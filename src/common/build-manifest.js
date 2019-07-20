@@ -3,7 +3,8 @@ const { join } = require('path')
 const {
   apiVersion,
   buildDirectoryName,
-  buildFileName,
+  pluginCommandsBuildFileName,
+  pluginUiBuildFileName,
   manifestFilePath
 } = require('./constants')
 
@@ -18,7 +19,8 @@ function createManifest (config) {
   return {
     name: config.name,
     api: apiVersion,
-    main: join(buildDirectoryName, buildFileName),
+    main: join(buildDirectoryName, pluginCommandsBuildFileName),
+    ui: join(buildDirectoryName, pluginUiBuildFileName),
     menu
   }
 }

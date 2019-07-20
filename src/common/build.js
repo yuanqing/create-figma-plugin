@@ -1,11 +1,43 @@
+const { join } = require('path')
+const buildBundle = require('./build-bundle')
 const buildManifest = require('./build-manifest')
-const buildPlugin = require('./build-plugin')
+const {
+  pluginCommandsModuleKey,
+  pluginCommandsBuildFileName,
+  pluginUiModuleKey,
+  pluginUiBuildFileName
+} = require('./constants')
 const readConfig = require('./read-config')
 
 async function build (isDevelopment) {
   const config = readConfig()
   await buildManifest(config)
-  return buildPlugin(config, isDevelopment)
+  const commands = extractCommands(config.menu)
+  await buildBundle(
+    commands,
+    pluginCommandsModuleKey,
+    join(__dirname, 'plugin-commands-entry-file.js'),
+    pluginCommandsBuildFileName,
+    isDevelopment
+  )
+  await buildBundle(
+    commands,
+    pluginUiModuleKey,
+    join(__dirname, 'plugin-ui-entry-file.js'),
+    pluginUiBuildFileName,
+    isDevelopment
+  )
+}
+
+function extractCommands (menu) {
+  const results = []
+  menu.forEach(function (item) {
+    if (item === '-') {
+      return
+    }
+    results.push(item.command)
+  })
+  return results
 }
 
 module.exports = build
