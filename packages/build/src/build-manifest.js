@@ -2,21 +2,24 @@ import { outputFile } from 'fs-extra'
 import { join } from 'path'
 import { constants } from '@create-figma-plugin/common'
 
-export async function buildManifest (config) {
-  const manifest = await createManifest(config)
+export async function buildManifest (config, hasPluginCommands, hasPluginUi) {
+  const menu = createMenu(config.menu)
+  const manifest = {
+    name: config.name,
+    api: constants.apiVersion
+  }
+  if (hasPluginCommands) {
+    manifest.main = join(
+      constants.buildDirectoryName,
+      constants.pluginCommandsFileName
+    )
+  }
+  if (hasPluginUi) {
+    manifest.ui = join(constants.buildDirectoryName, constants.pluginUiFileName)
+  }
+  manifest.menu = menu
   const string = JSON.stringify(manifest, null, 2) + '\n'
   return outputFile(constants.manifestFilePath, string)
-}
-
-function createManifest (config) {
-  const menu = createMenu(config.menu)
-  return {
-    name: config.name,
-    api: constants.apiVersion,
-    main: join(constants.buildDirectoryName, constants.pluginCommandsFileName),
-    ui: join(constants.buildDirectoryName, constants.pluginUiFileName),
-    menu
-  }
 }
 
 function createMenu (menu) {

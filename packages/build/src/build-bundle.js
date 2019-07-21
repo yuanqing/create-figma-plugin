@@ -14,7 +14,7 @@ export async function buildBundle (
 ) {
   const requires = createRequireCode(commands, moduleKey)
   if (requires === null) {
-    return
+    return Promise.resolve(false)
   }
   const entryFilePath = await buildWebpackEntryFile(
     entryFileTemplatePath,
@@ -35,7 +35,7 @@ export async function buildBundle (
         reject(error)
         return
       }
-      resolve()
+      resolve(true)
     })
   })
 }

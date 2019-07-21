@@ -9,11 +9,13 @@ export async function build (isDevelopment, isWatch) {
     return watch()
   }
   const config = readConfig()
-  await buildManifest(config)
   const commands = extractCommands(config.menu)
-  await buildPluginCommandsBundle(commands, isDevelopment)
-  await buildPluginUiBundle(commands, isDevelopment)
-  return Promise.resolve()
+  const hasPluginCommands = await buildPluginCommandsBundle(
+    commands,
+    isDevelopment
+  )
+  const hasPluginUi = await buildPluginUiBundle(commands, isDevelopment)
+  return buildManifest(config, hasPluginCommands, hasPluginUi)
 }
 
 function extractCommands (menu) {
