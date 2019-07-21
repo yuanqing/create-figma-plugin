@@ -26,7 +26,7 @@ function createWebpackConfig (entryFilePath, buildFileName, isDevelopment) {
         }
       ]
     },
-    devtool: isDevelopment ? 'source-map' : 'none',
+    devtool: isDevelopment ? 'inline-cheap-source-map' : 'none',
     target: 'node',
     stats: 'errors-only',
     plugins: [
