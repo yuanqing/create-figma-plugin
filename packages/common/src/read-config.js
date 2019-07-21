@@ -1,10 +1,8 @@
-const { join } = require('path')
-const { packageJsonConfigKey } = require('./constants')
+import { join } from 'path'
+import { constants } from './constants'
 
-function readConfig () {
+export function readConfig () {
   const packageJsonPath = join(process.cwd(), 'package.json')
   const packageJson = require(packageJsonPath)
-  return packageJson[packageJsonConfigKey]
+  return packageJson[constants.packageJsonConfigKey]
 }
-
-module.exports = readConfig

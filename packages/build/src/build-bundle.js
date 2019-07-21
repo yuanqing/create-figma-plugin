@@ -1,11 +1,11 @@
-const { constants } = require('@create-figma-plugin/common')
-const { readFile } = require('fs-extra')
-const { join } = require('path')
-const tempWrite = require('temp-write')
-const webpack = require('webpack')
-const createWebpackConfig = require('./create-webpack-config')
+import { readFile } from 'fs-extra'
+import { join } from 'path'
+import tempWrite from 'temp-write'
+import webpack from 'webpack'
+import { constants } from '@create-figma-plugin/common'
+import { createWebpackConfig } from './create-webpack-config'
 
-async function buildBundle (
+export async function buildBundle (
   commands,
   moduleKey,
   entryFileTemplatePath,
@@ -13,6 +13,9 @@ async function buildBundle (
   isDevelopment
 ) {
   const requires = createRequireCode(commands, moduleKey)
+  if (requires === null) {
+    return
+  }
   const entryFilePath = await buildWebpackEntryFile(
     entryFileTemplatePath,
     requires
@@ -42,10 +45,16 @@ function createRequireCode (commands, moduleKey) {
   const object = []
   commands.forEach(function (command, index) {
     const requirePath = join(process.cwd(), constants.sourceDirectory, command)
+    if (require(requirePath)[moduleKey] == null) {
+      return
+    }
     const alias = `x${index}`
     imports.push(`import { ${moduleKey} as ${alias} } from '${requirePath}';`)
     object.push(`'${command}': ${alias}`)
   })
+  if (imports.length === 0) {
+    return null
+  }
   return `
     ${imports.join('')}
     const __requires__ = {
@@ -59,5 +68,3 @@ async function buildWebpackEntryFile (entryFileTemplatePath, requires) {
   const fileContent = `${requires}${entryFileTemplate}`
   return tempWrite(fileContent)
 }
-
-module.exports = buildBundle

@@ -1,10 +1,10 @@
-const { constants, readConfig } = require('@create-figma-plugin/common')
-const { join } = require('path')
-const buildBundle = require('./build-bundle')
-const buildManifest = require('./build-manifest')
-const watch = require('./watch')
+import { join } from 'path'
+import { constants, readConfig } from '@create-figma-plugin/common'
+import { buildBundle } from './build-bundle'
+import { buildManifest } from './build-manifest'
+import { watch } from './watch'
 
-async function build (isDevelopment, isWatch) {
+export async function build (isDevelopment, isWatch) {
   if (isWatch) {
     return watch()
   }
@@ -56,5 +56,3 @@ function buildPluginUiBundle (commands, isDevelopment) {
     isDevelopment
   )
 }
-
-module.exports = build

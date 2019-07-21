@@ -1,3 +1,1 @@
-const init = require('./src/init')
-
-module.exports = init
+export { init } from './src/init'

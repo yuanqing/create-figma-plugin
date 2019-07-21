@@ -1,7 +1,2 @@
-const constants = require('./src/constants')
-const readConfig = require('./src/read-config')
-
-module.exports = {
-  constants,
-  readConfig
-}
+export { constants } from './src/constants'
+export { readConfig } from './src/read-config'

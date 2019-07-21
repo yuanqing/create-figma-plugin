@@ -1,4 +1,4 @@
-module.exports = {
+export const constants = {
   apiVersion: '0.6.0',
 
   packageJsonConfigKey: 'create-figma-plugin',

@@ -1,3 +1,1 @@
-const build = require('./src/build')
-
-module.exports = build
+export { build } from './src/build'

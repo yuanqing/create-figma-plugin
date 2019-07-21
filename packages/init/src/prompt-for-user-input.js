@@ -1,12 +1,12 @@
-const gitUserName = require('git-user-name')
-const githubUsernameRegex = require('github-username-regex')
-const { prompt } = require('inquirer')
-const titleCase = require('title-case')
+import gitUserName from 'git-user-name'
+import githubUsernameRegex from 'github-username-regex'
+import { prompt } from 'inquirer'
+import titleCase from 'title-case'
 
 const figmaPrefixRegex = /^figma-/
 const multipleSpaceRegex = /\s+/g
 
-function promptForUserInput (name) {
+export function promptForUserInput (name) {
   const questions = [
     {
       type: 'input',
@@ -63,5 +63,3 @@ function validate (input) {
 function filter (input) {
   return input.replace(multipleSpaceRegex, ' ').trim()
 }
-
-module.exports = promptForUserInput

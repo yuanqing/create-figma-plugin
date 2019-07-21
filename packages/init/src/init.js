@@ -1,11 +1,11 @@
-const { exists, outputFile, readFile } = require('fs-extra')
-const globby = require('globby')
-const isUtf8 = require('is-utf8')
-const mustache = require('mustache')
-const { join } = require('path')
-const promptForUserInput = require('./prompt-for-user-input')
+import { exists, outputFile, readFile } from 'fs-extra'
+import globby from 'globby'
+import isUtf8 from 'is-utf8'
+import mustache from 'mustache'
+import { join } from 'path'
+import { promptForUserInput } from './prompt-for-user-input'
 
-async function init (pluginName) {
+export async function init (pluginName) {
   const pluginDirectoryPath = join(process.cwd(), pluginName)
   if (await exists(pluginDirectoryPath)) {
     return Promise.reject(
@@ -44,5 +44,3 @@ mustache.escape = function (text) {
 function interpolate (string, data) {
   return mustache.render(string, data)
 }
-
-module.exports = init

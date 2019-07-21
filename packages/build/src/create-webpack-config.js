@@ -1,9 +1,13 @@
-const { constants } = require('@create-figma-plugin/common')
-const { join } = require('path')
-const TerserPlugin = require('terser-webpack-plugin')
-const webpack = require('webpack')
+import { join } from 'path'
+import TerserPlugin from 'terser-webpack-plugin'
+import webpack from 'webpack'
+import { constants } from '@create-figma-plugin/common'
 
-function createWebpackConfig (entryFilePath, outputConfig, isDevelopment) {
+export function createWebpackConfig (
+  entryFilePath,
+  outputConfig,
+  isDevelopment
+) {
   const mode = isDevelopment ? 'development' : 'production'
   return {
     mode,
@@ -33,5 +37,3 @@ function createWebpackConfig (entryFilePath, outputConfig, isDevelopment) {
     }
   }
 }
-
-module.exports = createWebpackConfig

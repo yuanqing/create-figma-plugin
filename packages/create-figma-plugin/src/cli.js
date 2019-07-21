@@ -1,8 +1,6 @@
-#!/usr/bin/env node
-
-const build = require('@create-figma-plugin/build')
-const init = require('@create-figma-plugin/init')
-const sade = require('sade')
+import sade from 'sade'
+import { build } from '@create-figma-plugin/build'
+import { init } from '@create-figma-plugin/init'
 
 const cli = sade('create-figma-plugin')
 

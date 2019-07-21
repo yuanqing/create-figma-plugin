@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "fix": "prettier-standard 'packages/**/src/**/*.js'",
-    "lint": "standard 'packages/**/src/**/*.js'"
+    "fix": "prettier-standard 'packages/**/*.js'",
+    "lint": "standard 'packages/**/*.js'"
   },
   "devDependencies": {
     "husky": "^3.0.1",

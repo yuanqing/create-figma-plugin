@@ -1,8 +1,8 @@
-const { outputFile } = require('fs-extra')
-const { join } = require('path')
-const { constants } = require('@create-figma-plugin/common')
+import { outputFile } from 'fs-extra'
+import { join } from 'path'
+import { constants } from '@create-figma-plugin/common'
 
-async function buildManifest (config) {
+export async function buildManifest (config) {
   const manifest = await createManifest(config)
   const string = JSON.stringify(manifest, null, 2) + '\n'
   return outputFile(constants.manifestFilePath, string)
@@ -29,5 +29,3 @@ function createMenu (menu) {
     return item
   })
 }
-
-module.exports = buildManifest

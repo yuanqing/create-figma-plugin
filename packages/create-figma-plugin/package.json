@@ -14,11 +14,12 @@
     "src"
   ],
   "bin": {
-    "create-figma-plugin": "src/cli.js"
+    "create-figma-plugin": "src/cli-esm.js"
   },
   "dependencies": {
     "@create-figma-plugin/build": "*",
     "@create-figma-plugin/init": "*",
+    "esm": "^3.2.25",
     "sade": "^1.6.0"
   }
 }

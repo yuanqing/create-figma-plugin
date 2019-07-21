@@ -1,8 +1,8 @@
-const { constants } = require('@create-figma-plugin/common')
-const chokidar = require('chokidar')
-const build = require('./build')
+import chokidar from 'chokidar'
+import { constants } from '@create-figma-plugin/common'
+import { build } from './build'
 
-function watch () {
+export function watch () {
   const watcher = chokidar.watch([constants.sourceGlobPattern, 'package.json'])
   async function handler () {
     await build(true)
@@ -11,5 +11,3 @@ function watch () {
   watcher.on('change', handler)
   return Promise.resolve()
 }
-
-module.exports = watch
