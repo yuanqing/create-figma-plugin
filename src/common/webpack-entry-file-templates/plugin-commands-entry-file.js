@@ -2,13 +2,9 @@
 
 const options = {
   showUI: function (showUiOptions) {
-    const html = `
-      <div id="create-figma-plugin"></div>
-      <script>
-        const ui = ${__html__}
-        ui.default()['${figma.command}']()
-      </script>
-    `
+    const html = `<div id="create-figma-plugin"></div><script>eval(\`${__html__}\`);__ui__.default()['${
+      figma.command
+    }']();</script>`
     figma.showUI(html, showUiOptions)
   },
   onMessage: function (callback) {

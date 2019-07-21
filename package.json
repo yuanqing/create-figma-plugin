@@ -20,10 +20,6 @@
     "lint": "standard 'src/**/*.js'"
   },
   "dependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-loader": "^8.0.6",
-    "babel-preset-preact": "^2.0.0",
     "chokidar": "^3.0.2",
     "fs-extra": "^8.1.0",
     "temp-write": "^4.0.0",

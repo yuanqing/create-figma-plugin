@@ -13,24 +13,9 @@ async function build (isDevelopment) {
   const config = readConfig()
   await buildManifest(config)
   const commands = extractCommands(config.menu)
-  await buildBundle(
-    commands,
-    pluginCommandsModuleKey,
-    join(
-      __dirname,
-      'webpack-entry-file-templates',
-      'plugin-commands-entry-file.js'
-    ),
-    pluginCommandsBuildFileName,
-    isDevelopment
-  )
-  await buildBundle(
-    commands,
-    pluginUiModuleKey,
-    join(__dirname, 'webpack-entry-file-templates', 'plugin-ui-entry-file.js'),
-    pluginUiBuildFileName,
-    isDevelopment
-  )
+  await buildPluginCommandsBundle(commands, isDevelopment)
+  await buildPluginUiBundle(commands, isDevelopment)
+  return Promise.resolve()
 }
 
 function extractCommands (menu) {
@@ -42,6 +27,36 @@ function extractCommands (menu) {
     results.push(item.command)
   })
   return results
+}
+
+function buildPluginCommandsBundle (commands, isDevelopment) {
+  return buildBundle(
+    commands,
+    pluginCommandsModuleKey,
+    join(
+      __dirname,
+      'webpack-entry-file-templates',
+      'plugin-commands-entry-file.js'
+    ),
+    {
+      filename: pluginCommandsBuildFileName
+    },
+    isDevelopment
+  )
+}
+
+function buildPluginUiBundle (commands, isDevelopment) {
+  return buildBundle(
+    commands,
+    pluginUiModuleKey,
+    join(__dirname, 'webpack-entry-file-templates', 'plugin-ui-entry-file.js'),
+    {
+      filename: pluginUiBuildFileName,
+      library: '__ui__',
+      libraryTarget: 'window'
+    },
+    isDevelopment
+  )
 }
 
 module.exports = build

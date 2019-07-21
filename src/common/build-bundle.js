@@ -9,7 +9,7 @@ async function buildBundle (
   commands,
   moduleKey,
   entryFileTemplatePath,
-  buildFileName,
+  outputConfig,
   isDevelopment
 ) {
   const requires = createRequireCode(commands, moduleKey)
@@ -19,7 +19,7 @@ async function buildBundle (
   )
   const webpackConfig = createWebpackConfig(
     entryFilePath,
-    buildFileName,
+    outputConfig,
     isDevelopment
   )
   return new Promise(function (resolve, reject) {

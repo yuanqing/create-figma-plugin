@@ -3,28 +3,14 @@ const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const { buildDirectoryName } = require('./constants')
 
-function createWebpackConfig (entryFilePath, buildFileName, isDevelopment) {
+function createWebpackConfig (entryFilePath, outputConfig, isDevelopment) {
   const mode = isDevelopment ? 'development' : 'production'
   return {
     mode,
     entry: entryFilePath,
     output: {
-      path: join(process.cwd(), buildDirectoryName),
-      filename: buildFileName
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', 'babel-preset-preact']
-            }
-          }
-        }
-      ]
+      ...outputConfig,
+      path: join(process.cwd(), buildDirectoryName)
     },
     devtool: isDevelopment ? 'inline-cheap-source-map' : 'none',
     target: 'node',
