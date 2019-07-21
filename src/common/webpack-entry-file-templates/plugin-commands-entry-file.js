@@ -2,7 +2,7 @@ const ui = `
   <div id="create-figma-plugin"></div>
   <script>
     const ui = ${__html__}
-    ui['${figma.command}']()
+    ui.default()['${figma.command}']()
   </script>
 `
 
