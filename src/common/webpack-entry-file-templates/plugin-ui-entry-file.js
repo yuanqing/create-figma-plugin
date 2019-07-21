@@ -1,5 +1,3 @@
-const ui = __REQUIRES__
-
 function onMessage (callback) {
   window.onmessage = function (event) {
     callback(event.data.pluginMessage)
@@ -11,9 +9,9 @@ function postMessage (data) {
 }
 
 const result = {}
-Object.keys(ui).forEach(function(key) {
+Object.keys(__requires__).forEach(function(key) {
   result[key] = function () {
-    ui[key](onMessage, postMessage)
+    __requires__[key](onMessage, postMessage)
   }
 })
 

@@ -12,7 +12,7 @@ async function buildBundle (
   buildFileName,
   isDevelopment
 ) {
-  const requires = mapCommandsToRequires(commands, moduleKey)
+  const requires = createRequireCode(commands, moduleKey)
   const entryFilePath = await buildWebpackEntryFile(
     entryFileTemplatePath,
     requires
@@ -37,16 +37,26 @@ async function buildBundle (
   })
 }
 
-function mapCommandsToRequires (commands, moduleKey) {
-  return commands.map(function (command) {
+function createRequireCode (commands, moduleKey) {
+  const imports = []
+  const object = []
+  commands.forEach(function (command, index) {
     const requirePath = join(process.cwd(), sourceDirectory, command)
-    return `'${command}': require('${requirePath}')['${moduleKey}']`
+    const alias = `x${index}`
+    imports.push(`import { ${moduleKey} as ${alias} } from '${requirePath}';`)
+    object.push(`'${command}': ${alias}`)
   })
+  return `
+    ${imports.join('')}
+    const __requires__ = {
+      ${object.join(',')}
+    };
+  `
 }
 
 async function buildWebpackEntryFile (entryFileTemplatePath, requires) {
   const entryFileTemplate = await readFile(entryFileTemplatePath, 'utf8')
-  const fileContent = entryFileTemplate.replace(/__REQUIRES__/, `{${requires}}`)
+  const fileContent = `${requires}${entryFileTemplate}`
   return tempWrite(fileContent)
 }
 
