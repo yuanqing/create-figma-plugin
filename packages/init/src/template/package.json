@@ -1,0 +1,29 @@
+{
+  "name": "{{pluginName}}",
+  "version": "0.0.0",
+{{#pluginDescription}}
+  "description": "{{pluginDescription}}",
+{{/pluginDescription}}
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin"
+  ],
+  "license": "MIT",
+  "author": "{{authorName}}",
+  "repository": "{{githubUsername}}/{{pluginName}}",
+  "files": [
+    "src"
+  ],
+  "devDependencies": {
+    "create-figma-plugin": "*"
+  },
+  "scripts": {
+    "build": "create-figma-plugin build",
+    "watch": "create-figma-plugin watch"
+  },
+  "create-figma-plugin": {
+    "name": "{{pluginDisplayName}}",
+    "menu": []
+  }
+}

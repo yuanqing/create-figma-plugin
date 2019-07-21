@@ -1,0 +1,21 @@
+{
+  "name": "@create-figma-plugin/init",
+  "version": "0.0.0",
+  "description": "Scaffolds a new Figma plugin",
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": "yuanqing/create-figma-plugin",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "git-user-name": "^2.0.0",
+    "github-username-regex": "1.0.0",
+    "globby": "^10.0.1",
+    "inquirer": "^6.5.0",
+    "is-utf8": "^0.2.1",
+    "mustache": "^3.0.1",
+    "title-case": "^2.1.1"
+  }
+}
