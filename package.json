@@ -5,10 +5,23 @@
     "lint": "standard 'packages/**/src/**/*.js'"
   },
   "devDependencies": {
+    "husky": "^3.0.1",
+    "lint-staged": "^9.2.0",
     "prettier-standard": "^9.1.1",
     "standard": "^13.0.2"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard",
+      "git add"
+    ]
+  }
 }
