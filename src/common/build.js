@@ -16,7 +16,11 @@ async function build (isDevelopment) {
   await buildBundle(
     commands,
     pluginCommandsModuleKey,
-    join(__dirname, 'webpack-entry-file-templates', 'plugin-commands-entry-file.js'),
+    join(
+      __dirname,
+      'webpack-entry-file-templates',
+      'plugin-commands-entry-file.js'
+    ),
     pluginCommandsBuildFileName,
     isDevelopment
   )

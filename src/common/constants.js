@@ -8,5 +8,5 @@ module.exports = {
   pluginUiBuildFileName: 'ui.js',
   pluginUiModuleKey: 'ui',
   sourceDirectory: 'src',
-  sourceGlobPattern: 'src/**/*.js',
+  sourceGlobPattern: 'src/**/*.js'
 }
