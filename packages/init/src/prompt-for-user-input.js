@@ -39,9 +39,7 @@ function promptForUserInput (name) {
       name: 'githubUsername',
       message: 'Github username',
       default: function ({ authorName }) {
-        return authorName
-          .toLowerCase()
-          .replace(multipleSpaceRegex, '')
+        return authorName.toLowerCase().replace(multipleSpaceRegex, '')
       },
       validate: function (input) {
         if (githubUsernameRegex.test(input)) {

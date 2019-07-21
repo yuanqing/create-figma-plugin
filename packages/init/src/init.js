@@ -13,13 +13,10 @@ async function init (pluginName) {
     )
   }
   const config = await promptForUserInput(pluginName)
-  return buildPluginDirectory(
-    pluginDirectoryPath,
-    {
-      ...config,
-      pluginName
-    }
-  )
+  return buildPluginDirectory(pluginDirectoryPath, {
+    ...config,
+    pluginName
+  })
 }
 
 async function buildPluginDirectory (pluginDirectoryPath, config) {
@@ -32,10 +29,7 @@ async function buildPluginDirectory (pluginDirectoryPath, config) {
     filePaths.map(async function (filePath) {
       const absolutePath = join(templateDirectory, filePath)
       const buffer = await readFile(absolutePath)
-      const outputPath = join(
-        pluginDirectoryPath,
-        filePath
-      )
+      const outputPath = join(pluginDirectoryPath, filePath)
       const fileContents = isUtf8(buffer)
         ? interpolate(buffer.toString(), config)
         : buffer
