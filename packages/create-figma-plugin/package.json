@@ -1,0 +1,23 @@
+{
+  "name": "create-figma-plugin",
+  "version": "0.0.1",
+  "description": "A toolkit to create Figma plugins",
+  "keywords": [
+    "figma",
+    "figma-plugin",
+    "toolkit"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": "yuanqing/create-figma-plugin",
+  "files": [
+    "src"
+  ],
+  "bin": {
+    "create-figma-plugin": "src/cli.js"
+  },
+  "dependencies": {
+    "@create-figma-plugin/build": "*",
+    "yargs": "^13.3.0"
+  }
+}

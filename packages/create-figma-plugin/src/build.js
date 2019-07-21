@@ -1,4 +1,4 @@
-const build = require('../common/build')
+const build = require('@create-figma-plugin/build')
 
 const command = {
   command: 'build',
@@ -9,9 +9,14 @@ const command = {
       type: 'boolean',
       default: false
     })
+    yargs.option('watch', {
+      alias: ['w'],
+      type: 'boolean',
+      default: false
+    })
   },
-  handler: function ({ development }) {
-    return build(development)
+  handler: function ({ development, watch }) {
+    return build(development, watch)
   }
 }
 

@@ -1,8 +1,8 @@
+const { constants } = require('@create-figma-plugin/common')
 const { readFile } = require('fs-extra')
 const { join } = require('path')
 const tempWrite = require('temp-write')
 const webpack = require('webpack')
-const { sourceDirectory } = require('./constants')
 const createWebpackConfig = require('./create-webpack-config')
 
 async function buildBundle (
@@ -41,7 +41,7 @@ function createRequireCode (commands, moduleKey) {
   const imports = []
   const object = []
   commands.forEach(function (command, index) {
-    const requirePath = join(process.cwd(), sourceDirectory, command)
+    const requirePath = join(process.cwd(), constants.sourceDirectory, command)
     const alias = `x${index}`
     imports.push(`import { ${moduleKey} as ${alias} } from '${requirePath}';`)
     object.push(`'${command}': ${alias}`)

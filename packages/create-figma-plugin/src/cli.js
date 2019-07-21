@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
-require('yargs')
+const yargs = require('yargs')
+const build = require('./build')
+
+yargs
   .scriptName('create-figma-plugin')
-  .command(require('./commands/build'))
-  .command(require('./commands/watch'))
+  .command(build)
   .demandCommand()
   .help()
   .version()

@@ -1,15 +1,13 @@
+const { constants, readConfig } = require('@create-figma-plugin/common')
 const { join } = require('path')
 const buildBundle = require('./build-bundle')
 const buildManifest = require('./build-manifest')
-const {
-  pluginCommandsModuleKey,
-  pluginCommandsBuildFileName,
-  pluginUiModuleKey,
-  pluginUiBuildFileName
-} = require('./constants')
-const readConfig = require('./read-config')
+const watch = require('./watch')
 
-async function build (isDevelopment) {
+async function build (isDevelopment, isWatch) {
+  if (isWatch) {
+    return watch()
+  }
   const config = readConfig()
   await buildManifest(config)
   const commands = extractCommands(config.menu)
@@ -32,14 +30,14 @@ function extractCommands (menu) {
 function buildPluginCommandsBundle (commands, isDevelopment) {
   return buildBundle(
     commands,
-    pluginCommandsModuleKey,
+    constants.pluginCommandsModuleExportKey,
     join(
       __dirname,
       'webpack-entry-file-templates',
       'plugin-commands-entry-file.js'
     ),
     {
-      filename: pluginCommandsBuildFileName
+      filename: constants.pluginCommandsFileName
     },
     isDevelopment
   )
@@ -48,10 +46,10 @@ function buildPluginCommandsBundle (commands, isDevelopment) {
 function buildPluginUiBundle (commands, isDevelopment) {
   return buildBundle(
     commands,
-    pluginUiModuleKey,
+    constants.pluginUiModuleExportKey,
     join(__dirname, 'webpack-entry-file-templates', 'plugin-ui-entry-file.js'),
     {
-      filename: pluginUiBuildFileName,
+      filename: constants.pluginUiFileName,
       library: '__ui__',
       libraryTarget: 'window'
     },

@@ -1,0 +1,11 @@
+{
+  "name": "@create-figma-plugin/common",
+  "version": "0.0.0",
+  "description": "Utilities used in the create-figma-plugin monorepo",
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": "yuanqing/create-figma-plugin",
+  "files": [
+    "src"
+  ]
+}
