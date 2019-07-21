@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "@create-figma-plugin/build": "*",
-    "yargs": "^13.3.0"
+    "sade": "^1.6.0"
   }
 }
