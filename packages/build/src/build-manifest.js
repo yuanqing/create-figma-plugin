@@ -17,12 +17,17 @@ export async function buildManifest (config, hasPluginCommands, hasPluginUi) {
   if (hasPluginUi) {
     manifest.ui = join(constants.buildDirectoryName, constants.pluginUiFileName)
   }
-  manifest.menu = menu
+  if (menu !== null && menu.length > 1) {
+    manifest.menu = menu
+  }
   const string = JSON.stringify(manifest, null, 2) + '\n'
   return outputFile(constants.manifestFilePath, string)
 }
 
 function createMenu (menu) {
+  if (menu == null) {
+    return null
+  }
   return menu.map(function (item) {
     if (item === '-') {
       return {

@@ -12,13 +12,15 @@ export async function buildBundle (
   outputConfig,
   isDevelopment
 ) {
-  const requires = createRequireCode(commands, moduleKey)
-  if (requires === null) {
+  const __REQUIRES__ = createRequireCode(commands, moduleKey)
+  if (__REQUIRES__ === null) {
     return Promise.resolve(false)
   }
+  const __COMMAND__ = commands.length > 1 ? 'figma.command' : `'${commands[0]}'`
   const entryFilePath = await buildWebpackEntryFile(
     entryFileTemplatePath,
-    requires
+    __REQUIRES__,
+    __COMMAND__
   )
   const webpackConfig = createWebpackConfig(
     entryFilePath,
@@ -63,8 +65,14 @@ function createRequireCode (commands, moduleKey) {
   `
 }
 
-async function buildWebpackEntryFile (entryFileTemplatePath, requires) {
+async function buildWebpackEntryFile (
+  entryFileTemplatePath,
+  __REQUIRES__,
+  __COMMAND__
+) {
   const entryFileTemplate = await readFile(entryFileTemplatePath, 'utf8')
-  const fileContent = `${requires}${entryFileTemplate}`
+  const fileContent = entryFileTemplate
+    .replace(/__REQUIRES__/g, __REQUIRES__)
+    .replace(/__COMMAND__/g, __COMMAND__)
   return tempWrite(fileContent)
 }

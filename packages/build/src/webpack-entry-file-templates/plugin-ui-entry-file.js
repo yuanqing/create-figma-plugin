@@ -1,4 +1,5 @@
-/* global parent, __requires__ */
+/* global __REQUIRES__, __requires__, parent */
+__REQUIRES__ // eslint-disable-line
 
 const options = {
   onMessage: function (callback) {

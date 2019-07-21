@@ -1,10 +1,15 @@
-/* global __html__, __requires__, figma */
+/* global __REQUIRES__, __COMMAND__, __html__, __requires__, figma */
+__REQUIRES__ // eslint-disable-line
 
 const options = {
   showUI: function (showUiOptions) {
-    const html = `<div id="create-figma-plugin"></div><script>eval(\`${__html__}\`);__ui__.default()['${
-      figma.command
-    }']();</script>`
+    const html = `
+      <div id="create-figma-plugin"></div>
+      <script>
+        eval(\`${__html__}\`);
+        window.__ui__.default()[${__COMMAND__}]();
+      </script>
+    `
     figma.showUI(html, showUiOptions)
   },
   onMessage: function (callback) {
@@ -13,5 +18,5 @@ const options = {
   postMessage: figma.ui.postMessage
 }
 
-const command = __requires__[figma.command]
+const command = __requires__[__COMMAND__]
 command(figma, options)
