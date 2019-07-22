@@ -35,7 +35,7 @@ export default function () {
 
 Our plugin command must be the `default` export of the file.
 
-Then, in our `package.json`, specify `src/hello-world.js` as the `command` for our plugin menu command:
+Then, in our `package.json`, set `src/hello-world.js` as a command in the plugin menu:
 
 ```diff
 {
@@ -53,7 +53,7 @@ Then, in our `package.json`, specify `src/hello-world.js` as the `command` for o
 }
 ```
 
-Note that the initial `src/` and trailing `.js` are omitted.
+We omit the initial `src/` and trailing `.js`, so `src/hello-world.js` is simply specified as `hello-world`.
 
 Then, to build the plugin, do:
 
@@ -96,8 +96,8 @@ An array that specifies the commands that appear in the plugin’s sub-menu.
 Each object in the array has these keys:
 
 - **`"name"`** is the display name of the command.
-- **`"command"`** is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js`.
-- **`"ui"`** *(optional)* is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js`.
+- **`"command"`** is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js` from the path.
+- **`"ui"`** *(optional)* is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js` from the path.
 
 #### *Example*
 
