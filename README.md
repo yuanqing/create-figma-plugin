@@ -3,7 +3,7 @@
 > A toolkit to create [Figma](https://figma.com) plugins
 
 - Write your plugin in modern JavaScript
-- A CLI to bundle your plugin implementation and UI code
+- A CLI to bundle your plugin implementation and UI code, with support for multiple commands
 - Automatically generate your plugin’s `manifest.json` file
 
 ---
@@ -35,12 +35,12 @@ export default function () {
 
 Our plugin command must be the `default` export of the file.
 
-Then, in our `package.json`, set `src/hello-world.js` as the `command` for our plugin menu command:
+Then, in our `package.json`, specify `src/hello-world.js` as the `command` for our plugin menu command:
 
 ```diff
 {
   ...
-  "sketch-plugin-helper": {
+  "create-figma-plugin": {
     ...
 -   "menu": []
 +   "menu": [
@@ -53,7 +53,7 @@ Then, in our `package.json`, set `src/hello-world.js` as the `command` for our p
 }
 ```
 
-Note that the initial `src/` and trailing `.js` extension are omitted.
+Note that the initial `src/` and trailing `.js` are omitted.
 
 Then, to build the plugin, do:
 
@@ -71,11 +71,11 @@ $ npm run watch
 
 ## Configuration
 
-All configuration options for your plugin are specified on the **`"create-figma-plugin"`** key of your `package.json` file.
+All configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of our `package.json` file.
 
 ### `"name"`
 
-The display name of your plugin.
+The display name of the plugin.
 
 #### *Example*
 
@@ -83,7 +83,7 @@ The display name of your plugin.
 {
   ...
   "create-figma-plugin": {
-+   "name": "Hello, World!",
++   "name": "Hello, World!"
     ...
   }
 }
@@ -91,11 +91,13 @@ The display name of your plugin.
 
 ### `"menu"`
 
-An array that specifies the commands that appear in you plugin’s sub-menu. Each object in the array has these keys:
+An array that specifies the commands that appear in the plugin’s sub-menu.
 
-- **`"name"`** is the name of the command.
-- **`"command"`** is the path to a JavaScript file in the `src` directory (with `src/` and `.js` omitted). The function must be set to `export default` in the specified file.
-- **`"ui"`** *(optional)* is the path to a JavaScript file in the `src` directory (with `src/` and `.js` omitted). The function must be set to `export default` in the specified file.
+Each object in the array has these keys:
+
+- **`"name"`** is the display name of the command.
+- **`"command"`** is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js`.
+- **`"ui"`** *(optional)* is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js`.
 
 #### *Example*
 
@@ -106,9 +108,9 @@ An array that specifies the commands that appear in you plugin’s sub-menu. Eac
     ...
 +   "menu": [
 +     {
-+       "name": "Hello, World!"
++       "name": "Hello, World!",
 +       "command": "hello-world",
-+       "ui": "hello-world-ui",
++       "ui": "hello-world-ui"
 +     }
 +   ],
     ...
@@ -122,28 +124,28 @@ An array that specifies the commands that appear in you plugin’s sub-menu. Eac
 
 ### Command
 
+A plugin command is specified as a function with the following signature:
+
 ```js
 export default function (figma, {showUI, postMessage, onMessage}) {
   // ...
 }
 ```
 
-A plugin command is specified as a function with the following arguments:
-
 - `figma` (`object`) – The global `figma` object.
-- `showUI` (`function (options)`) – Show the UI that corresponds to the command. The `options` object is passed directly to `figma.showUI`.
+- `showUI` (`function (options)`) – Show the UI that corresponds to the command. Note that the `options` object is passed directly to `figma.showUI`.
 - `postMessage` (`function (message)`) – Send a `message` to the UI `iframe`.
 - `onMessage` (`function (handler)`) – Set up a `handler` for receiving messages from the UI `iframe`.
 
 ### UI
+
+A plugin command’s UI is specified as a function with the following signature:
 
 ```js
 export default function ({postMessage, onMessage}) {
   // ...
 }
 ```
-
-A plugin command’s UI is specified as a function with the following arguments:
 
 - `postMessage` (`function (message)`) – Send a `message` to the plugin command.
 - `onMessage` (`function (handler)`) – Set up a `handler` for receiving messages from the plugin command.
@@ -170,14 +172,6 @@ A plugin command’s UI is specified as a function with the following arguments:
     -v, --version    Displays current version
     -h, --help       Displays this message
 
-```
-
----
-
-## Installation
-
-```
-$ npm install --global create-figma-plugin
 ```
 
 ---
