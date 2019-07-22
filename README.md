@@ -3,7 +3,7 @@
 > A toolkit to create [Figma](https://figma.com) plugins
 
 - Write your plugin in modern JavaScript
-- A CLI to bundle your plugin implementation and UI code, with support for multiple commands
+- Bundle your plugin implementation and UI code, with support for multiple commands
 - Automatically generate your plugin’s `manifest.json` file
 
 ---
