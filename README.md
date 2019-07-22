@@ -1,4 +1,4 @@
-# create-figma-plugin [![npm Version](https://badgen.net/npm/v/create-figma-plugin)](https://www.npmjs.org/package/create-figma-plugin)
+# create-figma-plugin [![npm Version](https://img.shields.io/npm/v/create-figma-plugin.svg)](https://www.npmjs.org/package/create-figma-plugin) [![Build Status](https://img.shields.io/travis/yuanqing/create-figma-plugin.svg)](https://travis-ci.org/yuanqing/create-figma-plugin)
 
 > A toolkit to create [Figma](https://figma.com) plugins
 
