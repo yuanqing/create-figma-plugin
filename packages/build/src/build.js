@@ -4,57 +4,60 @@ import { buildBundle } from './build-bundle'
 import { buildManifest } from './build-manifest'
 import { watch } from './watch'
 
+const pluginCommandsEntryFileTemplatePath = join(
+  __dirname,
+  'webpack-entry-file-templates',
+  'plugin-commands-entry-file.js'
+)
+const pluginUiEntryFileTemplatePath = join(
+  __dirname,
+  'webpack-entry-file-templates',
+  'plugin-ui-entry-file.js'
+)
+
 export async function build (isDevelopment, isWatch) {
   if (isWatch) {
     return watch()
   }
   const config = readConfig()
-  const commands = extractCommands(config.menu)
-  const hasPluginCommands = await buildPluginCommandsBundle(
-    commands,
-    isDevelopment
-  )
-  const hasPluginUi = await buildPluginUiBundle(commands, isDevelopment)
+  const pluginCommandModules = createModules(config.menu, 'command')
+  const hasPluginCommands = pluginCommandModules.length > 0
+  if (hasPluginCommands) {
+    await buildBundle(
+      pluginCommandModules,
+      pluginCommandsEntryFileTemplatePath,
+      {
+        filename: constants.pluginCommandsFileName
+      },
+      isDevelopment
+    )
+  }
+  const pluginUiModules = createModules(config.menu, 'ui')
+  const hasPluginUi = pluginUiModules.length > 0
+  if (hasPluginUi) {
+    await buildBundle(
+      pluginUiModules,
+      pluginUiEntryFileTemplatePath,
+      {
+        filename: constants.pluginUiFileName,
+        library: '__ui__',
+        libraryTarget: 'window'
+      },
+      isDevelopment
+    )
+  }
   return buildManifest(config, hasPluginCommands, hasPluginUi)
 }
 
-function extractCommands (menu) {
-  const results = []
-  menu.forEach(function (item) {
-    if (item === '-') {
-      return
+function createModules (commands, srcKey) {
+  const modules = []
+  commands.forEach(function (item) {
+    if (item.command && item[srcKey]) {
+      modules.push({
+        id: item.command,
+        src: item[srcKey]
+      })
     }
-    results.push(item.command)
   })
-  return results
-}
-
-function buildPluginCommandsBundle (commands, isDevelopment) {
-  return buildBundle(
-    commands,
-    constants.pluginCommandsModuleExportKey,
-    join(
-      __dirname,
-      'webpack-entry-file-templates',
-      'plugin-commands-entry-file.js'
-    ),
-    {
-      filename: constants.pluginCommandsFileName
-    },
-    isDevelopment
-  )
-}
-
-function buildPluginUiBundle (commands, isDevelopment) {
-  return buildBundle(
-    commands,
-    constants.pluginUiModuleExportKey,
-    join(__dirname, 'webpack-entry-file-templates', 'plugin-ui-entry-file.js'),
-    {
-      filename: constants.pluginUiFileName,
-      library: '__ui__',
-      libraryTarget: 'window'
-    },
-    isDevelopment
-  )
+  return modules
 }

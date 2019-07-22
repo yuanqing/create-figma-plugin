@@ -1,4 +1,5 @@
-/* global __REQUIRES__, __requires__, parent */
+/* global __requires__, __REQUIRES__, parent */
+
 __REQUIRES__ // eslint-disable-line
 
 const options = {

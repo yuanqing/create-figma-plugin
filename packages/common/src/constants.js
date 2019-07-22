@@ -9,8 +9,5 @@ export const constants = {
   buildDirectoryName: 'build',
   manifestFilePath: 'manifest.json',
   pluginCommandsFileName: 'plugin.js',
-  pluginUiFileName: 'ui.js',
-
-  pluginCommandsModuleExportKey: 'default',
-  pluginUiModuleExportKey: 'ui'
+  pluginUiFileName: 'ui.js'
 }

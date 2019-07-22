@@ -5,18 +5,20 @@ export function readConfig () {
   const packageJsonPath = join(process.cwd(), 'package.json')
   const packageJson = require(packageJsonPath)
   const config = packageJson[constants.packageJsonConfigKey]
-  if (config.command) {
-    const { command, menu, ...rest } = config
-    return {
-      ...rest,
-      menu: [
-        {
-          name: config.name,
-          command
-        },
-        ...(menu || [])
-      ]
-    }
+  return {
+    ...config,
+    menu: normaliseMenu(config.menu)
   }
-  return config
+}
+
+function normaliseMenu (menu) {
+  if (!menu) {
+    return []
+  }
+  return menu.map(function (item) {
+    if (item === '-') {
+      return { separator: true }
+    }
+    return item
+  })
 }

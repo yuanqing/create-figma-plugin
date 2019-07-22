@@ -6,21 +6,14 @@ import { constants } from '@create-figma-plugin/common'
 import { createWebpackConfig } from './create-webpack-config'
 
 export async function buildBundle (
-  commands,
-  moduleKey,
+  modules,
   entryFileTemplatePath,
   outputConfig,
   isDevelopment
 ) {
-  const __REQUIRES__ = createRequireCode(commands, moduleKey)
-  if (__REQUIRES__ === null) {
-    return Promise.resolve(false)
-  }
-  const __COMMAND__ = commands.length > 1 ? 'figma.command' : `'${commands[0]}'`
   const entryFilePath = await buildWebpackEntryFile(
-    entryFileTemplatePath,
-    __REQUIRES__,
-    __COMMAND__
+    modules,
+    entryFileTemplatePath
   )
   const webpackConfig = createWebpackConfig(
     entryFilePath,
@@ -42,37 +35,29 @@ export async function buildBundle (
   })
 }
 
-function createRequireCode (commands, moduleKey) {
-  const imports = []
-  const object = []
-  commands.forEach(function (command, index) {
-    const requirePath = join(process.cwd(), constants.sourceDirectory, command)
-    if (require(requirePath)[moduleKey] == null) {
-      return
-    }
-    const alias = `x${index}`
-    imports.push(`import { ${moduleKey} as ${alias} } from '${requirePath}';`)
-    object.push(`'${command}': ${alias}`)
-  })
-  if (imports.length === 0) {
-    return null
-  }
-  return `
-    ${imports.join('')}
-    const __requires__ = {
-      ${object.join(',')}
-    };
-  `
-}
-
-async function buildWebpackEntryFile (
-  entryFileTemplatePath,
-  __REQUIRES__,
-  __COMMAND__
-) {
+async function buildWebpackEntryFile (modules, entryFileTemplatePath) {
+  const __REQUIRES__ = createRequireCode(modules)
+  const __COMMAND__ =
+    modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
   const entryFileTemplate = await readFile(entryFileTemplatePath, 'utf8')
   const fileContent = entryFileTemplate
     .replace(/__REQUIRES__/g, __REQUIRES__)
     .replace(/__COMMAND__/g, __COMMAND__)
   return tempWrite(fileContent)
+}
+
+function createRequireCode (modules) {
+  const result = []
+  modules.forEach(function (item, index) {
+    const requirePath = join(process.cwd(), constants.sourceDirectory, item.src)
+    if (require(requirePath) == null) {
+      return
+    }
+    result.push(`'${item.id}': require('${requirePath}').default`)
+  })
+  return `
+    const __requires__ = {
+      ${result.join(',')}
+    };
+  `
 }
