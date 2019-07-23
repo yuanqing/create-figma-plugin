@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/init",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Scaffolds a new Figma plugin",
   "license": "MIT",
   "author": "Lim Yuan Qing",
