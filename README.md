@@ -85,7 +85,7 @@ Configuration options for the plugin are specified on the **`"create-figma-plugi
 
 #### Example
 
-```json
+```
 {
   ...
   "create-figma-plugin": {
