@@ -17,8 +17,8 @@
     "create-figma-plugin": "src/cli-esm.js"
   },
   "dependencies": {
-    "@create-figma-plugin/build": "*",
-    "@create-figma-plugin/init": "*",
+    "@create-figma-plugin/build": "^0.0.1",
+    "@create-figma-plugin/init": "^0.0.1",
     "esm": "^3.2.25",
     "sade": "^1.6.0"
   }
