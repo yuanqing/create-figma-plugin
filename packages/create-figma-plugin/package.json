@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A toolkit to create Figma plugins",
   "keywords": [
     "figma",
@@ -17,8 +17,8 @@
     "create-figma-plugin": "src/cli-esm.js"
   },
   "dependencies": {
-    "@create-figma-plugin/build": "^0.0.1",
-    "@create-figma-plugin/init": "^0.0.1",
+    "@create-figma-plugin/build": "^0.0.2",
+    "@create-figma-plugin/init": "^0.0.2",
     "esm": "^3.2.25",
     "sade": "^1.6.0"
   }
