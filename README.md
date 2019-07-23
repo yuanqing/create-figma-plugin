@@ -5,6 +5,7 @@
 - Write your plugin in modern JavaScript
 - Bundle your plugin implementation and UI code, with support for multiple commands
 - Automatically generate your plugin’s `manifest.json` file
+- Supports customizing the underlying Webpack configuration
 
 ---
 
@@ -25,7 +26,7 @@ $ cd figma-hello-world
 $ npm install
 ```
 
-Next, create a `src/hello-world.js` file containing the following:
+Next, create a `src/hello-world.js` file:
 
 ```js
 export default function () {
@@ -33,9 +34,9 @@ export default function () {
 }
 ```
 
-Our plugin command must be the `default` export of the file.
+The plugin command must be the `default` export of the file.
 
-Then, in our `package.json`, set `src/hello-world.js` as a command in the plugin menu:
+Then, in `package.json`, specify `src/hello-world.js` as a command in the plugin menu:
 
 ```diff
 {
@@ -45,17 +46,17 @@ Then, in our `package.json`, set `src/hello-world.js` as a command in the plugin
 -   "menu": []
 +   "menu": [
 +     {
-+       "name": "Hello, World!"
-+       "command": "hello-world",
++       "name": "Hello, World!",
++       "command": "hello-world"
 +     }
 +   ]
   }
 }
 ```
 
-We omit the initial `src/` and trailing `.js`, so `src/hello-world.js` is simply specified as `hello-world`.
+Omit the initial `src/` and trailing `.js`, so `src/hello-world.js` is specified as `hello-world`.
 
-Then, to build the plugin, do:
+Then, build the plugin:
 
 ```
 $ npm run build
@@ -71,52 +72,46 @@ $ npm run watch
 
 ## Configuration
 
-All configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of our `package.json` file.
+### `package.json`
 
-### `"name"`
+Configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of our `package.json` file.
 
-The display name of the plugin.
+- **`"name"`** — The display name of the plugin.
+- **`"menu"`** — An array that specifies the commands that appear in the plugin’s sub-menu. Each object in the array has these keys:
 
-#### *Example*
+    - **`"name"`** — The display name of the plugin command.
+    - **`"command"`** — The path to the plugin command implementation in the `src/` directory. Omit the initial `src/` and trailing `.js`.
+    - **`"ui"`** *(optional)* — The path to the plugin command’s UI implementation in the `src/` directory. Omit the initial `src/` and trailing `.js`.
 
-```diff
-{
-  ...
-  "create-figma-plugin": {
-+   "name": "Hello, World!"
-    ...
-  }
-}
-```
-
-### `"menu"`
-
-An array that specifies the commands that appear in the plugin’s sub-menu.
-
-Each object in the array has these keys:
-
-- **`"name"`** is the display name of the command.
-- **`"command"`** is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js` from the path.
-- **`"ui"`** *(optional)* is the path to a JavaScript file in the `src` directory. Omit the initial `src/` and trailing `.js` from the path.
-
-#### *Example*
+#### Example
 
 ```diff
 {
   ...
   "create-figma-plugin": {
-    ...
++   "name": "Hello, World!",
 +   "menu": [
 +     {
 +       "name": "Hello, World!",
-+       "command": "hello-world",
-+       "ui": "hello-world-ui"
++       "command": "hello-world/command",
++       "ui": "hello-world/ui"
 +     }
-+   ],
-    ...
++   ]
   }
 }
 ```
+
+### `create-figma-plugin.js`
+
+To customize the underlying [Webpack configuration](https://webpack.js.org/configuration/), create a `create-figma-plugin.js` file:
+
+```js
+export default function (config) {
+  // ...
+}
+```
+
+Mutate the `config` object as you see fit within the function.
 
 ---
 
@@ -124,7 +119,7 @@ Each object in the array has these keys:
 
 ### Command
 
-A plugin command is specified as a function with the following signature:
+A plugin command is specified as a function with the signature:
 
 ```js
 export default function (figma, {showUI, postMessage, onMessage}) {
@@ -132,23 +127,57 @@ export default function (figma, {showUI, postMessage, onMessage}) {
 }
 ```
 
-- `figma` (`object`) – The global `figma` object.
-- `showUI` (`function (options)`) – Show the UI that corresponds to the command. Note that the `options` object is passed directly to `figma.showUI`.
-- `postMessage` (`function (message)`) – Send a `message` to the UI `iframe`.
-- `onMessage` (`function (handler)`) – Set up a `handler` for receiving messages from the UI `iframe`.
+- **`figma`** (`object`) — The global `figma` object.
+- **`showUI`** (`function (options)`) — Show the UI for the command. Takes an optional `options` object that is passed directly to `figma.showUI`.
+- **`postMessage`** (`function (message)`) — Send a `message` to the UI `iframe`.
+- **`onMessage`** (`function (handler)`) — Set up a `handler` for receiving messages from the UI `iframe`.
 
 ### UI
 
-A plugin command’s UI is specified as a function with the following signature:
+A plugin command’s UI is specified as a function with the signature:
 
 ```js
-export default function ({postMessage, onMessage}) {
+export default function (rootNode, {postMessage, onMessage}) {
   // ...
 }
 ```
 
-- `postMessage` (`function (message)`) – Send a `message` to the plugin command.
-- `onMessage` (`function (handler)`) – Set up a `handler` for receiving messages from the plugin command.
+- **`rootNode`** ([`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)) — An empty `div` element within which you can render your UI.
+- **`postMessage`** (`function (message)`) — Send a `message` to the plugin command.
+- **`onMessage`** (`function (handler)`) — Set up a `handler` for receiving messages from the plugin command.
+
+### Example
+
+```js
+// hello-world/command.js
+
+export default function (figma, {showUI, postMessage, onMessage}) {
+  showUI({ width: 400, height: 200 })
+  // ...
+  postMessage('foo')
+  onMessage(function (message) {
+    console.log(message) //=> 'bar'
+  })
+  // ...
+  figma.closePlugin()
+}
+```
+
+```js
+// hello-world/ui.js
+
+import {render} from 'react-dom'
+
+export default function (rootNode, {postMessage, onMessage}) {
+  // ...
+  render(rootNode, <h1>Hello, World</h1>)
+  // ...
+  postMessage('bar')
+  onMessage(function (message) {
+    console.log(message) //=> 'foo'
+  })
+}
+```
 
 ---
 
@@ -175,6 +204,7 @@ export default function ({postMessage, onMessage}) {
 ```
 
 ---
+
 
 ## License
 
