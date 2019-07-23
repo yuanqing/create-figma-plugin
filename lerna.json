@@ -7,7 +7,7 @@
   ],
   "command": {
     "version": {
-      "push": false
+      "gitTagVersion": false
     }
   }
 }
