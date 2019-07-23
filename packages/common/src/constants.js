@@ -9,5 +9,7 @@ export const constants = {
   buildDirectoryName: 'build',
   manifestFilePath: 'manifest.json',
   pluginCommandsFileName: 'plugin.js',
-  pluginUiFileName: 'ui.js'
+  pluginUiFileName: 'ui.js',
+
+  webpackConfigMutatorFileName: 'create-figma-plugin.js'
 }

@@ -1,9 +1,11 @@
-import { readFile } from 'fs-extra'
+import { exists, readFile } from 'fs-extra'
 import { join } from 'path'
 import tempWrite from 'temp-write'
 import webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
 import { createWebpackConfig } from './create-webpack-config'
+
+const webpackConfigMutatorPath = join(process.cwd(), constants.webpackConfigMutatorFileName)
 
 export async function buildBundle (
   modules,
@@ -20,6 +22,9 @@ export async function buildBundle (
     outputConfig,
     isDevelopment
   )
+  if (await exists(webpackConfigMutatorPath)) {
+    require(webpackConfigMutatorPath).default(webpackConfig)
+  }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
       if (stats.hasErrors()) {
@@ -48,7 +53,7 @@ async function buildWebpackEntryFile (modules, entryFileTemplatePath) {
 
 function createRequireCode (modules) {
   const result = []
-  modules.forEach(function (item, index) {
+  modules.forEach(function (item) {
     const requirePath = join(process.cwd(), constants.sourceDirectory, item.src)
     if (require(requirePath) == null) {
       return
