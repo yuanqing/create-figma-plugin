@@ -3,21 +3,16 @@ import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
 
-export function createWebpackConfig (
-  entryFilePath,
-  outputConfig,
-  isDevelopment
-) {
+export function createWebpackConfig (entry, isDevelopment) {
   const mode = isDevelopment ? 'development' : 'production'
   return {
     mode,
-    entry: entryFilePath,
+    entry,
     output: {
-      ...outputConfig,
+      filename: '[name].js',
       path: join(process.cwd(), constants.buildDirectoryName)
     },
     devtool: isDevelopment ? 'inline-cheap-source-map' : 'none',
-    target: 'node',
     stats: 'errors-only',
     plugins: [
       new webpack.EnvironmentPlugin({

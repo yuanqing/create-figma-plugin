@@ -1,27 +1,34 @@
-import { exists, readFile } from 'fs-extra'
+import { exists } from 'fs-extra'
 import { join } from 'path'
-import tempWrite from 'temp-write'
 import webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
 import { createWebpackConfig } from './create-webpack-config'
+import { buildWebpackEntryFile } from './build-webpack-entry-file'
 
-const webpackConfigMutatorPath = join(process.cwd(), constants.webpackConfigMutatorFileName)
+const webpackConfigMutatorPath = join(
+  process.cwd(),
+  constants.webpackConfigMutatorFileName
+)
 
-export async function buildBundle (
-  modules,
-  entryFileTemplatePath,
-  outputConfig,
-  isDevelopment
-) {
-  const entryFilePath = await buildWebpackEntryFile(
-    modules,
-    entryFileTemplatePath
-  )
-  const webpackConfig = createWebpackConfig(
-    entryFilePath,
-    outputConfig,
-    isDevelopment
-  )
+const entryFileTemplateDirectoryPath = join(
+  __dirname,
+  'webpack-entry-file-templates'
+)
+
+export async function buildBundle (menu, isDevelopment) {
+  const entry = {
+    code: await buildWebpackEntryFile(
+      menu,
+      'command',
+      join(entryFileTemplateDirectoryPath, 'plugin-code-entry-file.js')
+    ),
+    ui: await buildWebpackEntryFile(
+      menu,
+      'ui',
+      join(entryFileTemplateDirectoryPath, 'plugin-ui-entry-file.js')
+    )
+  }
+  const webpackConfig = createWebpackConfig({ ...entry }, isDevelopment)
   if (await exists(webpackConfigMutatorPath)) {
     require(webpackConfigMutatorPath).default(webpackConfig)
   }
@@ -38,31 +45,4 @@ export async function buildBundle (
       resolve(true)
     })
   })
-}
-
-async function buildWebpackEntryFile (modules, entryFileTemplatePath) {
-  const __REQUIRES__ = createRequireCode(modules)
-  const __COMMAND__ =
-    modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
-  const entryFileTemplate = await readFile(entryFileTemplatePath, 'utf8')
-  const fileContent = entryFileTemplate
-    .replace(/__REQUIRES__/g, __REQUIRES__)
-    .replace(/__COMMAND__/g, __COMMAND__)
-  return tempWrite(fileContent)
-}
-
-function createRequireCode (modules) {
-  const result = []
-  modules.forEach(function (item) {
-    const requirePath = join(process.cwd(), constants.sourceDirectory, item.src)
-    if (require(requirePath) == null) {
-      return
-    }
-    result.push(`'${item.id}': require('${requirePath}').default`)
-  })
-  return `
-    const __requires__ = {
-      ${result.join(',')}
-    };
-  `
 }
