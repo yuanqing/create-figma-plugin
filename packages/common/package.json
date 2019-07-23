@@ -6,6 +6,7 @@
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",
   "files": [
+    "index.js",
     "src"
   ]
 }
