@@ -4,5 +4,10 @@
   "useWorkspaces": true,
   "packages": [
     "packages/*"
-  ]
+  ],
+  "command": {
+    "version": {
+      "push": false
+    }
+  }
 }
