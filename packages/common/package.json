@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Utilities used in the create-figma-plugin monorepo",
+  "description": "Utilities used in the `create-figma-plugin` monorepo",
   "license": "MIT",
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",

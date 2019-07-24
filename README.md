@@ -1,6 +1,6 @@
 # create-figma-plugin [![npm Version](https://img.shields.io/npm/v/create-figma-plugin.svg)](https://www.npmjs.org/package/create-figma-plugin) [![Build Status](https://img.shields.io/travis/yuanqing/create-figma-plugin.svg)](https://travis-ci.org/yuanqing/create-figma-plugin)
 
-> A toolkit to create [Figma](https://figma.com) plugins
+> A toolkit for developing [Figma](https://figma.com) plugins
 
 - Write modern JavaScript
 - Bundle your plugin command implementation and UI code, with support for multiple commands

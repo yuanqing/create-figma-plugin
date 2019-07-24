@@ -1,7 +1,7 @@
 {
   "name": "create-figma-plugin",
   "version": "0.0.2",
-  "description": "A toolkit to create Figma plugins",
+  "description": "A toolkit for developing Figma plugins",
   "keywords": [
     "figma",
     "figma-plugin",
