@@ -12,6 +12,25 @@ export function createWebpackConfig (entry, isDevelopment) {
       filename: '[name].js',
       path: join(process.cwd(), constants.buildDirectoryName)
     },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader'
+        },
+        {
+          test: /\.css$/,
+          loader: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+        },
+        {
+          test: /\.(png|jpg|gif|webp|svg)$/,
+          loader: [{ loader: 'url-loader' }]
+        }
+      ]
+    },
+    resolve: {
+      extensions: ['.tsx', '.ts', '.jsx', '.js']
+    },
     devtool: isDevelopment ? 'inline-cheap-source-map' : 'none',
     stats: 'errors-only',
     plugins: [

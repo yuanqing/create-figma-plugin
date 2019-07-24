@@ -19,7 +19,12 @@
   "dependencies": {
     "@create-figma-plugin/build": "^0.0.2",
     "@create-figma-plugin/init": "^0.0.2",
+    "css-loader": "^3.1.0",
     "esm": "^3.2.25",
-    "sade": "^1.6.0"
+    "sade": "^1.6.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "url-loader": "^2.1.0"
   }
 }

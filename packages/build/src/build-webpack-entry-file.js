@@ -3,11 +3,7 @@ import { join } from 'path'
 import tempWrite from 'temp-write'
 import { constants } from '@create-figma-plugin/common'
 
-export async function buildWebpackEntryFile (
-  menu,
-  key,
-  entryFileTemplatePath
-) {
+export async function buildWebpackEntryFile (menu, key, entryFileTemplatePath) {
   const modules = extractModules(menu, key)
   if (modules.length === 0) {
     return Promise.resolve(null)
