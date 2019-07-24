@@ -13,6 +13,7 @@
     "src"
   ],
   "dependencies": {
+    "@create-figma-plugin/common": "^0.0.3",
     "chokidar": "^3.0.2",
     "fs-extra": "^8.1.0",
     "temp-write": "^4.0.0",
