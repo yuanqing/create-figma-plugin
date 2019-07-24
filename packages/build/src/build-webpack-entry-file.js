@@ -5,10 +5,10 @@ import { constants } from '@create-figma-plugin/common'
 
 export async function buildWebpackEntryFile (
   menu,
-  srcKey,
+  key,
   entryFileTemplatePath
 ) {
-  const modules = extractModules(menu, srcKey)
+  const modules = extractModules(menu, key)
   if (modules.length === 0) {
     return Promise.resolve(null)
   }
