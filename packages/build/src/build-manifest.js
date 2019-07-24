@@ -22,7 +22,9 @@ export async function buildManifest (config, hasPluginCommands, hasPluginUi) {
     if (hasUiBundle(menu)) {
       manifest.ui = pluginUiFilePath
     }
-    manifest.menu = normaliseMenu(menu)
+    if (menu.length > 1) {
+      manifest.menu = normaliseMenu(menu)
+    }
   }
   const string = JSON.stringify(manifest, null, 2) + '\n'
   return outputFile(constants.manifestFilePath, string)
