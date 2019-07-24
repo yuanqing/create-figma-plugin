@@ -16,17 +16,22 @@ const entryFileTemplateDirectoryPath = join(
 )
 
 export async function buildBundle (menu, isDevelopment) {
-  const entry = {
-    code: await buildWebpackEntryFile(
-      menu,
-      'command',
-      join(entryFileTemplateDirectoryPath, 'plugin-code-entry-file.js')
-    ),
-    ui: await buildWebpackEntryFile(
-      menu,
-      'ui',
-      join(entryFileTemplateDirectoryPath, 'plugin-ui-entry-file.js')
-    )
+  const entry = {}
+  const codeEntryFile = await buildWebpackEntryFile(
+    menu,
+    'command',
+    join(entryFileTemplateDirectoryPath, 'plugin-code-entry-file.js')
+  )
+  if (codeEntryFile) {
+    entry.code = codeEntryFile
+  }
+  const uiEntryFile = await buildWebpackEntryFile(
+    menu,
+    'ui',
+    join(entryFileTemplateDirectoryPath, 'plugin-ui-entry-file.js')
+  )
+  if (uiEntryFile) {
+    entry.ui = uiEntryFile
   }
   const webpackConfig = createWebpackConfig({ ...entry }, isDevelopment)
   if (await exists(webpackConfigMutatorPath)) {
