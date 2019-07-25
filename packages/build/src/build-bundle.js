@@ -53,7 +53,7 @@ export async function buildBundle (config, isDevelopment) {
         reject(error)
         return
       }
-      resolve(true)
+      resolve()
     })
   })
 }
