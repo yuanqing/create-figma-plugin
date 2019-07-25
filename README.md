@@ -54,7 +54,7 @@ Then, in `package.json`, specify `src/hello-world/command.js` as a command in th
 }
 ```
 
-Omit the initial `src/` and trailing `.js`, so `src/hello-world/command.js` becomes `hello-world/command`.
+The initial `src/` path and extension can be omitted, so `src/hello-world/command.js` becomes `hello-world/command`.
 
 Then, build the plugin:
 
@@ -80,8 +80,8 @@ Configuration options for the plugin are specified on the **`"create-figma-plugi
 - **`"menu"`** — An array that specifies the commands that appear in the plugin’s sub-menu. Each object in the array has these keys:
 
     - **`"name"`** — The display name of the plugin command.
-    - **`"command"`** — The path to the plugin command implementation in the `src/` directory. Omit the initial `src/` and trailing `.js`.
-    - **`"ui"`** *(optional)* — The path to the plugin command’s UI implementation in the `src/` directory. Omit the initial `src/` and trailing `.js`.
+    - **`"command"`** — The path to the plugin command implementation in the `src/` directory. The initial `src/` path and file extension can be omitted.
+    - **`"ui"`** *(optional)* — The path to the plugin command’s UI implementation in the `src/` directory.
 
 #### Example
 
