@@ -2,22 +2,32 @@
   "name": "create-figma-plugin",
   "private": true,
   "scripts": {
+    "coverage": "nyc ava",
     "fix": "prettier-standard 'packages/**/*.js'",
     "lerna-clean": "lerna clean",
     "lerna-version": "lerna version",
     "lerna-publish": "lerna publish from-package",
-    "lint": "standard 'packages/**/*.js'"
+    "lint": "standard 'packages/**/*.js'",
+    "test": "ava"
   },
   "devDependencies": {
+    "ava": "^2.2.0",
     "husky": "^3.0.1",
     "lerna": "^3.16.2",
     "lint-staged": "^9.2.0",
+    "nyc": "^14.1.1",
     "prettier-standard": "^9.1.1",
     "standard": "^13.0.2"
   },
   "workspaces": [
     "packages/*"
   ],
+  "ava": {
+    "verbose": true,
+    "require": [
+      "esm"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

@@ -1,0 +1,11 @@
+{
+  "create-figma-plugin": {
+    "name": "foo",
+    "menu": [
+      {
+        "name": "bar",
+        "command": "baz"
+      }
+    ]
+  }
+}

@@ -9,3 +9,4 @@ node_js:
 script:
   - yarn lint
   - yarn fix
+  - yarn test

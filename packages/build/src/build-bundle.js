@@ -38,10 +38,7 @@ export async function buildBundle (menu, isDevelopment) {
     const key = extractBasename(constants.build.pluginUiFilePath)
     entry[key] = uiEntryFile
   }
-  const webpackConfigMutatorPath = join(
-    process.cwd(),
-    constants.configFileName
-  )
+  const webpackConfigMutatorPath = join(process.cwd(), constants.configFileName)
   let webpackConfig = createWebpackConfig(entry, isDevelopment)
   if (await exists(webpackConfigMutatorPath)) {
     webpackConfig = require(webpackConfigMutatorPath).default(webpackConfig)
