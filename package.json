@@ -2,9 +2,9 @@
   "name": "create-figma-plugin",
   "private": true,
   "scripts": {
-    "clean": "rimraf .nyc_output *.log",
+    "clean": "rimraf .nyc_output '*.log' 'packages/**/__fixtures__/**/build' 'packages/**/__fixtures__/**/manifest.json'",
     "coverage": "nyc ava",
-    "fix": "prettier-standard 'packages/**/*.js'",
+    "fix": "prettier-standard 'packages/**/*.js' '!packages/**/__fixtures__/**/build/**/*.js'",
     "lerna-clean": "lerna clean",
     "lerna-version": "lerna version",
     "lerna-publish": "lerna publish from-package",
@@ -25,6 +25,10 @@
     "packages/*"
   ],
   "ava": {
+    "files": [
+      "**/__tests__/**/*.js",
+      "!**/__tests__/__fixtures__/**/*.js"
+    ],
     "verbose": true,
     "require": [
       "esm"
@@ -39,6 +43,11 @@
     "*.js": [
       "standard",
       "git add"
+    ]
+  },
+  "standard": {
+    "ignore": [
+      "packages/**/__fixtures__/**/build/**/*.js"
     ]
   }
 }

@@ -1,15 +1,19 @@
-import { readFile } from 'fs-extra'
+import { exists, readFile } from 'fs-extra'
 import { join } from 'path'
 import tempWrite from 'temp-write'
 import { constants } from '@create-figma-plugin/common'
 
-export async function buildWebpackEntryFile (menu, key, entryFileTemplatePath) {
-  const modules = extractModules(menu, key)
+export async function buildWebpackEntryFile (
+  config,
+  key,
+  entryFileTemplatePath
+) {
+  const modules = extractModules(config, key, [])
   if (modules.length === 0) {
     return Promise.resolve(null)
   }
   const code = [
-    `this.__requires__=${createRequireCode(modules)};`,
+    `this.__requires__=${await createRequireCode(modules)};`,
     `this.__command__=${
       modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
     };`
@@ -18,28 +22,33 @@ export async function buildWebpackEntryFile (menu, key, entryFileTemplatePath) {
   return tempWrite(code.join('') + entryFileTemplate)
 }
 
-function extractModules (menu, key) {
-  const modules = []
-  menu.forEach(function (item) {
-    const id = item[constants.packageJson.pluginCodeKey]
-    if (id && item[key]) {
-      modules.push({
+function extractModules (config, key, result) {
+  const src = config[key]
+  if (src) {
+    const id = config[constants.packageJson.pluginCodeKey]
+    if (id) {
+      result.push({
         id,
-        src: item[key]
+        src
       })
     }
-  })
-  return modules
+  }
+  const menu = config[constants.packageJson.menuKey]
+  if (menu) {
+    menu.forEach(function (item) {
+      extractModules(item, key, result)
+    })
+  }
+  return result
 }
 
-function createRequireCode (modules) {
+async function createRequireCode (modules) {
   const code = []
   modules.forEach(function (item) {
     const requirePath = join(process.cwd(), constants.src.directory, item.src)
-    if (typeof require(requirePath) === 'undefined') {
-      return
+    if (exists(requirePath)) {
+      code.push(`'${item.id}':require('${requirePath}').default`)
     }
-    code.push(`'${item.id}':require('${requirePath}').default`)
   })
   return `{${code.join(',')}}`
 }

@@ -2,34 +2,41 @@ import { outputFile } from 'fs-extra'
 import { constants } from '@create-figma-plugin/common'
 
 export async function buildManifest (config) {
-  const manifest = {
+  const result = {
     name: config.name,
     api: constants.apiVersion
   }
-  const menu = config.menu
-  if (menu.length > 0) {
-    manifest.main = constants.build.pluginCodeFilePath
-    if (hasUiBundle(menu)) {
-      manifest.ui = constants.build.pluginUiFilePath
-    }
-    if (menu.length > 1) {
-      manifest.menu = normaliseMenu(menu)
-    }
+  if (hasBundle(config, constants.packageJson.pluginCodeKey)) {
+    result.main = constants.build.pluginCodeFilePath
   }
-  const string = JSON.stringify(manifest, null, 2) + '\n'
+  if (hasBundle(config, constants.packageJson.pluginUiKey)) {
+    result.ui = constants.build.pluginUiFilePath
+  }
+  const menu = config.menu
+  if (typeof menu !== 'undefined') {
+    result.menu = normaliseMenu(menu)
+  }
+  const string = JSON.stringify(result, null, 2) + '\n'
   return outputFile(constants.build.manifestFilePath, string)
 }
 
-function hasUiBundle (menu) {
+function hasBundle (config, key) {
+  if (typeof config[key] !== 'undefined') {
+    return true
+  }
   return (
-    menu.filter(function (item) {
-      return typeof item[constants.packageJson.pluginUiKey] !== 'undefined'
+    typeof config.menu !== 'undefined' &&
+    config.menu.filter(function (item) {
+      return typeof item[key] !== 'undefined'
     }).length > 0
   )
 }
 
 function normaliseMenu (menu) {
   return menu.map(function (item) {
+    if (typeof item.ui === 'undefined') {
+      return item
+    }
     return {
       name: item.name,
       command: item[constants.packageJson.pluginCodeKey]

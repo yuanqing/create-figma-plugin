@@ -18,10 +18,10 @@ const pluginUiEntryFileTemplate = join(
   'plugin-ui-entry-file.js'
 )
 
-export async function buildBundle (menu, isDevelopment) {
+export async function buildBundle (config, isDevelopment) {
   const entry = {}
   const codeEntryFile = await buildWebpackEntryFile(
-    menu,
+    config,
     constants.packageJson.pluginCodeKey,
     pluginCodeEntryFileTemplate
   )
@@ -30,7 +30,7 @@ export async function buildBundle (menu, isDevelopment) {
     entry[key] = codeEntryFile
   }
   const uiEntryFile = await buildWebpackEntryFile(
-    menu,
+    config,
     constants.packageJson.pluginUiKey,
     pluginUiEntryFileTemplate
   )

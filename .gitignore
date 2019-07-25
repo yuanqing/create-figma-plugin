@@ -2,3 +2,5 @@
 .nyc_output/
 *.log
 node_modules/
+packages/**/__fixtures__/**/build/
+packages/**/__fixtures__/**/manifest.json

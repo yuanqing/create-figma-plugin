@@ -3,11 +3,11 @@ import { buildBundle } from './build-bundle'
 import { buildManifest } from './build-manifest'
 import { watch } from './watch'
 
-export async function build (isDevelopment, isWatch) {
+export async function build (isDevelopment = false, isWatch = false) {
   if (isWatch) {
     return watch()
   }
-  const config = readConfig()
-  await buildBundle(config.menu, isDevelopment)
+  const config = await readConfig()
+  await buildBundle(config, isDevelopment)
   return buildManifest(config)
 }
