@@ -36,7 +36,7 @@ function createRequireCode (modules) {
   const code = []
   modules.forEach(function (item) {
     const requirePath = join(process.cwd(), constants.src.directory, item.src)
-    if (require(requirePath) == null) {
+    if (typeof require(requirePath) === 'undefined') {
       return
     }
     code.push(`'${item.id}':require('${requirePath}').default`)
