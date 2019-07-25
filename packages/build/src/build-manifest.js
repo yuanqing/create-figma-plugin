@@ -23,7 +23,7 @@ export async function buildManifest (config) {
 function hasUiBundle (menu) {
   return (
     menu.filter(function (item) {
-      return typeof item.ui !== 'undefined'
+      return typeof item[constants.packageJson.pluginUiKey] !== 'undefined'
     }).length > 0
   )
 }
@@ -32,7 +32,7 @@ function normaliseMenu (menu) {
   return menu.map(function (item) {
     return {
       name: item.name,
-      command: item.command
+      command: item[constants.packageJson.pluginCodeKey]
     }
   })
 }

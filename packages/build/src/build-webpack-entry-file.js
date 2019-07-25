@@ -21,9 +21,10 @@ export async function buildWebpackEntryFile (menu, key, entryFileTemplatePath) {
 function extractModules (menu, key) {
   const modules = []
   menu.forEach(function (item) {
-    if (item.command && item[key]) {
+    const id = item[constants.packageJson.pluginCodeKey]
+    if (id && item[key]) {
       modules.push({
-        id: item.command,
+        id,
         src: item[key]
       })
     }
