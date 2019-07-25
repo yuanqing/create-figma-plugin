@@ -23,6 +23,13 @@ export function promptForUserInput (pluginName) {
   const questions = [
     {
       type: 'input',
+      name: 'template',
+      message: 'Template',
+      filter,
+      prefix
+    },
+    {
+      type: 'input',
       name: 'displayName',
       message: 'Display name',
       default: function () {
