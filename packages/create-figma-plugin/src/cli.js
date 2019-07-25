@@ -12,12 +12,12 @@ cli
   })
 
 cli
-  .command('init <name>', 'Scaffolds a new plugin', { default: true })
+  .command('init <name>', 'Scaffold a new plugin', { default: true })
   .action(async function (name) {
     await init(name)
   })
 
-cli.command('watch', 'Watch and rebuild on changes').action(async function () {
+cli.command('watch', 'Watch and rebuild the plugin on changes').action(async function () {
   await build(true, true)
 })
 
