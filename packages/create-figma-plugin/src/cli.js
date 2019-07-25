@@ -17,8 +17,10 @@ cli
     await init(name)
   })
 
-cli.command('watch', 'Watch and rebuild the plugin on changes').action(async function () {
-  await build(true, true)
-})
+cli
+  .command('watch', 'Watch and rebuild the plugin on changes')
+  .action(async function () {
+    await build(true, true)
+  })
 
 cli.parse(process.argv)
