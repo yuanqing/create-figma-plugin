@@ -1,17 +1,21 @@
 {
-  "name": "{{pluginName}}",
+  "name": "{{name}}",
   "version": "0.0.0",
-{{#pluginDescription}}
-  "description": "{{pluginDescription}}",
-{{/pluginDescription}}
+{{#description}}
+  "description": "{{description}}",
+{{/description}}
   "keywords": [
     "create-figma-plugin",
     "figma",
     "figma-plugin"
   ],
   "license": "MIT",
-  "author": "{{authorName}}",
-  "repository": "{{githubUsername}}/{{pluginName}}",
+{{#author}}
+  "author": "{{author}}",
+{{/author}}
+{{#repositoryUrl}}
+  "repository": "{{repositoryUrl}}",
+{{/repositoryUrl}}
   "files": [
     "src"
   ],
@@ -23,7 +27,7 @@
     "watch": "create-figma-plugin watch"
   },
   "create-figma-plugin": {
-    "name": "{{pluginDisplayName}}",
-    "menu": []
+    "name": "{{displayName}}",
+    "command": "index.js"
   }
 }
