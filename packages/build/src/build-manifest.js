@@ -1,33 +1,23 @@
 import { outputFile } from 'fs-extra'
-import { join } from 'path'
 import { constants } from '@create-figma-plugin/common'
 
-const pluginCodeFilePath = join(
-  constants.buildDirectoryName,
-  constants.pluginCodeFileName
-)
-const pluginUiFilePath = join(
-  constants.buildDirectoryName,
-  constants.pluginUiFileName
-)
-
-export async function buildManifest (config, hasPluginCommands, hasPluginUi) {
+export async function buildManifest (config) {
   const manifest = {
     name: config.name,
     api: constants.apiVersion
   }
   const menu = config.menu
   if (menu.length > 0) {
-    manifest.main = pluginCodeFilePath
+    manifest.main = constants.build.pluginCodeFilePath
     if (hasUiBundle(menu)) {
-      manifest.ui = pluginUiFilePath
+      manifest.ui = constants.build.pluginUiFilePath
     }
     if (menu.length > 1) {
       manifest.menu = normaliseMenu(menu)
     }
   }
   const string = JSON.stringify(manifest, null, 2) + '\n'
-  return outputFile(constants.manifestFilePath, string)
+  return outputFile(constants.build.manifestFilePath, string)
 }
 
 function hasUiBundle (menu) {

@@ -1,15 +1,19 @@
 export const constants = {
   apiVersion: '0.6.0',
-
-  packageJsonConfigKey: 'create-figma-plugin',
-
-  sourceDirectory: 'src',
-  sourceGlobPattern: 'src/**/*.js',
-
-  buildDirectoryName: 'build',
-  manifestFilePath: 'manifest.json',
-  pluginCodeFileName: 'main.js',
-  pluginUiFileName: 'ui.js',
-
+  packageJson: {
+    configKey: 'create-figma-plugin',
+    codeKey: 'command',
+    uiKey: 'ui'
+  },
+  src: {
+    directory: 'src',
+    globPattern: 'src/**/*.js'
+  },
+  build: {
+    directoryName: 'build',
+    manifestFilePath: 'manifest.json',
+    pluginCodeFilePath: 'build/main.js',
+    pluginUiFilePath: 'build/ui.js'
+  },
   webpackConfigMutatorFileName: 'create-figma-plugin.js'
 }

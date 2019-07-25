@@ -10,7 +10,7 @@ export function createWebpackConfig (entry, isDevelopment) {
     entry,
     output: {
       filename: '[name].js',
-      path: join(process.cwd(), constants.buildDirectoryName)
+      path: join(process.cwd(), constants.build.directoryName)
     },
     module: {
       rules: [

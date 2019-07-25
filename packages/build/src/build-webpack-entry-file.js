@@ -34,7 +34,7 @@ function extractModules (menu, key) {
 function createRequireCode (modules) {
   const code = []
   modules.forEach(function (item) {
-    const requirePath = join(process.cwd(), constants.sourceDirectory, item.src)
+    const requirePath = join(process.cwd(), constants.src.directory, item.src)
     if (require(requirePath) == null) {
       return
     }

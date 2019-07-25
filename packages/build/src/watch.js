@@ -3,7 +3,7 @@ import { constants } from '@create-figma-plugin/common'
 import { build } from './build'
 
 export function watch () {
-  const watcher = chokidar.watch([constants.sourceGlobPattern, 'package.json'])
+  const watcher = chokidar.watch([constants.src.globPattern, 'package.json'])
   async function handler () {
     await build(true)
   }

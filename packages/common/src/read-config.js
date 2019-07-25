@@ -4,7 +4,7 @@ import { constants } from './constants'
 export function readConfig () {
   const packageJsonPath = join(process.cwd(), 'package.json')
   const packageJson = require(packageJsonPath)
-  const config = packageJson[constants.packageJsonConfigKey]
+  const config = packageJson[constants.packageJson.configKey]
   return {
     ...config,
     menu: normaliseMenu(config.menu)
