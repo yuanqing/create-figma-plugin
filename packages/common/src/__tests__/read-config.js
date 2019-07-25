@@ -16,11 +16,7 @@ test('no `package.json`', async function (t) {
   changeDirectory('1-no-package-json')
   t.deepEqual(await readConfig(), {
     name: 'plugin',
-    menu: [
-      {
-        command: 'index.js'
-      }
-    ]
+    command: 'index.js'
   })
 })
 
@@ -29,11 +25,7 @@ test('config key is `undefined`', async function (t) {
   changeDirectory('2-config-undefined')
   t.deepEqual(await readConfig(), {
     name: 'plugin',
-    menu: [
-      {
-        command: 'index.js'
-      }
-    ]
+    command: 'index.js'
   })
 })
 
@@ -42,11 +34,7 @@ test('config key is empty', async function (t) {
   changeDirectory('3-config-empty')
   t.deepEqual(await readConfig(), {
     name: 'plugin',
-    menu: [
-      {
-        command: 'index.js'
-      }
-    ]
+    command: 'index.js'
   })
 })
 

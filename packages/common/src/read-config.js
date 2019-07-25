@@ -4,11 +4,7 @@ import { constants } from './constants'
 
 const defaultConfig = {
   name: 'plugin',
-  menu: [
-    {
-      command: 'index.js'
-    }
-  ]
+  command: 'index.js'
 }
 
 export async function readConfig () {
