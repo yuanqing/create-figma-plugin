@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Compile and build a Figma plugin",
+  "description": "Build a Figma plugin",
   "license": "MIT",
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",

@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Scaffolds a new Figma plugin",
+  "description": "Scaffold a new Figma plugin",
   "license": "MIT",
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",
