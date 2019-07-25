@@ -3,7 +3,8 @@ export const constants = {
   packageJson: {
     configKey: 'create-figma-plugin',
     pluginCodeKey: 'command',
-    pluginUiKey: 'ui'
+    pluginUiKey: 'ui',
+    menuKey: 'menu'
   },
   src: {
     directory: 'src',
