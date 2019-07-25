@@ -101,17 +101,20 @@ Configuration options for the plugin are specified on the **`"create-figma-plugi
 }
 ```
 
-### `create-figma-plugin.js`
+### `create-figma-plugin.config.js`
 
-To customize the underlying [Webpack configuration](https://webpack.js.org/configuration/), create a `create-figma-plugin.js` file:
+To customize the underlying [Webpack configuration](https://webpack.js.org/configuration/), create a `create-figma-plugin.config.js` file:
 
 ```js
 export default function (config) {
   // ...
+  return {
+    // ...
+  }
 }
 ```
 
-Mutate the `config` object as you see fit within the function.
+The exported function receives the `config` object used by `create-figma-plugin`, and must return a new configuration object to be used.
 
 ---
 

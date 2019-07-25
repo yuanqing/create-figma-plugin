@@ -15,5 +15,5 @@ export const constants = {
     pluginCodeFilePath: 'build/main.js',
     pluginUiFilePath: 'build/ui.js'
   },
-  webpackConfigMutatorFileName: 'create-figma-plugin.js'
+  configFileName: 'create-figma-plugin.config.js'
 }

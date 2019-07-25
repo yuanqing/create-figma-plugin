@@ -40,11 +40,11 @@ export async function buildBundle (menu, isDevelopment) {
   }
   const webpackConfigMutatorPath = join(
     process.cwd(),
-    constants.webpackConfigMutatorFileName
+    constants.configFileName
   )
-  const webpackConfig = createWebpackConfig(entry, isDevelopment)
+  let webpackConfig = createWebpackConfig(entry, isDevelopment)
   if (await exists(webpackConfigMutatorPath)) {
-    require(webpackConfigMutatorPath).default(webpackConfig)
+    webpackConfig = require(webpackConfigMutatorPath).default(webpackConfig)
   }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
