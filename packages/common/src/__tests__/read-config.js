@@ -56,8 +56,7 @@ test('basic command', async function (t) {
   t.deepEqual(await readConfig(), {
     name: 'foo',
     command: 'bar',
-    ui: 'baz',
-    menu: null
+    ui: 'baz'
   })
 })
 
@@ -66,8 +65,6 @@ test('single menu command', async function (t) {
   changeDirectory('5-single-menu-command')
   t.deepEqual(await readConfig(), {
     name: 'foo',
-    command: null,
-    ui: null,
     menu: [
       {
         name: 'bar',
@@ -82,8 +79,6 @@ test('multiple menu commands', async function (t) {
   changeDirectory('6-multiple-menu-commands')
   t.deepEqual(await readConfig(), {
     name: 'foo',
-    command: null,
-    ui: null,
     menu: [
       {
         name: 'bar',

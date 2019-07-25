@@ -2,9 +2,8 @@ import { exists } from 'fs-extra'
 import { join } from 'path'
 import { constants } from './constants'
 
-const defaultName = 'plugin'
 const defaultConfig = {
-  name: defaultName,
+  name: 'plugin',
   menu: [
     {
       command: 'index.js'
@@ -22,25 +21,33 @@ export async function readConfig () {
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig
   }
-  return {
-    name: config.name || packageJson.name || defaultName,
-    command: config.command || null,
-    ui: config.ui || null,
-    menu: normaliseMenu(config.menu)
+  return createMenuItem(config)
+}
+
+function createMenuItem (config) {
+  const result = {}
+  result.name = config.name
+  if (config.command) {
+    result.command = config.command
   }
+  if (config.ui) {
+    result.ui = config.ui
+  }
+  if (config.menu) {
+    result.menu = normaliseMenu(config.menu)
+  }
+  return result
 }
 
 function normaliseMenu (menu) {
-  if (typeof menu === 'undefined') {
-    return null
-  }
   const result = []
   menu.forEach(function (item) {
     if (item === '-') {
       result.push({ separator: true })
+      return
     }
-    if (item && item.command) {
-      result.push(item)
+    if (item) {
+      result.push(createMenuItem(item))
     }
   })
   return result
