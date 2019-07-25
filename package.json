@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "fix": "prettier-standard 'packages/**/*.js'",
+    "lerna-clean": "lerna clean",
     "lerna-version": "lerna version",
     "lerna-publish": "lerna publish from-package",
     "lint": "standard 'packages/**/*.js'"
