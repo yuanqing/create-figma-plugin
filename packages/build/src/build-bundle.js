@@ -38,10 +38,10 @@ export async function buildBundle (config, isDevelopment) {
     const key = extractBasename(constants.build.pluginUiFilePath)
     entry[key] = uiEntryFile
   }
-  const webpackConfigMutatorPath = join(process.cwd(), constants.configFileName)
+  const customWebpackConfigPath = join(process.cwd(), constants.configFileName)
   let webpackConfig = createWebpackConfig(entry, isDevelopment)
-  if (await exists(webpackConfigMutatorPath)) {
-    webpackConfig = require(webpackConfigMutatorPath).default(webpackConfig)
+  if (await exists(customWebpackConfigPath)) {
+    webpackConfig = require(customWebpackConfigPath).default(webpackConfig)
   }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
