@@ -2,6 +2,7 @@
   "name": "create-figma-plugin",
   "private": true,
   "scripts": {
+    "clean": "rimraf .nyc_output *.log",
     "coverage": "nyc ava",
     "fix": "prettier-standard 'packages/**/*.js'",
     "lerna-clean": "lerna clean",
@@ -17,6 +18,7 @@
     "lint-staged": "^9.2.0",
     "nyc": "^14.1.1",
     "prettier-standard": "^9.1.1",
+    "rimraf": "^2.6.3",
     "standard": "^13.0.2"
   },
   "workspaces": [
