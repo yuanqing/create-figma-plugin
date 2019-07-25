@@ -11,5 +11,8 @@
   "files": [
     "index.js",
     "src"
-  ]
+  ],
+  "dependencies": {
+    "chalk": "^2.4.2"
+  }
 }
