@@ -17,14 +17,6 @@ export function createWebpackConfig (entry, isDevelopment) {
         {
           test: /\.tsx?$/,
           use: 'ts-loader'
-        },
-        {
-          test: /\.css$/,
-          loader: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
-        },
-        {
-          test: /\.(png|jpg|gif|webp|svg)$/,
-          loader: [{ loader: 'url-loader' }]
         }
       ]
     },
