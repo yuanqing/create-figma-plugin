@@ -21,6 +21,7 @@ export function createWebpackConfig (entry, isDevelopment) {
       ]
     },
     resolve: {
+      modules: [join(process.cwd(), 'src'), process.cwd(), 'node_modules'],
       extensions: ['.tsx', '.ts', '.jsx', '.js']
     },
     devtool: isDevelopment ? 'inline-cheap-source-map' : 'none',

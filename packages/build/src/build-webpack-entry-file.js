@@ -13,7 +13,7 @@ export async function buildWebpackEntryFile (
     return Promise.resolve(null)
   }
   const code = [
-    `this.__requires__=${await createRequireCode(modules)};`,
+    `this.__requires__=${createRequireCode(modules)};`,
     `this.__command__=${
       modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
     };`
@@ -42,13 +42,10 @@ function extractModules (config, key, result) {
   return result
 }
 
-async function createRequireCode (modules) {
+function createRequireCode (modules) {
   const code = []
   modules.forEach(function (item) {
-    const requirePath = join(process.cwd(), constants.src.directory, item.src)
-    if (exists(requirePath)) {
-      code.push(`'${item.id}':require('${requirePath}').default`)
-    }
+    code.push(`'${item.id}':require('${item.src}').default`)
   })
   return `{${code.join(',')}}`
 }
