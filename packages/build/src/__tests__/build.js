@@ -2,19 +2,22 @@ import test from 'ava'
 import { exists } from 'fs-extra'
 import { join } from 'path'
 import rimraf from 'rimraf'
-import { promisify } from 'util'
 import { build } from '../build'
 
 function changeDirectory (directory) {
   process.chdir(join(__dirname, '__fixtures__', directory))
 }
 
-const rimrafPromisified = promisify(rimraf)
 async function cleanUp () {
-  await rimrafPromisified(join(process.cwd(), 'manifest.json'))
-  await rimrafPromisified(join(process.cwd(), 'build'))
+  return new Promise(function (resolve, reject) {
+    rimraf(join(process.cwd(), '{manifest.json,build}'), function (error) {
+      if (error) {
+        return reject(error)
+      }
+      resolve()
+    })
+  })
 }
-
 test.afterEach.always(cleanUp)
 
 test.serial('no config', async function (t) {
