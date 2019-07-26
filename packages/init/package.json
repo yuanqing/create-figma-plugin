@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/init",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publishConfig": {
     "access": "public"
   },
@@ -13,7 +13,7 @@
     "src"
   ],
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.3",
+    "@create-figma-plugin/common": "^0.0.4",
     "degit": "^2.1.3",
     "fs-extra": "^8.1.0",
     "git-user-name": "^2.0.0",
