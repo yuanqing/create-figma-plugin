@@ -2,9 +2,10 @@
 
 > A toolkit for developing [Figma](https://figma.com) plugins
 
-- Write modern JavaScript
+- Write your plugin in modern JavaScript or TypeScript
 - Bundle your plugin command implementation and UI code, with support for multiple commands
 - Automatically generate your plugin’s `manifest.json` file
+- Scaffold your plugin using a template
 - Supports customizing the underlying Webpack configuration
 
 ---
@@ -19,14 +20,28 @@ To begin:
 $ npx create-figma-plugin figma-hello-world
 ```
 
-Enter the information prompted for. Then:
+Enter the information prompted for.
+
+See that we have a new folder named `figma-hello-world`. Then:
 
 ```sh
 $ cd figma-hello-world
 $ npm install
 ```
 
-Next, create a `src/hello-world/command.js` file:
+In `package.json`, see that `index.js` is specified as a command:
+
+```diff
+{
+  ...
+  "create-figma-plugin": {
+    ...
++   "command": "index.js"
+  }
+}
+```
+
+In `index.js`, see that the function is the `default` export of the the file:
 
 ```js
 export default function () {
@@ -34,29 +49,7 @@ export default function () {
 }
 ```
 
-The plugin command must be the `default` export of the file.
-
-Then, in `package.json`, specify `src/hello-world/command.js` as a command in the plugin menu:
-
-```diff
-{
-  ...
-  "create-figma-plugin": {
-    ...
--   "menu": []
-+   "menu": [
-+     {
-+       "name": "Hello, World!",
-+       "command": "hello-world/command"
-+     }
-+   ]
-  }
-}
-```
-
-The initial `src/` path and extension can be omitted, so `src/hello-world/command.js` becomes `hello-world/command`.
-
-Then, build the plugin:
+Now, build the plugin:
 
 ```
 $ npm run build
@@ -76,30 +69,58 @@ $ npm run watch
 
 Configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of your `package.json` file.
 
-- **`"name"`** — The display name of the plugin.
-- **`"menu"`** — An array that specifies the commands that appear in the plugin’s sub-menu. Each object in the array has these keys:
+- **`"name"`** — Display name of the plugin.
+- **`"command"`** — Path to the plugin command implementation.
+- **`"ui"`** *(optional)* — Path to the plugin command’s UI implementation.
+- **`"menu"`** *(optional)* — An array that specifies the commands shown in plugin’s sub-menu. Each object in the array has these keys:
 
     - **`"name"`** — The display name of the plugin command.
-    - **`"command"`** — The path to the plugin command implementation in the `src/` directory. The initial `src/` path and file extension can be omitted.
-    - **`"ui"`** *(optional)* — The path to the plugin command’s UI implementation in the `src/` directory.
+    - **`"command"`** — Ditto the `"command"` key above.
+    - **`"ui"`** *(optional)* — Ditto the `"ui"` key above.
+
+    Use a **`"-"`** in the array to specify a separator between commands in the plugin’s sub-menu.
+
+For brevity, the initial `src/` of any paths specified in the configuration can be omitted. `create-figma-plugin` will attempt to resolve file paths in the `src` directory.
 
 #### Example
+
+Single command:
 
 ```
 {
   ...
   "create-figma-plugin": {
     "name": "Hello, World!",
+    "command": "index.js",
+    "ui": "ui.js"
+  }
+}
+```
+
+Multiple commands:
+
+```
+{
+  ...
+  "create-figma-plugin": {
+    "name": "Hello, World",
     "menu": [
       {
-        "name": "Hello, World!",
-        "command": "hello-world/command",
-        "ui": "hello-world/ui"
+        "name": "Hello, World",
+        "command": "hello-world/index.js",
+        "ui": "hello-world/ui.js"
+      },
+      "-",
+      {
+        "name": "Settings",
+        "command": "settings/command.js",
+        "ui": "settings/ui.js"
       }
     ]
   }
 }
 ```
+
 
 ### `create-figma-plugin.config.js`
 
@@ -114,7 +135,7 @@ export default function (config) {
 }
 ```
 
-The exported function receives the `config` object used by `create-figma-plugin`, and must return a new configuration object to be used.
+The exported function receives the `config` object created by `create-figma-plugin`. The function must return the new configuration object to be used.
 
 ---
 
@@ -152,7 +173,7 @@ export default function (rootNode, {postMessage, onMessage}) {
 ### Example
 
 ```js
-// src/hello-world/command.js
+// index.js
 
 export default function (figma, {showUI, postMessage, onMessage}) {
   showUI({ width: 400, height: 200 })
@@ -167,13 +188,13 @@ export default function (figma, {showUI, postMessage, onMessage}) {
 ```
 
 ```js
-// src/hello-world/ui.js
+// ui.js
 
 import {render} from 'react-dom'
 
 export default function (rootNode, {postMessage, onMessage}) {
-  // ...
-  render(rootNode, <h1>Hello, World</h1>)
+  const ui = // ...
+  rootNode.appendChild(ui)
   // ...
   postMessage('bar')
   onMessage(function (message) {
@@ -193,8 +214,8 @@ export default function (rootNode, {postMessage, onMessage}) {
 
   Available Commands
     build    Build the plugin
-    init     Scaffolds a new plugin
-    watch    Watch and rebuild on changes
+    init     Scaffold a new plugin
+    watch    Watch and rebuild the plugin on changes
 
   For more info, run any command with the `--help` flag
     $ create-figma-plugin build --help
