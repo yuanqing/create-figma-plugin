@@ -5,8 +5,7 @@ export const constants = {
     defaultPluginName: 'figma-plugin'
   },
   src: {
-    directory: 'src',
-    globPattern: 'src/**/*.js'
+    directory: 'src'
   },
   build: {
     directoryName: 'build',
