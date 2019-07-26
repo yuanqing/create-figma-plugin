@@ -3,7 +3,7 @@ import { buildBundle } from './build-bundle'
 import { buildManifest } from './build-manifest'
 import { watch } from './watch'
 
-export async function build (isDevelopment = false, isWatch = false) {
+export async function build (isDevelopment, isWatch) {
   if (isWatch) {
     return watch()
   }
