@@ -5,3 +5,4 @@ node_modules/
 packages/**/__fixtures__/**/build/
 packages/**/__fixtures__/**/figma-plugin/
 packages/**/__fixtures__/**/manifest.json
+packages/create-figma-plugin/README.md
