@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@create-figma-plugin/build": "^0.0.3",
+    "@create-figma-plugin/common": "^0.0.3",
     "@create-figma-plugin/init": "^0.0.3",
     "esm": "^3.2.25",
     "sade": "^1.6.0"
