@@ -86,37 +86,37 @@ For brevity, the initial `src/` of any paths specified in the configuration can 
 
 Single command:
 
-```
+```diff
 {
   ...
   "create-figma-plugin": {
     "name": "Hello, World!",
-    "command": "index.js",
-    "ui": "ui.js"
++   "command": "index.js",
++   "ui": "ui.js"
   }
 }
 ```
 
 Multiple commands:
 
-```
+```diff
 {
   ...
   "create-figma-plugin": {
     "name": "Hello, World",
-    "menu": [
-      {
-        "name": "Hello, World",
-        "command": "hello-world/index.js",
-        "ui": "hello-world/ui.js"
-      },
-      "-",
-      {
-        "name": "Settings",
-        "command": "settings/command.js",
-        "ui": "settings/ui.js"
-      }
-    ]
++   "menu": [
++     {
++       "name": "Hello, World",
++       "command": "hello-world/index.js",
++       "ui": "hello-world/ui.js"
++     },
++     "-",
++     {
++       "name": "Settings",
++       "command": "settings/command.js",
++       "ui": "settings/ui.js"
++     }
++   ]
   }
 }
 ```
