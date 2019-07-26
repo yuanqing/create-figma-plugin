@@ -16,7 +16,7 @@
 
 To begin:
 
-```sh
+```
 $ npx create-figma-plugin figma-hello-world
 ```
 
@@ -24,7 +24,7 @@ Enter the information prompted for.
 
 See that we have a new folder named `figma-hello-world`. Then:
 
-```sh
+```
 $ cd figma-hello-world
 $ npm install
 ```
