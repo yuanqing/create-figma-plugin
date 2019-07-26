@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/build",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publishConfig": {
     "access": "public"
   },
@@ -13,7 +13,7 @@
     "src"
   ],
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.4",
+    "@create-figma-plugin/common": "^0.0.5",
     "chokidar": "^3.0.2",
     "fs-extra": "^8.1.0",
     "temp-write": "^4.0.0",
