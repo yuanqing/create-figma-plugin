@@ -5,6 +5,7 @@ import isUtf8 from 'is-utf8'
 import mustache from 'mustache'
 import { join } from 'path'
 import { promptForUserInput } from './prompt-for-user-input'
+import { constants } from '@create-figma-plugin/common'
 
 mustache.escape = function (text) {
   return text
@@ -31,7 +32,7 @@ async function throwIfDirectoryExists (directory) {
 
 function createDefaultConfig ({ name, template }) {
   const result = {
-    name: 'figma-plugin',
+    name: constants.packageJson.defaultPluginName,
     template: 'default'
   }
   if (name) {
