@@ -2,9 +2,7 @@ export const constants = {
   apiVersion: '0.6.0',
   packageJson: {
     configKey: 'create-figma-plugin',
-    pluginCodeKey: 'command',
-    pluginUiKey: 'ui',
-    menuKey: 'menu'
+    defaultPluginName: 'figma-plugin'
   },
   src: {
     directory: 'src',

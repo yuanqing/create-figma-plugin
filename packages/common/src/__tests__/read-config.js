@@ -15,7 +15,7 @@ test('no `package.json`', async function (t) {
   t.plan(1)
   changeDirectory('1-no-package-json')
   t.deepEqual(await readConfig(), {
-    name: 'plugin',
+    name: 'figma-plugin',
     command: 'index.js'
   })
 })
@@ -24,7 +24,7 @@ test('config key is `undefined`', async function (t) {
   t.plan(1)
   changeDirectory('2-config-undefined')
   t.deepEqual(await readConfig(), {
-    name: 'plugin',
+    name: 'figma-plugin',
     command: 'index.js'
   })
 })
@@ -33,7 +33,7 @@ test('config key is empty', async function (t) {
   t.plan(1)
   changeDirectory('3-config-empty')
   t.deepEqual(await readConfig(), {
-    name: 'plugin',
+    name: 'figma-plugin',
     command: 'index.js'
   })
 })

@@ -6,10 +6,10 @@ export async function buildManifest (config) {
     name: config.name,
     api: constants.apiVersion
   }
-  if (hasBundle(config, constants.packageJson.pluginCodeKey)) {
+  if (hasBundle(config, 'command')) {
     result.main = constants.build.pluginCodeFilePath
   }
-  if (hasBundle(config, constants.packageJson.pluginUiKey)) {
+  if (hasBundle(config, 'ui')) {
     result.ui = constants.build.pluginUiFilePath
   }
   const menu = config.menu
@@ -39,7 +39,7 @@ function normaliseMenu (menu) {
     }
     return {
       name: item.name,
-      command: item[constants.packageJson.pluginCodeKey]
+      command: item.command
     }
   })
 }

@@ -22,7 +22,7 @@ export async function buildBundle (config, isDevelopment) {
   const entry = {}
   const codeEntryFile = await buildWebpackEntryFile(
     config,
-    constants.packageJson.pluginCodeKey,
+    'command',
     pluginCodeEntryFileTemplate
   )
   if (codeEntryFile) {
@@ -31,7 +31,7 @@ export async function buildBundle (config, isDevelopment) {
   }
   const uiEntryFile = await buildWebpackEntryFile(
     config,
-    constants.packageJson.pluginUiKey,
+    'ui',
     pluginUiEntryFileTemplate
   )
   if (uiEntryFile) {

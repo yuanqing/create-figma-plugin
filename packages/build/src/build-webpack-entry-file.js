@@ -25,7 +25,7 @@ export async function buildWebpackEntryFile (
 function extractModules (config, key, result) {
   const src = config[key]
   if (src) {
-    const id = config[constants.packageJson.pluginCodeKey]
+    const id = config.command
     if (id) {
       result.push({
         id,
@@ -33,7 +33,7 @@ function extractModules (config, key, result) {
       })
     }
   }
-  const menu = config[constants.packageJson.menuKey]
+  const menu = config.menu
   if (menu) {
     menu.forEach(function (item) {
       extractModules(item, key, result)

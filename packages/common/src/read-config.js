@@ -3,7 +3,7 @@ import { join } from 'path'
 import { constants } from './constants'
 
 const defaultConfig = {
-  name: 'plugin',
+  name: constants.packageJson.defaultPluginName,
   command: 'index.js'
 }
 

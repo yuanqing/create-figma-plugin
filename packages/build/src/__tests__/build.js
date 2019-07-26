@@ -27,7 +27,7 @@ test.serial('no config', async function (t) {
   await build()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
-    name: 'plugin',
+    name: 'figma-plugin',
     api: '0.6.0',
     main: 'build/main.js'
   })
