@@ -7,10 +7,10 @@ const cli = sade('create-figma-plugin')
 
 cli
   .command('build', 'Build the plugin')
-  .option('-d, --development', 'Build in development mode', false)
-  .action(async function ({ development }) {
+  .option('-d, --dev', 'Build in development mode', false)
+  .action(async function ({ dev }) {
     log.info('Building plugin...')
-    await build(development)
+    await build(dev)
     log.success('Done')
   })
 
