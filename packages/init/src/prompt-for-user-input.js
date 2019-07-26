@@ -33,8 +33,8 @@ export async function promptForUserInput ({ name, template }) {
       type: 'input',
       name: 'displayName',
       message: 'display name',
-      default: function ({ name }) {
-        return titleCase(name.replace(figmaPrefixRegex, ''))
+      default: function (values) {
+        return titleCase((name || values.name).replace(figmaPrefixRegex, ''))
       },
       validate,
       filter,
