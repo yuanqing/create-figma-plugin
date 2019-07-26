@@ -1,7 +1,5 @@
-import { exists, readFile } from 'fs-extra'
-import { join } from 'path'
+import { readFile } from 'fs-extra'
 import tempWrite from 'temp-write'
-import { constants } from '@create-figma-plugin/common'
 
 export async function buildWebpackEntryFile (
   config,
