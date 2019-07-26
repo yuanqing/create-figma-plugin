@@ -10,16 +10,13 @@ mustache.escape = function (text) {
   return text
 }
 
-const defaultConfig = {
-  name: 'plugin',
-  template: 'default'
-}
-
 export async function init (options, useDefault) {
   if (typeof options.name !== 'undefined') {
     await throwIfDirectoryExists(join(process.cwd(), options.name))
   }
-  const config = useDefault ? defaultConfig : await promptForUserInput(options)
+  const config = useDefault
+    ? createDefaultConfig(options)
+    : await promptForUserInput(options)
   const pluginDirectoryPath = join(process.cwd(), config.name)
   await throwIfDirectoryExists(pluginDirectoryPath)
   await buildPluginDirectoryFromTemplate(pluginDirectoryPath, config.template)
@@ -32,6 +29,22 @@ async function throwIfDirectoryExists (directory) {
   }
 }
 
+function createDefaultConfig ({ name, template }) {
+  const result = {
+    name: 'figma-plugin',
+    template: 'default'
+  }
+  if (name) {
+    result.name = name
+  }
+  if (template) {
+    result.template = template
+  }
+  return result
+}
+
+const gitHubRepositoryRegex = /[\w-]+\/[\w-]+/
+
 async function buildPluginDirectoryFromTemplate (
   pluginDirectoryPath,
   template
@@ -41,11 +54,10 @@ async function buildPluginDirectoryFromTemplate (
     await ensureDir(pluginDirectoryPath)
     return copy(templateDirectory, pluginDirectoryPath)
   }
-  return degit(template, {
-    cache: true,
-    force: true,
-    verbose: true
-  }).clone(pluginDirectoryPath)
+  if (gitHubRepositoryRegex.test(template) === false) {
+    return new Error('Invalid GitHub repository')
+  }
+  return degit(template).clone(pluginDirectoryPath)
 }
 
 async function interpolateConfigValues (pluginDirectoryPath, config) {
