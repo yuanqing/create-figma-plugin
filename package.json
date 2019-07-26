@@ -42,6 +42,7 @@
   "lint-staged": {
     "*.js": [
       "standard",
+      "prettier-standard",
       "git add"
     ]
   },
