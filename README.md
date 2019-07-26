@@ -146,7 +146,7 @@ The exported function receives the `config` object created by `create-figma-plug
 A plugin command is specified as a function with the signature:
 
 ```js
-export default function (figma, {showUI, postMessage, onMessage}) {
+export default function (figma, { showUI, postMessage, onMessage }) {
   // ...
 }
 ```
@@ -156,26 +156,12 @@ export default function (figma, {showUI, postMessage, onMessage}) {
 - **`postMessage`** (`function (message)`) — Send a `message` to the UI `iframe`.
 - **`onMessage`** (`function (handler)`) — Set up a `handler` for receiving messages from the UI `iframe`.
 
-### UI
-
-A plugin command’s UI (rendered in an `iframe` by Figma) is specified as a function with the signature:
-
-```js
-export default function (rootNode, {postMessage, onMessage}) {
-  // ...
-}
-```
-
-- **`rootNode`** ([`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)) — An empty `div` element within which you can render your UI.
-- **`postMessage`** (`function (message)`) — Send a `message` to the plugin command.
-- **`onMessage`** (`function (handler)`) — Set up a `handler` for receiving messages from the plugin command.
-
-### Example
+#### Example
 
 ```js
 // index.js
 
-export default function (figma, {showUI, postMessage, onMessage}) {
+export default function (figma, { showUI, postMessage, onMessage }) {
   showUI({ width: 400, height: 200 })
   // ...
   postMessage('foo')
@@ -187,12 +173,26 @@ export default function (figma, {showUI, postMessage, onMessage}) {
 }
 ```
 
+### UI
+
+A plugin command’s UI (rendered in an `iframe` by Figma) is specified as a function with the signature:
+
+```js
+export default function (rootNode, { postMessage, onMessage }) {
+  // ...
+}
+```
+
+- **`rootNode`** ([`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)) — An empty `div` element within which you can render your UI.
+- **`postMessage`** (`function (message)`) — Send a `message` to the plugin command.
+- **`onMessage`** (`function (handler)`) — Set up a `handler` for receiving messages from the plugin command.
+
+#### Example
+
 ```js
 // ui.js
 
-import {render} from 'react-dom'
-
-export default function (rootNode, {postMessage, onMessage}) {
+export default function (rootNode, { postMessage, onMessage }) {
   const ui = // ...
   rootNode.appendChild(ui)
   // ...
