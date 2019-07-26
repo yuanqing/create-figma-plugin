@@ -1,4 +1,4 @@
-# create-figma-plugin [![npm Version](https://img.shields.io/npm/v/create-figma-plugin.svg)](https://www.npmjs.org/package/create-figma-plugin) [![Build Status](https://img.shields.io/travis/yuanqing/create-figma-plugin.svg)](https://travis-ci.org/yuanqing/create-figma-plugin)
+# Create Figma Plugin [![npm Version](https://img.shields.io/npm/v/create-figma-plugin.svg)](https://www.npmjs.org/package/create-figma-plugin) [![Build Status](https://img.shields.io/travis/yuanqing/create-figma-plugin.svg)](https://travis-ci.org/yuanqing/create-figma-plugin)
 
 > A toolkit for developing [Figma](https://figma.com) plugins
 
@@ -20,16 +20,14 @@ To begin:
 $ npx create-figma-plugin figma-hello-world
 ```
 
-Enter the information prompted for.
-
-See that we have a new folder named `figma-hello-world`. Then:
+Enter the information prompted for. Then:
 
 ```
 $ cd figma-hello-world
 $ npm install
 ```
 
-In `package.json`, see that `index.js` is specified as a command:
+In `package.json`, `index.js` is specified as a command:
 
 ```diff
 {
@@ -41,7 +39,7 @@ In `package.json`, see that `index.js` is specified as a command:
 }
 ```
 
-In `index.js`, see that the function is the `default` export of the the file:
+In `index.js`, the plugin implementation is the `default` export of the file:
 
 ```js
 export default function () {
@@ -80,7 +78,7 @@ Configuration options for the plugin are specified on the **`"create-figma-plugi
 
     Use a **`"-"`** in the array to specify a separator between commands in the plugin’s sub-menu.
 
-For brevity, the initial `src/` of any paths specified in the configuration can be omitted. `create-figma-plugin` will attempt to resolve file paths in the `src` directory.
+For brevity, the initial `src/` of any paths specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve file paths in the `src` directory.
 
 #### Example
 
@@ -135,7 +133,15 @@ export default function (config) {
 }
 ```
 
-The exported function receives the `config` object created by `create-figma-plugin`. The function must return the new configuration object to be used.
+The exported function receives the existing `config` object, and must return the new configuration object to be used.
+
+---
+
+## Installation
+
+```
+$ npm install --global create-figma-plugin
+```
 
 ---
 
