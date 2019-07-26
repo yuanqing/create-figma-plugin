@@ -43,6 +43,7 @@
     "*.js": [
       "standard",
       "prettier-standard",
+      "ava",
       "git add"
     ]
   },
