@@ -6,29 +6,38 @@ import mustache from 'mustache'
 import { join } from 'path'
 import { promptForUserInput } from './prompt-for-user-input'
 
-export async function init (name, config) {
-  const pluginDirectoryPath = join(process.cwd(), name)
-  if (await exists(pluginDirectoryPath)) {
-    return Promise.reject(
-      new Error(`Directory already exists: ${pluginDirectoryPath}`)
-    )
+mustache.escape = function (text) {
+  return text
+}
+
+const defaultConfig = {
+  name: 'plugin',
+  template: 'default'
+}
+
+export async function init (options, useDefault) {
+  if (typeof options.name !== 'undefined') {
+    await throwIfDirectoryExists(join(process.cwd(), options.name))
   }
-  if (typeof config === 'undefined') {
-    config = await promptForUserInput(name)
-  }
+  const config = useDefault ? defaultConfig : await promptForUserInput(options)
+  const pluginDirectoryPath = join(process.cwd(), config.name)
+  await throwIfDirectoryExists(pluginDirectoryPath)
   await buildPluginDirectoryFromTemplate(pluginDirectoryPath, config.template)
-  return interpolateConfigValues(pluginDirectoryPath, {
-    ...config,
-    name
-  })
+  return interpolateConfigValues(pluginDirectoryPath, config)
+}
+
+async function throwIfDirectoryExists (directory) {
+  if (await exists(directory)) {
+    return Promise.reject(new Error(`Directory already exists: ${directory}`))
+  }
 }
 
 async function buildPluginDirectoryFromTemplate (
   pluginDirectoryPath,
   template
 ) {
-  if (typeof template === 'undefined') {
-    const templateDirectory = join(__dirname, 'template')
+  const templateDirectory = join(__dirname, 'templates', template)
+  if (await exists(templateDirectory)) {
     await ensureDir(pluginDirectoryPath)
     return copy(templateDirectory, pluginDirectoryPath)
   }
@@ -56,9 +65,6 @@ async function interpolateConfigValues (pluginDirectoryPath, config) {
   )
 }
 
-mustache.escape = function (text) {
-  return text
-}
 function interpolate (string, data) {
   return mustache.render(string, data)
 }

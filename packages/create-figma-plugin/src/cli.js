@@ -12,9 +12,11 @@ cli
   })
 
 cli
-  .command('init <name>', 'Scaffold a new plugin', { default: true })
-  .action(async function (name) {
-    await init(name)
+  .command('init [name]', 'Scaffold a new plugin', { default: true })
+  .option('-t, --template', 'Use a template')
+  .option('-y, --yes', 'Use defaults', false)
+  .action(async function (name, { yes, template }) {
+    await init({ name, template }, yes)
   })
 
 cli

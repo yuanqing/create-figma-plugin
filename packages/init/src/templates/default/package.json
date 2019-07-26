@@ -9,7 +9,9 @@
     "figma",
     "figma-plugin"
   ],
-  "license": "MIT",
+{{#license}}
+  "license": "{{license}}",
+{{/license}}
 {{#author}}
   "author": "{{author}}",
 {{/author}}
@@ -27,7 +29,9 @@
     "watch": "create-figma-plugin watch"
   },
   "create-figma-plugin": {
+{{#displayName}}
     "name": "{{displayName}}",
+{{/displayName}}
     "command": "index.js"
   }
 }

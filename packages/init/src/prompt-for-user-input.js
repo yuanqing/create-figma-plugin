@@ -19,44 +19,53 @@ function filter (input) {
   return input.replace(multipleSpaceRegex, ' ').trim()
 }
 
-export function promptForUserInput (pluginName) {
+export async function promptForUserInput ({ name, template }) {
   const questions = [
-    {
+    typeof name === 'undefined' && {
       type: 'input',
-      name: 'template',
-      message: 'Template',
-      filter,
-      prefix
-    },
-    {
-      type: 'input',
-      name: 'displayName',
-      message: 'Display name',
-      default: function () {
-        return titleCase(pluginName.replace(figmaPrefixRegex, ''))
-      },
+      name: 'name',
+      message: 'name',
       validate,
       filter,
       prefix
     },
     {
       type: 'input',
+      name: 'displayName',
+      message: 'display name',
+      default: function ({ name }) {
+        return titleCase(name.replace(figmaPrefixRegex, ''))
+      },
+      validate,
+      filter,
+      prefix
+    },
+    typeof template === 'undefined' && {
+      type: 'input',
+      name: 'template',
+      message: 'template',
+      default: 'default',
+      filter,
+      prefix
+    },
+    {
+      type: 'input',
       name: 'description',
-      message: 'Description',
+      message: 'description',
       filter,
       prefix
     },
     {
       type: 'input',
       name: 'repositoryUrl',
-      message: 'Repository URL',
+      message: 'repository url',
       filter,
       prefix
     },
     {
       type: 'input',
       name: 'author',
-      message: 'Author',
+      message: 'author',
       default: function () {
         return gitUserName()
       },
@@ -66,11 +75,17 @@ export function promptForUserInput (pluginName) {
     {
       type: 'input',
       name: 'license',
-      message: 'License',
-      default: 'MIT',
+      message: 'license',
+      default: function () {
+        return 'MIT'
+      },
       filter,
       prefix
     }
-  ]
-  return prompt(questions)
+  ].filter(Boolean)
+  return {
+    name,
+    template,
+    ...(await prompt(questions))
+  }
 }
