@@ -42,8 +42,9 @@ In `package.json`, `index.js` is specified as a command:
 In `index.js`, the plugin implementation is the `default` export of the file:
 
 ```js
-export default function () {
+export default function (figma) {
   console.log('Hello, World!')
+  figma.closePlugin()
 }
 ```
 
