@@ -1,12 +1,12 @@
 import gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
 import titleCase from 'title-case'
-import { logPrefix } from '@create-figma-plugin/common'
+import { logPrefixes } from '@create-figma-plugin/common'
 
 const figmaPrefixRegex = /^figma-/
 const multipleSpaceRegex = /\s+/g
 
-const prefix = logPrefix.question
+const prefix = logPrefixes.question
 
 function validate (input) {
   if (input.replace(multipleSpaceRegex, '').trim().length > 0) {

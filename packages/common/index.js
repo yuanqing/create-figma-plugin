@@ -1,3 +1,4 @@
 export { constants } from './src/constants'
-export { logPrefix } from './src/log-prefix'
+export { log } from './src/log'
+export { logPrefixes } from './src/log-prefixes'
 export { readConfig } from './src/read-config'

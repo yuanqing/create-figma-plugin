@@ -5,7 +5,7 @@ const info = chalk.yellowBright('info')
 const question = chalk.gray('question')
 const success = chalk.green('success')
 
-export const logPrefix = {
+export const logPrefixes = {
   error,
   info,
   question,
