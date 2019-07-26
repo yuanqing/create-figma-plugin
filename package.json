@@ -2,7 +2,7 @@
   "name": "create-figma-plugin",
   "private": true,
   "scripts": {
-    "clean": "rimraf .nyc_output '*.log' 'packages/**/__fixtures__/**/build' 'packages/**/__fixtures__/**/manifest.json'",
+    "clean": "rimraf .nyc_output '*.log' 'packages/**/__fixtures__/**/build' 'packages/**/__fixtures__/**/figma-plugin' 'packages/**/__fixtures__/**/manifest.json'",
     "coverage": "nyc ava",
     "fix": "prettier-standard 'packages/**/*.js' '!packages/**/__fixtures__/**/build/**/*.js' '!packages/init/**/templates/**/*.js'",
     "lerna-clean": "lerna clean",
