@@ -146,9 +146,7 @@ The exported function receives the `config` object created by `create-figma-plug
 A plugin command is specified as a function with the signature:
 
 ```js
-export default function (figma, { showUI, postMessage, onMessage }) {
-  // ...
-}
+function (figma, { showUI, postMessage, onMessage })
 ```
 
 - **`figma`** (`object`) — The global `figma` object.
@@ -178,9 +176,7 @@ export default function (figma, { showUI, postMessage, onMessage }) {
 A plugin command’s UI (rendered in an `iframe` by Figma) is specified as a function with the signature:
 
 ```js
-export default function (rootNode, { postMessage, onMessage }) {
-  // ...
-}
+function (rootNode, { postMessage, onMessage })
 ```
 
 - **`rootNode`** ([`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)) — An empty `div` element within which you can render your UI.
