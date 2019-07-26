@@ -1,13 +1,20 @@
 /* global __html__, figma */
 
-const html = [
-  `<div id="create-figma-plugin"></div>`,
-  `<script>this.__command__='${this.__command__}';</script>`,
-  `<script>${__html__}</script>`
-].join('')
-
+const self = this
 const options = {
   showUI: function (options) {
+    if (typeof __html__ === 'undefined') {
+      throw new Error(
+        `UI not defined for the command corresponding to \`${
+          self.__command__
+        }\``
+      )
+    }
+    const html = [
+      `<div id="create-figma-plugin"></div>`,
+      `<script>this.__command__='${self.__command__}';</script>`,
+      `<script>${__html__}</script>`
+    ].join('')
     figma.showUI(html, options)
   },
   onMessage: function (callback) {
@@ -16,5 +23,5 @@ const options = {
   postMessage: figma.ui.postMessage
 }
 
-const command = this.__requires__[this.__command__]
+const command = self.__requires__[self.__command__]
 command(figma, options)
