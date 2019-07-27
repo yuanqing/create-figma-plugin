@@ -14,17 +14,21 @@
 
 *Requires [Node.js](https://nodejs.org/).*
 
-To begin:
-
 ```
 $ npx create-figma-plugin figma-hello-world
-```
-
-Enter the information prompted for. Then:
-
-```
 $ cd figma-hello-world
-$ npm install
+$ ls -1
+index.js
+package.json
+```
+
+`index.js` contains the plugin implementation, which is a function set to be the `default` export of the file:
+
+```js
+export default function (figma) {
+  console.log('Hello, World!')
+  figma.closePlugin()
+}
 ```
 
 In `package.json`, `index.js` is specified as a command:
@@ -39,16 +43,7 @@ In `package.json`, `index.js` is specified as a command:
 }
 ```
 
-In `index.js`, the plugin implementation is the `default` export of the file:
-
-```js
-export default function (figma) {
-  console.log('Hello, World!')
-  figma.closePlugin()
-}
-```
-
-To build the plugin, do:
+To build the plugin:
 
 ```
 $ npm run build
@@ -56,7 +51,7 @@ $ npm run build
 
 This will generate a `manifest.json` file and a `build/` directory with the plugin bundle.
 
-To rebuild the plugin whenever you make a change, do:
+To rebuild the plugin whenever you make a change:
 
 ```
 $ npm run watch
@@ -81,11 +76,11 @@ Configuration options for the plugin are specified on the **`"create-figma-plugi
 
     Use a **`"-"`** in the array to specify a separator between commands in the plugin’s sub-menu.
 
-For brevity, the initial `src/` of any paths specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve file paths in the `src/` directory.
+For brevity, the initial `src/` of paths specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve the paths in the `src/` directory.
 
 #### Example
 
-Single command:
+Plugin with a single command:
 
 ```diff
 {
@@ -98,7 +93,7 @@ Single command:
 }
 ```
 
-Multiple commands:
+Plugin with multiple commands in the plugin sub-menu:
 
 ```diff
 {
@@ -121,7 +116,6 @@ Multiple commands:
   }
 }
 ```
-
 
 ### `create-figma-plugin.config.js`
 
