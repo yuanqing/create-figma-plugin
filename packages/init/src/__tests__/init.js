@@ -21,12 +21,11 @@ async function cleanUp () {
 test.afterEach.always(cleanUp)
 
 test('use default', async function (t) {
-  t.plan(4)
+  t.plan(3)
   changeDirectory('1-use-default')
   await cleanUp()
   await init({}, true)
   t.true(await exists('figma-plugin'))
-  t.true(await exists('figma-plugin/.gitignore'))
   t.true(await exists('figma-plugin/index.js'))
   t.true(await exists('figma-plugin/package.json'))
 })
