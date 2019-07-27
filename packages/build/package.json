@@ -10,7 +10,8 @@
   "repository": "yuanqing/create-figma-plugin",
   "files": [
     "index.js",
-    "src"
+    "src",
+    "!__tests__"
   ],
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.5",

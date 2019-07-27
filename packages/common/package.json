@@ -10,7 +10,8 @@
   "repository": "yuanqing/create-figma-plugin",
   "files": [
     "index.js",
-    "src"
+    "src",
+    "!__tests__"
   ],
   "dependencies": {
     "chalk": "^2.4.2",
