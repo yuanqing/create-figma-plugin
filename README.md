@@ -2,13 +2,13 @@
 
 > A toolkit for developing [Figma](https://figma.com) plugins
 
+## Features
+
 - Write your plugin in modern JavaScript or TypeScript
 - Bundle your plugin command implementation and UI code, with support for multiple commands
 - Automatically generate your plugin’s `manifest.json` file
 - Scaffold your plugin using a template
 - Supports customizing the underlying Webpack configuration
-
----
 
 ## Quick start
 
@@ -56,8 +56,6 @@ To rebuild the plugin whenever you make a change:
 ```
 $ npm run watch
 ```
-
----
 
 ## Configuration
 
@@ -132,8 +130,6 @@ export default function (config) {
 
 The exported function receives the existing `config` object, and must return the new configuration object to be used.
 
----
-
 ## API
 
 ### Command
@@ -194,8 +190,6 @@ export default function (rootNode, { postMessage, onMessage }) {
 }
 ```
 
----
-
 ## CLI
 
 ```
@@ -218,15 +212,11 @@ export default function (rootNode, { postMessage, onMessage }) {
 
 ```
 
----
-
 ## Installation
 
 ```
 $ npm install --global create-figma-plugin
 ```
-
----
 
 ## License
 
