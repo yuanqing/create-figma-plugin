@@ -48,11 +48,13 @@ export default function (figma) {
 }
 ```
 
-Now, build the plugin:
+To build the plugin, do:
 
 ```
 $ npm run build
 ```
+
+This will generate a `manifest.json` file and a `build/` directory with the plugin bundle.
 
 To rebuild the plugin whenever you make a change, do:
 
@@ -71,7 +73,7 @@ Configuration options for the plugin are specified on the **`"create-figma-plugi
 - **`"name"`** — Display name of the plugin.
 - **`"command"`** — Path to the plugin command implementation.
 - **`"ui"`** *(optional)* — Path to the plugin command’s UI implementation.
-- **`"menu"`** *(optional)* — An array that specifies the commands shown in plugin’s sub-menu. Each object in the array has these keys:
+- **`"menu"`** *(optional)* — An array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has these keys:
 
     - **`"name"`** — The display name of the plugin command.
     - **`"command"`** — Ditto the `"command"` key above.
@@ -79,7 +81,7 @@ Configuration options for the plugin are specified on the **`"create-figma-plugi
 
     Use a **`"-"`** in the array to specify a separator between commands in the plugin’s sub-menu.
 
-For brevity, the initial `src/` of any paths specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve file paths in the `src` directory.
+For brevity, the initial `src/` of any paths specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve file paths in the `src/` directory.
 
 #### Example
 
@@ -135,14 +137,6 @@ export default function (config) {
 ```
 
 The exported function receives the existing `config` object, and must return the new configuration object to be used.
-
----
-
-## Installation
-
-```
-$ npm install --global create-figma-plugin
-```
 
 ---
 
@@ -228,6 +222,14 @@ export default function (rootNode, { postMessage, onMessage }) {
     -v, --version    Displays current version
     -h, --help       Displays this message
 
+```
+
+---
+
+## Installation
+
+```
+$ npm install --global create-figma-plugin
 ```
 
 ---
