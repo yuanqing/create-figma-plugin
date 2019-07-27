@@ -1,6 +1,8 @@
 {
   "name": "{{name}}",
-  "version": "0.0.0",
+{{#version}}
+  "version": "{{version}}",
+{{/version}}
 {{#description}}
   "description": "{{description}}",
 {{/description}}

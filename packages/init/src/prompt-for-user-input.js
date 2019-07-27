@@ -50,6 +50,14 @@ export async function promptForUserInput ({ name, template }) {
     },
     {
       type: 'input',
+      name: 'version',
+      message: 'version',
+      default: '1.0.0',
+      filter,
+      prefix
+    },
+    {
+      type: 'input',
       name: 'description',
       message: 'description',
       filter,
