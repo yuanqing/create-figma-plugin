@@ -11,7 +11,7 @@ mustache.escape = function (text) {
   return text
 }
 
-export async function init (options, useDefault) {
+export async function createFigmaPlugin (options, useDefault) {
   if (typeof options.name !== 'undefined') {
     await throwIfDirectoryExists(join(process.cwd(), options.name))
   }

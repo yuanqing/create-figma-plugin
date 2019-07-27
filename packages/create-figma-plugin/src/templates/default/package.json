@@ -20,15 +20,12 @@
 {{#repositoryUrl}}
   "repository": "{{repositoryUrl}}",
 {{/repositoryUrl}}
-  "files": [
-    "src"
-  ],
   "devDependencies": {
-    "create-figma-plugin": "*"
+    "@create-figma-plugin/build": "*"
   },
   "scripts": {
-    "build": "create-figma-plugin build",
-    "watch": "create-figma-plugin watch"
+    "build": "create-figma-plugin-build",
+    "watch": "create-figma-plugin-watch"
   },
   "create-figma-plugin": {
 {{#displayName}}

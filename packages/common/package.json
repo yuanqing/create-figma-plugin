@@ -9,10 +9,10 @@
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",
   "files": [
-    "index.js",
     "src",
     "!__tests__"
   ],
+  "main": "src/index.js",
   "dependencies": {
     "chalk": "^2.4.2",
     "fs-extra": "^8.1.0"

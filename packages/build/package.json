@@ -9,10 +9,13 @@
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",
   "files": [
-    "index.js",
     "src",
     "!__tests__"
   ],
+  "bin": {
+    "create-figma-plugin-build": "src/build/cli-esm.js",
+    "create-figma-plugin-watch": "src/watch/cli-esm.js"
+  },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.6",
     "chokidar": "^3.0.2",

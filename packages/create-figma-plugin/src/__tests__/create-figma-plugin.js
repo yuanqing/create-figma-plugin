@@ -2,7 +2,7 @@ import test from 'ava'
 import { exists } from 'fs-extra'
 import { join } from 'path'
 import rimraf from 'rimraf'
-import { init } from '../init'
+import { createFigmaPlugin } from '../create-figma-plugin'
 
 function changeDirectory (directory) {
   process.chdir(join(__dirname, '__fixtures__', directory))
@@ -24,7 +24,7 @@ test('use default', async function (t) {
   t.plan(3)
   changeDirectory('1-use-default')
   await cleanUp()
-  await init({}, true)
+  await createFigmaPlugin({}, true)
   t.true(await exists('figma-plugin'))
   t.true(await exists('figma-plugin/index.js'))
   t.true(await exists('figma-plugin/package.json'))

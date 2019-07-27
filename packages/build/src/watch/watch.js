@@ -1,6 +1,6 @@
 import chokidar from 'chokidar'
 import { constants } from '@create-figma-plugin/common'
-import { build } from './build'
+import { build } from '../build/build'
 
 // prettier-ignore
 const ignoreRegex = new RegExp([

@@ -14,11 +14,14 @@
 
 *Requires [Node.js](https://nodejs.org/).*
 
+To begin:
+
 ```
 $ npx create-figma-plugin figma-hello-world
 $ cd figma-hello-world
 $ ls -1
 index.js
+node_modules
 package.json
 ```
 
@@ -188,34 +191,6 @@ export default function (rootNode, { postMessage, onMessage }) {
     console.log(message) //=> 'foo'
   })
 }
-```
-
-## CLI
-
-```
-
-  Usage
-    $ create-figma-plugin <command> [options]
-
-  Available Commands
-    build    Build the plugin
-    init     Scaffold a new plugin
-    watch    Watch and rebuild the plugin on changes
-
-  For more info, run any command with the `--help` flag
-    $ create-figma-plugin build --help
-    $ create-figma-plugin init --help
-
-  Options
-    -v, --version    Displays current version
-    -h, --help       Displays this message
-
-```
-
-## Installation
-
-```
-$ npm install --global create-figma-plugin
 ```
 
 ## License
