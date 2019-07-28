@@ -6,7 +6,7 @@
     "coverage": "yarn run build && nyc --exclude 'packages/*/lib' --exclude 'packages/**/__tests__/**/*.js' -- ava",
     "fix": "prettier-standard 'packages/*/src/**/*.js' '!packages/**/__fixtures__/**'",
     "lint": "standard 'packages/*/src/**/*.js'",
-    "publish": "cpy README.md packages/create-figma-plugin && lerna publish from-package",
+    "publish": "yarn run clean && yarn run build && cpy README.md packages/create-figma-plugin && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install",
     "test": "yarn run build && ava",
     "version": "lerna version"
