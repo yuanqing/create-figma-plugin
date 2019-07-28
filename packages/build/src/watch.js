@@ -1,6 +1,6 @@
 import chokidar from 'chokidar'
 import { constants, log } from '@create-figma-plugin/common'
-import { build } from '../build/build'
+import { build } from '../build'
 
 /* eslint-disable */
 // prettier-ignore
