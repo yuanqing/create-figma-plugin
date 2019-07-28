@@ -12,8 +12,7 @@
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",
   "files": [
-    "lib",
-    "!__tests__"
+    "lib"
   ],
   "bin": {
     "create-figma-plugin": "lib/cli.js"

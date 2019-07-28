@@ -9,8 +9,7 @@
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/create-figma-plugin",
   "files": [
-    "lib",
-    "!__tests__"
+    "lib"
   ],
   "main": "lib/index.js",
   "dependencies": {
