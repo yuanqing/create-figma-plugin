@@ -1,8 +1,9 @@
 /* global parent */
 
+const self = this
+
 const rootNode = document.getElementById('create-figma-plugin')
 
-const self = this
 const options = {
   onMessage: function (callback) {
     self.onmessage = function (event) {
@@ -14,4 +15,4 @@ const options = {
   }
 }
 
-this.__requires__[this.__command__](rootNode, options)
+self.__requires__[self.__command__](rootNode, options)

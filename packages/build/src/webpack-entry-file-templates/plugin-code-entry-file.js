@@ -1,6 +1,7 @@
 /* global __html__, figma */
 
 const self = this
+
 const options = {
   showUI: function (options) {
     if (typeof __html__ === 'undefined') {
