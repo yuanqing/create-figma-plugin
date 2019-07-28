@@ -3,7 +3,7 @@
   "scripts": {
     "build": "lerna exec -- babel src --out-dir lib --delete-dir-on-start --ignore '**/__tests__/**/*.js' --plugins @babel/plugin-transform-modules-commonjs",
     "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/__fixtures__/**/{build,figma-plugin,manifest.json}'",
-    "coverage": "yarn build && nyc ava",
+    "coverage": "yarn build && nyc --exclude 'packages/*/lib' --exclude 'packages/**/__tests__/**/*.js' -- ava",
     "fix": "prettier-standard 'packages/*/src/**/*.js' '!packages/**/__fixtures__/**'",
     "lerna-clean": "lerna clean --yes",
     "lerna-version": "lerna version",
