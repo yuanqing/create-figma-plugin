@@ -1,5 +1,4 @@
 {
-  "name": "create-figma-plugin",
   "private": true,
   "scripts": {
     "build": "lerna exec -- babel src --out-dir lib --delete-dir-on-start --ignore '**/__tests__/**/*.js' --plugins @babel/plugin-transform-modules-commonjs",
