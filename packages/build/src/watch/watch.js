@@ -2,6 +2,7 @@ import chokidar from 'chokidar'
 import { constants } from '@create-figma-plugin/common'
 import { build } from '../build/build'
 
+/* eslint-disable */
 // prettier-ignore
 const ignoreRegex = new RegExp([
   '(^|\\/)', // beginning of string or '/'
@@ -11,6 +12,7 @@ const ignoreRegex = new RegExp([
   `|${constants.build.manifestFilePath}`,
   '|node_modules'
 ].join(''))
+/* eslint-enable */
 
 export function watch (onBuildStart, onBuildEnd, onChange) {
   const watcher = chokidar.watch('.', {

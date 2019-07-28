@@ -2,16 +2,20 @@
   "name": "create-figma-plugin",
   "private": true,
   "scripts": {
-    "clean": "rimraf .nyc_output '*.log' 'packages/**/__fixtures__/**/build' 'packages/**/__fixtures__/**/figma-plugin' 'packages/**/__fixtures__/**/manifest.json'",
+    "build": "lerna exec -- babel src --out-dir lib --delete-dir-on-start --ignore '**/__tests__/**/*.js' --plugins @babel/plugin-transform-modules-commonjs",
+    "clean": "rimraf '.nyc_output' '*.log' 'packages/*/lib' 'packages/**/__fixtures__/**/{build,figma-plugin,manifest.json}'",
     "coverage": "nyc ava",
-    "fix": "prettier-standard 'packages/**/*.js' '!packages/**/__fixtures__/**/build/**/*.js' '!packages/create-figma-plugin/**/templates/**/*.js'",
-    "lerna-clean": "lerna clean",
+    "fix": "prettier-standard 'packages/*/src/**/*.js' '!packages/**/__fixtures__/**'",
+    "lerna-clean": "lerna clean --yes",
     "lerna-version": "lerna version",
     "lerna-publish": "cpy README.md packages/create-figma-plugin && lerna publish from-package",
-    "lint": "standard 'packages/**/*.js'",
+    "lint": "standard 'packages/*/src/**/*.js'",
     "test": "ava"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
     "ava": "^2.2.0",
     "cpy-cli": "^2.0.0",
     "esm": "^3.2.25",
@@ -29,7 +33,7 @@
   "ava": {
     "files": [
       "packages/**/__tests__/**/*.js",
-      "!packages/**/__tests__/__fixtures__/**/*.js"
+      "!**/__fixtures__/**"
     ],
     "verbose": true,
     "require": [
@@ -50,8 +54,7 @@
   },
   "standard": {
     "ignore": [
-      "packages/**/__fixtures__/**/build/**/*.js",
-      "!packages/create-figma-plugin/**/templates/**/*.js"
+      "packages/**/__fixtures__/**"
     ]
   }
 }

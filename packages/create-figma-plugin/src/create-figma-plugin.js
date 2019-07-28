@@ -3,7 +3,7 @@ import { copy, ensureDir, exists, outputFile, readFile } from 'fs-extra'
 import globby from 'globby'
 import isUtf8 from 'is-utf8'
 import mustache from 'mustache'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { promptForUserInput } from './prompt-for-user-input'
 import { constants } from '@create-figma-plugin/common'
 
@@ -50,7 +50,7 @@ async function buildPluginDirectoryFromTemplate (
   pluginDirectoryPath,
   template
 ) {
-  const templateDirectory = join(__dirname, 'templates', template)
+  const templateDirectory = resolve(__dirname, '..', 'templates', template)
   if (await exists(templateDirectory)) {
     await ensureDir(pluginDirectoryPath)
     return copy(templateDirectory, pluginDirectoryPath)
