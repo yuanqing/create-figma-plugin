@@ -3,13 +3,13 @@
   "scripts": {
     "build": "lerna exec -- babel src --out-dir lib --delete-dir-on-start --ignore '**/__tests__/**/*.js' --plugins @babel/plugin-transform-modules-commonjs",
     "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/__fixtures__/**/{build,figma-plugin,manifest.json}'",
-    "coverage": "yarn build && nyc --exclude 'packages/*/lib' --exclude 'packages/**/__tests__/**/*.js' -- ava",
+    "coverage": "yarn run build && nyc --exclude 'packages/*/lib' --exclude 'packages/**/__tests__/**/*.js' -- ava",
     "fix": "prettier-standard 'packages/*/src/**/*.js' '!packages/**/__fixtures__/**'",
-    "lerna-clean": "lerna clean --yes",
-    "lerna-version": "lerna version",
-    "lerna-publish": "cpy README.md packages/create-figma-plugin && lerna publish from-package",
     "lint": "standard 'packages/*/src/**/*.js'",
-    "test": "yarn build && ava"
+    "publish": "cpy README.md packages/create-figma-plugin && lerna publish from-package",
+    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install",
+    "test": "yarn run build && ava",
+    "version": "lerna version"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
