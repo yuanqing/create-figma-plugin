@@ -1,24 +1,25 @@
-import { logPrefixes } from './log-prefixes'
+import npmlog from 'npmlog'
 
 function error (message) {
-  console.log(`${logPrefixes.error} ${message}`)
+  npmlog.error(message)
 }
 
 function info (message) {
-  console.log(`${logPrefixes.info} ${message}`)
+  npmlog.info(message)
 }
 
-function question (message) {
-  console.log(`${logPrefixes.question} ${message}`)
-}
-
+npmlog.addLevel('success', 3001, { fg: 'green', bold: true })
 function success (message) {
-  console.log(`${logPrefixes.success} ${message}`)
+  npmlog.success(message)
+}
+
+function silenceLogging () {
+  npmlog.level = 'silent'
 }
 
 export const log = {
   error,
   info,
-  question,
+  silenceLogging,
   success
 }

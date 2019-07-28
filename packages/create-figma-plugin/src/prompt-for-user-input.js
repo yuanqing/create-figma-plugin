@@ -1,12 +1,9 @@
 import gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
 import titleCase from 'title-case'
-import { logPrefixes } from '@create-figma-plugin/common'
 
 const figmaPrefixRegex = /^figma-/
 const multipleSpaceRegex = /\s+/g
-
-const prefix = logPrefixes.question
 
 function validate (input) {
   if (input.replace(multipleSpaceRegex, '').trim().length > 0) {
@@ -26,8 +23,7 @@ export async function promptForUserInput ({ name, template }) {
       name: 'name',
       message: 'name',
       validate,
-      filter,
-      prefix
+      filter
     },
     {
       type: 'input',
@@ -37,38 +33,33 @@ export async function promptForUserInput ({ name, template }) {
         return titleCase((name || values.name).replace(figmaPrefixRegex, ''))
       },
       validate,
-      filter,
-      prefix
+      filter
     },
     typeof template === 'undefined' && {
       type: 'input',
       name: 'template',
       message: 'template',
       default: 'default',
-      filter,
-      prefix
+      filter
     },
     {
       type: 'input',
       name: 'version',
       message: 'version',
       default: '1.0.0',
-      filter,
-      prefix
+      filter
     },
     {
       type: 'input',
       name: 'description',
       message: 'description',
-      filter,
-      prefix
+      filter
     },
     {
       type: 'input',
       name: 'repositoryUrl',
       message: 'repository url',
-      filter,
-      prefix
+      filter
     },
     {
       type: 'input',
@@ -77,8 +68,7 @@ export async function promptForUserInput ({ name, template }) {
       default: function () {
         return gitUserName()
       },
-      filter,
-      prefix
+      filter
     },
     {
       type: 'input',
@@ -87,8 +77,7 @@ export async function promptForUserInput ({ name, template }) {
       default: function () {
         return 'MIT'
       },
-      filter,
-      prefix
+      filter
     }
   ].filter(Boolean)
   return {

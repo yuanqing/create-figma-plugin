@@ -36,7 +36,8 @@
     ],
     "verbose": true,
     "require": [
-      "esm"
+      "esm",
+      "./packages/common/src/silence-logging.js"
     ]
   },
   "husky": {
