@@ -1,5 +1,5 @@
 import chokidar from 'chokidar'
-import { constants } from '@create-figma-plugin/common'
+import { constants, log } from '@create-figma-plugin/common'
 import { build } from '../build/build'
 
 /* eslint-disable */
@@ -14,20 +14,19 @@ const ignoreRegex = new RegExp([
 ].join(''))
 /* eslint-enable */
 
-export function watch (onBuildStart, onBuildEnd, onChange) {
+export function watch () {
   const watcher = chokidar.watch('.', {
     ignored: function (path) {
       return ignoreRegex.test(path)
     }
   })
   async function run () {
-    onBuildStart()
     await build(true)
-    onBuildEnd()
+    log.info('Watching...')
   }
   watcher.on('ready', run)
   watcher.on('change', async function (file) {
-    onChange(file)
+    log.info(`Changed: ${file}`)
     await run()
   })
 }
