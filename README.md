@@ -12,17 +12,11 @@
 
 ## Quick start
 
-*Requires [Node.js](https://nodejs.org/).*
-
-To begin:
-
 ```
 $ npx create-figma-plugin figma-hello-world
 $ cd figma-hello-world
-$ ls -1
-index.js
-node_modules
-package.json
+$ ls
+index.js   node_modules   package.json
 ```
 
 `index.js` contains the plugin implementation, which is a function set to be the `default` export of the file:
@@ -52,7 +46,7 @@ To build the plugin:
 $ npm run build
 ```
 
-This will generate a `manifest.json` file and a `build/` directory with the plugin bundle.
+This will generate a `manifest.json` file and a `build/` directory containing the plugin bundle.
 
 To rebuild the plugin whenever you make a change:
 
@@ -64,7 +58,7 @@ $ npm run watch
 
 ### `package.json`
 
-Configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of your `package.json` file.
+Basic configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of your `package.json` file.
 
 - **`"name"`** — Display name of the plugin.
 - **`"command"`** — Path to the plugin command implementation.
@@ -81,7 +75,7 @@ For brevity, the initial `src/` of paths specified in the configuration can be o
 
 #### Example
 
-Plugin with a single command:
+A basic plugin with a single command:
 
 ```diff
 {
@@ -94,7 +88,7 @@ Plugin with a single command:
 }
 ```
 
-Plugin with multiple commands in the plugin sub-menu:
+A plugin with multiple commands in the plugin sub-menu:
 
 ```diff
 {
