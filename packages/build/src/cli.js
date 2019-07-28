@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import sade from 'sade'
 import { build } from './build'
 import { watch } from './watch'

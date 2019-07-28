@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import sade from 'sade'
 import { createFigmaPlugin } from './create-figma-plugin'
 
