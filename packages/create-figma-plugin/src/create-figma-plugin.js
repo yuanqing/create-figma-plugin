@@ -1,15 +1,9 @@
-import degit from 'degit'
-import { copy, ensureDir, exists, outputFile, readFile } from 'fs-extra'
-import globby from 'globby'
-import isUtf8 from 'is-utf8'
-import mustache from 'mustache'
-import { join, resolve } from 'path'
-import { promptForUserInput } from './prompt-for-user-input'
+import { exists } from 'fs-extra'
+import { join } from 'path'
 import { constants } from '@create-figma-plugin/common'
-
-mustache.escape = function (text) {
-  return text
-}
+import { cloneFromTemplate } from './clone-from-template'
+import { interpolateValuesIntoFiles } from './interpolate-values-into-files'
+import { promptForUserInput } from './prompt-for-user-input'
 
 export async function createFigmaPlugin (options, useDefault) {
   if (typeof options.name !== 'undefined') {
@@ -20,8 +14,8 @@ export async function createFigmaPlugin (options, useDefault) {
     : await promptForUserInput(options)
   const pluginDirectoryPath = join(process.cwd(), config.name)
   await throwIfDirectoryExists(pluginDirectoryPath)
-  await buildPluginDirectoryFromTemplate(pluginDirectoryPath, config.template)
-  return interpolateConfigValues(pluginDirectoryPath, config)
+  await cloneFromTemplate(pluginDirectoryPath, config.template)
+  await interpolateValuesIntoFiles(pluginDirectoryPath, config)
 }
 
 async function throwIfDirectoryExists (directory) {
@@ -42,47 +36,4 @@ function createDefaultConfig ({ name, template }) {
     result.template = template
   }
   return result
-}
-
-const gitHubRepositoryRegex = /[\w-]+\/[\w-]+/
-
-async function buildPluginDirectoryFromTemplate (
-  pluginDirectoryPath,
-  template
-) {
-  const templateDirectory = resolve(
-    __dirname,
-    '..',
-    'plugin-templates',
-    template
-  )
-  if (await exists(templateDirectory)) {
-    await ensureDir(pluginDirectoryPath)
-    return copy(templateDirectory, pluginDirectoryPath)
-  }
-  if (gitHubRepositoryRegex.test(template) === false) {
-    return new Error('Invalid GitHub repository')
-  }
-  return degit(template).clone(pluginDirectoryPath)
-}
-
-async function interpolateConfigValues (pluginDirectoryPath, config) {
-  const filePaths = await globby('**/*', {
-    cwd: pluginDirectoryPath,
-    dot: true
-  })
-  return Promise.all(
-    filePaths.map(async function (filePath) {
-      const absolutePath = join(pluginDirectoryPath, filePath)
-      const buffer = await readFile(absolutePath)
-      const fileContents = isUtf8(buffer)
-        ? interpolate(buffer.toString(), config)
-        : buffer
-      return outputFile(absolutePath, fileContents)
-    })
-  )
-}
-
-function interpolate (string, data) {
-  return mustache.render(string, data)
 }
