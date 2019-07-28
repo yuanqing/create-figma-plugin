@@ -50,7 +50,12 @@ async function buildPluginDirectoryFromTemplate (
   pluginDirectoryPath,
   template
 ) {
-  const templateDirectory = resolve(__dirname, '..', 'templates', template)
+  const templateDirectory = resolve(
+    __dirname,
+    '..',
+    'plugin-templates',
+    template
+  )
   if (await exists(templateDirectory)) {
     await ensureDir(pluginDirectoryPath)
     return copy(templateDirectory, pluginDirectoryPath)

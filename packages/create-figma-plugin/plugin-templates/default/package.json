@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "create-figma-plugin-build",
-    "watch": "create-figma-plugin-watch"
+    "watch": "create-figma-plugin-build --watch"
   },
   "create-figma-plugin": {
 {{#displayName}}
