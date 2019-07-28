@@ -2,6 +2,7 @@ import { exists } from 'fs-extra'
 import { join } from 'path'
 import { constants } from '@create-figma-plugin/common'
 import { cloneFromTemplate } from './clone-from-template'
+import { installDependencies } from './install-dependencies'
 import { interpolateValuesIntoFiles } from './interpolate-values-into-files'
 import { promptForUserInput } from './prompt-for-user-input'
 
@@ -16,6 +17,7 @@ export async function createFigmaPlugin (options, useDefault) {
   await throwIfDirectoryExists(pluginDirectoryPath)
   await cloneFromTemplate(pluginDirectoryPath, config.template)
   await interpolateValuesIntoFiles(pluginDirectoryPath, config)
+  await installDependencies(pluginDirectoryPath)
 }
 
 async function throwIfDirectoryExists (directory) {
