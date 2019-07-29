@@ -9,8 +9,8 @@
     "publish": "yarn run build && cpy README.md packages/create-figma-plugin && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install",
     "test": "yarn run build && ava",
-    "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent",
-    "version": "lerna version"
+    "version": "lerna version",
+    "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
