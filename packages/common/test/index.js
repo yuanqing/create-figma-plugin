@@ -1,5 +1,5 @@
 import test from 'ava'
-import * as index from '..'
+import * as index from '../src/index'
 
 test('exports are not `undefined`', function (t) {
   t.plan(3)

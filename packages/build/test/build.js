@@ -2,10 +2,10 @@ import test from 'ava'
 import { exists } from 'fs-extra'
 import { join } from 'path'
 import rimraf from 'rimraf'
-import { build } from '../build'
+import { build } from '../src/build'
 
 function changeDirectory (directory) {
-  process.chdir(join(__dirname, '__fixtures__', directory))
+  process.chdir(join(__dirname, 'fixtures', directory))
 }
 
 async function cleanUp () {

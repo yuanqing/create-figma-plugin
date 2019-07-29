@@ -2,10 +2,10 @@ import test from 'ava'
 import { exists } from 'fs-extra'
 import { join } from 'path'
 import rimraf from 'rimraf'
-import { createFigmaPlugin } from '../create-figma-plugin'
+import { createFigmaPlugin } from '../src/create-figma-plugin'
 
 function changeDirectory (directory) {
-  process.chdir(join(__dirname, '__fixtures__', directory))
+  process.chdir(join(__dirname, 'fixtures', directory))
 }
 
 async function cleanUp () {

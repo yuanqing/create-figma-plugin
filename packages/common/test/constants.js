@@ -1,5 +1,5 @@
 import test from 'ava'
-import { constants } from '../constants'
+import { constants } from '../src/constants'
 
 test('is an object', function (t) {
   t.plan(2)

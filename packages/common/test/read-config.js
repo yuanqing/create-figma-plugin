@@ -1,9 +1,9 @@
 import test from 'ava'
 import { join } from 'path'
-import { readConfig } from '../read-config'
+import { readConfig } from '../src/read-config'
 
 function changeDirectory (directory) {
-  process.chdir(join(__dirname, '__fixtures__', directory))
+  process.chdir(join(__dirname, 'fixtures', directory))
 }
 
 test('is a function', function (t) {
