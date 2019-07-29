@@ -1,14 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna exec -- babel src --config-file '$LERNA_ROOT_PATH/.babelrc' --delete-dir-on-start --ignore '**/__tests__/**/*.js' --out-dir lib",
-    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/__fixtures__/**/{build,figma-plugin,manifest.json}'",
-    "coverage": "yarn run build && nyc --exclude 'packages/*/lib' --exclude 'packages/**/__tests__/**/*.js' -- ava",
-    "fix": "prettier-standard 'packages/*/src/**/*.js' '!packages/**/__fixtures__/**'",
-    "lint": "standard 'packages/*/src/**/*.js'",
+    "build": "lerna exec -- babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward",
+    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json}'",
+    "coverage": "yarn run clean && yarn run build && nyc --exclude 'packages/*/lib' -- ava",
+    "fix": "prettier-standard '*.js' 'packages/*/{src,test}/**/*.js'",
+    "lint": "standard '*.js' 'packages/*/{src,test}/**/*.js'",
     "publish": "yarn run clean && yarn run build && cpy README.md packages/create-figma-plugin && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install",
-    "test": "yarn run build && ava",
+    "test": "yarn run clean && yarn run build && ava",
+    "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent",
     "version": "lerna version"
   },
   "devDependencies": {
@@ -16,6 +17,7 @@
     "@babel/core": "^7.5.5",
     "@babel/plugin-transform-modules-commonjs": "^7.5.0",
     "ava": "^2.2.0",
+    "chokidar-cli": "^1.2.2",
     "cpy-cli": "^2.0.0",
     "esm": "^3.2.25",
     "husky": "^3.0.1",
@@ -26,13 +28,10 @@
     "rimraf": "^2.6.3",
     "standard": "^13.0.2"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "ava": {
     "files": [
-      "packages/**/__tests__/**/*.js",
-      "!**/__fixtures__/**"
+      "packages/*/test/**/*.js",
+      "!**/fixtures/**"
     ],
     "verbose": true,
     "require": [
@@ -52,9 +51,7 @@
       "git add"
     ]
   },
-  "standard": {
-    "ignore": [
-      "packages/**/__fixtures__/**"
-    ]
-  }
+  "workspaces": [
+    "packages/*"
+  ]
 }
