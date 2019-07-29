@@ -11,8 +11,8 @@ export async function buildWebpackEntryFile (
     return Promise.resolve(null)
   }
   const code = [
-    `this.__requires__=${createRequireCode(modules)};`,
-    `this.__command__=${
+    `const __requires__=${createRequireCode(modules)};`,
+    `const __command__=${
       modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
     };`
   ]

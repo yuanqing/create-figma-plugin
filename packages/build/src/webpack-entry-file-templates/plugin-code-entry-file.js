@@ -1,19 +1,15 @@
-/* global __html__, figma */
-
-const self = this
+/* global __command__, __html__, __requires__, figma */
 
 const options = {
   showUI: function (options) {
     if (typeof __html__ === 'undefined') {
       throw new Error(
-        `UI not defined for the command corresponding to \`${
-          self.__command__
-        }\``
+        `UI not defined for the command corresponding to \`${__command__}\``
       )
     }
     const html = [
       `<div id="create-figma-plugin"></div>`,
-      `<script>this.__command__='${self.__command__}';</script>`,
+      `<script>window.__command__='${__command__}';</script>`,
       `<script>${__html__}</script>`
     ].join('')
     figma.showUI(html, options)
@@ -24,5 +20,5 @@ const options = {
   postMessage: figma.ui.postMessage
 }
 
-const command = self.__requires__[self.__command__]
+const command = __requires__[__command__]
 command(figma, options)
