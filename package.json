@@ -1,14 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna exec -- babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward",
+    "build": "yarn run clean && lerna exec -- babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward",
     "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json}'",
-    "coverage": "yarn run clean && yarn run build && nyc --exclude 'packages/*/lib' -- ava",
+    "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
     "fix": "prettier-standard '*.js' 'packages/*/{src,test}/**/*.js'",
     "lint": "standard '*.js' 'packages/*/{src,test}/**/*.js'",
-    "publish": "yarn run clean && yarn run build && cpy README.md packages/create-figma-plugin && lerna publish from-package",
+    "publish": "yarn run build && cpy README.md packages/create-figma-plugin && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install",
-    "test": "yarn run clean && yarn run build && ava",
+    "test": "yarn run build && ava",
     "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent",
     "version": "lerna version"
   },
