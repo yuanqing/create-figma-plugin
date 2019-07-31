@@ -7,7 +7,10 @@
   "description": "Utilities used across the `create-figma-plugin` monorepo",
   "license": "MIT",
   "author": "Lim Yuan Qing",
-  "repository": "yuanqing/create-figma-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/create-figma-plugin/create-figma-plugin.git"
+  },
   "files": [
     "lib"
   ],
