@@ -12,7 +12,8 @@
   "author": "Lim Yuan Qing",
   "repository": {
     "type": "git",
-    "url": "git://github.com/create-figma-plugin/create-figma-plugin.git"
+    "url": "git://github.com/yuanqing/create-figma-plugin.git",
+    "directory": "packages/create-figma-plugin"
   },
   "files": [
     "lib",
