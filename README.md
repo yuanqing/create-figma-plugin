@@ -187,6 +187,11 @@ export default function (rootNode, { postMessage, onMessage }) {
 }
 ```
 
+## Other solutions
+
+- [figplug](https://github.com/rsms/figplug)
+- [fika](https://github.com/mattdesl/fika)
+
 ## License
 
 [MIT](LICENSE.md)
