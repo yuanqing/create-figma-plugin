@@ -1,5 +1,5 @@
 export const constants = {
-  apiVersion: '0.6.0',
+  apiVersion: '1.0.0',
   packageJson: {
     configKey: 'create-figma-plugin',
     defaultPluginName: 'figma-plugin'
