@@ -41,7 +41,7 @@ export async function buildBundle (config, isDevelopment) {
   const customWebpackConfigPath = join(process.cwd(), constants.configFileName)
   let webpackConfig = createWebpackConfig(entry, isDevelopment)
   if (await exists(customWebpackConfigPath)) {
-    webpackConfig = require(customWebpackConfigPath).default(webpackConfig)
+    webpackConfig = require(customWebpackConfigPath)(webpackConfig)
   }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
