@@ -3,7 +3,7 @@ import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
 
-export function createWebpackConfig (entry, isDevelopment, isWatch) {
+export function createWebpackConfig (entry, isDevelopment) {
   const mode = isDevelopment ? 'development' : 'production'
   return {
     mode,
@@ -20,7 +20,6 @@ export function createWebpackConfig (entry, isDevelopment, isWatch) {
         }
       ]
     },
-    watch: isWatch,
     resolve: {
       modules: [
         join(process.cwd(), constants.src.directory),
