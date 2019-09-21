@@ -7,11 +7,11 @@ const options = {
         `UI not defined for the command corresponding to \`${__command__}\``
       )
     }
-    const html = [
-      `<div id="create-figma-plugin"></div>`,
-      `<script>window.__command__='${__command__}';</script>`,
-      `<script>${__html__}</script>`
-    ].join('')
+    const html = `
+      <div id="create-figma-plugin"></div>
+      <script>window.__command__='${__command__}';</script>
+      <script>${__html__}</script>
+    `
     figma.showUI(html, options)
   },
   onMessage: function (callback) {
