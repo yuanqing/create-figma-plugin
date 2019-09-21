@@ -21,6 +21,7 @@
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.13",
     "chokidar": "^3.0.2",
+    "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "sade": "^1.6.0",
     "temp-write": "^4.0.0",

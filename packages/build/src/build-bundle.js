@@ -1,4 +1,4 @@
-import { exists } from 'fs-extra'
+import findUp from 'find-up'
 import { basename, extname, join } from 'path'
 import webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
@@ -38,9 +38,9 @@ export async function buildBundle (config, isDevelopment) {
     const key = extractBasename(constants.build.pluginUiFilePath)
     entry[key] = uiEntryFile
   }
-  const customWebpackConfigPath = join(process.cwd(), constants.configFileName)
   let webpackConfig = createWebpackConfig(entry, isDevelopment)
-  if (await exists(customWebpackConfigPath)) {
+  const customWebpackConfigPath = await findUp(constants.configFileName)
+  if (typeof customWebpackConfigPath !== 'undefined') {
     webpackConfig = require(customWebpackConfigPath)(webpackConfig)
   }
   return new Promise(function (resolve, reject) {
