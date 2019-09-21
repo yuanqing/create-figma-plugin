@@ -8,6 +8,7 @@ const options = {
       )
     }
     const html = `
+      <style>body{margin:0}</style>
       <div id="create-figma-plugin"></div>
       <script>window.__command__='${__command__}';</script>
       <script>${__html__}</script>
