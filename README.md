@@ -117,7 +117,7 @@ A plugin with multiple commands in the plugin sub-menu:
 To customize the underlying [Webpack configuration](https://webpack.js.org/configuration/), create a `create-figma-plugin.config.js` file:
 
 ```js
-export default function (config) {
+module.exports = function (config) {
   // ...
   return {
     // ...
