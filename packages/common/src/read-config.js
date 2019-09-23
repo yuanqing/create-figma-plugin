@@ -1,9 +1,11 @@
 import { exists } from 'fs-extra'
 import { join } from 'path'
+import slugify from '@sindresorhus/slugify'
 import { constants } from './constants'
 
 const defaultConfig = {
   name: constants.packageJson.defaultPluginName,
+  id: constants.packageJson.defaultPluginId,
   command: 'index.js'
 }
 
@@ -17,7 +19,10 @@ export async function readConfig () {
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig
   }
-  return createMenuItem(config)
+  return {
+    ...createMenuItem(config),
+    id: typeof config.id === 'undefined' ? slugify(config.name) : config.id
+  }
 }
 
 function createMenuItem (config) {

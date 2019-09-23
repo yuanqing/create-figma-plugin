@@ -28,6 +28,7 @@ test.serial('no config', async function (t) {
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     name: 'figma-plugin',
+    id: 'figma-plugin',
     api: '1.0.0',
     main: 'build/main.js'
   })
@@ -43,6 +44,7 @@ test.serial('basic command', async function (t) {
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     name: 'foo',
+    id: '42',
     api: '1.0.0',
     main: 'build/main.js'
   })
@@ -58,6 +60,7 @@ test.serial('multiple menu commands', async function (t) {
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     name: 'foo',
+    id: '42',
     api: '1.0.0',
     main: 'build/main.js',
     ui: 'build/ui.js',

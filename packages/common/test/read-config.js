@@ -16,6 +16,7 @@ test('no `package.json`', async function (t) {
   changeDirectory('1-no-package-json')
   t.deepEqual(await readConfig(), {
     name: 'figma-plugin',
+    id: 'figma-plugin',
     command: 'index.js'
   })
 })
@@ -25,6 +26,7 @@ test('config key is `undefined`', async function (t) {
   changeDirectory('2-config-undefined')
   t.deepEqual(await readConfig(), {
     name: 'figma-plugin',
+    id: 'figma-plugin',
     command: 'index.js'
   })
 })
@@ -34,6 +36,7 @@ test('config key is empty', async function (t) {
   changeDirectory('3-config-empty')
   t.deepEqual(await readConfig(), {
     name: 'figma-plugin',
+    id: 'figma-plugin',
     command: 'index.js'
   })
 })
@@ -43,6 +46,18 @@ test('basic command', async function (t) {
   changeDirectory('4-basic-command')
   t.deepEqual(await readConfig(), {
     name: 'foo',
+    id: '42',
+    command: 'bar',
+    ui: 'baz'
+  })
+})
+
+test('basic command without `id`', async function (t) {
+  t.plan(1)
+  changeDirectory('5-basic-command-without-id')
+  t.deepEqual(await readConfig(), {
+    name: 'foo',
+    id: 'foo',
     command: 'bar',
     ui: 'baz'
   })
@@ -50,9 +65,10 @@ test('basic command', async function (t) {
 
 test('single menu command', async function (t) {
   t.plan(1)
-  changeDirectory('5-single-menu-command')
+  changeDirectory('6-single-menu-command')
   t.deepEqual(await readConfig(), {
     name: 'foo',
+    id: '42',
     menu: [
       {
         name: 'bar',
@@ -64,9 +80,10 @@ test('single menu command', async function (t) {
 
 test('multiple menu commands', async function (t) {
   t.plan(1)
-  changeDirectory('6-multiple-menu-commands')
+  changeDirectory('7-multiple-menu-commands')
   t.deepEqual(await readConfig(), {
     name: 'foo',
+    id: '42',
     menu: [
       {
         name: 'bar',

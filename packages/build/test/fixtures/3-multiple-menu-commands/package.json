@@ -1,6 +1,7 @@
 {
   "create-figma-plugin": {
     "name": "foo",
+    "id": "42",
     "menu": [
       {
         "name": "bar",

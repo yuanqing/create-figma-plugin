@@ -4,6 +4,7 @@ import { constants } from '@create-figma-plugin/common'
 export async function buildManifest (config) {
   const result = {
     name: config.name,
+    id: config.id,
     api: constants.apiVersion
   }
   if (hasBundle(config, 'command')) {
