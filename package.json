@@ -7,7 +7,7 @@
     "fix": "prettier-standard '*.js' 'packages/*/{src,test}/**/*.js'",
     "lint": "standard '*.js' 'packages/*/{src,test}/**/*.js'",
     "publish": "yarn run build && cpy README.md packages/create-figma-plugin && lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install",
+    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules && yarn install && yarn run build",
     "test": "yarn run build && ava",
     "version": "lerna version",
     "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
