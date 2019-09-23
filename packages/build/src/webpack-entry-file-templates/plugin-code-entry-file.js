@@ -1,7 +1,7 @@
 /* global __command__, __html__, __requires__, figma */
 
 const options = {
-  showUI: function (options) {
+  showUI: function ({ width, height, data }) {
     if (typeof __html__ === 'undefined') {
       throw new Error(
         `UI not defined for the command corresponding to \`${__command__}\``
@@ -11,9 +11,10 @@ const options = {
       <style>body{margin:0}</style>
       <div id="create-figma-plugin"></div>
       <script>window.__command__='${__command__}';</script>
+      <script>window.__data__=${data ? JSON.stringify(data) : {}};</script>
       <script>${__html__}</script>
     `
-    figma.showUI(html, options)
+    figma.showUI(html, { width, height })
   },
   onMessage: function (callback) {
     figma.ui.onmessage = callback
