@@ -1,0 +1,19 @@
+{
+  "name": "@create-figma-plugin/utilities",
+  "version": "0.0.13",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Utilities and helper functions for creating Figma plugins",
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/create-figma-plugin.git",
+    "directory": "packages/utilities"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js"
+}
