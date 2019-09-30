@@ -1,23 +1,16 @@
-import { readFile } from 'fs-extra'
 import tempWrite from 'temp-write'
 
-export async function buildWebpackEntryFile (
-  config,
-  key,
-  entryFileTemplatePath
-) {
+export async function buildWebpackEntryFile (config, key, code) {
   const modules = extractModules(config, key, [])
   if (modules.length === 0) {
     return Promise.resolve(null)
   }
-  const code = [
-    `const __requires__=${createRequireCode(modules)};`,
-    `const __command__=${
-      modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
-    };`
-  ]
-  const entryFileTemplate = await readFile(entryFileTemplatePath, 'utf8')
-  return tempWrite(code.join('') + entryFileTemplate)
+  // prettier-ignore
+  return tempWrite(`
+    const modules = ${createRequireCode(modules)};
+    const command = ${modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`};
+    ${code}
+  `)
 }
 
 function extractModules (config, key, result) {

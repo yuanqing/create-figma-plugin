@@ -1,6 +1,6 @@
 import test from 'ava'
-import { exists } from 'fs-extra'
-import { join } from 'path'
+import { ensureSymlink, exists } from 'fs-extra'
+import { join, resolve } from 'path'
 import rimraf from 'rimraf'
 import { build } from '../src/build'
 
@@ -10,7 +10,9 @@ function changeDirectory (directory) {
 
 async function cleanUp () {
   return new Promise(function (resolve, reject) {
-    rimraf(join(process.cwd(), '{manifest.json,build}'), function (error) {
+    rimraf(join(process.cwd(), '{manifest.json,build,node_modules}'), function (
+      error
+    ) {
       if (error) {
         return reject(error)
       }
@@ -20,10 +22,22 @@ async function cleanUp () {
 }
 test.afterEach.always(cleanUp)
 
+function setUp () {
+  const sourcePath = resolve(__dirname, '..', '..', 'utilities')
+  const destinationPath = join(
+    process.cwd(),
+    'node_modules',
+    '@create-figma-plugin',
+    'utilities'
+  )
+  return ensureSymlink(sourcePath, destinationPath)
+}
+
 test.serial('no config', async function (t) {
   t.plan(3)
   changeDirectory('1-no-config')
   await cleanUp()
+  await setUp()
   await build()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
@@ -40,6 +54,7 @@ test.serial('basic command', async function (t) {
   t.plan(3)
   changeDirectory('2-basic-command')
   await cleanUp()
+  await setUp()
   await build()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
@@ -56,6 +71,7 @@ test.serial('multiple menu commands', async function (t) {
   t.plan(3)
   changeDirectory('3-multiple-menu-commands')
   await cleanUp()
+  await setUp()
   await build()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {

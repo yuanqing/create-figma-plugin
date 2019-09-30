@@ -1,5 +1,5 @@
-import { outputFile } from 'fs-extra'
 import { constants } from '@create-figma-plugin/common'
+import { outputFile } from 'fs-extra'
 
 export async function buildManifest (config) {
   const result = {

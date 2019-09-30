@@ -1,38 +1,32 @@
-import findUp from 'find-up'
-import { basename, extname, join } from 'path'
-import webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
+import findUp from 'find-up'
+import { basename, extname } from 'path'
+import webpack from 'webpack'
 import { createWebpackConfig } from './create-webpack-config'
 import { buildWebpackEntryFile } from './build-webpack-entry-file'
 
-const entryFileTemplateDirectoryPath = join(
-  __dirname,
-  'webpack-entry-file-templates'
-)
-const pluginCodeEntryFileTemplate = join(
-  entryFileTemplateDirectoryPath,
-  'plugin-code-entry-file.js'
-)
-const pluginUiEntryFileTemplate = join(
-  entryFileTemplateDirectoryPath,
-  'plugin-ui-entry-file.js'
-)
-
 export async function buildBundle (config, isDevelopment) {
   const entry = {}
-  const codeEntryFile = await buildWebpackEntryFile(
+  const commandEntryFile = await buildWebpackEntryFile(
     config,
     'command',
-    pluginCodeEntryFileTemplate
+    `
+      require('@create-figma-plugin/utilities/lib/events/command-events');
+      modules[command]();
+    `
   )
-  if (codeEntryFile) {
+  if (commandEntryFile) {
     const key = extractBasename(constants.build.pluginCodeFilePath)
-    entry[key] = codeEntryFile
+    entry[key] = commandEntryFile
   }
   const uiEntryFile = await buildWebpackEntryFile(
     config,
     'ui',
-    pluginUiEntryFileTemplate
+    `
+      require('@create-figma-plugin/utilities/lib/events/ui-events');
+      const rootNode = document.getElementById('create-figma-plugin');
+      modules[command](rootNode);
+    `
   )
   if (uiEntryFile) {
     const key = extractBasename(constants.build.pluginUiFilePath)
