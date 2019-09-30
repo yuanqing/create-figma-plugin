@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join, resolve } from 'path'
 import TerserPlugin from 'terser-webpack-plugin'
 import webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
@@ -24,6 +24,7 @@ export function createWebpackConfig (entry, isDevelopment) {
       modules: [
         join(process.cwd(), constants.src.directory),
         join(process.cwd(), 'node_modules'),
+        resolve(process.cwd(), '..', '..', 'node_modules'), // Lerna monorepo
         process.cwd(),
         'node_modules'
       ],
