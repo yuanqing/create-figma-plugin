@@ -6,6 +6,9 @@
     "packages/*"
   ],
   "command": {
+    "bootstrap": {
+      "forceLocal": true
+    },
     "version": {
       "message": "%v",
       "push": false
