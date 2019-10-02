@@ -16,8 +16,9 @@ export async function buildBundle (config, isDevelopment) {
     `
   )
   if (commandEntryFile) {
-    const key = extractBasename(constants.build.pluginCodeFilePath)
-    entry[key] = commandEntryFile
+    entry[
+      extractBasename(constants.build.pluginCodeFilePath)
+    ] = commandEntryFile
   }
   const uiEntryFile = await buildWebpackEntryFile(
     config,
@@ -29,8 +30,7 @@ export async function buildBundle (config, isDevelopment) {
     `
   )
   if (uiEntryFile) {
-    const key = extractBasename(constants.build.pluginUiFilePath)
-    entry[key] = uiEntryFile
+    entry[extractBasename(constants.build.pluginUiFilePath)] = uiEntryFile
   }
   let webpackConfig = createWebpackConfig(entry, isDevelopment)
   const customWebpackConfigPath = await findUp(constants.configFileName)
