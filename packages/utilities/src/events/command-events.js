@@ -1,12 +1,13 @@
 /* global figma */
 
-const listeners = []
+let count = 0
+const listeners = {}
 
 export function addCommandEventListener (eventName, callback) {
-  const index = listeners.length
-  listeners.push({ eventName, callback })
+  const id = count++
+  listeners[id] = { eventName, callback }
   return function () {
-    listeners.splice(index, 1)
+    delete listeners[id]
   }
 }
 
@@ -16,7 +17,8 @@ export function triggerUiEvent (...args) {
 
 if (typeof figma !== 'undefined') {
   figma.ui.onmessage = function ([type, ...args]) {
-    for (const { eventName, callback } of listeners) {
+    for (const id of Object.keys(listeners)) {
+      const { eventName, callback } = listeners[id]
       if (eventName === type) {
         callback.apply(null, args)
       }
