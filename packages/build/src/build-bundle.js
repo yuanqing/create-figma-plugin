@@ -7,31 +7,15 @@ import { createWebpackConfig } from './create-webpack-config'
 
 export async function buildBundle (config, isDevelopment) {
   const entry = {}
-  const commandModules = extractModules(config, 'command')
-  if (commandModules.length > 0) {
-    const commandEntryFile = await tempWrite(`
-      const modules = ${createRequireCode(commandModules)};
-      global.__command__ = ${
-        commandModules.length > 1
-          ? 'figma.command'
-          : `'${commandModules[0].id}'`
-      };
-      require('@create-figma-plugin/utilities/lib/events/command-events');
-      modules[global.__command__]();
-    `)
-    entry[
-      extractBasename(constants.build.pluginCodeFilePath)
-    ] = commandEntryFile
+  const commandEntryFile = await createCommandEntryFile(config)
+  if (commandEntryFile) {
+    const key = extractBasename(constants.build.pluginCodeFilePath)
+    entry[key] = commandEntryFile
   }
-  const uiModules = extractModules(config, 'ui')
-  if (uiModules.length > 0) {
-    const uiEntryFile = await tempWrite(`
-      const modules = ${createRequireCode(uiModules)};
-      require('@create-figma-plugin/utilities/lib/events/ui-events');
-      const rootNode = document.getElementById('create-figma-plugin');
-      modules[window.__command__](rootNode, window.__data__, window.__command__);
-    `)
-    entry[extractBasename(constants.build.pluginUiFilePath)] = uiEntryFile
+  const uiEntryFile = await createUiEntryFile(config)
+  if (uiEntryFile) {
+    const key = extractBasename(constants.build.pluginUiFilePath)
+    entry[key] = uiEntryFile
   }
   let webpackConfig = createWebpackConfig(entry, isDevelopment)
   const customWebpackConfigPath = await findUp(constants.configFileName)
@@ -51,6 +35,34 @@ export async function buildBundle (config, isDevelopment) {
       resolve()
     })
   })
+}
+
+async function createCommandEntryFile (config) {
+  const modules = extractModules(config, 'command')
+  if (modules.length === 0) {
+    return null
+  }
+  return tempWrite(`
+    const modules = ${createRequireCode(modules)}
+    global.__command__ = ${
+      modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
+    };
+    require('@create-figma-plugin/utilities/lib/events/command-events');
+    modules[global.__command__]();
+  `)
+}
+
+async function createUiEntryFile (config) {
+  const modules = extractModules(config, 'ui')
+  if (modules.length === 0) {
+    return null
+  }
+  return tempWrite(`
+    const modules = ${createRequireCode(modules)}
+    require('@create-figma-plugin/utilities/lib/events/ui-events');
+    const rootNode = document.getElementById('create-figma-plugin');
+    modules[window.__command__](rootNode, window.__data__, window.__command__);
+  `)
 }
 
 function extractModules (config, key, result = []) {
