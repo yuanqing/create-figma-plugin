@@ -1,5 +1,4 @@
-export * from './events/command-events'
-export * from './events/ui-events'
+export * from './events'
 export * from './fetch'
 export * from './settings'
 export * from './show-ui'

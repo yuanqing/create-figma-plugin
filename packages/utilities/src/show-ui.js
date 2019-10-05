@@ -1,4 +1,3 @@
-/* eslint no-useless-escape: 0 */
 /* global __html__, figma */
 
 export function showUi ({ width, height, data = {} }) {
@@ -9,6 +8,7 @@ export function showUi ({ width, height, data = {} }) {
       }\``
     )
   }
+  /* eslint-disable no-useless-escape */
   const html = `
     <style>body { margin: 0; }</style>
     <div id="create-figma-plugin"></div>
@@ -18,5 +18,6 @@ export function showUi ({ width, height, data = {} }) {
       ${__html__}
     <\/script>
   `
+  /* eslint-enable no-useless-escape */
   figma.showUI(html, { width, height })
 }
