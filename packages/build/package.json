@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/build",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "publishConfig": {
     "access": "public"
   },
@@ -19,8 +19,8 @@
     "create-figma-plugin-build": "lib/cli.js"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.18",
-    "@create-figma-plugin/utilities": "^0.0.18",
+    "@create-figma-plugin/common": "^0.0.19",
+    "@create-figma-plugin/utilities": "^0.0.19",
     "chokidar": "^3.1.1",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
