@@ -1,6 +1,6 @@
-export function pluralize (singular, plural, number) {
+export function pluralize (number, singular, plural) {
   if (number === 1) {
     return singular
   }
-  return plural
+  return typeof plural === 'undefined' ? `${singular}s` : plural
 }
