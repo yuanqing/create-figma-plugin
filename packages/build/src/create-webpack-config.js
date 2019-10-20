@@ -44,7 +44,8 @@ export function createWebpackConfig (entry, isDevelopment) {
             output: {
               comments: false
             }
-          }
+          },
+          extractComments: false
         })
       ]
     }
