@@ -10,10 +10,17 @@ export const setAbsoluteY = factory('y', 1)
 
 function factory (key, index) {
   return function (layer, value) {
-    const parent = layer.parent
     layer[key] =
-      parent.type === 'PAGE'
+      layer.parent.type === 'PAGE'
         ? value
-        : value - parent.absoluteTransform[index][2]
+        : value - getOutermostParent(layer).absoluteTransform[index][2]
   }
+}
+
+function getOutermostParent (layer) {
+  const parent = layer.parent
+  if (parent.type === 'PAGE') {
+    return layer
+  }
+  return getOutermostParent(parent)
 }
