@@ -60,6 +60,7 @@ $ npm run watch
 
 Basic configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of your `package.json` file.
 
+- **`"id"`** *(optional)* — Your plugin ID. This field is only required when you want to publish your plugin; use the unique ID that’s assigned to your plugin by Figma the first time you publish your plugin.
 - **`"name"`** — Display name of the plugin.
 - **`"command"`** — Path to the plugin command implementation.
 - **`"ui"`** *(optional)* — Path to the plugin command’s UI implementation.
@@ -81,6 +82,7 @@ A basic plugin with a single command:
 {
   ...
   "create-figma-plugin": {
+    "id": "figma-hello-world",
     "name": "Hello, World!",
 +   "command": "index.js",
 +   "ui": "ui.js"
@@ -94,6 +96,7 @@ A plugin with multiple commands in the plugin sub-menu:
 {
   ...
   "create-figma-plugin": {
+    "id": "figma-hello-world",
     "name": "Hello, World",
 +   "menu": [
 +     {
