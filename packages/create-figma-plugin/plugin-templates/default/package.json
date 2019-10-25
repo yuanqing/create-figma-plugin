@@ -28,6 +28,7 @@
     "watch": "create-figma-plugin-build --watch"
   },
   "create-figma-plugin": {
+    "id": "{{name}}",
 {{#displayName}}
     "name": "{{displayName}}",
 {{/displayName}}
