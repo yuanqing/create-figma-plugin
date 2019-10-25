@@ -60,10 +60,10 @@ $ npm run watch
 
 Specify basic configuration options for your plugin on the **`"create-figma-plugin"`** key of your `package.json` file.
 
-- **`"id"`** *(optional)* — Your plugin ID. This field is only required when you want to publish your plugin; specify the unique ID that’s assigned to your plugin by Figma the first time you publish your plugin.
-- **`"name"`** — Display name of the plugin.
-- **`"command"`** — Path to the plugin command implementation.
-- **`"ui"`** *(optional)* — Path to the plugin command’s UI implementation.
+- **`"id"`** *(optional)* — The plugin ID. This field is only required when you want to publish your plugin; specify the unique ID that’s assigned to your plugin by Figma the first time you publish your plugin.
+- **`"name"`** — The display name of the plugin.
+- **`"command"`** — Path to the plugin command implementation. The command implementation must be a function set to be `default` export of this file.
+- **`"ui"`** *(optional)* — Path to the plugin command’s UI implementation. The UI implementation must be a function set to be `default` export of this file.
 - **`"menu"`** *(optional)* — An array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has these keys:
 
     - **`"name"`** — The display name of the plugin command.
@@ -72,7 +72,7 @@ Specify basic configuration options for your plugin on the **`"create-figma-plug
 
     Use a **`"-"`** in the array to specify a separator between commands in the plugin’s sub-menu.
 
-For brevity, the initial `src/` of paths specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve the paths in the `src/` directory.
+The initial `src/` of any path specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve paths in the `src/` directory.
 
 #### Example
 
@@ -129,11 +129,6 @@ module.exports = function (config) {
 ```
 
 The exported function receives the existing `config` object, and must return the new configuration object to be used.
-
-## Other solutions
-
-- [figplug](https://github.com/rsms/figplug)
-- [fika](https://github.com/mattdesl/fika)
 
 ## License
 
