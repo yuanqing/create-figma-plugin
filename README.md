@@ -22,7 +22,7 @@ index.js   node_modules   package.json
 `index.js` contains the plugin implementation, which is a function set to be the `default` export of the file:
 
 ```js
-export default function (figma) {
+export default function () {
   console.log('Hello, World!')
   figma.closePlugin()
 }
@@ -58,9 +58,9 @@ $ npm run watch
 
 ### `package.json`
 
-Basic configuration options for the plugin are specified on the **`"create-figma-plugin"`** key of your `package.json` file.
+Specify basic configuration options for your plugin on the **`"create-figma-plugin"`** key of your `package.json` file.
 
-- **`"id"`** *(optional)* — Your plugin ID. This field is only required when you want to publish your plugin; use the unique ID that’s assigned to your plugin by Figma the first time you publish your plugin.
+- **`"id"`** *(optional)* — Your plugin ID. This field is only required when you want to publish your plugin; specify the unique ID that’s assigned to your plugin by Figma the first time you publish your plugin.
 - **`"name"`** — Display name of the plugin.
 - **`"command"`** — Path to the plugin command implementation.
 - **`"ui"`** *(optional)* — Path to the plugin command’s UI implementation.
@@ -129,66 +129,6 @@ module.exports = function (config) {
 ```
 
 The exported function receives the existing `config` object, and must return the new configuration object to be used.
-
-## API
-
-### Command
-
-A plugin command is specified as a function with the signature:
-
-```js
-function (figma, { showUI, postMessage, onMessage })
-```
-
-- **`figma`** (`object`) — The global `figma` object.
-- **`showUI`** (`function (options)`) — Show the UI for the command. Takes an optional `options` object that is passed directly to `figma.showUI`.
-- **`postMessage`** (`function (message)`) — Send a `message` to the UI `iframe`.
-- **`onMessage`** (`function (handler)`) — Set up a `handler` for receiving messages from the UI `iframe`.
-
-#### Example
-
-```js
-// index.js
-
-export default function (figma, { showUI, postMessage, onMessage }) {
-  showUI({ width: 400, height: 200 })
-  // ...
-  postMessage('foo')
-  onMessage(function (message) {
-    console.log(message) //=> 'bar'
-  })
-  // ...
-  figma.closePlugin()
-}
-```
-
-### UI
-
-A plugin command’s UI (rendered in an `iframe` by Figma) is specified as a function with the signature:
-
-```js
-function (rootNode, { postMessage, onMessage })
-```
-
-- **`rootNode`** ([`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)) — An empty `div` element within which you can render your UI.
-- **`postMessage`** (`function (message)`) — Send a `message` to the plugin command.
-- **`onMessage`** (`function (handler)`) — Set up a `handler` for receiving messages from the plugin command.
-
-#### Example
-
-```js
-// ui.js
-
-export default function (rootNode, { postMessage, onMessage }) {
-  const ui = // ...
-  rootNode.appendChild(ui)
-  // ...
-  postMessage('bar')
-  onMessage(function (message) {
-    console.log(message) //=> 'foo'
-  })
-}
-```
 
 ## Other solutions
 
