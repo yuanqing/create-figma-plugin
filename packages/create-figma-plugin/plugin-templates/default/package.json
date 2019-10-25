@@ -20,6 +20,9 @@
 {{#repositoryUrl}}
   "repository": "{{repositoryUrl}}",
 {{/repositoryUrl}}
+  "dependencies": {
+    "@create-figma-plugin/utilities": "*"
+  },
   "devDependencies": {
     "@create-figma-plugin/build": "*"
   },
