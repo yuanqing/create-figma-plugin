@@ -5,7 +5,7 @@
 ## Features
 
 - Write your plugin in modern JavaScript or TypeScript
-- Bundle your plugin command implementation and UI code, with support for multiple commands
+- Bundle your plugin command and UI implementation, with support for multiple commands
 - Automatically generate your plugin’s `manifest.json` file
 - Scaffold your plugin using a template
 - Supports customizing the underlying Webpack configuration
