@@ -14,16 +14,25 @@ export function getAbsolutePosition (layer) {
   }
 }
 
-export const setAbsoluteX = setAbsolutePositionFactory('x', 0)
-export const setAbsoluteY = setAbsolutePositionFactory('y', 1)
-function setAbsolutePositionFactory (key, index) {
-  return function (layer, value) {
-    layer[key] =
-      layer.parent.type === 'PAGE'
-        ? value
-        : value - getOutermostParent(layer).absoluteTransform[index][2]
+export function setAbsolutePosition (layer, { x, y }) {
+  if (layer.parent.type === 'PAGE') {
+    if (typeof x !== 'undefined') {
+      layer.x = x
+    }
+    if (typeof y !== 'undefined') {
+      layer.y = y
+    }
+    return
+  }
+  const outermostParent = getOutermostParent(layer)
+  if (typeof x !== 'undefined') {
+    layer.x = x - outermostParent.absoluteTransform[0][2]
+  }
+  if (typeof y !== 'undefined') {
+    layer.y = y - outermostParent.absoluteTransform[1][2]
   }
 }
+
 function getOutermostParent (layer) {
   const parent = layer.parent
   if (parent.type === 'PAGE') {
