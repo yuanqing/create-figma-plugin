@@ -1,9 +1,11 @@
 /* global figma */
 
+const KEY = 'settings'
+
 export function loadSettings () {
-  return figma.clientStorage.getAsync('settings')
+  return figma.clientStorage.getAsync(KEY)
 }
 
 export function saveSettings (settings) {
-  return figma.clientStorage.setAsync('settings', settings)
+  return figma.clientStorage.setAsync(KEY, settings)
 }

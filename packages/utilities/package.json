@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Utilities and helper functions for creating Figma plugins",
+  "description": "Helper functions for developing Figma plugins",
   "license": "MIT",
   "author": "Lim Yuan Qing",
   "repository": {

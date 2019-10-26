@@ -1,6 +1,6 @@
 /* global __html__, figma */
 
-export function showUi ({ width, height, data = {} }) {
+export function showUi (width, height, data = {}) {
   if (typeof __html__ === 'undefined') {
     throw new Error(
       `UI not defined for the command corresponding to \`${
