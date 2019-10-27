@@ -5,6 +5,12 @@
     "access": "public"
   },
   "description": "Code shared across the `create-figma-plugin` monorepo",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
   "repository": {

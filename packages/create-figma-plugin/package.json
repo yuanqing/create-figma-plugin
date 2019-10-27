@@ -3,10 +3,10 @@
   "version": "0.0.25",
   "description": "Scaffold a new Figma plugin",
   "keywords": [
-    "cli",
+    "create-figma-plugin",
     "figma",
     "figma-plugin",
-    "toolkit"
+    "figma-plugins"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",

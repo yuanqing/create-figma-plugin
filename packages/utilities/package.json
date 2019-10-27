@@ -5,6 +5,12 @@
     "access": "public"
   },
   "description": "Helper functions for developing Figma plugins",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
   "repository": {
