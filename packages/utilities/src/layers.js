@@ -41,11 +41,11 @@ function getOutermostParent (layer) {
   return getOutermostParent(parent)
 }
 
-export function traverseLayer (layer, callback, filterCallback) {
+export function traverseLayer (layer, callback, filter) {
   if (layer.removed) {
     return
   }
-  if (typeof filterCallback === 'function' && filterCallback(layer) === false) {
+  if (typeof filter === 'function' && filter(layer) === false) {
     return
   }
   callback(layer)
@@ -53,6 +53,6 @@ export function traverseLayer (layer, callback, filterCallback) {
     return
   }
   for (const childLayer of layer.children) {
-    traverseLayer(childLayer, callback, filterCallback)
+    traverseLayer(childLayer, callback, filter)
   }
 }
