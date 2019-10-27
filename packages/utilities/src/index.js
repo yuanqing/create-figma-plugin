@@ -1,6 +1,6 @@
 export * from './events'
 export * from './fetch'
 export * from './layers'
-export * from './string'
 export * from './settings'
+export * from './string'
 export * from './ui'
