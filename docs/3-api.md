@@ -1,25 +1,26 @@
 # API
 
 - [**Events**](#events)
-  - [addEventListener (eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
-  - [triggerEvent (eventName [, ...arguments])](#triggereventeventname--arguments)
+  - [addEventListener(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
+  - [triggerEvent(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
   - [*Example*](#example)
 - [**Layers**](#layers)
-  - [getSelectedLayersOrAllLayers ()](#const-layers--getselectedlayersoralllayers)
-  - [getAbsolutePosition (layer)](#const-absoluteposition--getabsolutepositionlayer)
-  - [setAbsolutePosition (layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
-  - [traverseLayer (layer, callback [, filterCallback])](#traverselayerlayer-callback--filtercallback)
+  - [getSelectedLayersOrAllLayers()](#const-layers--getselectedlayersoralllayers)
+  - [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
+  - [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
+  - [traverseLayer(layer, callback *[, filter]*)](#traverselayerlayer-callback--filter)
 - [**Settings**](#settings)
-  - [loadSettings ()](#const-settings--await-loadsettings)
-  - [saveSettings (settings)](#await-savesettings-settings)
+  - [loadSettings()](#const-settings--await-loadsettings)
+  - [saveSettings(settings)](#await-savesettingssettings)
 - [**String**](#string)
-  - [formatErrorMessage (message)](#const-errormessage--formaterrormessagemessage)
-  - [formatSuccessMessage (message)](#const-successmessage--formatsuccessmessagemessage)
-  - [mapNumberToWord (number)](#const-word--mapnumbertowordnumber)
-  - [pluralize (number, singular [, plural])](#const-word--pluralizenumber-singular--plural)
+  - [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
+  - [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
+  - [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
+  - [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
 - [**UI**](#ui)
-  - [showUi (width, height [, data])](#showuiwidth-height--data)
+  - [showUi(width, height *[, data]*)](#showuiwidth-height--data)
   - [*Example*](#example-1)
+
 
 ---
 
@@ -38,16 +39,16 @@ Registers an `eventListener` for the given `eventName`.
 
 #### Returns
 
-- A `function` for unregistering the `eventListener`
+- A `function` for deregistering the `eventListener`
 
 #### Parameters
 
 - `eventName` (`string`)
-- `callback` (`function (...arguments)`)
+- `eventListener` (`function (...arguments)`)
 
-### triggerEvent(eventName [, ...arguments])
+### triggerEvent(eventName *[, ...arguments]*)
 
-Calling `triggerEvent` in your plugin command invokes the event listener with the matching `eventName` in the UI `<iframe>`. Calling `triggerEvent` in the UI `<iframe>` invokes the event listener with the matching `eventName` in your plugin command.
+Calling `triggerEvent` in your plugin command invokes the event listener with the matching `eventName` in the UI `<iframe>`. Calling `triggerEvent` in your UI invokes the event listener with the matching `eventName` in your plugin command.
 
 All remaining `arguments` passed to `triggerEvent` are directly applied on the event listener.
 
@@ -131,7 +132,7 @@ Returns the X and Y position of the given `layer` relative to the page.
 
 ### setAbsolutePosition(layer, absolutePosition)
 
-Sets the absolute position of `layer` to the given `absolutePosition`.
+Sets the `layer` to the given `absolutePosition`.
 
 #### Returns
 
@@ -141,11 +142,11 @@ Sets the absolute position of `layer` to the given `absolutePosition`.
 
 - `absolutePosition` (a plain `object` with `x` and `y` keys)
 
-### traverseLayer(layer, callback [, filterCallback])
+### traverseLayer(layer, callback *[, filter]*)
 
 Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `callback`.
 
-Each layer is also passed to `filterCallback`. If you return `false` in `filterCallback` for a particular layer, then the `callback` will not be called for that particular layer, and the child layers of that particular layer will not be traversed.
+Each layer is also passed to a `filter` function. If you return `false` in `filter` for a particular layer, then the `callback` will not be called for that particular layer, and the child layers of that particular layer will not be traversed.
 
 #### Returns
 
@@ -155,7 +156,7 @@ Each layer is also passed to `filterCallback`. If you return `false` in `filterC
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `callback` (`function (layer)`)
-- `filterCallback` (`function (layer`) *(optional)*
+- `filter` (`function (layer`) *(optional)*
 
 ---
 
@@ -174,7 +175,7 @@ Loads your plugin’s `settings` (stored locally on the user’s computer).
 
 #### Returns
 
-- `object`
+- A `Promise` for an `object`
 
 ### await saveSettings(settings)
 
@@ -182,7 +183,7 @@ Saves the given `settings`.
 
 #### Returns
 
-- `undefined`
+- `Promise`
 
 #### Parameters
 
@@ -203,7 +204,7 @@ import {
 
 ### const errorMessage = formatErrorMessage(message)
 
-Prepends a cross to the `message`.
+Prepends a `✘` to the `message`.
 
 #### Returns
 
@@ -215,7 +216,7 @@ Prepends a cross to the `message`.
 
 ### const successMessage = formatSuccessMessage(message)
 
-Prepends a check to the `message`.
+Prepends a `✔` to the `message`.
 
 #### Returns
 
@@ -237,7 +238,7 @@ If `number` is between 0 and 9, returns the English word for the `number` (eg. `
 
 - `number` (`number`)
 
-### const word = pluralize(number, singular [, plural])
+### const word = pluralize(number, singular *[, plural]*)
 
 Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` defaults to `${singular}s` if not specified.
 
@@ -259,9 +260,19 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 import { showUi } from '@create-figma-plugin/utilities'
 ```
 
-### showUi(width, height [, data])
+### showUi(width, height *[, data]*)
 
-Opens the UI correponding to the command in an `<iframe>`. Set the `width` and `height`. Optionally pass some initial `data` to the UI.
+Renders the UI correponding to the command in an `<iframe>` with the given `width` and `height`. Optionally pass some initialising `data` from the command to the UI.
+
+#### Returns
+
+- `undefined`
+
+#### Parameters
+
+- `width` (`number`)
+- `height` (`number`)
+- `data` (`object`)
 
 ### *Example*
 
@@ -272,7 +283,7 @@ import { showUi } from '@create-figma-plugin/utilities'
 
 export default function () {
   // ...
-  showUi(240, 320, { foo: 42 })
+  showUi(240, 320, 'Hello, World!')
   // ...
 }
 ```
@@ -281,7 +292,7 @@ export default function () {
 // ui.js
 
 export default function (rootNode, data) {
-  console.log(data) //=> { foo: 42 }
+  console.log(data) //=> 'Hello, World!'
   // ...
 }
 ```

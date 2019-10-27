@@ -1,13 +1,13 @@
 # create-figma-plugin [![npm Version](https://img.shields.io/npm/v/create-figma-plugin.svg)](https://www.npmjs.com/package/create-figma-plugin) [![Build Status](https://img.shields.io/travis/yuanqing/create-figma-plugin.svg)](https://travis-ci.org/yuanqing/create-figma-plugin)
 
-> A toolkit for developing [Figma](https://figma.com) plugins
+> A toolkit for developing [Figma plugins](https://www.figma.com/plugin-docs/)
 
 ## Features
 
 - Write your plugin in modern JavaScript or TypeScript
-- Bundle your plugin command and UI implementation, with each command having a corresponding UI implementation
-- Automatically generate your plugin’s `manifest.json` file
 - Scaffold your plugin using a template
+- Bundle your plugin and automatically generate your plugin’s `manifest.json` file
+- Supports multiple commands and for each command to have a corresponding UI implementation
 - Supports customizing the underlying Webpack configuration
 
 ## Docs

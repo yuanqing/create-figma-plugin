@@ -1,6 +1,10 @@
 # Quick start
 
-## Basic command
+*Requires [Node.js](https://nodejs.org/).*
+
+## Create a basic plugin with a single command
+
+To begin, do:
 
 ```
 $ npx create-figma-plugin figma-hello-world
@@ -20,7 +24,7 @@ export default function () {
 }
 ```
 
-In `package.json`, point to `command.js` on the **`"command"`** key:
+In `package.json`, point to `command.js` on the **`"command"`** key under **`"create-figma-plugin"`**:
 
 ```diff
 {
@@ -32,17 +36,19 @@ In `package.json`, point to `command.js` on the **`"command"`** key:
 }
 ```
 
-Build the plugin:
+Then, build the plugin:
 
 ```
 $ npm run build
 ```
 
-This will generate a `manifest.json` file and a `build/` directory containing the plugin bundle.
+This will generate a `manifest.json` file for your plugin, and a `build/` directory containing your JavaScript bundle.
 
-## Adding a UI
+## Add a user interface
 
-Update `command.js` as follows:
+Every command defined in `package.json` can have a corresponding UI implementation.
+
+Update `command.js` to include a call to `showUi`:
 
 ```js
 // command.js
@@ -54,7 +60,9 @@ export default function () {
 }
 ```
 
-Create a `ui.js` for the plugin UI implementation:
+`showUi` takes a `width`, `height` and `data`. The third `data` parameter is useful for passing some initialising data from your command to its UI.
+
+Next, create a `ui.js`:
 
 ```js
 // ui.js
@@ -64,10 +72,12 @@ export default function (rootNode, data) {
 }
 ```
 
-- `rootNode` is an empty `<div>` element in the `<iframe>` within which you can render your plugin UI.
-- `data` is the third parameter that was passed to `showUi`.
+The exported function receives two parameters:
 
-In `package.json`, point to `ui.js` on the **`"ui"`** key:
+- `rootNode` — An empty `<div>` element within which you can render your UI.
+- `data` — This corresponds to the third parameter passed to `showUi`.
+
+Then, in `package.json`, point to `ui.js` on the **`"ui"`** key:
 
 ```diff
 {
