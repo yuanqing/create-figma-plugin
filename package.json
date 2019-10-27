@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "yarn run clean && lerna exec -- babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward",
-    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json}'",
+    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json}' 'packages/create-figma-plugin/{docs,README.md}'",
     "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
     "fix": "prettier-standard '*.js' 'packages/*/{src,test}/**/*.js'",
     "lint": "standard '*.js' 'packages/*/{src,test}/**/*.js'",
