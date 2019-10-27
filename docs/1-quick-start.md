@@ -48,19 +48,19 @@ This will generate a `manifest.json` file for your plugin, and a `build/` direct
 
 Every command defined in `package.json` can have a corresponding UI implementation.
 
-Update `command.js` to include a call to `showUi`:
+Update `command.js` to include a call to `showUI`:
 
 ```js
 // command.js
 
-import { showUi } from '@create-figma-plugin/utilities'
+import { showUI } from '@create-figma-plugin/utilities'
 
 export default function () {
-  showUi(240, 320, 'Hello, World!')
+  showUI(240, 320, 'Hello, World!')
 }
 ```
 
-`showUi` takes a `width`, `height` and `data`. The third `data` parameter is useful for passing some initialising data from your command to its UI.
+`showUI` takes a `width`, `height` and `data`. The third `data` parameter is useful for passing some initialising data from your command to its UI.
 
 Next, create a `ui.js`:
 
@@ -75,7 +75,7 @@ export default function (rootNode, data) {
 The exported function receives two parameters:
 
 - `rootNode` — An empty `<div>` element within which you can render your UI.
-- `data` — This corresponds to the third parameter passed to `showUi`.
+- `data` — This corresponds to the third parameter passed to `showUI`.
 
 Then, in `package.json`, point to `ui.js` on the **`"ui"`** key:
 

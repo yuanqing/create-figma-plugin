@@ -18,7 +18,7 @@
   - [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
   - [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
 - [**UI**](#ui)
-  - [showUi(width, height *[, data]*)](#showuiwidth-height--data)
+  - [showUI(width, height *[, data]*)](#showuiwidth-height--data)
   - [*Example*](#example-1)
 
 
@@ -257,10 +257,10 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 ## UI
 
 ```js
-import { showUi } from '@create-figma-plugin/utilities'
+import { showUI } from '@create-figma-plugin/utilities'
 ```
 
-### showUi(width, height *[, data]*)
+### showUI(width, height *[, data]*)
 
 Renders the UI correponding to the command in an `<iframe>` with the given `width` and `height`. Optionally pass some initialising `data` from the command to the UI.
 
@@ -279,11 +279,11 @@ Renders the UI correponding to the command in an `<iframe>` with the given `widt
 ```js
 // command.js
 
-import { showUi } from '@create-figma-plugin/utilities'
+import { showUI } from '@create-figma-plugin/utilities'
 
 export default function () {
   // ...
-  showUi(240, 320, 'Hello, World!')
+  showUI(240, 320, 'Hello, World!')
   // ...
 }
 ```
