@@ -27,31 +27,27 @@ export function getAbsolutePosition (layer) {
   }
 }
 
-export function setAbsolutePosition (layer, { x, y }) {
-  if (layer.parent.type === 'PAGE') {
-    if (typeof x !== 'undefined') {
-      layer.x = x
+export function setAbsolutePosition (layer, absolutePosition) {
+  let x = typeof absolutePosition.x !== 'undefined' ? absolutePosition.x : null
+  let y = typeof absolutePosition.y !== 'undefined' ? absolutePosition.y : null
+  let parent = layer.parent
+  while (parent.type !== 'PAGE') {
+    if (parent.type !== 'BOOLEAN_OPERATION' && parent.type !== 'GROUP') {
+      if (x !== null) {
+        x = x - parent.x
+      }
+      if (y !== null) {
+        y = y - parent.y
+      }
     }
-    if (typeof y !== 'undefined') {
-      layer.y = y
-    }
-    return
+    parent = parent.parent
   }
-  const outermostParent = getOutermostParent(layer)
-  if (typeof x !== 'undefined') {
-    layer.x = x - outermostParent.absoluteTransform[0][2]
+  if (x !== null) {
+    layer.x = x
   }
-  if (typeof y !== 'undefined') {
-    layer.y = y - outermostParent.absoluteTransform[1][2]
+  if (y !== null) {
+    layer.y = y
   }
-}
-
-function getOutermostParent (layer) {
-  const parent = layer.parent
-  if (parent.type === 'PAGE') {
-    return layer
-  }
-  return getOutermostParent(parent)
 }
 
 export function traverseLayer (layer, callback, filter) {
