@@ -6,6 +6,7 @@
   - [*Example*](#example)
 - [**Layers**](#layers)
   - [getSelectedLayersOrAllLayers()](#const-layers--getselectedlayersoralllayers)
+  - [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   - [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
   - [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
   - [traverseLayer(layer, callback *[, filter]*)](#traverselayerlayer-callback--filter)
@@ -20,7 +21,6 @@
 - [**UI**](#ui)
   - [showUI(width, height *[, data]*)](#showuiwidth-height--data)
   - [*Example*](#example-1)
-
 
 ---
 
@@ -104,6 +104,7 @@ export default function () {
 ```js
 import {
   getSelectedLayersOrAllLayers,
+  groupSiblingLayers,
   getAbsolutePosition
   setAbsolutePosition,
   traverseLayer
@@ -112,7 +113,7 @@ import {
 
 ### const layers = getSelectedLayersOrAllLayers()
 
-Gets the selected layers, or the top-level layers on the current page if no layers are selected.
+Gets the selected layers, or all the top-level layers on the current page if no layers are selected.
 
 #### Returns
 
@@ -120,7 +121,7 @@ Gets the selected layers, or the top-level layers on the current page if no laye
 
 ### const groups = groupSiblingLayers(layers)
 
-Splits the given `layers` into smaller groups of sibiling layers.
+Splits the given `layers` into smaller groups of sibling layers.
 
 #### Returns
 
