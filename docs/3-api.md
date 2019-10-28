@@ -118,6 +118,18 @@ Gets the selected layers, or the top-level layers on the current page if no laye
 
 - An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
 
+### const groups = groupSiblingLayers(layers)
+
+Splits the given `layers` into smaller groups of sibiling layers.
+
+#### Returns
+
+- An `array` of `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
 ### const absolutePosition = getAbsolutePosition(layer)
 
 Returns the X and Y position of the given `layer` relative to the page.
