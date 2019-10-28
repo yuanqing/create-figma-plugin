@@ -217,7 +217,7 @@ import {
 
 ### const errorMessage = formatErrorMessage(message)
 
-Prepends a `✘` to the `message`.
+Adds a `✘` prefix to the given `message`.
 
 #### Returns
 
@@ -229,7 +229,7 @@ Prepends a `✘` to the `message`.
 
 ### const successMessage = formatSuccessMessage(message)
 
-Prepends a `✔` to the `message`.
+Adds a `✔` prefix to the given `message`.
 
 #### Returns
 
