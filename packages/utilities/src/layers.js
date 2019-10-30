@@ -50,6 +50,16 @@ export function setAbsolutePosition (layer, absolutePosition) {
   }
 }
 
+export function loadFonts (layers) {
+  const promises = []
+  for (const layer of layers) {
+    if (layer.type === 'TEXT') {
+      promises.push(figma.loadFontAsync(layer.fontName))
+    }
+  }
+  return Promise.all(promises)
+}
+
 export function traverseLayer (layer, callback, filter) {
   if (layer.removed) {
     return
