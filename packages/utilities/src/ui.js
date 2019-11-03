@@ -1,6 +1,6 @@
 /* global __html__, figma */
 
-export function showUI (width, height, data = {}) {
+export function showUI ({ data, ...options }) {
   if (typeof __html__ === 'undefined') {
     throw new Error(
       `UI not defined for the command corresponding to \`${
@@ -19,5 +19,5 @@ export function showUI (width, height, data = {}) {
     <\/script>
   `
   /* eslint-enable no-useless-escape */
-  figma.showUI(html, { width, height })
+  figma.showUI(html, options)
 }
