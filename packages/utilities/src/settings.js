@@ -7,10 +7,7 @@ export function loadSettings (defaultSettings) {
   if (typeof settings === 'undefined') {
     return defaultSettings
   }
-  return {
-    ...defaultSettings,
-    ...settings
-  }
+  return Object.assign(defaultSettings, settings)
 }
 
 export function saveSettings (settings) {
