@@ -46,13 +46,4 @@ if (isCommand) {
       }
     }
   }
-  addEventListener('FETCH_REQUEST', async function (id, url, options) {
-    try {
-      const response = await window.fetch(url, options)
-      const result = await response.json()
-      triggerEvent('FETCH_RESULT', null, id, result)
-    } catch (error) {
-      triggerEvent('FETCH_RESULT', error, id)
-    }
-  })
 }

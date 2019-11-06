@@ -28,13 +28,17 @@ export async function readConfig () {
 function createMenuItem (config) {
   const result = {}
   result.name = config.name
-  if (config.command) {
+  if (typeof config.command !== 'undefined') {
     result.command = config.command
+    const handler =
+      typeof config.handler !== 'undefined' ? config.handler : 'default'
+    result.handler = handler
+    result.id = `${config.command}--${handler}`
   }
-  if (config.ui) {
+  if (typeof config.ui !== 'undefined') {
     result.ui = config.ui
   }
-  if (config.menu) {
+  if (typeof config.menu !== 'undefined') {
     result.menu = normaliseMenu(config.menu)
   }
   return result

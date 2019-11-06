@@ -8,12 +8,12 @@ import { createWebpackConfig } from './create-webpack-config'
 export async function buildBundle (config, isDevelopment) {
   const entry = {}
   const commandEntryFile = await createCommandEntryFile(config)
-  if (commandEntryFile) {
+  if (commandEntryFile !== null) {
     const key = extractBasename(constants.build.pluginCodeFilePath)
     entry[key] = commandEntryFile
   }
   const uiEntryFile = await createUiEntryFile(config)
-  if (uiEntryFile) {
+  if (uiEntryFile !== null) {
     const key = extractBasename(constants.build.pluginUiFilePath)
     entry[key] = uiEntryFile
   }
@@ -67,17 +67,17 @@ async function createUiEntryFile (config) {
 
 function extractModules (config, key, result = []) {
   const src = config[key]
-  if (src) {
-    const id = config.command
-    if (id) {
+  if (typeof src !== 'undefined') {
+    if (typeof config.command !== 'undefined') {
       result.push({
-        id,
-        src
+        id: config.id,
+        src,
+        handler: key === 'command' ? config.handler : 'default'
       })
     }
   }
   const menu = config.menu
-  if (menu) {
+  if (typeof menu !== 'undefined') {
     menu.forEach(function (item) {
       extractModules(item, key, result)
     })
@@ -88,7 +88,7 @@ function extractModules (config, key, result = []) {
 function createRequireCode (modules) {
   const code = []
   modules.forEach(function (item) {
-    code.push(`'${item.id}':require('${item.src}').default`)
+    code.push(`'${item.id}':require('${item.src}')['${item.handler}']`)
   })
   return `{${code.join(',')}}`
 }

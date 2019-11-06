@@ -2,8 +2,8 @@
 
 const KEY = 'settings'
 
-export function loadSettings (defaultSettings) {
-  const settings = figma.clientStorage.getAsync(KEY)
+export async function loadSettings (defaultSettings) {
+  const settings = await figma.clientStorage.getAsync(KEY)
   if (typeof settings === 'undefined') {
     return defaultSettings
   }

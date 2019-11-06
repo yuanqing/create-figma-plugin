@@ -17,7 +17,7 @@ export async function buildManifest (config) {
   if (typeof menu !== 'undefined') {
     result.menu = normaliseMenu(menu)
   }
-  const string = JSON.stringify(result, null, 2) + '\n'
+  const string = JSON.stringify(result) + '\n'
   return outputFile(constants.build.manifestFilePath, string)
 }
 
@@ -35,12 +35,18 @@ function hasBundle (config, key) {
 
 function normaliseMenu (menu) {
   return menu.map(function (item) {
-    if (typeof item.ui === 'undefined') {
+    if (typeof item.separator !== 'undefined') {
       return item
     }
-    return {
-      name: item.name,
-      command: item.command
+    const result = {
+      name: item.name
     }
+    if (typeof item.id !== 'undefined') {
+      result.command = item.id
+    }
+    if (typeof item.menu !== 'undefined') {
+      result.menu = normaliseMenu(item.menu)
+    }
+    return result
   })
 }
