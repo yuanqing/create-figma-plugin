@@ -83,14 +83,14 @@ test.serial('multiple menu commands', async function (t) {
     menu: [
       {
         name: 'bar',
-        command: 'baz'
+        command: 'baz--default'
       },
       {
         separator: true
       },
       {
         name: 'qux',
-        command: 'quux'
+        command: 'quux--default'
       }
     ]
   })

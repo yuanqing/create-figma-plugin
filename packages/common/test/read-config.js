@@ -48,6 +48,7 @@ test('basic command', async function (t) {
     name: 'foo',
     id: '42',
     command: 'bar',
+    handler: 'default',
     ui: 'baz'
   })
 })
@@ -59,6 +60,7 @@ test('basic command without `id`', async function (t) {
     name: 'foo',
     id: 'foo',
     command: 'bar',
+    handler: 'default',
     ui: 'baz'
   })
 })
@@ -72,7 +74,9 @@ test('single menu command', async function (t) {
     menu: [
       {
         name: 'bar',
-        command: 'baz'
+        id: 'baz--default',
+        command: 'baz',
+        handler: 'default'
       }
     ]
   })
@@ -87,14 +91,18 @@ test('multiple menu commands', async function (t) {
     menu: [
       {
         name: 'bar',
-        command: 'baz'
+        id: 'baz--default',
+        command: 'baz',
+        handler: 'default'
       },
       {
         separator: true
       },
       {
         name: 'qux',
+        id: 'quux--default',
         command: 'quux',
+        handler: 'default',
         ui: 'quuux'
       }
     ]
