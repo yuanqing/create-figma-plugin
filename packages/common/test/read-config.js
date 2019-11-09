@@ -82,9 +82,26 @@ test('single menu command', async function (t) {
   })
 })
 
+test('single menu command with `handler`', async function (t) {
+  t.plan(1)
+  changeDirectory('7-single-menu-command-with-handler')
+  t.deepEqual(await readConfig(), {
+    name: 'foo',
+    id: '42',
+    menu: [
+      {
+        name: 'bar',
+        id: 'baz--qux',
+        command: 'baz',
+        handler: 'qux'
+      }
+    ]
+  })
+})
+
 test('multiple menu commands', async function (t) {
   t.plan(1)
-  changeDirectory('7-multiple-menu-commands')
+  changeDirectory('8-multiple-menu-commands')
   t.deepEqual(await readConfig(), {
     name: 'foo',
     id: '42',
