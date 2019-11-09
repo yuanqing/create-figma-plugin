@@ -1,5 +1,4 @@
 export * from './events'
-export * from './fetch'
 export * from './layers'
 export * from './settings'
 export * from './string'

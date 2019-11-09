@@ -1,11 +1,13 @@
+const CHECK = '✔'
+const CROSS = '✘'
 const SPACE = '\u00a0'
 
 export function formatSuccessMessage (message) {
-  return `✔ ${SPACE} ${message}`
+  return `${CHECK} ${SPACE} ${message}`
 }
 
 export function formatErrorMessage (message) {
-  return `✘ ${SPACE} ${message}`
+  return `${CROSS} ${SPACE} ${message}`
 }
 
 const numbers = [

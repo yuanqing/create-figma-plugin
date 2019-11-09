@@ -51,7 +51,7 @@ function normaliseMenu (menu) {
       result.push({ separator: true })
       return
     }
-    if (item) {
+    if (typeof item !== 'undefined') {
       result.push(createMenuItem(item))
     }
   })

@@ -24,7 +24,7 @@ export async function buildBundle (config, isDevelopment) {
   }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
-      if (stats.hasErrors()) {
+      if (stats.hasErrors() === true) {
         reject(stats.toJson().errors.join('\n'))
         return
       }

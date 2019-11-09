@@ -53,22 +53,26 @@ export function setAbsolutePosition (layer, absolutePosition) {
 export function loadFonts (layers) {
   const promises = []
   for (const layer of layers) {
-    if (layer.type === 'TEXT') {
-      promises.push(figma.loadFontAsync(layer.fontName))
+    if (layer.type !== 'TEXT') {
+      continue
+    }
+    const length = layer.characters.length
+    for (let i = 0; i < length; i++) {
+      promises.push(figma.loadFontAsync(layer.getRangeFontName(i, i + 1)))
     }
   }
   return Promise.all(promises)
 }
 
 export function traverseLayer (layer, callback, filter) {
-  if (layer.removed) {
+  if (layer.removed === true) {
     return
   }
   if (typeof filter === 'function' && filter(layer) === false) {
     return
   }
   callback(layer)
-  if (layer.removed || typeof layer.children === 'undefined') {
+  if (layer.removed === true || typeof layer.children === 'undefined') {
     return
   }
   for (const childLayer of layer.children) {

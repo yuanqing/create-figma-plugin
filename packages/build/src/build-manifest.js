@@ -7,10 +7,10 @@ export async function buildManifest (config) {
     id: config.id,
     api: constants.apiVersion
   }
-  if (hasBundle(config, 'command')) {
+  if (hasBundle(config, 'command') === true) {
     result.main = constants.build.pluginCodeFilePath
   }
-  if (hasBundle(config, 'ui')) {
+  if (hasBundle(config, 'ui') === true) {
     result.ui = constants.build.pluginUiFilePath
   }
   const menu = config.menu

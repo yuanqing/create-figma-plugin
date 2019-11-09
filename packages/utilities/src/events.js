@@ -27,7 +27,7 @@ export const triggerEvent = isCommand
     )
   }
 
-if (isCommand) {
+if (isCommand === true) {
   figma.ui.onmessage = function ([type, ...args]) {
     for (const id of Object.keys(listeners)) {
       const { eventName, eventListener } = listeners[id]

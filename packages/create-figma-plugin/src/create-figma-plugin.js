@@ -25,7 +25,7 @@ export async function createFigmaPlugin (options, useDefault) {
 }
 
 async function throwIfDirectoryExists (directory) {
-  if (await exists(directory)) {
+  if ((await exists(directory)) === true) {
     return Promise.reject(new Error(`Directory already exists: ${directory}`))
   }
 }
@@ -35,10 +35,10 @@ function createDefaultConfig ({ name, template }) {
     name: constants.packageJson.defaultPluginName,
     template: 'default'
   }
-  if (name) {
+  if (typeof name !== 'undefined') {
     result.name = name
   }
-  if (template) {
+  if (typeof template !== 'undefined') {
     result.template = template
   }
   return result

@@ -30,7 +30,12 @@ export async function promptForUserInput ({ name, template }) {
       name: 'displayName',
       message: 'display name',
       default: function (values) {
-        return titleCase((name || values.name).replace(figmaPrefixRegex, ''))
+        return titleCase(
+          (typeof name !== 'undefined' ? name : values.name).replace(
+            figmaPrefixRegex,
+            ''
+          )
+        )
       },
       validate,
       filter

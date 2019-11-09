@@ -11,7 +11,7 @@ export async function cloneFromTemplate (pluginDirectoryPath, template) {
     'plugin-templates',
     template
   )
-  if (await exists(templateDirectory)) {
+  if ((await exists(templateDirectory)) === true) {
     await ensureDir(pluginDirectoryPath)
     return copy(templateDirectory, pluginDirectoryPath)
   }
