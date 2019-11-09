@@ -195,13 +195,17 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-### const settings = await loadSettings()
+### const settings = await loadSettings(*[defaultSettings]*)
 
-Loads your plugin’s `settings` (stored locally on the user’s computer).
+Loads your plugin’s `settings` (stored locally on the user’s computer). Values in `settings` default to an optional `defaultSettings` object.
 
 #### Returns
 
 - A `Promise` for an `object`
+
+#### Parameters
+
+- `defaultSettings` (`object`)
 
 ### await saveSettings(settings)
 
