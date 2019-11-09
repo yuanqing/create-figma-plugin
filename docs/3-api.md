@@ -9,6 +9,7 @@
   - [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   - [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
   - [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
+  - [loadFonts(layers)](#loadfontslayers)
   - [traverseLayer(layer, callback *[, filter]*)](#traverselayerlayer-callback--filter)
 - [**Settings**](#settings)
   - [loadSettings()](#const-settings--await-loadsettings)
@@ -19,7 +20,7 @@
   - [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
   - [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
 - [**UI**](#ui)
-  - [showUI(width, height *[, data]*)](#showuiwidth-height--data)
+  - [showUI(options *[, data]*)](#showuioptions--data)
   - [*Example*](#example-1)
 
 ---
@@ -155,6 +156,18 @@ Sets the `layer` to the given `absolutePosition`.
 
 - `absolutePosition` (a plain `object` with `x` and `y` keys)
 
+### loadFonts(layers)
+
+Loads the fonts used in all the text layers in `layers`.
+
+#### Returns
+
+- `Promise`
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
 ### traverseLayer(layer, callback *[, filter]*)
 
 Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `callback`.
@@ -273,9 +286,9 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 import { showUI } from '@create-figma-plugin/utilities'
 ```
 
-### showUI(width, height *[, data]*)
+### showUI(options *[, data]*)
 
-Renders the UI correponding to the command in an `<iframe>` with the given `width` and `height`. Optionally pass some initialising `data` from the command to the UI.
+Renders the UI correponding to the command in an `<iframe>`. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
 
 #### Returns
 
@@ -283,8 +296,10 @@ Renders the UI correponding to the command in an `<iframe>` with the given `widt
 
 #### Parameters
 
-- `width` (`number`)
-- `height` (`number`)
+- `options` (`object`)
+  - `width` (`number`)
+  - `height` (`number`)
+  - `visible` (`boolean`)
 - `data` (`object`)
 
 ### *Example*
@@ -296,7 +311,7 @@ import { showUI } from '@create-figma-plugin/utilities'
 
 export default function () {
   // ...
-  showUI(240, 320, 'Hello, World!')
+  showUI({ width: 240, height: 320 }, 'Hello, World!')
   // ...
 }
 ```
