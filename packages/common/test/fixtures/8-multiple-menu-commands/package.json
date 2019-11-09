@@ -5,13 +5,14 @@
     "menu": [
       {
         "name": "bar",
-        "command": "baz"
+        "command": "baz",
+        "handler": "qux"
       },
       "-",
       {
-        "name": "qux",
-        "command": "quux",
-        "ui": "quuux"
+        "name": "quux",
+        "command": "quuux",
+        "ui": "quuuux"
       }
     ]
   }

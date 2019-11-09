@@ -108,19 +108,19 @@ test('multiple menu commands', async function (t) {
     menu: [
       {
         name: 'bar',
-        id: 'baz--default',
+        id: 'baz--qux',
         command: 'baz',
-        handler: 'default'
+        handler: 'qux'
       },
       {
         separator: true
       },
       {
-        name: 'qux',
-        id: 'quux--default',
-        command: 'quux',
+        name: 'quux',
+        id: 'quuux--default',
+        command: 'quuux',
         handler: 'default',
-        ui: 'quuux'
+        ui: 'quuuux'
       }
     ]
   })
