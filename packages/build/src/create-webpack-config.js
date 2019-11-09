@@ -15,8 +15,14 @@ export function createWebpackConfig (entry, isDevelopment) {
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
-          use: 'ts-loader'
+          test: /\.js?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              plugins: ['@babel/plugin-proposal-object-rest-spread']
+            }
+          }
         }
       ]
     },
@@ -28,7 +34,7 @@ export function createWebpackConfig (entry, isDevelopment) {
         process.cwd(),
         'node_modules'
       ],
-      extensions: ['.tsx', '.ts', '.jsx', '.js', '.json']
+      extensions: ['.js', '.json']
     },
     devtool: isDevelopment ? 'inline-cheap-source-map' : 'none',
     stats: 'errors-only',
