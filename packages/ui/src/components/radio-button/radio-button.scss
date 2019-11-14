@@ -1,0 +1,56 @@
+@import "../_constants.scss";
+@import "../_text.scss";
+
+.radioButton {
+  @include text-11-regular;
+  user-select: none;
+  padding: 4px 0;
+}
+
+.label {
+  // reset
+  display: block;
+
+  position: relative;
+  padding: 4px 0;
+}
+
+.input {
+  // reset
+  -webkit-appearance: none;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  outline: 0;
+  background: none;
+
+  position: absolute;
+  top: 6px;
+  left: 0;
+  border: 1px solid $color-black;
+  border-radius: 6px;
+  width: 12px;
+  height: 12px;
+
+  &:checked {
+    border: 4px solid $color-blue;
+  }
+
+  &:disabled {
+    opacity: $opacity-30;
+  }
+}
+
+.text,
+.children {
+  padding-left: 20px;
+
+  .input:disabled ~ & {
+    cursor: not-allowed;
+    opacity: $opacity-30;
+  }
+}
+
+.children {
+  padding-top: 4px;
+}

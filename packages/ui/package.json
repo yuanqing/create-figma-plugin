@@ -1,0 +1,33 @@
+{
+  "name": "@create-figma-plugin/ui",
+  "version": "0.0.0",
+  "description": "Preact components for use in Figma plugins",
+  "keywords": [
+    "component",
+    "component-library",
+    "create-figma-plugin",
+    "design-system",
+    "figma",
+    "figma-plugin",
+    "figma-plugin-ds",
+    "figma-plugins",
+    "figma-ui",
+    "form",
+    "preact",
+    "ui"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/create-figma-plugin.git",
+    "directory": "packages/ui"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "figma-plugin-ds": "thomas-lowry/figma-plugin-ds",
+    "preact": "^10.0.0"
+  }
+}

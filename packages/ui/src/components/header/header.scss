@@ -1,0 +1,11 @@
+@import "../_constants.scss";
+@import "../_text.scss";
+
+.header {
+  // reset
+  margin: 0;
+
+  @include text-11-bold;
+  user-select: none;
+  color: $color-black;
+}

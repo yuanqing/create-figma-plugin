@@ -1,0 +1,54 @@
+@import "../_constants.scss";
+@import "../_text.scss";
+
+.segmentedControl {
+  @include text-11-regular;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.label {
+  // reset
+  display: block;
+
+  flex-grow: 1;
+  text-align: center;
+}
+
+.input {
+  display: none;
+}
+
+.text {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  border: 1px solid $color-blue;
+  padding: 7px;
+  color: $color-blue;
+  margin-left: -1px;
+
+  .label:first-child & {
+    margin-left: 0;
+    border-left-width: 1px;
+    border-radius: $border-radius-6 0 0 $border-radius-6;
+  }
+
+  .label:last-child & {
+    border-radius: 0 $border-radius-6 $border-radius-6 0;
+  }
+
+  .input:checked + & {
+    color: $color-white;
+    background-color: $color-blue;
+  }
+
+  .input:disabled + & {
+    cursor: not-allowed;
+    z-index: 1;
+    color: $color-gray-light;
+    border-color: $color-gray-light;
+  }
+}

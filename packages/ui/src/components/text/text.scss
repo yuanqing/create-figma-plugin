@@ -1,0 +1,20 @@
+@import "../_constants.scss";
+@import "../_text.scss";
+
+.text,
+.muted {
+  @include text-11-regular;
+  user-select: none;
+
+  strong {
+    @include text-11-bold;
+  }
+}
+
+.text {
+  color: $color-black;
+}
+
+.muted {
+  color: $color-gray;
+}

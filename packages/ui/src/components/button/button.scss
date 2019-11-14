@@ -1,0 +1,52 @@
+@import "../_constants.scss";
+@import "../_text.scss";
+
+.button,
+.secondary {
+  // reset
+  -webkit-appearance: none;
+  display: block;
+  outline: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  @include text-11-regular;
+  user-select: none;
+  border-radius: $border-radius-6;
+  width: 100%;
+  height: 32px;
+
+  &:disabled {
+    opacity: $opacity-30;
+  }
+}
+
+.button {
+  border: 2px solid transparent;
+  line-height: 28px;
+  color: $color-white;
+  background-color: $color-blue;
+
+  &:active,
+  &:focus {
+    border-color: $color-black-30;
+  }
+
+  &:disabled {
+    background-color: $color-black;
+  }
+}
+
+.secondary {
+  border: 1px solid $color-black;
+  line-height: 30px;
+  color: $color-black;
+  background-color: $color-white;
+
+  &:active,
+  &:focus {
+    border-width: 2px;
+    border-color: $color-blue;
+    line-height: 28px;
+  }
+}

@@ -1,0 +1,92 @@
+@import "../_constants.scss";
+@import "../_text.scss";
+
+.textbox {
+  position: relative;
+}
+
+.input {
+  // reset
+  display: block;
+  box-sizing: border-box;
+  outline: 0;
+  padding: 0;
+
+  @include text-11-regular;
+  cursor: default;
+  border: 1px solid $color-gray-light;
+  border-radius: $border-radius-2;
+  padding: 0 6px;
+  width: 100%;
+  height: 32px;
+  color: $color-black;
+
+  &:active,
+  &:focus {
+    border: 2px solid $color-blue;
+    padding: 0 5px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: $opacity-30;
+  }
+
+  &:disabled:active,
+  &:disabled:focus {
+    border: 1px solid $color-gray-light;
+    padding: 0 6px;
+  }
+
+  &::placeholder {
+    color: $color-gray;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.noBorder {
+  border-color: transparent;
+
+  &:hover {
+    border-color: $color-gray-light;
+  }
+
+  &:active,
+  &:focus {
+    border-color: $color-blue;
+  }
+}
+
+.withIcon {
+  padding-left: 28px;
+
+  &:active,
+  &:focus {
+    padding-left: 27px;
+  }
+}
+
+.icon {
+  pointer-events: none;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+
+  svg {
+    display: block;
+    fill: $color-gray;
+
+    .input:active + &,
+    .input:focus + &,
+    .noBorder:active + &,
+    .noBorder:focus + & {
+      fill: $color-blue;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@import "./_constants.scss";
+
+@font-face {
+	font-family: $font-family-inter;
+	font-style: normal;
+	font-weight: $font-weight-regular;
+	src: url("https://rsms.me/inter/font-files/Inter-Regular.woff2?v=3.7") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Regular.woff?v=3.7") format("woff");
+}
+
+@font-face {
+	font-family: $font-family-inter;
+	font-style: normal;
+	font-weight: $font-weight-bold;
+	src: url("https://rsms.me/inter/font-files/Inter-SemiBold.woff2?v=3.7") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-SemiBold.woff2?v=3.7") format("woff");
+}
+
+@mixin text-11-regular {
+	font-weight: $font-weight-regular;
+	font-size: $font-size-11;
+	line-height: $line-height-16;
+	font-family: $font-family;
+}
+
+@mixin text-11-bold {
+	font-weight: $font-weight-bold;
+	font-size: $font-size-11;
+	line-height: $line-height-16;
+	font-family: $font-family;
+}
