@@ -1,5 +1,13 @@
 /* global figma */
 
+export function getSelectedLayers () {
+  return [].concat(figma.currentPage.selection)
+}
+
+export function getAllLayers () {
+  return [].concat(figma.currentPage.children)
+}
+
 export function getSelectedLayersOrAllLayers () {
   const selection = figma.currentPage.selection
   return [].concat(
