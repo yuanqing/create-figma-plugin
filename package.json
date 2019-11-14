@@ -4,8 +4,12 @@
     "build": "yarn run clean && lerna exec --ignore ui -- babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward",
     "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json}' 'packages/create-figma-plugin/{docs,README.md}'",
     "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
-    "fix": "prettier-standard '*.js' '.storybook/*.js' 'packages/*/{src,test}/**/*.js'",
-    "lint": "standard '*.js' '.storybook/*.js' 'packages/*/{src,test}/**/*.js'",
+    "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
+    "fix-css": "prettier --write 'packages/*/src/**/*.scss'",
+    "fix-js": "prettier-standard '*.js' '.storybook/*.js' 'packages/*/{src,test}/**/*.js'",
+    "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
+    "lint-css": "stylelint 'packages/*/src/**/*.scss'",
+    "lint-js": "standard '*.js' '.storybook/*.js' 'packages/*/{src,test}/**/*.js'",
     "publish": "yarn run build && cpy docs packages/create-figma-plugin --parents && cpy README.md packages/create-figma-plugin && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
     "start": "start-storybook",
@@ -25,6 +29,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-require-context-hook": "^1.0.0",
     "chokidar-cli": "^2.1.0",
+    "concurrently": "^5.0.0",
     "cpy-cli": "^2.0.0",
     "css-loader": "^3.2.0",
     "esm": "^3.2.25",
@@ -33,14 +38,15 @@
     "lint-staged": "^9.4.2",
     "node-sass": "^4.13.0",
     "nyc": "^14.1.1",
+    "prettier": "^1.19.1",
     "prettier-standard": "^15.0.1",
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "standard": "^14.3.1",
-    "style-loader": "^1.0.0"
-  },
-  "peerDependencies": {
-    "preact": "^10.0.5"
+    "style-loader": "^1.0.0",
+    "stylelint": "^11.1.1",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-prettier": "^1.1.1"
   },
   "ava": {
     "files": [
@@ -63,6 +69,11 @@
       "standard",
       "prettier-standard",
       "git add"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-prettier/recommended"
     ]
   },
   "workspaces": [

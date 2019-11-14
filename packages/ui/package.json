@@ -26,8 +26,7 @@
   "files": [
     "src"
   ],
-  "dependencies": {
-    "figma-plugin-ds": "thomas-lowry/figma-plugin-ds",
-    "preact": "^10.0.0"
+  "peerDependencies": {
+    "preact": "^10.0.5"
   }
 }
