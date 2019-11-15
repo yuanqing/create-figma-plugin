@@ -2,6 +2,6 @@
 import { h } from 'preact'
 import styles from './divider.scss'
 
-export function Divider () {
-  return <hr class={styles.divider} />
+export function Divider (props) {
+  return <hr {...props} class={styles.divider} />
 }
