@@ -26,6 +26,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "start": "mkdirp node_modules && start-storybook"
+  },
   "peerDependencies": {
     "preact": "^10.0.5"
   }
