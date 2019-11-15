@@ -38,6 +38,7 @@
     "lint-staged": "^9.4.2",
     "node-sass": "^4.13.0",
     "nyc": "^14.1.1",
+    "preact": "^10.0.5",
     "prettier": "^1.19.1",
     "prettier-standard": "^15.0.1",
     "rimraf": "^3.0.0",
