@@ -46,27 +46,27 @@
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
   }
-}
 
-.noBorder {
-  border-color: transparent;
+  .noBorder & {
+    border-color: transparent;
 
-  &:hover {
-    border-color: $color-gray-light;
+    &:hover {
+      border-color: $color-gray-light;
+    }
+
+    &:active,
+    &:focus {
+      border-color: $color-blue;
+    }
   }
 
-  &:active,
-  &:focus {
-    border-color: $color-blue;
-  }
-}
+  .withIcon & {
+    padding-left: 28px;
 
-.withIcon {
-  padding-left: 28px;
-
-  &:active,
-  &:focus {
-    padding-left: 27px;
+    &:active,
+    &:focus {
+      padding-left: 27px;
+    }
   }
 }
 
@@ -83,9 +83,7 @@
     fill: $color-gray;
 
     .input:active + &,
-    .input:focus + &,
-    .noBorder:active + &,
-    .noBorder:focus + & {
+    .input:focus + & {
       fill: $color-blue;
     }
   }
