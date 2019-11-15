@@ -1,8 +1,7 @@
 @import "../_constants.scss";
 @import "../_text.scss";
 
-.button,
-.secondary {
+.button {
   // reset
   -webkit-appearance: none;
   display: block;
@@ -13,16 +12,9 @@
   @include text-11-regular;
   user-select: none;
   border-radius: $border-radius-6;
+  border: 2px solid transparent;
   width: 100%;
   height: 32px;
-
-  &:disabled {
-    opacity: $opacity-30;
-  }
-}
-
-.button {
-  border: 2px solid transparent;
   line-height: 28px;
   color: $color-white;
   background-color: $color-blue;
@@ -33,7 +25,12 @@
   }
 
   &:disabled {
+    opacity: $opacity-30;
     background-color: $color-black;
+  }
+
+  &.destructive {
+    background-color: $color-red;
   }
 }
 
@@ -48,5 +45,17 @@
     border-width: 2px;
     border-color: $color-blue;
     line-height: 28px;
+  }
+
+  &:disabled {
+    border-color: $color-black;
+    color: $color-black;
+    background-color: transparent;
+  }
+
+  &.destructive {
+    border-color: $color-red;
+    color: $color-red;
+    background-color: transparent;
   }
 }

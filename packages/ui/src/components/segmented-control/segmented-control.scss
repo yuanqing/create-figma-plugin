@@ -48,7 +48,8 @@
   .input:disabled + & {
     cursor: not-allowed;
     z-index: 1;
-    color: $color-gray-light;
-    border-color: $color-gray-light;
+    opacity: $opacity-30;
+    color: $color-black;
+    border-color: $color-black;
   }
 }
