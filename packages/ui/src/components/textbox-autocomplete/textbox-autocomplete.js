@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useEffect, useRef, useState } from 'preact/hooks'
-import styles from './textbox.scss'
+import styles from '../textbox/textbox.scss'
 
 const ENTER_KEY_CODE = 13
 const ESCAPE_KEY_CODE = 27

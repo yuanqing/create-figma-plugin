@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
-import styles from './textbox.scss'
+import styles from '../textbox/textbox.scss'
 
 const UP_KEY_CODE = 38
 const DOWN_KEY_CODE = 40
