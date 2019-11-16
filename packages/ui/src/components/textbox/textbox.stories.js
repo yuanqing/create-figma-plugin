@@ -34,7 +34,3 @@ export function Disabled () {
 export function WithIcon () {
   return <Textbox value='Text' onChange={noop} icon={icon} />
 }
-
-export function Numeric () {
-  return <Textbox numeric value={42} onChange={noop} />
-}

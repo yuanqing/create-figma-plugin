@@ -48,7 +48,7 @@
 }
 
 .text,
-.children {
+.description {
   padding-left: 20px;
 
   .input:disabled ~ & {
@@ -57,6 +57,7 @@
   }
 }
 
-.children {
+.description {
   padding-top: 4px;
+  color: $color-black-3;
 }

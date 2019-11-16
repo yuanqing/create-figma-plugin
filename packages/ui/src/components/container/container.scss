@@ -1,3 +1,7 @@
+@import "../_text.scss";
+
 .container {
+  @include text-11-regular;
+  user-select: none;
   padding: 0 16px;
 }

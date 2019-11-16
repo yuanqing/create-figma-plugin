@@ -1,13 +1,16 @@
 /** @jsx h */
 import { h } from 'preact'
 import { RadioButton } from './radio-button'
-import { Text } from '../text/text'
 
 export default { title: 'Radio Button' }
 
 export function Normal () {
   return (
-    <RadioButton name='Normal' value='bar' options={['foo', 'bar', 'baz']} />
+    <RadioButton
+      name='Normal'
+      value='bar'
+      options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
+    />
   )
 }
 
@@ -16,20 +19,24 @@ export function WithDisabledOption () {
     <RadioButton
       name='WithDisabledOption'
       value='bar'
-      options={['foo', 'bar', { disabled: true, value: 'baz' }]}
+      options={[
+        { value: 'foo' },
+        { value: 'bar' },
+        { value: 'baz', disabled: true }
+      ]}
     />
   )
 }
 
-export function WithDescription () {
+export function WithText () {
   return (
     <RadioButton
-      name='WithDescription'
+      name='WithText'
       value='bar'
       options={[
-        'foo',
-        'bar',
-        { value: 'baz', children: <Text muted>Description</Text> }
+        { value: 'foo', text: 'Foo' },
+        { value: 'bar', text: 'Bar' },
+        { value: 'baz', text: 'Baz' }
       ]}
     />
   )

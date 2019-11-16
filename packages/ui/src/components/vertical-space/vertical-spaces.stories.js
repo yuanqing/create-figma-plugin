@@ -4,14 +4,22 @@ import { VerticalSpace } from './vertical-space'
 
 export default { title: 'Vertical Space' }
 
+const style = {
+  backgroundColor: 'rgba(255, 0, 0, 0.2)'
+}
+
 export function Small () {
-  return <VerticalSpace size='small' />
+  return <VerticalSpace style={style} />
 }
 
 export function Medium () {
-  return <VerticalSpace size='medium' />
+  return <VerticalSpace medium style={style} />
 }
 
 export function Large () {
-  return <VerticalSpace size='large' />
+  return <VerticalSpace large style={style} />
+}
+
+export function ExtraLarge () {
+  return <VerticalSpace extraLarge style={style} />
 }

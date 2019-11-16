@@ -8,34 +8,46 @@ export function Normal () {
   return <Button text='Text' />
 }
 
-export function Disabled () {
-  return <Button text='Text' disabled />
+export function NormalDisabled () {
+  return <Button disabled text='Text' />
 }
 
-export function FulllWidth () {
-  return <Button text='Text' fullWidth />
+export function NormalFullWidth () {
+  return <Button fullWidth text='Text' />
 }
 
 export function Secondary () {
-  return <Button text='Text' secondary />
+  return <Button secondary text='Text' />
 }
 
 export function SecondaryDisabled () {
-  return <Button text='Text' secondary disabled />
+  return <Button secondary disabled text='Text' />
+}
+
+export function SecondaryFullWidth () {
+  return <Button secondary fullWidth text='Text' />
 }
 
 export function Destructive () {
-  return <Button text='Text' destructive />
+  return <Button destructive text='Text' />
 }
 
 export function DestructiveDisabled () {
-  return <Button text='Text' destructive disabled />
+  return <Button destructive disabled text='Text' />
+}
+
+export function DestructiveFullWidth () {
+  return <Button destructive fullWidth text='Text' />
 }
 
 export function DestructiveSecondary () {
-  return <Button text='Text' destructive secondary />
+  return <Button destructive secondary text='Text' />
 }
 
 export function DestructiveSecondaryDisabled () {
-  return <Button text='Text' destructive secondary disabled />
+  return <Button destructive secondary disabled text='Text' />
+}
+
+export function DestructiveSecondaryFullWidth () {
+  return <Button destructive secondary fullWidth text='Text' />
 }

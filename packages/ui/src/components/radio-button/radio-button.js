@@ -6,33 +6,22 @@ export function RadioButton ({ options, name, value, ...rest }) {
   return (
     <div class={styles.radioButton}>
       {options.map(function (option, index) {
-        let text = option
-        let disabled = false
-        let children = null
-        if (typeof option !== 'string') {
-          text = typeof option.value !== 'undefined' ? option.value : null
-          disabled =
-            typeof option.disabled !== 'undefined' ? option.disabled : false
-          children =
-            typeof option.children !== 'undefined' ? option.children : null
-        }
-        const id = `${name}${option}`
+        const text =
+          typeof option.text !== 'undefined' ? option.text : option.value
+        const id = `${name}${option.value}`
         return (
           <label class={styles.label} for={id} key={index}>
             <input
               {...rest}
               class={styles.input}
-              disabled={disabled}
               type='radio'
               id={id}
               name={name}
-              value={option}
-              checked={value === option}
+              value={option.value}
+              checked={value === option.value}
+              disabled={option.disabled === true}
             />
             <div class={styles.text}>{text}</div>
-            {children !== null ? (
-              <div class={styles.children}>{children}</div>
-            ) : null}
           </label>
         )
       })}

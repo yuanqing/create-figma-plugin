@@ -1,14 +1,13 @@
 /** @jsx h */
 import { h } from 'preact'
 import { Container } from './container'
-import { Text } from '../text/text'
 
 export default { title: 'Container' }
 
+const style = {
+  backgroundColor: 'rgba(255, 0, 0, 0.2)'
+}
+
 export function Normal () {
-  return (
-    <Container>
-      <Text>Text</Text>
-    </Container>
-  )
+  return <Container style={style}>Text</Container>
 }

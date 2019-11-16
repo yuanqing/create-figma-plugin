@@ -2,7 +2,9 @@
 @import "../_text.scss";
 
 .textbox {
+  @include text-11-regular;
   position: relative;
+  cursor: default;
 }
 
 .input {
@@ -87,4 +89,27 @@
       fill: $color-blue;
     }
   }
+}
+
+.options {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  right: 0;
+  border-radius: $border-radius-2;
+  padding: 8px 0;
+  color: $color-white;
+  background-color: $color-gray;
+  box-shadow: $box-shadow;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.option,
+.optionSelected {
+  padding: 4px 16px;
+}
+
+.optionSelected {
+  background-color: $color-blue;
 }
