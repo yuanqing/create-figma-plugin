@@ -27,13 +27,19 @@
   position: absolute;
   top: 6px;
   left: 0;
-  border: 1px solid $color-black;
+  border: 1px solid $color-black-8;
   border-radius: 6px;
   width: 12px;
   height: 12px;
 
-  &:checked {
-    border: 4px solid $color-blue;
+  &:checked:after {
+    content: "";
+    display: block;
+    margin: 2px 0 0 2px;
+    border-radius: 4px;
+    width: 6px;
+    height: 6px;
+    background-color: $color-black-8;
   }
 
   &:disabled {

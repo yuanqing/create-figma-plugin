@@ -4,16 +4,12 @@
 .segmentedControl {
   @include text-11-regular;
   user-select: none;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
 }
 
 .label {
   // reset
-  display: block;
+  display: inline-block;
 
-  flex-grow: 1;
   text-align: center;
 }
 
@@ -25,19 +21,13 @@
   position: relative;
   z-index: 2;
   box-sizing: border-box;
-  border: 1px solid $color-blue;
-  padding: 7px;
-  color: $color-blue;
-  margin-left: -1px;
+  padding: 6px 12px;
+  border: 2px solid transparent;
+  border-radius: $border-radius-2;
+  color: $color-black-8;
 
-  .label:first-child & {
-    margin-left: 0;
-    border-left-width: 1px;
-    border-radius: $border-radius-6 0 0 $border-radius-6;
-  }
-
-  .label:last-child & {
-    border-radius: 0 $border-radius-6 $border-radius-6 0;
+  &:hover {
+    background-color: $color-black-1;
   }
 
   .input:checked + & {
@@ -45,11 +35,18 @@
     background-color: $color-blue;
   }
 
+  .input:checked + &:active {
+    border-color: $color-black-3;
+  }
+
   .input:disabled + & {
     cursor: not-allowed;
     z-index: 1;
     opacity: $opacity-30;
-    color: $color-black;
-    border-color: $color-black;
+    color: $color-black-8;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 }

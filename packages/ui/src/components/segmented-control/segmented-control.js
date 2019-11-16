@@ -12,7 +12,7 @@ export function SegmentedControl ({ options, name, value, ...rest }) {
           text = option.value
           disabled = option.disabled
         }
-        const id = `${name}${option}`
+        const id = `${name}${text}`
         return (
           <label class={styles.label} for={id} key={index}>
             <input

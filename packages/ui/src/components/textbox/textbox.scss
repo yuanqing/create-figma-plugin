@@ -14,12 +14,12 @@
 
   @include text-11-regular;
   cursor: default;
-  border: 1px solid $color-gray-light;
+  border: 1px solid $color-black-1;
   border-radius: $border-radius-2;
   padding: 0 6px;
   width: 100%;
   height: 32px;
-  color: $color-black;
+  color: $color-black-8;
 
   &:active,
   &:focus {
@@ -34,12 +34,12 @@
 
   &:disabled:active,
   &:disabled:focus {
-    border: 1px solid $color-gray-light;
+    border: 1px solid $color-black-1;
     padding: 0 6px;
   }
 
   &::placeholder {
-    color: $color-gray;
+    color: $color-black-3;
   }
 
   &::-webkit-inner-spin-button,
@@ -51,7 +51,7 @@
     border-color: transparent;
 
     &:hover {
-      border-color: $color-gray-light;
+      border-color: $color-black-1;
     }
 
     &:active,
@@ -80,7 +80,7 @@
 
   svg {
     display: block;
-    fill: $color-gray;
+    fill: $color-black-3;
 
     .input:active + &,
     .input:focus + & {

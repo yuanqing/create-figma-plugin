@@ -4,7 +4,7 @@
 .button {
   // reset
   -webkit-appearance: none;
-  display: block;
+  display: inline-block;
   outline: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,49 +13,53 @@
   user-select: none;
   border-radius: $border-radius-6;
   border: 2px solid transparent;
-  width: 100%;
+  padding: 0 14px;
   height: 32px;
   line-height: 28px;
   color: $color-white;
   background-color: $color-blue;
 
-  &:active,
-  &:focus {
-    border-color: $color-black-30;
+  &:active {
+    border-color: $color-black-3;
   }
 
   &:disabled {
     opacity: $opacity-30;
-    background-color: $color-black;
-  }
-
-  &.destructive {
-    background-color: $color-red;
+    background-color: $color-black-8;
   }
 }
 
 .secondary {
-  border: 1px solid $color-black;
+  border: 1px solid $color-black-8;
+  padding: 0 15px;
   line-height: 30px;
-  color: $color-black;
+  color: $color-black-8;
   background-color: $color-white;
 
-  &:active,
-  &:focus {
+  &:active {
     border-width: 2px;
     border-color: $color-blue;
     line-height: 28px;
   }
 
   &:disabled {
-    border-color: $color-black;
-    color: $color-black;
+    border-color: $color-black-8;
+    color: $color-black-8;
     background-color: transparent;
   }
+}
 
-  &.destructive {
+.destructive {
+  background-color: $color-red;
+
+  &.secondary {
     border-color: $color-red;
     color: $color-red;
     background-color: transparent;
   }
+}
+
+.fullWidth {
+  display: block;
+  width: 100%;
 }
