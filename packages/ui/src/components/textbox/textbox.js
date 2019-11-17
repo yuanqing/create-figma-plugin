@@ -5,7 +5,7 @@ import styles from './textbox.scss'
 import classnames from '@sindresorhus/class-names'
 
 export function Textbox ({ focused, icon, noBorder, value, ...rest }) {
-  const withIcon = typeof icon !== 'undefined'
+  const hasIcon = typeof icon !== 'undefined'
 
   const inputElement = useRef(null)
 
@@ -23,7 +23,7 @@ export function Textbox ({ focused, icon, noBorder, value, ...rest }) {
       class={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
-        withIcon === true ? styles.withIcon : null
+        hasIcon === true ? styles.hasIcon : null
       )}
     >
       <input
@@ -34,7 +34,7 @@ export function Textbox ({ focused, icon, noBorder, value, ...rest }) {
         value={value}
         onFocus={handleFocus}
       />
-      {withIcon ? <div class={styles.icon}>{icon}</div> : null}
+      {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>
   )
 }

@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
-import styles from '../textbox/textbox.scss'
+import styles from '../textbox.scss'
 
 const UP_KEY_CODE = 38
 const DOWN_KEY_CODE = 40
@@ -17,7 +17,7 @@ export function TextboxNumeric ({
   value,
   ...rest
 }) {
-  const withIcon = typeof icon !== 'undefined'
+  const hasIcon = typeof icon !== 'undefined'
 
   const inputElement = useRef(null)
 
@@ -56,7 +56,7 @@ export function TextboxNumeric ({
       class={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
-        withIcon === true ? styles.withIcon : null
+        hasIcon === true ? styles.hasIcon : null
       )}
     >
       <input
@@ -69,7 +69,7 @@ export function TextboxNumeric ({
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
       />
-      {withIcon ? <div class={styles.icon}>{icon}</div> : null}
+      {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>
   )
 }

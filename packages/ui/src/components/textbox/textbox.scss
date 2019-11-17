@@ -62,7 +62,7 @@
     }
   }
 
-  .withIcon & {
+  .hasIcon & {
     padding-left: 28px;
 
     &:active,
@@ -91,25 +91,26 @@
   }
 }
 
-.options {
+.menu {
   position: absolute;
   width: 100%;
   top: 100%;
   right: 0;
+  box-sizing: border-box;
   border-radius: $border-radius-2;
   padding: 8px 0;
+  max-height: 120px;
   color: $color-white;
   background-color: $color-gray;
   box-shadow: $box-shadow;
-  max-height: 80px;
   overflow-y: auto;
 }
 
-.option,
-.optionSelected {
+.menuItem,
+.menuItemSelected {
   padding: 4px 16px;
 }
 
-.optionSelected {
+.menuItemSelected {
   background-color: $color-blue;
 }
