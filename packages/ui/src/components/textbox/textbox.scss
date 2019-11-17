@@ -107,7 +107,8 @@
 }
 
 .menuItem,
-.menuItemSelected {
+.menuItemSelected,
+.menuHeader {
   padding: 4px 16px;
 }
 
@@ -115,7 +116,15 @@
   background-color: $color-blue;
 }
 
-.separator {
+.menuHeader {
+  // reset
+  margin: 0;
+
+  @include text-11-regular;
+  color: $color-white-4;
+}
+
+.menuSeparator {
   // reset
   margin: 0;
   border: 0;

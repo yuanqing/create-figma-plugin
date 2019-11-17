@@ -29,14 +29,30 @@ export function TextboxAutocomplete ({
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false)
 
+  // This is an array of indices in `menuItems` that are actually selectable
+  const selectableMenuItemIndexes = menuItems.reduce(function (
+    result,
+    menuItem,
+    index
+  ) {
+    if (typeof menuItem.value !== 'undefined') {
+      result.push(index)
+    }
+    return result
+  },
+  [])
+
   const initialSelectedIndex = findIndex(value)
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex)
   const [isMenuVisible, setMenuVisible] = useState(false)
 
   function isValidValue (value) {
     let result = false
-    menuItems.forEach(function (menuItem) {
-      if (result === false && menuItem.value.indexOf(value) === 0) {
+    selectableMenuItemIndexes.forEach(function (selectableMenuItemIndex) {
+      if (
+        result === false &&
+        menuItems[selectableMenuItemIndex].value.indexOf(value) === 0
+      ) {
         result = true
       }
     })
@@ -45,8 +61,11 @@ export function TextboxAutocomplete ({
 
   function findIndex (value) {
     let result = -1
-    menuItems.forEach(function (menuItem, index) {
-      if (menuItem.value === value && result === -1) {
+    selectableMenuItemIndexes.forEach(function (
+      selectableMenuItemIndex,
+      index
+    ) {
+      if (result === -1 && menuItems[selectableMenuItemIndex].value === value) {
         result = index
       }
     })
@@ -76,20 +95,28 @@ export function TextboxAutocomplete ({
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
       event.preventDefault()
       let index
+      /* eslint-disable indent */
       if (keyCode === UP_KEY_CODE) {
         index =
           selectedIndex === null
-            ? menuItems.length - 1
-            : wraparoundIndex(selectedIndex - 1, menuItems.length)
+            ? selectableMenuItemIndexes.length - 1
+            : wraparoundIndex(
+                selectedIndex - 1,
+                selectableMenuItemIndexes.length
+              )
       } else {
         index =
           selectedIndex === null
             ? 0
-            : wraparoundIndex(selectedIndex + 1, menuItems.length)
+            : wraparoundIndex(
+                selectedIndex + 1,
+                selectableMenuItemIndexes.length
+              )
       }
+      /* eslint-enable indent */
       shouldSelectAllRef.current = true
       setSelectedIndex(index)
-      onChange(menuItems[index].value)
+      onChange(menuItems[selectableMenuItemIndexes[index]].value)
       return
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
@@ -136,7 +163,7 @@ export function TextboxAutocomplete ({
         setSelectedIndex(index)
       }
     } else {
-      if (value !== menuItems[selectedIndex].value) {
+      if (value !== menuItems[selectableMenuItemIndexes[selectedIndex]].value) {
         setSelectedIndex(-1)
       }
     }
@@ -147,10 +174,11 @@ export function TextboxAutocomplete ({
     scrollTopRef.current = menuElementRef.current.scrollTop
     setSelectedIndex(index)
     setMenuVisible(false)
-    onChange(menuItems[index].value)
+    onChange(menuItems[selectableMenuItemIndexes[index]].value)
   }
 
-  // Select the contents of the input whenever `value` changes
+  // Select the contents of the input whenever `value` changes and if
+  // `shouldSelectAllRef` is set to `true`
   useLayoutEffect(
     function () {
       if (shouldSelectAllRef.current === true) {
@@ -183,7 +211,11 @@ export function TextboxAutocomplete ({
         return
       }
       const menuElement = menuElementRef.current
-      const selectedElement = menuElement.children[selectedIndex]
+      const selectedElement = [].slice
+        .call(menuElement.children)
+        .find(function (element) {
+          return element.getAttribute('data-index') === `${selectedIndex}`
+        })
       if (selectedElement.offsetTop < menuElement.scrollTop) {
         menuElement.scrollTop = selectedElement.offsetTop
         return
@@ -227,7 +259,8 @@ export function TextboxAutocomplete ({
   }
 
   const hasIcon = typeof icon !== 'undefined'
-
+  const selectedMenuItemIndex = selectableMenuItemIndexes[selectedIndex]
+  let menuItemIndex = 0
   return (
     <div
       class={classnames(
@@ -252,15 +285,23 @@ export function TextboxAutocomplete ({
         <div class={styles.menu} ref={menuElementRef}>
           {menuItems.map(function (menuItem, index) {
             if (menuItem.separator === true) {
-              return <div class={styles.separator} />
+              return <hr class={styles.menuSeparator} key={index} />
+            }
+            if (typeof menuItem.header !== 'undefined') {
+              return (
+                <h2 class={styles.menuHeader} key={index}>
+                  {menuItem.header}
+                </h2>
+              )
             }
             const className =
-              index === selectedIndex ? 'menuItemSelected' : 'menuItem'
+              index === selectedMenuItemIndex ? 'menuItemSelected' : 'menuItem'
             return (
               <div
                 class={styles[className]}
-                onClick={handleOptionClick.bind(null, index)}
+                onClick={handleOptionClick.bind(null, menuItemIndex)}
                 key={index}
+                data-index={menuItemIndex++}
               >
                 {menuItem.value}
               </div>
