@@ -20,9 +20,39 @@ export function createWebpackConfig (entry, isDevelopment) {
           use: {
             loader: 'babel-loader',
             options: {
-              plugins: ['@babel/plugin-proposal-object-rest-spread']
+              plugins: [
+                '@babel/plugin-proposal-object-rest-spread',
+                [
+                  '@babel/plugin-transform-react-jsx',
+                  {
+                    pragma: 'h',
+                    pragmaFrag: 'Fragment'
+                  }
+                ]
+              ]
             }
           }
+        },
+        {
+          test: /\.s?css$/,
+          use: [
+            {
+              loader: 'style-loader',
+              options: {
+                injectType: 'styleTag'
+              }
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                modules: true
+              }
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
         }
       ]
     },

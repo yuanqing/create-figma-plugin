@@ -27,15 +27,22 @@
   "dependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-transform-react-jsx": "^7.7.0",
     "@create-figma-plugin/common": "^0.0.31",
     "@create-figma-plugin/utilities": "^0.0.31",
     "babel-loader": "^8.0.6",
     "chokidar": "^3.3.0",
+    "css-loader": "^3.2.0",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "sade": "^1.6.1",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
     "temp-write": "^4.0.0",
     "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.41.2"
+  },
+  "peerDependencies": {
+    "preact": "^10.0.5"
   }
 }
