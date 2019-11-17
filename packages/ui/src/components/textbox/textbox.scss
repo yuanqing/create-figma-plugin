@@ -114,3 +114,14 @@
 .menuItemSelected {
   background-color: $color-blue;
 }
+
+.separator {
+  // reset
+  margin: 0;
+  border: 0;
+
+  margin: 8px 0;
+  width: 100%;
+  height: 1px;
+  background-color: $color-white-2;
+}

@@ -14,12 +14,12 @@ function wraparoundIndex (index, length) {
 }
 
 export function TextboxAutocomplete ({
-  focused,
+  focused: isFocused,
   icon,
   noBorder,
   onChange,
-  options,
-  strict,
+  menu: menuItems,
+  strict: isStrict,
   value,
   ...rest
 }) {
@@ -33,10 +33,20 @@ export function TextboxAutocomplete ({
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex)
   const [isMenuVisible, setMenuVisible] = useState(false)
 
+  function isValidValue (value) {
+    let result = false
+    menuItems.forEach(function (menuItem) {
+      if (result === false && menuItem.value.indexOf(value) === 0) {
+        result = true
+      }
+    })
+    return result
+  }
+
   function findIndex (value) {
     let result = -1
-    options.forEach(function (option, index) {
-      if (option.value === value && result === -1) {
+    menuItems.forEach(function (menuItem, index) {
+      if (menuItem.value === value && result === -1) {
         result = index
       }
     })
@@ -47,6 +57,20 @@ export function TextboxAutocomplete ({
     setMenuVisible(true)
   }
 
+  function resolveNextValue (nextCharacter) {
+    const inputElement = inputElementRef.current
+    const selectionStartIndex = inputElement.selectionStart
+    const selectionEndIndex = inputElement.selectionEnd
+    const value = inputElementRef.current.value
+    if (selectionEndIndex - selectionStartIndex === 0) {
+      return `${value}${nextCharacter}`
+    }
+    return `${value.substring(
+      0,
+      selectionStartIndex
+    )}${nextCharacter}${value.substring(selectionEndIndex)}`
+  }
+
   function handleKeyDown (event) {
     const keyCode = event.keyCode
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
@@ -55,17 +79,17 @@ export function TextboxAutocomplete ({
       if (keyCode === UP_KEY_CODE) {
         index =
           selectedIndex === null
-            ? options.length - 1
-            : wraparoundIndex(selectedIndex - 1, options.length)
+            ? menuItems.length - 1
+            : wraparoundIndex(selectedIndex - 1, menuItems.length)
       } else {
         index =
           selectedIndex === null
             ? 0
-            : wraparoundIndex(selectedIndex + 1, options.length)
+            : wraparoundIndex(selectedIndex + 1, menuItems.length)
       }
       shouldSelectAllRef.current = true
       setSelectedIndex(index)
-      onChange(options[index].value)
+      onChange(menuItems[index].value)
       return
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
@@ -73,6 +97,25 @@ export function TextboxAutocomplete ({
       shouldSelectAllRef.current = false
       scrollTopRef.current = menuElementRef.current.scrollTop
       setMenuVisible(false)
+    }
+    if (isStrict === false) {
+      return
+    }
+    if (event.ctrlKey === true || event.metaKey === true) {
+      return
+    }
+    if (
+      event.keyCode === 32 || // space
+      (event.keyCode >= 48 && event.keyCode <= 57) || // 0 to 9
+      (event.keyCode >= 65 && event.keyCode <= 90) || // A to Z
+      (event.keyCode >= 96 && event.keyCode <= 105) || // Number pad
+      (event.keyCode >= 186 && event.keyCode <= 192) || // ;=,-./`
+      (event.keyCode >= 219 && event.keyCode <= 222) // [\]'
+    ) {
+      const nextValue = resolveNextValue(event.key)
+      if (isValidValue(nextValue) === false) {
+        event.preventDefault()
+      }
     }
   }
 
@@ -93,7 +136,7 @@ export function TextboxAutocomplete ({
         setSelectedIndex(index)
       }
     } else {
-      if (value !== options[selectedIndex].value) {
+      if (value !== menuItems[selectedIndex].value) {
         setSelectedIndex(-1)
       }
     }
@@ -104,7 +147,7 @@ export function TextboxAutocomplete ({
     scrollTopRef.current = menuElementRef.current.scrollTop
     setSelectedIndex(index)
     setMenuVisible(false)
-    onChange(options[index].value)
+    onChange(menuItems[index].value)
   }
 
   // Select the contents of the input whenever `value` changes
@@ -177,7 +220,7 @@ export function TextboxAutocomplete ({
     [isMenuVisible]
   )
 
-  if (focused === true) {
+  if (isFocused === true) {
     useLayoutEffect(function () {
       setMenuVisible(true)
     }, [])
@@ -207,7 +250,10 @@ export function TextboxAutocomplete ({
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {isMenuVisible === true ? (
         <div class={styles.menu} ref={menuElementRef}>
-          {options.map(function (option, index) {
+          {menuItems.map(function (menuItem, index) {
+            if (menuItem.separator === true) {
+              return <div class={styles.separator} />
+            }
             const className =
               index === selectedIndex ? 'menuItemSelected' : 'menuItem'
             return (
@@ -216,7 +262,7 @@ export function TextboxAutocomplete ({
                 onClick={handleOptionClick.bind(null, index)}
                 key={index}
               >
-                {option.value}
+                {menuItem.value}
               </div>
             )
           })}

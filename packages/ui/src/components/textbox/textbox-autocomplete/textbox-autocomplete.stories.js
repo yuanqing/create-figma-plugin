@@ -5,10 +5,11 @@ import { TextboxAutocomplete } from './textbox-autocomplete'
 
 export default { title: 'Textbox Autocomplete' }
 
-const options = [
+const menu = [
   { value: 'foo' },
   { value: 'bar' },
   { value: 'baz' },
+  { separator: true, value: 'x' },
   { value: 'qux' },
   { value: 'quux' },
   { value: 'quuux' },
@@ -19,10 +20,19 @@ const options = [
 export function Normal () {
   function Component () {
     const [value, setValue] = useState('')
+    return <TextboxAutocomplete value={value} menu={menu} onChange={setValue} />
+  }
+  return <Component />
+}
+
+export function Strict () {
+  function Component () {
+    const [value, setValue] = useState('')
     return (
       <TextboxAutocomplete
+        strict
         value={value}
-        options={options}
+        menu={menu}
         onChange={setValue}
       />
     )
