@@ -9,23 +9,11 @@ export function Normal () {
 }
 
 export function Bold () {
-  return (
-    <Text>
-      <strong>Text</strong>
-    </Text>
-  )
+  return <Text bold>Text</Text>
 }
 
 export function Muted () {
   return <Text muted>Text</Text>
-}
-
-export function MutedBold () {
-  return (
-    <Text muted>
-      <strong>Text</strong>
-    </Text>
-  )
 }
 
 export function Paragraph () {

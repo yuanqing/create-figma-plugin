@@ -1,10 +1,10 @@
 @import "../_constants.scss";
 @import "../_text.scss";
 
-.text,
-.isMuted {
+.text {
   @include text-11-regular;
   user-select: none;
+  color: $color-black-8;
 
   strong {
     @include text-11-bold;
@@ -15,10 +15,10 @@
   }
 }
 
-.text {
-  color: $color-black-8;
-}
-
 .isMuted {
   color: $color-black-3;
+}
+
+.isBold {
+  @include text-11-bold;
 }

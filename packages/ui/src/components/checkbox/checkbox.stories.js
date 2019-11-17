@@ -9,5 +9,5 @@ export function Normal () {
 }
 
 export function Disabled () {
-  return <Checkbox disabled name='NormalDisabled' value={false} text='Text' />
+  return <Checkbox disabled name='Disabled' value={false} text='Text' />
 }
