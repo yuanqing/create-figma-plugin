@@ -2,6 +2,6 @@
 import { h } from 'preact'
 import styles from './text.scss'
 
-export function Text ({ muted, ...rest }) {
-  return <div {...rest} class={styles[muted === true ? 'muted' : 'text']} />
+export function Text ({ muted: isMuted, ...rest }) {
+  return <div {...rest} class={styles[isMuted === true ? 'isMuted' : 'text']} />
 }

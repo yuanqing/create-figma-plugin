@@ -4,7 +4,13 @@ import { useEffect, useRef } from 'preact/hooks'
 import styles from './textbox.scss'
 import classnames from '@sindresorhus/class-names'
 
-export function Textbox ({ focused, icon, noBorder, value, ...rest }) {
+export function Textbox ({
+  focused: isFocused,
+  icon,
+  noBorder,
+  value,
+  ...rest
+}) {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElement = useRef(null)
@@ -14,7 +20,7 @@ export function Textbox ({ focused, icon, noBorder, value, ...rest }) {
     inputElement.current.select()
   }
 
-  if (focused === true) {
+  if (isFocused === true) {
     useEffect(handleFocus, [])
   }
 

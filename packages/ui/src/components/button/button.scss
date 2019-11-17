@@ -29,7 +29,7 @@
   }
 }
 
-.secondary {
+.isSecondary {
   border: 1px solid $color-black-8;
   padding: 0 15px;
   line-height: 30px;
@@ -49,17 +49,17 @@
   }
 }
 
-.destructive {
+.isDestructive {
   background-color: $color-red;
 
-  &.secondary {
+  &.isSecondary {
     border-color: $color-red;
     color: $color-red;
     background-color: transparent;
   }
 }
 
-.fullWidth {
+.isFullWidth {
   display: block;
   width: 100%;
 }

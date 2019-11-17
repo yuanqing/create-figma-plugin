@@ -2,7 +2,7 @@
 @import "../_text.scss";
 
 .text,
-.muted {
+.isMuted {
   @include text-11-regular;
   user-select: none;
 
@@ -19,6 +19,6 @@
   color: $color-black-8;
 }
 
-.muted {
+.isMuted {
   color: $color-black-3;
 }

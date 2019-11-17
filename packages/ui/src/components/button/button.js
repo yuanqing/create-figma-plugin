@@ -3,15 +3,21 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import styles from './button.scss'
 
-export function Button ({ destructive, fullWidth, secondary, text, ...props }) {
+export function Button ({
+  destructive: isDestructive,
+  fullWidth: isFullWidth,
+  secondary: isSecondary,
+  text,
+  ...props
+}) {
   return (
     <button
       {...props}
       class={classnames(
         styles.button,
-        secondary === true ? styles.secondary : null,
-        destructive === true ? styles.destructive : null,
-        fullWidth === true ? styles.fullWidth : null
+        isSecondary === true ? styles.isSecondary : null,
+        isDestructive === true ? styles.isDestructive : null,
+        isFullWidth === true ? styles.isFullWidth : null
       )}
     >
       {text}

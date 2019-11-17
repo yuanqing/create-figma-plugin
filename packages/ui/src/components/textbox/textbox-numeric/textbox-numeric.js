@@ -10,7 +10,7 @@ const DOWN_KEY_CODE = 40
 const nonNumericCharactersRegex = /[^\d-.]/
 
 export function TextboxNumeric ({
-  focused,
+  focused: isFocused,
   icon,
   noBorder,
   onChange,
@@ -47,7 +47,7 @@ export function TextboxNumeric ({
     }
   }
 
-  if (focused === true) {
+  if (isFocused === true) {
     useEffect(handleFocus, [])
   }
 
