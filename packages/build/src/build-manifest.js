@@ -5,7 +5,7 @@ export async function buildManifest (config) {
   const result = {
     name: config.name,
     id: config.id,
-    api: constants.apiVersion
+    api: config.apiVersion
   }
   if (hasBundle(config, 'command') === true) {
     result.main = constants.build.pluginCodeFilePath

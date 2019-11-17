@@ -4,6 +4,7 @@ import slugify from '@sindresorhus/slugify'
 import { constants } from './constants'
 
 const defaultConfig = {
+  apiVersion: constants.apiVersion,
   name: constants.packageJson.defaultPluginName,
   id: constants.packageJson.defaultPluginId,
   command: 'index.js'
@@ -21,6 +22,10 @@ export async function readConfig () {
   }
   return {
     ...createMenuItem(config),
+    apiVersion:
+      typeof config.apiVersion !== 'undefined'
+        ? config.apiVersion
+        : constants.apiVersion,
     id: typeof config.id === 'undefined' ? slugify(config.name) : config.id
   }
 }
