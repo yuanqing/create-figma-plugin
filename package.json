@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn run clean && lerna exec --ignore ui -- babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward",
+    "build": "yarn run clean && lerna exec --ignore @create-figma-plugin/ui -- babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward",
     "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json}' 'packages/create-figma-plugin/{docs,README.md}'",
     "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
     "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
