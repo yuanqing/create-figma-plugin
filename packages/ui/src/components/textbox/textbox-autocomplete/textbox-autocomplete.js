@@ -76,18 +76,18 @@ export function TextboxAutocomplete ({
     setMenuVisible(true)
   }
 
-  function resolveNextValue (nextCharacter) {
+  function resolveNextValue (insertedString) {
     const inputElement = inputElementRef.current
     const selectionStartIndex = inputElement.selectionStart
     const selectionEndIndex = inputElement.selectionEnd
     const value = inputElementRef.current.value
     if (selectionEndIndex - selectionStartIndex === 0) {
-      return `${value}${nextCharacter}`
+      return `${value}${insertedString}`
     }
     return `${value.substring(
       0,
       selectionStartIndex
-    )}${nextCharacter}${value.substring(selectionEndIndex)}`
+    )}${insertedString}${value.substring(selectionEndIndex)}`
   }
 
   function handleKeyDown (event) {
@@ -175,6 +175,13 @@ export function TextboxAutocomplete ({
     setSelectedIndex(index)
     setMenuVisible(false)
     onChange(menuItems[selectableMenuItemIndexes[index]].value)
+  }
+
+  function handlePaste (event) {
+    const nextValue = resolveNextValue(event.clipboardData.getData('Text'))
+    if (isValidValue(nextValue) === false) {
+      event.preventDefault()
+    }
   }
 
   // Select the contents of the input whenever `value` changes and if
@@ -279,6 +286,7 @@ export function TextboxAutocomplete ({
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
+        onPaste={handlePaste}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {isMenuVisible === true ? (
@@ -300,8 +308,8 @@ export function TextboxAutocomplete ({
               <div
                 class={styles[className]}
                 onClick={handleOptionClick.bind(null, menuItemIndex)}
-                key={index}
                 data-index={menuItemIndex++}
+                key={index}
               >
                 {menuItem.value}
               </div>
