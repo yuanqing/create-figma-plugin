@@ -3,6 +3,7 @@
 
 .text {
   @include text-11-regular;
+  cursor: default;
   user-select: none;
   color: $color-black-8;
 

@@ -7,7 +7,6 @@ export function Button ({
   destructive: isDestructive,
   fullWidth: isFullWidth,
   secondary: isSecondary,
-  text,
   ...props
 }) {
   return (
@@ -19,8 +18,6 @@ export function Button ({
         isDestructive === true ? styles.isDestructive : null,
         isFullWidth === true ? styles.isFullWidth : null
       )}
-    >
-      {text}
-    </button>
+    />
   )
 }

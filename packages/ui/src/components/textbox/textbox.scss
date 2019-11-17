@@ -3,8 +3,8 @@
 
 .textbox {
   @include text-11-regular;
-  position: relative;
   cursor: default;
+  position: relative;
 }
 
 .input {
@@ -75,13 +75,17 @@
 .icon {
   pointer-events: none;
   position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 8px;
-  height: 8px;
+  top: 4px;
+  left: 4px;
+  width: 24px;
+  height: 24px;
 
   svg {
     display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     fill: $color-black-3;
 
     .input:active + &,

@@ -9,11 +9,15 @@ const style = {
 }
 
 export function Small () {
-  return <VerticalSpace style={style} />
+  return <VerticalSpace small style={style} />
+}
+
+export function ExtraSmall () {
+  return <VerticalSpace extraSmall style={style} />
 }
 
 export function Medium () {
-  return <VerticalSpace medium style={style} />
+  return <VerticalSpace style={style} />
 }
 
 export function Large () {

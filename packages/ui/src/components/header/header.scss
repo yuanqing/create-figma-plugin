@@ -4,8 +4,10 @@
 .header {
   // reset
   margin: 0;
+  padding: 12px 0 8px;
 
   @include text-11-bold;
+  cursor: default;
   user-select: none;
   color: $color-black-8;
 }

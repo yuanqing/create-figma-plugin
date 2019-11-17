@@ -5,49 +5,77 @@ import { Button } from './button'
 export default { title: 'Button' }
 
 export function Normal () {
-  return <Button text='Text' />
+  return <Button>Text</Button>
 }
 
 export function NormalDisabled () {
-  return <Button disabled text='Text' />
+  return <Button disabled>Text</Button>
 }
 
 export function NormalFullWidth () {
-  return <Button fullWidth text='Text' />
+  return <Button fullWidth>Text</Button>
 }
 
 export function Secondary () {
-  return <Button secondary text='Text' />
+  return <Button secondary>Text</Button>
 }
 
 export function SecondaryDisabled () {
-  return <Button secondary disabled text='Text' />
+  return (
+    <Button secondary disabled>
+      Text
+    </Button>
+  )
 }
 
 export function SecondaryFullWidth () {
-  return <Button secondary fullWidth text='Text' />
+  return (
+    <Button secondary fullWidth>
+      Text
+    </Button>
+  )
 }
 
 export function Destructive () {
-  return <Button destructive text='Text' />
+  return <Button destructive>Text</Button>
 }
 
 export function DestructiveDisabled () {
-  return <Button destructive disabled text='Text' />
+  return (
+    <Button destructive disabled>
+      Text
+    </Button>
+  )
 }
 
 export function DestructiveFullWidth () {
-  return <Button destructive fullWidth text='Text' />
+  return (
+    <Button destructive fullWidth>
+      Text
+    </Button>
+  )
 }
 
 export function DestructiveSecondary () {
-  return <Button destructive secondary text='Text' />
+  return (
+    <Button destructive secondary>
+      Text
+    </Button>
+  )
 }
 
 export function DestructiveSecondaryDisabled () {
-  return <Button destructive secondary disabled text='Text' />
+  return (
+    <Button destructive secondary disabled>
+      Text
+    </Button>
+  )
 }
 
 export function DestructiveSecondaryFullWidth () {
-  return <Button destructive secondary fullWidth text='Text' />
+  return (
+    <Button destructive secondary fullWidth>
+      Text
+    </Button>
+  )
 }
