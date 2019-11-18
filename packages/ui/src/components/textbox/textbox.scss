@@ -96,6 +96,7 @@
   width: 100%;
   top: 100%;
   right: 0;
+  z-index: 10;
   box-sizing: border-box;
   border-radius: $border-radius-2;
   padding: 8px 0;
@@ -104,6 +105,11 @@
   background-color: $color-gray;
   box-shadow: $box-shadow;
   overflow-y: auto;
+
+  &.isTop {
+    top: auto;
+    bottom: 100%;
+  }
 }
 
 .menuItem,

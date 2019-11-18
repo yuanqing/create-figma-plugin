@@ -5,7 +5,7 @@ import { TextboxAutocomplete } from './textbox-autocomplete'
 
 export default { title: 'Textbox Autocomplete' }
 
-const menu = [
+const options = [
   { value: 'foo' },
   { value: 'bar' },
   { value: 'baz' },
@@ -21,7 +21,13 @@ const menu = [
 export function Normal () {
   function Component () {
     const [value, setValue] = useState('')
-    return <TextboxAutocomplete value={value} menu={menu} onChange={setValue} />
+    return (
+      <TextboxAutocomplete
+        value={value}
+        options={options}
+        onChange={setValue}
+      />
+    )
   }
   return <Component />
 }
@@ -33,7 +39,7 @@ export function Strict () {
       <TextboxAutocomplete
         strict
         value={value}
-        menu={menu}
+        options={options}
         onChange={setValue}
       />
     )

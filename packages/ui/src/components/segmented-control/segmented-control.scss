@@ -21,22 +21,13 @@
   position: relative;
   z-index: 2;
   box-sizing: border-box;
-  padding: 6px 12px;
-  border: 2px solid transparent;
+  padding: 6px 8px;
   border-radius: $border-radius-2;
   color: $color-black-8;
 
-  &:hover {
-    background-color: $color-black-1;
-  }
-
+  &:hover,
   .input:checked + & {
-    color: $color-white;
-    background-color: $color-blue;
-  }
-
-  .input:checked + &:active {
-    border-color: $color-black-3;
+    background-color: $color-black-1;
   }
 
   .input:disabled + & {

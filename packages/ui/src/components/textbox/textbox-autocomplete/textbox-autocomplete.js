@@ -18,9 +18,10 @@ export function TextboxAutocomplete ({
   icon,
   noBorder,
   onChange,
-  menu: menuItems,
+  options: menuItems,
   strict: isStrict,
   style,
+  top: isTop,
   value,
   ...rest
 }) {
@@ -292,7 +293,10 @@ export function TextboxAutocomplete ({
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {isMenuVisible === true ? (
-        <div class={styles.menu} ref={menuElementRef}>
+        <div
+          class={classnames(styles.menu, isTop ? styles.isTop : null)}
+          ref={menuElementRef}
+        >
           {menuItems.map(function (menuItem, index) {
             if (menuItem.separator === true) {
               return <hr class={styles.menuSeparator} key={index} />

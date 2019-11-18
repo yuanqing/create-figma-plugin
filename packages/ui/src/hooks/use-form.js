@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'preact/hooks'
 
+const ENTER_KEY_CODE = 13
+const ESCAPE_KEY_CODE = 27
+
 export function useForm (
   initialInputs,
   handleSubmitCallback,
-  handleCancelCallback
+  handleCancelCallback,
+  shouldHandleKeyUp
 ) {
   const [inputs, setInputs] = useState(initialInputs)
   function handleSubmit (event) {
@@ -23,23 +27,22 @@ export function useForm (
     })
   }
   function handleKeyUp (event) {
-    if (event.key === 'Enter') {
+    if (event.keyCode === ENTER_KEY_CODE) {
       handleSubmitCallback(inputs)
       return
     }
-    if (event.key === 'Escape') {
+    if (event.keyCode === ESCAPE_KEY_CODE) {
       handleCancelCallback()
     }
   }
-  useEffect(
-    function () {
+  if (shouldHandleKeyUp === true) {
+    useEffect(function () {
       window.addEventListener('keyup', handleKeyUp)
       return function () {
         window.removeEventListener('keyup', handleKeyUp)
       }
-    },
-    [inputs]
-  )
+    }, [])
+  }
   return {
     inputs,
     setInputs,
