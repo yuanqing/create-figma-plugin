@@ -2,18 +2,18 @@
 import { h } from 'preact'
 import styles from './checkbox.scss'
 
-export function Checkbox ({ name, text, value, ...props }) {
+export function Checkbox ({ children, name, style, value, ...rest }) {
   return (
-    <label class={styles.checkbox} for={name}>
+    <label class={styles.checkbox} for={name} style={style}>
       <input
-        {...props}
+        {...rest}
         class={styles.input}
         type='checkbox'
         id={name}
         name={name}
         checked={value === true}
       />
-      <div class={styles.text}>{text}</div>
+      <div class={styles.text}>{children}</div>
     </label>
   )
 }

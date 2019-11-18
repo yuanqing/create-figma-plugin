@@ -2,9 +2,9 @@
 import { h } from 'preact'
 import styles from './segmented-control.scss'
 
-export function SegmentedControl ({ options, name, value, ...rest }) {
+export function SegmentedControl ({ options, name, style, value, ...rest }) {
   return (
-    <div class={styles.segmentedControl}>
+    <div class={styles.segmentedControl} style={style}>
       {options.map(function (option, index) {
         const text =
           typeof option.text !== 'undefined' ? option.text : option.value

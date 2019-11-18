@@ -7,7 +7,8 @@ export function VerticalSpace ({
   small,
   large,
   extraLarge,
-  ...props
+  style,
+  ...rest
 }) {
   /* eslint-disable indent */
   const size =
@@ -21,5 +22,5 @@ export function VerticalSpace ({
       ? 'extraSmall'
       : 'medium'
   /* eslint-enable indent */
-  return <div {...props} class={styles[size]} />
+  return <div {...rest} class={styles[size]} style={style} />
 }

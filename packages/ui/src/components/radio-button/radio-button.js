@@ -2,9 +2,9 @@
 import { h } from 'preact'
 import styles from './radio-button.scss'
 
-export function RadioButton ({ options, name, value, ...rest }) {
+export function RadioButton ({ options, name, style, value, ...rest }) {
   return (
-    <div class={styles.radioButton}>
+    <div class={styles.radioButton} style={style}>
       {options.map(function (option, index) {
         const text =
           typeof option.text !== 'undefined' ? option.text : option.value

@@ -7,17 +7,19 @@ export function Button ({
   destructive: isDestructive,
   fullWidth: isFullWidth,
   secondary: isSecondary,
-  ...props
+  style,
+  ...rest
 }) {
   return (
     <button
-      {...props}
+      {...rest}
       class={classnames(
         styles.button,
         isSecondary === true ? styles.isSecondary : null,
         isDestructive === true ? styles.isDestructive : null,
         isFullWidth === true ? styles.isFullWidth : null
       )}
+      style={style}
     />
   )
 }

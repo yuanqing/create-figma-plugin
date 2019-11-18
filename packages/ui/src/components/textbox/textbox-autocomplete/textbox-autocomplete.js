@@ -20,6 +20,7 @@ export function TextboxAutocomplete ({
   onChange,
   menu: menuItems,
   strict: isStrict,
+  style,
   value,
   ...rest
 }) {
@@ -276,6 +277,7 @@ export function TextboxAutocomplete ({
         hasIcon === true ? styles.hasIcon : null
       )}
       ref={rootElementRef}
+      style={style}
     >
       <input
         {...rest}

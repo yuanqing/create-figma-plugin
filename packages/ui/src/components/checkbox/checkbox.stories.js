@@ -5,9 +5,17 @@ import { Checkbox } from './checkbox'
 export default { title: 'Checkbox' }
 
 export function Normal () {
-  return <Checkbox name='Normal' value={false} text='Text' />
+  return (
+    <Checkbox name='Normal' value={false}>
+      Text
+    </Checkbox>
+  )
 }
 
 export function Disabled () {
-  return <Checkbox disabled name='Disabled' value={false} text='Text' />
+  return (
+    <Checkbox disabled name='Disabled' value={false}>
+      Text
+    </Checkbox>
+  )
 }
