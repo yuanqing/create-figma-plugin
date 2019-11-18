@@ -26,6 +26,7 @@
   "files": [
     "src"
   ],
+  "main": "src/index.js",
   "scripts": {
     "start": "mkdirp node_modules && start-storybook"
   },
