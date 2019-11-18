@@ -19,7 +19,8 @@
   color: $color-white;
   background-color: $color-blue;
 
-  &:active {
+  &:active,
+  &:focus {
     border-color: $color-black-3;
   }
 
@@ -36,7 +37,8 @@
   color: $color-black-8;
   background-color: $color-white;
 
-  &:active {
+  &:active,
+  &:focus {
     border-width: 2px;
     padding: 0 14px;
     border-color: $color-blue;
