@@ -1,6 +1,9 @@
 {
   "name": "@create-figma-plugin/ui",
   "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Preact components for use in Figma plugins",
   "keywords": [
     "component",
