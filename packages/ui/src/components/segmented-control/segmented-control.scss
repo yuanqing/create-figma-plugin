@@ -4,6 +4,13 @@
 .segmentedControl {
   @include text-11-regular;
   user-select: none;
+  display: inline-block;
+  border-radius: $border-radius-2;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px $color-silver;
+  }
 }
 
 .label {
@@ -25,9 +32,13 @@
   border-radius: $border-radius-2;
   color: $color-black-8;
 
-  &:hover,
   .input:checked + & {
-    background-color: $color-black-1;
+    background-color: $color-silver;
+  }
+
+  .segmentedControl:hover label:first-child .input:checked + &,
+  .segmentedControl:hover label:last-child .input:checked + & {
+    border-radius: 0;
   }
 
   .input:disabled + & {
@@ -35,9 +46,5 @@
     z-index: 1;
     opacity: $opacity-30;
     color: $color-black-8;
-
-    &:hover {
-      background-color: transparent;
-    }
   }
 }
