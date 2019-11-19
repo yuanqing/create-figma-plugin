@@ -1,5 +1,5 @@
-@import "../_constants.scss";
-@import "../_text.scss";
+@import "../../scss/constants";
+@import "../../scss/text";
 
 .segmentedControl {
   @include text-11-regular;

@@ -1,5 +1,5 @@
-@import "../_constants.scss";
-@import "../_text.scss";
+@import "../../scss/constants";
+@import "../../scss/text";
 
 .radioButton {
   @include text-11-regular;
