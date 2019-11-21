@@ -29,6 +29,7 @@ export function TextboxAutocomplete ({
 
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const [isMenuVisible, setMenuVisible] = useState(false)
+  const [inputValue, setInputValue] = useState(value)
 
   function isValidValue (value) {
     for (const menuItem of menuItems) {
@@ -43,21 +44,37 @@ export function TextboxAutocomplete ({
   }
 
   function computeNextIndex (index) {
+    const lastIndex = menuItems.length - 1
+    if (
+      index === -1 ||
+      (index === lastIndex &&
+        (inputValue === menuItems[lastIndex].value ||
+          findIndex(inputValue) !== -1))
+    ) {
+      return 0
+    }
     while (++index < menuItems.length) {
       if (typeof menuItems[index].value !== 'undefined') {
         return index
       }
     }
-    return 0
+    return -1
   }
 
   function computePreviousIndex (index) {
-    while (--index > 0) {
+    if (
+      index === -1 ||
+      (index === 0 &&
+        (inputValue === menuItems[0].value || findIndex(inputValue) !== -1))
+    ) {
+      return menuItems.length - 1
+    }
+    while (--index > -1) {
       if (typeof menuItems[index].value !== 'undefined') {
         return index
       }
     }
-    return menuItems.length - 1
+    return -1
   }
 
   function findIndex (value) {
@@ -99,7 +116,10 @@ export function TextboxAutocomplete ({
           : computeNextIndex(selectedIndex)
       shouldSelectAllRef.current = true
       setSelectedIndex(nextIndex)
-      onChange(menuItems[nextIndex].value)
+      if (inputValue === null) {
+        setInputValue(value)
+      }
+      onChange(nextIndex === -1 ? inputValue : menuItems[nextIndex].value)
       return
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
@@ -150,6 +170,7 @@ export function TextboxAutocomplete ({
         setSelectedIndex(-1)
       }
     }
+    setInputValue(value)
     onChange(value)
   }
 
@@ -158,7 +179,9 @@ export function TextboxAutocomplete ({
     const index = parseInt(event.target.getAttribute('data-index'))
     setSelectedIndex(index)
     setMenuVisible(false)
-    onChange(menuItems[index].value)
+    const value = menuItems[index].value
+    setInputValue(value)
+    onChange(value)
   }
 
   function handlePaste (event) {
@@ -186,6 +209,7 @@ export function TextboxAutocomplete ({
     function () {
       if (isMenuVisible === false) {
         inputElementRef.current.blur()
+        setInputValue(value)
         return
       }
       menuElementRef.current.scrollTop = scrollTopRef.current
@@ -198,10 +222,14 @@ export function TextboxAutocomplete ({
   // Adjust the menu scroll position so that the selected menu item is always visible
   useLayoutEffect(
     function () {
-      if (isMenuVisible === false || selectedIndex === -1) {
+      if (isMenuVisible === false) {
         return
       }
       const menuElement = menuElementRef.current
+      if (selectedIndex === -1) {
+        menuElement.scrollTop = 0
+        return
+      }
       const selectedElement = [].slice
         .call(menuElement.children)
         .find(function (element) {
