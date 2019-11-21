@@ -9,10 +9,6 @@ const ESCAPE_KEY_CODE = 27
 const UP_KEY_CODE = 38
 const DOWN_KEY_CODE = 40
 
-function wraparoundIndex (index, length) {
-  return index >= 0 ? index % length : length - 1
-}
-
 export function TextboxAutocomplete ({
   focused: isFocused,
   icon,
@@ -31,54 +27,55 @@ export function TextboxAutocomplete ({
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false)
 
-  // This is an array of indices in `menuItems` that are actually selectable
-  const selectableMenuItemIndexes = menuItems.reduce(function (
-    result,
-    menuItem,
-    index
-  ) {
-    if (typeof menuItem.value !== 'undefined') {
-      result.push(index)
-    }
-    return result
-  },
-  [])
-
-  const initialSelectedIndex = findIndex(value)
-  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex)
+  const [selectedIndex, setSelectedIndex] = useState(-1)
   const [isMenuVisible, setMenuVisible] = useState(false)
 
   function isValidValue (value) {
-    let result = false
-    selectableMenuItemIndexes.forEach(function (selectableMenuItemIndex) {
+    for (const menuItem of menuItems) {
       if (
-        result === false &&
-        menuItems[selectableMenuItemIndex].value.indexOf(value) === 0
+        typeof menuItem.value !== 'undefined' &&
+        menuItem.value.indexOf(value) === 0
       ) {
-        result = true
+        return true
       }
-    })
-    return result
+    }
+    return false
+  }
+
+  function computeNextIndex (index) {
+    while (++index < menuItems.length) {
+      if (typeof menuItems[index].value !== 'undefined') {
+        return index
+      }
+    }
+    return 0
+  }
+
+  function computePreviousIndex (index) {
+    while (--index > 0) {
+      if (typeof menuItems[index].value !== 'undefined') {
+        return index
+      }
+    }
+    return menuItems.length - 1
   }
 
   function findIndex (value) {
-    let result = -1
-    selectableMenuItemIndexes.forEach(function (
-      selectableMenuItemIndex,
-      index
-    ) {
-      if (result === -1 && menuItems[selectableMenuItemIndex].value === value) {
-        result = index
+    let index = 0
+    for (const menuItem of menuItems) {
+      if (typeof menuItem.value !== 'undefined' && menuItem.value === value) {
+        return index
       }
-    })
-    return result
+      index = index + 1
+    }
+    return -1
   }
 
   function handleFocus () {
     setMenuVisible(true)
   }
 
-  function resolveNextValue (insertedString) {
+  function computeNextValue (insertedString) {
     const inputElement = inputElementRef.current
     const selectionStartIndex = inputElement.selectionStart
     const selectionEndIndex = inputElement.selectionEnd
@@ -96,29 +93,13 @@ export function TextboxAutocomplete ({
     const keyCode = event.keyCode
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
       event.preventDefault()
-      let index
-      /* eslint-disable indent */
-      if (keyCode === UP_KEY_CODE) {
-        index =
-          selectedIndex === null
-            ? selectableMenuItemIndexes.length - 1
-            : wraparoundIndex(
-                selectedIndex - 1,
-                selectableMenuItemIndexes.length
-              )
-      } else {
-        index =
-          selectedIndex === null
-            ? 0
-            : wraparoundIndex(
-                selectedIndex + 1,
-                selectableMenuItemIndexes.length
-              )
-      }
-      /* eslint-enable indent */
+      const nextIndex =
+        keyCode === UP_KEY_CODE
+          ? computePreviousIndex(selectedIndex)
+          : computeNextIndex(selectedIndex)
       shouldSelectAllRef.current = true
-      setSelectedIndex(index)
-      onChange(menuItems[selectableMenuItemIndexes[index]].value)
+      setSelectedIndex(nextIndex)
+      onChange(menuItems[nextIndex].value)
       return
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
@@ -127,7 +108,7 @@ export function TextboxAutocomplete ({
       scrollTopRef.current = menuElementRef.current.scrollTop
       setMenuVisible(false)
     }
-    if (isStrict === false) {
+    if (isStrict !== true) {
       return
     }
     if (event.ctrlKey === true || event.metaKey === true) {
@@ -141,7 +122,7 @@ export function TextboxAutocomplete ({
       (event.keyCode >= 186 && event.keyCode <= 192) || // ;=,-./`
       (event.keyCode >= 219 && event.keyCode <= 222) // [\]'
     ) {
-      const nextValue = resolveNextValue(event.key)
+      const nextValue = computeNextValue(event.key)
       if (isValidValue(nextValue) === false) {
         event.preventDefault()
       }
@@ -165,22 +146,23 @@ export function TextboxAutocomplete ({
         setSelectedIndex(index)
       }
     } else {
-      if (value !== menuItems[selectableMenuItemIndexes[selectedIndex]].value) {
+      if (value !== menuItems[selectedIndex].value) {
         setSelectedIndex(-1)
       }
     }
     onChange(value)
   }
 
-  function handleOptionClick (index) {
+  function handleOptionClick (event) {
     scrollTopRef.current = menuElementRef.current.scrollTop
+    const index = parseInt(event.target.getAttribute('data-index'))
     setSelectedIndex(index)
     setMenuVisible(false)
-    onChange(menuItems[selectableMenuItemIndexes[index]].value)
+    onChange(menuItems[index].value)
   }
 
   function handlePaste (event) {
-    const nextValue = resolveNextValue(event.clipboardData.getData('Text'))
+    const nextValue = computeNextValue(event.clipboardData.getData('Text'))
     if (isValidValue(nextValue) === false) {
       event.preventDefault()
     }
@@ -268,8 +250,6 @@ export function TextboxAutocomplete ({
   }
 
   const hasIcon = typeof icon !== 'undefined'
-  const selectedMenuItemIndex = selectableMenuItemIndexes[selectedIndex]
-  let menuItemIndex = 0
   return (
     <div
       class={classnames(
@@ -308,13 +288,14 @@ export function TextboxAutocomplete ({
                 </h2>
               )
             }
-            const className =
-              index === selectedMenuItemIndex ? 'menuItemSelected' : 'menuItem'
             return (
               <div
-                class={styles[className]}
-                onClick={handleOptionClick.bind(null, menuItemIndex)}
-                data-index={menuItemIndex++}
+                class={classnames(
+                  styles.menuItem,
+                  index === selectedIndex ? styles.menuItemSelected : null
+                )}
+                onClick={handleOptionClick}
+                data-index={index}
                 key={index}
               >
                 {menuItem.value}
