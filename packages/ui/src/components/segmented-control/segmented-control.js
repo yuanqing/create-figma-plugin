@@ -2,7 +2,18 @@
 import { h } from 'preact'
 import styles from './segmented-control.scss'
 
-export function SegmentedControl ({ options, name, style, value, ...rest }) {
+export function SegmentedControl ({
+  name,
+  onChange,
+  options,
+  style,
+  value,
+  ...rest
+}) {
+  function handleChange (event) {
+    onChange(event.target.value, name)
+  }
+
   return (
     <div class={styles.segmentedControl} style={style}>
       {options.map(function (option, index) {
@@ -20,6 +31,7 @@ export function SegmentedControl ({ options, name, style, value, ...rest }) {
               value={option.value}
               checked={value === option.value}
               disabled={option.disabled === true}
+              onChange={handleChange}
             />
             <div class={styles.text}>{text}</div>
           </label>

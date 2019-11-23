@@ -8,6 +8,7 @@ import styles from './textbox.scss'
 export function Textbox ({
   focused: isFocused,
   icon,
+  name,
   noBorder,
   onChange,
   style,
@@ -20,6 +21,10 @@ export function Textbox ({
 
   function handleFocus () {
     inputElementRef.current.select()
+  }
+
+  function handleInput () {
+    onChange(inputElementRef.current.value, name)
   }
 
   function handleKeyDown (event) {
@@ -53,9 +58,10 @@ export function Textbox ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
+        name={name}
         value={value}
         onFocus={handleFocus}
-        onInput={onChange}
+        onInput={handleInput}
         onKeyDown={handleKeyDown}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}

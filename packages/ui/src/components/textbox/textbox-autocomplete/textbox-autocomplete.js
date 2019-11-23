@@ -21,6 +21,7 @@ export function TextboxAutocomplete ({
   filter: shouldFilter,
   focused: isFocused,
   icon,
+  name,
   noBorder,
   onChange,
   options,
@@ -162,7 +163,10 @@ export function TextboxAutocomplete ({
           : computeNextId(selectedId)
       shouldSelectAllRef.current = true
       setSelectedId(nextId)
-      onChange(nextId === INVALID_ID ? currentValue : getValueById(nextId))
+      onChange(
+        nextId === INVALID_ID ? currentValue : getValueById(nextId),
+        name
+      )
       return
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
@@ -200,7 +204,7 @@ export function TextboxAutocomplete ({
     const index = getIdByValue(value)
     setSelectedId(index)
     setCurrentValue(value)
-    onChange(value)
+    onChange(value, name)
   }
 
   function handleOptionClick (event) {
@@ -210,7 +214,7 @@ export function TextboxAutocomplete ({
     setMenuVisible(false)
     const value = getValueById(id)
     setCurrentValue(EMPTY_STRING)
-    onChange(value)
+    onChange(value, name)
   }
 
   function handlePaste (event) {
@@ -328,6 +332,7 @@ export function TextboxAutocomplete ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
+        name={name}
         value={committedValue}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
