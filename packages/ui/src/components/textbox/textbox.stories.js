@@ -13,21 +13,21 @@ const icon = (
 function noop () {}
 
 export function Text () {
-  return <Textbox value='Text' />
+  return <Textbox value='Text' onChange={noop} />
 }
 
 export function WithPlaceholder () {
-  return <Textbox onChange={noop} placeholder='Text' />
+  return <Textbox placeholder='Text' onChange={noop} />
 }
 
 export function NoBorder () {
-  return <Textbox value='Text' onChange={noop} noBorder />
+  return <Textbox noBorder value='Text' onChange={noop} />
 }
 
 export function Disabled () {
-  return <Textbox value='Text' onChange={noop} disabled />
+  return <Textbox disabled value='Text' onChange={noop} />
 }
 
 export function WithIcon () {
-  return <Textbox value='Text' onChange={noop} icon={icon} />
+  return <Textbox icon={icon} value='Text' onChange={noop} />
 }

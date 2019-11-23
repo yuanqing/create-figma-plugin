@@ -24,13 +24,13 @@ export function WithPlaceholder () {
 }
 
 export function NoBorder () {
-  return <TextboxNumeric value={42} onChange={noop} noBorder />
+  return <TextboxNumeric noBorder value={42} onChange={noop} />
 }
 
 export function Disabled () {
-  return <TextboxNumeric value={42} onChange={noop} disabled />
+  return <TextboxNumeric disabled value={42} onChange={noop} />
 }
 
 export function WithIcon () {
-  return <TextboxNumeric value={42} onChange={noop} icon={icon} />
+  return <TextboxNumeric icon={icon} value={42} onChange={noop} />
 }
