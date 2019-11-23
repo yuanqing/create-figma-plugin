@@ -21,7 +21,6 @@ export function TextboxNumeric ({
   const inputElement = useRef(null)
 
   function handleFocus () {
-    inputElement.current.focus()
     inputElement.current.select()
   }
 
