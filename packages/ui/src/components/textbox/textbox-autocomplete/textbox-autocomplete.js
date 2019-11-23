@@ -2,6 +2,8 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useLayoutEffect, useRef, useState } from 'preact/hooks'
+import { computeNextValue } from '../utilities/compute-next-value'
+import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -9,7 +11,7 @@ import {
   ENTER_KEY_CODE,
   ESCAPE_KEY_CODE,
   UP_KEY_CODE
-} from '../key-codes'
+} from '../utilities/key-codes'
 import styles from '../textbox.scss'
 
 const EMPTY_STRING = ''
@@ -139,20 +141,6 @@ export function TextboxAutocomplete ({
     return menuItems[index].id
   }
 
-  function computeNextValue (insertedString) {
-    const inputElement = inputElementRef.current
-    const selectionStartIndex = inputElement.selectionStart
-    const selectionEndIndex = inputElement.selectionEnd
-    const value = inputElementRef.current.value
-    if (selectionEndIndex - selectionStartIndex === 0) {
-      return `${value}${insertedString}`
-    }
-    return `${value.substring(
-      0,
-      selectionStartIndex
-    )}${insertedString}${value.substring(selectionEndIndex)}`
-  }
-
   function handleFocus () {
     setMenuVisible(true)
     if (
@@ -162,17 +150,6 @@ export function TextboxAutocomplete ({
       // Copy over `committedValue` to `currentValue`
       setCurrentValue(committedValue)
     }
-  }
-
-  function isKeyCodeCharacterGenerating (keyCode) {
-    return (
-      keyCode === 32 || // space
-      (keyCode >= 48 && keyCode <= 57) || // 0 to 9
-      (keyCode >= 65 && keyCode <= 90) || // A to Z
-      (keyCode >= 96 && keyCode <= 105) || // Number pad
-      (keyCode >= 186 && keyCode <= 192) || // ;=,-./`
-      (keyCode >= 219 && keyCode <= 222) // [\]'
-    )
   }
 
   function handleKeyDown (event) {
@@ -203,7 +180,7 @@ export function TextboxAutocomplete ({
       return
     }
     if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-      const nextValue = computeNextValue(event.key)
+      const nextValue = computeNextValue(inputElementRef.current, event.key)
       if (isValidValue(nextValue) === false) {
         event.preventDefault()
       }
@@ -237,7 +214,10 @@ export function TextboxAutocomplete ({
   }
 
   function handlePaste (event) {
-    const nextValue = computeNextValue(event.clipboardData.getData('Text'))
+    const nextValue = computeNextValue(
+      inputElementRef.current,
+      event.clipboardData.getData('Text')
+    )
     if (isValidValue(nextValue) === false) {
       event.preventDefault()
     }

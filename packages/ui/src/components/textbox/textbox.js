@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useLayoutEffect, useRef } from 'preact/hooks'
-import { ESCAPE_KEY_CODE } from './key-codes'
+import { ESCAPE_KEY_CODE } from './utilities/key-codes'
 import styles from './textbox.scss'
 
 export function Textbox ({
@@ -16,17 +16,17 @@ export function Textbox ({
 }) {
   const hasIcon = typeof icon !== 'undefined'
 
-  const inputElement = useRef(null)
+  const inputElementRef = useRef(null)
 
   function handleFocus () {
-    inputElement.current.select()
+    inputElementRef.current.select()
   }
 
   function handleKeyDown (event) {
     const keyCode = event.keyCode
     if (keyCode === ESCAPE_KEY_CODE) {
       event.stopPropagation()
-      inputElement.current.blur()
+      inputElementRef.current.blur()
     }
   }
 
@@ -50,7 +50,7 @@ export function Textbox ({
     >
       <input
         {...rest}
-        ref={inputElement}
+        ref={inputElementRef}
         type='text'
         class={styles.input}
         value={value}
