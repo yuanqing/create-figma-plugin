@@ -1,8 +1,9 @@
 /** @jsx h */
+import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
+import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from './key-codes'
 import styles from './textbox.scss'
-import classnames from '@sindresorhus/class-names'
 
 export function Textbox ({
   focused: isFocused,
@@ -19,6 +20,13 @@ export function Textbox ({
   function handleFocus () {
     inputElement.current.focus()
     inputElement.current.select()
+  }
+
+  function handleKeyDown (event) {
+    const keyCode = event.keyCode
+    if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
+      inputElement.current.blur()
+    }
   }
 
   if (isFocused === true) {
@@ -41,6 +49,7 @@ export function Textbox ({
         class={styles.input}
         value={value}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>

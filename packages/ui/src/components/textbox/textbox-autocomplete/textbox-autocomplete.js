@@ -2,12 +2,15 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useLayoutEffect, useRef, useState } from 'preact/hooks'
+import {
+  BACKSPACE_KEY_CODE,
+  DELETE_KEY_CODE,
+  DOWN_KEY_CODE,
+  ENTER_KEY_CODE,
+  ESCAPE_KEY_CODE,
+  UP_KEY_CODE
+} from '../key-codes'
 import styles from '../textbox.scss'
-
-const ENTER_KEY_CODE = 13
-const ESCAPE_KEY_CODE = 27
-const UP_KEY_CODE = 38
-const DOWN_KEY_CODE = 40
 
 const EMPTY_STRING = ''
 const INVALID_ID = -1
@@ -48,7 +51,7 @@ export function TextboxAutocomplete ({
     menuItems = menuItems.filter(function (menuItem) {
       return (
         typeof menuItem.value !== 'undefined' &&
-        menuItem.value.indexOf(currentValue) !== -1
+        menuItem.value.toLowerCase().indexOf(currentValue.toLowerCase()) !== -1
       )
     })
   }
@@ -60,7 +63,7 @@ export function TextboxAutocomplete ({
     for (const menuItem of menuItems) {
       if (
         typeof menuItem.value !== 'undefined' &&
-        menuItem.value.indexOf(value) === 0
+        menuItem.value.toLowerCase().indexOf(value.toLowerCase()) === 0
       ) {
         return true
       }
@@ -161,6 +164,17 @@ export function TextboxAutocomplete ({
     }
   }
 
+  function isKeyCodeCharacterGenerating (keyCode) {
+    return (
+      keyCode === 32 || // space
+      (keyCode >= 48 && keyCode <= 57) || // 0 to 9
+      (keyCode >= 65 && keyCode <= 90) || // A to Z
+      (keyCode >= 96 && keyCode <= 105) || // Number pad
+      (keyCode >= 186 && keyCode <= 192) || // ;=,-./`
+      (keyCode >= 219 && keyCode <= 222) // [\]'
+    )
+  }
+
   function handleKeyDown (event) {
     const keyCode = event.keyCode
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
@@ -176,9 +190,11 @@ export function TextboxAutocomplete ({
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
       event.preventDefault()
+      event.stopPropagation()
       shouldSelectAllRef.current = false
       scrollTopRef.current = menuElementRef.current.scrollTop
       setMenuVisible(false)
+      return
     }
     if (isStrict !== true) {
       return
@@ -186,14 +202,7 @@ export function TextboxAutocomplete ({
     if (event.ctrlKey === true || event.metaKey === true) {
       return
     }
-    if (
-      event.keyCode === 32 || // space
-      (event.keyCode >= 48 && event.keyCode <= 57) || // 0 to 9
-      (event.keyCode >= 65 && event.keyCode <= 90) || // A to Z
-      (event.keyCode >= 96 && event.keyCode <= 105) || // Number pad
-      (event.keyCode >= 186 && event.keyCode <= 192) || // ;=,-./`
-      (event.keyCode >= 219 && event.keyCode <= 222) // [\]'
-    ) {
+    if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
       const nextValue = computeNextValue(event.key)
       if (isValidValue(nextValue) === false) {
         event.preventDefault()
@@ -204,10 +213,9 @@ export function TextboxAutocomplete ({
   function handleKeyUp (event) {
     const keyCode = event.keyCode
     if (
-      keyCode === UP_KEY_CODE ||
-      keyCode === DOWN_KEY_CODE ||
-      keyCode === ENTER_KEY_CODE ||
-      keyCode === ESCAPE_KEY_CODE
+      keyCode !== BACKSPACE_KEY_CODE &&
+      keyCode !== DELETE_KEY_CODE &&
+      isKeyCodeCharacterGenerating(keyCode) === false
     ) {
       return
     }

@@ -2,10 +2,13 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
+import {
+  DOWN_KEY_CODE,
+  ENTER_KEY_CODE,
+  ESCAPE_KEY_CODE,
+  UP_KEY_CODE
+} from '../key-codes'
 import styles from '../textbox.scss'
-
-const UP_KEY_CODE = 38
-const DOWN_KEY_CODE = 40
 
 const nonNumericCharactersRegex = /[^\d-.]/
 
@@ -28,7 +31,12 @@ export function TextboxNumeric ({
   }
 
   function handleKeyDown (event) {
-    if (event.keyCode === UP_KEY_CODE || event.keyCode === DOWN_KEY_CODE) {
+    const keyCode = event.keyCode
+    if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
+      inputElement.current.blur()
+      return
+    }
+    if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
       event.preventDefault()
       const value = inputElement.current.value
       const isNonNumeric = nonNumericCharactersRegex.test(value) === true

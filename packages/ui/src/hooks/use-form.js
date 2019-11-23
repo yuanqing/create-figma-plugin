@@ -7,7 +7,7 @@ export function useForm (
   initialInputs,
   handleSubmitCallback,
   handleCancelCallback,
-  shouldHandleKeyUp
+  shouldHandleKeyDown
 ) {
   const [inputs, setInputs] = useState(initialInputs)
   function handleSubmit (event) {
@@ -26,7 +26,7 @@ export function useForm (
       [event.target.name]: value
     })
   }
-  function handleKeyUp (event) {
+  function handleKeyDown (event) {
     if (event.keyCode === ENTER_KEY_CODE) {
       handleSubmitCallback(inputs)
       return
@@ -35,11 +35,11 @@ export function useForm (
       handleCancelCallback()
     }
   }
-  if (shouldHandleKeyUp === true) {
+  if (shouldHandleKeyDown === true) {
     useEffect(function () {
-      window.addEventListener('keyup', handleKeyUp)
+      window.addEventListener('keydown', handleKeyDown)
       return function () {
-        window.removeEventListener('keyup', handleKeyUp)
+        window.removeEventListener('keydown', handleKeyDown)
       }
     }, [])
   }
