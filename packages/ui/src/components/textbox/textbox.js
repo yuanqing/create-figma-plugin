@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
-import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from './key-codes'
+import { ESCAPE_KEY_CODE } from './key-codes'
 import styles from './textbox.scss'
 
 export function Textbox ({
@@ -24,7 +24,8 @@ export function Textbox ({
 
   function handleKeyDown (event) {
     const keyCode = event.keyCode
-    if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
+    if (keyCode === ESCAPE_KEY_CODE) {
+      event.stopPropagation()
       inputElement.current.blur()
     }
   }
