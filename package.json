@@ -9,7 +9,7 @@
     "fix-js": "prettier-standard '*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'packages/*/src/**/*.scss'",
-    "lint-js": "standard '*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
+    "lint-js": "standardx '*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
     "publish": "yarn run build && cpy docs packages/create-figma-plugin --parents && cpy README.md packages/create-figma-plugin && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
     "test": "yarn run build && ava",
@@ -30,6 +30,7 @@
     "concurrently": "^5.0.0",
     "cpy-cli": "^2.0.0",
     "css-loader": "^3.2.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "esm": "^3.2.25",
     "husky": "^3.1.0",
     "lerna": "^3.18.4",
@@ -42,7 +43,7 @@
     "prettier-standard": "^15.0.1",
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
-    "standard": "^14.3.1",
+    "standardx": "^5.0.0",
     "style-loader": "^1.0.0",
     "stylelint": "^12.0.0",
     "stylelint-config-prettier": "^6.0.0",
@@ -66,10 +67,19 @@
   },
   "lint-staged": {
     "*.js": [
-      "standard",
+      "standardx",
       "prettier-standard",
       "git add"
     ]
+  },
+  "eslintConfig": {
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "stylelint": {
     "extends": [
