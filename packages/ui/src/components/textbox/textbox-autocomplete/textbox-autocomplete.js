@@ -323,11 +323,14 @@ export function TextboxAutocomplete ({
     [isMenuVisible]
   )
 
-  if (isFocused === true) {
-    useLayoutEffect(function () {
-      setMenuVisible(true)
-    }, [])
-  }
+  useLayoutEffect(
+    function () {
+      if (isFocused === true) {
+        setMenuVisible(true)
+      }
+    },
+    [isFocused]
+  )
 
   const hasIcon = typeof icon !== 'undefined'
   return (

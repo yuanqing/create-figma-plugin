@@ -1,7 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useEffect, useRef } from 'preact/hooks'
+import { useLayoutEffect, useRef } from 'preact/hooks'
 import { DOWN_KEY_CODE, ESCAPE_KEY_CODE, UP_KEY_CODE } from '../key-codes'
 import styles from '../textbox.scss'
 
@@ -51,9 +51,14 @@ export function TextboxNumeric ({
     }
   }
 
-  if (isFocused === true) {
-    useEffect(handleFocus, [])
-  }
+  useLayoutEffect(
+    function () {
+      if (isFocused === true) {
+        handleFocus()
+      }
+    },
+    [isFocused]
+  )
 
   return (
     <div
