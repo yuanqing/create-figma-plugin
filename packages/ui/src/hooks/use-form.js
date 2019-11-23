@@ -36,12 +36,15 @@ export function useForm (
     }
   }
   if (shouldHandleKeyDown === true) {
-    useEffect(function () {
-      window.addEventListener('keydown', handleKeyDown)
-      return function () {
-        window.removeEventListener('keydown', handleKeyDown)
-      }
-    }, [])
+    useEffect(
+      function () {
+        window.addEventListener('keydown', handleKeyDown)
+        return function () {
+          window.removeEventListener('keydown', handleKeyDown)
+        }
+      },
+      [inputs]
+    )
   }
   return {
     inputs,
