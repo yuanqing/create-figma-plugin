@@ -46,3 +46,19 @@ export function Strict () {
   }
   return <Component />
 }
+
+export function Filter () {
+  function Component () {
+    const [value, setValue] = useState('')
+    return (
+      <TextboxAutocomplete
+        filter
+        strict
+        value={value}
+        options={options}
+        onChange={setValue}
+      />
+    )
+  }
+  return <Component />
+}

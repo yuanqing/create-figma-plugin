@@ -9,16 +9,20 @@ const ESCAPE_KEY_CODE = 27
 const UP_KEY_CODE = 38
 const DOWN_KEY_CODE = 40
 
+const EMPTY_STRING = ''
+const INVALID_ID = -1
+
 export function TextboxAutocomplete ({
+  filter: shouldFilter,
   focused: isFocused,
   icon,
   noBorder,
   onChange,
-  options: menuItems,
+  options,
   strict: isStrict,
   style,
   top: isTop,
-  value,
+  value: committedValue,
   ...rest
 }) {
   const rootElementRef = useRef(null)
@@ -27,11 +31,32 @@ export function TextboxAutocomplete ({
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false)
 
-  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [currentValue, setCurrentValue] = useState(EMPTY_STRING)
   const [isMenuVisible, setMenuVisible] = useState(false)
-  const [inputValue, setInputValue] = useState(value)
+  const [selectedId, setSelectedId] = useState(INVALID_ID)
+
+  let menuItems = options.map(function (option, index) {
+    return {
+      id: index,
+      ...option
+    }
+  })
+  if (
+    shouldFilter === true &&
+    (isValidValue(committedValue) === false || currentValue !== EMPTY_STRING)
+  ) {
+    menuItems = menuItems.filter(function (menuItem) {
+      return (
+        typeof menuItem.value !== 'undefined' &&
+        menuItem.value.indexOf(currentValue) !== -1
+      )
+    })
+  }
 
   function isValidValue (value) {
+    if (value === EMPTY_STRING) {
+      return true
+    }
     for (const menuItem of menuItems) {
       if (
         typeof menuItem.value !== 'undefined' &&
@@ -43,53 +68,72 @@ export function TextboxAutocomplete ({
     return false
   }
 
-  function computeNextIndex (index) {
-    const lastIndex = menuItems.length - 1
-    if (
-      index === -1 ||
-      (index === lastIndex &&
-        (inputValue === menuItems[lastIndex].value ||
-          findIndex(inputValue) !== -1))
-    ) {
-      return 0
-    }
-    while (++index < menuItems.length) {
-      if (typeof menuItems[index].value !== 'undefined') {
-        return index
-      }
-    }
-    return -1
-  }
-
-  function computePreviousIndex (index) {
-    if (
-      index === -1 ||
-      (index === 0 &&
-        (inputValue === menuItems[0].value || findIndex(inputValue) !== -1))
-    ) {
-      return menuItems.length - 1
-    }
-    while (--index > -1) {
-      if (typeof menuItems[index].value !== 'undefined') {
-        return index
-      }
-    }
-    return -1
-  }
-
-  function findIndex (value) {
-    let index = 0
+  function getIdByValue (value) {
     for (const menuItem of menuItems) {
-      if (typeof menuItem.value !== 'undefined' && menuItem.value === value) {
-        return index
+      if (menuItem.value === value) {
+        return menuItem.id
       }
-      index = index + 1
     }
-    return -1
+    return INVALID_ID
   }
 
-  function handleFocus () {
-    setMenuVisible(true)
+  function getValueById (id) {
+    for (const menuItem of menuItems) {
+      if (menuItem.id === id) {
+        return menuItem.value
+      }
+    }
+    return null
+  }
+
+  function computeNextId (id) {
+    if (id === INVALID_ID) {
+      return menuItems[0].id
+    }
+    let foundCurrentMenuItem = false
+    let index = -1
+    while (index++ < menuItems.length - 1) {
+      if (typeof menuItems[index].value !== 'undefined') {
+        if (foundCurrentMenuItem === true) {
+          // We've found the item after the current menu item with a `.value`
+          break
+        }
+        if (menuItems[index].id === id) {
+          foundCurrentMenuItem = true
+        }
+      }
+    }
+    if (index === menuItems.length) {
+      // Reached the end of `menuItems`
+      return getIdByValue(currentValue) === -1 ? INVALID_ID : menuItems[0].id
+    }
+    return menuItems[index].id
+  }
+
+  function computePreviousId (id) {
+    if (id === INVALID_ID) {
+      return menuItems[menuItems.length - 1].id
+    }
+    let foundCurrentMenuItem = false
+    let index = menuItems.length
+    while (index-- > 0) {
+      if (typeof menuItems[index].value !== 'undefined') {
+        if (foundCurrentMenuItem === true) {
+          // We've found the item after the current menu item with a `.value`
+          break
+        }
+        if (menuItems[index].id === id) {
+          foundCurrentMenuItem = true
+        }
+      }
+    }
+    if (index === -1) {
+      // Reached the beginning of `menuItems`
+      return getIdByValue(currentValue) === -1
+        ? INVALID_ID
+        : menuItems[menuItems.length - 1].id
+    }
+    return menuItems[index].id
   }
 
   function computeNextValue (insertedString) {
@@ -106,20 +150,28 @@ export function TextboxAutocomplete ({
     )}${insertedString}${value.substring(selectionEndIndex)}`
   }
 
+  function handleFocus () {
+    setMenuVisible(true)
+    if (
+      committedValue !== EMPTY_STRING &&
+      isValidValue(committedValue) === false
+    ) {
+      // Copy over `committedValue` to `currentValue`
+      setCurrentValue(committedValue)
+    }
+  }
+
   function handleKeyDown (event) {
     const keyCode = event.keyCode
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
       event.preventDefault()
-      const nextIndex =
+      const nextId =
         keyCode === UP_KEY_CODE
-          ? computePreviousIndex(selectedIndex)
-          : computeNextIndex(selectedIndex)
+          ? computePreviousId(selectedId)
+          : computeNextId(selectedId)
       shouldSelectAllRef.current = true
-      setSelectedIndex(nextIndex)
-      if (inputValue === null) {
-        setInputValue(value)
-      }
-      onChange(nextIndex === -1 ? inputValue : menuItems[nextIndex].value)
+      setSelectedId(nextId)
+      onChange(nextId === INVALID_ID ? currentValue : getValueById(nextId))
       return
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
@@ -160,27 +212,19 @@ export function TextboxAutocomplete ({
       return
     }
     const value = inputElementRef.current.value
-    if (selectedIndex === -1) {
-      const index = findIndex(value)
-      if (index !== -1) {
-        setSelectedIndex(index)
-      }
-    } else {
-      if (value !== menuItems[selectedIndex].value) {
-        setSelectedIndex(-1)
-      }
-    }
-    setInputValue(value)
+    const index = getIdByValue(value)
+    setSelectedId(index)
+    setCurrentValue(value)
     onChange(value)
   }
 
   function handleOptionClick (event) {
     scrollTopRef.current = menuElementRef.current.scrollTop
-    const index = parseInt(event.target.getAttribute('data-index'))
-    setSelectedIndex(index)
+    const id = parseInt(event.target.getAttribute('data-id'))
+    setSelectedId(id)
     setMenuVisible(false)
-    const value = menuItems[index].value
-    setInputValue(value)
+    const value = getValueById(id)
+    setCurrentValue(EMPTY_STRING)
     onChange(value)
   }
 
@@ -201,7 +245,7 @@ export function TextboxAutocomplete ({
         inputElementRef.current.select()
       }
     },
-    [value]
+    [committedValue]
   )
 
   // Restore the original menu scroll position and update focus
@@ -209,7 +253,7 @@ export function TextboxAutocomplete ({
     function () {
       if (isMenuVisible === false) {
         inputElementRef.current.blur()
-        setInputValue(value)
+        setCurrentValue(EMPTY_STRING)
         return
       }
       menuElementRef.current.scrollTop = scrollTopRef.current
@@ -226,14 +270,14 @@ export function TextboxAutocomplete ({
         return
       }
       const menuElement = menuElementRef.current
-      if (selectedIndex === -1) {
+      if (selectedId === INVALID_ID) {
         menuElement.scrollTop = 0
         return
       }
       const selectedElement = [].slice
         .call(menuElement.children)
         .find(function (element) {
-          return element.getAttribute('data-index') === `${selectedIndex}`
+          return element.getAttribute('data-id') === `${selectedId}`
         })
       if (selectedElement.offsetTop < menuElement.scrollTop) {
         menuElement.scrollTop = selectedElement.offsetTop
@@ -245,7 +289,7 @@ export function TextboxAutocomplete ({
         menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
       }
     },
-    [isMenuVisible, selectedIndex]
+    [isMenuVisible, selectedId]
   )
 
   // Blur the input and hide the menu if we clicked outside the component
@@ -293,7 +337,7 @@ export function TextboxAutocomplete ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
-        value={value}
+        value={committedValue}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
@@ -305,13 +349,13 @@ export function TextboxAutocomplete ({
           class={classnames(styles.menu, isTop ? styles.isTop : null)}
           ref={menuElementRef}
         >
-          {menuItems.map(function (menuItem, index) {
+          {menuItems.map(function (menuItem) {
             if (menuItem.separator === true) {
-              return <hr class={styles.menuSeparator} key={index} />
+              return <hr class={styles.menuSeparator} key={menuItem.id} />
             }
             if (typeof menuItem.header !== 'undefined') {
               return (
-                <h2 class={styles.menuHeader} key={index}>
+                <h2 class={styles.menuHeader} key={menuItem.id}>
                   {menuItem.header}
                 </h2>
               )
@@ -320,11 +364,11 @@ export function TextboxAutocomplete ({
               <div
                 class={classnames(
                   styles.menuItem,
-                  index === selectedIndex ? styles.menuItemSelected : null
+                  menuItem.id === selectedId ? styles.menuItemSelected : null
                 )}
                 onClick={handleOptionClick}
-                data-index={index}
-                key={index}
+                data-id={menuItem.id}
+                key={menuItem.id}
               >
                 {menuItem.value}
               </div>
