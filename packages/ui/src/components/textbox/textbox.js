@@ -9,6 +9,7 @@ export function Textbox ({
   focused: isFocused,
   icon,
   noBorder,
+  onChange,
   style,
   value,
   ...rest
@@ -49,6 +50,7 @@ export function Textbox ({
         class={styles.input}
         value={value}
         onFocus={handleFocus}
+        onInput={onChange}
         onKeyDown={handleKeyDown}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}

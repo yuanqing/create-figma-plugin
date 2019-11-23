@@ -70,7 +70,7 @@ export function TextboxNumeric ({
         type='text'
         class={styles.input}
         value={value}
-        onChange={onChange}
+        onInput={onChange}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
       />
