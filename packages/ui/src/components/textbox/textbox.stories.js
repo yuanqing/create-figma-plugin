@@ -5,8 +5,12 @@ import { Textbox } from './textbox'
 export default { title: 'Textbox' }
 
 const icon = (
-  <svg width='10' height='10'>
-    <path d='M7 0H3v1h4V0zM1 1V0H0v1h1zM0 3h1v4H0V3zm9 0h1v4H9V3zm1-2H9V0h1v1zM3 9h4v1H3V9zM1 9H0v1h1V9zm8 1V9h1v1H9z' />
+  <svg>
+    <path
+      fill-rule='evenodd'
+      clip-rule='evenodd'
+      d='M2 3H4V13H2V14H4.5H5V13.5V2.5V2H4.5H2V3ZM12 2H12.5H15V3H13V13H15V14H12.5H12V13.5V2.5V2ZM8 11V5H9V11H8Z'
+    />
   </svg>
 )
 
