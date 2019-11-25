@@ -25,9 +25,9 @@
     "create-figma-plugin-build": "lib/cli.js"
   },
   "dependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-    "@babel/plugin-transform-react-jsx": "^7.7.0",
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
+    "@babel/plugin-transform-react-jsx": "^7.7.4",
     "@create-figma-plugin/common": "^0.0.34",
     "@create-figma-plugin/utilities": "^0.0.34",
     "babel-loader": "^8.0.6",
