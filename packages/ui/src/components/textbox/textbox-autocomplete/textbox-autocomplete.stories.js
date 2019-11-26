@@ -32,6 +32,20 @@ export function Normal () {
   return <Component />
 }
 
+export function WithInitialValue () {
+  function Component () {
+    const [value, setValue] = useState('baz')
+    return (
+      <TextboxAutocomplete
+        value={value}
+        options={options}
+        onChange={setValue}
+      />
+    )
+  }
+  return <Component />
+}
+
 export function Strict () {
   function Component () {
     const [value, setValue] = useState('')

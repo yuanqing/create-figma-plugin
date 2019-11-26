@@ -316,6 +316,14 @@ export function TextboxAutocomplete ({
     [isFocused]
   )
 
+  useLayoutEffect(function () {
+    if (isValidValue(committedValue) === false) {
+      return
+    }
+    const id = getIdByValue(committedValue)
+    setSelectedId(id)
+  }, [])
+
   const hasIcon = typeof icon !== 'undefined'
   return (
     <div
