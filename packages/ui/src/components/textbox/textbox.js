@@ -11,7 +11,6 @@ export function Textbox ({
   name,
   noBorder,
   onChange,
-  style,
   value,
   ...rest
 }) {
@@ -51,7 +50,6 @@ export function Textbox ({
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
       )}
-      style={style}
     >
       <input
         {...rest}

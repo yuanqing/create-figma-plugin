@@ -5,14 +5,19 @@
   @include text-11-regular;
   cursor: default;
   user-select: none;
+  transform: translateY(4px);
   color: $color-black-8;
+  padding-top: 1px;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 0;
+    margin-top: -9px;
+  }
 
   strong {
     @include text-11-bold;
-  }
-
-  p {
-    margin: 0 0 8px 0;
   }
 
   a {

@@ -1,0 +1,28 @@
+@import "../../scss/constants";
+@import "../../scss/text";
+
+.stack {
+  user-select: none;
+}
+
+.item {
+  .extraSmall > & {
+    margin-top: $space-extra-small;
+  }
+
+  .small > & {
+    margin-top: $space-small;
+  }
+
+  .medium > & {
+    margin-top: $space-medium;
+  }
+
+  .large > & {
+    margin-top: $space-large;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+}

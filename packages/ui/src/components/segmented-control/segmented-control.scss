@@ -26,7 +26,6 @@
 
 .text {
   position: relative;
-  z-index: 2;
   box-sizing: border-box;
   padding: 6px 8px;
   border-radius: $border-radius-2;
@@ -43,7 +42,6 @@
 
   .input:disabled + & {
     cursor: not-allowed;
-    z-index: 1;
     opacity: $opacity-30;
     color: $color-black-8;
   }

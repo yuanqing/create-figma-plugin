@@ -18,7 +18,6 @@ export function TextboxNumeric ({
   name,
   noBorder,
   onChange,
-  style,
   value,
   ...rest
 }) {
@@ -92,7 +91,6 @@ export function TextboxNumeric ({
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
       )}
-      style={style}
     >
       <input
         {...rest}

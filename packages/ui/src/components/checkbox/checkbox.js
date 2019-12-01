@@ -2,13 +2,13 @@
 import { h } from 'preact'
 import styles from './checkbox.scss'
 
-export function Checkbox ({ children, name, onChange, style, value, ...rest }) {
+export function Checkbox ({ children, name, onChange, value, ...rest }) {
   function handleChange (event) {
     onChange(event.target.checked === true, name)
   }
 
   return (
-    <label class={styles.checkbox} for={name} style={style}>
+    <label class={styles.label} for={name}>
       <input
         {...rest}
         class={styles.input}

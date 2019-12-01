@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h } from 'preact'
-import styles from './container.scss'
+import styles from './vertical-space.scss'
 
-export function Container ({ extraSmall, small, medium, large, ...rest }) {
+export function VerticalSpace ({ extraSmall, small, medium, large, ...rest }) {
   return (
     <div
       {...rest}

@@ -1,7 +1,17 @@
 @import "../../scss/text";
 
-.container {
-  @include text-11-regular;
-  user-select: none;
-  padding: 0 16px;
+.extraSmall {
+  padding: 0 $space-extra-small;
+}
+
+.small {
+  padding: 0 $space-small;
+}
+
+.medium {
+  padding: 0 $space-medium;
+}
+
+.large {
+  padding: 0 $space-large;
 }

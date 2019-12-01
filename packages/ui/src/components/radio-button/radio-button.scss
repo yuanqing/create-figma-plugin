@@ -5,6 +5,7 @@
   @include text-11-regular;
   user-select: none;
   padding: 4px 0;
+  margin: -10px 0;
 }
 
 .label {
@@ -12,6 +13,7 @@
   display: block;
 
   position: relative;
+  z-index: $z-index-1;
   padding: 4px 0;
 }
 
@@ -47,17 +49,11 @@
   }
 }
 
-.text,
-.description {
+.text {
   padding-left: 20px;
 
   .input:disabled ~ & {
     cursor: not-allowed;
     opacity: $opacity-30;
   }
-}
-
-.description {
-  padding-top: 4px;
-  color: $color-black-3;
 }

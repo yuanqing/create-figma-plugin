@@ -15,13 +15,3 @@ export function Bold () {
 export function Muted () {
   return <Text muted>Text</Text>
 }
-
-export function Paragraph () {
-  return (
-    <Text>
-      <p>foo</p>
-      <p>bar</p>
-      <p>baz</p>
-    </Text>
-  )
-}

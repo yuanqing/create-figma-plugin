@@ -1,7 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useLayoutEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import {
@@ -26,7 +26,6 @@ export function TextboxAutocomplete ({
   onChange,
   options,
   strict: isStrict,
-  style,
   top: isTop,
   value: committedValue,
   ...rest
@@ -47,6 +46,37 @@ export function TextboxAutocomplete ({
       ...option
     }
   })
+
+  const isValidValue = useCallback(
+    function (value) {
+      if (value === EMPTY_STRING) {
+        return true
+      }
+      for (const menuItem of menuItems) {
+        if (
+          typeof menuItem.value !== 'undefined' &&
+          menuItem.value.toLowerCase().indexOf(value.toLowerCase()) === 0
+        ) {
+          return true
+        }
+      }
+      return false
+    },
+    [menuItems]
+  )
+
+  const getIdByValue = useCallback(
+    function (value) {
+      for (const menuItem of menuItems) {
+        if (menuItem.value === value) {
+          return menuItem.id
+        }
+      }
+      return INVALID_ID
+    },
+    [menuItems]
+  )
+
   if (
     shouldFilter === true &&
     (isValidValue(committedValue) === false || currentValue !== EMPTY_STRING)
@@ -57,30 +87,6 @@ export function TextboxAutocomplete ({
         menuItem.value.toLowerCase().indexOf(currentValue.toLowerCase()) !== -1
       )
     })
-  }
-
-  function isValidValue (value) {
-    if (value === EMPTY_STRING) {
-      return true
-    }
-    for (const menuItem of menuItems) {
-      if (
-        typeof menuItem.value !== 'undefined' &&
-        menuItem.value.toLowerCase().indexOf(value.toLowerCase()) === 0
-      ) {
-        return true
-      }
-    }
-    return false
-  }
-
-  function getIdByValue (value) {
-    for (const menuItem of menuItems) {
-      if (menuItem.value === value) {
-        return menuItem.id
-      }
-    }
-    return INVALID_ID
   }
 
   function getValueById (id) {
@@ -316,13 +322,16 @@ export function TextboxAutocomplete ({
     [isFocused]
   )
 
-  useLayoutEffect(function () {
-    if (isValidValue(committedValue) === false) {
-      return
-    }
-    const id = getIdByValue(committedValue)
-    setSelectedId(id)
-  }, [])
+  useLayoutEffect(
+    function () {
+      if (isValidValue(committedValue) === false) {
+        return
+      }
+      const id = getIdByValue(committedValue)
+      setSelectedId(id)
+    },
+    [committedValue, getIdByValue, isValidValue]
+  )
 
   const hasIcon = typeof icon !== 'undefined'
   return (
@@ -333,7 +342,6 @@ export function TextboxAutocomplete ({
         hasIcon === true ? styles.hasIcon : null
       )}
       ref={rootElementRef}
-      style={style}
     >
       <input
         {...rest}

@@ -1,13 +1,42 @@
 /** @jsx h */
 import { h } from 'preact'
 import { Container } from './container'
+import { Text } from '../text/text'
 
 export default { title: 'Container' }
 
 const style = {
-  backgroundColor: 'rgba(255, 0, 0, 0.2)'
+  backgroundColor: 'rgba(0, 0, 255, 0.2)'
 }
 
-export function Normal () {
-  return <Container style={style}>Text</Container>
+export function ExtraSmall () {
+  return (
+    <Container extraSmall style={style}>
+      <Text>Text</Text>
+    </Container>
+  )
+}
+
+export function Small () {
+  return (
+    <Container small style={style}>
+      <Text>Text</Text>
+    </Container>
+  )
+}
+
+export function Medium () {
+  return (
+    <Container medium style={style}>
+      <Text>Text</Text>
+    </Container>
+  )
+}
+
+export function Large () {
+  return (
+    <Container large style={style}>
+      <Text>Text</Text>
+    </Container>
+  )
 }
