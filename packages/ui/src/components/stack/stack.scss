@@ -22,6 +22,10 @@
     margin-top: $space-large;
   }
 
+  .extraLarge > & {
+    margin-top: $space-extra-large;
+  }
+
   &:first-child {
     margin-top: 0;
   }

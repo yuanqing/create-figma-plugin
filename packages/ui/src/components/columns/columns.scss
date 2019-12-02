@@ -42,3 +42,11 @@
     padding-left: $space-large;
   }
 }
+
+.extraLarge {
+  margin-left: -$space-extra-large;
+
+  > .column {
+    padding-left: $space-extra-large;
+  }
+}

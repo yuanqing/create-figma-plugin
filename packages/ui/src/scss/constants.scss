@@ -30,7 +30,9 @@ $opacity-30: 0.3;
 $z-index-1: 1;
 $z-index-2: 2;
 
-$space-extra-small: 8px;
-$space-small: 12px;
-$space-medium: 16px;
-$space-large: 20px;
+$space-unit: 4px;
+$space-extra-small: 2 * $space-unit;
+$space-small: 3 * $space-unit;
+$space-medium: 4 * $space-unit;
+$space-large: 5 * $space-unit;
+$space-extra-large: 6 * $space-unit;
