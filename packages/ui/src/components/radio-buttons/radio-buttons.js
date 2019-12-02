@@ -1,15 +1,23 @@
 /** @jsx h */
 import { h } from 'preact'
-import styles from './radio-button.scss'
+import { Stack } from '../stack/stack'
+import styles from './radio-buttons.scss'
 
-export function RadioButton ({ name, onChange, options, value, ...rest }) {
+export function RadioButtons ({
+  name,
+  onChange,
+  options,
+  space = 'small',
+  value,
+  ...rest
+}) {
   function handleChange (event) {
     const index = parseInt(event.target.getAttribute('data-index'))
     onChange(options[index].value, name)
   }
 
   return (
-    <div class={styles.radioButton}>
+    <Stack space={space}>
       {options.map(function (option, index) {
         const text =
           typeof option.text !== 'undefined' ? option.text : option.value
@@ -32,6 +40,6 @@ export function RadioButton ({ name, onChange, options, value, ...rest }) {
           </label>
         )
       })}
-    </div>
+    </Stack>
   )
 }

@@ -27,7 +27,7 @@ export function NoSpace () {
 
 export function ExtraSmall () {
   return (
-    <Columns extraSmall>
+    <Columns space='extraSmall'>
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -43,7 +43,7 @@ export function ExtraSmall () {
 
 export function Small () {
   return (
-    <Columns small>
+    <Columns space='small'>
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -59,7 +59,7 @@ export function Small () {
 
 export function Medium () {
   return (
-    <Columns medium>
+    <Columns space='medium'>
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -75,7 +75,7 @@ export function Medium () {
 
 export function Large () {
   return (
-    <Columns large>
+    <Columns space='large'>
       <div style={style}>
         <Text>foo</Text>
       </div>

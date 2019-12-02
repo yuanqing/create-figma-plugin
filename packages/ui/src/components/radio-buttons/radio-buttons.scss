@@ -1,20 +1,14 @@
 @import "../../scss/constants";
 @import "../../scss/text";
 
-.radioButton {
-  @include text-11-regular;
-  user-select: none;
-  padding: 4px 0;
-  margin: -10px 0;
-}
-
 .label {
   // reset
-  display: block;
+  display: flex;
 
+  @include text-11-regular;
+  user-select: none;
   position: relative;
   z-index: $z-index-1;
-  padding: 4px 0;
 }
 
 .input {
@@ -26,9 +20,7 @@
   outline: 0;
   background: none;
 
-  position: absolute;
-  top: 6px;
-  left: 0;
+  flex-grow: 0;
   border: 1px solid $color-black-8;
   border-radius: 6px;
   width: 12px;
@@ -50,7 +42,8 @@
 }
 
 .text {
-  padding-left: 20px;
+  flex-grow: 1;
+  padding: 2px 0 0 8px;
 
   .input:disabled ~ & {
     cursor: not-allowed;

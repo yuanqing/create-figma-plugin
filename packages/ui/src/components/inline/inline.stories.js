@@ -1,17 +1,17 @@
 /** @jsx h */
 import { h } from 'preact'
-import { Stack } from './stack'
+import { Inline } from './inline'
 import { Text } from '../text/text'
 
-export default { title: 'Stack' }
+export default { title: 'Inline' }
 
 const style = {
   backgroundColor: 'rgba(0, 0, 255, 0.2)'
 }
 
-export function ExtraSmall () {
+export function NoSpace () {
   return (
-    <Stack space='extraSmall'>
+    <Inline>
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -21,13 +21,29 @@ export function ExtraSmall () {
       <div style={style}>
         <Text>baz</Text>
       </div>
-    </Stack>
+    </Inline>
+  )
+}
+
+export function ExtraSmall () {
+  return (
+    <Inline space='extraSmall'>
+      <div style={style}>
+        <Text>foo</Text>
+      </div>
+      <div style={style}>
+        <Text>bar</Text>
+      </div>
+      <div style={style}>
+        <Text>baz</Text>
+      </div>
+    </Inline>
   )
 }
 
 export function Small () {
   return (
-    <Stack space='small'>
+    <Inline space='small'>
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -37,13 +53,13 @@ export function Small () {
       <div style={style}>
         <Text>baz</Text>
       </div>
-    </Stack>
+    </Inline>
   )
 }
 
 export function Medium () {
   return (
-    <Stack space='medium'>
+    <Inline space='medium'>
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -53,13 +69,13 @@ export function Medium () {
       <div style={style}>
         <Text>baz</Text>
       </div>
-    </Stack>
+    </Inline>
   )
 }
 
 export function Large () {
   return (
-    <Stack space='large'>
+    <Inline space='large'>
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -69,6 +85,6 @@ export function Large () {
       <div style={style}>
         <Text>baz</Text>
       </div>
-    </Stack>
+    </Inline>
   )
 }

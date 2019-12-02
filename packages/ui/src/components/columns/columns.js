@@ -3,23 +3,13 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import styles from './columns.scss'
 
-export function Columns ({
-  children,
-  extraSmall,
-  small,
-  medium,
-  large,
-  ...rest
-}) {
+export function Columns ({ children, space, ...rest }) {
   return (
     <div
       {...rest}
       class={classnames(
         styles.columns,
-        (extraSmall === true ? styles.extraSmall : null) ||
-          (small === true ? styles.small : null) ||
-          (medium === true ? styles.medium : null) ||
-          (large === true ? styles.large : null)
+        typeof space !== 'undefined' ? styles[space] : null
       )}
     >
       {children.map(function (element, index) {

@@ -3,13 +3,22 @@
 
 .label {
   // reset
-  display: block;
+  display: flex;
 
   @include text-11-regular;
   user-select: none;
   position: relative;
   z-index: $z-index-1;
-  padding: 12px 0;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -8px;
+    bottom: -8px;
+    left: -16px;
+    right: -16px;
+  }
 }
 
 .input {
@@ -21,9 +30,7 @@
   outline: 0;
   background: none;
 
-  position: absolute;
-  left: 0;
-  top: 10px;
+  flex-grow: 0;
   border: 1px solid $color-black-8;
   border-radius: $border-radius-2;
   width: 12px;
@@ -42,7 +49,8 @@
 }
 
 .text {
-  padding-left: 20px;
+  flex-grow: 1;
+  padding: 2px 0 0 8px;
 
   .input:disabled ~ & {
     cursor: not-allowed;

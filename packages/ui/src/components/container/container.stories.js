@@ -11,7 +11,7 @@ const style = {
 
 export function ExtraSmall () {
   return (
-    <Container extraSmall style={style}>
+    <Container space='extraSmall' style={style}>
       <Text>Text</Text>
     </Container>
   )
@@ -19,7 +19,7 @@ export function ExtraSmall () {
 
 export function Small () {
   return (
-    <Container small style={style}>
+    <Container space='small' style={style}>
       <Text>Text</Text>
     </Container>
   )
@@ -27,7 +27,7 @@ export function Small () {
 
 export function Medium () {
   return (
-    <Container medium style={style}>
+    <Container space='medium' style={style}>
       <Text>Text</Text>
     </Container>
   )
@@ -35,7 +35,7 @@ export function Medium () {
 
 export function Large () {
   return (
-    <Container large style={style}>
+    <Container space='large' style={style}>
       <Text>Text</Text>
     </Container>
   )

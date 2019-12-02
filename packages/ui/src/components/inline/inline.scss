@@ -1,44 +1,42 @@
 @import "../../scss/constants";
 @import "../../scss/text";
 
-.columns {
-  box-sizing: border-box;
-  display: flex;
+.inline {
   user-select: none;
 }
 
-.column {
-  flex-grow: 1;
+.item {
+  display: inline-block;
 }
 
 .extraSmall {
   margin-left: -$space-extra-small;
 
-  > .column {
-    padding-left: $space-extra-small;
+  > .item {
+    margin-left: $space-extra-small;
   }
 }
 
 .small {
   margin-left: -$space-small;
 
-  > .column {
-    padding-left: $space-small;
+  > .item {
+    margin-left: $space-small;
   }
 }
 
 .medium {
   margin-left: -$space-medium;
 
-  > .column {
-    padding-left: $space-medium;
+  > .item {
+    margin-left: $space-medium;
   }
 }
 
 .large {
   margin-left: -$space-large;
 
-  > .column {
-    padding-left: $space-large;
+  > .item {
+    margin-left: $space-large;
   }
 }

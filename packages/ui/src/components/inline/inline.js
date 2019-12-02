@@ -1,11 +1,17 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import styles from './stack.scss'
+import styles from './inline.scss'
 
-export function Stack ({ children, space = 'small', ...rest }) {
+export function Inline ({ children, space, ...rest }) {
   return (
-    <div {...rest} class={classnames(styles.stack, styles[space])}>
+    <div
+      {...rest}
+      class={classnames(
+        styles.inline,
+        typeof space !== 'undefined' ? styles[space] : null
+      )}
+    >
       {children.map(function (element, index) {
         return (
           <div class={styles.item} key={index}>

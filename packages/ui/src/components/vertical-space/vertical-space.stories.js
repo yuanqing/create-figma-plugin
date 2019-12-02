@@ -11,7 +11,7 @@ const style = {
 export function ExtraSmall () {
   return (
     <div style={style}>
-      <VerticalSpace extraSmall />
+      <VerticalSpace space='extraSmall' />
     </div>
   )
 }
@@ -19,7 +19,7 @@ export function ExtraSmall () {
 export function Small () {
   return (
     <div style={style}>
-      <VerticalSpace small />
+      <VerticalSpace space='small' />
     </div>
   )
 }
@@ -27,7 +27,7 @@ export function Small () {
 export function Medium () {
   return (
     <div style={style}>
-      <VerticalSpace medium />
+      <VerticalSpace space='medium' />
     </div>
   )
 }
@@ -35,7 +35,7 @@ export function Medium () {
 export function Large () {
   return (
     <div style={style}>
-      <VerticalSpace large />
+      <VerticalSpace space='large' />
     </div>
   )
 }
