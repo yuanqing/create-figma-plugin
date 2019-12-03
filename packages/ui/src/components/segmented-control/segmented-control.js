@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+import '../../scss/base.scss'
 import styles from './segmented-control.scss'
 
 export function SegmentedControl ({ name, onChange, options, value, ...rest }) {

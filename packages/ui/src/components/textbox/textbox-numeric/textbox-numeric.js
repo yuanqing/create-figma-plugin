@@ -10,6 +10,7 @@ import {
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import { numericInputRegex } from '../utilities/numeric-input-regex'
+import '../../../scss/base.scss'
 import styles from '../textbox.scss'
 
 export function TextboxNumeric ({

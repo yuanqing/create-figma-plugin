@@ -12,6 +12,7 @@ import {
   ESCAPE_KEY_CODE,
   UP_KEY_CODE
 } from '../utilities/key-codes'
+import '../../../scss/base.scss'
 import styles from '../textbox.scss'
 
 const EMPTY_STRING = ''

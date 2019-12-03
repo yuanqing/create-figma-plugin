@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+import '../../scss/base.scss'
 import styles from './checkbox.scss'
 
 export function Checkbox ({ children, name, onChange, value, ...rest }) {

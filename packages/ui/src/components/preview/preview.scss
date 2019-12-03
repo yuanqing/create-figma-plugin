@@ -6,22 +6,12 @@
   box-sizing: border-box;
 
   @include text-11-regular;
-  display: flex;
-  align-items: center safe;
   cursor: default;
   user-select: none;
   position: relative;
+  padding: $space-medium 0;
   height: 121px;
   overflow: auto;
   background-color: #f7f7f7;
   border-bottom: 1px solid $color-silver;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-}
-
-.inner {
-  flex-grow: 1;
 }

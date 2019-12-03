@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { Stack } from '../stack/stack'
+import '../../scss/base.scss'
 import styles from './radio-buttons.scss'
 
 export function RadioButtons ({

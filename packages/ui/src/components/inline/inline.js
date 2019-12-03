@@ -1,6 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
+import '../../scss/base.scss'
 import styles from './inline.scss'
 
 export function Inline ({ children, space, ...rest }) {
