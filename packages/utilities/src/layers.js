@@ -15,6 +15,16 @@ export function getSelectedLayersOrAllLayers () {
   )
 }
 
+export function getDocumentComponents () {
+  const result = []
+  traverseLayer(figma.root, function (layer) {
+    if (layer.type === 'COMPONENT') {
+      result.push(layer)
+    }
+  })
+  return result
+}
+
 export function groupSiblingLayers (layers) {
   const result = {}
   for (const layer of layers) {
