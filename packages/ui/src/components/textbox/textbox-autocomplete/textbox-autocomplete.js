@@ -43,7 +43,7 @@ export function TextboxAutocomplete ({
 
   let menuItems = options.map(function (option, index) {
     return {
-      id: index,
+      __id: index,
       ...option
     }
   })
@@ -70,7 +70,7 @@ export function TextboxAutocomplete ({
     function (value) {
       for (const menuItem of menuItems) {
         if (menuItem.value === value) {
-          return menuItem.id
+          return menuItem.__id
         }
       }
       return INVALID_ID
@@ -90,10 +90,10 @@ export function TextboxAutocomplete ({
     })
   }
 
-  function getValueById (id) {
+  function getMenuItemById (id) {
     for (const menuItem of menuItems) {
-      if (menuItem.id === id) {
-        return menuItem.value
+      if (menuItem.__id === id) {
+        return menuItem
       }
     }
     return null
@@ -101,7 +101,7 @@ export function TextboxAutocomplete ({
 
   function computeNextId (id) {
     if (id === INVALID_ID) {
-      return menuItems[0].id
+      return menuItems[0].__id
     }
     let foundCurrentMenuItem = false
     let index = -1
@@ -111,21 +111,21 @@ export function TextboxAutocomplete ({
           // We've found the item after the current menu item with a `.value`
           break
         }
-        if (menuItems[index].id === id) {
+        if (menuItems[index].__id === id) {
           foundCurrentMenuItem = true
         }
       }
     }
     if (index === menuItems.length) {
       // Reached the end of `menuItems`
-      return getIdByValue(currentValue) === -1 ? INVALID_ID : menuItems[0].id
+      return getIdByValue(currentValue) === -1 ? INVALID_ID : menuItems[0].__id
     }
-    return menuItems[index].id
+    return menuItems[index].__id
   }
 
   function computePreviousId (id) {
     if (id === INVALID_ID) {
-      return menuItems[menuItems.length - 1].id
+      return menuItems[menuItems.length - 1].__id
     }
     let foundCurrentMenuItem = false
     let index = menuItems.length
@@ -135,7 +135,7 @@ export function TextboxAutocomplete ({
           // We've found the item after the current menu item with a `.value`
           break
         }
-        if (menuItems[index].id === id) {
+        if (menuItems[index].__id === id) {
           foundCurrentMenuItem = true
         }
       }
@@ -144,9 +144,9 @@ export function TextboxAutocomplete ({
       // Reached the beginning of `menuItems`
       return getIdByValue(currentValue) === -1
         ? INVALID_ID
-        : menuItems[menuItems.length - 1].id
+        : menuItems[menuItems.length - 1].__id
     }
-    return menuItems[index].id
+    return menuItems[index].__id
   }
 
   function handleFocus () {
@@ -170,10 +170,12 @@ export function TextboxAutocomplete ({
           : computeNextId(selectedId)
       shouldSelectAllRef.current = true
       setSelectedId(nextId)
-      onChange(
-        nextId === INVALID_ID ? currentValue : getValueById(nextId),
-        name
-      )
+      if (nextId === INVALID_ID) {
+        onChange(currentValue, null)
+      } else {
+        const menuItem = getMenuItemById(nextId)
+        onChange(menuItem.value, menuItem)
+      }
       return
     }
     if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
@@ -211,7 +213,7 @@ export function TextboxAutocomplete ({
     const index = getIdByValue(value)
     setSelectedId(index)
     setCurrentValue(value)
-    onChange(value, name)
+    onChange(value, getMenuItemById(index))
   }
 
   function handleOptionClick (event) {
@@ -219,9 +221,9 @@ export function TextboxAutocomplete ({
     const id = parseInt(event.target.getAttribute('data-id'))
     setSelectedId(id)
     setMenuVisible(false)
-    const value = getValueById(id)
+    const menuItem = getMenuItemById(id)
     setCurrentValue(EMPTY_STRING)
-    onChange(value, name)
+    onChange(menuItem.value, menuItem)
   }
 
   function handlePaste (event) {
@@ -364,11 +366,11 @@ export function TextboxAutocomplete ({
         >
           {menuItems.map(function (menuItem) {
             if (menuItem.separator === true) {
-              return <hr class={styles.menuSeparator} key={menuItem.id} />
+              return <hr class={styles.menuSeparator} key={menuItem.__id} />
             }
             if (typeof menuItem.header !== 'undefined') {
               return (
-                <h2 class={styles.menuHeader} key={menuItem.id}>
+                <h2 class={styles.menuHeader} key={menuItem.__id}>
                   {menuItem.header}
                 </h2>
               )
@@ -377,11 +379,11 @@ export function TextboxAutocomplete ({
               <div
                 class={classnames(
                   styles.menuItem,
-                  menuItem.id === selectedId ? styles.menuItemSelected : null
+                  menuItem.__id === selectedId ? styles.menuItemSelected : null
                 )}
                 onClick={handleOptionClick}
-                data-id={menuItem.id}
-                key={menuItem.id}
+                data-id={menuItem.__id}
+                key={menuItem.__id}
               >
                 {menuItem.value}
               </div>
