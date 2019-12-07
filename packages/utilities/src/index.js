@@ -1,5 +1,6 @@
 export * from './events'
 export * from './layers'
+export * from './object'
 export * from './settings'
 export * from './string'
 export * from './ui'
