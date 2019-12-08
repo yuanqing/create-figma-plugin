@@ -21,20 +21,20 @@
 
   &:active,
   &:focus {
-    border-color: $color-black-3;
+    border-color: $color-black-30;
   }
 
   &:disabled {
     opacity: $opacity-30;
-    background-color: $color-black-8;
+    background-color: $color-black-80;
   }
 }
 
 .isSecondary {
-  border: 1px solid $color-black-8;
+  border: 1px solid $color-black-80;
   padding: 0 15px;
   line-height: 30px;
-  color: $color-black-8;
+  color: $color-black-80;
   background-color: $color-white;
 
   &:active,
@@ -46,8 +46,8 @@
   }
 
   &:disabled {
-    border-color: $color-black-8;
-    color: $color-black-8;
+    border-color: $color-black-80;
+    color: $color-black-80;
     background-color: transparent;
   }
 }

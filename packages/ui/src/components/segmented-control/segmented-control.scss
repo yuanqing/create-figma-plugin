@@ -29,7 +29,7 @@
   box-sizing: border-box;
   padding: 6px 8px;
   border-radius: $border-radius-2;
-  color: $color-black-8;
+  color: $color-black-80;
 
   .input:checked + & {
     background-color: $color-silver;
@@ -43,6 +43,6 @@
   .input:disabled + & {
     cursor: not-allowed;
     opacity: $opacity-30;
-    color: $color-black-8;
+    color: $color-black-80;
   }
 }

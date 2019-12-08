@@ -16,12 +16,12 @@
 
   @include text-11-regular;
   cursor: default;
-  border: 1px solid $color-black-1;
+  border: 1px solid $color-black-10;
   border-radius: $border-radius-2;
   padding: 0 6px;
   width: 100%;
   height: 32px;
-  color: $color-black-8;
+  color: $color-black-80;
 
   &:active,
   &:focus {
@@ -36,12 +36,12 @@
 
   &:disabled:active,
   &:disabled:focus {
-    border: 1px solid $color-black-1;
+    border: 1px solid $color-black-10;
     padding: 0 6px;
   }
 
   &::placeholder {
-    color: $color-black-3;
+    color: $color-black-30;
   }
 
   &::-webkit-inner-spin-button,
@@ -53,7 +53,7 @@
     border-color: transparent;
 
     &:hover {
-      border-color: $color-black-1;
+      border-color: $color-black-10;
     }
 
     &:active,
@@ -82,7 +82,7 @@
     display: block;
     width: 16px;
     height: 16px;
-    fill: $color-black-3;
+    fill: $color-black-30;
 
     .input:active + &,
     .input:focus + & {
@@ -126,7 +126,7 @@
   margin: 0;
 
   @include text-11-regular;
-  color: $color-white-4;
+  color: $color-white-40;
 }
 
 .menuSeparator {
@@ -137,5 +137,5 @@
   margin: 8px 0;
   width: 100%;
   height: 1px;
-  background-color: $color-white-2;
+  background-color: $color-white-20;
 }

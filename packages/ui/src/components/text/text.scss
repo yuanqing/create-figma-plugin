@@ -7,7 +7,7 @@
   user-select: none;
   transform: translateY(4px);
   padding-top: 1px;
-  color: $color-black-8;
+  color: $color-black-80;
 
   &:before {
     content: "";
@@ -27,7 +27,7 @@
 }
 
 .isMuted {
-  color: $color-black-3;
+  color: $color-black-30;
 }
 
 .isBold {
