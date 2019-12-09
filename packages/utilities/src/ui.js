@@ -3,9 +3,7 @@
 export function showUI (options, data = {}) {
   if (typeof __html__ === 'undefined') {
     throw new Error(
-      `UI not defined for the command corresponding to \`${
-        global.__command__
-      }\``
+      `UI not defined for the command corresponding to \`${global.__command__}\``
     )
   }
   /* eslint-disable no-useless-escape */
