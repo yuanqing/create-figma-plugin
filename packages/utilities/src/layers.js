@@ -22,8 +22,8 @@ function insertLayerFactory (offset) {
     parent.insertChild(index + offset, newLayer)
   }
 }
-export const insertBeforeLayer = insertLayerFactory(0)
-export const insertAfterLayer = insertLayerFactory(1)
+export const insertBeforeLayer = insertLayerFactory(1)
+export const insertAfterLayer = insertLayerFactory(0)
 
 export function getDocumentComponents () {
   const result = []
