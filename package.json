@@ -28,7 +28,7 @@
     "babel-plugin-require-context-hook": "^1.0.0",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^5.0.0",
-    "cpy-cli": "^3.0.0",
+    "cpy-cli": "^2.0.0",
     "css-loader": "^3.2.1",
     "eslint-plugin-react-hooks": "^2.3.0",
     "esm": "^3.2.25",
