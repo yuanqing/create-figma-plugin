@@ -15,8 +15,13 @@
   }
 }
 
-.isPurple {
-  color: $color-purple;
+.isDisabled {
+  cursor: not-allowed;
+  opacity: $opacity-30;
+
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 .isSelected,

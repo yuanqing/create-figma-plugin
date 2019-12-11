@@ -7,8 +7,8 @@ import styles from './selectable-item.scss'
 export function SelectableItem ({
   bold: isBold,
   children,
+  disabled: isDisabled,
   icon,
-  purple: isPurple,
   selected: isSelected,
   ...rest
 }) {
@@ -17,8 +17,8 @@ export function SelectableItem ({
       {...rest}
       class={classnames(
         styles.selectableItem,
-        isSelected === true ? styles.isSelected : null,
-        isPurple === true ? styles.isPurple : null
+        isDisabled === true ? styles.isDisabled : null,
+        isSelected === true ? styles.isSelected : null
       )}
     >
       {typeof icon !== 'undefined' ? (
