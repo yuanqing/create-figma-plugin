@@ -1,27 +1,37 @@
 # API
 
-- [**Events**](#events)
-  - [addEventListener(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
-  - [triggerEvent(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
-  - [*Example*](#example)
-- [**Layers**](#layers)
-  - [getSelectedLayersOrAllLayers()](#const-layers--getselectedlayersoralllayers)
-  - [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
-  - [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
-  - [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
-  - [loadFonts(layers)](#loadfontslayers)
-  - [traverseLayer(layer, callback *[, filter]*)](#traverselayerlayer-callback--filter)
-- [**Settings**](#settings)
-  - [loadSettings()](#const-settings--await-loadsettings)
-  - [saveSettings(settings)](#await-savesettingssettings)
-- [**String**](#string)
-  - [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
-  - [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
-  - [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
-  - [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
-- [**UI**](#ui)
-  - [showUI(options *[, data]*)](#showuioptions--data)
-  - [*Example*](#example-1)
+<!-- toc -->
+
+- [Events](#events)
+  * [addEventListener(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
+  * [triggerEvent(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
+  * [*Example*](#example)
+- [Layers](#layers)
+  * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)
+  * [insertAfterLayer(layer, referenceLayer)](#insertafterlayerlayer-referencelayer)
+  * [getSelectedLayersOrAllLayers()](#const-layers--getselectedlayersoralllayers)
+  * [getDocumentComponents()](#const-components--getdocumentcomponents)
+  * [extractLayerAttributes(layers, attributes)](#const-result--extractlayerattributeslayers-attributes)
+  * [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
+  * [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
+  * [traverseLayer(layer, callback *[, filter]*)](#traverselayerlayer-callback--filter)
+  * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
+  * [loadFonts(layers)](#loadfontslayers)
+- [Object](#object)
+  * [cloneObject(object)](#const-result--cloneobjectobject)
+- [Settings](#settings)
+  * [await loadSettings(*[defaultSettings]*)](#const-settings--await-loadsettingsdefaultsettings)
+  * [await saveSettings(settings)](#await-savesettingssettings)
+- [String](#string)
+  * [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
+  * [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
+  * [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
+  * [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
+- [UI](#ui)
+  * [showUI(options *[, data]*)](#showuioptions--data)
+  * [*Example*](#example-1)
+
+<!-- tocstop -->
 
 ---
 
@@ -104,13 +114,34 @@ export default function () {
 
 ```js
 import {
+  insertBeforeLayer,
+  insertAfterLayer,
   getSelectedLayersOrAllLayers,
-  groupSiblingLayers,
+  getDocumentComponents,
+  extractLayerAttributes,
   getAbsolutePosition
   setAbsolutePosition,
-  traverseLayer
+  traverseLayer,
+  groupSiblingLayers,
+  loadFonts
 } from '@create-figma-plugin/utilities'
 ```
+
+### insertBeforeLayer(layer, referenceLayer)
+
+Inserts `layer` before `referenceLayer` in the layer list.
+
+#### Returns
+
+- `undefined`
+
+### insertAfterLayer(layer, referenceLayer)
+
+Inserts `layer` after `referenceLayer` in the layer list.
+
+#### Returns
+
+- `undefined`
 
 ### const layers = getSelectedLayersOrAllLayers()
 
@@ -120,17 +151,26 @@ Gets the selected layers, or all the top-level layers on the current page if no 
 
 - An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
 
-### const groups = groupSiblingLayers(layers)
+### const components = getDocumentComponents()
 
-Splits the given `layers` into smaller groups of sibling layers.
+Gets all the components in the current document.
 
 #### Returns
 
-- An `array` of `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+- An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+
+### const result = extractLayerAttributes(layers, attributes)
+
+Extracts the specified `attributes` from each layer in `layers`. Each layer `id` will also be extracted.
+
+#### Returns
+
+- An `array` of plain objects
 
 #### Parameters
 
 - `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `attributes` (an `array` of `string`)
 
 ### const absolutePosition = getAbsolutePosition(layer)
 
@@ -156,18 +196,6 @@ Sets the `layer` to the given `absolutePosition`.
 
 - `absolutePosition` (a plain `object` with `x` and `y` keys)
 
-### loadFonts(layers)
-
-Loads the fonts used in all the text layers in `layers`.
-
-#### Returns
-
-- `Promise`
-
-#### Parameters
-
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-
 ### traverseLayer(layer, callback *[, filter]*)
 
 Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `callback`.
@@ -183,6 +211,50 @@ Each layer is also passed to a `filter` function. If you return `false` in `filt
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `callback` (`function (layer)`)
 - `filter` (`function (layer`) *(optional)*
+
+### const groups = groupSiblingLayers(layers)
+
+Splits the given `layers` into smaller groups of sibling layers.
+
+#### Returns
+
+- An `array` of `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+### loadFonts(layers)
+
+Loads the fonts used in all the text layers in `layers`.
+
+#### Returns
+
+- `Promise`
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+---
+
+## Object
+
+```js
+import { cloneObject } from '@create-figma-plugin/utilities'
+```
+
+### const result = cloneObject(object)
+
+Clones the given `object`.
+
+#### Returns
+
+- A deep copy of `object`
+
+#### Parameters
+
+- `object` (`any`)
 
 ---
 
