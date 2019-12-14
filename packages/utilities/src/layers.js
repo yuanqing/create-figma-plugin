@@ -1,12 +1,14 @@
 /* global figma */
 
-export function getSelectedLayers () {
-  return [].concat(figma.currentPage.selection)
+function insertLayerFactory (offset) {
+  return function (layer, referenceLayer) {
+    const parent = referenceLayer.parent
+    const index = parent.children.indexOf(referenceLayer)
+    parent.insertChild(index + offset, layer)
+  }
 }
-
-export function getAllLayers () {
-  return [].concat(figma.currentPage.children)
-}
+export const insertBeforeLayer = insertLayerFactory(1)
+export const insertAfterLayer = insertLayerFactory(0)
 
 export function getSelectedLayersOrAllLayers () {
   const selection = figma.currentPage.selection
@@ -14,16 +16,6 @@ export function getSelectedLayersOrAllLayers () {
     selection.length === 0 ? figma.currentPage.children : selection
   )
 }
-
-function insertLayerFactory (offset) {
-  return function (newLayer, layer) {
-    const parent = layer.parent
-    const index = parent.children.indexOf(layer)
-    parent.insertChild(index + offset, newLayer)
-  }
-}
-export const insertBeforeLayer = insertLayerFactory(1)
-export const insertAfterLayer = insertLayerFactory(0)
 
 export function getDocumentComponents () {
   const result = []
@@ -33,19 +25,6 @@ export function getDocumentComponents () {
     }
   })
   return result
-}
-
-export function groupSiblingLayers (layers) {
-  const result = {}
-  for (const layer of layers) {
-    const parentId = layer.parent.id
-    if (typeof result[parentId] === 'undefined') {
-      result[parentId] = [layer]
-    } else {
-      result[parentId].push(layer)
-    }
-  }
-  return Object.values(result)
 }
 
 export function extractLayerAttributes (layers, attributes) {
@@ -92,20 +71,6 @@ export function setAbsolutePosition (layer, absolutePosition) {
   }
 }
 
-export function loadFonts (layers) {
-  const promises = []
-  for (const layer of layers) {
-    if (layer.type !== 'TEXT') {
-      continue
-    }
-    const length = layer.characters.length
-    for (let i = 0; i < length; i++) {
-      promises.push(figma.loadFontAsync(layer.getRangeFontName(i, i + 1)))
-    }
-  }
-  return Promise.all(promises)
-}
-
 export function traverseLayer (layer, callback, filter) {
   if (layer.removed === true) {
     return
@@ -120,4 +85,31 @@ export function traverseLayer (layer, callback, filter) {
   for (const childLayer of layer.children) {
     traverseLayer(childLayer, callback, filter)
   }
+}
+
+export function groupSiblingLayers (layers) {
+  const result = {}
+  for (const layer of layers) {
+    const parentId = layer.parent.id
+    if (typeof result[parentId] === 'undefined') {
+      result[parentId] = [layer]
+    } else {
+      result[parentId].push(layer)
+    }
+  }
+  return Object.values(result)
+}
+
+export function loadFonts (layers) {
+  const promises = []
+  for (const layer of layers) {
+    if (layer.type !== 'TEXT') {
+      continue
+    }
+    const length = layer.characters.length
+    for (let i = 0; i < length; i++) {
+      promises.push(figma.loadFontAsync(layer.getRangeFontName(i, i + 1)))
+    }
+  }
+  return Promise.all(promises)
 }
