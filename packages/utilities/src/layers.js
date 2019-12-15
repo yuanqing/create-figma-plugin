@@ -19,11 +19,13 @@ export function getSelectedLayersOrAllLayers () {
 
 export function getDocumentComponents () {
   const result = []
-  traverseLayer(figma.root, function (layer) {
-    if (layer.type === 'COMPONENT') {
-      result.push(layer)
+  for (const page of figma.root.children) {
+    for (const layer of page.children) {
+      if (layer.type === 'COMPONENT') {
+        result.push(layer)
+      }
     }
-  })
+  }
   return result
 }
 
