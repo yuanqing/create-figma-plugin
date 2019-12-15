@@ -51,8 +51,8 @@ export function getAbsolutePosition (layer) {
 }
 
 export function setAbsolutePosition (layer, absolutePosition) {
-  let x = typeof absolutePosition.x !== 'undefined' ? absolutePosition.x : null
-  let y = typeof absolutePosition.y !== 'undefined' ? absolutePosition.y : null
+  let x = typeof absolutePosition.x === 'undefined' ? null : absolutePosition.x
+  let y = typeof absolutePosition.y === 'undefined' ? null : absolutePosition.y
   let parent = layer.parent
   while (parent.type !== 'PAGE') {
     if (parent.type !== 'BOOLEAN_OPERATION' && parent.type !== 'GROUP') {

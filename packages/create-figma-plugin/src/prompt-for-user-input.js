@@ -31,7 +31,7 @@ export async function promptForUserInput ({ name, template }) {
       message: 'display name',
       default: function (values) {
         return titleCase(
-          (typeof name !== 'undefined' ? name : values.name).replace(
+          (typeof name === 'undefined' ? values.name : name).replace(
             figmaPrefixRegex,
             ''
           )
