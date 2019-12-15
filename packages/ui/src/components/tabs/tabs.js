@@ -3,10 +3,10 @@ import { h } from 'preact'
 import '../../scss/base.scss'
 import styles from './tabs.scss'
 
-export function Tabs ({ key, onChange, options, value, ...rest }) {
+export function Tabs ({ name, onChange, options, value, ...rest }) {
   function handleChange (event) {
     const index = parseInt(event.target.getAttribute('data-index'))
-    onChange(options[index].value, key)
+    onChange(options[index].value, name)
   }
 
   const activeOption = options.find(function (option) {

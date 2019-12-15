@@ -5,7 +5,7 @@ import '../../scss/base.scss'
 import styles from './radio-buttons.scss'
 
 export function RadioButtons ({
-  key,
+  name,
   onChange,
   options,
   space = 'small',
@@ -14,7 +14,7 @@ export function RadioButtons ({
 }) {
   function handleChange (event) {
     const index = parseInt(event.target.getAttribute('data-index'))
-    onChange(options[index].value, key)
+    onChange(options[index].value, name)
   }
 
   return (

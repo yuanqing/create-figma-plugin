@@ -20,13 +20,13 @@ export function useForm (
     [inputs, handleSubmitCallback]
   )
   const handleInput = useCallback(
-    function handleInput (value, key) {
+    function (value, name) {
       setInputs({
         ...inputs,
-        [key]: value
+        [name]: value
       })
     },
-    [inputs]
+    [inputs, setInputs]
   )
   const handleKeyDown = useCallback(
     function (event) {

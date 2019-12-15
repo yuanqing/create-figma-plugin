@@ -22,7 +22,7 @@ export function TextboxAutocomplete ({
   filter: shouldFilter,
   focused: isFocused,
   icon,
-  key,
+  name,
   noBorder,
   onChange,
   options,
@@ -171,10 +171,10 @@ export function TextboxAutocomplete ({
       shouldSelectAllRef.current = true
       setSelectedId(nextId)
       if (nextId === INVALID_ID) {
-        onChange(currentValue, key, null)
+        onChange(currentValue, name, null)
       } else {
         const menuItem = getMenuItemById(nextId)
-        onChange(menuItem.value, key, menuItem)
+        onChange(menuItem.value, name, menuItem)
       }
       return
     }
@@ -213,7 +213,7 @@ export function TextboxAutocomplete ({
     const index = getIdByValue(value)
     setSelectedId(index)
     setCurrentValue(value)
-    onChange(value, key, getMenuItemById(index))
+    onChange(value, name, getMenuItemById(index))
   }
 
   function handleOptionClick (event) {
@@ -223,7 +223,7 @@ export function TextboxAutocomplete ({
     setMenuVisible(false)
     const menuItem = getMenuItemById(id)
     setCurrentValue(EMPTY_STRING)
-    onChange(menuItem.value, key, menuItem)
+    onChange(menuItem.value, name, menuItem)
   }
 
   function handlePaste (event) {

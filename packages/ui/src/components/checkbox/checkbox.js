@@ -3,9 +3,9 @@ import { h } from 'preact'
 import '../../scss/base.scss'
 import styles from './checkbox.scss'
 
-export function Checkbox ({ children, key, onChange, value, ...rest }) {
+export function Checkbox ({ children, name, onChange, value, ...rest }) {
   function handleChange (event) {
-    onChange(event.target.checked === true, key)
+    onChange(event.target.checked === true, name)
   }
 
   return (
