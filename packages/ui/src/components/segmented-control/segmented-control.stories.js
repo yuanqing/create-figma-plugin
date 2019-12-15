@@ -5,7 +5,7 @@ import { SegmentedControl } from './segmented-control'
 
 export default { title: 'Segmented Control' }
 
-export const Normal = function () {
+export const Default = function () {
   const [value, setValue] = useState('bar')
   return (
     <SegmentedControl

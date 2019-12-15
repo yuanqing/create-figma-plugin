@@ -18,7 +18,7 @@ const options = [
   { value: 'quuuuux' }
 ]
 
-export const Normal = function () {
+export const Default = function () {
   const [value, setValue] = useState('')
   return (
     <TextboxAutocomplete value={value} options={options} onChange={setValue} />

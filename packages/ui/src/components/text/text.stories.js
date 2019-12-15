@@ -4,7 +4,7 @@ import { Text } from './text'
 
 export default { title: 'Text' }
 
-export const Normal = function () {
+export const Default = function () {
   return <Text>Text</Text>
 }
 
