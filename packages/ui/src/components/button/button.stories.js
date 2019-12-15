@@ -4,23 +4,23 @@ import { Button } from './button'
 
 export default { title: 'Button' }
 
-export function Normal () {
+export const Normal = function () {
   return <Button>Text</Button>
 }
 
-export function NormalDisabled () {
+export const NormalDisabled = function () {
   return <Button disabled>Text</Button>
 }
 
-export function NormalFullWidth () {
+export const NormalFullWidth = function () {
   return <Button fullWidth>Text</Button>
 }
 
-export function Secondary () {
+export const Secondary = function () {
   return <Button secondary>Text</Button>
 }
 
-export function SecondaryDisabled () {
+export const SecondaryDisabled = function () {
   return (
     <Button secondary disabled>
       Text
@@ -28,7 +28,7 @@ export function SecondaryDisabled () {
   )
 }
 
-export function SecondaryFullWidth () {
+export const SecondaryFullWidth = function () {
   return (
     <Button secondary fullWidth>
       Text
@@ -36,11 +36,11 @@ export function SecondaryFullWidth () {
   )
 }
 
-export function Destructive () {
+export const Destructive = function () {
   return <Button destructive>Text</Button>
 }
 
-export function DestructiveDisabled () {
+export const DestructiveDisabled = function () {
   return (
     <Button destructive disabled>
       Text
@@ -48,7 +48,7 @@ export function DestructiveDisabled () {
   )
 }
 
-export function DestructiveFullWidth () {
+export const DestructiveFullWidth = function () {
   return (
     <Button destructive fullWidth>
       Text
@@ -56,7 +56,7 @@ export function DestructiveFullWidth () {
   )
 }
 
-export function DestructiveSecondary () {
+export const DestructiveSecondary = function () {
   return (
     <Button destructive secondary>
       Text
@@ -64,7 +64,7 @@ export function DestructiveSecondary () {
   )
 }
 
-export function DestructiveSecondaryDisabled () {
+export const DestructiveSecondaryDisabled = function () {
   return (
     <Button destructive secondary disabled>
       Text
@@ -72,7 +72,7 @@ export function DestructiveSecondaryDisabled () {
   )
 }
 
-export function DestructiveSecondaryFullWidth () {
+export const DestructiveSecondaryFullWidth = function () {
   return (
     <Button destructive secondary fullWidth>
       Text

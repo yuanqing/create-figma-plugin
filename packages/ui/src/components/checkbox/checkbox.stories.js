@@ -5,7 +5,7 @@ import { Text } from '../text/text'
 
 export default { title: 'Checkbox' }
 
-export function Normal () {
+export const Normal = function () {
   return (
     <Checkbox name='Normal' value={false}>
       <Text>Text</Text>
@@ -13,7 +13,7 @@ export function Normal () {
   )
 }
 
-export function Disabled () {
+export const Disabled = function () {
   return (
     <Checkbox disabled name='Disabled' value={false}>
       <Text>Text</Text>

@@ -9,7 +9,7 @@ const style = {
   backgroundColor: 'rgba(0, 0, 255, 0.2)'
 }
 
-export function ExtraSmall () {
+export const ExtraSmall = function () {
   return (
     <Container space='extraSmall' style={style}>
       <Text>Text</Text>
@@ -17,7 +17,7 @@ export function ExtraSmall () {
   )
 }
 
-export function Small () {
+export const Small = function () {
   return (
     <Container space='small' style={style}>
       <Text>Text</Text>
@@ -25,7 +25,7 @@ export function Small () {
   )
 }
 
-export function Medium () {
+export const Medium = function () {
   return (
     <Container space='medium' style={style}>
       <Text>Text</Text>
@@ -33,7 +33,7 @@ export function Medium () {
   )
 }
 
-export function Large () {
+export const Large = function () {
   return (
     <Container space='large' style={style}>
       <Text>Text</Text>

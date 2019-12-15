@@ -21,7 +21,13 @@ module.exports = function ({ config }) {
         loader: 'sass-loader'
       }
     ],
-    include: resolve(__dirname, '..')
+    include: resolve(__dirname, '..', 'src')
+  })
+  config.module.rules.push({
+    test: /\.stories\.js$/,
+    use: [{ loader: '@storybook/source-loader' }],
+    include: resolve(__dirname, '..', 'src'),
+    enforce: 'pre'
   })
   return config
 }

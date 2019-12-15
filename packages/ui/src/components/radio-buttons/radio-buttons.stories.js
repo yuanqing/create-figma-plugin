@@ -5,7 +5,7 @@ import { Text } from '../text/text'
 
 export default { title: 'Radio Buttons' }
 
-export function Normal () {
+export const Normal = function () {
   return (
     <RadioButtons
       small
@@ -20,7 +20,7 @@ export function Normal () {
   )
 }
 
-export function WithDisabledOption () {
+export const WithDisabledOption = function () {
   return (
     <RadioButtons
       small
@@ -35,7 +35,7 @@ export function WithDisabledOption () {
   )
 }
 
-export function WithText () {
+export const WithText = function () {
   return (
     <RadioButtons
       small

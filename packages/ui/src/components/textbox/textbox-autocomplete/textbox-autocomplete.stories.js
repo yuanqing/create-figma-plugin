@@ -18,7 +18,7 @@ const options = [
   { value: 'quuuuux' }
 ]
 
-export function Normal () {
+export const Normal = function () {
   function Component () {
     const [value, setValue] = useState('')
     return (
@@ -32,7 +32,7 @@ export function Normal () {
   return <Component />
 }
 
-export function WithInitialValue () {
+export const WithInitialValue = function () {
   function Component () {
     const [value, setValue] = useState('baz')
     return (
@@ -46,7 +46,7 @@ export function WithInitialValue () {
   return <Component />
 }
 
-export function Strict () {
+export const Strict = function () {
   function Component () {
     const [value, setValue] = useState('')
     return (
@@ -61,7 +61,7 @@ export function Strict () {
   return <Component />
 }
 
-export function Filter () {
+export const Filter = function () {
   function Component () {
     const [value, setValue] = useState('')
     return (

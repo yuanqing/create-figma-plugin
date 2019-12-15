@@ -4,14 +4,14 @@ import { Text } from './text'
 
 export default { title: 'Text' }
 
-export function Normal () {
+export const Normal = function () {
   return <Text>Text</Text>
 }
 
-export function Bold () {
+export const Bold = function () {
   return <Text bold>Text</Text>
 }
 
-export function Muted () {
+export const Muted = function () {
   return <Text muted>Text</Text>
 }

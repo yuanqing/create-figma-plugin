@@ -4,7 +4,7 @@ import { SegmentedControl } from './segmented-control'
 
 export default { title: 'Segmented Control' }
 
-export function Normal () {
+export const Normal = function () {
   return (
     <SegmentedControl
       name='Normal'
@@ -14,7 +14,7 @@ export function Normal () {
   )
 }
 
-export function WithDisabledOption () {
+export const WithDisabledOption = function () {
   return (
     <SegmentedControl
       name='WithDisabledOption'

@@ -9,7 +9,7 @@ const style = {
   backgroundColor: 'rgba(0, 0, 255, 0.2)'
 }
 
-export function NoSpace () {
+export const NoSpace = function () {
   return (
     <Columns>
       <div style={style}>
@@ -25,7 +25,7 @@ export function NoSpace () {
   )
 }
 
-export function ExtraSmall () {
+export const ExtraSmall = function () {
   return (
     <Columns space='extraSmall'>
       <div style={style}>
@@ -41,7 +41,7 @@ export function ExtraSmall () {
   )
 }
 
-export function Small () {
+export const Small = function () {
   return (
     <Columns space='small'>
       <div style={style}>
@@ -57,7 +57,7 @@ export function Small () {
   )
 }
 
-export function Medium () {
+export const Medium = function () {
   return (
     <Columns space='medium'>
       <div style={style}>
@@ -73,7 +73,7 @@ export function Medium () {
   )
 }
 
-export function Large () {
+export const Large = function () {
   return (
     <Columns space='large'>
       <div style={style}>

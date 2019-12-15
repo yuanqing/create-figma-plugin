@@ -16,22 +16,22 @@ const icon = (
 
 function noop () {}
 
-export function Text () {
+export const Text = function () {
   return <TextboxNumeric value={42} onChange={noop} />
 }
 
-export function WithPlaceholder () {
+export const WithPlaceholder = function () {
   return <TextboxNumeric placeholder={42} onChange={noop} />
 }
 
-export function NoBorder () {
+export const NoBorder = function () {
   return <TextboxNumeric noBorder value={42} onChange={noop} />
 }
 
-export function Disabled () {
+export const Disabled = function () {
   return <TextboxNumeric disabled value={42} onChange={noop} />
 }
 
-export function WithIcon () {
+export const WithIcon = function () {
   return <TextboxNumeric icon={icon} value={42} onChange={noop} />
 }

@@ -1,3 +1,3 @@
-const { configure } = require('@storybook/preact')
+import { configure } from '@storybook/preact'
 
 configure(require.context('../src', true, /\.stories\.js$/), module)

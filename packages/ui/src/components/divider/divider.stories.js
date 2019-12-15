@@ -4,6 +4,6 @@ import { Divider } from './divider'
 
 export default { title: 'Divider' }
 
-export function Normal () {
+export const Normal = function () {
   return <Divider />
 }

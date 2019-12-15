@@ -4,11 +4,11 @@ import { Preview } from './preview'
 
 export default { title: 'Preview' }
 
-export function Normal () {
+export const Normal = function () {
   return <Preview>Preview</Preview>
 }
 
-export function Overflow () {
+export const Overflow = function () {
   return (
     <Preview>
       foo

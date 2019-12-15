@@ -14,23 +14,23 @@ const icon = (
   </svg>
 )
 
-export function Normal () {
+export const Normal = function () {
   return <SelectableItem>Text</SelectableItem>
 }
 
-export function Purple () {
+export const Purple = function () {
   return <SelectableItem purple>Text</SelectableItem>
 }
 
-export function Selected () {
+export const Selected = function () {
   return <SelectableItem selected>Text</SelectableItem>
 }
 
-export function Bold () {
+export const Bold = function () {
   return <SelectableItem bold>Text</SelectableItem>
 }
 
-export function WithIcon () {
+export const WithIcon = function () {
   return (
     <SelectableItem bold purple icon={icon}>
       Text
