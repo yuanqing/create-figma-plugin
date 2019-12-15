@@ -19,12 +19,12 @@ command.js   node_modules   package.json
 // command.js
 
 export default function () {
-  console.log('Hello, World!')
+  figma.notify('Hello, World!')
   figma.closePlugin()
 }
 ```
 
-In `package.json`, point to `command.js` on the **`"command"`** key under **`"create-figma-plugin"`**:
+In `package.json`, we’re pointing to `command.js` on the **`"command"`** key under **`"create-figma-plugin"`**:
 
 ```diff
 {
@@ -56,7 +56,7 @@ Update `command.js` to include a call to `showUI`:
 import { showUI } from '@create-figma-plugin/utilities'
 
 export default function () {
-  showUI(240, 320, 'Hello, World!')
+  showUI({ width: 240, height: 320 }, 'Hello, World!')
 }
 ```
 
