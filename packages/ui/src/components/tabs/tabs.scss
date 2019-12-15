@@ -3,6 +3,8 @@
 
 .tabs {
   @include text-11-regular;
+  position: relative;
+  z-index: $z-index-1;
   border-bottom: 1px solid $color-black-10;
   padding-left: $space-extra-small;
 }
@@ -10,6 +12,7 @@
 .label {
   display: inline-block;
   color: $color-black-30;
+  padding: $space-small $space-extra-small;
 
   &:hover {
     color: $color-black-80;
@@ -21,10 +24,6 @@
 }
 
 .text {
-  position: relative;
-  box-sizing: border-box;
-  padding: $space-small $space-extra-small;
-
   .input:checked + & {
     color: $color-black-80;
     font-weight: $font-weight-bold;

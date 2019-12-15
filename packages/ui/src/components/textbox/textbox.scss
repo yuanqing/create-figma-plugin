@@ -88,8 +88,7 @@
   width: 100%;
   top: 100%;
   right: 0;
-  z-index: 10;
-  box-sizing: border-box;
+  z-index: $z-index-2;
   border-radius: $border-radius-2;
   padding: 8px 0;
   max-height: 120px;

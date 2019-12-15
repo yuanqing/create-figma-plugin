@@ -36,9 +36,7 @@ export function Tabs ({ key, onChange, options, value, ...rest }) {
           )
         })}
       </div>
-      {typeof activeOption === 'undefined' ? null : (
-        <div class={styles.activeView}>{activeOption.view}</div>
-      )}
+      {typeof activeOption === 'undefined' ? null : activeOption.view}
     </div>
   )
 }
