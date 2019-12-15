@@ -10,18 +10,24 @@ export function useForm (
   shouldHandleKeyDown
 ) {
   const [inputs, setInputs] = useState(initialInputs)
-  function handleSubmit (event) {
-    if (typeof event !== 'undefined') {
-      event.preventDefault()
-    }
-    handleSubmitCallback(inputs)
-  }
-  function handleInput (value, name) {
-    setInputs({
-      ...inputs,
-      [name]: value
-    })
-  }
+  const handleSubmit = useCallback(
+    function (event) {
+      if (typeof event !== 'undefined') {
+        event.preventDefault()
+      }
+      handleSubmitCallback(inputs)
+    },
+    [inputs, handleSubmitCallback]
+  )
+  const handleInput = useCallback(
+    function handleInput (value, key) {
+      setInputs({
+        ...inputs,
+        [key]: value
+      })
+    },
+    [inputs]
+  )
   const handleKeyDown = useCallback(
     function (event) {
       if (event.keyCode === ENTER_KEY_CODE) {
@@ -43,7 +49,7 @@ export function useForm (
         }
       }
     },
-    [handleKeyDown, shouldHandleKeyDown]
+    [shouldHandleKeyDown, handleKeyDown]
   )
   return {
     inputs,
