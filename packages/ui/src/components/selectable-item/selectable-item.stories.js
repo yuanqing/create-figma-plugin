@@ -18,10 +18,6 @@ export const Normal = function () {
   return <SelectableItem>Text</SelectableItem>
 }
 
-export const Purple = function () {
-  return <SelectableItem purple>Text</SelectableItem>
-}
-
 export const Selected = function () {
   return <SelectableItem selected>Text</SelectableItem>
 }
@@ -32,7 +28,7 @@ export const Bold = function () {
 
 export const WithIcon = function () {
   return (
-    <SelectableItem bold purple icon={icon}>
+    <SelectableItem bold icon={icon}>
       Text
     </SelectableItem>
   )

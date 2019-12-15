@@ -88,3 +88,19 @@ export const Large = function () {
     </Columns>
   )
 }
+
+export const ExtraLarge = function () {
+  return (
+    <Columns space='extraLarge'>
+      <div style={style}>
+        <Text>foo</Text>
+      </div>
+      <div style={style}>
+        <Text>bar</Text>
+      </div>
+      <div style={style}>
+        <Text>baz</Text>
+      </div>
+    </Columns>
+  )
+}

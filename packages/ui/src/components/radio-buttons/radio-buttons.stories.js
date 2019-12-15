@@ -1,16 +1,18 @@
 /** @jsx h */
 import { h } from 'preact'
+import { useState } from 'preact/hooks'
 import { RadioButtons } from './radio-buttons'
 import { Text } from '../text/text'
 
 export default { title: 'Radio Buttons' }
 
 export const Normal = function () {
+  const [value, setValue] = useState('bar')
   return (
     <RadioButtons
-      small
-      name='Normal'
-      value='bar'
+      name='normal'
+      value={value}
+      onChange={setValue}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text> },
@@ -21,30 +23,16 @@ export const Normal = function () {
 }
 
 export const WithDisabledOption = function () {
+  const [value, setValue] = useState('bar')
   return (
     <RadioButtons
-      small
-      name='WithDisabledOption'
-      value='bar'
+      name='withDisabledOption'
+      value={value}
+      onChange={setValue}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text> },
         { value: 'baz', text: <Text>baz</Text>, disabled: true }
-      ]}
-    />
-  )
-}
-
-export const WithText = function () {
-  return (
-    <RadioButtons
-      small
-      name='WithText'
-      value='bar'
-      options={[
-        { value: 'foo', text: <Text>foo</Text> },
-        { value: 'bar', text: <Text>bar</Text> },
-        { value: 'baz', text: <Text>baz</Text> }
       ]}
     />
   )

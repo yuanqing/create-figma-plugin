@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+import { useState } from 'preact/hooks'
 import { TextboxNumeric } from './textbox-numeric'
 
 export default { title: 'Textbox Numeric' }
@@ -14,24 +15,27 @@ const icon = (
   </svg>
 )
 
-function noop () {}
-
 export const Text = function () {
-  return <TextboxNumeric value={42} onChange={noop} />
+  const [value, setValue] = useState(42)
+  return <TextboxNumeric value={value} onChange={setValue} />
 }
 
 export const WithPlaceholder = function () {
-  return <TextboxNumeric placeholder={42} onChange={noop} />
+  const [value, setValue] = useState('')
+  return <TextboxNumeric placeholder={42} value={value} onChange={setValue} />
 }
 
 export const NoBorder = function () {
-  return <TextboxNumeric noBorder value={42} onChange={noop} />
+  const [value, setValue] = useState(42)
+  return <TextboxNumeric noBorder value={value} onChange={setValue} />
 }
 
 export const Disabled = function () {
-  return <TextboxNumeric disabled value={42} onChange={noop} />
+  const [value, setValue] = useState(42)
+  return <TextboxNumeric disabled value={value} onChange={setValue} />
 }
 
 export const WithIcon = function () {
-  return <TextboxNumeric icon={icon} value={42} onChange={noop} />
+  const [value, setValue] = useState(42)
+  return <TextboxNumeric icon={icon} value={value} onChange={setValue} />
 }

@@ -19,60 +19,40 @@ const options = [
 ]
 
 export const Normal = function () {
-  function Component () {
-    const [value, setValue] = useState('')
-    return (
-      <TextboxAutocomplete
-        value={value}
-        options={options}
-        onChange={setValue}
-      />
-    )
-  }
-  return <Component />
+  const [value, setValue] = useState('')
+  return (
+    <TextboxAutocomplete value={value} options={options} onChange={setValue} />
+  )
 }
 
 export const WithInitialValue = function () {
-  function Component () {
-    const [value, setValue] = useState('baz')
-    return (
-      <TextboxAutocomplete
-        value={value}
-        options={options}
-        onChange={setValue}
-      />
-    )
-  }
-  return <Component />
+  const [value, setValue] = useState('baz')
+  return (
+    <TextboxAutocomplete value={value} options={options} onChange={setValue} />
+  )
 }
 
 export const Strict = function () {
-  function Component () {
-    const [value, setValue] = useState('')
-    return (
-      <TextboxAutocomplete
-        strict
-        value={value}
-        options={options}
-        onChange={setValue}
-      />
-    )
-  }
-  return <Component />
+  const [value, setValue] = useState('')
+  return (
+    <TextboxAutocomplete
+      strict
+      value={value}
+      options={options}
+      onChange={setValue}
+    />
+  )
 }
 
 export const Filter = function () {
-  function Component () {
-    const [value, setValue] = useState('')
-    return (
-      <TextboxAutocomplete
-        filter
-        strict
-        value={value}
-        options={options}
-        onChange={setValue}
-      />
-    )
-  }
-  return <Component />
+  const [value, setValue] = useState('')
+  return (
+    <TextboxAutocomplete
+      filter
+      strict
+      value={value}
+      options={options}
+      onChange={setValue}
+    />
+  )
 }

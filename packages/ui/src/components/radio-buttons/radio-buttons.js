@@ -22,7 +22,7 @@ export function RadioButtons ({
       {options.map(function (option, index) {
         const text =
           typeof option.text !== 'undefined' ? option.text : option.value
-        const id = `${name}${option.value}`
+        const id = `${name}-${index}`
         return (
           <label class={styles.label} for={id} key={index}>
             <input

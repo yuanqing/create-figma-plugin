@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+import { useState } from 'preact/hooks'
 import { Textbox } from './textbox'
 
 export default { title: 'Textbox' }
@@ -14,24 +15,27 @@ const icon = (
   </svg>
 )
 
-function noop () {}
-
 export const Text = function () {
-  return <Textbox value='Text' onChange={noop} />
+  const [value, setValue] = useState('Text')
+  return <Textbox value={value} onChange={setValue} />
 }
 
 export const WithPlaceholder = function () {
-  return <Textbox placeholder='Text' onChange={noop} />
+  const [value, setValue] = useState('')
+  return <Textbox placeholder='Text' value={value} onChange={setValue} />
 }
 
 export const NoBorder = function () {
-  return <Textbox noBorder value='Text' onChange={noop} />
+  const [value, setValue] = useState('Text')
+  return <Textbox noBorder value={value} onChange={setValue} />
 }
 
 export const Disabled = function () {
-  return <Textbox disabled value='Text' onChange={noop} />
+  const [value, setValue] = useState('Text')
+  return <Textbox disabled value={value} onChange={setValue} />
 }
 
 export const WithIcon = function () {
-  return <Textbox icon={icon} value='Text' onChange={noop} />
+  const [value, setValue] = useState('Text')
+  return <Textbox icon={icon} value={value} onChange={setValue} />
 }

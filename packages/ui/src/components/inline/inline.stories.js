@@ -88,3 +88,19 @@ export const Large = function () {
     </Inline>
   )
 }
+
+export const ExtraLarge = function () {
+  return (
+    <Inline space='extraLarge'>
+      <div style={style}>
+        <Text>foo</Text>
+      </div>
+      <div style={style}>
+        <Text>bar</Text>
+      </div>
+      <div style={style}>
+        <Text>baz</Text>
+      </div>
+    </Inline>
+  )
+}

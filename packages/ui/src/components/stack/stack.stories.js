@@ -72,3 +72,19 @@ export const Large = function () {
     </Stack>
   )
 }
+
+export const extraLarge = function () {
+  return (
+    <Stack space='extraLarge'>
+      <div style={style}>
+        <Text>foo</Text>
+      </div>
+      <div style={style}>
+        <Text>bar</Text>
+      </div>
+      <div style={style}>
+        <Text>baz</Text>
+      </div>
+    </Stack>
+  )
+}
