@@ -1,6 +1,6 @@
 /* global figma */
 
 export default function () {
-  console.log('Hello, World!')
+  figma.notify('Hello, World!')
   figma.closePlugin()
 }
