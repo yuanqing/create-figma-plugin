@@ -4,8 +4,6 @@
 .selectableItem {
   display: flex;
   align-items: center;
-  cursor: default;
-  user-select: none;
   padding: 0 16px;
   height: 32px;
   color: $color-black-80;
@@ -29,25 +27,8 @@
   background-color: $color-selection-a;
 }
 
-.icon {
-  flex: 0 0 16px;
-  height: 16px;
-  margin-right: 8px;
-
-  svg {
-    display: block;
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
-  }
-}
-
 .text {
   @include text-11-regular;
   flex-grow: 1;
   pointer-events: none;
-}
-
-.isBold {
-  @include text-11-bold;
 }

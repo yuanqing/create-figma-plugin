@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+div,
+span {
+  cursor: default;
+  user-select: none;
+}
+
+button {
+  -webkit-appearance: none;
+  outline: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+}
+
+hr {
+  margin: 0;
+  border: 0;
+}
+
+label {
+  display: block;
+}
+
+input {
+  -webkit-appearance: none;
+  cursor: default;
+  margin: 0;
+  outline: 0;
+  border: 0;
+  font: inherit;
+}
+
+svg {
+  display: block;
+}

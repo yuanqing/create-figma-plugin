@@ -6,11 +6,10 @@ import { Text } from '../text/text'
 
 export default { title: 'Radio Buttons' }
 
-export const Normal = function () {
+export const Default = function () {
   const [value, setValue] = useState('bar')
   return (
     <RadioButtons
-      name='normal'
       value={value}
       onChange={setValue}
       options={[
@@ -26,7 +25,6 @@ export const WithDisabledOption = function () {
   const [value, setValue] = useState('bar')
   return (
     <RadioButtons
-      name='withDisabledOption'
       value={value}
       onChange={setValue}
       options={[

@@ -3,26 +3,23 @@ import { h } from 'preact'
 import '../../scss/base.scss'
 import styles from './segmented-control.scss'
 
-export function SegmentedControl ({ name, onChange, options, value, ...rest }) {
+export function SegmentedControl ({ key, onChange, options, value, ...rest }) {
   function handleChange (event) {
     const index = parseInt(event.target.getAttribute('data-index'))
-    onChange(options[index].value, name)
+    onChange(options[index].value, key)
   }
 
   return (
     <div class={styles.segmentedControl}>
       {options.map(function (option, index) {
         const text =
-          typeof option.text !== 'undefined' ? option.text : option.value
-        const id = `${name}-${index}`
+          typeof option.text === 'undefined' ? option.value : option.text
         return (
-          <label class={styles.label} for={id} key={index}>
+          <label class={styles.label} key={index}>
             <input
               {...rest}
               class={styles.input}
               type='radio'
-              id={id}
-              name={name}
               value={option.value}
               checked={value === option.value}
               disabled={option.disabled === true}

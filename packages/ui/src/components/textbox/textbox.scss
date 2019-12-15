@@ -3,19 +3,11 @@
 
 .textbox {
   @include text-11-regular;
-  cursor: default;
   position: relative;
 }
 
 .input {
-  // reset
-  display: block;
-  box-sizing: border-box;
-  outline: 0;
-  padding: 0;
-
   @include text-11-regular;
-  cursor: default;
   border: 1px solid $color-black-10;
   border-radius: $border-radius-2;
   padding: 0 6px;

@@ -6,11 +6,10 @@ import { Text } from '../text/text'
 
 export default { title: 'Tabs' }
 
-export const Normal = function () {
+export const Default = function () {
   const [value, setValue] = useState('bar')
   return (
     <Tabs
-      name='normal'
       value={value}
       onChange={setValue}
       options={[

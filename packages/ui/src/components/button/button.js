@@ -7,6 +7,7 @@ import styles from './button.scss'
 export function Button ({
   destructive: isDestructive,
   fullWidth: isFullWidth,
+  onClick,
   secondary: isSecondary,
   ...rest
 }) {
@@ -19,6 +20,7 @@ export function Button ({
         isDestructive === true ? styles.isDestructive : null,
         isFullWidth === true ? styles.isFullWidth : null
       )}
+      onClick={onClick}
     />
   )
 }

@@ -4,15 +4,15 @@ import { Button } from './button'
 
 export default { title: 'Button' }
 
-export const Normal = function () {
+export const Primary = function () {
   return <Button>Text</Button>
 }
 
-export const NormalDisabled = function () {
+export const PrimaryDisabled = function () {
   return <Button disabled>Text</Button>
 }
 
-export const NormalFullWidth = function () {
+export const PrimaryFullWidth = function () {
   return <Button fullWidth>Text</Button>
 }
 

@@ -3,19 +3,17 @@ import { h } from 'preact'
 import '../../scss/base.scss'
 import styles from './checkbox.scss'
 
-export function Checkbox ({ children, name, onChange, value, ...rest }) {
+export function Checkbox ({ children, key, onChange, value, ...rest }) {
   function handleChange (event) {
-    onChange(event.target.checked === true, name)
+    onChange(event.target.checked === true, key)
   }
 
   return (
-    <label class={styles.label} for={name}>
+    <label class={styles.label}>
       <input
         {...rest}
         class={styles.input}
         type='checkbox'
-        id={name}
-        name={name}
         checked={value === true}
         onChange={handleChange}
       />

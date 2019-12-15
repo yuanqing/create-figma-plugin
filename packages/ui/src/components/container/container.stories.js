@@ -9,7 +9,7 @@ const style = {
   backgroundColor: 'rgba(0, 0, 255, 0.2)'
 }
 
-export const ExtraSmall = function () {
+export const ExtraSmallSpace = function () {
   return (
     <Container space='extraSmall' style={style}>
       <Text>Text</Text>
@@ -17,7 +17,7 @@ export const ExtraSmall = function () {
   )
 }
 
-export const Small = function () {
+export const SmallSpace = function () {
   return (
     <Container space='small' style={style}>
       <Text>Text</Text>
@@ -25,7 +25,7 @@ export const Small = function () {
   )
 }
 
-export const Medium = function () {
+export const MediumSpace = function () {
   return (
     <Container space='medium' style={style}>
       <Text>Text</Text>
@@ -33,9 +33,17 @@ export const Medium = function () {
   )
 }
 
-export const Large = function () {
+export const LargeSpace = function () {
   return (
     <Container space='large' style={style}>
+      <Text>Text</Text>
+    </Container>
+  )
+}
+
+export const ExtraLargeSpace = function () {
+  return (
+    <Container space='extraLarge' style={style}>
       <Text>Text</Text>
     </Container>
   )

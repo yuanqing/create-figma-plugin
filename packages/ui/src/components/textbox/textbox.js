@@ -9,7 +9,7 @@ import styles from './textbox.scss'
 export function Textbox ({
   focused: isFocused,
   icon,
-  name,
+  key,
   noBorder,
   onChange,
   value,
@@ -24,7 +24,7 @@ export function Textbox ({
   }
 
   function handleInput () {
-    onChange(inputElementRef.current.value, name)
+    onChange(inputElementRef.current.value, key)
   }
 
   function handleKeyDown (event) {
@@ -57,7 +57,6 @@ export function Textbox ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
-        name={name}
         value={value}
         onFocus={handleFocus}
         onInput={handleInput}

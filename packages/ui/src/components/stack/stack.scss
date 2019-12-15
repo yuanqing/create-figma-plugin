@@ -1,10 +1,6 @@
 @import "../../scss/constants";
 @import "../../scss/text";
 
-.stack {
-  user-select: none;
-}
-
 .item {
   .extraSmall > & {
     margin-top: $space-extra-small;

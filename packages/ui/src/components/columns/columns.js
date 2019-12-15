@@ -9,7 +9,7 @@ export function Columns ({ children, space, ...rest }) {
       {...rest}
       class={classnames(
         styles.columns,
-        typeof space !== 'undefined' ? styles[space] : null
+        typeof space === 'undefined' ? null : styles[space]
       )}
     >
       {children.map(function (element, index) {

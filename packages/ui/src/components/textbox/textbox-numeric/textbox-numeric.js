@@ -16,7 +16,7 @@ import styles from '../textbox.scss'
 export function TextboxNumeric ({
   focused: isFocused,
   icon,
-  name,
+  key,
   noBorder,
   onChange,
   value,
@@ -31,7 +31,7 @@ export function TextboxNumeric ({
   }
 
   function handleInput () {
-    onChange(inputElementRef.current.value, name)
+    onChange(inputElementRef.current.value, key)
   }
 
   function handleKeyDown (event) {
@@ -98,14 +98,13 @@ export function TextboxNumeric ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
-        name={name}
         value={value}
         onInput={handleInput}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
       />
-      {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
+      {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
     </div>
   )
 }

@@ -2,12 +2,7 @@
 @import "@create-figma-plugin/ui/src/scss/text";
 
 .preview {
-  // reset
-  box-sizing: border-box;
-
   @include text-11-regular;
-  cursor: default;
-  user-select: none;
   position: relative;
   padding: $space-medium 0;
   height: 121px;

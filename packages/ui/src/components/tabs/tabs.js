@@ -3,30 +3,27 @@ import { h } from 'preact'
 import '../../scss/base.scss'
 import styles from './tabs.scss'
 
-export function Tabs ({ name, onChange, options, value, ...rest }) {
+export function Tabs ({ key, onChange, options, value, ...rest }) {
   function handleChange (event) {
     const index = parseInt(event.target.getAttribute('data-index'))
-    onChange(options[index].value, name)
+    onChange(options[index].value, key)
   }
+
   const activeOption = options.find(function (option) {
     return option.value === value
   })
-
   return (
     <div>
       <div class={styles.tabs}>
         {options.map(function (option, index) {
           const text =
-            typeof option.text !== 'undefined' ? option.text : option.value
-          const id = `${name}-${index}`
+            typeof option.text === 'undefined' ? option.value : option.text
           return (
-            <label class={styles.label} for={id} key={index}>
+            <label class={styles.label} key={index}>
               <input
                 {...rest}
                 class={styles.input}
                 type='radio'
-                id={id}
-                name={name}
                 value={option.value}
                 checked={value === option.value}
                 onChange={handleChange}

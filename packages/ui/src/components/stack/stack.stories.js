@@ -9,7 +9,7 @@ const style = {
   backgroundColor: 'rgba(0, 0, 255, 0.2)'
 }
 
-export const ExtraSmall = function () {
+export const ExtraSmallSpace = function () {
   return (
     <Stack space='extraSmall'>
       <div style={style}>
@@ -25,7 +25,7 @@ export const ExtraSmall = function () {
   )
 }
 
-export const Small = function () {
+export const SmallSpace = function () {
   return (
     <Stack space='small'>
       <div style={style}>
@@ -41,7 +41,7 @@ export const Small = function () {
   )
 }
 
-export const Medium = function () {
+export const MediumSpace = function () {
   return (
     <Stack space='medium'>
       <div style={style}>
@@ -57,7 +57,7 @@ export const Medium = function () {
   )
 }
 
-export const Large = function () {
+export const LargeSpace = function () {
   return (
     <Stack space='large'>
       <div style={style}>
@@ -73,7 +73,7 @@ export const Large = function () {
   )
 }
 
-export const extraLarge = function () {
+export const ExtraLargeSpace = function () {
   return (
     <Stack space='extraLarge'>
       <div style={style}>

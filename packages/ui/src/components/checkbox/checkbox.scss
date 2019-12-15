@@ -2,11 +2,8 @@
 @import "../../scss/text";
 
 .label {
-  // reset
-  display: flex;
-
   @include text-11-regular;
-  user-select: none;
+  display: flex;
   position: relative;
   z-index: $z-index-1;
 
@@ -22,14 +19,6 @@
 }
 
 .input {
-  // reset
-  -webkit-appearance: none;
-  display: block;
-  box-sizing: border-box;
-  margin: 0;
-  outline: 0;
-  background: none;
-
   flex: 0 0 12px;
   border: 1px solid $color-black-80;
   border-radius: $border-radius-2;

@@ -3,7 +3,6 @@
 
 .segmentedControl {
   @include text-11-regular;
-  user-select: none;
   display: inline-block;
   border-radius: $border-radius-2;
   overflow: hidden;
@@ -14,9 +13,7 @@
 }
 
 .label {
-  // reset
   display: inline-block;
-
   text-align: center;
 }
 

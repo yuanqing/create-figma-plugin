@@ -2,15 +2,8 @@
 @import "../../scss/text";
 
 .button {
-  // reset
-  -webkit-appearance: none;
-  display: inline-block;
-  outline: 0;
-  padding: 0;
-  box-sizing: border-box;
-
   @include text-11-regular;
-  user-select: none;
+  display: inline-block;
   border-radius: $border-radius-6;
   border: 2px solid transparent;
   padding: 0 14px;

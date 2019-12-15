@@ -2,21 +2,13 @@
 @import "../../scss/text";
 
 .tabs {
-  // reset
-  box-sizing: border-box;
-
   @include text-11-regular;
-  user-select: none;
-
   border-bottom: 1px solid $color-black-10;
   padding-left: $space-extra-small;
 }
 
 .label {
-  // reset
   display: inline-block;
-
-  text-align: center;
   color: $color-black-30;
 
   &:hover {

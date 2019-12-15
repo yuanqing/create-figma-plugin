@@ -6,10 +6,10 @@ import { Text } from '../text/text'
 
 export default { title: 'Checkbox' }
 
-export const Normal = function () {
+export const Default = function () {
   const [value, setValue] = useState(false)
   return (
-    <Checkbox name='normal' value={value} onChange={setValue}>
+    <Checkbox value={value} onChange={setValue}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -18,7 +18,7 @@ export const Normal = function () {
 export const Disabled = function () {
   const [value, setValue] = useState(false)
   return (
-    <Checkbox disabled name='disabled' value={value} onChange={setValue}>
+    <Checkbox disabled value={value} onChange={setValue}>
       <Text>Text</Text>
     </Checkbox>
   )

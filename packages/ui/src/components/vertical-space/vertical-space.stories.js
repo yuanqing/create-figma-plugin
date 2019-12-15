@@ -8,7 +8,7 @@ const style = {
   backgroundColor: 'rgba(0, 0, 255, 0.2)'
 }
 
-export const ExtraSmall = function () {
+export const ExtraSmallSpace = function () {
   return (
     <div style={style}>
       <VerticalSpace space='extraSmall' />
@@ -16,7 +16,7 @@ export const ExtraSmall = function () {
   )
 }
 
-export const Small = function () {
+export const SmallSpace = function () {
   return (
     <div style={style}>
       <VerticalSpace space='small' />
@@ -24,7 +24,7 @@ export const Small = function () {
   )
 }
 
-export const Medium = function () {
+export const MediumSpace = function () {
   return (
     <div style={style}>
       <VerticalSpace space='medium' />
@@ -32,10 +32,18 @@ export const Medium = function () {
   )
 }
 
-export const Large = function () {
+export const LargeSpace = function () {
   return (
     <div style={style}>
       <VerticalSpace space='large' />
+    </div>
+  )
+}
+
+export const ExtraLargeSpace = function () {
+  return (
+    <div style={style}>
+      <VerticalSpace space='extraLarge' />
     </div>
   )
 }

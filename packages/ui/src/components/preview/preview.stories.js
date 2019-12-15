@@ -4,7 +4,7 @@ import { Preview } from './preview'
 
 export default { title: 'Preview' }
 
-export const Normal = function () {
+export const Default = function () {
   return <Preview>Preview</Preview>
 }
 

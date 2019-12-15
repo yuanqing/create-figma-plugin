@@ -3,8 +3,6 @@
 
 .text {
   @include text-11-regular;
-  cursor: default;
-  user-select: none;
   transform: translateY(4px);
   padding-top: 1px;
   color: $color-black-80;
@@ -26,10 +24,10 @@
   }
 }
 
-.isMuted {
-  color: $color-black-30;
-}
-
 .isBold {
   @include text-11-bold;
+}
+
+.isMuted {
+  color: $color-black-30;
 }
