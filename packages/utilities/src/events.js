@@ -47,3 +47,9 @@ if (isCommand === true) {
     }
   }
 }
+
+export function onSelectionChange (callback) {
+  figma.on('selectionchange', function () {
+    callback(figma.currentPage.selection)
+  })
+}
