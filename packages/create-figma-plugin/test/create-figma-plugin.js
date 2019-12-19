@@ -26,7 +26,7 @@ test('use default', async function (t) {
   await cleanUp()
   await createFigmaPlugin({}, true)
   t.true(await exists('figma-plugin'))
-  t.true(await exists('figma-plugin/index.js'))
+  t.true(await exists('figma-plugin/command.js'))
   t.true(await exists('figma-plugin/node_modules'))
   t.true(await exists('figma-plugin/package.json'))
 })
