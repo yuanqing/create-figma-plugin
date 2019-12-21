@@ -1,5 +1,7 @@
 export * from './events'
+export * from './key-codes'
 export * from './layers'
+export * from './number'
 export * from './object'
 export * from './settings'
 export * from './string'

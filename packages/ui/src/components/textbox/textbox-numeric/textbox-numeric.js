@@ -1,18 +1,19 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
-import { h } from 'preact'
-import { useLayoutEffect, useRef } from 'preact/hooks'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
   UP_KEY_CODE
-} from '../utilities/key-codes'
+} from '@create-figma-plugin/utilities/src/key-codes'
+import {
+  evaluateNumericExpression,
+  isNumericExpression,
+  isValidNumericInput
+} from '@create-figma-plugin/utilities/src/number'
+import classnames from '@sindresorhus/class-names'
+import { h } from 'preact'
+import { useLayoutEffect, useRef } from 'preact/hooks'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import {
-  operatorRegex,
-  isValidNumericInput
-} from '../utilities/is-valid-numeric-input'
 import '../../../scss/base.scss'
 import styles from '../textbox.scss'
 
@@ -47,11 +48,10 @@ export function TextboxNumeric ({
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
       event.preventDefault()
       const value = inputElementRef.current.value
-      const isExpression = operatorRegex.test(value) === true
-      const parsedValue = isExpression ? eval(value) : parseFloat(value) // eslint-disable-line no-eval
+      const parsedValue = evaluateNumericExpression(value)
       const delta = event.shiftKey === true ? 10 : 1
       const significantFiguresCount = countSignificantFigures(
-        isExpression ? parsedValue : value
+        isNumericExpression(value) === true ? parsedValue : value
       )
       inputElementRef.current.value = formatValue(
         event.keyCode === UP_KEY_CODE

@@ -1,7 +1,8 @@
+import {
+  ENTER_KEY_CODE,
+  ESCAPE_KEY_CODE
+} from '@create-figma-plugin/utilities/src/key-codes'
 import { useCallback, useEffect, useState } from 'preact/hooks'
-
-const ENTER_KEY_CODE = 13
-const ESCAPE_KEY_CODE = 27
 
 export function useForm (
   initialInputs,

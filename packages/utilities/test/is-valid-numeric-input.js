@@ -1,5 +1,5 @@
 import test from 'ava'
-import { isValidNumericInput } from '../src/components/textbox/utilities/is-valid-numeric-input'
+import { isValidNumericInput } from '../src/number'
 
 test('empty string', async function (t) {
   t.plan(1)

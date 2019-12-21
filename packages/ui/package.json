@@ -34,6 +34,7 @@
     "start": "mkdirp node_modules && start-storybook"
   },
   "dependencies": {
+    "@create-figma-plugin/utilities": "^0.0.39",
     "@sindresorhus/class-names": "^1.1.0"
   },
   "peerDependencies": {
