@@ -9,7 +9,10 @@ import {
 } from '../utilities/key-codes'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import { numericInputRegex } from '../utilities/numeric-input-regex'
+import {
+  operatorRegex,
+  isValidNumericInput
+} from '../utilities/is-valid-numeric-input'
 import '../../../scss/base.scss'
 import styles from '../textbox.scss'
 
@@ -44,11 +47,16 @@ export function TextboxNumeric ({
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
       event.preventDefault()
       const value = inputElementRef.current.value
-      const number = parseFloat(value)
+      const isExpression = operatorRegex.test(value) === true
+      const parsedValue = isExpression ? eval(value) : parseFloat(value) // eslint-disable-line no-eval
       const delta = event.shiftKey === true ? 10 : 1
-      const significantFiguresCount = countSignificantFigures(value)
+      const significantFiguresCount = countSignificantFigures(
+        isExpression ? parsedValue : value
+      )
       inputElementRef.current.value = formatValue(
-        event.keyCode === UP_KEY_CODE ? number + delta : number - delta,
+        event.keyCode === UP_KEY_CODE
+          ? parsedValue + delta
+          : parsedValue - delta,
         significantFiguresCount
       )
       handleInput()
@@ -60,7 +68,7 @@ export function TextboxNumeric ({
     }
     if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
       const nextValue = computeNextValue(inputElementRef.current, event.key)
-      if (numericInputRegex.test(nextValue) === false) {
+      if (isValidNumericInput(nextValue) === false) {
         event.preventDefault()
       }
     }
@@ -71,7 +79,7 @@ export function TextboxNumeric ({
       inputElementRef.current,
       event.clipboardData.getData('Text')
     )
-    if (numericInputRegex.test(nextValue) === false) {
+    if (isValidNumericInput(nextValue) === false) {
       event.preventDefault()
     }
   }
