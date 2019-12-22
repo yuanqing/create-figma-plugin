@@ -48,8 +48,12 @@ if (isCommand === true) {
   }
 }
 
-export function onSelectionChange (callback) {
-  figma.on('selectionchange', function () {
-    callback(figma.currentPage.selection)
-  })
+export function onSelectionChange (eventListener) {
+  function callback () {
+    eventListener(figma.currentPage.selection)
+  }
+  figma.on('selectionchange', callback)
+  return function () {
+    figma.off('selectionchange', callback)
+  }
 }
