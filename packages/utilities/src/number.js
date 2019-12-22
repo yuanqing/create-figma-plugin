@@ -1,6 +1,10 @@
+const invalidCharactersRegex = /[^\d.+\-*/]/
 const operandRegex = /^-?\d*(?:\.\d*)?$/
 const operatorRegex = /[+\-*/]/
-const invalidCharactersRegex = /[^\d.+\-*/]/
+
+export function isNumericExpression (value) {
+  return operatorRegex.test(value) === true
+}
 
 export function isValidNumericInput (value) {
   const split = (value[0] === '-' ? value.substring(1) : value).split(
@@ -19,13 +23,9 @@ export function isValidNumericInput (value) {
   return true
 }
 
-export function isNumericExpression (value) {
-  return operandRegex.test(value) === false
-}
-
 export function evaluateNumericExpression (value) {
-  if (invalidCharactersRegex.test(value) === true) {
-    throw new Error(`Invalid expression: ${value}`)
+  if (value === '' || invalidCharactersRegex.test(value) === true) {
+    return null
   }
   if (operatorRegex.test(value) === true) {
     return eval(value) // eslint-disable-line no-eval

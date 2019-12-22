@@ -1,4 +1,7 @@
 /** @jsx h */
+import classnames from '@sindresorhus/class-names'
+import { h } from 'preact'
+import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -6,10 +9,7 @@ import {
   ENTER_KEY_CODE,
   ESCAPE_KEY_CODE,
   UP_KEY_CODE
-} from '@create-figma-plugin/utilities/src/key-codes'
-import classnames from '@sindresorhus/class-names'
-import { h } from 'preact'
-import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
+} from '../../../utilities/key-codes'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import '../../../scss/base.scss'
@@ -351,7 +351,7 @@ export function TextboxAutocomplete ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
-        value={committedValue}
+        value={committedValue === null ? '' : committedValue}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}

@@ -1,5 +1,4 @@
 export * from './events'
-export * from './key-codes'
 export * from './layers'
 export * from './number'
 export * from './object'

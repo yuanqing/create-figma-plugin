@@ -1,8 +1,8 @@
 /** @jsx h */
-import { ESCAPE_KEY_CODE } from '@create-figma-plugin/utilities/src/key-codes'
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useLayoutEffect, useRef } from 'preact/hooks'
+import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import '../../scss/base.scss'
 import styles from './textbox.scss'
 
@@ -12,6 +12,7 @@ export function Textbox ({
   name,
   noBorder,
   onChange,
+  propagateEscapeKeyDown = false,
   value,
   ...rest
 }) {
@@ -30,7 +31,9 @@ export function Textbox ({
   function handleKeyDown (event) {
     const keyCode = event.keyCode
     if (keyCode === ESCAPE_KEY_CODE) {
-      event.stopPropagation()
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
+      }
       inputElementRef.current.blur()
     }
   }
@@ -57,7 +60,7 @@ export function Textbox ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
-        value={value}
+        value={value === null ? '' : value}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}

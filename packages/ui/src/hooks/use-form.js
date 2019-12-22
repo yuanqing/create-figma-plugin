@@ -1,8 +1,5 @@
-import {
-  ENTER_KEY_CODE,
-  ESCAPE_KEY_CODE
-} from '@create-figma-plugin/utilities/src/key-codes'
 import { useCallback, useEffect, useState } from 'preact/hooks'
+import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../utilities/key-codes'
 
 export function useForm (
   initialInputs,
@@ -39,7 +36,7 @@ export function useForm (
         handleCancelCallback()
       }
     },
-    [inputs, handleCancelCallback, handleSubmitCallback]
+    [handleCancelCallback, handleSubmitCallback, inputs]
   )
   useEffect(
     function () {
@@ -50,7 +47,7 @@ export function useForm (
         }
       }
     },
-    [shouldHandleKeyDown, handleKeyDown]
+    [handleKeyDown, shouldHandleKeyDown]
   )
   return {
     inputs,

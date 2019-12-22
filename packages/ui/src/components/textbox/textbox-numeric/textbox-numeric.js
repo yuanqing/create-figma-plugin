@@ -1,10 +1,5 @@
 /** @jsx h */
 import {
-  DOWN_KEY_CODE,
-  ESCAPE_KEY_CODE,
-  UP_KEY_CODE
-} from '@create-figma-plugin/utilities/src/key-codes'
-import {
   evaluateNumericExpression,
   isNumericExpression,
   isValidNumericInput
@@ -12,6 +7,11 @@ import {
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useLayoutEffect, useRef } from 'preact/hooks'
+import {
+  DOWN_KEY_CODE,
+  ESCAPE_KEY_CODE,
+  UP_KEY_CODE
+} from '../../../utilities/key-codes'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import '../../../scss/base.scss'
@@ -23,6 +23,7 @@ export function TextboxNumeric ({
   name,
   noBorder,
   onChange,
+  propagateEscapeKeyDown = false,
   value,
   ...rest
 }) {
@@ -41,7 +42,9 @@ export function TextboxNumeric ({
   function handleKeyDown (event) {
     const keyCode = event.keyCode
     if (keyCode === ESCAPE_KEY_CODE) {
-      event.stopPropagation()
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
+      }
       inputElementRef.current.blur()
       return
     }
@@ -51,7 +54,7 @@ export function TextboxNumeric ({
       const parsedValue = evaluateNumericExpression(value)
       const delta = event.shiftKey === true ? 10 : 1
       const significantFiguresCount = countSignificantFigures(
-        isNumericExpression(value) === true ? parsedValue : value
+        isNumericExpression(value) === true ? `${parsedValue}` : value
       )
       inputElementRef.current.value = formatValue(
         event.keyCode === UP_KEY_CODE
@@ -106,7 +109,7 @@ export function TextboxNumeric ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
-        value={value}
+        value={value === null ? '' : value}
         onInput={handleInput}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
@@ -129,7 +132,7 @@ function countSignificantFigures (value) {
 
 function formatValue (value, significantFiguresCount) {
   if (significantFiguresCount === 0) {
-    return value
+    return `${value}`
   }
   const result = fractionalPartRegex.exec(`${value}`)
   if (result === null) {
