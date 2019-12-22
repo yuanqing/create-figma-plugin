@@ -2,10 +2,6 @@ const invalidCharactersRegex = /[^\d.+\-*/]/
 const operandRegex = /^-?\d*(?:\.\d*)?$/
 const operatorRegex = /[+\-*/]/
 
-export function isNumericExpression (value) {
-  return operatorRegex.test(value) === true
-}
-
 export function isValidNumericInput (value) {
   const split = (value[0] === '-' ? value.substring(1) : value).split(
     operatorRegex

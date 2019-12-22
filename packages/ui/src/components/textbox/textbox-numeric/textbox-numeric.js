@@ -1,7 +1,6 @@
 /** @jsx h */
 import {
   evaluateNumericExpression,
-  isNumericExpression,
   isValidNumericInput
 } from '@create-figma-plugin/utilities/src/number'
 import classnames from '@sindresorhus/class-names'
@@ -16,6 +15,8 @@ import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import '../../../scss/base.scss'
 import styles from '../textbox.scss'
+
+const nonDigitRegex = /[^\d.]/
 
 export function TextboxNumeric ({
   focused: isFocused,
@@ -55,7 +56,7 @@ export function TextboxNumeric ({
       const parsedValue = evaluateNumericExpression(value)
       const delta = event.shiftKey === true ? 10 : 1
       const significantFiguresCount = countSignificantFigures(
-        isNumericExpression(value) === true ? `${parsedValue}` : value
+        nonDigitRegex.test(value) === true ? `${parsedValue}` : value
       )
       inputElementRef.current.value = formatValue(
         event.keyCode === UP_KEY_CODE

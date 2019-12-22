@@ -19,7 +19,6 @@
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   * [loadFonts(layers)](#loadfontslayers)
 - [Number](#number)
-  * [isNumericExpression(value)](#const-result--isnumericexpressionvalue)
   * [isValidNumericInput(value)](#const-result--isvalidnumericinputvalue)
   * [evaluateNumericExpression(expression)](#const-result--evaluatenumericexpressionexpression)
 - [Object](#object)
@@ -261,31 +260,18 @@ Loads the fonts used in all the text layers in `layers`.
 
 ```js
 import {
-  isNumericExpression,
   isValidNumericInput,
   evaluateNumericExpression
 } from '@create-figma-plugin/utilities'
 ```
 
-### const result = isNumericExpression(value)
-
-Checks if `value` is a numeric expression.
-
-#### Returns
-
-- `true` if `value` is a numeric expression, else `false`
-
-#### Parameters
-
-- `value` (`string`)
-
 ### const result = isValidNumericInput(value)
 
-Checks if `value` is a partial or complete numeric expression (as input by a user).
+Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid.
 
 #### Returns
 
-- `true` if `value` is a valid numeric input, else `false`
+- `true` if `value` is a valid numeric expression, else `false`
 
 #### Parameters
 
