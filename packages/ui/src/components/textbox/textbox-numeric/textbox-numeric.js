@@ -23,6 +23,7 @@ export function TextboxNumeric ({
   name,
   noBorder,
   onChange,
+  placeholder,
   propagateEscapeKeyDown = false,
   value,
   ...rest
@@ -109,6 +110,7 @@ export function TextboxNumeric ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
+        placeholder={placeholder}
         value={value === null ? '' : value}
         onInput={handleInput}
         onFocus={handleFocus}

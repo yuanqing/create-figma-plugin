@@ -12,6 +12,7 @@ export function Textbox ({
   name,
   noBorder,
   onChange,
+  placeholder,
   propagateEscapeKeyDown = false,
   value,
   ...rest
@@ -60,6 +61,7 @@ export function Textbox ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
+        placeholder={placeholder}
         value={value === null ? '' : value}
         onFocus={handleFocus}
         onInput={handleInput}

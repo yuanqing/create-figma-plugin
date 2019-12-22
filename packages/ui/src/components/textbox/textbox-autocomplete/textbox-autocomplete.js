@@ -26,6 +26,7 @@ export function TextboxAutocomplete ({
   noBorder,
   onChange,
   options,
+  placeholder,
   strict: isStrict,
   top: isTop,
   value: committedValue,
@@ -351,6 +352,7 @@ export function TextboxAutocomplete ({
         ref={inputElementRef}
         type='text'
         class={styles.input}
+        placeholder={placeholder}
         value={committedValue === null ? '' : committedValue}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
