@@ -40,6 +40,7 @@
 ```js
 import {
   addEventListener,
+  onSelectionChange,
   triggerEvent
 } from '@create-figma-plugin/utilities'
 ```
@@ -55,6 +56,18 @@ Registers an `eventListener` for the given `eventName`.
 #### Parameters
 
 - `eventName` (`string`)
+- `eventListener` (`function (...arguments)`)
+
+### const removeEventListener = onSelectionChange(eventListener)
+
+Registers an `eventListener` for when the selection changes.
+
+#### Returns
+
+- A `function` for deregistering the `eventListener`
+
+#### Parameters
+
 - `eventListener` (`function (...arguments)`)
 
 ### triggerEvent(eventName *[, ...arguments]*)
@@ -238,23 +251,87 @@ Loads the fonts used in all the text layers in `layers`.
 
 ---
 
+## Number
+
+```js
+import {
+  isNumericExpression,
+  isValidNumericInput,
+  evaluateNumericExpression
+} from '@create-figma-plugin/utilities'
+```
+
+### const result = isNumericExpression(value)
+
+Checks if `value` is a numeric expression.
+
+#### Returns
+
+- `true` if `value` is a numeric expression, else `false`
+
+#### Parameters
+
+- `value` (`string`)
+
+### const result = isValidNumericInput(value)
+
+Checks if `value` is a partial or complete numeric expression (as input by a user).
+
+#### Returns
+
+- `true` if `value` is a valid numeric input, else `false`
+
+#### Parameters
+
+- `value` (`string`)
+
+### const result = evaluateNumericExpression(expression)
+
+Evaluates the given numeric `expression`.
+
+#### Returns
+
+- A `float`, the result of evaluating the given `expression`
+
+#### Parameters
+
+- `expression` (`string`)
+
+---
+
 ## Object
 
 ```js
-import { cloneObject } from '@create-figma-plugin/utilities'
+import {
+  cloneObject,
+  compareObjects
+} from '@create-figma-plugin/utilities'
 ```
 
 ### const result = cloneObject(object)
 
-Clones the given `object`.
+Creates a deep copy of the given `object`.
 
 #### Returns
 
-- A deep copy of `object`
+- A deep copy of the given `object`
 
 #### Parameters
 
 - `object` (`any`)
+
+### const result = compareObjects(a, b)
+
+Performs a shallow comparison of objects `a` and `b`.
+
+#### Returns
+
+- `true` if `a` and `b` are the same values, else `false`
+
+#### Parameters
+
+- `a` (`any`)
+- `b` (`any`)
 
 ---
 
