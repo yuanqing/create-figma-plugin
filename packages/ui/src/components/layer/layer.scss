@@ -1,0 +1,53 @@
+@import "../../scss/constants";
+@import "../../scss/text";
+
+.layer {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 32px;
+  color: $color-black-80;
+
+  &:hover {
+    background-color: $color-selection-b;
+  }
+}
+
+.component {
+  color: $color-purple;
+}
+
+.isSelected,
+.isSelected:hover {
+  background-color: $color-selection-a;
+}
+
+.text {
+  @include text-11-regular;
+  flex-grow: 1;
+  pointer-events: none;
+  padding-left: 8px;
+
+  .component &,
+  .frame & {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+
+  svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    .component & {
+      fill: $color-purple;
+    }
+    .frame & {
+      fill: $color-black-80;
+    }
+  }
+}
