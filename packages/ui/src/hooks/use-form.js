@@ -19,9 +19,11 @@ export function useForm (
   )
   const handleInput = useCallback(
     function (value, name) {
-      setInputs({
-        ...inputs,
-        [name]: value
+      setInputs(function (inputs) {
+        return {
+          ...inputs,
+          [name]: value
+        }
       })
     },
     [inputs, setInputs]
