@@ -17,17 +17,14 @@ export function useForm (
     },
     [inputs, handleSubmitCallback]
   )
-  const handleInput = useCallback(
-    function (value, name) {
-      setInputs(function (inputs) {
-        return {
-          ...inputs,
-          [name]: value
-        }
-      })
-    },
-    [inputs, setInputs]
-  )
+  function handleInput (value, name) {
+    setInputs(function (inputs) {
+      return {
+        ...inputs,
+        [name]: value
+      }
+    })
+  }
   const handleKeyDown = useCallback(
     function (event) {
       if (event.keyCode === ENTER_KEY_CODE) {
