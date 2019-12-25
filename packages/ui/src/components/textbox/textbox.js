@@ -1,7 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useLayoutEffect, useRef } from 'preact/hooks'
+import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import '../../scss/base.scss'
 import styles from './textbox.scss'
@@ -25,9 +25,12 @@ export function Textbox ({
     inputElementRef.current.select()
   }
 
-  function handleInput () {
-    onChange(inputElementRef.current.value, name)
-  }
+  const handleInput = useCallback(
+    function () {
+      onChange(inputElementRef.current.value, name)
+    },
+    [name, onChange]
+  )
 
   function handleKeyDown (event) {
     const keyCode = event.keyCode

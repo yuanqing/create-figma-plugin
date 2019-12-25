@@ -1,6 +1,8 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
+import { useCallback } from 'preact/hooks'
+import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import '../../scss/base.scss'
 import styles from './button.scss'
 
@@ -8,9 +10,23 @@ export function Button ({
   destructive: isDestructive,
   fullWidth: isFullWidth,
   onClick,
+  propagateEscapeKeyDown = false,
   secondary: isSecondary,
   ...rest
 }) {
+  const handleKeyDown = useCallback(
+    function (event) {
+      const keyCode = event.keyCode
+      if (keyCode === ESCAPE_KEY_CODE) {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        event.target.blur()
+      }
+    },
+    [propagateEscapeKeyDown]
+  )
+
   return (
     <button
       {...rest}
@@ -21,6 +37,7 @@ export function Button ({
         isFullWidth === true ? styles.isFullWidth : null
       )}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
     />
   )
 }

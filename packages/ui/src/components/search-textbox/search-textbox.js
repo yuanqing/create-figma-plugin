@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useLayoutEffect, useRef } from 'preact/hooks'
+import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { searchIcon } from '../../icons/search-icon'
 import '../../scss/base.scss'
@@ -21,19 +21,25 @@ export function SearchTextbox ({
     inputElementRef.current.select()
   }
 
-  function handleInput () {
-    onChange(inputElementRef.current.value, name)
-  }
+  const handleInput = useCallback(
+    function () {
+      onChange(inputElementRef.current.value, name)
+    },
+    [name, onChange]
+  )
 
-  function handleKeyDown (event) {
-    const keyCode = event.keyCode
-    if (keyCode === ESCAPE_KEY_CODE) {
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
+  const handleKeyDown = useCallback(
+    function (event) {
+      const keyCode = event.keyCode
+      if (keyCode === ESCAPE_KEY_CODE) {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        inputElementRef.current.blur()
       }
-      inputElementRef.current.blur()
-    }
-  }
+    },
+    [propagateEscapeKeyDown]
+  )
 
   useLayoutEffect(
     function () {

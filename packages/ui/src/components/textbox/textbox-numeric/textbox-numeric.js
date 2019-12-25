@@ -5,7 +5,7 @@ import {
 } from '@create-figma-plugin/utilities/src/number'
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useLayoutEffect, useRef } from 'preact/hooks'
+import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -37,47 +37,53 @@ export function TextboxNumeric ({
     inputElementRef.current.select()
   }
 
-  function handleInput () {
-    onChange(inputElementRef.current.value, name)
-  }
+  const handleInput = useCallback(
+    function () {
+      onChange(inputElementRef.current.value, name)
+    },
+    [name, onChange]
+  )
 
-  function handleKeyDown (event) {
-    const keyCode = event.keyCode
-    if (keyCode === ESCAPE_KEY_CODE) {
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
+  const handleKeyDown = useCallback(
+    function (event) {
+      const keyCode = event.keyCode
+      if (keyCode === ESCAPE_KEY_CODE) {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        inputElementRef.current.blur()
+        return
       }
-      inputElementRef.current.blur()
-      return
-    }
-    if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
-      event.preventDefault()
-      const value = inputElementRef.current.value
-      const parsedValue = evaluateNumericExpression(value)
-      const delta = event.shiftKey === true ? 10 : 1
-      const significantFiguresCount = countSignificantFigures(
-        nonDigitRegex.test(value) === true ? `${parsedValue}` : value
-      )
-      inputElementRef.current.value = formatValue(
-        event.keyCode === UP_KEY_CODE
-          ? parsedValue + delta
-          : parsedValue - delta,
-        significantFiguresCount
-      )
-      handleInput()
-      handleFocus()
-      return
-    }
-    if (event.ctrlKey === true || event.metaKey === true) {
-      return
-    }
-    if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-      const nextValue = computeNextValue(inputElementRef.current, event.key)
-      if (isValidNumericInput(nextValue) === false) {
+      if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
         event.preventDefault()
+        const value = inputElementRef.current.value
+        const parsedValue = evaluateNumericExpression(value)
+        const delta = event.shiftKey === true ? 10 : 1
+        const significantFiguresCount = countSignificantFigures(
+          nonDigitRegex.test(value) === true ? `${parsedValue}` : value
+        )
+        inputElementRef.current.value = formatValue(
+          event.keyCode === UP_KEY_CODE
+            ? parsedValue + delta
+            : parsedValue - delta,
+          significantFiguresCount
+        )
+        handleInput()
+        handleFocus()
+        return
       }
-    }
-  }
+      if (event.ctrlKey === true || event.metaKey === true) {
+        return
+      }
+      if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
+        const nextValue = computeNextValue(inputElementRef.current, event.key)
+        if (isValidNumericInput(nextValue) === false) {
+          event.preventDefault()
+        }
+      }
+    },
+    [handleInput, propagateEscapeKeyDown]
+  )
 
   function handlePaste (event) {
     const nextValue = computeNextValue(

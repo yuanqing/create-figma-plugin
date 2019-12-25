@@ -1,5 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
+import { useCallback } from 'preact/hooks'
+import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
 import '../../scss/base.scss'
 import styles from './radio-buttons.scss'
@@ -8,17 +10,34 @@ export function RadioButtons ({
   name,
   onChange,
   options,
+  propagateEscapeKeyDown = false,
   space = 'small',
   value,
   ...rest
 }) {
-  function handleChange (event) {
-    const index = parseInt(event.target.getAttribute('data-index'))
-    onChange(options[index].value, name)
-  }
+  const handleKeyDown = useCallback(
+    function (event) {
+      const keyCode = event.keyCode
+      if (keyCode === ESCAPE_KEY_CODE) {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        event.target.blur()
+      }
+    },
+    [propagateEscapeKeyDown]
+  )
+
+  const handleChange = useCallback(
+    function (event) {
+      const index = parseInt(event.target.getAttribute('data-index'))
+      onChange(options[index].value, name)
+    },
+    [name, onChange, options]
+  )
 
   return (
-    <Stack space={space}>
+    <Stack space={space} onKeyDown={handleKeyDown}>
       {options.map(function (option, index) {
         const text =
           typeof option.text === 'undefined' ? option.value : option.text

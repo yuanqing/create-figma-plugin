@@ -92,144 +92,179 @@ export function TextboxAutocomplete ({
     })
   }
 
-  function getMenuItemById (id) {
-    for (const menuItem of menuItems) {
-      if (menuItem.__id === id) {
-        return menuItem
-      }
-    }
-    return null
-  }
-
-  function computeNextId (id) {
-    if (id === INVALID_ID) {
-      return menuItems[0].__id
-    }
-    let foundCurrentMenuItem = false
-    let index = -1
-    while (index++ < menuItems.length - 1) {
-      if (typeof menuItems[index].value !== 'undefined') {
-        if (foundCurrentMenuItem === true) {
-          // We've found the item after the current menu item with a `.value`
-          break
-        }
-        if (menuItems[index].__id === id) {
-          foundCurrentMenuItem = true
+  const getMenuItemById = useCallback(
+    function (id) {
+      for (const menuItem of menuItems) {
+        if (menuItem.__id === id) {
+          return menuItem
         }
       }
-    }
-    if (index === menuItems.length) {
-      // Reached the end of `menuItems`
-      return getIdByValue(currentValue) === -1 ? INVALID_ID : menuItems[0].__id
-    }
-    return menuItems[index].__id
-  }
+      return null
+    },
+    [menuItems]
+  )
 
-  function computePreviousId (id) {
-    if (id === INVALID_ID) {
-      return menuItems[menuItems.length - 1].__id
-    }
-    let foundCurrentMenuItem = false
-    let index = menuItems.length
-    while (index-- > 0) {
-      if (typeof menuItems[index].value !== 'undefined') {
-        if (foundCurrentMenuItem === true) {
-          // We've found the item after the current menu item with a `.value`
-          break
-        }
-        if (menuItems[index].__id === id) {
-          foundCurrentMenuItem = true
+  const computeNextId = useCallback(
+    function (id) {
+      if (id === INVALID_ID) {
+        return menuItems[0].__id
+      }
+      let foundCurrentMenuItem = false
+      let index = -1
+      while (index++ < menuItems.length - 1) {
+        if (typeof menuItems[index].value !== 'undefined') {
+          if (foundCurrentMenuItem === true) {
+            // We've found the item after the current menu item with a `.value`
+            break
+          }
+          if (menuItems[index].__id === id) {
+            foundCurrentMenuItem = true
+          }
         }
       }
-    }
-    if (index === -1) {
-      // Reached the beginning of `menuItems`
-      return getIdByValue(currentValue) === -1
-        ? INVALID_ID
-        : menuItems[menuItems.length - 1].__id
-    }
-    return menuItems[index].__id
-  }
+      if (index === menuItems.length) {
+        // Reached the end of `menuItems`
+        return getIdByValue(currentValue) === -1
+          ? INVALID_ID
+          : menuItems[0].__id
+      }
+      return menuItems[index].__id
+    },
+    [currentValue, getIdByValue, menuItems]
+  )
 
-  function handleFocus () {
-    setMenuVisible(true)
-    if (
-      committedValue !== EMPTY_STRING &&
-      isValidValue(committedValue) === false
-    ) {
-      // Copy over `committedValue` to `currentValue`
-      setCurrentValue(committedValue)
-    }
-  }
+  const computePreviousId = useCallback(
+    function (id) {
+      if (id === INVALID_ID) {
+        return menuItems[menuItems.length - 1].__id
+      }
+      let foundCurrentMenuItem = false
+      let index = menuItems.length
+      while (index-- > 0) {
+        if (typeof menuItems[index].value !== 'undefined') {
+          if (foundCurrentMenuItem === true) {
+            // We've found the item after the current menu item with a `.value`
+            break
+          }
+          if (menuItems[index].__id === id) {
+            foundCurrentMenuItem = true
+          }
+        }
+      }
+      if (index === -1) {
+        // Reached the beginning of `menuItems`
+        return getIdByValue(currentValue) === -1
+          ? INVALID_ID
+          : menuItems[menuItems.length - 1].__id
+      }
+      return menuItems[index].__id
+    },
+    [currentValue, getIdByValue, menuItems]
+  )
 
-  function handleKeyDown (event) {
-    const keyCode = event.keyCode
-    if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
-      event.preventDefault()
-      if (isMenuVisible === false || menuItems.length === 0) {
+  const handleFocus = useCallback(
+    function () {
+      setMenuVisible(true)
+      if (
+        committedValue !== EMPTY_STRING &&
+        isValidValue(committedValue) === false
+      ) {
+        // Copy over `committedValue` to `currentValue`
+        setCurrentValue(committedValue)
+      }
+    },
+    [committedValue, isValidValue]
+  )
+
+  const handleKeyDown = useCallback(
+    function (event) {
+      const keyCode = event.keyCode
+      if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
+        event.preventDefault()
+        if (isMenuVisible === false || menuItems.length === 0) {
+          return
+        }
+        const nextId =
+          keyCode === UP_KEY_CODE
+            ? computePreviousId(selectedId)
+            : computeNextId(selectedId)
+        shouldSelectAllRef.current = true
+        setSelectedId(nextId)
+        if (nextId === INVALID_ID) {
+          onChange(currentValue, name, null)
+        } else {
+          const menuItem = getMenuItemById(nextId)
+          onChange(menuItem.value, name, menuItem)
+        }
         return
       }
-      const nextId =
-        keyCode === UP_KEY_CODE
-          ? computePreviousId(selectedId)
-          : computeNextId(selectedId)
-      shouldSelectAllRef.current = true
-      setSelectedId(nextId)
-      if (nextId === INVALID_ID) {
-        onChange(currentValue, name, null)
-      } else {
-        const menuItem = getMenuItemById(nextId)
-        onChange(menuItem.value, name, menuItem)
-      }
-      return
-    }
-    if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
-      event.preventDefault()
-      event.stopPropagation()
-      shouldSelectAllRef.current = false
-      scrollTopRef.current = menuElementRef.current.scrollTop
-      setMenuVisible(false)
-      return
-    }
-    if (isStrict !== true) {
-      return
-    }
-    if (event.ctrlKey === true || event.metaKey === true) {
-      return
-    }
-    if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-      const nextValue = computeNextValue(inputElementRef.current, event.key)
-      if (isValidValue(nextValue) === false) {
+      if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
         event.preventDefault()
+        event.stopPropagation()
+        shouldSelectAllRef.current = false
+        scrollTopRef.current = menuElementRef.current.scrollTop
+        setMenuVisible(false)
+        return
       }
-    }
-  }
+      if (isStrict !== true) {
+        return
+      }
+      if (event.ctrlKey === true || event.metaKey === true) {
+        return
+      }
+      if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
+        const nextValue = computeNextValue(inputElementRef.current, event.key)
+        if (isValidValue(nextValue) === false) {
+          event.preventDefault()
+        }
+      }
+    },
+    [
+      computeNextId,
+      computePreviousId,
+      currentValue,
+      getMenuItemById,
+      isMenuVisible,
+      isStrict,
+      isValidValue,
+      menuItems.length,
+      name,
+      onChange,
+      selectedId
+    ]
+  )
 
-  function handleKeyUp (event) {
-    const keyCode = event.keyCode
-    if (
-      keyCode !== BACKSPACE_KEY_CODE &&
-      keyCode !== DELETE_KEY_CODE &&
-      isKeyCodeCharacterGenerating(keyCode) === false
-    ) {
-      return
-    }
-    const value = inputElementRef.current.value
-    const index = getIdByValue(value)
-    setSelectedId(index)
-    setCurrentValue(value)
-    onChange(value, name, getMenuItemById(index))
-  }
+  const handleKeyUp = useCallback(
+    function (event) {
+      const keyCode = event.keyCode
+      if (
+        keyCode !== BACKSPACE_KEY_CODE &&
+        keyCode !== DELETE_KEY_CODE &&
+        isKeyCodeCharacterGenerating(keyCode) === false
+      ) {
+        return
+      }
+      const value = inputElementRef.current.value
+      const index = getIdByValue(value)
+      setSelectedId(index)
+      setCurrentValue(value)
+      onChange(value, name, getMenuItemById(index))
+    },
+    [getIdByValue, getMenuItemById, name, onChange]
+  )
 
-  function handleOptionClick (event) {
-    scrollTopRef.current = menuElementRef.current.scrollTop
-    const id = parseInt(event.target.getAttribute('data-id'))
-    setSelectedId(id)
-    setMenuVisible(false)
-    const menuItem = getMenuItemById(id)
-    setCurrentValue(EMPTY_STRING)
-    onChange(menuItem.value, name, menuItem)
-  }
+  const handleOptionClick = useCallback(
+    function (event) {
+      scrollTopRef.current = menuElementRef.current.scrollTop
+      const id = parseInt(event.target.getAttribute('data-id'))
+      setSelectedId(id)
+      setMenuVisible(false)
+      const menuItem = getMenuItemById(id)
+      setCurrentValue(EMPTY_STRING)
+      onChange(menuItem.value, name, menuItem)
+    },
+    [getMenuItemById, name, onChange]
+  )
 
   function handlePaste (event) {
     const nextValue = computeNextValue(

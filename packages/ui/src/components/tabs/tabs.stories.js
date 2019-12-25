@@ -10,6 +10,7 @@ export const Default = function () {
   const [value, setValue] = useState('bar')
   return (
     <Tabs
+      name='qux'
       value={value}
       onChange={setValue}
       options={[

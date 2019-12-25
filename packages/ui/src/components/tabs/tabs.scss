@@ -7,6 +7,11 @@
   z-index: $z-index-1;
   border-bottom: 1px solid $color-black-10;
   padding-left: $space-extra-small;
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
 }
 
 .label {

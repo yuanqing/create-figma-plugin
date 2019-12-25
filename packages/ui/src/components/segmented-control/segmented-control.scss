@@ -10,11 +10,17 @@
   &:hover {
     box-shadow: inset 0 0 0 1px $color-silver;
   }
+
+  &:focus {
+    box-shadow: inset 0 0 0 1px $color-white, 0 0 0 2px $color-blue;
+    outline: none;
+  }
 }
 
 .label {
   display: inline-block;
   text-align: center;
+  position: relative;
 }
 
 .input {
