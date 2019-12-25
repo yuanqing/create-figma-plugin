@@ -19,6 +19,11 @@
   }
 }
 
+.disabled {
+  cursor: not-allowed;
+  opacity: $opacity-30;
+}
+
 .input {
   flex: 0 0 12px;
   border: 1px solid $color-black-80;
@@ -56,21 +61,20 @@
   }
 
   &:disabled {
-    opacity: $opacity-30;
     border-color: $color-black-80;
 
     &:before {
       display: none;
     }
+
+    &:checked {
+      background-color: $color-black-80;
+    }
   }
 }
 
 .text {
+  pointer-events: none;
   flex-grow: 1;
   padding: 2px 0 0 8px;
-
-  .input:disabled ~ & {
-    cursor: not-allowed;
-    opacity: $opacity-30;
-  }
 }

@@ -1,4 +1,5 @@
 /** @jsx h */
+import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
@@ -7,6 +8,7 @@ import styles from './checkbox.scss'
 
 export function Checkbox ({
   children,
+  disabled,
   name,
   onChange,
   propagateEscapeKeyDown = false,
@@ -39,13 +41,19 @@ export function Checkbox ({
   )
 
   return (
-    <label class={styles.label}>
+    <label
+      class={classnames(
+        styles.label,
+        disabled === true ? styles.disabled : null
+      )}
+    >
       <input
         {...rest}
         class={styles.input}
         type='checkbox'
         name={name}
         checked={value === true}
+        disabled={disabled}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />

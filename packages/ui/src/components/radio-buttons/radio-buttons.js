@@ -1,4 +1,5 @@
 /** @jsx h */
+import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
@@ -42,7 +43,13 @@ export function RadioButtons ({
         const text =
           typeof option.text === 'undefined' ? option.value : option.text
         return (
-          <label class={styles.label} key={index}>
+          <label
+            class={classnames(
+              styles.label,
+              option.disabled === true ? styles.disabled : null
+            )}
+            key={index}
+          >
             <input
               {...rest}
               class={styles.input}
