@@ -355,6 +355,7 @@ export function TextboxAutocomplete ({
         {...rest}
         ref={inputElementRef}
         type='text'
+        name={name}
         class={styles.input}
         placeholder={placeholder}
         value={committedValue === null ? '' : committedValue}

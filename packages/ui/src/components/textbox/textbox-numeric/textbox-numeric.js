@@ -110,6 +110,7 @@ export function TextboxNumeric ({
         {...rest}
         ref={inputElementRef}
         type='text'
+        name={name}
         class={styles.input}
         placeholder={placeholder}
         value={value === null ? '' : value}

@@ -28,11 +28,13 @@ export function RadioButtons ({
               {...rest}
               class={styles.input}
               type='radio'
+              name={name}
               value={option.value}
               checked={value === option.value}
               disabled={option.disabled === true}
               onChange={handleChange}
               data-index={index}
+              tabIndex='0'
             />
             <div class={styles.text}>{text}</div>
           </label>

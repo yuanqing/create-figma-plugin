@@ -24,6 +24,7 @@ export function Tabs ({ name, onChange, options, value, ...rest }) {
                 {...rest}
                 class={styles.input}
                 type='radio'
+                name={name}
                 value={option.value}
                 checked={value === option.value}
                 onChange={handleChange}
