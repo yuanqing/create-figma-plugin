@@ -20,7 +20,7 @@ export function watch () {
     }
   })
   async function run () {
-    await build(true)
+    await build(true, false)
     log.info('Watching...')
   }
   watcher.on('ready', run)

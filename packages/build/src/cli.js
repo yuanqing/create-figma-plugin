@@ -12,6 +12,6 @@ sade('create-figma-plugin-build', true)
       watch()
       return
     }
-    await build(isDevelopment)
+    await build(isDevelopment, true)
   })
   .parse(process.argv)
