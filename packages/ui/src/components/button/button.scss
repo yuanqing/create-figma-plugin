@@ -18,6 +18,7 @@
   }
 
   &:disabled {
+    cursor: not-allowed;
     opacity: $opacity-30;
     background-color: $color-black-80;
   }
