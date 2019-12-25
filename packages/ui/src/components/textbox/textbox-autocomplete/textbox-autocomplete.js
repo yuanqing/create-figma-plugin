@@ -14,6 +14,7 @@ import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import '../../../scss/base.scss'
 import styles from '../textbox.scss'
+import textboxAutocompleteStyles from './textbox-autocomplete.scss'
 
 const EMPTY_STRING = ''
 const INVALID_ID = -1
@@ -362,16 +363,27 @@ export function TextboxAutocomplete ({
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {isMenuVisible === true ? (
         <div
-          class={classnames(styles.menu, isTop ? styles.isTop : null)}
+          class={classnames(
+            textboxAutocompleteStyles.menu,
+            isTop ? textboxAutocompleteStyles.isTop : null
+          )}
           ref={menuElementRef}
         >
           {menuItems.map(function (menuItem) {
             if (menuItem.separator === true) {
-              return <hr class={styles.menuSeparator} key={menuItem.__id} />
+              return (
+                <hr
+                  class={textboxAutocompleteStyles.menuSeparator}
+                  key={menuItem.__id}
+                />
+              )
             }
             if (typeof menuItem.header !== 'undefined') {
               return (
-                <h2 class={styles.menuHeader} key={menuItem.__id}>
+                <h2
+                  class={textboxAutocompleteStyles.menuHeader}
+                  key={menuItem.__id}
+                >
                   {menuItem.header}
                 </h2>
               )
@@ -379,8 +391,10 @@ export function TextboxAutocomplete ({
             return (
               <div
                 class={classnames(
-                  styles.menuItem,
-                  menuItem.__id === selectedId ? styles.menuItemSelected : null
+                  textboxAutocompleteStyles.menuItem,
+                  menuItem.__id === selectedId
+                    ? textboxAutocompleteStyles.menuItemSelected
+                    : null
                 )}
                 onClick={handleOptionClick}
                 data-id={menuItem.__id}
