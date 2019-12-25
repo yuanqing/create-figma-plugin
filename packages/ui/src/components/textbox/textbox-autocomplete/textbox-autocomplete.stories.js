@@ -49,6 +49,18 @@ export const Filter = function () {
   return (
     <TextboxAutocomplete
       filter
+      value={value}
+      options={options}
+      onChange={setValue}
+    />
+  )
+}
+
+export const FilterStrict = function () {
+  const [value, setValue] = useState('')
+  return (
+    <TextboxAutocomplete
+      filter
       strict
       value={value}
       options={options}

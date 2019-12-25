@@ -166,6 +166,9 @@ export function TextboxAutocomplete ({
     const keyCode = event.keyCode
     if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
       event.preventDefault()
+      if (isMenuVisible === false || menuItems.length === 0) {
+        return
+      }
       const nextId =
         keyCode === UP_KEY_CODE
           ? computePreviousId(selectedId)
@@ -269,7 +272,7 @@ export function TextboxAutocomplete ({
   // Adjust the menu scroll position so that the selected menu item is always visible
   useLayoutEffect(
     function () {
-      if (isMenuVisible === false) {
+      if (isMenuVisible === false || menuItems.length === 0) {
         return
       }
       const menuElement = menuElementRef.current
@@ -292,7 +295,7 @@ export function TextboxAutocomplete ({
         menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
       }
     },
-    [isMenuVisible, selectedId]
+    [isMenuVisible, menuItems.length, selectedId]
   )
 
   // Blur the input and hide the menu if we clicked outside the component
@@ -361,7 +364,7 @@ export function TextboxAutocomplete ({
         onPaste={handlePaste}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
-      {isMenuVisible === true ? (
+      {isMenuVisible === true && menuItems.length > 0 ? (
         <div
           class={classnames(
             textboxAutocompleteStyles.menu,
