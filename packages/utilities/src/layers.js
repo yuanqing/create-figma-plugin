@@ -20,11 +20,23 @@ export function getSelectedLayersOrAllLayers () {
 export function getDocumentComponents () {
   const result = []
   for (const page of figma.root.children) {
-    for (const layer of page.children) {
-      if (layer.type === 'COMPONENT') {
-        result.push(layer)
+    traverseLayer(
+      page,
+      function (layer) {
+        if (layer.type === 'COMPONENT') {
+          result.push(layer)
+          return false
+        }
+      },
+      function ({ type }) {
+        return (
+          type === 'COMPONENT' ||
+          type === 'FRAME' ||
+          type === 'GROUP' ||
+          type === 'PAGE'
+        )
       }
-    }
+    )
   }
   return result
 }
@@ -80,7 +92,9 @@ export function traverseLayer (layer, callback, filter) {
   if (typeof filter === 'function' && filter(layer) === false) {
     return
   }
-  callback(layer)
+  if (callback(layer) === false) {
+    return
+  }
   if (layer.removed === true || typeof layer.children === 'undefined') {
     return
   }
