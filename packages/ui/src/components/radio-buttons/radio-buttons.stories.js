@@ -35,3 +35,18 @@ export const WithDisabledOption = function () {
     />
   )
 }
+
+export const WithSelectedDisabledOption = function () {
+  const [value, setValue] = useState('bar')
+  return (
+    <RadioButtons
+      value={value}
+      onChange={setValue}
+      options={[
+        { value: 'foo', text: <Text>foo</Text>, disabled: true },
+        { value: 'bar', text: <Text>bar</Text>, disabled: true },
+        { value: 'baz', text: <Text>baz</Text>, disabled: true }
+      ]}
+    />
+  )
+}
