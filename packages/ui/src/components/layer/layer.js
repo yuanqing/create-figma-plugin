@@ -12,7 +12,6 @@ const icons = {
 }
 
 export function Layer ({ children, type, selected: isSelected, ...rest }) {
-  console.log(icons[type])
   return (
     <div
       {...rest}
