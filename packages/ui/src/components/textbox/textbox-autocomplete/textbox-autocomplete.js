@@ -8,6 +8,7 @@ import {
   DOWN_KEY_CODE,
   ENTER_KEY_CODE,
   ESCAPE_KEY_CODE,
+  TAB_KEY_CODE,
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
 import { computeNextValue } from '../utilities/compute-next-value'
@@ -198,9 +199,15 @@ export function TextboxAutocomplete ({
         }
         return
       }
-      if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
-        event.preventDefault()
-        event.stopPropagation()
+      if (
+        keyCode === ENTER_KEY_CODE ||
+        keyCode === ESCAPE_KEY_CODE ||
+        keyCode === TAB_KEY_CODE
+      ) {
+        if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
         shouldSelectAllRef.current = false
         scrollTopRef.current = menuElementRef.current.scrollTop
         setMenuVisible(false)
