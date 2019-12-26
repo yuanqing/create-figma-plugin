@@ -20,13 +20,13 @@ export function useForm (
     [state, onSubmit, validate]
   )
   const handleChange = useCallback(
-    function (value, name) {
-      setState(function (state) {
-        const newState = {
-          ...state,
-          [name]: value
+    function (nextState) {
+      setState(function (previousState) {
+        const state = {
+          ...previousState,
+          ...nextState
         }
-        return typeof transform === 'function' ? transform(newState) : newState
+        return typeof transform === 'function' ? transform(state) : state
       })
     },
     [transform, setState]
@@ -46,12 +46,12 @@ export function useForm (
     },
     [state, onClose, onSubmit, validate]
   )
-  const isValid = useCallback(
+  const isInvalid = useCallback(
     function () {
       if (typeof validate !== 'function') {
         throw new Error('Need a `validate` callback')
       }
-      return validate(state)
+      return validate(state) === false
     },
     [state, validate]
   )
@@ -68,6 +68,6 @@ export function useForm (
     state,
     handleChange,
     handleSubmit,
-    isValid
+    isInvalid
   }
 }
