@@ -32,7 +32,7 @@ export function RadioButtons ({
   const handleChange = useCallback(
     function (event) {
       const index = parseInt(event.target.getAttribute('data-index'))
-      onChange(options[index].value, name)
+      onChange({ [name]: options[index].value })
     },
     [name, onChange, options]
   )

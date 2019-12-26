@@ -191,10 +191,10 @@ export function TextboxAutocomplete ({
         shouldSelectAllRef.current = true
         setSelectedId(nextId)
         if (nextId === INVALID_ID) {
-          onChange(currentValue, name, null)
+          onChange({ [name]: currentValue })
         } else {
           const menuItem = getMenuItemById(nextId)
-          onChange(menuItem.value, name, menuItem)
+          onChange({ [name]: menuItem.value })
         }
         return
       }
@@ -248,9 +248,9 @@ export function TextboxAutocomplete ({
       const index = getIdByValue(value)
       setSelectedId(index)
       setCurrentValue(value)
-      onChange(value, name, getMenuItemById(index))
+      onChange({ [name]: value })
     },
-    [getIdByValue, getMenuItemById, name, onChange]
+    [getIdByValue, name, onChange]
   )
 
   const handleOptionClick = useCallback(
@@ -261,7 +261,7 @@ export function TextboxAutocomplete ({
       setMenuVisible(false)
       const menuItem = getMenuItemById(id)
       setCurrentValue(EMPTY_STRING)
-      onChange(menuItem.value, name, menuItem)
+      onChange({ [name]: menuItem.value })
     },
     [getMenuItemById, name, onChange]
   )

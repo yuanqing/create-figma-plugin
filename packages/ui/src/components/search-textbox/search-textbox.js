@@ -23,7 +23,7 @@ export function SearchTextbox ({
 
   const handleInput = useCallback(
     function () {
-      onChange(inputElementRef.current.value, name)
+      onChange({ [name]: inputElementRef.current.value })
     },
     [name, onChange]
   )

@@ -22,7 +22,7 @@ export function SegmentedControl ({
   const handleChange = useCallback(
     function (event) {
       const index = parseInt(event.target.getAttribute('data-index'))
-      onChange(options[index].value, name)
+      onChange({ [name]: options[index].value })
     },
     [name, onChange, options]
   )
@@ -52,7 +52,7 @@ export function SegmentedControl ({
           keyCode === LEFT_KEY_CODE || keyCode === UP_KEY_CODE ? -1 : 1
         )
         if (nextIndex !== -1) {
-          onChange(options[nextIndex].value, name)
+          onChange({ [name]: options[nextIndex].value })
         }
       }
     },

@@ -22,7 +22,7 @@ export function Tabs ({
   const handleChange = useCallback(
     function (event) {
       const index = parseInt(event.target.getAttribute('data-index'))
-      onChange(options[index].value, name)
+      onChange({ [name]: options[index].value })
     },
     [name, onChange, options]
   )
@@ -55,7 +55,7 @@ export function Tabs ({
         if (nextIndex === options.length) {
           nextIndex = 0
         }
-        onChange(options[nextIndex].value, name)
+        onChange({ [name]: options[nextIndex].value })
       }
     },
     [name, onChange, options, propagateEscapeKeyDown, value]

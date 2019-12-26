@@ -17,7 +17,7 @@ export function Checkbox ({
 }) {
   const handleChange = useCallback(
     function (event) {
-      onChange(event.target.checked === true, name)
+      onChange({ [name]: event.target.checked === true })
     },
     [name, onChange]
   )
@@ -34,7 +34,7 @@ export function Checkbox ({
       }
       if (keyCode === ENTER_KEY_CODE) {
         event.stopPropagation()
-        onChange(value !== true, name)
+        onChange({ [name]: value !== true })
       }
     },
     [name, onChange, propagateEscapeKeyDown, value]
