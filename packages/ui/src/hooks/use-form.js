@@ -1,50 +1,59 @@
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../utilities/key-codes'
 
-export function useForm (initialInputs, { close, submit, validate }) {
-  const [inputs, setInputs] = useState(initialInputs)
+export function useForm (
+  initialState,
+  { transform, validate, onClose, onSubmit }
+) {
+  const [state, setState] = useState(
+    typeof transform === 'function' ? transform(initialState) : initialState
+  )
   const handleSubmit = useCallback(
     function (event) {
       if (typeof event !== 'undefined') {
         event.preventDefault()
       }
-      if (typeof validate !== 'function' || validate(inputs) === true) {
-        submit(inputs)
+      if (typeof validate !== 'function' || validate(state) === true) {
+        onSubmit(state)
       }
     },
-    [inputs, submit, validate]
+    [state, onSubmit, validate]
   )
-  function handleInput (value, name) {
-    setInputs(function (inputs) {
-      return {
-        ...inputs,
-        [name]: value
-      }
-    })
-  }
+  const handleChange = useCallback(
+    function (value, name) {
+      setState(function (state) {
+        const newState = {
+          ...state,
+          [name]: value
+        }
+        return typeof transform === 'function' ? transform(newState) : newState
+      })
+    },
+    [transform, setState]
+  )
   const handleKeyDown = useCallback(
     function (event) {
       if (
         event.keyCode === ENTER_KEY_CODE &&
-        (typeof validate !== 'function' || validate(inputs) === true)
+        (typeof validate !== 'function' || validate(state) === true)
       ) {
-        submit(inputs)
+        onSubmit(state)
         return
       }
       if (event.keyCode === ESCAPE_KEY_CODE) {
-        close()
+        onClose()
       }
     },
-    [close, inputs, submit, validate]
+    [state, onClose, onSubmit, validate]
   )
   const isValid = useCallback(
     function () {
       if (typeof validate !== 'function') {
         throw new Error('Need a `validate` callback')
       }
-      return validate(inputs)
+      return validate(state)
     },
-    [inputs, validate]
+    [state, validate]
   )
   useEffect(
     function () {
@@ -56,9 +65,9 @@ export function useForm (initialInputs, { close, submit, validate }) {
     [handleKeyDown]
   )
   return {
-    inputs,
+    state,
+    handleChange,
     handleSubmit,
-    handleInput,
     isValid
   }
 }
