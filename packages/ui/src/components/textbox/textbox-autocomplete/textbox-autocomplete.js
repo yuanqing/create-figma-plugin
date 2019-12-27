@@ -1,7 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -289,7 +289,7 @@ export function TextboxAutocomplete ({
 
   // Select the contents of the input whenever `value` changes and if
   // `shouldSelectAllRef` is set to `true`
-  useLayoutEffect(
+  useEffect(
     function () {
       if (shouldSelectAllRef.current === true) {
         shouldSelectAllRef.current = false
@@ -301,7 +301,7 @@ export function TextboxAutocomplete ({
   )
 
   // Restore the original menu scroll position and update focus
-  useLayoutEffect(
+  useEffect(
     function () {
       if (isMenuVisible === false) {
         inputElementRef.current.blur()
@@ -316,7 +316,7 @@ export function TextboxAutocomplete ({
   )
 
   // Adjust the menu scroll position so that the selected menu item is always visible
-  useLayoutEffect(
+  useEffect(
     function () {
       if (isMenuVisible === false || menuItems.length === 0) {
         return
@@ -345,7 +345,7 @@ export function TextboxAutocomplete ({
   )
 
   // Blur the input and hide the menu if we clicked outside the component
-  useLayoutEffect(
+  useEffect(
     function () {
       function handleWindowMousedown (event) {
         if (
@@ -367,7 +367,7 @@ export function TextboxAutocomplete ({
     [isMenuVisible]
   )
 
-  useLayoutEffect(
+  useEffect(
     function () {
       if (isFocused === true) {
         setMenuVisible(true)
@@ -376,7 +376,7 @@ export function TextboxAutocomplete ({
     [isFocused]
   )
 
-  useLayoutEffect(
+  useEffect(
     function () {
       if (isValidValue(committedValue) === false) {
         return
