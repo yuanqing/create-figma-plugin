@@ -19,7 +19,8 @@
     "directory": "packages/utilities"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "main": "lib/index.js",
   "scripts": {

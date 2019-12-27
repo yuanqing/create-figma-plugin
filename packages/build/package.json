@@ -19,7 +19,8 @@
     "directory": "packages/build"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "bin": {
     "create-figma-plugin-build": "lib/cli.js"
