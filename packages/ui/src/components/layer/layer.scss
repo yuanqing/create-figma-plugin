@@ -27,6 +27,9 @@
   flex-grow: 1;
   pointer-events: none;
   padding-left: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   .component &,
   .frame & {

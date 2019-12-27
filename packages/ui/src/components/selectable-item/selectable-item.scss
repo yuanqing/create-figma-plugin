@@ -29,6 +29,9 @@
 
 .text {
   @include text-11-regular;
-  flex-grow: 1;
   pointer-events: none;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
