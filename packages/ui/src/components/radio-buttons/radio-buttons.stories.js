@@ -7,11 +7,45 @@ import { Text } from '../text/text'
 export default { title: 'Radio Buttons' }
 
 export const Default = function () {
-  const [value, setValue] = useState('bar')
+  const [state, setState] = useState({ foo: null })
   return (
     <RadioButtons
-      value={value}
-      onChange={setValue}
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+      options={[
+        { value: 'foo', text: <Text>foo</Text> },
+        { value: 'bar', text: <Text>bar</Text> },
+        { value: 'baz', text: <Text>baz</Text> }
+      ]}
+    />
+  )
+}
+
+export const Disabled = function () {
+  const [state, setState] = useState({ foo: null })
+  return (
+    <RadioButtons
+      disabled
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+      options={[
+        { value: 'foo', text: <Text>foo</Text> },
+        { value: 'bar', text: <Text>bar</Text> },
+        { value: 'baz', text: <Text>baz</Text> }
+      ]}
+    />
+  )
+}
+
+export const WithSelectedOption = function () {
+  const [state, setState] = useState({ foo: 'bar' })
+  return (
+    <RadioButtons
+      name='foo'
+      value={state.foo}
+      onChange={setState}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text> },
@@ -22,30 +56,32 @@ export const Default = function () {
 }
 
 export const WithDisabledOption = function () {
-  const [value, setValue] = useState('bar')
+  const [state, setState] = useState({ foo: null })
   return (
     <RadioButtons
-      value={value}
-      onChange={setValue}
+      name='foo'
+      value={state.foo}
+      onChange={setState}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
-        { value: 'bar', text: <Text>bar</Text> },
-        { value: 'baz', text: <Text>baz</Text>, disabled: true }
+        { value: 'bar', text: <Text>bar</Text>, disabled: true },
+        { value: 'baz', text: <Text>baz</Text> }
       ]}
     />
   )
 }
 
-export const WithSelectedDisabledOption = function () {
-  const [value, setValue] = useState('bar')
+export const WithDisabledSelectedOption = function () {
+  const [state, setState] = useState({ foo: 'bar' })
   return (
     <RadioButtons
-      value={value}
-      onChange={setValue}
+      name='foo'
+      value={state.foo}
+      onChange={setState}
       options={[
-        { value: 'foo', text: <Text>foo</Text>, disabled: true },
+        { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text>, disabled: true },
-        { value: 'baz', text: <Text>baz</Text>, disabled: true }
+        { value: 'baz', text: <Text>baz</Text> }
       ]}
     />
   )

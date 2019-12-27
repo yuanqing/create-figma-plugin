@@ -1,38 +1,63 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { spaceHorizontalIcon } from '../../../icons/space-horizontal-icon'
 import { TextboxNumeric } from './textbox-numeric'
+import { spaceHorizontalIcon } from '../../../icons/space-horizontal-icon'
 
 export default { title: 'Textbox Numeric' }
 
-export const Text = function () {
-  const [value, setValue] = useState(42)
-  return <TextboxNumeric value={value} onChange={setValue} />
-}
-
-export const WithPlaceholder = function () {
-  const [value, setValue] = useState('')
-  return <TextboxNumeric placeholder={42} value={value} onChange={setValue} />
-}
-
-export const NoBorder = function () {
-  const [value, setValue] = useState(42)
-  return <TextboxNumeric noBorder value={value} onChange={setValue} />
+export const Empty = function () {
+  const [state, setState] = useState({ foo: null })
+  return <TextboxNumeric name='foo' value={state.foo} onChange={setState} />
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState(42)
-  return <TextboxNumeric disabled value={value} onChange={setValue} />
+  const [state, setState] = useState({ foo: null })
+  return (
+    <TextboxNumeric disabled name='foo' value={state.foo} onChange={setState} />
+  )
+}
+
+export const WithPlaceholder = function () {
+  const [state, setState] = useState({ foo: null })
+  return (
+    <TextboxNumeric
+      placeholder='Placeholder'
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+    />
+  )
+}
+
+export const Filled = function () {
+  const [state, setState] = useState({ foo: 42 })
+  return <TextboxNumeric name='foo' value={state.foo} onChange={setState} />
+}
+
+export const FilledDisabled = function () {
+  const [state, setState] = useState({ foo: 42 })
+  return (
+    <TextboxNumeric disabled name='foo' value={state.foo} onChange={setState} />
+  )
+}
+
+export const NoBorder = function () {
+  const [state, setState] = useState({ foo: 42 })
+  return (
+    <TextboxNumeric noBorder name='foo' value={state.foo} onChange={setState} />
+  )
 }
 
 export const WithIcon = function () {
-  const [value, setValue] = useState(42)
+  const [state, setState] = useState({ foo: null })
   return (
     <TextboxNumeric
       icon={spaceHorizontalIcon}
-      value={value}
-      onChange={setValue}
+      placeholder='Space'
+      name='foo'
+      value={state.foo}
+      onChange={setState}
     />
   )
 }

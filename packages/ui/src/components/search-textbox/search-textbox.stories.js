@@ -5,17 +5,31 @@ import { SearchTextbox } from './search-textbox'
 
 export default { title: 'Search Textbox' }
 
-export const Text = function () {
-  const [value, setValue] = useState('Text')
-  return <SearchTextbox value={value} onChange={setValue} />
+export const Empty = function () {
+  const [state, setState] = useState({ foo: '' })
+  return <SearchTextbox name='foo' value={state.foo} onChange={setState} />
 }
 
 export const WithPlaceholder = function () {
-  const [value, setValue] = useState('')
-  return <SearchTextbox placeholder='Text' value={value} onChange={setValue} />
+  const [state, setState] = useState({ foo: '' })
+  return (
+    <SearchTextbox
+      placeholder='Placeholder'
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+    />
+  )
+}
+
+export const Filled = function () {
+  const [state, setState] = useState({ foo: 'Text' })
+  return <SearchTextbox name='foo' value={state.foo} onChange={setState} />
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState('Text')
-  return <SearchTextbox disabled value={value} onChange={setValue} />
+  const [state, setState] = useState({ foo: 'Text' })
+  return (
+    <SearchTextbox disabled name='foo' value={state.foo} onChange={setState} />
+  )
 }

@@ -14,16 +14,20 @@
   background-color: $color-hud;
   box-shadow: $box-shadow;
   overflow-y: auto;
+}
 
-  &.isTop {
-    top: auto;
-    bottom: 100%;
-  }
+.isTop {
+  top: auto;
+  bottom: 100%;
 }
 
 .menuItem,
 .menuHeader {
   padding: 4px 16px;
+
+  .hasIcon & {
+    padding-left: 30px;
+  }
 }
 
 .menuItemSelected {
@@ -31,9 +35,6 @@
 }
 
 .menuHeader {
-  // reset
-  margin: 0;
-
   @include text-11-regular;
   color: $color-white-40;
 }

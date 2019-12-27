@@ -5,15 +5,7 @@ import { Button } from './button'
 export default { title: 'Button' }
 
 export const Primary = function () {
-  return (
-    <Button
-      onClick={function () {
-        console.log('hello')
-      }}
-    >
-      Text
-    </Button>
-  )
+  return <Button>Text</Button>
 }
 
 export const PrimaryDisabled = function () {

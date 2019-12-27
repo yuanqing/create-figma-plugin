@@ -8,6 +8,7 @@ import styles from './button.scss'
 
 export function Button ({
   destructive: isDestructive,
+  disabled: isDisabled,
   fullWidth: isFullWidth,
   onClick,
   propagateEscapeKeyDown = false,
@@ -26,7 +27,6 @@ export function Button ({
     },
     [propagateEscapeKeyDown]
   )
-
   return (
     <button
       {...rest}
@@ -36,6 +36,7 @@ export function Button ({
         isDestructive === true ? styles.isDestructive : null,
         isFullWidth === true ? styles.isFullWidth : null
       )}
+      disabled={isDisabled === true}
       onClick={onClick}
       onKeyDown={handleKeyDown}
     />

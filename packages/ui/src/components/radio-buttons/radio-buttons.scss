@@ -5,7 +5,17 @@
   @include text-11-regular;
   display: flex;
   position: relative;
-  z-index: $z-index-1;
+
+  &:before {
+    // Increase the clickable area
+    content: "";
+    display: block;
+    position: absolute;
+    top: -8px;
+    bottom: -8px;
+    left: -16px;
+    right: -16px;
+  }
 }
 
 .disabled {

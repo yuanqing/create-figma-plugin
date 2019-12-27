@@ -64,6 +64,9 @@ export function useForm (
     },
     [handleKeyDown]
   )
+  useEffect(function () {
+    window.focus()
+  })
   return {
     state,
     handleChange,

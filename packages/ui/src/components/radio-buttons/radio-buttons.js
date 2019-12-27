@@ -8,6 +8,7 @@ import '../../scss/base.scss'
 import styles from './radio-buttons.scss'
 
 export function RadioButtons ({
+  disabled: isDisabled,
   name,
   onChange,
   options,
@@ -42,11 +43,12 @@ export function RadioButtons ({
       {options.map(function (option, index) {
         const text =
           typeof option.text === 'undefined' ? option.value : option.text
+        const disabled = isDisabled === true || option.disabled === true
         return (
           <label
             class={classnames(
               styles.label,
-              option.disabled === true ? styles.disabled : null
+              disabled === true ? styles.disabled : null
             )}
             key={index}
           >
@@ -57,7 +59,7 @@ export function RadioButtons ({
               name={name}
               value={option.value}
               checked={value === option.value}
-              disabled={option.disabled === true}
+              disabled={disabled === true}
               onChange={handleChange}
               data-index={index}
               tabIndex='0'

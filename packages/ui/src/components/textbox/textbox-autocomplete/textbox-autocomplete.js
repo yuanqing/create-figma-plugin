@@ -21,6 +21,7 @@ const EMPTY_STRING = ''
 const INVALID_ID = -1
 
 export function TextboxAutocomplete ({
+  disabled: isDisabled,
   filter: shouldFilter,
   focused: isFocused,
   icon,
@@ -53,7 +54,7 @@ export function TextboxAutocomplete ({
 
   const isValidValue = useCallback(
     function (value) {
-      if (value === EMPTY_STRING) {
+      if (value === EMPTY_STRING || value === null) {
         return true
       }
       for (const menuItem of menuItems) {
@@ -71,6 +72,9 @@ export function TextboxAutocomplete ({
 
   const getIdByValue = useCallback(
     function (value) {
+      if (value === EMPTY_STRING || value === null) {
+        return INVALID_ID
+      }
       for (const menuItem of menuItems) {
         if (menuItem.value === value) {
           return menuItem.__id
@@ -401,17 +405,19 @@ export function TextboxAutocomplete ({
         class={styles.input}
         placeholder={placeholder}
         value={committedValue === null ? '' : committedValue}
-        onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
-        onKeyUp={handleKeyUp}
-        onPaste={handlePaste}
+        disabled={isDisabled === true}
+        onFocus={isDisabled === true ? null : handleFocus}
+        onKeyDown={isDisabled === true ? null : handleKeyDown}
+        onKeyUp={isDisabled === true ? null : handleKeyUp}
+        onPaste={isDisabled === true ? null : handlePaste}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
-      {isMenuVisible === true && menuItems.length > 0 ? (
+      {isDisabled !== true && isMenuVisible === true && menuItems.length > 0 ? (
         <div
           class={classnames(
             textboxAutocompleteStyles.menu,
-            isTop ? textboxAutocompleteStyles.isTop : null
+            isTop === true ? textboxAutocompleteStyles.isTop : null,
+            hasIcon === true ? textboxAutocompleteStyles.hasIcon : null
           )}
           ref={menuElementRef}
         >
@@ -426,12 +432,12 @@ export function TextboxAutocomplete ({
             }
             if (typeof menuItem.header !== 'undefined') {
               return (
-                <h2
+                <h1
                   class={textboxAutocompleteStyles.menuHeader}
                   key={menuItem.__id}
                 >
                   {menuItem.header}
-                </h2>
+                </h1>
               )
             }
             return (

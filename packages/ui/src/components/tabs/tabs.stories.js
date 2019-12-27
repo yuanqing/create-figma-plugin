@@ -7,12 +7,28 @@ import { Text } from '../text/text'
 export default { title: 'Tabs' }
 
 export const Default = function () {
-  const [value, setValue] = useState('bar')
+  const [state, setState] = useState({ foo: null })
   return (
     <Tabs
-      name='qux'
-      value={value}
-      onChange={setValue}
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+      options={[
+        { value: 'foo', view: <Text>Foo</Text> },
+        { value: 'bar', view: <Text>Bar</Text> },
+        { value: 'baz', view: <Text>Baz</Text> }
+      ]}
+    />
+  )
+}
+
+export const WithSelectedOption = function () {
+  const [state, setState] = useState({ foo: 'bar' })
+  return (
+    <Tabs
+      name='foo'
+      value={state.foo}
+      onChange={setState}
       options={[
         { value: 'foo', view: <Text>Foo</Text> },
         { value: 'bar', view: <Text>Bar</Text> },

@@ -8,6 +8,7 @@
   color: $color-black-80;
 
   &:before {
+    pointer-events: none;
     content: "";
     display: block;
     height: 0;

@@ -8,7 +8,7 @@ import styles from './checkbox.scss'
 
 export function Checkbox ({
   children,
-  disabled,
+  disabled: isDisabled,
   name,
   onChange,
   propagateEscapeKeyDown = false,
@@ -44,7 +44,7 @@ export function Checkbox ({
     <label
       class={classnames(
         styles.label,
-        disabled === true ? styles.disabled : null
+        isDisabled === true ? styles.disabled : null
       )}
     >
       <input
@@ -53,7 +53,7 @@ export function Checkbox ({
         type='checkbox'
         name={name}
         checked={value === true}
-        disabled={disabled}
+        disabled={isDisabled === true}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />

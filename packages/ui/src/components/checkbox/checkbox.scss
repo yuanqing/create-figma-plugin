@@ -5,7 +5,6 @@
   @include text-11-regular;
   display: flex;
   position: relative;
-  z-index: $z-index-1;
 
   &:before {
     // Increase the clickable area

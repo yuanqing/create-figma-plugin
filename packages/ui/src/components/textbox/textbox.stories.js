@@ -1,34 +1,57 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { spaceHorizontalIcon } from '../../icons/space-horizontal-icon'
 import { Textbox } from './textbox'
+import { searchIcon } from '../../icons/search-icon'
 
 export default { title: 'Textbox' }
 
-export const Text = function () {
-  const [value, setValue] = useState('Text')
-  return <Textbox value={value} onChange={setValue} />
-}
-
-export const WithPlaceholder = function () {
-  const [value, setValue] = useState('')
-  return <Textbox placeholder='Text' value={value} onChange={setValue} />
-}
-
-export const NoBorder = function () {
-  const [value, setValue] = useState('Text')
-  return <Textbox noBorder value={value} onChange={setValue} />
+export const Empty = function () {
+  const [state, setState] = useState({ foo: null })
+  return <Textbox name='foo' value={state.foo} onChange={setState} />
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState('Text')
-  return <Textbox disabled value={value} onChange={setValue} />
+  const [state, setState] = useState({ foo: null })
+  return <Textbox disabled name='foo' value={state.foo} onChange={setState} />
+}
+
+export const WithPlaceholder = function () {
+  const [state, setState] = useState({ foo: null })
+  return (
+    <Textbox
+      placeholder='Placeholder'
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+    />
+  )
+}
+
+export const Filled = function () {
+  const [state, setState] = useState({ foo: 'Text' })
+  return <Textbox name='foo' value={state.foo} onChange={setState} />
+}
+
+export const FilledDisabled = function () {
+  const [state, setState] = useState({ foo: 'Text' })
+  return <Textbox disabled name='foo' value={state.foo} onChange={setState} />
+}
+
+export const NoBorder = function () {
+  const [state, setState] = useState({ foo: 'Text' })
+  return <Textbox noBorder name='foo' value={state.foo} onChange={setState} />
 }
 
 export const WithIcon = function () {
-  const [value, setValue] = useState('Text')
+  const [state, setState] = useState({ foo: null })
   return (
-    <Textbox icon={spaceHorizontalIcon} value={value} onChange={setValue} />
+    <Textbox
+      icon={searchIcon}
+      placeholder='Search'
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+    />
   )
 }

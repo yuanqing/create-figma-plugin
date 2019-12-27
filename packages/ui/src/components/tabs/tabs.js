@@ -43,6 +43,10 @@ export function Tabs ({
         keyCode === RIGHT_KEY_CODE ||
         keyCode === UP_KEY_CODE
       ) {
+        if (value === null) {
+          onChange({ [name]: options[0].value })
+          return
+        }
         const currentIndex = options.findIndex(function (option) {
           return option.value === value
         })
@@ -67,7 +71,7 @@ export function Tabs ({
 
   return (
     <div>
-      <div class={styles.tabs} onKeyDown={handleKeyDown} tabindex='1'>
+      <div class={styles.tabs} onKeyDown={handleKeyDown} tabindex='0'>
         {options.map(function (option, index) {
           const text =
             typeof option.text === 'undefined' ? option.value : option.text

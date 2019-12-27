@@ -7,27 +7,36 @@ import { Text } from '../text/text'
 export default { title: 'Checkbox' }
 
 export const Default = function () {
-  const [value, setValue] = useState(false)
+  const [state, setState] = useState({ foo: false })
   return (
-    <Checkbox value={value} onChange={setValue}>
+    <Checkbox name='foo' value={state.foo} onChange={setState}>
       <Text>Text</Text>
     </Checkbox>
   )
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState(false)
+  const [state, setState] = useState({ foo: false })
   return (
-    <Checkbox disabled value={value} onChange={setValue}>
+    <Checkbox disabled name='foo' value={state.foo} onChange={setState}>
       <Text>Text</Text>
     </Checkbox>
   )
 }
 
-export const CheckedDisabled = function () {
-  const [value, setValue] = useState(true)
+export const Selected = function () {
+  const [state, setState] = useState({ foo: true })
   return (
-    <Checkbox disabled value={value} onChange={setValue}>
+    <Checkbox name='foo' value={state.foo} onChange={setState}>
+      <Text>Text</Text>
+    </Checkbox>
+  )
+}
+
+export const DisabledSelected = function () {
+  const [state, setState] = useState({ foo: true })
+  return (
+    <Checkbox disabled name='foo' value={state.foo} onChange={setState}>
       <Text>Text</Text>
     </Checkbox>
   )

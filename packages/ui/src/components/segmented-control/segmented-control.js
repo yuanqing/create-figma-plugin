@@ -12,6 +12,7 @@ import '../../scss/base.scss'
 import styles from './segmented-control.scss'
 
 export function SegmentedControl ({
+  disabled: isDisabled,
   name,
   onChange,
   options,
@@ -43,6 +44,10 @@ export function SegmentedControl ({
         keyCode === RIGHT_KEY_CODE ||
         keyCode === UP_KEY_CODE
       ) {
+        if (value === null) {
+          onChange({ [name]: options[0].value })
+          return
+        }
         const currentIndex = options.findIndex(function (option) {
           return option.value === value
         })
@@ -60,7 +65,11 @@ export function SegmentedControl ({
   )
 
   return (
-    <div class={styles.segmentedControl} onKeyDown={handleKeyDown} tabindex='1'>
+    <div
+      class={styles.segmentedControl}
+      onKeyDown={isDisabled === true ? null : handleKeyDown}
+      tabindex={isDisabled === true ? null : '0'}
+    >
       {options.map(function (option, index) {
         const text =
           typeof option.text === 'undefined' ? option.value : option.text
@@ -73,7 +82,7 @@ export function SegmentedControl ({
               name={name}
               value={option.value}
               checked={value === option.value}
-              disabled={option.disabled === true}
+              disabled={isDisabled === true || option.disabled === true}
               onChange={handleChange}
               data-index={index}
             />
