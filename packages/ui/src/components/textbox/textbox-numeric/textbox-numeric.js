@@ -5,7 +5,7 @@ import {
 } from '@create-figma-plugin/utilities/src/number'
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useCallback, useEffect, useRef } from 'preact/hooks'
+import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -95,7 +95,7 @@ export function TextboxNumeric ({
     }
   }
 
-  useEffect(
+  useLayoutEffect(
     function () {
       if (isFocused === true) {
         handleFocus()

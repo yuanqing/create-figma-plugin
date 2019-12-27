@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useCallback, useEffect, useRef } from 'preact/hooks'
+import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { searchIcon } from '../../icons/search-icon'
 import '../../scss/base.scss'
@@ -41,7 +41,7 @@ export function SearchTextbox ({
     [propagateEscapeKeyDown]
   )
 
-  useEffect(
+  useLayoutEffect(
     function () {
       if (isFocused === true) {
         handleFocus()
