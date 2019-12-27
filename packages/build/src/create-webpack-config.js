@@ -66,7 +66,7 @@ export function createWebpackConfig (entry, isDevelopment) {
       ],
       extensions: ['.js', '.json']
     },
-    devtool: isDevelopment ? 'inline-cheap-source-map' : 'none',
+    devtool: isDevelopment ? 'inline-cheap-module-source-map' : 'none',
     stats: 'errors-only',
     plugins: [
       new webpack.EnvironmentPlugin({
