@@ -1,5 +1,3 @@
-/* global figma */
-
 function insertLayerFactory (offset) {
   return function (layer, referenceLayer) {
     const parent = referenceLayer.parent

@@ -1,4 +1,4 @@
-/* global __html__, figma */
+/* global __html__ */
 
 export function showUI (options, data = {}) {
   if (typeof __html__ === 'undefined') {

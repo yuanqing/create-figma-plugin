@@ -1,5 +1,3 @@
-/* global figma */
-
 const KEY = 'settings'
 
 export async function loadSettings (defaultSettings) {

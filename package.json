@@ -83,10 +83,15 @@
     ]
   },
   "eslintConfig": {
+    "globals": {
+      "figma": true
+    },
     "plugins": [
       "react-hooks"
     ],
     "rules": {
+      "indent": "off",
+      "no-console": "error",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn"
     }

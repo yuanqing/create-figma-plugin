@@ -1,5 +1,3 @@
-/* global figma */
-
 const isCommand = typeof window === 'undefined'
 
 const listeners = {}
