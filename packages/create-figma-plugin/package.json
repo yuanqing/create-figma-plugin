@@ -22,6 +22,10 @@
   "bin": {
     "create-figma-plugin": "lib/cli.js"
   },
+  "scripts": {
+    "fix": "prettier-standard '{src,test}/**/*.js'",
+    "lint": "standardx '{src,test}/**/*.js'"
+  },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.41",
     "degit": "^2.2.2",

@@ -21,5 +21,9 @@
   "files": [
     "lib"
   ],
-  "main": "lib/index.js"
+  "main": "lib/index.js",
+  "scripts": {
+    "fix": "prettier-standard '{src,test}/**/*.js'",
+    "lint": "standardx '{src,test}/**/*.js'"
+  }
 }
