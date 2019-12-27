@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Preact components for use in Figma plugins",
+  "description": "A Preact implementation of the Figma design system for use in Figma plugins",
   "keywords": [
     "component",
     "component-library",
