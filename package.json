@@ -13,7 +13,7 @@
     "lint-js": "standardx '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
     "publish": "yarn run build && cpy 'docs/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
-    "test": "lerna run test",
+    "test": "yarn run build && ava",
     "version": "lerna version",
     "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
   },
@@ -53,6 +53,17 @@
     "stylelint": "^12.0.1",
     "stylelint-config-prettier": "^8.0.0",
     "stylelint-prettier": "^1.1.2"
+  },
+  "ava": {
+    "files": [
+      "packages/*/test/**/*.js",
+      "!**/fixtures/**"
+    ],
+    "verbose": true,
+    "require": [
+      "esm",
+      "./packages/common/src/silence-logging.js"
+    ]
   },
   "husky": {
     "hooks": {

@@ -25,24 +25,12 @@
   "main": "lib/index.js",
   "scripts": {
     "fix": "prettier-standard '{src,test}/**/*.js'",
-    "lint": "standardx '{src,test}/**/*.js'",
-    "test": "ava"
+    "lint": "standardx '{src,test}/**/*.js'"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^0.9.1",
     "chalk": "^3.0.0",
     "fs-extra": "^8.1.0",
     "npmlog": "^4.1.2"
-  },
-  "ava": {
-    "files": [
-      "test/**/*.js",
-      "!**/fixtures/**"
-    ],
-    "verbose": true,
-    "require": [
-      "esm",
-      "../common/src/silence-logging.js"
-    ]
   }
 }

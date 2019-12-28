@@ -26,10 +26,8 @@
     "create-figma-plugin-build": "lib/cli.js"
   },
   "scripts": {
-    "clean": "rimraf 'test/fixtures/*/{build,manifest.json,node_modules}'",
     "fix": "prettier-standard '{src,test}/**/*.js'",
-    "lint": "standardx '{src,test}/**/*.js'",
-    "test": "yarn run clean && ava"
+    "lint": "standardx '{src,test}/**/*.js'"
   },
   "dependencies": {
     "@babel/core": "^7.7.7",
@@ -51,16 +49,5 @@
   },
   "peerDependencies": {
     "preact": "^10.1.1"
-  },
-  "ava": {
-    "files": [
-      "test/**/*.js",
-      "!**/fixtures/**"
-    ],
-    "verbose": true,
-    "require": [
-      "esm",
-      "../common/src/silence-logging.js"
-    ]
   }
 }
