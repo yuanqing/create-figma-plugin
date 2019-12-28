@@ -20,8 +20,20 @@ export const FrameSelected = function () {
   )
 }
 
+export const FrameWithPageName = function () {
+  return (
+    <Layer type='frame' pageName='Page Name'>
+      Text
+    </Layer>
+  )
+}
+
 export const FrameLongText = function () {
-  return <Layer type='frame'>{longText}</Layer>
+  return (
+    <Layer type='frame' pageName='Page Name'>
+      {longText}
+    </Layer>
+  )
 }
 
 export const Component = function () {
@@ -36,6 +48,18 @@ export const ComponentSelected = function () {
   )
 }
 
+export const ComponentWithPageName = function () {
+  return (
+    <Layer type='component' pageName='Page Name'>
+      Text
+    </Layer>
+  )
+}
+
 export const ComponentLongText = function () {
-  return <Layer type='component'>{longText}</Layer>
+  return (
+    <Layer type='component' pageName='Page Name'>
+      {longText}
+    </Layer>
+  )
 }

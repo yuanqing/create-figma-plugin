@@ -11,7 +11,13 @@ const icons = {
   frame: frameIcon
 }
 
-export function Layer ({ children, type, selected: isSelected, ...rest }) {
+export function Layer ({
+  children,
+  pageName,
+  type,
+  selected: isSelected,
+  ...rest
+}) {
   return (
     <div
       {...rest}
@@ -22,7 +28,10 @@ export function Layer ({ children, type, selected: isSelected, ...rest }) {
       )}
     >
       <div class={styles.icon}>{icons[type]}</div>
-      <div class={styles.text}>{children}</div>
+      <div class={styles.layerName}>{children}</div>
+      {typeof pageName !== 'undefined' ? (
+        <div class={styles.pageName}>{pageName}</div>
+      ) : null}
     </div>
   )
 }

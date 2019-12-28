@@ -22,19 +22,25 @@
   background-color: $color-selection-a;
 }
 
-.text {
+.layerName,
+.pageName {
   @include text-11-regular;
-  flex-grow: 1;
-  pointer-events: none;
-  padding-left: 8px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+}
+
+.layerName {
+  padding: 0 8px;
 
   .component &,
   .frame & {
     font-weight: $font-weight-bold;
   }
+}
+
+.pageName {
+  color: $color-black-30;
 }
 
 .icon {
