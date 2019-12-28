@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/ui",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "publishConfig": {
     "access": "public"
   },
@@ -40,7 +40,7 @@
     "start": "mkdirp node_modules && start-storybook"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^0.0.44",
+    "@create-figma-plugin/utilities": "^0.0.45",
     "@sindresorhus/class-names": "^1.1.0"
   },
   "peerDependencies": {
