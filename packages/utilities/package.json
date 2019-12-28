@@ -25,6 +25,17 @@
   "main": "lib/index.js",
   "scripts": {
     "fix": "prettier-standard '{src,test}/**/*.js'",
-    "lint": "standardx '{src,test}/**/*.js'"
+    "lint": "standardx '{src,test}/**/*.js'",
+    "test": "ava"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "verbose": true,
+    "require": [
+      "esm",
+      "../common/src/silence-logging.js"
+    ]
   }
 }

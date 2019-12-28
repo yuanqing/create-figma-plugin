@@ -24,8 +24,10 @@
     "create-figma-plugin": "lib/cli.js"
   },
   "scripts": {
+    "clean": "rimraf 'test/fixtures/*/figma-plugin'",
     "fix": "prettier-standard '{src,test}/**/*.js'",
-    "lint": "standardx '{src,test}/**/*.js'"
+    "lint": "standardx '{src,test}/**/*.js'",
+    "test": "yarn run clean && ava"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.43",
@@ -33,10 +35,20 @@
     "fs-extra": "^8.1.0",
     "git-user-name": "^2.0.0",
     "globby": "^10.0.1",
-    "inquirer": "^7.0.0",
+    "inquirer": "^7.0.1",
     "is-utf8": "^0.2.1",
-    "mustache": "^3.1.0",
-    "sade": "^1.6.1",
-    "title-case": "^2.1.1"
+    "mustache": "^3.2.0",
+    "sade": "^1.7.0",
+    "title-case": "^3.0.2"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "verbose": true,
+    "require": [
+      "esm",
+      "../common/src/silence-logging.js"
+    ]
   }
 }

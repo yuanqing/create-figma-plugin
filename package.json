@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "yarn run clean && lerna exec --ignore @create-figma-plugin/ui 'babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward'",
-    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json}' 'packages/create-figma-plugin/{docs,README.md}'",
+    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json,node_modules}' 'packages/create-figma-plugin/{docs,README.md}'",
     "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
     "docs": "node scripts/insert-toc.js",
     "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
@@ -11,18 +11,18 @@
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'packages/*/src/**/*.scss'",
     "lint-js": "standardx '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
-    "publish": "yarn run build && cpy docs packages/create-figma-plugin --parents && cpy README.md packages/create-figma-plugin && lerna publish from-package",
+    "publish": "yarn run build && cpy 'docs/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
-    "test": "yarn run build && ava",
+    "test": "lerna run test",
     "version": "lerna version",
     "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
     "@babel/plugin-transform-modules-commonjs": "^7.7.5",
-    "@babel/plugin-transform-react-jsx": "^7.7.4",
+    "@babel/plugin-transform-react-jsx": "^7.7.7",
     "@storybook/addon-storysource": "^5.2.8",
     "@storybook/preact": "^5.2.8",
     "@storybook/source-loader": "^5.2.8",
@@ -30,40 +30,29 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-require-context-hook": "^1.0.0",
     "chokidar-cli": "^2.1.0",
-    "concurrently": "^5.0.0",
-    "cpy-cli": "^2.0.0",
-    "css-loader": "^3.2.1",
+    "concurrently": "^5.0.2",
+    "cpy-cli": "^3.0.0",
+    "css-loader": "^3.4.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "esm": "^3.2.25",
     "fs-extra": "^8.1.0",
     "husky": "^3.1.0",
-    "lerna": "^3.19.0",
+    "lerna": "^3.20.0",
     "lint-staged": "^9.5.0",
     "markdown-toc": "^1.2.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.13.0",
-    "nyc": "^14.1.1",
-    "preact": "^10.0.5",
+    "nyc": "^15.0.0",
+    "preact": "^10.1.1",
     "prettier": "^1.19.1",
     "prettier-standard": "^16.1.0",
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "standardx": "^5.0.0",
-    "style-loader": "^1.0.1",
-    "stylelint": "^12.0.0",
+    "style-loader": "^1.1.2",
+    "stylelint": "^12.0.1",
     "stylelint-config-prettier": "^8.0.0",
-    "stylelint-prettier": "^1.1.1"
-  },
-  "ava": {
-    "files": [
-      "packages/*/test/**/*.js",
-      "!**/fixtures/**"
-    ],
-    "verbose": true,
-    "require": [
-      "esm",
-      "./packages/common/src/silence-logging.js"
-    ]
+    "stylelint-prettier": "^1.1.2"
   },
   "husky": {
     "hooks": {

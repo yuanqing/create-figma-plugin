@@ -1,6 +1,6 @@
 import gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
-import titleCase from 'title-case'
+import { titleCase } from 'title-case'
 
 const figmaPrefixRegex = /^figma-/
 const multipleSpaceRegex = /\s+/g

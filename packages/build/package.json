@@ -26,28 +26,41 @@
     "create-figma-plugin-build": "lib/cli.js"
   },
   "scripts": {
+    "clean": "rimraf 'test/fixtures/*/{build,manifest.json,node_modules}'",
     "fix": "prettier-standard '{src,test}/**/*.js'",
-    "lint": "standardx '{src,test}/**/*.js'"
+    "lint": "standardx '{src,test}/**/*.js'",
+    "test": "yarn run clean && ava"
   },
   "dependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/plugin-transform-react-jsx": "^7.7.4",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
+    "@babel/plugin-transform-react-jsx": "^7.7.7",
     "@create-figma-plugin/common": "^0.0.43",
     "@create-figma-plugin/utilities": "^0.0.43",
     "babel-loader": "^8.0.6",
-    "chokidar": "^3.3.0",
-    "css-loader": "^3.2.0",
+    "chokidar": "^3.3.1",
+    "css-loader": "^3.4.0",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
-    "sade": "^1.6.1",
+    "sade": "^1.7.0",
     "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.0",
+    "style-loader": "^1.1.2",
     "temp-write": "^4.0.0",
-    "terser-webpack-plugin": "^2.2.1",
-    "webpack": "^4.41.2"
+    "terser-webpack-plugin": "^2.3.1",
+    "webpack": "^4.41.5"
   },
   "peerDependencies": {
-    "preact": "^10.0.5"
+    "preact": "^10.1.1"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js",
+      "!**/fixtures/**"
+    ],
+    "verbose": true,
+    "require": [
+      "esm",
+      "../common/src/silence-logging.js"
+    ]
   }
 }

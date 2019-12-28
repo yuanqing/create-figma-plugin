@@ -10,7 +10,7 @@ function changeDirectory (directory) {
 
 async function cleanUp () {
   return new Promise(function (resolve, reject) {
-    rimraf(join(process.cwd(), '{manifest.json,build,node_modules}'), function (
+    rimraf(join(process.cwd(), '{build,manifest.json,node_modules}'), function (
       error
     ) {
       if (error) {
@@ -34,9 +34,12 @@ function setUp () {
 }
 
 test.serial('no config', async function (t) {
-  t.plan(3)
+  t.plan(6)
   changeDirectory('1-no-config')
   await cleanUp()
+  t.false(await exists('build'))
+  t.false(await exists('manifest.json'))
+  t.false(await exists('node_modules'))
   await setUp()
   await build()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -51,9 +54,12 @@ test.serial('no config', async function (t) {
 })
 
 test.serial('basic command', async function (t) {
-  t.plan(3)
+  t.plan(6)
   changeDirectory('2-basic-command')
   await cleanUp()
+  t.false(await exists('build'))
+  t.false(await exists('manifest.json'))
+  t.false(await exists('node_modules'))
   await setUp()
   await build()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -68,9 +74,12 @@ test.serial('basic command', async function (t) {
 })
 
 test.serial('multiple menu commands', async function (t) {
-  t.plan(3)
+  t.plan(6)
   changeDirectory('3-multiple-menu-commands')
   await cleanUp()
+  t.false(await exists('build'))
+  t.false(await exists('manifest.json'))
+  t.false(await exists('node_modules'))
   await setUp()
   await build()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')

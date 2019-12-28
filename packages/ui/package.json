@@ -44,6 +44,6 @@
     "@sindresorhus/class-names": "^1.1.0"
   },
   "peerDependencies": {
-    "preact": "^10.0.5"
+    "preact": "^10.1.1"
   }
 }
