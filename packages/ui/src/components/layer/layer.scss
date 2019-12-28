@@ -25,9 +25,10 @@
 .layerName,
 .pageName {
   @include text-11-regular;
-  white-space: nowrap;
+  pointer-events: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .layerName {
@@ -40,11 +41,13 @@
 }
 
 .pageName {
+  flex: 1 0 40px;
   color: $color-black-30;
 }
 
 .icon {
-  width: 16px;
+  pointer-events: none;
+  flex: 0 0 16px;
   height: 16px;
 
   svg {

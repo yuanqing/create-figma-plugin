@@ -14,8 +14,8 @@ const icons = {
 export function Layer ({
   children,
   pageName,
-  type,
   selected: isSelected,
+  type,
   ...rest
 }) {
   return (
