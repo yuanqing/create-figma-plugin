@@ -16,6 +16,8 @@
   * [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
   * [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
   * [traverseLayer(layer, callback *[, filter]*)](#traverselayerlayer-callback--filter)
+  * [sortLayersByName(layer)](#sortlayersbynamelayer)
+  * [updateLayersSortOrder(layer)](#updatelayerssortorderlayer)
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   * [loadFonts(layers)](#loadfontslayers)
 - [Number](#number)
@@ -229,6 +231,30 @@ Each layer is also passed to a `filter` function. If you return `false` in `filt
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `callback` (`function (layer)`)
 - `filter` (`function (layer`) *(optional)*
+
+### sortLayersByName(layer)
+
+Sorts `layer` in alphabetical order.
+
+#### Returns
+
+- An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+### updateLayersSortOrder(layer)
+
+Updates the layer list sort order of the layers in `layers`.
+
+#### Returns
+
+- `true` if the layer list sort order was changed, else `false`
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
 ### const groups = groupSiblingLayers(layers)
 
