@@ -64,7 +64,7 @@ export function useMenu ({
         menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
       }
     },
-    [onChange, items, selectedItem]
+    [getSelectedItemElement, items, onChange, selectedItem]
   )
   return { handleKeyDown, menuElementRef }
 }
