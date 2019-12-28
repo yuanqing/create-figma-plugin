@@ -15,7 +15,7 @@ export function Tabs ({
   name,
   onChange,
   options,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }) {
@@ -71,7 +71,7 @@ export function Tabs ({
 
   return (
     <div>
-      <div class={styles.tabs} onKeyDown={handleKeyDown} tabindex='0'>
+      <div class={styles.tabs} onKeyDown={handleKeyDown} tabIndex='0'>
         {options.map(function (option, index) {
           const text =
             typeof option.text === 'undefined' ? option.value : option.text
@@ -86,7 +86,6 @@ export function Tabs ({
                 checked={value === option.value}
                 onChange={handleChange}
                 data-index={index}
-                tabIndex='0'
               />
               <div class={styles.text} data-text={text}>
                 {text}

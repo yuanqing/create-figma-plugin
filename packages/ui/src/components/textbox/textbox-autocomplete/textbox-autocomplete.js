@@ -410,6 +410,7 @@ export function TextboxAutocomplete ({
         onKeyDown={isDisabled === true ? null : handleKeyDown}
         onKeyUp={isDisabled === true ? null : handleKeyUp}
         onPaste={isDisabled === true ? null : handlePaste}
+        tabIndex='0'
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {isDisabled !== true && isMenuVisible === true && menuItems.length > 0 ? (

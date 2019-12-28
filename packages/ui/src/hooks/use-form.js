@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from 'preact/hooks'
-import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../utilities/key-codes'
+import {
+  ENTER_KEY_CODE,
+  ESCAPE_KEY_CODE,
+  TAB_KEY_CODE
+} from '../utilities/key-codes'
 
 export function useForm (
   initialState,
@@ -33,15 +37,33 @@ export function useForm (
   )
   const handleKeyDown = useCallback(
     function (event) {
-      if (
-        event.keyCode === ENTER_KEY_CODE &&
-        (typeof validate !== 'function' || validate(state) === true)
-      ) {
-        onSubmit(state)
-        return
-      }
-      if (event.keyCode === ESCAPE_KEY_CODE) {
-        onClose()
+      switch (event.keyCode) {
+        case ESCAPE_KEY_CODE: {
+          onClose()
+          return
+        }
+        case ENTER_KEY_CODE: {
+          if (typeof validate !== 'function' || validate(state) === true) {
+            onSubmit(state)
+          }
+          return
+        }
+        case TAB_KEY_CODE: {
+          const tabbableElements = document.querySelectorAll('[tabindex]')
+          const index = findElementIndex(event.target, tabbableElements)
+          if (
+            index === tabbableElements.length - 1 &&
+            event.shiftKey === false
+          ) {
+            event.preventDefault()
+            tabbableElements[0].focus()
+            return
+          }
+          if (index === 0 && event.shiftKey === true) {
+            event.preventDefault()
+            tabbableElements[tabbableElements.length - 1].focus()
+          }
+        }
       }
     },
     [state, onClose, onSubmit, validate]
@@ -73,4 +95,15 @@ export function useForm (
     handleSubmit,
     isInvalid
   }
+}
+
+function findElementIndex (targetElement, elements) {
+  return Array.prototype.slice
+    .call(elements)
+    .reduce(function (result, element, index) {
+      if (result === -1 && element.isEqualNode(targetElement)) {
+        return index
+      }
+      return result
+    }, -1)
 }

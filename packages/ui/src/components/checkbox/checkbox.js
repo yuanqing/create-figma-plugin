@@ -11,7 +11,7 @@ export function Checkbox ({
   disabled: isDisabled,
   name,
   onChange,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }) {
@@ -56,6 +56,7 @@ export function Checkbox ({
         disabled={isDisabled === true}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        tabIndex='0'
       />
       <div class={styles.text}>{children}</div>
     </label>

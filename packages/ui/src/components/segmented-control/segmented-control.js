@@ -16,7 +16,7 @@ export function SegmentedControl ({
   name,
   onChange,
   options,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }) {
@@ -68,7 +68,7 @@ export function SegmentedControl ({
     <div
       class={styles.segmentedControl}
       onKeyDown={isDisabled === true ? null : handleKeyDown}
-      tabindex={isDisabled === true ? null : '0'}
+      tabIndex={isDisabled === true ? null : '0'}
     >
       {options.map(function (option, index) {
         const text =

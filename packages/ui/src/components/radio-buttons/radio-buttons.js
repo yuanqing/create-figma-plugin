@@ -12,7 +12,7 @@ export function RadioButtons ({
   name,
   onChange,
   options,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   space = 'small',
   value,
   ...rest

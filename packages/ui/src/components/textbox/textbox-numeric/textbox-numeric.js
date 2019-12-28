@@ -25,7 +25,7 @@ export function TextboxNumeric ({
   noBorder,
   onChange,
   placeholder,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }) {
@@ -124,6 +124,7 @@ export function TextboxNumeric ({
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
+        tabIndex='0'
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
     </div>

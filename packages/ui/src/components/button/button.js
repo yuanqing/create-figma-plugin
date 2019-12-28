@@ -11,7 +11,7 @@ export function Button ({
   disabled: isDisabled,
   fullWidth: isFullWidth,
   onClick,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   secondary: isSecondary,
   ...rest
 }) {
@@ -39,6 +39,7 @@ export function Button ({
       disabled={isDisabled === true}
       onClick={onClick}
       onKeyDown={handleKeyDown}
+      tabIndex='0'
     />
   )
 }

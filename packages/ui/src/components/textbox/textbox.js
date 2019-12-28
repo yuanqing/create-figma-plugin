@@ -13,7 +13,7 @@ export function Textbox ({
   noBorder,
   onChange,
   placeholder,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }) {
@@ -70,6 +70,7 @@ export function Textbox ({
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        tabIndex='0'
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>

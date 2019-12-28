@@ -11,7 +11,7 @@ export function SearchTextbox ({
   name,
   onChange,
   placeholder,
-  propagateEscapeKeyDown = false,
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }) {
@@ -63,6 +63,7 @@ export function SearchTextbox ({
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        tabIndex='0'
       />
       <div class={styles.icon}>{searchIcon}</div>
     </div>
