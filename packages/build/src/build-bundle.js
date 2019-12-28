@@ -43,12 +43,12 @@ async function createCommandEntryFile (config) {
     return null
   }
   return tempWrite(`
+    import '@create-figma-plugin/utilities/src/events'
     const modules = ${createRequireCode(modules)}
     global.__command__ = ${
       modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
-    };
-    require('@create-figma-plugin/utilities/lib/events');
-    modules[global.__command__]();
+    }
+    modules[global.__command__]()
   `)
 }
 
@@ -58,10 +58,10 @@ async function createUiEntryFile (config) {
     return null
   }
   return tempWrite(`
+    import '@create-figma-plugin/utilities/src/events'
     const modules = ${createRequireCode(modules)}
-    require('@create-figma-plugin/utilities/lib/events');
-    const rootNode = document.getElementById('create-figma-plugin');
-    modules[window.__command__](rootNode, window.__data__, window.__command__);
+    const rootNode = document.getElementById('create-figma-plugin')
+    modules[window.__command__](rootNode, window.__data__, window.__command__)
   `)
 }
 

@@ -17,8 +17,7 @@
   },
   "files": [
     "lib",
-    "plugin-templates",
-    "src"
+    "plugin-templates"
   ],
   "bin": {
     "create-figma-plugin": "lib/cli.js"
