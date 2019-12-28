@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "description": "Scaffold a new Figma plugin",
   "keywords": [
     "create-figma-plugin",
@@ -30,7 +30,7 @@
     "test": "yarn run clean && ava"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.43",
+    "@create-figma-plugin/common": "^0.0.44",
     "degit": "^2.2.2",
     "fs-extra": "^8.1.0",
     "git-user-name": "^2.0.0",

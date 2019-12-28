@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/build",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "publishConfig": {
     "access": "public"
   },
@@ -35,8 +35,8 @@
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
     "@babel/plugin-transform-react-jsx": "^7.7.7",
-    "@create-figma-plugin/common": "^0.0.43",
-    "@create-figma-plugin/utilities": "^0.0.43",
+    "@create-figma-plugin/common": "^0.0.44",
+    "@create-figma-plugin/utilities": "^0.0.44",
     "babel-loader": "^8.0.6",
     "chokidar": "^3.3.1",
     "css-loader": "^3.4.0",
