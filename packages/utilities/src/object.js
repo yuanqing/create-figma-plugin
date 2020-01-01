@@ -60,3 +60,17 @@ export function compareObjects (a, b) {
   }
   return true
 }
+
+export function extractAttributes (array, attributes) {
+  const result = []
+  for (const object of array) {
+    const item = {}
+    for (const attribute of attributes) {
+      const value = object[attribute]
+      item[attribute] =
+        typeof value === 'undefined' || object[attribute] === '' ? null : value
+    }
+    result.push(item)
+  }
+  return result
+}
