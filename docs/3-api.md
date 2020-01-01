@@ -138,7 +138,6 @@ import {
   insertAfterLayer,
   getSelectedLayersOrAllLayers,
   getDocumentComponents,
-  extractLayerAttributes,
   getAbsolutePosition
   setAbsolutePosition,
   traverseLayer,
@@ -178,19 +177,6 @@ Gets all the components in the current document.
 #### Returns
 
 - An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
-
-### const result = extractLayerAttributes(layers, attributes)
-
-Extracts the specified `attributes` from each layer in `layers`. Each layer `id` will also be extracted.
-
-#### Returns
-
-- An `array` of plain objects
-
-#### Parameters
-
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-- `attributes` (an `array` of `string`)
 
 ### const absolutePosition = getAbsolutePosition(layer)
 
@@ -291,9 +277,9 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-### const result = isValidNumericInput(value)
+### const result = isValidNumericInput(value *[, integerOnly]*)
 
-Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid.
+Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid. Set `integerOnly` to `true` to check that the expression contains only integers; `integerOnly` defaults to `false` if not specified.
 
 #### Returns
 
@@ -302,6 +288,7 @@ Checks if `value` is a numeric expression, as input by a user. “Partial” inp
 #### Parameters
 
 - `value` (`string`)
+- `integerOnly` (`boolean`)
 
 ### const result = evaluateNumericExpression(expression)
 
@@ -322,6 +309,7 @@ Evaluates the given numeric `expression`.
 ```js
 import {
   cloneObject,
+  extractAttributes,
   compareObjects
 } from '@create-figma-plugin/utilities'
 ```
@@ -337,6 +325,19 @@ Creates a deep copy of the given `object`.
 #### Parameters
 
 - `object` (`any`)
+
+### const result = extractAttributes(array, attributes)
+
+Extracts the specified `attributes` from each object in `array`.
+
+#### Returns
+
+- An `array` of plain objects
+
+#### Parameters
+
+- `array` (an `array` of plain objects)
+- `attributes` (an `array` of `string`)
 
 ### const result = compareObjects(a, b)
 

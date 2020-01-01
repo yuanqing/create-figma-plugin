@@ -19,7 +19,7 @@ command.js   node_modules   package.json
 // command.js
 
 export default function () {
-  figma.notify('Hello, World!')
+  figma.notify('Hello, World!') //=> 'Hello, World!'
   figma.closePlugin()
 }
 ```
