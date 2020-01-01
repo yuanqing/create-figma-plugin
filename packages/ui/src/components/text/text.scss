@@ -3,6 +3,7 @@
 
 .text {
   @include text-11-regular;
+  pointer-events: none;
   transform: translateY(4px);
   padding-top: 1px;
   color: $color-black-80;
