@@ -5,10 +5,10 @@ const path = require('path')
 async function main () {
   const filename = path.resolve(__dirname, '..', 'docs', '3-api.md')
   const contents = await fs.readFile(filename, 'utf8')
-  const regex = /\[const \w+ = /g
   const result = markdownToc
     .insert(contents, { maxdepth: 3, bullet: '-' })
-    .replace(regex, '[')
+    .replace(/\[const \w+ = /g, '[') // remove `const = `
+    .replace(/- \[([^\]]+)\]/g, '- [**$1**]') // make headers bold
   await fs.writeFile(filename, result, 'utf8')
 }
 main()
