@@ -25,5 +25,6 @@
   "scripts": {
     "fix": "prettier-standard '{src,test}/**/*.js'",
     "lint": "standardx '{src,test}/**/*.js'"
-  }
+  },
+  "sideEffects": false
 }

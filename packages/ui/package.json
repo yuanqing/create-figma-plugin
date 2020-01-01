@@ -45,5 +45,8 @@
   },
   "peerDependencies": {
     "preact": "^10.1.1"
-  }
+  },
+  "sideEffects": [
+    "./src/scss/{base,font-face,reset}.scss"
+  ]
 }

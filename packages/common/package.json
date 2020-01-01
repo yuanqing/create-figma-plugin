@@ -31,5 +31,6 @@
     "chalk": "^3.0.0",
     "fs-extra": "^8.1.0",
     "npmlog": "^4.1.2"
-  }
+  },
+  "sideEffects": false
 }
