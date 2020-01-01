@@ -23,6 +23,12 @@ export function createWebpackConfig (entry, isDevelopment) {
               plugins: [
                 '@babel/plugin-proposal-object-rest-spread',
                 [
+                  '@babel/plugin-transform-template-literals',
+                  {
+                    loose: true
+                  }
+                ],
+                [
                   '@babel/plugin-transform-react-jsx',
                   {
                     pragma: 'h',
