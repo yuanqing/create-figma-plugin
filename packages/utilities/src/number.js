@@ -4,7 +4,7 @@ const integerOperandRegex = /^-?\d*$/
 const operatorRegex = /[+\-*/]/
 const operatorSuffixRegex = /[+\-*/]$/
 
-export function isValidNumericInput (value, isInteger = false) {
+export function isValidNumericInput (value, integerOnly = false) {
   const split = (value[0] === '-' ? value.substring(1) : value).split(
     operatorRegex
   )
@@ -13,7 +13,7 @@ export function isValidNumericInput (value, isInteger = false) {
     const operand = split[i]
     if (
       (operand === '' && i !== split.length - 1) ||
-      (isInteger === true ? integerOperandRegex : floatOperandRegex).test(
+      (integerOnly === true ? integerOperandRegex : floatOperandRegex).test(
         operand
       ) === false
     ) {
