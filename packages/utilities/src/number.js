@@ -1,9 +1,10 @@
 const invalidCharactersRegex = /[^\d.+\-*/]/
-const operandRegex = /^-?\d*(?:\.\d*)?$/
+const floatOperandRegex = /^-?\d*(?:\.\d*)?$/
+const integerOperandRegex = /^-?\d*$/
 const operatorRegex = /[+\-*/]/
 const operatorSuffixRegex = /[+\-*/]$/
 
-export function isValidNumericInput (value) {
+export function isValidNumericInput (value, isInteger) {
   const split = (value[0] === '-' ? value.substring(1) : value).split(
     operatorRegex
   )
@@ -12,7 +13,8 @@ export function isValidNumericInput (value) {
     const operand = split[i]
     if (
       (operand === '' && i !== split.length - 1) ||
-      operandRegex.test(operand) === false
+      (isInteger ? integerOperandRegex : floatOperandRegex).test(operand) ===
+        false
     ) {
       return false
     }
