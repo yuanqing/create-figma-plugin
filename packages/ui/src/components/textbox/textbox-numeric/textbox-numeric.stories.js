@@ -61,3 +61,44 @@ export const WithIcon = function () {
     />
   )
 }
+
+export const Integer = function () {
+  const [state, setState] = useState({ foo: 42 })
+  return (
+    <TextboxNumeric
+      placeholder='Placeholder'
+      name='foo'
+      value={state.foo}
+      integer
+      onChange={setState}
+    />
+  )
+}
+
+export const CustomIncrements = function () {
+  const [state, setState] = useState({ foo: 42 })
+  return (
+    <TextboxNumeric
+      placeholder='Placeholder'
+      name='foo'
+      value={state.foo}
+      smallIncrement={4}
+      bigIncrement={20}
+      onChange={setState}
+    />
+  )
+}
+
+export const MinimumMaximum = function () {
+  const [state, setState] = useState({ foo: 42 })
+  return (
+    <TextboxNumeric
+      placeholder='Placeholder'
+      name='foo'
+      value={state.foo}
+      minimum={0}
+      maximum={100}
+      onChange={setState}
+    />
+  )
+}

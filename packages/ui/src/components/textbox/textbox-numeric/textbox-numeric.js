@@ -21,6 +21,11 @@ const nonDigitRegex = /[^\d.]/
 export function TextboxNumeric ({
   focused: isFocused,
   icon,
+  smallIncrement = 1,
+  bigIncrement = 10,
+  integer: isInteger = false,
+  maximum = Number.MAX_VALUE,
+  minimum = -1 * Number.MAX_VALUE,
   name,
   noBorder,
   onChange,
@@ -54,18 +59,25 @@ export function TextboxNumeric ({
         inputElementRef.current.blur()
         return
       }
-      if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
+      if (keyCode === DOWN_KEY_CODE || keyCode === UP_KEY_CODE) {
         event.preventDefault()
-        const value = inputElementRef.current.value
-        const parsedValue = evaluateNumericExpression(value)
-        const delta = event.shiftKey === true ? 10 : 1
+        const evaluatedValue = evaluateNumericExpression(value)
+        if (
+          (event.keyCode === DOWN_KEY_CODE && evaluatedValue <= minimum) ||
+          (event.keyCode === UP_KEY_CODE && evaluatedValue >= maximum)
+        ) {
+          return
+        }
+        const delta = event.shiftKey === true ? bigIncrement : smallIncrement
+        const newValue =
+          event.keyCode === DOWN_KEY_CODE
+            ? Math.max(evaluatedValue - delta, minimum)
+            : Math.min(evaluatedValue + delta, maximum)
         const significantFiguresCount = countSignificantFigures(
-          nonDigitRegex.test(value) === true ? `${parsedValue}` : value
+          nonDigitRegex.test(value) === true ? `${evaluatedValue}` : value
         )
-        inputElementRef.current.value = formatValue(
-          event.keyCode === UP_KEY_CODE
-            ? parsedValue + delta
-            : parsedValue - delta,
+        inputElementRef.current.value = formatSignificantFigures(
+          newValue,
           significantFiguresCount
         )
         handleInput()
@@ -77,23 +89,40 @@ export function TextboxNumeric ({
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
         const nextValue = computeNextValue(inputElementRef.current, event.key)
-        if (isValidNumericInput(nextValue) === false) {
+        if (isValidNumericInput(nextValue, isInteger) === false) {
+          event.preventDefault()
+          return
+        }
+        const evaluatedValue = evaluateNumericExpression(nextValue)
+        if (evaluatedValue < minimum || evaluatedValue > maximum) {
           event.preventDefault()
         }
       }
     },
-    [handleInput, propagateEscapeKeyDown]
+    [
+      bigIncrement,
+      handleInput,
+      isInteger,
+      maximum,
+      minimum,
+      propagateEscapeKeyDown,
+      smallIncrement,
+      value
+    ]
   )
 
-  function handlePaste (event) {
-    const nextValue = computeNextValue(
-      inputElementRef.current,
-      event.clipboardData.getData('Text')
-    )
-    if (isValidNumericInput(nextValue) === false) {
-      event.preventDefault()
-    }
-  }
+  const handlePaste = useCallback(
+    function (event) {
+      const nextValue = computeNextValue(
+        inputElementRef.current,
+        event.clipboardData.getData('Text')
+      )
+      if (isValidNumericInput(nextValue, isInteger) === false) {
+        event.preventDefault()
+      }
+    },
+    [isInteger]
+  )
 
   useLayoutEffect(
     function () {
@@ -141,7 +170,7 @@ function countSignificantFigures (value) {
   return result[1].length
 }
 
-function formatValue (value, significantFiguresCount) {
+function formatSignificantFigures (value, significantFiguresCount) {
   if (significantFiguresCount === 0) {
     return `${value}`
   }
