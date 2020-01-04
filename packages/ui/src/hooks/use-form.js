@@ -49,7 +49,9 @@ export function useForm (
           return
         }
         case TAB_KEY_CODE: {
-          const tabbableElements = document.querySelectorAll('[tabindex]')
+          const tabbableElements = document.querySelectorAll(
+            ':not([disabled])[tabindex]'
+          )
           const index = findElementIndex(event.target, tabbableElements)
           if (
             index === tabbableElements.length - 1 &&
