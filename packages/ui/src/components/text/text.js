@@ -17,7 +17,6 @@ export function Text ({
         styles.text,
         styles[align],
         isBold === true ? styles.isBold : null,
-        isBold === true ? styles.isBold : null,
         isMuted === true ? styles.isMuted : null
       )}
     />
