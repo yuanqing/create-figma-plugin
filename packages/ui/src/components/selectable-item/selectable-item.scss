@@ -1,15 +1,20 @@
 @import "../../scss/constants";
 @import "../../scss/text";
 
-.selectableItem {
+.label {
   display: flex;
   align-items: center;
+  position: relative;
   padding: 0 16px;
   height: 32px;
   color: $color-black-80;
 
   &:hover {
     background-color: $color-selection-b;
+  }
+
+  &:focus {
+    outline: 0;
   }
 }
 
@@ -22,9 +27,17 @@
   }
 }
 
-.isSelected,
-.isSelected:hover {
+.isFocused {
+  background-color: $color-selection-b;
+}
+
+.isChecked,
+.isChecked:hover {
   background-color: $color-selection-a;
+}
+
+.input {
+  display: none;
 }
 
 .text {
@@ -34,4 +47,21 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  .isBold & {
+    @include text-11-bold;
+  }
+}
+
+.icon {
+  pointer-events: none;
+  flex: 0 0 16px;
+  margin-left: 8px;
+  height: 16px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: $color-blue;
+  }
 }

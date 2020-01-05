@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+import { useState } from 'preact/hooks'
 import { SelectableItem } from './selectable-item'
 
 export default { title: 'Selectable Item' }
@@ -9,13 +10,73 @@ const longText = Array(100)
   .join(' ')
 
 export const Default = function () {
-  return <SelectableItem>Text</SelectableItem>
+  const [state, setState] = useState({ foo: false })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState}>
+      Text
+    </SelectableItem>
+  )
 }
 
 export const Selected = function () {
-  return <SelectableItem selected>Text</SelectableItem>
+  const [state, setState] = useState({ foo: true })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState}>
+      Text
+    </SelectableItem>
+  )
+}
+
+export const Disabled = function () {
+  const [state, setState] = useState({ foo: false })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState} disabled>
+      Text
+    </SelectableItem>
+  )
+}
+
+export const DisabledSelected = function () {
+  const [state, setState] = useState({ foo: true })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState} disabled>
+      Text
+    </SelectableItem>
+  )
+}
+
+export const Focused = function () {
+  const [state, setState] = useState({ foo: false })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState} focused>
+      Text
+    </SelectableItem>
+  )
+}
+
+export const FocusedSelected = function () {
+  const [state, setState] = useState({ foo: true })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState} focused>
+      Text
+    </SelectableItem>
+  )
+}
+
+export const Bold = function () {
+  const [state, setState] = useState({ foo: false })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState} bold>
+      Text
+    </SelectableItem>
+  )
 }
 
 export const LongText = function () {
-  return <SelectableItem>{longText}</SelectableItem>
+  const [state, setState] = useState({ foo: true })
+  return (
+    <SelectableItem name='foo' value={state.foo} onChange={setState} icon>
+      {longText}
+    </SelectableItem>
+  )
 }

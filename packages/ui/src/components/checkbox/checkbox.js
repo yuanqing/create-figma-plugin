@@ -11,33 +11,39 @@ export function Checkbox ({
   disabled: isDisabled,
   name,
   onChange,
+  onKeyDown,
   propagateEscapeKeyDown = true,
   value,
   ...rest
 }) {
   const handleChange = useCallback(
-    function (event) {
-      onChange({ [name]: event.target.checked === true })
+    function () {
+      onChange({ [name]: !(value === true) })
     },
-    [name, onChange]
+    [name, onChange, value]
   )
 
   const handleKeyDown = useCallback(
     function (event) {
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
+      switch (event.keyCode) {
+        case ESCAPE_KEY_CODE: {
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          event.target.blur()
+          break
         }
-        event.target.blur()
-        return
+        case ENTER_KEY_CODE: {
+          event.stopPropagation()
+          onChange({ [name]: !(value === true) })
+          break
+        }
       }
-      if (keyCode === ENTER_KEY_CODE) {
-        event.stopPropagation()
-        onChange({ [name]: value !== true })
+      if (typeof onKeyDown === 'function') {
+        onKeyDown(event)
       }
     },
-    [name, onChange, propagateEscapeKeyDown, value]
+    [name, onChange, onKeyDown, propagateEscapeKeyDown, value]
   )
 
   return (
