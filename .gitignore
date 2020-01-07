@@ -1,6 +1,7 @@
 .DS_Store
 .nyc_output/
 *.log
+build/
 lib/
 node_modules/
 packages/**/fixtures/**/build/

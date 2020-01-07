@@ -31,6 +31,7 @@
   ],
   "main": "src/index.js",
   "scripts": {
+    "build": "mkdirp node_modules && build-storybook --output-dir build",
     "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
     "fix-css": "prettier --write 'src/**/*.scss'",
     "fix-js": "prettier-standard '{.storybook,src}/**/*.js'",
