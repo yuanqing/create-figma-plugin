@@ -12,7 +12,7 @@ const longText = Array(100)
 export const Default = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState}>
+    <SelectableItem name='foo' value={state.foo} onClick={setState}>
       Text
     </SelectableItem>
   )
@@ -21,7 +21,7 @@ export const Default = function () {
 export const Selected = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState}>
+    <SelectableItem name='foo' value={state.foo} onClick={setState}>
       Text
     </SelectableItem>
   )
@@ -30,7 +30,7 @@ export const Selected = function () {
 export const Disabled = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState} disabled>
+    <SelectableItem name='foo' value={state.foo} onClick={setState} disabled>
       Text
     </SelectableItem>
   )
@@ -39,25 +39,7 @@ export const Disabled = function () {
 export const DisabledSelected = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState} disabled>
-      Text
-    </SelectableItem>
-  )
-}
-
-export const Focused = function () {
-  const [state, setState] = useState({ foo: false })
-  return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState} focused>
-      Text
-    </SelectableItem>
-  )
-}
-
-export const FocusedSelected = function () {
-  const [state, setState] = useState({ foo: true })
-  return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState} focused>
+    <SelectableItem name='foo' value={state.foo} onClick={setState} disabled>
       Text
     </SelectableItem>
   )
@@ -66,7 +48,7 @@ export const FocusedSelected = function () {
 export const Bold = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState} bold>
+    <SelectableItem name='foo' value={state.foo} onClick={setState} bold>
       Text
     </SelectableItem>
   )
@@ -75,7 +57,7 @@ export const Bold = function () {
 export const LongText = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState} icon>
+    <SelectableItem name='foo' value={state.foo} onClick={setState} icon>
       {longText}
     </SelectableItem>
   )

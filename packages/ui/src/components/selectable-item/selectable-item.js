@@ -11,20 +11,20 @@ export function SelectableItem ({
   bold: isBold,
   children,
   disabled: isDisabled,
-  focused: isFocused,
   icon: hasIcon,
   name,
   value,
-  onChange,
+  onClick,
   onKeyDown,
   propagateEscapeKeyDown,
   ...rest
 }) {
   const handleChange = useCallback(
-    function () {
-      onChange({ [name]: !(value === true) })
+    function (event) {
+      const newValue = !(value === true)
+      onClick({ [name]: newValue }, newValue, name, event)
     },
-    [name, onChange, value]
+    [name, onClick, value]
   )
 
   const handleKeyDown = useCallback(
@@ -39,7 +39,7 @@ export function SelectableItem ({
         }
         case ENTER_KEY_CODE: {
           event.stopPropagation()
-          onChange({ [name]: !(value === true) })
+          onClick({ [name]: !(value === true) })
           break
         }
       }
@@ -47,7 +47,7 @@ export function SelectableItem ({
         onKeyDown(event)
       }
     },
-    [name, value, onChange, onKeyDown, propagateEscapeKeyDown]
+    [name, value, onClick, onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -57,7 +57,6 @@ export function SelectableItem ({
         styles.label,
         isDisabled === true ? styles.isDisabled : null,
         isBold === true ? styles.isBold : null,
-        isFocused === true ? styles.isFocused : null,
         value === true ? styles.isChecked : null
       )}
       onKeyDown={isDisabled === true ? null : handleKeyDown}
