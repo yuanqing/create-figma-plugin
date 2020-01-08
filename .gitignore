@@ -1,7 +1,6 @@
 .DS_Store
 .nyc_output/
 *.log
-build/
 lib/
 node_modules/
 packages/**/fixtures/**/build/
@@ -9,3 +8,4 @@ packages/**/fixtures/**/figma-plugin/
 packages/**/fixtures/**/manifest.json
 packages/create-figma-plugin/docs
 packages/create-figma-plugin/README.md
+packages/ui/build/
