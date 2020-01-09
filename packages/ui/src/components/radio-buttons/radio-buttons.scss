@@ -29,12 +29,10 @@
   border-radius: 6px;
   height: 12px;
 
-  &:active,
   &:focus {
     border-color: $color-blue;
   }
 
-  &:active:before,
   &:focus:before {
     content: "";
     display: block;
