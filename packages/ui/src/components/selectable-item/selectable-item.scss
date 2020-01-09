@@ -27,6 +27,10 @@
   }
 }
 
+.isIndented {
+  padding-left: 36px;
+}
+
 .isChecked,
 .isChecked:hover {
   background-color: $color-selection-a;

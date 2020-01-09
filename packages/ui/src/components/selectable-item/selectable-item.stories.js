@@ -54,6 +54,15 @@ export const Bold = function () {
   )
 }
 
+export const Indent = function () {
+  const [state, setState] = useState({ foo: false })
+  return (
+    <SelectableItem name='foo' value={state.foo} onClick={setState} indent>
+      Text
+    </SelectableItem>
+  )
+}
+
 export const LongText = function () {
   const [state, setState] = useState({ foo: true })
   return (

@@ -12,6 +12,7 @@ export function SelectableItem ({
   children,
   disabled: isDisabled,
   icon: hasIcon,
+  indent: isIndented,
   name,
   value,
   onClick,
@@ -57,6 +58,7 @@ export function SelectableItem ({
         styles.label,
         isDisabled === true ? styles.isDisabled : null,
         isBold === true ? styles.isBold : null,
+        isIndented === true ? styles.isIndented : null,
         value === true ? styles.isChecked : null
       )}
       onKeyDown={isDisabled === true ? null : handleKeyDown}
