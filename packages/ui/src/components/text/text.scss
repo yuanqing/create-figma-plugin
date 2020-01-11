@@ -24,6 +24,11 @@
     text-decoration: none;
     color: $color-blue;
   }
+
+  code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+  }
 }
 
 .isBold {
