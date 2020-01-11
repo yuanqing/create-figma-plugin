@@ -1,8 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
+import styles from './svg.scss'
 
 export const spaceVerticalIcon = (
-  <svg>
+  <svg class={styles.svg}>
     <path
       fill-rule='evenodd'
       clip-rule='evenodd'
