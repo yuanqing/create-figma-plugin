@@ -4,10 +4,13 @@
 .searchTextbox {
   @include text-11-regular;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .input {
   @include text-11-regular;
+  flex-grow: 1;
   padding-left: 36px;
   width: 100%;
   height: 40px;
@@ -23,19 +26,30 @@
   }
 }
 
-.icon {
+.searchIcon {
   pointer-events: none;
   position: absolute;
   top: 12px;
   left: 12px;
+  color: $color-black-80;
 
   .input:disabled + & {
     opacity: $opacity-30;
   }
+}
 
-  svg {
-    width: 16px;
-    height: 16px;
-    fill: $color-black-80;
+.clear {
+  flex: 0 0 40px;
+  height: 40px;
+  padding: 12px;
+  color: $color-black-30;
+
+  &:hover {
+    color: $color-black-80;
+  }
+
+  &:focus {
+    outline: none;
+    color: $color-black-80;
   }
 }

@@ -3,6 +3,7 @@ import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { searchIcon } from '../../icons/search-icon'
+import { crossIcon } from '../../icons/cross-icon'
 import '../../scss/base.scss'
 import styles from './search-textbox.scss'
 
@@ -12,6 +13,7 @@ export function SearchTextbox ({
   onChange,
   placeholder,
   propagateEscapeKeyDown = true,
+  clearOnEscapeKeyDown = true,
   value,
   ...rest
 }) {
@@ -32,13 +34,26 @@ export function SearchTextbox ({
     function (event) {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
+        if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
+          onChange({ [name]: '' })
+          event.stopPropagation()
+          return
+        }
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
         inputElementRef.current.blur()
       }
     },
-    [propagateEscapeKeyDown]
+    [clearOnEscapeKeyDown, name, onChange, propagateEscapeKeyDown, value]
+  )
+
+  const handleClearClick = useCallback(
+    function () {
+      onChange({ [name]: '' })
+      inputElementRef.current.focus()
+    },
+    [name, onChange]
   )
 
   useLayoutEffect(
@@ -65,7 +80,12 @@ export function SearchTextbox ({
         onKeyDown={handleKeyDown}
         tabIndex='0'
       />
-      <div class={styles.icon}>{searchIcon}</div>
+      <div class={styles.searchIcon}>{searchIcon}</div>
+      {value === null || value === '' ? null : (
+        <div class={styles.clear} onClick={handleClearClick} tabIndex='0'>
+          {crossIcon}
+        </div>
+      )}
     </div>
   )
 }
