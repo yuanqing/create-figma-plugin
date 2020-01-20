@@ -1,14 +1,15 @@
 export function updateLayersSortOrder (layers) {
-  const insertIndex = calculateInsertIndex(layers)
-  const parentLayer = layers[0].parent // we've already checked that `layers` have a common parent
+  const copy = [].concat(layers)
+  const insertIndex = calculateInsertIndex(copy)
+  const parentLayer = copy[0].parent // we've already checked that `layers` have a common parent
   if (parentLayer.type !== 'DOCUMENT') {
-    layers.reverse()
+    copy.reverse()
   }
-  const before = collectLayerIndices(layers)
-  layers.forEach(function (layer) {
+  const before = collectLayerIndices(copy)
+  copy.forEach(function (layer) {
     parentLayer.insertChild(insertIndex, layer)
   })
-  const after = collectLayerIndices(layers)
+  const after = collectLayerIndices(copy)
   return areArraysIdentical(before, after) === false
 }
 
