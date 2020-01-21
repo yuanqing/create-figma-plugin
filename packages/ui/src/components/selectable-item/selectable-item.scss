@@ -9,13 +9,18 @@
   height: 32px;
   color: $color-black-80;
 
-  &:hover {
-    background-color: $color-selection-b;
-  }
-
   &:focus {
     outline: 0;
   }
+
+  &:hover {
+    background-color: $color-selection-b;
+  }
+}
+
+.isChecked,
+.isChecked:hover {
+  background-color: $color-selection-a;
 }
 
 .isDisabled {
@@ -30,11 +35,6 @@
 
 .isIndented {
   padding-left: 36px;
-}
-
-.isChecked,
-.isChecked:hover {
-  background-color: $color-selection-a;
 }
 
 .input {
@@ -59,10 +59,9 @@
   flex: 0 0 16px;
   margin-left: 8px;
   height: 16px;
+  color: $color-blue;
 
-  svg {
-    width: 16px;
-    height: 16px;
-    fill: $color-blue;
+  .isDisabled & {
+    color: $color-black-80;
   }
 }
