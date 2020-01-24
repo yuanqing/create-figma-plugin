@@ -38,6 +38,16 @@ export function TextboxNumeric ({
 
   const inputElementRef = useRef(null)
 
+  const handleClick = useCallback(
+    function () {
+      if (value === null) {
+        inputElementRef.current.focus()
+        inputElementRef.current.select()
+      }
+    },
+    [value]
+  )
+
   function handleFocus () {
     inputElementRef.current.select()
   }
@@ -60,6 +70,9 @@ export function TextboxNumeric ({
         return
       }
       if (keyCode === DOWN_KEY_CODE || keyCode === UP_KEY_CODE) {
+        if (value === null) {
+          return
+        }
         event.preventDefault()
         const evaluatedValue = evaluateNumericExpression(value)
         if (
@@ -88,7 +101,10 @@ export function TextboxNumeric ({
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        const nextValue = computeNextValue(inputElementRef.current, event.key)
+        const nextValue =
+          value === null
+            ? event.key
+            : computeNextValue(inputElementRef.current, event.key)
         if (isValidNumericInput(nextValue, isInteger) === false) {
           event.preventDefault()
           return
@@ -148,7 +164,8 @@ export function TextboxNumeric ({
         name={name}
         class={styles.input}
         placeholder={placeholder}
-        value={value === null ? '' : value}
+        value={value === null ? 'Mixed' : value}
+        onClick={handleClick}
         onInput={handleInput}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}

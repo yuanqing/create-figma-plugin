@@ -42,6 +42,11 @@ export const FilledDisabled = function () {
   )
 }
 
+export const Mixed = function () {
+  const [state, setState] = useState({ foo: null })
+  return <TextboxNumeric name='foo' value={state.foo} onChange={setState} />
+}
+
 export const NoBorder = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
@@ -54,6 +59,19 @@ export const WithIcon = function () {
   return (
     <TextboxNumeric
       icon={spaceHorizontalIcon}
+      placeholder='Space'
+      name='foo'
+      value={state.foo}
+      onChange={setState}
+    />
+  )
+}
+
+export const WithTextIcon = function () {
+  const [state, setState] = useState({ foo: null })
+  return (
+    <TextboxNumeric
+      icon='S'
       placeholder='Space'
       name='foo'
       value={state.foo}

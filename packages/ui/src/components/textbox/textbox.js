@@ -21,6 +21,16 @@ export function Textbox ({
 
   const inputElementRef = useRef(null)
 
+  const handleClick = useCallback(
+    function () {
+      if (value === null) {
+        inputElementRef.current.focus()
+        inputElementRef.current.select()
+      }
+    },
+    [value]
+  )
+
   function handleFocus () {
     inputElementRef.current.select()
   }
@@ -66,7 +76,8 @@ export function Textbox ({
         name={name}
         class={styles.input}
         placeholder={placeholder}
-        value={value === null ? '' : value}
+        value={value === null ? 'Mixed' : value}
+        onClick={handleClick}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}

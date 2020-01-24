@@ -109,6 +109,20 @@ export const WithIcon = function () {
   )
 }
 
+export const WithTextIcon = function () {
+  const [state, setState] = useState({ foo: null })
+  return (
+    <TextboxAutocomplete
+      icon='S'
+      placeholder='Search'
+      name='foo'
+      value={state.foo}
+      options={options}
+      onChange={setState}
+    />
+  )
+}
+
 export const Strict = function () {
   const [state, setState] = useState({ foo: null })
   return (
