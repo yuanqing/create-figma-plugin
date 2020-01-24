@@ -18,7 +18,7 @@ export function useForm (
         event.preventDefault()
       }
       if (typeof validate !== 'function' || validate(state) === true) {
-        onSubmit(state)
+        onSubmit(state, event)
       }
     },
     [state, onSubmit, validate]
@@ -39,12 +39,12 @@ export function useForm (
     function (event) {
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
-          onClose()
+          onClose(state, event)
           return
         }
         case ENTER_KEY_CODE: {
           if (typeof validate !== 'function' || validate(state) === true) {
-            onSubmit(state)
+            onSubmit(state, event)
           }
           return
         }
