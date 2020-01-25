@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
-import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
+import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import '../../scss/base.scss'
 import styles from './button.scss'
 
@@ -23,6 +23,9 @@ export function Button ({
           event.stopPropagation()
         }
         event.target.blur()
+      }
+      if (keyCode === ENTER_KEY_CODE) {
+        event.stopPropagation()
       }
     },
     [propagateEscapeKeyDown]
