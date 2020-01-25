@@ -53,8 +53,9 @@ export function TextboxNumeric ({
   }
 
   const handleInput = useCallback(
-    function () {
-      onChange({ [name]: inputElementRef.current.value })
+    function (event) {
+      const value = inputElementRef.current.value
+      onChange({ [name]: value }, value, name, event)
     },
     [name, onChange]
   )
