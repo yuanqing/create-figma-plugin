@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
+import { useCallback, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { searchIcon } from '../../icons/search-icon'
 import { crossIcon } from '../../icons/cross-icon'
@@ -8,7 +8,6 @@ import '../../scss/base.scss'
 import styles from './search-textbox.scss'
 
 export function SearchTextbox ({
-  focused: isFocused,
   name,
   onChange,
   placeholder,
@@ -54,15 +53,6 @@ export function SearchTextbox ({
       inputElementRef.current.focus()
     },
     [name, onChange]
-  )
-
-  useLayoutEffect(
-    function () {
-      if (isFocused === true) {
-        handleFocus()
-      }
-    },
-    [isFocused]
   )
 
   return (

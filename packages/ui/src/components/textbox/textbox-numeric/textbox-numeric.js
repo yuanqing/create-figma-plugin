@@ -5,7 +5,7 @@ import {
 } from '@create-figma-plugin/utilities/src/number'
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
+import { useCallback, useRef } from 'preact/hooks'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -19,7 +19,6 @@ import styles from '../textbox.scss'
 const nonDigitRegex = /[^\d.]/
 
 export function TextboxNumeric ({
-  focused: isFocused,
   icon,
   smallIncrement = 1,
   bigIncrement = 10,
@@ -139,15 +138,6 @@ export function TextboxNumeric ({
       }
     },
     [isInteger]
-  )
-
-  useLayoutEffect(
-    function () {
-      if (isFocused === true) {
-        handleFocus()
-      }
-    },
-    [isFocused]
   )
 
   return (

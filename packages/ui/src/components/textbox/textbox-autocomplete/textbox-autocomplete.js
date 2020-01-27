@@ -23,7 +23,6 @@ const INVALID_ID = -1
 export function TextboxAutocomplete ({
   disabled: isDisabled,
   filter: shouldFilter,
-  focused: isFocused,
   icon,
   name,
   noBorder,
@@ -365,15 +364,6 @@ export function TextboxAutocomplete ({
       }
     },
     [isMenuVisible]
-  )
-
-  useLayoutEffect(
-    function () {
-      if (isFocused === true) {
-        setMenuVisible(true)
-      }
-    },
-    [isFocused]
   )
 
   useLayoutEffect(

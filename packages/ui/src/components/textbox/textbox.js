@@ -1,13 +1,12 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { useCallback, useLayoutEffect, useRef } from 'preact/hooks'
+import { useCallback, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import '../../scss/base.scss'
 import styles from './textbox.scss'
 
 export function Textbox ({
-  focused: isFocused,
   icon,
   name,
   noBorder,
@@ -51,15 +50,6 @@ export function Textbox ({
       inputElementRef.current.blur()
     }
   }
-
-  useLayoutEffect(
-    function () {
-      if (isFocused === true) {
-        handleFocus()
-      }
-    },
-    [isFocused]
-  )
 
   return (
     <div
