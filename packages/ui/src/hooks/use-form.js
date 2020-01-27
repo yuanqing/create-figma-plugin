@@ -17,7 +17,10 @@ export function useForm (
       if (typeof event !== 'undefined') {
         event.preventDefault()
       }
-      if (typeof validate !== 'function' || validate(state) === true) {
+      if (
+        typeof onSubmit === 'function' &&
+        (typeof validate !== 'function' || validate(state) === true)
+      ) {
         onSubmit(state, event)
       }
     },
@@ -39,11 +42,16 @@ export function useForm (
     function (event) {
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
-          onClose(state, event)
+          if (typeof onClose === 'function') {
+            onClose(state, event)
+          }
           return
         }
         case ENTER_KEY_CODE: {
-          if (typeof validate !== 'function' || validate(state) === true) {
+          if (
+            typeof onSubmit === 'function' &&
+            (typeof validate !== 'function' || validate(state) === true)
+          ) {
             onSubmit(state, event)
           }
           return
