@@ -57,9 +57,7 @@ export function useForm (
           return
         }
         case TAB_KEY_CODE: {
-          const tabbableElements = document.querySelectorAll(
-            ':not([disabled])[tabindex]:not([tabindex="-1"])'
-          )
+          const tabbableElements = getTabbableElements()
           const index = findElementIndex(event.target, tabbableElements)
           if (
             index === tabbableElements.length - 1 &&
@@ -97,8 +95,13 @@ export function useForm (
     [handleKeyDown]
   )
   useEffect(function () {
-    window.focus()
-  })
+    const tabbableElements = getTabbableElements()
+    if (tabbableElements.length === 0) {
+      window.focus()
+      return
+    }
+    tabbableElements[0].focus()
+  }, [])
   return {
     state,
     handleChange,
@@ -107,13 +110,18 @@ export function useForm (
   }
 }
 
+function getTabbableElements () {
+  const elements = document.querySelectorAll(
+    ':not([disabled])[tabindex]:not([tabindex="-1"])'
+  )
+  return Array.prototype.slice.call(elements)
+}
+
 function findElementIndex (targetElement, elements) {
-  return Array.prototype.slice
-    .call(elements)
-    .reduce(function (result, element, index) {
-      if (result === -1 && element.isEqualNode(targetElement)) {
-        return index
-      }
-      return result
-    }, -1)
+  return elements.reduce(function (result, element, index) {
+    if (result === -1 && element.isEqualNode(targetElement)) {
+      return index
+    }
+    return result
+  }, -1)
 }
