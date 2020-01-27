@@ -12,8 +12,20 @@ export const Primary = function () {
   return <Button>Text</Button>
 }
 
+export const PrimaryLoading = function () {
+  return <Button loading>Text</Button>
+}
+
 export const PrimaryDisabled = function () {
   return <Button disabled>Text</Button>
+}
+
+export const PrimaryDisabledLoading = function () {
+  return (
+    <Button disabled loading>
+      Text
+    </Button>
+  )
 }
 
 export const PrimaryFullWidth = function () {
@@ -28,9 +40,25 @@ export const Secondary = function () {
   return <Button secondary>Text</Button>
 }
 
+export const SecondaryLoading = function () {
+  return (
+    <Button secondary loading>
+      Text
+    </Button>
+  )
+}
+
 export const SecondaryDisabled = function () {
   return (
     <Button secondary disabled>
+      Text
+    </Button>
+  )
+}
+
+export const SecondaryDisabledLoading = function () {
+  return (
+    <Button secondary disabled loading>
       Text
     </Button>
   )
@@ -56,9 +84,25 @@ export const Destructive = function () {
   return <Button destructive>Text</Button>
 }
 
+export const DestructiveLoading = function () {
+  return (
+    <Button destructive loading>
+      Text
+    </Button>
+  )
+}
+
 export const DestructiveDisabled = function () {
   return (
     <Button destructive disabled>
+      Text
+    </Button>
+  )
+}
+
+export const DestructiveDisabledLoading = function () {
+  return (
+    <Button destructive disabled loading>
       Text
     </Button>
   )
@@ -88,9 +132,25 @@ export const DestructiveSecondary = function () {
   )
 }
 
+export const DestructiveSecondaryLoading = function () {
+  return (
+    <Button destructive secondary loading>
+      Text
+    </Button>
+  )
+}
+
 export const DestructiveSecondaryDisabled = function () {
   return (
     <Button destructive secondary disabled>
+      Text
+    </Button>
+  )
+}
+
+export const DestructiveSecondaryDisabledLoading = function () {
+  return (
+    <Button destructive secondary disabled loading>
       Text
     </Button>
   )

@@ -2,6 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import '../../scss/base.scss'
 import styles from './button.scss'
@@ -10,6 +11,7 @@ export function Button ({
   destructive: isDestructive,
   disabled: isDisabled,
   fullWidth: isFullWidth,
+  loading: isLoading,
   onClick,
   propagateEscapeKeyDown = true,
   secondary: isSecondary,
@@ -31,18 +33,28 @@ export function Button ({
     [propagateEscapeKeyDown]
   )
   return (
-    <button
-      {...rest}
+    <div
       class={classnames(
         styles.button,
-        isSecondary === true ? styles.isSecondary : null,
+        isSecondary === true ? styles.isSecondary : styles.isPrimary,
         isDestructive === true ? styles.isDestructive : null,
-        isFullWidth === true ? styles.isFullWidth : null
+        isFullWidth === true ? styles.isFullWidth : null,
+        isDisabled === true ? styles.isDisabled : null,
+        isLoading === true ? styles.isLoading : null
       )}
-      disabled={isDisabled === true}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      tabIndex='0'
-    />
+    >
+      {isLoading === true ? (
+        <div class={styles.loadingIndicator}>
+          <LoadingIndicator />
+        </div>
+      ) : null}
+      <button
+        {...rest}
+        disabled={isDisabled === true}
+        onClick={onClick}
+        onKeyDown={handleKeyDown}
+        tabIndex='0'
+      />
+    </div>
   )
 }

@@ -2,62 +2,104 @@
 @import "../../scss/text";
 
 .button {
-  @include text-11-regular;
+  position: relative;
   display: inline-block;
-  border-radius: $border-radius-6;
-  border: 2px solid transparent;
-  padding: 0 14px;
-  height: 32px;
-  line-height: 28px;
-  color: $color-white;
-  background-color: $color-blue;
 
-  &:focus {
-    border-color: $color-black-30;
+  button {
+    @include text-11-regular;
+    display: inline-block;
+    border-radius: $border-radius-6;
+    height: 32px;
+    color: currentColor;
   }
 
-  &:disabled {
-    cursor: not-allowed;
+  &.isDisabled {
     opacity: $opacity-30;
+
+    button {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.isPrimary {
+  color: $color-white;
+
+  button {
+    border: 2px solid transparent;
+    padding: 0 14px;
+    line-height: 28px;
+    background-color: $color-blue;
+
+    &:focus {
+      border-color: $color-black-30;
+    }
+  }
+
+  &.isDestructive {
+    color: $color-white;
+
+    button {
+      background-color: $color-red;
+    }
+  }
+
+  &.isDisabled button {
     background-color: $color-black-80;
   }
 }
 
 .isSecondary {
-  border: 1px solid $color-black-80;
-  padding: 0 15px;
-  line-height: 30px;
   color: $color-black-80;
-  background-color: $color-white;
 
-  &:focus {
-    border-width: 2px;
-    padding: 0 14px;
-    border-color: $color-blue;
-    line-height: 28px;
+  button {
+    border: 1px solid $color-black-80;
+    padding: 0 15px;
+    line-height: 30px;
+    background-color: $color-white;
+
+    &:focus {
+      border-width: 2px;
+      border-color: $color-blue;
+      padding: 0 14px;
+      line-height: 28px;
+    }
   }
 
-  &:disabled {
-    border-color: $color-black-80;
-    color: $color-black-80;
-    background-color: transparent;
-  }
-}
-
-.isDestructive {
-  background-color: $color-red;
-
-  &.isSecondary {
-    border-color: $color-red;
+  &.isDestructive {
     color: $color-red;
-    background-color: transparent;
+
+    button {
+      border-color: $color-red;
+    }
   }
 }
 
 .isFullWidth {
   display: block;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+  button {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.isLoading {
+  button {
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .loadingIndicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    svg {
+      fill: currentColor;
+    }
+  }
 }
