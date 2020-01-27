@@ -75,6 +75,7 @@ export function ButtonUploadFile ({
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         tabIndex='0'
+        title=''
       />
       <button disabled={isDisabled === true} onClick={onClick} tabIndex='-1'>
         {children}
