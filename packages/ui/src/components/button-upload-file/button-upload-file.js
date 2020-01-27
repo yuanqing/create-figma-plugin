@@ -23,15 +23,7 @@ export function ButtonUploadFile ({
     function (event) {
       const files = Array.prototype.slice
         .call(event.target.files)
-        .sort(function (a, b) {
-          if (a.name !== b.name) {
-            return a.name.localeCompare(b.name, { numeric: true })
-          }
-          if (a.type !== b.type) {
-            return a.type.localeCompare(b.type, { numeric: true })
-          }
-          return a.lastModified - b.lastModified
-        })
+        .sort(sortComparator)
       onSelectedFiles(files, event)
     },
     [onSelectedFiles]
@@ -82,4 +74,13 @@ export function ButtonUploadFile ({
       </button>
     </div>
   )
+}
+
+function sortComparator (a, b) {
+  const aName = a.name.toLowerCase()
+  const bName = b.name.toLowerCase()
+  if (aName !== bName) {
+    return aName.localeCompare(bName, { numeric: true })
+  }
+  return a.lastModified - b.lastModified
 }
