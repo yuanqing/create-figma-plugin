@@ -38,7 +38,7 @@
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'src/**/*.scss'",
     "lint-js": "standardx '{.storybook,src}/**/*.js'",
-    "start": "mkdirp node_modules && start-storybook"
+    "watch": "mkdirp node_modules && start-storybook"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^0.0.48",
