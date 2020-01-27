@@ -1,0 +1,73 @@
+@import "../../scss/constants";
+@import "../../scss/text";
+
+.button {
+  position: relative;
+  display: inline-block;
+  color: $color-white;
+
+  button {
+    @include text-11-regular;
+    display: inline-block;
+    border-radius: $border-radius-6;
+    border: 2px solid transparent;
+    padding: 0 14px;
+    height: 32px;
+    line-height: 28px;
+    background-color: $color-blue;
+    color: currentColor;
+  }
+
+  &.isDisabled {
+    opacity: $opacity-30;
+
+    button {
+      cursor: not-allowed;
+      background-color: $color-black-80;
+    }
+  }
+}
+
+.isFullWidth {
+  display: block;
+
+  button {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.isLoading {
+  button {
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .loadingIndicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    svg {
+      fill: currentColor;
+    }
+  }
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+
+  &:active + button,
+  &:focus + button {
+    border-color: $color-black-30;
+  }
+}

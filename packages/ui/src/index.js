@@ -1,4 +1,5 @@
 export * from './components/button/button'
+export * from './components/button-upload-file/button-upload-file'
 export * from './components/checkbox/checkbox'
 export * from './components/columns/columns'
 export * from './components/container/container'
