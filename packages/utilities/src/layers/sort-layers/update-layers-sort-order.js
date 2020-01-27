@@ -1,5 +1,5 @@
 export function updateLayersSortOrder (layers) {
-  const copy = [].concat(layers)
+  const copy = layers.slice()
   const insertIndex = calculateInsertIndex(copy)
   const parentLayer = copy[0].parent // we've already checked that `layers` have a common parent
   if (parentLayer.type !== 'DOCUMENT') {
