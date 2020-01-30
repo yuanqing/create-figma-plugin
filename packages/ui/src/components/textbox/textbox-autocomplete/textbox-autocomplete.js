@@ -22,6 +22,7 @@ const INVALID_ID = -1
 
 export function TextboxAutocomplete ({
   disabled: isDisabled,
+  focused: isFocused,
   filter: shouldFilter,
   icon,
   name,
@@ -401,6 +402,7 @@ export function TextboxAutocomplete ({
         onKeyUp={isDisabled === true ? null : handleKeyUp}
         onPaste={isDisabled === true ? null : handlePaste}
         tabIndex='0'
+        data-initial-focus={isFocused === true}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {isDisabled !== true && isMenuVisible === true && menuItems.length > 0 ? (

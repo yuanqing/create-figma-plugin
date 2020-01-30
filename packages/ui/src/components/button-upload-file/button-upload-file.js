@@ -11,6 +11,7 @@ export function ButtonUploadFile ({
   accept,
   children,
   disabled: isDisabled,
+  focused: isFocused,
   fullWidth: isFullWidth,
   loading: isLoading,
   multiple,
@@ -68,6 +69,7 @@ export function ButtonUploadFile ({
         onKeyDown={handleKeyDown}
         tabIndex='0'
         title=''
+        data-initial-focus={isFocused === true}
       />
       <button disabled={isDisabled === true} onClick={onClick} tabIndex='-1'>
         {children}

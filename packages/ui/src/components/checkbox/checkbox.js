@@ -9,6 +9,7 @@ import styles from './checkbox.scss'
 export function Checkbox ({
   children,
   disabled: isDisabled,
+  focused: isFocused,
   name,
   onChange,
   onKeyDown,
@@ -63,6 +64,7 @@ export function Checkbox ({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         tabIndex='0'
+        data-initial-focus={isFocused === true}
       />
       <div class={styles.text}>{children}</div>
     </label>

@@ -10,6 +10,7 @@ import styles from './button.scss'
 export function Button ({
   destructive: isDestructive,
   disabled: isDisabled,
+  focused: isFocused,
   fullWidth: isFullWidth,
   loading: isLoading,
   onClick,
@@ -54,6 +55,7 @@ export function Button ({
         onClick={onClick}
         onKeyDown={handleKeyDown}
         tabIndex='0'
+        data-initial-focus={isFocused === true}
       />
     </div>
   )

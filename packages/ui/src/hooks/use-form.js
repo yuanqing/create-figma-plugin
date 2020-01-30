@@ -95,6 +95,11 @@ export function useForm (
     [handleKeyDown]
   )
   useEffect(function () {
+    const initialFocusedElement = document.querySelector('[data-initial-focus]')
+    if (initialFocusedElement !== null) {
+      initialFocusedElement.focus()
+      return
+    }
     const tabbableElements = getTabbableElements()
     if (tabbableElements.length === 0) {
       window.focus()

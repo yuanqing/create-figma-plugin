@@ -13,6 +13,7 @@ import styles from './segmented-control.scss'
 
 export function SegmentedControl ({
   disabled: isDisabled,
+  focused: isFocused,
   name,
   onChange,
   options,
@@ -69,6 +70,7 @@ export function SegmentedControl ({
       class={styles.segmentedControl}
       onKeyDown={isDisabled === true ? null : handleKeyDown}
       tabIndex={isDisabled === true ? null : '0'}
+      data-initial-focus={isFocused === true}
     >
       {options.map(function (option, index) {
         const text =
@@ -84,6 +86,7 @@ export function SegmentedControl ({
               checked={value === option.value}
               disabled={isDisabled === true || option.disabled === true}
               onChange={handleChange}
+              tabIndex='-1'
               data-index={index}
             />
             <div class={styles.text}>{text}</div>

@@ -9,6 +9,7 @@ import styles from './radio-buttons.scss'
 
 export function RadioButtons ({
   disabled: isDisabled,
+  focused: isFocused,
   name,
   onChange,
   options,
@@ -61,8 +62,9 @@ export function RadioButtons ({
               checked={value === option.value}
               disabled={disabled === true}
               onChange={handleChange}
-              data-index={index}
               tabIndex='0'
+              data-index={index}
+              data-initial-focus={isFocused === true}
             />
             <div class={styles.text}>{text}</div>
           </label>

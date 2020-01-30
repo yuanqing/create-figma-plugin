@@ -19,6 +19,7 @@ import styles from '../textbox.scss'
 const nonDigitRegex = /[^\d.]/
 
 export function TextboxNumeric ({
+  focused: isFocused,
   icon,
   smallIncrement = 1,
   bigIncrement = 10,
@@ -162,6 +163,7 @@ export function TextboxNumeric ({
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
         tabIndex='0'
+        data-initial-focus={isFocused === true}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
     </div>

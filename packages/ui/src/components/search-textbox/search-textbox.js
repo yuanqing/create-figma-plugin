@@ -8,6 +8,7 @@ import '../../scss/base.scss'
 import styles from './search-textbox.scss'
 
 export function SearchTextbox ({
+  focused: isFocused,
   name,
   onChange,
   placeholder,
@@ -69,6 +70,7 @@ export function SearchTextbox ({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         tabIndex='0'
+        data-initial-focus={isFocused === true}
       />
       <div class={styles.searchIcon}>{searchIcon}</div>
       {value === null || value === '' ? null : (

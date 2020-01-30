@@ -7,6 +7,7 @@ import '../../scss/base.scss'
 import styles from './textbox.scss'
 
 export function Textbox ({
+  focused: isFocused,
   icon,
   name,
   noBorder,
@@ -72,6 +73,7 @@ export function Textbox ({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         tabIndex='0'
+        data-initial-focus={isFocused === true}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>
