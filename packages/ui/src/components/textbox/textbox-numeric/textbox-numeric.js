@@ -158,6 +158,7 @@ export function TextboxNumeric ({
         class={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
+        disabled={isDisabled === true}
         onClick={handleClick}
         onInput={handleInput}
         onFocus={handleFocus}

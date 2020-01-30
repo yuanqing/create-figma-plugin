@@ -69,6 +69,7 @@ export function Textbox ({
         class={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
+        disabled={isDisabled === true}
         onClick={handleClick}
         onFocus={handleFocus}
         onInput={handleInput}
