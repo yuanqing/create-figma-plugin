@@ -63,7 +63,7 @@ export function Checkbox ({
         disabled={isDisabled === true}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        tabIndex='0'
+        tabIndex={isDisabled === true ? null : '0'}
         data-initial-focus={isFocused === true}
       />
       <div class={styles.text}>{children}</div>

@@ -44,12 +44,12 @@ export function RadioButtons ({
       {options.map(function (option, index) {
         const text =
           typeof option.text === 'undefined' ? option.value : option.text
-        const disabled = isDisabled === true || option.disabled === true
+        const isOptionDisabled = isDisabled === true || option.disabled === true
         return (
           <label
             class={classnames(
               styles.label,
-              disabled === true ? styles.disabled : null
+              isOptionDisabled === true ? styles.disabled : null
             )}
             key={index}
           >
@@ -60,9 +60,9 @@ export function RadioButtons ({
               name={name}
               value={option.value}
               checked={value === option.value}
-              disabled={disabled === true}
+              disabled={isOptionDisabled === true}
               onChange={handleChange}
-              tabIndex='0'
+              tabIndex={isOptionDisabled === true ? null : '0'}
               data-index={index}
               data-initial-focus={isFocused === true}
             />

@@ -62,7 +62,7 @@ export function SelectableItem ({
         value === true ? styles.isChecked : null
       )}
       onKeyDown={isDisabled === true ? null : handleKeyDown}
-      tabIndex='0'
+      tabIndex={isDisabled === true ? null : '0'}
     >
       <input
         {...rest}

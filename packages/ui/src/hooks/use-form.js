@@ -57,19 +57,19 @@ export function useForm (
           return
         }
         case TAB_KEY_CODE: {
-          const tabbableElements = getTabbableElements()
-          const index = findElementIndex(event.target, tabbableElements)
+          const focusableElements = getFocusableElements()
+          const index = findElementIndex(event.target, focusableElements)
           if (
-            index === tabbableElements.length - 1 &&
+            index === focusableElements.length - 1 &&
             event.shiftKey === false
           ) {
             event.preventDefault()
-            tabbableElements[0].focus()
+            focusableElements[0].focus()
             return
           }
           if (index === 0 && event.shiftKey === true) {
             event.preventDefault()
-            tabbableElements[tabbableElements.length - 1].focus()
+            focusableElements[focusableElements.length - 1].focus()
           }
         }
       }
@@ -95,12 +95,12 @@ export function useForm (
     [handleKeyDown]
   )
   useEffect(function () {
-    const initialFocusedElement = document.querySelector('[data-initial-focus]')
-    if (initialFocusedElement !== null) {
-      initialFocusedElement.focus()
+    const focusableElement = document.querySelector('[data-initial-focus]')
+    if (focusableElement !== null) {
+      focusableElement.focus()
       return
     }
-    const tabbableElements = getTabbableElements()
+    const tabbableElements = getFocusableElements()
     if (tabbableElements.length === 0) {
       window.focus()
       return
@@ -115,7 +115,7 @@ export function useForm (
   }
 }
 
-function getTabbableElements () {
+function getFocusableElements () {
   const elements = document.querySelectorAll(
     ':not([disabled])[tabindex]:not([tabindex="-1"])'
   )

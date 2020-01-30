@@ -401,7 +401,7 @@ export function TextboxAutocomplete ({
         onKeyDown={isDisabled === true ? null : handleKeyDown}
         onKeyUp={isDisabled === true ? null : handleKeyUp}
         onPaste={isDisabled === true ? null : handlePaste}
-        tabIndex='0'
+        tabIndex={isDisabled === true ? null : '0'}
         data-initial-focus={isFocused === true}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}

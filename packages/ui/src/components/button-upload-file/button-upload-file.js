@@ -67,7 +67,7 @@ export function ButtonUploadFile ({
         onChange={handleFiles}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        tabIndex='0'
+        tabIndex={isDisabled === true ? null : '0'}
         title=''
         data-initial-focus={isFocused === true}
       />

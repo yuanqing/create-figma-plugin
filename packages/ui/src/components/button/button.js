@@ -54,7 +54,7 @@ export function Button ({
         disabled={isDisabled === true}
         onClick={onClick}
         onKeyDown={handleKeyDown}
-        tabIndex='0'
+        tabIndex={isDisabled === true ? null : '0'}
         data-initial-focus={isFocused === true}
       />
     </div>

@@ -12,6 +12,7 @@ import '../../scss/base.scss'
 import styles from './tabs.scss'
 
 export function Tabs ({
+  focused: isFocused,
   name,
   onChange,
   options,
@@ -71,7 +72,12 @@ export function Tabs ({
 
   return (
     <div>
-      <div class={styles.tabs} onKeyDown={handleKeyDown} tabIndex='0'>
+      <div
+        class={styles.tabs}
+        onKeyDown={handleKeyDown}
+        tabIndex='0'
+        data-initial-focus={isFocused === true}
+      >
         {options.map(function (option, index) {
           const text =
             typeof option.text === 'undefined' ? option.value : option.text
@@ -85,6 +91,7 @@ export function Tabs ({
                 value={option.value}
                 checked={value === option.value}
                 onChange={handleChange}
+                tabIndex='-1'
                 data-index={index}
               />
               <div class={styles.text} data-text={text}>
