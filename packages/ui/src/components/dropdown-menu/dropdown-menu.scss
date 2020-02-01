@@ -2,8 +2,8 @@
 @import "../../scss/text";
 
 .dropdownMenu {
-  position: relative;
   display: inline-block;
+  position: relative;
 
   &:focus {
     box-shadow: none;
@@ -24,6 +24,10 @@
   color: $color-white;
   background-color: $color-hud;
   box-shadow: $box-shadow;
+}
+
+.menu::-webkit-scrollbar {
+  display: none;
 }
 
 .isFullWidth {
@@ -48,10 +52,6 @@
 .menuItem,
 .menuHeader {
   padding: 5px 32px 3px;
-
-  .hasIcon & {
-    padding-left: 30px;
-  }
 }
 
 .menuItem {
@@ -60,12 +60,6 @@
 
 .menuItemSelected {
   background-color: $color-blue;
-}
-
-.icon {
-  position: absolute;
-  top: 5px;
-  left: 8px;
 }
 
 .menuHeader {
@@ -78,4 +72,10 @@
   width: 100%;
   height: 1px;
   background-color: $color-white-20;
+}
+
+.icon {
+  position: absolute;
+  top: 5px;
+  left: 8px;
 }
