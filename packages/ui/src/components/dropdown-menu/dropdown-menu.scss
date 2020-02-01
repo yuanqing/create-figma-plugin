@@ -1,0 +1,81 @@
+@import "../../scss/constants";
+@import "../../scss/text";
+
+.dropdownMenu {
+  position: relative;
+  display: inline-block;
+
+  &:focus {
+    box-shadow: none;
+    outline: 0;
+  }
+}
+
+.menu {
+  @include text-12-regular;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  overflow-y: auto;
+  z-index: $z-index-2;
+  border-radius: $border-radius-2;
+  padding: 8px 0;
+  max-height: 120px;
+  color: $color-white;
+  background-color: $color-hud;
+  box-shadow: $box-shadow;
+}
+
+.isFullWidth {
+  width: 100%;
+}
+
+.isHidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.isTop {
+  top: auto;
+  bottom: 100%;
+}
+
+.isRight {
+  left: auto;
+  right: 0;
+}
+
+.menuItem,
+.menuHeader {
+  padding: 5px 32px 3px;
+
+  .hasIcon & {
+    padding-left: 30px;
+  }
+}
+
+.menuItem {
+  position: relative;
+}
+
+.menuItemSelected {
+  background-color: $color-blue;
+}
+
+.icon {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+}
+
+.menuHeader {
+  @include text-12-regular;
+  color: $color-white-40;
+}
+
+.menuSeparator {
+  margin: 8px 0;
+  width: 100%;
+  height: 1px;
+  background-color: $color-white-20;
+}

@@ -13,3 +13,17 @@
   line-height: $line-height-16;
   font-family: $font-family;
 }
+
+@mixin text-12-regular {
+  font-weight: $font-weight-regular;
+  font-size: $font-size-12;
+  line-height: $line-height-16;
+  font-family: $font-family;
+}
+
+@mixin text-12-bold {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-12;
+  line-height: $line-height-16;
+  font-family: $font-family;
+}
