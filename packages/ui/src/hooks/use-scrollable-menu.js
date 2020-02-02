@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 import { DOWN_KEY_CODE, UP_KEY_CODE } from '../utilities/key-codes'
 
-const INVALID_ITEM_ID = -1
+const INVALID_ITEM_ID = null
 
 export function useScrollableMenu ({
   itemElementAttributeName,
@@ -12,7 +12,7 @@ export function useScrollableMenu ({
   const menuElementRef = useRef(null)
   const parseItemElementId = useCallback(
     function (element) {
-      return parseInt(element.getAttribute(itemElementAttributeName))
+      return element.getAttribute(itemElementAttributeName)
     },
     [itemElementAttributeName]
   )
@@ -70,14 +70,10 @@ export function useScrollableMenu ({
         let newIndex
         if (event.keyCode === DOWN_KEY_CODE) {
           newIndex =
-            index === INVALID_ITEM_ID || index === itemElements.length - 1
-              ? 0
-              : index + 1
+            index === -1 || index === itemElements.length - 1 ? 0 : index + 1
         } else {
           newIndex =
-            index === INVALID_ITEM_ID || index === 0
-              ? itemElements.length - 1
-              : index - 1
+            index === -1 || index === 0 ? itemElements.length - 1 : index - 1
         }
         const selectedElement = itemElements[newIndex]
         const id = parseItemElementId(selectedElement)
@@ -96,10 +92,22 @@ export function useScrollableMenu ({
   )
   const handleMouseMove = useCallback(
     function (event) {
-      const selectedItemId = parseItemElementId(event.target)
-      onChange(selectedItemId)
+      const id = parseItemElementId(event.target)
+      if (id !== selectedItemId) {
+        onChange(id)
+      }
     },
-    [onChange, parseItemElementId]
+    [onChange, parseItemElementId, selectedItemId]
+  )
+  useEffect(
+    function () {
+      const menuElement = menuElementRef.current
+      if (menuElement === null) {
+        return
+      }
+      menuElement.setAttribute('style', 'position: relative; overflow-y: auto')
+    },
+    [menuElementRef]
   )
   useEffect(
     function () {
