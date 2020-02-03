@@ -14,11 +14,13 @@
   * [getDocumentComponents()](#const-components--getdocumentcomponents)
   * [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
   * [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
-  * [traverseLayer(layer, callback *[, filter]*)](#traverselayerlayer-callback--filter)
+  * [isLayerWithinInstance(layer)](#const-result--islayerwithininstancelayer)
+  * [traverseLayer(layer, processLayer *[, stopTraversal]*)](#traverselayerlayer-processlayer--stoptraversal)
   * [sortLayersByName(layer)](#sortlayersbynamelayer)
   * [updateLayersSortOrder(layer)](#updatelayerssortorderlayer)
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
-  * [loadFonts(layers)](#loadfontslayers)
+  * [removeDuplicateLayers(layers)](#const-result--removeduplicatelayerslayers)
+  * [loadFonts(layers)](#const-promise--loadfontslayers)
 - [**Number**](#number)
   * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
   * [evaluateNumericExpression(expression)](#const-result--evaluatenumericexpressionexpression)
@@ -140,8 +142,10 @@ import {
   getDocumentComponents,
   getAbsolutePosition
   setAbsolutePosition,
+  isLayerWithinInstance,
   traverseLayer,
   groupSiblingLayers,
+  removeDuplicateLayers,
   loadFonts
 } from '@create-figma-plugin/utilities'
 ```
@@ -202,11 +206,23 @@ Sets the `layer` to the given `absolutePosition`.
 
 - `absolutePosition` (a plain `object` with `x` and `y` keys)
 
-### traverseLayer(layer, callback *[, filter]*)
+### const result = isLayerWithinInstance(layer)
 
-Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `callback`.
+Checks if the `layer` is within Instance.
 
-Each layer is also passed to a `filter` function. If you return `false` in `filter` for a particular layer, then the `callback` will not be called for that particular layer, and the child layers of that particular layer will not be traversed.
+#### Returns
+
+- `true` if `layer` is within an Instance, else `false`
+
+#### Parameters
+
+- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+### traverseLayer(layer, processLayer *[, stopTraversal]*)
+
+Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `processLayer` callback.
+
+Each layer is also passed to a `stopTraversal` function. If you return `false` in `stopTraversal` for a particular layer, then its child layers will not be traversed.
 
 #### Returns
 
@@ -215,8 +231,8 @@ Each layer is also passed to a `filter` function. If you return `false` in `filt
 #### Parameters
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-- `callback` (`function (layer)`)
-- `filter` (`function (layer`) *(optional)*
+- `processLayer` (`function (layer)`)
+- `stopTraversal` (`function (layer`) *(optional)*
 
 ### sortLayersByName(layer)
 
@@ -244,7 +260,7 @@ Updates the layer list sort order of the layers in `layers`.
 
 ### const groups = groupSiblingLayers(layers)
 
-Splits the given `layers` into smaller groups of sibling layers.
+Splits `layers` into smaller groups of sibling layers.
 
 #### Returns
 
@@ -254,13 +270,25 @@ Splits the given `layers` into smaller groups of sibling layers.
 
 - `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
-### loadFonts(layers)
+### const result = removeDuplicateLayers(layers)
+
+Deduplicates `layers`.
+
+#### Returns
+
+- An `array` of unique [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+### const promise = loadFonts(layers)
 
 Loads the fonts used in all the text layers in `layers`.
 
 #### Returns
 
-- `Promise`
+- A `Promise` that resolves when all the fonts in `layers` were successfully loaded
 
 #### Parameters
 
