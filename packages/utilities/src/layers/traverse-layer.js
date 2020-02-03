@@ -1,17 +1,14 @@
-export function traverseLayer (layer, callback, filter) {
+export function traverseLayer (layer, processLayer, stopTraversal) {
   if (layer.removed === true) {
     return
   }
-  if (typeof filter === 'function' && filter(layer) === false) {
-    return
+  if (
+    typeof layer.children !== 'undefined' &&
+    (typeof stopTraversal !== 'function' || stopTraversal(layer) === false)
+  ) {
+    for (const childLayer of layer.children) {
+      traverseLayer(childLayer, processLayer, stopTraversal)
+    }
   }
-  if (callback(layer) === false) {
-    return
-  }
-  if (layer.removed === true || typeof layer.children === 'undefined') {
-    return
-  }
-  for (const childLayer of layer.children) {
-    traverseLayer(childLayer, callback, filter)
-  }
+  processLayer(layer)
 }
