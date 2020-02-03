@@ -163,7 +163,9 @@ export function DropdownMenu ({
             <div
               class={classnames(
                 styles.menuItem,
-                menuItem.id === selectedItemId ? styles.menuItemSelected : null
+                `${menuItem.id}` === selectedItemId
+                  ? styles.menuItemSelected
+                  : null
               )}
               onClick={handleMenuItemClick}
               key={menuItem.id}
