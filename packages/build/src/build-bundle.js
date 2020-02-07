@@ -66,15 +66,10 @@ async function createUiEntryFile (config) {
 }
 
 function extractModules (config, key, result = []) {
-  const src = config[key]
-  if (typeof src !== 'undefined') {
-    if (typeof config.command !== 'undefined') {
-      result.push({
-        id: config.id,
-        src,
-        handler: key === 'command' ? config.handler : 'default'
-      })
-    }
+  const id = config.id
+  const item = config[key]
+  if (typeof item !== 'undefined') {
+    result.push({ id, ...item })
   }
   const menu = config.menu
   if (typeof menu !== 'undefined') {

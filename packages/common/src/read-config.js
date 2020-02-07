@@ -34,14 +34,21 @@ function createMenuItem (config) {
   const result = {}
   result.name = config.name
   if (typeof config.command !== 'undefined') {
-    result.command = config.command
-    const handler =
-      typeof config.handler !== 'undefined' ? config.handler : 'default'
-    result.handler = handler
-    result.id = `${config.command}--${handler}`
-  }
-  if (typeof config.ui !== 'undefined') {
-    result.ui = config.ui
+    const id =
+      typeof config.command === 'string'
+        ? `${config.command}--default`
+        : `${config.command.src}--${config.command.handler}`
+    result.id = id
+    result.command =
+      typeof config.command === 'string'
+        ? { src: config.command, handler: 'default' }
+        : config.command
+    if (typeof config.ui !== 'undefined') {
+      result.ui =
+        typeof config.ui === 'string'
+          ? { src: config.ui, handler: 'default' }
+          : config.ui
+    }
   }
   if (typeof config.menu !== 'undefined') {
     result.menu = normaliseMenu(config.menu)
