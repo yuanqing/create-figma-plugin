@@ -1,6 +1,7 @@
 export * from './events'
 export * from './layers/absolute-position/get-absolute-position'
 export * from './layers/absolute-position/set-absolute-position'
+export * from './layers/compute-maximum-bounds'
 export * from './layers/get-document-components'
 export * from './layers/get-selected-layers-or-all-layers'
 export * from './layers/group-sibling-layers'
