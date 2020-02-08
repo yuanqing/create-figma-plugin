@@ -13,9 +13,11 @@ export async function buildManifest (config) {
   if (hasBundle(config, 'ui') === true) {
     result.ui = constants.build.pluginUiFilePath
   }
-  const menu = config.menu
-  if (typeof menu !== 'undefined') {
-    result.menu = normaliseMenu(menu)
+  if (typeof config.menu !== 'undefined') {
+    result.menu = normalizeCommandItems(config.menu)
+  }
+  if (typeof config.relaunchButtons !== 'undefined') {
+    result.relaunchButtons = normalizeCommandItems(config.relaunchButtons)
   }
   const string = JSON.stringify(result) + '\n'
   return outputFile(constants.build.manifestFilePath, string)
@@ -33,7 +35,7 @@ function hasBundle (config, key) {
   )
 }
 
-function normaliseMenu (menu) {
+function normalizeCommandItems (menu) {
   return menu.map(function (item) {
     if (typeof item.separator !== 'undefined') {
       return item
@@ -45,7 +47,7 @@ function normaliseMenu (menu) {
       result.command = item.id
     }
     if (typeof item.menu !== 'undefined') {
-      result.menu = normaliseMenu(item.menu)
+      result.menu = normalizeCommandItems(item.menu)
     }
     return result
   })

@@ -21,51 +21,63 @@ export async function readConfig () {
     return defaultConfig
   }
   return {
-    ...createMenuItem(config),
+    ...parseCommand(config),
     apiVersion:
       typeof config.apiVersion !== 'undefined'
         ? config.apiVersion
         : constants.apiVersion,
-    id: typeof config.id === 'undefined' ? slugify(config.name) : config.id
+    id: typeof config.id === 'undefined' ? slugify(config.name) : config.id,
+    relaunchButtons: parseRelaunchButtons(config.relaunchButtons)
   }
 }
 
-function createMenuItem (config) {
+function parseCommand (config) {
+  const { name, command, ui, menu } = config
   const result = {}
-  result.name = config.name
-  if (typeof config.command !== 'undefined') {
-    const id =
-      typeof config.command === 'string'
-        ? `${config.command}--default`
-        : `${config.command.src}--${config.command.handler}`
-    result.id = id
-    result.command =
-      typeof config.command === 'string'
-        ? { src: config.command, handler: 'default' }
-        : config.command
-    if (typeof config.ui !== 'undefined') {
-      result.ui =
-        typeof config.ui === 'string'
-          ? { src: config.ui, handler: 'default' }
-          : config.ui
-    }
+  result.name = name
+  if (typeof command !== 'undefined') {
+    result.id =
+      typeof command === 'string'
+        ? `${command}--default`
+        : `${command.src}--${command.handler}`
+    result.command = parseFile(command)
+    result.ui = parseFile(ui)
   }
-  if (typeof config.menu !== 'undefined') {
-    result.menu = normaliseMenu(config.menu)
+  if (typeof menu !== 'undefined') {
+    result.menu = []
+    menu.forEach(function (item) {
+      if (item === '-') {
+        result.menu.push({ separator: true })
+        return
+      }
+      if (typeof item !== 'undefined') {
+        result.menu.push(parseCommand(item))
+      }
+    })
   }
   return result
 }
 
-function normaliseMenu (menu) {
+function parseRelaunchButtons (relaunchButtons) {
+  if (typeof relaunchButtons === 'undefined') {
+    return []
+  }
   const result = []
-  menu.forEach(function (item) {
-    if (item === '-') {
-      result.push({ separator: true })
-      return
-    }
-    if (typeof item !== 'undefined') {
-      result.push(createMenuItem(item))
-    }
-  })
+  for (const id in relaunchButtons) {
+    const { name, command, ui } = relaunchButtons[id]
+    result.push({
+      id,
+      name,
+      command: parseFile(command),
+      ui: parseFile(ui)
+    })
+  }
   return result
+}
+
+function parseFile (src) {
+  if (typeof src === 'undefined') {
+    return null
+  }
+  return typeof src === 'string' ? { src, handler: 'default' } : src
 }

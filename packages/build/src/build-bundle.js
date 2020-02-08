@@ -38,9 +38,13 @@ export async function buildBundle (config, isDevelopment) {
 }
 
 async function createCommandEntryFile (config) {
-  const modules = extractModules(config, 'command')
+  const modules = []
+  extractModule(config, 'command', modules)
   if (modules.length === 0) {
     return null
+  }
+  if (typeof config.relaunchButtons !== 'undefined') {
+    extractModules(config.relaunchButtons, 'command', modules)
   }
   return tempWrite(`
     import '@create-figma-plugin/utilities/src/events'
@@ -53,9 +57,13 @@ async function createCommandEntryFile (config) {
 }
 
 async function createUiEntryFile (config) {
-  const modules = extractModules(config, 'ui')
+  const modules = []
+  extractModule(config, 'ui', modules)
   if (modules.length === 0) {
     return null
+  }
+  if (typeof config.relaunchButtons !== 'undefined') {
+    extractModules(config.relaunchButtons, 'ui', modules)
   }
   return tempWrite(`
     import '@create-figma-plugin/utilities/src/events'
@@ -65,19 +73,21 @@ async function createUiEntryFile (config) {
   `)
 }
 
-function extractModules (config, key, result = []) {
+function extractModules (items, key, result) {
+  items.forEach(function (item) {
+    extractModule(item, key, result)
+  })
+}
+
+function extractModule (config, key, result) {
   const id = config.id
   const item = config[key]
-  if (typeof item !== 'undefined') {
+  if (typeof item !== 'undefined' && item !== null) {
     result.push({ id, ...item })
   }
-  const menu = config.menu
-  if (typeof menu !== 'undefined') {
-    menu.forEach(function (item) {
-      extractModules(item, key, result)
-    })
+  if (typeof config.menu !== 'undefined') {
+    extractModules(config.menu, key, result)
   }
-  return result
 }
 
 function createRequireCode (modules) {
