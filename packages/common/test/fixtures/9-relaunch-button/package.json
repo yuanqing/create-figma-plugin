@@ -1,0 +1,18 @@
+{
+  "create-figma-plugin": {
+    "name": "foo",
+    "id": "42",
+    "menu": [
+      {
+        "name": "bar",
+        "command": "baz"
+      }
+    ],
+    "relaunchButtons": {
+      "qux": {
+        "name": "quux",
+        "command": "quuux"
+      }
+    }
+  }
+}

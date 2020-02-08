@@ -5,8 +5,10 @@
     "menu": [
       {
         "name": "bar",
-        "command": "baz",
-        "handler": "qux"
+        "command": {
+          "src": "baz",
+          "handler": "qux"
+        }
       },
       "-",
       {

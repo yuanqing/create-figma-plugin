@@ -27,13 +27,13 @@ export async function buildManifest (config) {
 }
 
 function hasBundle (config, key) {
-  if (typeof config[key] !== 'undefined') {
+  if (typeof config[key] !== 'undefined' && config[key] !== null) {
     return true
   }
   return (
     typeof config.menu !== 'undefined' &&
     config.menu.filter(function (item) {
-      return typeof item[key] !== 'undefined'
+      return hasBundle(item, key)
     }).length > 0
   )
 }

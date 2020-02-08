@@ -7,7 +7,8 @@ const defaultConfig = {
   apiVersion: constants.apiVersion,
   name: constants.packageJson.defaultPluginName,
   id: constants.packageJson.defaultPluginId,
-  command: 'index.js'
+  command: { src: 'index.js', handler: 'default' },
+  relaunchButtons: []
 }
 
 export async function readConfig () {

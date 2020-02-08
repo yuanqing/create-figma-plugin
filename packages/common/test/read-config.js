@@ -18,7 +18,8 @@ test('no `package.json`', async function (t) {
     apiVersion: '1.0.0',
     name: 'figma-plugin',
     id: 'figma-plugin',
-    command: 'index.js'
+    command: { src: 'index.js', handler: 'default' },
+    relaunchButtons: []
   })
 })
 
@@ -29,7 +30,8 @@ test('config key is `undefined`', async function (t) {
     apiVersion: '1.0.0',
     name: 'figma-plugin',
     id: 'figma-plugin',
-    command: 'index.js'
+    command: { src: 'index.js', handler: 'default' },
+    relaunchButtons: []
   })
 })
 
@@ -40,7 +42,8 @@ test('config key is empty', async function (t) {
     apiVersion: '1.0.0',
     name: 'figma-plugin',
     id: 'figma-plugin',
-    command: 'index.js'
+    command: { src: 'index.js', handler: 'default' },
+    relaunchButtons: []
   })
 })
 
@@ -51,9 +54,9 @@ test('basic command', async function (t) {
     apiVersion: '1.0.0',
     name: 'foo',
     id: '42',
-    command: 'bar',
-    handler: 'default',
-    ui: 'baz'
+    command: { src: 'bar', handler: 'default' },
+    ui: { src: 'baz', handler: 'default' },
+    relaunchButtons: []
   })
 })
 
@@ -64,9 +67,9 @@ test('basic command without `id`', async function (t) {
     apiVersion: '1.0.0',
     name: 'foo',
     id: 'foo',
-    command: 'bar',
-    handler: 'default',
-    ui: 'baz'
+    command: { src: 'bar', handler: 'default' },
+    ui: { src: 'baz', handler: 'default' },
+    relaunchButtons: []
   })
 })
 
@@ -81,10 +84,11 @@ test('single menu command', async function (t) {
       {
         name: 'bar',
         id: 'baz--default',
-        command: 'baz',
-        handler: 'default'
+        command: { src: 'baz', handler: 'default' },
+        ui: null
       }
-    ]
+    ],
+    relaunchButtons: []
   })
 })
 
@@ -99,10 +103,11 @@ test('single menu command with `handler`', async function (t) {
       {
         name: 'bar',
         id: 'baz--qux',
-        command: 'baz',
-        handler: 'qux'
+        command: { src: 'baz', handler: 'qux' },
+        ui: null
       }
-    ]
+    ],
+    relaunchButtons: []
   })
 })
 
@@ -117,8 +122,8 @@ test('multiple menu commands', async function (t) {
       {
         name: 'bar',
         id: 'baz--qux',
-        command: 'baz',
-        handler: 'qux'
+        command: { src: 'baz', handler: 'qux' },
+        ui: null
       },
       {
         separator: true
@@ -126,9 +131,35 @@ test('multiple menu commands', async function (t) {
       {
         name: 'quux',
         id: 'quuux--default',
-        command: 'quuux',
-        handler: 'default',
-        ui: 'quuuux'
+        command: { src: 'quuux', handler: 'default' },
+        ui: { src: 'quuuux', handler: 'default' }
+      }
+    ],
+    relaunchButtons: []
+  })
+})
+
+test('relaunch button', async function (t) {
+  t.plan(1)
+  changeDirectory('9-relaunch-button')
+  t.deepEqual(await readConfig(), {
+    apiVersion: '1.0.0',
+    name: 'foo',
+    id: '42',
+    menu: [
+      {
+        name: 'bar',
+        id: 'baz--default',
+        command: { src: 'baz', handler: 'default' },
+        ui: null
+      }
+    ],
+    relaunchButtons: [
+      {
+        name: 'quux',
+        id: 'qux',
+        command: { src: 'quuux', handler: 'default' },
+        ui: null
       }
     ]
   })
