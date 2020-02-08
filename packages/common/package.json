@@ -22,10 +22,6 @@
     "lib"
   ],
   "main": "lib/index.js",
-  "scripts": {
-    "fix": "prettier-standard '{src,test}/**/*.js'",
-    "lint": "standardx '{src,test}/**/*.js'"
-  },
   "dependencies": {
     "@sindresorhus/slugify": "^0.9.1",
     "chalk": "^3.0.0",
