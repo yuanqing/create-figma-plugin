@@ -16,7 +16,10 @@ export async function buildManifest (config) {
   if (typeof config.menu !== 'undefined') {
     result.menu = normalizeCommandItems(config.menu)
   }
-  if (typeof config.relaunchButtons !== 'undefined') {
+  if (
+    typeof config.relaunchButtons !== 'undefined' &&
+    config.relaunchButtons.length > 0
+  ) {
     result.relaunchButtons = normalizeCommandItems(config.relaunchButtons)
   }
   const string = JSON.stringify(result) + '\n'
