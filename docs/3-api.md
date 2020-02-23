@@ -5,8 +5,8 @@
 - [**Events**](#events)
   * [addEventListener(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
   * [onSelectionChange(eventListener)](#const-removeeventlistener--onselectionchangeeventlistener)
-  * [triggerEvent(eventName _[, ...arguments]_)](#triggereventeventname-_-arguments_)
-  * [_Example_](#_example_)
+  * [triggerEvent(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
+  * [*Example*](#example)
 - [**Layers**](#layers)
   * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)
   * [insertAfterLayer(layer, referenceLayer)](#insertafterlayerlayer-referencelayer)
@@ -17,7 +17,7 @@
   * [computeBoundingBox(layer)](#const-result--computeboundingboxlayer)
   * [computeMaximumBounds(layers)](#const-result--computemaximumboundslayers)
   * [isLayerWithinInstance(layer)](#const-result--islayerwithininstancelayer)
-  * [traverseLayer(layer, processLayer _[, stopTraversal]_)](#traverselayerlayer-processlayer-_-stoptraversal_)
+  * [traverseLayer(layer, processLayer *[, stopTraversal]*)](#traverselayerlayer-processlayer--stoptraversal)
   * [sortLayersByName(layer)](#sortlayersbynamelayer)
   * [updateLayersSortOrder(layer)](#updatelayerssortorderlayer)
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
@@ -25,23 +25,23 @@
   * [collapseLayer(layer)](#collapselayerlayer)
   * [loadFonts(layers)](#const-promise--loadfontslayers)
 - [**Number**](#number)
-  * [isValidNumericInput(value _[, integerOnly]_)](#const-result--isvalidnumericinputvalue-_-integeronly_)
+  * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
   * [evaluateNumericExpression(expression)](#const-result--evaluatenumericexpressionexpression)
 - [**Object**](#object)
   * [cloneObject(object)](#const-result--cloneobjectobject)
   * [extractAttributes(array, attributes)](#const-result--extractattributesarray-attributes)
   * [compareObjects(a, b)](#const-result--compareobjectsa-b)
 - [**Settings**](#settings)
-  * [await loadSettings(_[defaultSettings]_)](#const-settings--await-loadsettings_defaultsettings_)
+  * [await loadSettings(*[defaultSettings]*)](#const-settings--await-loadsettingsdefaultsettings)
   * [await saveSettings(settings)](#await-savesettingssettings)
 - [**String**](#string)
   * [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
   * [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
   * [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
-  * [pluralize(number, singular _[, plural]_)](#const-word--pluralizenumber-singular-_-plural_)
+  * [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
 - [**UI**](#ui)
-  * [showUI(options _[, data]_)](#showuioptions-_-data_)
-  * [_Example_](#_example_-1)
+  * [showUI(options *[, data]*)](#showuioptions--data)
+  * [*Example*](#example-1)
 
 <!-- tocstop -->
 
@@ -54,7 +54,7 @@ import {
   addEventListener,
   onSelectionChange,
   triggerEvent
-} from "@create-figma-plugin/utilities";
+} from '@create-figma-plugin/utilities'
 ```
 
 ### const removeEventListener = addEventListener(eventName, eventListener)
@@ -82,7 +82,7 @@ Registers an `eventListener` for when the selection changes.
 
 - `eventListener` (`function (...arguments)`)
 
-### triggerEvent(eventName _[, ...arguments]_)
+### triggerEvent(eventName *[, ...arguments]*)
 
 Calling `triggerEvent` in your plugin command invokes the event listener with the matching `eventName` in the UI `<iframe>`. Calling `triggerEvent` in your UI invokes the event listener with the matching `eventName` in your plugin command.
 
@@ -96,37 +96,40 @@ All remaining `arguments` passed to `triggerEvent` are directly applied on the e
 
 - `eventName` (`string`)
 
-### _Example_
+### *Example*
 
 ```js
 // command.js
 
 import {
   addEventListener,
-  triggerEvent
+  triggerEvent,
   // ...
-} from "@create-figma-plugin/utilities";
+} from '@create-figma-plugin/utilities'
 
-export default function() {
+export default function () {
   // ...
-  addEventListener("foo", function(count) {
-    console.log(count); //=> 2
-  });
-  triggerEvent("bar", 1);
+  addEventListener('foo', function(count) {
+    console.log(count) //=> 2
+  })
+  triggerEvent('bar', 1)
 }
 ```
 
 ```js
 // ui.js
 
-import { addEventListener, triggerEvent } from "@create-figma-plugin/utilities";
+import {
+  addEventListener,
+  triggerEvent
+} from '@create-figma-plugin/utilities'
 
-export default function() {
+export default function () {
   // ...
-  addEventListener("bar", function(count) {
-    console.log(count); //=> 1
-    triggerEvent("foo", count + 1);
-  });
+  addEventListener('bar', function(count) {
+    console.log(count) //=> 1
+    triggerEvent('foo', count + 1)
+  })
 }
 ```
 
@@ -258,9 +261,9 @@ Checks if the `layer` is within Instance.
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
-### traverseLayer(layer, processLayer _[, stopTraversal]_)
+### traverseLayer(layer, processLayer *[, stopTraversal]*)
 
-Traverses `layer` and its child layers recursively in a _depth-first_ manner, passing each layer to the specified `processLayer` callback.
+Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `processLayer` callback.
 
 Each layer is also passed to a `stopTraversal` function. If you return `false` in `stopTraversal` for a particular layer, then its child layers will not be traversed.
 
@@ -272,7 +275,7 @@ Each layer is also passed to a `stopTraversal` function. If you return `false` i
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `processLayer` (`function (layer)`)
-- `stopTraversal` (`function (layer`) _(optional)_
+- `stopTraversal` (`function (layer`) *(optional)*
 
 ### sortLayersByName(layer)
 
@@ -354,10 +357,10 @@ Loads the fonts used in all the text layers in `layers`.
 import {
   isValidNumericInput,
   evaluateNumericExpression
-} from "@create-figma-plugin/utilities";
+} from '@create-figma-plugin/utilities'
 ```
 
-### const result = isValidNumericInput(value _[, integerOnly]_)
+### const result = isValidNumericInput(value *[, integerOnly]*)
 
 Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid. Set `integerOnly` to `true` to check that the expression contains only integers; `integerOnly` defaults to `false` if not specified.
 
@@ -391,7 +394,7 @@ import {
   cloneObject,
   extractAttributes,
   compareObjects
-} from "@create-figma-plugin/utilities";
+} from '@create-figma-plugin/utilities'
 ```
 
 ### const result = cloneObject(object)
@@ -437,10 +440,13 @@ Performs a shallow comparison of objects `a` and `b`.
 ## Settings
 
 ```js
-import { loadSettings, saveSettings } from "@create-figma-plugin/utilities";
+import {
+  loadSettings,
+  saveSettings
+} from '@create-figma-plugin/utilities'
 ```
 
-### const settings = await loadSettings(_[defaultSettings]_)
+### const settings = await loadSettings(*[defaultSettings]*)
 
 Loads your plugin’s `settings` (stored locally on the user’s computer). Values in `settings` default to an optional `defaultSettings` object.
 
@@ -513,7 +519,7 @@ If `number` is between 0 and 9, returns the English word for the `number` (eg. `
 
 - `number` (`number`)
 
-### const word = pluralize(number, singular _[, plural]_)
+### const word = pluralize(number, singular *[, plural]*)
 
 Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` defaults to `${singular}s` if not specified.
 
@@ -532,10 +538,10 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 ## UI
 
 ```js
-import { showUI } from "@create-figma-plugin/utilities";
+import { showUI } from '@create-figma-plugin/utilities'
 ```
 
-### showUI(options _[, data]_)
+### showUI(options *[, data]*)
 
 Renders the UI correponding to the command in an `<iframe>`. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
 
@@ -551,16 +557,16 @@ Renders the UI correponding to the command in an `<iframe>`. Specify the width, 
   - `visible` (`boolean`)
 - `data` (`object`)
 
-### _Example_
+### *Example*
 
 ```js
 // command.js
 
-import { showUI } from "@create-figma-plugin/utilities";
+import { showUI } from '@create-figma-plugin/utilities'
 
-export default function() {
+export default function () {
   // ...
-  showUI({ width: 240, height: 320 }, "Hello, World!");
+  showUI({ width: 240, height: 320 }, 'Hello, World!')
   // ...
 }
 ```
@@ -569,7 +575,7 @@ export default function() {
 // ui.js
 
 export default function(rootNode, data) {
-  console.log(data); //=> 'Hello, World!'
+  console.log(data) //=> 'Hello, World!'
   // ...
 }
 ```
