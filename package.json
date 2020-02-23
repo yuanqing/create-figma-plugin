@@ -64,6 +64,20 @@
       "./packages/common/src/silence-logging.js"
     ]
   },
+  "eslintConfig": {
+    "globals": {
+      "figma": true
+    },
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "indent": "off",
+      "no-console": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -78,20 +92,6 @@
       "stylelint",
       "prettier"
     ]
-  },
-  "eslintConfig": {
-    "globals": {
-      "figma": true
-    },
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "indent": "off",
-      "no-console": "error",
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
   },
   "stylelint": {
     "extends": [
