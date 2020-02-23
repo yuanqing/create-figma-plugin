@@ -109,7 +109,7 @@ import {
 
 export default function () {
   // ...
-  addEventListener('foo', function(count) {
+  addEventListener('foo', function (count) {
     console.log(count) //=> 2
   })
   triggerEvent('bar', 1)
@@ -126,7 +126,7 @@ import {
 
 export default function () {
   // ...
-  addEventListener('bar', function(count) {
+  addEventListener('bar', function (count) {
     console.log(count) //=> 1
     triggerEvent('foo', count + 1)
   })
@@ -555,7 +555,7 @@ Renders the UI correponding to the command in an `<iframe>`. Specify the width, 
   - `width` (`number`)
   - `height` (`number`)
   - `visible` (`boolean`)
-- `data` (`object`) *(optional)*
+- `data` (`any`) *(optional)*
 
 ### *Example*
 
@@ -574,7 +574,7 @@ export default function () {
 ```js
 // ui.js
 
-export default function(rootNode, data) {
+export default function (rootNode, data) {
   console.log(data) //=> 'Hello, World!'
   // ...
 }
