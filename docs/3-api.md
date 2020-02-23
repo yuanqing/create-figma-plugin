@@ -371,7 +371,7 @@ Checks if `value` is a numeric expression, as input by a user. “Partial” inp
 #### Parameters
 
 - `value` (`string`)
-- `integerOnly` (`boolean`)
+- `integerOnly` (`boolean`) *(optional)*
 
 ### const result = evaluateNumericExpression(expression)
 
@@ -531,7 +531,7 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 
 - `number` (`number`)
 - `singular` (`string`)
-- `plural` (`string`)
+- `plural` (`string`) *(optional)*
 
 ---
 
@@ -555,7 +555,7 @@ Renders the UI correponding to the command in an `<iframe>`. Specify the width, 
   - `width` (`number`)
   - `height` (`number`)
   - `visible` (`boolean`)
-- `data` (`object`)
+- `data` (`object`) *(optional)*
 
 ### *Example*
 
