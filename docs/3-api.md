@@ -5,8 +5,8 @@
 - [**Events**](#events)
   * [addEventListener(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
   * [onSelectionChange(eventListener)](#const-removeeventlistener--onselectionchangeeventlistener)
-  * [triggerEvent(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
-  * [*Example*](#example)
+  * [triggerEvent(eventName _[, ...arguments]_)](#triggereventeventname-_-arguments_)
+  * [_Example_](#_example_)
 - [**Layers**](#layers)
   * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)
   * [insertAfterLayer(layer, referenceLayer)](#insertafterlayerlayer-referencelayer)
@@ -14,31 +14,34 @@
   * [getDocumentComponents()](#const-components--getdocumentcomponents)
   * [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
   * [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
+  * [computeBoundingBox(layer)](#const-result--computeboundingboxlayer)
+  * [computeMaximumBounds(layers)](#const-result--computemaximumboundslayers)
   * [isLayerWithinInstance(layer)](#const-result--islayerwithininstancelayer)
-  * [traverseLayer(layer, processLayer *[, stopTraversal]*)](#traverselayerlayer-processlayer--stoptraversal)
+  * [traverseLayer(layer, processLayer _[, stopTraversal]_)](#traverselayerlayer-processlayer-_-stoptraversal_)
   * [sortLayersByName(layer)](#sortlayersbynamelayer)
   * [updateLayersSortOrder(layer)](#updatelayerssortorderlayer)
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   * [removeDuplicateLayers(layers)](#const-result--removeduplicatelayerslayers)
+  * [collapseLayer(layer)](#collapselayerlayer)
   * [loadFonts(layers)](#const-promise--loadfontslayers)
 - [**Number**](#number)
-  * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
+  * [isValidNumericInput(value _[, integerOnly]_)](#const-result--isvalidnumericinputvalue-_-integeronly_)
   * [evaluateNumericExpression(expression)](#const-result--evaluatenumericexpressionexpression)
 - [**Object**](#object)
   * [cloneObject(object)](#const-result--cloneobjectobject)
   * [extractAttributes(array, attributes)](#const-result--extractattributesarray-attributes)
   * [compareObjects(a, b)](#const-result--compareobjectsa-b)
 - [**Settings**](#settings)
-  * [await loadSettings(*[defaultSettings]*)](#const-settings--await-loadsettingsdefaultsettings)
+  * [await loadSettings(_[defaultSettings]_)](#const-settings--await-loadsettings_defaultsettings_)
   * [await saveSettings(settings)](#await-savesettingssettings)
 - [**String**](#string)
   * [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
   * [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
   * [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
-  * [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
+  * [pluralize(number, singular _[, plural]_)](#const-word--pluralizenumber-singular-_-plural_)
 - [**UI**](#ui)
-  * [showUI(options *[, data]*)](#showuioptions--data)
-  * [*Example*](#example-1)
+  * [showUI(options _[, data]_)](#showuioptions-_-data_)
+  * [_Example_](#_example_-1)
 
 <!-- tocstop -->
 
@@ -51,7 +54,7 @@ import {
   addEventListener,
   onSelectionChange,
   triggerEvent
-} from '@create-figma-plugin/utilities'
+} from "@create-figma-plugin/utilities";
 ```
 
 ### const removeEventListener = addEventListener(eventName, eventListener)
@@ -79,7 +82,7 @@ Registers an `eventListener` for when the selection changes.
 
 - `eventListener` (`function (...arguments)`)
 
-### triggerEvent(eventName *[, ...arguments]*)
+### triggerEvent(eventName _[, ...arguments]_)
 
 Calling `triggerEvent` in your plugin command invokes the event listener with the matching `eventName` in the UI `<iframe>`. Calling `triggerEvent` in your UI invokes the event listener with the matching `eventName` in your plugin command.
 
@@ -93,40 +96,37 @@ All remaining `arguments` passed to `triggerEvent` are directly applied on the e
 
 - `eventName` (`string`)
 
-### *Example*
+### _Example_
 
 ```js
 // command.js
 
 import {
   addEventListener,
-  triggerEvent,
+  triggerEvent
   // ...
-} from '@create-figma-plugin/utilities'
+} from "@create-figma-plugin/utilities";
 
-export default function () {
+export default function() {
   // ...
-  addEventListener('foo', function (count) {
-    console.log(count) //=> 2
-  })
-  triggerEvent('bar', 1)
+  addEventListener("foo", function(count) {
+    console.log(count); //=> 2
+  });
+  triggerEvent("bar", 1);
 }
 ```
 
 ```js
 // ui.js
 
-import {
-  addEventListener,
-  triggerEvent
-} from '@create-figma-plugin/utilities'
+import { addEventListener, triggerEvent } from "@create-figma-plugin/utilities";
 
-export default function () {
+export default function() {
   // ...
-  addEventListener('bar', function (count) {
-    console.log(count) //=> 1
-    triggerEvent('foo', count + 1)
-  })
+  addEventListener("bar", function(count) {
+    console.log(count); //=> 1
+    triggerEvent("foo", count + 1);
+  });
 }
 ```
 
@@ -142,10 +142,15 @@ import {
   getDocumentComponents,
   getAbsolutePosition
   setAbsolutePosition,
+  computeBoundingBox,
+  computeMaximumBounds,
   isLayerWithinInstance,
   traverseLayer,
+  sortLayersByName,
+  updateLayersSortOrder,
   groupSiblingLayers,
   removeDuplicateLayers,
+  collapseLayer,
   loadFonts
 } from '@create-figma-plugin/utilities'
 ```
@@ -158,6 +163,11 @@ Inserts `layer` before `referenceLayer` in the layer list.
 
 - `undefined`
 
+#### Parameters
+
+- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `referenceLayer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
 ### insertAfterLayer(layer, referenceLayer)
 
 Inserts `layer` after `referenceLayer` in the layer list.
@@ -165,6 +175,11 @@ Inserts `layer` after `referenceLayer` in the layer list.
 #### Returns
 
 - `undefined`
+
+#### Parameters
+
+- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `referenceLayer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
 ### const layers = getSelectedLayersOrAllLayers()
 
@@ -204,7 +219,32 @@ Sets the `layer` to the given `absolutePosition`.
 
 #### Parameters
 
+- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `absolutePosition` (a plain `object` with `x` and `y` keys)
+
+### const result = computeBoundingBox(layer)
+
+Computes the coordinates and dimensions of the smallest bounding box that contains the given `layer`.
+
+#### Returns
+
+- An `object` with the `x`, `y`, `width`, and `height` of the bounding box
+
+#### Parameters
+
+- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+### const result = computeMaximumBounds(layers)
+
+Computes the absolute coordinates of the top-left and bottom-right corners of the smallest bounding box that contains the given `layers`.
+
+#### Returns
+
+- An `array` containing the top-left and bottom-right coordinate (an object with `x` and `y`) of the bounding box
+
+#### Parameters
+
+- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
 ### const result = isLayerWithinInstance(layer)
 
@@ -218,9 +258,9 @@ Checks if the `layer` is within Instance.
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
-### traverseLayer(layer, processLayer *[, stopTraversal]*)
+### traverseLayer(layer, processLayer _[, stopTraversal]_)
 
-Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `processLayer` callback.
+Traverses `layer` and its child layers recursively in a _depth-first_ manner, passing each layer to the specified `processLayer` callback.
 
 Each layer is also passed to a `stopTraversal` function. If you return `false` in `stopTraversal` for a particular layer, then its child layers will not be traversed.
 
@@ -232,7 +272,7 @@ Each layer is also passed to a `stopTraversal` function. If you return `false` i
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `processLayer` (`function (layer)`)
-- `stopTraversal` (`function (layer`) *(optional)*
+- `stopTraversal` (`function (layer`) _(optional)_
 
 ### sortLayersByName(layer)
 
@@ -282,6 +322,18 @@ Deduplicates `layers`.
 
 - `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
+### collapseLayer(layer)
+
+Collapses `layer` and all its child layers in the layer list.
+
+#### Returns
+
+- `undefined`
+
+#### Parameters
+
+- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
 ### const promise = loadFonts(layers)
 
 Loads the fonts used in all the text layers in `layers`.
@@ -302,10 +354,10 @@ Loads the fonts used in all the text layers in `layers`.
 import {
   isValidNumericInput,
   evaluateNumericExpression
-} from '@create-figma-plugin/utilities'
+} from "@create-figma-plugin/utilities";
 ```
 
-### const result = isValidNumericInput(value *[, integerOnly]*)
+### const result = isValidNumericInput(value _[, integerOnly]_)
 
 Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid. Set `integerOnly` to `true` to check that the expression contains only integers; `integerOnly` defaults to `false` if not specified.
 
@@ -339,7 +391,7 @@ import {
   cloneObject,
   extractAttributes,
   compareObjects
-} from '@create-figma-plugin/utilities'
+} from "@create-figma-plugin/utilities";
 ```
 
 ### const result = cloneObject(object)
@@ -385,13 +437,10 @@ Performs a shallow comparison of objects `a` and `b`.
 ## Settings
 
 ```js
-import {
-  loadSettings,
-  saveSettings
-} from '@create-figma-plugin/utilities'
+import { loadSettings, saveSettings } from "@create-figma-plugin/utilities";
 ```
 
-### const settings = await loadSettings(*[defaultSettings]*)
+### const settings = await loadSettings(_[defaultSettings]_)
 
 Loads your plugin’s `settings` (stored locally on the user’s computer). Values in `settings` default to an optional `defaultSettings` object.
 
@@ -464,7 +513,7 @@ If `number` is between 0 and 9, returns the English word for the `number` (eg. `
 
 - `number` (`number`)
 
-### const word = pluralize(number, singular *[, plural]*)
+### const word = pluralize(number, singular _[, plural]_)
 
 Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` defaults to `${singular}s` if not specified.
 
@@ -483,10 +532,10 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 ## UI
 
 ```js
-import { showUI } from '@create-figma-plugin/utilities'
+import { showUI } from "@create-figma-plugin/utilities";
 ```
 
-### showUI(options *[, data]*)
+### showUI(options _[, data]_)
 
 Renders the UI correponding to the command in an `<iframe>`. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
 
@@ -502,16 +551,16 @@ Renders the UI correponding to the command in an `<iframe>`. Specify the width, 
   - `visible` (`boolean`)
 - `data` (`object`)
 
-### *Example*
+### _Example_
 
 ```js
 // command.js
 
-import { showUI } from '@create-figma-plugin/utilities'
+import { showUI } from "@create-figma-plugin/utilities";
 
-export default function () {
+export default function() {
   // ...
-  showUI({ width: 240, height: 320 }, 'Hello, World!')
+  showUI({ width: 240, height: 320 }, "Hello, World!");
   // ...
 }
 ```
@@ -519,8 +568,8 @@ export default function () {
 ```js
 // ui.js
 
-export default function (rootNode, data) {
-  console.log(data) //=> 'Hello, World!'
+export default function(rootNode, data) {
+  console.log(data); //=> 'Hello, World!'
   // ...
 }
 ```
