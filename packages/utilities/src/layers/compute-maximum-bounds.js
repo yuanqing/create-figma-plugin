@@ -1,3 +1,5 @@
+import { computeBoundingBox } from './compute-bounding-box'
+
 export function computeMaximumBounds (layers) {
   let maximumBounds = [
     {
@@ -10,16 +12,15 @@ export function computeMaximumBounds (layers) {
     }
   ]
   for (const layer of layers) {
-    const x = layer.absoluteTransform[0][2]
-    const y = layer.absoluteTransform[1][2]
+    const { x, y, width, height } = computeBoundingBox(layer)
     maximumBounds = [
       {
         x: Math.min(maximumBounds[0].x, x),
         y: Math.min(maximumBounds[0].y, y)
       },
       {
-        x: Math.max(maximumBounds[1].x, x + layer.width),
-        y: Math.max(maximumBounds[1].y, y + layer.height)
+        x: Math.max(maximumBounds[1].x, x + width),
+        y: Math.max(maximumBounds[1].y, y + height)
       }
     ]
   }
