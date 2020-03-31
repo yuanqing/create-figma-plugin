@@ -4,11 +4,10 @@
 
 ## Features
 
-- Write your plugin in modern JavaScript
-- Scaffold your plugin using a template
-- Bundle your plugin and automatically generate your plugin’s `manifest.json` file
-- Supports multiple commands and for each command to have a corresponding UI implementation
-- Supports customizing the underlying Webpack configuration
+- [Scaffold your plugin](docs/1-quick-start.md#readme) using a template
+- [Supports multiple menu commands](docs/2-configuration.md#readme) and for each command to have their own UI implementation
+- [Utility functions](docs/3-api.md#readme) for common plugin tasks
+- A comprehensive set of Preact components that replicate the Figma UI design
 
 ## Docs
 
