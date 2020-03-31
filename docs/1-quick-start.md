@@ -10,7 +10,7 @@ To begin, do:
 $ npx create-figma-plugin figma-hello-world
 $ cd figma-hello-world
 $ ls
-command.js   node_modules   package.json
+.gitignore   command.js   node_modules   package.json
 ```
 
 `command.js` contains the plugin command implementation:
