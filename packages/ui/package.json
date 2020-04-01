@@ -31,7 +31,9 @@
   ],
   "main": "src/index.js",
   "scripts": {
-    "build": "mkdirp node_modules && build-storybook --output-dir build",
+    "build": "yarn run clean && mkdirp node_modules && build-storybook --output-dir build",
+    "clean": "rimraf build",
+    "deploy": "yarn run clean && storybook-to-ghpages --out build",
     "watch": "mkdirp node_modules && start-storybook"
   },
   "dependencies": {
@@ -43,5 +45,10 @@
   },
   "sideEffects": [
     "./src/scss/{base,font-face,reset}.scss"
-  ]
+  ],
+  "storybook-deployer": {
+    "gitUsername": "yuanqing",
+    "gitEmail": "desk@yuanqing.sg",
+    "commitMessage": "Deploy Storybook"
+  }
 }
