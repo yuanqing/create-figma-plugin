@@ -39,6 +39,10 @@
   color: $color-black-30;
 }
 
+.isNumeric {
+  font-variant-numeric: tabular-nums;
+}
+
 .left {
   text-align: left;
 }

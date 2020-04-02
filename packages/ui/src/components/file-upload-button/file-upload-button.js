@@ -5,10 +5,10 @@ import { useCallback } from 'preact/hooks'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import '../../scss/base.scss'
-import styles from './button-upload-file.scss'
+import styles from './file-upload-button.scss'
 
-export function ButtonUploadFile ({
-  accept,
+export function FileUploadButton ({
+  acceptedFileTypes,
   children,
   disabled: isDisabled,
   focused: isFocused,
@@ -20,7 +20,10 @@ export function ButtonUploadFile ({
   propagateEscapeKeyDown = true,
   ...rest
 }) {
-  const handleFiles = useCallback(
+  const handleClick = useCallback(function (event) {
+    event.target.focus()
+  }, [])
+  const handleChange = useCallback(
     function (event) {
       const files = Array.prototype.slice
         .call(event.target.files)
@@ -29,9 +32,6 @@ export function ButtonUploadFile ({
     },
     [onSelectedFiles]
   )
-  const handleClick = useCallback(function (event) {
-    event.target.focus()
-  }, [])
   const handleKeyDown = useCallback(
     function (event) {
       const keyCode = event.keyCode
@@ -44,6 +44,10 @@ export function ButtonUploadFile ({
     },
     [propagateEscapeKeyDown]
   )
+  const accept =
+    typeof acceptedFileTypes !== 'undefined'
+      ? acceptedFileTypes.join(',')
+      : null
   return (
     <div
       class={classnames(
@@ -64,7 +68,7 @@ export function ButtonUploadFile ({
         type='file'
         accept={accept}
         multiple={multiple}
-        onChange={handleFiles}
+        onChange={handleChange}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         tabIndex={isDisabled === true ? null : '0'}

@@ -15,3 +15,7 @@ export const Bold = function () {
 export const Muted = function () {
   return <Text muted>Text</Text>
 }
+
+export const Numeric = function () {
+  return <Text numeric>3.142</Text>
+}

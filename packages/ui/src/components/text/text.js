@@ -8,6 +8,7 @@ export function Text ({
   align = 'left',
   bold: isBold,
   muted: isMuted,
+  numeric: isNumeric,
   ...rest
 }) {
   return (
@@ -17,7 +18,8 @@ export function Text ({
         styles.text,
         styles[align],
         isBold === true ? styles.isBold : null,
-        isMuted === true ? styles.isMuted : null
+        isMuted === true ? styles.isMuted : null,
+        isNumeric === true ? styles.isNumeric : null
       )}
     />
   )

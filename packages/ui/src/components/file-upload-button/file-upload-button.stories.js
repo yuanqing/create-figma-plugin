@@ -1,53 +1,53 @@
 /** @jsx h */
 import { h } from 'preact'
-import { ButtonUploadFile } from './button-upload-file'
+import { FileUploadButton } from './file-upload-button'
 
-export default { title: 'Button Upload File' }
+export default { title: 'File Upload Button' }
 
 const longText = Array(100)
   .fill('Text')
   .join(' ')
 
 export const Button = function () {
-  return <ButtonUploadFile multiple>Text</ButtonUploadFile>
+  return <FileUploadButton multiple>Text</FileUploadButton>
 }
 
 export const ButtonLoading = function () {
   return (
-    <ButtonUploadFile multiple loading>
+    <FileUploadButton multiple loading>
       Text
-    </ButtonUploadFile>
+    </FileUploadButton>
   )
 }
 
 export const ButtonDisabled = function () {
   return (
-    <ButtonUploadFile multiple disabled>
+    <FileUploadButton multiple disabled>
       Text
-    </ButtonUploadFile>
+    </FileUploadButton>
   )
 }
 
 export const ButtonDisabledLoading = function () {
   return (
-    <ButtonUploadFile multiple disabled loading>
+    <FileUploadButton multiple disabled loading>
       Text
-    </ButtonUploadFile>
+    </FileUploadButton>
   )
 }
 
 export const ButtonFullWidth = function () {
   return (
-    <ButtonUploadFile multiple fullWidth>
+    <FileUploadButton multiple fullWidth>
       Text
-    </ButtonUploadFile>
+    </FileUploadButton>
   )
 }
 
 export const ButtonFullWidthLongText = function () {
   return (
-    <ButtonUploadFile multiple fullWidth>
+    <FileUploadButton multiple fullWidth>
       {longText}
-    </ButtonUploadFile>
+    </FileUploadButton>
   )
 }
