@@ -12,24 +12,25 @@
   * [insertAfterLayer(layer, referenceLayer)](#insertafterlayerlayer-referencelayer)
   * [getSelectedLayersOrAllLayers()](#const-layers--getselectedlayersoralllayers)
   * [getDocumentComponents()](#const-components--getdocumentcomponents)
-  * [getAbsolutePosition(layer)](#const-absoluteposition--getabsolutepositionlayer)
+  * [const {x, y} = getAbsolutePosition(layer)](#const-x-y--getabsolutepositionlayer)
   * [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
-  * [computeBoundingBox(layer)](#const-result--computeboundingboxlayer)
-  * [computeMaximumBounds(layers)](#const-result--computemaximumboundslayers)
+  * [const {x, y, width, height} = computeBoundingBox(layer)](#const-x-y-width-height--computeboundingboxlayer)
+  * [const [topLeft, bottomRight] = computeMaximumBounds(layers)](#const-topleft-bottomright--computemaximumboundslayers)
   * [isLayerWithinInstance(layer)](#const-result--islayerwithininstancelayer)
   * [traverseLayer(layer, processLayer *[, stopTraversal]*)](#traverselayerlayer-processlayer--stoptraversal)
-  * [sortLayersByName(layer)](#sortlayersbynamelayer)
-  * [updateLayersSortOrder(layer)](#updatelayerssortorderlayer)
+  * [sortLayersByName(layers)](#sortlayersbynamelayers)
+  * [updateLayersSortOrder(layers)](#updatelayerssortorderlayers)
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   * [removeDuplicateLayers(layers)](#const-result--removeduplicatelayerslayers)
   * [collapseLayer(layer)](#collapselayerlayer)
-  * [loadFonts(layers)](#const-promise--loadfontslayers)
+  * [await loadFonts(layers)](#await-loadfontslayers)
+  * [setRelaunchButton(layer, key *[, description]*)](#setrelaunchbuttonlayer-key--description)
 - [**Number**](#number)
   * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
   * [evaluateNumericExpression(expression)](#const-result--evaluatenumericexpressionexpression)
 - [**Object**](#object)
   * [cloneObject(object)](#const-result--cloneobjectobject)
-  * [extractAttributes(array, attributes)](#const-result--extractattributesarray-attributes)
+  * [extractAttributes(objects, attributes)](#const-result--extractattributesobjects-attributes)
   * [compareObjects(a, b)](#const-result--compareobjectsa-b)
 - [**Settings**](#settings)
   * [await loadSettings(*[defaultSettings]*)](#const-settings--await-loadsettingsdefaultsettings)
@@ -84,9 +85,10 @@ Registers an `eventListener` for when the selection changes.
 
 ### triggerEvent(eventName *[, ...arguments]*)
 
-Calling `triggerEvent` in your plugin command invokes the event listener with the matching `eventName` in the UI `<iframe>`. Calling `triggerEvent` in your UI invokes the event listener with the matching `eventName` in your plugin command.
+- Calling `triggerEvent` in your plugin command invokes the event listener with the matching `eventName` in your UI.
+- Calling `triggerEvent` in your UI invokes the event listener with the matching `eventName` in the plugin command.
 
-All remaining `arguments` passed to `triggerEvent` are directly applied on the event listener.
+All `arguments` that follow `eventName` are directly applied on the event listener.
 
 #### Returns
 
@@ -154,13 +156,14 @@ import {
   groupSiblingLayers,
   removeDuplicateLayers,
   collapseLayer,
-  loadFonts
+  loadFonts,
+  setRelaunchButton
 } from '@create-figma-plugin/utilities'
 ```
 
 ### insertBeforeLayer(layer, referenceLayer)
 
-Inserts `layer` before `referenceLayer` in the layer list.
+Inserts `layer` before the `referenceLayer` in the layer list.
 
 #### Returns
 
@@ -173,7 +176,7 @@ Inserts `layer` before `referenceLayer` in the layer list.
 
 ### insertAfterLayer(layer, referenceLayer)
 
-Inserts `layer` after `referenceLayer` in the layer list.
+Inserts `layer` after the `referenceLayer` in the layer list.
 
 #### Returns
 
@@ -200,7 +203,7 @@ Gets all the components in the current document.
 
 - An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
 
-### const absolutePosition = getAbsolutePosition(layer)
+### const {x, y} = getAbsolutePosition(layer)
 
 Returns the X and Y position of the given `layer` relative to the page.
 
@@ -225,25 +228,25 @@ Sets the `layer` to the given `absolutePosition`.
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `absolutePosition` (a plain `object` with `x` and `y` keys)
 
-### const result = computeBoundingBox(layer)
+### const {x, y, width, height} = computeBoundingBox(layer)
 
 Computes the coordinates and dimensions of the smallest bounding box that contains the given `layer`.
 
 #### Returns
 
-- An `object` with the `x`, `y`, `width`, and `height` of the bounding box
+- A plain `object` with `x`, `y`, `width`, and `height` keys
 
 #### Parameters
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
-### const result = computeMaximumBounds(layers)
+### const [topLeft, bottomRight] = computeMaximumBounds(layers)
 
-Computes the absolute coordinates of the top-left and bottom-right corners of the smallest bounding box that contains the given `layers`.
+Computes the absolute coordinates of the `topLeft` and `bottomRight` corners of the smallest bounding box that contains the given `layers`.
 
 #### Returns
 
-- An `array` containing the top-left and bottom-right coordinate (an object with `x` and `y`) of the bounding box
+- The `topLeft` and `bottomRight` coordinates as plain `object`s with `x` and `y` keys
 
 #### Parameters
 
@@ -251,7 +254,7 @@ Computes the absolute coordinates of the top-left and bottom-right corners of th
 
 ### const result = isLayerWithinInstance(layer)
 
-Checks if the `layer` is within Instance.
+Checks if the `layer` is within an Instance.
 
 #### Returns
 
@@ -275,11 +278,11 @@ Each layer is also passed to a `stopTraversal` function. If you return `false` i
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 - `processLayer` (`function (layer)`)
-- `stopTraversal` (`function (layer`) *(optional)*
+- `stopTraversal` (`function (layer)`) *(optional)*
 
-### sortLayersByName(layer)
+### sortLayersByName(layers)
 
-Sorts `layer` in alphabetical order.
+Sorts `layers` by layer name in alphabetical order.
 
 #### Returns
 
@@ -289,7 +292,7 @@ Sorts `layer` in alphabetical order.
 
 - `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
-### updateLayersSortOrder(layer)
+### updateLayersSortOrder(layers)
 
 Updates the layer list sort order of the layers in `layers`.
 
@@ -337,17 +340,31 @@ Collapses `layer` and all its child layers in the layer list.
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
-### const promise = loadFonts(layers)
+### await loadFonts(layers)
 
 Loads the fonts used in all the text layers in `layers`.
 
 #### Returns
 
-- A `Promise` that resolves when all the fonts in `layers` were successfully loaded
+- `Promise`
 
 #### Parameters
 
 - `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+### setRelaunchButton(layer, key *[, description]*)
+
+Adds a [relaunch button](https://www.figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `key` as [configured](2-configuration.md#packagejson) under **`"relaunchButtons"`**. `description` is the text displayed below the relaunch button.
+
+#### Returns
+
+- `undefined`
+
+#### Parameters
+
+- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `key` (`string`)
+- `description` (`string`) *(optional)*
 
 ---
 
@@ -362,7 +379,7 @@ import {
 
 ### const result = isValidNumericInput(value *[, integerOnly]*)
 
-Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid. Set `integerOnly` to `true` to check that the expression contains only integers; `integerOnly` defaults to `false` if not specified.
+Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid. Set `integerOnly` to `true` to check that the expression contains only integers. `integerOnly` defaults to `false` if not specified.
 
 #### Returns
 
@@ -399,7 +416,7 @@ import {
 
 ### const result = cloneObject(object)
 
-Creates a deep copy of the given `object`.
+Creates a deep copy of the given plain `object`.
 
 #### Returns
 
@@ -409,26 +426,26 @@ Creates a deep copy of the given `object`.
 
 - `object` (`any`)
 
-### const result = extractAttributes(array, attributes)
+### const result = extractAttributes(objects, attributes)
 
-Extracts the specified `attributes` from each object in `array`.
+Extracts the specified `attributes` from the given `objects`.
 
 #### Returns
 
-- An `array` of plain objects
+- An `array` of plain `object`s
 
 #### Parameters
 
-- `array` (an `array` of plain objects)
+- `objects` (an `array` of `object`)
 - `attributes` (an `array` of `string`)
 
 ### const result = compareObjects(a, b)
 
-Performs a shallow comparison of objects `a` and `b`.
+Performs a *shallow* comparison of objects `a` and `b`.
 
 #### Returns
 
-- `true` if `a` and `b` are the same values, else `false`
+- `true` if `a` and `b` are the same, else `false`
 
 #### Parameters
 
@@ -452,15 +469,15 @@ Loads your plugin’s `settings` (stored locally on the user’s computer). Valu
 
 #### Returns
 
-- A `Promise` for an `object`
+- A `Promise` for a plain `object`
 
 #### Parameters
 
-- `defaultSettings` (`object`)
+- `defaultSettings` (`object`) *(optional)*
 
 ### await saveSettings(settings)
 
-Saves the given `settings`.
+Saves the given `settings` for the plugin (stored locally on the user’s computer).
 
 #### Returns
 
