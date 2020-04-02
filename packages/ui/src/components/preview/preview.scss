@@ -1,5 +1,5 @@
-@import "@create-figma-plugin/ui/src/scss/constants";
-@import "@create-figma-plugin/ui/src/scss/text";
+@import "../../scss/constants";
+@import "../../scss/text";
 
 .preview {
   @include text-11-regular;
