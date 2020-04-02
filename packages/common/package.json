@@ -23,9 +23,9 @@
   ],
   "main": "lib/index.js",
   "dependencies": {
-    "@sindresorhus/slugify": "^0.9.1",
-    "chalk": "^3.0.0",
-    "fs-extra": "^8.1.0",
+    "@sindresorhus/slugify": "^0.11.0",
+    "chalk": "^4.0.0",
+    "fs-extra": "^9.0.0",
     "npmlog": "^4.1.2"
   },
   "sideEffects": false

@@ -41,7 +41,7 @@
     "@sindresorhus/class-names": "^1.1.0"
   },
   "peerDependencies": {
-    "preact": "^10.1.1"
+    "preact": "^10.3.4"
   },
   "sideEffects": [
     "./src/scss/{base,font-face,reset}.scss"
