@@ -14,6 +14,7 @@
 - [**Quick start**](docs/1-quick-start.md#readme)
 - [**Configuration**](docs/2-configuration.md#readme)
 - [**API**](docs/3-api.md#readme)
+- [**Storybook**](https://yuanqing.github.io/create-figma-plugin/)
 
 ## License
 
