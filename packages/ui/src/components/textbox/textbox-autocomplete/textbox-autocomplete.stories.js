@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 import { TextboxAutocomplete } from './textbox-autocomplete'
-import { searchIcon } from '../../../icons/search-icon'
+import { searchIcon } from '../../icon/icons/search-icon'
 
 export default { title: 'Textbox Autocomplete' }
 

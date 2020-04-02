@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 import { TextboxNumeric } from './textbox-numeric'
-import { spaceHorizontalIcon } from '../../../icons/space-horizontal-icon'
+import { spaceHorizontalIcon } from '../../icon/icons/space-horizontal-icon'
 
 export default { title: 'Textbox Numeric' }
 

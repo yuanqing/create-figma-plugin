@@ -2,8 +2,8 @@
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
-import { searchIcon } from '../../icons/search-icon'
-import { crossIcon } from '../../icons/cross-icon'
+import { searchIcon } from '../icon/icons/search-icon'
+import { crossIcon } from '../icon/icons/cross-icon'
 import '../../scss/base.scss'
 import styles from './search-textbox.scss'
 
