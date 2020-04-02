@@ -1,4 +1,4 @@
-import { traverseLayer } from './traverse-layer'
+import { traverseLayer } from '../traverse-layer'
 
 export function getDocumentComponents () {
   const result = []

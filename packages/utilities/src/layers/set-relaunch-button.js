@@ -1,3 +1,3 @@
-export function setRelaunchButton (layer, id, description = '') {
-  layer.setRelaunchData({ [id]: description })
+export function setRelaunchButton (layer, key, description = '') {
+  layer.setRelaunchData({ [key]: description })
 }
