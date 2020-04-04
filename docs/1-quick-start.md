@@ -75,7 +75,7 @@ export default function (rootNode, data) {
 The exported function receives two parameters:
 
 - `rootNode` — An empty `<div>` element within which you can render your UI.
-- `data` — This corresponds to the third parameter passed to `showUI`.
+- `data` — This corresponds to the third parameter passed to `showUI` in `command.js`.
 
 Then, in `package.json`, point to `ui.js` on the **`"ui"`** key:
 
