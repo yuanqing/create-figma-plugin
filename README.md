@@ -1,4 +1,4 @@
-# create-figma-plugin [![npm Version](https://badgen.net/npm/v/create-figma-plugin)](https://www.npmjs.com/package/create-figma-plugin) [![build](https://github.com/yuanqing/create-figma-plugin/workflows/build/badge.svg)](https://github.com/yuanqing/create-figma-plugin/actions?query=workflow%3Abuild)
+# Create Figma Plugin [![npm Version](https://badgen.net/npm/v/create-figma-plugin)](https://www.npmjs.com/package/create-figma-plugin) [![build](https://github.com/yuanqing/create-figma-plugin/workflows/build/badge.svg)](https://github.com/yuanqing/create-figma-plugin/actions?query=workflow%3Abuild)
 
 > A toolkit for developing [Figma plugins](https://www.figma.com/plugin-docs/)
 
