@@ -69,7 +69,7 @@ async function createUiEntryFile (config) {
     import '@create-figma-plugin/utilities/src/events'
     const modules = ${createRequireCode(modules)}
     const rootNode = document.getElementById('create-figma-plugin')
-    modules[window.__command__](rootNode, window.__data__, window.__command__)
+    modules[window.__command__](rootNode, window.__initialState__, window.__command__)
   `)
 }
 
