@@ -1,34 +1,33 @@
 const isCommand = typeof window === 'undefined'
 
-const listeners = {}
+const eventListeners = {}
 
 let count = 0
-export function addEventListener (eventName, eventListener) {
+export function on (eventName, eventListener) {
   const id = count++
-  listeners[id] = { eventName, eventListener }
+  eventListeners[id] = { eventName, eventListener }
   return function () {
-    delete listeners[id]
+    delete eventListeners[id]
   }
 }
 
-// prettier-ignore
-export const triggerEvent = isCommand
+export const emit = isCommand
   ? function (...args) {
-    figma.ui.postMessage(args)
-  }
+      figma.ui.postMessage(args)
+    }
   : function (...args) {
-    window.parent.postMessage(
-      {
-        pluginMessage: args
-      },
-      '*'
-    )
-  }
+      window.parent.postMessage(
+        {
+          pluginMessage: args
+        },
+        '*'
+      )
+    }
 
 if (isCommand === true) {
   figma.ui.onmessage = function ([type, ...args]) {
-    for (const id of Object.keys(listeners)) {
-      const { eventName, eventListener } = listeners[id]
+    for (const id of Object.keys(eventListeners)) {
+      const { eventName, eventListener } = eventListeners[id]
       if (eventName === type) {
         eventListener.apply(null, args)
       }
@@ -37,21 +36,11 @@ if (isCommand === true) {
 } else {
   window.onmessage = function (event) {
     const [type, ...args] = event.data.pluginMessage
-    for (const id of Object.keys(listeners)) {
-      const { eventName, eventListener } = listeners[id]
+    for (const id of Object.keys(eventListeners)) {
+      const { eventName, eventListener } = eventListeners[id]
       if (eventName === type) {
         eventListener.apply(null, args)
       }
     }
-  }
-}
-
-export function onSelectionChange (eventListener) {
-  function callback () {
-    eventListener(figma.currentPage.selection)
-  }
-  figma.on('selectionchange', callback)
-  return function () {
-    figma.off('selectionchange', callback)
   }
 }
