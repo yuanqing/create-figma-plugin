@@ -2,7 +2,7 @@
 
 const CLOSING_SLASH = '/'
 
-export function showUI ({ width, height, initialState = {} } = {}) {
+export function showUI ({ width, height }, initialState = {}) {
   if (typeof __html__ === 'undefined') {
     throw new Error(
       `UI not defined for the command corresponding to \`${global.__command__}\``

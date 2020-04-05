@@ -5,13 +5,10 @@ import {
   TAB_KEY_CODE
 } from '../utilities/key-codes'
 
-export function useForm ({
+export function useForm (
   initialState,
-  transform,
-  validate,
-  onSubmit,
-  onClose
-}) {
+  { transform, validate, onSubmit, onClose }
+) {
   const [state, setState] = useState(
     typeof transform === 'function' ? transform(initialState) : initialState
   )
