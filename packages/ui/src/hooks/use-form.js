@@ -5,26 +5,15 @@ import {
   TAB_KEY_CODE
 } from '../utilities/key-codes'
 
-export function useForm (
+export function useForm ({
   initialState,
-  { transform, validate, onClose, onSubmit }
-) {
+  transform,
+  validate,
+  onSubmit,
+  onClose
+}) {
   const [state, setState] = useState(
     typeof transform === 'function' ? transform(initialState) : initialState
-  )
-  const handleSubmit = useCallback(
-    function (event) {
-      if (typeof event !== 'undefined') {
-        event.preventDefault()
-      }
-      if (
-        typeof onSubmit === 'function' &&
-        (typeof validate !== 'function' || validate(state) === true)
-      ) {
-        onSubmit(state, event)
-      }
-    },
-    [state, onSubmit, validate]
   )
   const handleChange = useCallback(
     function (nextState) {
@@ -76,12 +65,26 @@ export function useForm (
     },
     [state, onClose, onSubmit, validate]
   )
-  const isInvalid = useCallback(
+  const handleSubmit = useCallback(
+    function (event) {
+      if (typeof event !== 'undefined') {
+        event.preventDefault()
+      }
+      if (
+        typeof onSubmit === 'function' &&
+        (typeof validate !== 'function' || validate(state) === true)
+      ) {
+        onSubmit(state, event)
+      }
+    },
+    [state, onSubmit, validate]
+  )
+  const isValid = useCallback(
     function () {
       if (typeof validate !== 'function') {
         throw new Error('Need a `validate` callback')
       }
-      return validate(state) === false
+      return validate(state) === true
     },
     [state, validate]
   )
@@ -111,7 +114,7 @@ export function useForm (
     state,
     handleChange,
     handleSubmit,
-    isInvalid
+    isValid
   }
 }
 
