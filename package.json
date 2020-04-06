@@ -59,11 +59,12 @@
       "packages/*/test/**/*.js",
       "!**/fixtures/**"
     ],
-    "verbose": true,
     "require": [
       "esm",
       "./packages/common/src/silence-logging.js"
-    ]
+    ],
+    "timeout": "30s",
+    "verbose": true
   },
   "eslintConfig": {
     "globals": {
