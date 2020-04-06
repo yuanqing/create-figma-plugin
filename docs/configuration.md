@@ -17,7 +17,7 @@ Configure your plugin via the **`"create-figma-plugin"`** key of your `package.j
 
     Use a **`"-"`** in the array to set a separator between commands in the sub-menu.
 
-The initial `src/` of any path specified in the configuration can be omitted. `create-figma-plugin` will attempt to resolve paths in the `src/` directory.
+The initial `src/` of any path specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve paths in the `src/` directory.
 
 ### *Example*
 
@@ -76,4 +76,4 @@ module.exports = function (config) {
 }
 ```
 
-`config` is the configuration object used when you build your plugin using `create-figma-plugin`. The exported function must return the new Webpack configuration to be used.
+`config` is the configuration object used when you build your plugin using Create Figma Plugin. The exported function must return the new Webpack configuration to be used.
