@@ -3,9 +3,8 @@
 <!-- toc -->
 
 - [**Events**](#events)
-  * [on(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
-  * [onSelectionChange(eventListener)](#const-removeeventlistener--onselectionchangeeventlistener)
-  * [emit(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
+  * [on(eventName, eventListener)](#const-off--oneventname-eventlistener)
+  * [emit(eventName *[, ...arguments]*)](#emiteventname--arguments)
   * [*Example*](#example)
 - [**Layers**](#layers)
   * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)
