@@ -3,9 +3,9 @@
 <!-- toc -->
 
 - [**Events**](#events)
-  * [addEventListener(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
+  * [on(eventName, eventListener)](#const-removeeventlistener--addeventlistenereventname-eventlistener)
   * [onSelectionChange(eventListener)](#const-removeeventlistener--onselectionchangeeventlistener)
-  * [triggerEvent(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
+  * [emit(eventName *[, ...arguments]*)](#triggereventeventname--arguments)
   * [*Example*](#example)
 - [**Layers**](#layers)
   * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)
@@ -52,13 +52,12 @@
 
 ```js
 import {
-  addEventListener,
-  onSelectionChange,
-  triggerEvent
+  emit,
+  on
 } from '@create-figma-plugin/utilities'
 ```
 
-### const removeEventListener = addEventListener(eventName, eventListener)
+### const off = on(eventName, eventListener)
 
 Registers an `eventListener` for the given `eventName`.
 
@@ -71,24 +70,12 @@ Registers an `eventListener` for the given `eventName`.
 - `eventName` (`string`)
 - `eventListener` (`function (...arguments)`)
 
-### const removeEventListener = onSelectionChange(eventListener)
+### emit(eventName *[, ...arguments]*)
 
-Registers an `eventListener` for when the selection changes.
+- Calling `emit` in your plugin command invokes the event listener with the matching `eventName` in your UI.
+- Calling `emit` in your UI invokes the event listener with the matching `eventName` in the plugin command.
 
-#### Returns
-
-- A `function` for deregistering the `eventListener`
-
-#### Parameters
-
-- `eventListener` (`function (...arguments)`)
-
-### triggerEvent(eventName *[, ...arguments]*)
-
-- Calling `triggerEvent` in your plugin command invokes the event listener with the matching `eventName` in your UI.
-- Calling `triggerEvent` in your UI invokes the event listener with the matching `eventName` in the plugin command.
-
-All `arguments` that follow `eventName` are directly applied on the event listener.
+All `arguments` passed after `eventName` are directly applied on the event listener.
 
 #### Returns
 
@@ -104,17 +91,17 @@ All `arguments` that follow `eventName` are directly applied on the event listen
 // command.js
 
 import {
-  addEventListener,
-  triggerEvent,
+  emit,
+  on,
   // ...
 } from '@create-figma-plugin/utilities'
 
 export default function () {
   // ...
-  addEventListener('foo', function (count) {
+  on('foo', function (count) {
     console.log(count) //=> 2
   })
-  triggerEvent('bar', 1)
+  emit('bar', 1)
 }
 ```
 
@@ -122,15 +109,15 @@ export default function () {
 // ui.js
 
 import {
-  addEventListener,
-  triggerEvent
+  emit,
+  on
 } from '@create-figma-plugin/utilities'
 
 export default function () {
   // ...
-  addEventListener('bar', function (count) {
+  on('bar', function (count) {
     console.log(count) //=> 1
-    triggerEvent('foo', count + 1)
+    emit('foo', count + 1)
   })
 }
 ```

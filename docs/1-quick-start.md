@@ -60,7 +60,7 @@ export default function () {
 }
 ```
 
-`showUI` takes a `width`, `height` and `data`. The third `data` parameter is useful for passing some initialising data from your command to its UI.
+`showUI` takes two parameters, and the second `data` parameter is useful for passing some initialising data from your command to its UI.
 
 Next, create a `ui.js`:
 
@@ -75,7 +75,7 @@ export default function (rootNode, data) {
 The exported function receives two parameters:
 
 - `rootNode` — An empty `<div>` element within which you can render your UI.
-- `data` — This corresponds to the third parameter passed to `showUI` in `command.js`.
+- `data` — This corresponds to the second parameter passed to `showUI` in your `command.js`.
 
 Then, in `package.json`, point to `ui.js` on the **`"ui"`** key:
 
