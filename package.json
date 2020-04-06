@@ -89,6 +89,9 @@
       "standardx",
       "prettier-standard"
     ],
+    "*.md": [
+      "yarn run docs"
+    ],
     "*.scss": [
       "stylelint",
       "prettier"
