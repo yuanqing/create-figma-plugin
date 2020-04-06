@@ -2,7 +2,7 @@
 
 const CLOSING_SLASH = '/'
 
-export function showUI ({ width, height }, initialState = {}) {
+export function showUI ({ width, height }, data = {}) {
   if (typeof __html__ === 'undefined') {
     throw new Error(
       `UI not defined for the command corresponding to \`${global.__command__}\``
@@ -12,7 +12,7 @@ export function showUI ({ width, height }, initialState = {}) {
     <div id="create-figma-plugin"></div>
     <script>
       window.__command__ = '${global.__command__}';
-      window.__initialState__ = ${JSON.stringify(initialState)};
+      window.__data__ = ${JSON.stringify(data)};
       ${__html__}
     <${CLOSING_SLASH}script>
   `
