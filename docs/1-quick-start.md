@@ -56,7 +56,7 @@ Update `command.js` to include a call to `showUI`:
 import { showUI } from '@create-figma-plugin/utilities'
 
 export default function () {
-  showUI({ width: 240, height: 320 }, 'Hello, World!')
+  showUI({ width: 240, height: 320 }, { foo: 'bar' })
 }
 ```
 
@@ -68,7 +68,7 @@ Next, create a `ui.js`:
 // ui.js
 
 export default function (rootNode, data) {
-  rootNode.innerHTML = `<h1>${data}</h1>` //=> <h1>Hello, World</h1>
+  rootNode.innerHTML = `<h1>${data.foo}</h1>` //=> <h1>bar</h1>
 }
 ```
 

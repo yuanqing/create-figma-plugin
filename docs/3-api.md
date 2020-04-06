@@ -568,9 +568,7 @@ Renders the UI correponding to the command in an `<iframe>`. Specify the width, 
 import { showUI } from '@create-figma-plugin/utilities'
 
 export default function () {
-  // ...
-  showUI({ width: 240, height: 320 }, 'Hello, World!')
-  // ...
+  showUI({ width: 240, height: 320 }, { foo: 'bar' })
 }
 ```
 
@@ -578,7 +576,6 @@ export default function () {
 // ui.js
 
 export default function (rootNode, data) {
-  console.log(data) //=> 'Hello, World!'
-  // ...
+  rootNode.innerHTML = `<h1>${data.foo}</h1>` //=> <h1>bar</h1>
 }
 ```
