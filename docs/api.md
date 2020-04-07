@@ -18,11 +18,11 @@
   * [isLayerWithinInstance(layer)](#const-result--islayerwithininstancelayer)
   * [traverseLayer(layer, processLayer *[, stopTraversal]*)](#traverselayerlayer-processlayer--stoptraversal)
   * [sortLayersByName(layers)](#sortlayersbynamelayers)
-  * [updateLayersSortOrder(layers)](#updatelayerssortorderlayers)
+  * [updateLayersSortOrder(layers)](#const-didchange--updatelayerssortorderlayers)
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   * [removeDuplicateLayers(layers)](#const-result--removeduplicatelayerslayers)
   * [collapseLayer(layer)](#collapselayerlayer)
-  * [await loadFonts(layers)](#await-loadfontslayers)
+  * [loadFonts(layers)](#await-loadfontslayers)
   * [setRelaunchButton(layer, key *[, description]*)](#setrelaunchbuttonlayer-key--description)
 - [**Number**](#number)
   * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
@@ -32,8 +32,8 @@
   * [extractAttributes(objects, attributes)](#const-result--extractattributesobjects-attributes)
   * [compareObjects(a, b)](#const-result--compareobjectsa-b)
 - [**Settings**](#settings)
-  * [await loadSettings(*[defaultSettings]*)](#const-settings--await-loadsettingsdefaultsettings)
-  * [await saveSettings(settings)](#await-savesettingssettings)
+  * [loadSettings(*[defaultSettings]*)](#const-settings--await-loadsettingsdefaultsettings)
+  * [saveSettings(settings)](#await-savesettingssettings)
 - [**String**](#string)
   * [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
   * [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
@@ -278,9 +278,9 @@ Sorts `layers` by layer name in alphabetical order.
 
 - `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
 
-### updateLayersSortOrder(layers)
+### const didChange = updateLayersSortOrder(layers)
 
-Updates the layer list sort order of the layers in `layers`.
+Updates the layer list sort order to follow the sort order of `layers`.
 
 #### Returns
 
@@ -292,7 +292,7 @@ Updates the layer list sort order of the layers in `layers`.
 
 ### const groups = groupSiblingLayers(layers)
 
-Splits `layers` into smaller groups of sibling layers.
+Splits `layers` into groups of sibling layers.
 
 #### Returns
 
