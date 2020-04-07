@@ -5,8 +5,8 @@
 ## Features
 
 - [Scaffold your plugin](#quick-start) using a template
-- Supports [multiple menu commands](docs/2-configuration.md#readme) and for each command to have its own UI implementation
-- [Utility functions](docs/3-api.md#readme) for common plugin operations
+- Supports [multiple menu commands](docs/configuration.md#readme) and for each command to have its own UI implementation
+- [Utility functions](docs/api.md#readme) for common plugin operations
 - A [comprehensive set of Preact components](https://yuanqing.github.io/create-figma-plugin/) that replicate the Figma UI design
 
 ## Quick start
