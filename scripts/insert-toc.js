@@ -7,7 +7,8 @@ async function main () {
   const contents = await fs.readFile(filename, 'utf8')
   const result = markdownToc
     .insert(contents, { maxdepth: 3, bullet: '-' })
-    .replace(/\[const [\w\s,{}[\]]+ = /g, '[') // remove `const = `
+    .replace(/\[const [\w\s,{}[\]]+ = /g, '[') // remove `const {...} = `
+    .replace(/\[await /g, '[') // remove `await `
     .replace(/- \[([^\]]+)\]/g, '- [**$1**]') // make headers bold
   await fs.writeFile(filename, result, 'utf8')
 }
