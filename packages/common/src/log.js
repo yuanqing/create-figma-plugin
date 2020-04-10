@@ -1,6 +1,8 @@
 import npmlog from 'npmlog'
 
+npmlog.disp.error = 'error'
 npmlog.style.info.fg = 'blue'
+
 function error (message) {
   npmlog.error('', message)
 }
