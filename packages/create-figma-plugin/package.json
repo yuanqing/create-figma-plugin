@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "0.0.57",
+  "version": "0.0.58",
   "description": "Scaffold a new Figma plugin",
   "keywords": [
     "create-figma-plugin",
@@ -23,7 +23,7 @@
     "create-figma-plugin": "lib/cli.js"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.57",
+    "@create-figma-plugin/common": "^0.0.58",
     "degit": "^2.8.0",
     "fs-extra": "^9.0.0",
     "git-user-name": "^2.0.0",
