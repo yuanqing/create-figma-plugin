@@ -142,6 +142,7 @@ import {
   groupSiblingLayers,
   removeDuplicateLayers,
   collapseLayer,
+  createImagePaint,
   loadFonts,
   setRelaunchButton
 } from '@create-figma-plugin/utilities'
@@ -325,6 +326,18 @@ Collapses `layer` and all its child layers in the layer list.
 #### Parameters
 
 - `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+
+### const paint = createImagePaint(bytes)
+
+Creates an `ImagePaint` from the `bytes` of an image.
+
+#### Returns
+
+- An [`ImagePaint`](https://www.figma.com/plugin-docs/api/Paint/#imagepaint) object
+
+#### Parameters
+
+- `bytes` ([`Uint8Array`](https://www.figma.com/plugin-docs/api/Image/#getbytesasync))
 
 ### await loadFonts(layers)
 
