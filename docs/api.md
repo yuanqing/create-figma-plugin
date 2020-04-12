@@ -354,7 +354,7 @@ Loads the fonts used in all the text layers in `layers`.
 
 ### setRelaunchButton(layer, key *[, description]*)
 
-Adds a [relaunch button](https://www.figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `key` as [configured](2-configuration.md#packagejson) under **`"relaunchButtons"`**. `description` is the text displayed below the relaunch button.
+Adds a [relaunch button](https://www.figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `key` as [configured](configuration.md#packagejson) under **`"relaunchButtons"`**. `description` is the text displayed below the relaunch button.
 
 #### Returns
 
