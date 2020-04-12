@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import sade from 'sade'
-import { build } from './build'
+import { buildAsync } from './build-async'
 import { watch } from './watch'
 
 sade('create-figma-plugin-build', true)
@@ -12,6 +12,6 @@ sade('create-figma-plugin-build', true)
       watch()
       return
     }
-    await build(isDevelopment, true)
+    await buildAsync(isDevelopment, true)
   })
   .parse(process.argv)

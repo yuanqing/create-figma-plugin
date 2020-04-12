@@ -23,7 +23,7 @@
   * [removeDuplicateLayers(layers)](#const-result--removeduplicatelayerslayers)
   * [collapseLayer(layer)](#collapselayerlayer)
   * [createImagePaint(bytes)](#const-paint--createimagepaintbytes)
-  * [loadFonts(layers)](#await-loadfontslayers)
+  * [loadFontsAsync(layers)](#await-loadfontsasynclayers)
   * [setRelaunchButton(layer, key *[, description]*)](#setrelaunchbuttonlayer-key--description)
 - [**Number**](#number)
   * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
@@ -33,8 +33,8 @@
   * [extractAttributes(objects, attributes)](#const-result--extractattributesobjects-attributes)
   * [compareObjects(a, b)](#const-result--compareobjectsa-b)
 - [**Settings**](#settings)
-  * [loadSettings(*[defaultSettings]*)](#const-settings--await-loadsettingsdefaultsettings)
-  * [saveSettings(settings)](#await-savesettingssettings)
+  * [loadSettingsAsync(*[defaultSettings]*)](#const-settings--await-loadsettingsasyncdefaultsettings)
+  * [saveSettingsAsync(settings)](#await-savesettingsasyncsettings)
 - [**String**](#string)
   * [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
   * [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
@@ -144,7 +144,7 @@ import {
   removeDuplicateLayers,
   collapseLayer,
   createImagePaint,
-  loadFonts,
+  loadFontsAsync,
   setRelaunchButton
 } from '@create-figma-plugin/utilities'
 ```
@@ -340,7 +340,7 @@ Creates an `ImagePaint` from the `bytes` of an image.
 
 - `bytes` ([`Uint8Array`](https://www.figma.com/plugin-docs/api/Image/#getbytesasync))
 
-### await loadFonts(layers)
+### await loadFontsAsync(layers)
 
 Loads the fonts used in all the text layers in `layers`.
 
@@ -458,12 +458,12 @@ Performs a *shallow* comparison of objects `a` and `b`.
 
 ```js
 import {
-  loadSettings,
-  saveSettings
+  loadSettingsAsync,
+  saveSettingsAsync
 } from '@create-figma-plugin/utilities'
 ```
 
-### const settings = await loadSettings(*[defaultSettings]*)
+### const settings = await loadSettingsAsync(*[defaultSettings]*)
 
 Loads your plugin’s `settings` (stored locally on the user’s computer). Values in `settings` default to an optional `defaultSettings` object.
 
@@ -475,7 +475,7 @@ Loads your plugin’s `settings` (stored locally on the user’s computer). Valu
 
 - `defaultSettings` (`object`) *(optional)*
 
-### await saveSettings(settings)
+### await saveSettingsAsync(settings)
 
 Saves the given `settings` for the plugin (stored locally on the user’s computer).
 

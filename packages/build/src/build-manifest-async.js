@@ -1,7 +1,7 @@
 import { constants } from '@create-figma-plugin/common'
 import { outputFile } from 'fs-extra'
 
-export async function buildManifest (config) {
+export async function buildManifestAsync (config) {
   const result = {
     name: config.name,
     id: config.id,

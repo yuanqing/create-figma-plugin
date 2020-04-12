@@ -1,4 +1,4 @@
-export function loadFonts (layers) {
+export function loadFontsAsync (layers) {
   const promises = []
   for (const layer of layers) {
     if (layer.type !== 'TEXT') {

@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 const gitHubRepositoryRegex = /[\w-]+\/[\w-]+/
 
-export async function cloneFromTemplate (pluginDirectoryPath, template) {
+export async function cloneFromTemplateAsync (pluginDirectoryPath, template) {
   const templateDirectory = resolve(
     __dirname,
     '..',
