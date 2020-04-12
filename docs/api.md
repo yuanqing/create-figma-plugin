@@ -22,6 +22,7 @@
   * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
   * [removeDuplicateLayers(layers)](#const-result--removeduplicatelayerslayers)
   * [collapseLayer(layer)](#collapselayerlayer)
+  * [createImagePaint(bytes)](#const-paint--createimagepaintbytes)
   * [loadFonts(layers)](#await-loadfontslayers)
   * [setRelaunchButton(layer, key *[, description]*)](#setrelaunchbuttonlayer-key--description)
 - [**Number**](#number)
