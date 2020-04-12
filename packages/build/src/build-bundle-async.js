@@ -5,14 +5,14 @@ import tempWrite from 'temp-write'
 import webpack from 'webpack'
 import { createWebpackConfig } from './create-webpack-config'
 
-export async function buildBundle (config, isDevelopment) {
+export async function buildBundleAsync (config, isDevelopment) {
   const entry = {}
-  const commandEntryFile = await createCommandEntryFile(config)
+  const commandEntryFile = await createCommandEntryFileAsync(config)
   if (commandEntryFile !== null) {
     const key = extractBasename(constants.build.pluginCodeFilePath)
     entry[key] = commandEntryFile
   }
-  const uiEntryFile = await createUiEntryFile(config)
+  const uiEntryFile = await createUiEntryFileAsync(config)
   if (uiEntryFile !== null) {
     const key = extractBasename(constants.build.pluginUiFilePath)
     entry[key] = uiEntryFile
@@ -37,7 +37,7 @@ export async function buildBundle (config, isDevelopment) {
   })
 }
 
-async function createCommandEntryFile (config) {
+async function createCommandEntryFileAsync (config) {
   const modules = []
   extractModule(config, 'command', modules)
   if (modules.length === 0) {
@@ -56,7 +56,7 @@ async function createCommandEntryFile (config) {
   `)
 }
 
-async function createUiEntryFile (config) {
+async function createUiEntryFileAsync (config) {
   const modules = []
   extractModule(config, 'ui', modules)
   if (modules.length === 0) {

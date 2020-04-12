@@ -16,7 +16,7 @@ function filter (input) {
   return input.replace(multipleSpaceRegex, ' ').trim()
 }
 
-export async function promptForUserInput ({ name, template }) {
+export async function promptForUserInputAsync ({ name, template }) {
   const questions = [
     typeof name === 'undefined' && {
       type: 'input',

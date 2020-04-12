@@ -2,13 +2,13 @@ import test from 'ava'
 import { exists } from 'fs-extra'
 import { join } from 'path'
 import rimraf from 'rimraf'
-import { createFigmaPlugin } from '../src/create-figma-plugin'
+import { createFigmaPluginAsync } from '../src/create-figma-plugin-async'
 
 function changeDirectory (directory) {
   process.chdir(join(__dirname, 'fixtures', directory))
 }
 
-async function cleanUp () {
+async function cleanUpAsync () {
   return new Promise(function (resolve, reject) {
     rimraf(join(process.cwd(), 'figma-plugin'), function (error) {
       if (error) {
@@ -18,14 +18,14 @@ async function cleanUp () {
     })
   })
 }
-test.afterEach.always(cleanUp)
+test.afterEach.always(cleanUpAsync)
 
 test('use default', async function (t) {
   t.plan(6)
   changeDirectory('1-use-default')
-  await cleanUp()
+  await cleanUpAsync()
   t.false(await exists('figma-plugin'))
-  await createFigmaPlugin({}, true)
+  await createFigmaPluginAsync({}, true)
   t.true(await exists('figma-plugin'))
   t.true(await exists('figma-plugin/.gitignore'))
   t.true(await exists('figma-plugin/command.js'))

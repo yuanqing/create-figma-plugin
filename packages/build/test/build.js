@@ -2,13 +2,13 @@ import test from 'ava'
 import { ensureSymlink, exists } from 'fs-extra'
 import { join, resolve } from 'path'
 import rimraf from 'rimraf'
-import { build } from '../src/build'
+import { buildAsync } from '../src/build-async'
 
 function changeDirectory (directory) {
   process.chdir(join(__dirname, 'fixtures', directory))
 }
 
-async function cleanUp () {
+async function cleanUpAsync () {
   return new Promise(function (resolve, reject) {
     rimraf(join(process.cwd(), '{build,manifest.json,node_modules}'), function (
       error
@@ -20,9 +20,9 @@ async function cleanUp () {
     })
   })
 }
-test.afterEach.always(cleanUp)
+test.afterEach.always(cleanUpAsync)
 
-function setUp () {
+function setUpAsync () {
   const sourcePath = resolve(__dirname, '..', '..', 'utilities')
   const destinationPath = join(
     process.cwd(),
@@ -36,12 +36,12 @@ function setUp () {
 test.serial('no config', async function (t) {
   t.plan(6)
   changeDirectory('1-no-config')
-  await cleanUp()
+  await cleanUpAsync()
   t.false(await exists('build'))
   t.false(await exists('manifest.json'))
   t.false(await exists('node_modules'))
-  await setUp()
-  await build()
+  await setUpAsync()
+  await buildAsync()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     name: 'figma-plugin',
@@ -56,12 +56,12 @@ test.serial('no config', async function (t) {
 test.serial('basic command', async function (t) {
   t.plan(6)
   changeDirectory('2-basic-command')
-  await cleanUp()
+  await cleanUpAsync()
   t.false(await exists('build'))
   t.false(await exists('manifest.json'))
   t.false(await exists('node_modules'))
-  await setUp()
-  await build()
+  await setUpAsync()
+  await buildAsync()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     name: 'foo',
@@ -76,12 +76,12 @@ test.serial('basic command', async function (t) {
 test.serial('multiple menu commands', async function (t) {
   t.plan(6)
   changeDirectory('3-multiple-menu-commands')
-  await cleanUp()
+  await cleanUpAsync()
   t.false(await exists('build'))
   t.false(await exists('manifest.json'))
   t.false(await exists('node_modules'))
-  await setUp()
-  await build()
+  await setUpAsync()
+  await buildAsync()
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     name: 'foo',

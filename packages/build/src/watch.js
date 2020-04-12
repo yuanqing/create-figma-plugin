@@ -1,6 +1,6 @@
 import chokidar from 'chokidar'
 import { constants, log } from '@create-figma-plugin/common'
-import { build } from './build'
+import { buildAsync } from './build-async'
 
 const ignoreRegex = new RegExp(
   [
@@ -19,13 +19,13 @@ export function watch () {
       return ignoreRegex.test(path)
     }
   })
-  async function run () {
-    await build(true, false)
+  async function runAsync () {
+    await buildAsync(true, false)
     log.info('Watching...')
   }
-  watcher.on('ready', run)
+  watcher.on('ready', runAsync)
   watcher.on('change', async function (file) {
     log.info(`Changed: ${file}`)
-    await run()
+    await runAsync()
   })
 }

@@ -8,7 +8,7 @@ mustache.escape = function (text) {
   return text
 }
 
-export async function interpolateValuesIntoFiles (directory, values) {
+export async function interpolateValuesIntoFilesAsync (directory, values) {
   const filePaths = await globby('**/*', {
     cwd: directory,
     dot: true

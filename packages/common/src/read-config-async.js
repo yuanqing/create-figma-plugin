@@ -11,7 +11,7 @@ const defaultConfig = {
   relaunchButtons: []
 }
 
-export async function readConfig () {
+export async function readConfigAsync () {
   const packageJsonPath = join(process.cwd(), 'package.json')
   if ((await exists(packageJsonPath)) === false) {
     return defaultConfig
