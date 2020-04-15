@@ -22,7 +22,7 @@
     "lib"
   ],
   "bin": {
-    "create-figma-plugin-build": "lib/cli.js"
+    "build-figma-plugin": "lib/cli.js"
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
