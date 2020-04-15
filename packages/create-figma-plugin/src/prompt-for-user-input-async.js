@@ -1,6 +1,6 @@
 import gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
-import { titleCase } from 'title-case'
+import { capitalCase } from 'capital-case'
 
 const figmaPrefixRegex = /^figma-/
 const multipleSpaceRegex = /\s+/g
@@ -30,7 +30,7 @@ export async function promptForUserInputAsync ({ name, template }) {
       name: 'displayName',
       message: 'display name',
       default: function (values) {
-        return titleCase(
+        return capitalCase(
           (typeof name === 'undefined' ? values.name : name).replace(
             figmaPrefixRegex,
             ''

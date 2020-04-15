@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.58",
+    "capital-case": "^1.0.3",
     "degit": "^2.8.0",
     "fs-extra": "^9.0.0",
     "git-user-name": "^2.0.0",
@@ -31,7 +32,6 @@
     "inquirer": "^7.1.0",
     "is-utf8": "^0.2.1",
     "mustache": "^4.0.1",
-    "sade": "^1.7.3",
-    "title-case": "^3.0.2"
+    "sade": "^1.7.3"
   }
 }
