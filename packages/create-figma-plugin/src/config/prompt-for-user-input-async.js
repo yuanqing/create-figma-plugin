@@ -1,20 +1,7 @@
+import { constants } from '@create-figma-plugin/common'
 import gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
-import { capitalCase } from 'capital-case'
-
-const figmaPrefixRegex = /^figma-/
-const multipleSpaceRegex = /\s+/g
-
-function validate (input) {
-  if (input.replace(multipleSpaceRegex, '').trim().length > 0) {
-    return true
-  }
-  return 'Required'
-}
-
-function filter (input) {
-  return input.replace(multipleSpaceRegex, ' ').trim()
-}
+import { createPluginDisplayName } from './create-plugin-display-name'
 
 export async function promptForUserInputAsync ({ name, template }) {
   const questions = [
@@ -30,11 +17,8 @@ export async function promptForUserInputAsync ({ name, template }) {
       name: 'displayName',
       message: 'display name',
       default: function (values) {
-        return capitalCase(
-          (typeof name === 'undefined' ? values.name : name).replace(
-            figmaPrefixRegex,
-            ''
-          )
+        return createPluginDisplayName(
+          typeof name === 'undefined' ? values.name : name
         )
       },
       validate,
@@ -44,14 +28,14 @@ export async function promptForUserInputAsync ({ name, template }) {
       type: 'input',
       name: 'template',
       message: 'template',
-      default: 'default',
+      default: constants.defaultTemplate,
       filter
     },
     {
       type: 'input',
       name: 'version',
       message: 'version',
-      default: '1.0.0',
+      default: constants.packageJson.defaultVersion,
       filter
     },
     {
@@ -70,18 +54,14 @@ export async function promptForUserInputAsync ({ name, template }) {
       type: 'input',
       name: 'author',
       message: 'author',
-      default: function () {
-        return gitUserName()
-      },
+      default: gitUserName(),
       filter
     },
     {
       type: 'input',
       name: 'license',
       message: 'license',
-      default: function () {
-        return 'MIT'
-      },
+      default: constants.packageJson.defaultLicense,
       filter
     }
   ].filter(Boolean)
@@ -90,4 +70,17 @@ export async function promptForUserInputAsync ({ name, template }) {
     template,
     ...(await prompt(questions))
   }
+}
+
+const multipleSpaceRegex = /\s+/g
+
+function validate (input) {
+  if (input.replace(multipleSpaceRegex, '').trim().length > 0) {
+    return true
+  }
+  return 'Required'
+}
+
+function filter (input) {
+  return input.replace(multipleSpaceRegex, ' ').trim()
 }

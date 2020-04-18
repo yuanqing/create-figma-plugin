@@ -1,9 +1,13 @@
 export const constants = {
   apiVersion: '1.0.0',
+  defaultTemplate: 'default',
   packageJson: {
     configKey: 'create-figma-plugin',
+    defaultLicense: 'MIT',
     defaultPluginId: 'figma-plugin',
-    defaultPluginName: 'figma-plugin'
+    defaultPluginName: 'figma-plugin',
+    defaultPluginDisplayName: 'Figma Plugin',
+    defaultVersion: '1.0.0'
   },
   src: {
     directory: 'src'
