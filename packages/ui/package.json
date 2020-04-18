@@ -6,7 +6,7 @@
   },
   "description": "A Preact implementation of the Figma design system for use in Figma plugins",
   "keywords": [
-    "component",
+    "components",
     "component-library",
     "create-figma-plugin",
     "design-system",
@@ -15,9 +15,10 @@
     "figma-plugin-ds",
     "figma-plugins",
     "figma-ui",
-    "form",
+    "forms",
     "preact",
-    "ui"
+    "ui",
+    "ui2"
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
@@ -48,7 +49,7 @@
   ],
   "storybook-deployer": {
     "gitUsername": "yuanqing",
-    "gitEmail": "desk@yuanqing.sg",
+    "gitEmail": "github@yuanqing.sg",
     "commitMessage": "Deploy Storybook"
   }
 }
