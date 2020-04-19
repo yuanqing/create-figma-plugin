@@ -6,7 +6,7 @@ import { constants } from './constants'
 const defaultConfig = {
   apiVersion: constants.apiVersion,
   name: constants.packageJson.defaultPluginName,
-  id: constants.packageJson.defaultPluginId,
+  id: constants.packageJson.defaultPluginName,
   command: { src: 'index.js', handler: 'default' },
   relaunchButtons: []
 }
