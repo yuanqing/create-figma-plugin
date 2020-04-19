@@ -11,8 +11,8 @@ export function createDefaultConfig ({ name, template }) {
     displayName: createPluginDisplayName(name),
     template:
       typeof template === 'undefined' ? constants.defaultTemplate : template,
-    version: constants.defaultVersion,
+    version: constants.packageJson.defaultVersion,
     author: gitUserName(),
-    license: constants.defaultLicense
+    license: constants.packageJson.defaultLicense
   }
 }
