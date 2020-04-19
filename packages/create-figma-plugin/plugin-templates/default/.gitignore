@@ -1,3 +1,5 @@
 .DS_Store
 *.log
+build/
+manifest.json
 node_modules/
