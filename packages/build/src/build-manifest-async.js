@@ -7,20 +7,20 @@ export async function buildManifestAsync (config) {
     id: config.id,
     api: config.apiVersion
   }
-  if (hasBundle(config, 'command') === true) {
+  if (hasBundle(config, 'main') === true) {
     result.main = constants.build.pluginCodeFilePath
   }
   if (hasBundle(config, 'ui') === true) {
     result.ui = constants.build.pluginUiFilePath
   }
   if (typeof config.menu !== 'undefined') {
-    result.menu = normalizeCommandItems(config.menu)
+    result.menu = normalizeMenu(config.menu)
   }
   if (
     typeof config.relaunchButtons !== 'undefined' &&
     config.relaunchButtons.length > 0
   ) {
-    result.relaunchButtons = normalizeCommandItems(config.relaunchButtons)
+    result.relaunchButtons = normalizeMenu(config.relaunchButtons)
   }
   const string = JSON.stringify(result) + '\n'
   return outputFile(constants.build.manifestFilePath, string)
@@ -38,7 +38,7 @@ function hasBundle (config, key) {
   )
 }
 
-function normalizeCommandItems (menu) {
+function normalizeMenu (menu) {
   return menu.map(function (item) {
     if (typeof item.separator !== 'undefined') {
       return item
@@ -46,11 +46,11 @@ function normalizeCommandItems (menu) {
     const result = {
       name: item.name
     }
-    if (typeof item.id !== 'undefined') {
-      result.command = item.id
+    if (typeof item.command !== 'undefined') {
+      result.command = item.command
     }
     if (typeof item.menu !== 'undefined') {
-      result.menu = normalizeCommandItems(item.menu)
+      result.menu = normalizeMenu(item.menu)
     }
     return result
   })

@@ -7,7 +7,8 @@ const defaultConfig = {
   apiVersion: constants.apiVersion,
   name: constants.packageJson.defaultPluginName,
   id: constants.packageJson.defaultPluginName,
-  command: { src: 'index.js', handler: 'default' },
+  command: 'index.js--default',
+  main: { src: 'index.js', handler: 'default' },
   relaunchButtons: []
 }
 
@@ -33,15 +34,15 @@ export async function readConfigAsync () {
 }
 
 function parseCommand (config) {
-  const { name, command, ui, menu } = config
+  const { name, main, ui, menu } = config
   const result = {}
   result.name = name
-  if (typeof command !== 'undefined') {
-    result.id =
-      typeof command === 'string'
-        ? `${command}--default`
-        : `${command.src}--${command.handler}`
-    result.command = parseFile(command)
+  if (typeof main !== 'undefined') {
+    result.command =
+      typeof main === 'string'
+        ? `${main}--default`
+        : `${main.src}--${main.handler}`
+    result.main = parseFile(main)
     result.ui = parseFile(ui)
   }
   if (typeof menu !== 'undefined') {
@@ -64,21 +65,36 @@ function parseRelaunchButtons (relaunchButtons) {
     return []
   }
   const result = []
-  for (const id in relaunchButtons) {
-    const { name, command, ui } = relaunchButtons[id]
+  for (const command in relaunchButtons) {
+    const { name, main, ui } = relaunchButtons[command]
     result.push({
-      id,
       name,
-      command: parseFile(command),
+      command,
+      main: parseFile(main),
       ui: parseFile(ui)
     })
   }
   return result
 }
 
-function parseFile (src) {
-  if (typeof src === 'undefined') {
+function parseFile (file) {
+  if (typeof file === 'undefined') {
     return null
   }
-  return typeof src === 'string' ? { src, handler: 'default' } : src
+  if (typeof file === 'string') {
+    return {
+      src: file,
+      handler: 'default'
+    }
+  }
+  if (typeof file.src === 'undefined') {
+    return null
+  }
+  if (typeof file.handler === 'undefined') {
+    return {
+      src: file.src,
+      handler: 'default'
+    }
+  }
+  return file
 }

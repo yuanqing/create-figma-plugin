@@ -7,10 +7,10 @@ import { createWebpackConfig } from './create-webpack-config'
 
 export async function buildBundleAsync (config, isDevelopment) {
   const entry = {}
-  const commandEntryFile = await createCommandEntryFileAsync(config)
-  if (commandEntryFile !== null) {
+  const mainEntryFile = await createMainEntryFileAsync(config)
+  if (mainEntryFile !== null) {
     const key = extractBasename(constants.build.pluginCodeFilePath)
-    entry[key] = commandEntryFile
+    entry[key] = mainEntryFile
   }
   const uiEntryFile = await createUiEntryFileAsync(config)
   if (uiEntryFile !== null) {
@@ -37,39 +37,44 @@ export async function buildBundleAsync (config, isDevelopment) {
   })
 }
 
-async function createCommandEntryFileAsync (config) {
-  const modules = []
-  extractModule(config, 'command', modules)
-  if (modules.length === 0) {
+async function createMainEntryFileAsync (config) {
+  const mainModules = []
+  extractModule(config, 'main', mainModules)
+  if (mainModules.length === 0) {
     return null
   }
   if (typeof config.relaunchButtons !== 'undefined') {
-    extractModules(config.relaunchButtons, 'command', modules)
+    extractModules(config.relaunchButtons, 'main', mainModules)
   }
   return tempWrite(`
-    import '@create-figma-plugin/utilities/src/events'
-    const modules = ${createRequireCode(modules)}
-    global.__command__ = ${
-      modules.length > 1 ? 'figma.command' : `'${modules[0].id}'`
-    }
-    modules[global.__command__]()
+    require('@create-figma-plugin/utilities/src/events');
+    const mainModules = ${createRequireCode(mainModules)};
+    const command = ${
+      mainModules.length > 1 ? 'figma.command' : `'${mainModules[0].command}'`
+    };
+    mainModules[command]();
   `)
 }
 
 async function createUiEntryFileAsync (config) {
-  const modules = []
-  extractModule(config, 'ui', modules)
-  if (modules.length === 0) {
+  const uiModules = []
+  extractModule(config, 'ui', uiModules)
+  if (uiModules.length === 0) {
     return null
   }
   if (typeof config.relaunchButtons !== 'undefined') {
-    extractModules(config.relaunchButtons, 'ui', modules)
+    extractModules(config.relaunchButtons, 'ui', uiModules)
   }
   return tempWrite(`
-    import '@create-figma-plugin/utilities/src/events'
-    const modules = ${createRequireCode(modules)}
-    const rootNode = document.getElementById('create-figma-plugin')
-    modules[window.__command__](rootNode, window.__data__, window.__command__)
+    require('@create-figma-plugin/utilities/src/events');
+    const rootNode = document.getElementById('create-figma-plugin');
+    const uiModules = ${createRequireCode(uiModules)};
+    if (typeof uiModules[__COMMAND__] === 'undefined') {
+      throw new Error(
+        'UI not defined for the command corresponding to ' + __COMMAND__
+      )
+    }
+    uiModules[__COMMAND__](rootNode, __DATA__, __COMMAND__);
   `)
 }
 
@@ -80,10 +85,13 @@ function extractModules (items, key, result) {
 }
 
 function extractModule (config, key, result) {
-  const id = config.id
+  const command = config.command
   const item = config[key]
   if (typeof item !== 'undefined' && item !== null) {
-    result.push({ id, ...item })
+    result.push({
+      command: typeof config.id === 'undefined' ? command : '',
+      ...item
+    })
   }
   if (typeof config.menu !== 'undefined') {
     extractModules(config.menu, key, result)
@@ -93,7 +101,7 @@ function extractModule (config, key, result) {
 function createRequireCode (modules) {
   const code = []
   modules.forEach(function (item) {
-    code.push(`'${item.id}':require('${item.src}')['${item.handler}']`)
+    code.push(`'${item.command}':require('${item.src}')['${item.handler}']`)
   })
   return `{${code.join(',')}}`
 }
