@@ -35,6 +35,6 @@
 {{#displayName}}
     "name": "{{displayName}}",
 {{/displayName}}
-    "command": "src/command.js"
+    "main": "src/main.js"
   }
 }
