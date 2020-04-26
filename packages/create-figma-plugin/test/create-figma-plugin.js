@@ -30,5 +30,5 @@ test('use default', async function (t) {
   t.true(await exists('figma-plugin/.gitignore'))
   t.true(await exists('figma-plugin/node_modules'))
   t.true(await exists('figma-plugin/package.json'))
-  t.true(await exists('figma-plugin/src/command.js'))
+  t.true(await exists('figma-plugin/src/main.js'))
 })

@@ -5,12 +5,12 @@
     "menu": [
       {
         "name": "bar",
-        "command": "baz"
+        "main": "baz"
       },
       "-",
       {
         "name": "qux",
-        "command": "quux",
+        "main": "quux",
         "ui": "quuux"
       }
     ]

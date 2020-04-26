@@ -5,13 +5,13 @@
     "menu": [
       {
         "name": "bar",
-        "command": "baz"
+        "main": "baz"
       }
     ],
     "relaunchButtons": {
       "qux": {
         "name": "quux",
-        "command": "quuux"
+        "main": "quuux"
       }
     }
   }

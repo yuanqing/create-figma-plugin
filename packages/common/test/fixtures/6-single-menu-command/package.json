@@ -5,7 +5,7 @@
     "menu": [
       {
         "name": "bar",
-        "command": "baz"
+        "main": "baz"
       }
     ]
   }

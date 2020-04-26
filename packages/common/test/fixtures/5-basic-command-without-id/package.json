@@ -1,7 +1,7 @@
 {
   "create-figma-plugin": {
     "name": "foo",
-    "command": "bar",
+    "main": "bar",
     "ui": "baz"
   }
 }

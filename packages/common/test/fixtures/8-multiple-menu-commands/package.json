@@ -5,7 +5,7 @@
     "menu": [
       {
         "name": "bar",
-        "command": {
+        "main": {
           "src": "baz",
           "handler": "qux"
         }
@@ -13,7 +13,7 @@
       "-",
       {
         "name": "quux",
-        "command": "quuux",
+        "main": "quuux",
         "ui": "quuuux"
       }
     ]

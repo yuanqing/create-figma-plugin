@@ -2,6 +2,6 @@
   "create-figma-plugin": {
     "name": "foo",
     "id": "42",
-    "command": "bar"
+    "main": "bar"
   }
 }
