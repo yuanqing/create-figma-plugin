@@ -21,7 +21,7 @@ async function cleanUpAsync () {
 test.afterEach.always(cleanUpAsync)
 
 test('use default', async function (t) {
-  t.plan(6)
+  t.plan(7)
   changeDirectory('1-use-default')
   await cleanUpAsync()
   t.false(await exists('figma-plugin'))
@@ -30,5 +30,6 @@ test('use default', async function (t) {
   t.true(await exists('figma-plugin/.gitignore'))
   t.true(await exists('figma-plugin/node_modules'))
   t.true(await exists('figma-plugin/package.json'))
+  t.true(await exists('figma-plugin/README.md'))
   t.true(await exists('figma-plugin/src/main.js'))
 })
