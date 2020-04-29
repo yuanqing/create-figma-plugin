@@ -6,7 +6,7 @@
 {{/description}}
 ## Development guide
 
-*This plugin was built with [Create Figma Plugin](https://github.com/yuanqing/create-figma-plugin).*
+*This plugin is built with [Create Figma Plugin](https://github.com/yuanqing/create-figma-plugin).*
 
 ### Pre-requisites
 
@@ -27,7 +27,7 @@ To build the plugin:
 $ npm run build
 ```
 
-This will generate a `manifest.json` file and a `build/` directory containing a JavaScript bundle for the plugin.
+This will generate a [`manifest.json`](https://figma.com/plugin-docs/manifest/) file and a `build/` directory containing a JavaScript bundle for the plugin.
 
 To watch for code changes and rebuild the plugin automatically:
 
@@ -45,11 +45,11 @@ In the Figma desktop app:
 
 ### Debugging
 
-In the Figma desktop app:
+Use `console.log` statements to inspect values in your code.
 
-- Go to `Plugins` → `Development` → `Open Console`. Use `console.log` statements to inspect values in your code.
+To open the JavaScript Console in the Figma desktop app, go to `Plugins` → `Development` → `Open Console`.
 
 ### Docs
 
-- [Figma Plugin API docs](https://www.figma.com/plugin-docs/api/api-overview/)
-- [Create Figma Plugin docs](https://github.com/yuanqing/create-figma-plugin)
+- [Figma Plugin API docs](https://figma.com/plugin-docs/api/api-overview/)
+- [Create Figma Plugin docs](https://github.com/yuanqing/create-figma-plugin/blob/master/README.md#readme)
