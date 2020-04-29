@@ -1,117 +1,113 @@
 # Create Figma Plugin [![npm Version](https://img.shields.io/npm/v/create-figma-plugin?cacheSeconds=1800)](https://www.npmjs.com/package/create-figma-plugin) [![build](https://github.com/yuanqing/create-figma-plugin/workflows/build/badge.svg)](https://github.com/yuanqing/create-figma-plugin/actions?query=workflow%3Abuild)
 
-> A comprehensive toolkit for developing [Figma plugins](https://www.figma.com/plugin-docs/)
+> A comprehensive toolkit for developing [Figma plugins](https://figma.com/plugin-docs/)
 
 ## Features
 
-- [Scaffold your plugin](#quick-start) using a template
-- Supports [multiple menu commands](docs/configuration.md#readme) and for each command to have its own UI implementation
-- [Utility functions](docs/api.md#readme) for common plugin operations
-- A [comprehensive set of Preact components](https://yuanqing.github.io/create-figma-plugin/) that replicate the Figma UI design
+- Initialize a new Figma plugin using a template.
+- Bundle your plugin, with support for multiple menu commands that each have its own UI implementation.
+- Utility functions for common plugin operations.
+- A set of Preact components that replicate the Figma UI design.
 
 ## Quick start
 
-*Requires [Node.js](https://nodejs.org/).*
+### Pre-requisites
 
-### Creating a basic plugin with a single command
+- [Node.js](https://nodejs.org/)
+- [Figma desktop app](https://figma.com/downloads/)
 
-To begin, do:
+### Initialize a new plugin
+
+First:
 
 ```
-$ npx create-figma-plugin figma-hello-world
+$ npx create-figma-plugin figma-hello-world --yes
+```
+
+Then:
+
+```
 $ cd figma-hello-world
 $ ls
-.gitignore   command.js   node_modules   package.json
+.gitignore   README.md   node_modules   package-lock.json   package.json   src
+$ ls src
+main.js
 ```
 
-`command.js` contains the plugin command implementation:
+`src/main.js` is the main entry point for the plugin:
 
 ```js
-// command.js
+// src/main.js
 
 export default function () {
-  figma.notify('Hello, World!') //=> 'Hello, World!'
-  figma.closePlugin()
+  figma.closePlugin('Hello, World!') //=> 'Hello, World!'
 }
 ```
 
-In `package.json`, we’re pointing to `command.js` on the **`"command"`** key under **`"create-figma-plugin"`**:
+See that in `package.json`, we’re pointing to `src/main.js` on the `"main"` key under `"create-figma-plugin"`:
 
 ```diff
 {
   ...
   "create-figma-plugin": {
     ...
-+   "command": "command.js"
++   "main": "src/main.js"
   }
 }
 ```
 
-Then, build the plugin:
+### Build the plugin
 
-```
-$ npm run build
-```
-
-This will generate a `manifest.json` file for your plugin, and a `build/` directory containing your JavaScript bundle.
-
-### Adding a user interface
-
-Every command defined in `package.json` can have a corresponding UI implementation.
-
-Update `command.js` to include a call to `showUI`:
-
-```js
-// command.js
-
-import { showUI } from '@create-figma-plugin/utilities'
-
-export default function () {
-  showUI({ width: 240, height: 320 }, { foo: 'bar' })
-}
-```
-
-`showUI` takes two parameters, and the second `data` parameter is useful for passing some initialising data from your command to its UI.
-
-Next, create a `ui.js`:
-
-```js
-// ui.js
-
-export default function (rootNode, data) {
-  rootNode.innerHTML = `<h1>${data.foo}</h1>` //=> <h1>bar</h1>
-}
-```
-
-The exported function receives two parameters:
-
-- `rootNode` — An empty `<div>` element within which you can render your UI.
-- `data` — This corresponds to the second parameter passed to `showUI` in your `command.js`.
-
-Then, in `package.json`, point to `ui.js` on the **`"ui"`** key:
+In `package.json`, we also have `build` and `watch` scripts set up to invoke the `build-figma-plugin` CLI:
 
 ```diff
 {
   ...
-  "create-figma-plugin": {
-    ...
-    "command": "command.js"
-+   "ui": "ui.js"
-  }
+  "scripts": {
++   "build": "build-figma-plugin",
++   "watch": "build-figma-plugin --watch"
+  },
+  ...
 }
 ```
 
-Rebuild the plugin:
+To build the plugin:
 
 ```
 $ npm run build
 ```
+
+This will generate a [`manifest.json`](https://figma.com/plugin-docs/manifest/) file and a `build/` directory containing a JavaScript bundle for the plugin.
+
+To watch for code changes and rebuild the plugin automatically:
+
+```
+$ npm run watch
+```
+
+### Installing the plugin
+
+In the Figma desktop app:
+
+- Open a Figma document.
+- Go to `Plugins` → `Development` → `New Plugin…`.
+- Click the `Click to choose a manifest.json file` box, and select the `manifest.json` file that was generated.
+
+### Debugging
+
+In the Figma desktop app:
+
+- Go to `Plugins` → `Development` → `Open Console`. Use `console.log` statements to inspect values in your code.
 
 ## Docs
 
 - [**Configuration**](docs/configuration.md#readme)
 - [**API**](docs/api.md#readme)
 - [**Component Library**](https://yuanqing.github.io/create-figma-plugin/)
+
+### Recipes
+
+- [Adding a user interface](docs/recipes/adding-a-user-interface.md)
 
 ## License
 
