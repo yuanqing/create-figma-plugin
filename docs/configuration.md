@@ -4,60 +4,96 @@
 
 Configure your plugin via the **`"create-figma-plugin"`** key of your `package.json` file.
 
-- **`"apiVersion"`** *(optional)* — The version of the Figma plugin API to use.
-- **`"id"`** *(optional)* — The plugin ID. This field is only required when you want to publish your plugin to Figma. Figma assigns a unique ID to your plugin when you first try to publish it; copy and paste that unique ID here.
-- **`"name"`** — The display name of the plugin.
-- **`"command"`** — The path to the plugin command implementation. The plugin command implementation must be a function set to be the `default` export of the file. Alternatively, you could also pass in an object literal with **`"src"`** and **`"handler"`** keys.
-- **`"ui"`** *(optional)* — The path to the plugin command’s corresponding UI implementation. The UI implementation must be a function set to be the `default` export of the file. Alternatively, you could also pass in an object literal with **`"src"`** and **`"handler"`** keys.
-- **`"menu"`** *(optional)* — An array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has these keys:
+### Configuration options
 
-    - **`"name"`** — The display name of the plugin command.
-    - **`"command"`** — Ditto the **`"command"`** key above.
-    - **`"ui"`** *(optional)* — Ditto the **`"ui"`** key above.
+#### `"apiVersion"`
 
-    Use a **`"-"`** in the array to set a separator between commands in the sub-menu.
+> *`string`*
 
-The initial `src/` of any path specified in the configuration can be omitted. Create Figma Plugin will attempt to resolve paths in the `src/` directory.
+*Optional.* The version of the Figma plugin API to use. Defaults to **`"1.0.0"`**.
 
-### *Example*
+#### `"id"`
 
-A basic plugin with a single command:
+> *`string`*
+
+*Required.* The plugin ID. This field can be omitted during development but is required if you want to [publish your plugin](https://help.figma.com/hc/en-us/articles/360042293394-Publish-a-plugin-to-the-Community#Submit_your_plugin_to_the_Community). Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
+
+#### `"name"`
+
+> *`string`*
+
+*Required.* The name of your plugin.
+
+#### `"main"`
+
+> *`string` or `object`*
+
+*Optional.* Path to the entry point of the plugin command. The plugin command must be the function set as the `default` export in the file. To use a named export, specify an object with these keys:
+
+- **`"src"`** (`string`) — *Required.* Path to the entry point of the plugin command.
+- **`"handler"`** (`string`) — *Required.* The name of the exported function in the file.
+
+#### `"ui"`
+
+> *`string` or `object`*
+
+*Optional.* Path to the UI implementation for the plugin command. The plugin command must be the function set as the `default` export in the file. To use a named export, specify an object with these keys:
+
+- **`"src"`** (`string`) — *Required.* Path to the UI implementation of the plugin command.
+- **`"handler"`** (`string`) — *Required.* The name of the exported function in the file.
+
+#### `"menu"`
+
+> *`array`*
+
+*Optional.* Specifies the commands shown in the plugin’s sub-menu. Each object in the array has these keys:
+
+- **`"name"`** (`string`) — *Required.* The display name of the plugin command.
+- **`"main"`** (`string` or `object`) — *Required.* Ditto the **`"main"`** key above.
+- **`"ui"`** (`string` or `object`) — *Optional.* Ditto the **`"ui"`** key above.
+- **`"menu"`** (`array`) — *Optional.* Ditto the **`"menu"`** key above. Menus can be nested.
+
+Use a **`"-"`** in the array to specify a separator between commands in the sub-menu.
+
+### Example
+
+A plugin with a single command:
 
 ```diff
-{
-  ...
-  "create-figma-plugin": {
-    "id": "figma-hello-world",
-    "name": "Hello, World!",
-+   "command": "index.js",
-+   "ui": "ui.js"
+  {
+    ...
+    "create-figma-plugin": {
+      "id": "314159265358979323",
+      "name": "Hello World",
++     "main": "src/main.js",
++     "ui": "src/ui.js"
+    }
   }
-}
 ```
 
-A plugin with multiple commands in the plugin sub-menu:
+A plugin with a sub-menu containing multiple commands:
 
 ```diff
-{
-  ...
-  "create-figma-plugin": {
-    "id": "figma-hello-world",
-    "name": "Hello, World",
-+   "menu": [
-+     {
-+       "name": "Hello, World",
-+       "command": "hello-world/index.js",
-+       "ui": "hello-world/ui.js"
-+     },
-+     "-",
-+     {
-+       "name": "Settings",
-+       "command": "settings/command.js",
-+       "ui": "settings/ui.js"
-+     }
-+   ]
+  {
+    ...
+    "create-figma-plugin": {
+      "id": "314159265358979323",
+      "name": "Hello World",
++     "menu": [
++       {
++         "name": "Hello, World",
++         "main": "src/hello-world/main.js",
++         "ui": "src/hello-world/ui.js"
++       },
++       "-",
++       {
++         "name": "Settings",
++         "main": "src/settings/main.js",
++         "ui": "src/settings/ui.js"
++       }
++     ]
+    }
   }
-}
 ```
 
 ---
@@ -76,4 +112,4 @@ module.exports = function (config) {
 }
 ```
 
-`config` is the configuration object used when you build your plugin using Create Figma Plugin. The exported function must return the new Webpack configuration to be used.
+`config` is the configuration object used when you build your plugin using the `build-figma-plugin` CLI. The exported function in `create-figma-plugin.config.js` must return the new Webpack configuration to be used.
