@@ -55,7 +55,7 @@ Configure your plugin via the **`"create-figma-plugin"`** key of your `package.j
 
 Use a **`"-"`** in the array to specify a separator between commands in the sub-menu.
 
-### Example
+### Examples
 
 A plugin with a single command:
 
