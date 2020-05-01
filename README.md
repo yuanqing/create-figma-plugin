@@ -102,19 +102,19 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 ## Docs
 
-- [Configuration](docs/configuration.md#readme)
 - [Figma plugins API](https://figma.com/plugin-docs/api/)
-- [Utility functions](docs/utility-functions.md#readme)
+- [Configuration](/docs/configuration.md#readme)
+- [Utility functions](/docs/utility-functions.md#readme)
 - [Preact component library (Storybook)](https://yuanqing.github.io/create-figma-plugin/)
 
 ### Recipes
 
-- [Specifying multiple commands in the plugin sub-menu](docs/recipes/multiple-commands.md#readme)
-- [Adding a UI to a plugin command](docs/recipes/ui.md#readme)
-- [Passing data between the Figma document and the UI](docs/recipes/data-passing.md#readme)
-- [Building custom UI components](docs/recipes/custom-ui-components.md#readme)
-- [Configuring relaunch buttons](docs/recipes/relaunch-buttons.md#readme)
+- [Specifying multiple commands in the plugin sub-menu](/docs/recipes/multiple-commands.md#readme)
+- [Adding a UI to a plugin command](/docs/recipes/ui.md#readme)
+- [Passing data between the Figma document and the UI](/docs/recipes/data-passing.md#readme)
+- [Building custom UI components](/docs/recipes/custom-ui-components.md#readme)
+- [Configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme)
 
 ## License
 
-[MIT](LICENSE.md)
+[MIT](/LICENSE.md)
