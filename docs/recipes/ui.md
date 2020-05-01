@@ -1,4 +1,4 @@
-# Adding a user interface
+# Creating a UI for a plugin command
 
 Every command defined in `package.json` can have a corresponding UI implementation.
 

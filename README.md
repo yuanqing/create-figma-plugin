@@ -108,11 +108,11 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 ### Recipes
 
-- [Specifying multiple commands in the plugin menu](docs/recipes/multiple-commands.md)
-- [Creating a UI for a plugin command](docs/recipes/ui.md)
-- [Passing data between the Figma document and the UI](docs/recipes/data-passing.md)
-- [Building custom UI components](docs/recipes/custom-ui-components.md)
-- [Configuring relaunch buttons](docs/recipes/relaunch-buttons.md)
+- [Specifying multiple commands in the plugin sub-menu](docs/recipes/multiple-commands.md#readme)
+- [Creating a UI for a plugin command](docs/recipes/ui.md#readme)
+- [Passing data between the Figma document and the UI](docs/recipes/data-passing.md#readme)
+- [Building custom UI components](docs/recipes/custom-ui-components.md#readme)
+- [Configuring relaunch buttons](docs/recipes/relaunch-buttons.md#readme)
 
 ## License
 
