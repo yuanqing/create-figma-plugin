@@ -97,12 +97,12 @@ In the Figma desktop app:
 
 Use `console.log` statements to inspect values in your code.
 
-To open the JavaScript Console in the Figma desktop app, go to `Plugins` → `Development` → `Open Console`.
+To open the developer console in the Figma desktop app, go to `Plugins` → `Development` → `Open Console`.
 
 ## Docs
 
 - [Configuration](docs/configuration.md#readme)
-- [Figma plugins API](https://figma.com/plugin-docs/api/api-overview/)
+- [Figma plugins API](https://figma.com/plugin-docs/api/)
 - [Utility functions API](docs/utility-functions.md#readme)
 - [Preact component library](https://yuanqing.github.io/create-figma-plugin/)
 
