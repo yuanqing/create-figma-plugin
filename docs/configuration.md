@@ -2,88 +2,48 @@
 
 ## `package.json`
 
-Configure your plugin via the **`"create-figma-plugin"`** key of your `package.json` file.
-
-### Configuration options
-
-#### `"apiVersion"`
-
-> *`string`*
-
-*Optional.* The version of the Figma plugin API to use. Defaults to **`"1.0.0"`**.
-
-#### `"id"`
-
-> *`string`*
-
-*Required.* The plugin ID. This field can be omitted during development but is required if you want to [publish your plugin](https://help.figma.com/hc/en-us/articles/360042293394-Publish-a-plugin-to-the-Community#Submit_your_plugin_to_the_Community). Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
-
-#### `"name"`
-
-> *`string`*
-
-*Required.* The name of your plugin.
-
-#### `"main"`
-
-> *`string` or `object`*
-
-*Optional.* Path to the entry point of the plugin command. The plugin command must be the function set as the `default` export in the file. To use a named export, specify an object with these keys:
-
-- **`"src"`** (`string`) — *Required.* Path to the entry point of the plugin command.
-- **`"handler"`** (`string`) — *Required.* The name of the exported function in the file.
-
-#### `"ui"`
-
-> *`string` or `object`*
-
-*Optional.* Path to the UI implementation for the plugin command. The plugin command must be the function set as the `default` export in the file. To use a named export, specify an object with these keys:
-
-- **`"src"`** (`string`) — *Required.* Path to the UI implementation of the plugin command.
-- **`"handler"`** (`string`) — *Required.* The name of the exported function in the file.
-
-#### `"menu"`
-
-> *`array`*
-
-*Optional.* Specifies the commands shown in the plugin’s sub-menu. Each object in the array has these keys:
-
-- **`"name"`** (`string`) — *Required.* The display name of the plugin command.
-- **`"main"`** (`string` or `object`) — *Required.* Ditto the **`"main"`** key above.
-- **`"ui"`** (`string` or `object`) — *Optional.* Ditto the **`"ui"`** key above.
-- **`"menu"`** (`array`) — *Optional.* Ditto the **`"menu"`** key above. Menus can be nested.
-
-Use a **`"-"`** in the array to specify a separator between commands in the sub-menu.
+Configure your plugin via the **`"figma-plugin"`** key of your `package.json` file.
 
 ### Examples
 
-A plugin with a single command:
+#### Single command
 
 ```diff
   {
-    ...
-    "create-figma-plugin": {
-      "id": "314159265358979323",
-      "name": "Hello World",
+    "figma-plugin": {
+      "id": "806532458729477508",
+      "name": "Draw Mask Under Selection",
++     "main": "src/main.js"
+    }
+  }
+```
+
+#### Single command with a UI
+
+```diff
+  {
+    "figma-plugin": {
+      "id": "767379335945775056",
+      "name": "Draw Slice Over Selection",
 +     "main": "src/main.js",
 +     "ui": "src/ui.js"
     }
   }
 ```
 
-A plugin with a sub-menu containing multiple commands:
+See the recipe for [adding a UI to your plugin](recipes/adding-a-user-interface.md).
+
+#### Multiple commands in the plugin menu
 
 ```diff
   {
-    ...
-    "create-figma-plugin": {
-      "id": "314159265358979323",
-      "name": "Hello World",
+    "figma-plugin": {
+      "id": "837846252158418235",
+      "name": "Flatten Selection to Bitmap",
 +     "menu": [
 +       {
-+         "name": "Hello, World",
-+         "main": "src/hello-world/main.js",
-+         "ui": "src/hello-world/ui.js"
++         "name": "Flatten Selection to Bitmap",
++         "main": "src/flatten-selection-to-bitmap/main.js"
 +       },
 +       "-",
 +       {
@@ -96,11 +56,108 @@ A plugin with a sub-menu containing multiple commands:
   }
 ```
 
+#### Relaunch buttons
+
+```diff
+  {
+    "figma-plugin": {
+      "id": "786286754606650597",
+      "name": "Organize Layers",
+      "menu": [
+        {
+          "name": "Organize Layers",
+          "main": "src/organize-layers/main.js",
+          "ui": "src/organize-layers/ui.js"
+        },
+        "-",
+        {
+          "name": "Reset Plugin",
+          "main": "src/reset-plugin/main.js"
+        }
+      ],
++     "relaunchButtons": {
++       "organizeLayers": {
++         "name": "Organize Layers",
++         "main": "src/organize-layers/main.js",
++         "ui": "src/organize-layers/ui.js"
++       }
++     }
+    }
+  }
+```
+
+See the recipe for [adding relaunch buttons to your plugin](recipes/adding-relaunch-buttons.md).
+
+### Configuration options
+
+#### `"apiVersion"`
+
+> *`string`*
+
+*(optional)* The version of the Figma plugin API to use. Defaults to **`"1.0.0"`**.
+
+#### `"id"`
+
+> *`string`*
+
+*(required)* The plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
+
+#### `"name"`
+
+> *`string`*
+
+*(required)* The name of the plugin.
+
+#### `"main"`
+
+> *`string` or `object`*
+
+*(optional if* **`"menu"`** *is specified)* Path to the entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
+
+- **`"src"`** (`string`) — *(required)* Path to the entry point of the plugin command.
+- **`"handler"`** (`string`) — *(required)* The name of the exported function in the file.
+
+#### `"ui"`
+
+> *`string` or `object`*
+
+*(optional)* Path to the UI implementation of the plugin command (as specified via the sibling **`"main"`** key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
+
+- **`"src"`** (`string`) — *(required)* Path to the UI implementation of the plugin command.
+- **`"handler"`** (`string`) — *(required)* The name of the exported function in the file.
+
+See the recipe for [adding a UI to your plugin](recipes/adding-a-user-interface.md).
+
+#### `"menu"`
+
+> *`array`*
+
+*(optional if* **`"main"`** *is specified)* An array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the following keys:
+
+- **`"name"`** (`string`) — *(required)* The name of the plugin command.
+- **`"main"`** (`string` or `object`) — *(required)* Ditto the **`"main"`** field above.
+- **`"ui"`** (`string` or `object`) — *(optional)* Ditto the **`"ui"`** field above.
+- **`"menu"`** (`array`) — *(optional)* Menus can be nested.
+
+Use a **`"-"`** in the array to specify a separator between commands in the sub-menu.
+
+#### `"relaunchButtons"`
+
+> *`object`*
+
+*(optional)* An object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`, and each value is an object with the following keys:
+
+- **`"name"`** (`string`) — *(required)* The name of the Relaunch Button command.
+- **`"main"`** (`string` or `object`) — *(required)* Ditto the **`"main"`** field above.
+- **`"ui"`** (`string` or `object`) — *(optional)* Ditto the **`"ui"`** field above.
+
+See the recipe for [adding relaunch buttons to your plugin](recipes/adding-relaunch-buttons.md).
+
 ---
 
-## `create-figma-plugin.config.js`
+## `figma-plugin.config.js`
 
-To customize the underlying [Webpack configuration](https://webpack.js.org/configuration/), create a `create-figma-plugin.config.js` file:
+The `build-figma-plugin` CLI is built on top of Webpack. To customize the underlying Webpack [configuration](https://webpack.js.org/configuration/), create a `figma-plugin.config.js` file:
 
 ```js
 module.exports = function (config) {
@@ -112,4 +169,4 @@ module.exports = function (config) {
 }
 ```
 
-`config` is the configuration object used when you build your plugin using the `build-figma-plugin` CLI. The exported function in `create-figma-plugin.config.js` must return the new Webpack configuration to be used.
+`config` is the original Webpack configuration object. The exported function must return the new Webpack configuration to be used.

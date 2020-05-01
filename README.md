@@ -9,7 +9,7 @@
 - Utility functions for common plugin operations.
 - A set of Preact components that replicate the Figma UI design.
 
-## Quick start
+## Development guide
 
 ### Pre-requisites
 
@@ -34,26 +34,26 @@ $ ls src
 main.js
 ```
 
-`src/main.js` is the main entry point for the plugin:
+`src/main.js` is the entry point for the plugin:
 
 ```js
 // src/main.js
 
 export default function () {
-  figma.closePlugin('Hello, World!') //=> 'Hello, World!'
+  figma.closePlugin('Hello, World!')
 }
 ```
 
-See that in `package.json`, we’re pointing to `src/main.js` on the `"main"` key under `"create-figma-plugin"`:
+See that in `package.json`, we’re pointing to `src/main.js` on the **`"main"`** key under **`"figma-plugin"`**:
 
 ```diff
-{
-  ...
-  "create-figma-plugin": {
+  {
     ...
-+   "main": "src/main.js"
+    "figma-plugin": {
+      ...
++     "main": "src/main.js"
+    }
   }
-}
 ```
 
 ### Build the plugin
@@ -61,14 +61,14 @@ See that in `package.json`, we’re pointing to `src/main.js` on the `"main"` ke
 In `package.json`, we also have `build` and `watch` scripts set up to invoke the `build-figma-plugin` CLI:
 
 ```diff
-{
-  ...
-  "scripts": {
-+   "build": "build-figma-plugin",
-+   "watch": "build-figma-plugin --watch"
-  },
-  ...
-}
+  {
+    ...
+    "scripts": {
++     "build": "build-figma-plugin",
++     "watch": "build-figma-plugin --watch"
+    },
+    ...
+  }
 ```
 
 To build the plugin:
@@ -95,19 +95,23 @@ In the Figma desktop app:
 
 ### Debugging
 
-In the Figma desktop app:
+Use `console.log` statements to inspect values in your code.
 
-- Go to `Plugins` → `Development` → `Open Console`. Use `console.log` statements to inspect values in your code.
+To open the JavaScript Console in the Figma desktop app, go to `Plugins` → `Development` → `Open Console`.
 
 ## Docs
 
-- [**Configuration**](docs/configuration.md#readme)
-- [**API**](docs/api.md#readme)
-- [**Component Library**](https://yuanqing.github.io/create-figma-plugin/)
+- [Configuration](docs/configuration.md#readme)
+- [Figma plugins API](https://figma.com/plugin-docs/api/api-overview/)
+- [Utility functions API](docs/utility-functions.md#readme)
+- [Preact component library](https://yuanqing.github.io/create-figma-plugin/)
 
 ### Recipes
 
-- [Adding a user interface](docs/recipes/adding-a-user-interface.md)
+- [Specifying multiple commands in the plugin menu](docs/recipes/multiple-commands.md)
+- [Creating a UI for a plugin command](docs/recipes/ui.md)
+- [Passing data between the Figma document and the UI](docs/recipes/data-passing.md)
+- [Setting relaunch buttons](docs/recipes/relaunch-buttons.md)
 
 ## License
 
