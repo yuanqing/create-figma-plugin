@@ -36,7 +36,7 @@ Finally, in `package.json`, point to `src/ui.js` on the `"ui"` key corresponding
 ```diff
 {
   ...
-  "create-figma-plugin": {
+  "figma-plugin": {
     ...
     "main": "src/main.js"
 +   "ui": "src/ui.js"

@@ -30,7 +30,7 @@
     "build": "build-figma-plugin",
     "watch": "build-figma-plugin --watch"
   },
-  "create-figma-plugin": {
+  "figma-plugin": {
     "id": "{{name}}",
 {{#displayName}}
     "name": "{{displayName}}",

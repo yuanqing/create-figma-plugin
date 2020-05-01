@@ -1,5 +1,5 @@
 {
-  "create-figma-plugin": {
+  "figma-plugin": {
     "name": "foo",
     "id": "42",
     "main": "bar",

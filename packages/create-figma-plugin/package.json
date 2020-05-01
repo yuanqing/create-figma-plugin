@@ -20,7 +20,7 @@
     "plugin-templates"
   ],
   "bin": {
-    "create-figma-plugin": "lib/cli.js"
+    "figma-plugin": "lib/cli.js"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.61",
