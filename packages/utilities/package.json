@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Helper functions for developing Figma plugins",
+  "description": "Utility functions for common Figma plugin operations",
   "keywords": [
     "create-figma-plugin",
     "figma",

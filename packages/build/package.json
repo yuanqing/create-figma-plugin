@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Build a Figma plugin",
+  "description": "Build a Figma plugin, with support for multiple menu commands that each have their own UI implementation",
   "keywords": [
     "create-figma-plugin",
     "figma",
