@@ -35,7 +35,7 @@ Configure your plugin via the **`"figma-plugin"`** key of your `package.json` fi
 }
 ```
 
-See the recipe for [creating a UI for a plugin command](recipes/ui.md#readme).
+See the recipe for [adding a UI to a plugin command](recipes/ui.md#readme).
 
 </details>
 
@@ -138,7 +138,7 @@ See the recipe for [configuring relaunch buttons](recipes/relaunch-buttons.md#re
 - **`"src"`** (*`string`*) — *(required)* Path to the UI implementation of the plugin command.
 - **`"handler"`** (*`string`*) — *(required)* The name of the exported function in the file.
 
-See the recipe for [creating a UI for a plugin command](recipes/ui.md#readme).
+See the recipe for [adding a UI to a plugin command](recipes/ui.md#readme).
 
 #### `"menu"`
 

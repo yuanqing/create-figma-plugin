@@ -1,4 +1,4 @@
-# Utility functions API
+# Utility functions
 
 <!-- toc -->
 

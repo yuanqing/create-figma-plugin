@@ -51,6 +51,7 @@ See that in `package.json`, we’re pointing to `src/main.js` on the **`"main"`*
     ...
     "figma-plugin": {
       ...
+      "name": "Hello World",
 +     "main": "src/main.js"
     }
   }
@@ -103,13 +104,13 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 - [Configuration](docs/configuration.md#readme)
 - [Figma plugins API](https://figma.com/plugin-docs/api/)
-- [Utility functions API](docs/utility-functions.md#readme)
+- [Utility functions](docs/utility-functions.md#readme)
 - [Preact component library (Storybook)](https://yuanqing.github.io/create-figma-plugin/)
 
 ### Recipes
 
 - [Specifying multiple commands in the plugin sub-menu](docs/recipes/multiple-commands.md#readme)
-- [Creating a UI for a plugin command](docs/recipes/ui.md#readme)
+- [Adding a UI to a plugin command](docs/recipes/ui.md#readme)
 - [Passing data between the Figma document and the UI](docs/recipes/data-passing.md#readme)
 - [Building custom UI components](docs/recipes/custom-ui-components.md#readme)
 - [Configuring relaunch buttons](docs/recipes/relaunch-buttons.md#readme)

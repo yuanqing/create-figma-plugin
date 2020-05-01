@@ -31,4 +31,4 @@ See that:
 
 The above configuration would result in the following:
 
-![Multiple commands](../../media/multiple-commands.png)
+![“Flatten Selection to Bitmap” plugin sub-menu](/media/multiple-commands.png)
