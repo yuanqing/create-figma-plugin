@@ -1,10 +1,8 @@
 # Configuration
 
-## `package.json`
-
 Configure your plugin via the **`"figma-plugin"`** key of your `package.json` file.
 
-### Examples
+## Examples
 
 <details>
 <summary><strong>Single command</strong></summary>
@@ -100,27 +98,27 @@ See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons
 
 </details>
 
-### Configuration options
+## Configuration options
 
-#### `"apiVersion"`
+### `"apiVersion"`
 
 > *`string`*
 
 *(optional)* The version of the Figma plugin API to use. Defaults to **`"1.0.0"`**.
 
-#### `"id"`
+### `"id"`
 
 > *`string`*
 
 *(required)* The plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
 
-#### `"name"`
+### `"name"`
 
 > *`string`*
 
 *(required)* The name of the plugin.
 
-#### `"main"`
+### `"main"`
 
 > *`string`* or *`object`*
 
@@ -129,7 +127,7 @@ See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons
 - **`"src"`** (*`string`*) — *(required)* Path to the entry point of the plugin command.
 - **`"handler"`** (*`string`*) — *(required)* The name of the exported function in the file.
 
-#### `"ui"`
+### `"ui"`
 
 > *`string`* or *`object`*
 
@@ -140,7 +138,7 @@ See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons
 
 See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
 
-#### `"menu"`
+### `"menu"`
 
 > *`array`*
 
@@ -153,7 +151,7 @@ See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme)
 
 Use a **`"-"`** in the array to specify a separator between commands in the sub-menu.
 
-#### `"relaunchButtons"`
+### `"relaunchButtons"`
 
 > *`object`*
 
@@ -164,21 +162,3 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
 - **`"ui"`** (*`string`* or *`object`*) — *(optional)* Ditto the **`"ui"`** field above.
 
 See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
-
----
-
-## `figma-plugin.config.js`
-
-The `build-figma-plugin` CLI is built on top of Webpack. To customize the underlying [Webpack configuration](https://webpack.js.org/configuration/), create a `figma-plugin.config.js` file:
-
-```js
-module.exports = function (config) {
-  // ...
-  return {
-    ...config
-    // ...
-  }
-}
-```
-
-`config` is the original Webpack configuration object, and the function must return the new configuration to be used.
