@@ -18,7 +18,9 @@ export async function buildBundleAsync (config, isDevelopment) {
     entry[key] = uiEntryFile
   }
   let webpackConfig = createWebpackConfig(entry, isDevelopment)
-  const customWebpackConfigPath = await findUp(constants.configFileName)
+  const customWebpackConfigPath = await findUp(
+    constants.build.webpackConfigFileName
+  )
   if (typeof customWebpackConfigPath !== 'undefined') {
     webpackConfig = require(customWebpackConfigPath)(webpackConfig)
   }
