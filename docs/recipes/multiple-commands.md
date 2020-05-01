@@ -25,12 +25,10 @@ Commands can be specified on the **`"menu"`** key under **`"figma-plugin"`**:
 
 See that:
 
-- The name of the plugin (to be shown at the “top-level”) is **`"Flatten Selection to Bitmap"`**.
-- **`"Flatten Selection to Bitmap"`** and **`"Settings"`** are the two commands in the plugin sub-menu. Of these two commands, only the **`"Settings"`** command has a UI implementation.
+- **`"Flatten Selection to Bitmap"`** and **`"Settings"`** are the two commands in the plugin sub-menu.
+- Of these two commands, only the **`"Settings"`** command has a UI implementation.
 - A **`"-"`** is used to specify a separator between the two commands in the plugin sub-menu.
 
 The above configuration would result in the following:
 
 ![“Flatten Selection to Bitmap” plugin sub-menu](/media/multiple-commands.png)
-
-See the docs for [configuration](/docs/configuration.md#readme).

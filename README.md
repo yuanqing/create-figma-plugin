@@ -7,7 +7,7 @@
 - Initialize a new Figma plugin using a template.
 - Bundle your plugin, with support for multiple menu commands that each have their own UI implementation.
 - Utility functions for common plugin operations.
-- A set of Preact components that replicate the Figma UI design.
+- A library of Preact components that replicate the Figma UI design.
 
 ## Development guide
 
@@ -112,7 +112,6 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 - [Specifying multiple commands in the plugin sub-menu](/docs/recipes/multiple-commands.md#readme)
 - [Adding a UI to a plugin command](/docs/recipes/ui.md#readme)
 - [Passing data between the Figma document and the UI](/docs/recipes/data-passing.md#readme)
-- [Building custom UI components](/docs/recipes/custom-ui-components.md#readme)
 - [Configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme)
 
 ## License

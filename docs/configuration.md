@@ -35,7 +35,7 @@ Configure your plugin via the **`"figma-plugin"`** key of your `package.json` fi
 }
 ```
 
-See the recipe for [adding a UI to a plugin command](/docs/recipes/ui.md#readme).
+See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
 
 </details>
 
@@ -96,7 +96,7 @@ See the recipe for [adding a UI to a plugin command](/docs/recipes/ui.md#readme)
 }
 ```
 
-See the recipe for [configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
+See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
 
 </details>
 
@@ -138,7 +138,7 @@ See the recipe for [configuring relaunch buttons](/docs/recipes/relaunch-buttons
 - **`"src"`** (*`string`*) — *(required)* Path to the UI implementation of the plugin command.
 - **`"handler"`** (*`string`*) — *(required)* The name of the exported function in the file.
 
-See the recipe for [adding a UI to a plugin command](/docs/recipes/ui.md#readme).
+See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
 
 #### `"menu"`
 
@@ -163,7 +163,7 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
 - **`"main"`** (*`string`* or *`object`*) — *(required)* Ditto the **`"main"`** field above.
 - **`"ui"`** (*`string`* or *`object`*) — *(optional)* Ditto the **`"ui"`** field above.
 
-See the recipe for [configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
+See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
 
 ---
 
