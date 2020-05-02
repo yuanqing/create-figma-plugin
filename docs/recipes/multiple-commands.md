@@ -2,25 +2,25 @@
 
 Commands can be specified on the **`"menu"`** key under **`"figma-plugin"`**:
 
-```json
-{
-  "figma-plugin": {
-    "id": "837846252158418235",
-    "name": "Flatten Selection to Bitmap",
-    "menu": [
-      {
-        "name": "Flatten Selection to Bitmap",
-        "main": "src/flatten-selection-to-bitmap/main.js"
-      },
-      "-",
-      {
-        "name": "Settings",
-        "main": "src/settings/main.js",
-        "ui": "src/settings/ui.js"
-      }
-    ]
+```diff
+  {
+    "figma-plugin": {
+      "id": "837846252158418235",
+      "name": "Flatten Selection to Bitmap",
++     "menu": [
++       {
++         "name": "Flatten Selection to Bitmap",
++         "main": "src/flatten-selection-to-bitmap/main.js"
++       },
++       "-",
++       {
++         "name": "Settings",
++         "main": "src/settings/main.js",
++         "ui": "src/settings/ui.js"
++       }
++     ]
+    }
   }
-}
 ```
 
 See that:

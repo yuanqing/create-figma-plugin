@@ -107,9 +107,9 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/r
 
 (*`object`*)
 
-*Optional.* An object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`, and each value is an object with the following keys:
+*Optional.* An object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the following keys:
 
-- **`"name"`** (*`string`*) — *Required.* The name of the Relaunch Button command.
+- **`"name"`** (*`string`*) — *Required.* The name of the Relaunch Button.
 - **`"main"`** (*`string`* or *`object`*) — *Required.* Ditto the **`"main"`** field above.
 - **`"ui"`** (*`string`* or *`object`*) — *Optional.* Ditto the **`"ui"`** field above.
 
