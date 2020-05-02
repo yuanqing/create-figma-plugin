@@ -122,7 +122,7 @@ See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons
 
 > *`string`* or *`object`*
 
-*(optional if* **`"menu"`** *is specified)* Path to the entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
+*(required, unless* **`"menu"`** *is specified)* Path to the entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
 
 - **`"src"`** (*`string`*) — *(required)* Path to the entry point of the plugin command.
 - **`"handler"`** (*`string`*) — *(required)* The name of the exported function in the file.
@@ -142,7 +142,7 @@ See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme)
 
 > *`array`*
 
-*(optional if* **`"main"`** *is specified)* An array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the following keys:
+*(required, unless* **`"main"`** *is specified)* An array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the following keys:
 
 - **`"name"`** (*`string`*) — *(required)* The name of the plugin command.
 - **`"main"`** (*`string`* or *`object`*) — *(optional if* **`"menu"`** *is specified)* Ditto the **`"main"`** field above.
