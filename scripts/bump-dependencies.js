@@ -8,12 +8,11 @@ async function main () {
     path.join(parentDirectory, 'package.json'),
     path.join(parentDirectory, 'packages', '**', 'package.json')
   ]
-  const packageJsonFiles = await globby(globs)
+  const packageJsonFiles = await globby(globs, { deep: 2 })
   const promises = []
   packageJsonFiles.forEach(function (packageJsonFile) {
     promises.push(
       ncu.run({
-        greatest: true,
         packageFile: packageJsonFile,
         packageManager: 'npm',
         silent: false,
