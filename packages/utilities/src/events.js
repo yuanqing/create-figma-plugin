@@ -2,13 +2,25 @@ const isCommand = typeof window === 'undefined'
 
 const eventListeners = {}
 
-let count = 0
+let currentId = 0
+
 export function on (eventName, eventListener) {
-  const id = count++
+  const id = `${currentId++}`
   eventListeners[id] = { eventName, eventListener }
   return function () {
     delete eventListeners[id]
   }
+}
+
+export function once (eventName, eventListener) {
+  let done = false
+  return on(eventName, function (...args) {
+    if (done === true) {
+      return
+    }
+    done = true
+    eventListener.apply(null, args)
+  })
 }
 
 export const emit = isCommand
@@ -26,7 +38,7 @@ export const emit = isCommand
 
 if (isCommand === true) {
   figma.ui.onmessage = function ([type, ...args]) {
-    for (const id of Object.keys(eventListeners)) {
+    for (const id in eventListeners) {
       const { eventName, eventListener } = eventListeners[id]
       if (eventName === type) {
         eventListener.apply(null, args)
@@ -36,7 +48,7 @@ if (isCommand === true) {
 } else {
   window.onmessage = function (event) {
     const [type, ...args] = event.data.pluginMessage
-    for (const id of Object.keys(eventListeners)) {
+    for (const id in eventListeners) {
       const { eventName, eventListener } = eventListeners[id]
       if (eventName === type) {
         eventListener.apply(null, args)
