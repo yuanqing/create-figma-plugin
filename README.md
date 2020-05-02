@@ -4,10 +4,10 @@
 
 ## Features
 
-- Initialize a new Figma plugin using a template.
-- Build your plugin, with support for multiple menu commands that each have their own UI implementation.
-- Utility functions for common plugin operations.
-- A library of Preact components that replicate the Figma UI design.
+- Initialize a new Figma plugin using a template
+- Build your plugin, with support for multiple menu commands that each have their own UI implementation
+- Utility functions for common plugin operations
+- A library of Preact components that replicate the Figma UI design
 
 ## Quick start
 
