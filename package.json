@@ -11,7 +11,7 @@
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'packages/*/src/**/*.scss'",
     "lint-js": "standardx '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
-    "publish": "yarn run build && cpy 'docs/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
+    "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
     "test": "yarn run build && ava",
     "version": "lerna version",
