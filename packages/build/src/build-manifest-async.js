@@ -52,6 +52,9 @@ function normalizeMenu (menu) {
     if (typeof item.menu !== 'undefined') {
       result.menu = normalizeMenu(item.menu)
     }
+    if (item.multipleSelection === true) {
+      result.multipleSelection = true
+    }
     return result
   })
 }

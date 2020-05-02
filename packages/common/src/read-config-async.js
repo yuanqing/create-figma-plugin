@@ -66,12 +66,13 @@ function parseRelaunchButtons (relaunchButtons) {
   }
   const result = []
   for (const command in relaunchButtons) {
-    const { name, main, ui } = relaunchButtons[command]
+    const { name, main, ui, multipleSelection } = relaunchButtons[command]
     result.push({
       name,
       command,
       main: parseFile(main),
-      ui: parseFile(ui)
+      ui: parseFile(ui),
+      multipleSelection
     })
   }
   return result
