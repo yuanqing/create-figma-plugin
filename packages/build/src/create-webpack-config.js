@@ -40,6 +40,13 @@ export function createWebpackConfig (entry, isDevelopment) {
           }
         },
         {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'ts-loader'
+          }
+        },
+        {
           test: /\.s?css$/,
           use: [
             {
@@ -70,7 +77,7 @@ export function createWebpackConfig (entry, isDevelopment) {
         process.cwd(),
         'node_modules'
       ],
-      extensions: ['.js', '.json']
+      extensions: ['.js', '.ts', '.tsx', '.json']
     },
     devtool: isDevelopment ? 'inline-cheap-module-source-map' : 'none',
     stats: 'errors-only',
