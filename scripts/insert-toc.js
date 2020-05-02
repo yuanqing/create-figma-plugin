@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 const path = require('path')
 
 async function main () {
-  const filename = path.resolve(__dirname, '..', 'docs', 'api.md')
+  const filename = path.resolve(__dirname, '..', 'docs', 'utility-functions.md')
   const contents = await fs.readFile(filename, 'utf8')
   const result = markdownToc
     .insert(contents, { maxdepth: 3, bullet: '-' })
