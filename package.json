@@ -11,9 +11,11 @@
     "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
     "lint-css": "stylelint 'packages/*/src/**/*.scss'",
     "lint-js": "standardx '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
+    "postinstall": "yarn run build && yarn run typings",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
     "test": "yarn run build && ava",
+    "typings": "mkdir -p node_modules/@types/figma && cd node_modules/@types/figma && curl --remote-name --silent https://www.figma.com/plugin-docs/figma.d.ts",
     "version": "lerna version",
     "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
   },
