@@ -4,8 +4,8 @@
 
 - [**Events**](#events)
   * [on(eventName, eventListener)](#const-off--oneventname-eventlistener)
+  * [once(eventName, eventListener)](#const-off--onceeventname-eventlistener)
   * [emit(eventName *[, ...arguments]*)](#emiteventname--arguments)
-  * [*Example*](#example)
 - [**Layers**](#layers)
   * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)
   * [insertAfterLayer(layer, referenceLayer)](#insertafterlayerlayer-referencelayer)
@@ -17,32 +17,32 @@
   * [computeMaximumBounds(layers)](#const-topleft-bottomright--computemaximumboundslayers)
   * [isLayerWithinInstance(layer)](#const-result--islayerwithininstancelayer)
   * [traverseLayer(layer, processLayer *[, stopTraversal]*)](#traverselayerlayer-processlayer--stoptraversal)
-  * [sortLayersByName(layers)](#sortlayersbynamelayers)
+  * [sortLayersByName(layers)](#const-sortedlayers--sortlayersbynamelayers)
+  * [sortSiblingLayersByLayerListOrder(siblingLayers)](#const-sortedsiblinglayers--sortsiblinglayersbylayerlistordersiblinglayers)
   * [updateLayersSortOrder(layers)](#const-didchange--updatelayerssortorderlayers)
-  * [groupSiblingLayers(layers)](#const-groups--groupsiblinglayerslayers)
-  * [removeDuplicateLayers(layers)](#const-result--removeduplicatelayerslayers)
+  * [areSiblingLayers(layers)](#const-result--aresiblinglayerslayers)
+  * [computeSiblingLayers(layers)](#const-groups--computesiblinglayerslayers)
+  * [removeDuplicateLayers(layers)](#const-uniquelayers--removeduplicatelayerslayers)
   * [collapseLayer(layer)](#collapselayerlayer)
-  * [createImagePaint(bytes)](#const-paint--createimagepaintbytes)
+  * [createImagePaint(bytes)](#const-imagepaint--createimagepaintbytes)
   * [loadFontsAsync(layers)](#await-loadfontsasynclayers)
-  * [setRelaunchButton(layer, key *[, description]*)](#setrelaunchbuttonlayer-key--description)
+  * [setRelaunchButton(layer, relaunchButtonId *[, description]*)](#setrelaunchbuttonlayer-relaunchbuttonid--description)
 - [**Number**](#number)
   * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
   * [evaluateNumericExpression(expression)](#const-result--evaluatenumericexpressionexpression)
 - [**Object**](#object)
   * [cloneObject(object)](#const-result--cloneobjectobject)
-  * [extractAttributes(objects, attributes)](#const-result--extractattributesobjects-attributes)
   * [compareObjects(a, b)](#const-result--compareobjectsa-b)
+  * [extractAttributes(objects, attributes)](#const-result--extractattributesobjects-attributes)
 - [**Settings**](#settings)
   * [loadSettingsAsync(*[defaultSettings]*)](#const-settings--await-loadsettingsasyncdefaultsettings)
   * [saveSettingsAsync(settings)](#await-savesettingsasyncsettings)
 - [**String**](#string)
   * [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
   * [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
-  * [mapNumberToWord(number)](#const-word--mapnumbertowordnumber)
   * [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
 - [**UI**](#ui)
   * [showUI(options *[, data]*)](#showuioptions--data)
-  * [*Example*](#example-1)
 
 <!-- tocstop -->
 
@@ -53,9 +53,12 @@
 ```js
 import {
   emit,
-  on
+  on,
+  once
 } from '@create-figma-plugin/utilities'
 ```
+
+See the [recipe for passing data between the plugin entry point and UI](/docs/recipes/data-passing.md#readme).
 
 ### const off = on(eventName, eventListener)
 
@@ -63,17 +66,30 @@ Registers an `eventListener` for the given `eventName`.
 
 #### Returns
 
-- A `function` for deregistering the `eventListener`
+- A function for deregistering the `eventListener`
 
 #### Parameters
 
-- `eventName` (`string`)
-- `eventListener` (`function (...arguments)`)
+- `eventName` (*`string`*)
+- `eventListener` (*`function (...arguments)`*)
+
+### const off = once(eventName, eventListener)
+
+Registers an `eventListener` that will run at most once for the given `eventName`.
+
+#### Returns
+
+- A function for deregistering the `eventListener`
+
+#### Parameters
+
+- `eventName` (*`string`*)
+- `eventListener` (*`function (...arguments)`*)
 
 ### emit(eventName *[, ...arguments]*)
 
-- Calling `emit` in your plugin command invokes the event listener with the matching `eventName` in your UI.
-- Calling `emit` in your UI invokes the event listener with the matching `eventName` in the plugin command.
+- Calling `emit` in your plugin entry point invokes the event listener with the matching `eventName` in your UI.
+- Calling `emit` in your UI invokes the event listener with the matching `eventName` in the plugin entry point.
 
 All `arguments` passed after `eventName` are directly applied on the event listener.
 
@@ -83,44 +99,7 @@ All `arguments` passed after `eventName` are directly applied on the event liste
 
 #### Parameters
 
-- `eventName` (`string`)
-
-### *Example*
-
-```js
-// command.js
-
-import {
-  emit,
-  on,
-  // ...
-} from '@create-figma-plugin/utilities'
-
-export default function () {
-  // ...
-  on('foo', function (count) {
-    console.log(count) //=> 2
-  })
-  emit('bar', 1)
-}
-```
-
-```js
-// ui.js
-
-import {
-  emit,
-  on
-} from '@create-figma-plugin/utilities'
-
-export default function () {
-  // ...
-  on('bar', function (count) {
-    console.log(count) //=> 1
-    emit('foo', count + 1)
-  })
-}
-```
+- `eventName` (*`string`*)
 
 ---
 
@@ -139,8 +118,10 @@ import {
   isLayerWithinInstance,
   traverseLayer,
   sortLayersByName,
+  sortSiblingLayersByLayerListOrder,
   updateLayersSortOrder,
-  groupSiblingLayers,
+  areSiblingLayers,
+  computeSiblingLayers,
   removeDuplicateLayers,
   collapseLayer,
   createImagePaint,
@@ -159,8 +140,8 @@ Inserts `layer` before the `referenceLayer` in the layer list.
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-- `referenceLayer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `referenceLayer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### insertAfterLayer(layer, referenceLayer)
 
@@ -172,8 +153,8 @@ Inserts `layer` after the `referenceLayer` in the layer list.
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-- `referenceLayer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `referenceLayer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### const layers = getSelectedLayersOrAllLayers()
 
@@ -181,7 +162,7 @@ Gets the selected layers, or all the top-level layers on the current page if no 
 
 #### Returns
 
-- An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+- An array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
 
 ### const components = getDocumentComponents()
 
@@ -189,7 +170,7 @@ Gets all the components in the current document.
 
 #### Returns
 
-- An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+- An array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
 
 ### const {x, y} = getAbsolutePosition(layer)
 
@@ -197,11 +178,11 @@ Returns the X and Y position of the given `layer` relative to the page.
 
 #### Returns
 
-- A plain `object` with `x` and `y` keys
+- A plain object with `x` and `y` keys
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### setAbsolutePosition(layer, absolutePosition)
 
@@ -213,8 +194,8 @@ Sets the `layer` to the given `absolutePosition`.
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-- `absolutePosition` (a plain `object` with `x` and `y` keys)
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `absolutePosition` (a plain object with `x` and `y` keys)
 
 ### const {x, y, width, height} = computeBoundingBox(layer)
 
@@ -222,11 +203,11 @@ Computes the coordinates and dimensions of the smallest bounding box that contai
 
 #### Returns
 
-- A plain `object` with `x`, `y`, `width`, and `height` keys
+- A plain object with `x`, `y`, `width`, and `height` keys
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### const [topLeft, bottomRight] = computeMaximumBounds(layers)
 
@@ -234,23 +215,23 @@ Computes the absolute coordinates of the `topLeft` and `bottomRight` corners of 
 
 #### Returns
 
-- The `topLeft` and `bottomRight` coordinates as plain `object`s with `x` and `y` keys
+- The `topLeft` and `bottomRight` coordinates as plain objects with `x` and `y` keys
 
 #### Parameters
 
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### const result = isLayerWithinInstance(layer)
 
-Checks if the `layer` is within an Instance.
+Checks if the `layer` is within an instance.
 
 #### Returns
 
-- `true` if `layer` is within an Instance, else `false`
+- `true` if `layer` is within an instance, else `false`
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### traverseLayer(layer, processLayer *[, stopTraversal]*)
 
@@ -264,21 +245,33 @@ Each layer is also passed to a `stopTraversal` function. If you return `false` i
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-- `processLayer` (`function (layer)`)
-- `stopTraversal` (`function (layer)`) *(optional)*
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `processLayer` (*`function (layer)`*)
+- `stopTraversal` (*`function (layer)`*) *(optional)*
 
-### sortLayersByName(layers)
+### const sortedLayers = sortLayersByName(layers)
 
 Sorts `layers` by layer name in alphabetical order.
 
 #### Returns
 
-- An `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+- A new array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
 
 #### Parameters
 
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+
+### const sortedSiblingLayers = sortSiblingLayersByLayerListOrder(siblingLayers)
+
+Sorts `siblingLayers` by their layer list order.
+
+#### Returns
+
+- A new array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
+
+#### Parameters
+
+- `siblingLayers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### const didChange = updateLayersSortOrder(layers)
 
@@ -290,31 +283,43 @@ Updates the layer list sort order to follow the sort order of `layers`.
 
 #### Parameters
 
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const groups = groupSiblingLayers(layers)
+### const result = areSiblingLayers(layers)
+
+Checks if all layers in `layers` are sibling layers.
+
+#### Returns
+
+- `true` if all layers in `layers` are sibling layers, else `false`
+
+#### Parameters
+
+- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+
+### const groups = computeSiblingLayers(layers)
 
 Splits `layers` into groups of sibling layers.
 
 #### Returns
 
-- An `array` of `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+- An array of array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
 
 #### Parameters
 
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const result = removeDuplicateLayers(layers)
+### const uniqueLayers = removeDuplicateLayers(layers)
 
-Deduplicates `layers`.
+Deduplicates the layers in `layers`.
 
 #### Returns
 
-- An `array` of unique [`Node`](https://www.figma.com/plugin-docs/api/nodes/) objects
+- An array of unique [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
 
 #### Parameters
 
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### collapseLayer(layer)
 
@@ -326,19 +331,19 @@ Collapses `layer` and all its child layers in the layer list.
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const paint = createImagePaint(bytes)
+### const imagePaint = createImagePaint(bytes)
 
-Creates an `ImagePaint` from the `bytes` of an image.
+Creates an *`ImagePaint`* object from the `bytes` of an image.
 
 #### Returns
 
-- An [`ImagePaint`](https://www.figma.com/plugin-docs/api/Paint/#imagepaint) object
+- An [*`ImagePaint`*](https://figma.com/plugin-docs/api/Paint/#imagepaint) object
 
 #### Parameters
 
-- `bytes` ([`Uint8Array`](https://www.figma.com/plugin-docs/api/Image/#getbytesasync))
+- `bytes` ([*`Uint8Array`*](https://figma.com/plugin-docs/api/Image/#getbytesasync))
 
 ### await loadFontsAsync(layers)
 
@@ -346,15 +351,17 @@ Loads the fonts used in all the text layers in `layers`.
 
 #### Returns
 
-- `Promise`
+- A *`Promise`*
 
 #### Parameters
 
-- `layers` (an `array` of [`Node`](https://www.figma.com/plugin-docs/api/nodes/))
+- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### setRelaunchButton(layer, key *[, description]*)
+### setRelaunchButton(layer, relaunchButtonId *[, description]*)
 
-Adds a [relaunch button](https://www.figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `key` as [configured](configuration.md#packagejson) under **`"relaunchButtons"`**. `description` is the text displayed below the relaunch button.
+Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `relaunchButtonId` as configured under **`"relaunchButtons"`** in `package.json`. `description` is the text displayed below the relaunch button.
+
+See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
 
 #### Returns
 
@@ -362,9 +369,9 @@ Adds a [relaunch button](https://www.figma.com/plugin-docs/api/properties/nodes-
 
 #### Parameters
 
-- `layer` ([`Node`](https://www.figma.com/plugin-docs/api/nodes/))
-- `key` (`string`)
-- `description` (`string`) *(optional)*
+- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `key` (*`string`*)
+- `description` (*`string`*) *(optional)*
 
 ---
 
@@ -387,8 +394,8 @@ Checks if `value` is a numeric expression, as input by a user. “Partial” inp
 
 #### Parameters
 
-- `value` (`string`)
-- `integerOnly` (`boolean`) *(optional)*
+- `value` (*`string`*)
+- `integerOnly` (*`boolean`*) *(optional)*
 
 ### const result = evaluateNumericExpression(expression)
 
@@ -396,11 +403,11 @@ Evaluates the given numeric `expression`.
 
 #### Returns
 
-- A `float`, the result of evaluating the given `expression`
+- A *`float`*, the result of evaluating the given `expression`
 
 #### Parameters
 
-- `expression` (`string`)
+- `expression` (*`string`*)
 
 ---
 
@@ -409,14 +416,14 @@ Evaluates the given numeric `expression`.
 ```js
 import {
   cloneObject,
-  extractAttributes,
-  compareObjects
+  compareObjects,
+  extractAttributes
 } from '@create-figma-plugin/utilities'
 ```
 
 ### const result = cloneObject(object)
 
-Creates a deep copy of the given plain `object`.
+Creates a deep copy of the given plain object.
 
 #### Returns
 
@@ -424,24 +431,11 @@ Creates a deep copy of the given plain `object`.
 
 #### Parameters
 
-- `object` (`any`)
-
-### const result = extractAttributes(objects, attributes)
-
-Extracts the specified `attributes` from the given `objects`.
-
-#### Returns
-
-- An `array` of plain `object`s
-
-#### Parameters
-
-- `objects` (an `array` of `object`)
-- `attributes` (an `array` of `string`)
+- `object` (*`any`*)
 
 ### const result = compareObjects(a, b)
 
-Performs a *shallow* comparison of objects `a` and `b`.
+Performs a deep comparison of objects `a` and `b`.
 
 #### Returns
 
@@ -449,8 +443,21 @@ Performs a *shallow* comparison of objects `a` and `b`.
 
 #### Parameters
 
-- `a` (`any`)
-- `b` (`any`)
+- `a` (*`any`*)
+- `b` (*`any`*)
+
+### const result = extractAttributes(objects, attributes)
+
+Extracts the specified `attributes` from the given `objects`.
+
+#### Returns
+
+- An array of plain objects
+
+#### Parameters
+
+- `objects` (an array of *`object`*)
+- `attributes` (an array of *`string`*)
 
 ---
 
@@ -469,11 +476,11 @@ Loads your plugin’s `settings` (stored locally on the user’s computer). Valu
 
 #### Returns
 
-- A `Promise` for a plain `object`
+- A *`Promise`* for a plain object
 
 #### Parameters
 
-- `defaultSettings` (`object`) *(optional)*
+- `defaultSettings` (*`object`*) *(optional)*
 
 ### await saveSettingsAsync(settings)
 
@@ -481,11 +488,11 @@ Saves the given `settings` for the plugin (stored locally on the user’s comput
 
 #### Returns
 
-- `Promise`
+- *`Promise`*
 
 #### Parameters
 
-- `settings` (`object`)
+- `settings` (*`object`*)
 
 ---
 
@@ -495,7 +502,6 @@ Saves the given `settings` for the plugin (stored locally on the user’s comput
 import {
   formatErrorMessage
   formatSuccessMessage,
-  mapNumberToWord,
   pluralize
 } from '@create-figma-plugin/utilities'
 ```
@@ -506,11 +512,11 @@ Adds a `✘` prefix to the given `message`.
 
 #### Returns
 
-- `string`
+- *`string`*
 
 #### Parameters
 
-- `message` (`string`)
+- `message` (*`string`*)
 
 ### const successMessage = formatSuccessMessage(message)
 
@@ -518,23 +524,11 @@ Adds a `✔` prefix to the given `message`.
 
 #### Returns
 
-- `string`
+- *`string`*
 
 #### Parameters
 
-- `message` (`string`)
-
-### const word = mapNumberToWord(number)
-
-If `number` is between 0 and 9, returns the English word for the `number` (eg. `7` maps to `seven`). Otherwise, returns `number` as a string.
-
-#### Returns
-
-- `string`
-
-#### Parameters
-
-- `number` (`number`)
+- `message` (*`string`*)
 
 ### const word = pluralize(number, singular *[, plural]*)
 
@@ -542,13 +536,13 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 
 #### Returns
 
-- `string`
+- *`string`*
 
 #### Parameters
 
-- `number` (`number`)
-- `singular` (`string`)
-- `plural` (`string`) *(optional)*
+- `number` (*`number`*)
+- `singular` (*`string`*)
+- `plural` (*`string`*) *(optional)*
 
 ---
 
@@ -562,34 +556,16 @@ import { showUI } from '@create-figma-plugin/utilities'
 
 Renders the UI correponding to the command in an `<iframe>`. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
 
+See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
+
 #### Returns
 
 - `undefined`
 
 #### Parameters
 
-- `options` (`object`)
-  - `width` (`number`)
-  - `height` (`number`)
-  - `visible` (`boolean`)
-- `data` (`any`) *(optional)*
-
-### *Example*
-
-```js
-// command.js
-
-import { showUI } from '@create-figma-plugin/utilities'
-
-export default function () {
-  showUI({ width: 240, height: 320 }, { foo: 'bar' })
-}
-```
-
-```js
-// ui.js
-
-export default function (rootNode, data) {
-  rootNode.innerHTML = `<h1>${data.foo}</h1>` //=> <h1>bar</h1>
-}
-```
+- `options` (*`object`*)
+  - `width` (*`number`*)
+  - `height` (*`number`*)
+  - `visible` (*`boolean`*)
+- `data` (*`any`*) *(optional)*
