@@ -4,10 +4,10 @@
 
 ## Features
 
-- Initialize a new Figma plugin using a template
-- Build your plugin, with support for multiple menu commands that each have their own UI implementation
-- Utility functions for common plugin operations
-- A library of Preact components that replicate the Figma UI design
+- [Initialize a new Figma plugin](#initialize-a-new-plugin) using a template
+- [Build your plugin](#build-the-plugin), with support for [multiple menu commands](/docs/recipes/multiple-commands.md#readme) that each have their own [UI implementation](/docs/recipes/ui.md#readme)
+- [Utility functions](/docs/utility-functions.md#readme) for common plugin operations
+- A [library of Preact components](https://yuanqing.github.io/create-figma-plugin/) that replicate the Figma UI design
 
 ## Quick start
 
@@ -44,7 +44,7 @@ export default function () {
 }
 ```
 
-See that in `package.json`, we’re pointing to `src/main.js` on the **`"main"`** key under **`"figma-plugin"`**:
+See that in `package.json`, we’re pointing to `src/main.js` on the [**`"main"`**](/docs/configuration.md#main) key under **`"figma-plugin"`**:
 
 ```diff
   {

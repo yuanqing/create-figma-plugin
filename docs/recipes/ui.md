@@ -53,7 +53,7 @@ See that:
 - `render` takes a single parameter, `Plugin`, which is a [Preact functional component](https://preactjs.com/guide/v10/components#functional-components).
 - The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from our plugin command’s entry point.
 
-Finally, in `package.json`, point to our UI file on the **`"ui"`** key:
+Finally, in `package.json`, point to our UI file on the [**`"ui"`**](/docs/configuration.md#ui) key:
 
 ```diff
   {

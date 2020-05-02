@@ -1,6 +1,6 @@
 # Configuring relaunch buttons
 
-[Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the **`"relaunchButtons"`** key under **`"figma-plugin"`**:
+[Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) key under **`"figma-plugin"`**:
 
 ```diff
   {
@@ -53,7 +53,7 @@ export default async function () {
 }
 ```
 
-Here, we’re associating `figma.currentPage` with the `organizeLayers` relaunch button.
+The second parameter passed to `setRelaunchButton` must be a particular `relaunchButtonId` as configured on the **`"relaunchButtons"`** key. Here, we’re associating `figma.currentPage` with the `organizeLayers` relaunch button command.
 
 This would result in the following:
 

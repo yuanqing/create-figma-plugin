@@ -359,7 +359,7 @@ Loads the fonts used in all the text layers in `layers`.
 
 ### setRelaunchButton(layer, relaunchButtonId *[, description]*)
 
-Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `relaunchButtonId` as configured under **`"relaunchButtons"`** in `package.json`. `description` is the text displayed below the relaunch button in the Figma UI.
+Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `relaunchButtonId` as configured under [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) in `package.json`. `description` is the text displayed below the relaunch button in the Figma UI.
 
 See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
 
@@ -554,7 +554,7 @@ import { showUI } from '@create-figma-plugin/utilities'
 
 ### showUI(options *[, data]*)
 
-Renders the UI correponding to the command in an `<iframe>`. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
+Renders the UI correponding to the command in a modal within the Figma UI. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
 
 See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
 
