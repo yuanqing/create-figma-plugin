@@ -9,7 +9,7 @@
 - Utility functions for common plugin operations.
 - A library of Preact components that replicate the Figma UI design.
 
-## Development guide
+## Quick start
 
 ### Pre-requisites
 
