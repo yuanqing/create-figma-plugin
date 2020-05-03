@@ -11,7 +11,7 @@
 
 ## Quick start
 
-See [Figma plugin basics](/docs/basics.md#readme) to better understand [how Figma plugins actually work](/docs/basics.md#how-plugins-work), and to get an overview of [what’s currently possible (and not possible) in a Figma plugin](/docs/basics.md#what-plugins-can-and-cannot-do).
+To start, read the [Figma plugin basics doc](/docs/basics.md#readme) to understand [how Figma plugins actually work](/docs/basics.md#how-plugins-work), and to learn about [what’s currently possible (and not possible) in a Figma plugin](/docs/basics.md#what-plugins-can-and-cannot-do).
 
 ### Pre-requisites
 
@@ -117,10 +117,10 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 - [Configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme)
 - [Customizing the underlying Webpack configuration](/docs/recipes/custom-webpack-configuration.md#readme)
 
-## Useful references
+## See also
 
-- [Figma plugins official docs](https://www.figma.com/plugin-docs/intro/)
-- [Figma plugins samples](https://github.com/figma/plugin-samples)
+- [Figma plugin official docs](https://www.figma.com/plugin-docs/intro/)
+- [Figma plugin samples](https://github.com/figma/plugin-samples)
 - [Open source Figma plugins on GitHub](https://github.com/thomas-lowry/figma-plugins-on-github/blob/master/README.md#plugins)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
 

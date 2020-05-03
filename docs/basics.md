@@ -68,33 +68,34 @@ To accomplish this:
 
 ## What plugins can and cannot do
 
-Figma plugins can…
+A Figma plugin can…
 
-- Read and manipulate the contents (ie. pages, layers, components, styles) of the currently-active Figma document
-- Store and retrieve data that is specific to the currently-active document
+- Read and manipulate the contents (ie. pages, layers, components, styles) of the currently-open Figma document
+- Store and retrieve data that is specific to the currently-open document
 - Store and retrieve data that is specific to the plugin
 - Get and set the user’s selection
 - Get and set the currently-active page
-- Run code in response to changes in the user’s selection or the currently-active page of the document while the plugin is currently running
+- Run code in response to changes in the user’s selection or the currently-active page, while the plugin is currently running
 - Change the viewport and zoom level
 - Collapse and uncollapse layers in the the layer list panel
 - Display a user interface in a modal in the Figma editor interface
-- Do anything that can be done in an `<iframe>` using HTML, CSS and JavaScript eg. making API calls over the network, requesting a file from the user, leveraging web technologies like `<canvas>`, and so on
+- Do anything that can be done in an `<iframe>` using HTML, CSS and JavaScript eg. making API calls over the network, requesting a file from the user, handling images, leveraging web technologies like `<canvas>`, and so on
 
-Figma plugins cannot…
+A Figma plugin cannot…
 
 - Access Figma documents that are not currently open
-- Read or modify the document name, document ID, and URL of the currently-active Figma document
+- Create or open a new or existing Figma document
+- Read or modify the name, ID, and URL of the currently-open Figma document
 - Read or modify the document’s users and their access permissions
 - Read or modify the document’s comments
-- Read or modify components and styles from a team library
-- Run code in response to granular user actions in the Figma editor eg. mouse events on the canvas
-- Run persistently in the background
+- Read or modify components and styles from a Team library
+- Run code in response to “granular” user actions in the Figma editor eg. mouse events on the canvas
 - Show more than one modal; at most one plugin modal can be shown at a time
-- Run alongside other plugins; at most one plugin can be running at a time
+- Run persistently in the background
+- Run alongside other plugins; at most one plugin can be running at a given time
 - Trigger other plugins
 - Trigger native Figma commands
-- Have keyboard shortcuts for its commands
+- Specify keyboard shortcuts for its commands
 - Run while the user is in Presentation View
 - Run if the user only has View permissions for the currently-open document
-- Modify the native Figma UI
+- Modify the native Figma editor interface
