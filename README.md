@@ -11,7 +11,7 @@
 
 ## Quick start
 
-To start, read the [Figma plugin basics doc](/docs/basics.md#readme) to understand [how Figma plugins actually work](/docs/basics.md#how-plugins-work), and to learn about [what’s currently possible (and not possible) in a Figma plugin](/docs/basics.md#what-plugins-can-and-cannot-do).
+To start, read the [Figma plugin basics doc](/docs/basics.md#readme) to understand [how a Figma plugin actually works](/docs/basics.md#how-a-figma-plugin-works), and to learn about [what’s currently possible (and not possible) in a Figma plugin](/docs/basics.md#what-a-figma-plugin-can-and-cannot-do).
 
 ### Pre-requisites
 
@@ -119,7 +119,7 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 ## See also
 
-- [Figma plugin official docs](https://www.figma.com/plugin-docs/intro/)
+- [Figma plugin official docs](https://figma.com/plugin-docs/intro/)
 - [Figma plugin samples](https://github.com/figma/plugin-samples)
 - [Open source Figma plugins on GitHub](https://github.com/thomas-lowry/figma-plugins-on-github/blob/master/README.md#plugins)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
