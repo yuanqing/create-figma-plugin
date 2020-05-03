@@ -4,10 +4,10 @@
 
 ### Overview
 
-Context | Figma plugin API  | JavaScript API
+API | Main context | UI context
 :--|:--|:--
-Main context | 🟢 Available (via the [`figma`](https://figma.com/plugin-docs/api/figma/) global object) | 🟡 Only a subset is available (excludes [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [`Fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API))
-UI context | 🔴 Not available | 🟢 Available
+Figma plugin API | 🟢 Available (via the [`figma`](https://figma.com/plugin-docs/api/figma/) global object) | 🔴 Not available
+JavaScript API | 🟡 Only a subset is available (excludes [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [`Fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)) | 🟢 Available
 
 See that:
 
@@ -39,7 +39,7 @@ Conceptually, the main and UI context would communicate through [“message pass
 
 The following are three common use cases that we will encounter when developing a Figma plugin, and the steps for making each use case possible within Figma’s plugin execution model.
 
-#### 1. “We want to get data from the Figma document, and show the data in our plugin UI.”
+#### A. “We want to get data from the Figma document, and show the data in our plugin UI.”
 
 To accomplish this:
 
@@ -47,7 +47,7 @@ To accomplish this:
 2. Read the required data off the Figma document in the main context. Pass the data from main context → UI context.
 3. Receive and show the data in the `<iframe>`.
 
-#### 2. “We want to get data from the user, and use the data in our Figma document.”
+#### B. “We want to get data from the user, and use the data in our Figma document.”
 
 To accomplish this:
 
@@ -55,7 +55,7 @@ To accomplish this:
 2. Render a form within the `<iframe>`. When the user clicks a submit button in the form, pass the user input data from UI context → main context.
 3. Receive and use the data in the main context.
 
-#### 3. “We want to get data from an API endpoint, and use the data in our Figma document.”
+#### C. “We want to get data from an API endpoint, and use the data in our Figma document.”
 
 To accomplish this:
 
