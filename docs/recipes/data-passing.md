@@ -1,4 +1,4 @@
-# Passing data between the plugin entry point and UI
+# Passing data between the plugin command’s main and UI contexts
 
 ```js
 // TODO

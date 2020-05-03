@@ -10,7 +10,7 @@ First:
 $ npm install @create-figma-plugin/ui preact
 ```
 
-Then, include a call to [`showUI`](/docs/utility-functions.md#showuioptions--data) in our plugin command’s entry point:
+Then, include a call to [`showUI`](/docs/utility-functions.md#showuioptions--data) in our plugin command’s main entry point:
 
 ```js
 // src/main.js

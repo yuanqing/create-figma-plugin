@@ -11,21 +11,21 @@ UI context | 🔴 Not available | 🟢 Available
 
 See that:
 
-1. There is a concept of a “Main context” and a “UI context”.
+1. There is a concept of a “main context” and a “UI context”.
 2. The availability of the Figma plugin API and JavaScript API differs between the two contexts.
 
 ### Main context
 
-The entry point of a plugin command is a sandboxed JavaScript environment. We call this the plugin command’s **“Main context”**.
+The entry point of a plugin command is a sandboxed JavaScript environment. We call this the plugin command’s **“main context”**.
 
-Within this Main context:
+Within this main context:
 
 1. Our JavaScript code can access and manipulate the contents of the Figma document via the [Figma plugin API](https://figma.com/plugin-docs/api/api-overview/). The plugin API is made available on the [`figma`](https://figma.com/plugin-docs/api/figma/) global object.
 2. Our JavaScript code can only access a subset of the standard browser JavaScript API. Most notably, this subset *excludes* both the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) as well as APIs such as [`Fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 ### UI context
 
-Showing a UI for a plugin command must be explicitly triggered in the command’s Main context. Figma would then display a modal in the Figma editor interface; this modal contains an `<iframe>` within which which we can render a UI. We call this `<iframe>` the plugin command’s **“UI context”**.
+Showing a UI for a plugin command must be explicitly triggered in the command’s main context. Figma would then display a modal in the Figma editor interface; this modal contains an `<iframe>` within which which we can render a UI. We call this `<iframe>` the plugin command’s **“UI context”**.
 
 Within this UI context:
 
@@ -35,7 +35,7 @@ Within this UI context:
 
 ### Three common use cases
 
-Conceptually, the Main and UI context would communicate through [“message passing”](https://figma.com/plugin-docs/how-plugins-run/). (In practice, this involves registering event listeners and emitting events.) Message passing between the Main and UI context is the only way to utilize parts of the Figma plugin API or JavaScript API that are only available in the opposite context.
+Conceptually, the main and UI context would communicate through [“message passing”](https://figma.com/plugin-docs/how-plugins-run/). (In practice, this involves registering event listeners and emitting events.) Message passing between the main and UI context is the only way to utilize parts of the Figma plugin API or JavaScript API that are only available in the opposite context.
 
 The following are three common use cases that we will encounter when developing a Figma plugin, and the steps for making each use case possible within Figma’s plugin execution model.
 
@@ -43,26 +43,26 @@ The following are three common use cases that we will encounter when developing 
 
 To accomplish this:
 
-1. In the Main context, call the function to show the UI.
-2. Read the required data off the Figma document in the Main context. Pass the data from Main context → UI context.
+1. In the main context, call the function to show the UI.
+2. Read the required data off the Figma document in the main context. Pass the data from main context → UI context.
 3. Receive and show the data in the `<iframe>`.
 
 #### “We want to get data from the user, and use the data in our Figma document.”
 
 To accomplish this:
 
-1. In the Main context, call the function to show the UI.
-2. Render a form within the `<iframe>`. When the user clicks a submit button in the form, pass the user input data from UI context → Main context.
-3. Receive and use the data in the Main context.
+1. In the main context, call the function to show the UI.
+2. Render a form within the `<iframe>`. When the user clicks a submit button in the form, pass the user input data from UI context → main context.
+3. Receive and use the data in the main context.
 
 #### “We want to get data from an API endpoint, and use the data in our Figma document.”
 
 To accomplish this:
 
-1. In the Main context, call the function to show the UI.
-2. Pass a request to make an API call from Main context → UI context.
-3. Make an API call in the `<iframe>`. When we receive the data from the API, pass the data from UI context → Main context.
-4. Receive and use the data in the Main context.
+1. In the main context, call the function to show the UI.
+2. Pass a request to make an API call from main context → UI context.
+3. Make an API call in the `<iframe>`. When we receive the data from the API, pass the data from UI context → main context.
+4. Receive and use the data in the main context.
 
 ---
 

@@ -36,7 +36,7 @@ $ ls src
 main.js
 ```
 
-`src/main.js` is the entry point for our plugin:
+`src/main.js` is the main entry point for our plugin:
 
 ```js
 // src/main.js
@@ -113,7 +113,7 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 - [Specifying multiple commands in the plugin sub-menu](/docs/recipes/multiple-commands.md#readme)
 - [Adding a UI to a plugin command](/docs/recipes/ui.md#readme)
-- [Passing data between the plugin entry point and UI](/docs/recipes/data-passing.md#readme)
+- [Passing data between the plugin command’s main and UI contexts](/docs/recipes/data-passing.md#readme)
 - [Configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme)
 - [Customizing the underlying Webpack configuration](/docs/recipes/custom-webpack-configuration.md#readme)
 
