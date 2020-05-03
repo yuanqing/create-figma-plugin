@@ -71,11 +71,44 @@ When we rebuild our plugin and run it, we’ll see:
 
 ![Figma plugin UI modal containing a “Hello, World” message in the Figma UI style](/media/ui-hello-world-figma.png)
 
-See the [full library of Preact components in the Storybook](https://yuanqing.github.io/create-figma-plugin/).
+See the [full library of Preact components in the Storybook](https://yuanqing.github.io/create-figma-plugin/), and the [recipe for passing data between the plugin command’s main and UI contexts](/docs/recipes/data-passing.md#readme).
+
+## Using custom CSS
+
+Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://github.com/css-modules/css-modules):
+
+```scss
+// src/styles.scss
+
+@import "@create-figma-plugin/ui/src/scss/constants";
+
+.container {
+  background-color: $color-black-10;
+}
+```
+
+```js
+// src/ui.js
+
+import { render } from '@create-figma-plugin/ui'
+import { h } from 'preact'
+import styles from './styles.scss'
+
+export default render(Plugin)
+
+function Plugin () {
+  // ...
+  return (
+    <div class={styles.container}>
+      {/* ... */}
+    </div>
+  )
+}
+```
 
 ## Using a custom UI library
 
-If we want to use a custom UI library, our plugin command’s UI implementation can be as follows:
+To use a custom UI library (instead of `@create-figma-plugin/ui`), write our plugin command’s UI implementation as follows:
 
 ```js
 // src/ui.js
