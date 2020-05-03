@@ -11,6 +11,8 @@
 
 ## Quick start
 
+See [Figma plugin basics](/docs/basics.md#readme) to better understand [how Figma plugins actually work](/docs/basics.md#how-plugins-work), and to get an overview of [what’s currently supported (and not supported) in a Figma plugin](/docs/basics.md#what-plugins-can-and-cannot-do).
+
 ### Pre-requisites
 
 - [Node.js](https://nodejs.org/)
@@ -102,7 +104,7 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 ## Docs
 
-- [Figma plugins API](https://figma.com/plugin-docs/api/)
+- [Figma plugin basics](/docs/basics.md#readme)
 - [Configuration](/docs/configuration.md#readme)
 - [Utility functions](/docs/utility-functions.md#readme)
 - [Preact component library (Storybook)](https://yuanqing.github.io/create-figma-plugin/)
@@ -114,6 +116,13 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 - [Passing data between the plugin entry point and UI](/docs/recipes/data-passing.md#readme)
 - [Configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme)
 - [Customizing the underlying Webpack configuration](/docs/recipes/custom-webpack-configuration.md#readme)
+
+## Useful references
+
+- [Figma plugins official docs](https://www.figma.com/plugin-docs/intro/)
+- [Figma plugins samples](https://github.com/figma/plugin-samples)
+- [Open source Figma plugins on GitHub](https://github.com/thomas-lowry/figma-plugins-on-github/blob/master/README.md#plugins)
+- [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
 
 ## License
 
