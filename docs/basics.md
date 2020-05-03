@@ -35,9 +35,9 @@ Within this UI context:
 
 ### Three common use cases
 
-Conceptually, the Main and UI context would communicate through [“message passing”](https://figma.com/plugin-docs/how-plugins-run/). (In practice, this involves registering event listeners and emitting events.) Message passing between the Main and UI context is the only way to leverage parts of the Figma plugin API or JavaScript API that are only available in the opposite context.
+Conceptually, the Main and UI context would communicate through [“message passing”](https://figma.com/plugin-docs/how-plugins-run/). (In practice, this involves registering event listeners and emitting events.) Message passing between the Main and UI context is the only way to utilize parts of the Figma plugin API or JavaScript API that are only available in the opposite context.
 
-Here are three common use cases that we will encounter when developing a Figma plugin, and the steps for making these possible within Figma’s plugin execution model.
+The following are three common use cases that we will encounter when developing a Figma plugin, and the steps for making each use case possible within Figma’s plugin execution model.
 
 #### “We want to get data from the Figma document, and show the data in our plugin UI.”
 
