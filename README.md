@@ -120,8 +120,6 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 ## See also
 
 - [Figma plugin API docs](https://figma.com/plugin-docs/api/)
-- [Figma plugin samples](https://github.com/figma/plugin-samples)
-- [Open source Figma plugins on GitHub](https://github.com/thomas-lowry/figma-plugins-on-github/blob/master/README.md#plugins)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
 
 ## License

@@ -3,8 +3,8 @@
 <!-- toc -->
 
 - [**Events**](#events)
-  * [on(eventName, eventListener)](#const-off--oneventname-eventlistener)
-  * [once(eventName, eventListener)](#const-off--onceeventname-eventlistener)
+  * [on(eventName, eventHandler)](#const-off--oneventname-eventhandler)
+  * [once(eventName, eventHandler)](#const-off--onceeventname-eventhandler)
   * [emit(eventName *[, ...arguments]*)](#emiteventname--arguments)
 - [**Layers**](#layers)
   * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)

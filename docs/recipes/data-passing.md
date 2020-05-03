@@ -1,6 +1,8 @@
 # Passing data between the plugin command’s main and UI contexts
 
-`@create-figma-plugin/utilities` offers 3 functions to facilitate data passing between our plugin command’s main and UI contexts:
+As described in the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme), one way to pass data from the main context to the UI context is through the [`showUI`](/docs/utility-functions.md#showuioptions--data) function from `@create-figma-plugin/utilities`.
+
+`@create-figma-plugin/utilities` also offers 3 other functions to facilitate data passing (in both directions) between our plugin command’s main and UI contexts:
 
 - [`on(eventName, eventHandler)`](/docs/utility-functions.md#const-off--oneventname-eventhandler) — Registers an `eventHandler` for the given `eventName`.
 - [`once(eventName, eventHandler)`](/docs/utility-functions.md#const-off--onceeventname-eventhandler) — Ditto `on`, only that the `eventHandler` will run at most once.
