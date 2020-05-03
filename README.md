@@ -36,7 +36,7 @@ $ ls src
 main.js
 ```
 
-`src/main.js` is the entry point for the plugin:
+`src/main.js` is the entry point for our plugin:
 
 ```js
 // src/main.js
