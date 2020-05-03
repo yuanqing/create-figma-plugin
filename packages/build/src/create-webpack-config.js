@@ -15,7 +15,7 @@ export function createWebpackConfig (entry, isDevelopment) {
     module: {
       rules: [
         {
-          test: /\.js?$/,
+          test: /\.js$/,
           exclude: /node_modules\/(?!@create-figma-plugin)/,
           use: {
             loader: 'babel-loader',
