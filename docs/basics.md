@@ -35,11 +35,11 @@ Within this UI context:
 
 ### Three common use cases
 
-Conceptually, the main and UI context would communicate through [“message passing”](https://figma.com/plugin-docs/how-plugins-run/). (In practice, this involves registering event listeners and emitting events.) Message passing between the main and UI context is the only way to utilize parts of the Figma plugin API or JavaScript API that are only available in the opposite context.
+Conceptually, the main and UI context would communicate through [“message passing”](https://figma.com/plugin-docs/how-plugins-run/). (In practice, this involves registering event handlers and emitting events.) Message passing between the main and UI context is the only way to utilize parts of the Figma plugin API or JavaScript API that are only available in the opposite context.
 
 The following are three common use cases that we will encounter when developing a Figma plugin, and the steps for making each use case possible within Figma’s plugin execution model.
 
-#### “We want to get data from the Figma document, and show the data in our plugin UI.”
+#### 1. “We want to get data from the Figma document, and show the data in our plugin UI.”
 
 To accomplish this:
 
@@ -47,7 +47,7 @@ To accomplish this:
 2. Read the required data off the Figma document in the main context. Pass the data from main context → UI context.
 3. Receive and show the data in the `<iframe>`.
 
-#### “We want to get data from the user, and use the data in our Figma document.”
+#### 2. “We want to get data from the user, and use the data in our Figma document.”
 
 To accomplish this:
 
@@ -55,7 +55,7 @@ To accomplish this:
 2. Render a form within the `<iframe>`. When the user clicks a submit button in the form, pass the user input data from UI context → main context.
 3. Receive and use the data in the main context.
 
-#### “We want to get data from an API endpoint, and use the data in our Figma document.”
+#### 3. “We want to get data from an API endpoint, and use the data in our Figma document.”
 
 To accomplish this:
 
@@ -89,13 +89,12 @@ A Figma plugin cannot…
 - Read or modify the document’s users and their access permissions
 - Read or modify the document’s comments
 - Read or modify components and styles from a Team library
-- Run code in response to “granular” user actions in the Figma editor eg. mouse events on the canvas
-- Show more than one modal; at most one plugin modal can be shown at a time
-- Run persistently in the background
+- Run code in response to “granular” user actions in the Figma editor, eg. mouse events on the canvas
+- Show more than one modal in the Figma editor interface; at most one plugin modal can be shown at a time
 - Run alongside other plugins; at most one plugin can be running at a given time
 - Trigger other plugins
 - Trigger native Figma commands
-- Specify keyboard shortcuts for its commands
+- Specify keyboard shortcuts for triggering its commands
 - Run while the user is in Presentation View
 - Run if the user only has View permissions for the currently-open document
 - Modify the native Figma editor interface

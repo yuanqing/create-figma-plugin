@@ -58,40 +58,39 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-See the [recipe for passing data between the plugin entry point and UI](/docs/recipes/data-passing.md#readme).
+See the [recipe for passing data between the plugin command’s main and UI contexts](/docs/recipes/data-passing.md#readme).
 
-### const off = on(eventName, eventListener)
+### const off = on(eventName, eventHandler)
 
-Registers an `eventListener` for the given `eventName`.
+Registers an `eventHandler` for the given `eventName`.
 
 #### Returns
 
-- A function for deregistering the `eventListener`
+- A function for deregistering the `eventHandler`
 
 #### Parameters
 
 - `eventName` (*`string`*)
-- `eventListener` (*`function (...arguments)`*)
+- `eventHandler` (*`function (...arguments)`*)
 
-### const off = once(eventName, eventListener)
+### const off = once(eventName, eventHandler)
 
-Registers an `eventListener` that will run at most once for the given `eventName`.
+Registers an `eventHandler` that will run at most once for the given `eventName`.
 
 #### Returns
 
-- A function for deregistering the `eventListener`
+- A function for deregistering the `eventHandler`
 
 #### Parameters
 
 - `eventName` (*`string`*)
-- `eventListener` (*`function (...arguments)`*)
+- `eventHandler` (*`function (...arguments)`*)
 
 ### emit(eventName *[, ...arguments]*)
 
-- Calling `emit` in your plugin entry point invokes the event listener with the matching `eventName` in your UI.
-- Calling `emit` in your UI invokes the event listener with the matching `eventName` in the plugin entry point.
+Calling `emit` in the main context invokes the event handler for the matching `eventName` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching `eventName` in the main context.
 
-All `arguments` passed after `eventName` are directly applied on the event listener.
+All `arguments` passed after `eventName` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
 
 #### Returns
 

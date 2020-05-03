@@ -51,7 +51,7 @@ function Plugin (props) {
 See that:
 
 - `render` takes a single parameter, `Plugin`, which is a [Preact functional component](https://preactjs.com/guide/v10/components#functional-components).
-- The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from our plugin command’s entry point.
+- The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from our plugin command’s main entry point.
 
 Finally, in `package.json`, point to our UI file on the [**`"ui"`**](/docs/configuration.md#ui) key:
 
@@ -87,4 +87,4 @@ export default function (rootNode, data) {
 
 The exported function receives two parameters:
 - `rootNode` — An empty `<div>` element within which you can render your UI.
-- `data` — This corresponds to the `data` object that was passed to `showUI` from the plugin command’s entry point.
+- `data` — This corresponds to the `data` object that was passed to `showUI` from the plugin command’s main entry point.

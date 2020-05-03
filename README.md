@@ -7,7 +7,7 @@
 - [Initialize a new Figma plugin](#initialize-a-new-plugin) using a template
 - [Build your plugin](#build-the-plugin), with support for [multiple menu commands](/docs/recipes/multiple-commands.md#readme) that each have their own [UI implementation](/docs/recipes/ui.md#readme)
 - [Utility functions](/docs/utility-functions.md#readme) for common plugin operations
-- A [library of Preact components](https://yuanqing.github.io/create-figma-plugin/) that replicate the Figma UI design
+- [A library of Preact components](https://yuanqing.github.io/create-figma-plugin/) that replicate the Figma UI design
 
 ## Quick start
 

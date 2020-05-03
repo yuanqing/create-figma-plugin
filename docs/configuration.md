@@ -24,9 +24,9 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 
 (*`string`* or *`object`*)
 
-*Required, unless* **`"menu"`** *is specified.* Path to the entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
+*Required, unless* **`"menu"`** *is specified.* Path to the main entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
 
-- **`"src"`** (*`string`*) — *Required.* Path to the entry point of the plugin command.
+- **`"src"`** (*`string`*) — *Required.* Path to the main entry point of the plugin command.
 - **`"handler"`** (*`string`*) — *Required.* The name of the exported function in the file.
 
 ### Example
@@ -107,11 +107,12 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/r
 
 (*`object`*)
 
-*Optional.* An object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the following keys:
+*Optional.* An object that specifies the commands that can be set as [relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/). Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the following keys:
 
 - **`"name"`** (*`string`*) — *Required.* The name of the Relaunch Button.
 - **`"main"`** (*`string`* or *`object`*) — *Required.* Ditto the **`"main"`** field above.
 - **`"ui"`** (*`string`* or *`object`*) — *Optional.* Ditto the **`"ui"`** field above.
+- **`"multipleSelection"`** (*`boolean`*) — *Optional.* Whether the relaunch button should appear when multiple layers are selected.
 
 ### Example
 

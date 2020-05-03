@@ -35,25 +35,23 @@ See that:
 - **`"organizeLayers"`** is the `relaunchButtonId`.
 - The object corresponding to **`"organizeLayers"`** specifies the command that runs when the relaunch button is clicked.
 
-Then, call [`setRelaunchButton`](/docs/utility-functions.md#setrelaunchbuttonlayer-relaunchbuttonid--description) in our plugin command’s entry point:
+Then, call [`setRelaunchButton`](/docs/utility-functions.md#setrelaunchbuttonlayer-relaunchbuttonid--description) in our plugin command’s main entry point:
 
 ```js
 // src/organize-layers/main.js
 
 import {
-  // ...
-  setRelaunchButton
+  setRelaunchButton,
   // ...
 } from '@create-figma-plugin/utilities'
 
 export default async function () {
-  // ...
   setRelaunchButton(figma.currentPage, 'organizeLayers')
   // ...
 }
 ```
 
-The second parameter passed to `setRelaunchButton` must be a particular `relaunchButtonId` as configured on the **`"relaunchButtons"`** key. Here, we’re associating `figma.currentPage` with the `organizeLayers` relaunch button command.
+The second parameter passed to `setRelaunchButton` must be a particular `relaunchButtonId` as configured on the **`"relaunchButtons"`** key of our `package.json`. In the above example, we’re associating `figma.currentPage` with the `organizeLayers` relaunch button command.
 
 This would result in the following:
 
