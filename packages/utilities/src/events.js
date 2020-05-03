@@ -1,25 +1,25 @@
 const isCommand = typeof window === 'undefined'
 
-const eventListeners = {}
+const eventHandlers = {}
 
 let currentId = 0
 
-export function on (eventName, eventListener) {
+export function on (eventName, eventHandler) {
   const id = `${currentId++}`
-  eventListeners[id] = { eventName, eventListener }
+  eventHandlers[id] = { eventName, eventHandler }
   return function () {
-    delete eventListeners[id]
+    delete eventHandlers[id]
   }
 }
 
-export function once (eventName, eventListener) {
+export function once (eventName, eventHandler) {
   let done = false
   return on(eventName, function (...args) {
     if (done === true) {
       return
     }
     done = true
-    eventListener.apply(null, args)
+    eventHandler.apply(null, args)
   })
 }
 
@@ -38,20 +38,20 @@ export const emit = isCommand
 
 if (isCommand === true) {
   figma.ui.onmessage = function ([type, ...args]) {
-    for (const id in eventListeners) {
-      const { eventName, eventListener } = eventListeners[id]
+    for (const id in eventHandlers) {
+      const { eventName, eventHandler } = eventHandlers[id]
       if (eventName === type) {
-        eventListener.apply(null, args)
+        eventHandler.apply(null, args)
       }
     }
   }
 } else {
   window.onmessage = function (event) {
     const [type, ...args] = event.data.pluginMessage
-    for (const id in eventListeners) {
-      const { eventName, eventListener } = eventListeners[id]
+    for (const id in eventHandlers) {
+      const { eventName, eventHandler } = eventHandlers[id]
       if (eventName === type) {
-        eventListener.apply(null, args)
+        eventHandler.apply(null, args)
       }
     }
   }
