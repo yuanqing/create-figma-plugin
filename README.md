@@ -11,7 +11,7 @@
 
 ## Quick start
 
-See [Figma plugin basics](/docs/basics.md#readme) to better understand [how Figma plugins actually work](/docs/basics.md#how-plugins-work), and to get an overview of [what’s currently supported (and not supported) in a Figma plugin](/docs/basics.md#what-plugins-can-and-cannot-do).
+See [Figma plugin basics](/docs/basics.md#readme) to better understand [how Figma plugins actually work](/docs/basics.md#how-plugins-work), and to get an overview of [what’s currently possible (and not possible) in a Figma plugin](/docs/basics.md#what-plugins-can-and-cannot-do).
 
 ### Pre-requisites
 
