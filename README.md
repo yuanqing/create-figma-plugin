@@ -59,6 +59,8 @@ See that in `package.json`, we’re pointing to `src/main.js` on the [**`"main"`
   }
 ```
 
+(This example only scratches the surface of what this toolkit provides. See the [recipes section](#recipes) below, or jump to the ones for [adding a UI to a plugin command](/docs/recipes/ui.md#readme), or [specifying multiple commands in the plugin sub-menu](/docs/recipes/multiple-commands.md#readme).)
+
 ### Build the plugin
 
 In `package.json`, we also have `build` and `watch` scripts set up to invoke the `build-figma-plugin` CLI:

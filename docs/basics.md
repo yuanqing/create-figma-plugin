@@ -77,13 +77,13 @@ A Figma plugin can…
 - Get and set the currently-active page
 - Run code in response to changes in the user’s selection or the currently-active page, while the plugin is currently running
 - Change the viewport and zoom level
-- Collapse and uncollapse layers in the the layer list panel
+- Collapse and uncollapse layers in the layer list panel
 - Display a user interface in a modal in the Figma editor interface
 - Do anything that can be done in an `<iframe>` using HTML, CSS and JavaScript eg. making API calls over the network, requesting a file from the user, handling images, leveraging web technologies like `<canvas>`, and so on
 
 A Figma plugin cannot…
 
-- Access Figma documents that are not currently open
+- Access or modify Figma documents that are not currently open
 - Create or open a new or existing Figma document
 - Read or modify the name, ID, and URL of the currently-open Figma document
 - Read or modify the document’s users and their access permissions

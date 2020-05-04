@@ -1,5 +1,13 @@
 # Utility functions
 
+These utility functions are part of the `@create-figma-plugin/utilities` module. If you had initialized your plugin with `npx create-figma-plugin`, the module would have already been installed. Otherwise, do:
+
+```
+$ npm install @create-figma-plugin/utilities
+```
+
+---
+
 <!-- toc -->
 
 - [**Events**](#events)
