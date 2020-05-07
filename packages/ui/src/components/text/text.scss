@@ -21,8 +21,15 @@
   }
 
   a {
+    pointer-events: all;
     text-decoration: none;
     color: $color-blue;
+
+    &:focus {
+      outline: 0;
+      border-radius: $border-radius-2;
+      background-color: $color-selection-a;
+    }
   }
 
   code {
