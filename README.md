@@ -124,6 +124,10 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 - [Figma plugin API docs](https://figma.com/plugin-docs/api/)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
 
+## Prior art
+
+Create Figma Plugin’s [configuration API](/docs/configuration.md#readme) is heavily inspired by [`skpm`](https://github.com/skpm/skpm).
+
 ## License
 
 [MIT](/LICENSE.md)
