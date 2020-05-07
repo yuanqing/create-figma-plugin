@@ -1,5 +1,6 @@
 const CHECK = '✔'
 const CROSS = '✘'
+const WARNING = '⚠'
 const SPACE = '\u00a0'
 
 export function formatSuccessMessage (message) {
@@ -8,6 +9,10 @@ export function formatSuccessMessage (message) {
 
 export function formatErrorMessage (message) {
   return `${CROSS} ${SPACE} ${message}`
+}
+
+export function formatWarningMessage (message) {
+  return `${WARNING} ${SPACE} ${message}`
 }
 
 export function pluralize (number, singular, plural) {
