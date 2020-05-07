@@ -2,7 +2,7 @@
 
 const CLOSING_SLASH = '/'
 
-export function showUI ({ width, height }, data = {}) {
+export function showUI (options, data = {}) {
   if (typeof __html__ === 'undefined') {
     throw new Error('No UI defined')
   }
@@ -14,5 +14,5 @@ export function showUI ({ width, height }, data = {}) {
       ${__html__}
     <${CLOSING_SLASH}script>
   `
-  figma.showUI(html, { width, height })
+  figma.showUI(html, options)
 }
