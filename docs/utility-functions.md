@@ -48,6 +48,7 @@ $ npm install @create-figma-plugin/utilities
 - [**String**](#string)
   * [formatErrorMessage(message)](#const-errormessage--formaterrormessagemessage)
   * [formatSuccessMessage(message)](#const-successmessage--formatsuccessmessagemessage)
+  * [formatWarningMessage(message)](#const-successmessage--formatwarningmessagemessage)
   * [pluralize(number, singular *[, plural]*)](#const-word--pluralizenumber-singular--plural)
 - [**UI**](#ui)
   * [showUI(options *[, data]*)](#showuioptions--data)
@@ -528,6 +529,18 @@ Adds a `✘` prefix to the given `message`.
 ### const successMessage = formatSuccessMessage(message)
 
 Adds a `✔` prefix to the given `message`.
+
+#### Returns
+
+- *`string`*
+
+#### Parameters
+
+- `message` (*`string`*)
+
+### const successMessage = formatWarningMessage(message)
+
+Adds a `⚠` prefix to the given `message`.
 
 #### Returns
 
