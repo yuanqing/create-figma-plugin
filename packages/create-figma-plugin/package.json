@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "Initialize a new Figma plugin using a template",
   "keywords": [
     "create-figma-plugin",
@@ -23,7 +23,7 @@
     "figma-plugin": "lib/cli.js"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.66",
+    "@create-figma-plugin/common": "^0.0.67",
     "degit": "^2.8.0",
     "fs-extra": "^9.0.0",
     "git-user-name": "^2.0.0",
