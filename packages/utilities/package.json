@@ -26,5 +26,8 @@
     "fix": "prettier-standard '{src,test}/**/*.js'",
     "lint": "standardx '{src,test}/**/*.js'"
   },
+  "dependencies": {
+    "natural-compare-lite": "^1.4.0"
+  },
   "sideEffects": false
 }
