@@ -21,7 +21,7 @@
     "ui2"
   ],
   "license": "MIT",
-  "author": "Lim Yuan Qing",
+  "author": "Yuan Qing Lim",
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/create-figma-plugin.git",
@@ -32,9 +32,9 @@
   ],
   "main": "src/index.js",
   "scripts": {
-    "build": "yarn run clean && mkdirp node_modules && build-storybook --output-dir build",
-    "clean": "rimraf build",
-    "deploy": "yarn run clean && storybook-to-ghpages --out build",
+    "build": "yarn run clean && mkdirp node_modules && build-storybook --output-dir storybook",
+    "clean": "rimraf storybook",
+    "deploy": "yarn run clean && storybook-to-ghpages --out storybook",
     "watch": "mkdirp node_modules && start-storybook"
   },
   "dependencies": {

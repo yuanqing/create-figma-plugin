@@ -1,11 +1,12 @@
 .DS_Store
 .nyc_output/
 *.log
-lib/
+*.tsbuildinfo
 node_modules/
+packages/*/lib/
 packages/**/fixtures/**/build/
 packages/**/fixtures/**/figma-plugin/
 packages/**/fixtures/**/manifest.json
 packages/create-figma-plugin/docs
 packages/create-figma-plugin/README.md
-packages/ui/build/
+packages/ui/storybook/

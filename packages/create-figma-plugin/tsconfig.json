@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.shared.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "include": ["src/**/*.ts"],
+  "references": [{ "path": "../common" }]
+}

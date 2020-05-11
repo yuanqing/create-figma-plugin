@@ -12,19 +12,18 @@
     "figma-plugins"
   ],
   "license": "MIT",
-  "author": "Lim Yuan Qing",
+  "author": "Yuan Qing Lim",
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/create-figma-plugin.git",
     "directory": "packages/utilities"
   },
   "files": [
-    "src"
+    "lib"
   ],
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "fix": "prettier-standard '{src,test}/**/*.js'",
-    "lint": "standardx '{src,test}/**/*.js'"
-  },
-  "sideEffects": false
+    "build": "yarn run clean && tsc --build",
+    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo"
+  }
 }

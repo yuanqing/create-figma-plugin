@@ -21,10 +21,10 @@
   "repository": "{{repositoryUrl}}",
 {{/repositoryUrl}}
   "dependencies": {
-    "@create-figma-plugin/utilities": "{{CREATE_FIGMA_PLUGIN_VERSION}}"
+    "@create-figma-plugin/utilities": "*"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "{{CREATE_FIGMA_PLUGIN_VERSION}}"
+    "@create-figma-plugin/build": "*"
   },
   "scripts": {
     "build": "build-figma-plugin",

@@ -1,17 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn run clean && lerna exec --scope '@create-figma-plugin/{build,common}' --scope create-figma-plugin 'babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward'",
+    "build": "lerna run build --ignore @create-figma-plugin/ui",
     "bump": "node scripts/bump-dependencies.js",
-    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json,node_modules}' 'packages/create-figma-plugin/{docs,README.md}' packages/ui/build",
+    "clean": "rimraf .nyc_output '*.log' 'packages/*/{lib,tsconfig.tsbuildinfo}' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json,node_modules}' 'packages/create-figma-plugin/{docs,README.md}' packages/ui/build",
     "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
     "docs": "node scripts/insert-toc.js",
-    "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
-    "fix-css": "prettier --write 'packages/*/src/**/*.scss'",
-    "fix-js": "prettier-standard '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
-    "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
-    "lint-css": "stylelint 'packages/*/src/**/*.scss'",
-    "lint-js": "standardx '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
+    "fix": "prettier-standard 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.ts' && prettier --write '*.json' 'packages/*/*.json' 'packages/*/src/**/*.scss'",
+    "lint": "standardx 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.ts' && stylelint 'packages/*/src/**/*.scss'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
@@ -20,20 +16,15 @@
     "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
-    "@babel/plugin-transform-react-jsx": "^7.9.4",
     "@figma/plugin-typings": "^1.15.0",
     "@storybook/addon-storysource": "^5.3.18",
     "@storybook/preact": "^5.3.18",
     "@storybook/source-loader": "^5.3.18",
     "@storybook/storybook-deployer": "^2.8.5",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "ava": "^3.8.1",
-    "babel-loader": "^8.1.0",
-    "babel-plugin-require-context-hook": "^1.0.0",
     "chokidar-cli": "^2.1.0",
-    "concurrently": "^5.2.0",
     "cpy-cli": "^3.1.0",
     "eslint-plugin-react-hooks": "^4.0.0",
     "esm": "^3.2.25",
@@ -53,7 +44,9 @@
     "standardx": "^5.0.0",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-prettier": "^1.1.2"
+    "stylelint-prettier": "^1.1.2",
+    "typescript": "^3.8.3",
+    "typescript-plugin-css-modules": "^2.3.0"
   },
   "ava": {
     "files": [
@@ -61,8 +54,7 @@
       "!**/fixtures/**"
     ],
     "require": [
-      "esm",
-      "./packages/common/src/silence-logging.js"
+      "esm"
     ],
     "timeout": "30s",
     "verbose": true
@@ -77,6 +69,8 @@
     "rules": {
       "indent": "off",
       "no-console": "error",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "error",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn"
     }
@@ -94,6 +88,12 @@
     "*.scss": [
       "stylelint",
       "prettier"
+    ]
+  },
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
     ]
   },
   "stylelint": {

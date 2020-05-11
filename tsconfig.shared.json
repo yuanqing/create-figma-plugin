@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "target": "ES2019",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
+  }
+}

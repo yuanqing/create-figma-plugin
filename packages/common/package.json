@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Internal code used across the `create-figma-plugin` monorepo",
+  "description": "Internal utilities used across the `create-figma-plugin` monorepo",
   "keywords": [
     "create-figma-plugin",
     "figma",
@@ -12,7 +12,7 @@
     "figma-plugins"
   ],
   "license": "MIT",
-  "author": "Lim Yuan Qing",
+  "author": "Yuan Qing Lim",
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/create-figma-plugin.git",
@@ -22,11 +22,14 @@
     "lib"
   ],
   "main": "lib/index.js",
+  "scripts": {
+    "build": "yarn run clean && tsc --build",
+    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo"
+  },
   "dependencies": {
     "@sindresorhus/slugify": "^0.11.0",
     "chalk": "^4.0.0",
     "fs-extra": "^9.0.0",
     "npmlog": "^4.1.2"
-  },
-  "sideEffects": false
+  }
 }

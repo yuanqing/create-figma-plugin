@@ -9,7 +9,7 @@
     "figma-plugins"
   ],
   "license": "MIT",
-  "author": "Lim Yuan Qing",
+  "author": "Yuan Qing Lim",
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/create-figma-plugin.git",
@@ -21,6 +21,10 @@
   ],
   "bin": {
     "create-figma-plugin": "lib/cli.js"
+  },
+  "scripts": {
+    "build": "yarn run clean && tsc --build",
+    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.68",
