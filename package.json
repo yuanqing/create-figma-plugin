@@ -1,39 +1,36 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn run clean && lerna exec --scope '@create-figma-plugin/{build,common}' --scope create-figma-plugin 'babel src --copy-files --delete-dir-on-start --out-dir lib --root-mode upward'",
-    "bump": "node scripts/bump-dependencies.js",
-    "clean": "rimraf .nyc_output '*.log' 'packages/*/lib' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json,node_modules}' 'packages/create-figma-plugin/{docs,README.md}' packages/ui/build",
-    "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
-    "docs": "node scripts/insert-toc.js",
-    "fix": "concurrently --raw 'yarn run fix-css' 'yarn run fix-js'",
-    "fix-css": "prettier --write 'packages/*/src/**/*.scss'",
-    "fix-js": "prettier-standard '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
-    "lint": "concurrently --raw 'yarn run lint-css' 'yarn run lint-js'",
-    "lint-css": "stylelint 'packages/*/src/**/*.scss'",
-    "lint-js": "standardx '*.js' 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.js'",
+    "build": "lerna run build",
+    "bump-dependencies": "node scripts/bump-dependencies.js",
+    "clean": "lerna run clean && rimraf '*.log'",
+    "insert-toc": "node scripts/insert-toc.js",
+    "fix": "lerna run fix && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
+    "lint": "lerna run lint && standardx 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
-    "test": "yarn run build && ava",
-    "version": "lerna version",
-    "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
+    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install && yarn run build",
+    "test": "yarn run build && lerna run test",
+    "version": "lerna version"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
-    "@babel/plugin-transform-react-jsx": "^7.9.4",
     "@figma/plugin-typings": "^1.15.0",
     "@storybook/addon-storysource": "^5.3.18",
     "@storybook/preact": "^5.3.18",
     "@storybook/source-loader": "^5.3.18",
     "@storybook/storybook-deployer": "^2.8.5",
+    "@types/fs-extra": "^8.1.0",
+    "@types/git-user-name": "^2.0.0",
+    "@types/mustache": "^4.0.1",
+    "@types/npmlog": "^4.1.2",
+    "@types/rimraf": "^3.0.0",
+    "@types/sade": "^1.6.0",
+    "@types/tap": "^14.10.0",
+    "@types/terser-webpack-plugin": "^2.2.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "ava": "^3.8.1",
-    "babel-loader": "^8.1.0",
-    "babel-plugin-require-context-hook": "^1.0.0",
     "chokidar-cli": "^2.1.0",
-    "concurrently": "^5.2.0",
     "cpy-cli": "^3.1.0",
     "eslint-plugin-react-hooks": "^4.0.0",
     "esm": "^3.2.25",
@@ -53,7 +50,10 @@
     "standardx": "^5.0.0",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-prettier": "^1.1.2"
+    "stylelint-prettier": "^1.1.2",
+    "tap": "^14.10.7",
+    "typescript": "^3.8.3",
+    "typescript-plugin-css-modules": "^2.3.0"
   },
   "ava": {
     "files": [
@@ -61,8 +61,7 @@
       "!**/fixtures/**"
     ],
     "require": [
-      "esm",
-      "./packages/common/src/silence-logging.js"
+      "esm"
     ],
     "timeout": "30s",
     "verbose": true
@@ -77,6 +76,8 @@
     "rules": {
       "indent": "off",
       "no-console": "error",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "error",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn"
     }
@@ -94,6 +95,12 @@
     "*.scss": [
       "stylelint",
       "prettier"
+    ]
+  },
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
     ]
   },
   "stylelint": {

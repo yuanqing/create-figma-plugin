@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Internal code used across the `create-figma-plugin` monorepo",
+  "description": "Internal utilities used across the `create-figma-plugin` monorepo",
   "keywords": [
     "create-figma-plugin",
     "figma",
@@ -12,7 +12,7 @@
     "figma-plugins"
   ],
   "license": "MIT",
-  "author": "Lim Yuan Qing",
+  "author": "Yuan Qing Lim",
   "repository": {
     "type": "git",
     "url": "git://github.com/yuanqing/create-figma-plugin.git",
@@ -22,11 +22,25 @@
     "lib"
   ],
   "main": "lib/index.js",
+  "scripts": {
+    "build": "yarn run clean-build && tsc --build",
+    "clean": "yarn run clean-build && yarn run clean-test",
+    "clean-build": "rimraf '*.log' lib tsconfig.tsbuildinfo",
+    "clean-test": "rimraf '*.log' .nyc_output coverage",
+    "fix": "prettier-standard '{src,test}/**/*.ts' && prettier --write '*.json'",
+    "lint": "standardx '{src,test}/**/*.ts'",
+    "test": "yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
+  },
   "dependencies": {
     "@sindresorhus/slugify": "^0.11.0",
     "chalk": "^4.0.0",
     "fs-extra": "^9.0.0",
     "npmlog": "^4.1.2"
   },
-  "sideEffects": false
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
+  }
 }

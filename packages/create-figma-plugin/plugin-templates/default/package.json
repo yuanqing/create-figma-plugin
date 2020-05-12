@@ -1,10 +1,10 @@
 {
-  "name": "{{name}}",
+  "name": "{{{name}}}",
 {{#version}}
-  "version": "{{version}}",
+  "version": "{{{version}}}",
 {{/version}}
 {{#description}}
-  "description": "{{description}}",
+  "description": "{{{description}}}",
 {{/description}}
   "keywords": [
     "create-figma-plugin",
@@ -12,28 +12,28 @@
     "figma-plugin"
   ],
 {{#license}}
-  "license": "{{license}}",
+  "license": "{{{license}}}",
 {{/license}}
 {{#author}}
-  "author": "{{author}}",
+  "author": "{{{author}}}",
 {{/author}}
 {{#repositoryUrl}}
-  "repository": "{{repositoryUrl}}",
+  "repository": "{{{repositoryUrl}}}",
 {{/repositoryUrl}}
   "dependencies": {
-    "@create-figma-plugin/utilities": "{{CREATE_FIGMA_PLUGIN_VERSION}}"
+    "@create-figma-plugin/utilities": "*"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "{{CREATE_FIGMA_PLUGIN_VERSION}}"
+    "@create-figma-plugin/build": "*"
   },
   "scripts": {
     "build": "build-figma-plugin",
     "watch": "build-figma-plugin --watch"
   },
   "figma-plugin": {
-    "id": "{{name}}",
+    "id": "{{{name}}}",
 {{#displayName}}
-    "name": "{{displayName}}",
+    "name": "{{{displayName}}}",
 {{/displayName}}
     "main": "src/main.js"
   }
