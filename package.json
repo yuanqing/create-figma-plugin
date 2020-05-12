@@ -29,11 +29,9 @@
     "@types/terser-webpack-plugin": "^2.2.0",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
-    "ava": "^3.8.1",
     "chokidar-cli": "^2.1.0",
     "cpy-cli": "^3.1.0",
     "eslint-plugin-react-hooks": "^4.0.0",
-    "esm": "^3.2.25",
     "fs-extra": "^9.0.0",
     "globby": "^11.0.0",
     "husky": "^4.2.5",
@@ -54,17 +52,6 @@
     "tap": "^14.10.7",
     "typescript": "^3.8.3",
     "typescript-plugin-css-modules": "^2.3.0"
-  },
-  "ava": {
-    "files": [
-      "packages/*/test/**/*.js",
-      "!**/fixtures/**"
-    ],
-    "require": [
-      "esm"
-    ],
-    "timeout": "30s",
-    "verbose": true
   },
   "eslintConfig": {
     "globals": {
@@ -88,7 +75,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.ts": [
       "standardx",
       "prettier-standard"
     ],
