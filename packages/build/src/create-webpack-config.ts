@@ -1,5 +1,5 @@
 import { join, resolve } from 'path'
-import TerserPlugin from 'terser-webpack-plugin'
+import * as TerserPlugin from 'terser-webpack-plugin'
 import * as webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
 
