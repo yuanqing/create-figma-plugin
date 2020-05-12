@@ -1,4 +1,4 @@
-import test from 'ava'
+import { test } from 'tap'
 import { evaluateNumericExpression } from '../src/number'
 
 test('positive numbers', async function (t) {

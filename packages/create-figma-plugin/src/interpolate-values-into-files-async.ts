@@ -1,12 +1,8 @@
 import { readFile, outputFile } from 'fs-extra'
 import * as globby from 'globby'
 import { join } from 'path'
-import isUtf8 from 'is-utf8'
-import mustache from 'mustache'
-
-mustache.escape = function (text) {
-  return text
-}
+import * as isUtf8 from 'is-utf8'
+import * as mustache from 'mustache'
 
 export async function interpolateValuesIntoFilesAsync (directory, values) {
   const filePaths = await globby('**/*', {

@@ -1,4 +1,4 @@
-import gitUserName from 'git-user-name'
+import * as gitUserName from 'git-user-name'
 import { constants } from '@create-figma-plugin/common'
 import { createPluginDisplayName } from './create-plugin-display-name'
 

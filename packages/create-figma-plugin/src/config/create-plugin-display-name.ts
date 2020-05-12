@@ -1,5 +1,5 @@
 import { constants } from '@create-figma-plugin/common'
-import titleCase from 'titlecase'
+import * as titleCase from 'titlecase'
 
 export function createPluginDisplayName (name) {
   if (typeof name === 'undefined') {

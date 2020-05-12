@@ -1,4 +1,4 @@
-import test from 'ava'
+import { test } from 'tap'
 import * as index from '../src/index'
 
 test('exports are not `undefined`', function (t) {

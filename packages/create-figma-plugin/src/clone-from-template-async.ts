@@ -1,4 +1,4 @@
-import degit from 'degit'
+import * as degit from 'degit'
 import { copy, ensureDir, pathExists, move } from 'fs-extra'
 import { join, resolve } from 'path'
 

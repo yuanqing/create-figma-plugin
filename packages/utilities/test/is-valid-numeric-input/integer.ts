@@ -1,4 +1,4 @@
-import test from 'ava'
+import { test } from 'tap'
 import { isValidNumericInput } from '../../src/number'
 
 test('string - empty', async function (t) {
