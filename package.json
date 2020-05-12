@@ -1,19 +1,17 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna run build --ignore @create-figma-plugin/ui",
-    "bump": "node scripts/bump-dependencies.js",
-    "clean": "rimraf .nyc_output '*.log' 'packages/*/{lib,tsconfig.tsbuildinfo}' 'packages/**/fixtures/**/{build,figma-plugin,manifest.json,node_modules}' 'packages/create-figma-plugin/{docs,README.md}' packages/ui/build",
-    "coverage": "yarn run build && nyc --exclude 'packages/*/lib' -- ava",
-    "docs": "node scripts/insert-toc.js",
-    "fix": "prettier-standard 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.ts' && prettier --write '*.json' 'packages/*/*.json' 'packages/*/src/**/*.scss'",
-    "lint": "standardx 'scripts/**/*.js' 'packages/*/{.storybook,src,test}/**/*.ts' && stylelint 'packages/*/src/**/*.scss'",
+    "build": "lerna run build",
+    "bump-dependencies": "node scripts/bump-dependencies.js",
+    "clean": "lerna run clean && rimraf '*.log'",
+    "insert-toc": "node scripts/insert-toc.js",
+    "fix": "lerna run fix && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
+    "lint": "lerna run lint && standardx 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf yarn.lock node_modules 'packages/*/node_modules' && yarn install && yarn run build",
-    "test": "yarn run build && ava",
-    "version": "lerna version",
-    "watch": "chokidar '*.js' 'packages/*/src/**/*.js' --command 'yarn build' --initial --silent"
+    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install && yarn run build",
+    "test": "yarn run build && lerna run test",
+    "version": "lerna version"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.15.0",
@@ -28,6 +26,7 @@
     "@types/rimraf": "^3.0.0",
     "@types/sade": "^1.6.0",
     "@types/tap": "^14.10.0",
+    "@types/terser-webpack-plugin": "^2.2.0",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
     "ava": "^3.8.1",

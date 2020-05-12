@@ -1,7 +1,7 @@
-import { test } from 'tap'
 import { pathExists } from 'fs-extra'
 import { join } from 'path'
 import * as rimraf from 'rimraf'
+import { test } from 'tap'
 import { createFigmaPluginAsync } from '../src/create-figma-plugin-async'
 
 test('use default', async function (t) {
@@ -22,7 +22,7 @@ test('use default', async function (t) {
 async function cleanUpAsync () {
   return new Promise(function (resolve, reject) {
     rimraf(join(process.cwd(), 'figma-plugin'), function (error) {
-      if (error !== null) {
+      if (error) {
         reject(error)
         return
       }

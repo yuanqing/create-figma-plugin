@@ -23,13 +23,13 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run clean && tsc --build",
+    "build": "yarn run clean-build && tsc --build",
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' lib tsconfig.tsbuildinfo",
-    "clean-test": "rimraf .nyc_output coverage",
-    "fix": "prettier-standard '{src,test}/**/*.ts' && prettier --write '*.json' 'test/fixtures/**/*.json'",
+    "clean-test": "rimraf '*.log' .nyc_output coverage",
+    "fix": "prettier-standard '{src,test}/**/*.ts' && prettier --write '*.json'",
     "lint": "standardx '{src,test}/**/*.ts'",
-    "test": "tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
+    "test": "yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^0.11.0",
