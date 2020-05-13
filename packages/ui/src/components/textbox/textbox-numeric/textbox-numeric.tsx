@@ -2,7 +2,7 @@
 import {
   evaluateNumericExpression,
   isValidNumericInput
-} from '@create-figma-plugin/utilities/src/number'
+} from '@create-figma-plugin/utilities'
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
