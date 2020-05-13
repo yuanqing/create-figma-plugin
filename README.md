@@ -25,6 +25,11 @@ First:
 ```
 $ npx create-figma-plugin figma-hello-world --yes
 ```
+Or using Yarn:
+
+```
+$ yarn create figma-plugin figma-hello-world --yes
+```
 
 Then:
 
