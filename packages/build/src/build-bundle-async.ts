@@ -52,7 +52,7 @@ async function createMainEntryFileAsync (config) {
     extractModules(config.relaunchButtons, 'main', mainModules)
   }
   return tempWrite(`
-    require('@create-figma-plugin/utilities/src/events');
+    require('@create-figma-plugin/utilities/lib/events');
     const mainModules = ${createRequireCode(mainModules)};
     const command = ${
       mainModules.length > 1 ? 'figma.command' : `'${mainModules[0].command}'`
@@ -71,7 +71,7 @@ async function createUiEntryFileAsync (config) {
     extractModules(config.relaunchButtons, 'ui', uiModules)
   }
   return tempWrite(`
-    require('@create-figma-plugin/utilities/src/events');
+    require('@create-figma-plugin/utilities/lib/events');
     const rootNode = document.getElementById('create-figma-plugin');
     const uiModules = ${createRequireCode(uiModules)};
     if (typeof uiModules[__COMMAND__] === 'undefined') {
