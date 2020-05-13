@@ -18,7 +18,7 @@ export function createWebpackConfig (
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.jsx?$/,
           exclude: /node_modules\/(?!@create-figma-plugin)/,
           use: {
             loader: 'babel-loader',
@@ -80,7 +80,7 @@ export function createWebpackConfig (
         process.cwd(),
         'node_modules'
       ],
-      extensions: ['.js', '.ts', '.tsx', '.json']
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
     },
     devtool: isDevelopment ? 'inline-cheap-module-source-map' : false,
     stats: 'errors-only',
