@@ -9,7 +9,7 @@ async function main () {
     return /\.tsx?$/.test(file) === false
   })
   const promises = nonTsFiles.map(function (file) {
-    const copiedFile = file.replace('packages/ui/src/', 'packages/ui/lib/')
+    const copiedFile = file.replace('/src/', '/lib/')
     return fs.copy(file, copiedFile)
   })
   await Promise.all(promises)
