@@ -3,7 +3,7 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "sourceMap": true,
     "target": "ES2019",
     "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
