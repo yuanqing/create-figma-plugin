@@ -32,7 +32,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run clean && tsc --build && node scripts/copy-non-ts-files.js",
+    "build": "yarn run clean && tsc --module ES2020 --moduleResolution Node && node scripts/copy-non-ts-files.js",
     "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "prettier-standard '{.storybook,src}/**/*.ts' && prettier --write '*.json'",
     "lint": "standardx '{.storybook,src}/**/*.ts'",

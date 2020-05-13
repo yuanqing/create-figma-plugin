@@ -23,7 +23,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run clean-build && tsc --build",
+    "build": "yarn run clean-build && tsc --module es2020 --moduleResolution node",
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "clean-test": "rimraf '*.log' .nyc_output coverage",

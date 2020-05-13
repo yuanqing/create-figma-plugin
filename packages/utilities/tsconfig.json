@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src",
-    "module": "ES2020",
-    "moduleResolution": "Node"
+    "rootDir": "src"
   },
   "include": ["src/**/*.ts"]
 }
