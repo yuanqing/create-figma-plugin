@@ -13,7 +13,9 @@
         }
       }
     ],
-    "rootDir": "src"
+    "rootDir": "src",
+    "module": "ES2020",
+    "moduleResolution": "Node"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "../utilities" }]

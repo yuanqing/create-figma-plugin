@@ -28,16 +28,18 @@
     "directory": "packages/ui"
   },
   "files": [
-    "src"
+    "lib"
   ],
-  "main": "src/index.ts",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run clean && mkdirp node_modules && build-storybook --output-dir build",
-    "clean": "rimraf build",
-    "deploy": "yarn run clean && storybook-to-ghpages --out build",
+    "build": "yarn run clean && tsc --build && node scripts/copy-non-ts-files.js",
+    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "prettier-standard '{.storybook,src}/**/*.ts' && prettier --write '*.json'",
     "lint": "standardx '{.storybook,src}/**/*.ts'",
-    "watch": "yarn run clean && mkdirp node_modules && start-storybook"
+    "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
+    "storybook-clean": "rimraf '*.log' build",
+    "storybook-deploy": "yarn run clean && storybook-to-ghpages --out build",
+    "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^0.0.69",
