@@ -2,7 +2,6 @@
 import classnames from '@sindresorhus/class-names'
 import { h, toChildArray } from 'preact'
 import { Space } from '../../types'
-import '../../scss/base.scss'
 import styles from './stack.scss'
 
 export interface StackProps {

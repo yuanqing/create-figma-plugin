@@ -6,7 +6,6 @@ import { Option, OptionValue, isOptionHeader, isOptionSeparator } from '../../ty
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
 import { checkIcon } from '../icon/icons/check-icon'
 import { ESCAPE_KEY_CODE, ENTER_KEY_CODE } from '../../utilities/key-codes'
-import '../../scss/base.scss'
 import styles from './dropdown-menu.scss'
 
 const INVALID_ID = -1

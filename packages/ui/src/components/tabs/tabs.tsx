@@ -8,7 +8,6 @@ import {
   RIGHT_KEY_CODE,
   UP_KEY_CODE
 } from '../../utilities/key-codes'
-import '../../scss/base.scss'
 import styles from './tabs.scss'
 
 export interface TabsProps {

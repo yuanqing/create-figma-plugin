@@ -1,6 +1,5 @@
 /** @jsx h */
 import { h } from 'preact'
-import '../../scss/base.scss'
 import styles from './loading-indicator.scss'
 
 export function LoadingIndicator (props : any) {

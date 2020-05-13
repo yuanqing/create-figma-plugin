@@ -4,7 +4,6 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
-import '../../scss/base.scss'
 import styles from './button.scss'
 
 export interface ButtonProps {

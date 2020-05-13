@@ -3,7 +3,6 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
-import '../../scss/base.scss'
 import styles from './file-upload-dropzone.scss'
 
 export interface FileUploadDropzoneProps {

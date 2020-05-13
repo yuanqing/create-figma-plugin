@@ -3,7 +3,6 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { componentIcon } from '../icon/icons/component-icon'
 import { frameIcon } from '../icon/icons/frame-icon'
-import '../../scss/base.scss'
 import styles from './layer.scss'
 
 const icons = {

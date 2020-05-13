@@ -1,6 +1,5 @@
 /** @jsx h */
 import { h } from 'preact'
-import '../../scss/base.scss'
 import style from './preview.scss'
 
 export interface PreviewProps {

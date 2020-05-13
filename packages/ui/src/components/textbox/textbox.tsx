@@ -3,7 +3,6 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
-import '../../scss/base.scss'
 import styles from './textbox.scss'
 
 export interface TextboxProps {

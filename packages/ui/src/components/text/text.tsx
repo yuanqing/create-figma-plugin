@@ -2,7 +2,6 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { Alignment, Space } from '../../types'
-import '../../scss/base.scss'
 import styles from './text.scss'
 
 export interface TextProps {

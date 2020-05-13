@@ -4,7 +4,6 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
-import '../../scss/base.scss'
 import styles from './selectable-item.scss'
 
 export interface SelectableItemProps {
