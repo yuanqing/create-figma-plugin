@@ -2,99 +2,124 @@ import { pathExists } from 'fs-extra'
 import { join } from 'path'
 import * as slugify from '@sindresorhus/slugify'
 import { constants } from './constants'
+import {
+  Config,
+  ConfigCommand,
+  ConfigCommandFile,
+  ConfigRelaunchButton
+} from './types/config'
+import {
+  RawConfig,
+  RawConfigCommand,
+  RawConfigCommandFile,
+  RawConfigRelaunchButtons
+} from './types/raw-config'
 
-const defaultConfig = {
+const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
-  name: constants.packageJson.defaultPluginName,
   id: constants.packageJson.defaultPluginName,
-  command: 'index.js--default',
+  name: constants.packageJson.defaultPluginName,
+  commandId: 'index.js--default',
   main: { src: 'index.js', handler: 'default' },
-  relaunchButtons: []
+  ui: undefined,
+  menu: undefined,
+  relaunchButtons: undefined
 }
 
-export async function readConfigAsync () {
+export async function readConfigAsync (): Promise<Config> {
   const packageJsonPath = join(process.cwd(), 'package.json')
   if ((await pathExists(packageJsonPath)) === false) {
     return defaultConfig
   }
   const packageJson = require(packageJsonPath)
-  const config = packageJson[constants.packageJson.configKey]
+  const config: RawConfig = packageJson[constants.packageJson.configKey]
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig
   }
+  const { apiVersion, id, name, main, ui, menu, relaunchButtons } = config
   return {
-    ...parseCommand(config),
     apiVersion:
-      typeof config.apiVersion !== 'undefined'
-        ? config.apiVersion
-        : constants.apiVersion,
-    id: typeof config.id === 'undefined' ? slugify(config.name) : config.id,
-    relaunchButtons: parseRelaunchButtons(config.relaunchButtons)
+      typeof apiVersion === 'undefined' ? constants.apiVersion : apiVersion,
+    id: typeof id === 'undefined' ? slugify(name) : id,
+    ...parseCommand({ name, main, ui, menu }),
+    relaunchButtons:
+      typeof relaunchButtons === 'undefined'
+        ? undefined
+        : parseRelaunchButtons(relaunchButtons)
   }
 }
 
-function parseCommand (config) {
-  const { name, main, ui, menu } = config
-  const result: any = {} // FIXME
+function parseCommand (command: {
+  name: string
+  main?: RawConfigCommandFile
+  ui?: RawConfigCommandFile
+  menu?: Array<RawConfigCommand>
+}): {
+  name: string
+  commandId: undefined | string
+  main: undefined | ConfigCommandFile
+  ui: undefined | ConfigCommandFile
+  menu: undefined | Array<ConfigCommand>
+} {
+  const { name, main, ui, menu } = command
+  const result: any = {}
   result.name = name
-  if (typeof main !== 'undefined') {
-    result.command =
-      typeof main === 'string'
-        ? `${main}--default`
-        : `${main.src}--${main.handler}`
-    result.main = parseFile(main)
-    result.ui = parseFile(ui)
-  }
-  if (typeof menu !== 'undefined') {
-    result.menu = []
-    menu.forEach(function (item) {
-      if (item === '-') {
-        result.menu.push({ separator: true })
-        return
-      }
-      if (typeof item !== 'undefined') {
-        result.menu.push(parseCommand(item))
-      }
-    })
-  }
+  result.commandId =
+    typeof main === 'undefined' ? undefined : parseCommandId(main)
+  result.main = typeof main === 'undefined' ? undefined : parseFile(main)
+  result.ui = typeof ui === 'undefined' ? undefined : parseFile(ui)
+  result.menu =
+    typeof menu === 'undefined'
+      ? undefined
+      : menu.map(function (command: RawConfigCommand) {
+          if (command === '-') {
+            return { separator: true }
+          }
+          return parseCommand(command)
+        })
   return result
 }
 
-function parseRelaunchButtons (relaunchButtons) {
-  if (typeof relaunchButtons === 'undefined') {
-    return []
-  }
+function parseRelaunchButtons (
+  relaunchButtons: RawConfigRelaunchButtons
+): Array<ConfigRelaunchButton> {
   const result = []
-  for (const command in relaunchButtons) {
-    const { main, ui, ...rest } = relaunchButtons[command]
+  for (const commandId in relaunchButtons) {
+    const { name, main, ui } = relaunchButtons[commandId]
     result.push({
-      command,
+      name,
+      commandId,
       main: parseFile(main),
-      ui: parseFile(ui),
-      ...rest
+      ui: typeof ui === 'undefined' ? undefined : parseFile(ui)
     })
   }
   return result
 }
 
-function parseFile (file) {
-  if (typeof file === 'undefined') {
-    return null
+function parseCommandId (main: RawConfigCommandFile): string {
+  if (typeof main === 'string') {
+    return `${main}--default`
   }
+  const { src, handler } = main
+  if (typeof handler === 'undefined') {
+    return `${src}--default`
+  }
+  return `${src}--${handler}`
+}
+
+function parseFile (file: RawConfigCommandFile): ConfigCommandFile {
   if (typeof file === 'string') {
     return {
       src: file,
       handler: 'default'
     }
   }
-  if (typeof file.src === 'undefined') {
-    return null
-  }
-  if (typeof file.handler === 'undefined') {
+  const { src, handler } = file
+  if (typeof handler === 'undefined') {
     return {
-      src: file.src,
+      src,
       handler: 'default'
     }
   }
-  return file
+  return { src, handler }
 }
