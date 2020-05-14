@@ -6,8 +6,8 @@
 
 API | Main context | UI context
 :--|:--|:--
-Figma plugin API | 🟢 Available (via the [`figma`](https://figma.com/plugin-docs/api/figma/) global object) | 🔴 Not available
-JavaScript API | 🟡 Only a subset is available (excludes [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [`Fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)) | 🟢 Available
+Figma plugin API | :white_check_mark: Available (via the [`figma`](https://figma.com/plugin-docs/api/figma/) global object) | :x: Not available
+JavaScript API | :warning: Only a subset is available (excludes [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [`Fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)) | :white_check_mark: Available
 
 See that:
 
