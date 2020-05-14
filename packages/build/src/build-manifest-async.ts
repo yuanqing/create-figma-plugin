@@ -48,8 +48,8 @@ function normalizeMenu (menu) {
       // FIXME
       name: item.name
     }
-    if (typeof item.command !== 'undefined') {
-      result.command = item.command
+    if (typeof item.commandId !== 'undefined') {
+      result.command = item.commandId
     }
     if (typeof item.menu !== 'undefined') {
       result.menu = normalizeMenu(item.menu)
