@@ -7,7 +7,8 @@
     "relaunchButtons": {
       "qux": {
         "name": "quux",
-        "main": "quuux"
+        "main": "quuux",
+        "multipleSelection": true
       }
     }
   }

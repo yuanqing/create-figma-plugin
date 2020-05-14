@@ -170,24 +170,42 @@ test('relaunch button', async function (t) {
     apiVersion: '1.0.0',
     name: 'foo',
     id: '42',
-    commandId: undefined,
-    main: undefined,
-    ui: undefined,
-    menu: [
-      {
-        name: 'bar',
-        commandId: 'baz--default',
-        main: { src: 'baz', handler: 'default' },
-        ui: undefined,
-        menu: undefined
-      }
-    ],
+    commandId: 'bar--default',
+    main: { src: 'bar', handler: 'default' },
+    ui: { src: 'baz', handler: 'default' },
+    menu: undefined,
     relaunchButtons: [
       {
         name: 'quux',
         commandId: 'qux',
         main: { src: 'quuux', handler: 'default' },
-        ui: undefined
+        ui: undefined,
+        multipleSelection: false
+      }
+    ]
+  })
+})
+
+test('relaunch button with multiple selection', async function (t) {
+  t.plan(1)
+  process.chdir(
+    join(__dirname, 'fixtures', '10-relaunch-button-with-multiple-selection')
+  )
+  t.deepEqual(await readConfigAsync(), {
+    apiVersion: '1.0.0',
+    name: 'foo',
+    id: '42',
+    commandId: 'bar--default',
+    main: { src: 'bar', handler: 'default' },
+    ui: { src: 'baz', handler: 'default' },
+    menu: undefined,
+    relaunchButtons: [
+      {
+        name: 'quux',
+        commandId: 'qux',
+        main: { src: 'quuux', handler: 'default' },
+        ui: undefined,
+        multipleSelection: true
       }
     ]
   })

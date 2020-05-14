@@ -29,5 +29,6 @@ export type RawConfigRelaunchButtons = {
     name: string
     main: RawConfigCommandFile
     ui?: RawConfigCommandFile
+    multipleSelection?: boolean
   }
 }

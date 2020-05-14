@@ -85,12 +85,14 @@ function parseRelaunchButtons (
 ): Array<ConfigRelaunchButton> {
   const result = []
   for (const commandId in relaunchButtons) {
-    const { name, main, ui } = relaunchButtons[commandId]
+    const { name, main, ui, multipleSelection } = relaunchButtons[commandId]
     result.push({
       name,
       commandId,
       main: parseFile(main),
-      ui: typeof ui === 'undefined' ? undefined : parseFile(ui)
+      ui: typeof ui === 'undefined' ? undefined : parseFile(ui),
+      multipleSelection:
+        typeof multipleSelection === 'undefined' ? false : multipleSelection
     })
   }
   return result

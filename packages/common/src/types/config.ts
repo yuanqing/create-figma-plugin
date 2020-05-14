@@ -29,4 +29,5 @@ export type ConfigRelaunchButton = {
   commandId: string
   main: ConfigCommandFile
   ui: undefined | ConfigCommandFile
+  multipleSelection: boolean
 }
