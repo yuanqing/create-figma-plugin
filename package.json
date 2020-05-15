@@ -21,6 +21,7 @@
     "@storybook/storybook-deployer": "^2.8.5",
     "@types/fs-extra": "^8.1.0",
     "@types/git-user-name": "^2.0.0",
+    "@types/inquirer": "^6.5.0",
     "@types/mustache": "^4.0.1",
     "@types/npmlog": "^4.1.2",
     "@types/rimraf": "^3.0.0",

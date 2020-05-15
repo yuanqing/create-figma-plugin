@@ -1,8 +1,8 @@
 import { exec } from 'child_process'
 
-export async function installDependenciesAsync (cwd) {
-  const command = isYarn() ? 'yarn install' : 'npm install'
-  return new Promise(function (resolve, reject) {
+export async function installDependenciesAsync (cwd: string): Promise<void> {
+  await new Promise(function (resolve, reject) {
+    const command = isYarn() === true ? 'yarn install' : 'npm install'
     exec(command, { cwd }, function (error) {
       if (error) {
         reject(error)
@@ -13,8 +13,6 @@ export async function installDependenciesAsync (cwd) {
   })
 }
 
-const yarnUserAgentRegex = /yarn\//
-
-function isYarn () {
-  return yarnUserAgentRegex.test(process.env.npm_config_user_agent)
+function isYarn (): boolean {
+  return /yarn\//.test(process.env.npm_config_user_agent as string)
 }

@@ -1,15 +1,19 @@
 import { readFile, outputFile } from 'fs-extra'
 import * as globby from 'globby'
 import { join } from 'path'
-import * as isUtf8 from 'is-utf8'
 import * as mustache from 'mustache'
+import { Settings } from './types/settings'
+const isUtf8 = require('is-utf8')
 
-export async function interpolateValuesIntoFilesAsync (directory, values) {
+export async function interpolateValuesIntoFilesAsync (
+  directory: string,
+  values: Settings
+): Promise<void> {
   const filePaths = await globby('**/*', {
     cwd: directory,
     dot: true
   })
-  return Promise.all(
+  await Promise.all(
     filePaths.map(async function (filePath) {
       const absolutePath = join(directory, filePath)
       const buffer = await readFile(absolutePath)
@@ -21,6 +25,6 @@ export async function interpolateValuesIntoFilesAsync (directory, values) {
   )
 }
 
-function interpolate (string, data) {
-  return mustache.render(string, data)
+function interpolate (string: string, values: Settings) {
+  return mustache.render(string, values)
 }

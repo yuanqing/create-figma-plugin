@@ -2,35 +2,47 @@ import { constants } from '@create-figma-plugin/common'
 import * as gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
 import { createPluginDisplayName } from './create-plugin-display-name'
+import { Settings } from '../types/settings'
 
-export async function promptForUserInputAsync ({ name, template }) {
+export async function promptForUserInputAsync (
+  options: Settings
+): Promise<Settings> {
+  const { name, template } = options
   const questions = [
-    typeof name === 'undefined' && {
-      type: 'input',
-      name: 'name',
-      message: 'name',
-      validate,
-      filter
-    },
+    typeof name === 'undefined'
+      ? false
+      : {
+          type: 'input',
+          name: 'name',
+          message: 'name',
+          validate,
+          filter
+        },
     {
       type: 'input',
       name: 'displayName',
       message: 'display name',
-      default: function (values) {
-        return createPluginDisplayName(
-          typeof name === 'undefined' ? values.name : name
-        )
+      default: function (values: { name: string }) {
+        if (typeof name !== 'undefined') {
+          return createPluginDisplayName(name)
+        }
+        if (typeof values.name !== 'undefined') {
+          return createPluginDisplayName(values.name)
+        }
+        return undefined
       },
       validate,
       filter
     },
-    typeof template === 'undefined' && {
-      type: 'input',
-      name: 'template',
-      message: 'template',
-      default: constants.defaultTemplate,
-      filter
-    },
+    typeof template === 'undefined'
+      ? false
+      : {
+          type: 'input',
+          name: 'template',
+          message: 'template',
+          default: constants.defaultTemplate,
+          filter
+        },
     {
       type: 'input',
       name: 'version',
@@ -66,21 +78,21 @@ export async function promptForUserInputAsync ({ name, template }) {
     }
   ].filter(Boolean)
   return {
+    ...(await prompt(questions)),
     name,
-    template,
-    ...(await prompt(questions))
+    template
   }
 }
 
 const multipleSpaceRegex = /\s+/g
 
-function validate (input) {
+function validate (input: string): true | 'Required' {
   if (input.replace(multipleSpaceRegex, '').trim().length > 0) {
     return true
   }
   return 'Required'
 }
 
-function filter (input) {
+function filter (input: string): string {
   return input.replace(multipleSpaceRegex, ' ').trim()
 }

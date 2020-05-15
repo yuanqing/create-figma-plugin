@@ -1,10 +1,13 @@
-import * as degit from 'degit'
 import { copy, ensureDir, pathExists, move } from 'fs-extra'
 import { join, resolve } from 'path'
+const degit = require('degit')
 
 const gitHubRepositoryRegex = /[\w-]+\/[\w-]+/
 
-export async function cloneFromTemplateAsync (pluginDirectoryPath, template) {
+export async function cloneFromTemplateAsync (
+  pluginDirectoryPath: string,
+  template: string
+): Promise<void> {
   const templateDirectory = resolve(
     __dirname,
     '..',
@@ -12,7 +15,7 @@ export async function cloneFromTemplateAsync (pluginDirectoryPath, template) {
     template
   )
   if ((await pathExists(templateDirectory)) === true) {
-    await ensureDir(pluginDirectoryPath)
+    await ensureDir(pluginDirectoryPath, 0o2775)
     await copy(templateDirectory, pluginDirectoryPath)
     const npmIgnoreFile = join(pluginDirectoryPath, '.npmignore')
     if ((await pathExists(npmIgnoreFile)) === true) {
@@ -21,10 +24,10 @@ export async function cloneFromTemplateAsync (pluginDirectoryPath, template) {
       const gitIgnoreFile = join(pluginDirectoryPath, '.gitignore')
       await move(npmIgnoreFile, gitIgnoreFile)
     }
-    return Promise.resolve()
+    return
   }
   if (gitHubRepositoryRegex.test(template) === false) {
-    return new Error('Invalid GitHub repository')
+    throw new Error('Invalid GitHub repository')
   }
-  return degit(template).clone(pluginDirectoryPath)
+  await degit(template).clone(pluginDirectoryPath)
 }

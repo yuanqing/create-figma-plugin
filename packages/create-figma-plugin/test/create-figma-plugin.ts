@@ -9,7 +9,10 @@ test('use default', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '1-use-default'))
   await cleanUpAsync()
   t.false(await pathExists('figma-plugin'))
-  await createFigmaPluginAsync({}, true)
+  await createFigmaPluginAsync(
+    { name: 'figma-plugin', template: 'default' },
+    true
+  )
   t.true(await pathExists('figma-plugin'))
   t.true(await pathExists('figma-plugin/.gitignore'))
   t.true(await pathExists('figma-plugin/node_modules'))
@@ -20,7 +23,7 @@ test('use default', async function (t) {
 })
 
 async function cleanUpAsync () {
-  return new Promise(function (resolve, reject) {
+  await new Promise(function (resolve, reject) {
     rimraf(join(process.cwd(), 'figma-plugin'), function (error) {
       if (error) {
         reject(error)
