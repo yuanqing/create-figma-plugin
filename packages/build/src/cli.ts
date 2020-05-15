@@ -10,11 +10,12 @@ sade('build-figma-plugin', true)
   )
   .option('-d, --dev', 'Create an unminified bundle with sourcemaps')
   .option('-w, --watch', 'Rebuild the plugin on code changes')
-  .action(async function ({ dev: isDevelopment, watch: isWatch }) {
-    if (isWatch === true) {
+  .action(async function (options: { dev: boolean; w: boolean }) {
+    const { dev, w } = options
+    if (w === true) {
       watch()
       return
     }
-    await buildAsync(isDevelopment, true)
+    await buildAsync(dev, true)
   })
   .parse(process.argv)

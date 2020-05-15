@@ -13,19 +13,19 @@ const ignoreRegex = new RegExp(
   ].join('')
 )
 
-export function watch () {
+export function watch (): void {
   const watcher = chokidar.watch('.', {
-    ignored: function (path) {
+    ignored: function (path: string) {
       return ignoreRegex.test(path)
     }
   })
-  async function runAsync () {
+  async function onChangeAsync () {
     await buildAsync(true, false)
     log.info('Watching...')
   }
-  watcher.on('ready', runAsync)
-  watcher.on('change', async function (file) {
+  watcher.on('ready', onChangeAsync)
+  watcher.on('change', async function (file: string) {
     log.info(`Changed: ${file}`)
-    await runAsync()
+    await onChangeAsync()
   })
 }

@@ -4,8 +4,8 @@ import * as webpack from 'webpack'
 import { constants } from '@create-figma-plugin/common'
 
 export function createWebpackConfig (
-  entry,
-  isDevelopment
+  entry: webpack.Entry,
+  isDevelopment: boolean
 ): webpack.Configuration {
   const mode = isDevelopment ? 'development' : 'production'
   return {

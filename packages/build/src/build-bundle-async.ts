@@ -1,18 +1,31 @@
-import { constants } from '@create-figma-plugin/common'
+import {
+  Config,
+  Command,
+  File,
+  Separator,
+  RelaunchButton,
+  constants
+} from '@create-figma-plugin/common'
 import * as findUp from 'find-up'
 import { basename, extname } from 'path'
 import * as tempWrite from 'temp-write'
 import * as webpack from 'webpack'
 import { createWebpackConfig } from './create-webpack-config'
+import { EntryFile } from './types/entry-file'
 
-export async function buildBundleAsync (config, isDevelopment) {
-  const entry = {}
-  const mainEntryFile = await createMainEntryFileAsync(config)
+export async function buildBundleAsync (
+  config: Config,
+  isDevelopment: boolean
+): Promise<void> {
+  const entry: webpack.Entry = {}
+  const { name, commandId, main, ui, menu, relaunchButtons } = config
+  const command = { name, commandId, main, ui, menu }
+  const mainEntryFile = await createMainEntryFileAsync(command, relaunchButtons)
   if (mainEntryFile !== null) {
     const key = extractBasename(constants.build.pluginCodeFilePath)
     entry[key] = mainEntryFile
   }
-  const uiEntryFile = await createUiEntryFileAsync(config)
+  const uiEntryFile = await createUiEntryFileAsync(command, relaunchButtons)
   if (uiEntryFile !== null) {
     const key = extractBasename(constants.build.pluginUiFilePath)
     entry[key] = uiEntryFile
@@ -42,38 +55,44 @@ export async function buildBundleAsync (config, isDevelopment) {
   })
 }
 
-async function createMainEntryFileAsync (config) {
-  const mainModules = []
-  extractModule(config, 'main', mainModules)
-  if (mainModules.length === 0) {
+async function createMainEntryFileAsync (
+  command: Command,
+  relaunchButtons: null | Array<RelaunchButton>
+): Promise<string | null> {
+  const modules: Array<EntryFile> = []
+  extractModule(command, 'main', modules)
+  if (modules.length === 0) {
     return null
   }
-  if (typeof config.relaunchButtons !== 'undefined') {
-    extractModules(config.relaunchButtons, 'main', mainModules)
+  if (relaunchButtons !== null) {
+    extractModules(relaunchButtons, 'main', modules)
   }
   return tempWrite(`
     require('@create-figma-plugin/utilities/lib/events');
-    const mainModules = ${createRequireCode(mainModules)};
+    const mainModules = ${createRequireCode(modules)};
     const command = ${
-      mainModules.length > 1 ? 'figma.command' : `'${mainModules[0].command}'`
+      modules.length > 1 ? 'figma.command' : `'${modules[0].commandId}'`
     };
     mainModules[command]();
   `)
 }
 
-async function createUiEntryFileAsync (config) {
-  const uiModules = []
-  extractModule(config, 'ui', uiModules)
-  if (uiModules.length === 0) {
+async function createUiEntryFileAsync (
+  command: Command,
+  relaunchButtons: null | Array<RelaunchButton>
+): Promise<string | null> {
+  const modules: Array<EntryFile> = []
+  extractModule(command, 'ui', modules)
+  if (modules.length === 0) {
     return null
   }
-  if (typeof config.relaunchButtons !== 'undefined') {
-    extractModules(config.relaunchButtons, 'ui', uiModules)
+  if (relaunchButtons !== null) {
+    extractModules(relaunchButtons, 'ui', modules)
   }
   return tempWrite(`
     require('@create-figma-plugin/utilities/lib/events');
     const rootNode = document.getElementById('create-figma-plugin');
-    const uiModules = ${createRequireCode(uiModules)};
+    const uiModules = ${createRequireCode(modules)};
     if (typeof uiModules[__COMMAND__] === 'undefined') {
       throw new Error(
         'UI not defined for the command corresponding to ' + __COMMAND__
@@ -83,35 +102,53 @@ async function createUiEntryFileAsync (config) {
   `)
 }
 
-function extractModules (items, key, result) {
-  items.forEach(function (item) {
-    extractModule(item, key, result)
-  })
-}
-
-function extractModule (config, key, result) {
-  const command = config.command
-  const item = config[key]
-  if (typeof item !== 'undefined' && item !== null) {
-    result.push({
-      command: typeof config.id === 'undefined' ? command : '',
-      ...item
-    })
-  }
-  if (typeof config.menu !== 'undefined') {
-    extractModules(config.menu, key, result)
+function extractModules (
+  items: Array<Separator | Command | RelaunchButton>,
+  key: 'ui' | 'main',
+  result: Array<EntryFile>
+): void {
+  for (const item of items) {
+    if (item === '-') {
+      continue
+    }
+    extractModule(item as Command | RelaunchButton, key, result)
   }
 }
 
-function createRequireCode (modules) {
-  const code = []
-  modules.forEach(function (item) {
-    code.push(`'${item.command}':require('${item.src}')['${item.handler}']`)
-  })
+function extractModule (
+  command: Command | RelaunchButton,
+  key: 'ui' | 'main',
+  result: Array<EntryFile>
+): void {
+  const commandId = command.commandId
+  if (commandId !== null) {
+    const item = command[key] as null | File
+    if (item !== null) {
+      const { src, handler } = item
+      result.push({
+        commandId,
+        src,
+        handler
+      })
+    }
+  }
+  const menu = (command as Command).menu
+  if (menu !== null) {
+    extractModules(menu, key, result)
+  }
+}
+
+function createRequireCode (entryFiles: Array<EntryFile>): string {
+  const code: Array<string> = []
+  for (const entryFile of entryFiles) {
+    code.push(
+      `'${entryFile.commandId}':require('${entryFile.src}')['${entryFile.handler}']`
+    )
+  }
   return `{${code.join(',')}}`
 }
 
-function extractBasename (filename) {
+function extractBasename (filename: string): string {
   const extension = extname(filename)
   return basename(filename, extension)
 }

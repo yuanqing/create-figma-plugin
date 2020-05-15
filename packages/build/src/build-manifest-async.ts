@@ -1,61 +1,85 @@
-import { constants } from '@create-figma-plugin/common'
+import {
+  Config,
+  Command,
+  RelaunchButton,
+  Separator,
+  constants
+} from '@create-figma-plugin/common'
 import { outputFile } from 'fs-extra'
+import {
+  Manifest,
+  ManifestMenuItem,
+  ManifestMenuItemSeparator,
+  ManifestRelaunchButton
+} from './types/manifest'
 
-export async function buildManifestAsync (config) {
-  const result: any = {
-    // FIXME
+export async function buildManifestAsync (config: Config): Promise<void> {
+  const { name, commandId, main, ui, menu, relaunchButtons } = config
+  const command = { name, commandId, main, ui, menu }
+  if (hasBundle(command, 'main') === false) {
+    throw new Error('Need a `main`')
+  }
+  const result: Manifest = {
     name: config.name,
     id: config.id,
-    api: config.apiVersion
+    api: config.apiVersion,
+    main: constants.build.pluginCodeFilePath
   }
-  if (hasBundle(config, 'main') === true) {
-    result.main = constants.build.pluginCodeFilePath
-  }
-  if (hasBundle(config, 'ui') === true) {
+  if (hasBundle(command, 'ui') === true) {
     result.ui = constants.build.pluginUiFilePath
   }
-  if (typeof config.menu !== 'undefined') {
-    result.menu = normalizeMenu(config.menu)
+  if (menu !== null) {
+    result.menu = createMenu(menu) as Array<
+      ManifestMenuItem | ManifestMenuItemSeparator
+    >
   }
-  if (
-    typeof config.relaunchButtons !== 'undefined' &&
-    config.relaunchButtons.length > 0
-  ) {
-    result.relaunchButtons = normalizeMenu(config.relaunchButtons)
+  if (relaunchButtons !== null) {
+    result.relaunchButtons = createMenu(relaunchButtons) as Array<
+      ManifestRelaunchButton
+    >
   }
   const string = JSON.stringify(result) + '\n'
-  return outputFile(constants.build.manifestFilePath, string)
+  await outputFile(constants.build.manifestFilePath, string)
 }
 
-function hasBundle (config, key) {
-  if (typeof config[key] !== 'undefined' && config[key] !== null) {
+function hasBundle (command: Command, key: 'main' | 'ui'): boolean {
+  if (command[key] !== null) {
     return true
   }
-  return (
-    typeof config.menu !== 'undefined' &&
-    config.menu.filter(function (item) {
-      return hasBundle(item, key)
-    }).length > 0
-  )
+  if (command.menu !== null) {
+    return (
+      command.menu.filter(function (command) {
+        if (command === '-') {
+          return false
+        }
+        return hasBundle(command, key)
+      }).length > 0
+    )
+  }
+  return false
 }
 
-function normalizeMenu (menu) {
+function createMenu (
+  menu: Array<Separator | Command | RelaunchButton>
+): Array<
+  ManifestMenuItem | ManifestMenuItemSeparator | ManifestRelaunchButton
+> {
   return menu.map(function (item) {
-    if (typeof item.separator !== 'undefined') {
-      return item
+    if (item === '-') {
+      return { separator: true }
     }
-    const result: any = {
-      // FIXME
+    const result: ManifestMenuItem | ManifestRelaunchButton = {
       name: item.name
     }
-    if (typeof item.commandId !== 'undefined') {
+    if (item.commandId !== null) {
       result.command = item.commandId
     }
-    if (typeof item.menu !== 'undefined') {
-      result.menu = normalizeMenu(item.menu)
+    const menu = (item as Command).menu
+    if (menu !== null) {
+      ;(result as ManifestMenuItem).menu = createMenu(menu)
     }
-    if (item.multipleSelection === true) {
-      result.multipleSelection = true
+    if ((item as RelaunchButton).multipleSelection === true) {
+      ;(result as ManifestRelaunchButton).multipleSelection = true
     }
     return result
   })
