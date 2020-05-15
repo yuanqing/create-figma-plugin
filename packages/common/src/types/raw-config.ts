@@ -1,34 +1,33 @@
-export type RawConfig = {
-  apiVersion?: string
-  id?: string
+interface BaseConfig {
   name: string
-  main?: RawConfigCommandFile
-  ui?: RawConfigCommandFile
-  menu?: Array<RawConfigCommand>
-  relaunchButtons?: RawConfigRelaunchButtons
+  main?: RawFile
+  ui?: RawFile
 }
 
-export type RawConfigCommand =
-  | '-'
-  | {
-      name: string
-      main: RawConfigCommandFile
-      ui?: RawConfigCommandFile
-      menu?: Array<RawConfigCommand>
-    }
+export interface RawCommand extends BaseConfig {
+  menu?: Array<RawCommand | RawSeparator>
+}
 
-export type RawConfigCommandFile =
+export interface RawConfig extends BaseConfig {
+  apiVersion?: string
+  id?: string
+  menu?: Array<RawCommand | RawSeparator>
+  relaunchButtons?: RawRelaunchButtons
+}
+
+export type RawFile =
   | string
   | {
       src: string
       handler?: string
     }
 
-export type RawConfigRelaunchButtons = {
-  [key: string]: {
-    name: string
-    main: RawConfigCommandFile
-    ui?: RawConfigCommandFile
-    multipleSelection?: boolean
-  }
+export type RawRelaunchButtons = {
+  [key: string]: RawRelaunchButton
 }
+
+export interface RawRelaunchButton extends BaseConfig {
+  multipleSelection?: boolean
+}
+
+export type RawSeparator = '-'

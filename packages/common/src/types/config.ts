@@ -1,33 +1,28 @@
-export type Config = {
-  apiVersion: string
-  id: string
+interface BaseConfig {
   name: string
-  commandId: undefined | string
-  main: undefined | ConfigCommandFile
-  ui: undefined | ConfigCommandFile
-  menu: undefined | Array<ConfigCommand>
-  relaunchButtons: undefined | Array<ConfigRelaunchButton>
+  commandId: null | string
+  main: null | File
+  ui: null | File
 }
 
-export type ConfigCommand =
-  | { separator: true }
-  | {
-      name: string
-      commandId: string
-      main: ConfigCommandFile
-      ui: undefined | ConfigCommandFile
-      menu: undefined | Array<ConfigCommand>
-    }
+export interface Command extends BaseConfig {
+  menu: null | Array<Command | Separator>
+}
 
-export type ConfigCommandFile = {
+export interface Config extends BaseConfig {
+  apiVersion: string
+  id: string
+  menu: null | Array<Command | Separator>
+  relaunchButtons: null | Array<RelaunchButton>
+}
+
+export interface File {
   src: string
   handler: string
 }
 
-export type ConfigRelaunchButton = {
-  name: string
-  commandId: string
-  main: ConfigCommandFile
-  ui: undefined | ConfigCommandFile
+export interface RelaunchButton extends BaseConfig {
   multipleSelection: boolean
 }
+
+export type Separator = '-'
