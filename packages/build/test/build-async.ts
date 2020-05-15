@@ -93,7 +93,7 @@ async function createSymlinkAsync () {
 }
 
 async function cleanUpAsync () {
-  return new Promise(function (resolve, reject) {
+  await new Promise(function (resolve, reject) {
     rimraf(join(process.cwd(), '{build,manifest.json,node_modules}'), function (
       error
     ) {
