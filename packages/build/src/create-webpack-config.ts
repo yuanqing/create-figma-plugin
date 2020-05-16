@@ -44,9 +44,16 @@ export function createWebpackConfig (
         },
         {
           test: /\.tsx?$/,
-          exclude: /node_modules/,
+          exclude: /node_modules\/(?!@create-figma-plugin)/,
           use: {
-            loader: 'ts-loader'
+            loader: 'ts-loader',
+            options: {
+              compilerOptions: {
+                moduleResolution: 'Node',
+                module: 'es2020',
+                target: 'es6'
+              }
+            }
           }
         },
         {
