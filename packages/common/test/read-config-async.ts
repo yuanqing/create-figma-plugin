@@ -148,7 +148,7 @@ test('multiple menu commands', async function (t) {
         ui: null,
         menu: null
       },
-      '-',
+      { separator: true },
       {
         name: 'quux',
         commandId: 'quuux--default',

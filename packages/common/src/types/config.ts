@@ -1,28 +1,30 @@
-interface BaseConfig {
+interface BaseConfigMixin {
   name: string
   commandId: null | string
-  main: null | File
-  ui: null | File
+  main: null | ConfigFile
+  ui: null | ConfigFile
 }
 
-export interface Command extends BaseConfig {
-  menu: null | Array<Command | Separator>
-}
-
-export interface Config extends BaseConfig {
+export interface Config extends BaseConfigMixin {
   apiVersion: string
   id: string
-  menu: null | Array<Command | Separator>
-  relaunchButtons: null | Array<RelaunchButton>
+  menu: null | Array<ConfigCommand | ConfigCommandSeparator>
+  relaunchButtons: null | Array<ConfigRelaunchButton>
 }
 
-export interface File {
+export interface ConfigCommand extends BaseConfigMixin {
+  menu: null | Array<ConfigCommand | ConfigCommandSeparator>
+}
+
+export type ConfigCommandSeparator = { separator: true }
+
+export interface ConfigFile {
   src: string
   handler: string
 }
 
-export interface RelaunchButton extends BaseConfig {
+export interface ConfigRelaunchButton extends BaseConfigMixin {
+  commandId: string
+  main: ConfigFile
   multipleSelection: boolean
 }
-
-export type Separator = '-'

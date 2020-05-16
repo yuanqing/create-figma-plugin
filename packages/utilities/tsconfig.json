@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "outDir": "lib",
     "rootDir": "src"
   },

@@ -1,7 +1,9 @@
 import { computeBoundingBox } from './compute-bounding-box'
 
-export function computeMaximumBounds (layers) {
-  let maximumBounds = [
+export function computeMaximumBounds (
+  nodes: Array<SceneNode>
+): [Vector, Vector] {
+  let maximumBounds: [Vector, Vector] = [
     {
       x: Number.MAX_VALUE,
       y: Number.MAX_VALUE
@@ -11,8 +13,8 @@ export function computeMaximumBounds (layers) {
       y: -1 * Number.MAX_VALUE
     }
   ]
-  for (const layer of layers) {
-    const { x, y, width, height } = computeBoundingBox(layer)
+  for (const node of nodes) {
+    const { x, y, width, height } = computeBoundingBox(node)
     maximumBounds = [
       {
         x: Math.min(maximumBounds[0].x, x),

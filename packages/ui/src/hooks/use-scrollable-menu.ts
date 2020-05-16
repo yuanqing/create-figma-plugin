@@ -16,7 +16,7 @@ export function useScrollableMenu ({
     },
     [itemElementAttributeName]
   )
-  const getItemElements: () => HTMLElement[] = useCallback(
+  const getItemElements: () => Array<HTMLElement> = useCallback(
     function () {
       const menuElement = menuElementRef.current
       if (menuElement === null) {

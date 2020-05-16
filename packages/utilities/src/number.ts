@@ -4,7 +4,10 @@ const integerOperandRegex = /^-?\d*$/
 const operatorRegex = /[+\-*/]/
 const operatorSuffixRegex = /[+\-*/]$/
 
-export function isValidNumericInput (value, integerOnly = false) {
+export function isValidNumericInput (
+  value: string,
+  integerOnly: boolean = false
+): boolean {
   const split = (value[0] === '-' ? value.substring(1) : value).split(
     operatorRegex
   )
@@ -23,7 +26,7 @@ export function isValidNumericInput (value, integerOnly = false) {
   return true
 }
 
-export function evaluateNumericExpression (value) {
+export function evaluateNumericExpression (value: string): null | number {
   if (value === '' || invalidCharactersRegex.test(value) === true) {
     return null
   }

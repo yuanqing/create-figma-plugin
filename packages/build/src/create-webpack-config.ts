@@ -1,7 +1,7 @@
+import { constants } from '@create-figma-plugin/common'
 import { join, resolve } from 'path'
 import * as TerserPlugin from 'terser-webpack-plugin'
 import * as webpack from 'webpack'
-import { constants } from '@create-figma-plugin/common'
 
 export function createWebpackConfig (
   entry: webpack.Entry,

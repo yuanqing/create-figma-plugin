@@ -1,9 +1,9 @@
 import {
   Config,
-  Command,
-  File,
-  Separator,
-  RelaunchButton,
+  ConfigCommand,
+  ConfigCommandSeparator,
+  ConfigFile,
+  ConfigRelaunchButton,
   constants
 } from '@create-figma-plugin/common'
 import * as findUp from 'find-up'
@@ -11,7 +11,10 @@ import { basename, extname } from 'path'
 import * as tempWrite from 'temp-write'
 import * as webpack from 'webpack'
 import { createWebpackConfig } from './create-webpack-config'
-import { EntryFile } from './types/entry-file'
+
+interface EntryFile extends ConfigFile {
+  commandId: string
+}
 
 export async function buildBundleAsync (
   config: Config,
@@ -56,8 +59,8 @@ export async function buildBundleAsync (
 }
 
 async function createMainEntryFileAsync (
-  command: Command,
-  relaunchButtons: null | Array<RelaunchButton>
+  command: ConfigCommand,
+  relaunchButtons: null | Array<ConfigRelaunchButton>
 ): Promise<string | null> {
   const modules: Array<EntryFile> = []
   extractModule(command, 'main', modules)
@@ -78,10 +81,10 @@ async function createMainEntryFileAsync (
 }
 
 async function createUiEntryFileAsync (
-  command: Command,
-  relaunchButtons: null | Array<RelaunchButton>
+  command: ConfigCommand,
+  relaunchButtons: null | Array<ConfigRelaunchButton>
 ): Promise<string | null> {
-  const modules: Array<EntryFile> = []
+  const modules: EntryFile[] = []
   extractModule(command, 'ui', modules)
   if (modules.length === 0) {
     return null
@@ -103,26 +106,26 @@ async function createUiEntryFileAsync (
 }
 
 function extractModules (
-  items: Array<Separator | Command | RelaunchButton>,
+  items: Array<ConfigCommandSeparator | ConfigCommand | ConfigRelaunchButton>,
   key: 'ui' | 'main',
   result: Array<EntryFile>
 ): void {
   for (const item of items) {
-    if (item === '-') {
+    if ('separator' in item) {
       continue
     }
-    extractModule(item as Command | RelaunchButton, key, result)
+    extractModule(item, key, result)
   }
 }
 
 function extractModule (
-  command: Command | RelaunchButton,
+  command: ConfigCommand | ConfigRelaunchButton,
   key: 'ui' | 'main',
   result: Array<EntryFile>
 ): void {
   const commandId = command.commandId
   if (commandId !== null) {
-    const item = command[key] as null | File
+    const item = command[key] as null | ConfigFile
     if (item !== null) {
       const { src, handler } = item
       result.push({
@@ -132,14 +135,14 @@ function extractModule (
       })
     }
   }
-  const menu = (command as Command).menu
+  const menu = (command as ConfigCommand).menu
   if (menu !== null) {
     extractModules(menu, key, result)
   }
 }
 
 function createRequireCode (entryFiles: Array<EntryFile>): string {
-  const code: Array<string> = []
+  const code: string[] = []
   for (const entryFile of entryFiles) {
     code.push(
       `'${entryFile.commandId}':require('${entryFile.src}')['${entryFile.handler}']`
