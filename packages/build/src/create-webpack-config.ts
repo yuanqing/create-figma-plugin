@@ -49,7 +49,7 @@ export function createWebpackConfig (
             loader: 'ts-loader',
             options: {
               compilerOptions: {
-                moduleResolution: 'Node',
+                moduleResolution: 'node',
                 module: 'es2020',
                 target: 'es6'
               }
