@@ -76,7 +76,7 @@ export function compareObjects (a: any, b: any): boolean {
 export function extractAttributes (
   array: Array<{ [key: string]: any }>,
   attributes: Array<string>
-) {
+): Array<{ [key: string]: any }> {
   const result = []
   for (const object of array) {
     const item: { [key: string]: any } = {}

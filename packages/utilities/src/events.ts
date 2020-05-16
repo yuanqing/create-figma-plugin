@@ -1,14 +1,18 @@
 const isCommand = typeof window === 'undefined'
 
-export type EventHandler = (...args: Array<any>) => void
-
 const eventHandlers: {
-  [id: string]: { eventName: string; eventHandler: EventHandler }
+  [id: string]: {
+    eventName: string
+    eventHandler: (...args: Array<any>) => void
+  }
 } = {}
 
 let currentId = 0
 
-export function on (eventName: string, eventHandler: EventHandler): () => void {
+export function on (
+  eventName: string,
+  eventHandler: (...args: Array<any>) => void
+): () => void {
   const id = `${currentId++}`
   eventHandlers[id] = { eventName, eventHandler }
   return function () {
@@ -18,7 +22,7 @@ export function on (eventName: string, eventHandler: EventHandler): () => void {
 
 export function once (
   eventName: string,
-  eventHandler: EventHandler
+  eventHandler: (...args: Array<any>) => void
 ): () => void {
   let done = false
   return on(eventName, function (...args) {
@@ -30,7 +34,7 @@ export function once (
   })
 }
 
-export const emit: ([type, ...args]: [string, Array<any>]) => void =
+export const emit: (type: string, ...args: Array<any>) => void =
   isCommand === true
     ? function (...args) {
         figma.ui.postMessage(args)
@@ -45,7 +49,7 @@ export const emit: ([type, ...args]: [string, Array<any>]) => void =
       }
 
 if (isCommand === true) {
-  figma.ui.onmessage = function ([type, ...args]: [string, Array<any>]): void {
+  figma.ui.onmessage = function (type: string, ...args: Array<any>): void {
     for (const id in eventHandlers) {
       const { eventName, eventHandler } = eventHandlers[id]
       if (eventName === type) {

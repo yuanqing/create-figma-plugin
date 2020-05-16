@@ -1,7 +1,6 @@
 const KEY = 'settings'
 
-type Settings = { [key: string]: SettingsValue | Array<SettingsValue> }
-type SettingsValue = Settings | number | string
+type Settings = { [key: string]: any }
 
 export async function loadSettingsAsync (
   defaultSettings: Settings
