@@ -10,23 +10,23 @@ export function updateNodesSortOrder (nodes: Array<SceneNode>): boolean {
     throw new Error('Nodes do not have the same parent')
   }
   const copy = nodes.slice()
-  const children = parent.children as Array<SceneNode>
-  const before = collectNodeIndexes(copy, children)
-  const insertIndex = computeInsertIndex(copy, children)
+  const ids = parent.children.map(function ({ id }) {
+    return id
+  })
+  const insertIndex = computeInsertIndex(copy, ids)
   copy.forEach(function (node) {
     parent.insertChild(insertIndex, node)
   })
-  const after = collectNodeIndexes(copy, children)
-  return compareArrays(before, after) === false
+  const idsAfter = parent.children.map(function ({ id }) {
+    return id
+  })
+  return compareArrays(ids, idsAfter) === false
 }
 
 function computeInsertIndex (
   nodes: Array<SceneNode>,
-  children: Array<SceneNode>
+  ids: Array<string>
 ): number {
-  const ids = children.map(function (node) {
-    return node.id
-  })
   let insertIndex = -1
   nodes.forEach(function (node) {
     const index = ids.indexOf(node.id)
@@ -35,15 +35,4 @@ function computeInsertIndex (
     }
   })
   return insertIndex + 1
-}
-
-function collectNodeIndexes (
-  nodes: Array<SceneNode>,
-  children: Array<SceneNode>
-): Array<number> {
-  const result = []
-  for (const node of nodes) {
-    result.push(children.indexOf(node))
-  }
-  return result
 }

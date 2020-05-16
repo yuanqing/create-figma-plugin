@@ -8,16 +8,16 @@ export function sortNodesByName (nodes: Array<SceneNode>): Array<SceneNode> {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName !== bName) {
-      return naturalCompare(aName, bName)
+      return naturalCompare(bName, aName)
     }
-    const y = a.y - b.y
+    const y = b.y - a.y
     if (y !== 0) {
       return y
     }
-    const x = a.x - b.x
+    const x = b.x - a.x
     if (x !== 0) {
       return x
     }
-    return naturalCompare(a.id, b.id)
+    return naturalCompare(b.id, a.id)
   })
 }
