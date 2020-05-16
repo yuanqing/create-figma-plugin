@@ -61,7 +61,7 @@ export async function buildBundleAsync (
 async function createMainEntryFileAsync (
   command: ConfigCommand,
   relaunchButtons: null | Array<ConfigRelaunchButton>
-): Promise<string | null> {
+): Promise<null | string> {
   const modules: Array<EntryFile> = []
   extractModule(command, 'main', modules)
   if (modules.length === 0) {
@@ -70,20 +70,21 @@ async function createMainEntryFileAsync (
   if (relaunchButtons !== null) {
     extractModules(relaunchButtons, 'main', modules)
   }
-  return tempWrite(`
+  const fileContent = `
     require('@create-figma-plugin/utilities/lib/events');
-    const mainModules = ${createRequireCode(modules)};
-    const command = ${
+    const modules = ${createRequireCode(modules)};
+    const commandId = ${
       modules.length > 1 ? 'figma.command' : `'${modules[0].commandId}'`
     };
-    mainModules[command]();
-  `)
+    modules[commandId]();
+  `
+  return tempWrite(fileContent)
 }
 
 async function createUiEntryFileAsync (
   command: ConfigCommand,
   relaunchButtons: null | Array<ConfigRelaunchButton>
-): Promise<string | null> {
+): Promise<null | string> {
   const modules: EntryFile[] = []
   extractModule(command, 'ui', modules)
   if (modules.length === 0) {
@@ -92,17 +93,21 @@ async function createUiEntryFileAsync (
   if (relaunchButtons !== null) {
     extractModules(relaunchButtons, 'ui', modules)
   }
-  return tempWrite(`
+  const fileContent = `
     require('@create-figma-plugin/utilities/lib/events');
     const rootNode = document.getElementById('create-figma-plugin');
-    const uiModules = ${createRequireCode(modules)};
-    if (typeof uiModules[__COMMAND__] === 'undefined') {
+    const modules = ${createRequireCode(modules)};
+    const commandId = __COMMAND__ === null ? '${
+      modules[0].commandId
+    }' : __COMMAND__;
+    if (typeof modules[commandId] === 'undefined') {
       throw new Error(
-        'UI not defined for the command corresponding to ' + __COMMAND__
-      )
+        'UI not defined for the command corresponding to ' + commandId
+      );
     }
-    uiModules[__COMMAND__](rootNode, __DATA__, __COMMAND__);
-  `)
+    modules[commandId](rootNode, __DATA__);
+  `
+  return tempWrite(fileContent)
 }
 
 function extractModules (
