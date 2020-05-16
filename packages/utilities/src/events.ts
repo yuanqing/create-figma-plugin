@@ -34,7 +34,7 @@ export function once (
   })
 }
 
-export const emit: (type: string, ...args: Array<any>) => void =
+export const emit: (eventName: string, ...args: Array<any>) => void =
   isCommand === true
     ? function (...args) {
         figma.ui.postMessage(args)
@@ -48,23 +48,24 @@ export const emit: (type: string, ...args: Array<any>) => void =
         )
       }
 
-if (isCommand === true) {
-  figma.ui.onmessage = function (type: string, ...args: Array<any>): void {
-    for (const id in eventHandlers) {
-      const { eventName, eventHandler } = eventHandlers[id]
-      if (eventName === type) {
-        eventHandler.apply(null, args)
-      }
+function invokeEventHandler (eventName: string, args: Array<any>) {
+  for (const id in eventHandlers) {
+    if (eventHandlers[id].eventName === eventName) {
+      eventHandlers[id].eventHandler.apply(null, args)
     }
+  }
+}
+
+if (isCommand === true) {
+  figma.ui.onmessage = function ([eventName, ...args]: [
+    string,
+    Array<any>
+  ]): void {
+    invokeEventHandler(eventName, args)
   }
 } else {
   window.onmessage = function (event: MessageEvent): void {
-    const [type, ...args]: [string, Array<any>] = event.data.pluginMessage
-    for (const id in eventHandlers) {
-      const { eventName, eventHandler } = eventHandlers[id]
-      if (eventName === type) {
-        eventHandler.apply(null, args)
-      }
-    }
+    const [eventName, ...args]: [string, Array<any>] = event.data.pluginMessage
+    invokeEventHandler(eventName, args)
   }
 }
