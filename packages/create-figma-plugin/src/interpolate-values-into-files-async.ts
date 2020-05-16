@@ -25,6 +25,6 @@ export async function interpolateValuesIntoFilesAsync (
   )
 }
 
-function interpolate (string: string, values: Settings) {
+function interpolate (string: string, values: Settings): string {
   return mustache.render(string, values)
 }

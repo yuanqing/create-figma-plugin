@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src",
-    "strict": true
+    "rootDir": "src"
   },
   "include": ["src/**/*.ts"],
   "references": [{ "path": "../common" }]
