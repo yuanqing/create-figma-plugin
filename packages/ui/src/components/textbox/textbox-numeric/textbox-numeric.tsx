@@ -2,7 +2,7 @@
 import {
   evaluateNumericExpression,
   isValidNumericInput
-} from '@create-figma-plugin/utilities'
+} from '@create-figma-plugin/utilities/lib/number'
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
@@ -20,11 +20,11 @@ import styles from '../textbox.scss'
 const nonDigitRegex = /[^\d.]/
 
 export interface TextboxNumericProps extends TextboxProps {
-  smallIncrement?: number,
-  bigIncrement?: number,
-  integer?: boolean,
-  maximum?: number,
-  minimum?: number,
+  smallIncrement?: number
+  bigIncrement?: number
+  integer?: boolean
+  maximum?: number
+  minimum?: number
   value: string
 }
 
@@ -44,15 +44,18 @@ export function TextboxNumeric ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : TextboxNumericProps) : h.JSX.Element {
+}: TextboxNumericProps): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
-  const inputElementRef : preact.RefObject<HTMLInputElement> = useRef(null)
+  const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
 
   const handleClick = useCallback(
     function () {
       if (value === null) {
-        if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        if (
+          inputElementRef.current === null ||
+          typeof inputElementRef.current === 'undefined'
+        ) {
           return
         }
         inputElementRef.current.focus()
@@ -63,7 +66,10 @@ export function TextboxNumeric ({
   )
 
   function handleFocus () {
-    if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+    if (
+      inputElementRef.current === null ||
+      typeof inputElementRef.current === 'undefined'
+    ) {
       return
     }
     inputElementRef.current.select()
@@ -71,7 +77,10 @@ export function TextboxNumeric ({
 
   const handleInput = useCallback(
     function (event: Event) {
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       const newValue = inputElementRef.current.value
@@ -82,7 +91,10 @@ export function TextboxNumeric ({
 
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       const keyCode = event.keyCode
@@ -159,7 +171,10 @@ export function TextboxNumeric ({
 
   const handlePaste = useCallback(
     function (event: ClipboardEvent) {
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       if (event.clipboardData === null) {
@@ -208,7 +223,7 @@ export function TextboxNumeric ({
 
 const fractionalPartRegex = /\.([^.]+)/
 
-function countSignificantFigures (value: string) : number {
+function countSignificantFigures (value: string): number {
   const result = fractionalPartRegex.exec(value)
   if (result === null) {
     return 0
@@ -216,7 +231,10 @@ function countSignificantFigures (value: string) : number {
   return result[1].length
 }
 
-function formatSignificantFigures (value: number, significantFiguresCount: number) : string {
+function formatSignificantFigures (
+  value: number,
+  significantFiguresCount: number
+): string {
   if (significantFiguresCount === 0) {
     return `${value}`
   }
