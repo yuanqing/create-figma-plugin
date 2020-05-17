@@ -7,13 +7,13 @@ import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './button.scss'
 
 export interface ButtonProps {
-  children: React.ReactNode,
+  children: preact.ComponentChildren,
   destructive?: boolean,
   disabled?: boolean,
   focused?: boolean,
   fullWidth?: boolean,
   loading?: boolean,
-  onClick: (event?) => void, // FIXME
+  onClick: EventListener,
   propagateEscapeKeyDown?: boolean,
   secondary?: boolean
 }
@@ -29,15 +29,15 @@ export function Button ({
   propagateEscapeKeyDown = true,
   secondary: isSecondary,
   ...rest
-} : ButtonProps) {
+} : ButtonProps) : h.JSX.Element {
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        event.target.blur()
+        ;(event.target as HTMLElement).blur()
       }
       if (keyCode === ENTER_KEY_CODE) {
         event.stopPropagation()
@@ -66,7 +66,7 @@ export function Button ({
         disabled={isDisabled === true}
         onClick={onClick}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? null : 0}
+        tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       >{children}</button>
     </div>

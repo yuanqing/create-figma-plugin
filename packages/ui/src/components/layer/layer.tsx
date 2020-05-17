@@ -11,8 +11,8 @@ const icons = {
 }
 
 export interface LayerProps {
-  children: React.ReactNode,
-  onClick: (event?) => void, // FIXME
+  children: preact.ComponentChildren,
+  onClick: EventListener,
   pageName?: string,
   selected?: boolean,
   type: LayerType,
@@ -26,7 +26,7 @@ export function Layer ({
   selected: isSelected,
   type,
   ...rest
-} : LayerProps) {
+} : LayerProps) : h.JSX.Element {
   return (
     <div
       {...rest}

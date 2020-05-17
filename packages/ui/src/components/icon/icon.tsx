@@ -6,7 +6,7 @@ export interface IconProps {
   children: string,
 }
 
-export function Icon ({ children } : IconProps) {
+export function Icon ({ children } : IconProps) : h.JSX.Element {
   return (
     <svg class={styles.icon}>
       <path fill-rule='evenodd' clip-rule='evenodd' d={children} />

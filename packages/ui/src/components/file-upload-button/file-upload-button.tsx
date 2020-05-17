@@ -2,20 +2,21 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+import { OnSelectedFiles } from '../../types'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './file-upload-button.scss'
 
 export interface FileUploadButtonProps {
   acceptedFileTypes?: string[],
-  children: React.ReactNode,
+  children: preact.ComponentChildren,
   disabled?: boolean,
   focused?: boolean,
   fullWidth?: boolean,
   loading?: boolean,
   multiple?: boolean,
-  onClick?: (event) => void, // FIXME
-  onSelectedFiles: (files, event) => void, // FIXME
+  onClick?: EventListener,
+  onSelectedFiles: OnSelectedFiles,
   propagateEscapeKeyDown?: boolean,
 }
 
@@ -31,27 +32,27 @@ export function FileUploadButton ({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-} : FileUploadButtonProps) {
-  const handleClick = useCallback(function (event) {
-    event.target.focus()
+} : FileUploadButtonProps) : h.JSX.Element {
+  const handleClick = useCallback(function (event: MouseEvent) {
+    (event.target as HTMLElement).focus()
   }, [])
   const handleChange = useCallback(
-    function (event) {
+    function (event: Event) : void {
       const files = Array.prototype.slice
-        .call(event.target.files)
-        .sort(sortComparator)
+        .call((event.target as HTMLInputElement).files)
+        .sort(comparator)
       onSelectedFiles(files, event)
     },
     [onSelectedFiles]
   )
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        event.target.blur()
+        (event.target as HTMLElement).blur()
       }
     },
     [propagateEscapeKeyDown]
@@ -59,7 +60,7 @@ export function FileUploadButton ({
   const accept =
     typeof acceptedFileTypes !== 'undefined'
       ? acceptedFileTypes.join(',')
-      : null
+      : undefined
   return (
     <div
       class={classnames(
@@ -83,7 +84,7 @@ export function FileUploadButton ({
         onChange={handleChange}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? null : 0}
+        tabIndex={isDisabled === true ? undefined : 0}
         title=''
         data-initial-focus={isFocused === true}
       />
@@ -94,11 +95,11 @@ export function FileUploadButton ({
   )
 }
 
-function sortComparator (a, b) {
+function comparator (a: File, b: File) {
   const aName = a.name.toLowerCase()
   const bName = b.name.toLowerCase()
   if (aName !== bName) {
-    return aName.localeCompare(bName, { numeric: true })
+    return aName.localeCompare(bName)
   }
   return a.lastModified - b.lastModified
 }

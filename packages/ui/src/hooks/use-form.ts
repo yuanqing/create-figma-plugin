@@ -8,7 +8,7 @@ import {
 type State = { [key: string]: any }
 
 export function useForm (
-  initialState,
+  initialState: State,
   options: {
     transform?: (state: State) => State
     validate?: (state: State) => boolean
@@ -33,7 +33,7 @@ export function useForm (
     [transform, setState]
   )
   const handleKeyDown = useCallback(
-    function (event?: KeyboardEvent): void {
+    function (event: KeyboardEvent): void {
       if (typeof event === 'undefined') {
         return
       }
@@ -77,7 +77,7 @@ export function useForm (
     [state, onClose, onSubmit, validate]
   )
   const handleSubmit = useCallback(
-    function (event?: Event): void {
+    function (event: Event): void {
       if (typeof event !== 'undefined') {
         event.preventDefault()
       }

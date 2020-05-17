@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 import { TextboxProps } from '../textbox'
-import { Option, isOptionHeader, isOptionSeparator, isOptionValue } from '../../../types/option'
+import { Option } from '../../../types'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -45,10 +45,10 @@ export function TextboxAutocomplete ({
   top: isTop,
   value: committedValue,
   ...rest
-} : TextboxAutocompleteProps) {
-  const rootElementRef = useRef(null)
-  const inputElementRef = useRef(null)
-  const menuElementRef = useRef(null)
+} : TextboxAutocompleteProps) : h.JSX.Element {
+  const rootElementRef : preact.RefObject<HTMLElement> = useRef(null)
+  const inputElementRef : preact.RefObject<HTMLElement> = useRef(null)
+  const menuElementRef : preact.RefObject<HTMLElement> = useRef(null)
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false)
 
@@ -69,7 +69,7 @@ export function TextboxAutocomplete ({
         return true
       }
       for (const menuItem of menuItems) {
-        if (isOptionValue(menuItem)) {
+        if ('value' in menuItem) {
           if (
             menuItem.value.toLowerCase().indexOf(value.toLowerCase()) === 0
           ) {
@@ -214,11 +214,12 @@ export function TextboxAutocomplete ({
         shouldSelectAllRef.current = true
         setSelectedId(nextId)
         if (nextId === INVALID_ID) {
-          onChange({ [name]: currentValue })
+          onChange({ [name]: currentValue }, currentValue, name, event)
         } else {
           const menuItem = getMenuItemById(nextId)
           if (isOptionValue(menuItem)) {
-            onChange({ [name]: menuItem.value })
+            const newValue = menuItem.value
+            onChange({ [name]: newValue }, newValue, name, event)
           }
         }
         return
@@ -279,7 +280,7 @@ export function TextboxAutocomplete ({
       const index = getIdByValue(value)
       setSelectedId(index)
       setCurrentValue(value)
-      onChange({ [name]: value })
+      onChange({ [name]: value }, value, name, event)
     },
     [getIdByValue, name, onChange]
   )
@@ -293,7 +294,8 @@ export function TextboxAutocomplete ({
       const menuItem = getMenuItemById(id)
       setCurrentValue(EMPTY_STRING)
       if (isOptionValue(menuItem)) {
-        onChange({ [name]: menuItem.value })
+        const newValue = menuItem.value
+        onChange({ [name]: newValue }, newValue, name, event)
       }
     },
     [getMenuItemById, name, onChange]
@@ -423,7 +425,7 @@ export function TextboxAutocomplete ({
         onKeyDown={isDisabled === true ? null : handleKeyDown}
         onKeyUp={isDisabled === true ? null : handleKeyUp}
         onPaste={isDisabled === true ? null : handlePaste}
-        tabIndex={isDisabled === true ? null : 0}
+        tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
@@ -437,7 +439,7 @@ export function TextboxAutocomplete ({
           ref={menuElementRef}
         >
           {menuItems.map(function (menuItem) {
-            if (isOptionSeparator(menuItem)) {
+            if ('separator' in menuItem) {
               return (
                 <hr
                   class={textboxAutocompleteStyles.menuSeparator}
@@ -445,7 +447,7 @@ export function TextboxAutocomplete ({
                 />
               )
             }
-            if (isOptionHeader(menuItem)) {
+            if ('header' in menuItem) {
               return (
                 <h1
                   class={textboxAutocompleteStyles.menuHeader}

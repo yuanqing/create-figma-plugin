@@ -2,16 +2,17 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+import { OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './checkbox.scss'
 
 export interface CheckboxProps {
-  children: React.ReactNode,
+  children: preact.ComponentChildren,
   disabled?: boolean,
   focused?: boolean,
   name: string,
-  onChange: (state) => void, // FIXME
-  onKeyDown?: (event?) => void, // FIXME
+  onChange: OnChange,
+  onKeyDown?: EventListener,
   propagateEscapeKeyDown?: boolean,
   value: boolean
 }
@@ -22,31 +23,33 @@ export function Checkbox ({
   focused: isFocused,
   name,
   onChange,
-  onKeyDown = null,
+  onKeyDown,
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : CheckboxProps) {
+} : CheckboxProps) : h.JSX.Element {
   const handleChange = useCallback(
-    function () {
-      onChange({ [name]: !(value === true) })
+    function (event: Event) {
+      const newValue = !(value === true)
+      onChange({ [name]: newValue }, newValue, name, event)
     },
     [name, onChange, value]
   )
 
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          event.target.blur()
+          ;(event.target as HTMLElement).blur()
           break
         }
         case ENTER_KEY_CODE: {
           event.stopPropagation()
-          onChange({ [name]: !(value === true) })
+          const newValue = !(value === true)
+          onChange({ [name]: newValue }, newValue, name, event)
           break
         }
       }
@@ -73,7 +76,7 @@ export function Checkbox ({
         disabled={isDisabled === true}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? null : 0}
+        tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
       <div class={styles.text}>{children}</div>

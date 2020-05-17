@@ -2,19 +2,20 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+import { OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
 import styles from './selectable-item.scss'
 
 export interface SelectableItemProps {
   bold?: boolean,
-  children: React.ReactNode,
+  children: preact.ComponentChildren,
   disabled?: boolean,
   icon?: boolean,
   indent?: boolean,
   name: string,
-  onClick: (state, value?, name?, event?) => void, // FIXME
-  onKeyDown?: (event?) => void, // FIXME
+  onChange: OnChange,
+  onKeyDown?: EventListener, // FIXME
   propagateEscapeKeyDown?: boolean,
   value: boolean
 }
@@ -26,33 +27,34 @@ export function SelectableItem ({
   icon: hasIcon,
   indent: isIndented,
   name,
-  onClick,
+  onChange,
   onKeyDown,
   propagateEscapeKeyDown,
   value,
   ...rest
-} : SelectableItemProps) {
+} : SelectableItemProps) : h.JSX.Element {
   const handleChange = useCallback(
-    function (event) {
+    function (event: Event) {
       const newValue = !(value === true)
-      onClick({ [name]: newValue }, newValue, name, event)
+      onChange({ [name]: newValue }, newValue, name, event)
     },
-    [name, onClick, value]
+    [name, onChange, value]
   )
 
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          event.target.blur()
+          ;(event.target as HTMLElement).blur()
           break
         }
         case ENTER_KEY_CODE: {
           event.stopPropagation()
-          onClick({ [name]: !(value === true) })
+          const newValue = !(value === true)
+          onChange({ [name]: newValue }, newValue, name, event)
           break
         }
       }
@@ -60,7 +62,7 @@ export function SelectableItem ({
         onKeyDown(event)
       }
     },
-    [name, value, onClick, onKeyDown, propagateEscapeKeyDown]
+    [name, value, onChange, onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -73,8 +75,8 @@ export function SelectableItem ({
         isIndented === true ? styles.isIndented : null,
         value === true ? styles.isChecked : null
       )}
-      onKeyDown={isDisabled === true ? null : handleKeyDown}
-      tabIndex={isDisabled === true ? null : 0}
+      onKeyDown={isDisabled === true ? undefined : handleKeyDown}
+      tabIndex={isDisabled === true ? undefined : 0}
     >
       <input
         {...rest}

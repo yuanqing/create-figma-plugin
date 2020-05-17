@@ -44,14 +44,17 @@ export function TextboxNumeric ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : TextboxNumericProps) {
+} : TextboxNumericProps) : h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
-  const inputElementRef = useRef(null)
+  const inputElementRef : preact.RefObject<HTMLInputElement> = useRef(null)
 
   const handleClick = useCallback(
     function () {
       if (value === null) {
+        if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+          return
+        }
         inputElementRef.current.focus()
         inputElementRef.current.select()
       }
@@ -60,19 +63,28 @@ export function TextboxNumeric ({
   )
 
   function handleFocus () {
+    if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      return
+    }
     inputElementRef.current.select()
   }
 
   const handleInput = useCallback(
-    function (event) {
-      const value = inputElementRef.current.value
-      onChange({ [name]: value }, value, name, event)
+    function (event: Event) {
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
+      }
+      const newValue = inputElementRef.current.value
+      onChange({ [name]: newValue }, newValue, name, event)
     },
     [name, onChange]
   )
 
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
+      }
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
@@ -87,6 +99,9 @@ export function TextboxNumeric ({
         }
         event.preventDefault()
         const evaluatedValue = evaluateNumericExpression(value)
+        if (evaluatedValue === null) {
+          return
+        }
         if (
           (event.keyCode === DOWN_KEY_CODE && evaluatedValue <= minimum) ||
           (event.keyCode === UP_KEY_CODE && evaluatedValue >= maximum)
@@ -122,6 +137,9 @@ export function TextboxNumeric ({
           return
         }
         const evaluatedValue = evaluateNumericExpression(nextValue)
+        if (evaluatedValue === null) {
+          return
+        }
         if (evaluatedValue < minimum || evaluatedValue > maximum) {
           event.preventDefault()
         }
@@ -140,7 +158,13 @@ export function TextboxNumeric ({
   )
 
   const handlePaste = useCallback(
-    function (event) {
+    function (event: ClipboardEvent) {
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
+      }
+      if (event.clipboardData === null) {
+        throw new Error('No `clipboardData`')
+      }
       const nextValue = computeNextValue(
         inputElementRef.current,
         event.clipboardData.getData('Text')
@@ -174,7 +198,7 @@ export function TextboxNumeric ({
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
-        tabIndex={isDisabled === true ? null : 0}
+        tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
@@ -184,7 +208,7 @@ export function TextboxNumeric ({
 
 const fractionalPartRegex = /\.([^.]+)/
 
-function countSignificantFigures (value) {
+function countSignificantFigures (value: string) : number {
   const result = fractionalPartRegex.exec(value)
   if (result === null) {
     return 0
@@ -192,7 +216,7 @@ function countSignificantFigures (value) {
   return result[1].length
 }
 
-function formatSignificantFigures (value, significantFiguresCount) {
+function formatSignificantFigures (value: number, significantFiguresCount: number) : string {
   if (significantFiguresCount === 0) {
     return `${value}`
   }

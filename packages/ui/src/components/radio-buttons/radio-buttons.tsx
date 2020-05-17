@@ -4,23 +4,23 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
-import { Space } from '../../types/space'
+import { OnChange, Space } from '../../types'
 import styles from './radio-buttons.scss'
 
 export interface RadioButtonsProps {
   disabled?: boolean,
   focused?: boolean,
   name: string,
-  onChange: (state) => void, // FIXME
+  onChange: OnChange,
   options: RadioButtonsOption[],
   propagateEscapeKeyDown?: boolean,
   space?: Space,
-  value: string
+  value: null | string
 }
 interface RadioButtonsOption {
   disabled?: boolean,
-  text?: React.ReactNode,
-  value: string
+  text?: preact.ComponentChildren,
+  value: null | string
 }
 
 export function RadioButtons ({
@@ -33,24 +33,28 @@ export function RadioButtons ({
   space = 'small',
   value,
   ...rest
-} : RadioButtonsProps) {
+} : RadioButtonsProps) : h.JSX.Element{
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        event.target.blur()
+        ;(event.target as HTMLElement).blur()
       }
     },
     [propagateEscapeKeyDown]
   )
 
   const handleChange = useCallback(
-    function (event) {
-      const index = parseInt(event.target.getAttribute('data-index'))
-      onChange({ [name]: options[index].value })
+    function (event: Event) {
+      const index = (event.target as HTMLElement).getAttribute('data-index')
+      if (index === null) {
+        return
+      }
+      const newValue = options[parseInt(index)].value
+      onChange({ [name]: newValue }, newValue, name, event)
     },
     [name, onChange, options]
   )
@@ -74,11 +78,11 @@ export function RadioButtons ({
                 class={styles.input}
                 type='radio'
                 name={name}
-                value={option.value}
+                value={option.value === null ? undefined : option.value}
                 checked={value === option.value}
                 disabled={isOptionDisabled === true}
                 onChange={handleChange}
-                tabIndex={isOptionDisabled === true ? null : 0}
+                tabIndex={isOptionDisabled === true ? undefined : 0}
                 data-index={index}
                 data-initial-focus={isFocused === true}
               />

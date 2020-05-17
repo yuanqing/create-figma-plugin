@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+import { OnChange } from '../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -13,16 +14,17 @@ import styles from './tabs.scss'
 export interface TabsProps {
   focused?: boolean,
   name: string,
-  onChange: (state) => void, // FIXME
+  onChange: OnChange,
   options: TabsOption[],
   propagateEscapeKeyDown?: boolean,
-  value: string
+  value: null | string
 }
-interface TabsOption {
+
+export interface TabsOption {
   disabled?: boolean,
-  text?: React.ReactNode,
-  value: string,
-  view: React.ReactNode
+  text?: preact.ComponentChildren,
+  value: null | string,
+  view: preact.ComponentChildren
 }
 
 export function Tabs ({
@@ -33,23 +35,27 @@ export function Tabs ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : TabsProps) {
+} : TabsProps) : h.JSX.Element {
   const handleChange = useCallback(
-    function (event) {
-      const index = parseInt(event.target.getAttribute('data-index'))
-      onChange({ [name]: options[index].value })
+    function (event: Event) {
+      const index = (event.target as HTMLElement).getAttribute('data-index')
+      if (index === null) {
+        return
+      }
+      const newValue = options[parseInt(index)].value
+      onChange({ [name]: newValue }, newValue, name, event)
     },
     [name, onChange, options]
   )
 
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        event.target.blur()
+        ;(event.target as HTMLElement).blur()
         return
       }
       if (
@@ -59,7 +65,8 @@ export function Tabs ({
         keyCode === UP_KEY_CODE
       ) {
         if (value === null) {
-          onChange({ [name]: options[0].value })
+          const newValue = options[0].value
+          onChange({ [name]: newValue }, newValue, name, event)
           return
         }
         const currentIndex = options.findIndex(function (option) {
@@ -74,7 +81,8 @@ export function Tabs ({
         if (nextIndex === options.length) {
           nextIndex = 0
         }
-        onChange({ [name]: options[nextIndex].value })
+        const newValue = options[nextIndex].value
+        onChange({ [name]: newValue }, newValue, name, event)
       }
     },
     [name, onChange, options, propagateEscapeKeyDown, value]
@@ -102,7 +110,7 @@ export function Tabs ({
                 class={styles.input}
                 type='radio'
                 name={name}
-                value={option.value}
+                value={option.value === null ? undefined : option.value}
                 checked={value === option.value}
                 onChange={handleChange}
                 tabIndex={-1}

@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+import { OnChange } from '../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -14,15 +15,16 @@ export interface SegmentedControlProps {
   disabled?: boolean,
   focused?: boolean,
   name: string,
-  onChange: (state) => void, // FIXME
-  options: SegmentedControlOption[],
+  onChange: OnChange,
+  options: Array<SegmentedControlOption>,
   propagateEscapeKeyDown?: boolean,
-  value: string
+  value: null | string
 }
+
 interface SegmentedControlOption {
   disabled?: boolean,
-  text?: React.ReactNode,
-  value: string
+  text?: preact.ComponentChildren,
+  value: null | string
 }
 
 export function SegmentedControl ({
@@ -34,23 +36,27 @@ export function SegmentedControl ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : SegmentedControlProps) {
+} : SegmentedControlProps) : h.JSX.Element {
   const handleChange = useCallback(
-    function (event) {
-      const index = parseInt(event.target.getAttribute('data-index'))
-      onChange({ [name]: options[index].value })
+    function (event: Event) {
+      const index = (event.target as HTMLElement).getAttribute('data-index')
+      if (index === null) {
+        return
+      }
+      const newValue = options[parseInt(index)].value
+      onChange({ [name]: newValue }, newValue, name, event)
     },
     [name, onChange, options]
   )
 
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        event.target.blur()
+        (event.target as HTMLElement).blur()
         return
       }
       if (
@@ -60,7 +66,8 @@ export function SegmentedControl ({
         keyCode === UP_KEY_CODE
       ) {
         if (value === null) {
-          onChange({ [name]: options[0].value })
+          const newValue = options[0].value
+          onChange({ [name]: newValue }, newValue, name, event)
           return
         }
         const currentIndex = options.findIndex(function (option) {
@@ -72,7 +79,8 @@ export function SegmentedControl ({
           keyCode === LEFT_KEY_CODE || keyCode === UP_KEY_CODE ? -1 : 1
         )
         if (nextIndex !== -1) {
-          onChange({ [name]: options[nextIndex].value })
+          const newValue = options[nextIndex].value
+          onChange({ [name]: newValue }, newValue, name, event)
         }
       }
     },
@@ -82,8 +90,8 @@ export function SegmentedControl ({
   return (
     <div
       class={styles.segmentedControl}
-      onKeyDown={isDisabled === true ? null : handleKeyDown}
-      tabIndex={isDisabled === true ? null : 0}
+      onKeyDown={isDisabled === true ? undefined : handleKeyDown}
+      tabIndex={isDisabled === true ? undefined : 0}
       data-initial-focus={isFocused === true}
     >
       {options.map(function (option, index) {
@@ -96,7 +104,7 @@ export function SegmentedControl ({
               class={styles.input}
               type='radio'
               name={name}
-              value={option.value}
+              value={option.value === null ? undefined : option.value}
               checked={value === option.value}
               disabled={isDisabled === true || option.disabled === true}
               onChange={handleChange}
@@ -111,7 +119,7 @@ export function SegmentedControl ({
   )
 }
 
-function resolveNextIndex (options, currentIndex, delta) {
+function resolveNextIndex (options: Array<SegmentedControlOption>, currentIndex: number, delta: number) : number {
   let nextIndex = currentIndex
   do {
     nextIndex += delta

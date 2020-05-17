@@ -2,15 +2,16 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
+import { OnSelectedFiles } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './file-upload-dropzone.scss'
 
 export interface FileUploadDropzoneProps {
   acceptedFileTypes?: string[],
-  children: React.ReactNode,
+  children: preact.ComponentChildren,
   multiple?: boolean,
-  onClick?: (event) => void, // FIXME
-  onSelectedFiles: (files, event) => void, // FIXME
+  onClick?: EventListener
+  onSelectedFiles: OnSelectedFiles,
   propagateEscapeKeyDown?: boolean,
 }
 
@@ -22,11 +23,11 @@ export function FileUploadDropzone ({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-} : FileUploadDropzoneProps) {
+} : FileUploadDropzoneProps) : h.JSX.Element {
   const [isDropActive, setIsDropActive] = useState(false)
   const filterFiles = useCallback(
-    function (files) {
-      const result = Array.prototype.slice.call(files).sort(sortComparator)
+    function (files: FileList): Array<File> {
+      const result = Array.prototype.slice.call(files).sort(comparator)
       if (typeof acceptedFileTypes === 'undefined') {
         return result
       }
@@ -36,30 +37,36 @@ export function FileUploadDropzone ({
     },
     [acceptedFileTypes]
   )
-  const handleBlur = useCallback(function () {
+  const handleBlur = useCallback(function () : void {
     setIsDropActive(false)
   }, [])
   const handleChange = useCallback(
-    function (event) {
-      const files = filterFiles(event.target.files)
-      onSelectedFiles(files, event)
+    function (event: Event) : void {
+      const files = (event.target as HTMLInputElement).files
+      if (files === null) {
+        return
+      }
+      onSelectedFiles(filterFiles(files), event)
     },
     [filterFiles, onSelectedFiles]
   )
-  const handleDragEnter = useCallback(function (event) {
+  const handleDragEnter = useCallback(function (event: DragEvent) : void {
     event.preventDefault()
   }, [])
-  const handleDragOver = useCallback(function (event) {
+  const handleDragOver = useCallback(function (event: DragEvent) : void {
     event.preventDefault()
     setIsDropActive(true)
   }, [])
-  const handleDragEnd = useCallback(function (event) {
+  const handleDragEnd = useCallback(function (event: DragEvent) : void {
     event.preventDefault()
     setIsDropActive(false)
   }, [])
   const handleDrop = useCallback(
-    function (event) {
+    function (event: DragEvent) : void {
       event.preventDefault()
+      if (event.dataTransfer === null) {
+        return
+      }
       const files = filterFiles(event.dataTransfer.files)
       onSelectedFiles(files, event)
       setIsDropActive(false)
@@ -67,13 +74,13 @@ export function FileUploadDropzone ({
     [filterFiles, onSelectedFiles]
   )
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) : void {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        event.target.blur()
+        (event.target as HTMLElement).blur()
       }
     },
     [propagateEscapeKeyDown]
@@ -81,7 +88,7 @@ export function FileUploadDropzone ({
   const accept =
     typeof acceptedFileTypes !== 'undefined'
       ? acceptedFileTypes.join(',')
-      : null
+      : undefined
   return (
     <div
       class={classnames(
@@ -111,11 +118,11 @@ export function FileUploadDropzone ({
   )
 }
 
-function sortComparator (a, b) {
+function comparator (a: File, b: File) {
   const aName = a.name.toLowerCase()
   const bName = b.name.toLowerCase()
   if (aName !== bName) {
-    return aName.localeCompare(bName, { numeric: true })
+    return aName.localeCompare(bName)
   }
   return a.lastModified - b.lastModified
 }

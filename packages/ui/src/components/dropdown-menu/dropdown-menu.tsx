@@ -2,25 +2,24 @@
 import classnames from '@sindresorhus/class-names'
 import { cloneElement, h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
-import { Option, OptionValue, isOptionHeader, isOptionSeparator } from '../../types/option'
-import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
+import { OnChange, Option } from '../../types'
+import { MenuItemId as ItemId, useScrollableMenu, INVALID_MENU_ITEM_ID } from '../../hooks/use-scrollable-menu'
 import { checkIcon } from '../icon/icons/check-icon'
 import { ESCAPE_KEY_CODE, ENTER_KEY_CODE } from '../../utilities/key-codes'
 import styles from './dropdown-menu.scss'
 
-const INVALID_ID = -1
-const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
+const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-dropdown-menu'
 
 export interface DropdownMenuProps {
-  children: JSX.Element,
+  children: preact.ComponentChildren,
   focused?: boolean,
   fullWidth?: boolean,
   name: string,
-  onChange: (state) => void, // FIXME
+  onChange: OnChange,
   options: Option[],
   right?: boolean,
   top?: boolean,
-  value: string
+  value: null | string
 }
 
 export type DropdownOption = Option
@@ -35,24 +34,37 @@ export function DropdownMenu ({
   right: isRight,
   top: isTop,
   value
-} : DropdownMenuProps) {
-  const rootElementRef = useRef(null)
+} : DropdownMenuProps) : h.JSX.Element {
+  const rootElementRef : preact.RefObject<HTMLDivElement> = useRef(null)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
-  const menuItems : Option[] = options.map(function (option, index) {
+  const menuItems : Array<Option> = options.map(function (option, index) {
     return {
-      id: index,
+      id: `${index}`,
       ...option
     }
   })
   const committedId = getIdByValue(menuItems, value)
-  const [selectedItemId, setSelectedItemId] = useState(committedId)
+  const [selectedId, setSelectedId] = useState(committedId)
+  const findOptionById = useCallback(
+    function (targetId: string) : undefined | Option {
+      return options.find(function ({ id }) {
+        return id === targetId
+      })
+    },
+    [options]
+  )
   const handleMenuItemClick = useCallback(
-    function (event) {
-      const index = parseInt(
-        event.target.getAttribute(ITEM_ELEMENT_ATTRIBUTE_NAME)
-      )
-      onChange({ [name]: (options[index] as OptionValue).value })
-      setIsMenuVisible(false)
+    function (event: MouseEvent) : void {
+      const targetId = (event.target as HTMLElement).getAttribute(ITEM_ELEMENT_ATTRIBUTE_NAME) as string
+      const option = findOptionById(targetId)
+      if (typeof option === 'undefined') {
+        return
+      }
+      if ('value' in option) {
+        const newValue = option.value
+        onChange({ [name]: newValue }, newValue, name, event)
+        setIsMenuVisible(false)
+      }
     },
     [name, onChange, options, setIsMenuVisible]
   )
@@ -62,42 +74,50 @@ export function DropdownMenu ({
     updateScrollPosition
   } = useScrollableMenu({
     itemElementAttributeName: ITEM_ELEMENT_ATTRIBUTE_NAME,
-    selectedItemId,
-    onChange: setSelectedItemId,
+    selectedItemId: selectedId,
+    onChange: setSelectedId,
     changeOnMouseOver: true
   })
   const handleClick = useCallback(
-    function (event) {
+    function (event: MouseEvent) : void {
       if (
+        menuElementRef.current === null || typeof menuElementRef.current === 'undefined' ||
+        rootElementRef.current === null || typeof rootElementRef.current === 'undefined' ||
         menuElementRef.current === event.target ||
-        menuElementRef.current.contains(event.target) === true
+        menuElementRef.current.contains(event.target as HTMLElement) === true
       ) {
-        // Exit if we clicked the menu
         return
       }
       if (
         rootElementRef.current === event.target ||
-        rootElementRef.current.contains(event.target) === true
+        rootElementRef.current.contains(event.target as HTMLElement) === true
       ) {
         setIsMenuVisible(!(isMenuVisible === true))
-        updateScrollPosition(selectedItemId)
+        updateScrollPosition(`${selectedId}`)
       }
     },
     [
       isMenuVisible,
       menuElementRef,
-      selectedItemId,
+      selectedId,
       setIsMenuVisible,
       updateScrollPosition
     ]
   )
   const handleRootElementKeyDown = useCallback(
     // Commit the selected value and hide the menu if `Enter` was pressed
-    function (event) {
+    function (event: KeyboardEvent): void {
       if (event.keyCode === ENTER_KEY_CODE) {
-        if (selectedItemId !== INVALID_ID) {
-          setSelectedItemId(selectedItemId)
-          onChange({ [name]: (options[selectedItemId] as OptionValue).value })
+        if (selectedId !== INVALID_MENU_ITEM_ID) {
+          setSelectedId(selectedId)
+          const option = findOptionById(selectedId)
+          if (typeof option === 'undefined') {
+            return
+          }
+          if ('value' in option ) {
+            const newValue = option.value
+            onChange({ [name]: newValue }, newValue, name, event)
+          }
         }
         setIsMenuVisible(false)
         return
@@ -114,18 +134,21 @@ export function DropdownMenu ({
       name,
       onChange,
       options,
-      selectedItemId,
+      selectedId,
       setIsMenuVisible,
-      setSelectedItemId
+      setSelectedId
     ]
   )
   const handleWindowClick = useCallback(
     // Hide the menu if we’d clicked outside
-    function (event) {
+    function (event: Event) : void{
+      if (rootElementRef.current === null || typeof rootElementRef.current === 'undefined') {
+        return
+      }
       if (
         isMenuVisible === false ||
         rootElementRef.current === event.target ||
-        rootElementRef.current.contains(event.target)
+        rootElementRef.current.contains(event.target as HTMLElement)
       ) {
         return
       }
@@ -134,7 +157,7 @@ export function DropdownMenu ({
     [rootElementRef, isMenuVisible, setIsMenuVisible]
   )
   useLayoutEffect(
-    function () {
+    function () : () => void {
       window.addEventListener('click', handleWindowClick)
       return function () {
         window.removeEventListener('click', handleWindowClick)
@@ -148,10 +171,10 @@ export function DropdownMenu ({
       onClick={handleClick}
       onKeyDown={handleRootElementKeyDown}
       tabIndex={0}
-      ref={rootElementRef}
+      ref={rootElementRef as preact.RefObject<HTMLDivElement>}
       data-initial-focus={isFocused === true}
     >
-      {cloneElement(children, { [name]: value })}
+      {cloneElement(children as preact.VNode<any>, { [name]: value })}
       <div
         class={classnames(
           styles.menu,
@@ -160,13 +183,13 @@ export function DropdownMenu ({
           isRight === true ? styles.isRight : null,
           isTop === true ? styles.isTop : null
         )}
-        ref={menuElementRef}
+        ref={menuElementRef as preact.RefObject<HTMLDivElement>}
       >
         {menuItems.map(function (menuItem) {
-          if (isOptionSeparator(menuItem)) {
+          if ('separator' in menuItem) {
             return <hr class={styles.menuSeparator} key={menuItem.id} />
           }
-          if (isOptionHeader(menuItem)) {
+          if ('header' in menuItem) {
             return (
               <h1 class={styles.menuHeader} key={menuItem.id}>
                 {menuItem.header}
@@ -177,7 +200,7 @@ export function DropdownMenu ({
             <div
               class={classnames(
                 styles.menuItem,
-                `${menuItem.id}` === selectedItemId
+                `${menuItem.id}` === selectedId
                   ? styles.menuItemSelected
                   : null
               )}
@@ -197,13 +220,16 @@ export function DropdownMenu ({
   )
 }
 
-function getIdByValue (menuItems, targetValue) {
+function getIdByValue (menuItems: Array<Option>, targetValue: null | string) : ItemId {
   if (targetValue !== null) {
-    for (const { id, value } of menuItems) {
-      if (value === targetValue) {
-        return id
+    for (const menuItem of menuItems) {
+      if ('value' in menuItem) {
+        const { id, value } = menuItem
+        if (value === targetValue) {
+          return typeof id === 'undefined' ? null : id
+        }
       }
     }
   }
-  return INVALID_ID
+  return INVALID_MENU_ITEM_ID
 }

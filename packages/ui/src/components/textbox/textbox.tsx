@@ -1,20 +1,21 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import { h } from 'preact'
+import { h, Key } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
+import { OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './textbox.scss'
 
 export interface TextboxProps {
   disabled?: boolean,
   focused?: boolean,
-  icon?: React.ReactNode,
+  icon?: preact.ComponentChildren,
   name: string,
   noBorder?: boolean,
-  onChange: (state, value?, name?, event?) => void, // FIXME
+  onChange: OnChange,
   placeholder?: string,
   propagateEscapeKeyDown?: boolean,
-  value: string
+  value: null | string
 }
 
 export function Textbox ({
@@ -28,13 +29,16 @@ export function Textbox ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : TextboxProps) {
+} : TextboxProps) : h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
-  const inputElementRef = useRef(null)
+  const inputElementRef : preact.RefObject<HTMLInputElement> = useRef(null)
 
   const handleClick = useCallback(
     function () {
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
+      }
       if (value === null) {
         inputElementRef.current.focus()
         inputElementRef.current.select()
@@ -44,21 +48,31 @@ export function Textbox ({
   )
 
   function handleFocus () {
+    if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      return
+    }
     inputElementRef.current.select()
   }
 
   const handleInput = useCallback(
-    function () {
-      onChange({ [name]: inputElementRef.current.value })
+    function (event: Event) {
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
+      }
+      const newValue = inputElementRef.current.value
+      onChange({ [name]: newValue }, newValue, name, event)
     },
     [name, onChange]
   )
 
-  function handleKeyDown (event) {
+  function handleKeyDown (event: KeyboardEvent) {
     const keyCode = event.keyCode
     if (keyCode === ESCAPE_KEY_CODE) {
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
+      }
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
       }
       inputElementRef.current.blur()
     }
@@ -85,7 +99,7 @@ export function Textbox ({
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? null : 0}
+        tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}

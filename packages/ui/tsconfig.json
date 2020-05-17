@@ -13,8 +13,7 @@
         }
       }
     ],
-    "rootDir": "src",
-    "strict": false
+    "rootDir": "src"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "../utilities" }]

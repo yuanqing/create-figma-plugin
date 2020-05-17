@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
+import { OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { searchIcon } from '../icon/icons/search-icon'
 import { crossIcon } from '../icon/icons/cross-icon'
@@ -10,7 +11,7 @@ export interface SearchTextboxProps {
   disabled?: boolean,
   focused?: boolean,
   name: string,
-  onChange: (state) => void, // FIXME
+  onChange: OnChange,
   placeholder?: string,
   propagateEscapeKeyDown?: boolean,
   clearOnEscapeKeyDown?: boolean,
@@ -27,31 +28,42 @@ export function SearchTextbox ({
   clearOnEscapeKeyDown = true,
   value,
   ...rest
-} : SearchTextboxProps) {
-  const inputElementRef = useRef(null)
+} : SearchTextboxProps) : h.JSX.Element {
+  const inputElementRef : preact.RefObject<HTMLInputElement> = useRef(null)
 
   function handleFocus () {
+    if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      return
+    }
     inputElementRef.current.select()
   }
 
   const handleInput = useCallback(
     function () {
-      onChange({ [name]: inputElementRef.current.value })
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
+      }
+      const newValue = inputElementRef.current.value
+      onChange({ [name]: newValue }, newValue, name, event)
     },
     [name, onChange]
   )
 
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
-          onChange({ [name]: '' })
+          const newValue = ''
+          onChange({ [name]: newValue }, newValue, name, event)
           event.stopPropagation()
           return
         }
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
+        }
+        if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+          return
         }
         inputElementRef.current.blur()
       }
@@ -61,7 +73,11 @@ export function SearchTextbox ({
 
   const handleClearClick = useCallback(
     function () {
-      onChange({ [name]: '' })
+      const newValue = ''
+      onChange({ [name]: newValue }, newValue, name, event)
+      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        return
+      }
       inputElementRef.current.focus()
     },
     [name, onChange]
