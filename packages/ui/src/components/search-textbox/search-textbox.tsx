@@ -43,7 +43,7 @@ export function SearchTextbox ({
   }
 
   const handleInput = useCallback(
-    function (event: InputEvent) {
+    function (event: Event) {
       if (
         inputElementRef.current === null ||
         typeof inputElementRef.current === 'undefined'

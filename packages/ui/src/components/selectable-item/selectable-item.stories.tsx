@@ -67,7 +67,7 @@ export const Indent = function () {
 export const LongText = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <SelectableItem name='foo' value={state.foo} onChange={setState} icon>
+    <SelectableItem name='foo' value={state.foo} onChange={setState}>
       {longText}
     </SelectableItem>
   )
