@@ -1,5 +1,6 @@
 import { join } from 'path'
 import { test } from 'tap'
+
 import { readConfigAsync } from '../src/read-config-async'
 
 test('is a function', function (t) {

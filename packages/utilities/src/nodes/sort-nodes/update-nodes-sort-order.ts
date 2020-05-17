@@ -1,5 +1,5 @@
-import { areSiblingNodes } from '../are-sibling-nodes'
 import { compareArrays } from '../../object'
+import { areSiblingNodes } from '../are-sibling-nodes'
 
 export function updateNodesSortOrder (nodes: Array<SceneNode>): boolean {
   const parent = nodes[0].parent

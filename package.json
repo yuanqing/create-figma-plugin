@@ -3,9 +3,9 @@
   "scripts": {
     "build": "lerna run build",
     "bump-dependencies": "node scripts/bump-dependencies.js",
-    "clean": "lerna run clean && rimraf '*.log'",
+    "clean": "lerna run clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf '*.log'",
     "insert-toc": "node scripts/insert-toc.js",
-    "fix": "lerna run fix && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
+    "fix": "lerna run fix && standardx --fix 'scripts/**/*.js' && prettier-standard 'scripts/**/*.js' && prettier --write '*.json'",
     "lint": "lerna run lint && standardx 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
@@ -35,6 +35,7 @@
     "chokidar-cli": "^2.1.0",
     "cpy-cli": "^3.1.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
     "fs-extra": "^9.0.0",
     "globby": "^11.0.0",
     "husky": "^4.2.5",
@@ -61,9 +62,11 @@
       "figma": true
     },
     "plugins": [
-      "react-hooks"
+      "react-hooks",
+      "simple-import-sort"
     ],
     "rules": {
+      "simple-import-sort/sort": "error",
       "indent": "off",
       "no-console": "error",
       "no-unused-vars": "off",

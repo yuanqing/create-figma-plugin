@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import * as sade from 'sade'
+
 import { createFigmaPluginAsync } from './create-figma-plugin-async'
 
 sade('create-figma-plugin [name]', true)

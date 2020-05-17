@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'preact/hooks'
+
 import {
   ENTER_KEY_CODE,
   ESCAPE_KEY_CODE,

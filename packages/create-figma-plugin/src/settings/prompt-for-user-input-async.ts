@@ -1,8 +1,9 @@
 import { constants } from '@create-figma-plugin/common'
 import * as gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
-import { createPluginDisplayName } from './create-plugin-display-name'
+
 import { Settings } from '../types/settings'
+import { createPluginDisplayName } from './create-plugin-display-name'
 
 export async function promptForUserInputAsync (
   options: Settings

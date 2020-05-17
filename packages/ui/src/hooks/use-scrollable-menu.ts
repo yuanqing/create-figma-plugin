@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from 'preact/hooks'
+
 import { DOWN_KEY_CODE, UP_KEY_CODE } from '../utilities/key-codes'
 
 export const INVALID_MENU_ITEM_ID = null

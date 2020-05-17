@@ -1,4 +1,4 @@
-import { copy, ensureDir, pathExists, move } from 'fs-extra'
+import { copy, ensureDir, move, pathExists } from 'fs-extra'
 import { join, resolve } from 'path'
 const degit = require('degit')
 

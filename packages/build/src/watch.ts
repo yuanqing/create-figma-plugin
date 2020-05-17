@@ -1,5 +1,6 @@
 import { constants, log } from '@create-figma-plugin/common'
 import * as chokidar from 'chokidar'
+
 import { buildAsync } from './build-async'
 
 const ignoreRegex = new RegExp(

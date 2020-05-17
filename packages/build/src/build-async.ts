@@ -1,4 +1,5 @@
 import { log, readConfigAsync } from '@create-figma-plugin/common'
+
 import { buildBundleAsync } from './build-bundle-async'
 import { buildManifestAsync } from './build-manifest-async'
 

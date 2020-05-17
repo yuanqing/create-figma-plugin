@@ -27,7 +27,7 @@
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "clean-test": "rimraf '*.log' .nyc_output coverage",
-    "fix": "prettier-standard '{src,test}/**/*.ts' && prettier --write '*.json'",
+    "fix": "standardx --fix '{src,test}/**/*.ts' && prettier-standard '{src,test}/**/*.ts' && prettier --write '*.json'",
     "lint": "standardx '{src,test}/**/*.ts'",
     "test": "yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
   },

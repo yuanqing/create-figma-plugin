@@ -6,6 +6,7 @@ import {
   constants
 } from '@create-figma-plugin/common'
 import { outputFile } from 'fs-extra'
+
 import {
   Manifest,
   ManifestMenuItem,

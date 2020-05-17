@@ -1,10 +1,11 @@
+import { log } from '@create-figma-plugin/common'
 import { pathExists } from 'fs-extra'
 import { join } from 'path'
-import { log } from '@create-figma-plugin/common'
-import { createDefaultSettings } from './settings/create-default-settings'
+
 import { cloneFromTemplateAsync } from './clone-from-template-async'
 import { installDependenciesAsync } from './install-dependencies-async'
 import { interpolateValuesIntoFilesAsync } from './interpolate-values-into-files-async'
+import { createDefaultSettings } from './settings/create-default-settings'
 import { promptForUserInputAsync } from './settings/prompt-for-user-input-async'
 import { Settings } from './types/settings'
 

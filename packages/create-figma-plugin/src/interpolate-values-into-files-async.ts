@@ -1,7 +1,8 @@
-import { readFile, outputFile } from 'fs-extra'
+import { outputFile, readFile } from 'fs-extra'
 import * as globby from 'globby'
-import { join } from 'path'
 import * as mustache from 'mustache'
+import { join } from 'path'
+
 import { Settings } from './types/settings'
 const isUtf8 = require('is-utf8')
 

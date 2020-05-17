@@ -1,6 +1,7 @@
+import * as slugify from '@sindresorhus/slugify'
 import { pathExists } from 'fs-extra'
 import { join } from 'path'
-import * as slugify from '@sindresorhus/slugify'
+
 import { constants } from './constants'
 import {
   Config,

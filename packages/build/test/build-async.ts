@@ -2,6 +2,7 @@ import { ensureSymlink, pathExists } from 'fs-extra'
 import { join, resolve } from 'path'
 import * as rimraf from 'rimraf'
 import { test } from 'tap'
+
 import { buildAsync } from '../src/build-async'
 
 test('no config', async function (t) {
