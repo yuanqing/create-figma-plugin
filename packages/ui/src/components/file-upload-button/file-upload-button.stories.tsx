@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+
 import { FileUploadButton } from './file-upload-button'
 
 export default { title: 'File Upload Button' }
@@ -11,7 +12,11 @@ const longText = Array(100)
 function handleSelectedFiles () {}
 
 export const Button = function () {
-  return <FileUploadButton multiple onSelectedFiles={handleSelectedFiles}>Text</FileUploadButton>
+  return (
+    <FileUploadButton multiple onSelectedFiles={handleSelectedFiles}>
+      Text
+    </FileUploadButton>
+  )
 }
 
 export const ButtonLoading = function () {
@@ -32,7 +37,12 @@ export const ButtonDisabled = function () {
 
 export const ButtonDisabledLoading = function () {
   return (
-    <FileUploadButton multiple disabled loading onSelectedFiles={handleSelectedFiles}>
+    <FileUploadButton
+      multiple
+      disabled
+      loading
+      onSelectedFiles={handleSelectedFiles}
+    >
       Text
     </FileUploadButton>
   )

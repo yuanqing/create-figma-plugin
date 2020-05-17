@@ -1,8 +1,10 @@
 /** @jsx h */
+import '../../../scss/base.scss'
+
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
-import { TextboxProps } from '../textbox'
+
 import { Option } from '../../../types'
 import {
   BACKSPACE_KEY_CODE,
@@ -13,10 +15,10 @@ import {
   TAB_KEY_CODE,
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
+import { TextboxProps } from '../textbox'
+import styles from '../textbox.scss'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import '../../../scss/base.scss'
-import styles from '../textbox.scss'
 import textboxAutocompleteStyles from './textbox-autocomplete.scss'
 
 const EMPTY_STRING = ''
@@ -25,9 +27,9 @@ const INVALID_MENU_ITEM_ID = null
 type MenuItemId = null | string
 
 export interface TextboxAutocompleteProps extends TextboxProps {
-  filter?: boolean,
-  options: Option[],
-  strict?: boolean,
+  filter?: boolean
+  options: Option[]
+  strict?: boolean
   top?: boolean
 }
 
@@ -49,18 +51,20 @@ export function TextboxAutocomplete ({
   top: isTop,
   value: committedValue,
   ...rest
-} : TextboxAutocompleteProps) : h.JSX.Element {
-  const rootElementRef : preact.RefObject<HTMLDivElement> = useRef(null)
-  const inputElementRef : preact.RefObject<HTMLInputElement> = useRef(null)
-  const menuElementRef : preact.RefObject<HTMLDivElement> = useRef(null)
+}: TextboxAutocompleteProps): h.JSX.Element {
+  const rootElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
+  const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
+  const menuElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false)
 
   const [currentValue, setCurrentValue]: [Value, any] = useState(EMPTY_STRING)
   const [isMenuVisible, setMenuVisible] = useState(false)
-  const [selectedId, setSelectedId]: [MenuItemId, any] = useState(INVALID_MENU_ITEM_ID)
+  const [selectedId, setSelectedId]: [MenuItemId, any] = useState(
+    INVALID_MENU_ITEM_ID
+  )
 
-  let menuItems : Option[] = options.map(function (option, index) {
+  let menuItems: Option[] = options.map(function (option, index) {
     return {
       id: `${index}`,
       ...option
@@ -74,9 +78,7 @@ export function TextboxAutocomplete ({
       }
       for (const menuItem of menuItems) {
         if ('value' in menuItem) {
-          if (
-            menuItem.value.toLowerCase().indexOf(value.toLowerCase()) === 0
-          ) {
+          if (menuItem.value.toLowerCase().indexOf(value.toLowerCase()) === 0) {
             return true
           }
         }
@@ -110,7 +112,8 @@ export function TextboxAutocomplete ({
     menuItems = menuItems.filter(function (menuItem) {
       if ('value' in menuItem) {
         return (
-          menuItem.value.toLowerCase().indexOf(currentValue.toLowerCase()) !== -1
+          menuItem.value.toLowerCase().indexOf(currentValue.toLowerCase()) !==
+          -1
         )
       }
       return false
@@ -238,7 +241,10 @@ export function TextboxAutocomplete ({
           event.stopPropagation()
         }
         shouldSelectAllRef.current = false
-        if (menuElementRef.current === null || typeof menuElementRef.current === 'undefined') {
+        if (
+          menuElementRef.current === null ||
+          typeof menuElementRef.current === 'undefined'
+        ) {
           return
         }
         scrollTopRef.current = menuElementRef.current.scrollTop
@@ -252,7 +258,10 @@ export function TextboxAutocomplete ({
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+        if (
+          inputElementRef.current === null ||
+          typeof inputElementRef.current === 'undefined'
+        ) {
           return
         }
         const nextValue = computeNextValue(inputElementRef.current, event.key)
@@ -286,7 +295,10 @@ export function TextboxAutocomplete ({
       ) {
         return
       }
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       const value = inputElementRef.current.value
@@ -300,7 +312,10 @@ export function TextboxAutocomplete ({
 
   const handleOptionClick = useCallback(
     function (event: MouseEvent) {
-      if (menuElementRef.current === null || typeof menuElementRef.current === 'undefined') {
+      if (
+        menuElementRef.current === null ||
+        typeof menuElementRef.current === 'undefined'
+      ) {
         return
       }
       scrollTopRef.current = menuElementRef.current.scrollTop
@@ -318,7 +333,11 @@ export function TextboxAutocomplete ({
   )
 
   function handlePaste (event: ClipboardEvent) {
-    if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined' || event.clipboardData === null) {
+    if (
+      inputElementRef.current === null ||
+      typeof inputElementRef.current === 'undefined' ||
+      event.clipboardData === null
+    ) {
       return
     }
     const nextValue = computeNextValue(
@@ -334,7 +353,10 @@ export function TextboxAutocomplete ({
   // `shouldSelectAllRef` is set to `true`
   useLayoutEffect(
     function () {
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       if (shouldSelectAllRef.current === true) {
@@ -349,8 +371,12 @@ export function TextboxAutocomplete ({
   // Restore the original menu scroll position and update focus
   useLayoutEffect(
     function () {
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined' ||
-      menuElementRef.current === null || typeof menuElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined' ||
+        menuElementRef.current === null ||
+        typeof menuElementRef.current === 'undefined'
+      ) {
         return
       }
       if (isMenuVisible === false) {
@@ -368,7 +394,10 @@ export function TextboxAutocomplete ({
   // Adjust the menu scroll position so that the selected menu item is always visible
   useLayoutEffect(
     function () {
-      if (menuElementRef.current === null || typeof menuElementRef.current === 'undefined') {
+      if (
+        menuElementRef.current === null ||
+        typeof menuElementRef.current === 'undefined'
+      ) {
         return
       }
       if (isMenuVisible === false || menuItems.length === 0) {
@@ -404,8 +433,12 @@ export function TextboxAutocomplete ({
   useLayoutEffect(
     function () {
       function handleWindowMousedown (event: MouseEvent) {
-        if (menuElementRef.current === null || typeof menuElementRef.current === 'undefined' ||
-        rootElementRef.current === null || typeof rootElementRef.current === 'undefined') {
+        if (
+          menuElementRef.current === null ||
+          typeof menuElementRef.current === 'undefined' ||
+          rootElementRef.current === null ||
+          typeof rootElementRef.current === 'undefined'
+        ) {
           return
         }
         if (

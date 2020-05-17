@@ -1,8 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { Checkbox } from './checkbox'
+
 import { Text } from '../text/text'
+import { Checkbox } from './checkbox'
 
 export default { title: 'Checkbox' }
 

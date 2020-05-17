@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+
 import { OnChange } from '../../types'
 import {
   DOWN_KEY_CODE,
@@ -12,18 +13,18 @@ import {
 import styles from './tabs.scss'
 
 export interface TabsProps {
-  focused?: boolean,
-  name: string,
-  onChange: OnChange,
-  options: TabsOption[],
-  propagateEscapeKeyDown?: boolean,
+  focused?: boolean
+  name: string
+  onChange: OnChange
+  options: TabsOption[]
+  propagateEscapeKeyDown?: boolean
   value: null | string
 }
 
 export interface TabsOption {
-  disabled?: boolean,
-  text?: preact.ComponentChildren,
-  value: null | string,
+  disabled?: boolean
+  text?: preact.ComponentChildren
+  value: null | string
   view: preact.ComponentChildren
 }
 
@@ -35,7 +36,7 @@ export function Tabs ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : TabsProps) : h.JSX.Element {
+}: TabsProps): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')

@@ -1,20 +1,28 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { TextboxNumeric } from './textbox-numeric'
+
 import { spaceHorizontalIcon } from '../../icon/icons/space-horizontal-icon'
+import { TextboxNumeric } from './textbox-numeric'
 
 export default { title: 'Textbox Numeric' }
 
 export const Empty = function () {
   const [state, setState] = useState({ foo: null })
-  return <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+  return (
+    <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+  )
 }
 
 export const Disabled = function () {
   const [state, setState] = useState({ foo: null })
   return (
-    <TextboxNumeric disabled name='foo' value={`${state.foo}`} onChange={setState} />
+    <TextboxNumeric
+      disabled
+      name='foo'
+      value={`${state.foo}`}
+      onChange={setState}
+    />
   )
 }
 
@@ -32,25 +40,39 @@ export const WithPlaceholder = function () {
 
 export const Filled = function () {
   const [state, setState] = useState({ foo: 42 })
-  return <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+  return (
+    <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+  )
 }
 
 export const FilledDisabled = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
-    <TextboxNumeric disabled name='foo' value={`${state.foo}`} onChange={setState} />
+    <TextboxNumeric
+      disabled
+      name='foo'
+      value={`${state.foo}`}
+      onChange={setState}
+    />
   )
 }
 
 export const Mixed = function () {
   const [state, setState] = useState({ foo: null })
-  return <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+  return (
+    <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+  )
 }
 
 export const NoBorder = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
-    <TextboxNumeric noBorder name='foo' value={`${state.foo}`} onChange={setState} />
+    <TextboxNumeric
+      noBorder
+      name='foo'
+      value={`${state.foo}`}
+      onChange={setState}
+    />
   )
 }
 

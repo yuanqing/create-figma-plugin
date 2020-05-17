@@ -2,22 +2,23 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+
 import { OnSelectedFiles } from '../../types'
-import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
+import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './file-upload-button.scss'
 
 export interface FileUploadButtonProps {
-  acceptedFileTypes?: string[],
-  children: preact.ComponentChildren,
-  disabled?: boolean,
-  focused?: boolean,
-  fullWidth?: boolean,
-  loading?: boolean,
-  multiple?: boolean,
-  onClick?: EventListener,
-  onSelectedFiles: OnSelectedFiles,
-  propagateEscapeKeyDown?: boolean,
+  acceptedFileTypes?: string[]
+  children: preact.ComponentChildren
+  disabled?: boolean
+  focused?: boolean
+  fullWidth?: boolean
+  loading?: boolean
+  multiple?: boolean
+  onClick?: EventListener
+  onSelectedFiles: OnSelectedFiles
+  propagateEscapeKeyDown?: boolean
 }
 
 export function FileUploadButton ({
@@ -32,12 +33,12 @@ export function FileUploadButton ({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-} : FileUploadButtonProps) : h.JSX.Element {
+}: FileUploadButtonProps): h.JSX.Element {
   const handleClick = useCallback(function (event: MouseEvent) {
-    (event.target as HTMLElement).focus()
+    ;(event.target as HTMLElement).focus()
   }, [])
   const handleChange = useCallback(
-    function (event: Event) : void {
+    function (event: Event): void {
       const files = Array.prototype.slice
         .call((event.target as HTMLInputElement).files)
         .sort(comparator)
@@ -52,7 +53,7 @@ export function FileUploadButton ({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        (event.target as HTMLElement).blur()
+        ;(event.target as HTMLElement).blur()
       }
     },
     [propagateEscapeKeyDown]

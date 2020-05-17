@@ -1,7 +1,8 @@
 /** @jsx h */
 import { h } from 'preact'
-import { Inline } from './inline'
+
 import { Text } from '../text/text'
+import { Inline } from './inline'
 
 export default { title: 'Inline' }
 

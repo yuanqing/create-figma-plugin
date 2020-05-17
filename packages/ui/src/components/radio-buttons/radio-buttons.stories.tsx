@@ -1,8 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { RadioButtons } from './radio-buttons'
+
 import { Text } from '../text/text'
+import { RadioButtons } from './radio-buttons'
 
 export default { title: 'Radio Buttons' }
 

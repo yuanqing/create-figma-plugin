@@ -2,21 +2,21 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+
 import { OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
 import styles from './selectable-item.scss'
 
 export interface SelectableItemProps {
-  bold?: boolean,
-  children: preact.ComponentChildren,
-  disabled?: boolean,
-  icon?: boolean,
-  indent?: boolean,
-  name: string,
-  onChange: OnChange,
-  onKeyDown?: EventListener, // FIXME
-  propagateEscapeKeyDown?: boolean,
+  bold?: boolean
+  children: preact.ComponentChildren
+  disabled?: boolean
+  indent?: boolean
+  name: string
+  onChange: OnChange
+  onKeyDown?: EventListener // FIXME
+  propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
@@ -24,7 +24,6 @@ export function SelectableItem ({
   bold: isBold,
   children,
   disabled: isDisabled,
-  icon: hasIcon,
   indent: isIndented,
   name,
   onChange,
@@ -32,7 +31,7 @@ export function SelectableItem ({
   propagateEscapeKeyDown,
   value,
   ...rest
-} : SelectableItemProps) : h.JSX.Element {
+}: SelectableItemProps): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)

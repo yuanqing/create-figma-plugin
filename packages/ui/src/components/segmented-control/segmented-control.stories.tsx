@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
+
 import { SegmentedControl } from './segmented-control'
 
 export default { title: 'Segmented Control' }

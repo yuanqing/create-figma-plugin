@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+
 import { Button } from './button'
 
 export default { title: 'Button' }
@@ -15,11 +16,19 @@ export const Primary = function () {
 }
 
 export const PrimaryLoading = function () {
-  return <Button loading onClick={handleClick}>Text</Button>
+  return (
+    <Button loading onClick={handleClick}>
+      Text
+    </Button>
+  )
 }
 
 export const PrimaryDisabled = function () {
-  return <Button disabled onClick={handleClick}>Text</Button>
+  return (
+    <Button disabled onClick={handleClick}>
+      Text
+    </Button>
+  )
 }
 
 export const PrimaryDisabledLoading = function () {
@@ -31,15 +40,27 @@ export const PrimaryDisabledLoading = function () {
 }
 
 export const PrimaryFullWidth = function () {
-  return <Button fullWidth onClick={handleClick}>Text</Button>
+  return (
+    <Button fullWidth onClick={handleClick}>
+      Text
+    </Button>
+  )
 }
 
 export const PrimaryFullWidthLongText = function () {
-  return <Button fullWidth onClick={handleClick}>{longText}</Button>
+  return (
+    <Button fullWidth onClick={handleClick}>
+      {longText}
+    </Button>
+  )
 }
 
 export const Secondary = function () {
-  return <Button secondary onClick={handleClick}>Text</Button>
+  return (
+    <Button secondary onClick={handleClick}>
+      Text
+    </Button>
+  )
 }
 
 export const SecondaryLoading = function () {
@@ -83,7 +104,11 @@ export const SecondaryFullWidthLongText = function () {
 }
 
 export const Destructive = function () {
-  return <Button destructive onClick={handleClick}>Text</Button>
+  return (
+    <Button destructive onClick={handleClick}>
+      Text
+    </Button>
+  )
 }
 
 export const DestructiveLoading = function () {

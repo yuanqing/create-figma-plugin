@@ -2,18 +2,19 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+
 import { OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './checkbox.scss'
 
 export interface CheckboxProps {
-  children: preact.ComponentChildren,
-  disabled?: boolean,
-  focused?: boolean,
-  name: string,
-  onChange: OnChange,
-  onKeyDown?: EventListener,
-  propagateEscapeKeyDown?: boolean,
+  children: preact.ComponentChildren
+  disabled?: boolean
+  focused?: boolean
+  name: string
+  onChange: OnChange
+  onKeyDown?: EventListener
+  propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
@@ -27,7 +28,7 @@ export function Checkbox ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : CheckboxProps) : h.JSX.Element {
+}: CheckboxProps): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)

@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+
 import { Preview } from './preview'
 
 export default { title: 'Preview' }

@@ -2,24 +2,25 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+
+import { OnChange, Space } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
-import { OnChange, Space } from '../../types'
 import styles from './radio-buttons.scss'
 
 export interface RadioButtonsProps {
-  disabled?: boolean,
-  focused?: boolean,
-  name: string,
-  onChange: OnChange,
-  options: RadioButtonsOption[],
-  propagateEscapeKeyDown?: boolean,
-  space?: Space,
+  disabled?: boolean
+  focused?: boolean
+  name: string
+  onChange: OnChange
+  options: RadioButtonsOption[]
+  propagateEscapeKeyDown?: boolean
+  space?: Space
   value: null | string
 }
 interface RadioButtonsOption {
-  disabled?: boolean,
-  text?: preact.ComponentChildren,
+  disabled?: boolean
+  text?: preact.ComponentChildren
   value: null | string
 }
 
@@ -33,7 +34,7 @@ export function RadioButtons ({
   space = 'small',
   value,
   ...rest
-} : RadioButtonsProps) : h.JSX.Element{
+}: RadioButtonsProps): h.JSX.Element {
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       const keyCode = event.keyCode
@@ -60,36 +61,36 @@ export function RadioButtons ({
   )
 
   return (
-      <Stack space={space} {...{onKeyDown: handleKeyDown}}>
-        {options.map(function (option, index) {
-          const text =
-            typeof option.text === 'undefined' ? option.value : option.text
-          const isOptionDisabled = isDisabled === true || option.disabled === true
-          return (
-            <label
-              class={classnames(
-                styles.label,
-                isOptionDisabled === true ? styles.disabled : null
-              )}
-              key={index}
-            >
-              <input
-                {...rest}
-                class={styles.input}
-                type='radio'
-                name={name}
-                value={option.value === null ? undefined : option.value}
-                checked={value === option.value}
-                disabled={isOptionDisabled === true}
-                onChange={handleChange}
-                tabIndex={isOptionDisabled === true ? undefined : 0}
-                data-index={index}
-                data-initial-focus={isFocused === true}
-              />
-              <div class={styles.text}>{text}</div>
-            </label>
-          )
-        })}
-      </Stack>
+    <Stack space={space} {...{ onKeyDown: handleKeyDown }}>
+      {options.map(function (option, index) {
+        const text =
+          typeof option.text === 'undefined' ? option.value : option.text
+        const isOptionDisabled = isDisabled === true || option.disabled === true
+        return (
+          <label
+            class={classnames(
+              styles.label,
+              isOptionDisabled === true ? styles.disabled : null
+            )}
+            key={index}
+          >
+            <input
+              {...rest}
+              class={styles.input}
+              type='radio'
+              name={name}
+              value={option.value === null ? undefined : option.value}
+              checked={value === option.value}
+              disabled={isOptionDisabled === true}
+              onChange={handleChange}
+              tabIndex={isOptionDisabled === true ? undefined : 0}
+              data-index={index}
+              data-initial-focus={isFocused === true}
+            />
+            <div class={styles.text}>{text}</div>
+          </label>
+        )
+      })}
+    </Stack>
   )
 }

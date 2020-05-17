@@ -1,6 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
+
 import { componentIcon } from '../icon/icons/component-icon'
 import { frameIcon } from '../icon/icons/frame-icon'
 import styles from './layer.scss'
@@ -11,11 +12,11 @@ const icons = {
 }
 
 export interface LayerProps {
-  children: preact.ComponentChildren,
-  onClick: EventListener,
-  pageName?: string,
-  selected?: boolean,
-  type: LayerType,
+  children: preact.ComponentChildren
+  onClick: EventListener
+  pageName?: string
+  selected?: boolean
+  type: LayerType
 }
 type LayerType = 'frame' | 'component'
 
@@ -26,7 +27,7 @@ export function Layer ({
   selected: isSelected,
   type,
   ...rest
-} : LayerProps) : h.JSX.Element {
+}: LayerProps): h.JSX.Element {
   return (
     <div
       {...rest}

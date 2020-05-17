@@ -1,8 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { Tabs } from './tabs'
+
 import { Text } from '../text/text'
+import { Tabs } from './tabs'
 
 export default { title: 'Tabs' }
 

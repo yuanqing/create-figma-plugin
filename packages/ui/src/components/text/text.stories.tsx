@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+
 import { Text } from './text'
 
 export default { title: 'Text' }

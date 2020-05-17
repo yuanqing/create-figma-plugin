@@ -1,8 +1,9 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { Textbox } from './textbox'
+
 import { searchIcon } from '../icon/icons/search-icon'
+import { Textbox } from './textbox'
 
 export default { title: 'Textbox' }
 

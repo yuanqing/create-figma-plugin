@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
+
 import { SelectableItem } from './selectable-item'
 
 export default { title: 'Selectable Item' }

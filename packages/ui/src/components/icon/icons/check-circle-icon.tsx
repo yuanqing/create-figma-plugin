@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
+
 import { Icon } from '../icon'
 
 const path =

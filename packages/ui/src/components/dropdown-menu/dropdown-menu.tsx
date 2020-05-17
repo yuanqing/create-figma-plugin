@@ -2,23 +2,28 @@
 import classnames from '@sindresorhus/class-names'
 import { cloneElement, h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
+
+import {
+  INVALID_MENU_ITEM_ID,
+  MenuItemId as ItemId,
+  useScrollableMenu
+} from '../../hooks/use-scrollable-menu'
 import { OnChange, Option } from '../../types'
-import { MenuItemId as ItemId, useScrollableMenu, INVALID_MENU_ITEM_ID } from '../../hooks/use-scrollable-menu'
+import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
-import { ESCAPE_KEY_CODE, ENTER_KEY_CODE } from '../../utilities/key-codes'
 import styles from './dropdown-menu.scss'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-dropdown-menu'
 
 export interface DropdownMenuProps {
-  children: preact.ComponentChildren,
-  focused?: boolean,
-  fullWidth?: boolean,
-  name: string,
-  onChange: OnChange,
-  options: Option[],
-  right?: boolean,
-  top?: boolean,
+  children: preact.ComponentChildren
+  focused?: boolean
+  fullWidth?: boolean
+  name: string
+  onChange: OnChange
+  options: Option[]
+  right?: boolean
+  top?: boolean
   value: null | string
 }
 
@@ -34,10 +39,10 @@ export function DropdownMenu ({
   right: isRight,
   top: isTop,
   value
-} : DropdownMenuProps) : h.JSX.Element {
-  const rootElementRef : preact.RefObject<HTMLDivElement> = useRef(null)
+}: DropdownMenuProps): h.JSX.Element {
+  const rootElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
-  const menuItems : Array<Option> = options.map(function (option, index) {
+  const menuItems: Array<Option> = options.map(function (option, index) {
     return {
       id: `${index}`,
       ...option
@@ -46,7 +51,7 @@ export function DropdownMenu ({
   const committedId = getIdByValue(menuItems, value)
   const [selectedId, setSelectedId] = useState(committedId)
   const findOptionById = useCallback(
-    function (targetId: string) : undefined | Option {
+    function (targetId: string): undefined | Option {
       return options.find(function ({ id }) {
         return id === targetId
       })
@@ -54,8 +59,10 @@ export function DropdownMenu ({
     [options]
   )
   const handleMenuItemClick = useCallback(
-    function (event: MouseEvent) : void {
-      const targetId = (event.target as HTMLElement).getAttribute(ITEM_ELEMENT_ATTRIBUTE_NAME) as string
+    function (event: MouseEvent): void {
+      const targetId = (event.target as HTMLElement).getAttribute(
+        ITEM_ELEMENT_ATTRIBUTE_NAME
+      ) as string
       const option = findOptionById(targetId)
       if (typeof option === 'undefined') {
         return
@@ -66,7 +73,7 @@ export function DropdownMenu ({
         setIsMenuVisible(false)
       }
     },
-    [name, onChange, options, setIsMenuVisible]
+    [findOptionById, name, onChange, setIsMenuVisible]
   )
   const {
     menuElementRef,
@@ -79,10 +86,12 @@ export function DropdownMenu ({
     changeOnMouseOver: true
   })
   const handleClick = useCallback(
-    function (event: MouseEvent) : void {
+    function (event: MouseEvent): void {
       if (
-        menuElementRef.current === null || typeof menuElementRef.current === 'undefined' ||
-        rootElementRef.current === null || typeof rootElementRef.current === 'undefined' ||
+        menuElementRef.current === null ||
+        typeof menuElementRef.current === 'undefined' ||
+        rootElementRef.current === null ||
+        typeof rootElementRef.current === 'undefined' ||
         menuElementRef.current === event.target ||
         menuElementRef.current.contains(event.target as HTMLElement) === true
       ) {
@@ -114,7 +123,7 @@ export function DropdownMenu ({
           if (typeof option === 'undefined') {
             return
           }
-          if ('value' in option ) {
+          if ('value' in option) {
             const newValue = option.value
             onChange({ [name]: newValue }, newValue, name, event)
           }
@@ -130,10 +139,10 @@ export function DropdownMenu ({
       handleKeyDown(event)
     },
     [
+      findOptionById,
       handleKeyDown,
       name,
       onChange,
-      options,
       selectedId,
       setIsMenuVisible,
       setSelectedId
@@ -141,8 +150,11 @@ export function DropdownMenu ({
   )
   const handleWindowClick = useCallback(
     // Hide the menu if we’d clicked outside
-    function (event: Event) : void{
-      if (rootElementRef.current === null || typeof rootElementRef.current === 'undefined') {
+    function (event: Event): void {
+      if (
+        rootElementRef.current === null ||
+        typeof rootElementRef.current === 'undefined'
+      ) {
         return
       }
       if (
@@ -157,7 +169,7 @@ export function DropdownMenu ({
     [rootElementRef, isMenuVisible, setIsMenuVisible]
   )
   useLayoutEffect(
-    function () : () => void {
+    function (): () => void {
       window.addEventListener('click', handleWindowClick)
       return function () {
         window.removeEventListener('click', handleWindowClick)
@@ -200,9 +212,7 @@ export function DropdownMenu ({
             <div
               class={classnames(
                 styles.menuItem,
-                `${menuItem.id}` === selectedId
-                  ? styles.menuItemSelected
-                  : null
+                `${menuItem.id}` === selectedId ? styles.menuItemSelected : null
               )}
               onClick={handleMenuItemClick}
               key={menuItem.id}
@@ -220,7 +230,10 @@ export function DropdownMenu ({
   )
 }
 
-function getIdByValue (menuItems: Array<Option>, targetValue: null | string) : ItemId {
+function getIdByValue (
+  menuItems: Array<Option>,
+  targetValue: null | string
+): ItemId {
   if (targetValue !== null) {
     for (const menuItem of menuItems) {
       if ('value' in menuItem) {

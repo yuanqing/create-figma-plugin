@@ -1,20 +1,21 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import { h, Key } from 'preact'
+import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
+
 import { OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './textbox.scss'
 
 export interface TextboxProps {
-  disabled?: boolean,
-  focused?: boolean,
-  icon?: preact.ComponentChildren,
-  name: string,
-  noBorder?: boolean,
-  onChange: OnChange,
-  placeholder?: string,
-  propagateEscapeKeyDown?: boolean,
+  disabled?: boolean
+  focused?: boolean
+  icon?: preact.ComponentChildren
+  name: string
+  noBorder?: boolean
+  onChange: OnChange
+  placeholder?: string
+  propagateEscapeKeyDown?: boolean
   value: null | string
 }
 
@@ -29,14 +30,17 @@ export function Textbox ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : TextboxProps) : h.JSX.Element {
+}: TextboxProps): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
-  const inputElementRef : preact.RefObject<HTMLInputElement> = useRef(null)
+  const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
 
   const handleClick = useCallback(
     function () {
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       if (value === null) {
@@ -48,7 +52,10 @@ export function Textbox ({
   )
 
   function handleFocus () {
-    if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+    if (
+      inputElementRef.current === null ||
+      typeof inputElementRef.current === 'undefined'
+    ) {
       return
     }
     inputElementRef.current.select()
@@ -56,7 +63,10 @@ export function Textbox ({
 
   const handleInput = useCallback(
     function (event: Event) {
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       const newValue = inputElementRef.current.value
@@ -71,7 +81,10 @@ export function Textbox ({
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      if (inputElementRef.current === null || typeof inputElementRef.current === 'undefined') {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
         return
       }
       inputElementRef.current.blur()

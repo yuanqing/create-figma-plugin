@@ -2,19 +2,20 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
-import { LoadingIndicator } from '../loading-indicator/loading-indicator'
+
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
+import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './button.scss'
 
 export interface ButtonProps {
-  children: preact.ComponentChildren,
-  destructive?: boolean,
-  disabled?: boolean,
-  focused?: boolean,
-  fullWidth?: boolean,
-  loading?: boolean,
-  onClick: EventListener,
-  propagateEscapeKeyDown?: boolean,
+  children: preact.ComponentChildren
+  destructive?: boolean
+  disabled?: boolean
+  focused?: boolean
+  fullWidth?: boolean
+  loading?: boolean
+  onClick: EventListener
+  propagateEscapeKeyDown?: boolean
   secondary?: boolean
 }
 
@@ -29,7 +30,7 @@ export function Button ({
   propagateEscapeKeyDown = true,
   secondary: isSecondary,
   ...rest
-} : ButtonProps) : h.JSX.Element {
+}: ButtonProps): h.JSX.Element {
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       const keyCode = event.keyCode
@@ -68,7 +69,9 @@ export function Button ({
         onKeyDown={handleKeyDown}
         tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
-      >{children}</button>
+      >
+        {children}
+      </button>
     </div>
   )
 }

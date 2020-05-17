@@ -1,15 +1,16 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
+
 import { Alignment } from '../../types'
 import styles from './text.scss'
 
 export interface TextProps {
-  children: preact.ComponentChildren,
-  align?: Alignment,
-  bold?: boolean,
-  muted?: boolean,
-  numeric?: boolean,
+  children: preact.ComponentChildren
+  align?: Alignment
+  bold?: boolean
+  muted?: boolean
+  numeric?: boolean
 }
 
 export function Text ({
@@ -19,7 +20,7 @@ export function Text ({
   muted: isMuted,
   numeric: isNumeric,
   ...rest
-} : TextProps) : h.JSX.Element {
+}: TextProps): h.JSX.Element {
   return (
     <div
       {...rest}
@@ -30,6 +31,8 @@ export function Text ({
         isMuted === true ? styles.isMuted : null,
         isNumeric === true ? styles.isNumeric : null
       )}
-    >{children}</div>
+    >
+      {children}
+    </div>
   )
 }

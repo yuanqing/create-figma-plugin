@@ -1,4 +1,6 @@
 /** @jsx h */
+import '../../../scss/base.scss'
+
 import {
   evaluateNumericExpression,
   isValidNumericInput
@@ -6,16 +8,16 @@ import {
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
-import { TextboxProps } from '../textbox'
+
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
+import { TextboxProps } from '../textbox'
+import styles from '../textbox.scss'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import '../../../scss/base.scss'
-import styles from '../textbox.scss'
 
 const nonDigitRegex = /[^\d.]/
 

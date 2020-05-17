@@ -1,11 +1,12 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
+
 import { DropdownMenu, DropdownOption } from './dropdown-menu'
 
 export default { title: 'Dropdown Menu' }
 
-const options : DropdownOption[] = [
+const options: DropdownOption[] = [
   { value: 'foo' },
   { value: 'bar' },
   { value: 'baz' },

@@ -1,12 +1,16 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
-import { TextboxAutocomplete, TextboxAutocompleteOption } from './textbox-autocomplete'
+
 import { searchIcon } from '../../icon/icons/search-icon'
+import {
+  TextboxAutocomplete,
+  TextboxAutocompleteOption
+} from './textbox-autocomplete'
 
 export default { title: 'Textbox Autocomplete' }
 
-const options : TextboxAutocompleteOption[] = [
+const options: TextboxAutocompleteOption[] = [
   { value: 'foo' },
   { value: 'bar' },
   { value: 'baz' },
