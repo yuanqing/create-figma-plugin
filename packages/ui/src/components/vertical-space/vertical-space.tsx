@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'preact'
-import { Space } from '../../types'
+import { Space } from '../../types/space'
 import styles from './vertical-space.scss'
 
 export interface VerticalSpaceProps {

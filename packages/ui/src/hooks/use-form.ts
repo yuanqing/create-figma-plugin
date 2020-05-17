@@ -5,16 +5,24 @@ import {
   TAB_KEY_CODE
 } from '../utilities/key-codes'
 
+type State = { [key: string]: any }
+
 export function useForm (
   initialState,
-  { transform, validate, onSubmit, onClose }
+  options: {
+    transform?: (state: State) => State
+    validate?: (state: State) => boolean
+    onSubmit?: (state: State, event: Event) => void
+    onClose?: (state: State, event: Event) => void
+  }
 ) {
+  const { transform, validate, onSubmit, onClose } = options
   const [state, setState] = useState(
     typeof transform === 'function' ? transform(initialState) : initialState
   )
   const handleChange = useCallback(
-    function (nextState) {
-      setState(function (previousState) {
+    function (nextState: State): void {
+      setState(function (previousState: State) {
         const state = {
           ...previousState,
           ...nextState
@@ -25,7 +33,10 @@ export function useForm (
     [transform, setState]
   )
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event?: KeyboardEvent): void {
+      if (typeof event === 'undefined') {
+        return
+      }
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
           if (typeof onClose === 'function') {
@@ -44,7 +55,10 @@ export function useForm (
         }
         case TAB_KEY_CODE: {
           const focusableElements = getFocusableElements()
-          const index = findElementIndex(event.target, focusableElements)
+          const index = findElementIndex(
+            event.target as HTMLElement,
+            focusableElements
+          )
           if (
             index === focusableElements.length - 1 &&
             event.shiftKey === false
@@ -63,7 +77,7 @@ export function useForm (
     [state, onClose, onSubmit, validate]
   )
   const handleSubmit = useCallback(
-    function (event) {
+    function (event?: Event): void {
       if (typeof event !== 'undefined') {
         event.preventDefault()
       }
@@ -77,7 +91,7 @@ export function useForm (
     [state, onSubmit, validate]
   )
   const isValid = useCallback(
-    function () {
+    function (): boolean {
       if (typeof validate !== 'function') {
         throw new Error('Need a `validate` callback')
       }
@@ -86,7 +100,7 @@ export function useForm (
     [state, validate]
   )
   useEffect(
-    function () {
+    function (): () => void {
       window.addEventListener('keydown', handleKeyDown)
       return function () {
         window.removeEventListener('keydown', handleKeyDown)
@@ -94,7 +108,7 @@ export function useForm (
     },
     [handleKeyDown]
   )
-  useEffect(function () {
+  useEffect(function (): void {
     const focusableElement = document.querySelector(
       '[data-initial-focus]'
     ) as HTMLElement
@@ -117,14 +131,17 @@ export function useForm (
   }
 }
 
-function getFocusableElements () {
+function getFocusableElements (): Array<HTMLElement> {
   const elements = document.querySelectorAll(
     ':not([disabled])[tabindex]:not([tabindex="-1"])'
   )
   return Array.prototype.slice.call(elements)
 }
 
-function findElementIndex (targetElement, elements) {
+function findElementIndex (
+  targetElement: HTMLElement,
+  elements: Array<HTMLElement>
+): number {
   return elements.reduce(function (result, element, index) {
     if (result === -1 && element.isEqualNode(targetElement)) {
       return index

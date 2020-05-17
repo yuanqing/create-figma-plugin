@@ -2,8 +2,8 @@
 import { h, render as preactRender } from 'preact'
 require('./scss/base.scss')
 
-export function render (Plugin) {
-  return function (rootNode, data) {
+export function render (Plugin: preact.FunctionComponent<any>) {
+  return function (rootNode: HTMLElement, data: { [key: string]: any }) : void {
     preactRender(<Plugin {...data} />, rootNode)
   }
 }

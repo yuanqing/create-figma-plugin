@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { cloneElement, h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
-import { Option, OptionValue, isOptionHeader, isOptionSeparator } from '../../types'
+import { Option, OptionValue, isOptionHeader, isOptionSeparator } from '../../types/option'
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
 import { checkIcon } from '../icon/icons/check-icon'
 import { ESCAPE_KEY_CODE, ENTER_KEY_CODE } from '../../utilities/key-codes'

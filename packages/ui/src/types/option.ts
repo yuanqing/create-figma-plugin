@@ -1,5 +1,3 @@
-export type Alignment = 'left' | 'center' | 'right'
-
 export type Option = OptionHeader | OptionValue | OptionSeparator
 
 export interface OptionHeader {
@@ -25,5 +23,3 @@ export interface OptionSeparator {
 export function isOptionSeparator (option: Option): option is OptionSeparator {
   return (option as OptionSeparator).separator === true
 }
-
-export type Space = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge'

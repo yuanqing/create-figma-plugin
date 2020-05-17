@@ -1,7 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h, toChildArray } from 'preact'
-import { Space } from '../../types'
+import { Space } from '../../types/space'
 import styles from './columns.scss'
 
 export interface ColumnsProps {

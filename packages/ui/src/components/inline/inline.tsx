@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h, toChildArray } from 'preact'
-import { Space } from '../../types'
+import { Space } from '../../types/space'
 import styles from './inline.scss'
 
 export interface InlineProps {

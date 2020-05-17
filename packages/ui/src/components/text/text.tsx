@@ -1,7 +1,7 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
-import { Alignment, Space } from '../../types'
+import { Alignment } from '../../types/alignment'
 import styles from './text.scss'
 
 export interface TextProps {

@@ -4,7 +4,7 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
-import { Space } from '../../types'
+import { Space } from '../../types/space'
 import styles from './radio-buttons.scss'
 
 export interface RadioButtonsProps {

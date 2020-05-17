@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 import { TextboxProps } from '../textbox'
-import { Option, isOptionHeader, isOptionSeparator, isOptionValue } from '../../../types'
+import { Option, isOptionHeader, isOptionSeparator, isOptionValue } from '../../../types/option'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,

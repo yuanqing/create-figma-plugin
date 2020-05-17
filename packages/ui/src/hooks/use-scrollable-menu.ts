@@ -3,21 +3,27 @@ import { DOWN_KEY_CODE, UP_KEY_CODE } from '../utilities/key-codes'
 
 const INVALID_ITEM_ID = null
 
-export function useScrollableMenu ({
-  itemElementAttributeName,
-  selectedItemId,
-  onChange,
-  changeOnMouseOver = true
+export function useScrollableMenu (options: {
+  itemElementAttributeName: string
+  selectedItemId: string
+  onChange: (id: string) => void
+  changeOnMouseOver: boolean
 }) {
+  const {
+    itemElementAttributeName,
+    selectedItemId,
+    onChange,
+    changeOnMouseOver = true
+  } = options
   const menuElementRef = useRef(null)
   const parseItemElementId = useCallback(
-    function (element) {
+    function (element: HTMLElement): string {
       return element.getAttribute(itemElementAttributeName)
     },
     [itemElementAttributeName]
   )
-  const getItemElements: () => Array<HTMLElement> = useCallback(
-    function () {
+  const getItemElements = useCallback(
+    function (): Array<HTMLElement> {
       const menuElement = menuElementRef.current
       if (menuElement === null) {
         return []
@@ -29,7 +35,7 @@ export function useScrollableMenu ({
     [menuElementRef, itemElementAttributeName]
   )
   const getItemIndex = useCallback(
-    function (id) {
+    function (id: string): number {
       if (id === INVALID_ITEM_ID) {
         return -1
       }
@@ -40,7 +46,7 @@ export function useScrollableMenu ({
     [getItemElements, parseItemElementId]
   )
   const updateScrollPosition = useCallback(
-    function (id) {
+    function (id: string): void {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
       if (index === -1) {
@@ -63,7 +69,7 @@ export function useScrollableMenu ({
     [getItemElements, getItemIndex, menuElementRef]
   )
   const handleKeyDown = useCallback(
-    function (event) {
+    function (event: KeyboardEvent): void {
       if (event.keyCode === DOWN_KEY_CODE || event.keyCode === UP_KEY_CODE) {
         const itemElements = getItemElements()
         const index = getItemIndex(selectedItemId)
@@ -91,8 +97,8 @@ export function useScrollableMenu ({
     ]
   )
   const handleMouseMove = useCallback(
-    function (event) {
-      const id = parseItemElementId(event.target)
+    function (event: MouseEvent): void {
+      const id = parseItemElementId(event.target as HTMLElement)
       if (id !== selectedItemId) {
         onChange(id)
       }
@@ -100,7 +106,7 @@ export function useScrollableMenu ({
     [onChange, parseItemElementId, selectedItemId]
   )
   useEffect(
-    function () {
+    function (): void {
       const menuElement = menuElementRef.current
       if (menuElement === null) {
         return
@@ -110,7 +116,7 @@ export function useScrollableMenu ({
     [menuElementRef]
   )
   useEffect(
-    function () {
+    function (): () => void {
       if (changeOnMouseOver === false) {
         return
       }
