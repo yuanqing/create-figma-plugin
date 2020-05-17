@@ -19,6 +19,7 @@
     "@storybook/preact": "^5.3.18",
     "@storybook/source-loader": "^5.3.18",
     "@storybook/storybook-deployer": "^2.8.5",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.1.1",
     "@types/fs-extra": "^8.1.0",
     "@types/git-user-name": "^2.0.0",
     "@types/inquirer": "^6.5.0",
@@ -52,8 +53,7 @@
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-prettier": "^1.1.2",
     "tap": "^14.10.7",
-    "typescript": "^3.8.3",
-    "typescript-plugin-css-modules": "^2.3.0"
+    "typescript": "^3.8.3"
   },
   "eslintConfig": {
     "globals": {
