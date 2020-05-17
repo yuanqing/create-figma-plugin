@@ -11,3 +11,4 @@ node_modules/
 /packages/create-figma-plugin/docs
 /packages/create-figma-plugin/README.md
 /packages/ui/build/
+/packages/ui/src/**/*.scss.d.ts

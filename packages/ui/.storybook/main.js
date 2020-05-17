@@ -1,14 +1,14 @@
 const { resolve } = require('path')
 
-module.exports = function ({ config }) {
-  config.module.rules = config.module.rules.filter(function ({ test }) {
-    return test.toString() !== '/\\.scss$/'
-  })
+function webpackFinal (config) {
   config.module.rules.push({
     test: /\.scss$/,
     use: [
       {
         loader: 'style-loader'
+      },
+      {
+        loader: '@teamsupercell/typings-for-css-modules-loader'
       },
       {
         loader: 'css-loader',
@@ -24,10 +24,24 @@ module.exports = function ({ config }) {
     include: resolve(__dirname, '..', 'src')
   })
   config.module.rules.push({
-    test: /\.stories\.js$/,
+    test: /\.tsx?$/,
+    use: {
+      loader: 'ts-loader'
+    }
+  })
+  config.module.rules.push({
+    test: /\.stories\.tsx$/,
     use: [{ loader: '@storybook/source-loader' }],
     include: resolve(__dirname, '..', 'src'),
     enforce: 'pre'
   })
+  config.resolve.extensions.push('.ts', '.tsx');
   return config
+}
+
+module.exports = {
+  webpackFinal,
+  addons: [
+    '@storybook/addon-storysource',
+  ]
 }
