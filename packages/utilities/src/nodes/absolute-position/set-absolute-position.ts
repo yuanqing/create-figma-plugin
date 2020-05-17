@@ -1,4 +1,7 @@
-export function setAbsolutePosition (node: SceneNode, vector: Vector): void {
+export function setAbsolutePosition (
+  node: SceneNode,
+  vector: { x?: number; y?: number }
+): void {
   let x = typeof vector.x === 'undefined' ? null : vector.x
   let y = typeof vector.y === 'undefined' ? null : vector.y
   let parent = node.parent
