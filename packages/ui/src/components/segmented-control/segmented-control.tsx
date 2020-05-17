@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
+
 import { OnChange } from '../../types'
 import {
   DOWN_KEY_CODE,
@@ -11,23 +12,25 @@ import {
 } from '../../utilities/key-codes'
 import styles from './segmented-control.scss'
 
-export interface SegmentedControlProps {
-  disabled?: boolean,
-  focused?: boolean,
-  name: string,
-  onChange: OnChange,
-  options: Array<SegmentedControlOption>,
-  propagateEscapeKeyDown?: boolean,
-  value: null | string
+export interface SegmentedControlProps<T> {
+  disabled?: boolean
+  focused?: boolean
+  name: string
+  onChange: OnChange
+  options: Array<SegmentedControlOption<T>>
+  propagateEscapeKeyDown?: boolean
+  value: null | T
 }
 
-interface SegmentedControlOption {
-  disabled?: boolean,
-  text?: preact.ComponentChildren,
-  value: null | string
+interface SegmentedControlOption<T> {
+  disabled?: boolean
+  text?: preact.ComponentChildren
+  value: null | T
 }
 
-export function SegmentedControl ({
+export function SegmentedControl<
+  T extends string | number | boolean = string
+> ({
   disabled: isDisabled,
   focused: isFocused,
   name,
@@ -36,7 +39,7 @@ export function SegmentedControl ({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-} : SegmentedControlProps) : h.JSX.Element {
+}: SegmentedControlProps<T>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')
@@ -56,7 +59,7 @@ export function SegmentedControl ({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        (event.target as HTMLElement).blur()
+        ;(event.target as HTMLElement).blur()
         return
       }
       if (
@@ -104,7 +107,7 @@ export function SegmentedControl ({
               class={styles.input}
               type='radio'
               name={name}
-              value={option.value === null ? undefined : option.value}
+              value={option.value === null ? undefined : `${option.value}`}
               checked={value === option.value}
               disabled={isDisabled === true || option.disabled === true}
               onChange={handleChange}
@@ -119,7 +122,11 @@ export function SegmentedControl ({
   )
 }
 
-function resolveNextIndex (options: Array<SegmentedControlOption>, currentIndex: number, delta: number) : number {
+function resolveNextIndex<T> (
+  options: Array<SegmentedControlOption<T>>,
+  currentIndex: number,
+  delta: number
+): number {
   let nextIndex = currentIndex
   do {
     nextIndex += delta
