@@ -51,7 +51,7 @@ export function createWebpackConfig (
               compilerOptions: {
                 moduleResolution: 'node',
                 module: 'es2020',
-                target: 'es6'
+                target: 'es5'
               }
             }
           }
