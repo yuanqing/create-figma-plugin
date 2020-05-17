@@ -18,7 +18,7 @@ export function formatWarningMessage (message: string): string {
 export function pluralize (
   number: number,
   singular: string,
-  plural: string
+  plural?: string
 ): string {
   if (number === 1) {
     return singular
