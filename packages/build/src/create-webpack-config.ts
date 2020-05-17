@@ -18,6 +18,44 @@ export function createWebpackConfig (
     module: {
       rules: [
         {
+          test: /\.s?css$/,
+          use: [
+            {
+              loader: 'style-loader',
+              options: {
+                injectType: 'styleTag'
+              }
+            },
+            {
+              loader: '@teamsupercell/typings-for-css-modules-loader'
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                modules: true
+              }
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        },
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules\/(?!@create-figma-plugin)/,
+          use: {
+            loader: 'ts-loader',
+            options: {
+              compilerOptions: {
+                moduleResolution: 'node',
+                module: 'es2020',
+                target: 'es5'
+              }
+            }
+          }
+        },
+        {
           test: /\.jsx?$/,
           exclude: /node_modules\/(?!@create-figma-plugin)/,
           use: {
@@ -41,41 +79,6 @@ export function createWebpackConfig (
               ]
             }
           }
-        },
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules\/(?!@create-figma-plugin)/,
-          use: {
-            loader: 'ts-loader',
-            options: {
-              compilerOptions: {
-                moduleResolution: 'node',
-                module: 'es2020',
-                target: 'es5'
-              }
-            }
-          }
-        },
-        {
-          test: /\.s?css$/,
-          use: [
-            {
-              loader: 'style-loader',
-              options: {
-                injectType: 'styleTag'
-              }
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                modules: true
-              }
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
         }
       ]
     },
