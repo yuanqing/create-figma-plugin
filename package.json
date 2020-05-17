@@ -86,7 +86,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "*.{js,ts,tsx}": [
       "standardx",
       "prettier-standard"
     ],
