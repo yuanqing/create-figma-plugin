@@ -30,7 +30,7 @@ export interface TextboxNumericProps extends TextboxProps {
   value: string
 }
 
-export function TextboxNumeric ({
+export function TextboxNumeric({
   disabled: isDisabled,
   focused: isFocused,
   icon,
@@ -67,7 +67,7 @@ export function TextboxNumeric ({
     [value]
   )
 
-  function handleFocus () {
+  function handleFocus() {
     if (
       inputElementRef.current === null ||
       typeof inputElementRef.current === 'undefined'
@@ -195,7 +195,7 @@ export function TextboxNumeric ({
 
   return (
     <div
-      class={classnames(
+      className={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
@@ -204,9 +204,9 @@ export function TextboxNumeric ({
       <input
         {...rest}
         ref={inputElementRef}
-        type='text'
+        type="text"
         name={name}
-        class={styles.input}
+        className={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
         disabled={isDisabled === true}
@@ -218,14 +218,14 @@ export function TextboxNumeric ({
         tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
-      {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
+      {hasIcon === true ? <div className={styles.icon}>{icon}</div> : null}
     </div>
   )
 }
 
 const fractionalPartRegex = /\.([^.]+)/
 
-function countSignificantFigures (value: string): number {
+function countSignificantFigures(value: string): number {
   const result = fractionalPartRegex.exec(value)
   if (result === null) {
     return 0
@@ -233,7 +233,7 @@ function countSignificantFigures (value: string): number {
   return result[1].length
 }
 
-function formatSignificantFigures (
+function formatSignificantFigures(
   value: number,
   significantFiguresCount: number
 ): string {

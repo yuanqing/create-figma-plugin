@@ -6,17 +6,15 @@ import { Layer } from './layer'
 
 export default { title: 'Layer' }
 
-const longText = Array(100)
-  .fill('Text')
-  .join(' ')
+const longText = Array(100).fill('Text').join(' ')
 
 export const Frame = function () {
   const [isSelected, setIsSelected] = useState(false)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
-    <Layer type='frame' selected={isSelected} onClick={handleClick}>
+    <Layer type="frame" selected={isSelected} onClick={handleClick}>
       Text
     </Layer>
   )
@@ -24,11 +22,11 @@ export const Frame = function () {
 
 export const FrameSelected = function () {
   const [isSelected, setIsSelected] = useState(true)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
-    <Layer type='frame' selected={isSelected} onClick={handleClick}>
+    <Layer type="frame" selected={isSelected} onClick={handleClick}>
       Text
     </Layer>
   )
@@ -36,13 +34,13 @@ export const FrameSelected = function () {
 
 export const FrameWithPageName = function () {
   const [isSelected, setIsSelected] = useState(false)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
     <Layer
-      type='frame'
-      pageName='Page Name'
+      type="frame"
+      pageName="Page Name"
       selected={isSelected}
       onClick={handleClick}
     >
@@ -53,13 +51,13 @@ export const FrameWithPageName = function () {
 
 export const FrameLongText = function () {
   const [isSelected, setIsSelected] = useState(false)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
     <Layer
-      type='frame'
-      pageName='Page Name'
+      type="frame"
+      pageName="Page Name"
       selected={isSelected}
       onClick={handleClick}
     >
@@ -70,11 +68,11 @@ export const FrameLongText = function () {
 
 export const Component = function () {
   const [isSelected, setIsSelected] = useState(false)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
-    <Layer type='component' selected={isSelected} onClick={handleClick}>
+    <Layer type="component" selected={isSelected} onClick={handleClick}>
       Text
     </Layer>
   )
@@ -82,11 +80,11 @@ export const Component = function () {
 
 export const ComponentSelected = function () {
   const [isSelected, setIsSelected] = useState(true)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
-    <Layer type='component' selected={isSelected} onClick={handleClick}>
+    <Layer type="component" selected={isSelected} onClick={handleClick}>
       Text
     </Layer>
   )
@@ -94,13 +92,13 @@ export const ComponentSelected = function () {
 
 export const ComponentWithPageName = function () {
   const [isSelected, setIsSelected] = useState(false)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
     <Layer
-      type='component'
-      pageName='Page Name'
+      type="component"
+      pageName="Page Name"
       selected={isSelected}
       onClick={handleClick}
     >
@@ -111,13 +109,13 @@ export const ComponentWithPageName = function () {
 
 export const ComponentLongText = function () {
   const [isSelected, setIsSelected] = useState(false)
-  function handleClick () {
+  function handleClick() {
     setIsSelected(!(isSelected === true))
   }
   return (
     <Layer
-      type='component'
-      pageName='Page Name'
+      type="component"
+      pageName="Page Name"
       selected={isSelected}
       onClick={handleClick}
     >

@@ -20,7 +20,7 @@ export interface LayerProps {
 }
 type LayerType = 'frame' | 'component'
 
-export function Layer ({
+export function Layer({
   children,
   onClick,
   pageName,
@@ -31,17 +31,17 @@ export function Layer ({
   return (
     <div
       {...rest}
-      class={classnames(
+      className={classnames(
         styles[type],
         styles.layer,
         isSelected === true ? styles.isSelected : null
       )}
       onClick={onClick}
     >
-      <div class={styles.icon}>{icons[type]}</div>
-      <div class={styles.layerName}>{children}</div>
+      <div className={styles.icon}>{icons[type]}</div>
+      <div className={styles.layerName}>{children}</div>
       {typeof pageName !== 'undefined' ? (
-        <div class={styles.pageName}>{pageName}</div>
+        <div className={styles.pageName}>{pageName}</div>
       ) : null}
     </div>
   )

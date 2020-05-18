@@ -1,4 +1,4 @@
-export function computeSiblingNodes (
+export function computeSiblingNodes(
   nodes: Array<SceneNode>
 ): Array<Array<SceneNode>> {
   const groups = resolveGroups(nodes)
@@ -26,7 +26,7 @@ export function computeSiblingNodes (
   return result
 }
 
-function resolveGroups (nodes: Array<SceneNode>): Array<Array<SceneNode>> {
+function resolveGroups(nodes: Array<SceneNode>): Array<Array<SceneNode>> {
   const result: { [parentId: string]: Array<SceneNode> } = {}
   for (const node of nodes) {
     const parent = node.parent

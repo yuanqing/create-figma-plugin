@@ -6,7 +6,7 @@ import { join } from 'path'
 import { Settings } from './types/settings'
 const isUtf8 = require('is-utf8')
 
-export async function interpolateValuesIntoFilesAsync (
+export async function interpolateValuesIntoFilesAsync(
   directory: string,
   values: Settings
 ): Promise<void> {
@@ -26,6 +26,6 @@ export async function interpolateValuesIntoFilesAsync (
   )
 }
 
-function interpolate (string: string, values: Settings): string {
+function interpolate(string: string, values: Settings): string {
   return mustache.render(string, values)
 }

@@ -9,9 +9,9 @@ export interface ContainerProps {
   space?: Space
 }
 
-export function Container ({
+export function Container({
   space = 'small',
   ...rest
 }: ContainerProps): h.JSX.Element {
-  return <div {...rest} class={styles[space]} />
+  return <div {...rest} className={styles[space]} />
 }

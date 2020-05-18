@@ -28,9 +28,7 @@ interface SegmentedControlOption<T> {
   value: null | T
 }
 
-export function SegmentedControl<
-  T extends string | number | boolean = string
-> ({
+export function SegmentedControl<T extends string | number | boolean = string>({
   disabled: isDisabled,
   focused: isFocused,
   name,
@@ -92,7 +90,7 @@ export function SegmentedControl<
 
   return (
     <div
-      class={styles.segmentedControl}
+      className={styles.segmentedControl}
       onKeyDown={isDisabled === true ? undefined : handleKeyDown}
       tabIndex={isDisabled === true ? undefined : 0}
       data-initial-focus={isFocused === true}
@@ -101,11 +99,11 @@ export function SegmentedControl<
         const text =
           typeof option.text === 'undefined' ? option.value : option.text
         return (
-          <label class={styles.label} key={index}>
+          <label className={styles.label} key={index}>
             <input
               {...rest}
-              class={styles.input}
-              type='radio'
+              className={styles.input}
+              type="radio"
               name={name}
               value={option.value === null ? undefined : `${option.value}`}
               checked={value === option.value}
@@ -114,7 +112,7 @@ export function SegmentedControl<
               tabIndex={-1}
               data-index={index}
             />
-            <div class={styles.text}>{text}</div>
+            <div className={styles.text}>{text}</div>
           </label>
         )
       })}
@@ -122,7 +120,7 @@ export function SegmentedControl<
   )
 }
 
-function resolveNextIndex<T> (
+function resolveNextIndex<T>(
   options: Array<SegmentedControlOption<T>>,
   currentIndex: number,
   delta: number

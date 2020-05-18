@@ -1,6 +1,6 @@
 import { getAbsolutePosition } from './absolute-position/get-absolute-position'
 
-export function computeBoundingBox (node: SceneNode): Rect {
+export function computeBoundingBox(node: SceneNode): Rect {
   if (node.rotation === 0) {
     const absolutePosition = getAbsolutePosition(node)
     const { width, height } = node

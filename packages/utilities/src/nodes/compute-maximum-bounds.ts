@@ -1,6 +1,6 @@
 import { computeBoundingBox } from './compute-bounding-box'
 
-export function computeMaximumBounds (
+export function computeMaximumBounds(
   nodes: Array<SceneNode>
 ): [Vector, Vector] {
   let maximumBounds: [Vector, Vector] = [

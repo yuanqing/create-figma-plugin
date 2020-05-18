@@ -17,7 +17,7 @@ interface EntryFile extends ConfigFile {
   commandId: string
 }
 
-export async function buildBundleAsync (
+export async function buildBundleAsync(
   config: Config,
   isDevelopment: boolean
 ): Promise<void> {
@@ -59,7 +59,7 @@ export async function buildBundleAsync (
   })
 }
 
-async function createMainEntryFileAsync (
+async function createMainEntryFileAsync(
   command: ConfigCommand,
   relaunchButtons: null | Array<ConfigRelaunchButton>
 ): Promise<null | string> {
@@ -82,7 +82,7 @@ async function createMainEntryFileAsync (
   return tempWrite(fileContent)
 }
 
-async function createUiEntryFileAsync (
+async function createUiEntryFileAsync(
   command: ConfigCommand,
   relaunchButtons: null | Array<ConfigRelaunchButton>
 ): Promise<null | string> {
@@ -111,7 +111,7 @@ async function createUiEntryFileAsync (
   return tempWrite(fileContent)
 }
 
-function extractModules (
+function extractModules(
   items: Array<ConfigCommandSeparator | ConfigCommand | ConfigRelaunchButton>,
   key: 'ui' | 'main',
   result: Array<EntryFile>
@@ -124,7 +124,7 @@ function extractModules (
   }
 }
 
-function extractModule (
+function extractModule(
   command: ConfigCommand | ConfigRelaunchButton,
   key: 'ui' | 'main',
   result: Array<EntryFile>
@@ -147,7 +147,7 @@ function extractModule (
   }
 }
 
-function createRequireCode (entryFiles: Array<EntryFile>): string {
+function createRequireCode(entryFiles: Array<EntryFile>): string {
   const code: string[] = []
   for (const entryFile of entryFiles) {
     code.push(
@@ -157,7 +157,7 @@ function createRequireCode (entryFiles: Array<EntryFile>): string {
   return `{${code.join(',')}}`
 }
 
-function extractBasename (filename: string): string {
+function extractBasename(filename: string): string {
   const extension = extname(filename)
   return basename(filename, extension)
 }

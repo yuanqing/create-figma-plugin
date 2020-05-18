@@ -3,7 +3,7 @@ import { log, readConfigAsync } from '@create-figma-plugin/common'
 import { buildBundleAsync } from './build-bundle-async'
 import { buildManifestAsync } from './build-manifest-async'
 
-export async function buildAsync (
+export async function buildAsync(
   isDevelopment: boolean,
   exitOnError: boolean
 ): Promise<void> {

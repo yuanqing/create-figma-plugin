@@ -1,4 +1,4 @@
-export function computeNextValue (
+export function computeNextValue(
   inputElement: HTMLInputElement,
   insertedString: string
 ) {

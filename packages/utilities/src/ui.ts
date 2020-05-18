@@ -2,7 +2,7 @@
 
 const CLOSING_SLASH = '/'
 
-export function showUI (options: ShowUIOptions, data: any = {}): void {
+export function showUI(options: ShowUIOptions, data: any = {}): void {
   if (typeof __html__ === 'undefined') {
     throw new Error('No UI defined')
   }

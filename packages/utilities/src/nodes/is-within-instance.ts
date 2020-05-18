@@ -1,4 +1,4 @@
-export function isWithinInstance (node: SceneNode): boolean {
+export function isWithinInstance(node: SceneNode): boolean {
   const parent = node.parent
   if (parent === null) {
     return false

@@ -10,7 +10,7 @@ export default { title: 'Checkbox' }
 export const Default = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <Checkbox name='foo' value={state.foo} onChange={setState}>
+    <Checkbox name="foo" value={state.foo} onChange={setState}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -19,7 +19,7 @@ export const Default = function () {
 export const Disabled = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <Checkbox disabled name='foo' value={state.foo} onChange={setState}>
+    <Checkbox disabled name="foo" value={state.foo} onChange={setState}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -28,7 +28,7 @@ export const Disabled = function () {
 export const Selected = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <Checkbox name='foo' value={state.foo} onChange={setState}>
+    <Checkbox name="foo" value={state.foo} onChange={setState}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -37,7 +37,7 @@ export const Selected = function () {
 export const DisabledSelected = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <Checkbox disabled name='foo' value={state.foo} onChange={setState}>
+    <Checkbox disabled name="foo" value={state.foo} onChange={setState}>
       <Text>Text</Text>
     </Checkbox>
   )

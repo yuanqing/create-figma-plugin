@@ -28,7 +28,7 @@ export const NoSpace = function () {
 
 export const ExtraSmallSpace = function () {
   return (
-    <Columns space='extraSmall'>
+    <Columns space="extraSmall">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -44,7 +44,7 @@ export const ExtraSmallSpace = function () {
 
 export const SmallSpace = function () {
   return (
-    <Columns space='small'>
+    <Columns space="small">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -60,7 +60,7 @@ export const SmallSpace = function () {
 
 export const MediumSpace = function () {
   return (
-    <Columns space='medium'>
+    <Columns space="medium">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -76,7 +76,7 @@ export const MediumSpace = function () {
 
 export const LargeSpace = function () {
   return (
-    <Columns space='large'>
+    <Columns space="large">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -92,7 +92,7 @@ export const LargeSpace = function () {
 
 export const ExtraLargeSpace = function () {
   return (
-    <Columns space='extraLarge'>
+    <Columns space="extraLarge">
       <div style={style}>
         <Text>foo</Text>
       </div>

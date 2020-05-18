@@ -29,7 +29,7 @@ export interface DropdownMenuProps {
 
 export type DropdownOption = Option
 
-export function DropdownMenu ({
+export function DropdownMenu({
   children,
   focused: isFocused,
   fullWidth: isFullWidth,
@@ -179,7 +179,7 @@ export function DropdownMenu ({
   )
   return (
     <div
-      class={styles.dropdownMenu}
+      className={styles.dropdownMenu}
       onClick={handleClick}
       onKeyDown={handleRootElementKeyDown}
       tabIndex={0}
@@ -188,7 +188,7 @@ export function DropdownMenu ({
     >
       {cloneElement(children as preact.VNode<any>, { [name]: value })}
       <div
-        class={classnames(
+        className={classnames(
           styles.menu,
           isMenuVisible === false ? styles.isHidden : null,
           isFullWidth === true ? styles.isFullWidth : null,
@@ -199,18 +199,18 @@ export function DropdownMenu ({
       >
         {menuItems.map(function (menuItem) {
           if ('separator' in menuItem) {
-            return <hr class={styles.menuSeparator} key={menuItem.id} />
+            return <hr className={styles.menuSeparator} key={menuItem.id} />
           }
           if ('header' in menuItem) {
             return (
-              <h1 class={styles.menuHeader} key={menuItem.id}>
+              <h1 className={styles.menuHeader} key={menuItem.id}>
                 {menuItem.header}
               </h1>
             )
           }
           return (
             <div
-              class={classnames(
+              className={classnames(
                 styles.menuItem,
                 `${menuItem.id}` === selectedId ? styles.menuItemSelected : null
               )}
@@ -219,7 +219,7 @@ export function DropdownMenu ({
               {...{ [ITEM_ELEMENT_ATTRIBUTE_NAME]: menuItem.id }}
             >
               {menuItem.id === committedId ? (
-                <div class={styles.icon}>{checkIcon}</div>
+                <div className={styles.icon}>{checkIcon}</div>
               ) : null}
               {menuItem.value}
             </div>
@@ -230,7 +230,7 @@ export function DropdownMenu ({
   )
 }
 
-function getIdByValue (
+function getIdByValue(
   menuItems: Array<Option>,
   targetValue: null | string
 ): ItemId {

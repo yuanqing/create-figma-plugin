@@ -5,7 +5,7 @@ import { prompt } from 'inquirer'
 import { Settings } from '../types/settings'
 import { createPluginDisplayName } from './create-plugin-display-name'
 
-export async function promptForUserInputAsync (
+export async function promptForUserInputAsync(
   options: Settings
 ): Promise<Settings> {
   const { name, template } = options
@@ -87,13 +87,13 @@ export async function promptForUserInputAsync (
 
 const multipleSpaceRegex = /\s+/g
 
-function validate (input: string): true | 'Required' {
+function validate(input: string): true | 'Required' {
   if (input.replace(multipleSpaceRegex, '').trim().length > 0) {
     return true
   }
   return 'Required'
 }
 
-function filter (input: string): string {
+function filter(input: string): string {
   return input.replace(multipleSpaceRegex, ' ').trim()
 }

@@ -1,6 +1,6 @@
 import naturalCompare from 'natural-compare-lite'
 
-export function sortNodesByName (nodes: Array<SceneNode>): Array<SceneNode> {
+export function sortNodesByName(nodes: Array<SceneNode>): Array<SceneNode> {
   if (nodes.length < 2) {
     return nodes.slice()
   }

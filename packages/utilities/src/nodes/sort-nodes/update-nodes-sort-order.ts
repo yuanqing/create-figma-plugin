@@ -1,7 +1,7 @@
 import { compareArrays } from '../../object'
 import { areSiblingNodes } from '../are-sibling-nodes'
 
-export function updateNodesSortOrder (nodes: Array<SceneNode>): boolean {
+export function updateNodesSortOrder(nodes: Array<SceneNode>): boolean {
   const parent = nodes[0].parent
   if (parent === null) {
     throw new Error('Node has no parent')
@@ -23,7 +23,7 @@ export function updateNodesSortOrder (nodes: Array<SceneNode>): boolean {
   return compareArrays(ids, idsAfter) === false
 }
 
-function computeInsertIndex (
+function computeInsertIndex(
   nodes: Array<SceneNode>,
   ids: Array<string>
 ): number {

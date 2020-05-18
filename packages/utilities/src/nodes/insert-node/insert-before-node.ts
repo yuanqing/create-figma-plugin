@@ -1,4 +1,4 @@
-export function insertBeforeNode (
+export function insertBeforeNode(
   node: SceneNode,
   referenceNode: SceneNode
 ): void {

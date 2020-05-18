@@ -20,7 +20,7 @@ export interface SelectableItemProps {
   value: boolean
 }
 
-export function SelectableItem ({
+export function SelectableItem({
   bold: isBold,
   children,
   disabled: isDisabled,
@@ -67,7 +67,7 @@ export function SelectableItem ({
   return (
     <label
       {...rest}
-      class={classnames(
+      className={classnames(
         styles.label,
         isDisabled === true ? styles.isDisabled : null,
         isBold === true ? styles.isBold : null,
@@ -79,16 +79,16 @@ export function SelectableItem ({
     >
       <input
         {...rest}
-        class={styles.input}
-        type='checkbox'
+        className={styles.input}
+        type="checkbox"
         name={name}
         checked={value === true}
         disabled={isDisabled === true}
         onChange={handleChange}
         tabIndex={-1}
       />
-      <div class={styles.text}>{children}</div>
-      {value === true ? <div class={styles.icon}>{checkIcon}</div> : null}
+      <div className={styles.text}>{children}</div>
+      {value === true ? <div className={styles.icon}>{checkIcon}</div> : null}
     </label>
   )
 }

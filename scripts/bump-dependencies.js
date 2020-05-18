@@ -2,7 +2,7 @@ const globby = require('globby')
 const ncu = require('npm-check-updates')
 const path = require('path')
 
-async function main () {
+async function main() {
   const parentDirectory = path.resolve(__dirname, '..')
   const globs = [
     path.join(parentDirectory, 'package.json'),

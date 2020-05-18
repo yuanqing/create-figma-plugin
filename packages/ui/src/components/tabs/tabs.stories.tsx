@@ -11,7 +11,7 @@ export const Default = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <Tabs
-      name='foo'
+      name="foo"
       value={state.foo}
       onChange={setState}
       options={[
@@ -27,7 +27,7 @@ export const WithSelectedOption = function () {
   const [state, setState] = useState({ foo: 'bar' })
   return (
     <Tabs
-      name='foo'
+      name="foo"
       value={state.foo}
       onChange={setState}
       options={[

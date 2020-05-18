@@ -6,7 +6,7 @@ export const INVALID_MENU_ITEM_ID = null
 
 export type MenuItemId = null | string
 
-export function useScrollableMenu (options: {
+export function useScrollableMenu(options: {
   itemElementAttributeName: string
   selectedItemId: MenuItemId
   onChange: (id: MenuItemId) => void

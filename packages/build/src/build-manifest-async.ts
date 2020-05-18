@@ -14,7 +14,7 @@ import {
   ManifestRelaunchButton
 } from './types/manifest'
 
-export async function buildManifestAsync (config: Config): Promise<void> {
+export async function buildManifestAsync(config: Config): Promise<void> {
   const { name, commandId, main, ui, menu, relaunchButtons } = config
   const command = { name, commandId, main, ui, menu }
   if (hasBundle(command, 'main') === false) {
@@ -39,7 +39,7 @@ export async function buildManifestAsync (config: Config): Promise<void> {
   await outputFile(constants.build.manifestFilePath, string)
 }
 
-function hasBundle (command: ConfigCommand, key: 'main' | 'ui'): boolean {
+function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {
   if (command[key] !== null) {
     return true
   }
@@ -55,7 +55,7 @@ function hasBundle (command: ConfigCommand, key: 'main' | 'ui'): boolean {
   return false
 }
 
-function createMenu (
+function createMenu(
   menu: Array<ConfigCommandSeparator | ConfigCommand>
 ): Array<ManifestMenuItem | ManifestMenuItemSeparator> {
   return menu.map(function (item) {
@@ -75,7 +75,7 @@ function createMenu (
   })
 }
 
-function createRelaunchButtons (
+function createRelaunchButtons(
   relaunchButtons: Array<ConfigRelaunchButton>
 ): Array<ManifestRelaunchButton> {
   return relaunchButtons.map(function (relaunchButton) {

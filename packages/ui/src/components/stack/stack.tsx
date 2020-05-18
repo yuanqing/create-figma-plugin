@@ -10,16 +10,16 @@ export interface StackProps {
   space?: Space
 }
 
-export function Stack ({
+export function Stack({
   children,
   space = 'small',
   ...rest
 }: StackProps): h.JSX.Element {
   return (
-    <div {...rest} class={classnames(styles[space])}>
+    <div {...rest} className={classnames(styles[space])}>
       {toChildArray(children).map(function (element, index) {
         return (
-          <div class={styles.item} key={index}>
+          <div className={styles.item} key={index}>
             {element}
           </div>
         )

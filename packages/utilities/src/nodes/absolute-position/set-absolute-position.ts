@@ -1,4 +1,4 @@
-export function setAbsolutePosition (
+export function setAbsolutePosition(
   node: SceneNode,
   vector: { x?: number; y?: number }
 ): void {

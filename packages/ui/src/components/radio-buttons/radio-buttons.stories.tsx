@@ -11,7 +11,7 @@ export const Default = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <RadioButtons
-      name='foo'
+      name="foo"
       value={state.foo}
       onChange={setState}
       options={[
@@ -28,7 +28,7 @@ export const Disabled = function () {
   return (
     <RadioButtons
       disabled
-      name='foo'
+      name="foo"
       value={state.foo}
       onChange={setState}
       options={[
@@ -44,7 +44,7 @@ export const WithSelectedOption = function () {
   const [state, setState] = useState({ foo: 'bar' })
   return (
     <RadioButtons
-      name='foo'
+      name="foo"
       value={state.foo}
       onChange={setState}
       options={[
@@ -60,7 +60,7 @@ export const WithDisabledOption = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <RadioButtons
-      name='foo'
+      name="foo"
       value={state.foo}
       onChange={setState}
       options={[
@@ -76,7 +76,7 @@ export const WithDisabledSelectedOption = function () {
   const [state, setState] = useState({ foo: 'bar' })
   return (
     <RadioButtons
-      name='foo'
+      name="foo"
       value={state.foo}
       onChange={setState}
       options={[

@@ -19,7 +19,7 @@ export interface TextboxProps {
   value: null | string
 }
 
-export function Textbox ({
+export function Textbox({
   disabled: isDisabled,
   focused: isFocused,
   icon,
@@ -51,7 +51,7 @@ export function Textbox ({
     [value]
   )
 
-  function handleFocus () {
+  function handleFocus() {
     if (
       inputElementRef.current === null ||
       typeof inputElementRef.current === 'undefined'
@@ -75,7 +75,7 @@ export function Textbox ({
     [name, onChange]
   )
 
-  function handleKeyDown (event: KeyboardEvent) {
+  function handleKeyDown(event: KeyboardEvent) {
     const keyCode = event.keyCode
     if (keyCode === ESCAPE_KEY_CODE) {
       if (propagateEscapeKeyDown === false) {
@@ -93,7 +93,7 @@ export function Textbox ({
 
   return (
     <div
-      class={classnames(
+      className={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
@@ -102,9 +102,9 @@ export function Textbox ({
       <input
         {...rest}
         ref={inputElementRef}
-        type='text'
+        type="text"
         name={name}
-        class={styles.input}
+        className={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
         disabled={isDisabled === true}
@@ -115,7 +115,7 @@ export function Textbox ({
         tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
-      {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
+      {hasIcon ? <div className={styles.icon}>{icon}</div> : null}
     </div>
   )
 }

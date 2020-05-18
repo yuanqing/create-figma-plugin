@@ -2,7 +2,7 @@
 import { h, render as preactRender } from 'preact'
 require('./scss/base.scss')
 
-export function render (
+export function render(
   Plugin: preact.FunctionComponent<any>,
   props?: { [key: string]: any }
 ) {

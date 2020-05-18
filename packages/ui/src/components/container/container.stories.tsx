@@ -12,7 +12,7 @@ const style = {
 
 export const ExtraSmallSpace = function () {
   return (
-    <Container space='extraSmall' {...{ style }}>
+    <Container space="extraSmall" {...{ style }}>
       <Text>Text</Text>
     </Container>
   )
@@ -20,7 +20,7 @@ export const ExtraSmallSpace = function () {
 
 export const SmallSpace = function () {
   return (
-    <Container space='small' {...{ style }}>
+    <Container space="small" {...{ style }}>
       <Text>Text</Text>
     </Container>
   )
@@ -28,7 +28,7 @@ export const SmallSpace = function () {
 
 export const MediumSpace = function () {
   return (
-    <Container space='medium' {...{ style }}>
+    <Container space="medium" {...{ style }}>
       <Text>Text</Text>
     </Container>
   )
@@ -36,7 +36,7 @@ export const MediumSpace = function () {
 
 export const LargeSpace = function () {
   return (
-    <Container space='large' {...{ style }}>
+    <Container space="large" {...{ style }}>
       <Text>Text</Text>
     </Container>
   )
@@ -44,7 +44,7 @@ export const LargeSpace = function () {
 
 export const ExtraLargeSpace = function () {
   return (
-    <Container space='extraLarge' {...{ style }}>
+    <Container space="extraLarge" {...{ style }}>
       <Text>Text</Text>
     </Container>
   )

@@ -1,4 +1,4 @@
-export function areSiblingNodes (nodes: Array<SceneNode>): boolean {
+export function areSiblingNodes(nodes: Array<SceneNode>): boolean {
   if (nodes.length < 2) {
     return true
   }

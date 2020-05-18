@@ -1,4 +1,4 @@
-export function cloneObject (object: any): any {
+export function cloneObject(object: any): any {
   const type = typeof object
   if (
     object === null ||
@@ -21,7 +21,7 @@ export function cloneObject (object: any): any {
   return result
 }
 
-export function compareArrays (a: Array<any>, b: Array<any>): boolean {
+export function compareArrays(a: Array<any>, b: Array<any>): boolean {
   if (a.length !== b.length) {
     return false
   }
@@ -33,7 +33,7 @@ export function compareArrays (a: Array<any>, b: Array<any>): boolean {
   return true
 }
 
-export function compareObjects (a: any, b: any): boolean {
+export function compareObjects(a: any, b: any): boolean {
   const type = typeof a
   if (
     a === null ||
@@ -73,7 +73,7 @@ export function compareObjects (a: any, b: any): boolean {
   return true
 }
 
-export function extractAttributes (
+export function extractAttributes(
   array: Array<{ [key: string]: any }>,
   attributes: Array<string>
 ): Array<{ [key: string]: any }> {

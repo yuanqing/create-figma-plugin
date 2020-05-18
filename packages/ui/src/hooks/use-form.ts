@@ -8,7 +8,7 @@ import {
 
 type State = { [key: string]: any }
 
-export function useForm (
+export function useForm(
   initialState: State,
   options: {
     transform?: (state: State) => State
@@ -132,14 +132,14 @@ export function useForm (
   }
 }
 
-function getFocusableElements (): Array<HTMLElement> {
+function getFocusableElements(): Array<HTMLElement> {
   const elements = document.querySelectorAll(
     ':not([disabled])[tabindex]:not([tabindex="-1"])'
   )
   return Array.prototype.slice.call(elements)
 }
 
-function findElementIndex (
+function findElementIndex(
   targetElement: HTMLElement,
   elements: Array<HTMLElement>
 ): number {

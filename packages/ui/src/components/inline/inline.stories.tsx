@@ -28,7 +28,7 @@ export const NoSpace = function () {
 
 export const ExtraSmallSpace = function () {
   return (
-    <Inline space='extraSmall'>
+    <Inline space="extraSmall">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -44,7 +44,7 @@ export const ExtraSmallSpace = function () {
 
 export const SmallSpace = function () {
   return (
-    <Inline space='small'>
+    <Inline space="small">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -60,7 +60,7 @@ export const SmallSpace = function () {
 
 export const MediumSpace = function () {
   return (
-    <Inline space='medium'>
+    <Inline space="medium">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -76,7 +76,7 @@ export const MediumSpace = function () {
 
 export const LargeSpace = function () {
   return (
-    <Inline space='large'>
+    <Inline space="large">
       <div style={style}>
         <Text>foo</Text>
       </div>
@@ -92,7 +92,7 @@ export const LargeSpace = function () {
 
 export const ExtraLargeSpace = function () {
   return (
-    <Inline space='extraLarge'>
+    <Inline space="extraLarge">
       <div style={style}>
         <Text>foo</Text>
       </div>

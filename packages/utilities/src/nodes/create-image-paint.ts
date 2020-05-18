@@ -1,4 +1,4 @@
-export function createImagePaint (bytes: Uint8Array): ImagePaint {
+export function createImagePaint(bytes: Uint8Array): ImagePaint {
   const image = figma.createImage(bytes)
   return {
     type: 'IMAGE',

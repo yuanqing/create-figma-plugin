@@ -19,7 +19,7 @@ export interface ButtonProps {
   secondary?: boolean
 }
 
-export function Button ({
+export function Button({
   children,
   destructive: isDestructive,
   disabled: isDisabled,
@@ -48,7 +48,7 @@ export function Button ({
   )
   return (
     <div
-      class={classnames(
+      className={classnames(
         styles.button,
         isSecondary === true ? styles.isSecondary : styles.isPrimary,
         isDestructive === true ? styles.isDestructive : null,
@@ -58,7 +58,7 @@ export function Button ({
       )}
     >
       {isLoading === true ? (
-        <div class={styles.loadingIndicator}>
+        <div className={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
       ) : null}

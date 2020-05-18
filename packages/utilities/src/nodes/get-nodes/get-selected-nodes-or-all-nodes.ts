@@ -1,4 +1,4 @@
-export function getSelectedNodesOrAllNodes (): Array<SceneNode> {
+export function getSelectedNodesOrAllNodes(): Array<SceneNode> {
   const selectedNodes = figma.currentPage.selection
   if (selectedNodes.length > 0) {
     return selectedNodes.slice()

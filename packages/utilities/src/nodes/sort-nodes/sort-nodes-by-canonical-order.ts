@@ -1,6 +1,6 @@
 import { areSiblingNodes } from '../are-sibling-nodes'
 
-export function sortNodesByCanonicalOrder (
+export function sortNodesByCanonicalOrder(
   nodes: Array<SceneNode>
 ): Array<SceneNode> {
   if (nodes.length < 2) {

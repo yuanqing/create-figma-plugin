@@ -9,7 +9,7 @@ export interface InlineProps {
   space?: Space
 }
 
-export function Inline ({
+export function Inline({
   children,
   space,
   ...rest
@@ -17,11 +17,11 @@ export function Inline ({
   return (
     <div
       {...rest}
-      class={typeof space === 'undefined' ? undefined : styles[space]}
+      className={typeof space === 'undefined' ? undefined : styles[space]}
     >
       {toChildArray(children).map(function (element, index) {
         return (
-          <div class={styles.item} key={index}>
+          <div className={styles.item} key={index}>
             {element}
           </div>
         )

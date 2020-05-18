@@ -82,7 +82,7 @@ test('multiple menu commands', async function (t) {
   await cleanUpAsync()
 })
 
-async function createSymlinkAsync () {
+async function createSymlinkAsync() {
   const sourcePath = resolve(__dirname, '..', '..', 'utilities')
   const destinationPath = join(
     process.cwd(),
@@ -93,7 +93,7 @@ async function createSymlinkAsync () {
   await ensureSymlink(sourcePath, destinationPath)
 }
 
-async function cleanUpAsync () {
+async function cleanUpAsync() {
   await new Promise(function (resolve, reject) {
     rimraf(join(process.cwd(), '{build,manifest.json,node_modules}'), function (
       error

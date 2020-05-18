@@ -1,4 +1,4 @@
-export function traverseNode (
+export function traverseNode(
   node: SceneNode,
   processNode: (node: SceneNode) => void,
   stopTraversal?: (node: SceneNode) => boolean

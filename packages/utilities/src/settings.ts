@@ -2,7 +2,7 @@ const KEY = 'settings'
 
 type Settings = { [key: string]: any }
 
-export async function loadSettingsAsync (
+export async function loadSettingsAsync(
   defaultSettings: Settings
 ): Promise<Settings> {
   const settings: Settings = await figma.clientStorage.getAsync(KEY)
@@ -12,6 +12,6 @@ export async function loadSettingsAsync (
   return Object.assign(defaultSettings, settings)
 }
 
-export async function saveSettingsAsync (settings: Settings): Promise<void> {
+export async function saveSettingsAsync(settings: Settings): Promise<void> {
   await figma.clientStorage.setAsync(KEY, settings)
 }

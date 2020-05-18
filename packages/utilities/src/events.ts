@@ -9,7 +9,7 @@ const eventHandlers: {
 
 let currentId = 0
 
-export function on (
+export function on(
   eventName: string,
   eventHandler: (...args: Array<any>) => void
 ): () => void {
@@ -20,7 +20,7 @@ export function on (
   }
 }
 
-export function once (
+export function once(
   eventName: string,
   eventHandler: (...args: Array<any>) => void
 ): () => void {
@@ -30,7 +30,7 @@ export function once (
       return
     }
     done = true
-    eventHandler.apply(null, args)
+    eventHandler(...args)
   })
 }
 
@@ -48,7 +48,7 @@ export const emit: (eventName: string, ...args: Array<any>) => void =
         )
       }
 
-function invokeEventHandler (eventName: string, args: Array<any>) {
+function invokeEventHandler(eventName: string, args: Array<any>) {
   for (const id in eventHandlers) {
     if (eventHandlers[id].eventName === eventName) {
       eventHandlers[id].eventHandler.apply(null, args)

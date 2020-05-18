@@ -9,7 +9,7 @@ import { createDefaultSettings } from './settings/create-default-settings'
 import { promptForUserInputAsync } from './settings/prompt-for-user-input-async'
 import { Settings } from './types/settings'
 
-export async function createFigmaPluginAsync (
+export async function createFigmaPluginAsync(
   options: Settings,
   useDefaults: boolean
 ): Promise<void> {
@@ -35,7 +35,7 @@ export async function createFigmaPluginAsync (
   log.success('Done')
 }
 
-async function throwIfDirectoryExistsAsync (directory: string): Promise<void> {
+async function throwIfDirectoryExistsAsync(directory: string): Promise<void> {
   if ((await pathExists(directory)) === true) {
     throw new Error(`Directory already exists: ${directory}`)
   }

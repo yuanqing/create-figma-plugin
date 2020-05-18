@@ -14,13 +14,13 @@ const ignoreRegex = new RegExp(
   ].join('')
 )
 
-export function watch (): void {
+export function watch(): void {
   const watcher = chokidar.watch('.', {
     ignored: function (path: string) {
       return ignoreRegex.test(path)
     }
   })
-  async function onChangeAsync () {
+  async function onChangeAsync() {
     await buildAsync(true, false)
     log.info('Watching...')
   }

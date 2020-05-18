@@ -1,4 +1,4 @@
-export async function loadFontsAsync (nodes: Array<SceneNode>): Promise<void> {
+export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
   let fonts: Array<FontName> = []
   for (const node of nodes) {
     if (node.type === 'TEXT') {
@@ -12,7 +12,7 @@ export async function loadFontsAsync (nodes: Array<SceneNode>): Promise<void> {
   )
 }
 
-function computeUniqueFontsUsedInNode (node: TextNode): Array<FontName> {
+function computeUniqueFontsUsedInNode(node: TextNode): Array<FontName> {
   const result: { [key: string]: FontName } = {}
   let i = -1
   const length = node.characters.length

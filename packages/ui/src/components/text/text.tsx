@@ -13,7 +13,7 @@ export interface TextProps {
   numeric?: boolean
 }
 
-export function Text ({
+export function Text({
   align = 'left',
   bold: isBold,
   children,
@@ -24,7 +24,7 @@ export function Text ({
   return (
     <div
       {...rest}
-      class={classnames(
+      className={classnames(
         styles.text,
         styles[align],
         isBold === true ? styles.isBold : null,

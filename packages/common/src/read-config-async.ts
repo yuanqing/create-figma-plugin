@@ -28,7 +28,7 @@ const defaultConfig: Config = {
   relaunchButtons: null
 }
 
-export async function readConfigAsync (): Promise<Config> {
+export async function readConfigAsync(): Promise<Config> {
   const packageJsonPath = join(process.cwd(), 'package.json')
   if ((await pathExists(packageJsonPath)) === false) {
     return defaultConfig
@@ -51,7 +51,7 @@ export async function readConfigAsync (): Promise<Config> {
   }
 }
 
-function parseCommand (command: RawConfigCommand): ConfigCommand {
+function parseCommand(command: RawConfigCommand): ConfigCommand {
   const { name, main, ui, menu } = command
   return {
     name,
@@ -72,7 +72,7 @@ function parseCommand (command: RawConfigCommand): ConfigCommand {
   }
 }
 
-function parseRelaunchButtons (
+function parseRelaunchButtons(
   relaunchButtons: RawConfigRelaunchButtons
 ): Array<ConfigRelaunchButton> {
   const result = []
@@ -93,7 +93,7 @@ function parseRelaunchButtons (
   return result
 }
 
-function parseCommandId (main: RawConfigFile): string {
+function parseCommandId(main: RawConfigFile): string {
   if (typeof main === 'string') {
     return `${main}--default`
   }
@@ -104,7 +104,7 @@ function parseCommandId (main: RawConfigFile): string {
   return `${src}--${handler}`
 }
 
-function parseFile (file: RawConfigFile): ConfigFile {
+function parseFile(file: RawConfigFile): ConfigFile {
   if (typeof file === 'string') {
     return {
       src: file,

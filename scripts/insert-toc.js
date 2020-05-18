@@ -2,7 +2,7 @@ const markdownToc = require('markdown-toc')
 const fs = require('fs-extra')
 const path = require('path')
 
-async function main () {
+async function main() {
   const filename = path.resolve(__dirname, '..', 'docs', 'utility-functions.md')
   const contents = await fs.readFile(filename, 'utf8')
   const result = markdownToc

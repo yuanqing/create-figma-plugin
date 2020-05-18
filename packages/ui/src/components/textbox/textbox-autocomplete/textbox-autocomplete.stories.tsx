@@ -27,7 +27,7 @@ export const Empty = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <TextboxAutocomplete
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -40,7 +40,7 @@ export const Disabled = function () {
   return (
     <TextboxAutocomplete
       disabled
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -52,8 +52,8 @@ export const WithPlaceholder = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <TextboxAutocomplete
-      placeholder='Placeholder'
-      name='foo'
+      placeholder="Placeholder"
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -65,7 +65,7 @@ export const Filled = function () {
   const [state, setState] = useState({ foo: 'baz' })
   return (
     <TextboxAutocomplete
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -78,7 +78,7 @@ export const FilledDisabled = function () {
   return (
     <TextboxAutocomplete
       disabled
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -91,7 +91,7 @@ export const NoBorder = function () {
   return (
     <TextboxAutocomplete
       noBorder
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -104,8 +104,8 @@ export const WithIcon = function () {
   return (
     <TextboxAutocomplete
       icon={searchIcon}
-      placeholder='Search'
-      name='foo'
+      placeholder="Search"
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -117,9 +117,9 @@ export const WithTextIcon = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <TextboxAutocomplete
-      icon='S'
-      placeholder='Search'
-      name='foo'
+      icon="S"
+      placeholder="Search"
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -132,7 +132,7 @@ export const Strict = function () {
   return (
     <TextboxAutocomplete
       strict
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -145,7 +145,7 @@ export const Filter = function () {
   return (
     <TextboxAutocomplete
       filter
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -159,7 +159,7 @@ export const FilterStrict = function () {
     <TextboxAutocomplete
       filter
       strict
-      name='foo'
+      name="foo"
       value={state.foo}
       options={options}
       onChange={setState}
@@ -177,7 +177,7 @@ export const MenuTop = function () {
     >
       <TextboxAutocomplete
         top
-        name='foo'
+        name="foo"
         value={state.foo}
         options={options}
         onChange={setState}

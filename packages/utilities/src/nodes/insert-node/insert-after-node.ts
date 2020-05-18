@@ -1,4 +1,4 @@
-export function insertAfterNode (
+export function insertAfterNode(
   node: SceneNode,
   referenceNode: SceneNode
 ): void {

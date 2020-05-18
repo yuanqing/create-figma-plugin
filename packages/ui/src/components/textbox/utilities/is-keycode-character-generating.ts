@@ -1,4 +1,4 @@
-export function isKeyCodeCharacterGenerating (keyCode: number): boolean {
+export function isKeyCodeCharacterGenerating(keyCode: number): boolean {
   return (
     keyCode === 32 || // space
     (keyCode >= 48 && keyCode <= 57) || // 0 to 9

@@ -18,7 +18,7 @@ export interface CheckboxProps {
   value: boolean
 }
 
-export function Checkbox ({
+export function Checkbox({
   children,
   disabled: isDisabled,
   focused: isFocused,
@@ -63,15 +63,15 @@ export function Checkbox ({
 
   return (
     <label
-      class={classnames(
+      className={classnames(
         styles.label,
         isDisabled === true ? styles.disabled : null
       )}
     >
       <input
         {...rest}
-        class={styles.input}
-        type='checkbox'
+        className={styles.input}
+        type="checkbox"
         name={name}
         checked={value === true}
         disabled={isDisabled === true}
@@ -80,7 +80,7 @@ export function Checkbox ({
         tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
-      <div class={styles.text}>{children}</div>
+      <div className={styles.text}>{children}</div>
     </label>
   )
 }

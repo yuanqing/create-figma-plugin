@@ -10,7 +10,7 @@ export interface ColumnsProps {
   space?: Space
 }
 
-export function Columns ({
+export function Columns({
   children,
   space,
   ...rest
@@ -18,14 +18,14 @@ export function Columns ({
   return (
     <div
       {...rest}
-      class={classnames(
+      className={classnames(
         styles.columns,
         typeof space === 'undefined' ? null : styles[space]
       )}
     >
       {toChildArray(children).map(function (element, index) {
         return (
-          <div class={styles.column} key={index}>
+          <div className={styles.column} key={index}>
             {element}
           </div>
         )

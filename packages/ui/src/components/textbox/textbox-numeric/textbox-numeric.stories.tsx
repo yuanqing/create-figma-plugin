@@ -10,7 +10,7 @@ export default { title: 'Textbox Numeric' }
 export const Empty = function () {
   const [state, setState] = useState({ foo: null })
   return (
-    <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+    <TextboxNumeric name="foo" value={`${state.foo}`} onChange={setState} />
   )
 }
 
@@ -19,7 +19,7 @@ export const Disabled = function () {
   return (
     <TextboxNumeric
       disabled
-      name='foo'
+      name="foo"
       value={`${state.foo}`}
       onChange={setState}
     />
@@ -30,8 +30,8 @@ export const WithPlaceholder = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <TextboxNumeric
-      placeholder='Placeholder'
-      name='foo'
+      placeholder="Placeholder"
+      name="foo"
       value={`${state.foo}`}
       onChange={setState}
     />
@@ -41,7 +41,7 @@ export const WithPlaceholder = function () {
 export const Filled = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
-    <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+    <TextboxNumeric name="foo" value={`${state.foo}`} onChange={setState} />
   )
 }
 
@@ -50,7 +50,7 @@ export const FilledDisabled = function () {
   return (
     <TextboxNumeric
       disabled
-      name='foo'
+      name="foo"
       value={`${state.foo}`}
       onChange={setState}
     />
@@ -60,7 +60,7 @@ export const FilledDisabled = function () {
 export const Mixed = function () {
   const [state, setState] = useState({ foo: null })
   return (
-    <TextboxNumeric name='foo' value={`${state.foo}`} onChange={setState} />
+    <TextboxNumeric name="foo" value={`${state.foo}`} onChange={setState} />
   )
 }
 
@@ -69,7 +69,7 @@ export const NoBorder = function () {
   return (
     <TextboxNumeric
       noBorder
-      name='foo'
+      name="foo"
       value={`${state.foo}`}
       onChange={setState}
     />
@@ -81,8 +81,8 @@ export const WithIcon = function () {
   return (
     <TextboxNumeric
       icon={spaceHorizontalIcon}
-      placeholder='Space'
-      name='foo'
+      placeholder="Space"
+      name="foo"
       value={`${state.foo}`}
       onChange={setState}
     />
@@ -93,9 +93,9 @@ export const WithTextIcon = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <TextboxNumeric
-      icon='S'
-      placeholder='Space'
-      name='foo'
+      icon="S"
+      placeholder="Space"
+      name="foo"
       value={`${state.foo}`}
       onChange={setState}
     />
@@ -106,8 +106,8 @@ export const Integer = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
     <TextboxNumeric
-      placeholder='Placeholder'
-      name='foo'
+      placeholder="Placeholder"
+      name="foo"
       value={`${state.foo}`}
       integer
       onChange={setState}
@@ -119,8 +119,8 @@ export const CustomIncrements = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
     <TextboxNumeric
-      placeholder='Placeholder'
-      name='foo'
+      placeholder="Placeholder"
+      name="foo"
       value={`${state.foo}`}
       smallIncrement={4}
       bigIncrement={20}
@@ -133,8 +133,8 @@ export const MinimumMaximum = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
     <TextboxNumeric
-      placeholder='Placeholder'
-      name='foo'
+      placeholder="Placeholder"
+      name="foo"
       value={`${state.foo}`}
       minimum={0}
       maximum={100}

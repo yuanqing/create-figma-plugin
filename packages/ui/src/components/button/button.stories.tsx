@@ -5,11 +5,9 @@ import { Button } from './button'
 
 export default { title: 'Button' }
 
-const longText = Array(100)
-  .fill('Text')
-  .join(' ')
+const longText = Array(100).fill('Text').join(' ')
 
-function handleClick () {}
+function handleClick() {}
 
 export const Primary = function () {
   return <Button onClick={handleClick}>Text</Button>

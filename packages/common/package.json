@@ -27,19 +27,13 @@
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "clean-test": "rimraf '*.log' .nyc_output coverage",
-    "fix": "standardx --fix '{src,test}/**/*.ts' && prettier-standard '{src,test}/**/*.ts' && prettier --write '*.json'",
-    "lint": "standardx '{src,test}/**/*.ts'",
+    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --write '*.json'",
+    "lint": "eslint '{src,test}/**/*.ts'",
     "test": "yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^0.11.0",
     "fs-extra": "^9.0.0",
     "npmlog": "^4.1.2"
-  },
-  "standardx": {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint/eslint-plugin"
-    ]
   }
 }

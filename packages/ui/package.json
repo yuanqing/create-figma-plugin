@@ -34,8 +34,8 @@
   "scripts": {
     "build": "yarn run clean && tsc --module es2020 --moduleResolution node && node scripts/copy-non-ts-files.js",
     "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
-    "fix": "standardx --fix '{.storybook,src}/**/*.{ts,tsx}' && prettier-standard '{.storybook,src}/**/*.{ts,tsx}' && prettier --write '*.json'",
-    "lint": "standardx '{.storybook,src}/**/*.{ts,tsx}'",
+    "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && prettier --write '*.json'",
+    "lint": "eslint '{.storybook,scripts,src}/**/*.{js,ts,tsx}'",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
     "storybook-clean": "rimraf '*.log' build 'src/**/*.scss.d.ts'",
     "storybook-deploy": "yarn run storybook-clean && storybook-to-ghpages --out build",
@@ -51,7 +51,7 @@
   "sideEffects": [
     "./src/scss/{base,font-face,reset}.scss"
   ],
-  "standardx": {
+  "eslint": {
     "ignore": [
       "src/**/*.scss.d.ts"
     ],

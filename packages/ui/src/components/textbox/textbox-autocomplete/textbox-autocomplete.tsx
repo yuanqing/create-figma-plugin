@@ -37,7 +37,7 @@ export type TextboxAutocompleteOption = Option
 
 type Value = null | string
 
-export function TextboxAutocomplete ({
+export function TextboxAutocomplete({
   disabled: isDisabled,
   focused: isFocused,
   filter: shouldFilter,
@@ -332,7 +332,7 @@ export function TextboxAutocomplete ({
     [getMenuItemById, name, onChange]
   )
 
-  function handlePaste (event: ClipboardEvent) {
+  function handlePaste(event: ClipboardEvent) {
     if (
       inputElementRef.current === null ||
       typeof inputElementRef.current === 'undefined' ||
@@ -432,7 +432,7 @@ export function TextboxAutocomplete ({
   // Blur the input and hide the menu if we clicked outside the component
   useLayoutEffect(
     function () {
-      function handleWindowMousedown (event: MouseEvent) {
+      function handleWindowMousedown(event: MouseEvent) {
         if (
           menuElementRef.current === null ||
           typeof menuElementRef.current === 'undefined' ||
@@ -474,7 +474,7 @@ export function TextboxAutocomplete ({
   const hasIcon = typeof icon !== 'undefined'
   return (
     <div
-      class={classnames(
+      className={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
@@ -484,9 +484,9 @@ export function TextboxAutocomplete ({
       <input
         {...rest}
         ref={inputElementRef}
-        type='text'
+        type="text"
         name={name}
-        class={styles.input}
+        className={styles.input}
         placeholder={placeholder}
         value={committedValue === null ? '' : committedValue}
         disabled={isDisabled === true}
@@ -497,10 +497,10 @@ export function TextboxAutocomplete ({
         tabIndex={isDisabled === true ? undefined : 0}
         data-initial-focus={isFocused === true}
       />
-      {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
+      {hasIcon === true ? <div className={styles.icon}>{icon}</div> : null}
       {isDisabled !== true && isMenuVisible === true && menuItems.length > 0 ? (
         <div
-          class={classnames(
+          className={classnames(
             textboxAutocompleteStyles.menu,
             isTop === true ? textboxAutocompleteStyles.isTop : null,
             hasIcon === true ? textboxAutocompleteStyles.hasIcon : null
@@ -511,7 +511,7 @@ export function TextboxAutocomplete ({
             if ('separator' in menuItem) {
               return (
                 <hr
-                  class={textboxAutocompleteStyles.menuSeparator}
+                  className={textboxAutocompleteStyles.menuSeparator}
                   key={menuItem.id}
                 />
               )
@@ -519,7 +519,7 @@ export function TextboxAutocomplete ({
             if ('header' in menuItem) {
               return (
                 <h1
-                  class={textboxAutocompleteStyles.menuHeader}
+                  className={textboxAutocompleteStyles.menuHeader}
                   key={menuItem.id}
                 >
                   {menuItem.header}
@@ -528,7 +528,7 @@ export function TextboxAutocomplete ({
             }
             return (
               <div
-                class={classnames(
+                className={classnames(
                   textboxAutocompleteStyles.menuItem,
                   menuItem.id === selectedId
                     ? textboxAutocompleteStyles.menuItemSelected

@@ -19,7 +19,7 @@ export interface SearchTextboxProps {
   value: string
 }
 
-export function SearchTextbox ({
+export function SearchTextbox({
   disabled: isDisabled,
   focused: isFocused,
   name,
@@ -32,7 +32,7 @@ export function SearchTextbox ({
 }: SearchTextboxProps): h.JSX.Element {
   const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
 
-  function handleFocus () {
+  function handleFocus() {
     if (
       inputElementRef.current === null ||
       typeof inputElementRef.current === 'undefined'
@@ -97,14 +97,14 @@ export function SearchTextbox ({
   )
 
   return (
-    <div class={styles.searchTextbox}>
+    <div className={styles.searchTextbox}>
       <input
         {...rest}
         disabled={isDisabled}
         ref={inputElementRef}
-        type='text'
+        type="text"
         name={name}
-        class={styles.input}
+        className={styles.input}
         placeholder={placeholder}
         value={value === null ? '' : value}
         onFocus={handleFocus}
@@ -113,9 +113,9 @@ export function SearchTextbox ({
         tabIndex={0}
         data-initial-focus={isFocused === true}
       />
-      <div class={styles.searchIcon}>{searchIcon}</div>
+      <div className={styles.searchIcon}>{searchIcon}</div>
       {value === null || value === '' ? null : (
-        <div class={styles.clear} onClick={handleClearClick} tabIndex={0}>
+        <div className={styles.clear} onClick={handleClearClick} tabIndex={0}>
           {crossIcon}
         </div>
       )}

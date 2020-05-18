@@ -3,7 +3,7 @@ import { join, resolve } from 'path'
 import * as TerserPlugin from 'terser-webpack-plugin'
 import * as webpack from 'webpack'
 
-export function createWebpackConfig (
+export function createWebpackConfig(
   entry: webpack.Entry,
   isDevelopment: boolean
 ): webpack.Configuration {

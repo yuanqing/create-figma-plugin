@@ -4,7 +4,7 @@ const degit = require('degit')
 
 const gitHubRepositoryRegex = /[\w-]+\/[\w-]+/
 
-export async function cloneFromTemplateAsync (
+export async function cloneFromTemplateAsync(
   pluginDirectoryPath: string,
   template: string
 ): Promise<void> {

@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const globby = require('globby')
 const path = require('path')
 
-async function main () {
+async function main() {
   const glob = path.join(path.resolve(__dirname, '..'), 'src', '**', '*')
   const allFiles = await globby(glob)
   const nonTsFiles = allFiles.filter(function (file) {

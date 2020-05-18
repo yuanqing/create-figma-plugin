@@ -21,7 +21,7 @@ export interface FileUploadButtonProps {
   propagateEscapeKeyDown?: boolean
 }
 
-export function FileUploadButton ({
+export function FileUploadButton({
   acceptedFileTypes,
   children,
   disabled: isDisabled,
@@ -64,7 +64,7 @@ export function FileUploadButton ({
       : undefined
   return (
     <div
-      class={classnames(
+      className={classnames(
         styles.button,
         isFullWidth === true ? styles.isFullWidth : null,
         isDisabled === true ? styles.isDisabled : null,
@@ -72,21 +72,21 @@ export function FileUploadButton ({
       )}
     >
       {isLoading === true ? (
-        <div class={styles.loadingIndicator}>
+        <div className={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
       ) : null}
       <input
         {...rest}
-        class={styles.input}
-        type='file'
+        className={styles.input}
+        type="file"
         accept={accept}
         multiple={multiple}
         onChange={handleChange}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         tabIndex={isDisabled === true ? undefined : 0}
-        title=''
+        title=""
         data-initial-focus={isFocused === true}
       />
       <button disabled={isDisabled === true} onClick={onClick} tabIndex={-1}>
@@ -96,7 +96,7 @@ export function FileUploadButton ({
   )
 }
 
-function comparator (a: File, b: File) {
+function comparator(a: File, b: File) {
   const aName = a.name.toLowerCase()
   const bName = b.name.toLowerCase()
   if (aName !== bName) {

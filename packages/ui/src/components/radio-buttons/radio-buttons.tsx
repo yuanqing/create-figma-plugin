@@ -24,7 +24,7 @@ interface RadioButtonsOption {
   value: null | string
 }
 
-export function RadioButtons ({
+export function RadioButtons({
   disabled: isDisabled,
   focused: isFocused,
   name,
@@ -68,7 +68,7 @@ export function RadioButtons ({
         const isOptionDisabled = isDisabled === true || option.disabled === true
         return (
           <label
-            class={classnames(
+            className={classnames(
               styles.label,
               isOptionDisabled === true ? styles.disabled : null
             )}
@@ -76,8 +76,8 @@ export function RadioButtons ({
           >
             <input
               {...rest}
-              class={styles.input}
-              type='radio'
+              className={styles.input}
+              type="radio"
               name={name}
               value={option.value === null ? undefined : option.value}
               checked={value === option.value}
@@ -87,7 +87,7 @@ export function RadioButtons ({
               data-index={index}
               data-initial-focus={isFocused === true}
             />
-            <div class={styles.text}>{text}</div>
+            <div className={styles.text}>{text}</div>
           </label>
         )
       })}

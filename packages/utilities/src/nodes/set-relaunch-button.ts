@@ -1,4 +1,4 @@
-export function setRelaunchButton (
+export function setRelaunchButton(
   node: SceneNode,
   key: string,
   options?: { description: string }

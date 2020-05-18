@@ -15,7 +15,7 @@ export interface FileUploadDropzoneProps {
   propagateEscapeKeyDown?: boolean
 }
 
-export function FileUploadDropzone ({
+export function FileUploadDropzone({
   acceptedFileTypes,
   children,
   multiple,
@@ -90,15 +90,15 @@ export function FileUploadDropzone ({
       : undefined
   return (
     <div
-      class={classnames(
+      className={classnames(
         styles.fileUploadDropzone,
         isDropActive === true ? styles.isDropActive : null
       )}
     >
       <input
         {...rest}
-        class={styles.input}
-        type='file'
+        className={styles.input}
+        type="file"
         accept={accept}
         multiple={multiple}
         onBlur={handleBlur}
@@ -109,15 +109,15 @@ export function FileUploadDropzone ({
         onDrop={handleDrop}
         onKeyDown={handleKeyDown}
         tabIndex={-1}
-        title=''
+        title=""
       />
-      <div class={styles.dashedLine} />
-      <div class={styles.children}>{children}</div>
+      <div className={styles.dashedLine} />
+      <div className={styles.children}>{children}</div>
     </div>
   )
 }
 
-function comparator (a: File, b: File) {
+function comparator(a: File, b: File) {
   const aName = a.name.toLowerCase()
   const bName = b.name.toLowerCase()
   if (aName !== bName) {

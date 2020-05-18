@@ -5,11 +5,9 @@ import { FileUploadButton } from './file-upload-button'
 
 export default { title: 'File Upload Button' }
 
-const longText = Array(100)
-  .fill('Text')
-  .join(' ')
+const longText = Array(100).fill('Text').join(' ')
 
-function handleSelectedFiles () {}
+function handleSelectedFiles() {}
 
 export const Button = function () {
   return (
