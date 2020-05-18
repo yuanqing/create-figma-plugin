@@ -5,7 +5,7 @@
     "bump-dependencies": "node scripts/bump-dependencies.js",
     "clean": "lerna run clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf '*.log'",
     "insert-toc": "node scripts/insert-toc.js",
-    "fix": "lerna run fix && eslint --fix 'scripts/**/*.js' && prettier --write '*.json'",
+    "fix": "lerna run fix && eslint --fix 'scripts/**/*.js' && prettier --loglevel error --write '*.json'",
     "lint": "lerna run lint && eslint 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",

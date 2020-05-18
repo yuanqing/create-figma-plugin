@@ -34,7 +34,7 @@
   "scripts": {
     "build": "yarn run clean && tsc --module es2020 --moduleResolution node && node scripts/copy-non-ts-files.js",
     "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && prettier --write '*.json'",
+    "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && prettier --loglevel error --write '*.json'",
     "lint": "eslint '{.storybook,scripts,src}/**/*.{js,ts,tsx}'",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
     "storybook-clean": "rimraf '*.log' build 'src/**/*.scss.d.ts'",
