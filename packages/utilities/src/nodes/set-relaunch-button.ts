@@ -1,5 +1,5 @@
 export function setRelaunchButton(
-  node: SceneNode,
+  node: BaseNode,
   key: string,
   options?: { description: string }
 ) {
