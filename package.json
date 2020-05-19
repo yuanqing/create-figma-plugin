@@ -55,6 +55,7 @@
   "eslintConfig": {
     "extends": "yuanqing",
     "ignorePatterns": [
+      "*.scss.d.ts",
       "packages/create-figma-plugin/plugin-templates"
     ]
   },
