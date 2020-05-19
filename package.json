@@ -9,7 +9,7 @@
     "lint": "lerna run lint && eslint 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install && yarn run build",
+    "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
     "test": "yarn run build && lerna run test",
     "version": "lerna version"
   },
@@ -42,7 +42,6 @@
     "markdown-toc": "^1.2.0",
     "mkdirp": "^1.0.4",
     "npm-check-updates": "^4.1.2",
-    "nyc": "^15.0.1",
     "preact": "^10.4.1",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
