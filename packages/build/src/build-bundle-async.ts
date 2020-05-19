@@ -45,7 +45,7 @@ export async function buildBundleAsync(
     webpackConfig = require(customWebpackConfigPath)(webpackConfig)
   }
   return new Promise(function (resolve, reject) {
-    webpack(webpackConfig, async function (error, stats) {
+    webpack(webpackConfig, function (error, stats) {
       if (stats.hasErrors() === true) {
         reject(stats.toJson().errors.join('\n'))
         return
@@ -88,11 +88,11 @@ async function createUiEntryFileAsync(
 ): Promise<null | string> {
   const modules: EntryFile[] = []
   extractModule(command, 'ui', modules)
-  if (modules.length === 0) {
-    return null
-  }
   if (relaunchButtons !== null) {
     extractModules(relaunchButtons, 'ui', modules)
+  }
+  if (modules.length === 0) {
+    return null
   }
   const fileContent = `
     require('@create-figma-plugin/utilities/lib/events');
@@ -141,9 +141,8 @@ function extractModule(
       })
     }
   }
-  const menu = (command as ConfigCommand).menu
-  if (menu !== null) {
-    extractModules(menu, key, result)
+  if ('menu' in command && command.menu !== null) {
+    extractModules(command.menu, key, result)
   }
 }
 

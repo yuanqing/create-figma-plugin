@@ -28,6 +28,17 @@ export async function buildManifestAsync(config: Config): Promise<void> {
   }
   if (hasBundle(command, 'ui') === true) {
     result.ui = constants.build.pluginUiFilePath
+  } else {
+    if (relaunchButtons !== null) {
+      const relaunchButtonsWithUi = relaunchButtons.filter(function (
+        relaunchButton
+      ) {
+        return relaunchButton.ui !== null
+      })
+      if (relaunchButtonsWithUi.length > 0) {
+        result.ui = constants.build.pluginUiFilePath
+      }
+    }
   }
   if (menu !== null) {
     result.menu = createMenu(menu)

@@ -82,6 +82,34 @@ test('multiple menu commands', async function (t) {
   await cleanUpAsync()
 })
 
+test('relaunch button', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '4-relaunch-button'))
+  await cleanUpAsync()
+  t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
+  t.false(await pathExists('node_modules'))
+  await createSymlinkAsync()
+  await buildAsync(true, false)
+  const manifestJsonPath = join(process.cwd(), 'manifest.json')
+  t.deepEqual(require(manifestJsonPath), {
+    name: 'foo',
+    id: '42',
+    api: '1.0.0',
+    main: 'build/main.js',
+    ui: 'build/ui.js',
+    relaunchButtons: [
+      {
+        name: 'qux',
+        command: 'baz'
+      }
+    ]
+  })
+  t.true(await pathExists('build/main.js'))
+  t.true(await pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
 async function createSymlinkAsync() {
   const sourcePath = resolve(__dirname, '..', '..', 'utilities')
   const destinationPath = join(

@@ -1,6 +1,6 @@
 /* eslint no-console: "off" */
 
-export default async function (figma) {
+export default function () {
   console.log('baz')
   figma.stopPlugin()
 }

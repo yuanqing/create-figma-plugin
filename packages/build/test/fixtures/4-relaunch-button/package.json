@@ -1,0 +1,14 @@
+{
+  "figma-plugin": {
+    "name": "foo",
+    "id": "42",
+    "main": "bar",
+    "relaunchButtons": {
+      "baz": {
+        "name": "qux",
+        "main": "quux",
+        "ui": "quuux"
+      }
+    }
+  }
+}
