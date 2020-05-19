@@ -3,6 +3,23 @@ import { join, resolve } from 'path'
 import * as TerserPlugin from 'terser-webpack-plugin'
 import * as webpack from 'webpack'
 
+const babelLoaderPlugins = [
+  '@babel/plugin-proposal-object-rest-spread',
+  [
+    '@babel/plugin-transform-template-literals',
+    {
+      loose: true
+    }
+  ],
+  [
+    '@babel/plugin-transform-react-jsx',
+    {
+      pragma: 'h',
+      pragmaFrag: 'Fragment'
+    }
+  ]
+]
+
 export function createWebpackConfig(
   entry: webpack.Entry,
   isDevelopment: boolean
@@ -17,6 +34,25 @@ export function createWebpackConfig(
     },
     module: {
       rules: [
+        {
+          test: /\.jsx?$/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              plugins: babelLoaderPlugins
+            }
+          }
+        },
+        {
+          test: /\.tsx?$/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-typescript'],
+              plugins: babelLoaderPlugins
+            }
+          }
+        },
         {
           test: /\.s?css$/,
           use: [
@@ -40,45 +76,6 @@ export function createWebpackConfig(
               loader: 'sass-loader'
             }
           ]
-        },
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules\/(?!@create-figma-plugin)/,
-          use: {
-            loader: 'ts-loader',
-            options: {
-              compilerOptions: {
-                moduleResolution: 'node',
-                module: 'es2020',
-                target: 'es5'
-              }
-            }
-          }
-        },
-        {
-          test: /\.jsx?$/,
-          exclude: /node_modules\/(?!@create-figma-plugin)/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              plugins: [
-                '@babel/plugin-proposal-object-rest-spread',
-                [
-                  '@babel/plugin-transform-template-literals',
-                  {
-                    loose: true
-                  }
-                ],
-                [
-                  '@babel/plugin-transform-react-jsx',
-                  {
-                    pragma: 'h',
-                    pragmaFrag: 'Fragment'
-                  }
-                ]
-              ]
-            }
-          }
         }
       ]
     },
@@ -90,7 +87,7 @@ export function createWebpackConfig(
         process.cwd(),
         'node_modules'
       ],
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+      extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
     },
     devtool: isDevelopment ? 'inline-cheap-module-source-map' : false,
     stats: 'errors-only',

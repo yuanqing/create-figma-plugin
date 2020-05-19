@@ -38,6 +38,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
     "@babel/plugin-transform-react-jsx": "^7.9.4",
     "@babel/plugin-transform-template-literals": "^7.8.3",
+    "@babel/preset-typescript": "^7.9.0",
     "@create-figma-plugin/common": "^0.0.73",
     "@create-figma-plugin/utilities": "^0.0.73",
     "@teamsupercell/typings-for-css-modules-loader": "^2.1.1",
