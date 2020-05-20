@@ -3,22 +3,27 @@ import { join, resolve } from 'path'
 import * as TerserPlugin from 'terser-webpack-plugin'
 import * as webpack from 'webpack'
 
-const babelLoaderPlugins = [
-  '@babel/plugin-proposal-object-rest-spread',
-  [
-    '@babel/plugin-transform-template-literals',
-    {
-      loose: true
-    }
-  ],
-  [
-    '@babel/plugin-transform-react-jsx',
-    {
-      pragma: 'h',
-      pragmaFrag: 'Fragment'
-    }
-  ]
-]
+const babelLoader = {
+  loader: 'babel-loader',
+  options: {
+    plugins: [
+      '@babel/plugin-proposal-object-rest-spread',
+      [
+        '@babel/plugin-transform-template-literals',
+        {
+          loose: true
+        }
+      ],
+      [
+        '@babel/plugin-transform-react-jsx',
+        {
+          pragma: 'h',
+          pragmaFrag: 'Fragment'
+        }
+      ]
+    ]
+  }
+}
 
 export function createWebpackConfig(
   entry: webpack.Entry,
@@ -36,22 +41,23 @@ export function createWebpackConfig(
       rules: [
         {
           test: /\.jsx?$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              plugins: babelLoaderPlugins
-            }
-          }
+          use: babelLoader
         },
         {
           test: /\.tsx?$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-typescript'],
-              plugins: babelLoaderPlugins
+          use: [
+            babelLoader,
+            {
+              loader: 'ts-loader',
+              options: {
+                compilerOptions: {
+                  moduleResolution: 'node',
+                  module: 'es2020',
+                  target: 'es2016'
+                }
+              }
             }
-          }
+          ]
         },
         {
           test: /\.s?css$/,
