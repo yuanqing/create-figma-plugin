@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import styles from './loading-indicator.scss'
 
-export function LoadingIndicator(props: any): h.JSX.Element {
+export function LoadingIndicator(props: { [key: string]: any }): h.JSX.Element {
   return (
     <div {...props} className={styles.loadingIndicator}>
       <svg>

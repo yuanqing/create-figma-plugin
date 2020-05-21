@@ -20,8 +20,8 @@ export interface CheckboxProps {
 
 export function Checkbox({
   children,
-  disabled: isDisabled,
-  focused: isFocused,
+  disabled,
+  focused,
   name,
   onChange,
   onKeyDown,
@@ -65,7 +65,7 @@ export function Checkbox({
     <label
       className={classnames(
         styles.label,
-        isDisabled === true ? styles.disabled : null
+        disabled === true ? styles.disabled : null
       )}
     >
       <input
@@ -74,11 +74,11 @@ export function Checkbox({
         type="checkbox"
         name={name}
         checked={value === true}
-        disabled={isDisabled === true}
+        disabled={disabled === true}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? undefined : 0}
-        data-initial-focus={isFocused === true}
+        tabIndex={disabled === true ? undefined : 0}
+        data-initial-focus={focused === true}
       />
       <div className={styles.text}>{children}</div>
     </label>

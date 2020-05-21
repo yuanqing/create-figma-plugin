@@ -24,10 +24,10 @@ export interface FileUploadButtonProps {
 export function FileUploadButton({
   acceptedFileTypes,
   children,
-  disabled: isDisabled,
-  focused: isFocused,
-  fullWidth: isFullWidth,
-  loading: isLoading,
+  disabled,
+  focused,
+  fullWidth,
+  loading,
   multiple,
   onClick,
   onSelectedFiles,
@@ -66,12 +66,12 @@ export function FileUploadButton({
     <div
       className={classnames(
         styles.button,
-        isFullWidth === true ? styles.isFullWidth : null,
-        isDisabled === true ? styles.isDisabled : null,
-        isLoading === true ? styles.isLoading : null
+        fullWidth === true ? styles.isFullWidth : null,
+        disabled === true ? styles.isDisabled : null,
+        loading === true ? styles.isLoading : null
       )}
     >
-      {isLoading === true ? (
+      {loading === true ? (
         <div className={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
@@ -85,11 +85,11 @@ export function FileUploadButton({
         onChange={handleChange}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? undefined : 0}
+        tabIndex={disabled === true ? undefined : 0}
         title=""
-        data-initial-focus={isFocused === true}
+        data-initial-focus={focused === true}
       />
-      <button disabled={isDisabled === true} onClick={onClick} tabIndex={-1}>
+      <button disabled={disabled === true} onClick={onClick} tabIndex={-1}>
         {children}
       </button>
     </div>

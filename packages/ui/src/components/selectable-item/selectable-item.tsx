@@ -21,14 +21,14 @@ export interface SelectableItemProps {
 }
 
 export function SelectableItem({
-  bold: isBold,
+  bold,
   children,
-  disabled: isDisabled,
-  indent: isIndented,
+  disabled,
+  indent,
   name,
   onChange,
   onKeyDown,
-  propagateEscapeKeyDown,
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }: SelectableItemProps): h.JSX.Element {
@@ -69,13 +69,13 @@ export function SelectableItem({
       {...rest}
       className={classnames(
         styles.label,
-        isDisabled === true ? styles.isDisabled : null,
-        isBold === true ? styles.isBold : null,
-        isIndented === true ? styles.isIndented : null,
+        disabled === true ? styles.isDisabled : null,
+        bold === true ? styles.isBold : null,
+        indent === true ? styles.isIndented : null,
         value === true ? styles.isChecked : null
       )}
-      onKeyDown={isDisabled === true ? undefined : handleKeyDown}
-      tabIndex={isDisabled === true ? undefined : 0}
+      onKeyDown={disabled === true ? undefined : handleKeyDown}
+      tabIndex={disabled === true ? undefined : 0}
     >
       <input
         {...rest}
@@ -83,7 +83,7 @@ export function SelectableItem({
         type="checkbox"
         name={name}
         checked={value === true}
-        disabled={isDisabled === true}
+        disabled={disabled === true}
         onChange={handleChange}
         tabIndex={-1}
       />

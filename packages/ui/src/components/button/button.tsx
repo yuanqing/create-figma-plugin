@@ -21,14 +21,14 @@ export interface ButtonProps {
 
 export function Button({
   children,
-  destructive: isDestructive,
-  disabled: isDisabled,
-  focused: isFocused,
-  fullWidth: isFullWidth,
-  loading: isLoading,
+  destructive,
+  disabled,
+  focused,
+  fullWidth,
+  loading,
   onClick,
   propagateEscapeKeyDown = true,
-  secondary: isSecondary,
+  secondary,
   ...rest
 }: ButtonProps): h.JSX.Element {
   const handleKeyDown = useCallback(
@@ -50,25 +50,25 @@ export function Button({
     <div
       className={classnames(
         styles.button,
-        isSecondary === true ? styles.isSecondary : styles.isPrimary,
-        isDestructive === true ? styles.isDestructive : null,
-        isFullWidth === true ? styles.isFullWidth : null,
-        isDisabled === true ? styles.isDisabled : null,
-        isLoading === true ? styles.isLoading : null
+        secondary === true ? styles.isSecondary : styles.isPrimary,
+        destructive === true ? styles.isDestructive : null,
+        fullWidth === true ? styles.isFullWidth : null,
+        disabled === true ? styles.isDisabled : null,
+        loading === true ? styles.isLoading : null
       )}
     >
-      {isLoading === true ? (
+      {loading === true ? (
         <div className={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
       ) : null}
       <button
         {...rest}
-        disabled={isDisabled === true}
+        disabled={disabled === true}
         onClick={onClick}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? undefined : 0}
-        data-initial-focus={isFocused === true}
+        tabIndex={disabled === true ? undefined : 0}
+        data-initial-focus={focused === true}
       >
         {children}
       </button>

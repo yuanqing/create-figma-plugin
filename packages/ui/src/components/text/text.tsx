@@ -15,10 +15,10 @@ export interface TextProps {
 
 export function Text({
   align = 'left',
-  bold: isBold,
+  bold,
   children,
-  muted: isMuted,
-  numeric: isNumeric,
+  muted,
+  numeric,
   ...rest
 }: TextProps): h.JSX.Element {
   return (
@@ -27,9 +27,9 @@ export function Text({
       className={classnames(
         styles.text,
         styles[align],
-        isBold === true ? styles.isBold : null,
-        isMuted === true ? styles.isMuted : null,
-        isNumeric === true ? styles.isNumeric : null
+        bold === true ? styles.isBold : null,
+        muted === true ? styles.isMuted : null,
+        numeric === true ? styles.isNumeric : null
       )}
     >
       {children}

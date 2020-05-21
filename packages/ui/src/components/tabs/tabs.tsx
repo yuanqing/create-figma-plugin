@@ -29,7 +29,7 @@ export interface TabsOption {
 }
 
 export function Tabs({
-  focused: isFocused,
+  focused,
   name,
   onChange,
   options,
@@ -99,7 +99,7 @@ export function Tabs({
         className={styles.tabs}
         onKeyDown={handleKeyDown}
         tabIndex={0}
-        data-initial-focus={isFocused === true}
+        data-initial-focus={focused === true}
       >
         {options.map(function (option, index) {
           const text =

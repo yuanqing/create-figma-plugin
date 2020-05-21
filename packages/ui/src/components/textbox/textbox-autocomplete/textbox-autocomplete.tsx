@@ -38,17 +38,17 @@ export type TextboxAutocompleteOption = Option
 type Value = null | string
 
 export function TextboxAutocomplete({
-  disabled: isDisabled,
-  focused: isFocused,
-  filter: shouldFilter,
+  disabled,
+  focused,
+  filter,
   icon,
   name,
   noBorder,
   onChange,
   options,
   placeholder,
-  strict: isStrict,
-  top: isTop,
+  strict,
+  top,
   value: committedValue,
   ...rest
 }: TextboxAutocompleteProps): h.JSX.Element {
@@ -106,7 +106,7 @@ export function TextboxAutocomplete({
   )
 
   if (
-    shouldFilter === true &&
+    filter === true &&
     (isValidValue(committedValue) === false || currentValue !== EMPTY_STRING)
   ) {
     menuItems = menuItems.filter(function (menuItem) {
@@ -251,7 +251,7 @@ export function TextboxAutocomplete({
         setMenuVisible(false)
         return
       }
-      if (isStrict !== true) {
+      if (strict !== true) {
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
@@ -276,7 +276,7 @@ export function TextboxAutocomplete({
       currentValue,
       getMenuItemById,
       isMenuVisible,
-      isStrict,
+      strict,
       isValidValue,
       menuItems.length,
       name,
@@ -489,20 +489,20 @@ export function TextboxAutocomplete({
         className={styles.input}
         placeholder={placeholder}
         value={committedValue === null ? '' : committedValue}
-        disabled={isDisabled === true}
-        onFocus={isDisabled === true ? undefined : handleFocus}
-        onKeyDown={isDisabled === true ? undefined : handleKeyDown}
-        onKeyUp={isDisabled === true ? undefined : handleKeyUp}
-        onPaste={isDisabled === true ? undefined : handlePaste}
-        tabIndex={isDisabled === true ? undefined : 0}
-        data-initial-focus={isFocused === true}
+        disabled={disabled === true}
+        onFocus={disabled === true ? undefined : handleFocus}
+        onKeyDown={disabled === true ? undefined : handleKeyDown}
+        onKeyUp={disabled === true ? undefined : handleKeyUp}
+        onPaste={disabled === true ? undefined : handlePaste}
+        tabIndex={disabled === true ? undefined : 0}
+        data-initial-focus={focused === true}
       />
       {hasIcon === true ? <div className={styles.icon}>{icon}</div> : null}
-      {isDisabled !== true && isMenuVisible === true && menuItems.length > 0 ? (
+      {disabled !== true && isMenuVisible === true && menuItems.length > 0 ? (
         <div
           className={classnames(
             textboxAutocompleteStyles.menu,
-            isTop === true ? textboxAutocompleteStyles.isTop : null,
+            top === true ? textboxAutocompleteStyles.isTop : null,
             hasIcon === true ? textboxAutocompleteStyles.hasIcon : null
           )}
           ref={menuElementRef}

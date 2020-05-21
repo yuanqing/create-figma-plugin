@@ -20,8 +20,8 @@ export interface SearchTextboxProps {
 }
 
 export function SearchTextbox({
-  disabled: isDisabled,
-  focused: isFocused,
+  disabled,
+  focused,
   name,
   onChange,
   placeholder,
@@ -100,7 +100,7 @@ export function SearchTextbox({
     <div className={styles.searchTextbox}>
       <input
         {...rest}
-        disabled={isDisabled}
+        disabled={disabled}
         ref={inputElementRef}
         type="text"
         name={name}
@@ -111,7 +111,7 @@ export function SearchTextbox({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         tabIndex={0}
-        data-initial-focus={isFocused === true}
+        data-initial-focus={focused === true}
       />
       <div className={styles.searchIcon}>{searchIcon}</div>
       {value === null || value === '' ? null : (

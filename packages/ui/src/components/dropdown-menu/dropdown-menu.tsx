@@ -31,13 +31,13 @@ export type DropdownOption = Option
 
 export function DropdownMenu({
   children,
-  focused: isFocused,
-  fullWidth: isFullWidth,
+  focused,
+  fullWidth,
   name,
   onChange,
   options,
-  right: isRight,
-  top: isTop,
+  right,
+  top,
   value
 }: DropdownMenuProps): h.JSX.Element {
   const rootElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
@@ -184,16 +184,16 @@ export function DropdownMenu({
       onKeyDown={handleRootElementKeyDown}
       tabIndex={0}
       ref={rootElementRef as preact.RefObject<HTMLDivElement>}
-      data-initial-focus={isFocused === true}
+      data-initial-focus={focused === true}
     >
       {cloneElement(children as preact.VNode<any>, { [name]: value })}
       <div
         className={classnames(
           styles.menu,
           isMenuVisible === false ? styles.isHidden : null,
-          isFullWidth === true ? styles.isFullWidth : null,
-          isRight === true ? styles.isRight : null,
-          isTop === true ? styles.isTop : null
+          fullWidth === true ? styles.isFullWidth : null,
+          right === true ? styles.isRight : null,
+          top === true ? styles.isTop : null
         )}
         ref={menuElementRef as preact.RefObject<HTMLDivElement>}
       >

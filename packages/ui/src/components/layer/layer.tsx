@@ -24,7 +24,7 @@ export function Layer({
   children,
   onClick,
   pageName,
-  selected: isSelected,
+  selected,
   type,
   ...rest
 }: LayerProps): h.JSX.Element {
@@ -34,7 +34,7 @@ export function Layer({
       className={classnames(
         styles[type],
         styles.layer,
-        isSelected === true ? styles.isSelected : null
+        selected === true ? styles.isSelected : null
       )}
       onClick={onClick}
     >

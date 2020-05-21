@@ -25,8 +25,8 @@ interface RadioButtonsOption {
 }
 
 export function RadioButtons({
-  disabled: isDisabled,
-  focused: isFocused,
+  disabled,
+  focused,
   name,
   onChange,
   options,
@@ -65,7 +65,7 @@ export function RadioButtons({
       {options.map(function (option, index) {
         const text =
           typeof option.text === 'undefined' ? option.value : option.text
-        const isOptionDisabled = isDisabled === true || option.disabled === true
+        const isOptionDisabled = disabled === true || option.disabled === true
         return (
           <label
             className={classnames(
@@ -85,7 +85,7 @@ export function RadioButtons({
               onChange={handleChange}
               tabIndex={isOptionDisabled === true ? undefined : 0}
               data-index={index}
-              data-initial-focus={isFocused === true}
+              data-initial-focus={focused === true}
             />
             <div className={styles.text}>{text}</div>
           </label>

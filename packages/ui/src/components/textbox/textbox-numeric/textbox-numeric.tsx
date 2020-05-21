@@ -31,12 +31,12 @@ export interface TextboxNumericProps extends TextboxProps {
 }
 
 export function TextboxNumeric({
-  disabled: isDisabled,
-  focused: isFocused,
+  disabled,
+  focused,
   icon,
   smallIncrement = 1,
   bigIncrement = 10,
-  integer: isInteger = false,
+  integer = false,
   maximum = Number.MAX_VALUE,
   minimum = -1 * Number.MAX_VALUE,
   name,
@@ -146,7 +146,7 @@ export function TextboxNumeric({
           value === null
             ? event.key
             : computeNextValue(inputElementRef.current, event.key)
-        if (isValidNumericInput(nextValue, isInteger) === false) {
+        if (isValidNumericInput(nextValue, integer) === false) {
           event.preventDefault()
           return
         }
@@ -162,7 +162,7 @@ export function TextboxNumeric({
     [
       bigIncrement,
       handleInput,
-      isInteger,
+      integer,
       maximum,
       minimum,
       propagateEscapeKeyDown,
@@ -186,11 +186,11 @@ export function TextboxNumeric({
         inputElementRef.current,
         event.clipboardData.getData('Text')
       )
-      if (isValidNumericInput(nextValue, isInteger) === false) {
+      if (isValidNumericInput(nextValue, integer) === false) {
         event.preventDefault()
       }
     },
-    [isInteger]
+    [integer]
   )
 
   return (
@@ -209,14 +209,14 @@ export function TextboxNumeric({
         className={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
-        disabled={isDisabled === true}
+        disabled={disabled === true}
         onClick={handleClick}
         onInput={handleInput}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
-        tabIndex={isDisabled === true ? undefined : 0}
-        data-initial-focus={isFocused === true}
+        tabIndex={disabled === true ? undefined : 0}
+        data-initial-focus={focused === true}
       />
       {hasIcon === true ? <div className={styles.icon}>{icon}</div> : null}
     </div>

@@ -20,8 +20,8 @@ export interface TextboxProps {
 }
 
 export function Textbox({
-  disabled: isDisabled,
-  focused: isFocused,
+  disabled,
+  focused,
   icon,
   name,
   noBorder,
@@ -107,13 +107,13 @@ export function Textbox({
         className={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
-        disabled={isDisabled === true}
+        disabled={disabled === true}
         onClick={handleClick}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
-        tabIndex={isDisabled === true ? undefined : 0}
-        data-initial-focus={isFocused === true}
+        tabIndex={disabled === true ? undefined : 0}
+        data-initial-focus={focused === true}
       />
       {hasIcon ? <div className={styles.icon}>{icon}</div> : null}
     </div>
