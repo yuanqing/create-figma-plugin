@@ -29,7 +29,7 @@ interface SegmentedControlOption<T> {
 }
 
 export function SegmentedControl<T extends string | number | boolean = string>({
-  disabled: isDisabled,
+  disabled: disabled,
   focused: isFocused,
   name,
   onChange,
@@ -91,8 +91,8 @@ export function SegmentedControl<T extends string | number | boolean = string>({
   return (
     <div
       className={styles.segmentedControl}
-      onKeyDown={isDisabled === true ? undefined : handleKeyDown}
-      tabIndex={isDisabled === true ? undefined : 0}
+      onKeyDown={disabled === true ? undefined : handleKeyDown}
+      tabIndex={disabled === true ? undefined : 0}
       data-initial-focus={isFocused === true}
     >
       {options.map(function (option, index) {
@@ -107,7 +107,7 @@ export function SegmentedControl<T extends string | number | boolean = string>({
               name={name}
               value={option.value === null ? undefined : `${option.value}`}
               checked={value === option.value}
-              disabled={isDisabled === true || option.disabled === true}
+              disabled={disabled === true || option.disabled === true}
               onChange={handleChange}
               tabIndex={-1}
               data-index={index}

@@ -69,10 +69,10 @@ export function SelectableItem({
       {...rest}
       className={classnames(
         styles.label,
-        disabled === true ? styles.isDisabled : null,
-        bold === true ? styles.isBold : null,
-        indent === true ? styles.isIndented : null,
-        value === true ? styles.isChecked : null
+        disabled === true ? styles.disabled : null,
+        bold === true ? styles.bold : null,
+        indent === true ? styles.indent : null,
+        value === true ? styles.checked : null
       )}
       onKeyDown={disabled === true ? undefined : handleKeyDown}
       tabIndex={disabled === true ? undefined : 0}

@@ -50,11 +50,11 @@ export function Button({
     <div
       className={classnames(
         styles.button,
-        secondary === true ? styles.isSecondary : styles.isPrimary,
-        destructive === true ? styles.isDestructive : null,
-        fullWidth === true ? styles.isFullWidth : null,
-        disabled === true ? styles.isDisabled : null,
-        loading === true ? styles.isLoading : null
+        secondary === true ? styles.secondary : styles.primary,
+        destructive === true ? styles.destructive : null,
+        fullWidth === true ? styles.fullWidth : null,
+        disabled === true ? styles.disabled : null,
+        loading === true ? styles.loading : null
       )}
     >
       {loading === true ? (

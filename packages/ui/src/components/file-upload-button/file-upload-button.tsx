@@ -66,9 +66,9 @@ export function FileUploadButton({
     <div
       className={classnames(
         styles.button,
-        fullWidth === true ? styles.isFullWidth : null,
-        disabled === true ? styles.isDisabled : null,
-        loading === true ? styles.isLoading : null
+        fullWidth === true ? styles.fullWidth : null,
+        disabled === true ? styles.disabled : null,
+        loading === true ? styles.loading : null
       )}
     >
       {loading === true ? (

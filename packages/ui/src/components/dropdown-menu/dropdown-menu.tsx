@@ -190,10 +190,10 @@ export function DropdownMenu({
       <div
         className={classnames(
           styles.menu,
-          isMenuVisible === false ? styles.isHidden : null,
-          fullWidth === true ? styles.isFullWidth : null,
-          right === true ? styles.isRight : null,
-          top === true ? styles.isTop : null
+          isMenuVisible === false ? styles.hidden : null,
+          fullWidth === true ? styles.fullWidth : null,
+          right === true ? styles.right : null,
+          top === true ? styles.top : null
         )}
         ref={menuElementRef as preact.RefObject<HTMLDivElement>}
       >

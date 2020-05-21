@@ -30,21 +30,21 @@
   display: none;
 }
 
-.isFullWidth {
+.fullWidth {
   width: 100%;
 }
 
-.isHidden {
+.hidden {
   visibility: hidden;
   pointer-events: none;
 }
 
-.isTop {
+.top {
   top: auto;
   bottom: 100%;
 }
 
-.isRight {
+.right {
   left: auto;
   right: 0;
 }

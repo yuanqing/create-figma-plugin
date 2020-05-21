@@ -13,7 +13,7 @@
     color: currentColor;
   }
 
-  &.isDisabled {
+  &.disabled {
     opacity: $opacity-30;
 
     button {
@@ -22,7 +22,7 @@
   }
 }
 
-.isPrimary {
+.primary {
   color: $color-white;
 
   button {
@@ -36,7 +36,7 @@
     }
   }
 
-  &.isDestructive {
+  &.destructive {
     color: $color-white;
 
     button {
@@ -44,12 +44,12 @@
     }
   }
 
-  &.isDisabled button {
+  &.disabled button {
     background-color: $color-black-80;
   }
 }
 
-.isSecondary {
+.secondary {
   color: $color-black-80;
 
   button {
@@ -66,7 +66,7 @@
     }
   }
 
-  &.isDestructive {
+  &.destructive {
     color: $color-red;
 
     button {
@@ -75,7 +75,7 @@
   }
 }
 
-.isFullWidth {
+.fullWidth {
   display: block;
 
   button {
@@ -87,7 +87,7 @@
   }
 }
 
-.isLoading {
+.loading {
   button {
     color: rgba(0, 0, 0, 0);
   }

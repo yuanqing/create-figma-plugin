@@ -27,9 +27,9 @@ export function Text({
       className={classnames(
         styles.text,
         styles[align],
-        bold === true ? styles.isBold : null,
-        muted === true ? styles.isMuted : null,
-        numeric === true ? styles.isNumeric : null
+        bold === true ? styles.bold : null,
+        muted === true ? styles.muted : null,
+        numeric === true ? styles.numeric : null
       )}
     >
       {children}

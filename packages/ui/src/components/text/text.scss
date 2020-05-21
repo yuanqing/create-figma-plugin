@@ -38,15 +38,15 @@
   }
 }
 
-.isBold {
+.bold {
   @include text-11-bold;
 }
 
-.isMuted {
+.muted {
   color: $color-black-30;
 }
 
-.isNumeric {
+.numeric {
   font-variant-numeric: tabular-nums;
 }
 

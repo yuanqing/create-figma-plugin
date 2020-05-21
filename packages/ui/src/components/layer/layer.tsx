@@ -34,7 +34,7 @@ export function Layer({
       className={classnames(
         styles[type],
         styles.layer,
-        selected === true ? styles.isSelected : null
+        selected === true ? styles.selected : null
       )}
       onClick={onClick}
     >

@@ -502,7 +502,7 @@ export function TextboxAutocomplete({
         <div
           className={classnames(
             textboxAutocompleteStyles.menu,
-            top === true ? textboxAutocompleteStyles.isTop : null,
+            top === true ? textboxAutocompleteStyles.top : null,
             hasIcon === true ? textboxAutocompleteStyles.hasIcon : null
           )}
           ref={menuElementRef}
