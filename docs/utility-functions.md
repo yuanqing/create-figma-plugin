@@ -1,3 +1,7 @@
+> # WIP
+
+---
+
 # Utility functions
 
 These utility functions are part of the `@create-figma-plugin/utilities` module. If you had initialized your plugin with `npx create-figma-plugin`, the module would have already been installed. Otherwise, do:
@@ -14,27 +18,27 @@ $ npm install @create-figma-plugin/utilities
   * [on(eventName, eventHandler)](#const-off--oneventname-eventhandler)
   * [once(eventName, eventHandler)](#const-off--onceeventname-eventhandler)
   * [emit(eventName *[, ...arguments]*)](#emiteventname--arguments)
-- [**Layers**](#layers)
-  * [insertBeforeLayer(layer, referenceLayer)](#insertbeforelayerlayer-referencelayer)
-  * [insertAfterLayer(layer, referenceLayer)](#insertafterlayerlayer-referencelayer)
-  * [getSelectedLayersOrAllLayers()](#const-layers--getselectedlayersoralllayers)
+- [**Nodes**](#nodes)
+  * [insertBeforeNode(node, referenceNode)](#insertbeforenodenode-referencenode)
+  * [insertAfterNode(node, referenceNode)](#insertafternodenode-referencenode)
+  * [getSelectedNodesOrAllNodes()](#const-nodes--getselectednodesorallnodes)
   * [getDocumentComponents()](#const-components--getdocumentcomponents)
-  * [getAbsolutePosition(layer)](#const-x-y--getabsolutepositionlayer)
-  * [setAbsolutePosition(layer, absolutePosition)](#setabsolutepositionlayer-absoluteposition)
-  * [computeBoundingBox(layer)](#const-x-y-width-height--computeboundingboxlayer)
-  * [computeMaximumBounds(layers)](#const-topleft-bottomright--computemaximumboundslayers)
-  * [isLayerWithinInstance(layer)](#const-result--islayerwithininstancelayer)
-  * [traverseLayer(layer, processLayer *[, stopTraversal]*)](#traverselayerlayer-processlayer--stoptraversal)
-  * [sortLayersByName(layers)](#const-sortedlayers--sortlayersbynamelayers)
-  * [sortSiblingLayersByLayerListOrder(siblingLayers)](#const-sortedsiblinglayers--sortsiblinglayersbylayerlistordersiblinglayers)
-  * [updateLayersSortOrder(layers)](#const-didchange--updatelayerssortorderlayers)
-  * [areSiblingLayers(layers)](#const-result--aresiblinglayerslayers)
-  * [computeSiblingLayers(layers)](#const-groups--computesiblinglayerslayers)
-  * [removeDuplicateLayers(layers)](#const-uniquelayers--removeduplicatelayerslayers)
-  * [collapseLayer(layer)](#collapselayerlayer)
+  * [getAbsolutePosition(node)](#const-x-y--getabsolutepositionnode)
+  * [setAbsolutePosition(node, absolutePosition)](#setabsolutepositionnode-absoluteposition)
+  * [computeBoundingBox(node)](#const-x-y-width-height--computeboundingboxnode)
+  * [computeMaximumBounds(nodes)](#const-topleft-bottomright--computemaximumboundsnodes)
+  * [isNodeWithinInstance(node)](#const-result--isnodewithininstancenode)
+  * [traverseNode(node, processNode *[, stopTraversal]*)](#traversenodenode-processnode--stoptraversal)
+  * [sortNodesByName(nodes)](#const-sortednodes--sortnodesbynamenodes)
+  * [sortSiblingNodesByNodeListOrder(siblingNodes)](#const-sortedsiblingnodes--sortsiblingnodesbynodelistordersiblingnodes)
+  * [updateNodesSortOrder(nodes)](#const-didchange--updatenodessortordernodes)
+  * [areSiblingNodes(nodes)](#const-result--aresiblingnodesnodes)
+  * [computeSiblingNodes(nodes)](#const-groups--computesiblingnodesnodes)
+  * [removeDuplicateNodes(nodes)](#const-uniquenodes--removeduplicatenodesnodes)
+  * [collapseNode(node)](#collapsenodenode)
   * [createImagePaint(bytes)](#const-imagepaint--createimagepaintbytes)
-  * [loadFontsAsync(layers)](#await-loadfontsasynclayers)
-  * [setRelaunchButton(layer, relaunchButtonId *[, description]*)](#setrelaunchbuttonlayer-relaunchbuttonid--description)
+  * [loadFontsAsync(nodes)](#await-loadfontsasyncnodes)
+  * [setRelaunchButton(node, relaunchButtonId *[, description]*)](#setrelaunchbuttonnode-relaunchbuttonid--description)
 - [**Number**](#number)
   * [isValidNumericInput(value *[, integerOnly]*)](#const-result--isvalidnumericinputvalue--integeronly)
   * [evaluateNumericExpression(expression)](#const-result--evaluatenumericexpressionexpression)
@@ -111,49 +115,36 @@ All `arguments` passed after `eventName` will be directly [applied](https://deve
 
 ---
 
-## Layers
+## Nodes
 
 ```js
 import {
-  insertBeforeLayer,
-  insertAfterLayer,
-  getSelectedLayersOrAllLayers,
+  insertBeforeNode,
+  insertAfterNode,
+  getSelectedNodesOrAllNodes,
   getDocumentComponents,
   getAbsolutePosition
   setAbsolutePosition,
   computeBoundingBox,
   computeMaximumBounds,
-  isLayerWithinInstance,
-  traverseLayer,
-  sortLayersByName,
-  sortSiblingLayersByLayerListOrder,
-  updateLayersSortOrder,
-  areSiblingLayers,
-  computeSiblingLayers,
-  removeDuplicateLayers,
-  collapseLayer,
+  isNodeWithinInstance,
+  traverseNode,
+  sortNodesByName,
+  sortSiblingNodesByNodeListOrder,
+  updateNodesSortOrder,
+  areSiblingNodes,
+  computeSiblingNodes,
+  removeDuplicateNodes,
+  collapseNode,
   createImagePaint,
   loadFontsAsync,
   setRelaunchButton
 } from '@create-figma-plugin/utilities'
 ```
 
-### insertBeforeLayer(layer, referenceLayer)
+### insertBeforeNode(node, referenceNode)
 
-Inserts `layer` before the `referenceLayer` in the layer list.
-
-#### Returns
-
-- `undefined`
-
-#### Parameters
-
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
-- `referenceLayer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
-
-### insertAfterLayer(layer, referenceLayer)
-
-Inserts `layer` after the `referenceLayer` in the layer list.
+Inserts `node` before the `referenceNode` in the node list.
 
 #### Returns
 
@@ -161,12 +152,25 @@ Inserts `layer` after the `referenceLayer` in the layer list.
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
-- `referenceLayer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `referenceNode` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const layers = getSelectedLayersOrAllLayers()
+### insertAfterNode(node, referenceNode)
 
-Gets the selected layers, or all the top-level layers on the current page if no layers are selected.
+Inserts `node` after the `referenceNode` in the node list.
+
+#### Returns
+
+- `undefined`
+
+#### Parameters
+
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `referenceNode` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+
+### const nodes = getSelectedNodesOrAllNodes()
+
+Gets the selected nodes, or all the top-level nodes on the current page if no nodes are selected.
 
 #### Returns
 
@@ -180,9 +184,9 @@ Gets all the components in the current document.
 
 - An array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
 
-### const {x, y} = getAbsolutePosition(layer)
+### const {x, y} = getAbsolutePosition(node)
 
-Returns the X and Y position of the given `layer` relative to the page.
+Returns the X and Y position of the given `node` relative to the page.
 
 #### Returns
 
@@ -190,11 +194,11 @@ Returns the X and Y position of the given `layer` relative to the page.
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### setAbsolutePosition(layer, absolutePosition)
+### setAbsolutePosition(node, absolutePosition)
 
-Sets the `layer` to the given `absolutePosition`.
+Sets the `node` to the given `absolutePosition`.
 
 #### Returns
 
@@ -202,12 +206,12 @@ Sets the `layer` to the given `absolutePosition`.
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 - `absolutePosition` (a plain object with `x` and `y` keys)
 
-### const {x, y, width, height} = computeBoundingBox(layer)
+### const {x, y, width, height} = computeBoundingBox(node)
 
-Computes the coordinates and dimensions of the smallest bounding box that contains the given `layer`.
+Computes the coordinates and dimensions of the smallest bounding box that contains the given `node`.
 
 #### Returns
 
@@ -215,11 +219,11 @@ Computes the coordinates and dimensions of the smallest bounding box that contai
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const [topLeft, bottomRight] = computeMaximumBounds(layers)
+### const [topLeft, bottomRight] = computeMaximumBounds(nodes)
 
-Computes the absolute coordinates of the `topLeft` and `bottomRight` corners of the smallest bounding box that contains the given `layers`.
+Computes the absolute coordinates of the `topLeft` and `bottomRight` corners of the smallest bounding box that contains the given `nodes`.
 
 #### Returns
 
@@ -227,25 +231,25 @@ Computes the absolute coordinates of the `topLeft` and `bottomRight` corners of 
 
 #### Parameters
 
-- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `nodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const result = isLayerWithinInstance(layer)
+### const result = isNodeWithinInstance(node)
 
-Checks if the `layer` is within an instance.
+Checks if the `node` is within an instance.
 
 #### Returns
 
-- `true` if `layer` is within an instance, else `false`
+- `true` if `node` is within an instance, else `false`
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### traverseLayer(layer, processLayer *[, stopTraversal]*)
+### traverseNode(node, processNode *[, stopTraversal]*)
 
-Traverses `layer` and its child layers recursively in a *depth-first* manner, passing each layer to the specified `processLayer` callback.
+Traverses `node` and its child nodes recursively in a *depth-first* manner, passing each node to the specified `processNode` callback.
 
-Each layer is also passed to a `stopTraversal` function. If you return `false` in `stopTraversal` for a particular layer, then its child layers will not be traversed.
+Each node is also passed to a `stopTraversal` function. If you return `false` in `stopTraversal` for a particular node, then its child nodes will not be traversed.
 
 #### Returns
 
@@ -253,25 +257,13 @@ Each layer is also passed to a `stopTraversal` function. If you return `false` i
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
-- `processLayer` (*`function (layer)`*)
-- `stopTraversal` (*`function (layer)`*) *(optional)*
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `processNode` (*`function (node)`*)
+- `stopTraversal` (*`function (node)`*) *(optional)*
 
-### const sortedLayers = sortLayersByName(layers)
+### const sortedNodes = sortNodesByName(nodes)
 
-Sorts `layers` by layer name in alphabetical order.
-
-#### Returns
-
-- A new array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
-
-#### Parameters
-
-- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
-
-### const sortedSiblingLayers = sortSiblingLayersByLayerListOrder(siblingLayers)
-
-Sorts `siblingLayers` by their layer list order.
+Sorts `nodes` by node name in alphabetical order.
 
 #### Returns
 
@@ -279,35 +271,47 @@ Sorts `siblingLayers` by their layer list order.
 
 #### Parameters
 
-- `siblingLayers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `nodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const didChange = updateLayersSortOrder(layers)
+### const sortedSiblingNodes = sortSiblingNodesByNodeListOrder(siblingNodes)
 
-Updates the layer list sort order to follow the sort order of `layers`.
-
-#### Returns
-
-- `true` if the layer list sort order was changed, else `false`
-
-#### Parameters
-
-- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
-
-### const result = areSiblingLayers(layers)
-
-Checks if all layers in `layers` are sibling layers.
+Sorts `siblingNodes` by their node list order.
 
 #### Returns
 
-- `true` if all layers in `layers` are sibling layers, else `false`
+- A new array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/) objects
 
 #### Parameters
 
-- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `siblingNodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const groups = computeSiblingLayers(layers)
+### const didChange = updateNodesSortOrder(nodes)
 
-Splits `layers` into groups of sibling layers.
+Updates the node list sort order to follow the sort order of `nodes`.
+
+#### Returns
+
+- `true` if the node list sort order was changed, else `false`
+
+#### Parameters
+
+- `nodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+
+### const result = areSiblingNodes(nodes)
+
+Checks if all nodes in `nodes` are sibling nodes.
+
+#### Returns
+
+- `true` if all nodes in `nodes` are sibling nodes, else `false`
+
+#### Parameters
+
+- `nodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+
+### const groups = computeSiblingNodes(nodes)
+
+Splits `nodes` into groups of sibling nodes.
 
 #### Returns
 
@@ -315,11 +319,11 @@ Splits `layers` into groups of sibling layers.
 
 #### Parameters
 
-- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `nodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### const uniqueLayers = removeDuplicateLayers(layers)
+### const uniqueNodes = removeDuplicateNodes(nodes)
 
-Deduplicates the layers in `layers`.
+Deduplicates the nodes in `nodes`.
 
 #### Returns
 
@@ -327,11 +331,11 @@ Deduplicates the layers in `layers`.
 
 #### Parameters
 
-- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `nodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### collapseLayer(layer)
+### collapseNode(node)
 
-Collapses `layer` and all its child layers in the layer list.
+Collapses `node` and all its child nodes in the node list.
 
 #### Returns
 
@@ -339,7 +343,7 @@ Collapses `layer` and all its child layers in the layer list.
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
 ### const imagePaint = createImagePaint(bytes)
 
@@ -353,9 +357,9 @@ Creates an *`ImagePaint`* object from the `bytes` of an image.
 
 - `bytes` ([*`Uint8Array`*](https://figma.com/plugin-docs/api/Image/#getbytesasync))
 
-### await loadFontsAsync(layers)
+### await loadFontsAsync(nodes)
 
-Loads the fonts used in all the text layers in `layers`.
+Loads the fonts used in all the text nodes in `nodes`.
 
 #### Returns
 
@@ -363,11 +367,11 @@ Loads the fonts used in all the text layers in `layers`.
 
 #### Parameters
 
-- `layers` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `nodes` (an array of [*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 
-### setRelaunchButton(layer, relaunchButtonId *[, description]*)
+### setRelaunchButton(node, relaunchButtonId *[, description]*)
 
-Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `layer` for the command with the given `relaunchButtonId` as configured under [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) in `package.json`. `description` is the text displayed below the relaunch button in the Figma UI.
+Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `node` for the command with the given `relaunchButtonId` as configured under [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) in `package.json`. `description` is the text displayed below the relaunch button in the Figma UI.
 
 See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
 
@@ -377,7 +381,7 @@ See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons
 
 #### Parameters
 
-- `layer` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
+- `node` ([*`Node`*](https://figma.com/plugin-docs/api/nodes/))
 - `key` (*`string`*)
 - `description` (*`string`*) *(optional)*
 
