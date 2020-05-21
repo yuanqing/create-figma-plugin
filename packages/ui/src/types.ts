@@ -5,8 +5,11 @@ export type OnChange = (
   value?: any,
   name?: string,
   event?: Event
-) => void
-export type OnSelectedFiles = (files?: Array<File>, event?: Event) => void
+) => void | Promise<void>
+export type OnSelectedFiles = (
+  files?: Array<File>,
+  event?: Event
+) => void | Promise<void>
 
 export type Option = OptionHeader | OptionValue | OptionSeparator
 export interface OptionHeader {
