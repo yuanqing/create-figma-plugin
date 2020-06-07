@@ -5,19 +5,19 @@
   @include text-11-regular;
   position: relative;
   z-index: $z-index-1;
-  border-bottom: 1px solid $color-black-10;
   padding-left: $space-extra-small;
+  border-bottom: 1px solid $color-black-10;
 
   &:focus {
-    box-shadow: none;
     outline: 0;
+    box-shadow: none;
   }
 }
 
 .label {
   display: inline-block;
-  color: $color-black-30;
   padding: $space-small $space-extra-small;
+  color: $color-black-30;
 
   &:hover {
     color: $color-black-80;
@@ -35,12 +35,12 @@
   }
 
   &:after {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    font-weight: $font-weight-bold;
+    visibility: hidden;
     content: attr(data-text);
     pointer-events: none;
-    display: block;
-    visibility: hidden;
-    overflow: hidden;
-    height: 0;
-    font-weight: $font-weight-bold;
   }
 }

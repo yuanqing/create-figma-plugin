@@ -2,11 +2,11 @@
 @import '../../scss/text';
 
 .label {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
-  padding: 0 16px;
   height: 32px;
+  padding: 0 16px;
   color: $color-black-80;
 
   &:focus {
@@ -24,9 +24,9 @@
 }
 
 .disabled {
+  background-color: $color-black-30;
   cursor: not-allowed;
   opacity: $opacity-30;
-  background-color: $color-black-30;
 
   &:hover {
     background-color: $color-black-30;
@@ -43,11 +43,11 @@
 
 .text {
   @include text-11-regular;
-  pointer-events: none;
   flex-grow: 1;
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
 
   .bold & {
     @include text-11-bold;
@@ -55,11 +55,11 @@
 }
 
 .icon {
-  pointer-events: none;
   flex: 0 0 16px;
-  margin-left: 8px;
   height: 16px;
+  margin-left: 8px;
   color: $color-blue;
+  pointer-events: none;
 
   .disabled & {
     color: $color-black-80;

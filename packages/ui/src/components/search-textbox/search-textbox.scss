@@ -11,9 +11,9 @@
 .input {
   @include text-11-regular;
   flex-grow: 1;
-  padding-left: 36px;
   width: 100%;
   height: 40px;
+  padding-left: 36px;
   color: $color-black-80;
 
   &:disabled {
@@ -27,11 +27,11 @@
 }
 
 .searchIcon {
-  pointer-events: none;
   position: absolute;
   top: 12px;
   left: 12px;
   color: $color-black-80;
+  pointer-events: none;
 
   .input:disabled + & {
     opacity: $opacity-30;
@@ -49,7 +49,7 @@
   }
 
   &:focus {
-    outline: 0;
     color: $color-black-80;
+    outline: 0;
   }
 }

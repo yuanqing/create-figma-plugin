@@ -4,8 +4,8 @@
 .preview {
   @include text-11-regular;
   position: relative;
-  padding: $space-medium 0;
   height: 121px;
+  padding: $space-medium 0;
   overflow: auto;
   background-color: $color-preview;
   border-bottom: 1px solid $color-silver;

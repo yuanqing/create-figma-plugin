@@ -21,13 +21,13 @@
 }
 
 .input {
-  opacity: 0;
   width: 100%;
+  opacity: 0;
 }
 
 .dashedLine {
-  pointer-events: none;
   border: 1px dashed $color-black-30;
+  pointer-events: none;
 
   .input:active + &,
   .input:focus + &,

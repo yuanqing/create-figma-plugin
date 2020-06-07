@@ -3,18 +3,18 @@
 
 .label {
   @include text-11-regular;
-  display: flex;
   position: relative;
+  display: flex;
 
   &:before {
-    // Increase the clickable area
-    content: '';
-    display: block;
     position: absolute;
     top: -8px;
+    right: -16px;
     bottom: -8px;
     left: -16px;
-    right: -16px;
+    display: block;
+    // Increase the clickable area
+    content: '';
   }
 }
 
@@ -25,39 +25,39 @@
 
 .input {
   flex: 0 0 12px;
+  height: 12px;
   border: 1px solid $color-black-80;
   border-radius: 6px;
-  height: 12px;
 
   &:focus {
     border-color: $color-blue;
   }
 
   &:focus:before {
-    content: '';
-    display: block;
     position: absolute;
     top: 0;
     left: 0;
+    display: block;
     width: 12px;
     height: 12px;
     border-radius: 6px;
     box-shadow: 0 0 0 1px $color-blue;
+    content: '';
   }
 
   &:checked:after {
-    content: '';
     display: block;
-    margin: 2px 0 0 2px;
-    border-radius: 4px;
     width: 6px;
     height: 6px;
+    margin: 2px 0 0 2px;
     background-color: $color-black-80;
+    border-radius: 4px;
+    content: '';
   }
 
   &:disabled {
-    cursor: not-allowed;
     border-color: $color-black-80;
+    cursor: not-allowed;
 
     &:before {
       display: none;
@@ -66,7 +66,7 @@
 }
 
 .text {
-  pointer-events: none;
   flex-grow: 1;
   padding: 2px 0 0 8px;
+  pointer-events: none;
 }

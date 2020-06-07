@@ -47,6 +47,8 @@
     "rimraf": "^3.0.2",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-order": "^4.1.0",
     "stylelint-prettier": "^1.1.2",
     "tap": "^14.10.7",
     "typescript": "^3.8.3",
@@ -76,7 +78,8 @@
   "prettier": "eslint-config-yuanqing/prettier",
   "stylelint": {
     "extends": [
-      "stylelint-prettier/recommended"
+      "stylelint-prettier/recommended",
+      "stylelint-config-rational-order"
     ]
   },
   "workspaces": [

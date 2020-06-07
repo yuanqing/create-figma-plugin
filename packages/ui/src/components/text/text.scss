@@ -3,17 +3,17 @@
 
 .text {
   @include text-11-regular;
-  pointer-events: none;
-  transform: translateY(4px);
   padding-top: 1px;
   color: $color-black-80;
+  transform: translateY(4px);
+  pointer-events: none;
 
   &:before {
-    pointer-events: none;
-    content: '';
     display: block;
     height: 0;
     margin-top: -9px;
+    content: '';
+    pointer-events: none;
   }
 
   strong {
@@ -21,14 +21,14 @@
   }
 
   a {
-    pointer-events: all;
-    text-decoration: none;
     color: $color-blue;
+    text-decoration: none;
+    pointer-events: all;
 
     &:focus {
-      outline: 0;
-      border-radius: $border-radius-2;
       background-color: $color-selection-a;
+      border-radius: $border-radius-2;
+      outline: 0;
     }
   }
 

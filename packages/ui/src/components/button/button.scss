@@ -8,9 +8,9 @@
   button {
     @include text-11-regular;
     display: inline-block;
-    border-radius: $border-radius-6;
     height: 32px;
     color: currentColor;
+    border-radius: $border-radius-6;
   }
 
   &.disabled {
@@ -26,10 +26,10 @@
   color: $color-white;
 
   button {
-    border: 2px solid transparent;
     padding: 0 14px;
     line-height: 28px;
     background-color: $color-blue;
+    border: 2px solid transparent;
 
     &:focus {
       border-color: $color-black-30;
@@ -53,16 +53,16 @@
   color: $color-black-80;
 
   button {
-    border: 1px solid $color-black-80;
     padding: 0 15px;
     line-height: 30px;
     background-color: $color-white;
+    border: 1px solid $color-black-80;
 
     &:focus {
-      border-width: 2px;
-      border-color: $color-blue;
       padding: 0 14px;
       line-height: 28px;
+      border-color: $color-blue;
+      border-width: 2px;
     }
   }
 
@@ -82,8 +82,8 @@
     display: block;
     width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
@@ -94,8 +94,8 @@
 
   .loadingIndicator {
     position: absolute;
-    left: 50%;
     top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 
     svg {

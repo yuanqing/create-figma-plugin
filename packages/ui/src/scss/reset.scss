@@ -19,11 +19,11 @@ h3 {
 }
 
 button {
-  -webkit-appearance: none;
-  outline: 0;
   padding: 0;
-  border: 0;
   font: inherit;
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
 }
 
 hr {
@@ -36,12 +36,12 @@ label {
 }
 
 input {
-  -webkit-appearance: none;
-  cursor: default;
   margin: 0;
-  outline: 0;
-  border: 0;
   font: inherit;
+  border: 0;
+  outline: 0;
+  cursor: default;
+  -webkit-appearance: none;
 }
 
 svg {
