@@ -7,7 +7,10 @@ export default { title: 'File Upload Button' }
 
 const longText = Array(100).fill('Text').join(' ')
 
-function handleSelectedFiles() {}
+function handleSelectedFiles(files?: Array<File>, event?: Event) {
+  console.log(files) // eslint-disable-line no-console
+  console.log(event) // eslint-disable-line no-console
+}
 
 export const Button = function () {
   return (
