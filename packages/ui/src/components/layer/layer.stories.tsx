@@ -9,40 +9,40 @@ export default { title: 'Layer' }
 const longText = Array(100).fill('Text').join(' ')
 
 export const Frame = function () {
-  const [isSelected, setIsSelected] = useState(false)
+  const [selected, setSelected] = useState(false)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
-    <Layer type="frame" selected={isSelected} onClick={handleClick}>
+    <Layer onClick={handleClick} selected={selected} type="frame">
       Text
     </Layer>
   )
 }
 
 export const FrameSelected = function () {
-  const [isSelected, setIsSelected] = useState(true)
+  const [selected, setSelected] = useState(true)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
-    <Layer type="frame" selected={isSelected} onClick={handleClick}>
+    <Layer onClick={handleClick} selected={selected} type="frame">
       Text
     </Layer>
   )
 }
 
 export const FrameWithPageName = function () {
-  const [isSelected, setIsSelected] = useState(false)
+  const [selected, setSelected] = useState(false)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
     <Layer
-      type="frame"
-      pageName="Page Name"
-      selected={isSelected}
       onClick={handleClick}
+      pageName="Page Name"
+      selected={selected}
+      type="frame"
     >
       Text
     </Layer>
@@ -50,16 +50,16 @@ export const FrameWithPageName = function () {
 }
 
 export const FrameLongText = function () {
-  const [isSelected, setIsSelected] = useState(false)
+  const [selected, setSelected] = useState(false)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
     <Layer
-      type="frame"
-      pageName="Page Name"
-      selected={isSelected}
       onClick={handleClick}
+      pageName="Page Name"
+      selected={selected}
+      type="frame"
     >
       {longText}
     </Layer>
@@ -67,40 +67,40 @@ export const FrameLongText = function () {
 }
 
 export const Component = function () {
-  const [isSelected, setIsSelected] = useState(false)
+  const [selected, setSelected] = useState(false)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
-    <Layer type="component" selected={isSelected} onClick={handleClick}>
+    <Layer onClick={handleClick} selected={selected} type="component">
       Text
     </Layer>
   )
 }
 
 export const ComponentSelected = function () {
-  const [isSelected, setIsSelected] = useState(true)
+  const [selected, setSelected] = useState(true)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
-    <Layer type="component" selected={isSelected} onClick={handleClick}>
+    <Layer onClick={handleClick} selected={selected} type="component">
       Text
     </Layer>
   )
 }
 
 export const ComponentWithPageName = function () {
-  const [isSelected, setIsSelected] = useState(false)
+  const [selected, setSelected] = useState(false)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
     <Layer
-      type="component"
-      pageName="Page Name"
-      selected={isSelected}
       onClick={handleClick}
+      pageName="Page Name"
+      selected={selected}
+      type="component"
     >
       Text
     </Layer>
@@ -108,16 +108,16 @@ export const ComponentWithPageName = function () {
 }
 
 export const ComponentLongText = function () {
-  const [isSelected, setIsSelected] = useState(false)
+  const [selected, setSelected] = useState(false)
   function handleClick() {
-    setIsSelected(!(isSelected === true))
+    setSelected(!(selected === true))
   }
   return (
     <Layer
-      type="component"
-      pageName="Page Name"
-      selected={isSelected}
       onClick={handleClick}
+      pageName="Page Name"
+      selected={selected}
+      type="component"
     >
       {longText}
     </Layer>

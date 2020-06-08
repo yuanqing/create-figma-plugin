@@ -55,7 +55,7 @@ export const PrimaryFullWidthLongText = function () {
 
 export const Secondary = function () {
   return (
-    <Button secondary onClick={handleClick}>
+    <Button onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -63,7 +63,7 @@ export const Secondary = function () {
 
 export const SecondaryLoading = function () {
   return (
-    <Button secondary loading onClick={handleClick}>
+    <Button loading onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -71,7 +71,7 @@ export const SecondaryLoading = function () {
 
 export const SecondaryDisabled = function () {
   return (
-    <Button secondary disabled onClick={handleClick}>
+    <Button disabled onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -79,7 +79,7 @@ export const SecondaryDisabled = function () {
 
 export const SecondaryDisabledLoading = function () {
   return (
-    <Button secondary disabled loading onClick={handleClick}>
+    <Button disabled loading onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -87,7 +87,7 @@ export const SecondaryDisabledLoading = function () {
 
 export const SecondaryFullWidth = function () {
   return (
-    <Button secondary fullWidth onClick={handleClick}>
+    <Button fullWidth onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -95,7 +95,7 @@ export const SecondaryFullWidth = function () {
 
 export const SecondaryFullWidthLongText = function () {
   return (
-    <Button secondary fullWidth onClick={handleClick}>
+    <Button fullWidth onClick={handleClick} secondary>
       {longText}
     </Button>
   )
@@ -151,7 +151,7 @@ export const DestructiveFullWidthLongText = function () {
 
 export const DestructiveSecondary = function () {
   return (
-    <Button destructive secondary onClick={handleClick}>
+    <Button destructive onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -159,7 +159,7 @@ export const DestructiveSecondary = function () {
 
 export const DestructiveSecondaryLoading = function () {
   return (
-    <Button destructive secondary loading onClick={handleClick}>
+    <Button destructive loading onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -167,7 +167,7 @@ export const DestructiveSecondaryLoading = function () {
 
 export const DestructiveSecondaryDisabled = function () {
   return (
-    <Button destructive secondary disabled onClick={handleClick}>
+    <Button destructive disabled onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -175,7 +175,7 @@ export const DestructiveSecondaryDisabled = function () {
 
 export const DestructiveSecondaryDisabledLoading = function () {
   return (
-    <Button destructive secondary disabled loading onClick={handleClick}>
+    <Button destructive disabled loading onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -183,7 +183,7 @@ export const DestructiveSecondaryDisabledLoading = function () {
 
 export const DestructiveSecondaryFullWidth = function () {
   return (
-    <Button destructive secondary fullWidth onClick={handleClick}>
+    <Button destructive fullWidth onClick={handleClick} secondary>
       Text
     </Button>
   )
@@ -191,7 +191,7 @@ export const DestructiveSecondaryFullWidth = function () {
 
 export const DestructiveSecondaryFullWidthLongText = function () {
   return (
-    <Button destructive secondary fullWidth onClick={handleClick}>
+    <Button destructive fullWidth onClick={handleClick} secondary>
       {longText}
     </Button>
   )

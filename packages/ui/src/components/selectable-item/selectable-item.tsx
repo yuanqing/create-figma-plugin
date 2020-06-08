@@ -79,13 +79,13 @@ export function SelectableItem({
     >
       <input
         {...rest}
-        class={styles.input}
-        type="checkbox"
-        name={name}
         checked={value === true}
+        class={styles.input}
         disabled={disabled === true}
+        name={name}
         onChange={handleChange}
         tabIndex={-1}
+        type="checkbox"
       />
       <div class={styles.text}>{children}</div>
       {value === true ? <div class={styles.icon}>{checkIcon}</div> : null}

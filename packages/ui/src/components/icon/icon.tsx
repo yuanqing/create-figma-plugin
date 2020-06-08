@@ -10,7 +10,7 @@ export interface IconProps {
 export function Icon({ children }: IconProps): h.JSX.Element {
   return (
     <svg class={styles.icon} xmlns="http://www.w3.org/2000/svg">
-      <path clip-rule="evenodd" fill-rule="evenodd" d={children} />
+      <path clip-rule="evenodd" d={children} fill-rule="evenodd" />
     </svg>
   )
 }

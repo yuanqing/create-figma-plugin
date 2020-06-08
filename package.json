@@ -61,6 +61,13 @@
       "packages/create-figma-plugin/plugin-templates"
     ],
     "rules": {
+      "react/jsx-sort-props": [
+        2,
+        {
+          "ignoreCase": true,
+          "reservedFirst": true
+        }
+      ],
       "react/no-unknown-property": [
         2,
         {

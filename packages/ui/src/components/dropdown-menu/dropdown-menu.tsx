@@ -179,15 +179,16 @@ export function DropdownMenu({
   )
   return (
     <div
+      ref={rootElementRef as preact.RefObject<HTMLDivElement>}
       class={styles.dropdownMenu}
+      data-initial-focus={focused === true}
       onClick={handleClick}
       onKeyDown={handleRootElementKeyDown}
       tabIndex={0}
-      ref={rootElementRef as preact.RefObject<HTMLDivElement>}
-      data-initial-focus={focused === true}
     >
       {cloneElement(children as preact.VNode<any>, { [name]: value })}
       <div
+        ref={menuElementRef as preact.RefObject<HTMLDivElement>}
         class={classnames(
           styles.menu,
           isMenuVisible === false ? styles.hidden : null,
@@ -195,27 +196,26 @@ export function DropdownMenu({
           right === true ? styles.right : null,
           top === true ? styles.top : null
         )}
-        ref={menuElementRef as preact.RefObject<HTMLDivElement>}
       >
         {menuItems.map(function (menuItem) {
           if ('separator' in menuItem) {
-            return <hr class={styles.menuSeparator} key={menuItem.id} />
+            return <hr key={menuItem.id} class={styles.menuSeparator} />
           }
           if ('header' in menuItem) {
             return (
-              <h1 class={styles.menuHeader} key={menuItem.id}>
+              <h1 key={menuItem.id} class={styles.menuHeader}>
                 {menuItem.header}
               </h1>
             )
           }
           return (
             <div
+              key={menuItem.id}
               class={classnames(
                 styles.menuItem,
                 `${menuItem.id}` === selectedId ? styles.menuItemSelected : null
               )}
               onClick={handleMenuItemClick}
-              key={menuItem.id}
               {...{ [ITEM_ELEMENT_ATTRIBUTE_NAME]: menuItem.id }}
             >
               {menuItem.id === committedId ? (

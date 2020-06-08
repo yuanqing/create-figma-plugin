@@ -22,7 +22,7 @@ export const Button = function () {
 
 export const ButtonLoading = function () {
   return (
-    <FileUploadButton multiple loading onSelectedFiles={handleSelectedFiles}>
+    <FileUploadButton loading multiple onSelectedFiles={handleSelectedFiles}>
       Text
     </FileUploadButton>
   )
@@ -30,7 +30,7 @@ export const ButtonLoading = function () {
 
 export const ButtonDisabled = function () {
   return (
-    <FileUploadButton multiple disabled onSelectedFiles={handleSelectedFiles}>
+    <FileUploadButton disabled multiple onSelectedFiles={handleSelectedFiles}>
       Text
     </FileUploadButton>
   )
@@ -39,9 +39,9 @@ export const ButtonDisabled = function () {
 export const ButtonDisabledLoading = function () {
   return (
     <FileUploadButton
-      multiple
       disabled
       loading
+      multiple
       onSelectedFiles={handleSelectedFiles}
     >
       Text
@@ -51,7 +51,7 @@ export const ButtonDisabledLoading = function () {
 
 export const ButtonFullWidth = function () {
   return (
-    <FileUploadButton multiple fullWidth onSelectedFiles={handleSelectedFiles}>
+    <FileUploadButton fullWidth multiple onSelectedFiles={handleSelectedFiles}>
       Text
     </FileUploadButton>
   )
@@ -59,7 +59,7 @@ export const ButtonFullWidth = function () {
 
 export const ButtonFullWidthLongText = function () {
   return (
-    <FileUploadButton multiple fullWidth onSelectedFiles={handleSelectedFiles}>
+    <FileUploadButton fullWidth multiple onSelectedFiles={handleSelectedFiles}>
       {longText}
     </FileUploadButton>
   )

@@ -11,9 +11,9 @@ export const Default = function () {
   return (
     <SegmentedControl
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
+      value={state.foo}
     />
   )
 }
@@ -24,9 +24,9 @@ export const Disabled = function () {
     <SegmentedControl
       disabled
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
+      value={state.foo}
     />
   )
 }
@@ -36,9 +36,9 @@ export const WithSelectedOption = function () {
   return (
     <SegmentedControl
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
+      value={state.foo}
     />
   )
 }
@@ -48,13 +48,13 @@ export const WithDisabledOption = function () {
   return (
     <SegmentedControl
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo' },
         { value: 'bar', disabled: true },
         { value: 'baz' }
       ]}
+      value={state.foo}
     />
   )
 }
@@ -64,13 +64,13 @@ export const WithDisabledSelectedOption = function () {
   return (
     <SegmentedControl
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo' },
         { value: 'bar', disabled: true },
         { value: 'baz' }
       ]}
+      value={state.foo}
     />
   )
 }

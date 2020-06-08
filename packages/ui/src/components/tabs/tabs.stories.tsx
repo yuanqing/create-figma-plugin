@@ -12,13 +12,13 @@ export const Default = function () {
   return (
     <Tabs
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo', view: <Text>Foo</Text> },
         { value: 'bar', view: <Text>Bar</Text> },
         { value: 'baz', view: <Text>Baz</Text> }
       ]}
+      value={state.foo}
     />
   )
 }
@@ -28,13 +28,13 @@ export const WithSelectedOption = function () {
   return (
     <Tabs
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo', view: <Text>Foo</Text> },
         { value: 'bar', view: <Text>Bar</Text> },
         { value: 'baz', view: <Text>Baz</Text> }
       ]}
+      value={state.foo}
     />
   )
 }

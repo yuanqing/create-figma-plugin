@@ -21,7 +21,7 @@ export function Inline({
     >
       {toChildArray(children).map(function (element, index) {
         return (
-          <div class={styles.item} key={index}>
+          <div key={index} class={styles.item}>
             {element}
           </div>
         )

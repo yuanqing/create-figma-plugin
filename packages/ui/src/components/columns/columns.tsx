@@ -25,7 +25,7 @@ export function Columns({
     >
       {toChildArray(children).map(function (element, index) {
         return (
-          <div class={styles.column} key={index}>
+          <div key={index} class={styles.column}>
             {element}
           </div>
         )

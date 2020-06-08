@@ -64,11 +64,11 @@ export function Button({
       ) : null}
       <button
         {...rest}
+        data-initial-focus={focused === true}
         disabled={disabled === true}
         onClick={onClick}
         onKeyDown={handleKeyDown}
         tabIndex={disabled === true ? undefined : 0}
-        data-initial-focus={focused === true}
       >
         {children}
       </button>

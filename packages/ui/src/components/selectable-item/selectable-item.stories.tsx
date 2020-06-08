@@ -11,7 +11,7 @@ const longText = Array(100).fill('Text').join(' ')
 export const Default = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <SelectableItem name="foo" value={state.foo} onChange={setState}>
+    <SelectableItem name="foo" onChange={setState} value={state.foo}>
       Text
     </SelectableItem>
   )
@@ -20,7 +20,7 @@ export const Default = function () {
 export const Selected = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <SelectableItem name="foo" value={state.foo} onChange={setState}>
+    <SelectableItem name="foo" onChange={setState} value={state.foo}>
       Text
     </SelectableItem>
   )
@@ -29,7 +29,7 @@ export const Selected = function () {
 export const Disabled = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <SelectableItem name="foo" value={state.foo} onChange={setState} disabled>
+    <SelectableItem disabled name="foo" onChange={setState} value={state.foo}>
       Text
     </SelectableItem>
   )
@@ -38,7 +38,7 @@ export const Disabled = function () {
 export const DisabledSelected = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <SelectableItem name="foo" value={state.foo} onChange={setState} disabled>
+    <SelectableItem disabled name="foo" onChange={setState} value={state.foo}>
       Text
     </SelectableItem>
   )
@@ -47,7 +47,7 @@ export const DisabledSelected = function () {
 export const Bold = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <SelectableItem name="foo" value={state.foo} onChange={setState} bold>
+    <SelectableItem bold name="foo" onChange={setState} value={state.foo}>
       Text
     </SelectableItem>
   )
@@ -56,7 +56,7 @@ export const Bold = function () {
 export const Indent = function () {
   const [state, setState] = useState({ foo: false })
   return (
-    <SelectableItem name="foo" value={state.foo} onChange={setState} indent>
+    <SelectableItem indent name="foo" onChange={setState} value={state.foo}>
       Text
     </SelectableItem>
   )
@@ -65,7 +65,7 @@ export const Indent = function () {
 export const LongText = function () {
   const [state, setState] = useState({ foo: true })
   return (
-    <SelectableItem name="foo" value={state.foo} onChange={setState}>
+    <SelectableItem name="foo" onChange={setState} value={state.foo}>
       {longText}
     </SelectableItem>
   )

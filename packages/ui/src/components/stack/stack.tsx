@@ -19,7 +19,7 @@ export function Stack({
     <div {...rest} class={classnames(styles[space])}>
       {toChildArray(children).map(function (element, index) {
         return (
-          <div class={styles.item} key={index}>
+          <div key={index} class={styles.item}>
             {element}
           </div>
         )

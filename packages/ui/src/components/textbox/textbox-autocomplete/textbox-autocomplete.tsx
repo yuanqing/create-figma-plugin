@@ -474,53 +474,53 @@ export function TextboxAutocomplete({
   const hasIcon = typeof icon !== 'undefined'
   return (
     <div
+      ref={rootElementRef}
       class={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
       )}
-      ref={rootElementRef}
     >
       <input
         {...rest}
         ref={inputElementRef}
-        type="text"
-        name={name}
         class={styles.input}
-        placeholder={placeholder}
-        value={committedValue === null ? '' : committedValue}
+        data-initial-focus={focused === true}
         disabled={disabled === true}
+        name={name}
         onFocus={disabled === true ? undefined : handleFocus}
         onKeyDown={disabled === true ? undefined : handleKeyDown}
         onKeyUp={disabled === true ? undefined : handleKeyUp}
         onPaste={disabled === true ? undefined : handlePaste}
+        placeholder={placeholder}
         tabIndex={disabled === true ? undefined : 0}
-        data-initial-focus={focused === true}
+        type="text"
+        value={committedValue === null ? '' : committedValue}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {disabled !== true && isMenuVisible === true && menuItems.length > 0 ? (
         <div
+          ref={menuElementRef}
           class={classnames(
             textboxAutocompleteStyles.menu,
             top === true ? textboxAutocompleteStyles.top : null,
             hasIcon === true ? textboxAutocompleteStyles.hasIcon : null
           )}
-          ref={menuElementRef}
         >
           {menuItems.map(function (menuItem) {
             if ('separator' in menuItem) {
               return (
                 <hr
-                  class={textboxAutocompleteStyles.menuSeparator}
                   key={menuItem.id}
+                  class={textboxAutocompleteStyles.menuSeparator}
                 />
               )
             }
             if ('header' in menuItem) {
               return (
                 <h1
-                  class={textboxAutocompleteStyles.menuHeader}
                   key={menuItem.id}
+                  class={textboxAutocompleteStyles.menuHeader}
                 >
                   {menuItem.header}
                 </h1>
@@ -528,15 +528,15 @@ export function TextboxAutocomplete({
             }
             return (
               <div
+                key={menuItem.id}
                 class={classnames(
                   textboxAutocompleteStyles.menuItem,
                   menuItem.id === selectedId
                     ? textboxAutocompleteStyles.menuItemSelected
                     : null
                 )}
-                onClick={handleOptionClick}
                 data-id={menuItem.id}
-                key={menuItem.id}
+                onClick={handleOptionClick}
               >
                 {menuItem.value}
               </div>

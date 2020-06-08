@@ -9,24 +9,24 @@ import { searchIcon } from '../icon/icons/search-icon'
 import styles from './search-textbox.scss'
 
 export interface SearchTextboxProps {
+  clearOnEscapeKeyDown?: boolean
   disabled?: boolean
   focused?: boolean
   name: string
   onChange: OnChange
   placeholder?: string
   propagateEscapeKeyDown?: boolean
-  clearOnEscapeKeyDown?: boolean
   value: string
 }
 
 export function SearchTextbox({
+  clearOnEscapeKeyDown = true,
   disabled,
   focused,
   name,
   onChange,
   placeholder,
   propagateEscapeKeyDown = true,
-  clearOnEscapeKeyDown = true,
   value,
   ...rest
 }: SearchTextboxProps): h.JSX.Element {
@@ -100,18 +100,18 @@ export function SearchTextbox({
     <div class={styles.searchTextbox}>
       <input
         {...rest}
-        disabled={disabled}
         ref={inputElementRef}
-        type="text"
-        name={name}
         class={styles.input}
-        placeholder={placeholder}
-        value={value === null ? '' : value}
+        data-initial-focus={focused === true}
+        disabled={disabled}
+        name={name}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        placeholder={placeholder}
         tabIndex={0}
-        data-initial-focus={focused === true}
+        type="text"
+        value={value === null ? '' : value}
       />
       <div class={styles.searchIcon}>{searchIcon}</div>
       {value === null || value === '' ? null : (

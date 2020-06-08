@@ -12,13 +12,13 @@ export const Default = function () {
   return (
     <RadioButtons
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text> },
         { value: 'baz', text: <Text>baz</Text> }
       ]}
+      value={state.foo}
     />
   )
 }
@@ -29,13 +29,13 @@ export const Disabled = function () {
     <RadioButtons
       disabled
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text> },
         { value: 'baz', text: <Text>baz</Text> }
       ]}
+      value={state.foo}
     />
   )
 }
@@ -45,13 +45,13 @@ export const WithSelectedOption = function () {
   return (
     <RadioButtons
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text> },
         { value: 'baz', text: <Text>baz</Text> }
       ]}
+      value={state.foo}
     />
   )
 }
@@ -61,13 +61,13 @@ export const WithDisabledOption = function () {
   return (
     <RadioButtons
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text>, disabled: true },
         { value: 'baz', text: <Text>baz</Text> }
       ]}
+      value={state.foo}
     />
   )
 }
@@ -77,13 +77,13 @@ export const WithDisabledSelectedOption = function () {
   return (
     <RadioButtons
       name="foo"
-      value={state.foo}
       onChange={setState}
       options={[
         { value: 'foo', text: <Text>foo</Text> },
         { value: 'bar', text: <Text>bar</Text>, disabled: true },
         { value: 'baz', text: <Text>baz</Text> }
       ]}
+      value={state.foo}
     />
   )
 }

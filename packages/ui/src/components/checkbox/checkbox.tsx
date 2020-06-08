@@ -70,15 +70,15 @@ export function Checkbox({
     >
       <input
         {...rest}
-        class={styles.input}
-        type="checkbox"
-        name={name}
         checked={value === true}
+        class={styles.input}
+        data-initial-focus={focused === true}
         disabled={disabled === true}
+        name={name}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         tabIndex={disabled === true ? undefined : 0}
-        data-initial-focus={focused === true}
+        type="checkbox"
       />
       <div class={styles.text}>{children}</div>
     </label>

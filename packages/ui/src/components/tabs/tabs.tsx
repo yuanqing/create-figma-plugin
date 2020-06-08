@@ -97,25 +97,25 @@ export function Tabs({
     <div>
       <div
         class={styles.tabs}
+        data-initial-focus={focused === true}
         onKeyDown={handleKeyDown}
         tabIndex={0}
-        data-initial-focus={focused === true}
       >
         {options.map(function (option, index) {
           const text =
             typeof option.text === 'undefined' ? option.value : option.text
           return (
-            <label class={styles.label} key={index}>
+            <label key={index} class={styles.label}>
               <input
                 {...rest}
-                class={styles.input}
-                type="radio"
-                name={name}
-                value={option.value === null ? undefined : option.value}
                 checked={value === option.value}
+                class={styles.input}
+                data-index={index}
+                name={name}
                 onChange={handleChange}
                 tabIndex={-1}
-                data-index={index}
+                type="radio"
+                value={option.value === null ? undefined : option.value}
               />
               <div class={styles.text} data-text={text}>
                 {text}

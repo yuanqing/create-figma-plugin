@@ -28,9 +28,9 @@ export const Empty = function () {
   return (
     <TextboxAutocomplete
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      value={state.foo}
     />
   )
 }
@@ -41,9 +41,9 @@ export const Disabled = function () {
     <TextboxAutocomplete
       disabled
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      value={state.foo}
     />
   )
 }
@@ -52,11 +52,11 @@ export const WithPlaceholder = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <TextboxAutocomplete
-      placeholder="Placeholder"
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      placeholder="Placeholder"
+      value={state.foo}
     />
   )
 }
@@ -66,9 +66,9 @@ export const Filled = function () {
   return (
     <TextboxAutocomplete
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      value={state.foo}
     />
   )
 }
@@ -79,9 +79,9 @@ export const FilledDisabled = function () {
     <TextboxAutocomplete
       disabled
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      value={state.foo}
     />
   )
 }
@@ -90,11 +90,11 @@ export const NoBorder = function () {
   const [state, setState] = useState({ foo: 'baz' })
   return (
     <TextboxAutocomplete
-      noBorder
       name="foo"
-      value={state.foo}
-      options={options}
+      noBorder
       onChange={setState}
+      options={options}
+      value={state.foo}
     />
   )
 }
@@ -104,11 +104,11 @@ export const WithIcon = function () {
   return (
     <TextboxAutocomplete
       icon={searchIcon}
-      placeholder="Search"
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      placeholder="Search"
+      value={state.foo}
     />
   )
 }
@@ -118,11 +118,11 @@ export const WithTextIcon = function () {
   return (
     <TextboxAutocomplete
       icon="S"
-      placeholder="Search"
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      placeholder="Search"
+      value={state.foo}
     />
   )
 }
@@ -131,11 +131,11 @@ export const Strict = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <TextboxAutocomplete
-      strict
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      strict
+      value={state.foo}
     />
   )
 }
@@ -146,9 +146,9 @@ export const Filter = function () {
     <TextboxAutocomplete
       filter
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      value={state.foo}
     />
   )
 }
@@ -158,11 +158,11 @@ export const FilterStrict = function () {
   return (
     <TextboxAutocomplete
       filter
-      strict
       name="foo"
-      value={state.foo}
-      options={options}
       onChange={setState}
+      options={options}
+      strict
+      value={state.foo}
     />
   )
 }
@@ -176,11 +176,11 @@ export const MenuTop = function () {
       }}
     >
       <TextboxAutocomplete
-        top
         name="foo"
-        value={state.foo}
-        options={options}
         onChange={setState}
+        options={options}
+        top
+        value={state.foo}
       />
     </div>
   )

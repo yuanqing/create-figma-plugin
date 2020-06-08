@@ -78,16 +78,16 @@ export function FileUploadButton({
       ) : null}
       <input
         {...rest}
-        class={styles.input}
-        type="file"
         accept={accept}
+        class={styles.input}
+        data-initial-focus={focused === true}
         multiple={multiple}
         onChange={handleChange}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         tabIndex={disabled === true ? undefined : 0}
         title=""
-        data-initial-focus={focused === true}
+        type="file"
       />
       <button disabled={disabled === true} onClick={onClick} tabIndex={-1}>
         {children}

@@ -97,19 +97,19 @@ export function FileUploadDropzone({
     >
       <input
         {...rest}
-        class={styles.input}
-        type="file"
         accept={accept}
+        class={styles.input}
         multiple={multiple}
         onBlur={handleBlur}
         onChange={handleChange}
-        onDragEnter={handleDragEnter}
         onDragEnd={handleDragEnd}
+        onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onKeyDown={handleKeyDown}
         tabIndex={-1}
         title=""
+        type="file"
       />
       <div class={styles.dashedLine} />
       <div class={styles.children}>{children}</div>
