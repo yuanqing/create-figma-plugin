@@ -97,7 +97,7 @@ export function TextboxAutocomplete({
       for (const menuItem of menuItems) {
         if ('value' in menuItem) {
           if (menuItem.value === value) {
-            return menuItem.id
+            return menuItem.id as MenuItemId
           }
         }
       }
@@ -134,7 +134,7 @@ export function TextboxAutocomplete({
   const computeNextId = useCallback(
     function (id: MenuItemId): MenuItemId {
       if (id === INVALID_MENU_ITEM_ID) {
-        return menuItems[0].id
+        return menuItems[0].id as MenuItemId
       }
       let foundCurrentMenuItem = false
       let index = -1
@@ -154,9 +154,9 @@ export function TextboxAutocomplete({
         // Reached the end of `menuItems`
         return getIdByValue(currentValue) === INVALID_MENU_ITEM_ID
           ? INVALID_MENU_ITEM_ID
-          : menuItems[0].id
+          : (menuItems[0].id as MenuItemId)
       }
-      return menuItems[index].id
+      return menuItems[index].id as MenuItemId
     },
     [currentValue, getIdByValue, menuItems]
   )
@@ -164,7 +164,7 @@ export function TextboxAutocomplete({
   const computePreviousId = useCallback(
     function (id: MenuItemId): MenuItemId {
       if (id === INVALID_MENU_ITEM_ID) {
-        return menuItems[menuItems.length - 1].id
+        return menuItems[menuItems.length - 1].id as MenuItemId
       }
       let foundCurrentMenuItem = false
       let index = menuItems.length
@@ -184,9 +184,9 @@ export function TextboxAutocomplete({
         // Reached the beginning of `menuItems`
         return getIdByValue(currentValue) === INVALID_MENU_ITEM_ID
           ? INVALID_MENU_ITEM_ID
-          : menuItems[menuItems.length - 1].id
+          : (menuItems[menuItems.length - 1].id as MenuItemId)
       }
-      return menuItems[index].id
+      return menuItems[index].id as MenuItemId
     },
     [currentValue, getIdByValue, menuItems]
   )
