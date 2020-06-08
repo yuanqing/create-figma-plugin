@@ -3,10 +3,12 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "module": "CommonJS",
+    "lib": ["dom", "es2020"],
+    "module": "commonjs",
     "sourceMap": true,
     "strict": true,
-    "target": "ES2019",
-    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
+    "target": "es2019",
+    "types": ["@figma/plugin-typings", "node"],
+    "typeRoots": ["./node_modules/@types"]
   }
 }
