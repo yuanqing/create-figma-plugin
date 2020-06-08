@@ -13,15 +13,15 @@ export type OnSelectedFiles = (
 
 export type Option = OptionHeader | OptionValue | OptionSeparator
 export interface OptionHeader {
-  id?: null | string
+  id: null | string
   header: string
 }
 export interface OptionValue {
-  id?: null | string
+  id: null | string
   value: string
 }
 export interface OptionSeparator {
-  id?: null | string
+  id: null | string
   separator: true
 }
 
