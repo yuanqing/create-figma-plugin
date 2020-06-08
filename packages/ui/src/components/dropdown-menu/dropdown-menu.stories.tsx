@@ -23,7 +23,7 @@ function Foo({ foo }: { foo?: string }) {
   return <h1 style={{ width: '240px' }}>{foo === null ? 'Select…' : foo}</h1>
 }
 
-export const Empty = function () {
+export const BottomLeft = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <DropdownMenu
@@ -37,28 +37,14 @@ export const Empty = function () {
   )
 }
 
-export const Filled = function () {
-  const [state, setState] = useState({ foo: 'qux' })
-  return (
-    <DropdownMenu
-      name="foo"
-      onChange={setState}
-      options={options}
-      value={state.foo}
-    >
-      <Foo />
-    </DropdownMenu>
-  )
-}
-
-export const FullWidth = function () {
+export const BottomRight = function () {
   const [state, setState] = useState({ foo: null })
   return (
     <DropdownMenu
-      fullWidth
       name="foo"
       onChange={setState}
       options={options}
+      right
       value={state.foo}
     >
       <Foo />
@@ -109,14 +95,28 @@ export const TopRight = function () {
   )
 }
 
-export const BottomRight = function () {
-  const [state, setState] = useState({ foo: null })
+export const Filled = function () {
+  const [state, setState] = useState({ foo: 'qux' })
   return (
     <DropdownMenu
       name="foo"
       onChange={setState}
       options={options}
-      right
+      value={state.foo}
+    >
+      <Foo />
+    </DropdownMenu>
+  )
+}
+
+export const FullWidth = function () {
+  const [state, setState] = useState({ foo: null })
+  return (
+    <DropdownMenu
+      fullWidth
+      name="foo"
+      onChange={setState}
+      options={options}
       value={state.foo}
     >
       <Foo />

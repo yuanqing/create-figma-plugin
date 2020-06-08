@@ -51,12 +51,13 @@ export function DropdownMenu({
   const committedId = getIdByValue(menuItems, value)
   const [selectedId, setSelectedId] = useState(committedId)
   const findOptionById = useCallback(
-    function (targetId: string): undefined | Option {
-      return options.find(function ({ id }) {
+    function (targetId: string): null | Option {
+      const result = menuItems.find(function ({ id }) {
         return id === targetId
       })
+      return typeof result === 'undefined' ? null : result
     },
-    [options]
+    [menuItems]
   )
   const handleMenuItemClick = useCallback(
     function (event: MouseEvent): void {
@@ -64,7 +65,7 @@ export function DropdownMenu({
         ITEM_ELEMENT_ATTRIBUTE_NAME
       ) as string
       const option = findOptionById(targetId)
-      if (typeof option === 'undefined') {
+      if (option === null) {
         return
       }
       if ('value' in option) {
@@ -80,10 +81,10 @@ export function DropdownMenu({
     handleKeyDown,
     updateScrollPosition
   } = useScrollableMenu({
+    changeOnMouseOver: true,
     itemElementAttributeName: ITEM_ELEMENT_ATTRIBUTE_NAME,
-    selectedItemId: selectedId,
     onChange: setSelectedId,
-    changeOnMouseOver: true
+    selectedItemId: selectedId
   })
   const handleClick = useCallback(
     function (event: MouseEvent): void {
@@ -120,7 +121,7 @@ export function DropdownMenu({
         if (selectedId !== INVALID_MENU_ITEM_ID) {
           setSelectedId(selectedId)
           const option = findOptionById(selectedId)
-          if (typeof option === 'undefined') {
+          if (option === null) {
             return
           }
           if ('value' in option) {
@@ -188,7 +189,6 @@ export function DropdownMenu({
     >
       {cloneElement(children as preact.VNode<any>, { [name]: value })}
       <div
-        ref={menuElementRef as preact.RefObject<HTMLDivElement>}
         class={classnames(
           styles.menu,
           isMenuVisible === false ? styles.hidden : null,
@@ -197,34 +197,38 @@ export function DropdownMenu({
           top === true ? styles.top : null
         )}
       >
-        {menuItems.map(function (menuItem) {
-          if ('separator' in menuItem) {
-            return <hr key={menuItem.id} class={styles.menuSeparator} />
-          }
-          if ('header' in menuItem) {
+        <div ref={menuElementRef as preact.RefObject<HTMLDivElement>}>
+          {menuItems.map(function (menuItem) {
+            if ('separator' in menuItem) {
+              return <hr key={menuItem.id} class={styles.menuSeparator} />
+            }
+            if ('header' in menuItem) {
+              return (
+                <h1 key={menuItem.id} class={styles.menuHeader}>
+                  {menuItem.header}
+                </h1>
+              )
+            }
             return (
-              <h1 key={menuItem.id} class={styles.menuHeader}>
-                {menuItem.header}
-              </h1>
+              <div
+                key={menuItem.id}
+                class={classnames(
+                  styles.menuItem,
+                  `${menuItem.id}` === selectedId
+                    ? styles.menuItemSelected
+                    : null
+                )}
+                onClick={handleMenuItemClick}
+                {...{ [ITEM_ELEMENT_ATTRIBUTE_NAME]: menuItem.id }}
+              >
+                {menuItem.id === committedId ? (
+                  <div class={styles.icon}>{checkIcon}</div>
+                ) : null}
+                {menuItem.value}
+              </div>
             )
-          }
-          return (
-            <div
-              key={menuItem.id}
-              class={classnames(
-                styles.menuItem,
-                `${menuItem.id}` === selectedId ? styles.menuItemSelected : null
-              )}
-              onClick={handleMenuItemClick}
-              {...{ [ITEM_ELEMENT_ATTRIBUTE_NAME]: menuItem.id }}
-            >
-              {menuItem.id === committedId ? (
-                <div class={styles.icon}>{checkIcon}</div>
-              ) : null}
-              {menuItem.value}
-            </div>
-          )
-        })}
+          })}
+        </div>
       </div>
     </div>
   )
