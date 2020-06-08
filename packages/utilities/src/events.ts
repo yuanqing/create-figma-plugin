@@ -14,7 +14,7 @@ export function on(
   eventHandler: (...args: Array<any>) => void
 ): () => void {
   const id = `${currentId++}`
-  eventHandlers[id] = { eventName, eventHandler }
+  eventHandlers[id] = { eventHandler, eventName }
   return function () {
     delete eventHandlers[id]
   }

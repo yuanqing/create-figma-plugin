@@ -8,18 +8,18 @@ export function createDefaultSettings(options: Settings): Settings {
   const { name, template } = options
   const author = gitUserName()
   return {
-    name:
-      typeof name === 'undefined'
-        ? constants.packageJson.defaultPluginName
-        : name,
+    author: author === null ? undefined : author,
     displayName:
       typeof name === 'undefined'
         ? constants.packageJson.defaultPluginDisplayName
         : createPluginDisplayName(name),
+    license: constants.packageJson.defaultLicense,
+    name:
+      typeof name === 'undefined'
+        ? constants.packageJson.defaultPluginName
+        : name,
     template:
       typeof template === 'undefined' ? constants.defaultTemplate : template,
-    version: constants.packageJson.defaultVersion,
-    author: author === null ? undefined : author,
-    license: constants.packageJson.defaultLicense
+    version: constants.packageJson.defaultVersion
   }
 }

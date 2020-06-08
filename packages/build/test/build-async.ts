@@ -16,10 +16,10 @@ test('no config', async function (t) {
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
-    name: 'figma-plugin',
-    id: 'figma-plugin',
     api: '1.0.0',
-    main: 'build/main.js'
+    id: 'figma-plugin',
+    main: 'build/main.js',
+    name: 'figma-plugin'
   })
   t.true(await pathExists('build/main.js'))
   t.false(await pathExists('build/ui.js'))
@@ -37,10 +37,10 @@ test('basic command', async function (t) {
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
-    name: 'foo',
-    id: '42',
     api: '1.0.0',
-    main: 'build/main.js'
+    id: '42',
+    main: 'build/main.js',
+    name: 'foo'
   })
   t.true(await pathExists('build/main.js'))
   t.false(await pathExists('build/ui.js'))
@@ -58,24 +58,24 @@ test('multiple menu commands', async function (t) {
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
-    name: 'foo',
-    id: '42',
     api: '1.0.0',
+    id: '42',
     main: 'build/main.js',
-    ui: 'build/ui.js',
     menu: [
       {
-        name: 'bar',
-        command: 'baz--default'
+        command: 'baz--default',
+        name: 'bar'
       },
       {
         separator: true
       },
       {
-        name: 'qux',
-        command: 'quux--default'
+        command: 'quux--default',
+        name: 'qux'
       }
-    ]
+    ],
+    name: 'foo',
+    ui: 'build/ui.js'
   })
   t.true(await pathExists('build/main.js'))
   t.true(await pathExists('build/ui.js'))
@@ -93,17 +93,17 @@ test('relaunch button', async function (t) {
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
-    name: 'foo',
-    id: '42',
     api: '1.0.0',
+    id: '42',
     main: 'build/main.js',
-    ui: 'build/ui.js',
+    name: 'foo',
     relaunchButtons: [
       {
-        name: 'qux',
-        command: 'baz'
+        command: 'baz',
+        name: 'qux'
       }
-    ]
+    ],
+    ui: 'build/ui.js'
   })
   t.true(await pathExists('build/main.js'))
   t.true(await pathExists('build/ui.js'))

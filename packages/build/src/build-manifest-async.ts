@@ -16,15 +16,15 @@ import {
 
 export async function buildManifestAsync(config: Config): Promise<void> {
   const { name, commandId, main, ui, menu, relaunchButtons } = config
-  const command = { name, commandId, main, ui, menu }
+  const command = { commandId, main, menu, name, ui }
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a "main"')
   }
   const result: Manifest = {
-    name: config.name,
-    id: config.id,
     api: config.apiVersion,
-    main: constants.build.pluginCodeFilePath
+    id: config.id,
+    main: constants.build.pluginCodeFilePath,
+    name: config.name
   }
   if (hasBundle(command, 'ui') === true) {
     result.ui = constants.build.pluginUiFilePath
@@ -91,8 +91,8 @@ function createRelaunchButtons(
 ): Array<ManifestRelaunchButton> {
   return relaunchButtons.map(function (relaunchButton) {
     const result: ManifestRelaunchButton = {
-      name: relaunchButton.name,
-      command: relaunchButton.commandId
+      command: relaunchButton.commandId,
+      name: relaunchButton.name
     }
     if (relaunchButton.multipleSelection === true) {
       result.multipleSelection = true

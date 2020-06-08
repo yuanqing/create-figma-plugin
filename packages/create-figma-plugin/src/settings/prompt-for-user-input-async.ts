@@ -13,16 +13,13 @@ export async function promptForUserInputAsync(
     typeof name === 'undefined'
       ? false
       : {
-          type: 'input',
-          name: 'name',
+          filter,
           message: 'name',
-          validate,
-          filter
+          name: 'name',
+          type: 'input',
+          validate
         },
     {
-      type: 'input',
-      name: 'displayName',
-      message: 'display name',
       default: function (values: { name: string }) {
         if (typeof name !== 'undefined') {
           return createPluginDisplayName(name)
@@ -32,50 +29,53 @@ export async function promptForUserInputAsync(
         }
         return undefined
       },
-      validate,
-      filter
+      filter,
+      message: 'display name',
+      name: 'displayName',
+      type: 'input',
+      validate
     },
     typeof template === 'undefined'
       ? false
       : {
-          type: 'input',
-          name: 'template',
-          message: 'template',
           default: constants.defaultTemplate,
-          filter
+          filter,
+          message: 'template',
+          name: 'template',
+          type: 'input'
         },
     {
-      type: 'input',
-      name: 'version',
-      message: 'version',
       default: constants.packageJson.defaultVersion,
-      filter
+      filter,
+      message: 'version',
+      name: 'version',
+      type: 'input'
     },
     {
-      type: 'input',
-      name: 'description',
+      filter,
       message: 'description',
-      filter
+      name: 'description',
+      type: 'input'
     },
     {
-      type: 'input',
-      name: 'repositoryUrl',
+      filter,
       message: 'repository url',
-      filter
+      name: 'repositoryUrl',
+      type: 'input'
     },
     {
-      type: 'input',
-      name: 'author',
-      message: 'author',
       default: gitUserName(),
-      filter
+      filter,
+      message: 'author',
+      name: 'author',
+      type: 'input'
     },
     {
-      type: 'input',
-      name: 'license',
-      message: 'license',
       default: constants.packageJson.defaultLicense,
-      filter
+      filter,
+      message: 'license',
+      name: 'license',
+      type: 'input'
     }
   ].filter(Boolean)
   return {

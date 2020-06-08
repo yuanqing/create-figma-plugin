@@ -33,7 +33,7 @@
     "chokidar-cli": "^2.1.0",
     "cpy-cli": "^3.1.0",
     "eslint": "^7.0.0",
-    "eslint-config-yuanqing": "0.0.1",
+    "eslint-config-yuanqing": "0.0.2",
     "fs-extra": "^9.0.0",
     "globby": "^11.0.0",
     "husky": "^4.2.5",
@@ -61,13 +61,6 @@
       "packages/create-figma-plugin/plugin-templates"
     ],
     "rules": {
-      "react/jsx-sort-props": [
-        2,
-        {
-          "ignoreCase": true,
-          "reservedFirst": true
-        }
-      ],
       "react/no-unknown-property": [
         2,
         {

@@ -31,12 +31,9 @@ export function createWebpackConfig(
 ): webpack.Configuration {
   const mode = isDevelopment ? 'development' : 'production'
   return {
-    mode,
+    devtool: isDevelopment ? 'inline-cheap-module-source-map' : false,
     entry,
-    output: {
-      filename: '[name].js',
-      path: join(process.cwd(), constants.build.directoryName)
-    },
+    mode,
     module: {
       rules: [
         {
@@ -51,8 +48,8 @@ export function createWebpackConfig(
               loader: 'ts-loader',
               options: {
                 compilerOptions: {
-                  moduleResolution: 'node',
                   module: 'es2020',
+                  moduleResolution: 'node',
                   target: 'es2016'
                 }
               }
@@ -85,34 +82,37 @@ export function createWebpackConfig(
         }
       ]
     },
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          extractComments: false,
+          terserOptions: {
+            output: {
+              comments: false
+            }
+          }
+        })
+      ]
+    },
+    output: {
+      filename: '[name].js',
+      path: join(process.cwd(), constants.build.directoryName)
+    },
+    plugins: [
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: mode
+      })
+    ],
     resolve: {
+      extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
       modules: [
         join(process.cwd(), constants.src.directory),
         join(process.cwd(), 'node_modules'),
         resolve(process.cwd(), '..', '..', 'node_modules'), // Lerna monorepo
         process.cwd(),
         'node_modules'
-      ],
-      extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
-    },
-    devtool: isDevelopment ? 'inline-cheap-module-source-map' : false,
-    stats: 'errors-only',
-    plugins: [
-      new webpack.EnvironmentPlugin({
-        NODE_ENV: mode
-      })
-    ],
-    optimization: {
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            output: {
-              comments: false
-            }
-          },
-          extractComments: false
-        })
       ]
-    }
+    },
+    stats: 'errors-only'
   }
 }

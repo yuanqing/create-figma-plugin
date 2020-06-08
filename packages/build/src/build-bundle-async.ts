@@ -23,7 +23,7 @@ export async function buildBundleAsync(
 ): Promise<void> {
   const entry: webpack.Entry = {}
   const { name, commandId, main, ui, menu, relaunchButtons } = config
-  const command = { name, commandId, main, ui, menu }
+  const command = { commandId, main, menu, name, ui }
   const mainEntryFile = await createMainEntryFileAsync(command, relaunchButtons)
   if (mainEntryFile !== null) {
     const key = extractBasename(constants.build.pluginCodeFilePath)
@@ -136,8 +136,8 @@ function extractModule(
       const { src, handler } = item
       result.push({
         commandId,
-        src,
-        handler
+        handler,
+        src
       })
     }
   }

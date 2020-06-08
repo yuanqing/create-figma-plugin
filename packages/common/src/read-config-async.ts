@@ -19,13 +19,13 @@ import {
 
 const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
-  id: constants.packageJson.defaultPluginName,
-  name: constants.packageJson.defaultPluginName,
   commandId: 'index.js--default',
-  main: { src: 'index.js', handler: 'default' },
-  ui: null,
+  id: constants.packageJson.defaultPluginName,
+  main: { handler: 'default', src: 'index.js' },
   menu: null,
-  relaunchButtons: null
+  name: constants.packageJson.defaultPluginName,
+  relaunchButtons: null,
+  ui: null
 }
 
 export async function readConfigAsync(): Promise<Config> {
@@ -43,7 +43,7 @@ export async function readConfigAsync(): Promise<Config> {
     apiVersion:
       typeof apiVersion === 'undefined' ? constants.apiVersion : apiVersion,
     id: typeof id === 'undefined' ? slugify(name) : id,
-    ...parseCommand({ name, main, ui, menu }),
+    ...parseCommand({ main, menu, name, ui }),
     relaunchButtons:
       typeof relaunchButtons === 'undefined'
         ? null
@@ -54,10 +54,8 @@ export async function readConfigAsync(): Promise<Config> {
 function parseCommand(command: RawConfigCommand): ConfigCommand {
   const { name, main, ui, menu } = command
   return {
-    name,
     commandId: typeof main === 'undefined' ? null : parseCommandId(main),
     main: typeof main === 'undefined' ? null : parseFile(main),
-    ui: typeof ui === 'undefined' ? null : parseFile(ui),
     menu:
       typeof menu === 'undefined'
         ? null
@@ -68,7 +66,9 @@ function parseCommand(command: RawConfigCommand): ConfigCommand {
               return { separator: true }
             }
             return parseCommand(command)
-          })
+          }),
+    name,
+    ui: typeof ui === 'undefined' ? null : parseFile(ui)
   }
 }
 
@@ -82,12 +82,12 @@ function parseRelaunchButtons(
       throw new Error(`Need a "main" for relaunch button: ${name}`)
     }
     result.push({
-      name,
       commandId,
       main: parseFile(main),
-      ui: typeof ui === 'undefined' ? null : parseFile(ui),
       multipleSelection:
-        typeof multipleSelection === 'undefined' ? false : multipleSelection
+        typeof multipleSelection === 'undefined' ? false : multipleSelection,
+      name,
+      ui: typeof ui === 'undefined' ? null : parseFile(ui)
     })
   }
   return result
@@ -107,16 +107,16 @@ function parseCommandId(main: RawConfigFile): string {
 function parseFile(file: RawConfigFile): ConfigFile {
   if (typeof file === 'string') {
     return {
-      src: file,
-      handler: 'default'
+      handler: 'default',
+      src: file
     }
   }
   const { src, handler } = file
   if (typeof handler === 'undefined') {
     return {
-      src,
-      handler: 'default'
+      handler: 'default',
+      src
     }
   }
-  return { src, handler }
+  return { handler, src }
 }

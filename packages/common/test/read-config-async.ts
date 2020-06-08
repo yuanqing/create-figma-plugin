@@ -13,13 +13,13 @@ test('no `package.json`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '1-no-package-json'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'figma-plugin',
-    id: 'figma-plugin',
     commandId: 'index.js--default',
-    main: { src: 'index.js', handler: 'default' },
-    ui: null,
+    id: 'figma-plugin',
+    main: { handler: 'default', src: 'index.js' },
     menu: null,
-    relaunchButtons: null
+    name: 'figma-plugin',
+    relaunchButtons: null,
+    ui: null
   })
 })
 
@@ -28,13 +28,13 @@ test('config key is `undefined`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '2-config-undefined'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'figma-plugin',
-    id: 'figma-plugin',
     commandId: 'index.js--default',
-    main: { src: 'index.js', handler: 'default' },
-    ui: null,
+    id: 'figma-plugin',
+    main: { handler: 'default', src: 'index.js' },
     menu: null,
-    relaunchButtons: null
+    name: 'figma-plugin',
+    relaunchButtons: null,
+    ui: null
   })
 })
 
@@ -43,13 +43,13 @@ test('config key is empty', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '3-config-empty'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'figma-plugin',
-    id: 'figma-plugin',
     commandId: 'index.js--default',
-    main: { src: 'index.js', handler: 'default' },
-    ui: null,
+    id: 'figma-plugin',
+    main: { handler: 'default', src: 'index.js' },
     menu: null,
-    relaunchButtons: null
+    name: 'figma-plugin',
+    relaunchButtons: null,
+    ui: null
   })
 })
 
@@ -58,13 +58,13 @@ test('basic command', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '4-basic-command'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'foo',
-    id: '42',
     commandId: 'bar--default',
-    main: { src: 'bar', handler: 'default' },
-    ui: { src: 'baz', handler: 'default' },
+    id: '42',
+    main: { handler: 'default', src: 'bar' },
     menu: null,
-    relaunchButtons: null
+    name: 'foo',
+    relaunchButtons: null,
+    ui: { handler: 'default', src: 'baz' }
   })
 })
 
@@ -73,13 +73,13 @@ test('basic command without `id`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '5-basic-command-without-id'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'foo',
-    id: 'foo',
     commandId: 'bar--default',
-    main: { src: 'bar', handler: 'default' },
-    ui: { src: 'baz', handler: 'default' },
+    id: 'foo',
+    main: { handler: 'default', src: 'bar' },
     menu: null,
-    relaunchButtons: null
+    name: 'foo',
+    relaunchButtons: null,
+    ui: { handler: 'default', src: 'baz' }
   })
 })
 
@@ -88,21 +88,21 @@ test('single menu command', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '6-single-menu-command'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'foo',
-    id: '42',
     commandId: null,
+    id: '42',
     main: null,
-    ui: null,
     menu: [
       {
-        name: 'bar',
         commandId: 'baz--default',
-        main: { src: 'baz', handler: 'default' },
-        ui: null,
-        menu: null
+        main: { handler: 'default', src: 'baz' },
+        menu: null,
+        name: 'bar',
+        ui: null
       }
     ],
-    relaunchButtons: null
+    name: 'foo',
+    relaunchButtons: null,
+    ui: null
   })
 })
 
@@ -113,21 +113,21 @@ test('single menu command with `handler`', async function (t) {
   )
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'foo',
-    id: '42',
     commandId: null,
+    id: '42',
     main: null,
-    ui: null,
     menu: [
       {
-        name: 'bar',
         commandId: 'baz--qux',
-        main: { src: 'baz', handler: 'qux' },
-        ui: null,
-        menu: null
+        main: { handler: 'qux', src: 'baz' },
+        menu: null,
+        name: 'bar',
+        ui: null
       }
     ],
-    relaunchButtons: null
+    name: 'foo',
+    relaunchButtons: null,
+    ui: null
   })
 })
 
@@ -136,29 +136,29 @@ test('multiple menu commands', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '8-multiple-menu-commands'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'foo',
-    id: '42',
     commandId: null,
+    id: '42',
     main: null,
-    ui: null,
     menu: [
       {
-        name: 'bar',
         commandId: 'baz--qux',
-        main: { src: 'baz', handler: 'qux' },
-        ui: null,
-        menu: null
+        main: { handler: 'qux', src: 'baz' },
+        menu: null,
+        name: 'bar',
+        ui: null
       },
       { separator: true },
       {
-        name: 'quux',
         commandId: 'quuux--default',
-        main: { src: 'quuux', handler: 'default' },
-        ui: { src: 'quuuux', handler: 'default' },
-        menu: null
+        main: { handler: 'default', src: 'quuux' },
+        menu: null,
+        name: 'quux',
+        ui: { handler: 'default', src: 'quuuux' }
       }
     ],
-    relaunchButtons: null
+    name: 'foo',
+    relaunchButtons: null,
+    ui: null
   })
 })
 
@@ -167,21 +167,21 @@ test('relaunch button', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '9-relaunch-button'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'foo',
-    id: '42',
     commandId: 'bar--default',
-    main: { src: 'bar', handler: 'default' },
-    ui: { src: 'baz', handler: 'default' },
+    id: '42',
+    main: { handler: 'default', src: 'bar' },
     menu: null,
+    name: 'foo',
     relaunchButtons: [
       {
-        name: 'quux',
         commandId: 'qux',
-        main: { src: 'quuux', handler: 'default' },
-        ui: null,
-        multipleSelection: false
+        main: { handler: 'default', src: 'quuux' },
+        multipleSelection: false,
+        name: 'quux',
+        ui: null
       }
-    ]
+    ],
+    ui: { handler: 'default', src: 'baz' }
   })
 })
 
@@ -192,20 +192,20 @@ test('relaunch button with multiple selection', async function (t) {
   )
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    name: 'foo',
-    id: '42',
     commandId: 'bar--default',
-    main: { src: 'bar', handler: 'default' },
-    ui: { src: 'baz', handler: 'default' },
+    id: '42',
+    main: { handler: 'default', src: 'bar' },
     menu: null,
+    name: 'foo',
     relaunchButtons: [
       {
-        name: 'quux',
         commandId: 'qux',
-        main: { src: 'quuux', handler: 'default' },
-        ui: null,
-        multipleSelection: true
+        main: { handler: 'default', src: 'quuux' },
+        multipleSelection: true,
+        name: 'quux',
+        ui: null
       }
-    ]
+    ],
+    ui: { handler: 'default', src: 'baz' }
   })
 })

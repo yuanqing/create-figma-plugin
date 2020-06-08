@@ -4,7 +4,7 @@ export function computeBoundingBox(node: SceneNode): Rect {
   if (node.rotation === 0) {
     const absolutePosition = getAbsolutePosition(node)
     const { width, height } = node
-    return { ...absolutePosition, width, height }
+    return { ...absolutePosition, height, width }
   }
   const parent = node.parent
   if (parent === null) {
@@ -15,5 +15,5 @@ export function computeBoundingBox(node: SceneNode): Rect {
   const absolutePosition = getAbsolutePosition(group)
   const { width, height } = group
   parent.insertChild(index, node)
-  return { ...absolutePosition, width, height }
+  return { ...absolutePosition, height, width }
 }

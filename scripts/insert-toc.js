@@ -6,7 +6,7 @@ async function main() {
   const filename = path.resolve(__dirname, '..', 'docs', 'utility-functions.md')
   const contents = await fs.readFile(filename, 'utf8')
   const result = markdownToc
-    .insert(contents, { maxdepth: 3, bullet: '-' })
+    .insert(contents, { bullet: '-', maxdepth: 3 })
     .replace(/\[const [\w\s,{}[\]]+ = /g, '[') // remove `const {...} = `
     .replace(/\[await /g, '[') // remove `await `
     .replace(/- \[([^\]]+)\]/g, '- [**$1**]') // make headers bold
