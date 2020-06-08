@@ -28,7 +28,7 @@ export default function () {
 
 Next, create a file for our UI (eg. `src/ui.ts`):
 
-```ts
+```tsx
 // src/ui.ts
 
 /** @jsx h */
@@ -87,7 +87,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 }
 ```
 
-```ts
+```tsx
 // src/ui.ts
 
 import { render } from '@create-figma-plugin/ui'

@@ -25,7 +25,7 @@ export default function () {
 }
 ```
 
-```ts
+```tsx
 // src/ui.ts
 
 /** @jsx h */
