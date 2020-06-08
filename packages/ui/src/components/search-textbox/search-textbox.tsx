@@ -97,14 +97,14 @@ export function SearchTextbox({
   )
 
   return (
-    <div className={styles.searchTextbox}>
+    <div class={styles.searchTextbox}>
       <input
         {...rest}
         disabled={disabled}
         ref={inputElementRef}
         type="text"
         name={name}
-        className={styles.input}
+        class={styles.input}
         placeholder={placeholder}
         value={value === null ? '' : value}
         onFocus={handleFocus}
@@ -113,9 +113,9 @@ export function SearchTextbox({
         tabIndex={0}
         data-initial-focus={focused === true}
       />
-      <div className={styles.searchIcon}>{searchIcon}</div>
+      <div class={styles.searchIcon}>{searchIcon}</div>
       {value === null || value === '' ? null : (
-        <div className={styles.clear} onClick={handleClearClick} tabIndex={0}>
+        <div class={styles.clear} onClick={handleClearClick} tabIndex={0}>
           {crossIcon}
         </div>
       )}

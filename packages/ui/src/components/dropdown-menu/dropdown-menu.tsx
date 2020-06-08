@@ -179,7 +179,7 @@ export function DropdownMenu({
   )
   return (
     <div
-      className={styles.dropdownMenu}
+      class={styles.dropdownMenu}
       onClick={handleClick}
       onKeyDown={handleRootElementKeyDown}
       tabIndex={0}
@@ -188,7 +188,7 @@ export function DropdownMenu({
     >
       {cloneElement(children as preact.VNode<any>, { [name]: value })}
       <div
-        className={classnames(
+        class={classnames(
           styles.menu,
           isMenuVisible === false ? styles.hidden : null,
           fullWidth === true ? styles.fullWidth : null,
@@ -199,18 +199,18 @@ export function DropdownMenu({
       >
         {menuItems.map(function (menuItem) {
           if ('separator' in menuItem) {
-            return <hr className={styles.menuSeparator} key={menuItem.id} />
+            return <hr class={styles.menuSeparator} key={menuItem.id} />
           }
           if ('header' in menuItem) {
             return (
-              <h1 className={styles.menuHeader} key={menuItem.id}>
+              <h1 class={styles.menuHeader} key={menuItem.id}>
                 {menuItem.header}
               </h1>
             )
           }
           return (
             <div
-              className={classnames(
+              class={classnames(
                 styles.menuItem,
                 `${menuItem.id}` === selectedId ? styles.menuItemSelected : null
               )}
@@ -219,7 +219,7 @@ export function DropdownMenu({
               {...{ [ITEM_ELEMENT_ATTRIBUTE_NAME]: menuItem.id }}
             >
               {menuItem.id === committedId ? (
-                <div className={styles.icon}>{checkIcon}</div>
+                <div class={styles.icon}>{checkIcon}</div>
               ) : null}
               {menuItem.value}
             </div>

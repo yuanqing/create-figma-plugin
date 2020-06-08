@@ -12,5 +12,5 @@ export function VerticalSpace({
   space = 'small',
   ...rest
 }: VerticalSpaceProps): h.JSX.Element {
-  return <div {...rest} className={styles[space]} />
+  return <div {...rest} class={styles[space]} />
 }

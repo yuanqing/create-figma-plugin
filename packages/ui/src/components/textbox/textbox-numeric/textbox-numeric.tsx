@@ -195,7 +195,7 @@ export function TextboxNumeric({
 
   return (
     <div
-      className={classnames(
+      class={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
@@ -206,7 +206,7 @@ export function TextboxNumeric({
         ref={inputElementRef}
         type="text"
         name={name}
-        className={styles.input}
+        class={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
         disabled={disabled === true}
@@ -218,7 +218,7 @@ export function TextboxNumeric({
         tabIndex={disabled === true ? undefined : 0}
         data-initial-focus={focused === true}
       />
-      {hasIcon === true ? <div className={styles.icon}>{icon}</div> : null}
+      {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
     </div>
   )
 }

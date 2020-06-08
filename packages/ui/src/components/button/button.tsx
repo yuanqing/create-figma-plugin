@@ -48,7 +48,7 @@ export function Button({
   )
   return (
     <div
-      className={classnames(
+      class={classnames(
         styles.button,
         secondary === true ? styles.secondary : styles.primary,
         destructive === true ? styles.destructive : null,
@@ -58,7 +58,7 @@ export function Button({
       )}
     >
       {loading === true ? (
-        <div className={styles.loadingIndicator}>
+        <div class={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
       ) : null}

@@ -17,11 +17,11 @@ export function Inline({
   return (
     <div
       {...rest}
-      className={typeof space === 'undefined' ? undefined : styles[space]}
+      class={typeof space === 'undefined' ? undefined : styles[space]}
     >
       {toChildArray(children).map(function (element, index) {
         return (
-          <div className={styles.item} key={index}>
+          <div class={styles.item} key={index}>
             {element}
           </div>
         )

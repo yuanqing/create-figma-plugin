@@ -16,10 +16,10 @@ export function Stack({
   ...rest
 }: StackProps): h.JSX.Element {
   return (
-    <div {...rest} className={classnames(styles[space])}>
+    <div {...rest} class={classnames(styles[space])}>
       {toChildArray(children).map(function (element, index) {
         return (
-          <div className={styles.item} key={index}>
+          <div class={styles.item} key={index}>
             {element}
           </div>
         )

@@ -31,17 +31,17 @@ export function Layer({
   return (
     <div
       {...rest}
-      className={classnames(
+      class={classnames(
         styles[type],
         styles.layer,
         selected === true ? styles.selected : null
       )}
       onClick={onClick}
     >
-      <div className={styles.icon}>{icons[type]}</div>
-      <div className={styles.layerName}>{children}</div>
+      <div class={styles.icon}>{icons[type]}</div>
+      <div class={styles.layerName}>{children}</div>
       {typeof pageName !== 'undefined' ? (
-        <div className={styles.pageName}>{pageName}</div>
+        <div class={styles.pageName}>{pageName}</div>
       ) : null}
     </div>
   )

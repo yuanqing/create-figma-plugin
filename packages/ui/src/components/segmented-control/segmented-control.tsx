@@ -90,7 +90,7 @@ export function SegmentedControl<T extends string | number | boolean = string>({
 
   return (
     <div
-      className={styles.segmentedControl}
+      class={styles.segmentedControl}
       onKeyDown={disabled === true ? undefined : handleKeyDown}
       tabIndex={disabled === true ? undefined : 0}
       data-initial-focus={isFocused === true}
@@ -99,10 +99,10 @@ export function SegmentedControl<T extends string | number | boolean = string>({
         const text =
           typeof option.text === 'undefined' ? option.value : option.text
         return (
-          <label className={styles.label} key={index}>
+          <label class={styles.label} key={index}>
             <input
               {...rest}
-              className={styles.input}
+              class={styles.input}
               type="radio"
               name={name}
               value={option.value === null ? undefined : `${option.value}`}
@@ -112,7 +112,7 @@ export function SegmentedControl<T extends string | number | boolean = string>({
               tabIndex={-1}
               data-index={index}
             />
-            <div className={styles.text}>{text}</div>
+            <div class={styles.text}>{text}</div>
           </label>
         )
       })}

@@ -96,7 +96,7 @@ export function Tabs({
   return (
     <div>
       <div
-        className={styles.tabs}
+        class={styles.tabs}
         onKeyDown={handleKeyDown}
         tabIndex={0}
         data-initial-focus={focused === true}
@@ -105,10 +105,10 @@ export function Tabs({
           const text =
             typeof option.text === 'undefined' ? option.value : option.text
           return (
-            <label className={styles.label} key={index}>
+            <label class={styles.label} key={index}>
               <input
                 {...rest}
-                className={styles.input}
+                class={styles.input}
                 type="radio"
                 name={name}
                 value={option.value === null ? undefined : option.value}
@@ -117,7 +117,7 @@ export function Tabs({
                 tabIndex={-1}
                 data-index={index}
               />
-              <div className={styles.text} data-text={text}>
+              <div class={styles.text} data-text={text}>
                 {text}
               </div>
             </label>

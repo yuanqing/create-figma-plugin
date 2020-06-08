@@ -93,7 +93,7 @@ export function Textbox({
 
   return (
     <div
-      className={classnames(
+      class={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
@@ -104,7 +104,7 @@ export function Textbox({
         ref={inputElementRef}
         type="text"
         name={name}
-        className={styles.input}
+        class={styles.input}
         placeholder={placeholder}
         value={value === null ? 'Mixed' : value}
         disabled={disabled === true}
@@ -115,7 +115,7 @@ export function Textbox({
         tabIndex={disabled === true ? undefined : 0}
         data-initial-focus={focused === true}
       />
-      {hasIcon ? <div className={styles.icon}>{icon}</div> : null}
+      {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>
   )
 }

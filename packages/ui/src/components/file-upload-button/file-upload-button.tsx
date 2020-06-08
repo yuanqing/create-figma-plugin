@@ -64,7 +64,7 @@ export function FileUploadButton({
       : undefined
   return (
     <div
-      className={classnames(
+      class={classnames(
         styles.button,
         fullWidth === true ? styles.fullWidth : null,
         disabled === true ? styles.disabled : null,
@@ -72,13 +72,13 @@ export function FileUploadButton({
       )}
     >
       {loading === true ? (
-        <div className={styles.loadingIndicator}>
+        <div class={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
       ) : null}
       <input
         {...rest}
-        className={styles.input}
+        class={styles.input}
         type="file"
         accept={accept}
         multiple={multiple}

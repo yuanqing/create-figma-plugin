@@ -90,14 +90,14 @@ export function FileUploadDropzone({
       : undefined
   return (
     <div
-      className={classnames(
+      class={classnames(
         styles.fileUploadDropzone,
         isDropActive === true ? styles.isDropActive : null
       )}
     >
       <input
         {...rest}
-        className={styles.input}
+        class={styles.input}
         type="file"
         accept={accept}
         multiple={multiple}
@@ -111,8 +111,8 @@ export function FileUploadDropzone({
         tabIndex={-1}
         title=""
       />
-      <div className={styles.dashedLine} />
-      <div className={styles.children}>{children}</div>
+      <div class={styles.dashedLine} />
+      <div class={styles.children}>{children}</div>
     </div>
   )
 }

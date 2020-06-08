@@ -67,7 +67,7 @@ export function SelectableItem({
   return (
     <label
       {...rest}
-      className={classnames(
+      class={classnames(
         styles.label,
         disabled === true ? styles.disabled : null,
         bold === true ? styles.bold : null,
@@ -79,7 +79,7 @@ export function SelectableItem({
     >
       <input
         {...rest}
-        className={styles.input}
+        class={styles.input}
         type="checkbox"
         name={name}
         checked={value === true}
@@ -87,8 +87,8 @@ export function SelectableItem({
         onChange={handleChange}
         tabIndex={-1}
       />
-      <div className={styles.text}>{children}</div>
-      {value === true ? <div className={styles.icon}>{checkIcon}</div> : null}
+      <div class={styles.text}>{children}</div>
+      {value === true ? <div class={styles.icon}>{checkIcon}</div> : null}
     </label>
   )
 }

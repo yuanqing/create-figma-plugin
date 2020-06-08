@@ -13,5 +13,5 @@ export function Container({
   space = 'small',
   ...rest
 }: ContainerProps): h.JSX.Element {
-  return <div {...rest} className={styles[space]} />
+  return <div {...rest} class={styles[space]} />
 }

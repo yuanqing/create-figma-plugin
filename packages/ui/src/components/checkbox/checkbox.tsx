@@ -63,14 +63,14 @@ export function Checkbox({
 
   return (
     <label
-      className={classnames(
+      class={classnames(
         styles.label,
         disabled === true ? styles.disabled : null
       )}
     >
       <input
         {...rest}
-        className={styles.input}
+        class={styles.input}
         type="checkbox"
         name={name}
         checked={value === true}
@@ -80,7 +80,7 @@ export function Checkbox({
         tabIndex={disabled === true ? undefined : 0}
         data-initial-focus={focused === true}
       />
-      <div className={styles.text}>{children}</div>
+      <div class={styles.text}>{children}</div>
     </label>
   )
 }

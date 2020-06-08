@@ -18,14 +18,14 @@ export function Columns({
   return (
     <div
       {...rest}
-      className={classnames(
+      class={classnames(
         styles.columns,
         typeof space === 'undefined' ? null : styles[space]
       )}
     >
       {toChildArray(children).map(function (element, index) {
         return (
-          <div className={styles.column} key={index}>
+          <div class={styles.column} key={index}>
             {element}
           </div>
         )

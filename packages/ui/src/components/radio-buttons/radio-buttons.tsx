@@ -68,7 +68,7 @@ export function RadioButtons({
         const isOptionDisabled = disabled === true || option.disabled === true
         return (
           <label
-            className={classnames(
+            class={classnames(
               styles.label,
               isOptionDisabled === true ? styles.disabled : null
             )}
@@ -76,7 +76,7 @@ export function RadioButtons({
           >
             <input
               {...rest}
-              className={styles.input}
+              class={styles.input}
               type="radio"
               name={name}
               value={option.value === null ? undefined : option.value}
@@ -87,7 +87,7 @@ export function RadioButtons({
               data-index={index}
               data-initial-focus={focused === true}
             />
-            <div className={styles.text}>{text}</div>
+            <div class={styles.text}>{text}</div>
           </label>
         )
       })}

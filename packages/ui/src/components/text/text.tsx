@@ -24,7 +24,7 @@ export function Text({
   return (
     <div
       {...rest}
-      className={classnames(
+      class={classnames(
         styles.text,
         styles[align],
         bold === true ? styles.bold : null,

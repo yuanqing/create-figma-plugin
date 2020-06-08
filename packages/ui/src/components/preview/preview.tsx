@@ -9,7 +9,7 @@ export interface PreviewProps {
 
 export function Preview({ children, ...rest }: PreviewProps): h.JSX.Element {
   return (
-    <div {...rest} className={style.preview}>
+    <div {...rest} class={style.preview}>
       {children}
     </div>
   )

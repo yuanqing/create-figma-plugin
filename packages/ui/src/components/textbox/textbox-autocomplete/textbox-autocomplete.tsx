@@ -474,7 +474,7 @@ export function TextboxAutocomplete({
   const hasIcon = typeof icon !== 'undefined'
   return (
     <div
-      className={classnames(
+      class={classnames(
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         hasIcon === true ? styles.hasIcon : null
@@ -486,7 +486,7 @@ export function TextboxAutocomplete({
         ref={inputElementRef}
         type="text"
         name={name}
-        className={styles.input}
+        class={styles.input}
         placeholder={placeholder}
         value={committedValue === null ? '' : committedValue}
         disabled={disabled === true}
@@ -497,10 +497,10 @@ export function TextboxAutocomplete({
         tabIndex={disabled === true ? undefined : 0}
         data-initial-focus={focused === true}
       />
-      {hasIcon === true ? <div className={styles.icon}>{icon}</div> : null}
+      {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
       {disabled !== true && isMenuVisible === true && menuItems.length > 0 ? (
         <div
-          className={classnames(
+          class={classnames(
             textboxAutocompleteStyles.menu,
             top === true ? textboxAutocompleteStyles.top : null,
             hasIcon === true ? textboxAutocompleteStyles.hasIcon : null
@@ -511,7 +511,7 @@ export function TextboxAutocomplete({
             if ('separator' in menuItem) {
               return (
                 <hr
-                  className={textboxAutocompleteStyles.menuSeparator}
+                  class={textboxAutocompleteStyles.menuSeparator}
                   key={menuItem.id}
                 />
               )
@@ -519,7 +519,7 @@ export function TextboxAutocomplete({
             if ('header' in menuItem) {
               return (
                 <h1
-                  className={textboxAutocompleteStyles.menuHeader}
+                  class={textboxAutocompleteStyles.menuHeader}
                   key={menuItem.id}
                 >
                   {menuItem.header}
@@ -528,7 +528,7 @@ export function TextboxAutocomplete({
             }
             return (
               <div
-                className={classnames(
+                class={classnames(
                   textboxAutocompleteStyles.menuItem,
                   menuItem.id === selectedId
                     ? textboxAutocompleteStyles.menuItemSelected
