@@ -24,7 +24,8 @@
     "@create-figma-plugin/utilities": "*"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "*"
+    "@create-figma-plugin/build": "*",
+    "@figma/plugin-typings": "*"
   },
   "scripts": {
     "build": "build-figma-plugin",
@@ -35,6 +36,6 @@
 {{#displayName}}
     "name": "{{{displayName}}}",
 {{/displayName}}
-    "main": "src/main.js"
+    "main": "src/main.ts"
   }
 }
