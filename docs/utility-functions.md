@@ -63,7 +63,7 @@ $ npm install @create-figma-plugin/utilities
 
 ## Events
 
-```js
+```ts
 import {
   emit,
   on,
@@ -117,7 +117,7 @@ All `arguments` passed after `eventName` will be directly [applied](https://deve
 
 ## Nodes
 
-```js
+```ts
 import {
   insertBeforeNode,
   insertAfterNode,
@@ -389,7 +389,7 @@ See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons
 
 ## Number
 
-```js
+```ts
 import {
   isValidNumericInput,
   evaluateNumericExpression
@@ -425,7 +425,7 @@ Evaluates the given numeric `expression`.
 
 ## Object
 
-```js
+```ts
 import {
   cloneObject,
   compareObjects,
@@ -475,7 +475,7 @@ Extracts the specified `attributes` from the given `objects`.
 
 ## Settings
 
-```js
+```ts
 import {
   loadSettingsAsync,
   saveSettingsAsync
@@ -510,7 +510,7 @@ Saves the given `settings` for the plugin (stored locally on the user’s comput
 
 ## String
 
-```js
+```ts
 import {
   formatErrorMessage
   formatSuccessMessage,
@@ -572,7 +572,7 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 
 ## UI
 
-```js
+```ts
 import { showUI } from '@create-figma-plugin/utilities'
 ```
 

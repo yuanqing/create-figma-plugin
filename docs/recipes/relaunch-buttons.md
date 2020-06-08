@@ -10,20 +10,20 @@
       "menu": [
         {
           "name": "Organize Layers",
-          "main": "src/organize-layers/main.js",
-          "ui": "src/organize-layers/ui.js"
+          "main": "src/organize-layers/main.ts",
+          "ui": "src/organize-layers/ui.ts"
         },
         "-",
         {
           "name": "Reset Plugin",
-          "main": "src/reset-plugin/main.js"
+          "main": "src/reset-plugin/main.ts"
         }
       ],
 +     "relaunchButtons": {
 +       "organizeLayers": {
 +         "name": "Organize Layers",
-+         "main": "src/organize-layers/main.js",
-+         "ui": "src/organize-layers/ui.js"
++         "main": "src/organize-layers/main.ts",
++         "ui": "src/organize-layers/ui.ts"
 +       }
 +     }
     }
@@ -37,7 +37,7 @@ See that:
 
 Then, call [`setRelaunchButton`](/docs/utility-functions.md#setrelaunchbuttonlayer-relaunchbuttonid--description) in our plugin command’s main entry point:
 
-```js
+```ts
 // src/organize-layers/main.js
 
 import {
@@ -59,6 +59,10 @@ This would result in the following:
 
 If we want to show additional text below the relaunch button, we can pass a third parameter to `setRelaunchButton`:
 
-```js
-setRelaunchButton(figma.currentPage, 'organizeLayers', 'Organizes all layers on the page based on layer name')
+```ts
+setRelaunchButton(
+  figma.currentPage,
+  'organizeLayers',
+  { description: 'Organizes all layers on the page based on layer name' }
+)
 ```

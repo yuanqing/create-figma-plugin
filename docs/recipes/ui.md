@@ -12,8 +12,8 @@ $ npm install @create-figma-plugin/ui preact
 
 Then, include a call to [`showUI`](/docs/utility-functions.md#showuioptions--data) in our plugin command’s main entry point:
 
-```js
-// src/main.js
+```ts
+// src/main.ts
 
 import { showUI } from '@create-figma-plugin/utilities'
 
@@ -26,10 +26,10 @@ export default function () {
 
 `showUI` takes two parameters, and the second `data` parameter is useful for passing some initialising data to the UI.
 
-Next, create a file for our UI (eg. `src/ui.js`):
+Next, create a file for our UI (eg. `src/ui.ts`):
 
-```js
-// src/ui.js
+```ts
+// src/ui.ts
 
 /** @jsx h */
 import { render, Container, Text, VerticalSpace } from '@create-figma-plugin/ui'
@@ -61,8 +61,8 @@ Finally, in `package.json`, point to our UI file on the [**`"ui"`**](/docs/confi
     "figma-plugin": {
       ...
       "name": "Hello World",
-      "main": "src/main.js",
-+     "ui": "src/ui.js"
+      "main": "src/main.ts",
++     "ui": "src/ui.ts"
     }
   }
 ```
@@ -87,8 +87,8 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 }
 ```
 
-```js
-// src/ui.js
+```ts
+// src/ui.ts
 
 import { render } from '@create-figma-plugin/ui'
 import { h } from 'preact'
@@ -110,8 +110,8 @@ function Plugin () {
 
 To use a custom UI library (instead of `@create-figma-plugin/ui`), write our plugin command’s UI implementation as follows:
 
-```js
-// src/ui.js
+```ts
+// src/ui.ts
 
 export default function (rootNode, data) {
   rootNode.innerHTML = `<p>${data.greeting}</p>` //=> <h1>Hello, World!</h1>

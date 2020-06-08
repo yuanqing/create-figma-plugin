@@ -36,7 +36,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
   "figma-plugin": {
     "id": "806532458729477508",
     "name": "Draw Mask Under Selection",
-    "main": "src/main.js"
+    "main": "src/main.ts"
   }
 }
 ```
@@ -57,8 +57,8 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
   "figma-plugin": {
     "id": "767379335945775056",
     "name": "Draw Slice Over Selection",
-    "main": "src/main.js",
-    "ui": "src/ui.js"
+    "main": "src/main.ts",
+    "ui": "src/ui.ts"
   }
 }
 ```
@@ -88,13 +88,13 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",
-        "main": "src/flatten-selection-to-bitmap/main.js"
+        "main": "src/flatten-selection-to-bitmap/main.ts"
       },
       "-",
       {
         "name": "Settings",
-        "main": "src/settings/main.js",
-        "ui": "src/settings/ui.js"
+        "main": "src/settings/main.ts",
+        "ui": "src/settings/ui.ts"
       }
     ]
   }
@@ -124,20 +124,20 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/r
     "menu": [
       {
         "name": "Organize Layers",
-        "main": "src/organize-layers/main.js",
-        "ui": "src/organize-layers/ui.js"
+        "main": "src/organize-layers/main.ts",
+        "ui": "src/organize-layers/ui.ts"
       },
       "-",
       {
         "name": "Reset Plugin",
-        "main": "src/reset-plugin/main.js"
+        "main": "src/reset-plugin/main.ts"
       }
     ],
     "relaunchButtons": {
       "organizeLayers": {
         "name": "Organize Layers",
-        "main": "src/organize-layers/main.js",
-        "ui": "src/organize-layers/ui.js"
+        "main": "src/organize-layers/main.ts",
+        "ui": "src/organize-layers/ui.ts"
       }
     }
   }

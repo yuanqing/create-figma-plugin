@@ -8,8 +8,8 @@
 
 Consider a toy example:
 
-```js
-// src/main.js
+```ts
+// src/main.ts
 
 import {
   once,
@@ -25,8 +25,8 @@ export default function () {
 }
 ```
 
-```js
-// src/ui.js
+```ts
+// src/ui.ts
 
 /** @jsx h */
 import { render, Button } from '@create-figma-plugin/ui'

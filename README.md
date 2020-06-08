@@ -30,23 +30,23 @@ Then:
 
 ```
 $ cd figma-hello-world
-$ ls
-.gitignore   README.md   node_modules   package-lock.json   package.json   src
+$ ls -a
+.gitignore  README.md  node_modules  package-lock.json  package.json  tsconfig.json  src
 $ ls src
-main.js
+main.ts
 ```
 
-`src/main.js` is the main entry point for our plugin:
+`src/main.ts` is the main entry point for our plugin:
 
-```js
-// src/main.js
+```ts
+// src/main.ts
 
 export default function () {
   figma.closePlugin('Hello, World!')
 }
 ```
 
-See that in `package.json`, we’re pointing to `src/main.js` on the [**`"main"`**](/docs/configuration.md#main) key under **`"figma-plugin"`**:
+See that in `package.json`, we’re pointing to `src/main.ts` on the [**`"main"`**](/docs/configuration.md#main) key under **`"figma-plugin"`**:
 
 ```diff
   {
@@ -54,7 +54,7 @@ See that in `package.json`, we’re pointing to `src/main.js` on the [**`"main"`
     "figma-plugin": {
       ...
       "name": "Hello World",
-+     "main": "src/main.js"
++     "main": "src/main.ts"
     }
   }
 ```

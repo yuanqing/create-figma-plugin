@@ -10,13 +10,13 @@ Commands can be specified on the [**`"menu"`**](/docs/configuration.md#menu) key
 +     "menu": [
 +       {
 +         "name": "Flatten Selection to Bitmap",
-+         "main": "src/flatten-selection-to-bitmap/main.js"
++         "main": "src/flatten-selection-to-bitmap/main.ts"
 +       },
 +       "-",
 +       {
 +         "name": "Settings",
-+         "main": "src/settings/main.js",
-+         "ui": "src/settings/ui.js"
++         "main": "src/settings/main.ts",
++         "ui": "src/settings/ui.ts"
 +       }
 +     ]
     }
