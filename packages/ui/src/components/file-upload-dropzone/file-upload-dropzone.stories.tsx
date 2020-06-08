@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
+import { Text } from '../text/text'
 import { FileUploadDropzone } from './file-upload-dropzone'
 
 export default { title: 'File Upload Dropzone' }
@@ -13,7 +14,9 @@ function handleSelectedFiles(files?: Array<File>, event?: Event) {
 export const Default = function () {
   return (
     <FileUploadDropzone multiple onSelectedFiles={handleSelectedFiles}>
-      foo
+      <Text align="center" muted>
+        Text
+      </Text>
     </FileUploadDropzone>
   )
 }

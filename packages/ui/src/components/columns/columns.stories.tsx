@@ -7,7 +7,7 @@ import { Columns } from './columns'
 export default { title: 'Columns' }
 
 const style = {
-  backgroundColor: 'rgba(0, 0, 255, 0.2)'
+  backgroundColor: '#daebf7'
 }
 
 export const NoSpace = function () {

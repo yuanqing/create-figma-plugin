@@ -7,7 +7,7 @@ import { Container } from './container'
 export default { title: 'Container' }
 
 const style = {
-  backgroundColor: 'rgba(0, 0, 255, 0.2)'
+  backgroundColor: '#daebf7'
 }
 
 export const ExtraSmallSpace = function () {

@@ -6,7 +6,7 @@ import { VerticalSpace } from './vertical-space'
 export default { title: 'Vertical Space' }
 
 const style = {
-  backgroundColor: 'rgba(0, 0, 255, 0.2)'
+  backgroundColor: '#daebf7'
 }
 
 export const ExtraSmallSpace = function () {

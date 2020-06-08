@@ -7,7 +7,7 @@ import { Stack } from './stack'
 export default { title: 'Stack' }
 
 const style = {
-  backgroundColor: 'rgba(0, 0, 255, 0.2)'
+  backgroundColor: '#daebf7'
 }
 
 export const ExtraSmallSpace = function () {

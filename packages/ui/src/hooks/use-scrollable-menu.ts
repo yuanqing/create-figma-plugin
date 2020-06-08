@@ -141,5 +141,5 @@ export function useScrollableMenu(options: {
     },
     [changeOnMouseOver, getItemElements, handleMouseMove]
   )
-  return { menuElementRef, handleKeyDown, updateScrollPosition }
+  return { handleKeyDown, menuElementRef, updateScrollPosition }
 }

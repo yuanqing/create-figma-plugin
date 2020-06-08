@@ -7,7 +7,7 @@ import { Inline } from './inline'
 export default { title: 'Inline' }
 
 const style = {
-  backgroundColor: 'rgba(0, 0, 255, 0.2)'
+  backgroundColor: '#daebf7'
 }
 
 export const NoSpace = function () {

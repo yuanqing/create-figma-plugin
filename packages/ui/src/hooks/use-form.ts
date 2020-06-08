@@ -125,10 +125,10 @@ export function useForm(
     tabbableElements[0].focus()
   }, [])
   return {
-    state,
     handleChange,
     handleSubmit,
-    isValid
+    isValid,
+    state
   }
 }
 

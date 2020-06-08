@@ -15,7 +15,7 @@ export interface SelectableItemProps {
   indent?: boolean
   name: string
   onChange: OnChange
-  onKeyDown?: EventListener // FIXME
+  onKeyDown?: EventListener
   propagateEscapeKeyDown?: boolean
   value: boolean
 }

@@ -51,7 +51,7 @@ export const WithDisabledOption = function () {
       onChange={setState}
       options={[
         { value: 'foo' },
-        { value: 'bar', disabled: true },
+        { disabled: true, value: 'bar' },
         { value: 'baz' }
       ]}
       value={state.foo}
@@ -67,7 +67,7 @@ export const WithDisabledSelectedOption = function () {
       onChange={setState}
       options={[
         { value: 'foo' },
-        { value: 'bar', disabled: true },
+        { disabled: true, value: 'bar' },
         { value: 'baz' }
       ]}
       value={state.foo}

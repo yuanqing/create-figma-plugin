@@ -14,9 +14,9 @@ export const Default = function () {
       name="foo"
       onChange={setState}
       options={[
-        { value: 'foo', text: <Text>foo</Text> },
-        { value: 'bar', text: <Text>bar</Text> },
-        { value: 'baz', text: <Text>baz</Text> }
+        { text: <Text>foo</Text>, value: 'foo' },
+        { text: <Text>bar</Text>, value: 'bar' },
+        { text: <Text>baz</Text>, value: 'baz' }
       ]}
       value={state.foo}
     />
@@ -31,9 +31,9 @@ export const Disabled = function () {
       name="foo"
       onChange={setState}
       options={[
-        { value: 'foo', text: <Text>foo</Text> },
-        { value: 'bar', text: <Text>bar</Text> },
-        { value: 'baz', text: <Text>baz</Text> }
+        { text: <Text>foo</Text>, value: 'foo' },
+        { text: <Text>bar</Text>, value: 'bar' },
+        { text: <Text>baz</Text>, value: 'baz' }
       ]}
       value={state.foo}
     />
@@ -47,9 +47,9 @@ export const WithSelectedOption = function () {
       name="foo"
       onChange={setState}
       options={[
-        { value: 'foo', text: <Text>foo</Text> },
-        { value: 'bar', text: <Text>bar</Text> },
-        { value: 'baz', text: <Text>baz</Text> }
+        { text: <Text>foo</Text>, value: 'foo' },
+        { text: <Text>bar</Text>, value: 'bar' },
+        { text: <Text>baz</Text>, value: 'baz' }
       ]}
       value={state.foo}
     />
@@ -63,9 +63,9 @@ export const WithDisabledOption = function () {
       name="foo"
       onChange={setState}
       options={[
-        { value: 'foo', text: <Text>foo</Text> },
-        { value: 'bar', text: <Text>bar</Text>, disabled: true },
-        { value: 'baz', text: <Text>baz</Text> }
+        { text: <Text>foo</Text>, value: 'foo' },
+        { disabled: true, text: <Text>bar</Text>, value: 'bar' },
+        { text: <Text>baz</Text>, value: 'baz' }
       ]}
       value={state.foo}
     />
@@ -79,9 +79,9 @@ export const WithDisabledSelectedOption = function () {
       name="foo"
       onChange={setState}
       options={[
-        { value: 'foo', text: <Text>foo</Text> },
-        { value: 'bar', text: <Text>bar</Text>, disabled: true },
-        { value: 'baz', text: <Text>baz</Text> }
+        { text: <Text>foo</Text>, value: 'foo' },
+        { disabled: true, text: <Text>bar</Text>, value: 'bar' },
+        { text: <Text>baz</Text>, value: 'baz' }
       ]}
       value={state.foo}
     />
