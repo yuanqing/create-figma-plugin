@@ -102,18 +102,18 @@ export function Textbox({
       <input
         {...rest}
         ref={inputElementRef}
-        type="text"
-        name={name}
         class={styles.input}
-        placeholder={placeholder}
-        value={value === null ? 'Mixed' : value}
+        data-initial-focus={focused === true}
         disabled={disabled === true}
+        name={name}
         onClick={handleClick}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        placeholder={placeholder}
         tabIndex={disabled === true ? undefined : 0}
-        data-initial-focus={focused === true}
+        type="text"
+        value={value === null ? 'Mixed' : value}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>

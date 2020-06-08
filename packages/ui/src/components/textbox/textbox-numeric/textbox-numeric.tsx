@@ -22,20 +22,20 @@ import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-
 const nonDigitRegex = /[^\d.]/
 
 export interface TextboxNumericProps extends TextboxProps {
-  smallIncrement?: number
-  bigIncrement?: number
+  incrementBig?: number
   integer?: boolean
   maximum?: number
   minimum?: number
-  value: string
+  incrementSmall?: number
+  value: null | string
 }
 
 export function TextboxNumeric({
   disabled,
   focused,
   icon,
-  smallIncrement = 1,
-  bigIncrement = 10,
+  incrementBig = 10,
+  incrementSmall = 1,
   integer = false,
   maximum = Number.MAX_VALUE,
   minimum = -1 * Number.MAX_VALUE,
@@ -53,13 +53,13 @@ export function TextboxNumeric({
 
   const handleClick = useCallback(
     function () {
+      if (
+        inputElementRef.current === null ||
+        typeof inputElementRef.current === 'undefined'
+      ) {
+        return
+      }
       if (value === null) {
-        if (
-          inputElementRef.current === null ||
-          typeof inputElementRef.current === 'undefined'
-        ) {
-          return
-        }
         inputElementRef.current.focus()
         inputElementRef.current.select()
       }
@@ -122,7 +122,7 @@ export function TextboxNumeric({
         ) {
           return
         }
-        const delta = event.shiftKey === true ? bigIncrement : smallIncrement
+        const delta = event.shiftKey === true ? incrementBig : incrementSmall
         const newValue =
           event.keyCode === DOWN_KEY_CODE
             ? Math.max(evaluatedValue - delta, minimum)
@@ -160,13 +160,13 @@ export function TextboxNumeric({
       }
     },
     [
-      bigIncrement,
+      incrementBig,
       handleInput,
       integer,
       maximum,
       minimum,
       propagateEscapeKeyDown,
-      smallIncrement,
+      incrementSmall,
       value
     ]
   )
@@ -204,19 +204,19 @@ export function TextboxNumeric({
       <input
         {...rest}
         ref={inputElementRef}
-        type="text"
-        name={name}
         class={styles.input}
-        placeholder={placeholder}
-        value={value === null ? 'Mixed' : value}
+        data-initial-focus={focused === true}
         disabled={disabled === true}
+        name={name}
         onClick={handleClick}
-        onInput={handleInput}
         onFocus={handleFocus}
+        onInput={handleInput}
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
+        placeholder={placeholder}
         tabIndex={disabled === true ? undefined : 0}
-        data-initial-focus={focused === true}
+        type="text"
+        value={value === null ? 'Mixed' : value}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
     </div>

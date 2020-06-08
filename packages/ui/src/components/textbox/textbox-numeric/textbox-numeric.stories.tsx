@@ -8,32 +8,25 @@ import { TextboxNumeric } from './textbox-numeric'
 export default { title: 'Textbox Numeric' }
 
 export const Empty = function () {
-  const [state, setState] = useState({ foo: null })
-  return (
-    <TextboxNumeric name="foo" value={`${state.foo}`} onChange={setState} />
-  )
+  const [state, setState] = useState({ foo: '' })
+  return <TextboxNumeric name="foo" onChange={setState} value={state.foo} />
 }
 
 export const Disabled = function () {
-  const [state, setState] = useState({ foo: null })
+  const [state, setState] = useState({ foo: '' })
   return (
-    <TextboxNumeric
-      disabled
-      name="foo"
-      value={`${state.foo}`}
-      onChange={setState}
-    />
+    <TextboxNumeric disabled name="foo" onChange={setState} value={state.foo} />
   )
 }
 
 export const WithPlaceholder = function () {
-  const [state, setState] = useState({ foo: null })
+  const [state, setState] = useState({ foo: '' })
   return (
     <TextboxNumeric
-      placeholder="Placeholder"
       name="foo"
-      value={`${state.foo}`}
       onChange={setState}
+      placeholder="Placeholder"
+      value={state.foo}
     />
   )
 }
@@ -41,7 +34,7 @@ export const WithPlaceholder = function () {
 export const Filled = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
-    <TextboxNumeric name="foo" value={`${state.foo}`} onChange={setState} />
+    <TextboxNumeric name="foo" onChange={setState} value={`${state.foo}`} />
   )
 }
 
@@ -51,54 +44,46 @@ export const FilledDisabled = function () {
     <TextboxNumeric
       disabled
       name="foo"
-      value={`${state.foo}`}
       onChange={setState}
+      value={`${state.foo}`}
     />
   )
 }
 
 export const Mixed = function () {
   const [state, setState] = useState({ foo: null })
-  return (
-    <TextboxNumeric name="foo" value={`${state.foo}`} onChange={setState} />
-  )
+  return <TextboxNumeric name="foo" onChange={setState} value={state.foo} />
 }
 
 export const NoBorder = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
     <TextboxNumeric
-      noBorder
       name="foo"
-      value={`${state.foo}`}
+      noBorder
       onChange={setState}
+      value={`${state.foo}`}
     />
   )
 }
 
 export const WithIcon = function () {
-  const [state, setState] = useState({ foo: null })
+  const [state, setState] = useState({ foo: '' })
   return (
     <TextboxNumeric
       icon={spaceHorizontalIcon}
-      placeholder="Space"
       name="foo"
-      value={`${state.foo}`}
       onChange={setState}
+      placeholder="Space"
+      value={state.foo}
     />
   )
 }
 
 export const WithTextIcon = function () {
-  const [state, setState] = useState({ foo: null })
+  const [state, setState] = useState({ foo: '' })
   return (
-    <TextboxNumeric
-      icon="S"
-      placeholder="Space"
-      name="foo"
-      value={`${state.foo}`}
-      onChange={setState}
-    />
+    <TextboxNumeric icon="X" name="foo" onChange={setState} value={state.foo} />
   )
 }
 
@@ -106,11 +91,10 @@ export const Integer = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
     <TextboxNumeric
-      placeholder="Placeholder"
-      name="foo"
-      value={`${state.foo}`}
       integer
+      name="foo"
       onChange={setState}
+      value={`${state.foo}`}
     />
   )
 }
@@ -119,12 +103,11 @@ export const CustomIncrements = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
     <TextboxNumeric
-      placeholder="Placeholder"
+      incrementBig={20}
+      incrementSmall={4}
       name="foo"
-      value={`${state.foo}`}
-      smallIncrement={4}
-      bigIncrement={20}
       onChange={setState}
+      value={`${state.foo}`}
     />
   )
 }
@@ -133,12 +116,11 @@ export const MinimumMaximum = function () {
   const [state, setState] = useState({ foo: 42 })
   return (
     <TextboxNumeric
-      placeholder="Placeholder"
-      name="foo"
-      value={`${state.foo}`}
-      minimum={0}
       maximum={100}
+      minimum={0}
+      name="foo"
       onChange={setState}
+      value={`${state.foo}`}
     />
   )
 }
