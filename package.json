@@ -59,7 +59,19 @@
     "ignorePatterns": [
       "*.scss.d.ts",
       "packages/create-figma-plugin/plugin-templates"
-    ]
+    ],
+    "rules": {
+      "react/no-unknown-property": [
+        2,
+        {
+          "ignore": [
+            "class",
+            "clip-rule",
+            "fill-rule"
+          ]
+        }
+      ]
+    }
   },
   "husky": {
     "hooks": {

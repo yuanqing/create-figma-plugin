@@ -8,11 +8,9 @@ export interface IconProps {
 }
 
 export function Icon({ children }: IconProps): h.JSX.Element {
-  /* eslint-disable react/no-unknown-property */
   return (
     <svg class={styles.icon} xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd" d={children} />
+      <path clip-rule="evenodd" fill-rule="evenodd" d={children} />
     </svg>
   )
-  /* eslint-enable react/no-unknown-property */
 }
