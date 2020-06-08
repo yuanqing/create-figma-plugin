@@ -19,7 +19,7 @@ test('use default', async function (t) {
   t.true(await pathExists('figma-plugin/node_modules'))
   t.true(await pathExists('figma-plugin/package.json'))
   t.true(await pathExists('figma-plugin/README.md'))
-  t.true(await pathExists('figma-plugin/src/main.js'))
+  t.true(await pathExists('figma-plugin/src/main.ts'))
   await cleanUpAsync()
 })
 
