@@ -24,18 +24,16 @@ import textboxAutocompleteStyles from './textbox-autocomplete.scss'
 const EMPTY_STRING = ''
 const INVALID_MENU_ITEM_ID = null
 
+type Value = null | string
 type MenuItemId = null | string
 
+export type TextboxAutocompleteOption = Option
 export interface TextboxAutocompleteProps extends TextboxProps {
   filter?: boolean
-  options: Option[]
+  options: TextboxAutocompleteOption[]
   strict?: boolean
   top?: boolean
 }
-
-export type TextboxAutocompleteOption = Option
-
-type Value = null | string
 
 export function TextboxAutocomplete({
   disabled,
@@ -56,15 +54,18 @@ export function TextboxAutocomplete({
   const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
   const scrollTopRef = useRef(0)
-  const shouldSelectAllRef = useRef(false)
+  const shouldSelectAllRef = useRef(false) // Whether to select the contents of the textbox
 
   const [currentValue, setCurrentValue]: [Value, any] = useState(EMPTY_STRING)
-  const [isMenuVisible, setMenuVisible] = useState(false)
+  const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [selectedId, setSelectedId]: [MenuItemId, any] = useState(
     INVALID_MENU_ITEM_ID
   )
 
-  let menuItems: Option[] = options.map(function (option, index) {
+  let menuItems: TextboxAutocompleteOption[] = options.map(function (
+    option,
+    index
+  ) {
     return {
       id: `${index}`,
       ...option
@@ -72,7 +73,7 @@ export function TextboxAutocomplete({
   })
 
   const isValidValue = useCallback(
-    function (value: Value) {
+    function (value: Value): boolean {
       if (value === EMPTY_STRING || value === null) {
         return true
       }
@@ -89,7 +90,7 @@ export function TextboxAutocomplete({
   )
 
   const getIdByValue = useCallback(
-    function (value: Value) {
+    function (value: Value): MenuItemId {
       if (value === EMPTY_STRING || value === null) {
         return INVALID_MENU_ITEM_ID
       }
@@ -120,20 +121,18 @@ export function TextboxAutocomplete({
     })
   }
 
-  const getMenuItemById = useCallback(
-    function (id: MenuItemId) {
-      for (const menuItem of menuItems) {
-        if (menuItem.id === id) {
-          return menuItem
-        }
-      }
-      return null
+  const findMenuItemById = useCallback(
+    function (targetId: MenuItemId): null | TextboxAutocompleteOption {
+      const result = menuItems.find(function ({ id }) {
+        return id === targetId
+      })
+      return typeof result === 'undefined' ? null : result
     },
     [menuItems]
   )
 
   const computeNextId = useCallback(
-    function (id: MenuItemId) {
+    function (id: MenuItemId): MenuItemId {
       if (id === INVALID_MENU_ITEM_ID) {
         return menuItems[0].id
       }
@@ -163,7 +162,7 @@ export function TextboxAutocomplete({
   )
 
   const computePreviousId = useCallback(
-    function (id: MenuItemId) {
+    function (id: MenuItemId): MenuItemId {
       if (id === INVALID_MENU_ITEM_ID) {
         return menuItems[menuItems.length - 1].id
       }
@@ -193,8 +192,8 @@ export function TextboxAutocomplete({
   )
 
   const handleFocus = useCallback(
-    function () {
-      setMenuVisible(true)
+    function (): void {
+      setIsMenuVisible(true)
       if (
         committedValue !== EMPTY_STRING &&
         isValidValue(committedValue) === false
@@ -207,23 +206,27 @@ export function TextboxAutocomplete({
   )
 
   const handleKeyDown = useCallback(
-    function (event: KeyboardEvent) {
+    function (event: KeyboardEvent): void {
       const keyCode = event.keyCode
       if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
         event.preventDefault()
-        if (isMenuVisible === false || menuItems.length === 0) {
+        if (menuItems.length === 0) {
+          return
+        }
+        if (isMenuVisible === false) {
+          setIsMenuVisible(true)
           return
         }
         const nextId =
           keyCode === UP_KEY_CODE
-            ? computePreviousId(selectedId as MenuItemId)
-            : computeNextId(selectedId as MenuItemId)
+            ? computePreviousId(selectedId)
+            : computeNextId(selectedId)
         shouldSelectAllRef.current = true
-        setSelectedId(nextId as MenuItemId)
+        setSelectedId(nextId)
         if (nextId === INVALID_MENU_ITEM_ID) {
           onChange({ [name]: currentValue }, currentValue, name, event)
         } else {
-          const menuItem = getMenuItemById(nextId as MenuItemId)
+          const menuItem = findMenuItemById(nextId)
           if (menuItem !== null && 'value' in menuItem) {
             const newValue = menuItem.value
             onChange({ [name]: newValue }, newValue, name, event)
@@ -234,11 +237,27 @@ export function TextboxAutocomplete({
       if (
         keyCode === ENTER_KEY_CODE ||
         keyCode === ESCAPE_KEY_CODE ||
-        keyCode === TAB_KEY_CODE
+        keyCode === TAB_KEY_CODE // Tabbing away from this component
       ) {
         if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
           event.preventDefault()
           event.stopPropagation()
+        }
+        if (isMenuVisible === false && keyCode === ENTER_KEY_CODE) {
+          // Show the menu if it is currently hidden.
+          setIsMenuVisible(true)
+          return
+        }
+        if (isMenuVisible === false && keyCode === ESCAPE_KEY_CODE) {
+          // Blur the textbox if the menu is currently already hidden.
+          if (
+            inputElementRef.current === null ||
+            typeof inputElementRef.current === 'undefined'
+          ) {
+            return
+          }
+          inputElementRef.current.blur()
+          return
         }
         shouldSelectAllRef.current = false
         if (
@@ -248,7 +267,7 @@ export function TextboxAutocomplete({
           return
         }
         scrollTopRef.current = menuElementRef.current.scrollTop
-        setMenuVisible(false)
+        setIsMenuVisible(false)
         return
       }
       if (strict !== true) {
@@ -274,7 +293,7 @@ export function TextboxAutocomplete({
       computeNextId,
       computePreviousId,
       currentValue,
-      getMenuItemById,
+      findMenuItemById,
       isMenuVisible,
       strict,
       isValidValue,
@@ -286,7 +305,7 @@ export function TextboxAutocomplete({
   )
 
   const handleKeyUp = useCallback(
-    function (event: KeyboardEvent) {
+    function (event: KeyboardEvent): void {
       const keyCode = event.keyCode
       if (
         keyCode !== BACKSPACE_KEY_CODE &&
@@ -303,6 +322,7 @@ export function TextboxAutocomplete({
       }
       const value = inputElementRef.current.value
       const index = getIdByValue(value)
+      setIsMenuVisible(true)
       setSelectedId(index)
       setCurrentValue(value)
       onChange({ [name]: value }, value, name, event)
@@ -311,7 +331,7 @@ export function TextboxAutocomplete({
   )
 
   const handleOptionClick = useCallback(
-    function (event: MouseEvent) {
+    function (event: MouseEvent): void {
       if (
         menuElementRef.current === null ||
         typeof menuElementRef.current === 'undefined'
@@ -321,18 +341,18 @@ export function TextboxAutocomplete({
       scrollTopRef.current = menuElementRef.current.scrollTop
       const id = (event.target as HTMLElement).getAttribute('data-id')
       setSelectedId(id)
-      setMenuVisible(false)
-      const menuItem = getMenuItemById(id)
+      setIsMenuVisible(false)
+      const menuItem = findMenuItemById(id)
       setCurrentValue(EMPTY_STRING)
       if (menuItem !== null && 'value' in menuItem) {
         const newValue = menuItem.value
         onChange({ [name]: newValue }, newValue, name, event)
       }
     },
-    [getMenuItemById, name, onChange]
+    [findMenuItemById, name, onChange]
   )
 
-  function handlePaste(event: ClipboardEvent) {
+  function handlePaste(event: ClipboardEvent): void {
     if (
       inputElementRef.current === null ||
       typeof inputElementRef.current === 'undefined' ||
@@ -352,7 +372,7 @@ export function TextboxAutocomplete({
   // Select the contents of the input whenever `value` changes and if
   // `shouldSelectAllRef` is set to `true`
   useLayoutEffect(
-    function () {
+    function (): void {
       if (
         inputElementRef.current === null ||
         typeof inputElementRef.current === 'undefined'
@@ -370,7 +390,7 @@ export function TextboxAutocomplete({
 
   // Restore the original menu scroll position and update focus
   useLayoutEffect(
-    function () {
+    function (): void {
       if (
         inputElementRef.current === null ||
         typeof inputElementRef.current === 'undefined' ||
@@ -393,7 +413,7 @@ export function TextboxAutocomplete({
 
   // Adjust the menu scroll position so that the selected menu item is always visible
   useLayoutEffect(
-    function () {
+    function (): void {
       if (
         menuElementRef.current === null ||
         typeof menuElementRef.current === 'undefined'
@@ -431,7 +451,7 @@ export function TextboxAutocomplete({
 
   // Blur the input and hide the menu if we clicked outside the component
   useLayoutEffect(
-    function () {
+    function (): () => void {
       function handleWindowMousedown(event: MouseEvent) {
         if (
           menuElementRef.current === null ||
@@ -450,7 +470,7 @@ export function TextboxAutocomplete({
           return
         }
         scrollTopRef.current = menuElementRef.current.scrollTop
-        setMenuVisible(false)
+        setIsMenuVisible(false)
       }
       window.addEventListener('mousedown', handleWindowMousedown)
       return function () {
@@ -461,7 +481,7 @@ export function TextboxAutocomplete({
   )
 
   useLayoutEffect(
-    function () {
+    function (): void {
       if (isValidValue(committedValue) === false) {
         return
       }
