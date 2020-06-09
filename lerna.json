@@ -1,8 +1,10 @@
 {
-  "version": "0.0.74-alpha.1",
+  "version": "0.0.74",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "command": {
     "bootstrap": {
       "forceLocal": true
