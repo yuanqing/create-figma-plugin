@@ -9,6 +9,11 @@ const eventHandlers: {
 
 let currentId = 0
 
+/**
+ * Registers an `eventHandler` for the given `eventName`.
+ *
+ * @returns A function for deregistering the `eventHandler`
+ */
 export function on(
   eventName: string,
   eventHandler: (...args: Array<any>) => void
@@ -20,6 +25,12 @@ export function on(
   }
 }
 
+/**
+ * Registers an `eventHandler` that will run at most once for the given
+ * `eventName`.
+ *
+ * @returns A function for deregistering the `eventHandler`
+ */
 export function once(
   eventName: string,
   eventHandler: (...args: Array<any>) => void
@@ -34,6 +45,15 @@ export function once(
   })
 }
 
+/**
+ * Calling `emit` in the main context invokes the event handler for the
+ * matching `eventName` in your UI. Correspondingly, calling `emit` in your
+ * UI invokes the event handler for the matching `eventName` in the main
+ * context.
+ *
+ * All `arguments` passed after `eventName` will be directly applied on the
+ * event handler.
+ */
 export const emit: (eventName: string, ...args: Array<any>) => void =
   isCommand === true
     ? function (...args) {

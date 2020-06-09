@@ -1,3 +1,6 @@
+/**
+ * Inserts `node` after the `referenceNode` in the layer list.
+ */
 export function insertAfterNode(
   node: SceneNode,
   referenceNode: SceneNode

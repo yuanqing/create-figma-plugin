@@ -1,5 +1,9 @@
 import { getAbsolutePosition } from './absolute-position/get-absolute-position'
 
+/**
+ * Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
+ * the smallest bounding box that contains the given `node`.
+ */
 export function computeBoundingBox(node: SceneNode): Rect {
   if (node.rotation === 0) {
     const absolutePosition = getAbsolutePosition(node)

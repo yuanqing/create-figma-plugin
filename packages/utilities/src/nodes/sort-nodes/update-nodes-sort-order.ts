@@ -1,15 +1,19 @@
 import { compareArrays } from '../../object'
 import { areSiblingNodes } from '../are-sibling-nodes'
 
-export function updateNodesSortOrder(nodes: Array<SceneNode>): boolean {
-  const parent = nodes[0].parent
+/**
+ * Updates the layer list sort order to follow the sort order of the nodes
+ * in the `siblingNodes` array.
+ */
+export function updateNodesSortOrder(siblingNodes: Array<SceneNode>): boolean {
+  const parent = siblingNodes[0].parent
   if (parent === null) {
     throw new Error('Node has no parent')
   }
-  if (areSiblingNodes(nodes) === false) {
+  if (areSiblingNodes(siblingNodes) === false) {
     throw new Error('Nodes do not have the same parent')
   }
-  const copy = nodes.slice()
+  const copy = siblingNodes.slice()
   const ids = parent.children.map(function ({ id }) {
     return id
   })

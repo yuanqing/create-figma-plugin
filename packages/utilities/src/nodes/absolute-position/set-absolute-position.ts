@@ -1,3 +1,6 @@
+/**
+ * Sets the `node` to the given `x` and `y` absolute position.
+ */
 export function setAbsolutePosition(
   node: SceneNode,
   vector: { x?: number; y?: number }

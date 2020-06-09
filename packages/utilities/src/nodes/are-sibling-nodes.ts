@@ -1,3 +1,8 @@
+/**
+ * Checks if all nodes in `nodes` are sibling nodes.
+ *
+ * @returns `true` if all nodes in `nodes` are sibling nodes, else `false`
+ */
 export function areSiblingNodes(nodes: Array<SceneNode>): boolean {
   if (nodes.length < 2) {
     return true

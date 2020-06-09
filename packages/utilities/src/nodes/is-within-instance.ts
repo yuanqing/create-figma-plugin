@@ -1,3 +1,8 @@
+/**
+ * Checks if the given `node` is within an Instance.
+ *
+ * @returns `true` if the `node` is within an Instance, else `false`
+ */
 export function isWithinInstance(node: SceneNode): boolean {
   const parent = node.parent
   if (parent === null) {

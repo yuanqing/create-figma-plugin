@@ -1,3 +1,11 @@
+/**
+ * Traverses `node` and its child nodes recursively in a *depth-first*
+ * manner, passing each node to the specified `processNode` callback.
+ *
+ * Each node is also passed to a `stopTraversal` function. If you return
+ * `false` in `stopTraversal` for a particular node, then its child nodes
+ * will not be traversed.
+ */
 export function traverseNode(
   node: SceneNode,
   processNode: (node: SceneNode) => void,

@@ -3,18 +3,31 @@ const CROSS = '✘'
 const WARNING = '⚠'
 const SPACE = '\u00a0'
 
+/**
+ * Adds a `✔` prefix to the given `message`.
+ */
 export function formatSuccessMessage(message: string): string {
   return `${CHECK} ${SPACE} ${message}`
 }
 
+/**
+ * Adds a `✘` prefix to the given `message`.
+ */
 export function formatErrorMessage(message: string): string {
   return `${CROSS} ${SPACE} ${message}`
 }
 
+/**
+ * Adds a `⚠` prefix to the given `message`.
+ */
 export function formatWarningMessage(message: string): string {
   return `${WARNING} ${SPACE} ${message}`
 }
 
+/**
+ * Returns `singular` if `number` is exactly `1`, else returns `plural`.
+ * `plural` defaults to `${singular}s` if not specified.
+ */
 export function pluralize(
   number: number,
   singular: string,

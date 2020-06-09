@@ -1,19 +1,25 @@
 import { areSiblingNodes } from '../are-sibling-nodes'
 
+/**
+ * Sorts `siblingNodes` according to their layer list order. Does not modify
+ * the original `siblingNodes` array.
+ *
+ * @returns A new array of `SceneNode` objects
+ */
 export function sortNodesByCanonicalOrder(
-  nodes: Array<SceneNode>
+  siblingNodes: Array<SceneNode>
 ): Array<SceneNode> {
-  if (nodes.length < 2) {
-    return nodes.slice()
+  if (siblingNodes.length < 2) {
+    return siblingNodes.slice()
   }
-  const parent = nodes[0].parent
+  const parent = siblingNodes[0].parent
   if (parent === null) {
     throw new Error('Node has no parent')
   }
-  if (areSiblingNodes(nodes) === false) {
+  if (areSiblingNodes(siblingNodes) === false) {
     throw new Error('Nodes do not have the same parent')
   }
-  return nodes
+  return siblingNodes
     .slice()
     .map(function (node) {
       return {

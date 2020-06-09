@@ -1,3 +1,6 @@
+/**
+ * Splits `nodes` into groups of sibling nodes.
+ */
 export function computeSiblingNodes(
   nodes: Array<SceneNode>
 ): Array<Array<SceneNode>> {

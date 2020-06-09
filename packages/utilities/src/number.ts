@@ -4,6 +4,14 @@ const integerOperandRegex = /^-?\d*$/
 const operatorRegex = /[+\-*/]/
 const operatorSuffixRegex = /[+\-*/]$/
 
+/**
+ * Checks if `value` is a numeric expression, as input by a user. “Partial”
+ * inputs are considered valid. Set `integerOnly` to `true` to check that the
+ * expression contains only integers. `integerOnly` defaults to `false` if not
+ * specified.
+ *
+ * @returns `true` if `value` is a valid numeric expression, else `false`
+ */
 export function isValidNumericInput(
   value: string,
   integerOnly = false
@@ -26,6 +34,11 @@ export function isValidNumericInput(
   return true
 }
 
+/**
+ * Evaluates the given numeric `expression`.
+ *
+ * @returns The result of evaluating the given `expression`
+ */
 export function evaluateNumericExpression(value: string): null | number {
   if (value === '' || invalidCharactersRegex.test(value) === true) {
     return null
