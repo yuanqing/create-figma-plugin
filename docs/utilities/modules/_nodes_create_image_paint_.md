@@ -13,7 +13,7 @@
 
 ▸ **createImagePaint**(`bytes`: Uint8Array): *ImagePaint*
 
-*Defined in [nodes/create-image-paint.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/create-image-paint.ts#L4)*
+*Defined in [nodes/create-image-paint.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/create-image-paint.ts#L4)*
 
 Creates an `ImagePaint` object from the `bytes` of an image.
 

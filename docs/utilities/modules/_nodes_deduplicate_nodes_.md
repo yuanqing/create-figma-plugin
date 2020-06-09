@@ -13,7 +13,7 @@
 
 ▸ **deduplicateNodes**(`nodes`: Array‹SceneNode›): *Array‹SceneNode›*
 
-*Defined in [nodes/deduplicate-nodes.ts:7](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/deduplicate-nodes.ts#L7)*
+*Defined in [nodes/deduplicate-nodes.ts:7](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/deduplicate-nodes.ts#L7)*
 
 Deduplicates the nodes in `nodes`. Does not modify the original
 `nodes` array.

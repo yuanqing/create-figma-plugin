@@ -13,7 +13,7 @@
 
 ▸ **insertAfterNode**(`node`: SceneNode, `referenceNode`: SceneNode): *void*
 
-*Defined in [nodes/insert-node/insert-after-node.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/insert-node/insert-after-node.ts#L4)*
+*Defined in [nodes/insert-node/insert-after-node.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/insert-node/insert-after-node.ts#L4)*
 
 Inserts `node` after the `referenceNode` in the layer list.
 

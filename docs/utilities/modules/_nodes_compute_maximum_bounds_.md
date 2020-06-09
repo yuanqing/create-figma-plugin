@@ -13,7 +13,7 @@
 
 ▸ **computeMaximumBounds**(`nodes`: Array‹SceneNode›): *[Vector, Vector]*
 
-*Defined in [nodes/compute-maximum-bounds.ts:7](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/compute-maximum-bounds.ts#L7)*
+*Defined in [nodes/compute-maximum-bounds.ts:7](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/compute-maximum-bounds.ts#L7)*
 
 Computes the absolute coordinates of the top-left and bottom-right
 corners of the smallest bounding box that contains the given `nodes`.

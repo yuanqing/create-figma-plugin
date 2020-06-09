@@ -16,7 +16,7 @@
 
 ▸ **cloneObject**(`object`: any): *any*
 
-*Defined in [object.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/object.ts#L4)*
+*Defined in [object.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/object.ts#L4)*
 
 Creates a deep copy of the given object.
 
@@ -34,7 +34,7 @@ ___
 
 ▸ **compareArrays**(`a`: Array‹any›, `b`: Array‹any›): *boolean*
 
-*Defined in [object.ts:32](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/object.ts#L32)*
+*Defined in [object.ts:32](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/object.ts#L32)*
 
 Performs a *shallow* comparison of arrays `a` and `b`.
 
@@ -55,7 +55,7 @@ ___
 
 ▸ **compareObjects**(`a`: any, `b`: any): *boolean*
 
-*Defined in [object.ts:49](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/object.ts#L49)*
+*Defined in [object.ts:49](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/object.ts#L49)*
 
 Performs a *deep* comparison of objects `a` and `b`.
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **extractAttributes**(`array`: Array‹object›, `attributes`: Array‹string›): *Array‹object›*
 
-*Defined in [object.ts:95](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/object.ts#L95)*
+*Defined in [object.ts:95](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/object.ts#L95)*
 
 Extracts the specified list of `attributes` from the given `array` of
 objects.

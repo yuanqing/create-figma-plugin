@@ -13,7 +13,7 @@
 
 ▸ **traverseNode**(`node`: SceneNode, `processNode`: function, `stopTraversal?`: undefined | function): *void*
 
-*Defined in [nodes/traverse-node.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/traverse-node.ts#L9)*
+*Defined in [nodes/traverse-node.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/traverse-node.ts#L9)*
 
 Traverses `node` and its child nodes recursively in a *depth-first*
 manner, passing each node to the specified `processNode` callback.

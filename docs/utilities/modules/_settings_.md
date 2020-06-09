@@ -14,7 +14,7 @@
 
 ▸ **loadSettingsAsync**(`defaultSettings`: Settings): *Promise‹Settings›*
 
-*Defined in [settings.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/settings.ts#L9)*
+*Defined in [settings.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/settings.ts#L9)*
 
 Loads your plugin’s `settings` (stored locally on the user’s computer).
 Values in `settings` default to an optional `defaultSettings` object.
@@ -33,7 +33,7 @@ ___
 
 ▸ **saveSettingsAsync**(`settings`: Settings): *Promise‹void›*
 
-*Defined in [settings.ts:23](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/settings.ts#L23)*
+*Defined in [settings.ts:23](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/settings.ts#L23)*
 
 Saves the given `settings` for your plugin (stored locally on the user’s
 computer).

@@ -13,7 +13,7 @@
 
 ▸ **showUI**(`options`: ShowUIOptions, `data`: any): *void*
 
-*Defined in [ui.ts:12](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/ui.ts#L12)*
+*Defined in [ui.ts:12](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/ui.ts#L12)*
 
 Renders the UI correponding to the command in a modal within the Figma UI.
 Specify the width, height, and visibility of the UI via `options`.

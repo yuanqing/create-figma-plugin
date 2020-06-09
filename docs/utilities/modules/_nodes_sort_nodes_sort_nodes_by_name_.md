@@ -13,7 +13,7 @@
 
 ▸ **sortNodesByName**(`nodes`: Array‹SceneNode›): *Array‹SceneNode›*
 
-*Defined in [nodes/sort-nodes/sort-nodes-by-name.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/sort-nodes/sort-nodes-by-name.ts#L9)*
+*Defined in [nodes/sort-nodes/sort-nodes-by-name.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/sort-nodes/sort-nodes-by-name.ts#L9)*
 
 Sorts `nodes` in alphabetical order. Does not modify the original
 `nodes` array.

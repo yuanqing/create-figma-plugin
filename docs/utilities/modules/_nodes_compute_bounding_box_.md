@@ -13,7 +13,7 @@
 
 ▸ **computeBoundingBox**(`node`: SceneNode): *Rect*
 
-*Defined in [nodes/compute-bounding-box.ts:7](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/compute-bounding-box.ts#L7)*
+*Defined in [nodes/compute-bounding-box.ts:7](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/compute-bounding-box.ts#L7)*
 
 Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
 the smallest bounding box that contains the given `node`.

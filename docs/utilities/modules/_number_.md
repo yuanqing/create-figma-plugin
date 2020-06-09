@@ -14,7 +14,7 @@
 
 ▸ **evaluateNumericExpression**(`value`: string): *null | number*
 
-*Defined in [number.ts:42](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/number.ts#L42)*
+*Defined in [number.ts:42](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/number.ts#L42)*
 
 Evaluates the given numeric `expression`.
 
@@ -34,7 +34,7 @@ ___
 
 ▸ **isValidNumericInput**(`value`: string, `integerOnly`: boolean): *boolean*
 
-*Defined in [number.ts:15](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/number.ts#L15)*
+*Defined in [number.ts:15](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/number.ts#L15)*
 
 Checks if `value` is a numeric expression, as input by a user. “Partial”
 inputs are considered valid. Set `integerOnly` to `true` to check that the

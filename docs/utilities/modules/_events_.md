@@ -29,7 +29,7 @@
         )
       }
 
-*Defined in [events.ts:57](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/events.ts#L57)*
+*Defined in [events.ts:57](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/events.ts#L57)*
 
 Calling `emit` in the main context invokes the event handler for the
 matching `eventName` in your UI. Correspondingly, calling `emit` in your
@@ -56,7 +56,7 @@ Name | Type |
 
 ▸ **on**(`eventName`: string, `eventHandler`: function): *function*
 
-*Defined in [events.ts:17](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/events.ts#L17)*
+*Defined in [events.ts:17](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/events.ts#L17)*
 
 Registers an `eventHandler` for the given `eventName`.
 
@@ -86,7 +86,7 @@ ___
 
 ▸ **once**(`eventName`: string, `eventHandler`: function): *function*
 
-*Defined in [events.ts:34](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/events.ts#L34)*
+*Defined in [events.ts:34](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/events.ts#L34)*
 
 Registers an `eventHandler` that will run at most once for the given
 `eventName`.

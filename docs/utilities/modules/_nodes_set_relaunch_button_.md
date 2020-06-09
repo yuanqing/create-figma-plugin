@@ -13,7 +13,7 @@
 
 ▸ **setRelaunchButton**(`node`: BaseNode, `key`: string, `options?`: undefined | object): *void*
 
-*Defined in [nodes/set-relaunch-button.ts:10](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/set-relaunch-button.ts#L10)*
+*Defined in [nodes/set-relaunch-button.ts:10](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/set-relaunch-button.ts#L10)*
 
 Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
 on `node` for the command with the given `relaunchButtonId` as configured

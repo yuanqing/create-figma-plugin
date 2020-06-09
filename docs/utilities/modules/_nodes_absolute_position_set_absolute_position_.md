@@ -13,7 +13,7 @@
 
 ▸ **setAbsolutePosition**(`node`: SceneNode, `vector`: object): *void*
 
-*Defined in [nodes/absolute-position/set-absolute-position.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/absolute-position/set-absolute-position.ts#L4)*
+*Defined in [nodes/absolute-position/set-absolute-position.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/absolute-position/set-absolute-position.ts#L4)*
 
 Sets the `node` to the given `x` and `y` absolute position.
 

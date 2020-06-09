@@ -16,7 +16,7 @@
 
 ▸ **formatErrorMessage**(`message`: string): *string*
 
-*Defined in [string.ts:16](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/string.ts#L16)*
+*Defined in [string.ts:16](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/string.ts#L16)*
 
 Adds a `✘` prefix to the given `message`.
 
@@ -34,7 +34,7 @@ ___
 
 ▸ **formatSuccessMessage**(`message`: string): *string*
 
-*Defined in [string.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/string.ts#L9)*
+*Defined in [string.ts:9](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/string.ts#L9)*
 
 Adds a `✔` prefix to the given `message`.
 
@@ -52,7 +52,7 @@ ___
 
 ▸ **formatWarningMessage**(`message`: string): *string*
 
-*Defined in [string.ts:23](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/string.ts#L23)*
+*Defined in [string.ts:23](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/string.ts#L23)*
 
 Adds a `⚠` prefix to the given `message`.
 
@@ -70,7 +70,7 @@ ___
 
 ▸ **pluralize**(`number`: number, `singular`: string, `plural?`: undefined | string): *string*
 
-*Defined in [string.ts:31](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/string.ts#L31)*
+*Defined in [string.ts:31](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/string.ts#L31)*
 
 Returns `singular` if `number` is exactly `1`, else returns `plural`.
 `plural` defaults to `${singular}s` if not specified.

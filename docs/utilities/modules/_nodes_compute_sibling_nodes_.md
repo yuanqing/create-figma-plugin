@@ -13,7 +13,7 @@
 
 ▸ **computeSiblingNodes**(`nodes`: Array‹SceneNode›): *Array‹Array‹SceneNode››*
 
-*Defined in [nodes/compute-sibling-nodes.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/compute-sibling-nodes.ts#L4)*
+*Defined in [nodes/compute-sibling-nodes.ts:4](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/compute-sibling-nodes.ts#L4)*
 
 Splits `nodes` into groups of sibling nodes.
 

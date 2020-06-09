@@ -13,7 +13,7 @@
 
 ▸ **areSiblingNodes**(`nodes`: Array‹SceneNode›): *boolean*
 
-*Defined in [nodes/are-sibling-nodes.ts:6](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/are-sibling-nodes.ts#L6)*
+*Defined in [nodes/are-sibling-nodes.ts:6](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/are-sibling-nodes.ts#L6)*
 
 Checks if all nodes in `nodes` are sibling nodes.
 

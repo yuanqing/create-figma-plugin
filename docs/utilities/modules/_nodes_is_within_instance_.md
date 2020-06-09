@@ -13,7 +13,7 @@
 
 ▸ **isWithinInstance**(`node`: SceneNode): *boolean*
 
-*Defined in [nodes/is-within-instance.ts:6](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/is-within-instance.ts#L6)*
+*Defined in [nodes/is-within-instance.ts:6](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/is-within-instance.ts#L6)*
 
 Checks if the given `node` is within an Instance.
 

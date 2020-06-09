@@ -13,7 +13,7 @@
 
 ▸ **getDocumentComponents**(): *Array‹ComponentNode›*
 
-*Defined in [nodes/get-nodes/get-document-components.ts:6](https://github.com/yuanqing/create-figma-plugin/blob/c1a9a79/packages/utilities/src/nodes/get-nodes/get-document-components.ts#L6)*
+*Defined in [nodes/get-nodes/get-document-components.ts:6](https://github.com/yuanqing/create-figma-plugin/blob/master/packages/utilities/src/nodes/get-nodes/get-document-components.ts#L6)*
 
 Gets all the components in the current document.
 
