@@ -13,9 +13,9 @@ test('no `package.json`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '1-no-package-json'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    commandId: 'index.js--default',
+    commandId: 'main.ts--default',
     id: 'figma-plugin',
-    main: { handler: 'default', src: 'index.js' },
+    main: { handler: 'default', src: 'main.ts' },
     menu: null,
     name: 'figma-plugin',
     relaunchButtons: null,
@@ -28,9 +28,9 @@ test('config key is `undefined`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '2-config-undefined'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    commandId: 'index.js--default',
+    commandId: 'main.ts--default',
     id: 'figma-plugin',
-    main: { handler: 'default', src: 'index.js' },
+    main: { handler: 'default', src: 'main.ts' },
     menu: null,
     name: 'figma-plugin',
     relaunchButtons: null,
@@ -43,9 +43,9 @@ test('config key is empty', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '3-config-empty'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
-    commandId: 'index.js--default',
+    commandId: 'main.ts--default',
     id: 'figma-plugin',
-    main: { handler: 'default', src: 'index.js' },
+    main: { handler: 'default', src: 'main.ts' },
     menu: null,
     name: 'figma-plugin',
     relaunchButtons: null,

@@ -19,9 +19,9 @@ import {
 
 const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
-  commandId: 'index.js--default',
+  commandId: 'main.ts--default',
   id: constants.packageJson.defaultPluginName,
-  main: { handler: 'default', src: 'index.js' },
+  main: { handler: 'default', src: 'main.ts' },
   menu: null,
   name: constants.packageJson.defaultPluginName,
   relaunchButtons: null,
