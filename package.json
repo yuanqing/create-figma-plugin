@@ -3,10 +3,10 @@
   "scripts": {
     "build": "lerna run build",
     "bump-dependencies": "node scripts/bump-dependencies.js",
-    "clean": "lerna run clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf '*.log'",
+    "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf '*.log'",
     "docs": "lerna run --scope @create-figma-plugin/utilities docs",
-    "fix": "lerna run fix && eslint --fix 'scripts/**/*.js' && prettier --loglevel error --write '*.{js,json}'",
-    "lint": "lerna run lint && eslint 'scripts/**/*.js'",
+    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.js' && prettier --loglevel error --write '*.{js,json}'",
+    "lint": "lerna run --parallel lint && eslint 'scripts/**/*.js'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
