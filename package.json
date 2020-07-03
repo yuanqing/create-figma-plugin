@@ -10,7 +10,7 @@
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
-    "test": "yarn run build && lerna run test",
+    "test": "lerna run test",
     "version": "lerna version"
   },
   "devDependencies": {
