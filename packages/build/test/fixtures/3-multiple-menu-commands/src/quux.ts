@@ -2,5 +2,5 @@
 
 export default function () {
   console.log('quux')
-  figma.stopPlugin()
+  figma.closePlugin()
 }

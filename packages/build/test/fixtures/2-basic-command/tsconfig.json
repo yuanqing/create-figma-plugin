@@ -1,0 +1,5 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@figma"]
+  }
+}

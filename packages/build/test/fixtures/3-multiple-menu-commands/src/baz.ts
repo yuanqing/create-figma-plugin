@@ -2,5 +2,5 @@
 
 export default function () {
   console.log('baz')
-  figma.stopPlugin()
+  figma.closePlugin()
 }

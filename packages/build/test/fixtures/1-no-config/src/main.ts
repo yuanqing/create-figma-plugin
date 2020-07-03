@@ -2,5 +2,5 @@
 
 export default function () {
   console.log('index')
-  figma.stopPlugin()
+  figma.closePlugin()
 }

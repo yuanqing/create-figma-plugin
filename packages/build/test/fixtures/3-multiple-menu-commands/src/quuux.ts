@@ -2,4 +2,5 @@
 
 export default function () {
   console.log('quuux')
+  figma.closePlugin()
 }

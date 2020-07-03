@@ -12,7 +12,7 @@ test('no config', async function (t) {
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
-  await createSymlinkAsync()
+  await createSymlinksAsync()
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
@@ -33,7 +33,7 @@ test('basic command', async function (t) {
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
-  await createSymlinkAsync()
+  await createSymlinksAsync()
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
@@ -54,7 +54,7 @@ test('multiple menu commands', async function (t) {
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
-  await createSymlinkAsync()
+  await createSymlinksAsync()
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
@@ -89,7 +89,7 @@ test('relaunch button', async function (t) {
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
-  await createSymlinkAsync()
+  await createSymlinksAsync()
   await buildAsync(true, false)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
@@ -110,15 +110,15 @@ test('relaunch button', async function (t) {
   await cleanUpAsync()
 })
 
-async function createSymlinkAsync() {
-  const sourcePath = resolve(__dirname, '..', '..', 'utilities')
-  const destinationPath = join(
-    process.cwd(),
-    'node_modules',
-    '@create-figma-plugin',
-    'utilities'
+async function createSymlinksAsync() {
+  await ensureSymlink(
+    resolve(__dirname, '..', '..', 'utilities'),
+    join(process.cwd(), 'node_modules', '@create-figma-plugin', 'utilities')
   )
-  await ensureSymlink(sourcePath, destinationPath)
+  await ensureSymlink(
+    resolve(__dirname, '..', '..', '..', 'node_modules', '@figma'),
+    join(process.cwd(), 'node_modules', '@figma')
+  )
 }
 
 async function cleanUpAsync() {

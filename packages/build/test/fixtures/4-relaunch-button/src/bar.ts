@@ -2,5 +2,5 @@
 
 export default function () {
   console.log('bar')
-  figma.stopPlugin()
+  figma.closePlugin()
 }
