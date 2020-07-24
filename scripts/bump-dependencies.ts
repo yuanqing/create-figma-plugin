@@ -1,8 +1,8 @@
-const globby = require('globby')
-const ncu = require('npm-check-updates')
-const path = require('path')
+import * as globby from 'globby'
+import * as ncu from 'npm-check-updates'
+import * as path from 'path'
 
-async function main() {
+async function main(): Promise<void> {
   const parentDirectory = path.resolve(__dirname, '..')
   const globs = [
     path.join(parentDirectory, 'package.json'),
