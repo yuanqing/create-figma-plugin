@@ -1,8 +1,9 @@
-const invalidCharactersRegex = /[^\d.+\-*/]/
 const floatOperandRegex = /^-?\d*(?:\.\d*)?$/
 const integerOperandRegex = /^-?\d*$/
 const operatorRegex = /[+\-*/]/
 const operatorSuffixRegex = /[+\-*/]$/
+const numbersRegex = /\d/
+const invalidCharactersRegex = /[^\d.+\-*/]/
 
 /**
  * Checks if `value` is a numeric expression, as input by a user. “Partial”
@@ -40,7 +41,11 @@ export function isValidNumericInput(
  * @returns The result of evaluating the given `expression`
  */
 export function evaluateNumericExpression(value: string): null | number {
-  if (value === '' || invalidCharactersRegex.test(value) === true) {
+  if (
+    value === '' ||
+    numbersRegex.test(value) === false ||
+    invalidCharactersRegex.test(value) === true
+  ) {
     return null
   }
   if (operatorRegex.test(value) === true) {

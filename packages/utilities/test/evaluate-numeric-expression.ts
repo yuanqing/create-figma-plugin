@@ -2,6 +2,13 @@ import { test } from 'tap'
 
 import { evaluateNumericExpression } from '../src/number'
 
+test('invalid expressions', async function (t) {
+  t.plan(3)
+  t.is(evaluateNumericExpression(''), null)
+  t.is(evaluateNumericExpression('-'), null)
+  t.is(evaluateNumericExpression('-.'), null)
+})
+
 test('positive numbers', async function (t) {
   t.plan(5)
   t.is(evaluateNumericExpression('0'), 0)
