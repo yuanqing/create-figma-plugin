@@ -34,10 +34,10 @@
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.74-alpha.1",
     "degit": "^2.8.0",
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^9.0.1",
     "git-user-name": "^2.0.0",
-    "globby": "^11.0.0",
-    "inquirer": "^7.1.0",
+    "globby": "^11.0.1",
+    "inquirer": "^7.3.3",
     "is-utf8": "^0.2.1",
     "mustache": "^4.0.1",
     "sade": "^1.7.3",

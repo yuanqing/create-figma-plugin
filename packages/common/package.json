@@ -32,8 +32,8 @@
     "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
   },
   "dependencies": {
-    "@sindresorhus/slugify": "^0.11.0",
-    "fs-extra": "^9.0.0",
+    "@sindresorhus/slugify": "^1.1.0",
+    "fs-extra": "^9.0.1",
     "npmlog": "^4.1.2"
   }
 }
