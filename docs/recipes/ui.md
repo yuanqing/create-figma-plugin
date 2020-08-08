@@ -80,7 +80,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 ```scss
 // src/styles.scss
 
-@import "@create-figma-plugin/ui/src/scss/constants";
+@import "@create-figma-plugin/ui/lib/scss/constants";
 
 .container {
   background-color: $color-black-10;
