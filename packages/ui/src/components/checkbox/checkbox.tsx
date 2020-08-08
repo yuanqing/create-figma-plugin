@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnChange } from '../../types'
+import { HTMLProps, OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './checkbox.scss'
 
@@ -28,7 +28,7 @@ export function Checkbox({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: CheckboxProps): h.JSX.Element {
+}: HTMLProps<CheckboxProps, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)

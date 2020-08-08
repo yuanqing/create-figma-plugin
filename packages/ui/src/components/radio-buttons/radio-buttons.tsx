@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnChange, Space } from '../../types'
+import { HTMLProps, OnChange, Space } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
 import styles from './radio-buttons.scss'
@@ -34,7 +34,7 @@ export function RadioButtons({
   space = 'small',
   value,
   ...rest
-}: RadioButtonsProps): h.JSX.Element {
+}: HTMLProps<RadioButtonsProps, HTMLInputElement>): h.JSX.Element {
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       const keyCode = event.keyCode

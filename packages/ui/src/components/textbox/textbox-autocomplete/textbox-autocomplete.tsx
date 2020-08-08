@@ -5,7 +5,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
-import { Option } from '../../../types'
+import { HTMLProps, Option } from '../../../types'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -49,7 +49,7 @@ export function TextboxAutocomplete({
   top,
   value: committedValue,
   ...rest
-}: TextboxAutocompleteProps): h.JSX.Element {
+}: HTMLProps<TextboxAutocompleteProps, HTMLInputElement>): h.JSX.Element {
   const rootElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: preact.RefObject<HTMLDivElement> = useRef(null)

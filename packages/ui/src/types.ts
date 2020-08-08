@@ -1,4 +1,12 @@
+import { h } from 'preact'
+
 export type Alignment = 'left' | 'center' | 'right'
+
+export type HTMLProps<Props, RefType extends EventTarget = EventTarget> = Omit<
+  h.JSX.HTMLAttributes<RefType>,
+  keyof Props
+> &
+  Props
 
 export type OnChange = (
   state?: any,

@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnChange } from '../../types'
+import { HTMLProps, OnChange } from '../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -37,7 +37,7 @@ export function SegmentedControl<T extends string | number | boolean = string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: SegmentedControlProps<T>): h.JSX.Element {
+}: HTMLProps<SegmentedControlProps<T>, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')

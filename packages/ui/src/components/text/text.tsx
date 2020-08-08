@@ -2,7 +2,7 @@
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 
-import { Alignment } from '../../types'
+import { Alignment, HTMLProps } from '../../types'
 import styles from './text.scss'
 
 export interface TextProps {
@@ -20,7 +20,7 @@ export function Text({
   muted,
   numeric,
   ...rest
-}: TextProps): h.JSX.Element {
+}: HTMLProps<TextProps, HTMLDivElement>): h.JSX.Element {
   return (
     <div
       {...rest}

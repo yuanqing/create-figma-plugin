@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnSelectedFiles } from '../../types'
+import { HTMLProps, OnSelectedFiles } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './file-upload-button.scss'
@@ -33,7 +33,7 @@ export function FileUploadButton({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-}: FileUploadButtonProps): h.JSX.Element {
+}: HTMLProps<FileUploadButtonProps, HTMLInputElement>): h.JSX.Element {
   const handleClick = useCallback(function (event: MouseEvent) {
     ;(event.target as HTMLElement).focus()
   }, [])

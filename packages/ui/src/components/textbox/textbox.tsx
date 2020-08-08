@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { OnChange } from '../../types'
+import { HTMLProps, OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './textbox.scss'
 
@@ -30,7 +30,7 @@ export function Textbox({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: TextboxProps): h.JSX.Element {
+}: HTMLProps<TextboxProps, HTMLInputElement>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
