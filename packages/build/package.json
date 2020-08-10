@@ -34,27 +34,27 @@
     "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
   },
   "dependencies": {
-    "@babel/core": "^7.10.5",
-    "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-transform-react-jsx": "^7.10.4",
     "@babel/plugin-transform-template-literals": "^7.10.5",
     "@create-figma-plugin/common": "^0.0.74-alpha.1",
     "@create-figma-plugin/utilities": "^0.0.74",
     "babel-loader": "^8.1.0",
-    "chokidar": "^3.4.1",
-    "css-loader": "^3.6.0",
+    "chokidar": "^3.4.2",
+    "css-loader": "^4.2.1",
     "find-up": "^4.1.0",
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "sade": "^1.7.3",
     "sass": "^1.26.10",
-    "sass-loader": "^9.0.2",
+    "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
     "temp-write": "^4.0.0",
-    "terser-webpack-plugin": "^3.0.7",
-    "ts-loader": "^8.0.1",
+    "terser-webpack-plugin": "^4.0.0",
+    "ts-loader": "^8.0.2",
     "typed-css-modules": "^0.6.4",
     "typescript": "^3.9.7",
-    "webpack": "^4.43.0"
+    "webpack": "^4.44.1"
   }
 }
