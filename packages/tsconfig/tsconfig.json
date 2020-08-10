@@ -5,7 +5,6 @@
     "jsxFactory": "h",
     "module": "es2020",
     "moduleResolution": "node",
-    "strict": true,
     "target": "es2016"
   }
 }
