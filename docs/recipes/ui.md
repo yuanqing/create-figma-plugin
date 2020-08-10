@@ -35,9 +35,7 @@ Next, create a file for our UI (eg. `src/ui.tsx` — the file must have a `tsx` 
 import { render, Container, Text, VerticalSpace } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 
-export default render(Plugin)
-
-function Plugin (props) {
+function Plugin (props: { greeting: string }) : h.JSX.Element {
   return (
     <Container space='medium'>
       <VerticalSpace space='medium' />
@@ -46,6 +44,8 @@ function Plugin (props) {
     </Container>
   )
 }
+
+export default render(Plugin)
 ```
 
 See that:
