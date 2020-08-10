@@ -1,0 +1,28 @@
+{
+  "name": "@create-figma-plugin/tsconfig",
+  "version": "0.0.74",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "TypeScript config for plugins built using the Create Figma Plugin toolkit",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/create-figma-plugin.git",
+    "directory": "packages/tsconfig"
+  },
+  "files": [
+    "tsconfig.json"
+  ],
+  "main": "tsconfig.json",
+  "scripts": {
+    "fix": "prettier --loglevel error --write '*.json'"
+  }
+}

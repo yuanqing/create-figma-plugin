@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@create-figma-plugin/build": "*",
+    "@create-figma-plugin/tsconfig": "*",
     "@figma/plugin-typings": "*"
   },
   "scripts": {

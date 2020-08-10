@@ -45,14 +45,7 @@ export function createWebpackConfig(
           use: [
             babelLoader,
             {
-              loader: 'ts-loader',
-              options: {
-                compilerOptions: {
-                  module: 'es2020',
-                  moduleResolution: 'node',
-                  target: 'es2016'
-                }
-              }
+              loader: 'ts-loader'
             }
           ]
         },
