@@ -49,7 +49,7 @@
     "preact": "^10.4.6"
   },
   "sideEffects": [
-    "./src/scss/{base,font-face,reset}.scss"
+    "./lib/scss/*.scss"
   ],
   "eslint": {
     "ignore": [
