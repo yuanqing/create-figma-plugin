@@ -35,7 +35,7 @@ Next, create a file for our UI (eg. `src/ui.tsx` — the file must have a `tsx` 
 import { render, Container, Text, VerticalSpace } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 
-function Plugin (props: { greeting: string }) : h.JSX.Element {
+function Plugin (props: { greeting: string }) {
   return (
     <Container space='medium'>
       <VerticalSpace space='medium' />
@@ -94,8 +94,6 @@ import { render } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 import styles from './styles.scss'
 
-export default render(Plugin)
-
 function Plugin () {
   // ...
   return (
@@ -104,6 +102,8 @@ function Plugin () {
     </div>
   )
 }
+
+export default render(Plugin)
 ```
 
 ## Using a custom UI library
@@ -113,7 +113,7 @@ To use a custom UI library (instead of `@create-figma-plugin/ui`), write our plu
 ```ts
 // src/ui.ts
 
-export default function (rootNode, data) {
+export default function (rootNode: HTMLElement, data: { greeting: string }) {
   rootNode.innerHTML = `<p>${data.greeting}</p>` //=> <h1>Hello, World!</h1>
 }
 ```
