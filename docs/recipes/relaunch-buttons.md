@@ -11,7 +11,7 @@
         {
           "name": "Organize Layers",
           "main": "src/organize-layers/main.ts",
-          "ui": "src/organize-layers/ui.ts"
+          "ui": "src/organize-layers/ui.tsx"
         },
         "-",
         {
@@ -23,7 +23,7 @@
 +       "organizeLayers": {
 +         "name": "Organize Layers",
 +         "main": "src/organize-layers/main.ts",
-+         "ui": "src/organize-layers/ui.ts"
++         "ui": "src/organize-layers/ui.tsx"
 +       }
 +     }
     }

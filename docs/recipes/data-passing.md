@@ -26,7 +26,7 @@ export default function () {
 ```
 
 ```tsx
-// src/ui.ts
+// src/ui.tsx
 
 /** @jsx h */
 import { render, Button } from '@create-figma-plugin/ui'

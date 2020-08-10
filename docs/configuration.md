@@ -58,7 +58,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
     "id": "767379335945775056",
     "name": "Draw Slice Over Selection",
     "main": "src/main.ts",
-    "ui": "src/ui.ts"
+    "ui": "src/ui.tsx"
   }
 }
 ```
@@ -94,7 +94,7 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
       {
         "name": "Settings",
         "main": "src/settings/main.ts",
-        "ui": "src/settings/ui.ts"
+        "ui": "src/settings/ui.tsx"
       }
     ]
   }
@@ -125,7 +125,7 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/r
       {
         "name": "Organize Layers",
         "main": "src/organize-layers/main.ts",
-        "ui": "src/organize-layers/ui.ts"
+        "ui": "src/organize-layers/ui.tsx"
       },
       "-",
       {
@@ -137,7 +137,7 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/r
       "organizeLayers": {
         "name": "Organize Layers",
         "main": "src/organize-layers/main.ts",
-        "ui": "src/organize-layers/ui.ts"
+        "ui": "src/organize-layers/ui.tsx"
       }
     }
   }

@@ -16,7 +16,7 @@ Commands can be specified on the [**`"menu"`**](/docs/configuration.md#menu) key
 +       {
 +         "name": "Settings",
 +         "main": "src/settings/main.ts",
-+         "ui": "src/settings/ui.ts"
++         "ui": "src/settings/ui.tsx"
 +       }
 +     ]
     }

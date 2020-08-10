@@ -26,10 +26,10 @@ export default function () {
 
 `showUI` takes two parameters, and the second `data` parameter is useful for passing some initialising data to the UI.
 
-Next, create a file for our UI (eg. `src/ui.ts`):
+Next, create a file for our UI (eg. `src/ui.tsx` — the file must have a `tsx` extension):
 
 ```tsx
-// src/ui.ts
+// src/ui.tsx
 
 /** @jsx h */
 import { render, Container, Text, VerticalSpace } from '@create-figma-plugin/ui'
@@ -62,7 +62,7 @@ Finally, in `package.json`, point to our UI file on the [**`"ui"`**](/docs/confi
       ...
       "name": "Hello World",
       "main": "src/main.ts",
-+     "ui": "src/ui.ts"
++     "ui": "src/ui.tsx"
     }
   }
 ```
@@ -88,7 +88,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 ```
 
 ```tsx
-// src/ui.ts
+// src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'
 import { h } from 'preact'
