@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { OnSelectedFiles } from '../../types'
+import { HTMLProps, OnSelectedFiles } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './file-upload-dropzone.scss'
 
@@ -22,7 +22,7 @@ export function FileUploadDropzone({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-}: FileUploadDropzoneProps): h.JSX.Element {
+}: HTMLProps<FileUploadDropzoneProps, HTMLInputElement>): h.JSX.Element {
   const [isDropActive, setIsDropActive] = useState(false)
   const filterFiles = useCallback(
     function (files: FileList): Array<File> {
