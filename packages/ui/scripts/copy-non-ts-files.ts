@@ -1,5 +1,5 @@
 import * as fs from 'fs-extra'
-import globby from 'globby'
+import * as globby from 'globby'
 import * as path from 'path'
 
 async function main(): Promise<void> {

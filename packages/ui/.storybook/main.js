@@ -8,9 +8,6 @@ function webpackFinal (config) {
         loader: 'style-loader'
       },
       {
-        loader: '@teamsupercell/typings-for-css-modules-loader'
-      },
-      {
         loader: 'css-loader',
         options: {
           importLoaders: 1,
@@ -23,19 +20,6 @@ function webpackFinal (config) {
     ],
     include: resolve(__dirname, '..', 'src')
   })
-  config.module.rules.push({
-    test: /\.tsx?$/,
-    use: {
-      loader: 'ts-loader'
-    }
-  })
-  config.module.rules.push({
-    test: /\.stories\.tsx$/,
-    use: [{ loader: '@storybook/source-loader' }],
-    include: resolve(__dirname, '..', 'src'),
-    enforce: 'pre'
-  })
-  config.resolve.extensions.push('.ts', '.tsx');
   return config
 }
 
