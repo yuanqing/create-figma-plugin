@@ -3,12 +3,18 @@ import * as globby from 'globby'
 import * as mustache from 'mustache'
 import { join } from 'path'
 
+import { CreateFigmaPluginVersions } from './types/create-figma-plugin-versions'
 import { Settings } from './types/settings'
+
 const isUtf8 = require('is-utf8')
+
+type Values = Settings & {
+  createFigmaPluginVersions: CreateFigmaPluginVersions
+}
 
 export async function interpolateValuesIntoFilesAsync(
   directory: string,
-  values: Settings
+  values: Values
 ): Promise<void> {
   const filePaths = await globby('**/*', {
     cwd: directory,
@@ -26,6 +32,6 @@ export async function interpolateValuesIntoFilesAsync(
   )
 }
 
-function interpolate(string: string, values: Settings): string {
+function interpolate(string: string, values: Values): string {
   return mustache.render(string, values)
 }

@@ -20,6 +20,7 @@
     "@storybook/source-loader": "^5.3.19",
     "@storybook/storybook-deployer": "^2.8.6",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.1",
+    "@types/degit": "^2.8.0",
     "@types/fs-extra": "^9.0.1",
     "@types/git-user-name": "^2.0.0",
     "@types/inquirer": "^7.3.0",

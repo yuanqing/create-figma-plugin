@@ -1,6 +1,6 @@
+import degit from 'degit'
 import { copy, ensureDir, move, pathExists } from 'fs-extra'
 import { join, resolve } from 'path'
-const degit = require('degit')
 
 const gitHubRepositoryRegex = /[\w-]+\/[\w-]+/
 
@@ -29,5 +29,5 @@ export async function cloneFromTemplateAsync(
   if (gitHubRepositoryRegex.test(template) === false) {
     throw new Error('Invalid GitHub repository')
   }
-  await degit(template).clone(pluginDirectoryPath)
+  await degit(template, {}).clone(pluginDirectoryPath)
 }
