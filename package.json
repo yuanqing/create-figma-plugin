@@ -19,7 +19,6 @@
     "@storybook/preact": "^6.0.6",
     "@storybook/source-loader": "^6.0.6",
     "@storybook/storybook-deployer": "^2.8.6",
-    "@teamsupercell/typings-for-css-modules-loader": "^2.2.1",
     "@types/degit": "^2.8.0",
     "@types/fs-extra": "^9.0.1",
     "@types/git-user-name": "^2.0.0",
@@ -54,8 +53,7 @@
     "ts-node": "^8.10.2",
     "typedoc": "^0.18.0",
     "typedoc-plugin-markdown": "^2.4.0",
-    "typescript": "^3.9.7",
-    "typescript-plugin-css-modules": "^2.4.0"
+    "typescript": "^3.9.7"
   },
   "eslintConfig": {
     "extends": "yuanqing",
