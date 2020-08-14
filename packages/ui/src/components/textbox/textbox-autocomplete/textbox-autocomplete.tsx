@@ -1,6 +1,4 @@
 /** @jsx h */
-import '../../../scss/base.scss'
-
 import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'

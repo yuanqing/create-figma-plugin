@@ -1,6 +1,4 @@
 /** @jsx h */
-import '../../../scss/base.scss'
-
 import {
   evaluateNumericExpression,
   isValidNumericInput
