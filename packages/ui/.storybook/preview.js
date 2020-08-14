@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 import { addDecorator, addParameters, configure } from '@storybook/preact'
+require('../src/scss/base.scss')
 
 addDecorator(function (Story) {
   return <Story />
