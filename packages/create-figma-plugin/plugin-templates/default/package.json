@@ -21,11 +21,11 @@
   "repository": "{{{repositoryUrl}}}",
 {{/repositoryUrl}}
   "dependencies": {
-    "@create-figma-plugin/utilities": "^{{{createFigmaPluginVersions.utilities}}}"
+    "@create-figma-plugin/utilities": "{{{createFigmaPluginVersions.utilities}}}"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "^{{{createFigmaPluginVersions.build}}}",
-    "@create-figma-plugin/tsconfig": "^{{{createFigmaPluginVersions.tsconfig}}}",
+    "@create-figma-plugin/build": "{{{createFigmaPluginVersions.build}}}",
+    "@create-figma-plugin/tsconfig": "{{{createFigmaPluginVersions.tsconfig}}}",
     "@figma/plugin-typings": "^1.16.1"
   },
   "scripts": {
