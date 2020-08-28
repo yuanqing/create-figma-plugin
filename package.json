@@ -5,7 +5,7 @@
     "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
     "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf '*.log'",
     "docs": "lerna run --scope @create-figma-plugin/utilities docs",
-    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
     "postinstall": "yarn run build",
     "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
