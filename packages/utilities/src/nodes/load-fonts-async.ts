@@ -16,9 +16,12 @@ export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
 }
 
 function computeUniqueFontsUsedInNode(node: TextNode): Array<FontName> {
+  const length = node.characters.length
+  if (length === 0) {
+    return [node.fontName as FontName]
+  }
   const result: { [key: string]: FontName } = {}
   let i = -1
-  const length = node.characters.length
   while (++i < length) {
     const fontName = node.getRangeFontName(i, i + 1) as FontName
     const key = `${fontName.family}-${fontName.style}`
