@@ -1,8 +1,8 @@
 import { log, readConfigAsync } from '@create-figma-plugin/common'
 
 import { buildBundleAsync } from './build-bundle-async'
-import { buildCssModulesTypings } from './build-css-modules-typings'
 import { buildManifestAsync } from './build-manifest-async'
+import { buildScssModulesTypings } from './build-scss-modules-typings'
 
 export async function buildAsync(
   isDevelopment: boolean,
@@ -11,7 +11,7 @@ export async function buildAsync(
   log.info('Building plugin...')
   const config = await readConfigAsync()
   try {
-    await buildCssModulesTypings()
+    await buildScssModulesTypings()
     await buildBundleAsync(config, isDevelopment)
     await buildManifestAsync(config)
   } catch (error) {
