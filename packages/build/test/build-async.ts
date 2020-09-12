@@ -40,16 +40,38 @@ test('basic command', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'foo'
+    name: 'x'
   })
   t.true(await pathExists('build/main.js'))
   t.false(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
+test('command with UI', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '3-command-with-ui'))
+  await cleanUpAsync()
+  t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
+  t.false(await pathExists('node_modules'))
+  await createSymlinksAsync()
+  await buildAsync(true, false)
+  const manifestJsonPath = join(process.cwd(), 'manifest.json')
+  t.deepEqual(require(manifestJsonPath), {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    name: 'x',
+    ui: 'build/ui.js'
+  })
+  t.true(await pathExists('build/main.js'))
+  t.true(await pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
 test('multiple menu commands', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '3-multiple-menu-commands'))
+  process.chdir(join(__dirname, 'fixtures', '4-multiple-menu-commands'))
   await cleanUpAsync()
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
@@ -63,18 +85,18 @@ test('multiple menu commands', async function (t) {
     main: 'build/main.js',
     menu: [
       {
-        command: 'baz--default',
-        name: 'bar'
+        command: 'foo--default',
+        name: 'y'
       },
       {
         separator: true
       },
       {
-        command: 'quux--default',
-        name: 'qux'
+        command: 'bar/main--default',
+        name: 'z'
       }
     ],
-    name: 'foo',
+    name: 'x',
     ui: 'build/ui.js'
   })
   t.true(await pathExists('build/main.js'))
@@ -84,7 +106,7 @@ test('multiple menu commands', async function (t) {
 
 test('relaunch button', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '4-relaunch-button'))
+  process.chdir(join(__dirname, 'fixtures', '5-relaunch-button'))
   await cleanUpAsync()
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
@@ -96,15 +118,38 @@ test('relaunch button', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'foo',
+    name: 'x',
     relaunchButtons: [
       {
-        command: 'baz',
-        name: 'qux'
+        command: 'bar',
+        name: 'y'
       }
-    ],
+    ]
+  })
+  t.true(await pathExists('build/main.js'))
+  t.false(await pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('custom styles', async function (t) {
+  t.plan(8)
+  process.chdir(join(__dirname, 'fixtures', '6-custom-styles'))
+  await cleanUpAsync()
+  t.false(await pathExists('src/styles.scss.d.ts'))
+  t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
+  t.false(await pathExists('node_modules'))
+  await createSymlinksAsync()
+  await buildAsync(true, false)
+  const manifestJsonPath = join(process.cwd(), 'manifest.json')
+  t.deepEqual(require(manifestJsonPath), {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    name: 'x',
     ui: 'build/ui.js'
   })
+  t.true(await pathExists('src/styles.scss.d.ts'))
   t.true(await pathExists('build/main.js'))
   t.true(await pathExists('build/ui.js'))
   await cleanUpAsync()
@@ -122,15 +167,28 @@ async function createSymlinksAsync() {
 }
 
 async function cleanUpAsync() {
-  await new Promise(function (resolve, reject) {
-    rimraf(join(process.cwd(), '{build,manifest.json,node_modules}'), function (
-      error
-    ) {
-      if (error) {
-        reject(error)
-        return
-      }
-      resolve()
+  const promises = [
+    new Promise(function (resolve, reject) {
+      rimraf(
+        join(process.cwd(), '{build,manifest.json,node_modules}'),
+        function (error) {
+          if (error) {
+            reject(error)
+            return
+          }
+          resolve()
+        }
+      )
+    }),
+    new Promise(function (resolve, reject) {
+      rimraf(join(process.cwd(), 'src', '*.scss.d.ts'), function (error) {
+        if (error) {
+          reject(error)
+          return
+        }
+        resolve()
+      })
     })
-  })
+  ]
+  await Promise.all(promises)
 }
