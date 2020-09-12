@@ -16,6 +16,8 @@ export async function buildScssModulesTypings(): Promise<void> {
   }
   await execa(tsm, [
     pattern,
+    '--nameFormat',
+    'none',
     '--implementation',
     'sass',
     '--includePaths',
