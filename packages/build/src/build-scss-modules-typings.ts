@@ -14,5 +14,12 @@ export async function buildScssModulesTypings(): Promise<void> {
   if (typeof tsm === 'undefined') {
     throw new Error('Cannot find `tsm`')
   }
-  await execa(tsm, [pattern, '--implementation', 'sass'])
+  await execa(tsm, [
+    pattern,
+    '--implementation',
+    'sass',
+    '--includePaths',
+    'node_modules',
+    '../../node_modules'
+  ])
 }
