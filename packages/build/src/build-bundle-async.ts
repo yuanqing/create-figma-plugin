@@ -98,15 +98,15 @@ async function createUiEntryFileAsync(
     require('@create-figma-plugin/utilities/lib/events');
     const rootNode = document.getElementById('create-figma-plugin');
     const modules = ${createRequireCode(modules)};
-    const commandId = __COMMAND__ === null ? '${
+    const commandId = __FIGMA_COMMAND__ === null ? '${
       modules[0].commandId
-    }' : __COMMAND__;
+    }' : __FIGMA_COMMAND__;
     if (typeof modules[commandId] === 'undefined') {
       throw new Error(
         'UI not defined for the command corresponding to ' + commandId
       );
     }
-    modules[commandId](rootNode, __DATA__);
+    modules[commandId](rootNode, __SHOW_UI_DATA__);
   `
   return tempWrite(fileContent)
 }

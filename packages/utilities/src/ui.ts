@@ -16,10 +16,10 @@ export function showUI(options: ShowUIOptions, data: any = {}): void {
   const html = `
     <div id="create-figma-plugin"></div>
     <script>
-      const __COMMAND__ = ${
+      const __FIGMA_COMMAND__ = ${
         figma.command === '' ? 'null' : `'${figma.command}'`
       };
-      const __DATA__ = ${JSON.stringify(data)};
+      const __SHOW_UI_DATA__ = ${JSON.stringify(data)};
       ${__html__}
     <${CLOSING_SLASH}script>
   `
