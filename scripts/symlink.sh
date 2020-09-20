@@ -16,7 +16,7 @@ main() {
   TARGET_DIRECTORY=$(cd "$2"; pwd)
 
   rm -rf "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
-  mkdir "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
+  mkdir -p "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/build "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/common "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/tsconfig "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
@@ -24,6 +24,7 @@ main() {
   ln -s "$SOURCE_DIRECTORY"/packages/utilities "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
 
   rm -rf "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
+  mkdir -p "$TARGET_DIRECTORY"/node_modules/.bin
   ln -s "$SOURCE_DIRECTORY"/packages/build/lib/cli.js "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
   chmod +x "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
 }
