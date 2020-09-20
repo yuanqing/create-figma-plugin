@@ -108,7 +108,7 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 - [Figma plugin basics](/docs/basics.md#readme)
 - [Configuration](/docs/configuration.md#readme)
-- [Utility functions](/docs/utilities/README.md##modules)
+- [Utility functions](/docs/utilities/README.md#modules)
 - [Preact component library (Storybook)](https://yuanqing.github.io/create-figma-plugin/)
 - [Contributing](/docs/contributing.md#readme)
 
