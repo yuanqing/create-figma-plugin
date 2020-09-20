@@ -74,9 +74,9 @@ async function createMainEntryFileAsync(
   const fileContent = `
     require('@create-figma-plugin/utilities/lib/events');
     const modules = ${createRequireCode(modules)};
-    const commandId = ${
-      modules.length > 1 ? 'figma.command' : `'${modules[0].commandId}'`
-    };
+    const commandId = (figma.command === '' || ${modules.length === 1}) ? '${
+    modules[0].commandId
+  }' : figma.command;
     modules[commandId]();
   `
   return tempWrite(fileContent)
