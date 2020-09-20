@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/common",
-  "version": "0.0.79",
+  "version": "0.0.80",
   "publishConfig": {
     "access": "public"
   },
