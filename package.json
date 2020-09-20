@@ -25,6 +25,7 @@
     "@types/inquirer": "^7.3.1",
     "@types/mustache": "^4.0.1",
     "@types/natural-compare-lite": "^1.4.0",
+    "@types/node": "^14.11.1",
     "@types/npmlog": "^4.1.2",
     "@types/rimraf": "^3.0.0",
     "@types/sade": "^1.7.2",
