@@ -98,7 +98,7 @@ async function createUiEntryFileAsync(
     require('@create-figma-plugin/utilities/lib/events');
     const rootNode = document.getElementById('create-figma-plugin');
     const modules = ${createRequireCode(modules)};
-    const commandId = __FIGMA_COMMAND__ === null ? '${
+    const commandId = __FIGMA_COMMAND__ === '' ? '${
       modules[0].commandId
     }' : __FIGMA_COMMAND__;
     if (typeof modules[commandId] === 'undefined') {
