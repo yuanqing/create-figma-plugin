@@ -5,6 +5,7 @@ import naturalCompare from 'natural-compare-lite'
  * `nodes` array.
  *
  * @returns A new array of `SceneNode` objects
+ * @category Node
  */
 export function sortNodesByName(nodes: Array<SceneNode>): Array<SceneNode> {
   if (nodes.length < 2) {

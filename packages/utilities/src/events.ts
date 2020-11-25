@@ -13,6 +13,7 @@ let currentId = 0
  * Registers an `eventHandler` for the given `eventName`.
  *
  * @returns A function for deregistering the `eventHandler`
+ * @category Events
  */
 export function on(
   eventName: string,
@@ -30,6 +31,7 @@ export function on(
  * `eventName`.
  *
  * @returns A function for deregistering the `eventHandler`
+ * @category Events
  */
 export function once(
   eventName: string,
@@ -53,6 +55,8 @@ export function once(
  *
  * All `arguments` passed after `eventName` will be directly applied on the
  * event handler.
+ *
+ * @category Events
  */
 export const emit: (eventName: string, ...args: Array<any>) => void =
   isCommand === true

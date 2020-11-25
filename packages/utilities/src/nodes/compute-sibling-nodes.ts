@@ -1,5 +1,7 @@
 /**
  * Splits `nodes` into groups of sibling nodes.
+ *
+ * @category Node
  */
 export function computeSiblingNodes(
   nodes: Array<SceneNode>

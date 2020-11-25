@@ -5,6 +5,8 @@
  * Each node is also passed to a `stopTraversal` function. If you return
  * `false` in `stopTraversal` for a particular node, then its child nodes
  * will not be traversed.
+ *
+ * @category Node
  */
 export function traverseNode(
   node: SceneNode,

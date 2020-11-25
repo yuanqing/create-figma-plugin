@@ -5,6 +5,8 @@ const SPACE = '\u00a0'
 
 /**
  * Adds a `✔` prefix to the given `message`.
+ *
+ * @category String
  */
 export function formatSuccessMessage(message: string): string {
   return `${CHECK} ${SPACE} ${message}`
@@ -12,6 +14,8 @@ export function formatSuccessMessage(message: string): string {
 
 /**
  * Adds a `✘` prefix to the given `message`.
+ *
+ * @category String
  */
 export function formatErrorMessage(message: string): string {
   return `${CROSS} ${SPACE} ${message}`
@@ -19,6 +23,8 @@ export function formatErrorMessage(message: string): string {
 
 /**
  * Adds a `⚠` prefix to the given `message`.
+ *
+ * @category String
  */
 export function formatWarningMessage(message: string): string {
   return `${WARNING} ${SPACE} ${message}`
@@ -27,6 +33,8 @@ export function formatWarningMessage(message: string): string {
 /**
  * Returns `singular` if `number` is exactly `1`, else returns `plural`.
  * `plural` defaults to `${singular}s` if not specified.
+ *
+ * @category String
  */
 export function pluralize(
   number: number,

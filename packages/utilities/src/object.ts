@@ -1,5 +1,7 @@
 /**
  * Creates a deep copy of the given object.
+ *
+ * @category Object
  */
 export function cloneObject(object: any): any {
   const type = typeof object
@@ -28,6 +30,7 @@ export function cloneObject(object: any): any {
  * Performs a *shallow* comparison of arrays `a` and `b`.
  *
  * @returns `true` if `a` and `b` are the same, else `false`
+ * @category Object
  */
 export function compareArrays(a: Array<any>, b: Array<any>): boolean {
   if (a.length !== b.length) {
@@ -45,6 +48,7 @@ export function compareArrays(a: Array<any>, b: Array<any>): boolean {
  * Performs a *deep* comparison of objects `a` and `b`.
  *
  * @returns `true` if `a` and `b` are the same, else `false`
+ * @category Object
  */
 export function compareObjects(a: any, b: any): boolean {
   const type = typeof a
@@ -91,6 +95,7 @@ export function compareObjects(a: any, b: any): boolean {
  * objects.
  *
  * @returns An array of plain objects
+ * @category Object
  */
 export function extractAttributes(
   array: Array<{ [key: string]: any }>,

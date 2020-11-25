@@ -3,6 +3,7 @@
  * `nodes` array.
  *
  * @returns A new array of `SceneNode` objects
+ * @category Node
  */
 export function deduplicateNodes(nodes: Array<SceneNode>): Array<SceneNode> {
   const result: { [id: string]: SceneNode } = {}

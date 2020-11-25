@@ -3,6 +3,8 @@ import { getAbsolutePosition } from './absolute-position/get-absolute-position'
 /**
  * Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
  * the smallest bounding box that contains the given `node`.
+ *
+ * @category Node
  */
 export function computeBoundingBox(node: SceneNode): Rect {
   if (node.rotation === 0) {

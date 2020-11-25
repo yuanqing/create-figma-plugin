@@ -6,6 +6,8 @@
  * button in the Figma UI.
  *
  * See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
+ *
+ * @category Node
  */
 export function setRelaunchButton(
   node: BaseNode,

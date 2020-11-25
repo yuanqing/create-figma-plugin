@@ -1,5 +1,7 @@
 /**
  * Sets the `node` to the given `x` and `y` absolute position.
+ *
+ * @category Node
  */
 export function setAbsolutePosition(
   node: SceneNode,

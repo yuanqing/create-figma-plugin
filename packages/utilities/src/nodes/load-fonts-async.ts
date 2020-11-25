@@ -1,5 +1,7 @@
 /**
  * Loads the fonts used in all the text nodes in `nodes`.
+ *
+ * @category Node
  */
 export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
   const result: { [key: string]: FontName } = {}

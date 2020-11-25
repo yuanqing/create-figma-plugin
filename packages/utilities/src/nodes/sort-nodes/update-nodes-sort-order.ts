@@ -4,6 +4,8 @@ import { areSiblingNodes } from '../are-sibling-nodes'
 /**
  * Updates the layer list sort order to follow the sort order of the nodes
  * in the `siblingNodes` array.
+ *
+ * @category Node
  */
 export function updateNodesSortOrder(siblingNodes: Array<SceneNode>): boolean {
   const parent = siblingNodes[0].parent

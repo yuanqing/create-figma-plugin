@@ -12,6 +12,7 @@ const invalidCharactersRegex = /[^\d.+\-*/]/
  * specified.
  *
  * @returns `true` if `value` is a valid numeric expression, else `false`
+ * @category Number
  */
 export function isValidNumericInput(
   value: string,
@@ -39,6 +40,7 @@ export function isValidNumericInput(
  * Evaluates the given numeric `expression`.
  *
  * @returns The result of evaluating the given `expression`
+ * @category Number
  */
 export function evaluateNumericExpression(value: string): null | number {
   if (

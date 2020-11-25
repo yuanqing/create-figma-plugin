@@ -3,6 +3,8 @@ import { computeBoundingBox } from './compute-bounding-box'
 /**
  * Computes the absolute coordinates of the top-left and bottom-right
  * corners of the smallest bounding box that contains the given `nodes`.
+ *
+ * @category Node
  */
 export function computeMaximumBounds(
   nodes: Array<SceneNode>

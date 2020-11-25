@@ -8,6 +8,8 @@ const CLOSING_SLASH = '/'
  * Optionally pass on some initialising `data` from the command to the UI.
  *
  * See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
+ *
+ * @category UI
  */
 export function showUI(options: ShowUIOptions, data: any = {}): void {
   if (typeof __html__ === 'undefined') {

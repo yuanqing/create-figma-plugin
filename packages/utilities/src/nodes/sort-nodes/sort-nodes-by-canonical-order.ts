@@ -5,6 +5,7 @@ import { areSiblingNodes } from '../are-sibling-nodes'
  * the original `siblingNodes` array.
  *
  * @returns A new array of `SceneNode` objects
+ * @category Node
  */
 export function sortNodesByCanonicalOrder(
   siblingNodes: Array<SceneNode>

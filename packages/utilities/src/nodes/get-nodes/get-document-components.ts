@@ -2,6 +2,8 @@ import { traverseNode } from '../traverse-node'
 
 /**
  * Gets all the components in the current document.
+ *
+ * @category Node
  */
 export function getDocumentComponents(): Array<ComponentNode> {
   const result: Array<ComponentNode> = []

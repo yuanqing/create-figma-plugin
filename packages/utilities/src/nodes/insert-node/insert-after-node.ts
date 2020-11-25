@@ -1,5 +1,7 @@
 /**
  * Inserts `node` after the `referenceNode` in the layer list.
+ *
+ * @category Node
  */
 export function insertAfterNode(
   node: SceneNode,

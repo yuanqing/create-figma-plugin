@@ -1,5 +1,7 @@
 /**
  * Inserts `node` before the `referenceNode` in the layer list.
+ *
+ * @category Node
  */
 export function insertBeforeNode(
   node: SceneNode,
