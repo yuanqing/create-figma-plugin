@@ -168,7 +168,7 @@ async function createSymlinksAsync() {
 
 async function cleanUpAsync() {
   const promises = [
-    new Promise(function (resolve, reject) {
+    new Promise<void>(function (resolve, reject) {
       rimraf(
         join(process.cwd(), '{build,manifest.json,node_modules}'),
         function (error) {
@@ -180,7 +180,7 @@ async function cleanUpAsync() {
         }
       )
     }),
-    new Promise(function (resolve, reject) {
+    new Promise<void>(function (resolve, reject) {
       rimraf(join(process.cwd(), 'src', '*.scss.d.ts'), function (error) {
         if (error) {
           reject(error)
