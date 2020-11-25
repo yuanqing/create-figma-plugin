@@ -1,7 +1,7 @@
 import { exec } from 'child_process'
 
 export async function installDependenciesAsync(cwd: string): Promise<void> {
-  await new Promise(function (resolve, reject) {
+  await new Promise<void>(function (resolve, reject) {
     const command = isYarn() === true ? 'yarn install' : 'npm install'
     exec(command, { cwd }, function (error) {
       if (error) {
