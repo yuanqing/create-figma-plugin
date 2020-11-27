@@ -2,9 +2,9 @@
 
 `@create-figma-plugin/utilities` offers 3 functions to facilitate data passing (in both directions) between our plugin command’s main and UI contexts:
 
-- [`on(eventName, eventHandler)`](/docs/utilities/modules/_events_.md#on) — Registers an `eventHandler` for the given `eventName`.
-- [`once(eventName, eventHandler)`](/docs/utilities/modules/_events_.md#once) — Ditto `on`, only that the `eventHandler` will run at most once.
-- [`emit(eventName *[, ...arguments]*)`](/docs/utilities/modules/_events_.md#const-emit) — Calling `emit` in the main context invokes the event handler for the matching `eventName` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching `eventName` in the main context. All `arguments` passed after `eventName` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
+- [`on(eventName, eventHandler)`](/docs/utilities.md#oneventname-eventhandler) — Registers an `eventHandler` for the given `eventName`.
+- [`once(eventName, eventHandler)`](/docs/utilities.md#onceeventname-eventhandler) — Ditto `on`, only that the `eventHandler` will run at most once.
+- [`emit(eventName, ...args)`](/docs/utilities.md#emiteventname-args) — Calling `emit` in the main context invokes the event handler for the matching `eventName` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching `eventName` in the main context. All `arguments` passed after `eventName` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
 
 Consider a toy example:
 

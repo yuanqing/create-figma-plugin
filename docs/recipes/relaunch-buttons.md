@@ -35,7 +35,7 @@ See that:
 - **`"organizeLayers"`** is the `relaunchButtonId`.
 - The object corresponding to **`"organizeLayers"`** specifies the command that runs when the relaunch button is clicked.
 
-Then, call [`setRelaunchButton`](/docs/utilities/modules/_nodes_set_relaunch_button_.md#setrelaunchbutton) in our plugin command’s main entry point:
+Then, call [`setRelaunchButton`](/docs/utilities.md#setrelaunchbuttonnode-relaunchbuttonid--options) in our plugin command’s main entry point:
 
 ```ts
 // src/organize-layers/main.js
