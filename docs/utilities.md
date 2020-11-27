@@ -1,7 +1,7 @@
 # Utilities
 
 - [**Events**](#events)
-  - [emit()](#emit)
+  - [emit(eventName, ...args)](#emiteventname-args)
   - [on(eventName, eventHandler)](#oneventname-eventhandler)
   - [once(eventName, eventHandler)](#onceeventname-eventhandler)
 - [**Node**](#node)
@@ -20,7 +20,7 @@
   - [isWithinInstance(node)](#iswithininstancenode)
   - [loadFontsAsync(nodes)](#loadfontsasyncnodes)
   - [setAbsolutePosition(node, vector)](#setabsolutepositionnode-vector)
-  - [setRelaunchButton(node, key [, options])](#setrelaunchbuttonnode-key--options)
+  - [setRelaunchButton(node, relaunchButtonId [, options])](#setrelaunchbuttonnode-relaunchbuttonid--options)
   - [sortNodesByCanonicalOrder(siblingNodes)](#sortnodesbycanonicalordersiblingnodes)
   - [sortNodesByName(nodes)](#sortnodesbynamenodes)
   - [traverseNode(node, processNode [, stopTraversal])](#traversenodenode-processnode--stoptraversal)
@@ -46,11 +46,20 @@
 
 ## Events
 
-### emit()
+### emit(eventName, ...args)
 
-Calling `emit` in the main context invokes the event handler for the matching `eventName` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching `eventName` in the main context.
+Calling `emit` in the main context invokes the event handler for the
+matching `eventName` in your UI. Correspondingly, calling `emit` in your
+UI invokes the event handler for the matching `eventName` in the main
+context.
 
-All `arguments` passed after `eventName` will be directly applied on the event handler.
+All `args` passed after `eventName` will be directly applied on the
+event handler.
+
+#### *Parameters*
+
+- **`eventName`** (`string`)
+- **`...args`** (`Array<any>`)
 
 #### *Return type*
 
@@ -69,13 +78,16 @@ Registers an `eventHandler` for the given `eventName`.
 
 #### *Return type*
 
+Returns a function for deregistering the `eventHandler`.
+
 ```
 () => void
 ```
 
 ### once(eventName, eventHandler)
 
-Registers an `eventHandler` that will run at most once for the given `eventName`.
+Registers an `eventHandler` that will run at most once for the given
+`eventName`.
 
 #### *Parameters*
 
@@ -84,9 +96,12 @@ Registers an `eventHandler` that will run at most once for the given `eventName`
 
 #### *Return type*
 
+Returns a function for deregistering the `eventHandler`.
+
 ```
 () => void
 ```
+
 ## Node
 
 ### areSiblingNodes(nodes)
@@ -98,6 +113,9 @@ Checks if all nodes in `nodes` are sibling nodes.
 - **`nodes`** (`Array<SceneNode>`)
 
 #### *Return type*
+
+Returns `true` if all nodes in `nodes` are sibling nodes,
+else `false`.
 
 ```
 boolean
@@ -119,7 +137,8 @@ boolean
 
 ### computeBoundingBox(node)
 
-Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of the smallest bounding box that contains the given `node`.
+Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
+the smallest bounding box that contains the given `node`.
 
 #### *Parameters*
 
@@ -133,7 +152,8 @@ Rect
 
 ### computeMaximumBounds(nodes)
 
-Computes the absolute coordinates of the top-left and bottom-right corners of the smallest bounding box that contains the given `nodes`.
+Computes the absolute coordinates of the top-left and bottom-right
+corners of the smallest bounding box that contains the given `nodes`.
 
 #### *Parameters*
 
@@ -175,13 +195,16 @@ ImagePaint
 
 ### deduplicateNodes(nodes)
 
-Deduplicates the nodes in `nodes`. Does not modify the original `nodes` array.
+Deduplicates the nodes in `nodes`. Does not modify the original
+`nodes` array.
 
 #### *Parameters*
 
 - **`nodes`** (`Array<SceneNode>`)
 
 #### *Return type*
+
+Returns a new array of `SceneNode` objects.
 
 ```
 Array<SceneNode>
@@ -216,7 +239,8 @@ Array<ComponentNode>
 
 ### getSelectedNodesOrAllNodes()
 
-Gets the selected nodes, or all the top-level nodes on the current page if no nodes are selected.
+Gets the selected nodes, or all the top-level nodes on the current page if
+no nodes are selected.
 
 #### *Return type*
 
@@ -264,6 +288,8 @@ Checks if the given `node` is within an Instance.
 
 #### *Return type*
 
+Returns `true` if the `node` is within an Instance, else `false`.
+
 ```
 boolean
 ```
@@ -299,16 +325,20 @@ Sets the `node` to the given `x` and `y` absolute position.
 void
 ```
 
-### setRelaunchButton(node, key [, options])
+### setRelaunchButton(node, relaunchButtonId [, options])
 
-Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `node` for the command with the given `relaunchButtonId` as configured under [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) in `package.json`. `description` is the text displayed below the relaunch button in the Figma UI.
+Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
+on `node` for the command with the given `relaunchButtonId` as configured
+under [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) in
+`package.json`. `description` is the text displayed below the relaunch
+button in the Figma UI.
 
 See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
 
 #### *Parameters*
 
 - **`node`** (`BaseNode`)
-- **`key`** (`string`)
+- **`relaunchButtonId`** (`string`)
 - **`options`** (`object`) – *Optional.*
   - **`description`** (`string`)
 
@@ -320,7 +350,8 @@ void
 
 ### sortNodesByCanonicalOrder(siblingNodes)
 
-Sorts `siblingNodes` according to their layer list order. Does not modify the original `siblingNodes` array.
+Sorts `siblingNodes` according to their layer list order. Does not modify
+the original `siblingNodes` array.
 
 #### *Parameters*
 
@@ -328,13 +359,16 @@ Sorts `siblingNodes` according to their layer list order. Does not modify the or
 
 #### *Return type*
 
+Returns a new array of `SceneNode` objects.
+
 ```
 Array<SceneNode>
 ```
 
 ### sortNodesByName(nodes)
 
-Sorts `nodes` in alphabetical order. Does not modify the original `nodes` array.
+Sorts `nodes` in alphabetical order. Does not modify the original
+`nodes` array.
 
 #### *Parameters*
 
@@ -342,15 +376,20 @@ Sorts `nodes` in alphabetical order. Does not modify the original `nodes` array.
 
 #### *Return type*
 
+Returns a new array of `SceneNode` objects.
+
 ```
 Array<SceneNode>
 ```
 
 ### traverseNode(node, processNode [, stopTraversal])
 
-Traverses `node` and its child nodes recursively in a *depth-first* manner, passing each node to the specified `processNode` callback.
+Traverses `node` and its child nodes recursively in a *depth-first*
+manner, passing each node to the specified `processNode` callback.
 
-Each node is also passed to a `stopTraversal` function. If you return `false` in `stopTraversal` for a particular node, then its child nodes will not be traversed.
+Each node is also passed to a `stopTraversal` function. If you return
+`false` in `stopTraversal` for a particular node, then its child nodes
+will not be traversed.
 
 #### *Parameters*
 
@@ -366,7 +405,8 @@ void
 
 ### updateNodesSortOrder(siblingNodes)
 
-Updates the layer list sort order to follow the sort order of the nodes in the `siblingNodes` array.
+Updates the layer list sort order to follow the sort order of the nodes
+in the `siblingNodes` array.
 
 #### *Parameters*
 
@@ -377,6 +417,7 @@ Updates the layer list sort order to follow the sort order of the nodes in the `
 ```
 boolean
 ```
+
 ## Number
 
 ### evaluateNumericExpression(value)
@@ -389,13 +430,18 @@ Evaluates the given numeric `expression`.
 
 #### *Return type*
 
+Returns the result of evaluating the given `expression`.
+
 ```
 null | number
 ```
 
 ### isValidNumericInput(value [, integerOnly])
 
-Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid. Set `integerOnly` to `true` to check that the expression contains only integers. `integerOnly` defaults to `false` if not specified.
+Checks if `value` is a numeric expression, as input by a user. “Partial”
+inputs are considered valid. Set `integerOnly` to `true` to check that the
+expression contains only integers. `integerOnly` defaults to `false` if not
+specified.
 
 #### *Parameters*
 
@@ -404,9 +450,13 @@ Checks if `value` is a numeric expression, as input by a user. “Partial” inp
 
 #### *Return type*
 
+Returns `true` if `value` is a valid numeric expression,
+else `false`.
+
 ```
 boolean
 ```
+
 ## Object
 
 ### cloneObject(object)
@@ -434,6 +484,8 @@ Performs a *shallow* comparison of arrays `a` and `b`.
 
 #### *Return type*
 
+Returns `true` if `a` and `b` are the same, else `false`.
+
 ```
 boolean
 ```
@@ -449,13 +501,16 @@ Performs a *deep* comparison of objects `a` and `b`.
 
 #### *Return type*
 
+Returns `true` if `a` and `b` are the same, else `false`.
+
 ```
 boolean
 ```
 
 ### extractAttributes(array, attributes)
 
-Extracts the specified list of `attributes` from the given `array` of objects.
+Extracts the specified list of `attributes` from the given `array` of
+objects.
 
 #### *Parameters*
 
@@ -464,16 +519,20 @@ Extracts the specified list of `attributes` from the given `array` of objects.
 
 #### *Return type*
 
+Returns an array of plain objects.
+
 ```
 Array<{
   [key: string]: any;
 }>
 ```
+
 ## Settings
 
 ### loadSettingsAsync(defaultSettings)
 
-Loads your plugin’s `settings` (stored locally on the user’s computer). Values in `settings` default to an optional `defaultSettings` object.
+Loads your plugin’s `settings` (stored locally on the user’s computer).
+Values in `settings` default to an optional `defaultSettings` object.
 
 #### *Parameters*
 
@@ -487,7 +546,8 @@ Promise<Settings>
 
 ### saveSettingsAsync(settings)
 
-Saves the given `settings` for your plugin (stored locally on the user’s computer).
+Saves the given `settings` for your plugin (stored locally on the user’s
+computer).
 
 #### *Parameters*
 
@@ -498,6 +558,7 @@ Saves the given `settings` for your plugin (stored locally on the user’s compu
 ```
 Promise<void>
 ```
+
 ## String
 
 ### formatErrorMessage(message)
@@ -544,7 +605,8 @@ string
 
 ### pluralize(number, singular [, plural])
 
-Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` defaults to `${singular}s` if not specified.
+Returns `singular` if `number` is exactly `1`, else returns `plural`.
+`plural` defaults to `${singular}s` if not specified.
 
 #### *Parameters*
 
@@ -557,11 +619,14 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 ```
 string
 ```
+
 ## UI
 
 ### showUI(options [, data])
 
-Renders the UI correponding to the command in a modal within the Figma UI. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
+Renders the UI correponding to the command in a modal within the Figma UI.
+Specify the width, height, and visibility of the UI via `options`.
+Optionally pass on some initialising `data` from the command to the UI.
 
 See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
 
