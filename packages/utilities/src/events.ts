@@ -12,7 +12,7 @@ let currentId = 0
 /**
  * Registers an `eventHandler` for the given `eventName`.
  *
- * @returns A function for deregistering the `eventHandler`
+ * @returns Returns a function for deregistering the `eventHandler`.
  * @category Events
  */
 export function on(
@@ -30,7 +30,7 @@ export function on(
  * Registers an `eventHandler` that will run at most once for the given
  * `eventName`.
  *
- * @returns A function for deregistering the `eventHandler`
+ * @returns Returns a function for deregistering the `eventHandler`.
  * @category Events
  */
 export function once(
@@ -53,7 +53,7 @@ export function once(
  * UI invokes the event handler for the matching `eventName` in the main
  * context.
  *
- * All `arguments` passed after `eventName` will be directly applied on the
+ * All `args` passed after `eventName` will be directly applied on the
  * event handler.
  *
  * @category Events

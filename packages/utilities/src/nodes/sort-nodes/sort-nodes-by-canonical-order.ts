@@ -4,7 +4,7 @@ import { areSiblingNodes } from '../are-sibling-nodes'
  * Sorts `siblingNodes` according to their layer list order. Does not modify
  * the original `siblingNodes` array.
  *
- * @returns A new array of `SceneNode` objects
+ * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
 export function sortNodesByCanonicalOrder(

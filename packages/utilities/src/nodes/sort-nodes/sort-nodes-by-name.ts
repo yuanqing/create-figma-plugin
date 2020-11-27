@@ -4,7 +4,7 @@ import naturalCompare from 'natural-compare-lite'
  * Sorts `nodes` in alphabetical order. Does not modify the original
  * `nodes` array.
  *
- * @returns A new array of `SceneNode` objects
+ * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
 export function sortNodesByName(nodes: Array<SceneNode>): Array<SceneNode> {

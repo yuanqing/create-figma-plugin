@@ -1,7 +1,8 @@
 /**
  * Checks if all nodes in `nodes` are sibling nodes.
  *
- * @returns `true` if all nodes in `nodes` are sibling nodes, else `false`
+ * @returns Returns `true` if all nodes in `nodes` are sibling nodes,
+ * else `false`.
  * @category Node
  */
 export function areSiblingNodes(nodes: Array<SceneNode>): boolean {

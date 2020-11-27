@@ -2,7 +2,7 @@
  * Deduplicates the nodes in `nodes`. Does not modify the original
  * `nodes` array.
  *
- * @returns A new array of `SceneNode` objects
+ * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
 export function deduplicateNodes(nodes: Array<SceneNode>): Array<SceneNode> {

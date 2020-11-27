@@ -29,7 +29,7 @@ export function cloneObject(object: any): any {
 /**
  * Performs a *shallow* comparison of arrays `a` and `b`.
  *
- * @returns `true` if `a` and `b` are the same, else `false`
+ * @returns Returns `true` if `a` and `b` are the same, else `false`.
  * @category Object
  */
 export function compareArrays(a: Array<any>, b: Array<any>): boolean {
@@ -47,7 +47,7 @@ export function compareArrays(a: Array<any>, b: Array<any>): boolean {
 /**
  * Performs a *deep* comparison of objects `a` and `b`.
  *
- * @returns `true` if `a` and `b` are the same, else `false`
+ * @returns Returns `true` if `a` and `b` are the same, else `false`.
  * @category Object
  */
 export function compareObjects(a: any, b: any): boolean {
@@ -94,7 +94,7 @@ export function compareObjects(a: any, b: any): boolean {
  * Extracts the specified list of `attributes` from the given `array` of
  * objects.
  *
- * @returns An array of plain objects
+ * @returns Returns an array of plain objects.
  * @category Object
  */
 export function extractAttributes(
