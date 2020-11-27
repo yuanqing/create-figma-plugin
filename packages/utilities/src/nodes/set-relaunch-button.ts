@@ -13,7 +13,7 @@ export function setRelaunchButton(
   node: BaseNode,
   key: string,
   options?: { description: string }
-) {
+): void {
   const description = options?.description || ''
   node.setRelaunchData({ [key]: description })
 }
