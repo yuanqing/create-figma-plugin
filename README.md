@@ -6,7 +6,7 @@
 
 - [Initialize a new Figma plugin](#initialize-a-new-plugin) using a template
 - [Build your plugin](#build-the-plugin), with support for [multiple menu commands](/docs/recipes/multiple-commands.md#readme) that each have their own [UI implementation](/docs/recipes/ui.md#readme)
-- [Utility functions](/docs/utilities.md##modules) for common plugin operations
+- [Utility functions](/docs/utilities.md#readme) for common plugin operations
 - [A library of Preact components](https://yuanqing.github.io/create-figma-plugin/) that replicate the Figma UI design
 
 ## Quick start
@@ -108,7 +108,7 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 - [Figma plugin basics](/docs/basics.md#readme)
 - [Configuration](/docs/configuration.md#readme)
-- [Utility functions](/docs/utilities.md#modules)
+- [Utility functions](/docs/utilities.md#readme)
 - [Preact component library (Storybook)](https://yuanqing.github.io/create-figma-plugin/)
 - [Contributing](/docs/contributing.md#readme)
 
