@@ -16,7 +16,7 @@ export interface TextboxProps {
   onChange: OnChange
   placeholder?: string
   propagateEscapeKeyDown?: boolean
-  inputType?: 'text' | 'password'
+  type?: 'text' | 'password'
   value: null | string
 }
 
@@ -29,7 +29,7 @@ export function Textbox({
   onChange,
   placeholder,
   propagateEscapeKeyDown = true,
-  inputType = 'text',
+  type = 'text',
   value,
   ...rest
 }: HTMLProps<TextboxProps, HTMLInputElement>): h.JSX.Element {
@@ -114,7 +114,7 @@ export function Textbox({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         tabIndex={disabled === true ? undefined : 0}
-        type={inputType}
+        type={type}
         value={value === null ? 'Mixed' : value}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}

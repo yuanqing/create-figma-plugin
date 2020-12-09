@@ -53,10 +53,10 @@ export const Password = function () {
   const [state, setState] = useState({ foo: 'Hidden Text' })
   return (
     <Textbox
-      inputType="password"
       name="foo"
       noBorder
       onChange={setState}
+      type="password"
       value={state.foo}
     />
   )
