@@ -49,6 +49,19 @@ export const NoBorder = function () {
   return <Textbox name="foo" noBorder onChange={setState} value={state.foo} />
 }
 
+export const Password = function () {
+  const [state, setState] = useState({ foo: 'Hidden Text' })
+  return (
+    <Textbox
+      name="foo"
+      noBorder
+      onChange={setState}
+      type="password"
+      value={state.foo}
+    />
+  )
+}
+
 export const WithIcon = function () {
   const [state, setState] = useState({ foo: '' })
   return (
