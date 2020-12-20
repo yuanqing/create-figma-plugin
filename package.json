@@ -3,7 +3,7 @@
   "scripts": {
     "build": "lerna run build",
     "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
-    "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf build '*.log'",
+    "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && yarn run website-clean && rimraf '*.log'",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
     "postinstall": "yarn run build",
@@ -11,9 +11,11 @@
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
     "test": "lerna run test",
     "version": "lerna version",
-    "website": "yarn run website-docs && yarn run website-storybook",
-    "website-docs": "lerna run --scope @create-figma-plugin/utilities docs && single-page-markdown-website docs/index.md",
-    "website-storybook": "lerna run --scope @create-figma-plugin/ui storybook-build && cpy packages/ui/build build/ui"
+    "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook",
+    "website-build-docs": "lerna run --scope @create-figma-plugin/utilities docs && single-page-markdown-website docs/index.md",
+    "website-build-storybook": "lerna run --scope @create-figma-plugin/ui storybook-build && cpy packages/ui/build build/ui",
+    "website-clean": "rimraf build",
+    "website-deploy": "yarn run website-build && gh-pages --dist build"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.19.0",
@@ -39,6 +41,7 @@
     "eslint-config-yuanqing": "0.0.4",
     "fs-extra": "^9.0.1",
     "generate-ts-docs": "^0.0.6",
+    "gh-pages": "^3.1.0",
     "globby": "^11.0.1",
     "husky": "^4.3.6",
     "lerna": "^3.22.1",
@@ -48,8 +51,8 @@
     "preact": "^10.5.7",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "single-page-markdown-website": "^0.0.3",
     "sass-loader": "^10.1.0",
+    "single-page-markdown-website": "^0.0.3",
     "style-loader": "^2.0.0",
     "stylelint": "^13.8.0",
     "stylelint-config-prettier": "^8.0.2",
