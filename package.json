@@ -3,15 +3,17 @@
   "scripts": {
     "build": "lerna run build",
     "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
-    "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf '*.log'",
-    "docs": "lerna run --scope @create-figma-plugin/utilities docs",
+    "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && rimraf build '*.log'",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
     "postinstall": "yarn run build",
-    "publish": "yarn run build && cpy 'docs/**/*.md' README.md packages/create-figma-plugin --parents && lerna publish from-package",
+    "publish": "yarn run build && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
     "test": "lerna run test",
-    "version": "lerna version"
+    "version": "lerna version",
+    "website": "yarn run website-docs && yarn run website-storybook",
+    "website-docs": "lerna run --scope @create-figma-plugin/utilities docs && single-page-markdown-website docs/index.md",
+    "website-storybook": "lerna run --scope @create-figma-plugin/ui storybook-build && cpy packages/ui/build build/ui"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.19.0",
@@ -36,7 +38,7 @@
     "eslint": "^7.16.0",
     "eslint-config-yuanqing": "0.0.4",
     "fs-extra": "^9.0.1",
-    "generate-ts-docs": "^0.0.5",
+    "generate-ts-docs": "^0.0.6",
     "globby": "^11.0.1",
     "husky": "^4.3.6",
     "lerna": "^3.22.1",
@@ -46,7 +48,7 @@
     "preact": "^10.5.7",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "single-page-markdown-website": "*",
+    "single-page-markdown-website": "^0.0.3",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "stylelint": "^13.8.0",
@@ -95,6 +97,20 @@
     ]
   },
   "prettier": "eslint-config-yuanqing/prettier",
+  "single-page-markdown-website": {
+    "title": "Create Figma Plugin",
+    "description": "A comprehensive toolkit for developing Figma plugins",
+    "links": [
+      {
+        "text": "GitHub",
+        "url": "https://github.com/yuanqing/create-figma-plugin"
+      },
+      {
+        "text": "Storybook",
+        "url": "https://yuanqing.github.io/create-figma-plugin/ui/"
+      }
+    ]
+  },
   "stylelint": {
     "extends": [
       "stylelint-prettier/recommended",

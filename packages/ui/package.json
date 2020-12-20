@@ -38,7 +38,6 @@
     "lint": "eslint '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
     "storybook-clean": "rimraf '*.log' build 'src/**/*.scss.d.ts'",
-    "storybook-deploy": "yarn run storybook-clean && storybook-to-ghpages --out build",
     "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook"
   },
   "dependencies": {

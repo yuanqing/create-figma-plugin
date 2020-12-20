@@ -6,6 +6,7 @@
 coverage/
 lib/
 node_modules/
+/build/
 /packages/**/fixtures/**/build/
 /packages/**/fixtures/**/figma-plugin/
 /packages/**/fixtures/**/manifest.json

@@ -7,7 +7,7 @@ const CLOSING_SLASH = '/'
  * Specify the width, height, and visibility of the UI via `options`.
  * Optionally pass on some initialising `data` from the command to the UI.
  *
- * See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
+ * See the [recipe for adding a UI to a plugin command](#adding-a-ui-to-a-plugin-command).
  *
  * @category UI
  */

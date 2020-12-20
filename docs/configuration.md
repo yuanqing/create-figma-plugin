@@ -2,25 +2,25 @@
 
 Configure your plugin under the **`"figma-plugin"`** key of your `package.json` file.
 
-## `"apiVersion"`
+## `apiVersion`
 
 (*`string`*)
 
 *Optional.* The version of the Figma plugin API to use. Defaults to **`"1.0.0"`**.
 
-## `"id"`
+## `id`
 
 (*`string`*)
 
 *Required.* The plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
 
-## `"name"`
+## `name`
 
 (*`string`*)
 
 *Required.* The name of the plugin.
 
-## `"main"`
+## `main`
 
 (*`string`* or *`object`*)
 
@@ -29,7 +29,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 - **`"src"`** (*`string`*) — *Required.* Path to the main entry point of the plugin command.
 - **`"handler"`** (*`string`*) — *Required.* The name of the exported function in the file.
 
-### Example
+***Example***
 
 ```json
 {
@@ -41,7 +41,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 }
 ```
 
-## `"ui"`
+## `ui`
 
 (*`string`* or *`object`*)
 
@@ -50,7 +50,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 - **`"src"`** (*`string`*) — *Required.* Path to the UI implementation of the plugin command.
 - **`"handler"`** (*`string`*) — *Required.* The name of the exported function in the file.
 
-### Example
+***Example***
 
 ```json
 {
@@ -63,9 +63,9 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 }
 ```
 
-See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
+See the [recipe for adding a UI to a plugin command](#adding-a-ui-to-a-plugin-command).
 
-## `"menu"`
+## `menu`
 
 (*`array`*)
 
@@ -78,7 +78,7 @@ See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme)
 
 Use a **`"-"`** in the array to specify a separator between commands in the sub-menu.
 
-### Example
+***Example***
 
 ```json
 {
@@ -101,9 +101,9 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
 }
 ```
 
-See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/recipes/multiple-commands.md#readme).
+See the [recipe for specifying multiple commands in the plugin sub-menu](#specifying-multiple-commands-in-the-plugin-sub-menu).
 
-## `"relaunchButtons"`
+## `relaunchButtons`
 
 (*`object`*)
 
@@ -114,7 +114,7 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/r
 - **`"ui"`** (*`string`* or *`object`*) — *Optional.* Ditto the **`"ui"`** field above.
 - **`"multipleSelection"`** (*`boolean`*) — *Optional.* Whether the relaunch button should appear when multiple layers are selected.
 
-### Example
+***Example***
 
 ```json
 {
@@ -144,4 +144,4 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](/docs/r
 }
 ```
 
-See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
+See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).

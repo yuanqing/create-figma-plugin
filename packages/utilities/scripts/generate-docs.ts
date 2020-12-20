@@ -2,7 +2,6 @@ import * as fs from 'fs-extra'
 import {
   createCategories,
   parseExportedFunctionsAsync,
-  renderCategoriesToMarkdownToc,
   renderFunctionDataToMarkdown
 } from 'generate-ts-docs'
 import * as path from 'path'
@@ -19,18 +18,12 @@ async function main() {
   const categories = createCategories(functionsData)
   lines.push('# Utilities')
   lines.push('')
-  lines.push(renderCategoriesToMarkdownToc(categories))
-  lines.push('')
-  lines.push('## Installation')
-  lines.push('')
   lines.push('```')
   lines.push('$ npm install @create-figma-plugin/utilities')
   lines.push('```')
   lines.push('')
-  lines.push('## API')
-  lines.push('')
   for (const category of categories) {
-    lines.push(`### ${category.name}`)
+    lines.push(`## ${category.name}`)
     lines.push('')
     lines.push('```ts')
     lines.push('import {')
@@ -45,7 +38,7 @@ async function main() {
     for (const functionData of category.functionsData) {
       lines.push(
         renderFunctionDataToMarkdown(functionData, {
-          headerLevel: 4
+          headerLevel: 3
         })
       )
     }

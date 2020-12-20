@@ -1,58 +1,10 @@
 # Utilities
 
-- [**Events**](#events)
-  - [emit(eventName, ...args)](#emiteventname-args)
-  - [on(eventName, eventHandler)](#oneventname-eventhandler)
-  - [once(eventName, eventHandler)](#onceeventname-eventhandler)
-- [**Node**](#node)
-  - [areSiblingNodes(nodes)](#aresiblingnodesnodes)
-  - [collapseLayer(node)](#collapselayernode)
-  - [computeBoundingBox(node)](#computeboundingboxnode)
-  - [computeMaximumBounds(nodes)](#computemaximumboundsnodes)
-  - [computeSiblingNodes(nodes)](#computesiblingnodesnodes)
-  - [createImagePaint(bytes)](#createimagepaintbytes)
-  - [deduplicateNodes(nodes)](#deduplicatenodesnodes)
-  - [getAbsolutePosition(node)](#getabsolutepositionnode)
-  - [getDocumentComponents()](#getdocumentcomponents)
-  - [getSelectedNodesOrAllNodes()](#getselectednodesorallnodes)
-  - [insertAfterNode(node, referenceNode)](#insertafternodenode-referencenode)
-  - [insertBeforeNode(node, referenceNode)](#insertbeforenodenode-referencenode)
-  - [isWithinInstance(node)](#iswithininstancenode)
-  - [loadFontsAsync(nodes)](#loadfontsasyncnodes)
-  - [setAbsolutePosition(node, vector)](#setabsolutepositionnode-vector)
-  - [setRelaunchButton(node, relaunchButtonId [, options])](#setrelaunchbuttonnode-relaunchbuttonid--options)
-  - [sortNodesByCanonicalOrder(siblingNodes)](#sortnodesbycanonicalordersiblingnodes)
-  - [sortNodesByName(nodes)](#sortnodesbynamenodes)
-  - [traverseNode(node, processNode [, stopTraversal])](#traversenodenode-processnode--stoptraversal)
-  - [updateNodesSortOrder(siblingNodes)](#updatenodessortordersiblingnodes)
-- [**Number**](#number)
-  - [evaluateNumericExpression(value)](#evaluatenumericexpressionvalue)
-  - [isValidNumericInput(value [, integerOnly])](#isvalidnumericinputvalue--integeronly)
-- [**Object**](#object)
-  - [cloneObject(object)](#cloneobjectobject)
-  - [compareArrays(a, b)](#comparearraysa-b)
-  - [compareObjects(a, b)](#compareobjectsa-b)
-  - [extractAttributes(array, attributes)](#extractattributesarray-attributes)
-- [**Settings**](#settings)
-  - [loadSettingsAsync(defaultSettings)](#loadsettingsasyncdefaultsettings)
-  - [saveSettingsAsync(settings)](#savesettingsasyncsettings)
-- [**String**](#string)
-  - [formatErrorMessage(message)](#formaterrormessagemessage)
-  - [formatSuccessMessage(message)](#formatsuccessmessagemessage)
-  - [formatWarningMessage(message)](#formatwarningmessagemessage)
-  - [pluralize(number, singular [, plural])](#pluralizenumber-singular--plural)
-- [**UI**](#ui)
-  - [showUI(options [, data])](#showuioptions--data)
-
-## Installation
-
 ```
 $ npm install @create-figma-plugin/utilities
 ```
 
-## API
-
-### Events
+## Events
 
 ```ts
 import {
@@ -62,7 +14,7 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-#### emit(eventName, ...args)
+### emit(eventName, ...args)
 
 Calling `emit` in the main context invokes the event handler for the
 matching `eventName` in your UI. Correspondingly, calling `emit` in your
@@ -72,27 +24,27 @@ context.
 All `args` passed after `eventName` will be directly applied on the
 event handler.
 
-##### *Parameters*
+***Parameters***
 
 - **`eventName`** (`string`)
 - **`...args`** (`Array<any>`)
 
-##### *Return type*
+***Return type***
 
 ```
 void
 ```
 
-#### on(eventName, eventHandler)
+### on(eventName, eventHandler)
 
 Registers an `eventHandler` for the given `eventName`.
 
-##### *Parameters*
+***Parameters***
 
 - **`eventName`** (`string`)
 - **`eventHandler`** (`(...args: Array<any>) => void`)
 
-##### *Return type*
+***Return type***
 
 Returns a function for deregistering the `eventHandler`.
 
@@ -100,17 +52,17 @@ Returns a function for deregistering the `eventHandler`.
 () => void
 ```
 
-#### once(eventName, eventHandler)
+### once(eventName, eventHandler)
 
 Registers an `eventHandler` that will run at most once for the given
 `eventName`.
 
-##### *Parameters*
+***Parameters***
 
 - **`eventName`** (`string`)
 - **`eventHandler`** (`(...args: Array<any>) => void`)
 
-##### *Return type*
+***Return type***
 
 Returns a function for deregistering the `eventHandler`.
 
@@ -119,7 +71,7 @@ Returns a function for deregistering the `eventHandler`.
 ```
 
 
-### Node
+## Node
 
 ```ts
 import {
@@ -146,15 +98,15 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-#### areSiblingNodes(nodes)
+### areSiblingNodes(nodes)
 
 Checks if all nodes in `nodes` are sibling nodes.
 
-##### *Parameters*
+***Parameters***
 
 - **`nodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 Returns `true` if all nodes in `nodes` are sibling nodes,
 else `false`.
@@ -163,88 +115,88 @@ else `false`.
 boolean
 ```
 
-#### collapseLayer(node)
+### collapseLayer(node)
 
 Collapses `node` and all its child nodes in the layer list.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 
-##### *Return type*
+***Return type***
 
 ```
 boolean
 ```
 
-#### computeBoundingBox(node)
+### computeBoundingBox(node)
 
 Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
 the smallest bounding box that contains the given `node`.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 
-##### *Return type*
+***Return type***
 
 ```
 Rect
 ```
 
-#### computeMaximumBounds(nodes)
+### computeMaximumBounds(nodes)
 
 Computes the absolute coordinates of the top-left and bottom-right
 corners of the smallest bounding box that contains the given `nodes`.
 
-##### *Parameters*
+***Parameters***
 
 - **`nodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 ```
 [Vector, Vector]
 ```
 
-#### computeSiblingNodes(nodes)
+### computeSiblingNodes(nodes)
 
 Splits `nodes` into groups of sibling nodes.
 
-##### *Parameters*
+***Parameters***
 
 - **`nodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 ```
 Array<Array<SceneNode>>
 ```
 
-#### createImagePaint(bytes)
+### createImagePaint(bytes)
 
 Creates an `ImagePaint` object from the `bytes` of an image.
 
-##### *Parameters*
+***Parameters***
 
 - **`bytes`** (`Uint8Array`)
 
-##### *Return type*
+***Return type***
 
 ```
 ImagePaint
 ```
 
-#### deduplicateNodes(nodes)
+### deduplicateNodes(nodes)
 
 Deduplicates the nodes in `nodes`. Does not modify the original
 `nodes` array.
 
-##### *Parameters*
+***Parameters***
 
 - **`nodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 Returns a new array of `SceneNode` objects.
 
@@ -252,15 +204,15 @@ Returns a new array of `SceneNode` objects.
 Array<SceneNode>
 ```
 
-#### getAbsolutePosition(node)
+### getAbsolutePosition(node)
 
 Returns the `x` and `y` position of the given `node` relative to the page.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 
-##### *Return type*
+***Return type***
 
 ```
 {
@@ -269,66 +221,66 @@ Returns the `x` and `y` position of the given `node` relative to the page.
 }
 ```
 
-#### getDocumentComponents()
+### getDocumentComponents()
 
 Gets all the components in the current document.
 
-##### *Return type*
+***Return type***
 
 ```
 Array<ComponentNode>
 ```
 
-#### getSelectedNodesOrAllNodes()
+### getSelectedNodesOrAllNodes()
 
 Gets the selected nodes, or all the top-level nodes on the current page if
 no nodes are selected.
 
-##### *Return type*
+***Return type***
 
 ```
 Array<SceneNode>
 ```
 
-#### insertAfterNode(node, referenceNode)
+### insertAfterNode(node, referenceNode)
 
 Inserts `node` after the `referenceNode` in the layer list.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 - **`referenceNode`** (`SceneNode`)
 
-##### *Return type*
+***Return type***
 
 ```
 void
 ```
 
-#### insertBeforeNode(node, referenceNode)
+### insertBeforeNode(node, referenceNode)
 
 Inserts `node` before the `referenceNode` in the layer list.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 - **`referenceNode`** (`SceneNode`)
 
-##### *Return type*
+***Return type***
 
 ```
 void
 ```
 
-#### isWithinInstance(node)
+### isWithinInstance(node)
 
 Checks if the given `node` is within an Instance.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 
-##### *Return type*
+***Return type***
 
 Returns `true` if the `node` is within an Instance, else `false`.
 
@@ -336,70 +288,70 @@ Returns `true` if the `node` is within an Instance, else `false`.
 boolean
 ```
 
-#### loadFontsAsync(nodes)
+### loadFontsAsync(nodes)
 
 Loads the fonts used in all the text nodes in `nodes`.
 
-##### *Parameters*
+***Parameters***
 
 - **`nodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 ```
 Promise<void>
 ```
 
-#### setAbsolutePosition(node, vector)
+### setAbsolutePosition(node, vector)
 
 Sets the `node` to the given `x` and `y` absolute position.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 - **`vector`** (`object`)
   - **`x`** (`number`) – *Optional.*
   - **`y`** (`number`) – *Optional.*
 
-##### *Return type*
+***Return type***
 
 ```
 void
 ```
 
-#### setRelaunchButton(node, relaunchButtonId [, options])
+### setRelaunchButton(node, relaunchButtonId [, options])
 
 Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
 on `node` for the command with the given `relaunchButtonId` as configured
-under [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) in
+under [**`"relaunchButtons"`**](#relaunchbuttons) in
 `package.json`. `description` is the text displayed below the relaunch
 button in the Figma UI.
 
-See the [recipe for configuring relaunch buttons](/docs/recipes/relaunch-buttons.md#readme).
+See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`BaseNode`)
 - **`relaunchButtonId`** (`string`)
 - **`options`** (`object`) – *Optional.*
   - **`description`** (`string`)
 
-##### *Return type*
+***Return type***
 
 ```
 void
 ```
 
-#### sortNodesByCanonicalOrder(siblingNodes)
+### sortNodesByCanonicalOrder(siblingNodes)
 
 Sorts `siblingNodes` according to their layer list order. Does not modify
 the original `siblingNodes` array.
 
-##### *Parameters*
+***Parameters***
 
 - **`siblingNodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 Returns a new array of `SceneNode` objects.
 
@@ -407,16 +359,16 @@ Returns a new array of `SceneNode` objects.
 Array<SceneNode>
 ```
 
-#### sortNodesByName(nodes)
+### sortNodesByName(nodes)
 
 Sorts `nodes` in alphabetical order. Does not modify the original
 `nodes` array.
 
-##### *Parameters*
+***Parameters***
 
 - **`nodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 Returns a new array of `SceneNode` objects.
 
@@ -424,7 +376,7 @@ Returns a new array of `SceneNode` objects.
 Array<SceneNode>
 ```
 
-#### traverseNode(node, processNode [, stopTraversal])
+### traverseNode(node, processNode [, stopTraversal])
 
 Traverses `node` and its child nodes recursively in a *depth-first*
 manner, passing each node to the specified `processNode` callback.
@@ -433,35 +385,35 @@ Each node is also passed to a `stopTraversal` function. If you return
 `false` in `stopTraversal` for a particular node, then its child nodes
 will not be traversed.
 
-##### *Parameters*
+***Parameters***
 
 - **`node`** (`SceneNode`)
 - **`processNode`** (`(node: SceneNode) => void`)
 - **`stopTraversal`** (`(node: SceneNode) => boolean`) – *Optional.*
 
-##### *Return type*
+***Return type***
 
 ```
 void
 ```
 
-#### updateNodesSortOrder(siblingNodes)
+### updateNodesSortOrder(siblingNodes)
 
 Updates the layer list sort order to follow the sort order of the nodes
 in the `siblingNodes` array.
 
-##### *Parameters*
+***Parameters***
 
 - **`siblingNodes`** (`Array<SceneNode>`)
 
-##### *Return type*
+***Return type***
 
 ```
 boolean
 ```
 
 
-### Number
+## Number
 
 ```ts
 import {
@@ -470,15 +422,15 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-#### evaluateNumericExpression(value)
+### evaluateNumericExpression(value)
 
 Evaluates the given numeric `expression`.
 
-##### *Parameters*
+***Parameters***
 
 - **`value`** (`string`)
 
-##### *Return type*
+***Return type***
 
 Returns the result of evaluating the given `expression`.
 
@@ -486,19 +438,19 @@ Returns the result of evaluating the given `expression`.
 null | number
 ```
 
-#### isValidNumericInput(value [, integerOnly])
+### isValidNumericInput(value [, integerOnly])
 
 Checks if `value` is a numeric expression, as input by a user. “Partial”
 inputs are considered valid. Set `integerOnly` to `true` to check that the
 expression contains only integers. `integerOnly` defaults to `false` if not
 specified.
 
-##### *Parameters*
+***Parameters***
 
 - **`value`** (`string`)
 - **`integerOnly`** (`boolean`) – *Optional.*
 
-##### *Return type*
+***Return type***
 
 Returns `true` if `value` is a valid numeric expression,
 else `false`.
@@ -508,7 +460,7 @@ boolean
 ```
 
 
-### Object
+## Object
 
 ```ts
 import {
@@ -519,30 +471,30 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-#### cloneObject(object)
+### cloneObject(object)
 
 Creates a deep copy of the given object.
 
-##### *Parameters*
+***Parameters***
 
 - **`object`** (`any`)
 
-##### *Return type*
+***Return type***
 
 ```
 any
 ```
 
-#### compareArrays(a, b)
+### compareArrays(a, b)
 
 Performs a *shallow* comparison of arrays `a` and `b`.
 
-##### *Parameters*
+***Parameters***
 
 - **`a`** (`Array<any>`)
 - **`b`** (`Array<any>`)
 
-##### *Return type*
+***Return type***
 
 Returns `true` if `a` and `b` are the same, else `false`.
 
@@ -550,16 +502,16 @@ Returns `true` if `a` and `b` are the same, else `false`.
 boolean
 ```
 
-#### compareObjects(a, b)
+### compareObjects(a, b)
 
 Performs a *deep* comparison of objects `a` and `b`.
 
-##### *Parameters*
+***Parameters***
 
 - **`a`** (`any`)
 - **`b`** (`any`)
 
-##### *Return type*
+***Return type***
 
 Returns `true` if `a` and `b` are the same, else `false`.
 
@@ -567,17 +519,17 @@ Returns `true` if `a` and `b` are the same, else `false`.
 boolean
 ```
 
-#### extractAttributes(array, attributes)
+### extractAttributes(array, attributes)
 
 Extracts the specified list of `attributes` from the given `array` of
 objects.
 
-##### *Parameters*
+***Parameters***
 
 - **`array`** (`Array<{ [key: string]: any; }>`)
 - **`attributes`** (`Array<string>`)
 
-##### *Return type*
+***Return type***
 
 Returns an array of plain objects.
 
@@ -588,7 +540,7 @@ Array<{
 ```
 
 
-### Settings
+## Settings
 
 ```ts
 import {
@@ -597,38 +549,38 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-#### loadSettingsAsync(defaultSettings)
+### loadSettingsAsync(defaultSettings)
 
 Loads your plugin’s `settings` (stored locally on the user’s computer).
 Values in `settings` default to an optional `defaultSettings` object.
 
-##### *Parameters*
+***Parameters***
 
 - **`defaultSettings`** (`Settings`)
 
-##### *Return type*
+***Return type***
 
 ```
 Promise<Settings>
 ```
 
-#### saveSettingsAsync(settings)
+### saveSettingsAsync(settings)
 
 Saves the given `settings` for your plugin (stored locally on the user’s
 computer).
 
-##### *Parameters*
+***Parameters***
 
 - **`settings`** (`Settings`)
 
-##### *Return type*
+***Return type***
 
 ```
 Promise<void>
 ```
 
 
-### String
+## String
 
 ```ts
 import {
@@ -639,67 +591,67 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-#### formatErrorMessage(message)
+### formatErrorMessage(message)
 
 Adds a `✘` prefix to the given `message`.
 
-##### *Parameters*
+***Parameters***
 
 - **`message`** (`string`)
 
-##### *Return type*
+***Return type***
 
 ```
 string
 ```
 
-#### formatSuccessMessage(message)
+### formatSuccessMessage(message)
 
 Adds a `✔` prefix to the given `message`.
 
-##### *Parameters*
+***Parameters***
 
 - **`message`** (`string`)
 
-##### *Return type*
+***Return type***
 
 ```
 string
 ```
 
-#### formatWarningMessage(message)
+### formatWarningMessage(message)
 
 Adds a `⚠` prefix to the given `message`.
 
-##### *Parameters*
+***Parameters***
 
 - **`message`** (`string`)
 
-##### *Return type*
+***Return type***
 
 ```
 string
 ```
 
-#### pluralize(number, singular [, plural])
+### pluralize(number, singular [, plural])
 
 Returns `singular` if `number` is exactly `1`, else returns `plural`.
 `plural` defaults to `${singular}s` if not specified.
 
-##### *Parameters*
+***Parameters***
 
 - **`number`** (`number`)
 - **`singular`** (`string`)
 - **`plural`** (`string`) – *Optional.*
 
-##### *Return type*
+***Return type***
 
 ```
 string
 ```
 
 
-### UI
+## UI
 
 ```ts
 import {
@@ -707,20 +659,20 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-#### showUI(options [, data])
+### showUI(options [, data])
 
 Renders the UI correponding to the command in a modal within the Figma UI.
 Specify the width, height, and visibility of the UI via `options`.
 Optionally pass on some initialising `data` from the command to the UI.
 
-See the [recipe for adding a UI to a plugin command](/docs/recipes/ui.md#readme).
+See the [recipe for adding a UI to a plugin command](#adding-a-ui-to-a-plugin-command).
 
-##### *Parameters*
+***Parameters***
 
 - **`options`** (`ShowUIOptions`)
 - **`data`** (`any`) – *Optional.*
 
-##### *Return type*
+***Return type***
 
 ```
 void

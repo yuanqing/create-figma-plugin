@@ -1,6 +1,6 @@
-# Specifying multiple commands in the plugin sub-menu
+## Specifying multiple commands in the plugin sub-menu
 
-Commands can be specified on the [**`"menu"`**](/docs/configuration.md#menu) key under **`"figma-plugin"`**:
+Commands can be specified on the [**`"menu"`**](#menu) key under **`"figma-plugin"`**:
 
 ```diff
   {

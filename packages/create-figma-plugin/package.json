@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "yarn run clean-build && tsc --build",
-    "clean": "rimraf docs README.md && yarn run clean-build && yarn run clean-test",
+    "clean": "rimraf docs && yarn run clean-build && yarn run clean-test",
     "clean-build": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "clean-test": "rimraf '*.log' 'test/fixtures/*/figma-plugin' .nyc_output coverage",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",

@@ -1,4 +1,4 @@
-# Adding a UI to a plugin command
+## Adding a UI to a plugin command
 
 `@create-figma-plugin/ui` is a library of [Preact](https://preactjs.com/) components that replicate the Figma UI design:
 
@@ -10,7 +10,7 @@ First:
 $ npm install @create-figma-plugin/ui preact
 ```
 
-Then, include a call to [`showUI`](/docs/utilities.md#showuioptions--data) in our plugin command’s main entry point:
+Then, include a call to [`showUI`](#showuioptions--data) in our plugin command’s main entry point:
 
 ```ts
 // src/main.ts
@@ -28,7 +28,7 @@ export default function () {
 
 Next, create a file for our UI (eg. `src/ui.tsx` — the file must have a `tsx` extension):
 
-```tsx
+```ts
 // src/ui.tsx
 
 /** @jsx h */
@@ -53,7 +53,7 @@ See that:
 - `render` takes a single parameter, `Plugin`, which is a [Preact functional component](https://preactjs.com/guide/v10/components#functional-components).
 - The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from our plugin command’s main entry point.
 
-Finally, in `package.json`, point to our UI file on the [**`"ui"`**](/docs/configuration.md#ui) key:
+Finally, in `package.json`, point to our UI file on the [**`"ui"`**](#ui) key:
 
 ```diff
   {
@@ -71,7 +71,7 @@ When we rebuild our plugin and run it, we’ll see:
 
 ![Figma plugin UI modal containing a “Hello, World” message in the Figma UI style](/media/ui-hello-world-figma.png)
 
-See the [full library of Preact components in the Storybook](https://yuanqing.github.io/create-figma-plugin/), and the [recipe for passing data between the plugin command’s main and UI contexts](/docs/recipes/data-passing.md#readme).
+See the [full library of Preact components in the Storybook](https://yuanqing.github.io/create-figma-plugin/), and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
 ## Using custom CSS
 
@@ -87,7 +87,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 }
 ```
 
-```tsx
+```ts
 // src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'

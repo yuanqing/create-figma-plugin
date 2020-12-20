@@ -1,6 +1,6 @@
-# Configuring relaunch buttons
+## Configuring relaunch buttons
 
-[Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](/docs/configuration.md#relaunchbuttons) key under **`"figma-plugin"`**:
+[Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](#relaunchbuttons) key under **`"figma-plugin"`**:
 
 ```diff
   {
@@ -35,7 +35,7 @@ See that:
 - **`"organizeLayers"`** is the `relaunchButtonId`.
 - The object corresponding to **`"organizeLayers"`** specifies the command that runs when the relaunch button is clicked.
 
-Then, call [`setRelaunchButton`](/docs/utilities.md#setrelaunchbuttonnode-relaunchbuttonid--options) in our plugin command’s main entry point:
+Then, call [`setRelaunchButton`](#setrelaunchbuttonnode-relaunchbuttonid--options) in our plugin command’s main entry point:
 
 ```ts
 // src/organize-layers/main.js
