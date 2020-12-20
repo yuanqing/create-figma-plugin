@@ -2095,10 +2095,10 @@
     escape-string-regexp "^2.0.0"
     lodash.deburr "^4.1.0"
 
-"@single-page-markdown-website/frontend@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@single-page-markdown-website/frontend/-/frontend-0.0.2.tgz#3292e4f097c9c7156099c271b71fcff7aad98335"
-  integrity sha512-BbNV2HNi6XqUNx0V6ophZvPyThsQzJQHapS7gh8L4xd3HBlmkBKbZz8Hcaep2+azxeuk7hMeoGKscNTDxLb87w==
+"@single-page-markdown-website/frontend@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@single-page-markdown-website/frontend/-/frontend-0.0.3.tgz#514dda039d7879b03c66dfcd2739e6fcd61d7926"
+  integrity sha512-2nf1dkTEJrHQB5cg+D8iZ505G79RuPXGzqjzTTnn1/xWZ652bR8JGfsWmBG/Ixhj5xr51nNsMd5nXFls9rS9Tg==
 
 "@storybook/addon-storysource@^6.1.11":
   version "6.1.11"
@@ -13164,11 +13164,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3:
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
 single-page-markdown-website@*:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/single-page-markdown-website/-/single-page-markdown-website-0.0.2.tgz#c258f05bfb08e1f34e33169d3b9904a6ecb32da2"
-  integrity sha512-C3UCnjnRAJwsmRZPAt7I0IVT4d98Q8NN86P6BeY4eznmndWTOYrfQk47ZjBEcPOvDYpjaGso+0uokv3HSn5U9g==
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/single-page-markdown-website/-/single-page-markdown-website-0.0.3.tgz#56047bb4286d4f2437ddc31dd16ab899ab316fa5"
+  integrity sha512-h9s57FLQVkaG+XpoifQ+bB8vmWDF41IwgTaVE7cD/ugT0+LY13tv8Lhb4PZoB5r9acVjVfBwZU9GDqU9DDea6g==
   dependencies:
-    "@single-page-markdown-website/frontend" "^0.0.2"
+    "@single-page-markdown-website/frontend" "^0.0.3"
     "@yuanqing/cli" "^0.0.9"
     chokidar "^3.4.3"
     find-up "^5.0.0"
