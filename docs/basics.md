@@ -64,8 +64,6 @@ To accomplish this:
 3. Make an API call in the `<iframe>`. When we receive the data from the API, pass the data from UI context → main context.
 4. Receive and use the data in the main context.
 
----
-
 ## What a Figma plugin can and cannot do
 
 A Figma plugin can…

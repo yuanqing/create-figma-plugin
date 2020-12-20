@@ -8,5 +8,3 @@
 - [Build your plugin](#build-the-plugin), with support for [multiple menu commands](#specifying-multiple-commands-in-the-plugin-sub-menu) that each have their own [UI implementation](#adding-a-ui-to-a-plugin-command)
 - [Utility functions](#utilities) for common plugin operations
 - [A library of Preact components](https://yuanqing.github.io/create-figma-plugin/ui/) that replicate the Figma UI design
-
----
