@@ -2,8 +2,6 @@
 
 > A comprehensive toolkit for developing [Figma plugins](https://figma.com/plugin-docs/)
 
-## [Docs](https://yuanqing.github.io/create-figma-plugin/)
-
 - [Getting started](https://yuanqing.github.io/create-figma-plugin/#getting-started)
 - [Figma plugin basics](https://yuanqing.github.io/create-figma-plugin/#figma-plugin-basics)
 - [Configuration](https://yuanqing.github.io/create-figma-plugin/#configuration)
