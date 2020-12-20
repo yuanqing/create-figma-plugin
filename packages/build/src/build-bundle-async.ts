@@ -46,7 +46,7 @@ export async function buildBundleAsync(
   }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, function (error, stats) {
-      if (stats.hasErrors() === true) {
+      if (typeof stats !== 'undefined' && stats.hasErrors() === true) {
         reject(stats.toJson().errors.join('\n'))
         return
       }

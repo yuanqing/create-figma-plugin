@@ -40,8 +40,8 @@
     "inquirer": "^7.3.3",
     "is-utf8": "^0.2.1",
     "latest-version": "^5.1.0",
-    "mustache": "^4.0.1",
-    "sade": "^1.7.3",
+    "mustache": "^4.1.0",
+    "sade": "^1.7.4",
     "titlecase": "^1.1.3"
   }
 }
