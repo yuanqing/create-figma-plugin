@@ -99,6 +99,7 @@ main.ts
 <p>Create Figma Plugin’s <a href="#configuration">configuration API</a> is heavily inspired by <a href="https://developer.sketch.com/plugins/plugin-manifest"><code>skpm</code></a>’s.</p>
 <h2 id="license">License<a aria-hidden class="header-link"tabindex="-1"href="#license"><span class="header-link__text">#</span></a></h2>
 <p><a href="https://github.com/yuanqing/create-figma-plugin/blob/master/LICENSE.md">MIT</a></p>
+<hr>
 <h1 id="figma-plugin-basics">Figma plugin basics<a aria-hidden class="header-link"tabindex="-1"href="#figma-plugin-basics"><span class="header-link__text">#</span></a></h1>
 <h2 id="how-a-figma-plugin-works">How a Figma plugin works<a aria-hidden class="header-link"tabindex="-1"href="#how-a-figma-plugin-works"><span class="header-link__text">#</span></a></h2>
 <h3 id="overview">Overview<a aria-hidden class="header-link"tabindex="-1"href="#overview"><span class="header-link__text">#</span></a></h3>
@@ -168,7 +169,6 @@ main.ts
 <li>Make an API call in the <code>&#x3C;iframe></code>. When we receive the data from the API, pass the data from UI context → main context.</li>
 <li>Receive and use the data in the main context.</li>
 </ol>
-<hr>
 <h2 id="what-a-figma-plugin-can-and-cannot-do">What a Figma plugin can and cannot do<a aria-hidden class="header-link"tabindex="-1"href="#what-a-figma-plugin-can-and-cannot-do"><span class="header-link__text">#</span></a></h2>
 <p>A Figma plugin can…</p>
 <ul>
@@ -201,6 +201,7 @@ main.ts
 <li>Run if the user only has View permissions for the currently-open document</li>
 <li>Modify the native Figma editor interface</li>
 </ul>
+<hr>
 <h1 id="configuration">Configuration<a aria-hidden class="header-link"tabindex="-1"href="#configuration"><span class="header-link__text">#</span></a></h1>
 <p>Configure your plugin under the <strong><code>"figma-plugin"</code></strong> key of your <code>package.json</code> file.</p>
 <h2 id="apiversion"><code>apiVersion</code><a aria-hidden class="header-link"tabindex="-1"href="#apiversion"><span class="header-link__text">#</span></a></h2>
@@ -314,6 +315,7 @@ main.ts
 }
 </code></pre>
 <p>See the <a href="#configuring-relaunch-buttons">recipe for configuring relaunch buttons</a>.</p>
+<hr>
 <h1 id="recipes">Recipes<a aria-hidden class="header-link"tabindex="-1"href="#recipes"><span class="header-link__text">#</span></a></h1>
 <h2 id="customizing-the-underlying-webpack-configuration">Customizing the underlying Webpack configuration<a aria-hidden class="header-link"tabindex="-1"href="#customizing-the-underlying-webpack-configuration"><span class="header-link__text">#</span></a></h2>
 <p>The <code>build-figma-plugin</code> CLI is built on top of Webpack. To customize the underlying <a href="https://webpack.js.org/configuration/">Webpack configuration</a>, create a <code>figma-plugin.config.js</code> file:</p>
@@ -561,6 +563,7 @@ main.ts
 <li><code>rootNode</code> — An empty <code>&#x3C;div></code> element within which you can render your UI.</li>
 <li><code>data</code> — This corresponds to the <code>data</code> object that was passed to <code>showUI</code> from the plugin command’s main entry point.</li>
 </ul>
+<hr>
 <h1 id="utilities">Utilities<a aria-hidden class="header-link"tabindex="-1"href="#utilities"><span class="header-link__text">#</span></a></h1>
 <pre><code>$ npm install @create-figma-plugin/utilities
 </code></pre>
@@ -1021,6 +1024,7 @@ Optionally pass on some initialising <code>data</code> from the command to the U
 <p><em><strong>Return type</strong></em></p>
 <pre><code>void
 </code></pre>
+<hr>
 <h1 id="contributing">Contributing<a aria-hidden class="header-link"tabindex="-1"href="#contributing"><span class="header-link__text">#</span></a></h1>
 <h2 id="testing-locally-on-an-existing-plugin">Testing locally on an existing plugin<a aria-hidden class="header-link"tabindex="-1"href="#testing-locally-on-an-existing-plugin"><span class="header-link__text">#</span></a></h2>
 <p>First, build <code>create-figma-plugin</code>:</p>
