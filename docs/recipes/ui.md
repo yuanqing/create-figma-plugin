@@ -71,7 +71,7 @@ When we rebuild our plugin and run it, we’ll see:
 
 ![Figma plugin UI modal containing a “Hello, World” message in the Figma UI style](/media/ui-hello-world-figma.png)
 
-See the [full library of Preact components in the Storybook](https://yuanqing.github.io/create-figma-plugin/), and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
+See the [full library of Preact components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
 ## Using custom CSS
 
