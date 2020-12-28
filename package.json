@@ -4,6 +4,7 @@
     "build": "lerna run build",
     "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
     "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && yarn run website-clean && rimraf '*.log'",
+    "docs": "lerna run --scope @create-figma-plugin/utilities docs",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --loglevel error --write 'package.json' 'tsconfig.shared.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
     "postinstall": "yarn run build",
@@ -12,7 +13,7 @@
     "test": "lerna run test",
     "version": "lerna version",
     "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook",
-    "website-build-docs": "lerna run --scope @create-figma-plugin/utilities docs && single-page-markdown-website docs/index.md",
+    "website-build-docs": "yarn run docs && single-page-markdown-website docs/index.md",
     "website-build-storybook": "lerna run --scope @create-figma-plugin/ui storybook-build && cpy packages/ui/build build/ui",
     "website-clean": "rimraf build",
     "website-deploy": "yarn run website-build && gh-pages --dist build"
