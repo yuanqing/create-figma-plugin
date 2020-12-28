@@ -52,7 +52,7 @@
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "sass-loader": "^10.1.0",
-    "single-page-markdown-website": "^0.0.3",
+    "single-page-markdown-website": "^0.0.8",
     "style-loader": "^2.0.0",
     "stylelint": "^13.8.0",
     "stylelint-config-prettier": "^8.0.2",
@@ -105,12 +105,12 @@
     "description": "A comprehensive toolkit for developing Figma plugins",
     "links": [
       {
-        "text": "GitHub",
-        "url": "https://github.com/yuanqing/create-figma-plugin"
-      },
-      {
         "text": "Storybook",
         "url": "https://yuanqing.github.io/create-figma-plugin/ui/"
+      },
+      {
+        "text": "GitHub",
+        "url": "https://github.com/yuanqing/create-figma-plugin"
       }
     ]
   },
