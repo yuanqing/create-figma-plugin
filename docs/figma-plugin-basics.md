@@ -7,12 +7,12 @@
 API | Main context | UI context
 :--|:--|:--
 Figma plugin API | :white_check_mark: Available (via the [`figma`](https://figma.com/plugin-docs/api/figma/) global object) | :x: Not available
-JavaScript API | :warning: Only a subset is available (excludes [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [`Fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)) | :white_check_mark: Available
+JavaScript API | :x: Only a subset is available (excludes [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)) | :white_check_mark: Available
 
 See that:
 
 1. There is a concept of a “main context” and a “UI context”.
-2. The availability of the Figma plugin API and JavaScript API differs between the two contexts.
+2. The availability of the Figma plugin API and JavaScript API differs between the two “contexts”.
 
 ### Main context
 
@@ -21,7 +21,7 @@ The entry point of a plugin command is a sandboxed JavaScript environment. We ca
 Within this main context:
 
 1. Our JavaScript code can access and manipulate the contents of the Figma document via the [Figma plugin API](https://figma.com/plugin-docs/api/api-overview/). The plugin API is made available on the [`figma`](https://figma.com/plugin-docs/api/figma/) global object.
-2. Our JavaScript code can only access a subset of the standard browser JavaScript API. Most notably, this subset *excludes* both the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) as well as APIs such as [`Fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+2. Our JavaScript code can only access a subset of the standard browser JavaScript API. Most notably, this subset *excludes* both the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) as well as APIs such as [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 ### UI context
 
@@ -29,8 +29,8 @@ Showing a UI for a plugin command must be explicitly triggered in the command’
 
 Within this UI context:
 
-1. Our JavaScript code cannot access the Figma plugin API; there is *no* `figma` global.
-2. Our JavaScript code can access the full browser JavaScript API. This includes both the DOM and `Fetch`. Note that the DOM would be DOM of the `<iframe>`, *not* the Figma editor.
+1. Our JavaScript code cannot access the Figma plugin API; there is *no* `figma` global object.
+2. Our JavaScript code can access the full browser JavaScript API. This includes both the DOM and `Fetch`. Note that the DOM here would be DOM of the `<iframe>`, *not* the Figma editor.
 3. We can have any arbitrary HTML, CSS, and JavaScript in the `<iframe>`.
 
 ### Three common use cases
@@ -39,7 +39,7 @@ Conceptually, the main and UI context would communicate through [“message pass
 
 The following are three common use cases that we will encounter when developing a Figma plugin, and the steps for making each use case possible within Figma’s plugin execution model.
 
-#### A. “We want to get data from the Figma document, and show the data in our plugin UI.”
+#### I. “We want to get data from the Figma document, and show the data in our plugin UI.”
 
 To accomplish this:
 
@@ -47,7 +47,7 @@ To accomplish this:
 2. Read the required data off the Figma document in the main context. Pass the data from main context → UI context.
 3. Receive and show the data in the `<iframe>`.
 
-#### B. “We want to get data from the user, and use the data in our Figma document.”
+#### II. “We want to get data from the user, and use the data in our Figma document.”
 
 To accomplish this:
 
@@ -55,7 +55,7 @@ To accomplish this:
 2. Render a form within the `<iframe>`. When the user clicks a submit button in the form, pass the user input data from UI context → main context.
 3. Receive and use the data in the main context.
 
-#### C. “We want to get data from an API endpoint, and use the data in our Figma document.”
+#### III. “We want to get data from an API endpoint, and use the data in our Figma document.”
 
 To accomplish this:
 
@@ -95,4 +95,4 @@ A Figma plugin cannot…
 - Specify keyboard shortcuts for triggering its commands
 - Run while the user is in Presentation View
 - Run if the user only has View permissions for the currently-open document
-- Modify the native Figma editor interface
+- Modify the Figma editor interface

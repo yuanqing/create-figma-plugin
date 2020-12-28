@@ -1,5 +1,7 @@
 # Utilities
 
+`@create-figma-plugin/utilities` is a library of helpful utility functions for common Figma plugin operations.
+
 ```
 $ npm install @create-figma-plugin/utilities
 ```

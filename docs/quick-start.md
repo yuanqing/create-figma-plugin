@@ -1,6 +1,4 @@
-# Getting started
-
-To start, read the [Figma plugin basics doc](#figma-plugin-basics) to understand [how a Figma plugin actually works](#how-a-figma-plugin-works), and to learn about [what’s currently possible (and not possible) in a Figma plugin](#what-a-figma-plugin-can-and-cannot-do).
+# Quick start
 
 ## Pre-requisites
 
@@ -97,11 +95,3 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 
 - [Figma plugin API docs](https://figma.com/plugin-docs/api/)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
-
-## Prior art
-
-Create Figma Plugin’s [configuration API](#configuration) is heavily inspired by [`skpm`](https://developer.sketch.com/plugins/plugin-manifest)’s.
-
-## License
-
-[MIT](https://github.com/yuanqing/create-figma-plugin/blob/master/LICENSE.md)

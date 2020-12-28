@@ -2,11 +2,11 @@
 
 ---
 
-./getting-started.md
+./quick-start.md
 
 ---
 
-./basics.md
+./figma-plugin-basics.md
 
 ---
 
@@ -16,7 +16,15 @@
 
 # Recipes
 
-./recipes/*.md
+./recipes/multiple-commands.md
+
+./recipes/data-passing.md
+
+./recipes/ui.md
+
+./recipes/relaunch-buttons.md
+
+./recipes/custom-webpack-configuration.md
 
 ---
 
