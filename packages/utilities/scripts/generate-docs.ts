@@ -18,6 +18,10 @@ async function main() {
   const categories = createCategories(functionsData)
   lines.push('# Utilities')
   lines.push('')
+  lines.push(
+    '`@create-figma-plugin/utilities` is a library of helpful utility functions for common Figma plugin operations.'
+  )
+  lines.push('')
   lines.push('```')
   lines.push('$ npm install @create-figma-plugin/utilities')
   lines.push('```')
