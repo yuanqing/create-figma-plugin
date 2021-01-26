@@ -89,6 +89,9 @@ if (isCommand === true) {
   }
 } else {
   window.onmessage = function (event: MessageEvent): void {
+    if (typeof event.data.pluginMessage === 'undefined') {
+      return
+    }
     const [eventName, ...args]: [string, Array<any>] = event.data.pluginMessage
     invokeEventHandler(eventName, args)
   }
