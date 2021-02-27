@@ -45,9 +45,18 @@ export async function buildBundleAsync(
     webpackConfig = require(customWebpackConfigPath)(webpackConfig)
   }
   return new Promise(function (resolve, reject) {
-    webpack(webpackConfig, function (error) {
+    webpack(webpackConfig, function (error, stats) {
       if (error) {
         reject(error)
+        return
+      }
+      if (typeof stats !== 'undefined' && stats.hasErrors() === true) {
+        const errors = stats.toJson().errors
+        if (typeof errors === 'undefined') {
+          reject('An unknown error occurred')
+          return
+        }
+        reject(errors.join('\n'))
         return
       }
       resolve()
