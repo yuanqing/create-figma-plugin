@@ -1,11 +1,17 @@
 # Contributing
 
+## Pre-requisites
+
+- [Node.js](https://nodejs.org/) – v14
+- [Yarn](https://classic.yarnpkg.com/) – v1
+
 ## Testing locally on an existing plugin
 
 First, build the Create Figma Plugin project:
 
 ```
 $ cd create-figma-plugin
+$ yarn
 $ yarn build
 ```
 
