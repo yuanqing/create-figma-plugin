@@ -38,7 +38,7 @@ export function createWebpackConfig(
       rules: [
         {
           test: /\.jsx?$/,
-          use: babelLoader
+          use: [babelLoader]
         },
         {
           test: /\.tsx?$/,
