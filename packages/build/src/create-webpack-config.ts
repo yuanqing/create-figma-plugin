@@ -3,9 +3,13 @@ import { join, resolve } from 'path'
 import * as TerserPlugin from 'terser-webpack-plugin'
 import * as webpack from 'webpack'
 
-const babelLoader = {
+const createBabelLoader = (isDevelopment: boolean) => ({
   loader: 'babel-loader',
   options: {
+    cacheCompression: false,
+    cacheDirectory: isDevelopment
+      ? join(constants.build.cacheDirectoryName, 'babel-loader')
+      : false,
     plugins: [
       '@babel/plugin-proposal-object-rest-spread',
       [
@@ -23,6 +27,15 @@ const babelLoader = {
       ]
     ]
   }
+})
+
+const webpackCache: webpack.Configuration['cache'] = {
+  cacheDirectory: resolve(
+    process.cwd(),
+    constants.build.cacheDirectoryName,
+    'webpack'
+  ),
+  type: 'filesystem'
 }
 
 export function createWebpackConfig(
@@ -30,7 +43,10 @@ export function createWebpackConfig(
   isDevelopment: boolean
 ): webpack.Configuration {
   const mode = isDevelopment ? 'development' : 'production'
+  const babelLoader = createBabelLoader(isDevelopment)
+
   return {
+    cache: isDevelopment ? webpackCache : false,
     devtool: isDevelopment ? 'inline-cheap-module-source-map' : false,
     entry,
     mode,
@@ -73,6 +89,7 @@ export function createWebpackConfig(
       ]
     },
     optimization: {
+      minimize: !isDevelopment,
       minimizer: [
         new TerserPlugin({
           extractComments: false,

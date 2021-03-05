@@ -1,6 +1,7 @@
 export const constants = {
   apiVersion: '1.0.0',
   build: {
+    cacheDirectoryName: 'build/cache',
     directoryName: 'build',
     manifestFilePath: 'manifest.json',
     pluginCodeFilePath: 'build/main.js',
