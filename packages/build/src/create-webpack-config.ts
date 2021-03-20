@@ -7,9 +7,7 @@ const createBabelLoader = (isDevelopment: boolean) => ({
   loader: 'babel-loader',
   options: {
     cacheCompression: false,
-    cacheDirectory: isDevelopment
-      ? join(constants.build.cacheDirectoryName, 'babel-loader')
-      : false,
+    cacheDirectory: isDevelopment,
     plugins: [
       '@babel/plugin-proposal-object-rest-spread',
       [
@@ -29,24 +27,14 @@ const createBabelLoader = (isDevelopment: boolean) => ({
   }
 })
 
-const webpackCache: webpack.Configuration['cache'] = {
-  cacheDirectory: resolve(
-    process.cwd(),
-    constants.build.cacheDirectoryName,
-    'webpack'
-  ),
-  type: 'filesystem'
-}
-
 export function createWebpackConfig(
   entry: webpack.Entry,
   isDevelopment: boolean
 ): webpack.Configuration {
   const mode = isDevelopment ? 'development' : 'production'
   const babelLoader = createBabelLoader(isDevelopment)
-
   return {
-    cache: isDevelopment ? webpackCache : false,
+    cache: isDevelopment ? { type: 'filesystem' } : false,
     devtool: isDevelopment ? 'inline-cheap-module-source-map' : false,
     entry,
     mode,
