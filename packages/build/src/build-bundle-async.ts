@@ -56,7 +56,7 @@ export async function buildBundleAsync(
           reject('An unknown error occurred')
           return
         }
-        reject(errors.join('\n'))
+        reject(errors.map((error) => error.message).join('\n\n'))
         return
       }
       resolve()
