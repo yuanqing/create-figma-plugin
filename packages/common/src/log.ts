@@ -1,21 +1,15 @@
-import * as npmlog from 'npmlog'
+import { blue, green, red } from 'kleur/colors'
 
-npmlog.disp.error = 'error'
-npmlog.style.error = {
-  fg: 'red'
-}
 function error(message: string): void {
-  npmlog.error('', message)
+  console.error(`${red('error')} ${message}`) // eslint-disable-line no-console
 }
 
-npmlog.style.info.fg = 'blue'
 function info(message: string): void {
-  npmlog.info('', message)
+  console.info(`${blue('info')} ${message}`) // eslint-disable-line no-console
 }
 
-npmlog.addLevel('success', 3001, { fg: 'green' })
 function success(message: string): void {
-  npmlog.success('', message)
+  console.log(`${green('success')} ${message}`) // eslint-disable-line no-console
 }
 
 export const log = {
