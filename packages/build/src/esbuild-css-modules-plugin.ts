@@ -63,7 +63,7 @@ async function createCssModulesJavaScript(
     throw new Error('`getJSON` callback was not called')
   }
   hash.update(cssFilePath)
-  const elementId = hash.digest('base64')
+  const elementId = hash.copy().digest('base64')
   return `
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
