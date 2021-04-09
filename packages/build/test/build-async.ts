@@ -85,14 +85,14 @@ test('multiple menu commands', async function (t) {
     main: 'build/main.js',
     menu: [
       {
-        command: 'foo--default',
+        command: 'src/foo--default',
         name: 'y'
       },
       {
         separator: true
       },
       {
-        command: 'bar/main--default',
+        command: 'src/bar/main--default',
         name: 'z'
       }
     ],
@@ -149,17 +149,13 @@ test('custom styles', async function (t) {
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.true(await pathExists('src/styles.scss.d.ts'))
+  t.true(await pathExists('src/styles.css.d.ts'))
   t.true(await pathExists('build/main.js'))
   t.true(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
 async function createSymlinksAsync() {
-  await ensureSymlink(
-    resolve(__dirname, '..', '..', 'utilities'),
-    join(process.cwd(), 'node_modules', '@create-figma-plugin', 'utilities')
-  )
   await ensureSymlink(
     resolve(__dirname, '..', '..', '..', 'node_modules', '@figma'),
     join(process.cwd(), 'node_modules', '@figma')

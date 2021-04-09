@@ -2,11 +2,11 @@
   "figma-plugin": {
     "name": "x",
     "id": "42",
-    "main": "foo",
+    "main": "src/foo.ts",
     "relaunchButtons": {
       "bar": {
         "name": "y",
-        "main": "bar"
+        "main": "src/bar.ts"
       }
     }
   }

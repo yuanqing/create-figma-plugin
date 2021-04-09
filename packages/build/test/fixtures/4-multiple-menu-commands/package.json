@@ -5,13 +5,13 @@
     "menu": [
       {
         "name": "y",
-        "main": "foo"
+        "main": "src/foo.ts"
       },
       "-",
       {
         "name": "z",
-        "main": "bar/main",
-        "ui": "bar/ui"
+        "main": "src/bar/main.ts",
+        "ui": "src/bar/ui.ts"
       }
     ]
   }
