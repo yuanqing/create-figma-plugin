@@ -21,7 +21,7 @@ const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
   commandId: 'main.ts--default',
   id: constants.packageJson.defaultPluginName,
-  main: { handler: 'default', src: 'main.ts' },
+  main: { handler: 'default', src: join(constants.src.directory, 'main.ts') },
   menu: null,
   name: constants.packageJson.defaultPluginName,
   relaunchButtons: null,
