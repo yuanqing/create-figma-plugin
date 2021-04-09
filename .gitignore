@@ -1,6 +1,6 @@
 .DS_Store
 *.log
-*.scss.d.ts
+*.css.d.ts
 *.tsbuildinfo
 .nyc_output/
 coverage/
