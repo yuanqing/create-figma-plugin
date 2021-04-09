@@ -22,7 +22,7 @@ export function watch(): void {
     }
   })
   async function onChangeAsync() {
-    await buildAsync(true, false)
+    await buildAsync(false, false)
     log.info('Watching...')
   }
   watcher.on('ready', onChangeAsync)
