@@ -135,7 +135,7 @@ test('custom styles', async function (t) {
   t.plan(8)
   process.chdir(join(__dirname, 'fixtures', '6-custom-styles'))
   await cleanUpAsync()
-  t.false(await pathExists('src/styles.scss.d.ts'))
+  t.false(await pathExists('src/styles.css.d.ts'))
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
@@ -177,7 +177,7 @@ async function cleanUpAsync() {
       )
     }),
     new Promise<void>(function (resolve, reject) {
-      rimraf(join(process.cwd(), 'src', '*.scss.d.ts'), function (error) {
+      rimraf(join(process.cwd(), 'src', '*.css.d.ts'), function (error) {
         if (error) {
           reject(error)
           return

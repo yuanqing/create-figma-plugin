@@ -8,7 +8,7 @@ const ignoreRegex = new RegExp(
     '(?:^|\\/)', // beginning of string or '/'
     '\\.', // '.'
     '[^.]+', // one or more characters that isn't '.'
-    '|(?:.scss.d.ts$)',
+    '|(?:.css.d.ts$)',
     `|${constants.build.directoryName}`,
     `|${constants.build.manifestFilePath}`,
     '|node_modules'
