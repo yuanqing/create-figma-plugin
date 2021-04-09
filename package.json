@@ -19,60 +19,32 @@
     "website-deploy": "yarn run website-build && gh-pages --dist build"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.19.3",
-    "@storybook/addon-storysource": "^6.1.21",
-    "@storybook/preact": "^6.1.21",
-    "@storybook/source-loader": "^6.1.21",
-    "@types/degit": "^2.8.1",
-    "@types/fs-extra": "^9.0.9",
-    "@types/git-user-name": "^2.0.0",
-    "@types/inquirer": "^7.3.1",
-    "@types/mustache": "^4.1.1",
-    "@types/natural-compare-lite": "^1.4.0",
     "@types/node": "^14.14.37",
-    "@types/npmlog": "^4.1.2",
-    "@types/rimraf": "^3.0.0",
-    "@types/sade": "^1.7.2",
-    "@types/tap": "^14.10.3",
-    "@types/terser-webpack-plugin": "^5.0.3",
-    "chokidar-cli": "^2.1.0",
     "cpy-cli": "^3.1.1",
-    "css-loader": "^5.2.0",
     "eslint": "^7.23.0",
-    "eslint-config-yuanqing": "0.0.4",
-    "fs-extra": "^9.1.0",
-    "generate-ts-docs": "^0.0.6",
+    "eslint-config-yuanqing": "^0.0.4",
     "gh-pages": "^3.1.0",
     "globby": "^11.0.3",
     "lerna": "^4.0.0",
     "lint-staged": "^10.5.4",
-    "mkdirp": "^1.0.4",
     "npm-check-updates": "^11.3.0",
-    "preact": "^10.5.13",
     "prettier": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
-    "sass-loader": "^11.0.1",
     "simple-git-hooks": "^2.2.0",
     "single-page-markdown-website": "^0.0.10",
-    "style-loader": "^2.0.0",
-    "stylelint": "^13.12.0",
-    "stylelint-config-prettier": "^8.0.2",
-    "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-order": "^4.1.0",
-    "stylelint-prettier": "^1.2.0",
-    "tap": "^14.11.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },
   "eslintConfig": {
     "extends": "yuanqing",
     "ignorePatterns": [
-      "*.scss.d.ts",
+      "*.css.d.ts",
       "packages/create-figma-plugin/plugin-templates"
     ],
     "rules": {
+      "@typescript-eslint/explicit-module-boundary-types": [
+        0
+      ],
       "react/no-unknown-property": [
         2,
         {
@@ -92,7 +64,7 @@
     "*.{js,ts,tsx}": [
       "eslint"
     ],
-    "*.scss": [
+    "*.css": [
       "stylelint",
       "prettier"
     ]

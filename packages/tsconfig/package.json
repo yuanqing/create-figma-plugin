@@ -24,5 +24,8 @@
   "main": "tsconfig.json",
   "scripts": {
     "fix": "prettier --loglevel error --write '*.json'"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }
