@@ -1,5 +1,3 @@
-const isCommand = typeof window === 'undefined'
-
 const eventHandlers: {
   [id: string]: {
     eventName: string
@@ -59,7 +57,7 @@ export function once(
  * @category Events
  */
 export const emit: (eventName: string, ...args: Array<any>) => void =
-  isCommand === true
+  typeof window === 'undefined'
     ? function (...args) {
         figma.ui.postMessage(args)
       }
@@ -80,7 +78,7 @@ function invokeEventHandler(eventName: string, args: Array<any>) {
   }
 }
 
-if (isCommand === true) {
+if (typeof window === 'undefined') {
   figma.ui.onmessage = function ([eventName, ...args]: [
     string,
     Array<any>

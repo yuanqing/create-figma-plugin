@@ -1,7 +1,3 @@
-/* global __html__ */
-
-const CLOSING_SLASH = '/'
-
 /**
  * Renders the UI correponding to the command in a modal within the Figma UI.
  * Specify the width, height, and visibility of the UI via `options`.
@@ -21,7 +17,7 @@ export function showUI(options: ShowUIOptions, data: any = {}): void {
       const __FIGMA_COMMAND__ = '${figma.command}';
       const __SHOW_UI_DATA__ = ${JSON.stringify(data)};
       ${__html__}
-    <${CLOSING_SLASH}script>
+    </script>
   `
   figma.showUI(html, options)
 }
