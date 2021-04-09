@@ -1,25 +1,34 @@
 import { log, readConfigAsync } from '@create-figma-plugin/common'
+import { gray } from 'kleur/colors'
 
-import { buildBundleAsync } from './build-bundle-async'
+import { buildBundlesAsync } from './build-bundles-async'
+import { buildCssModulesTypings } from './build-css-modules-typings'
 import { buildManifestAsync } from './build-manifest-async'
-import { buildScssModulesTypings } from './build-scss-modules-typings'
 
 export async function buildAsync(
-  isDevelopment: boolean,
+  minify: boolean,
   exitOnError: boolean
 ): Promise<void> {
-  log.info('Building plugin...')
+  const time = process.hrtime()
+  log.info('Building...')
   const config = await readConfigAsync()
   try {
-    await buildScssModulesTypings()
-    await buildBundleAsync(config, isDevelopment)
-    await buildManifestAsync(config)
+    await buildCssModulesTypings()
+    await buildManifestAsync(config, minify)
+    await buildBundlesAsync(config, minify)
   } catch (error) {
     log.error(error)
     if (exitOnError === true) {
       process.exit(1)
     }
-    return
   }
-  log.success('Done')
+  const elapsedTime = process.hrtime(time)
+  log.success(`Done ${gray(formatElapsedTime(elapsedTime))}`)
+}
+
+function formatElapsedTime(time: [number, number]) {
+  if (time[0] === 0) {
+    return `${(time[1] / 1e6).toFixed(0)}ms`
+  }
+  return `${(time[0] + time[1] / 1e9).toFixed(2)}s`
 }

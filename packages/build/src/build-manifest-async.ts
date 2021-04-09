@@ -5,7 +5,7 @@ import {
   ConfigRelaunchButton,
   constants
 } from '@create-figma-plugin/common'
-import { outputFile } from 'fs-extra'
+import * as fs from 'fs-extra'
 
 import {
   Manifest,
@@ -14,9 +14,11 @@ import {
   ManifestRelaunchButton
 } from './types/manifest'
 
-export async function buildManifestAsync(config: Config): Promise<void> {
-  const { name, commandId, main, ui, menu, relaunchButtons } = config
-  const command = { commandId, main, menu, name, ui }
+export async function buildManifestAsync(
+  config: Config,
+  minify: boolean
+): Promise<void> {
+  const { relaunchButtons, ...command } = config
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a "main"')
   }
@@ -40,14 +42,17 @@ export async function buildManifestAsync(config: Config): Promise<void> {
       }
     }
   }
-  if (menu !== null) {
-    result.menu = createMenu(menu)
+  if (command.menu !== null) {
+    result.menu = createMenu(command.menu)
   }
   if (relaunchButtons !== null) {
     result.relaunchButtons = createRelaunchButtons(relaunchButtons)
   }
-  const string = JSON.stringify(result) + '\n'
-  await outputFile(constants.build.manifestFilePath, string)
+  const string =
+    (minify === true
+      ? JSON.stringify(result)
+      : JSON.stringify(result, null, 2)) + '\n'
+  await fs.outputFile(constants.build.manifestFilePath, string)
 }
 
 function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {

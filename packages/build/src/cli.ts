@@ -8,14 +8,14 @@ sade('build-figma-plugin', true)
   .describe(
     'Build a Figma plugin, with support for multiple menu commands that each have their own UI implementation'
   )
-  .option('-d, --dev', 'Create an unminified bundle with sourcemaps')
-  .option('-w, --watch', 'Rebuild the plugin on code changes')
-  .action(async function (options: { dev: boolean; w: boolean }) {
-    const { dev, w } = options
+  .option('-m, --minify', 'Minify the plugin bundle', false)
+  .option('-w, --watch', 'Rebuild the plugin on code changes', false)
+  .action(async function (options: { minify: boolean; w: boolean }) {
+    const { minify, w } = options
     if (w === true) {
       watch()
       return
     }
-    await buildAsync(dev, true)
+    await buildAsync(minify, true)
   })
   .parse(process.argv)
