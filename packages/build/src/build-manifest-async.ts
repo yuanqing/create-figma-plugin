@@ -5,7 +5,7 @@ import {
   ConfigRelaunchButton,
   constants
 } from '@create-figma-plugin/common'
-import * as fs from 'fs-extra'
+import { outputFile } from 'fs-extra'
 
 import {
   Manifest,
@@ -52,7 +52,7 @@ export async function buildManifestAsync(
     (minify === true
       ? JSON.stringify(result)
       : JSON.stringify(result, null, 2)) + '\n'
-  await fs.outputFile(constants.build.manifestFilePath, string)
+  await outputFile(constants.build.manifestFilePath, string)
 }
 
 function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {

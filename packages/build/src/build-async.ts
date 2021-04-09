@@ -13,9 +13,11 @@ export async function buildAsync(
   log.info('Building...')
   const config = await readConfigAsync()
   try {
-    await buildCssModulesTypings()
-    await buildManifestAsync(config, minify)
-    await buildBundlesAsync(config, minify)
+    await Promise.all([
+      buildCssModulesTypings(),
+      buildManifestAsync(config, minify),
+      buildBundlesAsync(config, minify)
+    ])
   } catch (error) {
     log.error(error)
     if (exitOnError === true) {
@@ -23,7 +25,7 @@ export async function buildAsync(
     }
   }
   const elapsedTime = process.hrtime(time)
-  log.success(`Done ${gray(formatElapsedTime(elapsedTime))}`)
+  log.success(`Built ${gray(formatElapsedTime(elapsedTime))}`)
 }
 
 function formatElapsedTime(time: [number, number]) {

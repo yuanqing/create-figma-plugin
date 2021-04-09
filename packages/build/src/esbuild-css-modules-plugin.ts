@@ -1,23 +1,23 @@
-import * as crypto from 'crypto'
-import * as esbuild from 'esbuild'
-import * as fs from 'fs-extra'
-import * as path from 'path'
+import { createHash } from 'crypto'
+import { Plugin, PluginBuild } from 'esbuild'
+import { readFile } from 'fs-extra'
+import { basename, extname, resolve } from 'path'
 import postcss from 'postcss'
 import * as tempWrite from 'temp-write'
 
 const cssNano = require('cssnano')
 const postCssModules = require('postcss-modules')
 
-export function esbuildCssModulesPlugin(minify: boolean): esbuild.Plugin {
+export function esbuildCssModulesPlugin(minify: boolean): Plugin {
   return {
     name: 'css-modules',
-    setup: function (build: esbuild.PluginBuild) {
+    setup: function (build: PluginBuild) {
       build.onResolve({ filter: /\.css$/ }, async function (args: any) {
-        const cssfilePath = path.resolve(args.resolveDir, args.path)
+        const cssfilePath = resolve(args.resolveDir, args.path)
         const js = await createCssModulesJavaScript(cssfilePath, minify)
         const jsFilePath = await tempWrite(
           js,
-          `${path.basename(args.path, path.extname(args.path))}.js`
+          `${basename(args.path, extname(args.path))}.js`
         )
         return {
           path: jsFilePath
@@ -27,13 +27,13 @@ export function esbuildCssModulesPlugin(minify: boolean): esbuild.Plugin {
   }
 }
 
-const hash = crypto.createHash('sha1')
+const hash = createHash('sha1')
 
 async function createCssModulesJavaScript(
   cssFilePath: string,
   minify: boolean
 ) {
-  const css = await fs.readFile(cssFilePath)
+  const css = await readFile(cssFilePath)
   let classNamesJson: null | string = null
   const plugins = []
   plugins.push(

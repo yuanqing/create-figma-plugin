@@ -1,5 +1,5 @@
 import { constants, log } from '@create-figma-plugin/common'
-import * as chokidar from 'chokidar'
+import { watch as chokidarWatch } from 'chokidar'
 
 import { buildAsync } from './build-async'
 
@@ -16,7 +16,7 @@ const ignoreRegex = new RegExp(
 )
 
 export function watch(): void {
-  const watcher = chokidar.watch('.', {
+  const watcher = chokidarWatch('.', {
     ignored: function (path: string) {
       return ignoreRegex.test(path)
     }

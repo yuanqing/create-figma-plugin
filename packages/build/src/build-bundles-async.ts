@@ -6,8 +6,8 @@ import {
   ConfigRelaunchButton,
   constants
 } from '@create-figma-plugin/common'
-import * as esbuild from 'esbuild'
-import * as path from 'path'
+import { build } from 'esbuild'
+import { join } from 'path'
 
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin'
 
@@ -28,11 +28,11 @@ async function buildMainBundleAsync(
   minify: boolean
 ): Promise<void> {
   const js = createMainEntryFile(config)
-  await esbuild.build({
+  await build({
     bundle: true,
     logLevel: 'error',
     minify,
-    outfile: path.join(constants.build.directoryName, 'main.js'),
+    outfile: join(process.cwd(), constants.build.directoryName, 'main.js'),
     stdin: {
       contents: js,
       resolveDir: process.cwd()
@@ -68,11 +68,11 @@ async function buildUiBundleAsync(
   if (js === null) {
     return
   }
-  await esbuild.build({
+  await build({
     bundle: true,
     logLevel: 'error',
     minify,
-    outfile: path.join(constants.build.directoryName, 'ui.js'),
+    outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),
     plugins: [esbuildCssModulesPlugin(minify)],
     stdin: {
       contents: js,
