@@ -85,14 +85,14 @@ test('multiple menu commands', async function (t) {
     main: 'build/main.js',
     menu: [
       {
-        command: 'src/foo--default',
+        command: 'src/foo.ts--default',
         name: 'y'
       },
       {
         separator: true
       },
       {
-        command: 'src/bar/main--default',
+        command: 'src/bar/main.ts--default',
         name: 'z'
       }
     ],
