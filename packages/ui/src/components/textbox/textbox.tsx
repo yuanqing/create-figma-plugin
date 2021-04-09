@@ -5,7 +5,7 @@ import { useCallback, useRef } from 'preact/hooks'
 
 import { HTMLProps, OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
-import styles from './textbox.scss'
+import styles from './textbox.css'
 
 export interface TextboxProps {
   disabled?: boolean

@@ -1,0 +1,8 @@
+.preview {
+  position: relative;
+  height: 121px;
+  padding: var(--space-medium) 0;
+  overflow: auto;
+  background-color: var(--color-preview);
+  border-bottom: 1px solid var(--color-silver);
+}

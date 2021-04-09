@@ -1,6 +1,7 @@
 /** @jsx h */
+import './css/base.css'
+
 import { h, render as preactRender } from 'preact'
-require('./scss/base.scss')
 
 export function render(
   Plugin: preact.FunctionComponent<any>,

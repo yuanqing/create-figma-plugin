@@ -14,10 +14,10 @@ import {
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
 import { TextboxProps } from '../textbox'
-import styles from '../textbox.scss'
+import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import textboxAutocompleteStyles from './textbox-autocomplete.scss'
+import textboxAutocompleteStyles from './textbox-autocomplete.css'
 
 const EMPTY_STRING = ''
 const INVALID_MENU_ITEM_ID = null

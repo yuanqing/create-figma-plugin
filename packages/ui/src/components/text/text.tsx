@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h } from 'preact'
 
 import { Alignment, HTMLProps } from '../../types'
-import styles from './text.scss'
+import styles from './text.css'
 
 export interface TextProps {
   children: preact.ComponentChildren

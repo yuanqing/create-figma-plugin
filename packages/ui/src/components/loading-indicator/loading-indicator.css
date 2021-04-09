@@ -3,16 +3,15 @@
   width: 16px;
   height: 16px;
   margin: 0 auto;
-
-  svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 16px;
-    height: 16px;
-    animation: rotating 0.5s linear infinite;
-    fill: currentColor;
-  }
+}
+.loadingIndicator svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  animation: rotating 0.5s linear infinite;
+  fill: currentColor;
 }
 
 @keyframes rotating {

@@ -2,7 +2,7 @@
 import { h } from 'preact'
 
 import { HTMLProps } from '../../types'
-import style from './preview.scss'
+import style from './preview.css'
 
 export interface PreviewProps {
   children: preact.ComponentChildren

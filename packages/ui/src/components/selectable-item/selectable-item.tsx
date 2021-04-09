@@ -6,7 +6,7 @@ import { useCallback } from 'preact/hooks'
 import { HTMLProps, OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
-import styles from './selectable-item.scss'
+import styles from './selectable-item.css'
 
 export interface SelectableItemProps {
   bold?: boolean

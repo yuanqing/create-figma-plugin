@@ -10,7 +10,7 @@ import {
   RIGHT_KEY_CODE,
   UP_KEY_CODE
 } from '../../utilities/key-codes'
-import styles from './segmented-control.scss'
+import styles from './segmented-control.css'
 
 export interface SegmentedControlProps<T> {
   disabled?: boolean
@@ -21,8 +21,7 @@ export interface SegmentedControlProps<T> {
   propagateEscapeKeyDown?: boolean
   value: null | T
 }
-
-interface SegmentedControlOption<T> {
+export interface SegmentedControlOption<T> {
   disabled?: boolean
   text?: preact.ComponentChildren
   value: null | T

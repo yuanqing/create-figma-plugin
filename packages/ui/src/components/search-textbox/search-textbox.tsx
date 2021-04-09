@@ -6,7 +6,7 @@ import { HTMLProps, OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { crossIcon } from '../icon/icons/cross-icon'
 import { searchIcon } from '../icon/icons/search-icon'
-import styles from './search-textbox.scss'
+import styles from './search-textbox.css'
 
 export interface SearchTextboxProps {
   clearOnEscapeKeyDown?: boolean

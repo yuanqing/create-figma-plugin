@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h, toChildArray } from 'preact'
 
 import { HTMLProps, Space } from '../../types'
-import styles from './stack.scss'
+import styles from './stack.css'
 
 export interface StackProps {
   children: preact.ComponentChildren

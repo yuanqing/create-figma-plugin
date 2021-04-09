@@ -2,7 +2,7 @@
 import { h, toChildArray } from 'preact'
 
 import { HTMLProps, Space } from '../../types'
-import styles from './inline.scss'
+import styles from './inline.css'
 
 export interface InlineProps {
   children: preact.ComponentChildren

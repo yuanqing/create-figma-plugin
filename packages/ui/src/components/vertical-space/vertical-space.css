@@ -1,0 +1,19 @@
+.extraSmall {
+  height: var(--space-extra-small);
+}
+
+.small {
+  height: var(--space-small);
+}
+
+.medium {
+  height: var(--space-medium);
+}
+
+.large {
+  height: var(--space-large);
+}
+
+.extraLarge {
+  height: var(--space-extra-large);
+}

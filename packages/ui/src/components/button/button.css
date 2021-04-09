@@ -1,0 +1,84 @@
+.button {
+  position: relative;
+  display: inline-block;
+}
+.button button {
+  display: inline-block;
+  height: 32px;
+  color: currentColor;
+  border-radius: var(--border-radius-6);
+}
+.button.disabled {
+  opacity: var(--opacity-30);
+}
+.button.disabled button {
+  cursor: not-allowed;
+}
+
+.primary {
+  color: var(--color-white);
+}
+.primary button {
+  padding: 0 14px;
+  line-height: 28px;
+  background-color: var(--color-blue);
+  border: 2px solid transparent;
+}
+.primary button:focus {
+  border-color: var(--color-black-30);
+}
+.primary.destructive {
+  color: var(--color-white);
+}
+.primary.destructive button {
+  background-color: var(--color-red);
+}
+.primary.disabled button {
+  background-color: var(--color-black-80);
+}
+
+.secondary {
+  color: var(--color-black-80);
+}
+.secondary button {
+  padding: 0 15px;
+  line-height: 30px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black-80);
+}
+.secondary button:focus {
+  padding: 0 14px;
+  line-height: 28px;
+  border-color: var(--color-blue);
+  border-width: 2px;
+}
+.secondary.destructive {
+  color: var(--color-red);
+}
+.secondary.destructive button {
+  border-color: var(--color-red);
+}
+
+.fullWidth {
+  display: block;
+}
+.fullWidth button {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.loading button {
+  color: rgba(0, 0, 0, 0);
+}
+.loading .loadingIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loading .loadingIndicator svg {
+  fill: currentColor;
+}

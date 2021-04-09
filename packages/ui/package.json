@@ -33,26 +33,50 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "yarn run clean && tsc --module es2020 --moduleResolution node && ts-node scripts/copy-non-ts-files.ts",
-    "clean": "rimraf '*.log' lib 'src/**/*.scss.d.ts' tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.scss' && prettier --loglevel error --write '*.json' '.storybook/**/*.html'",
-    "lint": "eslint '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint 'src/**/*.scss'",
+    "clean": "rimraf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
+    "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json' '.storybook/**/*.html'",
+    "lint": "eslint '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
-    "storybook-clean": "rimraf '*.log' build 'src/**/*.scss.d.ts'",
+    "storybook-clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
     "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^0.0.84",
     "@sindresorhus/class-names": "^1.1.0"
   },
+  "devDependencies": {
+    "@storybook/addon-storysource": "^6.1.21",
+    "@storybook/preact": "^6.1.21",
+    "@storybook/source-loader": "^6.1.21",
+    "@types/fs-extra": "^9.0.9",
+    "css-loader": "^5.2.0",
+    "eslint": "^7.23.0",
+    "eslint-config-yuanqing": "^0.0.4",
+    "fs-extra": "^9.1.0",
+    "preact": "^10.5.13",
+    "prettier": "^2.2.1",
+    "mkdirp": "^1.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "style-loader": "^2.0.0",
+    "stylelint": "^13.12.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-order": "^4.1.0",
+    "stylelint-prettier": "^1.2.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  },
   "peerDependencies": {
     "preact": "^10"
   },
   "sideEffects": [
-    "./lib/scss/*.scss"
+    "./lib/css/*.css"
   ],
   "eslint": {
     "ignore": [
-      "src/**/*.scss.d.ts"
+      "src/**/*.css.d.ts"
     ],
     "parser": "@typescript-eslint/parser",
     "plugins": [

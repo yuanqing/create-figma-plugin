@@ -1,0 +1,56 @@
+.layer {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  color: var(--color-black-80);
+}
+.layer:hover {
+  background-color: var(--color-selection-b);
+}
+
+.component {
+  color: var(--color-purple);
+}
+
+.selected,
+.selected:hover {
+  background-color: var(--color-selection-a);
+}
+
+.layerName,
+.pageName {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.layerName {
+  padding: 0 8px;
+}
+.component .layerName,
+.frame .layerName {
+  font-weight: var(--font-weight-bold);
+}
+
+.pageName {
+  flex: 1 0 40px;
+  color: var(--color-black-30);
+}
+
+.icon {
+  flex: 0 0 16px;
+  height: 16px;
+  pointer-events: none;
+}
+.icon svg {
+  width: 16px;
+  height: 16px;
+}
+.component .icon svg {
+  fill: var(--color-purple);
+}
+.frame .icon svg {
+  fill: var(--color-black-80);
+}

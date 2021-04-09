@@ -1,0 +1,18 @@
+.extraSmall > .item {
+  margin-top: var(--space-extra-small);
+}
+.small > .item {
+  margin-top: var(--space-small);
+}
+.medium > .item {
+  margin-top: var(--space-medium);
+}
+.large > .item {
+  margin-top: var(--space-large);
+}
+.extraLarge > .item {
+  margin-top: var(--space-extra-large);
+}
+.item:first-child {
+  margin-top: 0;
+}

@@ -2,7 +2,7 @@ const { resolve } = require('path')
 
 function webpackFinal (config) {
   config.module.rules.push({
-    test: /\.scss$/,
+    test: /\.css$/,
     use: [
       {
         loader: 'style-loader'
@@ -13,9 +13,6 @@ function webpackFinal (config) {
           importLoaders: 1,
           modules: true
         }
-      },
-      {
-        loader: 'sass-loader'
       }
     ],
     include: resolve(__dirname, '..', 'src')

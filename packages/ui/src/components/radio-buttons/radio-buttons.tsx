@@ -6,7 +6,7 @@ import { useCallback } from 'preact/hooks'
 import { HTMLProps, OnChange, Space } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
-import styles from './radio-buttons.scss'
+import styles from './radio-buttons.css'
 
 export interface RadioButtonsProps {
   disabled?: boolean
@@ -18,7 +18,7 @@ export interface RadioButtonsProps {
   space?: Space
   value: null | string
 }
-interface RadioButtonsOption {
+export interface RadioButtonsOption {
   disabled?: boolean
   text?: preact.ComponentChildren
   value: null | string

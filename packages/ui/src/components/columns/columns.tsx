@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { h, toChildArray } from 'preact'
 
 import { HTMLProps, Space } from '../../types'
-import styles from './columns.scss'
+import styles from './columns.css'
 
 export interface ColumnsProps {
   children: preact.ComponentChildren

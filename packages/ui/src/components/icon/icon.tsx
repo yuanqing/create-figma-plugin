@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import styles from './icon.scss'
+import styles from './icon.css'
 
 export interface IconProps {
   children: string

@@ -5,7 +5,7 @@ import { h } from 'preact'
 import { HTMLProps } from '../../types'
 import { componentIcon } from '../icon/icons/component-icon'
 import { frameIcon } from '../icon/icons/frame-icon'
-import styles from './layer.scss'
+import styles from './layer.css'
 
 const icons = {
   component: componentIcon,
@@ -19,7 +19,7 @@ export interface LayerProps {
   selected?: boolean
   type: LayerType
 }
-type LayerType = 'frame' | 'component'
+export type LayerType = 'frame' | 'component'
 
 export function Layer({
   children,

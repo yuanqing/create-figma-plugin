@@ -5,7 +5,7 @@ import { useCallback, useState } from 'preact/hooks'
 
 import { HTMLProps, OnSelectedFiles } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
-import styles from './file-upload-dropzone.scss'
+import styles from './file-upload-dropzone.css'
 
 export interface FileUploadDropzoneProps {
   acceptedFileTypes?: string[]

@@ -11,7 +11,7 @@ import {
 import { OnChange, Option } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
-import styles from './dropdown-menu.scss'
+import styles from './dropdown-menu.css'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-dropdown-menu'
 
@@ -26,8 +26,7 @@ export interface DropdownMenuProps {
   top?: boolean
   value: null | string
 }
-
-export type DropdownOption = Option
+export type DropdownMenuOption = Option
 
 export function DropdownMenu({
   children,

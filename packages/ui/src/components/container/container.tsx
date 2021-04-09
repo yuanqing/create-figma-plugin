@@ -2,7 +2,7 @@
 import { h } from 'preact'
 
 import { HTMLProps, Space } from '../../types'
-import styles from './container.scss'
+import styles from './container.css'
 
 export interface ContainerProps {
   children: preact.ComponentChildren

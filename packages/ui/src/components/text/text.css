@@ -1,0 +1,54 @@
+.text {
+  padding-top: 1px;
+  color: var(--color-black-80);
+  transform: translateY(4px);
+  pointer-events: none;
+}
+.text:before {
+  display: block;
+  height: 0;
+  margin-top: -9px;
+  content: '';
+  pointer-events: none;
+}
+.text strong {
+  font-weight: var(--font-weight-bold);
+}
+.text a {
+  color: var(--color-blue);
+  text-decoration: none;
+  pointer-events: all;
+}
+.text a:focus {
+  background-color: var(--color-selection-a);
+  border-radius: var(--border-radius-2);
+  outline: 0;
+}
+.text code {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.muted {
+  color: var(--color-black-30);
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}

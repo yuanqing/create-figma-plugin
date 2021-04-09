@@ -5,7 +5,7 @@ import { useCallback } from 'preact/hooks'
 
 import { HTMLProps, OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
-import styles from './checkbox.scss'
+import styles from './checkbox.css'
 
 export interface CheckboxProps {
   children: preact.ComponentChildren

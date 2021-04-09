@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import styles from './loading-indicator.scss'
+import styles from './loading-indicator.css'
 
 export function LoadingIndicator(props: { [key: string]: any }): h.JSX.Element {
   return (

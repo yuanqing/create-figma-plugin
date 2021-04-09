@@ -6,7 +6,7 @@ import { useCallback } from 'preact/hooks'
 import { HTMLProps } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
-import styles from './button.scss'
+import styles from './button.css'
 
 export interface ButtonProps {
   children: preact.ComponentChildren

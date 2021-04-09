@@ -1,0 +1,60 @@
+.button {
+  position: relative;
+  display: inline-block;
+  color: var(--color-white);
+}
+.button button {
+  display: inline-block;
+  height: 32px;
+  padding: 0 14px;
+  color: currentColor;
+  line-height: 28px;
+  background-color: var(--color-blue);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-6);
+}
+.button.disabled {
+  opacity: var(--opacity-30);
+}
+.button.disabled button {
+  background-color: var(--color-black-80);
+  cursor: not-allowed;
+}
+
+.fullWidth {
+  display: block;
+}
+.fullWidth button {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.loading button {
+  color: rgba(0, 0, 0, 0);
+}
+.loading .loadingIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loading .loadingIndicator svg {
+  fill: currentColor;
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+}
+.input:active + button,
+.input:focus + button {
+  border-color: var(--color-black-30);
+}

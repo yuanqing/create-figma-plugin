@@ -1,6 +1,3 @@
-@import '../../scss/constants';
-@import '../../scss/text';
-
 .fileUploadDropzone {
   position: relative;
   width: 100%;
@@ -8,7 +5,7 @@
 }
 
 .isDropActive {
-  background-color: $color-selection-b;
+  background-color: var(--color-selection-b);
 }
 
 .input,
@@ -26,14 +23,13 @@
 }
 
 .dashedLine {
-  border: 1px dashed $color-black-30;
+  border: 1px dashed var(--color-black-30);
   pointer-events: none;
-
-  .input:active + &,
-  .input:focus + &,
-  .isDropActive & {
-    border-color: $color-blue;
-  }
+}
+.input:active + .dashedLine,
+.input:focus + .dashedLine,
+.isDropActive .dashedLine {
+  border-color: var(--color-blue);
 }
 
 .children {
