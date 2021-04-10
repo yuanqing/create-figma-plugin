@@ -122,7 +122,12 @@ test('relaunch button', async function (t) {
     name: 'x',
     relaunchButtons: [
       {
+        command: 'foo',
+        name: 'x'
+      },
+      {
         command: 'bar',
+        multipleSelection: true,
         name: 'y'
       }
     ]
@@ -175,6 +180,30 @@ test('preact', async function (t) {
   })
   t.ok(await pathExists('build/main.js'))
   t.ok(await pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('manifest options', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '8-manifest-options'))
+  await cleanUpAsync()
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
+  const manifestJsonPath = join(process.cwd(), 'manifest.json')
+  t.deepEqual(require(manifestJsonPath), {
+    api: '1.0.0',
+    build: 'bar',
+    enablePrivatePluginApi: true,
+    enableProposedApi: true,
+    id: '42',
+    main: 'build/main.js',
+    name: 'x'
+  })
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 

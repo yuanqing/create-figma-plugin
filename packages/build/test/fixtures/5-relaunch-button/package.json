@@ -4,9 +4,14 @@
     "id": "42",
     "main": "src/foo.ts",
     "relaunchButtons": {
+      "foo": {
+        "name": "x",
+        "main": "src/foo.ts"
+      },
       "bar": {
         "name": "y",
-        "main": "src/bar.ts"
+        "main": "src/bar.ts",
+        "multipleSelection": true
       }
     }
   }

@@ -1,0 +1,10 @@
+{
+  "figma-plugin": {
+    "name": "x",
+    "id": "42",
+    "main": "src/foo.ts",
+    "enableProposedApi": true,
+    "enablePrivatePluginApi": true,
+    "build": "bar"
+  }
+}
