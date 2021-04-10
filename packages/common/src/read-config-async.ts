@@ -1,5 +1,5 @@
 import * as slugify from '@sindresorhus/slugify'
-import { pathExists } from 'fs-extra'
+import { pathExists, readFile } from 'fs-extra'
 import { join } from 'path'
 
 import { constants } from './constants'
@@ -19,12 +19,16 @@ import {
 
 const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
+  build: null,
   commandId: 'main.ts--default',
+  enablePrivatePluginApi: false,
+  enableProposedApi: false,
   id: constants.packageJson.defaultPluginName,
   main: { handler: 'default', src: join(constants.src.directory, 'main.ts') },
   menu: null,
   name: constants.packageJson.defaultPluginName,
   relaunchButtons: null,
+  remainderOptions: {},
   ui: null
 }
 
@@ -33,21 +37,41 @@ export async function readConfigAsync(): Promise<Config> {
   if ((await pathExists(packageJsonPath)) === false) {
     return defaultConfig
   }
-  const packageJson = require(packageJsonPath)
+  const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf8'))
   const config: RawConfig = packageJson[constants.packageJson.configKey]
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig
   }
-  const { apiVersion, id, name, main, ui, menu, relaunchButtons } = config
+  const {
+    apiVersion,
+    build,
+    enableProposedApi,
+    enablePrivatePluginApi,
+    id,
+    name,
+    main,
+    ui,
+    menu,
+    relaunchButtons,
+    ...remainderOptions
+  } = config
   return {
     apiVersion:
       typeof apiVersion === 'undefined' ? constants.apiVersion : apiVersion,
+    build: typeof build === 'undefined' ? null : build,
+    enablePrivatePluginApi:
+      typeof enablePrivatePluginApi === 'undefined'
+        ? false
+        : enablePrivatePluginApi,
+    enableProposedApi:
+      typeof enableProposedApi === 'undefined' ? false : enableProposedApi,
     id: typeof id === 'undefined' ? slugify(name) : id,
     ...parseCommand({ main, menu, name, ui }),
     relaunchButtons:
       typeof relaunchButtons === 'undefined'
         ? null
-        : parseRelaunchButtons(relaunchButtons)
+        : parseRelaunchButtons(relaunchButtons),
+    remainderOptions
   }
 }
 

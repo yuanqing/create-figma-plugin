@@ -16,7 +16,17 @@ import {
 
 export async function buildManifestAsync(minify: boolean): Promise<void> {
   const config = await readConfigAsync()
-  const { name, commandId, main, ui, menu, relaunchButtons } = config
+  const {
+    build,
+    enablePrivatePluginApi,
+    enableProposedApi,
+    name,
+    commandId,
+    main,
+    ui,
+    menu,
+    relaunchButtons
+  } = config
   const command = { commandId, main, menu, name, ui }
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a "main"')
@@ -46,6 +56,15 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   }
   if (relaunchButtons !== null) {
     result.relaunchButtons = createRelaunchButtons(relaunchButtons)
+  }
+  if (enableProposedApi === true) {
+    result.enableProposedApi = true
+  }
+  if (enablePrivatePluginApi === true) {
+    result.enablePrivatePluginApi = true
+  }
+  if (build !== null) {
+    result.build = build
   }
   const string =
     (minify === true

@@ -4,8 +4,7 @@ export const constants = {
     directoryName: 'build',
     manifestFilePath: 'manifest.json',
     pluginCodeFilePath: 'build/main.js',
-    pluginUiFilePath: 'build/ui.js',
-    webpackConfigFileName: 'figma-plugin.config.js'
+    pluginUiFilePath: 'build/ui.js'
   },
   defaultTemplate: 'default',
   packageJson: {

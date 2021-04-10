@@ -10,6 +10,12 @@ export interface Config extends BaseConfigMixin {
   id: string
   menu: null | Array<ConfigCommand | ConfigCommandSeparator>
   relaunchButtons: null | Array<ConfigRelaunchButton>
+  enableProposedApi: boolean
+  enablePrivatePluginApi: boolean
+  build: null | string
+  remainderOptions: {
+    [key: string]: any
+  }
 }
 
 export interface ConfigCommand extends BaseConfigMixin {

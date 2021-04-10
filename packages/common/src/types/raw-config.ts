@@ -9,6 +9,9 @@ export interface RawConfig extends BaseRawConfigMixin {
   id?: string
   menu?: Array<RawConfigCommand>
   relaunchButtons?: RawConfigRelaunchButtons
+  enableProposedApi?: boolean
+  enablePrivatePluginApi?: boolean
+  build?: string
 }
 
 export interface RawConfigCommand extends BaseRawConfigMixin {

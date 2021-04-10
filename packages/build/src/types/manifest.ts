@@ -6,6 +6,9 @@ export type Manifest = {
   ui?: string
   menu?: Array<ManifestMenuItem | ManifestMenuItemSeparator>
   relaunchButtons?: Array<ManifestRelaunchButton>
+  enableProposedApi?: boolean
+  enablePrivatePluginApi?: boolean
+  build?: string
 }
 
 export type ManifestMenuItem = {
