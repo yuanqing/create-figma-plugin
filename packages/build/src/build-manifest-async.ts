@@ -25,13 +25,15 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     main,
     ui,
     menu,
-    relaunchButtons
+    relaunchButtons,
+    remainderOptions
   } = config
   const command = { commandId, main, menu, name, ui }
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a "main"')
   }
   const result: Manifest = {
+    ...remainderOptions,
     api: config.apiVersion,
     id: config.id,
     main: constants.build.pluginCodeFilePath,

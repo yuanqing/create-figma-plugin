@@ -1,0 +1,8 @@
+{
+  "figma-plugin": {
+    "name": "x",
+    "id": "42",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
+  }
+}

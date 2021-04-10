@@ -1,0 +1,3 @@
+{
+  "extends": "@create-figma-plugin/tsconfig"
+}

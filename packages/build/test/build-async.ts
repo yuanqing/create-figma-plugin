@@ -1,5 +1,6 @@
+import * as findUp from 'find-up'
 import { ensureSymlink, pathExists } from 'fs-extra'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import * as rimraf from 'rimraf'
 import { test } from 'tap'
 
@@ -12,8 +13,8 @@ test('no config', async function (t) {
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
   t.notOk(await pathExists('node_modules'))
-  await createSymlinksAsync()
-  await buildAsync({ minify: false, typecheck: false })
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -33,8 +34,8 @@ test('basic command', async function (t) {
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
   t.notOk(await pathExists('node_modules'))
-  await createSymlinksAsync()
-  await buildAsync({ minify: false, typecheck: false })
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -54,8 +55,8 @@ test('command with UI', async function (t) {
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
   t.notOk(await pathExists('node_modules'))
-  await createSymlinksAsync()
-  await buildAsync({ minify: false, typecheck: false })
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -76,8 +77,8 @@ test('multiple menu commands', async function (t) {
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
   t.notOk(await pathExists('node_modules'))
-  await createSymlinksAsync()
-  await buildAsync({ minify: false, typecheck: false })
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -111,8 +112,8 @@ test('relaunch button', async function (t) {
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
   t.notOk(await pathExists('node_modules'))
-  await createSymlinksAsync()
-  await buildAsync({ minify: false, typecheck: false })
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -139,8 +140,8 @@ test('custom styles', async function (t) {
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
   t.notOk(await pathExists('node_modules'))
-  await createSymlinksAsync()
-  await buildAsync({ minify: false, typecheck: false })
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -155,9 +156,37 @@ test('custom styles', async function (t) {
   await cleanUpAsync()
 })
 
-async function createSymlinksAsync() {
+test('preact', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '7-preact'))
+  await cleanUpAsync()
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
+  const manifestJsonPath = join(process.cwd(), 'manifest.json')
+  t.deepEqual(require(manifestJsonPath), {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    name: 'x',
+    ui: 'build/ui.js'
+  })
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+async function createFigmaTypingsSymlinksAsync() {
+  const directoryPath = await findUp(join('node_modules', '@figma'), {
+    type: 'directory'
+  })
+  if (typeof directoryPath === 'undefined') {
+    throw new Error('Cannot find `node_modules/@figma`')
+  }
   await ensureSymlink(
-    resolve(__dirname, '..', '..', '..', 'node_modules', '@figma'),
+    directoryPath,
     join(process.cwd(), 'node_modules', '@figma')
   )
 }

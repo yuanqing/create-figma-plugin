@@ -57,6 +57,7 @@
     "@types/tap": "^14.10.3",
     "eslint": "^7.24.0",
     "eslint-config-yuanqing": "^0.0.4",
+    "preact": "^10.5.13",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "tap": "^15.0.2",
