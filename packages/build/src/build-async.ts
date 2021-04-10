@@ -1,18 +1,24 @@
 import { log } from '@create-figma-plugin/common'
-import { gray } from 'kleur/colors'
+import { yellow } from 'kleur/colors'
 
 import { buildBundlesAsync } from './build-bundles-async'
 import { buildCssModulesTypingsAsync } from './build-css-modules-typings-async'
 import { buildManifestAsync } from './build-manifest-async'
 import { trackElapsedTime } from './track-elapsed-time'
+import { BuildOptions } from './types/build'
 
-export async function buildAsync(minify: boolean): Promise<void> {
+export async function buildAsync(options: BuildOptions): Promise<void> {
   const elapsedTime = trackElapsedTime()
-  log.info('Building')
-  await Promise.all([
-    buildCssModulesTypingsAsync(),
-    buildManifestAsync(minify),
-    buildBundlesAsync(minify)
-  ])
-  log.success(`Built ${gray(elapsedTime())}`)
+  log.info('Building...')
+  try {
+    await buildCssModulesTypingsAsync()
+    await Promise.all([
+      buildManifestAsync(options.minify),
+      buildBundlesAsync(options)
+    ])
+  } catch (error) {
+    log.error(error.message)
+    process.exit(1)
+  }
+  log.success(`Built in ${yellow(elapsedTime())}`)
 }

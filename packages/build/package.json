@@ -46,7 +46,8 @@
     "postcss-modules": "^4.0.0",
     "sade": "^1.7.4",
     "temp-write": "^4.0.0",
-    "typed-css-modules": "^0.6.7"
+    "typed-css-modules": "^0.6.7",
+    "typescript": "^4.2.3"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.19.3",

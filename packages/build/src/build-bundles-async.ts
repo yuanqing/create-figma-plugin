@@ -11,15 +11,24 @@ import { build } from 'esbuild'
 import { join } from 'path'
 
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin'
+import { typeCheckAsync } from './type-check-async'
+import { BuildOptions } from './types/build'
 
 interface EntryFile extends ConfigFile {
   commandId: string
 }
 
-export async function buildBundlesAsync(minify: boolean): Promise<void> {
+export async function buildBundlesAsync(options: BuildOptions): Promise<void> {
   const config = await readConfigAsync()
-  await buildMainBundleAsync(config, minify)
-  await buildUiBundleAsync(config, minify)
+  if (options.typecheck === true) {
+    await typeCheckAsync()
+  }
+  try {
+    await buildMainBundleAsync(config, options.minify)
+    await buildUiBundleAsync(config, options.minify)
+  } catch (error) {
+    throw new Error(`esbuild error\n${error.message}`)
+  }
 }
 
 async function buildMainBundleAsync(

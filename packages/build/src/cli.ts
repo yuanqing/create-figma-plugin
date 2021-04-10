@@ -9,11 +9,20 @@ sade('build-figma-plugin', true)
     'Build a Figma plugin, with support for multiple menu commands that each have their own UI implementation'
   )
   .option('-m, --minify', 'Minify the plugin bundle', false)
+  .option('-t, --typecheck', 'Type check the plugin code before build', false)
   .option('-w, --watch', 'Rebuild the plugin on code changes', false)
-  .action(async function (options: { minify: boolean; watch: boolean }) {
-    await buildAsync(options.minify)
+  .action(async function (options: {
+    minify: boolean
+    typecheck: boolean
+    watch: boolean
+  }) {
+    const buildOptions = {
+      minify: options.minify,
+      typecheck: options.typecheck
+    }
+    await buildAsync(buildOptions)
     if (options.watch === true) {
-      watch(options.minify)
+      watch(buildOptions)
       return
     }
   })

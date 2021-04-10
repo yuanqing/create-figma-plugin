@@ -132,15 +132,24 @@ function parseFile(file: RawConfigFile): ConfigFile {
   if (typeof file === 'string') {
     return {
       handler: 'default',
-      src: file
+      src: normalizeFilePath(file)
     }
   }
   const { src, handler } = file
+  const normalizedFilePath = normalizeFilePath(src)
   if (typeof handler === 'undefined') {
     return {
       handler: 'default',
-      src
+      src: normalizedFilePath
     }
   }
-  return { handler, src }
+  return { handler, src: normalizedFilePath }
+}
+
+const filePathPrefixRegex = /^(?:\.\/)?src/
+function normalizeFilePath(filePath: string): string {
+  if (filePathPrefixRegex.test(filePath) === true) {
+    return filePath
+  }
+  return join(constants.src.directory, filePath)
 }
