@@ -10,12 +10,11 @@ sade('build-figma-plugin', true)
   )
   .option('-m, --minify', 'Minify the plugin bundle', false)
   .option('-w, --watch', 'Rebuild the plugin on code changes', false)
-  .action(async function (options: { minify: boolean; w: boolean }) {
-    const { minify, w } = options
-    if (w === true) {
-      watch()
+  .action(async function (options: { minify: boolean; watch: boolean }) {
+    await buildAsync(options.minify)
+    if (options.watch === true) {
+      watch(options.minify)
       return
     }
-    await buildAsync(minify, true)
   })
   .parse(process.argv)

@@ -1,9 +1,9 @@
 import {
-  Config,
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigRelaunchButton,
-  constants
+  constants,
+  readConfigAsync
 } from '@create-figma-plugin/common'
 import { outputFile } from 'fs-extra'
 
@@ -14,11 +14,10 @@ import {
   ManifestRelaunchButton
 } from './types/manifest'
 
-export async function buildManifestAsync(
-  config: Config,
-  minify: boolean
-): Promise<void> {
-  const { relaunchButtons, ...command } = config
+export async function buildManifestAsync(minify: boolean): Promise<void> {
+  const config = await readConfigAsync()
+  const { name, commandId, main, ui, menu, relaunchButtons } = config
+  const command = { commandId, main, menu, name, ui }
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a "main"')
   }

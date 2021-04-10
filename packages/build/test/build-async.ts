@@ -13,7 +13,7 @@ test('no config', async function (t) {
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await createSymlinksAsync()
-  await buildAsync(true, false)
+  await buildAsync(true)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -34,7 +34,7 @@ test('basic command', async function (t) {
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await createSymlinksAsync()
-  await buildAsync(true, false)
+  await buildAsync(true)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -55,7 +55,7 @@ test('command with UI', async function (t) {
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await createSymlinksAsync()
-  await buildAsync(true, false)
+  await buildAsync(true)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -77,7 +77,7 @@ test('multiple menu commands', async function (t) {
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await createSymlinksAsync()
-  await buildAsync(true, false)
+  await buildAsync(true)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -112,7 +112,7 @@ test('relaunch button', async function (t) {
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await createSymlinksAsync()
-  await buildAsync(true, false)
+  await buildAsync(true)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
@@ -140,7 +140,7 @@ test('custom styles', async function (t) {
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await createSymlinksAsync()
-  await buildAsync(true, false)
+  await buildAsync(true)
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',

@@ -1,33 +1,37 @@
-import { constants, log } from '@create-figma-plugin/common'
+import { log } from '@create-figma-plugin/common'
 import { watch as chokidarWatch } from 'chokidar'
+import { gray, yellow } from 'kleur/colors'
 
-import { buildAsync } from './build-async'
+import { buildBundlesAsync } from './build-bundles-async'
+import { buildCssModulesTypingsAsync } from './build-css-modules-typings-async'
+import { buildManifestAsync } from './build-manifest-async'
+import { trackElapsedTime } from './track-elapsed-time'
 
-const ignoreRegex = new RegExp(
-  [
-    '(?:^|\\/)', // beginning of string or '/'
-    '\\.', // '.'
-    '[^.]+', // one or more characters that isn't '.'
-    '|(?:.css.d.ts$)',
-    `|${constants.build.directoryName}`,
-    `|${constants.build.manifestFilePath}`,
-    '|node_modules'
-  ].join('')
-)
+const cssRegex = /.css$/
+const ignoreRegex = /.css.d.ts$/
 
-export function watch(): void {
-  const watcher = chokidarWatch('.', {
+export function watch(minify: boolean): void {
+  const globs = ['package.json', 'src/**/*.{css,js,jsx,ts,tsx}']
+  const watcher = chokidarWatch(globs, {
     ignored: function (path: string) {
-      return ignoreRegex.test(path)
+      return ignoreRegex.test(path) === true
     }
   })
-  async function onChangeAsync() {
-    await buildAsync(false, false)
-    log.info('Watching...')
-  }
-  watcher.on('ready', onChangeAsync)
+  watcher.on('ready', function () {
+    log.info('Watching')
+  })
   watcher.on('change', async function (file: string) {
-    log.info(`Changed: ${file}`)
-    await onChangeAsync()
+    log.info(`Changed ${yellow(file)}`)
+    const elapsedTime = trackElapsedTime()
+    if (file === 'package.json') {
+      await buildManifestAsync(minify)
+    } else {
+      if (cssRegex.test(file) === true) {
+        await buildCssModulesTypingsAsync()
+      }
+    }
+    await buildBundlesAsync(minify)
+    log.success(`Built ${gray(elapsedTime())}`)
+    log.info('Watching')
   })
 }

@@ -4,7 +4,8 @@ import {
   ConfigCommandSeparator,
   ConfigFile,
   ConfigRelaunchButton,
-  constants
+  constants,
+  readConfigAsync
 } from '@create-figma-plugin/common'
 import { build } from 'esbuild'
 import { join } from 'path'
@@ -15,10 +16,8 @@ interface EntryFile extends ConfigFile {
   commandId: string
 }
 
-export async function buildBundlesAsync(
-  config: Config,
-  minify: boolean
-): Promise<void> {
+export async function buildBundlesAsync(minify: boolean): Promise<void> {
+  const config = await readConfigAsync()
   await buildMainBundleAsync(config, minify)
   await buildUiBundleAsync(config, minify)
 }
