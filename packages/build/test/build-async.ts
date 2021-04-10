@@ -16,7 +16,7 @@ test('no config', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: 'figma-plugin',
     main: 'build/main.js',
@@ -37,7 +37,7 @@ test('basic command', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -58,7 +58,7 @@ test('command with UI', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -80,7 +80,7 @@ test('multiple menu commands', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -115,7 +115,7 @@ test('nested menu commands', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -147,7 +147,7 @@ test('relaunch button', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -181,7 +181,7 @@ test('custom styles', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -204,7 +204,7 @@ test('preact', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -226,7 +226,7 @@ test('additional options', async function (t) {
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
-  t.deepEqual(require(manifestJsonPath), {
+  t.same(require(manifestJsonPath), {
     api: '1.0.0',
     build: 'qux',
     enablePrivatePluginApi: true,
