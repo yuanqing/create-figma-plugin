@@ -29,7 +29,7 @@
     "clean-test": "rimraf '*.log' 'test/fixtures/*/figma-plugin' .nyc_output coverage",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
-    "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --timeout 300 --reporter terse --ts"
+    "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --timeout 300 --reporter terse --timeout 120 --ts"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.84",
