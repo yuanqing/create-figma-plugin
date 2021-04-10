@@ -1,0 +1,11 @@
+{
+  "figma-plugin": {
+    "name": "foo",
+    "id": "42",
+    "main": "bar",
+    "ui": "baz",
+    "enableProposedApi": true,
+    "enablePrivatePluginApi": true,
+    "build": "qux"
+  }
+}

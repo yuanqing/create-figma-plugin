@@ -105,9 +105,41 @@ test('multiple menu commands', async function (t) {
   await cleanUpAsync()
 })
 
+test('nested menu commands', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '5-nested-menu-commands'))
+  await cleanUpAsync()
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
+  await createFigmaTypingsSymlinksAsync()
+  await buildAsync({ minify: false, typecheck: true })
+  const manifestJsonPath = join(process.cwd(), 'manifest.json')
+  t.deepEqual(require(manifestJsonPath), {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    menu: [
+      {
+        menu: [
+          {
+            command: 'src/foo.ts--default',
+            name: 'z'
+          }
+        ],
+        name: 'y'
+      }
+    ],
+    name: 'x'
+  })
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
 test('relaunch button', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '5-relaunch-button'))
+  process.chdir(join(__dirname, 'fixtures', '6-relaunch-button'))
   await cleanUpAsync()
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
@@ -139,7 +171,7 @@ test('relaunch button', async function (t) {
 
 test('custom styles', async function (t) {
   t.plan(8)
-  process.chdir(join(__dirname, 'fixtures', '6-custom-styles'))
+  process.chdir(join(__dirname, 'fixtures', '7-custom-styles'))
   await cleanUpAsync()
   t.notOk(await pathExists('src/styles.css.d.ts'))
   t.notOk(await pathExists('build'))
@@ -163,7 +195,7 @@ test('custom styles', async function (t) {
 
 test('preact', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '7-preact'))
+  process.chdir(join(__dirname, 'fixtures', '8-preact'))
   await cleanUpAsync()
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
@@ -185,7 +217,7 @@ test('preact', async function (t) {
 
 test('additional options', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '8-additional-options'))
+  process.chdir(join(__dirname, 'fixtures', '9-additional-options'))
   await cleanUpAsync()
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))

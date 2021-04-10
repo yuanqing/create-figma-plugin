@@ -1,0 +1,17 @@
+{
+  "figma-plugin": {
+    "name": "x",
+    "id": "42",
+    "menu": [
+      {
+        "name": "y",
+        "menu": [
+          {
+            "name": "z",
+            "main": "src/foo.ts"
+          }
+        ]
+      }
+    ]
+  }
+}

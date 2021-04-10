@@ -194,9 +194,44 @@ test('multiple menu commands', async function (t) {
   })
 })
 
+test('nested menu commands', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '9-nested-menu-commands'))
+  t.deepEqual(await readConfigAsync(), {
+    apiVersion: '1.0.0',
+    build: null,
+    commandId: null,
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    id: '42',
+    main: null,
+    menu: [
+      {
+        commandId: null,
+        main: null,
+        menu: [
+          {
+            commandId: 'qux--default',
+            main: { handler: 'default', src: 'src/qux' },
+            menu: null,
+            name: 'baz',
+            ui: { handler: 'default', src: 'src/quux' }
+          }
+        ],
+        name: 'bar',
+        ui: null
+      }
+    ],
+    name: 'foo',
+    relaunchButtons: null,
+    remainderOptions: {},
+    ui: null
+  })
+})
+
 test('relaunch button', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '9-relaunch-button'))
+  process.chdir(join(__dirname, 'fixtures', '10-relaunch-button'))
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
     build: null,
@@ -224,7 +259,7 @@ test('relaunch button', async function (t) {
 test('relaunch button with multiple selection', async function (t) {
   t.plan(1)
   process.chdir(
-    join(__dirname, 'fixtures', '10-relaunch-button-with-multiple-selection')
+    join(__dirname, 'fixtures', '11-relaunch-button-with-multiple-selection')
   )
   t.deepEqual(await readConfigAsync(), {
     apiVersion: '1.0.0',
@@ -245,6 +280,25 @@ test('relaunch button with multiple selection', async function (t) {
         ui: null
       }
     ],
+    remainderOptions: {},
+    ui: { handler: 'default', src: 'src/baz' }
+  })
+})
+
+test('additional options', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '12-additional-options'))
+  t.deepEqual(await readConfigAsync(), {
+    apiVersion: '1.0.0',
+    build: 'qux',
+    commandId: 'bar--default',
+    enablePrivatePluginApi: true,
+    enableProposedApi: true,
+    id: '42',
+    main: { handler: 'default', src: 'src/bar' },
+    menu: null,
+    name: 'foo',
+    relaunchButtons: null,
     remainderOptions: {},
     ui: { handler: 'default', src: 'src/baz' }
   })

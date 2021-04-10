@@ -1,0 +1,18 @@
+{
+  "figma-plugin": {
+    "name": "foo",
+    "id": "42",
+    "menu": [
+      {
+        "name": "bar",
+        "menu": [
+          {
+            "name": "baz",
+            "main": "qux",
+            "ui": "quux"
+          }
+        ]
+      }
+    ]
+  }
+}
