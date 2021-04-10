@@ -37,7 +37,7 @@ async function buildMainBundleAsync(
       contents: js,
       resolveDir: process.cwd()
     },
-    target: 'es2020'
+    target: 'es2017'
   })
 }
 
@@ -70,6 +70,8 @@ async function buildUiBundleAsync(
   }
   await build({
     bundle: true,
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
     logLevel: 'error',
     minify,
     outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),
@@ -78,7 +80,7 @@ async function buildUiBundleAsync(
       contents: js,
       resolveDir: process.cwd()
     },
-    target: 'es2020'
+    target: 'chrome58'
   })
 }
 
