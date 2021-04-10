@@ -195,7 +195,7 @@ test('additional options', async function (t) {
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
   t.deepEqual(require(manifestJsonPath), {
     api: '1.0.0',
-    build: 'bar',
+    build: 'qux',
     enablePrivatePluginApi: true,
     enableProposedApi: true,
     id: '42',

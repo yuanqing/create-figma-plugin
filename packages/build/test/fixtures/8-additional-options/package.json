@@ -5,6 +5,6 @@
     "main": "src/foo.ts",
     "enableProposedApi": true,
     "enablePrivatePluginApi": true,
-    "build": "bar"
+    "build": "qux"
   }
 }
