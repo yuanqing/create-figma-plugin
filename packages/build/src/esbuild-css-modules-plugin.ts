@@ -64,12 +64,14 @@ async function createCssModulesJavaScript(
   }
   hash.update(cssFilePath)
   const elementId = hash.copy().digest('base64')
+  const isBaseCss =
+    cssFilePath.indexOf('create-figma-plugin/packages/ui/lib/css') !== -1
   return `
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
       element.id = '${elementId}';
       element.textContent = \`${result.css}\`;
-      document.head.appendChild(element);
+      document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
     }
     export default ${classNamesJson};
   `
