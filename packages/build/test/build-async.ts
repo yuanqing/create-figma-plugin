@@ -183,9 +183,9 @@ test('preact', async function (t) {
   await cleanUpAsync()
 })
 
-test('manifest options', async function (t) {
+test('additional options', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '8-manifest-options'))
+  process.chdir(join(__dirname, 'fixtures', '8-additional-options'))
   await cleanUpAsync()
   t.notOk(await pathExists('build'))
   t.notOk(await pathExists('manifest.json'))
