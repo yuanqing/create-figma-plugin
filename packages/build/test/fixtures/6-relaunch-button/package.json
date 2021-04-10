@@ -10,7 +10,8 @@
       },
       "bar": {
         "name": "y",
-        "main": "src/bar.ts",
+        "main": "src/bar/main.ts",
+        "ui": "src/bar/ui.ts",
         "multipleSelection": true
       }
     }

@@ -162,10 +162,11 @@ test('relaunch button', async function (t) {
         multipleSelection: true,
         name: 'y'
       }
-    ]
+    ],
+    ui: 'build/ui.js'
   })
   t.ok(await pathExists('build/main.js'))
-  t.notOk(await pathExists('build/ui.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
