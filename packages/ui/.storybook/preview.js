@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h } from 'preact'
-import { addDecorator, addParameters, configure } from '@storybook/preact'
+import { addDecorator, addParameters } from '@storybook/preact'
 
-require('../src/css/base.css')
+import '../src/css/base.css'
 
 addDecorator(function (Story) {
   return <Story />
@@ -17,5 +17,3 @@ addParameters({
     }
   }
 })
-
-configure(require.context('../src', true, /\.stories\.tsx$/), module)

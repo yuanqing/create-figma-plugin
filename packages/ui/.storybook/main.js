@@ -1,7 +1,12 @@
-const { resolve } = require('path')
-
 function webpackFinal (config) {
-  config.module.rules.push({
+  const index = config.module.rules.findIndex(function (rule) {
+    return rule.test.toString() === '/\\.css$/'
+  })
+  if (index === -1) {
+    throw new Error('Module rule for CSS not found in Storybook webpack config')
+  }
+  config.module.rules[index] = {
+    sideEffects: true,
     test: /\.css$/,
     use: [
       {
@@ -10,19 +15,17 @@ function webpackFinal (config) {
       {
         loader: 'css-loader',
         options: {
-          importLoaders: 1,
+          importLoaders: 0,
           modules: true
         }
       }
-    ],
-    include: resolve(__dirname, '..', 'src')
-  })
+    ]
+  }
   return config
 }
 
 module.exports = {
   webpackFinal,
-  addons: [
-    '@storybook/addon-storysource',
-  ]
+  stories: ['../src/**/*.stories.tsx'],
+  addons: ['@storybook/addon-storysource']
 }
