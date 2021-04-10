@@ -5,7 +5,7 @@ import { readConfigAsync } from '../src/read-config-async'
 
 test('is a function', function (t) {
   t.plan(1)
-  t.true(typeof readConfigAsync === 'function')
+  t.ok(typeof readConfigAsync === 'function')
 })
 
 test('no `package.json`', async function (t) {

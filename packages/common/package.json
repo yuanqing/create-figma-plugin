@@ -29,7 +29,7 @@
     "clean-test": "rimraf '*.log' .nyc_output coverage",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json' 'test/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
-    "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
+    "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --reporter terse --ts"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^1.1.0",

@@ -30,7 +30,7 @@
     "docs": "ts-node scripts/generate-docs.ts",
     "fix": "eslint --fix '{scripts,src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
     "lint": "eslint '{scripts,src,test}/**/*.ts'",
-    "test": "tsc -b && yarn run clean-test && tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --reporter terse"
+    "test": "tsc -b && yarn run clean-test && tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --reporter terse --ts"
   },
   "dependencies": {
     "natural-compare-lite": "1.4.0"

@@ -9,9 +9,9 @@ test('no config', async function (t) {
   t.plan(6)
   process.chdir(join(__dirname, 'fixtures', '1-no-config'))
   await cleanUpAsync()
-  t.false(await pathExists('build'))
-  t.false(await pathExists('manifest.json'))
-  t.false(await pathExists('node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
   await createSymlinksAsync()
   await buildAsync({ minify: false, typecheck: false })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -21,8 +21,8 @@ test('no config', async function (t) {
     main: 'build/main.js',
     name: 'figma-plugin'
   })
-  t.true(await pathExists('build/main.js'))
-  t.false(await pathExists('build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -30,9 +30,9 @@ test('basic command', async function (t) {
   t.plan(6)
   process.chdir(join(__dirname, 'fixtures', '2-basic-command'))
   await cleanUpAsync()
-  t.false(await pathExists('build'))
-  t.false(await pathExists('manifest.json'))
-  t.false(await pathExists('node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
   await createSymlinksAsync()
   await buildAsync({ minify: false, typecheck: false })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -42,8 +42,8 @@ test('basic command', async function (t) {
     main: 'build/main.js',
     name: 'x'
   })
-  t.true(await pathExists('build/main.js'))
-  t.false(await pathExists('build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -51,9 +51,9 @@ test('command with UI', async function (t) {
   t.plan(6)
   process.chdir(join(__dirname, 'fixtures', '3-command-with-ui'))
   await cleanUpAsync()
-  t.false(await pathExists('build'))
-  t.false(await pathExists('manifest.json'))
-  t.false(await pathExists('node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
   await createSymlinksAsync()
   await buildAsync({ minify: false, typecheck: false })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -64,8 +64,8 @@ test('command with UI', async function (t) {
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.true(await pathExists('build/main.js'))
-  t.true(await pathExists('build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -73,9 +73,9 @@ test('multiple menu commands', async function (t) {
   t.plan(6)
   process.chdir(join(__dirname, 'fixtures', '4-multiple-menu-commands'))
   await cleanUpAsync()
-  t.false(await pathExists('build'))
-  t.false(await pathExists('manifest.json'))
-  t.false(await pathExists('node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
   await createSymlinksAsync()
   await buildAsync({ minify: false, typecheck: false })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -99,8 +99,8 @@ test('multiple menu commands', async function (t) {
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.true(await pathExists('build/main.js'))
-  t.true(await pathExists('build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -108,9 +108,9 @@ test('relaunch button', async function (t) {
   t.plan(6)
   process.chdir(join(__dirname, 'fixtures', '5-relaunch-button'))
   await cleanUpAsync()
-  t.false(await pathExists('build'))
-  t.false(await pathExists('manifest.json'))
-  t.false(await pathExists('node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
   await createSymlinksAsync()
   await buildAsync({ minify: false, typecheck: false })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -126,8 +126,8 @@ test('relaunch button', async function (t) {
       }
     ]
   })
-  t.true(await pathExists('build/main.js'))
-  t.false(await pathExists('build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -135,10 +135,10 @@ test('custom styles', async function (t) {
   t.plan(8)
   process.chdir(join(__dirname, 'fixtures', '6-custom-styles'))
   await cleanUpAsync()
-  t.false(await pathExists('src/styles.css.d.ts'))
-  t.false(await pathExists('build'))
-  t.false(await pathExists('manifest.json'))
-  t.false(await pathExists('node_modules'))
+  t.notOk(await pathExists('src/styles.css.d.ts'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('manifest.json'))
+  t.notOk(await pathExists('node_modules'))
   await createSymlinksAsync()
   await buildAsync({ minify: false, typecheck: false })
   const manifestJsonPath = join(process.cwd(), 'manifest.json')
@@ -149,9 +149,9 @@ test('custom styles', async function (t) {
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.true(await pathExists('src/styles.css.d.ts'))
-  t.true(await pathExists('build/main.js'))
-  t.true(await pathExists('build/ui.js'))
+  t.ok(await pathExists('src/styles.css.d.ts'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 

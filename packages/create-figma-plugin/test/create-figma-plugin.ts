@@ -9,17 +9,17 @@ test('use default', async function (t) {
   t.plan(7)
   process.chdir(join(__dirname, 'fixtures', '1-use-default'))
   await cleanUpAsync()
-  t.false(await pathExists('figma-plugin'))
+  t.notOk(await pathExists('figma-plugin'))
   await createFigmaPluginAsync(
     { name: 'figma-plugin', template: 'default' },
     true
   )
-  t.true(await pathExists('figma-plugin'))
-  t.true(await pathExists('figma-plugin/.gitignore'))
-  t.true(await pathExists('figma-plugin/node_modules'))
-  t.true(await pathExists('figma-plugin/package.json'))
-  t.true(await pathExists('figma-plugin/README.md'))
-  t.true(await pathExists('figma-plugin/src/main.ts'))
+  t.ok(await pathExists('figma-plugin'))
+  t.ok(await pathExists('figma-plugin/.gitignore'))
+  t.ok(await pathExists('figma-plugin/node_modules'))
+  t.ok(await pathExists('figma-plugin/package.json'))
+  t.ok(await pathExists('figma-plugin/README.md'))
+  t.ok(await pathExists('figma-plugin/src/main.ts'))
   await cleanUpAsync()
 })
 
