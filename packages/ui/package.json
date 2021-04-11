@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/ui",
-  "version": "0.0.85-alpha.0",
+  "version": "0.0.85-alpha.1",
   "publishConfig": {
     "access": "public"
   },
@@ -41,7 +41,7 @@
     "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^0.0.85-alpha.0",
+    "@create-figma-plugin/utilities": "^0.0.85-alpha.1",
     "@sindresorhus/class-names": "^1.1.0"
   },
   "devDependencies": {
