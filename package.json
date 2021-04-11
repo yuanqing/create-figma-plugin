@@ -88,10 +88,7 @@
     ]
   },
   "stylelint": {
-    "extends": [
-      "stylelint-prettier/recommended",
-      "stylelint-config-rational-order"
-    ]
+    "extends": "stylelint-config-yuanqing"
   },
   "workspaces": [
     "packages/*"
