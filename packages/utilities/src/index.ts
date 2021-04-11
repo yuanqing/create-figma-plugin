@@ -20,7 +20,12 @@ export { sortNodesByName } from './nodes/sort-nodes/sort-nodes-by-name'
 export { updateNodesSortOrder } from './nodes/sort-nodes/update-nodes-sort-order'
 export { traverseNode } from './nodes/traverse-node'
 export { isValidNumericInput, evaluateNumericExpression } from './number'
-export { cloneObject, compareArrays } from './object'
+export {
+  cloneObject,
+  compareArrays,
+  compareObjects,
+  extractAttributes
+} from './object'
 export { loadSettingsAsync, saveSettingsAsync } from './settings'
 export {
   formatSuccessMessage,
