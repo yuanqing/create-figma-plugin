@@ -52,6 +52,7 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.19.3",
     "@types/fs-extra": "^9.0.10",
+    "@types/node": "^14.14.37",
     "@types/rimraf": "^3.0.0",
     "@types/sade": "^1.7.2",
     "@types/tap": "^14.10.3",
