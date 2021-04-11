@@ -2,6 +2,8 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+    "resolveJsonModule": true,
+    "strict": true
   }
 }
