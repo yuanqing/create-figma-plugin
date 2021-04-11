@@ -26,10 +26,10 @@
   "devDependencies": {
     "@create-figma-plugin/build": "{{{createFigmaPluginVersions.build}}}",
     "@create-figma-plugin/tsconfig": "{{{createFigmaPluginVersions.tsconfig}}}",
-    "@figma/plugin-typings": "^1.16.1"
+    "@figma/plugin-typings": "^1.19.3"
   },
   "scripts": {
-    "build": "build-figma-plugin",
+    "build": "build-figma-plugin --minify --typecheck",
     "watch": "build-figma-plugin --watch"
   },
   "figma-plugin": {
