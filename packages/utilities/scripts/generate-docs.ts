@@ -1,14 +1,14 @@
-import * as fs from 'fs-extra'
+import { outputFile } from 'fs-extra'
 import {
   createCategories,
   parseExportedFunctionsAsync,
   renderFunctionDataToMarkdown
 } from 'generate-ts-docs'
-import * as path from 'path'
+import { join, resolve } from 'path'
 
-const rootDirectoryPath = path.resolve(__dirname, '..', '..', '..')
-const tsconfigFilePath = path.join(rootDirectoryPath, 'tsconfig.shared.json')
-const outputFilePath = path.join(rootDirectoryPath, 'docs', 'utilities.md')
+const rootDirectoryPath = resolve(__dirname, '..', '..', '..')
+const tsconfigFilePath = join(rootDirectoryPath, 'tsconfig.shared.json')
+const outputFilePath = join(rootDirectoryPath, 'docs', 'utilities.md')
 
 async function main() {
   const lines: Array<string> = []
@@ -48,6 +48,6 @@ async function main() {
     }
     lines.push('')
   }
-  await fs.outputFile(outputFilePath, lines.join('\n').trim())
+  await outputFile(outputFilePath, lines.join('\n').trim())
 }
 main()
