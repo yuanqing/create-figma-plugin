@@ -2,7 +2,7 @@
 
 `@create-figma-plugin/ui` is a library of [Preact](https://preactjs.com/) components that replicate the Figma UI design:
 
-[![UI components from `@create-figma-plugin/ui`: Icon, Button, Checkbox, Radio Buttons, Segmented Control, Selectable List, Layer, Textbox, Autocomplete](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/)
+[![UI components from `@create-figma-plugin/ui`: Icon, Button, Checkbox, Radio Buttons, Segmented Control, Selectable List, Layer, Textbox, Autocomplete](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
 
 (See the [full library of components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).)
 
@@ -28,7 +28,7 @@ export default function () {
 
 `showUI` takes two arguments, and the second `data` argument is useful for passing some initialising data to the UI.
 
-Next, create a file for our UI (eg. `src/ui.tsx` — the file must have a `tsx` or `jsx` extension for TypeScript or JavaScript respectively):
+Next, create a file for our UI (eg. `src/ui.tsx` — the file must have either a `tsx` or `jsx` extension for TypeScript or JavaScript respectively):
 
 ```ts
 // src/ui.tsx
@@ -81,6 +81,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 
 ```scss
 // src/styles.css
+
 .container {
   background-color: var(--color-black-10);
 }
@@ -105,12 +106,16 @@ function Plugin () {
 export default render(Plugin)
 ```
 
+See the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the CSS variables available for use in your custom CSS.
+
 ## Using a custom UI library
 
 To use a custom UI library (instead of `@create-figma-plugin/ui`), write our plugin command’s UI implementation as follows:
 
 ```ts
 // src/ui.ts
+
+import '@create-figma-plugin/ui/lib/css/base.css'
 
 export default function (rootNode: HTMLElement, data: { greeting: string }) {
   rootNode.innerHTML = `<p>${data.greeting}</p>` //=> <h1>Hello, World!</h1>
