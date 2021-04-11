@@ -24,8 +24,6 @@
 
 ./recipes/relaunch-buttons.md
 
-./recipes/custom-webpack-configuration.md
-
 ---
 
 ./utilities.md

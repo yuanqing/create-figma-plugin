@@ -1,6 +1,6 @@
 ## Passing data between the plugin command’s main and UI contexts
 
-`@create-figma-plugin/utilities` offers 3 functions to facilitate data passing (in both directions) between our plugin command’s main and UI contexts:
+`@create-figma-plugin/utilities` provides 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#how-a-figma-plugin-works):
 
 - [`on(eventName, eventHandler)`](#oneventname-eventhandler) — Registers an `eventHandler` for the given `eventName`.
 - [`once(eventName, eventHandler)`](#onceeventname-eventhandler) — Ditto `on`, only that the `eventHandler` will run at most once.

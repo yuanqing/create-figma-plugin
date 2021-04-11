@@ -26,9 +26,9 @@ export default function () {
 }
 ```
 
-`showUI` takes two parameters, and the second `data` parameter is useful for passing some initialising data to the UI.
+`showUI` takes two arguments, and the second `data` argument is useful for passing some initialising data to the UI.
 
-Next, create a file for our UI (eg. `src/ui.tsx` — the file must have a `tsx` extension):
+Next, create a file for our UI (eg. `src/ui.tsx` — the file must have a `tsx` or `jsx` extension for TypeScript or JavaScript respectively):
 
 ```ts
 // src/ui.tsx
@@ -52,7 +52,7 @@ export default render(Plugin)
 
 See that:
 
-- `render` takes a single parameter, `Plugin`, which is a [Preact functional component](https://preactjs.com/guide/v10/components#functional-components).
+- `render` takes a single argument, `Plugin`, which is a [Preact functional component](https://preactjs.com/guide/v10/components#functional-components).
 - The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from our plugin command’s main entry point.
 
 Finally, in `package.json`, point to our UI file on the [**`"ui"`**](#ui) key:
@@ -80,12 +80,9 @@ See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), and the
 Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://github.com/css-modules/css-modules):
 
 ```scss
-// src/styles.scss
-
-@import "@create-figma-plugin/ui/lib/scss/constants";
-
+// src/styles.css
 .container {
-  background-color: $color-black-10;
+  background-color: var(--color-black-10);
 }
 ```
 
@@ -94,7 +91,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 
 import { render } from '@create-figma-plugin/ui'
 import { h } from 'preact'
-import styles from './styles.scss'
+import styles from './styles.css'
 
 function Plugin () {
   // ...
@@ -120,6 +117,6 @@ export default function (rootNode: HTMLElement, data: { greeting: string }) {
 }
 ```
 
-The exported function receives two parameters:
+The exported function receives two arguments:
 - `rootNode` — An empty `<div>` element within which you can render your UI.
 - `data` — This corresponds to the `data` object that was passed to `showUI` from the plugin command’s main entry point.

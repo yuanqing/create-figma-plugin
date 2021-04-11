@@ -51,13 +51,13 @@ export default async function () {
 }
 ```
 
-The second parameter passed to `setRelaunchButton` must be a particular `relaunchButtonId` as configured on the **`"relaunchButtons"`** key of our `package.json`. In the above example, we’re associating `figma.currentPage` with the `organizeLayers` relaunch button command.
+The second argument passed to `setRelaunchButton` must be a particular `relaunchButtonId` as configured on the **`"relaunchButtons"`** key of our `package.json`. In the above example, we’re associating `figma.currentPage` with the `organizeLayers` relaunch button command.
 
 This would result in the following:
 
 ![“Organize Layers” relaunch button](/media/relaunch-button.png)
 
-If we want to show additional text below the relaunch button, we can pass a third parameter to `setRelaunchButton`:
+If we want to show additional text below the relaunch button, we can pass a third argument to `setRelaunchButton`:
 
 ```ts
 setRelaunchButton(

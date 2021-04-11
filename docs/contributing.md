@@ -15,7 +15,7 @@ $ yarn install
 
 ## Testing locally on an existing plugin
 
-First, build the Create Figma Plugin project:
+First, build the entire Create Figma Plugin project:
 
 ```
 $ yarn build
