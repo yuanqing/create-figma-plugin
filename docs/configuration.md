@@ -145,3 +145,15 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](#specif
 ```
 
 See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
+
+## `"enablePrivatePluginApi"`
+
+(*`boolean`*)
+
+*Optional.* Allow use of plugin APIs that are only available to private plugins.
+
+## `"enableProposedApi"`
+
+(*`boolean`*)
+
+*Optional.* Allow use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
