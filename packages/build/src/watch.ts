@@ -7,17 +7,20 @@ import { buildCssModulesTypingsAsync } from './build-css-modules-typings-async'
 import { buildManifestAsync } from './build-manifest-async'
 import { trackElapsedTime } from './track-elapsed-time'
 import { BuildOptions } from './types/build'
+import { watchIgnoreRegex } from './watch-ignore-regex'
 
-const cssRegex = /.css$/
-const ignoreRegex = /.css.d.ts$/
+const cssRegex = /\.css$/
+const packageJsonRegex = /^package\.json$/
 
 export function watch(options: BuildOptions): void {
-  const globs = ['package.json', 'src/**/*.{css,js,jsx,ts,tsx}']
-  const watcher = chokidarWatch(globs, {
-    ignored: function (path: string) {
-      return ignoreRegex.test(path) === true
+  const watcher = chokidarWatch(
+    ['./**/*.{css,js,json,jsx,ts,tsx}', 'package.json', 'tsconfig.json'],
+    {
+      ignored: function (path: string) {
+        return watchIgnoreRegex.test(path) === true
+      }
     }
-  })
+  )
   watcher.on('ready', function () {
     log.info('Watching...')
   })
@@ -26,7 +29,7 @@ export function watch(options: BuildOptions): void {
     log.info('Building...')
     try {
       const elapsedTime = trackElapsedTime()
-      if (file === 'package.json') {
+      if (packageJsonRegex.test(file) === true) {
         await buildManifestAsync(options.minify)
       } else {
         if (cssRegex.test(file) === true) {
