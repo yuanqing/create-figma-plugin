@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "jsx": "react",
-    "jsxFactory": "h",
-    "resolveJsonModule": true,
-    "strict": true
-  }
-}
