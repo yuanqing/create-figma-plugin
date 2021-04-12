@@ -49,8 +49,7 @@
     "rev-hash": "^3.0.0",
     "sade": "^1.7.4",
     "temp-write": "^4.0.0",
-    "typed-css-modules": "^0.6.7",
-    "typescript": "^4.2.4"
+    "typed-css-modules": "^0.6.7"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.19.3",
@@ -64,6 +63,11 @@
     "preact": "^10.5.13",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "tap": "^15.0.2"
+    "tap": "^15.0.2",
+    "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "@figma/plugin-typings": "^1",
+    "typescript": "^4"
   }
 }
