@@ -10,21 +10,19 @@ test('no config', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '1-no-config'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: 'figma-plugin',
     main: 'main.js',
     name: 'figma-plugin'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.notOk(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -32,21 +30,19 @@ test('basic command', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '2-basic-command'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'main.js',
     name: 'x'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.notOk(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -54,13 +50,11 @@ test('command with UI', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '3-command-with-ui'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
@@ -68,8 +62,8 @@ test('command with UI', async function (t) {
     name: 'x',
     ui: 'ui.js'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.ok(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -77,13 +71,11 @@ test('multiple menu commands', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '4-multiple-menu-commands'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
@@ -104,8 +96,8 @@ test('multiple menu commands', async function (t) {
     name: 'x',
     ui: 'ui.js'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.ok(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -113,13 +105,11 @@ test('nested menu commands', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '5-nested-menu-commands'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
@@ -137,8 +127,8 @@ test('nested menu commands', async function (t) {
     ],
     name: 'x'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.notOk(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -146,13 +136,11 @@ test('relaunch button', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '6-relaunch-button'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
@@ -171,8 +159,8 @@ test('relaunch button', async function (t) {
     ],
     ui: 'ui.js'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.ok(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -180,14 +168,12 @@ test('custom styles', async function (t) {
   t.plan(7)
   process.chdir(join(__dirname, 'fixtures', '7-custom-styles'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./src/styles.css.d.ts'))
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('src/styles.css.d.ts'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
@@ -195,9 +181,9 @@ test('custom styles', async function (t) {
     name: 'x',
     ui: 'ui.js'
   })
-  t.ok(await pathExists('./src/styles.css.d.ts'))
-  t.ok(await pathExists('./build/main.js'))
-  t.ok(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('src/styles.css.d.ts'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -205,13 +191,11 @@ test('preact', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '8-preact'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
@@ -219,8 +203,8 @@ test('preact', async function (t) {
     name: 'x',
     ui: 'ui.js'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.ok(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.ok(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -228,13 +212,11 @@ test('additional options', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '9-additional-options'))
   await cleanUpAsync()
-  t.notOk(await pathExists('./build'))
-  t.notOk(await pathExists('./node_modules'))
+  t.notOk(await pathExists('build'))
+  t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(
-    await readFile('./build/manifest.json', 'utf8')
-  )
+  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     build: 'qux',
@@ -244,8 +226,8 @@ test('additional options', async function (t) {
     main: 'main.js',
     name: 'x'
   })
-  t.ok(await pathExists('./build/main.js'))
-  t.notOk(await pathExists('./build/ui.js'))
+  t.ok(await pathExists('build/main.js'))
+  t.notOk(await pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 

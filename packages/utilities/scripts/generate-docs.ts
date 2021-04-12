@@ -12,7 +12,7 @@ const outputFilePath = join(rootDirectoryPath, 'docs', 'utilities.md')
 
 async function main() {
   const lines: Array<string> = []
-  const functionsData = await parseExportedFunctionsAsync(['./src/**/*.ts'], {
+  const functionsData = await parseExportedFunctionsAsync(['src/**/*.ts'], {
     tsconfigFilePath
   })
   const categories = createCategories(functionsData)
