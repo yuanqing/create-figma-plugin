@@ -1,4 +1,3 @@
-import { createHash } from 'crypto'
 import { Plugin, PluginBuild } from 'esbuild'
 import { readFile } from 'fs-extra'
 import { basename, extname, resolve } from 'path'
@@ -7,6 +6,7 @@ import * as tempWrite from 'temp-write'
 
 const cssNano = require('cssnano')
 const postCssModules = require('postcss-modules')
+const revHash = require('rev-hash')
 
 export function esbuildCssModulesPlugin(minify: boolean): Plugin {
   return {
@@ -26,8 +26,6 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
     }
   }
 }
-
-const hash = createHash('sha1')
 
 async function createCssModulesJavaScript(
   cssFilePath: string,
@@ -62,8 +60,7 @@ async function createCssModulesJavaScript(
   if (classNamesJson === null) {
     throw new Error('`getJSON` callback was not called')
   }
-  hash.update(cssFilePath)
-  const elementId = hash.copy().digest('base64')
+  const elementId = revHash(cssFilePath)
   const isBaseCss =
     cssFilePath.indexOf('create-figma-plugin/packages/ui/lib/css') !== -1
   return `

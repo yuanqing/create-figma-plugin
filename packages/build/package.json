@@ -45,6 +45,7 @@
     "kleur": "^4.1.4",
     "postcss": "^8.2.9",
     "postcss-modules": "^4.0.0",
+    "rev-hash": "^3.0.0",
     "sade": "^1.7.4",
     "temp-write": "^4.0.0",
     "typed-css-modules": "^0.6.7",
