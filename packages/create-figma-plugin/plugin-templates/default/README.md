@@ -6,7 +6,7 @@
 {{/description}}
 ## Development guide
 
-*This plugin is built with [Create Figma Plugin](https://github.com/yuanqing/create-figma-plugin).*
+*This plugin is built with [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin/).*
 
 ### Pre-requisites
 
