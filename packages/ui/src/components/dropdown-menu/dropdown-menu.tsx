@@ -149,7 +149,7 @@ export function DropdownMenu({
     ]
   )
   const handleWindowClick = useCallback(
-    // Hide the menu if we’d clicked outside
+    // Hide the menu if we'd clicked outside
     function (event: Event): void {
       if (
         rootElementRef.current === null ||
