@@ -11,13 +11,8 @@ export function showUI(options: ShowUIOptions, data: any = {}): void {
   if (typeof __html__ === 'undefined') {
     throw new Error('No UI defined')
   }
-  const html = `
-    <div id="create-figma-plugin"></div>
-    <script>
-      const __FIGMA_COMMAND__ = '${figma.command}';
-      const __SHOW_UI_DATA__ = ${JSON.stringify(data)};
-      ${__html__}
-    </script>
-  `
+  const html = `<div id="create-figma-plugin"></div><script>const __FIGMA_COMMAND__='${
+    figma.command
+  }';const __SHOW_UI_DATA__=${JSON.stringify(data)};${__html__}</script>`
   figma.showUI(html, options)
 }
