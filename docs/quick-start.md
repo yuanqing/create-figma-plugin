@@ -2,7 +2,7 @@
 
 ## Pre-requisites
 
-- [Node.js](https://nodejs.org/)
+- [Node.js](https://nodejs.org)
 - [Figma desktop app](https://figma.com/downloads/)
 
 ## Initialize a new plugin
@@ -79,9 +79,9 @@ $ npm run watch
 
 ## Type checking
 
-The `build-figma-plugin` CLI is powered by [esbuild](https://esbuild.github.io/), which enables extremely fast builds.
+The `build-figma-plugin` CLI is powered by [esbuild](https://esbuild.github.io), which enables extremely fast builds.
 
-When run without the `--typecheck` flag, `build-figma-plugin` will *not* perform type checking of your TypeScript code. Instead, use a code editor such as [Visual Studio Code](https://code.visualstudio.com/) to type check your code during development.
+When run without the `--typecheck` flag, `build-figma-plugin` will *not* perform type checking of your TypeScript code. Instead, use a code editor such as [Visual Studio Code](https://code.visualstudio.com) to type check your code during development.
 
 ## Installing the plugin
 

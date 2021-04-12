@@ -2,8 +2,8 @@
 
 ## Pre-requisites
 
-- [Node.js](https://nodejs.org/) – v14
-- [Yarn](https://classic.yarnpkg.com/) – v1
+- [Node.js](https://nodejs.org) – v14
+- [Yarn](https://classic.yarnpkg.com) – v1
 
 ## Building the project locally
 

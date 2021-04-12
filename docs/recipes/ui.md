@@ -1,6 +1,6 @@
 ## Adding a UI to a plugin command
 
-`@create-figma-plugin/ui` is a library of [Preact](https://preactjs.com/) components that replicate the Figma UI design:
+`@create-figma-plugin/ui` is a library of [Preact](https://preactjs.com) components that replicate the Figma UI design:
 
 [![UI components from `@create-figma-plugin/ui`: Icon, Button, Checkbox, Radio Buttons, Segmented Control, Selectable List, Layer, Textbox, Autocomplete](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
 
