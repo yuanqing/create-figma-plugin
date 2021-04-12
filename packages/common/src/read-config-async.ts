@@ -20,7 +20,7 @@ import {
 const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
   build: null,
-  commandId: 'main.ts--default',
+  commandId: join(constants.src.directory, 'main.ts--default'),
   enablePrivatePluginApi: false,
   enableProposedApi: false,
   id: constants.packageJson.defaultPluginName,
@@ -132,24 +132,15 @@ function parseFile(file: RawConfigFile): ConfigFile {
   if (typeof file === 'string') {
     return {
       handler: 'default',
-      src: normalizeFilePath(file)
+      src: file
     }
   }
   const { src, handler } = file
-  const normalizedFilePath = normalizeFilePath(src)
   if (typeof handler === 'undefined') {
     return {
       handler: 'default',
-      src: normalizedFilePath
+      src
     }
   }
-  return { handler, src: normalizedFilePath }
-}
-
-const filePathPrefixRegex = /^(?:\.\/)?src/
-function normalizeFilePath(filePath: string): string {
-  if (filePathPrefixRegex.test(filePath) === true) {
-    return filePath
-  }
-  return join(constants.src.directory, filePath)
+  return { handler, src }
 }

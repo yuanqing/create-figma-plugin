@@ -14,7 +14,7 @@ test('no `package.json`', async function (t) {
   t.same(await readConfigAsync(), {
     apiVersion: '1.0.0',
     build: null,
-    commandId: 'main.ts--default',
+    commandId: 'src/main.ts--default',
     enablePrivatePluginApi: false,
     enableProposedApi: false,
     id: 'figma-plugin',
@@ -33,7 +33,7 @@ test('config key is `undefined`', async function (t) {
   t.same(await readConfigAsync(), {
     apiVersion: '1.0.0',
     build: null,
-    commandId: 'main.ts--default',
+    commandId: 'src/main.ts--default',
     enablePrivatePluginApi: false,
     enableProposedApi: false,
     id: 'figma-plugin',
@@ -52,7 +52,7 @@ test('config key is empty', async function (t) {
   t.same(await readConfigAsync(), {
     apiVersion: '1.0.0',
     build: null,
-    commandId: 'main.ts--default',
+    commandId: 'src/main.ts--default',
     enablePrivatePluginApi: false,
     enableProposedApi: false,
     id: 'figma-plugin',
@@ -75,12 +75,12 @@ test('basic command', async function (t) {
     enablePrivatePluginApi: false,
     enableProposedApi: false,
     id: '42',
-    main: { handler: 'default', src: 'src/bar' },
+    main: { handler: 'default', src: 'bar' },
     menu: null,
     name: 'foo',
     relaunchButtons: null,
     remainderOptions: {},
-    ui: { handler: 'default', src: 'src/baz' }
+    ui: { handler: 'default', src: 'baz' }
   })
 })
 
@@ -94,12 +94,12 @@ test('basic command without `id`', async function (t) {
     enablePrivatePluginApi: false,
     enableProposedApi: false,
     id: 'foo',
-    main: { handler: 'default', src: 'src/bar' },
+    main: { handler: 'default', src: 'bar' },
     menu: null,
     name: 'foo',
     relaunchButtons: null,
     remainderOptions: {},
-    ui: { handler: 'default', src: 'src/baz' }
+    ui: { handler: 'default', src: 'baz' }
   })
 })
 
@@ -117,7 +117,7 @@ test('single menu command', async function (t) {
     menu: [
       {
         commandId: 'baz--default',
-        main: { handler: 'default', src: 'src/baz' },
+        main: { handler: 'default', src: 'baz' },
         menu: null,
         name: 'bar',
         ui: null
@@ -146,7 +146,7 @@ test('single menu command with `handler`', async function (t) {
     menu: [
       {
         commandId: 'baz--qux',
-        main: { handler: 'qux', src: 'src/baz' },
+        main: { handler: 'qux', src: 'baz' },
         menu: null,
         name: 'bar',
         ui: null
@@ -173,7 +173,7 @@ test('multiple menu commands', async function (t) {
     menu: [
       {
         commandId: 'baz--qux',
-        main: { handler: 'qux', src: 'src/baz' },
+        main: { handler: 'qux', src: 'baz' },
         menu: null,
         name: 'bar',
         ui: null
@@ -181,10 +181,10 @@ test('multiple menu commands', async function (t) {
       { separator: true },
       {
         commandId: 'quuux--default',
-        main: { handler: 'default', src: 'src/quuux' },
+        main: { handler: 'default', src: 'quuux' },
         menu: null,
         name: 'quux',
-        ui: { handler: 'default', src: 'src/quuuux' }
+        ui: { handler: 'default', src: 'quuuux' }
       }
     ],
     name: 'foo',
@@ -212,10 +212,10 @@ test('nested menu commands', async function (t) {
         menu: [
           {
             commandId: 'qux--default',
-            main: { handler: 'default', src: 'src/qux' },
+            main: { handler: 'default', src: 'qux' },
             menu: null,
             name: 'baz',
-            ui: { handler: 'default', src: 'src/quux' }
+            ui: { handler: 'default', src: 'quux' }
           }
         ],
         name: 'bar',
@@ -239,20 +239,20 @@ test('relaunch button', async function (t) {
     enablePrivatePluginApi: false,
     enableProposedApi: false,
     id: '42',
-    main: { handler: 'default', src: 'src/bar' },
+    main: { handler: 'default', src: 'bar' },
     menu: null,
     name: 'foo',
     relaunchButtons: [
       {
         commandId: 'qux',
-        main: { handler: 'default', src: 'src/quuux' },
+        main: { handler: 'default', src: 'quuux' },
         multipleSelection: false,
         name: 'quux',
         ui: null
       }
     ],
     remainderOptions: {},
-    ui: { handler: 'default', src: 'src/baz' }
+    ui: { handler: 'default', src: 'baz' }
   })
 })
 
@@ -268,20 +268,20 @@ test('relaunch button with multiple selection', async function (t) {
     enablePrivatePluginApi: false,
     enableProposedApi: false,
     id: '42',
-    main: { handler: 'default', src: 'src/bar' },
+    main: { handler: 'default', src: 'bar' },
     menu: null,
     name: 'foo',
     relaunchButtons: [
       {
         commandId: 'qux',
-        main: { handler: 'default', src: 'src/quuux' },
+        main: { handler: 'default', src: 'quuux' },
         multipleSelection: true,
         name: 'quux',
         ui: null
       }
     ],
     remainderOptions: {},
-    ui: { handler: 'default', src: 'src/baz' }
+    ui: { handler: 'default', src: 'baz' }
   })
 })
 
@@ -295,11 +295,11 @@ test('additional options', async function (t) {
     enablePrivatePluginApi: true,
     enableProposedApi: true,
     id: '42',
-    main: { handler: 'default', src: 'src/bar' },
+    main: { handler: 'default', src: 'bar' },
     menu: null,
     name: 'foo',
     relaunchButtons: null,
     remainderOptions: {},
-    ui: { handler: 'default', src: 'src/baz' }
+    ui: { handler: 'default', src: 'baz' }
   })
 })
