@@ -14,7 +14,7 @@ const packageJsonRegex = /^package\.json$/
 
 export function watch(options: BuildOptions): void {
   const watcher = chokidarWatch(
-    ['./**/*.{css,js,json,jsx,ts,tsx}', 'package.json'],
+    ['./**/*.{css,js,json,jsx,ts,tsx}', 'package.json', 'tsconfig.json'],
     {
       ignored: function (path: string) {
         return watchIgnoreRegex.test(path) === true
