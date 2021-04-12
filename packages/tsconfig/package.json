@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/tsconfig",
-  "version": "0.0.85-alpha.2",
+  "version": "0.0.85-alpha.4",
   "publishConfig": {
     "access": "public"
   },

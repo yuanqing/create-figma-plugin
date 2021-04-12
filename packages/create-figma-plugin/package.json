@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "0.0.85-alpha.3",
+  "version": "0.0.85-alpha.4",
   "description": "Initialize a new Figma plugin using a template",
   "keywords": [
     "create-figma-plugin",
