@@ -8,13 +8,11 @@ import type { Settings } from './types/settings'
 
 const isUtf8 = require('is-utf8')
 
-type Values = Settings & {
-  createFigmaPluginVersions: CreateFigmaPluginVersions
-}
-
 export async function interpolateValuesIntoFilesAsync(
   directory: string,
-  values: Values
+  values: Settings & {
+    createFigmaPluginVersions: CreateFigmaPluginVersions
+  }
 ): Promise<void> {
   const filePaths = await globby('**/*', {
     cwd: directory,
@@ -25,13 +23,9 @@ export async function interpolateValuesIntoFilesAsync(
       const absolutePath = join(directory, filePath)
       const buffer = await readFile(absolutePath)
       const fileContents = isUtf8(buffer)
-        ? interpolate(buffer.toString(), values)
+        ? mustache.render(buffer.toString(), values)
         : buffer
       return outputFile(absolutePath, fileContents)
     })
   )
-}
-
-function interpolate(string: string, values: Values): string {
-  return mustache.render(string, values)
 }

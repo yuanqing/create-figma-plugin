@@ -1,5 +1,5 @@
 export type CreateFigmaPluginVersions = {
-  build: string
-  tsconfig: string
-  utilities: string
+  readonly build: string
+  readonly tsconfig: string
+  readonly utilities: string
 }
