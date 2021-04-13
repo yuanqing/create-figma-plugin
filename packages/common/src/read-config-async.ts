@@ -28,7 +28,6 @@ const defaultConfig: Config = {
   menu: null,
   name: constants.packageJson.defaultPluginName,
   relaunchButtons: null,
-  remainderOptions: {},
   ui: null
 }
 
@@ -37,7 +36,7 @@ export async function readConfigAsync(): Promise<Config> {
   if ((await pathExists(packageJsonPath)) === false) {
     return defaultConfig
   }
-  const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf8'))
+  const packageJson: any = JSON.parse(await readFile(packageJsonPath, 'utf8'))
   const config: RawConfig = packageJson[constants.packageJson.configKey]
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig
@@ -52,8 +51,7 @@ export async function readConfigAsync(): Promise<Config> {
     main,
     ui,
     menu,
-    relaunchButtons,
-    ...remainderOptions
+    relaunchButtons
   } = config
   return {
     apiVersion:
@@ -70,8 +68,7 @@ export async function readConfigAsync(): Promise<Config> {
     relaunchButtons:
       typeof relaunchButtons === 'undefined'
         ? null
-        : parseRelaunchButtons(relaunchButtons),
-    remainderOptions
+        : parseRelaunchButtons(relaunchButtons)
   }
 }
 
@@ -99,7 +96,7 @@ function parseCommand(command: RawConfigCommand): ConfigCommand {
 function parseRelaunchButtons(
   relaunchButtons: RawConfigRelaunchButtons
 ): Array<ConfigRelaunchButton> {
-  const result = []
+  const result: Array<ConfigRelaunchButton> = []
   for (const commandId in relaunchButtons) {
     const { name, main, ui, multipleSelection } = relaunchButtons[commandId]
     if (typeof main === 'undefined') {

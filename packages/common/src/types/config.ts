@@ -13,9 +13,6 @@ export interface Config extends BaseConfigMixin {
   readonly enableProposedApi: boolean
   readonly enablePrivatePluginApi: boolean
   readonly build: null | string
-  readonly remainderOptions: {
-    [key: string]: any
-  }
 }
 
 export interface ConfigCommand extends BaseConfigMixin {

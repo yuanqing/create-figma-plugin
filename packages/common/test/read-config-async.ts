@@ -22,7 +22,6 @@ test('no `package.json`', async function (t) {
     menu: null,
     name: 'figma-plugin',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: null
   })
 })
@@ -41,7 +40,6 @@ test('config key is `undefined`', async function (t) {
     menu: null,
     name: 'figma-plugin',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: null
   })
 })
@@ -60,7 +58,6 @@ test('config key is empty', async function (t) {
     menu: null,
     name: 'figma-plugin',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: null
   })
 })
@@ -79,7 +76,6 @@ test('basic command', async function (t) {
     menu: null,
     name: 'foo',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: { handler: 'default', src: 'baz' }
   })
 })
@@ -98,7 +94,6 @@ test('basic command without `id`', async function (t) {
     menu: null,
     name: 'foo',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: { handler: 'default', src: 'baz' }
   })
 })
@@ -125,7 +120,6 @@ test('single menu command', async function (t) {
     ],
     name: 'foo',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: null
   })
 })
@@ -154,7 +148,6 @@ test('single menu command with `handler`', async function (t) {
     ],
     name: 'foo',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: null
   })
 })
@@ -189,7 +182,6 @@ test('multiple menu commands', async function (t) {
     ],
     name: 'foo',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: null
   })
 })
@@ -224,7 +216,6 @@ test('nested menu commands', async function (t) {
     ],
     name: 'foo',
     relaunchButtons: null,
-    remainderOptions: {},
     ui: null
   })
 })
@@ -251,7 +242,6 @@ test('relaunch button', async function (t) {
         ui: null
       }
     ],
-    remainderOptions: {},
     ui: { handler: 'default', src: 'baz' }
   })
 })
@@ -280,26 +270,6 @@ test('relaunch button with multiple selection', async function (t) {
         ui: null
       }
     ],
-    remainderOptions: {},
-    ui: { handler: 'default', src: 'baz' }
-  })
-})
-
-test('additional options', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '12-additional-options'))
-  t.same(await readConfigAsync(), {
-    apiVersion: '1.0.0',
-    build: 'qux',
-    commandId: 'bar--default',
-    enablePrivatePluginApi: true,
-    enableProposedApi: true,
-    id: '42',
-    main: { handler: 'default', src: 'bar' },
-    menu: null,
-    name: 'foo',
-    relaunchButtons: null,
-    remainderOptions: {},
     ui: { handler: 'default', src: 'baz' }
   })
 })
