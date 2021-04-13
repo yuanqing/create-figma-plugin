@@ -1,4 +1,4 @@
 export type BuildOptions = {
-  minify: boolean
-  typecheck: boolean
+  readonly minify: boolean
+  readonly typecheck: boolean
 }

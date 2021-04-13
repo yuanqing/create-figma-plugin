@@ -208,29 +208,6 @@ test('preact', async function (t) {
   await cleanUpAsync()
 })
 
-test('additional options', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '9-additional-options'))
-  await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
-  await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
-  t.same(manifestJson, {
-    api: '1.0.0',
-    build: 'qux',
-    enablePrivatePluginApi: true,
-    enableProposedApi: true,
-    id: '42',
-    main: 'main.js',
-    name: 'x'
-  })
-  t.ok(await pathExists('build/main.js'))
-  t.notOk(await pathExists('build/ui.js'))
-  await cleanUpAsync()
-})
-
 async function createFigmaTypingsSymlinksAsync() {
   const directoryPath = await findUp(join('node_modules', '@figma'), {
     type: 'directory'

@@ -5,7 +5,7 @@ export function trackElapsedTime(): () => string {
   }
 }
 
-function formatTime(time: [number, number]) {
+function formatTime(time: [number, number]): string {
   if (time[0] === 0) {
     return `${(time[1] / 1e6).toFixed(0)}ms`
   }

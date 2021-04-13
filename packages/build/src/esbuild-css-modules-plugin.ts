@@ -1,6 +1,7 @@
 import type { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
 import { readFile } from 'fs-extra'
 import { basename, extname, resolve } from 'path'
+import type { AcceptedPlugin } from 'postcss'
 import postcss from 'postcss'
 import * as tempWrite from 'temp-write'
 
@@ -34,12 +35,12 @@ async function createCssModulesJavaScript(
   cssFilePath: string,
   minify: boolean
 ) {
-  const css = await readFile(cssFilePath)
+  const css = await readFile(cssFilePath, 'utf8')
   let classNamesJson: null | string = null
-  const plugins = []
+  const plugins: Array<AcceptedPlugin> = []
   plugins.push(
     postCssModules({
-      getJSON: function (_: string, json: { [key: string]: string }): void {
+      getJSON: function (_: string, json: Record<string, string>): void {
         if (classNamesJson !== null) {
           throw new Error('`getJSON` callback called more than once')
         }
@@ -63,7 +64,7 @@ async function createCssModulesJavaScript(
   if (classNamesJson === null) {
     throw new Error('`getJSON` callback was not called')
   }
-  const elementId = revHash(cssFilePath)
+  const elementId: string = revHash(cssFilePath)
   const isBaseCss =
     cssFilePath.indexOf('create-figma-plugin/packages/ui/lib/css') !== -1
   return `

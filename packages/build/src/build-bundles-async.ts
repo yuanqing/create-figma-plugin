@@ -14,7 +14,7 @@ import { typeCheckAsync } from './type-check-async'
 import type { BuildOptions } from './types/build'
 
 interface EntryFile extends ConfigFile {
-  commandId: string
+  readonly commandId: string
 }
 
 export async function buildBundlesAsync(options: BuildOptions): Promise<void> {
@@ -50,18 +50,18 @@ async function buildMainBundleAsync(
 
 function createMainEntryFile(config: Config): string {
   const { relaunchButtons, ...command } = config
-  const modules: Array<EntryFile> = []
-  extractModule(command, 'main', modules)
-  if (modules.length === 0) {
+  const entryFiles: Array<EntryFile> = []
+  extractEntryFile(command, 'main', entryFiles)
+  if (entryFiles.length === 0) {
     throw new Error('Need a main entry point')
   }
   if (relaunchButtons !== null) {
-    extractModules(relaunchButtons, 'main', modules)
+    extractEntryFiles(relaunchButtons, 'main', entryFiles)
   }
   return `
-    const modules = ${createRequireCode(modules)};
-    const commandId = (${modules.length === 1} || figma.command === '') ? '${
-    modules[0].commandId
+    const modules = ${createRequireCode(entryFiles)};
+    const commandId = (${entryFiles.length === 1} || figma.command === '') ? '${
+    entryFiles[0].commandId
   }' : figma.command;
     modules[commandId]();
   `
@@ -93,10 +93,10 @@ async function buildUiBundleAsync(
 
 function createUiEntryFile(config: Config): null | string {
   const { relaunchButtons, ...command } = config
-  const modules: EntryFile[] = []
-  extractModule(command, 'ui', modules)
+  const modules: Array<EntryFile> = []
+  extractEntryFile(command, 'ui', modules)
   if (relaunchButtons !== null) {
-    extractModules(relaunchButtons, 'ui', modules)
+    extractEntryFiles(relaunchButtons, 'ui', modules)
   }
   if (modules.length === 0) {
     return null
@@ -116,7 +116,7 @@ function createUiEntryFile(config: Config): null | string {
   `
 }
 
-function extractModules(
+function extractEntryFiles(
   items: Array<ConfigCommandSeparator | ConfigCommand | ConfigRelaunchButton>,
   key: 'ui' | 'main',
   result: Array<EntryFile>
@@ -125,11 +125,11 @@ function extractModules(
     if ('separator' in item) {
       continue
     }
-    extractModule(item, key, result)
+    extractEntryFile(item, key, result)
   }
 }
 
-function extractModule(
+function extractEntryFile(
   command: ConfigCommand | ConfigRelaunchButton,
   key: 'ui' | 'main',
   result: Array<EntryFile>
@@ -147,7 +147,7 @@ function extractModule(
     }
   }
   if ('menu' in command && command.menu !== null) {
-    extractModules(command.menu, key, result)
+    extractEntryFiles(command.menu, key, result)
   }
 }
 

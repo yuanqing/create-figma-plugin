@@ -2,6 +2,7 @@
 import * as sade from 'sade'
 
 import { buildAsync } from './build-async'
+import type { BuildOptions } from './types/build'
 import { watch } from './watch'
 
 sade('build-figma-plugin', true)
@@ -16,7 +17,7 @@ sade('build-figma-plugin', true)
     typecheck: boolean
     watch: boolean
   }) {
-    const buildOptions = {
+    const buildOptions: BuildOptions = {
       minify: options.minify,
       typecheck: options.typecheck
     }
