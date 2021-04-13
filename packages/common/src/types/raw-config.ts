@@ -1,21 +1,21 @@
 interface BaseRawConfigMixin {
-  name: string
-  main?: RawConfigFile
-  ui?: RawConfigFile
+  readonly name: string
+  readonly main?: RawConfigFile
+  readonly ui?: RawConfigFile
 }
 
 export interface RawConfig extends BaseRawConfigMixin {
-  apiVersion?: string
-  id?: string
-  menu?: Array<RawConfigCommand>
-  relaunchButtons?: RawConfigRelaunchButtons
-  enableProposedApi?: boolean
-  enablePrivatePluginApi?: boolean
-  build?: string
+  readonly apiVersion?: string
+  readonly id?: string
+  readonly menu?: Array<RawConfigCommand>
+  readonly relaunchButtons?: RawConfigRelaunchButtons
+  readonly enableProposedApi?: boolean
+  readonly enablePrivatePluginApi?: boolean
+  readonly build?: string
 }
 
 export interface RawConfigCommand extends BaseRawConfigMixin {
-  menu?: Array<RawConfigCommand>
+  readonly menu?: Array<RawConfigCommand>
 }
 
 export type RawConfigCommandSeparator = '-'
@@ -23,14 +23,14 @@ export type RawConfigCommandSeparator = '-'
 export type RawConfigFile =
   | string
   | {
-      src: string
-      handler?: string
+      readonly src: string
+      readonly handler?: string
     }
 
 export interface RawConfigRelaunchButton extends BaseRawConfigMixin {
-  multipleSelection?: boolean
+  readonly multipleSelection?: boolean
 }
 
 export type RawConfigRelaunchButtons = {
-  [relaunchButtonId: string]: RawConfigRelaunchButton
+  readonly [relaunchButtonId: string]: RawConfigRelaunchButton
 }

@@ -1,36 +1,36 @@
 interface BaseConfigMixin {
-  name: string
-  commandId: null | string
-  main: null | ConfigFile
-  ui: null | ConfigFile
+  readonly name: string
+  readonly commandId: null | string
+  readonly main: null | ConfigFile
+  readonly ui: null | ConfigFile
 }
 
 export interface Config extends BaseConfigMixin {
-  apiVersion: string
-  id: string
-  menu: null | Array<ConfigCommand | ConfigCommandSeparator>
-  relaunchButtons: null | Array<ConfigRelaunchButton>
-  enableProposedApi: boolean
-  enablePrivatePluginApi: boolean
-  build: null | string
-  remainderOptions: {
+  readonly apiVersion: string
+  readonly id: string
+  readonly menu: null | Array<ConfigCommand | ConfigCommandSeparator>
+  readonly relaunchButtons: null | Array<ConfigRelaunchButton>
+  readonly enableProposedApi: boolean
+  readonly enablePrivatePluginApi: boolean
+  readonly build: null | string
+  readonly remainderOptions: {
     [key: string]: any
   }
 }
 
 export interface ConfigCommand extends BaseConfigMixin {
-  menu: null | Array<ConfigCommand | ConfigCommandSeparator>
+  readonly menu: null | Array<ConfigCommand | ConfigCommandSeparator>
 }
 
-export type ConfigCommandSeparator = { separator: true }
+export type ConfigCommandSeparator = { readonly separator: true }
 
 export interface ConfigFile {
-  src: string
-  handler: string
+  readonly src: string
+  readonly handler: string
 }
 
 export interface ConfigRelaunchButton extends BaseConfigMixin {
-  commandId: string
-  main: ConfigFile
-  multipleSelection: boolean
+  readonly commandId: string
+  readonly main: ConfigFile
+  readonly multipleSelection: boolean
 }
