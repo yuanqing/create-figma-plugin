@@ -33,11 +33,11 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "yarn run clean && tsc --module es2020 --moduleResolution node && ts-node scripts/copy-non-ts-files.ts",
-    "clean": "rimraf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
+    "clean": "rm -rf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json' '.storybook/**/*.html'",
     "lint": "eslint '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
-    "storybook-clean": "rimraf '*.log' build 'src/**/*.css.d.ts'",
+    "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
     "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook"
   },
   "dependencies": {
@@ -60,7 +60,6 @@
     "prettier": "^2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "rimraf": "^3.0.2",
     "style-loader": "^2.0.0",
     "stylelint": "^13.12.0",
     "stylelint-config-yuanqing": "^0.0.1",

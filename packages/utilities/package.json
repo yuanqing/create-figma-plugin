@@ -25,8 +25,8 @@
   "scripts": {
     "build": "yarn run clean-build && tsc --module es2020 --moduleResolution node",
     "clean": "yarn run clean-build && yarn run clean-test",
-    "clean-build": "rimraf '*.log' lib tsconfig.tsbuildinfo",
-    "clean-test": "rimraf '*.log' .nyc_output coverage",
+    "clean-build": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
+    "clean-test": "rm -rf '*.log' .nyc_output coverage",
     "docs": "ts-node scripts/generate-docs.ts",
     "fix": "eslint --fix '{scripts,src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
     "lint": "eslint '{scripts,src,test}/**/*.ts'",
@@ -46,7 +46,6 @@
     "fs-extra": "^9.1.0",
     "generate-ts-docs": "^0.0.6",
     "prettier": "^2.2.1",
-    "rimraf": "^3.0.2",
     "tap": "^15.0.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
