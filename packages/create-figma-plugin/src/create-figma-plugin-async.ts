@@ -8,7 +8,7 @@ import { interpolateValuesIntoFilesAsync } from './interpolate-values-into-files
 import { resolveLatestVersions } from './resolve-latest-versions'
 import { createDefaultSettings } from './settings/create-default-settings'
 import { promptForUserInputAsync } from './settings/prompt-for-user-input-async'
-import { Settings } from './types/settings'
+import type { Settings } from './types/settings'
 
 export async function createFigmaPluginAsync(
   options: Settings,

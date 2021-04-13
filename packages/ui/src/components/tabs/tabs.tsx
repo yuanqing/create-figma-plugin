@@ -1,8 +1,9 @@
 /** @jsx h */
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { HTMLProps, OnChange } from '../../types'
+import type { HTMLProps, OnChange } from '../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -23,9 +24,9 @@ export interface TabsProps {
 
 export interface TabsOption {
   disabled?: boolean
-  text?: preact.ComponentChildren
+  text?: ComponentChildren
   value: null | string
-  view: preact.ComponentChildren
+  view: ComponentChildren
 }
 
 export function Tabs({

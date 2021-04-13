@@ -4,16 +4,17 @@ import {
   isValidNumericInput
 } from '@create-figma-plugin/utilities/lib/number'
 import classnames from '@sindresorhus/class-names'
+import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { HTMLProps } from '../../../types'
+import type { HTMLProps } from '../../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
-import { TextboxProps } from '../textbox'
+import type { TextboxProps } from '../textbox'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
@@ -48,7 +49,7 @@ export function TextboxNumeric({
 }: HTMLProps<TextboxNumericProps, HTMLInputElement>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
-  const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleClick = useCallback(
     function () {

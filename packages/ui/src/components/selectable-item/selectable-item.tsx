@@ -1,16 +1,17 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { HTMLProps, OnChange } from '../../types'
+import type { HTMLProps, OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
 import styles from './selectable-item.css'
 
 export interface SelectableItemProps {
   bold?: boolean
-  children: preact.ComponentChildren
+  children: ComponentChildren
   disabled?: boolean
   indent?: boolean
   name: string

@@ -1,12 +1,13 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h, toChildArray } from 'preact'
 
-import { HTMLProps, Space } from '../../types'
+import type { HTMLProps, Space } from '../../types'
 import styles from './stack.css'
 
 export interface StackProps {
-  children: preact.ComponentChildren
+  children: ComponentChildren
   space?: Space
 }
 

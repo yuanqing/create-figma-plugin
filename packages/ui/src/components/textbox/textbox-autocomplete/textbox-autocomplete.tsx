@@ -1,9 +1,10 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
-import { HTMLProps, Option } from '../../../types'
+import type { HTMLProps, Option } from '../../../types'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -13,7 +14,7 @@ import {
   TAB_KEY_CODE,
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
-import { TextboxProps } from '../textbox'
+import type { TextboxProps } from '../textbox'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
@@ -48,9 +49,9 @@ export function TextboxAutocomplete({
   value: committedValue,
   ...rest
 }: HTMLProps<TextboxAutocompleteProps, HTMLInputElement>): h.JSX.Element {
-  const rootElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
-  const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
-  const menuElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
+  const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+  const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false) // Whether to select the contents of the textbox
 

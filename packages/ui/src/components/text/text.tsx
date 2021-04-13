@@ -1,12 +1,13 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 
-import { Alignment, HTMLProps } from '../../types'
+import type { Alignment, HTMLProps } from '../../types'
 import styles from './text.css'
 
 export interface TextProps {
-  children: preact.ComponentChildren
+  children: ComponentChildren
   align?: Alignment
   bold?: boolean
   muted?: boolean

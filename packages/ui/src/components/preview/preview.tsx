@@ -1,11 +1,12 @@
 /** @jsx h */
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 
-import { HTMLProps } from '../../types'
+import type { HTMLProps } from '../../types'
 import style from './preview.css'
 
 export interface PreviewProps {
-  children: preact.ComponentChildren
+  children: ComponentChildren
 }
 
 export function Preview({

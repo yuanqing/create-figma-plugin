@@ -1,3 +1,4 @@
+import type { RefObject } from 'preact'
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { DOWN_KEY_CODE, UP_KEY_CODE } from '../utilities/key-codes'
@@ -18,7 +19,7 @@ export function useScrollableMenu(options: {
     onChange,
     changeOnMouseOver = true
   } = options
-  const menuElementRef: preact.RefObject<HTMLElement> = useRef(null)
+  const menuElementRef: RefObject<HTMLElement> = useRef(null)
   const parseItemElementId = useCallback(
     function (element: HTMLElement): MenuItemId {
       return element.getAttribute(itemElementAttributeName)

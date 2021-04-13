@@ -1,5 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren, RefObject, VNode } from 'preact'
 import { cloneElement, h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
@@ -8,7 +9,7 @@ import {
   MenuItemId as ItemId,
   useScrollableMenu
 } from '../../hooks/use-scrollable-menu'
-import { OnChange, Option } from '../../types'
+import type { OnChange, Option } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
 import styles from './dropdown-menu.css'
@@ -16,7 +17,7 @@ import styles from './dropdown-menu.css'
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-dropdown-menu'
 
 export interface DropdownMenuProps {
-  children: preact.ComponentChildren
+  children: ComponentChildren
   focused?: boolean
   fullWidth?: boolean
   name: string
@@ -39,7 +40,7 @@ export function DropdownMenu({
   top,
   value
 }: DropdownMenuProps): h.JSX.Element {
-  const rootElementRef: preact.RefObject<HTMLDivElement> = useRef(null)
+  const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const menuItems: Array<Option> = options.map(function (option, index) {
     return {
@@ -179,14 +180,14 @@ export function DropdownMenu({
   )
   return (
     <div
-      ref={rootElementRef as preact.RefObject<HTMLDivElement>}
+      ref={rootElementRef as RefObject<HTMLDivElement>}
       class={styles.dropdownMenu}
       data-initial-focus={focused === true}
       onClick={handleClick}
       onKeyDown={handleRootElementKeyDown}
       tabIndex={0}
     >
-      {cloneElement(children as preact.VNode<any>, { [name]: value })}
+      {cloneElement(children as VNode<any>, { [name]: value })}
       <div
         class={classnames(
           styles.menu,
@@ -196,7 +197,7 @@ export function DropdownMenu({
           top === true ? styles.top : null
         )}
       >
-        <div ref={menuElementRef as preact.RefObject<HTMLDivElement>}>
+        <div ref={menuElementRef as RefObject<HTMLDivElement>}>
           {menuItems.map(function (menuItem) {
             if ('separator' in menuItem) {
               return <hr key={menuItem.id} class={styles.menuSeparator} />

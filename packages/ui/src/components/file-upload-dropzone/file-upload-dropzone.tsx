@@ -1,15 +1,16 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { HTMLProps, OnSelectedFiles } from '../../types'
+import type { HTMLProps, OnSelectedFiles } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './file-upload-dropzone.css'
 
 export interface FileUploadDropzoneProps {
   acceptedFileTypes?: string[]
-  children: preact.ComponentChildren
+  children: ComponentChildren
   multiple?: boolean
   onSelectedFiles: OnSelectedFiles
   propagateEscapeKeyDown?: boolean

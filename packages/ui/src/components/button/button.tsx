@@ -1,15 +1,16 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { HTMLProps } from '../../types'
+import type { HTMLProps } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './button.css'
 
 export interface ButtonProps {
-  children: preact.ComponentChildren
+  children: ComponentChildren
   destructive?: boolean
   disabled?: boolean
   focused?: boolean

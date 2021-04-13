@@ -1,16 +1,17 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { HTMLProps, OnSelectedFiles } from '../../types'
+import type { HTMLProps, OnSelectedFiles } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './file-upload-button.css'
 
 export interface FileUploadButtonProps {
   acceptedFileTypes?: string[]
-  children: preact.ComponentChildren
+  children: ComponentChildren
   disabled?: boolean
   focused?: boolean
   fullWidth?: boolean

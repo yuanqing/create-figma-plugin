@@ -1,4 +1,4 @@
-import { Plugin, PluginBuild } from 'esbuild'
+import type { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
 import { readFile } from 'fs-extra'
 import { basename, extname, resolve } from 'path'
 import postcss from 'postcss'
@@ -12,17 +12,20 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
   return {
     name: 'css-modules',
     setup: function (build: PluginBuild) {
-      build.onResolve({ filter: /\.css$/ }, async function (args: any) {
-        const cssfilePath = resolve(args.resolveDir, args.path)
-        const js = await createCssModulesJavaScript(cssfilePath, minify)
-        const jsFilePath = await tempWrite(
-          js,
-          `${basename(args.path, extname(args.path))}.js`
-        )
-        return {
-          path: jsFilePath
+      build.onResolve(
+        { filter: /\.css$/ },
+        async function (args: OnResolveArgs) {
+          const cssfilePath = resolve(args.resolveDir, args.path)
+          const js = await createCssModulesJavaScript(cssfilePath, minify)
+          const jsFilePath = await tempWrite(
+            js,
+            `${basename(args.path, extname(args.path))}.js`
+          )
+          return {
+            path: jsFilePath
+          }
         }
-      })
+      )
     }
   }
 }

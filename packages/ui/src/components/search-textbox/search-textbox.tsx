@@ -1,8 +1,9 @@
 /** @jsx h */
+import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { HTMLProps, OnChange } from '../../types'
+import type { HTMLProps, OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { crossIcon } from '../icon/icons/cross-icon'
 import { searchIcon } from '../icon/icons/search-icon'
@@ -30,7 +31,7 @@ export function SearchTextbox({
   value,
   ...rest
 }: HTMLProps<SearchTextboxProps, HTMLInputElement>): h.JSX.Element {
-  const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   function handleFocus() {
     if (

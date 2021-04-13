@@ -1,9 +1,10 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { HTMLProps, OnChange, Space } from '../../types'
+import type { HTMLProps, OnChange, Space } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
 import styles from './radio-buttons.css'
@@ -20,7 +21,7 @@ export interface RadioButtonsProps {
 }
 export interface RadioButtonsOption {
   disabled?: boolean
-  text?: preact.ComponentChildren
+  text?: ComponentChildren
   value: null | string
 }
 

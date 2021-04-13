@@ -1,13 +1,12 @@
-import {
+import type {
   ConfigCommand,
   ConfigCommandSeparator,
-  ConfigRelaunchButton,
-  constants,
-  readConfigAsync
+  ConfigRelaunchButton
 } from '@create-figma-plugin/common'
+import { constants, readConfigAsync } from '@create-figma-plugin/common'
 import { outputFile } from 'fs-extra'
 
-import {
+import type {
   Manifest,
   ManifestMenuItem,
   ManifestMenuItemSeparator,

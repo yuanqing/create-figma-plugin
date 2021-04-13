@@ -1,11 +1,12 @@
 /** @jsx h */
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 
-import { HTMLProps, Space } from '../../types'
+import type { HTMLProps, Space } from '../../types'
 import styles from './container.css'
 
 export interface ContainerProps {
-  children: preact.ComponentChildren
+  children: ComponentChildren
   space?: Space
 }
 

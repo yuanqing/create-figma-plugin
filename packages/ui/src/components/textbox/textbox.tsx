@@ -1,16 +1,18 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
+import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { HTMLProps, OnChange } from '../../types'
+import type { HTMLProps, OnChange } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './textbox.css'
 
 export interface TextboxProps {
   disabled?: boolean
   focused?: boolean
-  icon?: preact.ComponentChildren
+  icon?: ComponentChildren
   name: string
   noBorder?: boolean
   onChange: OnChange
@@ -35,7 +37,7 @@ export function Textbox({
 }: HTMLProps<TextboxProps, HTMLInputElement>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
-  const inputElementRef: preact.RefObject<HTMLInputElement> = useRef(null)
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleClick = useCallback(
     function () {

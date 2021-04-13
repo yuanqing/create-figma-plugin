@@ -1,14 +1,15 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
+import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { HTMLProps, OnChange } from '../../types'
+import type { HTMLProps, OnChange } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './checkbox.css'
 
 export interface CheckboxProps {
-  children: preact.ComponentChildren
+  children: ComponentChildren
   disabled?: boolean
   focused?: boolean
   name: string
