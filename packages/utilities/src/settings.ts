@@ -1,6 +1,6 @@
 const KEY = 'settings'
 
-type Settings = { [key: string]: any }
+type Settings = Record<string, unknown>
 
 /**
  * Loads your plugin’s `settings` (stored locally on the user’s computer).

@@ -7,7 +7,7 @@
  *
  * @category UI
  */
-export function showUI(options: ShowUIOptions, data: any = {}): void {
+export function showUI(options: ShowUIOptions, data: unknown = {}): void {
   if (typeof __html__ === 'undefined') {
     throw new Error('No UI defined')
   }

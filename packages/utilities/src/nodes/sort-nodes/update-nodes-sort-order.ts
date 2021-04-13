@@ -1,4 +1,4 @@
-import { compareArrays } from '../../object'
+import { compareStringArrays } from '../../object'
 import { areSiblingNodes } from '../are-sibling-nodes'
 
 /**
@@ -26,7 +26,7 @@ export function updateNodesSortOrder(siblingNodes: Array<SceneNode>): boolean {
   const idsAfter = parent.children.map(function ({ id }) {
     return id
   })
-  return compareArrays(ids, idsAfter) === false
+  return compareStringArrays(ids, idsAfter) === false
 }
 
 function computeInsertIndex(

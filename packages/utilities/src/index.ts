@@ -21,8 +21,8 @@ export { updateNodesSortOrder } from './nodes/sort-nodes/update-nodes-sort-order
 export { traverseNode } from './nodes/traverse-node'
 export { isValidNumericInput, evaluateNumericExpression } from './number'
 export {
+  compareStringArrays,
   cloneObject,
-  compareArrays,
   compareObjects,
   extractAttributes
 } from './object'

@@ -1,16 +1,17 @@
+import type { JsonValue } from 'type-fest'
+
 /**
  * Creates a deep copy of the given object.
  *
  * @category Object
  */
-export function cloneObject(object: any): any {
-  const type = typeof object
+export function cloneObject(object: JsonValue): JsonValue {
   if (
     object === null ||
-    type === 'boolean' ||
-    type === 'number' ||
-    type === 'string' ||
-    type === 'undefined'
+    typeof object === 'undefined' ||
+    typeof object === 'boolean' ||
+    typeof object === 'number' ||
+    typeof object === 'string'
   ) {
     return object
   }
@@ -19,29 +20,11 @@ export function cloneObject(object: any): any {
       return cloneObject(value)
     })
   }
-  const result: { [key: string]: any } = {}
+  const result: Record<string, JsonValue> = {}
   for (const key in object) {
     result[key] = cloneObject(object[key])
   }
   return result
-}
-
-/**
- * Performs a *shallow* comparison of arrays `a` and `b`.
- *
- * @returns Returns `true` if `a` and `b` are the same, else `false`.
- * @category Object
- */
-export function compareArrays(a: Array<any>, b: Array<any>): boolean {
-  if (a.length !== b.length) {
-    return false
-  }
-  for (const index in a) {
-    if (a[index] !== b[index]) {
-      return false
-    }
-  }
-  return true
 }
 
 /**
@@ -50,33 +33,38 @@ export function compareArrays(a: Array<any>, b: Array<any>): boolean {
  * @returns Returns `true` if `a` and `b` are the same, else `false`.
  * @category Object
  */
-export function compareObjects(a: any, b: any): boolean {
-  const type = typeof a
+export function compareObjects(a: JsonValue, b: JsonValue): boolean {
   if (
     a === null ||
-    type === 'boolean' ||
-    type === 'number' ||
-    type === 'string' ||
-    type === 'undefined'
+    typeof a === 'undefined' ||
+    typeof a === 'boolean' ||
+    typeof a === 'number' ||
+    typeof a === 'string'
   ) {
     return a === b
   }
   if (Array.isArray(a)) {
-    if (Array.isArray(b) === false) {
+    if (!Array.isArray(b)) {
       return false
     }
     if (a.length !== b.length) {
       return false
     }
-    let result = true
-    a.forEach(function (value, index) {
-      if (result === true && compareObjects(value, b[index]) === false) {
-        result = false
+    for (const index in a) {
+      if (compareObjects(a[index], b[index]) === false) {
+        return false
       }
-    })
-    return result
+    }
+    return true
   }
-  if (typeof b !== 'object') {
+  if (
+    b === null ||
+    typeof b === 'undefined' ||
+    typeof b === 'boolean' ||
+    typeof b === 'number' ||
+    typeof b === 'string' ||
+    Array.isArray(b)
+  ) {
     return false
   }
   if (Object.keys(a).length !== Object.keys(b).length) {
@@ -91,6 +79,27 @@ export function compareObjects(a: any, b: any): boolean {
 }
 
 /**
+ * Compares string arrays `a` and `b`.
+ *
+ * @returns Returns `true` if `a` and `b` are the same, else `false`.
+ * @category Object
+ */
+export function compareStringArrays(
+  a: Array<string>,
+  b: Array<string>
+): boolean {
+  if (a.length !== b.length) {
+    return false
+  }
+  for (const index in a) {
+    if (a[index] !== b[index]) {
+      return false
+    }
+  }
+  return true
+}
+
+/**
  * Extracts the specified list of `attributes` from the given `array` of
  * objects.
  *
@@ -98,16 +107,18 @@ export function compareObjects(a: any, b: any): boolean {
  * @category Object
  */
 export function extractAttributes(
-  array: Array<{ [key: string]: any }>,
+  array: Array<Record<string, boolean | null | number | string>>,
   attributes: Array<string>
-): Array<{ [key: string]: any }> {
-  const result = []
+): Array<Record<string, boolean | null | number | string>> {
+  const result: Array<Record<string, boolean | null | number | string>> = []
   for (const object of array) {
-    const item: { [key: string]: any } = {}
+    const item: Record<string, boolean | null | number | string> = {}
     for (const attribute of attributes) {
       const value = object[attribute]
-      item[attribute] =
-        typeof value === 'undefined' || object[attribute] === '' ? null : value
+      if (typeof value === 'undefined') {
+        throw new Error(`Attribute \`${attribute}\` does not exist`)
+      }
+      item[attribute] = value
     }
     result.push(item)
   }

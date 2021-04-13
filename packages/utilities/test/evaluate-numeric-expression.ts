@@ -2,14 +2,14 @@ import { test } from 'tap'
 
 import { evaluateNumericExpression } from '../src/number'
 
-test('invalid expressions', async function (t) {
+test('invalid expressions', function (t) {
   t.plan(3)
   t.equal(evaluateNumericExpression(''), null)
   t.equal(evaluateNumericExpression('-'), null)
   t.equal(evaluateNumericExpression('-.'), null)
 })
 
-test('positive numbers', async function (t) {
+test('positive numbers', function (t) {
   t.plan(5)
   t.equal(evaluateNumericExpression('0'), 0)
   t.equal(evaluateNumericExpression('3'), 3)
@@ -18,7 +18,7 @@ test('positive numbers', async function (t) {
   t.equal(evaluateNumericExpression('3.142'), 3.142)
 })
 
-test('negative numbers', async function (t) {
+test('negative numbers', function (t) {
   t.plan(5)
   t.equal(evaluateNumericExpression('-0'), -0)
   t.equal(evaluateNumericExpression('-3'), -3)
@@ -27,7 +27,7 @@ test('negative numbers', async function (t) {
   t.equal(evaluateNumericExpression('-3.142'), -3.142)
 })
 
-test('expressions', async function (t) {
+test('expressions', function (t) {
   t.plan(5)
   t.equal(evaluateNumericExpression('0+1'), 1)
   t.equal(evaluateNumericExpression('3-2'), 1)
@@ -36,7 +36,7 @@ test('expressions', async function (t) {
   t.equal(evaluateNumericExpression('1+2*3/4'), 2.5)
 })
 
-test('expressions ending with an operator', async function (t) {
+test('expressions ending with an operator', function (t) {
   t.plan(5)
   t.equal(evaluateNumericExpression('0+1+'), 1)
   t.equal(evaluateNumericExpression('3-2-'), 1)
@@ -45,7 +45,7 @@ test('expressions ending with an operator', async function (t) {
   t.equal(evaluateNumericExpression('1+2*3/4+'), 2.5)
 })
 
-test('expressions starting with a negative number', async function (t) {
+test('expressions starting with a negative number', function (t) {
   t.plan(5)
   t.equal(evaluateNumericExpression('-0+1'), 1)
   t.equal(evaluateNumericExpression('-3-2'), -5)

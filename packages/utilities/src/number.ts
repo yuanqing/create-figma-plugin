@@ -7,9 +7,9 @@ const invalidCharactersRegex = /[^\d.+\-*/]/
 
 /**
  * Checks if `value` is a numeric expression, as input by a user. “Partial”
- * inputs are considered valid. Set `integerOnly` to `true` to check that the
- * expression contains only integers. `integerOnly` defaults to `false` if not
- * specified.
+ * inputs are considered valid. Set `options.integersOnly` to `true` to check
+ * that the expression contains only integers. `options.integersOnly` defaults
+ * to `false` if not specified.
  *
  * @returns Returns `true` if `value` is a valid numeric expression,
  * else `false`.
@@ -17,7 +17,7 @@ const invalidCharactersRegex = /[^\d.+\-*/]/
  */
 export function isValidNumericInput(
   value: string,
-  integerOnly = false
+  options: { integersOnly: boolean } = { integersOnly: false }
 ): boolean {
   const split = (value[0] === '-' ? value.substring(1) : value).split(
     operatorRegex
@@ -27,9 +27,10 @@ export function isValidNumericInput(
     const operand = split[i]
     if (
       (operand === '' && i !== split.length - 1) ||
-      (integerOnly === true ? integerOperandRegex : floatOperandRegex).test(
-        operand
-      ) === false
+      (options.integersOnly === true
+        ? integerOperandRegex
+        : floatOperandRegex
+      ).test(operand) === false
     ) {
       return false
     }
