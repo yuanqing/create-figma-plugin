@@ -146,7 +146,9 @@ export function TextboxNumeric({
           value === null
             ? event.key
             : computeNextValue(inputElementRef.current, event.key)
-        if (isValidNumericInput(nextValue, integer) === false) {
+        if (
+          isValidNumericInput(nextValue, { integersOnly: integer }) === false
+        ) {
           event.preventDefault()
           return
         }
@@ -186,7 +188,7 @@ export function TextboxNumeric({
         inputElementRef.current,
         event.clipboardData.getData('Text')
       )
-      if (isValidNumericInput(nextValue, integer) === false) {
+      if (isValidNumericInput(nextValue, { integersOnly: integer }) === false) {
         event.preventDefault()
       }
     },
