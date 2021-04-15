@@ -1,6 +1,6 @@
-const KEY = 'settings'
+import type { JsonObject } from 'type-fest'
 
-type Settings = Record<string, unknown>
+const SETTINGS_KEY = 'settings'
 
 /**
  * Loads your plugin’s `settings` (stored locally on the user’s computer).
@@ -9,9 +9,9 @@ type Settings = Record<string, unknown>
  * @category Settings
  */
 export async function loadSettingsAsync(
-  defaultSettings: Settings
-): Promise<Settings> {
-  const settings: Settings = await figma.clientStorage.getAsync(KEY)
+  defaultSettings: JsonObject
+): Promise<JsonObject> {
+  const settings: JsonObject = await figma.clientStorage.getAsync(SETTINGS_KEY)
   if (typeof settings === 'undefined') {
     return defaultSettings
   }
@@ -24,6 +24,6 @@ export async function loadSettingsAsync(
  *
  * @category Settings
  */
-export async function saveSettingsAsync(settings: Settings): Promise<void> {
-  await figma.clientStorage.setAsync(KEY, settings)
+export async function saveSettingsAsync(settings: JsonObject): Promise<void> {
+  await figma.clientStorage.setAsync(SETTINGS_KEY, settings)
 }

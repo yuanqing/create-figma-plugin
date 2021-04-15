@@ -33,4 +33,5 @@ export {
   formatWarningMessage,
   pluralize
 } from './string'
+export type { EventHandler, JsonValue, JsonObject } from './types'
 export { showUI } from './ui'

@@ -1,7 +1,9 @@
+import type { EventHandler } from './types'
+
 const eventHandlers: {
   [id: string]: {
     eventName: string
-    eventHandler: (...args: Array<any>) => void
+    eventHandler: EventHandler
   }
 } = {}
 
@@ -13,9 +15,9 @@ let currentId = 0
  * @returns Returns a function for deregistering the `eventHandler`.
  * @category Events
  */
-export function on(
+export function on<T extends EventHandler>(
   eventName: string,
-  eventHandler: (...args: Array<any>) => void
+  eventHandler: T
 ): () => void {
   const id = `${currentId++}`
   eventHandlers[id] = { eventHandler, eventName }
@@ -31,9 +33,9 @@ export function on(
  * @returns Returns a function for deregistering the `eventHandler`.
  * @category Events
  */
-export function once(
+export function once<T extends EventHandler>(
   eventName: string,
-  eventHandler: (...args: Array<any>) => void
+  eventHandler: T
 ): () => void {
   let done = false
   return on(eventName, function (...args) {
@@ -56,21 +58,27 @@ export function once(
  *
  * @category Events
  */
-export const emit: (eventName: string, ...args: Array<any>) => void =
+export const emit =
   typeof window === 'undefined'
-    ? function (...args) {
-        figma.ui.postMessage(args)
+    ? function <T extends EventHandler>(
+        eventName: string,
+        ...args: Parameters<T>
+      ) {
+        figma.ui.postMessage([eventName, ...args])
       }
-    : function (...args) {
+    : function <T extends EventHandler>(
+        eventName: string,
+        ...args: Parameters<T>
+      ) {
         window.parent.postMessage(
           {
-            pluginMessage: args
+            pluginMessage: [eventName, ...args]
           },
           '*'
         )
       }
 
-function invokeEventHandler(eventName: string, args: Array<any>) {
+function invokeEventHandler(eventName: string, args: Array<unknown>) {
   for (const id in eventHandlers) {
     if (eventHandlers[id].eventName === eventName) {
       eventHandlers[id].eventHandler.apply(null, args)
@@ -81,7 +89,7 @@ function invokeEventHandler(eventName: string, args: Array<any>) {
 if (typeof window === 'undefined') {
   figma.ui.onmessage = function ([eventName, ...args]: [
     string,
-    Array<any>
+    Array<unknown>
   ]): void {
     invokeEventHandler(eventName, args)
   }
@@ -90,7 +98,10 @@ if (typeof window === 'undefined') {
     if (typeof event.data.pluginMessage === 'undefined') {
       return
     }
-    const [eventName, ...args]: [string, Array<any>] = event.data.pluginMessage
+    const [eventName, ...args]: [
+      string,
+      Array<unknown>
+    ] = event.data.pluginMessage
     invokeEventHandler(eventName, args)
   }
 }

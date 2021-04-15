@@ -7,6 +7,9 @@ export function setAbsolutePosition(
   node: SceneNode,
   vector: { x?: number; y?: number }
 ): void {
+  if (typeof vector.x === 'undefined' && typeof vector.y === 'undefined') {
+    throw new Error('Specify at least one of `x` or `y`')
+  }
   let x = typeof vector.x === 'undefined' ? null : vector.x
   let y = typeof vector.y === 'undefined' ? null : vector.y
   let parent = node.parent

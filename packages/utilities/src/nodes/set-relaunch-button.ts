@@ -12,8 +12,7 @@
 export function setRelaunchButton(
   node: BaseNode,
   relaunchButtonId: string,
-  options?: { description: string }
+  options: { description: string } = { description: '' }
 ): void {
-  const description = options?.description || ''
-  node.setRelaunchData({ [relaunchButtonId]: description })
+  node.setRelaunchData({ [relaunchButtonId]: options.description })
 }

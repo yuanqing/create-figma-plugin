@@ -1,11 +1,11 @@
-import type { JsonValue } from 'type-fest'
+import type { JsonValue } from './types'
 
 /**
  * Creates a deep copy of the given object.
  *
  * @category Object
  */
-export function cloneObject(object: JsonValue): JsonValue {
+export function cloneObject<T>(object: T): T {
   if (
     object === null ||
     typeof object === 'undefined' ||
@@ -16,15 +16,17 @@ export function cloneObject(object: JsonValue): JsonValue {
     return object
   }
   if (Array.isArray(object)) {
-    return object.map(function (value) {
-      return cloneObject(value)
-    })
+    const result: Array<unknown> = []
+    for (const value of object as Array<unknown>) {
+      result.push(cloneObject(value))
+    }
+    return result as any
   }
-  const result: Record<string, JsonValue> = {}
+  const result: Record<string, unknown> = {}
   for (const key in object) {
     result[key] = cloneObject(object[key])
   }
-  return result
+  return result as T
 }
 
 /**
@@ -79,7 +81,7 @@ export function compareObjects(a: JsonValue, b: JsonValue): boolean {
 }
 
 /**
- * Compares string arrays `a` and `b`.
+ * Compares the string arrays `a` and `b`.
  *
  * @returns Returns `true` if `a` and `b` are the same, else `false`.
  * @category Object
@@ -106,13 +108,13 @@ export function compareStringArrays(
  * @returns Returns an array of plain objects.
  * @category Object
  */
-export function extractAttributes(
-  array: Array<Record<string, boolean | null | number | string>>,
-  attributes: Array<string>
-): Array<Record<string, boolean | null | number | string>> {
-  const result: Array<Record<string, boolean | null | number | string>> = []
+export function extractAttributes<T>(
+  array: Array<T>,
+  attributes: Array<keyof T>
+): Array<T> {
+  const result: Array<T> = []
   for (const object of array) {
-    const item: Record<string, boolean | null | number | string> = {}
+    const item: any = {}
     for (const attribute of attributes) {
       const value = object[attribute]
       if (typeof value === 'undefined') {
@@ -120,7 +122,7 @@ export function extractAttributes(
       }
       item[attribute] = value
     }
-    result.push(item)
+    result.push(item as T)
   }
   return result
 }
