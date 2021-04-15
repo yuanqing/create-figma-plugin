@@ -35,7 +35,10 @@ export function cloneObject<T>(object: T): T {
  * @returns Returns `true` if `a` and `b` are the same, else `false`.
  * @category Object
  */
-export function compareObjects(a: JsonValue, b: JsonValue): boolean {
+export function compareObjects(
+  a: JsonValue | undefined,
+  b: JsonValue | undefined
+): boolean {
   if (
     a === null ||
     typeof a === 'undefined' ||
@@ -110,11 +113,11 @@ export function compareStringArrays(
  */
 export function extractAttributes<T>(
   array: Array<T>,
-  attributes: Array<keyof T>
-): Array<T> {
-  const result: Array<T> = []
+  attributes: Array<keyof Partial<T>>
+): Array<Partial<T>> {
+  const result: Array<Partial<T>> = []
   for (const object of array) {
-    const item: any = {}
+    const item: Partial<T> = {}
     for (const attribute of attributes) {
       const value = object[attribute]
       if (typeof value === 'undefined') {
@@ -122,7 +125,7 @@ export function extractAttributes<T>(
       }
       item[attribute] = value
     }
-    result.push(item as T)
+    result.push(item)
   }
   return result
 }

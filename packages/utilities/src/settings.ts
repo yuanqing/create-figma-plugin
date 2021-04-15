@@ -1,4 +1,4 @@
-import type { JsonObject } from 'type-fest'
+import type { JsonObject } from './types'
 
 const SETTINGS_KEY = 'settings'
 
