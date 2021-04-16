@@ -9,8 +9,8 @@ export type MenuItemId = null | string
 
 export function useScrollableMenu(options: {
   itemElementAttributeName: string
-  selectedItemId: MenuItemId
-  onChange: (id: MenuItemId) => void
+  selectedItemId: null | string
+  onChange: (id: null | string) => void
   changeOnMouseOver: boolean
 }) {
   const {
@@ -21,7 +21,7 @@ export function useScrollableMenu(options: {
   } = options
   const menuElementRef: RefObject<HTMLElement> = useRef(null)
   const parseItemElementId = useCallback(
-    function (element: HTMLElement): MenuItemId {
+    function (element: HTMLElement): null | string {
       return element.getAttribute(itemElementAttributeName)
     },
     [itemElementAttributeName]
@@ -39,7 +39,7 @@ export function useScrollableMenu(options: {
     [menuElementRef, itemElementAttributeName]
   )
   const getItemIndex = useCallback(
-    function (id: MenuItemId): number {
+    function (id: null | string): number {
       if (id === INVALID_MENU_ITEM_ID) {
         return -1
       }
@@ -50,7 +50,7 @@ export function useScrollableMenu(options: {
     [getItemElements, parseItemElementId]
   )
   const updateScrollPosition = useCallback(
-    function (id: MenuItemId): void {
+    function (id: null | string): void {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
       if (index === -1) {

@@ -1,20 +1,19 @@
 import { useCallback, useEffect, useState } from 'preact/hooks'
 
+import type { Props } from '../types'
 import {
   ENTER_KEY_CODE,
   ESCAPE_KEY_CODE,
   TAB_KEY_CODE
 } from '../utilities/key-codes'
 
-type State = { [key: string]: any }
-
-export function useForm(
-  initialState: State,
+export function useForm<P>(
+  initialState: Props<P>,
   options: {
-    transform?: (state: State) => State
-    validate?: (state: State) => boolean
-    onSubmit?: (state: State, event: Event) => void
-    onClose?: (state: State, event: Event) => void
+    transform?: (state: Props<P>) => Props<P>
+    validate?: (state: Props<P>) => boolean
+    onSubmit?: (state: Props<P>, event: Event) => void
+    onClose?: (state: Props<P>, event: Event) => void
   }
 ) {
   const { transform, validate, onSubmit, onClose } = options
@@ -22,8 +21,8 @@ export function useForm(
     typeof transform === 'function' ? transform(initialState) : initialState
   )
   const handleChange = useCallback(
-    function (nextState: State): void {
-      setState(function (previousState: State) {
+    function (nextState: Props<P>): void {
+      setState(function (previousState: Props<P>) {
         const state = {
           ...previousState,
           ...nextState

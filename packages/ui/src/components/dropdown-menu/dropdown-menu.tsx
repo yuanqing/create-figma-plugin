@@ -4,9 +4,9 @@ import type { ComponentChildren, RefObject, VNode } from 'preact'
 import { cloneElement, h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
+import type { MenuItemId as ItemId } from '../../hooks/use-scrollable-menu'
 import {
   INVALID_MENU_ITEM_ID,
-  MenuItemId as ItemId,
   useScrollableMenu
 } from '../../hooks/use-scrollable-menu'
 import type { OnChange, Option } from '../../types'

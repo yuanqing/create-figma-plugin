@@ -1,11 +1,13 @@
-import type { h } from 'preact'
+import type { h, RenderableProps } from 'preact'
 
 export type Alignment = 'left' | 'center' | 'right'
 
 export type Props<
   ComponentProps,
   RefType extends EventTarget = EventTarget
-> = Omit<h.JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
+> = RenderableProps<
+  Omit<h.JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
+>
 
 export type OnChange = (
   state?: any,
@@ -13,20 +15,24 @@ export type OnChange = (
   name?: string,
   event?: Event
 ) => void | Promise<void>
+
 export type OnSelectedFiles = (
   files?: Array<File>,
   event?: Event
 ) => void | Promise<void>
 
 export type Option = OptionHeader | OptionValue | OptionSeparator
+
 export interface OptionHeader {
   id?: null | string
   header: string
 }
+
 export interface OptionValue {
   id?: null | string
   value: string
 }
+
 export interface OptionSeparator {
   id?: null | string
   separator: true
