@@ -3,7 +3,7 @@ import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { HTMLProps, OnChange } from '../../types'
+import type { OnChange, Props } from '../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -37,7 +37,7 @@ export function Tabs({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: HTMLProps<TabsProps, HTMLInputElement>): h.JSX.Element {
+}: Props<TabsProps, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')

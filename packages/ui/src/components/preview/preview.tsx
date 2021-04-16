@@ -2,7 +2,7 @@
 import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 
-import type { HTMLProps } from '../../types'
+import type { Props } from '../../types'
 import style from './preview.css'
 
 export interface PreviewProps {
@@ -12,7 +12,7 @@ export interface PreviewProps {
 export function Preview({
   children,
   ...rest
-}: HTMLProps<PreviewProps, HTMLDivElement>): h.JSX.Element {
+}: Props<PreviewProps, HTMLDivElement>): h.JSX.Element {
   return (
     <div {...rest} class={style.preview}>
       {children}

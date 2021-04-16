@@ -4,7 +4,7 @@ import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { HTMLProps } from '../../types'
+import type { Props } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './button.css'
@@ -32,7 +32,7 @@ export function Button({
   propagateEscapeKeyDown = true,
   secondary,
   ...rest
-}: HTMLProps<ButtonProps, HTMLButtonElement>): h.JSX.Element {
+}: Props<ButtonProps, HTMLButtonElement>): h.JSX.Element {
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       const keyCode = event.keyCode

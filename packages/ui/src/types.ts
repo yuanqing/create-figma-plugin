@@ -1,12 +1,11 @@
-import { h } from 'preact'
+import type { h } from 'preact'
 
 export type Alignment = 'left' | 'center' | 'right'
 
-export type HTMLProps<Props, RefType extends EventTarget = EventTarget> = Omit<
-  h.JSX.HTMLAttributes<RefType>,
-  keyof Props
-> &
-  Props
+export type Props<
+  ComponentProps,
+  RefType extends EventTarget = EventTarget
+> = Omit<h.JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
 
 export type OnChange = (
   state?: any,

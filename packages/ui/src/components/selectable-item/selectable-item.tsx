@@ -4,7 +4,7 @@ import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { HTMLProps, OnChange } from '../../types'
+import type { OnChange, Props } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
 import styles from './selectable-item.css'
@@ -32,7 +32,7 @@ export function SelectableItem({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: HTMLProps<SelectableItemProps, HTMLInputElement>): h.JSX.Element {
+}: Props<SelectableItemProps, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)

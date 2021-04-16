@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import type { HTMLProps, Space } from '../../types'
+import type { Props, Space } from '../../types'
 import styles from './vertical-space.css'
 
 export interface VerticalSpaceProps {
@@ -11,6 +11,6 @@ export interface VerticalSpaceProps {
 export function VerticalSpace({
   space = 'small',
   ...rest
-}: HTMLProps<VerticalSpaceProps, HTMLDivElement>): h.JSX.Element {
+}: Props<VerticalSpaceProps, HTMLDivElement>): h.JSX.Element {
   return <div {...rest} class={styles[space]} />
 }

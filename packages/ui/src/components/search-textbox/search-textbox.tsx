@@ -3,7 +3,7 @@ import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import type { HTMLProps, OnChange } from '../../types'
+import type { OnChange, Props } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { crossIcon } from '../icon/icons/cross-icon'
 import { searchIcon } from '../icon/icons/search-icon'
@@ -30,7 +30,7 @@ export function SearchTextbox({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: HTMLProps<SearchTextboxProps, HTMLInputElement>): h.JSX.Element {
+}: Props<SearchTextboxProps, HTMLInputElement>): h.JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   function handleFocus() {

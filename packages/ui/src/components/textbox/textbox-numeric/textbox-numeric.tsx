@@ -8,7 +8,7 @@ import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import type { HTMLProps } from '../../../types'
+import type { Props } from '../../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -46,7 +46,7 @@ export function TextboxNumeric({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: HTMLProps<TextboxNumericProps, HTMLInputElement>): h.JSX.Element {
+}: Props<TextboxNumericProps, HTMLInputElement>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)

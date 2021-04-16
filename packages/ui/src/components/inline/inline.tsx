@@ -2,7 +2,7 @@
 import type { ComponentChildren } from 'preact'
 import { h, toChildArray } from 'preact'
 
-import type { HTMLProps, Space } from '../../types'
+import type { Props, Space } from '../../types'
 import styles from './inline.css'
 
 export interface InlineProps {
@@ -14,7 +14,7 @@ export function Inline({
   children,
   space,
   ...rest
-}: HTMLProps<InlineProps, HTMLDivElement>): h.JSX.Element {
+}: Props<InlineProps, HTMLDivElement>): h.JSX.Element {
   return (
     <div
       {...rest}

@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import type { ComponentChildren } from 'preact'
 import { h, toChildArray } from 'preact'
 
-import type { HTMLProps, Space } from '../../types'
+import type { Props, Space } from '../../types'
 import styles from './columns.css'
 
 export interface ColumnsProps {
@@ -15,7 +15,7 @@ export function Columns({
   children,
   space,
   ...rest
-}: HTMLProps<ColumnsProps, HTMLDivElement>): h.JSX.Element {
+}: Props<ColumnsProps, HTMLDivElement>): h.JSX.Element {
   return (
     <div
       {...rest}

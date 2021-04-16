@@ -4,7 +4,7 @@ import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import type { HTMLProps, OnSelectedFiles } from '../../types'
+import type { OnSelectedFiles, Props } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './file-upload-dropzone.css'
 
@@ -23,7 +23,7 @@ export function FileUploadDropzone({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-}: HTMLProps<FileUploadDropzoneProps, HTMLInputElement>): h.JSX.Element {
+}: Props<FileUploadDropzoneProps, HTMLInputElement>): h.JSX.Element {
   const [isDropActive, setIsDropActive] = useState(false)
   const filterFiles = useCallback(
     function (files: FileList): Array<File> {

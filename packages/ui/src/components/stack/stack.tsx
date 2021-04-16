@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import type { ComponentChildren } from 'preact'
 import { h, toChildArray } from 'preact'
 
-import type { HTMLProps, Space } from '../../types'
+import type { Props, Space } from '../../types'
 import styles from './stack.css'
 
 export interface StackProps {
@@ -15,7 +15,7 @@ export function Stack({
   children,
   space = 'small',
   ...rest
-}: HTMLProps<StackProps, HTMLDivElement>): h.JSX.Element {
+}: Props<StackProps, HTMLDivElement>): h.JSX.Element {
   return (
     <div {...rest} class={classnames(styles[space])}>
       {toChildArray(children).map(function (element, index) {

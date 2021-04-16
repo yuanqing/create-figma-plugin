@@ -4,7 +4,7 @@ import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { HTMLProps, OnSelectedFiles } from '../../types'
+import type { OnSelectedFiles, Props } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './file-upload-button.css'
@@ -34,7 +34,7 @@ export function FileUploadButton({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-}: HTMLProps<FileUploadButtonProps, HTMLInputElement>): h.JSX.Element {
+}: Props<FileUploadButtonProps, HTMLInputElement>): h.JSX.Element {
   const handleClick = useCallback(function (event: MouseEvent) {
     ;(event.target as HTMLElement).focus()
   }, [])

@@ -5,7 +5,7 @@ import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import type { HTMLProps, OnChange } from '../../types'
+import type { OnChange, Props } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './textbox.css'
 
@@ -34,7 +34,7 @@ export function Textbox({
   type = 'text',
   value,
   ...rest
-}: HTMLProps<TextboxProps, HTMLInputElement>): h.JSX.Element {
+}: Props<TextboxProps, HTMLInputElement>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)

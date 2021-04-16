@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import type { ComponentChildren } from 'preact'
 import { h } from 'preact'
 
-import type { HTMLProps } from '../../types'
+import type { Props } from '../../types'
 import { componentIcon } from '../icon/icons/component-icon'
 import { frameIcon } from '../icon/icons/frame-icon'
 import styles from './layer.css'
@@ -29,7 +29,7 @@ export function Layer({
   selected,
   type,
   ...rest
-}: HTMLProps<LayerProps, HTMLDivElement>): h.JSX.Element {
+}: Props<LayerProps, HTMLDivElement>): h.JSX.Element {
   return (
     <div
       {...rest}
