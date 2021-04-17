@@ -29,7 +29,7 @@ event handler.
 ***Parameters***
 
 - **`eventName`** (`string`)
-- **`...args`** (`Array<any>`)
+- **`...args`** (`Parameters<T>`)
 
 ***Return type***
 
@@ -44,7 +44,7 @@ Registers an `eventHandler` for the given `eventName`.
 ***Parameters***
 
 - **`eventName`** (`string`)
-- **`eventHandler`** (`(...args: Array<any>) => void`)
+- **`eventHandler`** (`T`)
 
 ***Return type***
 
@@ -62,7 +62,7 @@ Registers an `eventHandler` that will run at most once for the given
 ***Parameters***
 
 - **`eventName`** (`string`)
-- **`eventHandler`** (`(...args: Array<any>) => void`)
+- **`eventHandler`** (`T`)
 
 ***Return type***
 
@@ -440,17 +440,18 @@ Returns the result of evaluating the given `expression`.
 null | number
 ```
 
-### isValidNumericInput(value [, integerOnly])
+### isValidNumericInput(value [, options])
 
 Checks if `value` is a numeric expression, as input by a user. “Partial”
-inputs are considered valid. Set `integerOnly` to `true` to check that the
-expression contains only integers. `integerOnly` defaults to `false` if not
-specified.
+inputs are considered valid. Set `options.integersOnly` to `true` to check
+that the expression contains only integers. `options.integersOnly` defaults
+to `false` if not specified.
 
 ***Parameters***
 
 - **`value`** (`string`)
-- **`integerOnly`** (`boolean`) – *Optional.*
+- **`options`** (`object`) – *Optional.*
+  - **`integersOnly`** (`boolean`)
 
 ***Return type***
 
@@ -467,8 +468,8 @@ boolean
 ```ts
 import {
   cloneObject,
-  compareArrays,
   compareObjects,
+  compareStringArrays,
   extractAttributes
 } from '@create-figma-plugin/utilities'
 ```
@@ -479,22 +480,22 @@ Creates a deep copy of the given object.
 
 ***Parameters***
 
-- **`object`** (`any`)
+- **`object`** (`T`)
 
 ***Return type***
 
 ```
-any
+T
 ```
 
-### compareArrays(a, b)
+### compareObjects(a, b)
 
-Performs a *shallow* comparison of arrays `a` and `b`.
+Performs a *deep* comparison of objects `a` and `b`.
 
 ***Parameters***
 
-- **`a`** (`Array<any>`)
-- **`b`** (`Array<any>`)
+- **`a`** (`JsonValue | undefined`)
+- **`b`** (`JsonValue | undefined`)
 
 ***Return type***
 
@@ -504,14 +505,14 @@ Returns `true` if `a` and `b` are the same, else `false`.
 boolean
 ```
 
-### compareObjects(a, b)
+### compareStringArrays(a, b)
 
-Performs a *deep* comparison of objects `a` and `b`.
+Compares the string arrays `a` and `b`.
 
 ***Parameters***
 
-- **`a`** (`any`)
-- **`b`** (`any`)
+- **`a`** (`Array<string>`)
+- **`b`** (`Array<string>`)
 
 ***Return type***
 
@@ -528,17 +529,15 @@ objects.
 
 ***Parameters***
 
-- **`array`** (`Array<{ [key: string]: any; }>`)
-- **`attributes`** (`Array<string>`)
+- **`array`** (`Array<T>`)
+- **`attributes`** (`Array<keyof Partial<T>>`)
 
 ***Return type***
 
 Returns an array of plain objects.
 
 ```
-Array<{
-  [key: string]: any;
-}>
+Array<Partial<T>>
 ```
 
 
@@ -558,12 +557,12 @@ Values in `settings` default to an optional `defaultSettings` object.
 
 ***Parameters***
 
-- **`defaultSettings`** (`Settings`)
+- **`defaultSettings`** (`JsonObject`)
 
 ***Return type***
 
 ```
-Promise<Settings>
+Promise<JsonObject>
 ```
 
 ### saveSettingsAsync(settings)
@@ -573,7 +572,7 @@ computer).
 
 ***Parameters***
 
-- **`settings`** (`Settings`)
+- **`settings`** (`JsonObject`)
 
 ***Return type***
 
@@ -672,7 +671,7 @@ See the [recipe for adding a UI to a plugin command](#adding-a-ui-to-a-plugin-co
 ***Parameters***
 
 - **`options`** (`ShowUIOptions`)
-- **`data`** (`any`) – *Optional.*
+- **`data`** (`unknown`) – *Optional.*
 
 ***Return type***
 
