@@ -13,23 +13,25 @@ import {
 } from '../../utilities/key-codes'
 import styles from './tabs.css'
 
-export interface TabsProps {
+export interface TabsProps<Value, Key extends string> {
   focused?: boolean
-  name: string
-  onChange: OnChange
-  options: TabsOption[]
+  name: Key
+  onChange: OnChange<Value, Key>
+  options: Array<TabsOption<Value>>
   propagateEscapeKeyDown?: boolean
-  value: null | string
+  value: null | Value
 }
-
-export interface TabsOption {
+export interface TabsOption<Value> {
   disabled?: boolean
   text?: ComponentChildren
-  value: null | string
+  value: Value
   view: ComponentChildren
 }
 
-export function Tabs({
+export function Tabs<
+  Value extends boolean | number | string,
+  Key extends string
+>({
   focused,
   name,
   onChange,
@@ -37,7 +39,7 @@ export function Tabs({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<TabsProps, HTMLInputElement>): h.JSX.Element {
+}: Props<TabsProps<Value, Key>, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')
@@ -45,7 +47,12 @@ export function Tabs({
         return
       }
       const newValue = options[parseInt(index)].value
-      onChange({ [name]: newValue }, newValue, name, event)
+      onChange(
+        { [name]: newValue } as { [k in Key]: Value },
+        newValue,
+        name,
+        event
+      )
     },
     [name, onChange, options]
   )
@@ -68,7 +75,12 @@ export function Tabs({
       ) {
         if (value === null) {
           const newValue = options[0].value
-          onChange({ [name]: newValue }, newValue, name, event)
+          onChange(
+            { [name]: newValue } as { [k in Key]: Value },
+            newValue,
+            name,
+            event
+          )
           return
         }
         const currentIndex = options.findIndex(function (option) {
@@ -84,7 +96,12 @@ export function Tabs({
           nextIndex = 0
         }
         const newValue = options[nextIndex].value
-        onChange({ [name]: newValue }, newValue, name, event)
+        onChange(
+          { [name]: newValue } as { [k in Key]: Value },
+          newValue,
+          name,
+          event
+        )
       }
     },
     [name, onChange, options, propagateEscapeKeyDown, value]
@@ -116,7 +133,6 @@ export function Tabs({
                 onChange={handleChange}
                 tabIndex={-1}
                 type="radio"
-                value={option.value === null ? undefined : option.value}
               />
               <div class={styles.text} data-text={text}>
                 {text}

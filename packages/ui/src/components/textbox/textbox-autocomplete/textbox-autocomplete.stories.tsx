@@ -24,7 +24,8 @@ const options: TextboxAutocompleteOption[] = [
 ]
 
 export const Empty = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       name="foo"
@@ -36,7 +37,8 @@ export const Empty = function () {
 }
 
 export const Disabled = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       disabled
@@ -49,7 +51,8 @@ export const Disabled = function () {
 }
 
 export const WithPlaceholder = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       name="foo"
@@ -62,7 +65,8 @@ export const WithPlaceholder = function () {
 }
 
 export const Filled = function () {
-  const [state, setState] = useState({ foo: 'baz' })
+  const initialState: { foo: null | string } = { foo: 'baz' }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       name="foo"
@@ -74,7 +78,8 @@ export const Filled = function () {
 }
 
 export const FilledDisabled = function () {
-  const [state, setState] = useState({ foo: 'baz' })
+  const initialState: { foo: null | string } = { foo: 'baz' }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       disabled
@@ -87,7 +92,8 @@ export const FilledDisabled = function () {
 }
 
 export const NoBorder = function () {
-  const [state, setState] = useState({ foo: 'baz' })
+  const initialState: { foo: null | string } = { foo: 'baz' }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       name="foo"
@@ -100,7 +106,8 @@ export const NoBorder = function () {
 }
 
 export const WithIcon = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       icon={searchIcon}
@@ -114,7 +121,8 @@ export const WithIcon = function () {
 }
 
 export const WithTextIcon = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       icon="S"
@@ -128,7 +136,8 @@ export const WithTextIcon = function () {
 }
 
 export const Strict = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       name="foo"
@@ -141,7 +150,8 @@ export const Strict = function () {
 }
 
 export const Filter = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       filter
@@ -154,7 +164,8 @@ export const Filter = function () {
 }
 
 export const FilterStrict = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxAutocomplete
       filter
@@ -168,7 +179,8 @@ export const FilterStrict = function () {
 }
 
 export const MenuTop = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <div
       style={{

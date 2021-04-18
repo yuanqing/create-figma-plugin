@@ -24,7 +24,8 @@ function Foo({ foo }: { foo?: string }) {
 }
 
 export const BottomLeft = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <DropdownMenu
       name="foo"
@@ -38,7 +39,8 @@ export const BottomLeft = function () {
 }
 
 export const BottomRight = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <DropdownMenu
       name="foo"
@@ -53,7 +55,8 @@ export const BottomRight = function () {
 }
 
 export const TopLeft = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <div
       style={{
@@ -74,7 +77,8 @@ export const TopLeft = function () {
 }
 
 export const TopRight = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <div
       style={{
@@ -96,7 +100,8 @@ export const TopRight = function () {
 }
 
 export const Filled = function () {
-  const [state, setState] = useState({ foo: 'qux' })
+  const initialState: { foo: null | string } = { foo: 'qux' }
+  const [state, setState] = useState(initialState)
   return (
     <DropdownMenu
       name="foo"
@@ -110,7 +115,8 @@ export const Filled = function () {
 }
 
 export const FullWidth = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <DropdownMenu
       fullWidth

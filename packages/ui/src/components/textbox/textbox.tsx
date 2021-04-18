@@ -9,20 +9,20 @@ import type { OnChange, Props } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './textbox.css'
 
-export interface TextboxProps {
+export interface TextboxProps<Value, Key extends string> {
   disabled?: boolean
   focused?: boolean
   icon?: ComponentChildren
-  name: string
+  name: Key
   noBorder?: boolean
-  onChange: OnChange
+  onChange: OnChange<Value, Key>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   type?: 'text' | 'password'
-  value: null | string
+  value: Value
 }
 
-export function Textbox({
+export function Textbox<Key extends string>({
   disabled,
   focused,
   icon,
@@ -34,7 +34,7 @@ export function Textbox({
   type = 'text',
   value,
   ...rest
-}: Props<TextboxProps, HTMLInputElement>): h.JSX.Element {
+}: Props<TextboxProps<null | string, Key>, HTMLInputElement>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
@@ -74,7 +74,12 @@ export function Textbox({
         return
       }
       const newValue = inputElementRef.current.value
-      onChange({ [name]: newValue }, newValue, name, event)
+      onChange(
+        { [name]: newValue } as { [k in Key]: string },
+        newValue,
+        name,
+        event
+      )
     },
     [name, onChange]
   )

@@ -13,22 +13,25 @@ import {
 } from '../../utilities/key-codes'
 import styles from './segmented-control.css'
 
-export interface SegmentedControlProps<T> {
+export interface SegmentedControlProps<Value, Key extends string> {
   disabled?: boolean
   focused?: boolean
-  name: string
-  onChange: OnChange
-  options: Array<SegmentedControlOption<T>>
+  name: Key
+  onChange: OnChange<Value, Key>
+  options: Array<SegmentedControlOption<Value>>
   propagateEscapeKeyDown?: boolean
-  value: null | T
+  value: null | Value
 }
-export interface SegmentedControlOption<T> {
+export interface SegmentedControlOption<Value> {
   disabled?: boolean
   text?: ComponentChildren
-  value: null | T
+  value: Value
 }
 
-export function SegmentedControl<T extends string | number | boolean = string>({
+export function SegmentedControl<
+  Value extends boolean | number | string,
+  Key extends string
+>({
   disabled: disabled,
   focused: isFocused,
   name,
@@ -37,7 +40,7 @@ export function SegmentedControl<T extends string | number | boolean = string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<SegmentedControlProps<T>, HTMLInputElement>): h.JSX.Element {
+}: Props<SegmentedControlProps<Value, Key>, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')
@@ -45,7 +48,12 @@ export function SegmentedControl<T extends string | number | boolean = string>({
         return
       }
       const newValue = options[parseInt(index)].value
-      onChange({ [name]: newValue }, newValue, name, event)
+      onChange(
+        { [name]: newValue } as { [k in Key]: Value },
+        newValue,
+        name,
+        event
+      )
     },
     [name, onChange, options]
   )
@@ -68,7 +76,12 @@ export function SegmentedControl<T extends string | number | boolean = string>({
       ) {
         if (value === null) {
           const newValue = options[0].value
-          onChange({ [name]: newValue }, newValue, name, event)
+          onChange(
+            { [name]: newValue } as { [k in Key]: Value },
+            newValue,
+            name,
+            event
+          )
           return
         }
         const currentIndex = options.findIndex(function (option) {
@@ -81,7 +94,12 @@ export function SegmentedControl<T extends string | number | boolean = string>({
         )
         if (nextIndex !== -1) {
           const newValue = options[nextIndex].value
-          onChange({ [name]: newValue }, newValue, name, event)
+          onChange(
+            { [name]: newValue } as { [k in Key]: Value },
+            newValue,
+            name,
+            event
+          )
         }
       }
     },
@@ -120,8 +138,8 @@ export function SegmentedControl<T extends string | number | boolean = string>({
   )
 }
 
-function resolveNextIndex<T>(
-  options: Array<SegmentedControlOption<T>>,
+function resolveNextIndex<Value>(
+  options: Array<SegmentedControlOption<Value>>,
   currentIndex: number,
   delta: number
 ): number {

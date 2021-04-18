@@ -9,10 +9,10 @@ export type Props<
   Omit<h.JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
 >
 
-export type OnChange = (
-  state?: any,
-  value?: any,
-  name?: string,
+export type OnChange<Value, Key extends string> = (
+  state: { [k in Key]: Value },
+  value?: Value,
+  name?: Key,
   event?: Event
 ) => void | Promise<void>
 

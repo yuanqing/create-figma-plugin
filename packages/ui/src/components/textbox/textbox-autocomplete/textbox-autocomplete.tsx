@@ -27,14 +27,15 @@ type Value = null | string
 type MenuItemId = null | string
 
 export type TextboxAutocompleteOption = Option
-export interface TextboxAutocompleteProps extends TextboxProps {
+export interface TextboxAutocompleteProps<Value, Key extends string>
+  extends TextboxProps<Value, Key> {
   filter?: boolean
   options: TextboxAutocompleteOption[]
   strict?: boolean
   top?: boolean
 }
 
-export function TextboxAutocomplete({
+export function TextboxAutocomplete<Key extends string>({
   disabled,
   focused,
   filter,
@@ -48,7 +49,10 @@ export function TextboxAutocomplete({
   top,
   value: committedValue,
   ...rest
-}: Props<TextboxAutocompleteProps, HTMLInputElement>): h.JSX.Element {
+}: Props<
+  TextboxAutocompleteProps<Value, Key>,
+  HTMLInputElement
+>): h.JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
@@ -223,12 +227,22 @@ export function TextboxAutocomplete({
         shouldSelectAllRef.current = true
         setSelectedId(nextId)
         if (nextId === INVALID_MENU_ITEM_ID) {
-          onChange({ [name]: currentValue }, currentValue, name, event)
+          onChange(
+            { [name]: currentValue } as { [k in Key]: string },
+            currentValue,
+            name,
+            event
+          )
         } else {
           const menuItem = findMenuItemById(nextId)
           if (menuItem !== null && 'value' in menuItem) {
             const newValue = menuItem.value
-            onChange({ [name]: newValue }, newValue, name, event)
+            onChange(
+              { [name]: newValue } as { [k in Key]: string },
+              newValue,
+              name,
+              event
+            )
           }
         }
         return
@@ -324,7 +338,7 @@ export function TextboxAutocomplete({
       setIsMenuVisible(true)
       setSelectedId(index)
       setCurrentValue(value)
-      onChange({ [name]: value }, value, name, event)
+      onChange({ [name]: value } as { [k in Key]: string }, value, name, event)
     },
     [getIdByValue, name, onChange]
   )
@@ -345,7 +359,12 @@ export function TextboxAutocomplete({
       setCurrentValue(EMPTY_STRING)
       if (menuItem !== null && 'value' in menuItem) {
         const newValue = menuItem.value
-        onChange({ [name]: newValue }, newValue, name, event)
+        onChange(
+          { [name]: newValue } as { [k in Key]: string },
+          newValue,
+          name,
+          event
+        )
       }
     },
     [findMenuItemById, name, onChange]

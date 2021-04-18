@@ -4,33 +4,40 @@ import {
   isValidNumericInput
 } from '@create-figma-plugin/utilities/lib/number'
 import classnames from '@sindresorhus/class-names'
-import type { RefObject } from 'preact'
+import type { ComponentChildren, RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import type { Props } from '../../../types'
+import type { OnChange, Props } from '../../../types'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
-import type { TextboxProps } from '../textbox'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 
 const nonDigitRegex = /[^\d.]/
 
-export interface TextboxNumericProps extends TextboxProps {
+export interface TextboxNumericProps<Value, Key extends string> {
+  disabled?: boolean
+  focused?: boolean
+  icon?: ComponentChildren
   incrementBig?: number
+  incrementSmall?: number
   integer?: boolean
   maximum?: number
   minimum?: number
-  incrementSmall?: number
-  value: null | string
+  name: Key
+  noBorder?: boolean
+  onChange: OnChange<Value, Key>
+  placeholder?: string
+  propagateEscapeKeyDown?: boolean
+  value: Value
 }
 
-export function TextboxNumeric({
+export function TextboxNumeric<Key extends string>({
   disabled,
   focused,
   icon,
@@ -46,26 +53,13 @@ export function TextboxNumeric({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<TextboxNumericProps, HTMLInputElement>): h.JSX.Element {
+}: Props<
+  TextboxNumericProps<null | number, Key>,
+  HTMLInputElement
+>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-
-  const handleClick = useCallback(
-    function () {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      if (value === null) {
-        inputElementRef.current.focus()
-        inputElementRef.current.select()
-      }
-    },
-    [value]
-  )
 
   function handleFocus() {
     if (
@@ -85,8 +79,17 @@ export function TextboxNumeric({
       ) {
         return
       }
-      const newValue = inputElementRef.current.value
-      onChange({ [name]: newValue }, newValue, name, event)
+      const value = inputElementRef.current.value
+      const evaluatedValue = evaluateNumericExpression(value)
+      if (evaluatedValue === null) {
+        return
+      }
+      onChange(
+        { [name]: evaluatedValue } as { [k in Key]: number },
+        evaluatedValue,
+        name,
+        event
+      )
     },
     [name, onChange]
   )
@@ -99,6 +102,7 @@ export function TextboxNumeric({
       ) {
         return
       }
+      const value = inputElementRef.current.value
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
@@ -162,14 +166,13 @@ export function TextboxNumeric({
       }
     },
     [
-      incrementBig,
       handleInput,
+      incrementBig,
+      incrementSmall,
       integer,
       maximum,
       minimum,
-      propagateEscapeKeyDown,
-      incrementSmall,
-      value
+      propagateEscapeKeyDown
     ]
   )
 
@@ -182,7 +185,7 @@ export function TextboxNumeric({
         return
       }
       if (event.clipboardData === null) {
-        throw new Error('No `clipboardData`')
+        throw new Error('`event.clipboardData` is `null`')
       }
       const nextValue = computeNextValue(
         inputElementRef.current,
@@ -194,7 +197,6 @@ export function TextboxNumeric({
     },
     [integer]
   )
-
   return (
     <div
       class={classnames(
@@ -205,12 +207,12 @@ export function TextboxNumeric({
     >
       <input
         {...rest}
+        {...{ defaultValue: value === null ? '' : `${value}` }}
         ref={inputElementRef}
         class={styles.input}
         data-initial-focus={focused === true}
         disabled={disabled === true}
         name={name}
-        onClick={handleClick}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
@@ -218,7 +220,6 @@ export function TextboxNumeric({
         placeholder={placeholder}
         tabIndex={disabled === true ? undefined : 0}
         type="text"
-        value={value === null ? 'Mixed' : value}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
     </div>

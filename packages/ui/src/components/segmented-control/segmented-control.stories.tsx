@@ -7,9 +7,10 @@ import { SegmentedControl } from './segmented-control'
 export default { title: 'Segmented Control' }
 
 export const Default = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl
+    <SegmentedControl<string, 'foo'>
       name="foo"
       onChange={setState}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
@@ -19,9 +20,10 @@ export const Default = function () {
 }
 
 export const Disabled = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl
+    <SegmentedControl<string, 'foo'>
       disabled
       name="foo"
       onChange={setState}
@@ -32,9 +34,10 @@ export const Disabled = function () {
 }
 
 export const WithSelectedOption = function () {
-  const [state, setState] = useState({ foo: 'bar' })
+  const initialState: { foo: null | string } = { foo: 'bar' }
+  const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl
+    <SegmentedControl<string, 'foo'>
       name="foo"
       onChange={setState}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
@@ -44,9 +47,10 @@ export const WithSelectedOption = function () {
 }
 
 export const WithDisabledOption = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl
+    <SegmentedControl<string, 'foo'>
       name="foo"
       onChange={setState}
       options={[
@@ -60,9 +64,10 @@ export const WithDisabledOption = function () {
 }
 
 export const WithDisabledSelectedOption = function () {
-  const [state, setState] = useState({ foo: 'bar' })
+  const initialState: { foo: null | string } = { foo: 'bar' }
+  const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl
+    <SegmentedControl<string, 'foo'>
       name="foo"
       onChange={setState}
       options={[

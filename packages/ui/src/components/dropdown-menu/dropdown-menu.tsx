@@ -16,20 +16,20 @@ import styles from './dropdown-menu.css'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-dropdown-menu'
 
-export interface DropdownMenuProps {
+export interface DropdownMenuProps<Value, Key extends string> {
   children: ComponentChildren
   focused?: boolean
   fullWidth?: boolean
-  name: string
-  onChange: OnChange
+  name: Key
+  onChange: OnChange<Value, Key>
   options: Option[]
   right?: boolean
   top?: boolean
-  value: null | string
+  value: Value
 }
 export type DropdownMenuOption = Option
 
-export function DropdownMenu({
+export function DropdownMenu<Key extends string>({
   children,
   focused,
   fullWidth,
@@ -39,7 +39,7 @@ export function DropdownMenu({
   right,
   top,
   value
-}: DropdownMenuProps): h.JSX.Element {
+}: DropdownMenuProps<null | string, Key>): h.JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const menuItems: Array<Option> = options.map(function (option, index) {
@@ -70,7 +70,12 @@ export function DropdownMenu({
       }
       if ('value' in option) {
         const newValue = option.value
-        onChange({ [name]: newValue }, newValue, name, event)
+        onChange(
+          { [name]: newValue } as { [k in Key]: null | string },
+          newValue,
+          name,
+          event
+        )
         setIsMenuVisible(false)
       }
     },
@@ -126,7 +131,12 @@ export function DropdownMenu({
           }
           if ('value' in option) {
             const newValue = option.value
-            onChange({ [name]: newValue }, newValue, name, event)
+            onChange(
+              { [name]: newValue } as { [k in Key]: null | string },
+              newValue,
+              name,
+              event
+            )
           }
         }
         setIsMenuVisible(false)

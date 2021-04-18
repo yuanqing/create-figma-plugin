@@ -9,18 +9,18 @@ import { crossIcon } from '../icon/icons/cross-icon'
 import { searchIcon } from '../icon/icons/search-icon'
 import styles from './search-textbox.css'
 
-export interface SearchTextboxProps {
+export interface SearchTextboxProps<Value, Key extends string> {
   clearOnEscapeKeyDown?: boolean
   disabled?: boolean
   focused?: boolean
-  name: string
-  onChange: OnChange
+  name: Key
+  onChange: OnChange<Value, Key>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
-  value: string
+  value: Value
 }
 
-export function SearchTextbox({
+export function SearchTextbox<Key extends string>({
   clearOnEscapeKeyDown = true,
   disabled,
   focused,
@@ -30,7 +30,7 @@ export function SearchTextbox({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<SearchTextboxProps, HTMLInputElement>): h.JSX.Element {
+}: Props<SearchTextboxProps<string, Key>, HTMLInputElement>): h.JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   function handleFocus() {
@@ -52,7 +52,12 @@ export function SearchTextbox({
         return
       }
       const newValue = inputElementRef.current.value
-      onChange({ [name]: newValue }, newValue, name, event)
+      onChange(
+        { [name]: newValue } as { [k in Key]: string },
+        newValue,
+        name,
+        event
+      )
     },
     [name, onChange]
   )
@@ -63,7 +68,12 @@ export function SearchTextbox({
       if (keyCode === ESCAPE_KEY_CODE) {
         if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
           const newValue = ''
-          onChange({ [name]: newValue }, newValue, name, event)
+          onChange(
+            { [name]: newValue } as { [k in Key]: string },
+            newValue,
+            name,
+            event
+          )
           event.stopPropagation()
           return
         }
@@ -85,7 +95,12 @@ export function SearchTextbox({
   const handleClearClick = useCallback(
     function (event: MouseEvent) {
       const newValue = ''
-      onChange({ [name]: newValue }, newValue, name, event)
+      onChange(
+        { [name]: newValue } as { [k in Key]: string },
+        newValue,
+        name,
+        event
+      )
       if (
         inputElementRef.current === null ||
         typeof inputElementRef.current === 'undefined'

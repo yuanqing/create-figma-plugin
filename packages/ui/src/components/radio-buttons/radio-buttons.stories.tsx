@@ -8,7 +8,8 @@ import { RadioButtons } from './radio-buttons'
 export default { title: 'Radio Buttons' }
 
 export const Default = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <RadioButtons
       name="foo"
@@ -24,7 +25,8 @@ export const Default = function () {
 }
 
 export const Disabled = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <RadioButtons
       disabled
@@ -41,7 +43,8 @@ export const Disabled = function () {
 }
 
 export const WithSelectedOption = function () {
-  const [state, setState] = useState({ foo: 'bar' })
+  const initialState: { foo: null | string } = { foo: 'bar' }
+  const [state, setState] = useState(initialState)
   return (
     <RadioButtons
       name="foo"
@@ -57,7 +60,8 @@ export const WithSelectedOption = function () {
 }
 
 export const WithDisabledOption = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <RadioButtons
       name="foo"
@@ -73,7 +77,8 @@ export const WithDisabledOption = function () {
 }
 
 export const WithDisabledSelectedOption = function () {
-  const [state, setState] = useState({ foo: 'bar' })
+  const initialState: { foo: null | string } = { foo: 'bar' }
+  const [state, setState] = useState(initialState)
   return (
     <RadioButtons
       name="foo"

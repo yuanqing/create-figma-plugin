@@ -8,17 +8,20 @@ import { Textbox } from './textbox'
 export default { title: 'Textbox' }
 
 export const Empty = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | string } = { foo: '' }
+  const [state, setState] = useState(initialState)
   return <Textbox name="foo" onChange={setState} value={state.foo} />
 }
 
 export const Disabled = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | string } = { foo: '' }
+  const [state, setState] = useState(initialState)
   return <Textbox disabled name="foo" onChange={setState} value={state.foo} />
 }
 
 export const WithPlaceholder = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | string } = { foo: '' }
+  const [state, setState] = useState(initialState)
   return (
     <Textbox
       name="foo"
@@ -30,27 +33,32 @@ export const WithPlaceholder = function () {
 }
 
 export const Filled = function () {
-  const [state, setState] = useState({ foo: 'Text' })
+  const initialState: { foo: null | string } = { foo: 'Text' }
+  const [state, setState] = useState(initialState)
   return <Textbox name="foo" onChange={setState} value={state.foo} />
 }
 
 export const FilledDisabled = function () {
-  const [state, setState] = useState({ foo: 'Text' })
+  const initialState: { foo: null | string } = { foo: 'Text' }
+  const [state, setState] = useState(initialState)
   return <Textbox disabled name="foo" onChange={setState} value={state.foo} />
 }
 
 export const Mixed = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | string } = { foo: null }
+  const [state, setState] = useState(initialState)
   return <Textbox name="foo" onChange={setState} value={state.foo} />
 }
 
 export const NoBorder = function () {
-  const [state, setState] = useState({ foo: 'Text' })
+  const initialState: { foo: null | string } = { foo: 'Text' }
+  const [state, setState] = useState(initialState)
   return <Textbox name="foo" noBorder onChange={setState} value={state.foo} />
 }
 
 export const Password = function () {
-  const [state, setState] = useState({ foo: 'Hidden Text' })
+  const initialState: { foo: null | string } = { foo: 'password' }
+  const [state, setState] = useState(initialState)
   return (
     <Textbox
       name="foo"
@@ -63,7 +71,8 @@ export const Password = function () {
 }
 
 export const WithIcon = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | string } = { foo: '' }
+  const [state, setState] = useState(initialState)
   return (
     <Textbox
       icon={searchIcon}
@@ -76,6 +85,7 @@ export const WithIcon = function () {
 }
 
 export const WithTextIcon = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | string } = { foo: '' }
+  const [state, setState] = useState(initialState)
   return <Textbox icon="X" name="foo" onChange={setState} value={state.foo} />
 }

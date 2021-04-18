@@ -9,23 +9,23 @@ import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { Stack } from '../stack/stack'
 import styles from './radio-buttons.css'
 
-export interface RadioButtonsProps {
+export interface RadioButtonsProps<Value, Key extends string> {
   disabled?: boolean
   focused?: boolean
-  name: string
-  onChange: OnChange
-  options: RadioButtonsOption[]
+  name: Key
+  onChange: OnChange<Value, Key>
+  options: RadioButtonsOption<Value>[]
   propagateEscapeKeyDown?: boolean
   space?: Space
-  value: null | string
+  value: Value
 }
-export interface RadioButtonsOption {
+export interface RadioButtonsOption<Value> {
   disabled?: boolean
   text?: ComponentChildren
-  value: null | string
+  value: Value
 }
 
-export function RadioButtons({
+export function RadioButtons<Key extends string>({
   disabled,
   focused,
   name,
@@ -35,7 +35,10 @@ export function RadioButtons({
   space = 'small',
   value,
   ...rest
-}: Props<RadioButtonsProps, HTMLInputElement>): h.JSX.Element {
+}: Props<
+  RadioButtonsProps<null | string, Key>,
+  HTMLInputElement
+>): h.JSX.Element {
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       const keyCode = event.keyCode
@@ -56,7 +59,12 @@ export function RadioButtons({
         return
       }
       const newValue = options[parseInt(index)].value
-      onChange({ [name]: newValue }, newValue, name, event)
+      onChange(
+        { [name]: newValue } as { [k in Key]: null | string },
+        newValue,
+        name,
+        event
+      )
     },
     [name, onChange, options]
   )

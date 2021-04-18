@@ -8,19 +8,22 @@ import { TextboxNumeric } from './textbox-numeric'
 export default { title: 'Textbox Numeric' }
 
 export const Empty = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | number } = { foo: null }
+  const [state, setState] = useState(initialState)
   return <TextboxNumeric name="foo" onChange={setState} value={state.foo} />
 }
 
 export const Disabled = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | number } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxNumeric disabled name="foo" onChange={setState} value={state.foo} />
   )
 }
 
 export const WithPlaceholder = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | number } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxNumeric
       name="foo"
@@ -32,43 +35,36 @@ export const WithPlaceholder = function () {
 }
 
 export const Filled = function () {
-  const [state, setState] = useState({ foo: 42 })
-  return (
-    <TextboxNumeric name="foo" onChange={setState} value={`${state.foo}`} />
-  )
+  const initialState: { foo: null | number } = { foo: 42 }
+  const [state, setState] = useState(initialState)
+  return <TextboxNumeric name="foo" onChange={setState} value={state.foo} />
 }
 
 export const FilledDisabled = function () {
-  const [state, setState] = useState({ foo: 42 })
+  const initialState: { foo: null | number } = { foo: 42 }
+  const [state, setState] = useState(initialState)
   return (
-    <TextboxNumeric
-      disabled
-      name="foo"
-      onChange={setState}
-      value={`${state.foo}`}
-    />
+    <TextboxNumeric disabled name="foo" onChange={setState} value={state.foo} />
   )
 }
 
 export const Mixed = function () {
-  const [state, setState] = useState({ foo: null })
+  const initialState: { foo: null | number } = { foo: null }
+  const [state, setState] = useState(initialState)
   return <TextboxNumeric name="foo" onChange={setState} value={state.foo} />
 }
 
 export const NoBorder = function () {
-  const [state, setState] = useState({ foo: 42 })
+  const initialState: { foo: null | number } = { foo: 42 }
+  const [state, setState] = useState(initialState)
   return (
-    <TextboxNumeric
-      name="foo"
-      noBorder
-      onChange={setState}
-      value={`${state.foo}`}
-    />
+    <TextboxNumeric name="foo" noBorder onChange={setState} value={state.foo} />
   )
 }
 
 export const WithIcon = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | number } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxNumeric
       icon={spaceHorizontalIcon}
@@ -81,46 +77,45 @@ export const WithIcon = function () {
 }
 
 export const WithTextIcon = function () {
-  const [state, setState] = useState({ foo: '' })
+  const initialState: { foo: null | number } = { foo: null }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxNumeric icon="X" name="foo" onChange={setState} value={state.foo} />
   )
 }
 
 export const Integer = function () {
-  const [state, setState] = useState({ foo: 42 })
+  const initialState: { foo: null | number } = { foo: 42 }
+  const [state, setState] = useState(initialState)
   return (
-    <TextboxNumeric
-      integer
-      name="foo"
-      onChange={setState}
-      value={`${state.foo}`}
-    />
+    <TextboxNumeric integer name="foo" onChange={setState} value={state.foo} />
   )
 }
 
 export const CustomIncrements = function () {
-  const [state, setState] = useState({ foo: 42 })
+  const initialState: { foo: null | number } = { foo: 42 }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxNumeric
       incrementBig={20}
       incrementSmall={4}
       name="foo"
       onChange={setState}
-      value={`${state.foo}`}
+      value={state.foo}
     />
   )
 }
 
 export const MinimumMaximum = function () {
-  const [state, setState] = useState({ foo: 42 })
+  const initialState: { foo: null | number } = { foo: 42 }
+  const [state, setState] = useState(initialState)
   return (
     <TextboxNumeric
       maximum={100}
       minimum={0}
       name="foo"
       onChange={setState}
-      value={`${state.foo}`}
+      value={state.foo}
     />
   )
 }

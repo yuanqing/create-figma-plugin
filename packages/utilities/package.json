@@ -33,7 +33,8 @@
     "test": "tsc -b && yarn run clean-test && tap 'test/**/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --reporter terse --timeout 120 --ts"
   },
   "dependencies": {
-    "natural-compare-lite": "1.4.0"
+    "natural-compare-lite": "1.4.0",
+    "type-fest": "^1.0.2"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.19.3",
@@ -48,7 +49,6 @@
     "prettier": "^2.2.1",
     "tap": "^15.0.2",
     "ts-node": "^9.1.1",
-    "type-fest": "^1.0.2",
     "typescript": "^4.2.4"
   },
   "sideEffects": false

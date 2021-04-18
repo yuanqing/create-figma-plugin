@@ -8,18 +8,18 @@ import type { OnChange, Props } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './checkbox.css'
 
-export interface CheckboxProps {
+export interface CheckboxProps<Value, Key extends string> {
   children: ComponentChildren
   disabled?: boolean
   focused?: boolean
-  name: string
-  onChange: OnChange
+  name: Key
+  onChange: OnChange<Value, Key>
   onKeyDown?: EventListener
   propagateEscapeKeyDown?: boolean
-  value: boolean
+  value: Value
 }
 
-export function Checkbox({
+export function Checkbox<Key extends string>({
   children,
   disabled,
   focused,
@@ -29,11 +29,16 @@ export function Checkbox({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<CheckboxProps, HTMLInputElement>): h.JSX.Element {
+}: Props<CheckboxProps<boolean, Key>, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)
-      onChange({ [name]: newValue }, newValue, name, event)
+      onChange(
+        { [name]: newValue } as { [k in Key]: boolean },
+        newValue,
+        name,
+        event
+      )
     },
     [name, onChange, value]
   )
@@ -51,7 +56,12 @@ export function Checkbox({
         case ENTER_KEY_CODE: {
           event.stopPropagation()
           const newValue = !(value === true)
-          onChange({ [name]: newValue }, newValue, name, event)
+          onChange(
+            { [name]: newValue } as { [k in Key]: boolean },
+            newValue,
+            name,
+            event
+          )
           break
         }
       }

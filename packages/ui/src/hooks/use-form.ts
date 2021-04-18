@@ -1,19 +1,19 @@
+import type { JsonObject } from '@create-figma-plugin/utilities'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 
-import type { Props } from '../types'
 import {
   ENTER_KEY_CODE,
   ESCAPE_KEY_CODE,
   TAB_KEY_CODE
 } from '../utilities/key-codes'
 
-export function useForm<P>(
-  initialState: Props<P>,
+export function useForm<State extends JsonObject>(
+  initialState: State,
   options: {
-    transform?: (state: Props<P>) => Props<P>
-    validate?: (state: Props<P>) => boolean
-    onSubmit?: (state: Props<P>, event: Event) => void
-    onClose?: (state: Props<P>, event: Event) => void
+    transform?: (state: State) => State
+    validate?: (state: State) => boolean
+    onSubmit?: (state: State, event: Event) => void
+    onClose?: (state: State, event: Event) => void
   }
 ) {
   const { transform, validate, onSubmit, onClose } = options
@@ -21,8 +21,8 @@ export function useForm<P>(
     typeof transform === 'function' ? transform(initialState) : initialState
   )
   const handleChange = useCallback(
-    function (nextState: Props<P>): void {
-      setState(function (previousState: Props<P>) {
+    function (nextState: Partial<State>): void {
+      setState(function (previousState: State) {
         const state = {
           ...previousState,
           ...nextState
