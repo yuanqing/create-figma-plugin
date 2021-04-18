@@ -29,7 +29,7 @@ event handler.
 ***Parameters***
 
 - **`eventName`** (`string`)
-- **`...args`** (`Parameters<T>`)
+- **`...args`** (`Parameters<E>`)
 
 ***Return type***
 
@@ -44,7 +44,7 @@ Registers an `eventHandler` for the given `eventName`.
 ***Parameters***
 
 - **`eventName`** (`string`)
-- **`eventHandler`** (`T`)
+- **`eventHandler`** (`E`)
 
 ***Return type***
 
@@ -62,7 +62,7 @@ Registers an `eventHandler` that will run at most once for the given
 ***Parameters***
 
 - **`eventName`** (`string`)
-- **`eventHandler`** (`T`)
+- **`eventHandler`** (`E`)
 
 ***Return type***
 
@@ -557,12 +557,12 @@ Values in `settings` default to an optional `defaultSettings` object.
 
 ***Parameters***
 
-- **`defaultSettings`** (`JsonObject`)
+- **`defaultSettings`** (`Settings`)
 
 ***Return type***
 
 ```
-Promise<JsonObject>
+Promise<Settings>
 ```
 
 ### saveSettingsAsync(settings)
@@ -572,7 +572,7 @@ computer).
 
 ***Parameters***
 
-- **`settings`** (`JsonObject`)
+- **`settings`** (`Settings`)
 
 ***Return type***
 
@@ -671,7 +671,7 @@ See the [recipe for adding a UI to a plugin command](#adding-a-ui-to-a-plugin-co
 ***Parameters***
 
 - **`options`** (`ShowUIOptions`)
-- **`data`** (`unknown`) – *Optional.*
+- **`data`** (`T`) – *Optional.*
 
 ***Return type***
 

@@ -1,5 +1,5 @@
 /** @jsx h */
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 
 import type { Props, Space } from '../../types'
@@ -13,6 +13,6 @@ export interface ContainerProps {
 export function Container({
   space = 'small',
   ...rest
-}: Props<ContainerProps, HTMLDivElement>): h.JSX.Element {
+}: Props<HTMLDivElement, ContainerProps>): JSX.Element {
   return <div {...rest} class={styles[space]} />
 }

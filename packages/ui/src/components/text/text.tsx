@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 
 import type { Alignment, Props } from '../../types'
@@ -21,7 +21,7 @@ export function Text({
   muted,
   numeric,
   ...rest
-}: Props<TextProps, HTMLDivElement>): h.JSX.Element {
+}: Props<HTMLDivElement, TextProps>): JSX.Element {
   return (
     <div
       {...rest}

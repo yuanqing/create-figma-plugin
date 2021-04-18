@@ -1,5 +1,5 @@
 /** @jsx h */
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 
 import type { Props } from '../../types'
@@ -12,7 +12,7 @@ export interface PreviewProps {
 export function Preview({
   children,
   ...rest
-}: Props<PreviewProps, HTMLDivElement>): h.JSX.Element {
+}: Props<HTMLDivElement, PreviewProps>): JSX.Element {
   return (
     <div {...rest} class={style.preview}>
       {children}

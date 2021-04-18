@@ -1,12 +1,12 @@
-import type { h, RenderableProps } from 'preact'
+import type { JSX, RenderableProps } from 'preact'
 
 export type Alignment = 'left' | 'center' | 'right'
 
 export type Props<
-  ComponentProps,
-  RefType extends EventTarget = EventTarget
+  RefType extends EventTarget = EventTarget,
+  ComponentProps = Record<string, never>
 > = RenderableProps<
-  Omit<h.JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
+  Omit<JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
 >
 
 export type OnChange<Value, Key extends string> = (

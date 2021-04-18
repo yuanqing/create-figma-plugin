@@ -1,9 +1,11 @@
 /** @jsx h */
+import type { JSX } from 'preact'
 import { h } from 'preact'
 
+import type { Props } from '../../types'
 import styles from './loading-indicator.css'
 
-export function LoadingIndicator(props: { [key: string]: any }): h.JSX.Element {
+export function LoadingIndicator(props: Props<HTMLDivElement>): JSX.Element {
   return (
     <div {...props} class={styles.loadingIndicator}>
       <svg>

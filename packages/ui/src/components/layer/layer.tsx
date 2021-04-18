@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 
 import type { Props } from '../../types'
@@ -29,7 +29,7 @@ export function Layer({
   selected,
   type,
   ...rest
-}: Props<LayerProps, HTMLDivElement>): h.JSX.Element {
+}: Props<HTMLDivElement, LayerProps>): JSX.Element {
   return (
     <div
       {...rest}

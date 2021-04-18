@@ -1,5 +1,5 @@
 /** @jsx h */
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -39,7 +39,7 @@ export function Tabs<
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<TabsProps<Value, Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, TabsProps<Value, Key>>): JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')

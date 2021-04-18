@@ -152,7 +152,7 @@ function extractEntryFile(
 }
 
 function createRequireCode(entryFiles: Array<EntryFile>): string {
-  const code: string[] = []
+  const code: Array<string> = []
   for (const entryFile of entryFiles) {
     code.push(
       `'${entryFile.commandId}':require('./${entryFile.src}')['${entryFile.handler}']`

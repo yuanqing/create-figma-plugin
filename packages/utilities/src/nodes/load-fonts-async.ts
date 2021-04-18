@@ -4,7 +4,7 @@
  * @category Node
  */
 export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
-  const result: { [key: string]: FontName } = {}
+  const result: Record<string, FontName> = {}
   for (const node of nodes) {
     if (node.type === 'TEXT') {
       collectFontsUsedInNode(node, result)
@@ -19,7 +19,7 @@ export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
 
 function collectFontsUsedInNode(
   node: TextNode,
-  result: { [key: string]: FontName }
+  result: Record<string, FontName>
 ): void {
   const length = node.characters.length
   if (length === 0) {

@@ -1,10 +1,11 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { RefObject } from 'preact'
+import type { ComponentChildren, JSX, RefObject } from 'preact'
 import { h } from 'preact'
+import type { StateUpdater } from 'preact/hooks'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
-import type { Option, Props } from '../../../types'
+import type { OnChange, Option, Props } from '../../../types'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -14,26 +15,31 @@ import {
   TAB_KEY_CODE,
   UP_KEY_CODE
 } from '../../../utilities/key-codes'
-import type { TextboxProps } from '../textbox'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import textboxAutocompleteStyles from './textbox-autocomplete.css'
 
+type MenuItemId = typeof INVALID_MENU_ITEM_ID | string
+
 const EMPTY_STRING = ''
 const INVALID_MENU_ITEM_ID = null
 
-type Value = null | string
-type MenuItemId = null | string
-
-export type TextboxAutocompleteOption = Option
-export interface TextboxAutocompleteProps<Key extends string>
-  extends TextboxProps<Key> {
+export interface TextboxAutocompleteProps<Key extends string> {
+  disabled?: boolean
+  focused?: boolean
   filter?: boolean
-  options: TextboxAutocompleteOption[]
+  icon?: ComponentChildren
+  name: Key
+  noBorder?: boolean
+  onChange: OnChange<null | string, Key>
+  options: Array<TextboxAutocompleteOption>
+  placeholder?: string
   strict?: boolean
   top?: boolean
+  value: null | string
 }
+export type TextboxAutocompleteOption = Option
 
 export function TextboxAutocomplete<Key extends string>({
   disabled,
@@ -49,20 +55,24 @@ export function TextboxAutocomplete<Key extends string>({
   top,
   value: committedValue,
   ...rest
-}: Props<TextboxAutocompleteProps<Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, TextboxAutocompleteProps<Key>>): JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false) // Whether to select the contents of the textbox
 
-  const [currentValue, setCurrentValue]: [Value, any] = useState(EMPTY_STRING)
+  const [currentValue, setCurrentValue]: [
+    null | string,
+    StateUpdater<null | string>
+  ] = useState(EMPTY_STRING as null | string)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
-  const [selectedId, setSelectedId]: [MenuItemId, any] = useState(
-    INVALID_MENU_ITEM_ID
-  )
+  const [selectedId, setSelectedId]: [
+    MenuItemId,
+    StateUpdater<MenuItemId>
+  ] = useState(INVALID_MENU_ITEM_ID as MenuItemId)
 
-  let menuItems: TextboxAutocompleteOption[] = options.map(function (
+  let menuItems: Array<TextboxAutocompleteOption> = options.map(function (
     option,
     index
   ) {
@@ -73,7 +83,7 @@ export function TextboxAutocomplete<Key extends string>({
   })
 
   const isValidValue = useCallback(
-    function (value: Value): boolean {
+    function (value: null | string): boolean {
       if (value === EMPTY_STRING || value === null) {
         return true
       }
@@ -90,14 +100,17 @@ export function TextboxAutocomplete<Key extends string>({
   )
 
   const getIdByValue = useCallback(
-    function (value: Value): MenuItemId {
+    function (value: null | string): MenuItemId {
       if (value === EMPTY_STRING || value === null) {
         return INVALID_MENU_ITEM_ID
       }
       for (const menuItem of menuItems) {
         if ('value' in menuItem) {
           if (menuItem.value === value) {
-            return menuItem.id as MenuItemId
+            if (typeof menuItem.id === 'undefined') {
+              throw new Error('`menuItem` has no `id`')
+            }
+            return menuItem.id
           }
         }
       }
@@ -108,7 +121,8 @@ export function TextboxAutocomplete<Key extends string>({
 
   if (
     filter === true &&
-    (isValidValue(committedValue) === false || currentValue !== EMPTY_STRING)
+    currentValue !== null &&
+    (currentValue !== EMPTY_STRING || isValidValue(committedValue) === false)
   ) {
     menuItems = menuItems.filter(function (menuItem) {
       if ('value' in menuItem) {
@@ -122,7 +136,7 @@ export function TextboxAutocomplete<Key extends string>({
   }
 
   const findMenuItemById = useCallback(
-    function (targetId: MenuItemId): null | TextboxAutocompleteOption {
+    function (targetId: string): null | TextboxAutocompleteOption {
       const result = menuItems.find(function ({ id }) {
         return id === targetId
       })
@@ -134,7 +148,11 @@ export function TextboxAutocomplete<Key extends string>({
   const computeNextId = useCallback(
     function (id: MenuItemId): MenuItemId {
       if (id === INVALID_MENU_ITEM_ID) {
-        return menuItems[0].id as MenuItemId
+        const result = menuItems[0].id
+        if (typeof result === 'undefined') {
+          throw new Error('`menuItem[0]` has no `id`')
+        }
+        return result
       }
       let foundCurrentMenuItem = false
       let index = -1
@@ -152,11 +170,20 @@ export function TextboxAutocomplete<Key extends string>({
       }
       if (index === menuItems.length) {
         // Reached the end of `menuItems`
-        return getIdByValue(currentValue) === INVALID_MENU_ITEM_ID
-          ? INVALID_MENU_ITEM_ID
-          : (menuItems[0].id as MenuItemId)
+        if (getIdByValue(currentValue) === INVALID_MENU_ITEM_ID) {
+          return INVALID_MENU_ITEM_ID
+        }
+        const result = menuItems[0].id
+        if (typeof result === 'undefined') {
+          throw new Error('`menuItem[0]` has no `id`')
+        }
+        return result
       }
-      return menuItems[index].id as MenuItemId
+      const result = menuItems[index].id
+      if (typeof result === 'undefined') {
+        throw new Error(`\`menuItem[${index}]\` has no \`id\``)
+      }
+      return result
     },
     [currentValue, getIdByValue, menuItems]
   )
@@ -164,7 +191,12 @@ export function TextboxAutocomplete<Key extends string>({
   const computePreviousId = useCallback(
     function (id: MenuItemId): MenuItemId {
       if (id === INVALID_MENU_ITEM_ID) {
-        return menuItems[menuItems.length - 1].id as MenuItemId
+        const index = menuItems.length - 1
+        const result = menuItems[index].id
+        if (typeof result === 'undefined') {
+          throw new Error(`\`menuItem[${index}]\` has no \`id\``)
+        }
+        return result
       }
       let foundCurrentMenuItem = false
       let index = menuItems.length
@@ -182,11 +214,21 @@ export function TextboxAutocomplete<Key extends string>({
       }
       if (index === -1) {
         // Reached the beginning of `menuItems`
-        return getIdByValue(currentValue) === INVALID_MENU_ITEM_ID
-          ? INVALID_MENU_ITEM_ID
-          : (menuItems[menuItems.length - 1].id as MenuItemId)
+        if (getIdByValue(currentValue) === INVALID_MENU_ITEM_ID) {
+          return INVALID_MENU_ITEM_ID
+        }
+        const index = menuItems.length - 1
+        const result = menuItems[index].id
+        if (typeof result === 'undefined') {
+          throw new Error(`\`menuItem[${index}]\` has no \`id\``)
+        }
+        return result
       }
-      return menuItems[index].id as MenuItemId
+      const result = menuItems[index].id
+      if (typeof result === 'undefined') {
+        throw new Error(`\`menuItem[${index}]\` has no \`id\``)
+      }
+      return result
     },
     [currentValue, getIdByValue, menuItems]
   )
@@ -350,6 +392,9 @@ export function TextboxAutocomplete<Key extends string>({
       }
       scrollTopRef.current = menuElementRef.current.scrollTop
       const id = (event.target as HTMLElement).getAttribute('data-id')
+      if (id === null) {
+        throw new Error('No `data-id` attribute')
+      }
       setSelectedId(id)
       setIsMenuVisible(false)
       const menuItem = findMenuItemById(id)

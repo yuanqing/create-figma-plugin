@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -10,7 +10,7 @@ import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './file-upload-button.css'
 
 export interface FileUploadButtonProps {
-  acceptedFileTypes?: string[]
+  acceptedFileTypes?: Array<string>
   children: ComponentChildren
   disabled?: boolean
   focused?: boolean
@@ -34,7 +34,7 @@ export function FileUploadButton({
   onSelectedFiles,
   propagateEscapeKeyDown = true,
   ...rest
-}: Props<FileUploadButtonProps, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, FileUploadButtonProps>): JSX.Element {
   const handleClick = useCallback(function (event: MouseEvent) {
     ;(event.target as HTMLElement).focus()
   }, [])

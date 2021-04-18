@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -29,7 +29,7 @@ export function Checkbox<Key extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<CheckboxProps<Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, CheckboxProps<Key>>): JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)

@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -32,7 +32,7 @@ export function SelectableItem<Key extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<SelectableItemProps<Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, SelectableItemProps<Key>>): JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)
@@ -77,7 +77,6 @@ export function SelectableItem<Key extends string>({
 
   return (
     <label
-      {...(rest as any)}
       class={classnames(
         styles.label,
         disabled === true ? styles.disabled : null,

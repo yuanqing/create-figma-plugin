@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -14,7 +14,7 @@ export interface RadioButtonsProps<Key extends string> {
   focused?: boolean
   name: Key
   onChange: OnChange<null | string, Key>
-  options: RadioButtonsOption[]
+  options: Array<RadioButtonsOption>
   propagateEscapeKeyDown?: boolean
   space?: Space
   value: null | string
@@ -35,7 +35,7 @@ export function RadioButtons<Key extends string>({
   space = 'small',
   value,
   ...rest
-}: Props<RadioButtonsProps<Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, RadioButtonsProps<Key>>): JSX.Element {
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       const keyCode = event.keyCode

@@ -46,6 +46,7 @@ export { Stack, StackProps } from './components/stack/stack'
 export { Tabs, TabsOption, TabsProps } from './components/tabs/tabs'
 export { Text, TextProps } from './components/text/text'
 export { Textbox, TextboxProps } from './components/textbox/textbox'
+export { TEXTBOX_MIXED_VALUE } from './components/textbox/utilities/textbox-mixed-value'
 export {
   TextboxAutocomplete,
   TextboxAutocompleteOption,

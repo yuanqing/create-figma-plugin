@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import type { RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
@@ -8,6 +8,8 @@ import { useCallback, useRef } from 'preact/hooks'
 import type { OnChange, Props } from '../../types'
 import { ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './textbox.css'
+import { renderTextboxValueToString } from './utilities/render-textbox-value-to-string'
+import { TEXTBOX_MIXED_VALUE } from './utilities/textbox-mixed-value'
 
 export interface TextboxProps<Key extends string> {
   disabled?: boolean
@@ -15,11 +17,11 @@ export interface TextboxProps<Key extends string> {
   icon?: ComponentChildren
   name: Key
   noBorder?: boolean
-  onChange: OnChange<null | string, Key>
+  onChange: OnChange<null | typeof TEXTBOX_MIXED_VALUE | string, Key>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   type?: 'text' | 'password'
-  value: null | string
+  value: null | typeof TEXTBOX_MIXED_VALUE | string
 }
 
 export function Textbox<Key extends string>({
@@ -34,7 +36,7 @@ export function Textbox<Key extends string>({
   type = 'text',
   value,
   ...rest
-}: Props<TextboxProps<Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, TextboxProps<Key>>): JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
@@ -122,7 +124,7 @@ export function Textbox<Key extends string>({
         placeholder={placeholder}
         tabIndex={disabled === true ? undefined : 0}
         type={type}
-        value={value === null ? 'Mixed' : value}
+        value={renderTextboxValueToString(value)}
       />
       {hasIcon ? <div class={styles.icon}>{icon}</div> : null}
     </div>

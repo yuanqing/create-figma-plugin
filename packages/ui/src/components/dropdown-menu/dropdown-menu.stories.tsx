@@ -6,7 +6,7 @@ import { DropdownMenu, DropdownMenuOption } from './dropdown-menu'
 
 export default { title: 'Dropdown Menu' }
 
-const options: DropdownMenuOption[] = [
+const options: Array<DropdownMenuOption> = [
   { value: 'foo' },
   { value: 'bar' },
   { value: 'baz' },

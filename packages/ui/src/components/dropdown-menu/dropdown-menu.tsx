@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, RefObject, VNode } from 'preact'
+import type { ComponentChildren, JSX, RefObject, VNode } from 'preact'
 import { cloneElement, h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
@@ -9,7 +9,7 @@ import {
   INVALID_MENU_ITEM_ID,
   useScrollableMenu
 } from '../../hooks/use-scrollable-menu'
-import type { OnChange, Option } from '../../types'
+import type { OnChange, Option, Props } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
 import styles from './dropdown-menu.css'
@@ -22,7 +22,7 @@ export interface DropdownMenuProps<Key extends string> {
   fullWidth?: boolean
   name: Key
   onChange: OnChange<null | string, Key>
-  options: Option[]
+  options: Array<Option>
   right?: boolean
   top?: boolean
   value: null | string
@@ -39,7 +39,7 @@ export function DropdownMenu<Key extends string>({
   right,
   top,
   value
-}: DropdownMenuProps<Key>): h.JSX.Element {
+}: Props<HTMLDivElement, DropdownMenuProps<Key>>): JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const menuItems: Array<Option> = options.map(function (option, index) {
@@ -197,7 +197,7 @@ export function DropdownMenu<Key extends string>({
       onKeyDown={handleRootElementKeyDown}
       tabIndex={0}
     >
-      {cloneElement(children as VNode<any>, { [name]: value })}
+      {cloneElement(children as VNode, { [name]: value })}
       <div
         class={classnames(
           styles.menu,

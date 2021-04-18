@@ -1,6 +1,6 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -32,7 +32,7 @@ export function Button({
   propagateEscapeKeyDown = true,
   secondary,
   ...rest
-}: Props<ButtonProps, HTMLButtonElement>): h.JSX.Element {
+}: Props<HTMLButtonElement, ButtonProps>): JSX.Element {
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       const keyCode = event.keyCode

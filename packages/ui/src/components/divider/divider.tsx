@@ -1,8 +1,10 @@
 /** @jsx h */
+import type { JSX } from 'preact'
 import { h } from 'preact'
 
+import type { Props } from '../../types'
 import styles from './divider.css'
 
-export function Divider(props: { [key: string]: any }): h.JSX.Element {
+export function Divider(props: Props<HTMLHRElement>): JSX.Element {
   return <hr {...props} class={styles.divider} />
 }

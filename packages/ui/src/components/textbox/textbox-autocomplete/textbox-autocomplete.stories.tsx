@@ -10,7 +10,7 @@ import {
 
 export default { title: 'Textbox Autocomplete' }
 
-const options: TextboxAutocompleteOption[] = [
+const options: Array<TextboxAutocompleteOption> = [
   { value: 'foo' },
   { value: 'bar' },
   { value: 'baz' },

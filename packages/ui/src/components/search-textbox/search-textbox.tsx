@@ -1,5 +1,5 @@
 /** @jsx h */
-import type { RefObject } from 'preact'
+import type { JSX, RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
@@ -30,7 +30,7 @@ export function SearchTextbox<Key extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<SearchTextboxProps<Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, SearchTextboxProps<Key>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   function handleFocus() {

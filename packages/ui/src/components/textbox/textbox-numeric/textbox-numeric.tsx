@@ -4,7 +4,7 @@ import {
   isValidNumericInput
 } from '@create-figma-plugin/utilities/lib/number'
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, RefObject } from 'preact'
+import type { ComponentChildren, JSX, RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
@@ -17,6 +17,8 @@ import {
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
+import { renderTextboxValueToString } from '../utilities/render-textbox-value-to-string'
+import { TEXTBOX_MIXED_VALUE } from '../utilities/textbox-mixed-value'
 
 const nonDigitRegex = /[^\d.]/
 
@@ -31,10 +33,10 @@ export interface TextboxNumericProps<Key extends string> {
   minimum?: number
   name: Key
   noBorder?: boolean
-  onChange: OnChange<null | number, Key>
+  onChange: OnChange<null | typeof TEXTBOX_MIXED_VALUE | string, Key>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
-  value: null | number
+  value: null | typeof TEXTBOX_MIXED_VALUE | string
 }
 
 export function TextboxNumeric<Key extends string>({
@@ -53,7 +55,7 @@ export function TextboxNumeric<Key extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<TextboxNumericProps<Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, TextboxNumericProps<Key>>): JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
@@ -77,16 +79,7 @@ export function TextboxNumeric<Key extends string>({
         return
       }
       const value = inputElementRef.current.value
-      const evaluatedValue = evaluateNumericExpression(value)
-      if (evaluatedValue === null) {
-        return
-      }
-      onChange(
-        { [name]: evaluatedValue } as { [k in Key]: number },
-        evaluatedValue,
-        name,
-        event
-      )
+      onChange({ [name]: value } as { [k in Key]: string }, value, name, event)
     },
     [name, onChange]
   )
@@ -99,7 +92,6 @@ export function TextboxNumeric<Key extends string>({
       ) {
         return
       }
-      const value = inputElementRef.current.value
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
@@ -109,7 +101,7 @@ export function TextboxNumeric<Key extends string>({
         return
       }
       if (keyCode === DOWN_KEY_CODE || keyCode === UP_KEY_CODE) {
-        if (value === null) {
+        if (value === null || value === TEXTBOX_MIXED_VALUE) {
           return
         }
         event.preventDefault()
@@ -169,7 +161,8 @@ export function TextboxNumeric<Key extends string>({
       integer,
       maximum,
       minimum,
-      propagateEscapeKeyDown
+      propagateEscapeKeyDown,
+      value
     ]
   )
 
@@ -204,7 +197,6 @@ export function TextboxNumeric<Key extends string>({
     >
       <input
         {...rest}
-        {...{ defaultValue: value === null ? '' : `${value}` }}
         ref={inputElementRef}
         class={styles.input}
         data-initial-focus={focused === true}
@@ -217,6 +209,7 @@ export function TextboxNumeric<Key extends string>({
         placeholder={placeholder}
         tabIndex={disabled === true ? undefined : 0}
         type="text"
+        value={renderTextboxValueToString(value)}
       />
       {hasIcon === true ? <div class={styles.icon}>{icon}</div> : null}
     </div>

@@ -1,5 +1,5 @@
 /** @jsx h */
-import type { ComponentChildren } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
@@ -40,7 +40,7 @@ export function SegmentedControl<
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<SegmentedControlProps<Value, Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<HTMLInputElement, SegmentedControlProps<Value, Key>>): JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const index = (event.target as HTMLElement).getAttribute('data-index')
