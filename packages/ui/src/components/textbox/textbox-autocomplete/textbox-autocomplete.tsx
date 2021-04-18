@@ -27,8 +27,8 @@ type Value = null | string
 type MenuItemId = null | string
 
 export type TextboxAutocompleteOption = Option
-export interface TextboxAutocompleteProps<Value, Key extends string>
-  extends TextboxProps<Value, Key> {
+export interface TextboxAutocompleteProps<Key extends string>
+  extends TextboxProps<Key> {
   filter?: boolean
   options: TextboxAutocompleteOption[]
   strict?: boolean
@@ -49,10 +49,7 @@ export function TextboxAutocomplete<Key extends string>({
   top,
   value: committedValue,
   ...rest
-}: Props<
-  TextboxAutocompleteProps<Value, Key>,
-  HTMLInputElement
->): h.JSX.Element {
+}: Props<TextboxAutocompleteProps<Key>, HTMLInputElement>): h.JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)

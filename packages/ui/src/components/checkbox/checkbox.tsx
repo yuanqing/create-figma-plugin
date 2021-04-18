@@ -8,15 +8,15 @@ import type { OnChange, Props } from '../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import styles from './checkbox.css'
 
-export interface CheckboxProps<Value, Key extends string> {
+export interface CheckboxProps<Key extends string> {
   children: ComponentChildren
   disabled?: boolean
   focused?: boolean
   name: Key
-  onChange: OnChange<Value, Key>
+  onChange: OnChange<boolean, Key>
   onKeyDown?: EventListener
   propagateEscapeKeyDown?: boolean
-  value: Value
+  value: boolean
 }
 
 export function Checkbox<Key extends string>({
@@ -29,7 +29,7 @@ export function Checkbox<Key extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<CheckboxProps<boolean, Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<CheckboxProps<Key>, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)

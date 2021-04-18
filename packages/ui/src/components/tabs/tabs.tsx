@@ -29,7 +29,7 @@ export interface TabsOption<Value> {
 }
 
 export function Tabs<
-  Value extends boolean | number | string,
+  Value extends boolean | null | number | string,
   Key extends string
 >({
   focused,

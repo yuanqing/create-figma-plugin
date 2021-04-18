@@ -10,7 +10,7 @@ export const Default = function () {
   const initialState: { foo: null | string } = { foo: null }
   const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl<string, 'foo'>
+    <SegmentedControl<null | string, 'foo'>
       name="foo"
       onChange={setState}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
@@ -23,7 +23,7 @@ export const Disabled = function () {
   const initialState: { foo: null | string } = { foo: null }
   const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl<string, 'foo'>
+    <SegmentedControl<null | string, 'foo'>
       disabled
       name="foo"
       onChange={setState}
@@ -37,7 +37,7 @@ export const WithSelectedOption = function () {
   const initialState: { foo: null | string } = { foo: 'bar' }
   const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl<string, 'foo'>
+    <SegmentedControl<null | string, 'foo'>
       name="foo"
       onChange={setState}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
@@ -50,7 +50,7 @@ export const WithDisabledOption = function () {
   const initialState: { foo: null | string } = { foo: null }
   const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl<string, 'foo'>
+    <SegmentedControl<null | string, 'foo'>
       name="foo"
       onChange={setState}
       options={[
@@ -67,7 +67,7 @@ export const WithDisabledSelectedOption = function () {
   const initialState: { foo: null | string } = { foo: 'bar' }
   const [state, setState] = useState(initialState)
   return (
-    <SegmentedControl<string, 'foo'>
+    <SegmentedControl<null | string, 'foo'>
       name="foo"
       onChange={setState}
       options={[

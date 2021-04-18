@@ -20,7 +20,7 @@ export interface SegmentedControlProps<Value, Key extends string> {
   onChange: OnChange<Value, Key>
   options: Array<SegmentedControlOption<Value>>
   propagateEscapeKeyDown?: boolean
-  value: null | Value
+  value: Value
 }
 export interface SegmentedControlOption<Value> {
   disabled?: boolean
@@ -29,7 +29,7 @@ export interface SegmentedControlOption<Value> {
 }
 
 export function SegmentedControl<
-  Value extends boolean | number | string,
+  Value extends boolean | null | number | string,
   Key extends string
 >({
   disabled: disabled,

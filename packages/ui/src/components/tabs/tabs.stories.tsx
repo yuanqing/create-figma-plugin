@@ -11,7 +11,7 @@ export const Default = function () {
   const initialState: { foo: null | string } = { foo: null }
   const [state, setState] = useState(initialState)
   return (
-    <Tabs<string, 'foo'>
+    <Tabs<null | string, 'foo'>
       name="foo"
       onChange={setState}
       options={[
@@ -28,7 +28,7 @@ export const WithSelectedOption = function () {
   const initialState: { foo: null | string } = { foo: 'bar' }
   const [state, setState] = useState(initialState)
   return (
-    <Tabs<string, 'foo'>
+    <Tabs<null | string, 'foo'>
       name="foo"
       onChange={setState}
       options={[

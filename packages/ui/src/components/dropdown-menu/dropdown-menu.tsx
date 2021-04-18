@@ -16,16 +16,16 @@ import styles from './dropdown-menu.css'
 
 const ITEM_ELEMENT_ATTRIBUTE_NAME = 'data-dropdown-menu'
 
-export interface DropdownMenuProps<Value, Key extends string> {
+export interface DropdownMenuProps<Key extends string> {
   children: ComponentChildren
   focused?: boolean
   fullWidth?: boolean
   name: Key
-  onChange: OnChange<Value, Key>
+  onChange: OnChange<null | string, Key>
   options: Option[]
   right?: boolean
   top?: boolean
-  value: Value
+  value: null | string
 }
 export type DropdownMenuOption = Option
 
@@ -39,7 +39,7 @@ export function DropdownMenu<Key extends string>({
   right,
   top,
   value
-}: DropdownMenuProps<null | string, Key>): h.JSX.Element {
+}: DropdownMenuProps<Key>): h.JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const menuItems: Array<Option> = options.map(function (option, index) {

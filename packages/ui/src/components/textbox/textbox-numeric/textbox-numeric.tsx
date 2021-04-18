@@ -20,7 +20,7 @@ import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-
 
 const nonDigitRegex = /[^\d.]/
 
-export interface TextboxNumericProps<Value, Key extends string> {
+export interface TextboxNumericProps<Key extends string> {
   disabled?: boolean
   focused?: boolean
   icon?: ComponentChildren
@@ -31,10 +31,10 @@ export interface TextboxNumericProps<Value, Key extends string> {
   minimum?: number
   name: Key
   noBorder?: boolean
-  onChange: OnChange<Value, Key>
+  onChange: OnChange<null | number, Key>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
-  value: Value
+  value: null | number
 }
 
 export function TextboxNumeric<Key extends string>({
@@ -53,10 +53,7 @@ export function TextboxNumeric<Key extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<
-  TextboxNumericProps<null | number, Key>,
-  HTMLInputElement
->): h.JSX.Element {
+}: Props<TextboxNumericProps<Key>, HTMLInputElement>): h.JSX.Element {
   const hasIcon = typeof icon !== 'undefined'
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)

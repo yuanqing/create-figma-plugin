@@ -9,16 +9,16 @@ import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../utilities/key-codes'
 import { checkIcon } from '../icon/icons/check-icon'
 import styles from './selectable-item.css'
 
-export interface SelectableItemProps<Value, Key extends string> {
+export interface SelectableItemProps<Key extends string> {
   bold?: boolean
   children: ComponentChildren
   disabled?: boolean
   indent?: boolean
   name: Key
-  onChange: OnChange<Value, Key>
+  onChange: OnChange<boolean, Key>
   onKeyDown?: EventListener
   propagateEscapeKeyDown?: boolean
-  value: Value
+  value: boolean
 }
 
 export function SelectableItem<Key extends string>({
@@ -32,7 +32,7 @@ export function SelectableItem<Key extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<SelectableItemProps<boolean, Key>, HTMLInputElement>): h.JSX.Element {
+}: Props<SelectableItemProps<Key>, HTMLInputElement>): h.JSX.Element {
   const handleChange = useCallback(
     function (event: Event) {
       const newValue = !(value === true)
