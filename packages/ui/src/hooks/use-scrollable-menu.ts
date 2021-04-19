@@ -3,14 +3,14 @@ import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { DOWN_KEY_CODE, UP_KEY_CODE } from '../utilities/key-codes'
 
-export const INVALID_MENU_ITEM_ID = null
+type ItemId = typeof INVALID_ITEM_ID | string
 
-export type MenuItemId = null | string
+const INVALID_ITEM_ID = null
 
 export function useScrollableMenu(options: {
   itemElementAttributeName: string
-  selectedItemId: null | string
-  onChange: (id: null | string) => void
+  selectedItemId: ItemId
+  onChange: (id: ItemId) => void
   changeOnMouseOver: boolean
 }) {
   const {
@@ -21,7 +21,7 @@ export function useScrollableMenu(options: {
   } = options
   const menuElementRef: RefObject<HTMLElement> = useRef(null)
   const parseItemElementId = useCallback(
-    function (element: HTMLElement): null | string {
+    function (element: HTMLElement): ItemId {
       return element.getAttribute(itemElementAttributeName)
     },
     [itemElementAttributeName]
@@ -39,8 +39,8 @@ export function useScrollableMenu(options: {
     [menuElementRef, itemElementAttributeName]
   )
   const getItemIndex = useCallback(
-    function (id: null | string): number {
-      if (id === INVALID_MENU_ITEM_ID) {
+    function (id: ItemId): number {
+      if (id === INVALID_ITEM_ID) {
         return -1
       }
       return getItemElements().findIndex(function (element) {
@@ -50,7 +50,7 @@ export function useScrollableMenu(options: {
     [getItemElements, parseItemElementId]
   )
   const updateScrollPosition = useCallback(
-    function (id: null | string): void {
+    function (id: ItemId): void {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
       if (index === -1) {
