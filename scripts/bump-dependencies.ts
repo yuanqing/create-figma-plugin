@@ -1,5 +1,5 @@
-import * as globby from 'globby'
-import * as ncu from 'npm-check-updates'
+import globby from 'globby'
+import ncu from 'npm-check-updates'
 import * as path from 'path'
 
 async function main(): Promise<void> {

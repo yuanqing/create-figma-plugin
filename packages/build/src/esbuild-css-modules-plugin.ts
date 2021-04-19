@@ -3,11 +3,11 @@ import { readFile } from 'fs-extra'
 import { basename, extname, resolve } from 'path'
 import type { AcceptedPlugin } from 'postcss'
 import postcss from 'postcss'
-import * as tempWrite from 'temp-write'
+import revHash from 'rev-hash'
+import tempWrite from 'temp-write'
 
 const cssNano = require('cssnano')
 const postCssModules = require('postcss-modules')
-const revHash = require('rev-hash')
 
 export function esbuildCssModulesPlugin(minify: boolean): Plugin {
   return {

@@ -1,5 +1,5 @@
 import * as execa from 'execa'
-import * as findUp from 'find-up'
+import findUp from 'find-up'
 import { pathExists } from 'fs-extra'
 import { join } from 'path'
 

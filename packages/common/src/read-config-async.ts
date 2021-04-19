@@ -1,4 +1,4 @@
-import * as slugify from '@sindresorhus/slugify'
+import slugify from '@sindresorhus/slugify'
 import { pathExists, readFile } from 'fs-extra'
 import { join } from 'path'
 

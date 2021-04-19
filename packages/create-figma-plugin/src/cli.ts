@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import * as sade from 'sade'
+import sade from 'sade'
 
 import { createFigmaPluginAsync } from './create-figma-plugin-async'
 

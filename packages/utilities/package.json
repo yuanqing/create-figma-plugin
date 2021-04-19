@@ -23,7 +23,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run clean-build && tsc --module es2020 --moduleResolution node",
+    "build": "yarn run clean-build && tsc --module ES2020 --moduleResolution Node",
     "clean": "yarn run clean-build && yarn run clean-test",
     "clean-build": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
     "clean-test": "rm -rf '*.log' .nyc_output coverage",

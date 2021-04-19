@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "lib": ["dom", "es2020"],
-    "module": "commonjs",
+    "esModuleInterop": true,
+    "lib": ["DOM", "ES2020"],
+    "module": "CommonJS",
     "sourceMap": true,
     "strict": true,
-    "target": "es2019",
-    "types": ["@figma/plugin-typings", "node"],
-    "typeRoots": ["./node_modules/@types"]
+    "target": "ES2020",
+    "types": ["@figma/plugin-typings", "node"]
   }
 }

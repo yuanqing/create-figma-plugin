@@ -1,6 +1,6 @@
 import { constants } from '@create-figma-plugin/common'
-import * as execa from 'execa'
-import * as findUp from 'find-up'
+import execa from 'execa'
+import findUp from 'find-up'
 import { join } from 'path'
 
 export async function buildCssModulesTypingsAsync(): Promise<void> {

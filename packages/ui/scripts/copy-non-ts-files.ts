@@ -1,5 +1,5 @@
 import { copy } from 'fs-extra'
-import * as globby from 'globby'
+import globby from 'globby'
 import { join, resolve } from 'path'
 
 async function main(): Promise<void> {

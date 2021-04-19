@@ -1,6 +1,6 @@
 import { outputFile, readFile } from 'fs-extra'
-import * as globby from 'globby'
-import * as mustache from 'mustache'
+import globby from 'globby'
+import mustache from 'mustache'
 import { join } from 'path'
 
 import type { CreateFigmaPluginVersions } from './types/create-figma-plugin-versions'

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import * as sade from 'sade'
+import sade from 'sade'
 
 import { buildAsync } from './build-async'
 import type { BuildOptions } from './types/build'

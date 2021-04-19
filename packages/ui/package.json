@@ -32,7 +32,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "build": "yarn run clean && tsc --module es2020 --moduleResolution node && ts-node scripts/copy-non-ts-files.ts",
+    "build": "yarn run clean && tsc --module ES2020 --moduleResolution Node && ts-node scripts/copy-non-ts-files.ts",
     "clean": "rm -rf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json' '.storybook/**/*.html'",
     "lint": "eslint '{.storybook,scripts,src}/**/*.{ts,tsx}' && stylelint 'src/**/*.css'",

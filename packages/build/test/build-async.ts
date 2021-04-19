@@ -1,4 +1,4 @@
-import * as findUp from 'find-up'
+import findUp from 'find-up'
 import { ensureSymlink, pathExists, readFile } from 'fs-extra'
 import { join } from 'path'
 import * as rimraf from 'rimraf'

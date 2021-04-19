@@ -1,5 +1,5 @@
 import { constants } from '@create-figma-plugin/common'
-import * as gitUserName from 'git-user-name'
+import gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
 
 import type { Settings } from '../types/settings'
