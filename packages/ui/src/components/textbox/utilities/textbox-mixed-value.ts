@@ -1,1 +1,0 @@
-export const TEXTBOX_MIXED_VALUE = Symbol('TEXTBOX_MIXED_VALUE')

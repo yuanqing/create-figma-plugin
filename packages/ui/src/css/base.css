@@ -62,6 +62,7 @@ h3 {
 button {
   padding: 0;
   font: inherit;
+  background-color: transparent;
   border: 0;
   outline: 0;
   -webkit-appearance: none;

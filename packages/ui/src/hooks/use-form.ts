@@ -7,6 +7,8 @@ import {
   TAB_KEY_CODE
 } from '../utilities/key-codes'
 
+const INITIAL_FOCUS_DATA_ATTRIBUTE = 'data-initial-focus'
+
 export function useForm<State extends JsonObject>(
   initialState: State,
   options: {
@@ -17,21 +19,24 @@ export function useForm<State extends JsonObject>(
   }
 ) {
   const { transform, validate, onSubmit, onClose } = options
+
   const [state, setState] = useState(
     typeof transform === 'function' ? transform(initialState) : initialState
   )
+
   const handleChange = useCallback(
-    function (nextState: Partial<State>): void {
+    function <T>(value: T, name: string): void {
       setState(function (previousState: State) {
         const state = {
           ...previousState,
-          ...nextState
+          ...{ [name]: value }
         }
         return typeof transform === 'function' ? transform(state) : state
       })
     },
     [transform, setState]
   )
+
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent): void {
       if (typeof event === 'undefined') {
@@ -76,6 +81,7 @@ export function useForm<State extends JsonObject>(
     },
     [state, onClose, onSubmit, validate]
   )
+
   const handleSubmit = useCallback(
     function (event: Event): void {
       if (typeof event !== 'undefined') {
@@ -90,6 +96,7 @@ export function useForm<State extends JsonObject>(
     },
     [state, onSubmit, validate]
   )
+
   const isValid = useCallback(
     function (): boolean {
       if (typeof validate !== 'function') {
@@ -99,6 +106,7 @@ export function useForm<State extends JsonObject>(
     },
     [state, validate]
   )
+
   useEffect(
     function (): () => void {
       window.addEventListener('keydown', handleKeyDown)
@@ -108,9 +116,10 @@ export function useForm<State extends JsonObject>(
     },
     [handleKeyDown]
   )
+
   useEffect(function (): void {
     const focusableElement = document.querySelector(
-      '[data-initial-focus]'
+      `[${INITIAL_FOCUS_DATA_ATTRIBUTE}]`
     ) as HTMLElement
     if (focusableElement !== null) {
       focusableElement.focus()
@@ -123,9 +132,13 @@ export function useForm<State extends JsonObject>(
     }
     tabbableElements[0].focus()
   }, [])
+
   return {
     handleChange,
     handleSubmit,
+    initialFocus: {
+      [INITIAL_FOCUS_DATA_ATTRIBUTE]: true
+    },
     isValid,
     state
   }

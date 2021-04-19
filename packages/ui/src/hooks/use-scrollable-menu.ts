@@ -56,7 +56,7 @@ export function useScrollableMenu(options: {
       if (index === -1) {
         return
       }
-      const selectedElement = itemElements[index] as HTMLElement
+      const selectedElement = itemElements[index]
       const menuElement = menuElementRef.current
       if (menuElement === null || typeof menuElement === 'undefined') {
         return

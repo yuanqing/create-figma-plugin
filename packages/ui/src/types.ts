@@ -1,6 +1,12 @@
 import type { JSX, RenderableProps } from 'preact'
 
-export type Alignment = 'left' | 'center' | 'right'
+export type OnChange<Value> = (
+  value: Value,
+  name: undefined | string,
+  event: Event
+) => void
+
+export type OnSelectedFiles = (files: Array<File>, event: Event) => void
 
 export type Props<
   RefType extends EventTarget = EventTarget,
@@ -8,34 +14,3 @@ export type Props<
 > = RenderableProps<
   Omit<JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
 >
-
-export type OnChange<Value, Key extends string> = (
-  state: { [k in Key]: Value },
-  value?: Value,
-  name?: Key,
-  event?: Event
-) => void | Promise<void>
-
-export type OnSelectedFiles = (
-  files?: Array<File>,
-  event?: Event
-) => void | Promise<void>
-
-export type Option = OptionHeader | OptionValue | OptionSeparator
-
-export interface OptionHeader {
-  id?: null | string
-  header: string
-}
-
-export interface OptionValue {
-  id?: null | string
-  value: string
-}
-
-export interface OptionSeparator {
-  id?: null | string
-  separator: true
-}
-
-export type Space = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge'
