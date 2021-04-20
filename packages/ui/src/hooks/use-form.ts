@@ -25,7 +25,7 @@ export function useForm<State extends JsonObject>(
   )
 
   const handleChange = useCallback(
-    function <T>(value: T, name: undefined | string) {
+    function <S extends keyof State>(value: State[S], name: undefined | S) {
       if (typeof name === 'undefined') {
         throw new Error('`name` is undefined')
       }

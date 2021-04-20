@@ -9,18 +9,18 @@ import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
 
-export interface SelectableItemProps {
+export interface SelectableItemProps<T extends string> {
   bold?: boolean
   children: ComponentChildren
   disabled?: boolean
   indent?: boolean
-  name?: string
-  onChange: OnChange<boolean>
+  name?: T
+  onChange: OnChange<boolean, T>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
-export function SelectableItem({
+export function SelectableItem<T extends string>({
   bold = false,
   children,
   disabled = false,
@@ -30,7 +30,7 @@ export function SelectableItem({
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
-}: Props<HTMLInputElement, SelectableItemProps>): JSX.Element {
+}: Props<HTMLInputElement, SelectableItemProps<T>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
       onChange(value === false, name, event)

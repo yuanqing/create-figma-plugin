@@ -20,7 +20,7 @@ import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import { TEXTBOX_MIXED_VALUE } from '../utilities/textbox-mixed-value'
 
-export interface TextboxNumericProps {
+export interface TextboxNumericProps<T extends string> {
   disabled?: boolean
   icon?: ComponentChildren
   incrementBig?: number
@@ -28,10 +28,10 @@ export interface TextboxNumericProps {
   integer?: boolean
   maximum?: number
   minimum?: number
-  name?: string
+  name?: T
   noBorder?: boolean
-  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string>
-  onNumberChange?: (value: null | number, name: undefined | string) => void
+  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string, T>
+  onNumberChange?: (value: null | number, name?: T) => void
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: typeof TEXTBOX_MIXED_VALUE | string
@@ -39,7 +39,7 @@ export interface TextboxNumericProps {
 
 const nonDigitRegex = /[^\d.]/
 
-export function TextboxNumeric({
+export function TextboxNumeric<T extends string>({
   disabled = false,
   icon,
   incrementBig = 10,
@@ -55,7 +55,7 @@ export function TextboxNumeric({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, TextboxNumericProps>): JSX.Element {
+}: Props<HTMLInputElement, TextboxNumericProps<T>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(

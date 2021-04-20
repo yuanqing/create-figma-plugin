@@ -10,24 +10,30 @@ import type { StackSpace } from '../../layout/stack/stack'
 import { Stack } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
 
-export interface RadioButtonsOption<T extends boolean | number | string> {
+export interface RadioButtonsOption<S extends boolean | number | string> {
   disabled?: boolean
   children?: ComponentChildren
-  value: T
+  value: S
 }
-export interface RadioButtonsProps<T extends boolean | number | string> {
+export interface RadioButtonsProps<
+  T extends string,
+  S extends boolean | number | string
+> {
   disabled?: boolean
-  name?: string
-  onChange: OnChange<null | T>
-  options: Array<RadioButtonsOption<T>>
+  name?: T
+  onChange: OnChange<null | S, T>
+  options: Array<RadioButtonsOption<S>>
   propagateEscapeKeyDown?: boolean
   space?: StackSpace
-  value: null | T
+  value: null | S
 }
 
 const ITEM_ID_DATA_ATTRIBUTE = 'data-radio-buttons-item-id'
 
-export function RadioButtons<T extends boolean | number | string>({
+export function RadioButtons<
+  T extends string,
+  S extends boolean | number | string
+>({
   disabled = false,
   name,
   onChange,
@@ -36,7 +42,7 @@ export function RadioButtons<T extends boolean | number | string>({
   space = 'small',
   value,
   ...rest
-}: Props<HTMLInputElement, RadioButtonsProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, RadioButtonsProps<T, S>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
       const id = (event.target as HTMLElement).getAttribute(

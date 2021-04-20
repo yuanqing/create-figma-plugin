@@ -37,13 +37,13 @@ export interface TextboxAutocompleteOptionSeparator {
   id?: null | string
   separator: true
 }
-export interface TextboxAutocompleteProps {
+export interface TextboxAutocompleteProps<T extends string> {
   disabled?: boolean
   filter?: boolean
   icon?: ComponentChildren
-  name?: string
+  name?: T
   noBorder?: boolean
-  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string>
+  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string, T>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -58,7 +58,7 @@ const EMPTY_STRING = ''
 const INVALID_ITEM_ID = null
 const ITEM_ID_DATA_ATTRIBUTE = 'data-textbox-autocomplete-item-id'
 
-export function TextboxAutocomplete({
+export function TextboxAutocomplete<T extends string>({
   disabled = false,
   filter = false,
   icon,
@@ -72,7 +72,7 @@ export function TextboxAutocomplete({
   top = false,
   value: committedValue,
   ...rest
-}: Props<HTMLInputElement, TextboxAutocompleteProps>): JSX.Element {
+}: Props<HTMLInputElement, TextboxAutocompleteProps<T>>): JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)

@@ -13,23 +13,29 @@ import {
 } from '../../../utilities/key-codes'
 import styles from './segmented-control.css'
 
-export interface SegmentedControlOption<T> {
+export interface SegmentedControlOption<S> {
   disabled?: boolean
   children?: ComponentChildren
-  value: T
+  value: S
 }
-export interface SegmentedControlProps<T extends boolean | number | string> {
+export interface SegmentedControlProps<
+  T extends string,
+  S extends boolean | number | string
+> {
   disabled?: boolean
-  name?: string
-  onChange: OnChange<null | T>
-  options: Array<SegmentedControlOption<T>>
+  name?: T
+  onChange: OnChange<null | S, T>
+  options: Array<SegmentedControlOption<S>>
   propagateEscapeKeyDown?: boolean
-  value: null | T
+  value: null | S
 }
 
 const ITEM_ID_DATA_ATTRIBUTE = 'data-segmented-control-item-id'
 
-export function SegmentedControl<T extends boolean | number | string>({
+export function SegmentedControl<
+  T extends string,
+  S extends boolean | number | string
+>({
   disabled = false,
   name,
   onChange,
@@ -37,7 +43,7 @@ export function SegmentedControl<T extends boolean | number | string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, SegmentedControlProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, SegmentedControlProps<T, S>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
       const id = (event.target as HTMLElement).getAttribute(

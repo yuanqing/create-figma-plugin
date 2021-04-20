@@ -1,8 +1,8 @@
 import type { JSX, RenderableProps } from 'preact'
 
-export type OnChange<Value> = (
-  value: Value,
-  name: undefined | string,
+export type OnChange<V, N extends string> = (
+  value: V,
+  name: undefined | N,
   event: Event
 ) => void
 

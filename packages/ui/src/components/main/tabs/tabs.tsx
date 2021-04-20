@@ -18,9 +18,9 @@ export interface TabsOption {
   children: ComponentChildren
   value: string
 }
-export interface TabsProps {
-  name?: string
-  onChange: OnChange<string>
+export interface TabsProps<T extends string> {
+  name?: T
+  onChange: OnChange<string, T>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
   value: null | string
@@ -28,14 +28,14 @@ export interface TabsProps {
 
 const ITEM_ID_DATA_ATTRIBUTE = 'data-tabs-item-id'
 
-export function Tabs({
+export function Tabs<T extends string>({
   name,
   onChange,
   options,
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, TabsProps>): JSX.Element {
+}: Props<HTMLInputElement, TabsProps<T>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
       const id = (event.target as HTMLElement).getAttribute(

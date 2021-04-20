@@ -11,19 +11,19 @@ import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
 import { TEXTBOX_MIXED_VALUE } from './utilities/textbox-mixed-value'
 
-export interface TextboxProps {
+export interface TextboxProps<T extends string> {
   disabled?: boolean
   icon?: ComponentChildren
-  name?: string
+  name?: T
   noBorder?: boolean
-  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string>
+  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string, T>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   type?: 'text' | 'password'
   value: typeof TEXTBOX_MIXED_VALUE | string
 }
 
-export function Textbox({
+export function Textbox<T extends string>({
   disabled = false,
   icon,
   name,
@@ -34,7 +34,7 @@ export function Textbox({
   type = 'text',
   value,
   ...rest
-}: Props<HTMLInputElement, TextboxProps>): JSX.Element {
+}: Props<HTMLInputElement, TextboxProps<T>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
