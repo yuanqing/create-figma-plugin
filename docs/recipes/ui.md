@@ -116,7 +116,7 @@ To use a custom UI library (instead of `@create-figma-plugin/ui`), write our plu
 // src/ui.ts
 
 export default function (rootNode: HTMLElement, data: { greeting: string }) {
-  rootNode.innerHTML = `<p>${data.greeting}</p>` //=> <h1>Hello, World!</h1>
+  rootNode.innerHTML = `<p>${data.greeting}</p>` //=> <p>Hello, World!</p>
 }
 ```
 
