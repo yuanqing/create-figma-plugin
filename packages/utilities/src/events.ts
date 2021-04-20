@@ -8,9 +8,9 @@ const eventHandlers: Record<string, EventHandler> = {}
 let currentId = 0
 
 /**
- * Registers an `eventHandler` for the given `eventName`.
+ * Registers an event `handler` for the given event `name`.
  *
- * @returns Returns a function for deregistering the `eventHandler`.
+ * @returns Returns a function for deregistering the `handler`.
  * @category Events
  */
 export function on<T extends EventHandler>(
@@ -26,10 +26,10 @@ export function on<T extends EventHandler>(
 }
 
 /**
- * Registers an `eventHandler` that will run at most once for the given
- * `eventName`.
+ * Registers an event `handler` that will run at most once for the given
+ * event `name`.
  *
- * @returns Returns a function for deregistering the `eventHandler`.
+ * @returns Returns a function for deregistering the `handler`.
  * @category Events
  */
 export function once<T extends EventHandler>(
@@ -48,30 +48,31 @@ export function once<T extends EventHandler>(
 
 /**
  * Calling `emit` in the main context invokes the event handler for the
- * matching `eventName` in your UI. Correspondingly, calling `emit` in your
- * UI invokes the event handler for the matching `eventName` in the main
+ * matching event `name` in your UI. Correspondingly, calling `emit` in your
+ * UI invokes the event handler for the matching event `name` in the main
  * context.
  *
- * All `args` passed after `eventName` will be directly applied on the
- * event handler.
+ * All `args` passed after `name` will be directly
+ * [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+ * on the event handler.
  *
  * @category Events
  */
 export const emit =
   typeof window === 'undefined'
     ? function <T extends EventHandler>(
-        eventName: T['name'],
+        name: T['name'],
         ...args: Parameters<T['handler']>
       ) {
-        figma.ui.postMessage([eventName, ...args])
+        figma.ui.postMessage([name, ...args])
       }
     : function <T extends EventHandler>(
-        eventName: T['name'],
+        name: T['name'],
         ...args: Parameters<T['handler']>
       ) {
         window.parent.postMessage(
           {
-            pluginMessage: [eventName, ...args]
+            pluginMessage: [name, ...args]
           },
           '*'
         )
@@ -86,21 +87,18 @@ function invokeEventHandler(name: string, args: Array<unknown>) {
 }
 
 if (typeof window === 'undefined') {
-  figma.ui.onmessage = function ([eventName, ...args]: [
+  figma.ui.onmessage = function ([name, ...args]: [
     string,
     Array<unknown>
   ]): void {
-    invokeEventHandler(eventName, args)
+    invokeEventHandler(name, args)
   }
 } else {
   window.onmessage = function (event: MessageEvent): void {
     if (typeof event.data.pluginMessage === 'undefined') {
       return
     }
-    const [eventName, ...args]: [
-      string,
-      Array<unknown>
-    ] = event.data.pluginMessage
-    invokeEventHandler(eventName, args)
+    const [name, ...args]: [string, Array<unknown>] = event.data.pluginMessage
+    invokeEventHandler(name, args)
   }
 }

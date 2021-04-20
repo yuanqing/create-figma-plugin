@@ -16,20 +16,21 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-### emit(eventName, ...args)
+### emit(name, ...args)
 
 Calling `emit` in the main context invokes the event handler for the
-matching `eventName` in your UI. Correspondingly, calling `emit` in your
-UI invokes the event handler for the matching `eventName` in the main
+matching event `name` in your UI. Correspondingly, calling `emit` in your
+UI invokes the event handler for the matching event `name` in the main
 context.
 
-All `args` passed after `eventName` will be directly applied on the
-event handler.
+All `args` passed after `name` will be directly
+[applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+on the event handler.
 
 ***Parameters***
 
-- **`eventName`** (`string`)
-- **`...args`** (`Parameters<E>`)
+- **`name`** (`T["name"]`)
+- **`...args`** (`Parameters<T["handler"]>`)
 
 ***Return type***
 
@@ -37,36 +38,36 @@ event handler.
 void
 ```
 
-### on(eventName, eventHandler)
+### on(name, handler)
 
-Registers an `eventHandler` for the given `eventName`.
+Registers an event `handler` for the given event `name`.
 
 ***Parameters***
 
-- **`eventName`** (`string`)
-- **`eventHandler`** (`E`)
+- **`name`** (`T['name']`)
+- **`handler`** (`T['handler']`)
 
 ***Return type***
 
-Returns a function for deregistering the `eventHandler`.
+Returns a function for deregistering the `handler`.
 
 ```
 () => void
 ```
 
-### once(eventName, eventHandler)
+### once(name, handler)
 
-Registers an `eventHandler` that will run at most once for the given
-`eventName`.
+Registers an event `handler` that will run at most once for the given
+event `name`.
 
 ***Parameters***
 
-- **`eventName`** (`string`)
-- **`eventHandler`** (`E`)
+- **`name`** (`T['name']`)
+- **`handler`** (`T['handler']`)
 
 ***Return type***
 
-Returns a function for deregistering the `eventHandler`.
+Returns a function for deregistering the `handler`.
 
 ```
 () => void
