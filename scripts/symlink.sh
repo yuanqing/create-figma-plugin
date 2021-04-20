@@ -15,6 +15,9 @@ main() {
   fi
   TARGET_DIRECTORY=$(cd "$2"; pwd)
 
+  rm -rf "$TARGET_DIRECTORY"/node_modules/create-figma-plugin
+  ln -s "$SOURCE_DIRECTORY"/packages/create-figma-plugin "$TARGET_DIRECTORY"/node_modules
+
   rm -rf "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   mkdir -p "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/build "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
@@ -24,9 +27,16 @@ main() {
   ln -s "$SOURCE_DIRECTORY"/packages/utilities "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
 
   rm -rf "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
-  mkdir -p "$TARGET_DIRECTORY"/node_modules/.bin
+  rm -rf "$TARGET_DIRECTORY"/node_modules/.bin/create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/build/lib/cli.js "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
   chmod +x "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
+  ln -s "$SOURCE_DIRECTORY"/packages/create-figma-plugin/lib/cli.js "$TARGET_DIRECTORY"/node_modules/.bin/create-figma-plugin
+  chmod +x "$TARGET_DIRECTORY"/node_modules/.bin/create-figma-plugin
+
+  rm -rf "$TARGET_DIRECTORY"/node_modules/preact
+  ln -s "$SOURCE_DIRECTORY"/node_modules/preact "$TARGET_DIRECTORY"/node_modules
+
+  rm -rf "$TARGET_DIRECTORY"/node_modules/@figma/plugin-typings
 }
 
 main "$@"
