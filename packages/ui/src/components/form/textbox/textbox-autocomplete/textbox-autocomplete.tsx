@@ -247,7 +247,7 @@ export function TextboxAutocomplete({
   )
 
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function (): void {
+    function () {
       setIsMenuVisible(true)
       if (
         committedValue !== EMPTY_STRING &&
@@ -261,7 +261,7 @@ export function TextboxAutocomplete({
   )
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent): void {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
         event.preventDefault()
@@ -348,7 +348,7 @@ export function TextboxAutocomplete({
   )
 
   const handleKeyUp: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent): void {
+    function (event: KeyboardEvent) {
       const keyCode = event.keyCode
       if (
         keyCode !== BACKSPACE_KEY_CODE &&
@@ -368,7 +368,7 @@ export function TextboxAutocomplete({
   )
 
   const handleOptionClick: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
-    function (event: MouseEvent): void {
+    function (event: MouseEvent) {
       scrollTopRef.current = getCurrentFromRef(menuElementRef).scrollTop
       const id = (event.target as HTMLElement).getAttribute(
         ITEM_ID_DATA_ATTRIBUTE

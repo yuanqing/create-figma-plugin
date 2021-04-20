@@ -34,7 +34,7 @@ export function FileUploadButton({
   ...rest
 }: Props<HTMLInputElement, FileUploadButtonProps>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event): void {
+    function (event: Event) {
       const files = Array.prototype.slice
         .call((event.target as HTMLInputElement).files)
         .sort(comparator)
