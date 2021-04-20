@@ -30,7 +30,7 @@ export interface SegmentedControlProps<T extends boolean | number | string> {
 const ITEM_ID_DATA_ATTRIBUTE = 'data-segmented-control-item-id'
 
 export function SegmentedControl<T extends boolean | number | string>({
-  disabled: disabled,
+  disabled = false,
   name,
   onChange,
   options,
@@ -40,13 +40,10 @@ export function SegmentedControl<T extends boolean | number | string>({
 }: Props<HTMLInputElement, SegmentedControlProps<T>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      const index = (event.target as HTMLElement).getAttribute(
+      const id = (event.target as HTMLElement).getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
-      )
-      if (index === null) {
-        return
-      }
-      const newValue = options[parseInt(index, 10)].value
+      ) as string
+      const newValue = options[parseInt(id, 10)].value
       onChange(newValue, name, event)
     },
     [name, onChange, options]

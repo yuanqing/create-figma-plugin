@@ -9,6 +9,7 @@ import { h } from 'preact'
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import type { OnChange, Props } from '../../../../types'
+import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
 import {
   DOWN_KEY_CODE,
   ESCAPE_KEY_CODE,
@@ -44,8 +45,8 @@ export function TextboxNumeric({
   incrementBig = 10,
   incrementSmall = 1,
   integer = false,
-  maximum = Number.MAX_VALUE,
-  minimum = -1 * Number.MAX_VALUE,
+  maximum,
+  minimum,
   name,
   noBorder = false,
   onChange,
@@ -59,79 +60,91 @@ export function TextboxNumeric({
 
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
     function () {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      inputElementRef.current.select()
+      getCurrentFromRef(inputElementRef).select()
     },
     []
   )
 
   const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      const value = inputElementRef.current.value
-      onChange(value, name, event)
+      const newValue = getCurrentFromRef(inputElementRef).value
+      onChange(newValue, name, event)
     },
     [name, onChange]
   )
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
+      const inputElement = getCurrentFromRef(inputElementRef)
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        inputElementRef.current.blur()
+        inputElement.blur()
         return
       }
       if (keyCode === DOWN_KEY_CODE || keyCode === UP_KEY_CODE) {
+        event.preventDefault()
         if (value === TEXTBOX_MIXED_VALUE) {
-          inputElementRef.current.value = '0'
-          onChange(value, name, event)
-          inputElementRef.current.select()
+          const delta = event.shiftKey === true ? incrementBig : incrementSmall
+          let newValue: number
+          if (typeof minimum === 'undefined') {
+            if (keyCode === DOWN_KEY_CODE) {
+              // decrement by `delta`
+              newValue = 0 - delta
+            } else {
+              // increment by `delta`
+              newValue = 0 + delta
+            }
+          } else {
+            if (keyCode === DOWN_KEY_CODE) {
+              // can't go below minimum
+              newValue = minimum
+            } else {
+              // increment by `delta` above the `minimum`
+              newValue = minimum + delta
+            }
+          }
+          const formattedValue = `${newValue}`
+          inputElement.value = formattedValue
+          inputElement.select()
+          onChange(formattedValue, name, event)
           return
         }
-        event.preventDefault()
         const evaluatedValue = evaluateNumericExpression(value)
         if (evaluatedValue === null) {
           return
         }
         if (
-          (event.keyCode === DOWN_KEY_CODE && evaluatedValue <= minimum) ||
-          (event.keyCode === UP_KEY_CODE && evaluatedValue >= maximum)
+          (event.keyCode === DOWN_KEY_CODE &&
+            typeof minimum !== 'undefined' &&
+            evaluatedValue <= minimum) ||
+          (event.keyCode === UP_KEY_CODE &&
+            typeof maximum !== 'undefined' &&
+            evaluatedValue >= maximum)
         ) {
           return
         }
         const delta = event.shiftKey === true ? incrementBig : incrementSmall
         const newValue =
           event.keyCode === DOWN_KEY_CODE
-            ? Math.max(evaluatedValue - delta, minimum)
+            ? typeof minimum === 'undefined'
+              ? evaluatedValue - delta
+              : Math.max(evaluatedValue - delta, minimum)
+            : typeof maximum === 'undefined'
+            ? evaluatedValue + delta
             : Math.min(evaluatedValue + delta, maximum)
         const significantFiguresCount = countSignificantFigures(
           nonDigitRegex.test(value) === true ? `${evaluatedValue}` : value
         )
-        inputElementRef.current.value = formatSignificantFigures(
+        const formattedValue = formatSignificantFigures(
           newValue,
           significantFiguresCount
         )
-        onChange(value, name, event)
-        inputElementRef.current.select()
+        inputElement.value = formattedValue
+        inputElement.select()
+        onChange(formattedValue, name, event)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
@@ -141,7 +154,7 @@ export function TextboxNumeric({
         const nextValue =
           value === TEXTBOX_MIXED_VALUE
             ? event.key
-            : computeNextValue(inputElementRef.current, event.key)
+            : computeNextValue(inputElement, event.key)
         if (
           isValidNumericInput(nextValue, { integersOnly: integer }) === false
         ) {
@@ -152,7 +165,10 @@ export function TextboxNumeric({
         if (evaluatedValue === null) {
           return
         }
-        if (evaluatedValue < minimum || evaluatedValue > maximum) {
+        if (
+          (typeof minimum !== 'undefined' && evaluatedValue < minimum) ||
+          (typeof maximum !== 'undefined' && evaluatedValue > maximum)
+        ) {
           event.preventDefault()
         }
       }
@@ -172,17 +188,11 @@ export function TextboxNumeric({
 
   const handlePaste: JSX.ClipboardEventHandler<HTMLInputElement> = useCallback(
     function (event: ClipboardEvent) {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
       const nextValue = computeNextValue(
-        inputElementRef.current,
+        getCurrentFromRef(inputElementRef),
         event.clipboardData.getData('Text')
       )
       if (isValidNumericInput(nextValue, { integersOnly: integer }) === false) {

@@ -4,6 +4,7 @@ import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
 import type { OnChange, Props } from '../../../types'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import { iconCross } from '../../icon/icon-cross/icon-cross'
 import { iconSearch } from '../../icon/icon-search/icon-search'
@@ -33,26 +34,14 @@ export function SearchTextbox({
 
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
     function () {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      inputElementRef.current.select()
+      getCurrentFromRef(inputElementRef).select()
     },
     []
   )
 
   const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      const newValue = inputElementRef.current.value
+      const newValue = getCurrentFromRef(inputElementRef).value
       onChange(newValue, name, event)
     },
     [name, onChange]
@@ -71,13 +60,7 @@ export function SearchTextbox({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (
-          inputElementRef.current === null ||
-          typeof inputElementRef.current === 'undefined'
-        ) {
-          return
-        }
-        inputElementRef.current.blur()
+        getCurrentFromRef(inputElementRef).blur()
       }
     },
     [clearOnEscapeKeyDown, name, onChange, propagateEscapeKeyDown, value]
@@ -86,13 +69,7 @@ export function SearchTextbox({
   const handleClearButtonClick: JSX.MouseEventHandler<HTMLButtonElement> = useCallback(
     function (event: MouseEvent) {
       onChange('', name, event)
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      inputElementRef.current.focus()
+      getCurrentFromRef(inputElementRef).focus()
     },
     [name, onChange]
   )

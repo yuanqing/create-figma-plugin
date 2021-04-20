@@ -61,8 +61,8 @@ export const BooleanValue = function () {
     <SegmentedControl
       onChange={setValue}
       options={[
-        { children: 'true', value: true },
-        { children: 'false', value: false }
+        { children: 'foo', value: true },
+        { children: 'bar', value: false }
       ]}
       value={value}
     />
@@ -75,9 +75,9 @@ export const NumericValue = function () {
     <SegmentedControl
       onChange={setValue}
       options={[
-        { children: '1', value: 1 },
-        { children: '2', value: 2 },
-        { children: '3', value: 3 }
+        { children: 'foo', value: 1 },
+        { children: 'bar', value: 2 },
+        { children: 'baz', value: 3 }
       ]}
       value={value}
     />

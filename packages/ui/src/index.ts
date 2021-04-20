@@ -1,4 +1,4 @@
-// form
+// components/form
 export { Button, ButtonProps } from './components/form/button/button'
 export { Checkbox, CheckboxProps } from './components/form/checkbox/checkbox'
 export {
@@ -34,7 +34,7 @@ export {
   TextboxNumericProps
 } from './components/form/textbox/textbox-numeric/textbox-numeric'
 
-// icon
+// components/icon
 export { Icon, IconProps } from './components/icon/icon'
 export { iconCheck } from './components/icon/icon-check/icon-check'
 export { iconCheckCircle } from './components/icon/icon-check-circle/icon-check-circle'
@@ -48,7 +48,7 @@ export { iconSearch } from './components/icon/icon-search/icon-search'
 export { iconSpaceHorizontal } from './components/icon/icon-space-horizontal/icon-space-horizontal'
 export { iconSpaceVertical } from './components/icon/icon-space-vertical/icon-space-vertical'
 
-// layout
+// components/layout
 export {
   Columns,
   ColumnsProps,
@@ -71,7 +71,7 @@ export {
   VerticalSpaceSpace
 } from './components/layout/vertical-space/vertical-space'
 
-// main
+// components/main
 export { Divider } from './components/main/divider/divider'
 export { Layer, LayerType, LayerProps } from './components/main/layer/layer'
 export { LoadingIndicator } from './components/main/loading-indicator/loading-indicator'
@@ -99,7 +99,7 @@ export {
   DOWN_KEY_CODE,
   DELETE_KEY_CODE
 } from './utilities/key-codes'
+export { render } from './utilities/render'
 
-// everything else
-export { render } from './render'
+// types
 export type { OnChange, OnSelectedFiles, Props } from './types'

@@ -50,7 +50,7 @@ export function FileUploadDropzone({
     function (event: Event) {
       const files = (event.target as HTMLInputElement).files
       if (files === null) {
-        return
+        throw new Error('`event.target.files` is `null`')
       }
       onSelectedFiles(filterFiles(files), event)
     },
@@ -84,7 +84,7 @@ export function FileUploadDropzone({
     function (event: DragEvent) {
       event.preventDefault()
       if (event.dataTransfer === null) {
-        return
+        throw new Error('`event.dataTransfer` is `null`')
       }
       const files = filterFiles(event.dataTransfer.files)
       onSelectedFiles(files, event)
@@ -116,9 +116,9 @@ export function FileUploadDropzone({
       <input
         {...rest}
         accept={
-          typeof acceptedFileTypes !== 'undefined'
-            ? acceptedFileTypes.join(',')
-            : undefined
+          typeof acceptedFileTypes === 'undefined'
+            ? undefined
+            : acceptedFileTypes.join(',')
         }
         class={styles.input}
         multiple={multiple}

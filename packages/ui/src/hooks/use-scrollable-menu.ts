@@ -1,6 +1,7 @@
 import type { RefObject } from 'preact'
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
+import { getCurrentFromRef } from '../utilities/get-current-from-ref'
 import { DOWN_KEY_CODE, UP_KEY_CODE } from '../utilities/key-codes'
 
 type ItemId = typeof INVALID_ITEM_ID | string
@@ -20,24 +21,25 @@ export function useScrollableMenu(options: {
     changeOnMouseOver = true
   } = options
   const menuElementRef: RefObject<HTMLElement> = useRef(null)
+
   const parseItemElementId = useCallback(
     function (element: HTMLElement): ItemId {
       return element.getAttribute(itemElementAttributeName)
     },
     [itemElementAttributeName]
   )
+
   const getItemElements = useCallback(
     function (): Array<HTMLElement> {
-      const menuElement = menuElementRef.current
-      if (menuElement === null || typeof menuElement === 'undefined') {
-        return []
-      }
       return Array.from(
-        menuElement.querySelectorAll(`[${itemElementAttributeName}]`)
+        getCurrentFromRef(menuElementRef).querySelectorAll(
+          `[${itemElementAttributeName}]`
+        )
       )
     },
     [menuElementRef, itemElementAttributeName]
   )
+
   const getItemIndex = useCallback(
     function (id: ItemId): number {
       if (id === INVALID_ITEM_ID) {
@@ -49,18 +51,16 @@ export function useScrollableMenu(options: {
     },
     [getItemElements, parseItemElementId]
   )
+
   const updateScrollPosition = useCallback(
-    function (id: ItemId): void {
+    function (id: ItemId) {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
       if (index === -1) {
         return
       }
       const selectedElement = itemElements[index]
-      const menuElement = menuElementRef.current
-      if (menuElement === null || typeof menuElement === 'undefined') {
-        return
-      }
+      const menuElement = getCurrentFromRef(menuElementRef)
       if (selectedElement.offsetTop < menuElement.scrollTop) {
         // Selected element is above the visible items at the current scroll position
         menuElement.scrollTop = selectedElement.offsetTop
@@ -75,8 +75,9 @@ export function useScrollableMenu(options: {
     },
     [getItemElements, getItemIndex, menuElementRef]
   )
+
   const handleKeyDown = useCallback(
-    function (event: KeyboardEvent): void {
+    function (event: KeyboardEvent) {
       if (event.keyCode === DOWN_KEY_CODE || event.keyCode === UP_KEY_CODE) {
         const itemElements = getItemElements()
         const index = getItemIndex(selectedItemId)
@@ -103,8 +104,9 @@ export function useScrollableMenu(options: {
       updateScrollPosition
     ]
   )
+
   const handleMouseMove = useCallback(
-    function (event: MouseEvent): void {
+    function (event: MouseEvent) {
       const id = parseItemElementId(event.target as HTMLElement)
       if (id !== selectedItemId) {
         onChange(id)
@@ -112,18 +114,19 @@ export function useScrollableMenu(options: {
     },
     [onChange, parseItemElementId, selectedItemId]
   )
+
   useEffect(
-    function (): void {
-      const menuElement = menuElementRef.current
-      if (menuElement === null || typeof menuElement === 'undefined') {
-        return
-      }
-      menuElement.setAttribute('style', 'position: relative; overflow-y: auto')
+    function () {
+      getCurrentFromRef(menuElementRef).setAttribute(
+        'style',
+        'position: relative; overflow-y: auto'
+      )
     },
     [menuElementRef]
   )
+
   useEffect(
-    function (): void | (() => void) {
+    function () {
       if (changeOnMouseOver === false) {
         return
       }
@@ -142,5 +145,6 @@ export function useScrollableMenu(options: {
     },
     [changeOnMouseOver, getItemElements, handleMouseMove]
   )
+
   return { handleKeyDown, menuElementRef, updateScrollPosition }
 }

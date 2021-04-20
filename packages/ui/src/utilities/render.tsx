@@ -1,5 +1,5 @@
 /** @jsx h */
-import './css/base.css'
+import '../css/base.css'
 
 import type { FunctionComponent } from 'preact'
 import { h, render as preactRender } from 'preact'

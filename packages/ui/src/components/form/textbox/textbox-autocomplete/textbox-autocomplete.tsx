@@ -5,6 +5,7 @@ import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
 import type { OnChange, Props } from '../../../../types'
+import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
 import {
   BACKSPACE_KEY_CODE,
   DELETE_KEY_CODE,
@@ -45,6 +46,7 @@ export interface TextboxAutocompleteProps {
   onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
+  propagateEscapeKeyDown?: boolean
   strict?: boolean
   top?: boolean
   value: typeof TEXTBOX_MIXED_VALUE | string
@@ -65,6 +67,7 @@ export function TextboxAutocomplete({
   onChange,
   options,
   placeholder,
+  propagateEscapeKeyDown = true,
   strict = false,
   top = false,
   value: committedValue,
@@ -291,34 +294,24 @@ export function TextboxAutocomplete({
         keyCode === ESCAPE_KEY_CODE ||
         keyCode === TAB_KEY_CODE // Tabbing away from this component
       ) {
-        if (keyCode === ENTER_KEY_CODE || keyCode === ESCAPE_KEY_CODE) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-        if (isMenuVisible === false && keyCode === ENTER_KEY_CODE) {
+        event.preventDefault()
+        if (keyCode === ENTER_KEY_CODE && isMenuVisible === false) {
           // Show the menu if it is currently hidden.
           setIsMenuVisible(true)
+          event.stopPropagation()
           return
         }
-        if (isMenuVisible === false && keyCode === ESCAPE_KEY_CODE) {
+        if (keyCode === ESCAPE_KEY_CODE && isMenuVisible === false) {
           // Blur the textbox if the menu is currently already hidden.
-          if (
-            inputElementRef.current === null ||
-            typeof inputElementRef.current === 'undefined'
-          ) {
-            return
+          getCurrentFromRef(inputElementRef).blur()
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
           }
-          inputElementRef.current.blur()
           return
         }
+        event.stopPropagation()
         shouldSelectAllRef.current = false
-        if (
-          menuElementRef.current === null ||
-          typeof menuElementRef.current === 'undefined'
-        ) {
-          return
-        }
-        scrollTopRef.current = menuElementRef.current.scrollTop
+        scrollTopRef.current = getCurrentFromRef(menuElementRef).scrollTop
         setIsMenuVisible(false)
         return
       }
@@ -329,13 +322,10 @@ export function TextboxAutocomplete({
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        if (
-          inputElementRef.current === null ||
-          typeof inputElementRef.current === 'undefined'
-        ) {
-          return
-        }
-        const nextValue = computeNextValue(inputElementRef.current, event.key)
+        const nextValue = computeNextValue(
+          getCurrentFromRef(inputElementRef),
+          event.key
+        )
         if (isValidValue(nextValue) === false) {
           event.preventDefault()
         }
@@ -347,6 +337,7 @@ export function TextboxAutocomplete({
       currentValue,
       findMenuItemById,
       isMenuVisible,
+      propagateEscapeKeyDown,
       strict,
       isValidValue,
       menuItems.length,
@@ -366,13 +357,7 @@ export function TextboxAutocomplete({
       ) {
         return
       }
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      const value = inputElementRef.current.value
+      const value = getCurrentFromRef(inputElementRef).value
       const index = getIdByValue(value)
       setIsMenuVisible(true)
       setSelectedId(index)
@@ -384,19 +369,10 @@ export function TextboxAutocomplete({
 
   const handleOptionClick: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
     function (event: MouseEvent): void {
-      if (
-        menuElementRef.current === null ||
-        typeof menuElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      scrollTopRef.current = menuElementRef.current.scrollTop
+      scrollTopRef.current = getCurrentFromRef(menuElementRef).scrollTop
       const id = (event.target as HTMLElement).getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
-      )
-      if (id === null) {
-        throw new Error(`No ${ITEM_ID_DATA_ATTRIBUTE} attribute`)
-      }
+      ) as string
       setSelectedId(id)
       setIsMenuVisible(false)
       const menuItem = findMenuItemById(id)
@@ -411,15 +387,11 @@ export function TextboxAutocomplete({
 
   const handlePaste: JSX.ClipboardEventHandler<HTMLInputElement> = useCallback(
     function (event: ClipboardEvent) {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined' ||
-        event.clipboardData === null
-      ) {
-        return
+      if (event.clipboardData === null) {
+        throw new Error('`event.clipboardData` is `null`')
       }
       const nextValue = computeNextValue(
-        inputElementRef.current,
+        getCurrentFromRef(inputElementRef),
         event.clipboardData.getData('Text')
       )
       if (isValidValue(nextValue) === false) {
@@ -433,16 +405,11 @@ export function TextboxAutocomplete({
   // `shouldSelectAllRef` is set to `true`
   useLayoutEffect(
     function () {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
+      const inputElement = getCurrentFromRef(inputElementRef)
       if (shouldSelectAllRef.current === true) {
         shouldSelectAllRef.current = false
-        inputElementRef.current.focus()
-        inputElementRef.current.select()
+        inputElement.focus()
+        inputElement.select()
       }
     },
     [committedValue]
@@ -451,22 +418,16 @@ export function TextboxAutocomplete({
   // Restore the original menu scroll position and update focus
   useLayoutEffect(
     function () {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined' ||
-        menuElementRef.current === null ||
-        typeof menuElementRef.current === 'undefined'
-      ) {
-        return
-      }
+      const inputElement = getCurrentFromRef(inputElementRef)
+      const menuElement = getCurrentFromRef(menuElementRef)
       if (isMenuVisible === false) {
-        inputElementRef.current.blur()
+        inputElement.blur()
         setCurrentValue(EMPTY_STRING)
         return
       }
-      menuElementRef.current.scrollTop = scrollTopRef.current
-      inputElementRef.current.focus()
-      inputElementRef.current.select()
+      menuElement.scrollTop = scrollTopRef.current
+      inputElement.focus()
+      inputElement.select()
     },
     [isMenuVisible]
   )
@@ -474,16 +435,10 @@ export function TextboxAutocomplete({
   // Adjust the menu scroll position so that the selected menu item is always visible
   useLayoutEffect(
     function () {
-      if (
-        menuElementRef.current === null ||
-        typeof menuElementRef.current === 'undefined'
-      ) {
-        return
-      }
       if (isMenuVisible === false || menuItems.length === 0) {
         return
       }
-      const menuElement = menuElementRef.current
+      const menuElement = getCurrentFromRef(menuElementRef)
       if (selectedId === INVALID_ITEM_ID) {
         menuElement.scrollTop = 0
         return
@@ -515,23 +470,16 @@ export function TextboxAutocomplete({
   useLayoutEffect(
     function () {
       function handleWindowMousedown(event: MouseEvent) {
-        if (
-          menuElementRef.current === null ||
-          typeof menuElementRef.current === 'undefined' ||
-          rootElementRef.current === null ||
-          typeof rootElementRef.current === 'undefined'
-        ) {
-          return
-        }
+        const rootElement = getCurrentFromRef(rootElementRef)
         if (
           isMenuVisible === false ||
-          rootElementRef.current === event.target ||
-          rootElementRef.current.contains(event.target as HTMLElement)
+          rootElement === event.target ||
+          rootElement.contains(event.target as HTMLElement)
         ) {
           // Exit if we clicked on any DOM element that is part of the component
           return
         }
-        scrollTopRef.current = menuElementRef.current.scrollTop
+        scrollTopRef.current = getCurrentFromRef(menuElementRef).scrollTop
         setIsMenuVisible(false)
       }
       window.addEventListener('mousedown', handleWindowMousedown)

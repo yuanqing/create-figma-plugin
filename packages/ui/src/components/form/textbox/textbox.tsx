@@ -1,11 +1,11 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX } from 'preact'
-import type { RefObject } from 'preact'
+import type { ComponentChildren, JSX, RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
 import type { OnChange, Props } from '../../../types'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
@@ -39,26 +39,15 @@ export function Textbox({
 
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
     function () {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      inputElementRef.current.select()
+      const inputElement = getCurrentFromRef(inputElementRef)
+      inputElement.select()
     },
     []
   )
 
   const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
-      const newValue = inputElementRef.current.value
+      const newValue = getCurrentFromRef(inputElementRef).value
       onChange(newValue, name, event)
     },
     [name, onChange]
@@ -66,18 +55,13 @@ export function Textbox({
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      if (
-        inputElementRef.current === null ||
-        typeof inputElementRef.current === 'undefined'
-      ) {
-        return
-      }
+      const inputElement = getCurrentFromRef(inputElementRef)
       const keyCode = event.keyCode
       if (keyCode === ESCAPE_KEY_CODE) {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        inputElementRef.current.blur()
+        inputElement.blur()
       }
       if (
         value !== TEXTBOX_MIXED_VALUE ||
@@ -86,7 +70,7 @@ export function Textbox({
         return
       }
       event.preventDefault()
-      inputElementRef.current.select()
+      inputElement.select()
     },
     [value, propagateEscapeKeyDown]
   )

@@ -39,13 +39,10 @@ export function RadioButtons<T extends boolean | number | string>({
 }: Props<HTMLInputElement, RadioButtonsProps<T>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      const index = (event.target as HTMLElement).getAttribute(
+      const id = (event.target as HTMLElement).getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
-      )
-      if (index === null) {
-        return
-      }
-      const newValue = options[parseInt(index, 10)].value
+      ) as string
+      const newValue = options[parseInt(id, 10)].value
       onChange(newValue, name, event)
     },
     [name, onChange, options]

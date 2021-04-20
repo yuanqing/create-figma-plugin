@@ -74,8 +74,8 @@ export const BooleanValue = function () {
     <RadioButtons
       onChange={setValue}
       options={[
-        { children: <Text>true</Text>, value: true },
-        { children: <Text>false</Text>, value: false }
+        { children: <Text>foo</Text>, value: true },
+        { children: <Text>bar</Text>, value: false }
       ]}
       value={value}
     />
@@ -88,9 +88,9 @@ export const NumericValue = function () {
     <RadioButtons
       onChange={setValue}
       options={[
-        { children: <Text>1</Text>, value: 1 },
-        { children: <Text>2</Text>, value: 2 },
-        { children: <Text>3</Text>, value: 3 }
+        { children: <Text>foo</Text>, value: 1 },
+        { children: <Text>bar</Text>, value: 2 },
+        { children: <Text>baz</Text>, value: 3 }
       ]}
       value={value}
     />
