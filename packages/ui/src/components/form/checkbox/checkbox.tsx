@@ -70,7 +70,7 @@ export function Checkbox({
         name={name}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        tabIndex={disabled === true ? -1 : undefined}
+        tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
       />
       <div class={styles.text}>{children}</div>

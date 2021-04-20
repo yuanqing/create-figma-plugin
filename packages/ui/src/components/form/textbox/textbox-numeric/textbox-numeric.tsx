@@ -31,7 +31,7 @@ export interface TextboxNumericProps {
   name?: string
   noBorder?: boolean
   onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string>
-  onNumberChange?: (value: null | number, name?: string) => void
+  onNumberChange?: (value: null | number, name: undefined | string) => void
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: typeof TEXTBOX_MIXED_VALUE | string
@@ -236,7 +236,7 @@ export function TextboxNumeric({
         onKeyDown={handleKeyDown}
         onPaste={handlePaste}
         placeholder={placeholder}
-        tabIndex={disabled === true ? -1 : undefined}
+        tabIndex={disabled === true ? -1 : 0}
         type="text"
         value={value === TEXTBOX_MIXED_VALUE ? 'Mixed' : value}
       />

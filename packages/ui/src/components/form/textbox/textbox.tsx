@@ -93,7 +93,7 @@ export function Textbox({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        tabIndex={disabled === true ? -1 : undefined}
+        tabIndex={disabled === true ? -1 : 0}
         type={type}
         value={value === TEXTBOX_MIXED_VALUE ? 'Mixed' : value}
       />

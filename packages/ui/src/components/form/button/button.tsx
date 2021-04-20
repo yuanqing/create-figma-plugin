@@ -68,7 +68,7 @@ export function Button({
         disabled={disabled === true}
         onClick={onClick}
         onKeyDown={handleKeyDown}
-        tabIndex={disabled === true ? -1 : undefined}
+        tabIndex={disabled === true ? -1 : 0}
       >
         {children}
       </button>

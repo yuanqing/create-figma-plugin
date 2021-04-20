@@ -521,7 +521,7 @@ export function TextboxAutocomplete({
         onKeyUp={disabled === true ? undefined : handleKeyUp}
         onPaste={disabled === true ? undefined : handlePaste}
         placeholder={placeholder}
-        tabIndex={disabled === true ? -1 : undefined}
+        tabIndex={disabled === true ? -1 : 0}
         type="text"
         value={committedValue === null ? '' : committedValue}
       />

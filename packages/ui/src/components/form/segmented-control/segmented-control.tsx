@@ -91,7 +91,7 @@ export function SegmentedControl<T extends boolean | number | string>({
     <div
       class={styles.segmentedControl}
       onKeyDown={disabled === true ? undefined : handleKeyDown}
-      tabIndex={disabled === true ? -1 : undefined}
+      tabIndex={disabled === true ? -1 : 0}
     >
       {options.map(function (option, index) {
         const children =

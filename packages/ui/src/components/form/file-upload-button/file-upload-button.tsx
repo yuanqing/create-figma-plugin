@@ -89,7 +89,7 @@ export function FileUploadButton({
         onChange={handleChange}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        tabIndex={disabled === true ? -1 : undefined}
+        tabIndex={disabled === true ? -1 : 0}
         title=""
         type="file"
       />
