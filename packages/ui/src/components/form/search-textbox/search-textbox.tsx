@@ -6,8 +6,8 @@ import { useCallback, useRef } from 'preact/hooks'
 import type { OnChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
-import { iconCross } from '../../icon/icon-cross/icon-cross'
-import { iconSearch } from '../../icon/icon-search/icon-search'
+import { IconCross } from '../../icon/icon-cross/icon-cross'
+import { IconSearch } from '../../icon/icon-search/icon-search'
 import styles from './search-textbox.css'
 
 export interface SearchTextboxProps {
@@ -90,14 +90,16 @@ export function SearchTextbox({
         type="text"
         value={value === null ? '' : value}
       />
-      <div class={styles.searchIcon}>{iconSearch}</div>
+      <div class={styles.searchIcon}>
+        <IconSearch />
+      </div>
       {value === null || value === '' ? null : (
         <button
           class={styles.clearButton}
           onClick={handleClearButtonClick}
           tabIndex={0}
         >
-          {iconCross}
+          <IconCross />
         </button>
       )}
     </div>

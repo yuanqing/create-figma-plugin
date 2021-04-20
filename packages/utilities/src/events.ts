@@ -1,11 +1,9 @@
-import type { EventHandler } from './types'
+export type EventHandler = {
+  name: string
+  handler: (...args: any) => void
+}
 
-const eventHandlers: {
-  [id: string]: {
-    eventName: string
-    eventHandler: EventHandler
-  }
-} = {}
+const eventHandlers: Record<string, EventHandler> = {}
 
 let currentId = 0
 
@@ -15,12 +13,13 @@ let currentId = 0
  * @returns Returns a function for deregistering the `eventHandler`.
  * @category Events
  */
-export function on<E extends EventHandler>(
-  eventName: string,
-  eventHandler: E
+export function on<T extends EventHandler>(
+  name: T['name'],
+  handler: T['handler']
 ): () => void {
-  const id = `${currentId++}`
-  eventHandlers[id] = { eventHandler, eventName }
+  const id = `${currentId}`
+  currentId += 1
+  eventHandlers[id] = { handler, name }
   return function () {
     delete eventHandlers[id]
   }
@@ -33,17 +32,17 @@ export function on<E extends EventHandler>(
  * @returns Returns a function for deregistering the `eventHandler`.
  * @category Events
  */
-export function once<E extends EventHandler>(
-  eventName: string,
-  eventHandler: E
+export function once<T extends EventHandler>(
+  name: T['name'],
+  handler: T['handler']
 ): () => void {
   let done = false
-  return on(eventName, function (...args) {
+  return on(name, function (...args) {
     if (done === true) {
       return
     }
     done = true
-    eventHandler(...args)
+    handler(...args)
   })
 }
 
@@ -60,15 +59,15 @@ export function once<E extends EventHandler>(
  */
 export const emit =
   typeof window === 'undefined'
-    ? function <E extends EventHandler>(
-        eventName: string,
-        ...args: Parameters<E>
+    ? function <T extends EventHandler>(
+        eventName: T['name'],
+        ...args: Parameters<T['handler']>
       ) {
         figma.ui.postMessage([eventName, ...args])
       }
-    : function <E extends EventHandler>(
-        eventName: string,
-        ...args: Parameters<E>
+    : function <T extends EventHandler>(
+        eventName: T['name'],
+        ...args: Parameters<T['handler']>
       ) {
         window.parent.postMessage(
           {
@@ -78,10 +77,10 @@ export const emit =
         )
       }
 
-function invokeEventHandler(eventName: string, args: Array<unknown>) {
+function invokeEventHandler(name: string, args: Array<unknown>) {
   for (const id in eventHandlers) {
-    if (eventHandlers[id].eventName === eventName) {
-      eventHandlers[id].eventHandler.apply(null, args)
+    if (eventHandlers[id].name === name) {
+      eventHandlers[id].handler.apply(null, args)
     }
   }
 }

@@ -1,8 +1,10 @@
 /** @jsx h */
-import { iconComponent } from './icon-component'
+import { h } from 'preact'
+
+import { IconComponent } from './icon-component'
 
 export default { title: 'ui/Icon/Component' }
 
 export const Component = function () {
-  return iconComponent
+  return <IconComponent />
 }

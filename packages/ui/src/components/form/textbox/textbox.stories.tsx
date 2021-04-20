@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { iconSearch } from '../../icon/icon-search/icon-search'
+import { IconSearch } from '../../icon/icon-search/icon-search'
 import { Textbox } from './textbox'
 
 export default { title: 'ui/Form/Textbox' }
@@ -34,7 +34,7 @@ export const NoBorder = function () {
 
 export const Icon = function () {
   const [value, setValue] = useState<null | string>('Text')
-  return <Textbox icon={iconSearch} onChange={setValue} value={value} />
+  return <Textbox icon={<IconSearch />} onChange={setValue} value={value} />
 }
 
 export const TextIcon = function () {

@@ -1,4 +1,5 @@
 export { emit, on, once } from './events'
+export type { EventHandler } from './events'
 export { getAbsolutePosition } from './nodes/absolute-position/get-absolute-position'
 export { setAbsolutePosition } from './nodes/absolute-position/set-absolute-position'
 export { areSiblingNodes } from './nodes/are-sibling-nodes'
@@ -33,5 +34,5 @@ export {
   formatWarningMessage,
   pluralize
 } from './string'
-export type { EventHandler, JsonValue, JsonObject } from './types'
+export type { JsonValue, JsonObject } from './types'
 export { showUI } from './ui'

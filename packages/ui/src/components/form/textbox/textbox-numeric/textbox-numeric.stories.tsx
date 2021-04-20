@@ -3,7 +3,7 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { iconSpaceHorizontal } from '../../../icon/icon-space-horizontal/icon-space-horizontal'
+import { IconSpaceHorizontal } from '../../../icon/icon-space-horizontal/icon-space-horizontal'
 import { TextboxNumeric } from './textbox-numeric'
 
 export default { title: 'ui/Form/Textbox Numeric' }
@@ -88,7 +88,7 @@ export const Icon = function () {
   }
   return (
     <TextboxNumeric
-      icon={iconSpaceHorizontal}
+      icon={<IconSpaceHorizontal />}
       onChange={setString}
       onNumberChange={handleNumberChange}
       value={string}

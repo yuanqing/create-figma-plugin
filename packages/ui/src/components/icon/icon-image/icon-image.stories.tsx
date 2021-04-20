@@ -1,8 +1,10 @@
 /** @jsx h */
-import { iconImage } from './icon-image'
+import { h } from 'preact'
+
+import { IconImage } from './icon-image'
 
 export default { title: 'ui/Icon/Image' }
 
 export const Image = function () {
-  return iconImage
+  return <IconImage />
 }

@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { iconSearch } from '../../../icon/icon-search/icon-search'
+import { IconSearch } from '../../../icon/icon-search/icon-search'
 import {
   TextboxAutocomplete,
   TextboxAutocompleteOption
@@ -112,7 +112,7 @@ export const Icon = function () {
   const [value, setValue] = useState<null | string>('foo')
   return (
     <TextboxAutocomplete
-      icon={iconSearch}
+      icon={<IconSearch />}
       onChange={setValue}
       options={options}
       value={value}

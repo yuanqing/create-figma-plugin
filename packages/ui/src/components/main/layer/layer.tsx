@@ -4,13 +4,13 @@ import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 
 import type { Props } from '../../../types'
-import { iconComponent } from '../../icon/icon-component/icon-component'
-import { iconFrame } from '../../icon/icon-frame/icon-frame'
+import { IconComponent } from '../../icon/icon-component/icon-component'
+import { IconFrame } from '../../icon/icon-frame/icon-frame'
 import styles from './layer.css'
 
 const icons = {
-  component: iconComponent,
-  frame: iconFrame
+  component: <IconComponent />,
+  frame: <IconFrame />
 }
 
 export interface LayerProps {

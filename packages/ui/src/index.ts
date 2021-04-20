@@ -35,18 +35,51 @@ export {
 } from './components/form/textbox/textbox-numeric/textbox-numeric'
 
 // components/icon
-export { Icon, IconProps } from './components/icon/icon'
-export { iconCheck } from './components/icon/icon-check/icon-check'
-export { iconCheckCircle } from './components/icon/icon-check-circle/icon-check-circle'
-export { iconComponent } from './components/icon/icon-component/icon-component'
-export { iconCross } from './components/icon/icon-cross/icon-cross'
-export { iconFrame } from './components/icon/icon-frame/icon-frame'
-export { iconImage } from './components/icon/icon-image/icon-image'
-export { iconMoveDown } from './components/icon/icon-move-down/icon-move-down'
-export { iconMoveRight } from './components/icon/icon-move-right/icon-move-right'
-export { iconSearch } from './components/icon/icon-search/icon-search'
-export { iconSpaceHorizontal } from './components/icon/icon-space-horizontal/icon-space-horizontal'
-export { iconSpaceVertical } from './components/icon/icon-space-vertical/icon-space-vertical'
+export { createIcon, IconProps } from './components/icon/create-icon'
+export {
+  IconCheck,
+  IconCheckProps
+} from './components/icon/icon-check/icon-check'
+export {
+  IconCheckCircle,
+  IconCheckCircleProps
+} from './components/icon/icon-check-circle/icon-check-circle'
+export {
+  IconComponent,
+  IconComponentProps
+} from './components/icon/icon-component/icon-component'
+export {
+  IconCross,
+  IconCrossProps
+} from './components/icon/icon-cross/icon-cross'
+export {
+  IconFrame,
+  IconFrameProps
+} from './components/icon/icon-frame/icon-frame'
+export {
+  IconImage,
+  IconImageProps
+} from './components/icon/icon-image/icon-image'
+export {
+  IconMoveDown,
+  IconMoveDownProps
+} from './components/icon/icon-move-down/icon-move-down'
+export {
+  IconMoveRight,
+  IconMoveRightProps
+} from './components/icon/icon-move-right/icon-move-right'
+export {
+  IconSearch,
+  IconSearchProps
+} from './components/icon/icon-search/icon-search'
+export {
+  IconSpaceHorizontal,
+  IconSpaceHorizontalProps
+} from './components/icon/icon-space-horizontal/icon-space-horizontal'
+export {
+  IconSpaceVertical,
+  IconSpaceVerticalProps
+} from './components/icon/icon-space-vertical/icon-space-vertical'
 
 // components/layout
 export {
@@ -72,9 +105,12 @@ export {
 } from './components/layout/vertical-space/vertical-space'
 
 // components/main
-export { Divider } from './components/main/divider/divider'
+export { Divider, DividerProps } from './components/main/divider/divider'
 export { Layer, LayerType, LayerProps } from './components/main/layer/layer'
-export { LoadingIndicator } from './components/main/loading-indicator/loading-indicator'
+export {
+  LoadingIndicator,
+  LoadingIndicatorProps
+} from './components/main/loading-indicator/loading-indicator'
 export { Preview, PreviewProps } from './components/main/preview/preview'
 export {
   SelectableItem,

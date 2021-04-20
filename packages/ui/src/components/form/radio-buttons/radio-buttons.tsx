@@ -84,7 +84,7 @@ export function RadioButtons<T extends boolean | number | string>({
               disabled={isOptionDisabled === true}
               name={name}
               onChange={handleChange}
-              tabIndex={isOptiondisabled === true ? -1 : 0}
+              tabIndex={isOptionDisabled === true ? -1 : 0}
               type="radio"
               {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}
             />

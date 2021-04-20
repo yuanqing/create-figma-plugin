@@ -6,7 +6,7 @@ import { useCallback } from 'preact/hooks'
 
 import type { OnChange, Props } from '../../../types'
 import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
-import { iconCheck } from '../../icon/icon-check/icon-check'
+import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
 
 export interface SelectableItemProps {
@@ -82,7 +82,11 @@ export function SelectableItem({
         type="checkbox"
       />
       <div class={styles.text}>{children}</div>
-      {value === true ? <div class={styles.icon}>{iconCheck}</div> : null}
+      {value === true ? (
+        <div class={styles.icon}>
+          <IconCheck />
+        </div>
+      ) : null}
     </label>
   )
 }
