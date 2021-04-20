@@ -25,7 +25,10 @@ export function useForm<State extends JsonObject>(
   )
 
   const handleChange = useCallback(
-    function <T>(value: T, name: string): void {
+    function <T>(value: T, name: undefined | string) {
+      if (typeof name === 'undefined') {
+        throw new Error('`name` is undefined')
+      }
       setState(function (previousState: State) {
         const state = {
           ...previousState,
@@ -38,10 +41,7 @@ export function useForm<State extends JsonObject>(
   )
 
   const handleKeyDown = useCallback(
-    function (event: KeyboardEvent): void {
-      if (typeof event === 'undefined') {
-        return
-      }
+    function (event: KeyboardEvent) {
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
           if (typeof onClose === 'function') {
@@ -83,10 +83,7 @@ export function useForm<State extends JsonObject>(
   )
 
   const handleSubmit = useCallback(
-    function (event: Event): void {
-      if (typeof event !== 'undefined') {
-        event.preventDefault()
-      }
+    function (event: Event) {
       if (
         typeof onSubmit === 'function' &&
         (typeof validate !== 'function' || validate(state) === true)
@@ -98,7 +95,7 @@ export function useForm<State extends JsonObject>(
   )
 
   const isValid = useCallback(
-    function (): boolean {
+    function () {
       if (typeof validate !== 'function') {
         throw new Error('Need a `validate` callback')
       }
@@ -117,7 +114,7 @@ export function useForm<State extends JsonObject>(
     [handleKeyDown]
   )
 
-  useEffect(function (): void {
+  useEffect(function () {
     const focusableElement = document.querySelector(
       `[${INITIAL_FOCUS_DATA_ATTRIBUTE}]`
     ) as HTMLElement
