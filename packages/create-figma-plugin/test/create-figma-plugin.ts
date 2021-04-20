@@ -1,6 +1,6 @@
 import { pathExists } from 'fs-extra'
 import { join } from 'path'
-import * as rimraf from 'rimraf'
+import rimraf from 'rimraf'
 import { test } from 'tap'
 
 import { createFigmaPluginAsync } from '../src/create-figma-plugin-async'

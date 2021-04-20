@@ -1,7 +1,7 @@
 import findUp from 'find-up'
 import { ensureSymlink, pathExists, readFile } from 'fs-extra'
 import { join } from 'path'
-import * as rimraf from 'rimraf'
+import rimraf from 'rimraf'
 import { test } from 'tap'
 
 import { buildAsync } from '../src/build-async'
