@@ -3,3 +3,4 @@
 *.css.d.ts
 build/
 node_modules/
+manifest.json

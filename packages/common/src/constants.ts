@@ -2,9 +2,9 @@ export const constants = {
   apiVersion: '1.0.0',
   build: {
     directoryName: 'build',
-    manifestFilePath: 'build/manifest.json',
-    pluginCodeFilePath: 'main.js',
-    pluginUiFilePath: 'ui.js'
+    manifestFilePath: 'manifest.json',
+    pluginCodeFilePath: 'build/main.js',
+    pluginUiFilePath: 'build/ui.js'
   },
   defaultTemplate: 'default',
   packageJson: {
