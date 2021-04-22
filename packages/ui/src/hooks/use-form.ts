@@ -13,9 +13,9 @@ export function useForm<State extends JsonObject>(
   initialState: State,
   options: {
     transform?: (state: State) => State
-    validate?: (state: State) => boolean
-    onSubmit?: (state: State, event: Event) => void
-    onClose?: (state: State, event: Event) => void
+    validate: (state: State) => boolean
+    onSubmit: (state: State, event: Event) => void
+    onClose: (state: State, event: Event) => void
   }
 ) {
   const { transform, validate, onSubmit, onClose } = options
@@ -44,16 +44,11 @@ export function useForm<State extends JsonObject>(
     function (event: KeyboardEvent) {
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
-          if (typeof onClose === 'function') {
-            onClose(state, event)
-          }
+          onClose(state, event)
           return
         }
         case ENTER_KEY_CODE: {
-          if (
-            typeof onSubmit === 'function' &&
-            (typeof validate !== 'function' || validate(state) === true)
-          ) {
+          if (validate(state) === true) {
             onSubmit(state, event)
           }
           return
@@ -84,10 +79,7 @@ export function useForm<State extends JsonObject>(
 
   const handleSubmit = useCallback(
     function (event: Event) {
-      if (
-        typeof onSubmit === 'function' &&
-        (typeof validate !== 'function' || validate(state) === true)
-      ) {
+      if (validate(state) === true) {
         onSubmit(state, event)
       }
     },
@@ -96,9 +88,6 @@ export function useForm<State extends JsonObject>(
 
   const isValid = useCallback(
     function () {
-      if (typeof validate !== 'function') {
-        throw new Error('Need a `validate` callback')
-      }
       return validate(state) === true
     },
     [state, validate]
