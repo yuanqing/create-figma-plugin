@@ -1,0 +1,6 @@
+{
+  "api": "1.0.0",
+  "id": "figma-plugin",
+  "main": "build/main.js",
+  "name": "figma-plugin"
+}

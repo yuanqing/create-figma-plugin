@@ -1,0 +1,7 @@
+{
+  "api": "1.0.0",
+  "id": "42",
+  "main": "build/main.js",
+  "name": "x",
+  "ui": "build/ui.js"
+}

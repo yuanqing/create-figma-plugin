@@ -14,11 +14,11 @@ test('no config', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: 'figma-plugin',
-    main: 'main.js',
+    main: 'build/main.js',
     name: 'figma-plugin'
   })
   t.ok(await pathExists('build/main.js'))
@@ -34,11 +34,11 @@ test('basic command', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
-    main: 'main.js',
+    main: 'build/main.js',
     name: 'x'
   })
   t.ok(await pathExists('build/main.js'))
@@ -54,13 +54,13 @@ test('command with UI', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
-    main: 'main.js',
+    main: 'build/main.js',
     name: 'x',
-    ui: 'ui.js'
+    ui: 'build/ui.js'
   })
   t.ok(await pathExists('build/main.js'))
   t.ok(await pathExists('build/ui.js'))
@@ -75,11 +75,11 @@ test('multiple menu commands', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
-    main: 'main.js',
+    main: 'build/main.js',
     menu: [
       {
         command: 'src/foo.ts--default',
@@ -94,7 +94,7 @@ test('multiple menu commands', async function (t) {
       }
     ],
     name: 'x',
-    ui: 'ui.js'
+    ui: 'build/ui.js'
   })
   t.ok(await pathExists('build/main.js'))
   t.ok(await pathExists('build/ui.js'))
@@ -109,11 +109,11 @@ test('nested menu commands', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
-    main: 'main.js',
+    main: 'build/main.js',
     menu: [
       {
         menu: [
@@ -140,11 +140,11 @@ test('relaunch button', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
-    main: 'main.js',
+    main: 'build/main.js',
     name: 'x',
     relaunchButtons: [
       {
@@ -157,7 +157,7 @@ test('relaunch button', async function (t) {
         name: 'y'
       }
     ],
-    ui: 'ui.js'
+    ui: 'build/ui.js'
   })
   t.ok(await pathExists('build/main.js'))
   t.ok(await pathExists('build/ui.js'))
@@ -173,13 +173,13 @@ test('custom styles', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
-    main: 'main.js',
+    main: 'build/main.js',
     name: 'x',
-    ui: 'ui.js'
+    ui: 'build/ui.js'
   })
   t.ok(await pathExists('src/styles.css.d.ts'))
   t.ok(await pathExists('build/main.js'))
@@ -195,13 +195,13 @@ test('preact', async function (t) {
   t.notOk(await pathExists('node_modules'))
   await createFigmaTypingsSymlinksAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('build/manifest.json', 'utf8'))
+  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
   t.same(manifestJson, {
     api: '1.0.0',
     id: '42',
-    main: 'main.js',
+    main: 'build/main.js',
     name: 'x',
-    ui: 'ui.js'
+    ui: 'build/ui.js'
   })
   t.ok(await pathExists('build/main.js'))
   t.ok(await pathExists('build/ui.js'))

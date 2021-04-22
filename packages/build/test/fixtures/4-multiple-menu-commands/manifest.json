@@ -1,0 +1,20 @@
+{
+  "api": "1.0.0",
+  "id": "42",
+  "main": "build/main.js",
+  "name": "x",
+  "ui": "build/ui.js",
+  "menu": [
+    {
+      "name": "y",
+      "command": "src/foo.ts--default"
+    },
+    {
+      "separator": true
+    },
+    {
+      "name": "z",
+      "command": "src/bar/main.ts--default"
+    }
+  ]
+}
