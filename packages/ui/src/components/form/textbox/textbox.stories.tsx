@@ -1,10 +1,10 @@
 /** @jsx h */
+import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { IconSearch } from '../../icon/icon-search/icon-search'
 import { Textbox } from './textbox'
-import { MIXED_STRING } from './utilities/mixed-constants'
 
 export default { title: 'Components/Form/Textbox' }
 

@@ -1,8 +1,10 @@
 /** @jsx h */
 import {
   evaluateNumericExpression,
-  isValidNumericInput
-} from '@create-figma-plugin/utilities/lib/number'
+  isValidNumericInput,
+  MIXED_NUMBER,
+  MIXED_STRING
+} from '@create-figma-plugin/utilities'
 import classnames from '@sindresorhus/class-names'
 import type { ComponentChildren, JSX, RefObject } from 'preact'
 import { h } from 'preact'
@@ -18,7 +20,6 @@ import {
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import { MIXED_NUMBER, MIXED_STRING } from '../utilities/mixed-constants'
 
 export interface TextboxNumericProps<T extends string> {
   disabled?: boolean

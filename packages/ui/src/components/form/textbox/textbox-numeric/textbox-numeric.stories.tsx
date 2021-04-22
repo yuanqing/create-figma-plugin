@@ -1,10 +1,10 @@
 /** @jsx h */
 /* eslint-disable no-console */
+import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { IconSpaceHorizontal } from '../../../icon/icon-space-horizontal/icon-space-horizontal'
-import { MIXED_NUMBER, MIXED_STRING } from '../utilities/mixed-constants'
 import { TextboxNumeric } from './textbox-numeric'
 
 export default { title: 'Components/Form/Textbox Numeric' }

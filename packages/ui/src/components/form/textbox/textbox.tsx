@@ -1,4 +1,5 @@
 /** @jsx h */
+import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import classnames from '@sindresorhus/class-names'
 import type { ComponentChildren, JSX, RefObject } from 'preact'
 import { h } from 'preact'
@@ -9,7 +10,6 @@ import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
-import { MIXED_STRING } from './utilities/mixed-constants'
 
 export interface TextboxProps<T extends string> {
   disabled?: boolean
