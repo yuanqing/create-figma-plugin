@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks'
 import { Text } from '../../main/text/text'
 import { Checkbox } from './checkbox'
 
-export default { title: 'ui/Form/Checkbox' }
+export default { title: 'Components/Form/Checkbox' }
 
 export const Unselected = function () {
   const [value, setValue] = useState(false)

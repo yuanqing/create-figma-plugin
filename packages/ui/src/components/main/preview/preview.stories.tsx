@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Preview } from './preview'
 
-export default { title: 'ui/Main/Preview' }
+export default { title: 'Components/Main/Preview' }
 
 export const Default = function () {
   return <Preview>Preview</Preview>

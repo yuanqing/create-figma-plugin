@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Columns } from './columns'
 
-export default { title: 'ui/Layout/Columns' }
+export default { title: 'Components/Layout/Columns' }
 
 export const NoSpace = function () {
   const style = { backgroundColor: '#daebf7' }

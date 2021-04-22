@@ -5,7 +5,7 @@ import { h } from 'preact'
 import { Text } from '../../main/text/text'
 import { FileUploadDropzone } from './file-upload-dropzone'
 
-export default { title: 'ui/Form/File Upload Dropzone' }
+export default { title: 'Components/Form/File Upload Dropzone' }
 
 export const Default = function () {
   function handleSelectedFiles(files: Array<File>, event: Event) {

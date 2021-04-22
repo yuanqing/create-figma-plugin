@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Divider } from './divider'
 
-export default { title: 'ui/Main/Divider' }
+export default { title: 'Components/Main/Divider' }
 
 export const Default = function () {
   return <Divider />

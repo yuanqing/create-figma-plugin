@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Inline } from './inline'
 
-export default { title: 'ui/Layout/Inline' }
+export default { title: 'Components/Layout/Inline' }
 
 export const NoSpace = function () {
   const style = { backgroundColor: '#daebf7' }

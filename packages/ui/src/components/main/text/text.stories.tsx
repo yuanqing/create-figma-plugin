@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Text } from './text'
 
-export default { title: 'ui/Main/Text' }
+export default { title: 'Components/Main/Text' }
 
 export const Default = function () {
   return <Text>Text</Text>

@@ -4,7 +4,7 @@ import { h } from 'preact'
 
 import { Button } from './button'
 
-export default { title: 'ui/Form/Button' }
+export default { title: 'Components/Form/Button' }
 
 export const Default = function () {
   function handleClick(event: MouseEvent) {

@@ -4,7 +4,7 @@ import { useState } from 'preact/hooks'
 
 import { SegmentedControl } from './segmented-control'
 
-export default { title: 'ui/Form/Segmented Control' }
+export default { title: 'Components/Form/Segmented Control' }
 
 export const Unselected = function () {
   const [value, setValue] = useState<null | string>(null)

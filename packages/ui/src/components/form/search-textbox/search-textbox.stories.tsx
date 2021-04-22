@@ -4,7 +4,7 @@ import { useState } from 'preact/hooks'
 
 import { SearchTextbox } from './search-textbox'
 
-export default { title: 'ui/Form/Search Textbox' }
+export default { title: 'Components/Form/Search Textbox' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')

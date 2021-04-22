@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks'
 import { Text } from '../../main/text/text'
 import { RadioButtons } from './radio-buttons'
 
-export default { title: 'ui/Form/Radio Buttons' }
+export default { title: 'Components/Form/Radio Buttons' }
 
 export const Unselected = function () {
   const [value, setValue] = useState<null | string>(null)

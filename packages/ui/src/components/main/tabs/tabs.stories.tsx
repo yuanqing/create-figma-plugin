@@ -4,7 +4,7 @@ import { useState } from 'preact/hooks'
 
 import { Tabs } from './tabs'
 
-export default { title: 'ui/Main/Tabs' }
+export default { title: 'Components/Main/Tabs' }
 
 export const Unselected = function () {
   const [value, setValue] = useState<string | null>(null)

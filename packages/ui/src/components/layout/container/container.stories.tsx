@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Container } from './container'
 
-export default { title: 'ui/Layout/Container' }
+export default { title: 'Components/Layout/Container' }
 
 export const ExtraSmallSpace = function () {
   const style = { backgroundColor: '#daebf7' }

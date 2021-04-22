@@ -4,7 +4,7 @@ import { h } from 'preact'
 
 import { FileUploadButton } from './file-upload-button'
 
-export default { title: 'ui/Form/File Upload Button' }
+export default { title: 'Components/Form/File Upload Button' }
 
 export const Default = function () {
   function handleSelectedFiles(files: Array<File>, event: Event) {

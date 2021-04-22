@@ -4,7 +4,7 @@ import { useState } from 'preact/hooks'
 
 import { Layer } from './layer'
 
-export default { title: 'ui/Main/Layer' }
+export default { title: 'Components/Main/Layer' }
 
 export const Frame = function () {
   const [selected, setSelected] = useState(false)
