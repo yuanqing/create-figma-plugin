@@ -5,8 +5,10 @@
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
-export function deduplicateNodes(nodes: Array<SceneNode>): Array<SceneNode> {
-  const result: { [id: string]: SceneNode } = {}
+export function deduplicateNodes<T extends SceneNode>(
+  nodes: Array<T>
+): Array<T> {
+  const result: Record<string, T> = {}
   for (const node of nodes) {
     result[node.id] = node
   }

@@ -3,11 +3,11 @@
  *
  * @category Node
  */
-export function computeSiblingNodes(
-  nodes: Array<SceneNode>
-): Array<Array<SceneNode>> {
+export function computeSiblingNodes<T extends SceneNode>(
+  nodes: Array<T>
+): Array<Array<T>> {
   const groups = resolveGroups(nodes)
-  const result = []
+  const result: Array<Array<T>> = []
   for (const group of groups) {
     const parent = group[0].parent
     if (parent === null) {
@@ -31,8 +31,8 @@ export function computeSiblingNodes(
   return result
 }
 
-function resolveGroups(nodes: Array<SceneNode>): Array<Array<SceneNode>> {
-  const result: { [parentId: string]: Array<SceneNode> } = {}
+function resolveGroups<T extends SceneNode>(nodes: Array<T>): Array<Array<T>> {
+  const result: Record<string, Array<T>> = {}
   for (const node of nodes) {
     const parent = node.parent
     if (parent === null) {

@@ -5,7 +5,7 @@
  */
 export function setAbsolutePosition(
   node: SceneNode,
-  vector: { x?: number; y?: number }
+  vector: Partial<Vector>
 ): void {
   if (typeof vector.x === 'undefined' && typeof vector.y === 'undefined') {
     throw new Error('Specify at least one of `x` or `y`')

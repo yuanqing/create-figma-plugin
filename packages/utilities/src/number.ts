@@ -1,3 +1,5 @@
+import { MIXED_NUMBER, MIXED_STRING } from './constants'
+
 const floatOperandRegex = /^-?\d*(?:\.\d*)?$/
 const integerOperandRegex = /^-?\d*$/
 const operatorRegex = /[+\-*/]/
@@ -60,4 +62,14 @@ export function evaluateNumericExpression(value: string): null | number {
     return eval(value) // eslint-disable-line no-eval
   }
   return parseFloat(value)
+}
+
+export function mapTextboxNumberToString(value: null | number): string {
+  if (value === null) {
+    return ''
+  }
+  if (value === MIXED_NUMBER) {
+    return MIXED_STRING
+  }
+  return `${value}`
 }

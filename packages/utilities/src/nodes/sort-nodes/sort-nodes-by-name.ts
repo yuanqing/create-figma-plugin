@@ -7,7 +7,9 @@ import naturalCompare from 'natural-compare-lite'
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
-export function sortNodesByName(nodes: Array<SceneNode>): Array<SceneNode> {
+export function sortNodesByName<T extends SceneNode>(
+  nodes: Array<T>
+): Array<T> {
   if (nodes.length < 2) {
     return nodes.slice()
   }

@@ -7,9 +7,9 @@ import { areSiblingNodes } from '../are-sibling-nodes'
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
-export function sortNodesByCanonicalOrder(
-  siblingNodes: Array<SceneNode>
-): Array<SceneNode> {
+export function sortNodesByCanonicalOrder<T extends SceneNode>(
+  siblingNodes: Array<T>
+): Array<T> {
   if (siblingNodes.length < 2) {
     return siblingNodes.slice()
   }
