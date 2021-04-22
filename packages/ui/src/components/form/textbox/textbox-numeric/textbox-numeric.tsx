@@ -18,7 +18,7 @@ import {
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import { TEXTBOX_MIXED_VALUE } from '../utilities/textbox-mixed-value'
+import { MIXED_NUMBER, MIXED_STRING } from '../utilities/mixed-constants'
 
 export interface TextboxNumericProps<T extends string> {
   disabled?: boolean
@@ -30,11 +30,11 @@ export interface TextboxNumericProps<T extends string> {
   minimum?: number
   name?: T
   noBorder?: boolean
-  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string, T>
+  onChange: OnChange<string, T>
   onNumberChange?: (value: null | number, name?: T) => void
   placeholder?: string
   propagateEscapeKeyDown?: boolean
-  value: typeof TEXTBOX_MIXED_VALUE | string
+  value: string
 }
 
 const nonDigitRegex = /[^\d.]/
@@ -86,7 +86,7 @@ export function TextboxNumeric<T extends string>({
       }
       if (keyCode === DOWN_KEY_CODE || keyCode === UP_KEY_CODE) {
         event.preventDefault()
-        if (value === TEXTBOX_MIXED_VALUE) {
+        if (value === MIXED_STRING) {
           const delta = event.shiftKey === true ? incrementBig : incrementSmall
           let newValue: number
           if (typeof minimum === 'undefined') {
@@ -152,7 +152,7 @@ export function TextboxNumeric<T extends string>({
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
         const nextValue =
-          value === TEXTBOX_MIXED_VALUE
+          value === MIXED_STRING
             ? event.key
             : computeNextValue(inputElement, event.key)
         if (
@@ -186,6 +186,16 @@ export function TextboxNumeric<T extends string>({
     ]
   )
 
+  const handleMouseUp: JSX.MouseEventHandler<HTMLInputElement> = useCallback(
+    function (event: MouseEvent) {
+      if (value !== MIXED_STRING) {
+        return
+      }
+      event.preventDefault()
+    },
+    [value]
+  )
+
   const handlePaste: JSX.ClipboardEventHandler<HTMLInputElement> = useCallback(
     function (event: ClipboardEvent) {
       if (event.clipboardData === null) {
@@ -207,8 +217,8 @@ export function TextboxNumeric<T extends string>({
       if (typeof onNumberChange === 'undefined') {
         return
       }
-      if (value === TEXTBOX_MIXED_VALUE) {
-        onNumberChange(null, name)
+      if (value === MIXED_STRING) {
+        onNumberChange(MIXED_NUMBER, name)
         return
       }
       const evaluatedValue = evaluateNumericExpression(value)
@@ -234,11 +244,12 @@ export function TextboxNumeric<T extends string>({
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        onMouseUp={handleMouseUp}
         onPaste={handlePaste}
         placeholder={placeholder}
         tabIndex={disabled === true ? -1 : 0}
         type="text"
-        value={value === TEXTBOX_MIXED_VALUE ? 'Mixed' : value}
+        value={value === MIXED_STRING ? 'Mixed' : value}
       />
       {typeof icon === 'undefined' ? null : (
         <div class={styles.icon}>{icon}</div>

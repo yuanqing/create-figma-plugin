@@ -9,18 +9,18 @@ import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
-import { TEXTBOX_MIXED_VALUE } from './utilities/textbox-mixed-value'
+import { MIXED_STRING } from './utilities/mixed-constants'
 
 export interface TextboxProps<T extends string> {
   disabled?: boolean
   icon?: ComponentChildren
   name?: T
   noBorder?: boolean
-  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string, T>
+  onChange: OnChange<string, T>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   type?: 'text' | 'password'
-  value: typeof TEXTBOX_MIXED_VALUE | string
+  value: string
 }
 
 export function Textbox<T extends string>({
@@ -64,7 +64,7 @@ export function Textbox<T extends string>({
         inputElement.blur()
       }
       if (
-        value !== TEXTBOX_MIXED_VALUE ||
+        value !== MIXED_STRING ||
         isKeyCodeCharacterGenerating(keyCode) === true
       ) {
         return
@@ -73,6 +73,16 @@ export function Textbox<T extends string>({
       inputElement.select()
     },
     [value, propagateEscapeKeyDown]
+  )
+
+  const handleMouseUp: JSX.MouseEventHandler<HTMLInputElement> = useCallback(
+    function (event: MouseEvent) {
+      if (value !== MIXED_STRING) {
+        return
+      }
+      event.preventDefault()
+    },
+    [value]
   )
 
   return (
@@ -92,10 +102,11 @@ export function Textbox<T extends string>({
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        onMouseUp={handleMouseUp}
         placeholder={placeholder}
         tabIndex={disabled === true ? -1 : 0}
         type={type}
-        value={value === TEXTBOX_MIXED_VALUE ? 'Mixed' : value}
+        value={value === MIXED_STRING ? 'Mixed' : value}
       />
       {typeof icon === 'undefined' ? null : (
         <div class={styles.icon}>{icon}</div>

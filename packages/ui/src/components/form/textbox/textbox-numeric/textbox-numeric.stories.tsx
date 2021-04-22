@@ -1,15 +1,16 @@
-/* eslint-disable no-console */
 /** @jsx h */
+/* eslint-disable no-console */
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { IconSpaceHorizontal } from '../../../icon/icon-space-horizontal/icon-space-horizontal'
+import { MIXED_NUMBER, MIXED_STRING } from '../utilities/mixed-constants'
 import { TextboxNumeric } from './textbox-numeric'
 
-export default { title: 'ui/Form/Textbox Numeric' }
+export default { title: 'Components/Form/Textbox Numeric' }
 
 export const Empty = function () {
-  const [string, setString] = useState<null | string>('')
+  const [string, setString] = useState('')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -23,7 +24,7 @@ export const Empty = function () {
 }
 
 export const Placeholder = function () {
-  const [string, setString] = useState<null | string>('')
+  const [string, setString] = useState('')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -38,7 +39,7 @@ export const Placeholder = function () {
 }
 
 export const Filled = function () {
-  const [string, setString] = useState<null | string>('42')
+  const [string, setString] = useState('42')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -52,7 +53,7 @@ export const Filled = function () {
 }
 
 export const Disabled = function () {
-  const [string, setString] = useState<null | string>('42')
+  const [string, setString] = useState('42')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -67,7 +68,7 @@ export const Disabled = function () {
 }
 
 export const NoBorder = function () {
-  const [string, setString] = useState<null | string>('42')
+  const [string, setString] = useState('42')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -82,7 +83,7 @@ export const NoBorder = function () {
 }
 
 export const Icon = function () {
-  const [string, setString] = useState<null | string>('42')
+  const [string, setString] = useState('42')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -97,7 +98,7 @@ export const Icon = function () {
 }
 
 export const TextIcon = function () {
-  const [string, setString] = useState<null | string>('42')
+  const [string, setString] = useState('42')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -112,9 +113,9 @@ export const TextIcon = function () {
 }
 
 export const Mixed = function () {
-  const [string, setString] = useState<null | string>(null)
+  const [string, setString] = useState(MIXED_STRING)
   function handleNumberChange(value: null | number) {
-    console.log(value)
+    console.log(value === MIXED_NUMBER)
   }
   return (
     <TextboxNumeric
@@ -126,7 +127,7 @@ export const Mixed = function () {
 }
 
 export const IntegersOnly = function () {
-  const [string, setString] = useState<null | string>('42')
+  const [string, setString] = useState('42')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -141,7 +142,7 @@ export const IntegersOnly = function () {
 }
 
 export const CustomIncrements = function () {
-  const [string, setString] = useState<null | string>('42')
+  const [string, setString] = useState('42')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
@@ -149,7 +150,6 @@ export const CustomIncrements = function () {
     <TextboxNumeric
       incrementBig={8}
       incrementSmall={4}
-      integer
       onChange={setString}
       onNumberChange={handleNumberChange}
       value={string}
@@ -158,13 +158,12 @@ export const CustomIncrements = function () {
 }
 
 export const MinimumMaximum = function () {
-  const [string, setString] = useState<null | string>('0')
+  const [string, setString] = useState('0')
   function handleNumberChange(value: null | number) {
     console.log(value)
   }
   return (
     <TextboxNumeric
-      integer
       maximum={10}
       minimum={0}
       onChange={setString}

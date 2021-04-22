@@ -18,7 +18,6 @@ import {
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
-import { TEXTBOX_MIXED_VALUE } from '../utilities/textbox-mixed-value'
 import textboxAutocompleteStyles from './textbox-autocomplete.css'
 
 export type TextboxAutocompleteOption =
@@ -43,13 +42,13 @@ export interface TextboxAutocompleteProps<T extends string> {
   icon?: ComponentChildren
   name?: T
   noBorder?: boolean
-  onChange: OnChange<typeof TEXTBOX_MIXED_VALUE | string, T>
+  onChange: OnChange<string, T>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   strict?: boolean
   top?: boolean
-  value: typeof TEXTBOX_MIXED_VALUE | string
+  value: string
 }
 
 type ItemId = typeof INVALID_ITEM_ID | string
@@ -79,9 +78,7 @@ export function TextboxAutocomplete<T extends string>({
   const scrollTopRef = useRef(0)
   const shouldSelectAllRef = useRef(false) // Whether to select the contents of the textbox
 
-  const [currentValue, setCurrentValue] = useState<
-    typeof TEXTBOX_MIXED_VALUE | string
-  >(EMPTY_STRING)
+  const [currentValue, setCurrentValue] = useState<string>(EMPTY_STRING)
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [selectedId, setSelectedId] = useState<ItemId>(INVALID_ITEM_ID)
 
@@ -96,8 +93,8 @@ export function TextboxAutocomplete<T extends string>({
   })
 
   const isValidValue = useCallback(
-    function (value: typeof TEXTBOX_MIXED_VALUE | string): boolean {
-      if (value === TEXTBOX_MIXED_VALUE || value === EMPTY_STRING) {
+    function (value: string): boolean {
+      if (value === EMPTY_STRING) {
         return true
       }
       for (const menuItem of menuItems) {
@@ -113,8 +110,8 @@ export function TextboxAutocomplete<T extends string>({
   )
 
   const getIdByValue = useCallback(
-    function (value: typeof TEXTBOX_MIXED_VALUE | string): ItemId {
-      if (value === TEXTBOX_MIXED_VALUE || value === EMPTY_STRING) {
+    function (value: string): ItemId {
+      if (value === EMPTY_STRING) {
         return INVALID_ITEM_ID
       }
       for (const menuItem of menuItems) {
@@ -134,7 +131,6 @@ export function TextboxAutocomplete<T extends string>({
 
   if (
     filter === true &&
-    currentValue !== TEXTBOX_MIXED_VALUE &&
     (currentValue !== EMPTY_STRING || isValidValue(committedValue) === false)
   ) {
     menuItems = menuItems.filter(function (menuItem) {
@@ -419,12 +415,12 @@ export function TextboxAutocomplete<T extends string>({
   useLayoutEffect(
     function () {
       const inputElement = getCurrentFromRef(inputElementRef)
-      const menuElement = getCurrentFromRef(menuElementRef)
       if (isMenuVisible === false) {
         inputElement.blur()
         setCurrentValue(EMPTY_STRING)
         return
       }
+      const menuElement = getCurrentFromRef(menuElementRef)
       menuElement.scrollTop = scrollTopRef.current
       inputElement.focus()
       inputElement.select()
@@ -523,7 +519,7 @@ export function TextboxAutocomplete<T extends string>({
         placeholder={placeholder}
         tabIndex={disabled === true ? -1 : 0}
         type="text"
-        value={committedValue === null ? '' : committedValue}
+        value={committedValue}
       />
       {typeof icon === 'undefined' ? null : (
         <div class={styles.icon}>{icon}</div>

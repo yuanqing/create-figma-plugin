@@ -8,7 +8,7 @@ import {
   TextboxAutocompleteOption
 } from './textbox-autocomplete'
 
-export default { title: 'ui/Form/Textbox Autocomplete' }
+export default { title: 'Components/Form/Textbox Autocomplete' }
 
 export const Empty = function () {
   const options: Array<TextboxAutocompleteOption> = [
@@ -19,7 +19,7 @@ export const Empty = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('')
+  const [value, setValue] = useState('')
   return (
     <TextboxAutocomplete onChange={setValue} options={options} value={value} />
   )
@@ -34,7 +34,7 @@ export const Placeholder = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('')
+  const [value, setValue] = useState('')
   return (
     <TextboxAutocomplete
       onChange={setValue}
@@ -54,7 +54,7 @@ export const Filled = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('foo')
+  const [value, setValue] = useState('foo')
   return (
     <TextboxAutocomplete onChange={setValue} options={options} value={value} />
   )
@@ -69,7 +69,7 @@ export const Disabled = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('foo')
+  const [value, setValue] = useState('foo')
   return (
     <TextboxAutocomplete
       disabled
@@ -89,7 +89,7 @@ export const NoBorder = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('foo')
+  const [value, setValue] = useState('foo')
   return (
     <TextboxAutocomplete
       noBorder
@@ -109,7 +109,7 @@ export const Icon = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('foo')
+  const [value, setValue] = useState('foo')
   return (
     <TextboxAutocomplete
       icon={<IconSearch />}
@@ -129,7 +129,7 @@ export const TextIcon = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('foo')
+  const [value, setValue] = useState('foo')
   return (
     <TextboxAutocomplete
       icon="S"
@@ -150,7 +150,7 @@ export const Strict = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('')
+  const [value, setValue] = useState('')
   return (
     <TextboxAutocomplete
       onChange={setValue}
@@ -170,7 +170,7 @@ export const Filter = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState<null | string>('')
+  const [value, setValue] = useState('')
   return (
     <TextboxAutocomplete
       filter
@@ -191,7 +191,7 @@ export const MenuTop = function () {
     { value: 'qux' }
   ]
   const style = { marginTop: '128px' }
-  const [value, setValue] = useState<null | string>('')
+  const [value, setValue] = useState('')
   return (
     <div style={style}>
       <TextboxAutocomplete
