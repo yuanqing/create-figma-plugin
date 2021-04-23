@@ -24,7 +24,7 @@ export interface SegmentedControlProps<
 > {
   disabled?: boolean
   name?: T
-  onChange: OnChange<null | S, T>
+  onChange: OnChange<S, T>
   options: Array<SegmentedControlOption<S>>
   propagateEscapeKeyDown?: boolean
   value: null | S

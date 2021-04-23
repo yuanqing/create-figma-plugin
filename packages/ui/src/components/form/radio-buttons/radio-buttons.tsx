@@ -21,7 +21,7 @@ export interface RadioButtonsProps<
 > {
   disabled?: boolean
   name?: T
-  onChange: OnChange<null | S, T>
+  onChange: OnChange<S, T>
   options: Array<RadioButtonsOption<S>>
   propagateEscapeKeyDown?: boolean
   space?: StackSpace

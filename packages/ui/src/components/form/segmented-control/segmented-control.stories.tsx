@@ -18,7 +18,7 @@ export const Unselected = function () {
 }
 
 export const Selected = function () {
-  const [value, setValue] = useState<null | string>('bar')
+  const [value, setValue] = useState('bar')
   return (
     <SegmentedControl
       onChange={setValue}
@@ -29,7 +29,7 @@ export const Selected = function () {
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState<null | string>('bar')
+  const [value, setValue] = useState('bar')
   return (
     <SegmentedControl
       disabled
@@ -41,7 +41,7 @@ export const Disabled = function () {
 }
 
 export const DisabledOption = function () {
-  const [value, setValue] = useState<null | string>('bar')
+  const [value, setValue] = useState('bar')
   return (
     <SegmentedControl
       onChange={setValue}
@@ -56,7 +56,7 @@ export const DisabledOption = function () {
 }
 
 export const BooleanValue = function () {
-  const [value, setValue] = useState<null | boolean>(false)
+  const [value, setValue] = useState(false)
   return (
     <SegmentedControl
       onChange={setValue}
@@ -70,7 +70,7 @@ export const BooleanValue = function () {
 }
 
 export const NumericValue = function () {
-  const [value, setValue] = useState<null | number>(2)
+  const [value, setValue] = useState(2)
   return (
     <SegmentedControl
       onChange={setValue}
