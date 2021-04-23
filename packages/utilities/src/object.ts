@@ -111,21 +111,25 @@ export function compareStringArrays(
  * @returns Returns an array of plain objects.
  * @category Object
  */
-export function extractAttributes<T>(
+export function extractAttributes<T, K extends keyof T>(
   array: Array<T>,
-  attributes: Array<keyof Partial<T>>
-): Array<Partial<T>> {
-  const result: Array<Partial<T>> = []
+  attributes: K[]
+): Array<Pick<T, K>> {
+  const result: Array<Pick<T, K>> = []
   for (const object of array) {
-    const item: Partial<T> = {}
-    for (const attribute of attributes) {
-      const value = object[attribute]
-      if (typeof value === 'undefined') {
-        throw new Error(`Attribute \`${attribute}\` does not exist`)
-      }
-      item[attribute] = value
+    result.push(pick(object, attributes))
+  }
+  return result
+}
+
+function pick<T, K extends keyof T>(object: T, attributes: K[]): Pick<T, K> {
+  const result = {} as Pick<T, K>
+  for (const attribute of attributes) {
+    const value = object[attribute]
+    if (typeof value === 'undefined') {
+      throw new Error(`Attribute \`${attribute}\` does not exist`)
     }
-    result.push(item)
+    result[attribute] = value
   }
   return result
 }
