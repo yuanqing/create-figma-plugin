@@ -3,8 +3,10 @@ import { test } from 'tap'
 import { watchIgnoreRegex } from '../src/watch-ignore-regex'
 
 test('ignored', function (t) {
-  t.plan(5)
+  t.plan(7)
   t.ok(watchIgnoreRegex.test('node_modules'))
+  t.ok(watchIgnoreRegex.test('manifest.json'))
+  t.ok(watchIgnoreRegex.test('package-lock.json'))
   t.ok(watchIgnoreRegex.test('style.css.d.ts'))
   t.ok(watchIgnoreRegex.test('src/style.css.d.ts'))
   t.ok(watchIgnoreRegex.test('build'))
