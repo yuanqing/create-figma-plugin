@@ -7,7 +7,7 @@
     "docs": "lerna run --scope @create-figma-plugin/utilities docs",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --ignore-path lerna.json --loglevel error --write '*.json'",
     "lint": "lerna run --parallel lint && eslint 'scripts/**/*.ts'",
-    "postinstall": "simple-git-hooks && yarn run build",
+    "postinstall": "simple-git-hooks",
     "publish": "yarn run build && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
     "test": "lerna run test",
