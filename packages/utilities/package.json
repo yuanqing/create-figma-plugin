@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/utilities",
-  "version": "0.0.85-alpha.4",
+  "version": "0.0.85-alpha.5",
   "publishConfig": {
     "access": "public"
   },

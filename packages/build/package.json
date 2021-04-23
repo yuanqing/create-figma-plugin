@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/build",
-  "version": "0.0.85-alpha.4",
+  "version": "0.0.85-alpha.5",
   "publishConfig": {
     "access": "public"
   },
@@ -34,7 +34,7 @@
     "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --reporter terse --timeout 120 --ts"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.85-alpha.3",
+    "@create-figma-plugin/common": "^0.0.85-alpha.5",
     "@create-figma-plugin/tsconfig": "^0.0.85-alpha.4",
     "chokidar": "^3.5.1",
     "cssnano": "^4.1.11",
