@@ -12,42 +12,47 @@ const INITIAL_FOCUS_DATA_ATTRIBUTE = 'data-initial-focus'
 export function useForm<State extends JsonObject>(
   initialState: State,
   options: {
-    transform?: (state: State) => State
-    validate: (state: State) => boolean
-    onSubmit: (state: State, event: Event) => void
-    onClose: (state: State, event: Event) => void
+    validate?: (state: State) => boolean
+    onSubmit?: (state: State, event: Event) => void
+    onClose?: (state: State, event: Event) => void
   }
 ) {
-  const { transform, validate, onSubmit, onClose } = options
+  const { validate, onSubmit, onClose } = options
 
-  const [state, setState] = useState(
-    typeof transform === 'function' ? transform(initialState) : initialState
-  )
+  const [state, setState] = useState(initialState)
 
   const handleChange = useCallback(
     function <S extends keyof State>(value: State[S], name: undefined | S) {
       if (typeof name === 'undefined') {
-        throw new Error('`name` is undefined')
+        throw new Error('`name` is `undefined`')
       }
       setState(function (previousState: State) {
-        const state = {
+        return {
           ...previousState,
           ...{ [name]: value }
         }
-        return typeof transform === 'function' ? transform(state) : state
       })
     },
-    [transform, setState]
+    [setState]
   )
 
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
       switch (event.keyCode) {
         case ESCAPE_KEY_CODE: {
+          if (typeof onClose === 'undefined') {
+            return
+          }
           onClose(state, event)
           return
         }
         case ENTER_KEY_CODE: {
+          if (
+            typeof validate === 'undefined' ||
+            typeof onSubmit === 'undefined'
+          ) {
+            return
+          }
           if (validate(state) === true) {
             onSubmit(state, event)
           }
@@ -71,6 +76,7 @@ export function useForm<State extends JsonObject>(
             event.preventDefault()
             focusableElements[focusableElements.length - 1].focus()
           }
+          return
         }
       }
     },
@@ -79,6 +85,9 @@ export function useForm<State extends JsonObject>(
 
   const handleSubmit = useCallback(
     function (event: Event) {
+      if (typeof validate === 'undefined' || typeof onSubmit === 'undefined') {
+        return
+      }
       if (validate(state) === true) {
         onSubmit(state, event)
       }
@@ -88,13 +97,16 @@ export function useForm<State extends JsonObject>(
 
   const isValid = useCallback(
     function () {
+      if (typeof validate === 'undefined') {
+        throw new Error('`validate` is `undefined`')
+      }
       return validate(state) === true
     },
     [state, validate]
   )
 
   useEffect(
-    function (): () => void {
+    function () {
       window.addEventListener('keydown', handleKeyDown)
       return function () {
         window.removeEventListener('keydown', handleKeyDown)
