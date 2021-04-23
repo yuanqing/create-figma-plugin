@@ -5,7 +5,7 @@ import { extractAttributes } from '../../src/object'
 test('extract attributes', function (t) {
   t.plan(1)
   t.deepEqual(
-    extractAttributes<{ x: number; y: number; z: number }>(
+    extractAttributes(
       [
         { x: 1, y: 2, z: 3 },
         { x: 4, y: 5, z: 6 }
