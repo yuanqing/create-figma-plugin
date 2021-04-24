@@ -10,7 +10,7 @@ export const Unselected = function () {
   const [value, setValue] = useState<string | null>(null)
   return (
     <Tabs
-      onChange={setValue}
+      onValueChange={setValue}
       options={[
         { children: <div>Foo</div>, value: 'foo' },
         { children: <div>Bar</div>, value: 'bar' },
@@ -25,7 +25,7 @@ export const Selected = function () {
   const [value, setValue] = useState<string | null>('bar')
   return (
     <Tabs
-      onChange={setValue}
+      onValueChange={setValue}
       options={[
         { children: <div>Foo</div>, value: 'foo' },
         { children: <div>Bar</div>, value: 'bar' },

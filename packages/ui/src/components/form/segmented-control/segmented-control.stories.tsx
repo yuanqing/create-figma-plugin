@@ -2,26 +2,28 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
+import { useInitialFocus } from '../../../hooks/use-initial-focus'
 import { SegmentedControl } from './segmented-control'
 
 export default { title: 'Components/Form/Segmented Control' }
 
-export const Unselected = function () {
-  const [value, setValue] = useState<null | string>(null)
+export const Selected = function () {
+  const [value, setValue] = useState('bar')
   return (
     <SegmentedControl
-      onChange={setValue}
+      onValueChange={setValue}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
       value={value}
     />
   )
 }
 
-export const Selected = function () {
+export const Focused = function () {
   const [value, setValue] = useState('bar')
   return (
     <SegmentedControl
-      onChange={setValue}
+      {...useInitialFocus()}
+      onValueChange={setValue}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
       value={value}
     />
@@ -33,7 +35,7 @@ export const Disabled = function () {
   return (
     <SegmentedControl
       disabled
-      onChange={setValue}
+      onValueChange={setValue}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
       value={value}
     />
@@ -44,7 +46,7 @@ export const DisabledOption = function () {
   const [value, setValue] = useState('bar')
   return (
     <SegmentedControl
-      onChange={setValue}
+      onValueChange={setValue}
       options={[
         { value: 'foo' },
         { value: 'bar' },
@@ -59,7 +61,7 @@ export const BooleanValue = function () {
   const [value, setValue] = useState(false)
   return (
     <SegmentedControl
-      onChange={setValue}
+      onValueChange={setValue}
       options={[
         { children: 'foo', value: true },
         { children: 'bar', value: false }
@@ -73,7 +75,7 @@ export const NumericValue = function () {
   const [value, setValue] = useState(2)
   return (
     <SegmentedControl
-      onChange={setValue}
+      onValueChange={setValue}
       options={[
         { children: 'foo', value: 1 },
         { children: 'bar', value: 2 },

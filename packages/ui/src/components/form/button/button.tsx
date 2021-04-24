@@ -5,7 +5,6 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import type { Props } from '../../../types'
-import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import { LoadingIndicator } from '../../main/loading-indicator/loading-indicator'
 import styles from './button.css'
 
@@ -33,14 +32,13 @@ export function Button({
 }: Props<HTMLButtonElement, ButtonProps>): JSX.Element {
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLButtonElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
         ;(event.target as HTMLElement).blur()
       }
-      if (keyCode === ENTER_KEY_CODE) {
+      if (event.key === 'Enter') {
         event.stopPropagation()
       }
     },

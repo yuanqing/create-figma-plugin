@@ -4,8 +4,7 @@ import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { OnChange, Props } from '../../../types'
-import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
+import type { OnValueChange, Props } from '../../../types'
 import type { StackSpace } from '../../layout/stack/stack'
 import { Stack } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
@@ -21,7 +20,7 @@ export interface RadioButtonsProps<
 > {
   disabled?: boolean
   name?: T
-  onChange: OnChange<S, T>
+  onValueChange: OnValueChange<S, T>
   options: Array<RadioButtonsOption<S>>
   propagateEscapeKeyDown?: boolean
   space?: StackSpace
@@ -36,7 +35,7 @@ export function RadioButtons<
 >({
   disabled = false,
   name,
-  onChange,
+  onValueChange,
   options,
   propagateEscapeKeyDown = true,
   space = 'small',
@@ -45,30 +44,36 @@ export function RadioButtons<
 }: Props<HTMLInputElement, RadioButtonsProps<T, S>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      const id = (event.target as HTMLElement).getAttribute(
+      const id = (event.target as HTMLInputElement).getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onChange(newValue, name, event)
+      onValueChange(newValue, name)
     },
-    [name, onChange, options]
+    [name, onValueChange, options]
   )
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = useCallback(
+  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        ;(event.target as HTMLElement).blur()
+        ;(event.target as HTMLInputElement).blur()
+      }
+      if (event.key === 'Enter') {
+        const id = (event.target as HTMLInputElement).getAttribute(
+          ITEM_ID_DATA_ATTRIBUTE
+        ) as string
+        const newValue = options[parseInt(id, 10)].value
+        onValueChange(newValue, name)
       }
     },
-    [propagateEscapeKeyDown]
+    [name, onValueChange, options, propagateEscapeKeyDown]
   )
 
   return (
-    <Stack onKeyDown={handleKeyDown} space={space}>
+    <Stack space={space}>
       {options.map(function (option, index) {
         const children =
           typeof option.children === 'undefined'
@@ -90,6 +95,7 @@ export function RadioButtons<
               disabled={isOptionDisabled === true}
               name={name}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
               tabIndex={isOptionDisabled === true ? -1 : 0}
               type="radio"
               {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}

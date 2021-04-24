@@ -4,6 +4,7 @@ import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
+import { useInitialFocus } from '../../../../hooks/use-initial-focus'
 import { IconSpaceHorizontal } from '../../../icon/icon-space-horizontal/icon-space-horizontal'
 import { TextboxNumeric } from './textbox-numeric'
 
@@ -16,8 +17,23 @@ export const Empty = function () {
   }
   return (
     <TextboxNumeric
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
+      value={string}
+    />
+  )
+}
+
+export const Focused = function () {
+  const [string, setString] = useState('')
+  function handleNumberChange(value: null | number) {
+    console.log(value)
+  }
+  return (
+    <TextboxNumeric
+      {...useInitialFocus()}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -30,8 +46,8 @@ export const Placeholder = function () {
   }
   return (
     <TextboxNumeric
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       placeholder="Placeholder"
       value={string}
     />
@@ -45,8 +61,8 @@ export const Filled = function () {
   }
   return (
     <TextboxNumeric
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -60,8 +76,8 @@ export const Disabled = function () {
   return (
     <TextboxNumeric
       disabled
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -75,8 +91,8 @@ export const NoBorder = function () {
   return (
     <TextboxNumeric
       noBorder
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -90,8 +106,8 @@ export const Icon = function () {
   return (
     <TextboxNumeric
       icon={<IconSpaceHorizontal />}
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -105,8 +121,8 @@ export const TextIcon = function () {
   return (
     <TextboxNumeric
       icon="X"
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -119,8 +135,8 @@ export const Mixed = function () {
   }
   return (
     <TextboxNumeric
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -134,8 +150,8 @@ export const IntegersOnly = function () {
   return (
     <TextboxNumeric
       integer
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -150,8 +166,8 @@ export const CustomIncrements = function () {
     <TextboxNumeric
       incrementBig={8}
       incrementSmall={4}
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )
@@ -166,8 +182,8 @@ export const MinimumMaximum = function () {
     <TextboxNumeric
       maximum={10}
       minimum={0}
-      onChange={setString}
-      onNumberChange={handleNumberChange}
+      onNumericValueChange={handleNumberChange}
+      onValueChange={setString}
       value={string}
     />
   )

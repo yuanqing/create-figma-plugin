@@ -1,12 +1,11 @@
 import type { JSX, RenderableProps } from 'preact'
 
-export type OnChange<V, N extends string> = (
+export type OnValueChange<V, N extends string> = (
   value: V,
-  name: undefined | N,
-  event: Event
+  name: undefined | N
 ) => void
 
-export type OnSelectedFiles = (files: Array<File>, event: Event) => void
+export type OnSelectedFiles = (files: Array<File>) => void
 
 export type Props<
   RefType extends EventTarget = EventTarget,

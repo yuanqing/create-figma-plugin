@@ -6,17 +6,11 @@ import {
   MIXED_STRING
 } from '@create-figma-plugin/utilities'
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX, RefObject } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
-import { useCallback, useEffect, useRef } from 'preact/hooks'
+import { useCallback, useEffect } from 'preact/hooks'
 
-import type { OnChange, Props } from '../../../../types'
-import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
-import {
-  DOWN_KEY_CODE,
-  ESCAPE_KEY_CODE,
-  UP_KEY_CODE
-} from '../../../../utilities/key-codes'
+import type { OnValueChange, Props } from '../../../../types'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
@@ -31,8 +25,8 @@ export interface TextboxNumericProps<T extends string> {
   minimum?: number
   name?: T
   noBorder?: boolean
-  onChange: OnChange<string, T>
-  onNumberChange?: (value: null | number, name?: T) => void
+  onValueChange: OnValueChange<string, T>
+  onNumericValueChange?: (value: null | number, name?: T) => void
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: string
@@ -50,48 +44,47 @@ export function TextboxNumeric<T extends string>({
   minimum,
   name,
   noBorder = false,
-  onChange,
-  onNumberChange,
+  onValueChange,
+  onNumericValueChange,
   placeholder,
   propagateEscapeKeyDown = true,
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxNumericProps<T>>): JSX.Element {
-  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function () {
-      getCurrentFromRef(inputElementRef).select()
+    function (event: FocusEvent) {
+      const element = event.target as HTMLInputElement
+      element.select()
     },
     []
   )
 
   const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      const newValue = getCurrentFromRef(inputElementRef).value
-      onChange(newValue, name, event)
+      const element = event.target as HTMLInputElement
+      onValueChange(element.value, name)
     },
-    [name, onChange]
+    [name, onValueChange]
   )
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      const inputElement = getCurrentFromRef(inputElementRef)
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      const element = event.target as HTMLInputElement
+      const key = event.key
+      if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        inputElement.blur()
+        element.blur()
         return
       }
-      if (keyCode === DOWN_KEY_CODE || keyCode === UP_KEY_CODE) {
+      if (key === 'ArrowDown' || key === 'ArrowUp') {
         event.preventDefault()
         if (value === MIXED_STRING) {
           const delta = event.shiftKey === true ? incrementBig : incrementSmall
           let newValue: number
           if (typeof minimum === 'undefined') {
-            if (keyCode === DOWN_KEY_CODE) {
+            if (key === 'ArrowDown') {
               // decrement by `delta`
               newValue = 0 - delta
             } else {
@@ -99,7 +92,7 @@ export function TextboxNumeric<T extends string>({
               newValue = 0 + delta
             }
           } else {
-            if (keyCode === DOWN_KEY_CODE) {
+            if (key === 'ArrowDown') {
               // can't go below minimum
               newValue = minimum
             } else {
@@ -108,9 +101,9 @@ export function TextboxNumeric<T extends string>({
             }
           }
           const formattedValue = `${newValue}`
-          inputElement.value = formattedValue
-          inputElement.select()
-          onChange(formattedValue, name, event)
+          element.value = formattedValue
+          element.select()
+          onValueChange(formattedValue, name)
           return
         }
         const evaluatedValue = evaluateNumericExpression(value)
@@ -118,10 +111,10 @@ export function TextboxNumeric<T extends string>({
           return
         }
         if (
-          (event.keyCode === DOWN_KEY_CODE &&
+          (key === 'ArrowDown' &&
             typeof minimum !== 'undefined' &&
             evaluatedValue <= minimum) ||
-          (event.keyCode === UP_KEY_CODE &&
+          (key === 'ArrowUp' &&
             typeof maximum !== 'undefined' &&
             evaluatedValue >= maximum)
         ) {
@@ -129,7 +122,7 @@ export function TextboxNumeric<T extends string>({
         }
         const delta = event.shiftKey === true ? incrementBig : incrementSmall
         const newValue =
-          event.keyCode === DOWN_KEY_CODE
+          key === 'ArrowDown'
             ? typeof minimum === 'undefined'
               ? evaluatedValue - delta
               : Math.max(evaluatedValue - delta, minimum)
@@ -143,9 +136,9 @@ export function TextboxNumeric<T extends string>({
           newValue,
           significantFiguresCount
         )
-        inputElement.value = formattedValue
-        inputElement.select()
-        onChange(formattedValue, name, event)
+        element.value = formattedValue
+        element.select()
+        onValueChange(formattedValue, name)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
@@ -155,7 +148,7 @@ export function TextboxNumeric<T extends string>({
         const nextValue =
           value === MIXED_STRING
             ? event.key
-            : computeNextValue(inputElement, event.key)
+            : computeNextValue(element, event.key)
         if (
           isValidNumericInput(nextValue, { integersOnly: integer }) === false
         ) {
@@ -181,7 +174,7 @@ export function TextboxNumeric<T extends string>({
       maximum,
       minimum,
       name,
-      onChange,
+      onValueChange,
       propagateEscapeKeyDown,
       value
     ]
@@ -202,8 +195,9 @@ export function TextboxNumeric<T extends string>({
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
+      const element = event.target as HTMLInputElement
       const nextValue = computeNextValue(
-        getCurrentFromRef(inputElementRef),
+        element,
         event.clipboardData.getData('Text')
       )
       if (isValidNumericInput(nextValue, { integersOnly: integer }) === false) {
@@ -215,17 +209,17 @@ export function TextboxNumeric<T extends string>({
 
   useEffect(
     function () {
-      if (typeof onNumberChange === 'undefined') {
+      if (typeof onNumericValueChange === 'undefined') {
         return
       }
       if (value === MIXED_STRING) {
-        onNumberChange(MIXED_NUMBER, name)
+        onNumericValueChange(MIXED_NUMBER, name)
         return
       }
       const evaluatedValue = evaluateNumericExpression(value)
-      onNumberChange(evaluatedValue, name)
+      onNumericValueChange(evaluatedValue, name)
     },
-    [name, onNumberChange, value]
+    [name, onNumericValueChange, value]
   )
 
   return (
@@ -238,7 +232,6 @@ export function TextboxNumeric<T extends string>({
     >
       <input
         {...rest}
-        ref={inputElementRef}
         class={styles.input}
         disabled={disabled === true}
         name={name}

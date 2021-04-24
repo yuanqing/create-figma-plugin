@@ -2,6 +2,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
+import { useInitialFocus } from '../../../hooks/use-initial-focus'
 import { Button } from './button'
 
 export default { title: 'Components/Form/Button' }
@@ -11,6 +12,17 @@ export const Default = function () {
     console.log(event)
   }
   return <Button onClick={handleClick}>Text</Button>
+}
+
+export const Focused = function () {
+  function handleClick(event: MouseEvent) {
+    console.log(event)
+  }
+  return (
+    <Button {...useInitialFocus()} onClick={handleClick}>
+      Text
+    </Button>
+  )
 }
 
 export const Loading = function () {

@@ -4,17 +4,8 @@ import type { ComponentChildren, JSX, RefObject } from 'preact'
 import { h } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
-import type { OnChange, Props } from '../../../../types'
+import type { OnValueChange, Props } from '../../../../types'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
-import {
-  BACKSPACE_KEY_CODE,
-  DELETE_KEY_CODE,
-  DOWN_KEY_CODE,
-  ENTER_KEY_CODE,
-  ESCAPE_KEY_CODE,
-  TAB_KEY_CODE,
-  UP_KEY_CODE
-} from '../../../../utilities/key-codes'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
@@ -42,7 +33,7 @@ export interface TextboxAutocompleteProps<T extends string> {
   icon?: ComponentChildren
   name?: T
   noBorder?: boolean
-  onChange: OnChange<string, T>
+  onValueChange: OnValueChange<string, T>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -63,7 +54,7 @@ export function TextboxAutocomplete<T extends string>({
   icon,
   name,
   noBorder = false,
-  onChange,
+  onValueChange,
   options,
   placeholder,
   propagateEscapeKeyDown = true,
@@ -258,8 +249,8 @@ export function TextboxAutocomplete<T extends string>({
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
-      if (keyCode === UP_KEY_CODE || keyCode === DOWN_KEY_CODE) {
+      const key = event.key
+      if (key === 'ArrowUp' || key === 'ArrowDown') {
         event.preventDefault()
         if (menuItems.length === 0) {
           return
@@ -269,35 +260,35 @@ export function TextboxAutocomplete<T extends string>({
           return
         }
         const nextId =
-          keyCode === UP_KEY_CODE
+          key === 'ArrowUp'
             ? computePreviousId(selectedId)
             : computeNextId(selectedId)
         shouldSelectAllRef.current = true
         setSelectedId(nextId)
         if (nextId === INVALID_ITEM_ID) {
-          onChange(currentValue, name, event)
+          onValueChange(currentValue, name)
         } else {
           const menuItem = findMenuItemById(nextId)
           if (menuItem !== null && 'value' in menuItem) {
             const newValue = menuItem.value
-            onChange(newValue, name, event)
+            onValueChange(newValue, name)
           }
         }
         return
       }
       if (
-        keyCode === ENTER_KEY_CODE ||
-        keyCode === ESCAPE_KEY_CODE ||
-        keyCode === TAB_KEY_CODE // Tabbing away from this component
+        key === 'Enter' ||
+        key === 'Escape' ||
+        key === 'Tab' // Tabbing away from this component
       ) {
         event.preventDefault()
-        if (keyCode === ENTER_KEY_CODE && isMenuVisible === false) {
+        if (key === 'Enter' && isMenuVisible === false) {
           // Show the menu if it is currently hidden.
           setIsMenuVisible(true)
           event.stopPropagation()
           return
         }
-        if (keyCode === ESCAPE_KEY_CODE && isMenuVisible === false) {
+        if (key === 'Escape' && isMenuVisible === false) {
           // Blur the textbox if the menu is currently already hidden.
           getCurrentFromRef(inputElementRef).blur()
           if (propagateEscapeKeyDown === false) {
@@ -338,18 +329,18 @@ export function TextboxAutocomplete<T extends string>({
       isValidValue,
       menuItems.length,
       name,
-      onChange,
+      onValueChange,
       selectedId
     ]
   )
 
   const handleKeyUp: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
+      const key = event.key
       if (
-        keyCode !== BACKSPACE_KEY_CODE &&
-        keyCode !== DELETE_KEY_CODE &&
-        isKeyCodeCharacterGenerating(keyCode) === false
+        key !== 'Backspace' &&
+        key !== 'Delete' &&
+        isKeyCodeCharacterGenerating(event.keyCode) === false
       ) {
         return
       }
@@ -358,9 +349,9 @@ export function TextboxAutocomplete<T extends string>({
       setIsMenuVisible(true)
       setSelectedId(index)
       setCurrentValue(value)
-      onChange(value, name, event)
+      onValueChange(value, name)
     },
-    [getIdByValue, name, onChange]
+    [getIdByValue, name, onValueChange]
   )
 
   const handleOptionClick: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
@@ -375,10 +366,10 @@ export function TextboxAutocomplete<T extends string>({
       setCurrentValue(EMPTY_STRING)
       if (menuItem !== null && 'value' in menuItem) {
         const newValue = menuItem.value
-        onChange(newValue, name, event)
+        onValueChange(newValue, name)
       }
     },
-    [findMenuItemById, name, onChange]
+    [findMenuItemById, name, onValueChange]
   )
 
   const handlePaste: JSX.ClipboardEventHandler<HTMLInputElement> = useCallback(

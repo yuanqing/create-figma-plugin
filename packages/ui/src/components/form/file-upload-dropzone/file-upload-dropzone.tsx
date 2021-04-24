@@ -5,7 +5,6 @@ import { h } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
 import type { OnSelectedFiles, Props } from '../../../types'
-import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import styles from './file-upload-dropzone.css'
 
 export interface FileUploadDropzoneProps {
@@ -52,7 +51,7 @@ export function FileUploadDropzone({
       if (files === null) {
         throw new Error('`event.target.files` is `null`')
       }
-      onSelectedFiles(filterFiles(files), event)
+      onSelectedFiles(filterFiles(files))
     },
     [filterFiles, onSelectedFiles]
   )
@@ -87,7 +86,7 @@ export function FileUploadDropzone({
         throw new Error('`event.dataTransfer` is `null`')
       }
       const files = filterFiles(event.dataTransfer.files)
-      onSelectedFiles(files, event)
+      onSelectedFiles(files)
       setIsDropActive(false)
     },
     [filterFiles, onSelectedFiles]
@@ -95,8 +94,7 @@ export function FileUploadDropzone({
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }

@@ -3,14 +3,7 @@ import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { OnChange, Props } from '../../../types'
-import {
-  DOWN_KEY_CODE,
-  ESCAPE_KEY_CODE,
-  LEFT_KEY_CODE,
-  RIGHT_KEY_CODE,
-  UP_KEY_CODE
-} from '../../../utilities/key-codes'
+import type { OnValueChange, Props } from '../../../types'
 import styles from './tabs.css'
 
 export interface TabsOption {
@@ -20,7 +13,7 @@ export interface TabsOption {
 }
 export interface TabsProps<T extends string> {
   name?: T
-  onChange: OnChange<string, T>
+  onValueChange: OnValueChange<string, T>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
   value: null | string
@@ -30,7 +23,7 @@ const ITEM_ID_DATA_ATTRIBUTE = 'data-tabs-item-id'
 
 export function Tabs<T extends string>({
   name,
-  onChange,
+  onValueChange,
   options,
   propagateEscapeKeyDown = true,
   value,
@@ -42,15 +35,15 @@ export function Tabs<T extends string>({
         ITEM_ID_DATA_ATTRIBUTE
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onChange(newValue, name, event)
+      onValueChange(newValue, name)
     },
-    [name, onChange, options]
+    [name, onValueChange, options]
   )
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      const key = event.key
+      if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
@@ -58,22 +51,21 @@ export function Tabs<T extends string>({
         return
       }
       if (
-        keyCode === DOWN_KEY_CODE ||
-        keyCode === LEFT_KEY_CODE ||
-        keyCode === RIGHT_KEY_CODE ||
-        keyCode === UP_KEY_CODE
+        key === 'ArrowUp' ||
+        key === 'ArrowDown' ||
+        key === 'ArrowLeft' ||
+        key === 'ArrowRight'
       ) {
         if (value === null) {
           const newValue = options[0].value
-          onChange(newValue, name, event)
+          onValueChange(newValue, name)
           return
         }
         const currentIndex = options.findIndex(function (option) {
           return option.value === value
         })
         let nextIndex =
-          currentIndex +
-          (keyCode === LEFT_KEY_CODE || keyCode === UP_KEY_CODE ? -1 : 1)
+          currentIndex + (key === 'ArrowLeft' || key === 'ArrowUp' ? -1 : 1)
         if (nextIndex === -1) {
           nextIndex = options.length - 1
         }
@@ -81,10 +73,10 @@ export function Tabs<T extends string>({
           nextIndex = 0
         }
         const newValue = options[nextIndex].value
-        onChange(newValue, name, event)
+        onValueChange(newValue, name)
       }
     },
-    [name, onChange, options, propagateEscapeKeyDown, value]
+    [name, onValueChange, options, propagateEscapeKeyDown, value]
   )
 
   const activeOption = options.find(function (option) {

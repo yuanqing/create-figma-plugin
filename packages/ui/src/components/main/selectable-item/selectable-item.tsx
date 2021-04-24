@@ -4,8 +4,7 @@ import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { OnChange, Props } from '../../../types'
-import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
+import type { OnValueChange, Props } from '../../../types'
 import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
 
@@ -15,7 +14,7 @@ export interface SelectableItemProps<T extends string> {
   disabled?: boolean
   indent?: boolean
   name?: T
-  onChange: OnChange<boolean, T>
+  onValueChange: OnValueChange<boolean, T>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
@@ -26,37 +25,37 @@ export function SelectableItem<T extends string>({
   disabled = false,
   indent = false,
   name,
-  onChange,
+  onValueChange,
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
 }: Props<HTMLInputElement, SelectableItemProps<T>>): JSX.Element {
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      onChange(value === false, name, event)
+    function () {
+      onValueChange(value === false, name)
     },
-    [name, onChange, value]
+    [name, onValueChange, value]
   )
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLLabelElement> = useCallback(
     function (event: KeyboardEvent) {
-      switch (event.keyCode) {
-        case ESCAPE_KEY_CODE: {
+      switch (event.key) {
+        case 'Escape': {
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
           ;(event.target as HTMLElement).blur()
           break
         }
-        case ENTER_KEY_CODE: {
+        case 'Enter': {
           event.stopPropagation()
           const newValue = value === false
-          onChange(newValue, name, event)
+          onValueChange(newValue, name)
           break
         }
       }
     },
-    [name, value, onChange, propagateEscapeKeyDown]
+    [name, value, onValueChange, propagateEscapeKeyDown]
   )
 
   return (

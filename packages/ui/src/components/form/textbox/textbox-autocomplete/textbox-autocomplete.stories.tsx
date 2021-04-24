@@ -2,6 +2,7 @@
 import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
+import { useInitialFocus } from '../../../../hooks/use-initial-focus'
 import { IconSearch } from '../../../icon/icon-search/icon-search'
 import {
   TextboxAutocomplete,
@@ -21,7 +22,31 @@ export const Empty = function () {
   ]
   const [value, setValue] = useState('')
   return (
-    <TextboxAutocomplete onChange={setValue} options={options} value={value} />
+    <TextboxAutocomplete
+      onValueChange={setValue}
+      options={options}
+      value={value}
+    />
+  )
+}
+
+export const Focused = function () {
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  const [value, setValue] = useState('')
+  return (
+    <TextboxAutocomplete
+      {...useInitialFocus()}
+      onValueChange={setValue}
+      options={options}
+      value={value}
+    />
   )
 }
 
@@ -37,7 +62,7 @@ export const Placeholder = function () {
   const [value, setValue] = useState('')
   return (
     <TextboxAutocomplete
-      onChange={setValue}
+      onValueChange={setValue}
       options={options}
       placeholder="Placeholder"
       value={value}
@@ -56,7 +81,11 @@ export const Filled = function () {
   ]
   const [value, setValue] = useState('foo')
   return (
-    <TextboxAutocomplete onChange={setValue} options={options} value={value} />
+    <TextboxAutocomplete
+      onValueChange={setValue}
+      options={options}
+      value={value}
+    />
   )
 }
 
@@ -73,7 +102,7 @@ export const Disabled = function () {
   return (
     <TextboxAutocomplete
       disabled
-      onChange={setValue}
+      onValueChange={setValue}
       options={options}
       value={value}
     />
@@ -93,7 +122,7 @@ export const NoBorder = function () {
   return (
     <TextboxAutocomplete
       noBorder
-      onChange={setValue}
+      onValueChange={setValue}
       options={options}
       value={value}
     />
@@ -113,7 +142,7 @@ export const Icon = function () {
   return (
     <TextboxAutocomplete
       icon={<IconSearch />}
-      onChange={setValue}
+      onValueChange={setValue}
       options={options}
       value={value}
     />
@@ -133,7 +162,7 @@ export const TextIcon = function () {
   return (
     <TextboxAutocomplete
       icon="S"
-      onChange={setValue}
+      onValueChange={setValue}
       options={options}
       placeholder="Search"
       value={value}
@@ -153,7 +182,7 @@ export const Strict = function () {
   const [value, setValue] = useState('')
   return (
     <TextboxAutocomplete
-      onChange={setValue}
+      onValueChange={setValue}
       options={options}
       strict
       value={value}
@@ -174,7 +203,7 @@ export const Filter = function () {
   return (
     <TextboxAutocomplete
       filter
-      onChange={setValue}
+      onValueChange={setValue}
       options={options}
       value={value}
     />
@@ -195,7 +224,7 @@ export const MenuTop = function () {
   return (
     <div style={style}>
       <TextboxAutocomplete
-        onChange={setValue}
+        onValueChange={setValue}
         options={options}
         top
         value={value}

@@ -107,6 +107,7 @@ export {
 // components/main
 export { Divider, DividerProps } from './components/main/divider/divider'
 export { Layer, LayerType, LayerProps } from './components/main/layer/layer'
+export { Loading, LoadingProps } from './components/main/loading/loading'
 export {
   LoadingIndicator,
   LoadingIndicatorProps
@@ -121,21 +122,14 @@ export { Text, TextAlignment, TextProps } from './components/main/text/text'
 
 // hooks
 export { useForm } from './hooks/use-form'
+export { useFocusTrap } from './hooks/use-focus-trap'
+export { useInitialFocus } from './hooks/use-initial-focus'
+export { useKeyDownHandler } from './hooks/use-key-down-handler'
 export { useScrollableMenu } from './hooks/use-scrollable-menu'
+export { useFormState } from './hooks/use-form-state'
 
 // utilities
-export {
-  BACKSPACE_KEY_CODE,
-  TAB_KEY_CODE,
-  ENTER_KEY_CODE,
-  ESCAPE_KEY_CODE,
-  LEFT_KEY_CODE,
-  UP_KEY_CODE,
-  RIGHT_KEY_CODE,
-  DOWN_KEY_CODE,
-  DELETE_KEY_CODE
-} from './utilities/key-codes'
 export { render } from './utilities/render'
 
 // types
-export type { OnChange, OnSelectedFiles, Props } from './types'
+export type { OnValueChange, OnSelectedFiles, Props } from './types'

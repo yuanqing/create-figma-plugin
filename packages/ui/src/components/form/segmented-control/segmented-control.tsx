@@ -1,16 +1,10 @@
 /** @jsx h */
-import type { ComponentChildren, JSX } from 'preact'
+import type { ComponentChildren, JSX, RefObject } from 'preact'
 import { h } from 'preact'
-import { useCallback } from 'preact/hooks'
+import { useCallback, useRef } from 'preact/hooks'
 
-import type { OnChange, Props } from '../../../types'
-import {
-  DOWN_KEY_CODE,
-  ESCAPE_KEY_CODE,
-  LEFT_KEY_CODE,
-  RIGHT_KEY_CODE,
-  UP_KEY_CODE
-} from '../../../utilities/key-codes'
+import type { OnValueChange, Props } from '../../../types'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './segmented-control.css'
 
 export interface SegmentedControlOption<S> {
@@ -24,10 +18,10 @@ export interface SegmentedControlProps<
 > {
   disabled?: boolean
   name?: T
-  onChange: OnChange<S, T>
+  onValueChange: OnValueChange<S, T>
   options: Array<SegmentedControlOption<S>>
   propagateEscapeKeyDown?: boolean
-  value: null | S
+  value: S
 }
 
 const ITEM_ID_DATA_ATTRIBUTE = 'data-segmented-control-item-id'
@@ -38,27 +32,38 @@ export function SegmentedControl<
 >({
   disabled = false,
   name,
-  onChange,
+  onValueChange,
   options,
   propagateEscapeKeyDown = true,
   value,
   ...rest
 }: Props<HTMLInputElement, SegmentedControlProps<T, S>>): JSX.Element {
+  const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
+
   const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
       const id = (event.target as HTMLElement).getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onChange(newValue, name, event)
+      onValueChange(newValue, name)
     },
-    [name, onChange, options]
+    [name, onValueChange, options]
+  )
+
+  const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
+    function () {
+      // Redirect focus to the root element
+      const rootElement = getCurrentFromRef(rootElementRef)
+      rootElement.focus()
+    },
+    []
   )
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      const key = event.key
+      if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
@@ -66,35 +71,32 @@ export function SegmentedControl<
         return
       }
       if (
-        keyCode === DOWN_KEY_CODE ||
-        keyCode === LEFT_KEY_CODE ||
-        keyCode === RIGHT_KEY_CODE ||
-        keyCode === UP_KEY_CODE
+        key === 'ArrowUp' ||
+        key === 'ArrowDown' ||
+        key === 'ArrowLeft' ||
+        key === 'ArrowRight'
       ) {
-        if (value === null) {
-          const newValue = options[0].value
-          onChange(newValue, name, event)
-          return
-        }
         const currentIndex = options.findIndex(function (option) {
           return option.value === value
         })
         const nextIndex = resolveNextIndex(
           options,
           currentIndex,
-          keyCode === LEFT_KEY_CODE || keyCode === UP_KEY_CODE ? -1 : 1
+          key === 'ArrowLeft' || key === 'ArrowUp' ? -1 : 1
         )
-        if (nextIndex !== -1) {
-          const newValue = options[nextIndex].value
-          onChange(newValue, name, event)
+        if (nextIndex === -1) {
+          return
         }
+        const newValue = options[nextIndex].value
+        onValueChange(newValue, name)
       }
     },
-    [name, onChange, options, propagateEscapeKeyDown, value]
+    [name, onValueChange, options, propagateEscapeKeyDown, value]
   )
 
   return (
     <div
+      ref={rootElementRef}
       class={styles.segmentedControl}
       onKeyDown={disabled === true ? undefined : handleKeyDown}
       tabIndex={disabled === true ? -1 : 0}
@@ -114,7 +116,7 @@ export function SegmentedControl<
               disabled={isOptionDisabled === true}
               name={name}
               onChange={handleChange}
-              tabIndex={-1}
+              onFocus={handleFocus}
               type="radio"
               {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}
             />

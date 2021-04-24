@@ -1,13 +1,11 @@
 /** @jsx h */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX, RefObject } from 'preact'
+import type { ComponentChildren, JSX } from 'preact'
 import { h } from 'preact'
-import { useCallback, useRef } from 'preact/hooks'
+import { useCallback } from 'preact/hooks'
 
-import type { OnChange, Props } from '../../../types'
-import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
-import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
+import type { OnValueChange, Props } from '../../../types'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
 
@@ -16,7 +14,7 @@ export interface TextboxProps<T extends string> {
   icon?: ComponentChildren
   name?: T
   noBorder?: boolean
-  onChange: OnChange<string, T>
+  onValueChange: OnValueChange<string, T>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   type?: 'text' | 'password'
@@ -28,49 +26,46 @@ export function Textbox<T extends string>({
   icon,
   name,
   noBorder = false,
-  onChange,
+  onValueChange,
   placeholder,
   propagateEscapeKeyDown = true,
   type = 'text',
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxProps<T>>): JSX.Element {
-  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-
   const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function () {
-      const inputElement = getCurrentFromRef(inputElementRef)
-      inputElement.select()
+    function (event: FocusEvent) {
+      const element = event.target as HTMLInputElement
+      element.select()
     },
     []
   )
 
   const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
     function (event: Event) {
-      const newValue = getCurrentFromRef(inputElementRef).value
-      onChange(newValue, name, event)
+      const element = event.target as HTMLInputElement
+      onValueChange(element.value, name)
     },
-    [name, onChange]
+    [name, onValueChange]
   )
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      const inputElement = getCurrentFromRef(inputElementRef)
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      const element = event.target as HTMLInputElement
+      if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        inputElement.blur()
+        element.blur()
       }
       if (
         value !== MIXED_STRING ||
-        isKeyCodeCharacterGenerating(keyCode) === true
+        isKeyCodeCharacterGenerating(event.keyCode) === true
       ) {
         return
       }
       event.preventDefault()
-      inputElement.select()
+      element.select()
     },
     [value, propagateEscapeKeyDown]
   )
@@ -95,7 +90,6 @@ export function Textbox<T extends string>({
     >
       <input
         {...rest}
-        ref={inputElementRef}
         class={styles.input}
         disabled={disabled === true}
         name={name}

@@ -9,6 +9,6 @@
 }
 
 .loadingIndicator {
-  color: var(--color-blue);
   padding-bottom: var(--space-small);
+  color: var(--color-blue);
 }

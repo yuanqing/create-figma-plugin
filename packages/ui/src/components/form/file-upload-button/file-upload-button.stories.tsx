@@ -2,14 +2,14 @@
 /** @jsx h */
 import { h } from 'preact'
 
+import { useInitialFocus } from '../../../hooks/use-initial-focus'
 import { FileUploadButton } from './file-upload-button'
 
 export default { title: 'Components/Form/File Upload Button' }
 
 export const Default = function () {
-  function handleSelectedFiles(files: Array<File>, event: Event) {
+  function handleSelectedFiles(files: Array<File>) {
     console.log(files)
-    console.log(event)
   }
   return (
     <FileUploadButton onSelectedFiles={handleSelectedFiles}>
@@ -18,11 +18,24 @@ export const Default = function () {
   )
 }
 
+export const Focused = function () {
+  function handleSelectedFiles(files: Array<File>) {
+    console.log(files)
+  }
+  return (
+    <FileUploadButton
+      {...useInitialFocus()}
+      onSelectedFiles={handleSelectedFiles}
+    >
+      Text
+    </FileUploadButton>
+  )
+}
+
 export const AcceptedFileTypes = function () {
   const acceptedFileTypes = ['image/x-png', 'image/gif', 'image/jpeg']
-  function handleSelectedFiles(files: Array<File>, event: Event) {
+  function handleSelectedFiles(files: Array<File>) {
     console.log(files)
-    console.log(event)
   }
   return (
     <FileUploadButton
@@ -35,9 +48,8 @@ export const AcceptedFileTypes = function () {
 }
 
 export const Multiple = function () {
-  function handleSelectedFiles(files: Array<File>, event: Event) {
+  function handleSelectedFiles(files: Array<File>) {
     console.log(files)
-    console.log(event)
   }
   return (
     <FileUploadButton multiple onSelectedFiles={handleSelectedFiles}>
@@ -47,9 +59,8 @@ export const Multiple = function () {
 }
 
 export const Loading = function () {
-  function handleSelectedFiles(files: Array<File>, event: Event) {
+  function handleSelectedFiles(files: Array<File>) {
     console.log(files)
-    console.log(event)
   }
   return (
     <FileUploadButton loading onSelectedFiles={handleSelectedFiles}>
@@ -59,9 +70,8 @@ export const Loading = function () {
 }
 
 export const Disabled = function () {
-  function handleSelectedFiles(files: Array<File>, event: Event) {
+  function handleSelectedFiles(files: Array<File>) {
     console.log(files)
-    console.log(event)
   }
   return (
     <FileUploadButton disabled onSelectedFiles={handleSelectedFiles}>
@@ -71,9 +81,8 @@ export const Disabled = function () {
 }
 
 export const FullWidth = function () {
-  function handleSelectedFiles(files: Array<File>, event: Event) {
+  function handleSelectedFiles(files: Array<File>) {
     console.log(files)
-    console.log(event)
   }
   return (
     <FileUploadButton fullWidth onSelectedFiles={handleSelectedFiles}>

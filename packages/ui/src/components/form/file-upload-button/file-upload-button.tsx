@@ -5,7 +5,6 @@ import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import type { OnSelectedFiles, Props } from '../../../types'
-import { ESCAPE_KEY_CODE } from '../../../utilities/key-codes'
 import { LoadingIndicator } from '../../main/loading-indicator/loading-indicator'
 import styles from './file-upload-button.css'
 
@@ -38,7 +37,7 @@ export function FileUploadButton({
       const files = Array.prototype.slice
         .call((event.target as HTMLInputElement).files)
         .sort(comparator)
-      onSelectedFiles(files, event)
+      onSelectedFiles(files)
     },
     [onSelectedFiles]
   )
@@ -52,8 +51,7 @@ export function FileUploadButton({
 
   const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
     function (event: KeyboardEvent) {
-      const keyCode = event.keyCode
-      if (keyCode === ESCAPE_KEY_CODE) {
+      if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
