@@ -1,5 +1,3 @@
-import type { JsonObject } from './types'
-
 const SETTINGS_KEY = 'settings'
 
 /**
@@ -8,10 +6,8 @@ const SETTINGS_KEY = 'settings'
  *
  * @category Settings
  */
-export async function loadSettingsAsync<Settings extends JsonObject>(
-  defaultSettings: Settings
-): Promise<Settings> {
-  const settings: Settings = await figma.clientStorage.getAsync(SETTINGS_KEY)
+export async function loadSettingsAsync<T>(defaultSettings: T): Promise<T> {
+  const settings: T = await figma.clientStorage.getAsync(SETTINGS_KEY)
   if (typeof settings === 'undefined') {
     return defaultSettings
   }
@@ -24,8 +20,6 @@ export async function loadSettingsAsync<Settings extends JsonObject>(
  *
  * @category Settings
  */
-export async function saveSettingsAsync<Settings extends JsonObject>(
-  settings: Settings
-): Promise<void> {
+export async function saveSettingsAsync<T>(settings: T): Promise<void> {
   await figma.clientStorage.setAsync(SETTINGS_KEY, settings)
 }

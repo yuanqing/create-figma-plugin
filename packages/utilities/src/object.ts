@@ -1,5 +1,3 @@
-import type { JsonValue } from './types'
-
 /**
  * Creates a deep copy of the given object.
  *
@@ -35,10 +33,7 @@ export function cloneObject<T>(object: T): T {
  * @returns Returns `true` if `a` and `b` are the same, else `false`.
  * @category Object
  */
-export function compareObjects(
-  a: JsonValue | undefined,
-  b: JsonValue | undefined
-): boolean {
+export function compareObjects(a: any, b: any): boolean {
   if (
     a === null ||
     typeof a === 'undefined' ||

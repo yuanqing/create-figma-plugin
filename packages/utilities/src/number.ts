@@ -64,7 +64,7 @@ export function evaluateNumericExpression(value: string): null | number {
   return parseFloat(value)
 }
 
-export function mapTextboxNumberToString(value: null | number): string {
+export function mapTextboxNumericValueToString(value: null | number): string {
   if (value === null) {
     return ''
   }

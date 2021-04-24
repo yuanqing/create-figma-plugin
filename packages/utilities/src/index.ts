@@ -24,7 +24,7 @@ export { traverseNode } from './nodes/traverse-node'
 export {
   isValidNumericInput,
   evaluateNumericExpression,
-  mapTextboxNumberToString
+  mapTextboxNumericValueToString
 } from './number'
 export {
   compareStringArrays,
@@ -39,5 +39,4 @@ export {
   formatWarningMessage,
   pluralize
 } from './string'
-export type { JsonValue, JsonObject } from './types'
 export { showUI } from './ui'
