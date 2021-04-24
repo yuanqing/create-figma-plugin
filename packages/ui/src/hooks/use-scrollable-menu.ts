@@ -2,7 +2,6 @@ import type { RefObject } from 'preact'
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
-import { DOWN_KEY_CODE, UP_KEY_CODE } from '../utilities/key-codes'
 
 type ItemId = typeof INVALID_ITEM_ID | string
 
@@ -78,11 +77,12 @@ export function useScrollableMenu(options: {
 
   const handleKeyDown = useCallback(
     function (event: KeyboardEvent) {
-      if (event.keyCode === DOWN_KEY_CODE || event.keyCode === UP_KEY_CODE) {
+      const key = event.key
+      if (key === 'ArrowDown' || key === 'ArrowUp') {
         const itemElements = getItemElements()
         const index = getItemIndex(selectedItemId)
         let newIndex
-        if (event.keyCode === DOWN_KEY_CODE) {
+        if (key === 'ArrowDown') {
           newIndex =
             index === -1 || index === itemElements.length - 1 ? 0 : index + 1
         } else {

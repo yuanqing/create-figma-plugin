@@ -1,162 +1,46 @@
-import type { JsonObject } from '@create-figma-plugin/utilities'
-import { useCallback, useEffect, useState } from 'preact/hooks'
+import { useCallback } from 'preact/hooks'
 
-import {
-  ENTER_KEY_CODE,
-  ESCAPE_KEY_CODE,
-  TAB_KEY_CODE
-} from '../utilities/key-codes'
+import { useFocusTrap } from './use-focus-trap'
+import { useFormState } from './use-form-state'
+import { useInitialFocus } from './use-initial-focus'
+import { useKeyDownHandler } from './use-key-down-handler'
 
-const INITIAL_FOCUS_DATA_ATTRIBUTE = 'data-initial-focus'
-
-export function useForm<State extends JsonObject>(
-  initialState: State,
+export function useForm<T>(
+  initialState: T,
   options: {
-    validate?: (state: State) => boolean
-    onSubmit?: (state: State, event: Event) => void
-    onClose?: (state: State, event: Event) => void
+    validate?: (state: T) => boolean
+    submit: (state: T) => void
+    close: (state: T) => void
   }
 ) {
-  const { validate, onSubmit, onClose } = options
-
-  const [state, setState] = useState(initialState)
-
-  const handleChange = useCallback(
-    function <S extends keyof State>(value: State[S], name: undefined | S) {
-      if (typeof name === 'undefined') {
-        throw new Error('`name` is `undefined`')
-      }
-      setState(function (previousState: State) {
-        return {
-          ...previousState,
-          ...{ [name]: value }
-        }
-      })
-    },
-    [setState]
-  )
-
-  const handleKeyDown = useCallback(
-    function (event: KeyboardEvent) {
-      switch (event.keyCode) {
-        case ESCAPE_KEY_CODE: {
-          if (typeof onClose === 'undefined') {
-            return
-          }
-          onClose(state, event)
-          return
-        }
-        case ENTER_KEY_CODE: {
-          if (
-            typeof validate === 'undefined' ||
-            typeof onSubmit === 'undefined'
-          ) {
-            return
-          }
-          if (validate(state) === true) {
-            onSubmit(state, event)
-          }
-          return
-        }
-        case TAB_KEY_CODE: {
-          const focusableElements = getFocusableElements()
-          const index = findElementIndex(
-            event.target as HTMLElement,
-            focusableElements
-          )
-          if (
-            index === focusableElements.length - 1 &&
-            event.shiftKey === false
-          ) {
-            event.preventDefault()
-            focusableElements[0].focus()
-            return
-          }
-          if (index === 0 && event.shiftKey === true) {
-            event.preventDefault()
-            focusableElements[focusableElements.length - 1].focus()
-          }
-          return
-        }
-      }
-    },
-    [state, onClose, onSubmit, validate]
-  )
-
+  const { validate, submit, close } = options
+  const { formState, setFormState } = useFormState(initialState)
   const handleSubmit = useCallback(
-    function (event: Event) {
-      if (typeof validate === 'undefined' || typeof onSubmit === 'undefined') {
+    function () {
+      if (typeof validate !== 'undefined' && validate(formState) === false) {
         return
       }
-      if (validate(state) === true) {
-        onSubmit(state, event)
-      }
+      submit(formState)
     },
-    [state, onSubmit, validate]
+    [formState, submit, validate]
   )
-
-  const isValid = useCallback(
+  useKeyDownHandler('Enter', handleSubmit)
+  const handleClose = useCallback(
     function () {
-      if (typeof validate === 'undefined') {
-        throw new Error('`validate` is `undefined`')
-      }
-      return validate(state) === true
+      close(formState)
     },
-    [state, validate]
+    [close, formState]
   )
-
-  useEffect(
-    function () {
-      window.addEventListener('keydown', handleKeyDown)
-      return function () {
-        window.removeEventListener('keydown', handleKeyDown)
-      }
-    },
-    [handleKeyDown]
-  )
-
-  useEffect(function () {
-    const focusableElement = document.querySelector(
-      `[${INITIAL_FOCUS_DATA_ATTRIBUTE}]`
-    ) as HTMLElement
-    if (focusableElement !== null) {
-      focusableElement.focus()
-      return
-    }
-    const tabbableElements = getFocusableElements()
-    if (tabbableElements.length === 0) {
-      window.focus()
-      return
-    }
-    tabbableElements[0].focus()
-  }, [])
-
+  useKeyDownHandler('Escape', handleClose)
+  useFocusTrap()
+  const disabled =
+    typeof validate !== 'undefined' ? validate(formState) === false : false
+  const initialFocus = useInitialFocus()
   return {
-    handleChange,
+    disabled,
+    formState,
     handleSubmit,
-    initialFocus: {
-      [INITIAL_FOCUS_DATA_ATTRIBUTE]: true
-    },
-    isValid,
-    state
+    initialFocus,
+    setFormState
   }
-}
-
-function getFocusableElements(): Array<HTMLElement> {
-  const elements = document.querySelectorAll(
-    ':not([disabled])[tabindex]:not([tabindex="-1"])'
-  )
-  return Array.prototype.slice.call(elements)
-}
-
-function findElementIndex(
-  targetElement: HTMLElement,
-  elements: Array<HTMLElement>
-): number {
-  return elements.reduce(function (result, element, index) {
-    if (result === -1 && element.isEqualNode(targetElement)) {
-      return index
-    }
-    return result
-  }, -1)
 }

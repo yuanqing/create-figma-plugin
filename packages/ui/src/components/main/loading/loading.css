@@ -1,0 +1,14 @@
+.loading {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.wrapper {
+  flex-grow: 1;
+}
+
+.loadingIndicator {
+  color: var(--color-blue);
+  padding-bottom: var(--space-small);
+}
