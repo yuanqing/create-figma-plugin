@@ -1,17 +1,18 @@
-import type {
+import {
   Config,
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
-  ConfigRelaunchButton
+  ConfigRelaunchButton,
+  constants,
+  readConfigAsync
 } from '@create-figma-plugin/common'
-import { constants, readConfigAsync } from '@create-figma-plugin/common'
 import { build } from 'esbuild'
 import { join } from 'path'
 
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin'
 import { typeCheckAsync } from './type-check-async'
-import type { BuildOptions } from './types/build'
+import { BuildOptions } from './types/build'
 
 interface EntryFile extends ConfigFile {
   readonly commandId: string

@@ -1,9 +1,8 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX } from 'preact'
-import { h } from 'preact'
+import { ComponentChildren, h, JSX } from 'preact'
 
-import type { Props } from '../../../types'
+import { Props } from '../../../types'
 import { IconComponent } from '../../icon/icon-component/icon-component'
 import { IconFrame } from '../../icon/icon-frame/icon-frame'
 import styles from './layer.css'

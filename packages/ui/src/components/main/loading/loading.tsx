@@ -1,7 +1,7 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 
-import type { Props } from '../../../types'
+import { Props } from '../../../types'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './loading.css'
 

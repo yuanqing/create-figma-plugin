@@ -1,6 +1,6 @@
 import latestVersion from 'latest-version'
 
-import type { CreateFigmaPluginVersions } from './types/create-figma-plugin-versions'
+import { CreateFigmaPluginVersions } from './types/create-figma-plugin-versions'
 
 export async function resolveLatestVersions(): Promise<CreateFigmaPluginVersions> {
   return {

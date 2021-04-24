@@ -1,58 +1,53 @@
-import type { RefObject } from 'preact'
+import { RefObject } from 'preact'
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
 
-type ItemId = typeof INVALID_ITEM_ID | string
-
 const INVALID_ITEM_ID = null
+const SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
 
 export function useScrollableMenu(options: {
-  itemElementAttributeName: string
-  selectedItemId: ItemId
-  onChange: (id: ItemId) => void
+  scrollableMenuItemDataAttributeName?: string
+  selectedItemId: null | string
+  onChange: (id: null | string) => void
   changeOnMouseOver: boolean
 }) {
-  const {
-    itemElementAttributeName,
-    selectedItemId,
-    onChange,
-    changeOnMouseOver = true
-  } = options
-  const menuElementRef: RefObject<HTMLElement> = useRef(null)
+  const { selectedItemId, onChange, changeOnMouseOver = true } = options
 
-  const parseItemElementId = useCallback(
-    function (element: HTMLElement): ItemId {
-      return element.getAttribute(itemElementAttributeName)
-    },
-    [itemElementAttributeName]
-  )
+  const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
+
+  const getMenuItemId = useCallback(function (
+    element: HTMLElement
+  ): null | string {
+    return element.getAttribute(SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME)
+  },
+  [])
 
   const getItemElements = useCallback(
     function (): Array<HTMLElement> {
       return Array.from(
         getCurrentFromRef(menuElementRef).querySelectorAll(
-          `[${itemElementAttributeName}]`
+          `[${SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME}]`
         )
       )
     },
-    [menuElementRef, itemElementAttributeName]
+    [menuElementRef]
   )
 
   const getItemIndex = useCallback(
-    function (id: ItemId): number {
+    function (id: null | string): number {
       if (id === INVALID_ITEM_ID) {
         return -1
       }
       return getItemElements().findIndex(function (element) {
-        return parseItemElementId(element) === id
+        return getMenuItemId(element) === id
       })
     },
-    [getItemElements, parseItemElementId]
+    [getItemElements, getMenuItemId]
   )
 
   const updateScrollPosition = useCallback(
-    function (id: ItemId) {
+    function (id: null | string) {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
       if (index === -1) {
@@ -90,7 +85,7 @@ export function useScrollableMenu(options: {
             index === -1 || index === 0 ? itemElements.length - 1 : index - 1
         }
         const selectedElement = itemElements[newIndex]
-        const id = parseItemElementId(selectedElement)
+        const id = getMenuItemId(selectedElement)
         onChange(id)
         updateScrollPosition(id)
       }
@@ -99,7 +94,7 @@ export function useScrollableMenu(options: {
       getItemElements,
       getItemIndex,
       onChange,
-      parseItemElementId,
+      getMenuItemId,
       selectedItemId,
       updateScrollPosition
     ]
@@ -107,22 +102,22 @@ export function useScrollableMenu(options: {
 
   const handleMouseMove = useCallback(
     function (event: MouseEvent) {
-      const id = parseItemElementId(event.target as HTMLElement)
+      const id = getMenuItemId(event.target as HTMLElement)
       if (id !== selectedItemId) {
         onChange(id)
       }
     },
-    [onChange, parseItemElementId, selectedItemId]
+    [onChange, getMenuItemId, selectedItemId]
   )
 
   useEffect(
     function () {
-      getCurrentFromRef(menuElementRef).setAttribute(
-        'style',
-        'position: relative; overflow-y: auto'
-      )
+      window.addEventListener('keydown', handleKeyDown)
+      return function () {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
     },
-    [menuElementRef]
+    [handleKeyDown]
   )
 
   useEffect(
@@ -146,5 +141,8 @@ export function useScrollableMenu(options: {
     [changeOnMouseOver, getItemElements, handleMouseMove]
   )
 
-  return { handleKeyDown, menuElementRef, updateScrollPosition }
+  return {
+    menuElementRef,
+    scrollableMenuItemIdDataAttributeName: SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME
+  }
 }

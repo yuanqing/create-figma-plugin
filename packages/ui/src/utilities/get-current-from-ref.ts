@@ -1,4 +1,4 @@
-import type { RefObject } from 'preact'
+import { RefObject } from 'preact'
 
 export function getCurrentFromRef<T>(ref: RefObject<T>): T {
   if (ref.current === null) {

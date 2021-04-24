@@ -1,4 +1,4 @@
-import type { JSX, RenderableProps } from 'preact'
+import { JSX, RenderableProps } from 'preact'
 
 export type OnValueChange<V, N extends string> = (
   value: V,

@@ -1,8 +1,7 @@
 /** @jsx h */
-import type { JSX } from 'preact'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 
-import type { Props } from '../../types'
+import { Props } from '../../types'
 import styles from './icon.css'
 
 export type IconProps = Props<SVGSVGElement>

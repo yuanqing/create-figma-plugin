@@ -1,10 +1,9 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX } from 'preact'
-import { h } from 'preact'
+import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import styles from './checkbox.css'
 
 export interface CheckboxProps<T extends string> {

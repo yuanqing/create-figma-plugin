@@ -1,8 +1,7 @@
 /** @jsx h */
-import type { ComponentChildren, JSX } from 'preact'
-import { h } from 'preact'
+import { ComponentChildren, h, JSX } from 'preact'
 
-import type { Props } from '../../../types'
+import { Props } from '../../../types'
 import style from './preview.css'
 
 export interface PreviewProps {

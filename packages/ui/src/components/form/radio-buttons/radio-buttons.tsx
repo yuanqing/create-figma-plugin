@@ -1,12 +1,10 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX } from 'preact'
-import { h } from 'preact'
+import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { OnValueChange, Props } from '../../../types'
-import type { StackSpace } from '../../layout/stack/stack'
-import { Stack } from '../../layout/stack/stack'
+import { OnValueChange, Props } from '../../../types'
+import { Stack, StackSpace } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
 
 export interface RadioButtonsOption<S extends boolean | number | string> {

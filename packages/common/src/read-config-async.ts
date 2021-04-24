@@ -3,13 +3,13 @@ import { pathExists, readFile } from 'fs-extra'
 import { join } from 'path'
 
 import { constants } from './constants'
-import type {
+import {
   Config,
   ConfigCommand,
   ConfigFile,
   ConfigRelaunchButton
 } from './types/config'
-import type {
+import {
   RawConfig,
   RawConfigCommand,
   RawConfigCommandSeparator,

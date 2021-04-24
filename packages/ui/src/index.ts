@@ -130,6 +130,7 @@ export { useFormState } from './hooks/use-form-state'
 
 // utilities
 export { render } from './utilities/render'
+export { getCurrentFromRef } from './utilities/get-current-from-ref'
 
 // types
 export type { OnValueChange, OnSelectedFiles, Props } from './types'

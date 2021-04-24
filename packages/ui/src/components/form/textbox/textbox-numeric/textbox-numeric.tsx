@@ -6,11 +6,10 @@ import {
   MIXED_STRING
 } from '@create-figma-plugin/utilities'
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX } from 'preact'
-import { h } from 'preact'
+import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
-import type { OnValueChange, Props } from '../../../../types'
+import { OnValueChange, Props } from '../../../../types'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'

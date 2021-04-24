@@ -3,8 +3,8 @@ import globby from 'globby'
 import mustache from 'mustache'
 import { join } from 'path'
 
-import type { CreateFigmaPluginVersions } from './types/create-figma-plugin-versions'
-import type { Settings } from './types/settings'
+import { CreateFigmaPluginVersions } from './types/create-figma-plugin-versions'
+import { Settings } from './types/settings'
 
 const isUtf8 = require('is-utf8')
 

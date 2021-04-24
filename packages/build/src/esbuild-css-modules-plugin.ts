@@ -1,8 +1,7 @@
-import type { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
+import { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
 import { readFile } from 'fs-extra'
 import { basename, extname, resolve } from 'path'
-import type { AcceptedPlugin } from 'postcss'
-import postcss from 'postcss'
+import postcss, { AcceptedPlugin } from 'postcss'
 import revHash from 'rev-hash'
 import tempWrite from 'temp-write'
 

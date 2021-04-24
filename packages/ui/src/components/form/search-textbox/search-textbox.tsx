@@ -1,9 +1,8 @@
 /** @jsx h */
-import type { JSX } from 'preact'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { IconCross } from '../../icon/icon-cross/icon-cross'
 import { IconSearch } from '../../icon/icon-search/icon-search'
 import styles from './search-textbox.css'

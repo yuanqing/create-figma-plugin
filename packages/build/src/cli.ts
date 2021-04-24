@@ -2,7 +2,7 @@
 import sade from 'sade'
 
 import { buildAsync } from './build-async'
-import type { BuildOptions } from './types/build'
+import { BuildOptions } from './types/build'
 import { watch } from './watch'
 
 sade('build-figma-plugin', true)

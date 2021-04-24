@@ -1,9 +1,8 @@
 /** @jsx h */
-import type { ComponentChildren, JSX, RefObject } from 'preact'
-import { h } from 'preact'
+import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import type { OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './segmented-control.css'
 

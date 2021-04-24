@@ -6,7 +6,7 @@ import { buildBundlesAsync } from './build-bundles-async'
 import { buildCssModulesTypingsAsync } from './build-css-modules-typings-async'
 import { buildManifestAsync } from './build-manifest-async'
 import { trackElapsedTime } from './track-elapsed-time'
-import type { BuildOptions } from './types/build'
+import { BuildOptions } from './types/build'
 import { watchIgnoreRegex } from './watch-ignore-regex'
 
 const cssRegex = /\.css$/

@@ -1,9 +1,8 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX } from 'preact'
-import { h, toChildArray } from 'preact'
+import { ComponentChildren, h, JSX, toChildArray } from 'preact'
 
-import type { Props } from '../../../types'
+import { Props } from '../../../types'
 import styles from './columns.css'
 
 export interface ColumnsProps {

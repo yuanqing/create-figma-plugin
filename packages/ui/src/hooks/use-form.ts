@@ -8,13 +8,14 @@ import { useKeyDownHandler } from './use-key-down-handler'
 export function useForm<T>(
   initialState: T,
   options: {
+    close: (state: T) => void
+    transform?: (state: T) => T
     validate?: (state: T) => boolean
     submit: (state: T) => void
-    close: (state: T) => void
   }
 ) {
-  const { validate, submit, close } = options
-  const { formState, setFormState } = useFormState(initialState)
+  const { close, submit, transform, validate } = options
+  const { formState, setFormState } = useFormState(initialState, transform)
   const handleSubmit = useCallback(
     function () {
       if (typeof validate !== 'undefined' && validate(formState) === false) {

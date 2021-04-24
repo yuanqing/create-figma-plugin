@@ -1,10 +1,9 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import type { ComponentChildren, JSX } from 'preact'
-import { h } from 'preact'
+import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import type { OnSelectedFiles, Props } from '../../../types'
+import { OnSelectedFiles, Props } from '../../../types'
 import { LoadingIndicator } from '../../main/loading-indicator/loading-indicator'
 import styles from './file-upload-button.css'
 
