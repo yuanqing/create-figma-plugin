@@ -32,18 +32,18 @@
     "test": "yarn run build && yarn run clean-test && tap 'test/*.ts' --coverage-report html --coverage-report text --no-browser --no-check-coverage --reporter terse --timeout 120 --ts"
   },
   "dependencies": {
-    "@sindresorhus/slugify": "^1.1.0",
+    "@sindresorhus/slugify": "^2.0.0",
     "fs-extra": "^9.1.0",
     "kleur": "^4.1.4"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.10",
-    "@types/node": "^14.14.37",
-    "@types/tap": "^14.10.3",
-    "eslint": "^7.24.0",
+    "@types/fs-extra": "^9.0.11",
+    "@types/node": "^14.14.41",
+    "@types/tap": "^15.0.0",
+    "eslint": "^7.25.0",
     "eslint-config-yuanqing": "^0.0.4",
     "prettier": "^2.2.1",
-    "tap": "^15.0.2",
+    "tap": "^15.0.5",
     "typescript": "^4.2.4"
   }
 }

@@ -45,21 +45,21 @@
     "titlecase": "^1.1.3"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.19.3",
+    "@figma/plugin-typings": "^1.22.0",
     "@types/degit": "^2.8.2",
-    "@types/fs-extra": "^9.0.10",
+    "@types/fs-extra": "^9.0.11",
     "@types/git-user-name": "^2.0.0",
     "@types/inquirer": "^7.3.1",
     "@types/mustache": "^4.1.1",
-    "@types/node": "^14.14.37",
+    "@types/node": "^14.14.41",
     "@types/rimraf": "^3.0.0",
     "@types/sade": "^1.7.2",
-    "@types/tap": "^14.10.3",
-    "eslint": "^7.24.0",
+    "@types/tap": "^15.0.0",
+    "eslint": "^7.25.0",
     "eslint-config-yuanqing": "^0.0.4",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "tap": "^15.0.2",
+    "tap": "^15.0.5",
     "typescript": "^4.2.4"
   }
 }

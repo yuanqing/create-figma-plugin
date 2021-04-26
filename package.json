@@ -20,17 +20,17 @@
     "website-deploy": "yarn run website-build && gh-pages --dist build"
   },
   "devDependencies": {
-    "@types/node": "^14.14.37",
+    "@types/node": "^14.14.41",
     "cpy-cli": "^3.1.1",
-    "eslint": "^7.24.0",
+    "eslint": "^7.25.0",
     "eslint-config-yuanqing": "^0.0.4",
     "gh-pages": "^3.1.0",
     "globby": "^11.0.3",
     "lerna": "^4.0.0",
     "lint-staged": "^10.5.4",
-    "npm-check-updates": "^11.4.1",
+    "npm-check-updates": "^11.5.1",
     "prettier": "^2.2.1",
-    "simple-git-hooks": "^2.3.1",
+    "simple-git-hooks": "^2.4.1",
     "single-page-markdown-website": "^0.0.14",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
