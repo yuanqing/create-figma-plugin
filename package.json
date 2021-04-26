@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
-    "bump-dependencies": "ts-node scripts/bump-dependencies.ts",
+    "bump-dependencies": "ts-node --project tsconfig.shared.json scripts/bump-dependencies.ts",
     "clean": "lerna run --parallel clean && lerna run --scope @create-figma-plugin/ui storybook-clean && yarn run website-clean && rm -rf '*.log'",
     "fix": "lerna run --parallel fix && eslint --fix 'scripts/**/*.ts' && prettier --ignore-path lerna.json --loglevel error --write '*.json'",
     "generate-docs": "lerna run generate-docs --parallel --stream",
