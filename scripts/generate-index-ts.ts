@@ -5,7 +5,6 @@ import globby from 'globby'
 async function main(): Promise<void> {
   const args = process.argv.slice(2)
   const filePaths = await globby([
-    'src/**/*.{ts,tsx}',
     ...args,
     '!src/index.ts',
     '!**/*.d.ts',
