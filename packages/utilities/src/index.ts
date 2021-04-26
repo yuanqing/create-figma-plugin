@@ -14,7 +14,7 @@ export { getDocumentComponents } from './nodes/get-nodes/get-document-components
 export { getSelectedNodesOrAllNodes } from './nodes/get-nodes/get-selected-nodes-or-all-nodes'
 export { insertAfterNode } from './nodes/insert-node/insert-after-node'
 export { insertBeforeNode } from './nodes/insert-node/insert-before-node'
-export { isWithinInstance } from './nodes/is-within-instance'
+export { isWithinInstanceNode } from './nodes/is-within-instance-node'
 export { loadFontsAsync } from './nodes/load-fonts-async'
 export { setRelaunchButton } from './nodes/set-relaunch-button'
 export { sortNodesByCanonicalOrder } from './nodes/sort-nodes/sort-nodes-by-canonical-order'

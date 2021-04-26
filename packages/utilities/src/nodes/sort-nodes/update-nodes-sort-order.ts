@@ -1,5 +1,6 @@
 import { compareStringArrays } from '../../object'
 import { areSiblingNodes } from '../are-sibling-nodes'
+import { getParentNode } from '../get-parent-node'
 
 /**
  * Updates the layer list sort order to follow the sort order of the nodes
@@ -8,22 +9,19 @@ import { areSiblingNodes } from '../are-sibling-nodes'
  * @category Node
  */
 export function updateNodesSortOrder(siblingNodes: Array<SceneNode>): boolean {
-  const parent = siblingNodes[0].parent
-  if (parent === null) {
-    throw new Error('Node has no parent')
-  }
+  const parentNode = getParentNode(siblingNodes[0])
   if (areSiblingNodes(siblingNodes) === false) {
-    throw new Error('Nodes do not have the same parent')
+    throw new Error('Nodes in `siblingNodes` do not have the same parent')
   }
-  const copy = siblingNodes.slice()
-  const ids = parent.children.map(function ({ id }) {
+  const siblingNodesCopy = siblingNodes.slice()
+  const ids = parentNode.children.map(function ({ id }: SceneNode) {
     return id
   })
-  const insertIndex = computeInsertIndex(copy, ids)
-  copy.forEach(function (node) {
-    parent.insertChild(insertIndex, node)
-  })
-  const idsAfter = parent.children.map(function ({ id }) {
+  const insertIndex = computeInsertIndex(siblingNodesCopy, ids)
+  for (const node of siblingNodesCopy) {
+    parentNode.insertChild(insertIndex, node)
+  }
+  const idsAfter = parentNode.children.map(function ({ id }: SceneNode) {
     return id
   })
   return compareStringArrays(ids, idsAfter) === false
@@ -34,11 +32,11 @@ function computeInsertIndex(
   ids: Array<string>
 ): number {
   let insertIndex = -1
-  nodes.forEach(function (node) {
+  for (const node of nodes) {
     const index = ids.indexOf(node.id)
     if (index > insertIndex) {
       insertIndex = index
     }
-  })
+  }
   return insertIndex + 1
 }

@@ -54,7 +54,7 @@ function createMainEntryFile(config: Config): string {
   const entryFiles: Array<EntryFile> = []
   extractEntryFile(command, 'main', entryFiles)
   if (entryFiles.length === 0) {
-    throw new Error('Need a main entry point')
+    throw new Error('Need a `main` entry point')
   }
   if (relaunchButtons !== null) {
     extractEntryFiles(relaunchButtons, 'main', entryFiles)
@@ -110,7 +110,7 @@ function createUiEntryFile(config: Config): null | string {
     }' : __FIGMA_COMMAND__;
     if (typeof modules[commandId] === 'undefined') {
       throw new Error(
-        'UI not defined for the command corresponding to ' + commandId
+        'No UI defined for command \`' + commandId + '\`'
       );
     }
     modules[commandId](rootNode, __SHOW_UI_DATA__);

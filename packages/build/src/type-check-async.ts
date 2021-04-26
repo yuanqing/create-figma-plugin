@@ -9,7 +9,7 @@ export async function typeCheckAsync(): Promise<void> {
     throw new Error('Cannot find `tsc`')
   }
   if ((await pathExists('tsconfig.json')) === false) {
-    throw new Error('Need a tsconfig.json')
+    throw new Error('Need a `tsconfig.json`')
   }
   try {
     await execa.command(`${tsc} --noEmit --project tsconfig.json`)

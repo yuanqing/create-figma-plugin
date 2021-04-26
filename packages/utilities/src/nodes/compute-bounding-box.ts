@@ -1,4 +1,5 @@
 import { getAbsolutePosition } from './absolute-position/get-absolute-position'
+import { getParentNode } from './get-parent-node'
 
 /**
  * Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
@@ -12,14 +13,11 @@ export function computeBoundingBox(node: SceneNode): Rect {
     const { width, height } = node
     return { ...absolutePosition, height, width }
   }
-  const parent = node.parent
-  if (parent === null) {
-    throw new Error('Node has no parent')
-  }
-  const index = parent.children.indexOf(node)
-  const group = figma.group([node], parent, index)
+  const parentNode = getParentNode(node)
+  const index = parentNode.children.indexOf(node)
+  const group = figma.group([node], parentNode, index)
   const absolutePosition = getAbsolutePosition(group)
   const { width, height } = group
-  parent.insertChild(index, node)
+  parentNode.insertChild(index, node)
   return { ...absolutePosition, height, width }
 }

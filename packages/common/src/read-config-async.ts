@@ -100,7 +100,7 @@ function parseRelaunchButtons(
   for (const commandId in relaunchButtons) {
     const { name, main, ui, multipleSelection } = relaunchButtons[commandId]
     if (typeof main === 'undefined') {
-      throw new Error(`Need a "main" for relaunch button: ${name}`)
+      throw new Error(`Need a \`main\` for relaunch button: ${name}`)
     }
     result.push({
       commandId,

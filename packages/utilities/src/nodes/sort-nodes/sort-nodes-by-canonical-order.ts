@@ -1,4 +1,5 @@
 import { areSiblingNodes } from '../are-sibling-nodes'
+import { getParentNode } from '../get-parent-node'
 
 /**
  * Sorts `siblingNodes` according to their layer list order. Does not modify
@@ -13,18 +14,15 @@ export function sortNodesByCanonicalOrder<T extends SceneNode>(
   if (siblingNodes.length < 2) {
     return siblingNodes.slice()
   }
-  const parent = siblingNodes[0].parent
-  if (parent === null) {
-    throw new Error('Node has no parent')
-  }
+  const parentNode = getParentNode(siblingNodes[0])
   if (areSiblingNodes(siblingNodes) === false) {
-    throw new Error('Nodes do not have the same parent')
+    throw new Error('Nodes in `siblingNodes` do not have the same parent')
   }
   return siblingNodes
     .slice()
     .map(function (node) {
       return {
-        index: parent.children.indexOf(node),
+        index: parentNode.children.indexOf(node),
         node
       }
     })

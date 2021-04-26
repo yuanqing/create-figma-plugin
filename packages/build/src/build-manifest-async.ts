@@ -29,7 +29,7 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   } = config
   const command = { commandId, main, menu, name, ui }
   if (hasBundle(command, 'main') === false) {
-    throw new Error('Need a "main"')
+    throw new Error('Need a `main` entry point')
   }
   const result: Manifest = {
     api: config.apiVersion,

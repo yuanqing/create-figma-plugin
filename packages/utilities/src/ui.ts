@@ -7,7 +7,10 @@
  *
  * @category UI
  */
-export function showUI<T>(options: ShowUIOptions, data?: T): void {
+export function showUI<T extends Record<string, unknown>>(
+  options: ShowUIOptions,
+  data?: T
+): void {
   if (typeof __html__ === 'undefined') {
     throw new Error('No UI defined')
   }

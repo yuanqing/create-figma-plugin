@@ -1,3 +1,5 @@
+import { getParentNode } from './get-parent-node'
+
 /**
  * Checks if all nodes in `nodes` are sibling nodes.
  *
@@ -10,12 +12,9 @@ export function areSiblingNodes(nodes: Array<SceneNode>): boolean {
     return true
   }
   const [firstNode, ...rest] = nodes
-  if (firstNode.parent === null) {
-    return false
-  }
-  const parentId = firstNode.parent.id
+  const firstParentNode = getParentNode(firstNode)
   for (const node of rest) {
-    if (node.parent === null || node.parent.id !== parentId) {
+    if (node.parent === null || node.parent.id !== firstParentNode.id) {
       return false
     }
   }

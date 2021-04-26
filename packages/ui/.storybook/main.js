@@ -3,7 +3,7 @@ function webpackFinal (config) {
     return rule.test.toString() === '/\\.css$/'
   })
   if (index === -1) {
-    throw new Error('Module rule for CSS not found in Storybook webpack config')
+    throw new Error('Module rule for `.css` files not found in Storybook webpack config')
   }
   config.module.rules[index] = {
     sideEffects: true,

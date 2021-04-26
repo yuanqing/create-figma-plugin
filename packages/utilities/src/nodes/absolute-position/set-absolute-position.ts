@@ -8,21 +8,21 @@ export function setAbsolutePosition(
   vector: Partial<Vector>
 ): void {
   if (typeof vector.x === 'undefined' && typeof vector.y === 'undefined') {
-    throw new Error('Specify at least one of `x` or `y`')
+    throw new Error('Need at least one of `x` or `y`')
   }
   let x = typeof vector.x === 'undefined' ? null : vector.x
   let y = typeof vector.y === 'undefined' ? null : vector.y
-  let parent = node.parent
-  while (parent !== null && parent.type !== 'PAGE') {
-    if (parent.type === 'FRAME') {
+  let parentNode = node.parent
+  while (parentNode !== null && parentNode.type !== 'PAGE') {
+    if (parentNode.type === 'FRAME') {
       if (x !== null) {
-        x = x - parent.x
+        x = x - parentNode.x
       }
       if (y !== null) {
-        y = y - parent.y
+        y = y - parentNode.y
       }
     }
-    parent = parent.parent
+    parentNode = parentNode.parent
   }
   if (x !== null) {
     node.x = x
