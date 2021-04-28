@@ -10,7 +10,7 @@ export function createIcon(path: string) {
   return function Icon(props: IconProps): JSX.Element {
     return (
       <svg {...props} class={styles.icon} xmlns="http://www.w3.org/2000/svg">
-        <path clip-rule="evenodd" d={path} fill-rule="evenodd" />
+        <path clipRule="evenodd" d={path} fillRule="evenodd" />
       </svg>
     )
   }

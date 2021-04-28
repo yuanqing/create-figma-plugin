@@ -5,15 +5,21 @@ import { useFormState } from './use-form-state'
 import { useInitialFocus } from './use-initial-focus'
 import { useKeyDownHandler } from './use-key-down-handler'
 
-export function useForm<T>(
-  initialState: T,
+export function useForm<S>(
+  initialState: S,
   options: {
-    close: (state: T) => void
-    transform?: (state: T) => T
-    validate?: (state: T) => boolean
-    submit: (state: T) => void
+    close: (state: S) => void
+    transform?: (state: S) => S
+    validate?: (state: S) => boolean
+    submit: (state: S) => void
   }
-) {
+): {
+  disabled: boolean
+  formState: S
+  handleSubmit: () => void
+  initialFocus: Record<string, true>
+  setFormState: <N extends keyof S>(state: S[N], name: undefined | N) => void
+} {
   const { close, submit, transform, validate } = options
 
   const { formState, setFormState } = useFormState(initialState, transform)

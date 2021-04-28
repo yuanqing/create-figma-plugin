@@ -49,14 +49,9 @@
         2,
         {
           "ignore": [
-            "class",
-            "clip-rule",
-            "fill-rule"
+            "class"
           ]
         }
-      ],
-      "react/prop-types": [
-        "off"
       ]
     }
   },

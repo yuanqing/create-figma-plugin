@@ -11,7 +11,10 @@ export function useScrollableMenu(options: {
   selectedItemId: null | string
   onItemIdChange: (id: null | string) => void
   changeOnMouseOver: boolean
-}) {
+}): {
+  menuElementRef: RefObject<HTMLDivElement>
+  scrollableMenuItemIdDataAttributeName: typeof SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME
+} {
   const { selectedItemId, onItemIdChange, changeOnMouseOver = true } = options
 
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)

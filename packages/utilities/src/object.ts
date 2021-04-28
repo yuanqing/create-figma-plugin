@@ -117,14 +117,14 @@ export function extractAttributes<T, K extends keyof T>(
   return result
 }
 
-function pick<T, K extends keyof T>(object: T, attributes: K[]): Pick<T, K> {
+function pick<T, K extends keyof T>(object: T, keys: K[]): Pick<T, K> {
   const result = {} as Pick<T, K>
-  for (const attribute of attributes) {
-    const value = object[attribute]
+  for (const key of keys) {
+    const value = object[key]
     if (typeof value === 'undefined') {
-      throw new Error(`Attribute \`${attribute}\` does not exist on \`object\``)
+      throw new Error(`Attribute \`${key}\` does not exist on \`object\``)
     }
-    result[attribute] = value
+    result[key] = value
   }
   return result
 }
