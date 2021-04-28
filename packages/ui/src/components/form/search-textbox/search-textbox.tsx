@@ -75,7 +75,7 @@ export function SearchTextbox<T extends string>({
       <input
         {...rest}
         class={styles.input}
-        disabled={disabled}
+        disabled={disabled === true}
         name={name}
         onFocus={handleFocus}
         onInput={handleInput}
