@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types'
+import { OnChange, OnValueChange, Props } from '../../../types'
 import { Stack, StackSpace } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
 
@@ -13,16 +13,17 @@ export interface RadioButtonsOption<S extends boolean | number | string> {
   value: S
 }
 export interface RadioButtonsProps<
-  T extends string,
-  S extends boolean | number | string
+  N extends string,
+  V extends boolean | number | string
 > {
   disabled?: boolean
-  name?: T
-  onValueChange: OnValueChange<S, T>
-  options: Array<RadioButtonsOption<S>>
+  name?: N
+  onChange?: OnChange<HTMLInputElement>
+  onValueChange?: OnValueChange<V, N, null | V>
+  options: Array<RadioButtonsOption<V>>
   propagateEscapeKeyDown?: boolean
   space?: StackSpace
-  value: null | S
+  value: null | V
 }
 
 const ITEM_ID_DATA_ATTRIBUTE = 'data-radio-buttons-item-id'
@@ -33,41 +34,44 @@ export function RadioButtons<
 >({
   disabled = false,
   name,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   options,
   propagateEscapeKeyDown = true,
   space = 'small',
   value,
   ...rest
 }: Props<HTMLInputElement, RadioButtonsProps<T, S>>): JSX.Element {
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      const id = (event.target as HTMLInputElement).getAttribute(
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name)
+      onValueChange(newValue, name, value)
+      onChange(event)
     },
-    [name, onValueChange, options]
+    [name, onChange, onValueChange, options, value]
   )
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        ;(event.target as HTMLInputElement).blur()
+        event.currentTarget.blur()
       }
       if (event.key === 'Enter') {
-        const id = (event.target as HTMLInputElement).getAttribute(
+        const id = event.currentTarget.getAttribute(
           ITEM_ID_DATA_ATTRIBUTE
         ) as string
         const newValue = options[parseInt(id, 10)].value
-        onValueChange(newValue, name)
+        onValueChange(newValue, name, value)
+        onChange(event)
       }
     },
-    [name, onValueChange, options, propagateEscapeKeyDown]
+    [name, onChange, onValueChange, options, propagateEscapeKeyDown, value]
   )
 
   return (

@@ -10,7 +10,7 @@ export interface FileUploadDropzoneProps {
   acceptedFileTypes?: Array<string>
   children: ComponentChildren
   multiple?: boolean
-  onSelectedFiles: OnSelectedFiles
+  onSelectedFiles?: OnSelectedFiles
   propagateEscapeKeyDown?: boolean
 }
 
@@ -37,49 +37,52 @@ export function FileUploadDropzone({
     [acceptedFileTypes]
   )
 
-  const handleBlur: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function () {
-      setIsDropActive(false)
-    },
-    []
-  )
+  const handleBlur = useCallback(function () {
+    setIsDropActive(false)
+  }, [])
 
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      const files = (event.target as HTMLInputElement).files
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      if (typeof onSelectedFiles === 'undefined') {
+        return
+      }
+      const files = event.currentTarget.files
       if (files === null) {
-        throw new Error('`event.target.files` is `null`')
+        throw new Error('`event.currentTarget.files` is `null`')
       }
       onSelectedFiles(filterFiles(files))
     },
     [filterFiles, onSelectedFiles]
   )
 
-  const handleDragEnter: JSX.DragEventHandler<HTMLInputElement> = useCallback(
-    function (event: DragEvent) {
-      event.preventDefault()
-    },
-    []
-  )
+  const handleDragEnter = useCallback(function (
+    event: JSX.TargetedDragEvent<HTMLInputElement>
+  ) {
+    event.preventDefault()
+  },
+  [])
 
-  const handleDragOver: JSX.DragEventHandler<HTMLInputElement> = useCallback(
-    function (event: DragEvent) {
-      event.preventDefault()
-      setIsDropActive(true)
-    },
-    []
-  )
+  const handleDragOver = useCallback(function (
+    event: JSX.TargetedDragEvent<HTMLInputElement>
+  ) {
+    event.preventDefault()
+    setIsDropActive(true)
+  },
+  [])
 
-  const handleDragEnd: JSX.DragEventHandler<HTMLInputElement> = useCallback(
-    function (event: DragEvent) {
-      event.preventDefault()
-      setIsDropActive(false)
-    },
-    []
-  )
+  const handleDragEnd = useCallback(function (
+    event: JSX.TargetedDragEvent<HTMLInputElement>
+  ) {
+    event.preventDefault()
+    setIsDropActive(false)
+  },
+  [])
 
-  const handleDrop: JSX.DragEventHandler<HTMLInputElement> = useCallback(
-    function (event: DragEvent) {
+  const handleDrop = useCallback(
+    function (event: JSX.TargetedDragEvent<HTMLInputElement>) {
+      if (typeof onSelectedFiles === 'undefined') {
+        return
+      }
       event.preventDefault()
       if (event.dataTransfer === null) {
         throw new Error('`event.dataTransfer` is `null`')
@@ -91,13 +94,13 @@ export function FileUploadDropzone({
     [filterFiles, onSelectedFiles]
   )
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        ;(event.target as HTMLElement).blur()
+        event.currentTarget.blur()
       }
     },
     [propagateEscapeKeyDown]

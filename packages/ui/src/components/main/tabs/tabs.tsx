@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types'
+import { OnChange, OnValueChange, Props } from '../../../types'
 import styles from './tabs.css'
 
 export interface TabsOption {
@@ -12,7 +12,8 @@ export interface TabsOption {
 }
 export interface TabsProps<T extends string> {
   name?: T
-  onValueChange: OnValueChange<string, T>
+  onChange?: OnChange<HTMLDivElement | HTMLInputElement>
+  onValueChange?: OnValueChange<string, T, null | string>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
   value: null | string
@@ -22,31 +23,33 @@ const ITEM_ID_DATA_ATTRIBUTE = 'data-tabs-item-id'
 
 export function Tabs<T extends string>({
   name,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   options,
   propagateEscapeKeyDown = true,
   value,
   ...rest
 }: Props<HTMLInputElement, TabsProps<T>>): JSX.Element {
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      const id = (event.target as HTMLElement).getAttribute(
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name)
+      onValueChange(newValue, name, value)
+      onChange(event)
     },
-    [name, onValueChange, options]
+    [name, onChange, onValueChange, options, value]
   )
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLDivElement>) {
       const key = event.key
       if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        ;(event.target as HTMLElement).blur()
+        event.currentTarget.blur()
         return
       }
       if (
@@ -57,7 +60,8 @@ export function Tabs<T extends string>({
       ) {
         if (value === null) {
           const newValue = options[0].value
-          onValueChange(newValue, name)
+          onValueChange(newValue, name, value)
+          onChange(event)
           return
         }
         const currentIndex = options.findIndex(function (option) {
@@ -72,10 +76,11 @@ export function Tabs<T extends string>({
           nextIndex = 0
         }
         const newValue = options[nextIndex].value
-        onValueChange(newValue, name)
+        onValueChange(newValue, name, value)
+        onChange(event)
       }
     },
-    [name, onValueChange, options, propagateEscapeKeyDown, value]
+    [name, onChange, onValueChange, options, propagateEscapeKeyDown, value]
   )
 
   const activeOption = options.find(function (option) {

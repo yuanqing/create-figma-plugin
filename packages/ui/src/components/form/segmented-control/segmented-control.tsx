@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types'
+import { OnChange, OnValueChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './segmented-control.css'
 
@@ -17,7 +17,8 @@ export interface SegmentedControlProps<
 > {
   disabled?: boolean
   name?: T
-  onValueChange: OnValueChange<S, T>
+  onChange?: OnChange<HTMLDivElement | HTMLInputElement>
+  onValueChange?: OnValueChange<S, T>
   options: Array<SegmentedControlOption<S>>
   propagateEscapeKeyDown?: boolean
   value: S
@@ -31,7 +32,8 @@ export function SegmentedControl<
 >({
   disabled = false,
   name,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   options,
   propagateEscapeKeyDown = true,
   value,
@@ -39,34 +41,32 @@ export function SegmentedControl<
 }: Props<HTMLInputElement, SegmentedControlProps<T, S>>): JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
 
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      const id = (event.target as HTMLElement).getAttribute(
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name)
+      onValueChange(newValue, name, value)
+      onChange(event)
     },
-    [name, onValueChange, options]
+    [name, onChange, onValueChange, options, value]
   )
 
-  const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function () {
-      // Redirect focus to the root element
-      const rootElement = getCurrentFromRef(rootElementRef)
-      rootElement.focus()
-    },
-    []
-  )
+  const handleFocus = useCallback(function () {
+    // Redirect focus to the root element
+    const rootElement = getCurrentFromRef(rootElementRef)
+    rootElement.focus()
+  }, [])
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLDivElement>) {
       const key = event.key
       if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        ;(event.target as HTMLElement).blur()
+        event.currentTarget.blur()
         return
       }
       if (
@@ -87,10 +87,11 @@ export function SegmentedControl<
           return
         }
         const newValue = options[nextIndex].value
-        onValueChange(newValue, name)
+        onValueChange(newValue, name, value)
+        onChange(event)
       }
     },
-    [name, onValueChange, options, propagateEscapeKeyDown, value]
+    [name, onChange, onValueChange, options, propagateEscapeKeyDown, value]
   )
 
   return (

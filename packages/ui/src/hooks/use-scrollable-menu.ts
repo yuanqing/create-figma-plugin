@@ -9,10 +9,10 @@ const SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
 export function useScrollableMenu(options: {
   scrollableMenuItemDataAttributeName?: string
   selectedItemId: null | string
-  onChange: (id: null | string) => void
+  onItemIdChange: (id: null | string) => void
   changeOnMouseOver: boolean
 }) {
-  const { selectedItemId, onChange, changeOnMouseOver = true } = options
+  const { selectedItemId, onItemIdChange, changeOnMouseOver = true } = options
 
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
@@ -86,14 +86,14 @@ export function useScrollableMenu(options: {
         }
         const selectedElement = itemElements[newIndex]
         const id = getMenuItemId(selectedElement)
-        onChange(id)
+        onItemIdChange(id)
         updateScrollPosition(id)
       }
     },
     [
       getItemElements,
       getItemIndex,
-      onChange,
+      onItemIdChange,
       getMenuItemId,
       selectedItemId,
       updateScrollPosition
@@ -102,12 +102,12 @@ export function useScrollableMenu(options: {
 
   const handleMouseMove = useCallback(
     function (event: MouseEvent) {
-      const id = getMenuItemId(event.target as HTMLElement)
+      const id = getMenuItemId(event.target as HTMLElement) // FIXME
       if (id !== selectedItemId) {
-        onChange(id)
+        onItemIdChange(id)
       }
     },
-    [onChange, getMenuItemId, selectedItemId]
+    [onItemIdChange, getMenuItemId, selectedItemId]
   )
 
   useEffect(

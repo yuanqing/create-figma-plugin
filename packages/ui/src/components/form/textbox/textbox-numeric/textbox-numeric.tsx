@@ -9,7 +9,7 @@ import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types'
+import { OnChange, OnValueChange, Props } from '../../../../types'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
@@ -24,7 +24,8 @@ export interface TextboxNumericProps<T extends string> {
   minimum?: number
   name?: T
   noBorder?: boolean
-  onValueChange: OnValueChange<string, T>
+  onChange?: OnChange<HTMLInputElement>
+  onValueChange?: OnValueChange<string, T>
   onNumericValueChange?: (value: null | number, name?: T) => void
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -43,40 +44,40 @@ export function TextboxNumeric<T extends string>({
   minimum,
   name,
   noBorder = false,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   onNumericValueChange,
   placeholder,
   propagateEscapeKeyDown = true,
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxNumericProps<T>>): JSX.Element {
-  const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function (event: FocusEvent) {
-      const element = event.target as HTMLInputElement
-      element.select()
+  const handleFocus = useCallback(function (
+    event: JSX.TargetedFocusEvent<HTMLInputElement>
+  ) {
+    event.currentTarget.select()
+  },
+  [])
+
+  const handleInput = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      onValueChange(event.currentTarget.value, name, value)
+      onChange(event)
     },
-    []
+    [name, onChange, onValueChange, value]
   )
 
-  const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      const element = event.target as HTMLInputElement
-      onValueChange(element.value, name)
-    },
-    [name, onValueChange]
-  )
-
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
-      const element = event.target as HTMLInputElement
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       const key = event.key
       if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        element.blur()
+        event.currentTarget.blur()
         return
       }
+      const element = event.currentTarget
       if (key === 'ArrowDown' || key === 'ArrowUp') {
         event.preventDefault()
         if (value === MIXED_STRING) {
@@ -102,7 +103,8 @@ export function TextboxNumeric<T extends string>({
           const formattedValue = `${newValue}`
           element.value = formattedValue
           element.select()
-          onValueChange(formattedValue, name)
+          onValueChange(formattedValue, name, value)
+          onChange(event)
           return
         }
         const evaluatedValue = evaluateNumericExpression(value)
@@ -137,7 +139,8 @@ export function TextboxNumeric<T extends string>({
         )
         element.value = formattedValue
         element.select()
-        onValueChange(formattedValue, name)
+        onValueChange(formattedValue, name, value)
+        onChange(event)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
@@ -173,14 +176,15 @@ export function TextboxNumeric<T extends string>({
       maximum,
       minimum,
       name,
+      onChange,
       onValueChange,
       propagateEscapeKeyDown,
       value
     ]
   )
 
-  const handleMouseUp: JSX.MouseEventHandler<HTMLInputElement> = useCallback(
-    function (event: MouseEvent) {
+  const handleMouseUp = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLInputElement>) {
       if (value !== MIXED_STRING) {
         return
       }
@@ -189,14 +193,13 @@ export function TextboxNumeric<T extends string>({
     [value]
   )
 
-  const handlePaste: JSX.ClipboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: ClipboardEvent) {
+  const handlePaste = useCallback(
+    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>) {
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
-      const element = event.target as HTMLInputElement
       const nextValue = computeNextValue(
-        element,
+        event.currentTarget,
         event.clipboardData.getData('Text')
       )
       if (isValidNumericInput(nextValue, { integersOnly: integer }) === false) {

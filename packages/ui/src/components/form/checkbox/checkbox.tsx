@@ -3,54 +3,58 @@ import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types'
+import { OnChange, OnValueChange, Props } from '../../../types'
 import styles from './checkbox.css'
 
-export interface CheckboxProps<T extends string> {
+export interface CheckboxProps<N extends string> {
   children: ComponentChildren
   disabled?: boolean
-  name?: T
-  onValueChange: OnValueChange<boolean, T>
+  name?: N
+  onChange?: OnChange<HTMLInputElement>
+  onValueChange?: OnValueChange<boolean, N>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
-export function Checkbox<T extends string>({
+export function Checkbox<N extends string>({
   children,
   disabled = false,
   name,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
-}: Props<HTMLInputElement, CheckboxProps<T>>): JSX.Element {
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function () {
+}: Props<HTMLInputElement, CheckboxProps<N>>): JSX.Element {
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const newValue = value === false
-      onValueChange(newValue, name)
+      onValueChange(newValue, name, value)
+      onChange(event)
     },
-    [name, onValueChange, value]
+    [name, onChange, onValueChange, value]
   )
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       switch (event.key) {
         case 'Escape': {
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          ;(event.target as HTMLElement).blur()
+          event.currentTarget.blur()
           break
         }
         case 'Enter': {
           event.stopPropagation()
           const newValue = value === false
-          onValueChange(newValue, name)
+          onValueChange(newValue, name, value)
+          onChange(event)
           break
         }
       }
     },
-    [name, onValueChange, propagateEscapeKeyDown, value]
+    [name, onChange, onValueChange, propagateEscapeKeyDown, value]
   )
 
   return (

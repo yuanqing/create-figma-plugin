@@ -15,7 +15,9 @@ export function useForm<T>(
   }
 ) {
   const { close, submit, transform, validate } = options
+
   const { formState, setFormState } = useFormState(initialState, transform)
+
   const handleSubmit = useCallback(
     function () {
       if (typeof validate !== 'undefined' && validate(formState) === false) {
@@ -26,6 +28,7 @@ export function useForm<T>(
     [formState, submit, validate]
   )
   useKeyDownHandler('Enter', handleSubmit)
+
   const handleClose = useCallback(
     function () {
       close(formState)
@@ -33,9 +36,12 @@ export function useForm<T>(
     [close, formState]
   )
   useKeyDownHandler('Escape', handleClose)
+
   useFocusTrap()
+
   const disabled =
     typeof validate !== 'undefined' ? validate(formState) === false : false
+
   const initialFocus = useInitialFocus()
   return {
     disabled,

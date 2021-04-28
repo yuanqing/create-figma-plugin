@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types'
+import { OnChange, OnValueChange, Props } from '../../../types'
 import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
 
@@ -13,7 +13,8 @@ export interface SelectableItemProps<T extends string> {
   disabled?: boolean
   indent?: boolean
   name?: T
-  onValueChange: OnValueChange<boolean, T>
+  onChange?: OnChange<HTMLInputElement | HTMLLabelElement>
+  onValueChange?: OnValueChange<boolean, T>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
@@ -24,37 +25,40 @@ export function SelectableItem<T extends string>({
   disabled = false,
   indent = false,
   name,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
 }: Props<HTMLInputElement, SelectableItemProps<T>>): JSX.Element {
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function () {
-      onValueChange(value === false, name)
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      onValueChange(value === false, name, value)
+      onChange(event)
     },
-    [name, onValueChange, value]
+    [name, onChange, onValueChange, value]
   )
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLLabelElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLLabelElement>) {
       switch (event.key) {
         case 'Escape': {
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          ;(event.target as HTMLElement).blur()
+          event.currentTarget.blur()
           break
         }
         case 'Enter': {
           event.stopPropagation()
           const newValue = value === false
-          onValueChange(newValue, name)
+          onValueChange(newValue, name, value)
+          onChange(event)
           break
         }
       }
     },
-    [name, value, onValueChange, propagateEscapeKeyDown]
+    [name, value, onChange, onValueChange, propagateEscapeKeyDown]
   )
 
   return (

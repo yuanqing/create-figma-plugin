@@ -4,7 +4,7 @@ import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types'
+import { OnChange, OnValueChange, Props } from '../../../types'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
 
@@ -13,7 +13,8 @@ export interface TextboxProps<T extends string> {
   icon?: ComponentChildren
   name?: T
   noBorder?: boolean
-  onValueChange: OnValueChange<string, T>
+  onChange?: OnChange<HTMLInputElement>
+  onValueChange?: OnValueChange<string, T>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   type?: 'text' | 'password'
@@ -25,37 +26,36 @@ export function Textbox<T extends string>({
   icon,
   name,
   noBorder = false,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
   type = 'text',
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxProps<T>>): JSX.Element {
-  const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function (event: FocusEvent) {
-      const element = event.target as HTMLInputElement
-      element.select()
+  const handleFocus = useCallback(function (
+    event: JSX.TargetedFocusEvent<HTMLInputElement>
+  ) {
+    event.currentTarget.select()
+  },
+  [])
+
+  const handleInput = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      onValueChange(event.currentTarget.value, name, value)
+      onChange(event)
     },
-    []
+    [name, onChange, onValueChange, value]
   )
 
-  const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      const element = event.target as HTMLInputElement
-      onValueChange(element.value, name)
-    },
-    [name, onValueChange]
-  )
-
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
-      const element = event.target as HTMLInputElement
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        element.blur()
+        event.currentTarget.blur()
       }
       if (
         value !== MIXED_STRING ||
@@ -64,13 +64,13 @@ export function Textbox<T extends string>({
         return
       }
       event.preventDefault()
-      element.select()
+      event.currentTarget.select()
     },
     [value, propagateEscapeKeyDown]
   )
 
-  const handleMouseUp: JSX.MouseEventHandler<HTMLInputElement> = useCallback(
-    function (event: MouseEvent) {
+  const handleMouseUp = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLInputElement>) {
       if (value !== MIXED_STRING) {
         return
       }

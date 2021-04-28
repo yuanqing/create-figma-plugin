@@ -3,7 +3,7 @@ import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types'
+import { OnChange, OnValueChange, Props } from '../../../../types'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
@@ -32,7 +32,8 @@ export interface TextboxAutocompleteProps<T extends string> {
   icon?: ComponentChildren
   name?: T
   noBorder?: boolean
-  onValueChange: OnValueChange<string, T>
+  onChange?: OnChange<HTMLDivElement | HTMLInputElement>
+  onValueChange?: OnValueChange<string, T>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -53,7 +54,8 @@ export function TextboxAutocomplete<T extends string>({
   icon,
   name,
   noBorder = false,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   options,
   placeholder,
   propagateEscapeKeyDown = true,
@@ -232,7 +234,7 @@ export function TextboxAutocomplete<T extends string>({
     [currentValue, getIdByValue, menuItems]
   )
 
-  const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
+  const handleFocus = useCallback(
     function () {
       setIsMenuVisible(true)
       if (
@@ -246,8 +248,8 @@ export function TextboxAutocomplete<T extends string>({
     [committedValue, isValidValue]
   )
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       const key = event.key
       if (key === 'ArrowUp' || key === 'ArrowDown') {
         event.preventDefault()
@@ -265,12 +267,14 @@ export function TextboxAutocomplete<T extends string>({
         shouldSelectAllRef.current = true
         setSelectedId(nextId)
         if (nextId === INVALID_ITEM_ID) {
-          onValueChange(currentValue, name)
+          onValueChange(currentValue, name, committedValue)
+          onChange(event)
         } else {
           const menuItem = findMenuItemById(nextId)
           if (menuItem !== null && 'value' in menuItem) {
             const newValue = menuItem.value
-            onValueChange(newValue, name)
+            onValueChange(newValue, name, committedValue)
+            onChange(event)
           }
         }
         return
@@ -318,6 +322,7 @@ export function TextboxAutocomplete<T extends string>({
       }
     },
     [
+      committedValue,
       computeNextId,
       computePreviousId,
       currentValue,
@@ -328,13 +333,14 @@ export function TextboxAutocomplete<T extends string>({
       isValidValue,
       menuItems.length,
       name,
+      onChange,
       onValueChange,
       selectedId
     ]
   )
 
-  const handleKeyUp: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyUp = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       const key = event.key
       if (
         key !== 'Backspace' &&
@@ -348,15 +354,16 @@ export function TextboxAutocomplete<T extends string>({
       setIsMenuVisible(true)
       setSelectedId(index)
       setCurrentValue(value)
-      onValueChange(value, name)
+      onValueChange(value, name, committedValue)
+      onChange(event)
     },
-    [getIdByValue, name, onValueChange]
+    [committedValue, getIdByValue, name, onChange, onValueChange]
   )
 
-  const handleOptionClick: JSX.MouseEventHandler<HTMLDivElement> = useCallback(
-    function (event: MouseEvent) {
+  const handleOptionClick = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLDivElement>) {
       scrollTopRef.current = getCurrentFromRef(menuElementRef).scrollTop
-      const id = (event.target as HTMLElement).getAttribute(
+      const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE
       ) as string
       setSelectedId(id)
@@ -365,14 +372,15 @@ export function TextboxAutocomplete<T extends string>({
       setCurrentValue(EMPTY_STRING)
       if (menuItem !== null && 'value' in menuItem) {
         const newValue = menuItem.value
-        onValueChange(newValue, name)
+        onValueChange(newValue, name, committedValue)
+        onChange(event)
       }
     },
-    [findMenuItemById, name, onValueChange]
+    [committedValue, findMenuItemById, name, onChange, onValueChange]
   )
 
-  const handlePaste: JSX.ClipboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: ClipboardEvent) {
+  const handlePaste = useCallback(
+    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>) {
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
@@ -460,7 +468,7 @@ export function TextboxAutocomplete<T extends string>({
         if (
           isMenuVisible === false ||
           rootElement === event.target ||
-          rootElement.contains(event.target as HTMLElement)
+          rootElement.contains(event.target as HTMLElement) // FIXME
         ) {
           // Exit if we clicked on any DOM element that is part of the component
           return

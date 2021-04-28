@@ -2,16 +2,17 @@
 import { h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types'
+import { OnChange, OnValueChange, Props } from '../../../types'
 import { IconCross } from '../../icon/icon-cross/icon-cross'
 import { IconSearch } from '../../icon/icon-search/icon-search'
 import styles from './search-textbox.css'
 
-export interface SearchTextboxProps<T extends string> {
+export interface SearchTextboxProps<N extends string> {
   clearOnEscapeKeyDown?: boolean
   disabled?: boolean
-  name?: T
-  onValueChange: OnValueChange<string, T>
+  name?: N
+  onChange?: OnChange<HTMLButtonElement | HTMLInputElement>
+  onValueChange?: OnValueChange<string, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: string
@@ -21,53 +22,60 @@ export function SearchTextbox<T extends string>({
   clearOnEscapeKeyDown = true,
   disabled = false,
   name,
-  onValueChange,
+  onChange = function () {},
+  onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
   value,
   ...rest
 }: Props<HTMLInputElement, SearchTextboxProps<T>>): JSX.Element {
-  const handleFocus: JSX.FocusEventHandler<HTMLInputElement> = useCallback(
-    function (event: FocusEvent) {
-      const element = event.target as HTMLInputElement
-      element.select()
+  const handleFocus = useCallback(function (
+    event: JSX.TargetedFocusEvent<HTMLInputElement>
+  ) {
+    event.currentTarget.select()
+  },
+  [])
+
+  const handleInput = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      onValueChange(event.currentTarget.value, name, value)
+      onChange(event)
     },
-    []
+    [name, onChange, onValueChange, value]
   )
 
-  const handleInput: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
-      const element = event.target as HTMLInputElement
-      onValueChange(element.value, name)
-    },
-    [name, onValueChange]
-  )
-
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       if (event.key === 'Escape') {
         if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
           event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
-          onValueChange('', name)
+          onValueChange('', name, value)
+          onChange(event)
           return
         }
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        const element = event.target as HTMLInputElement
-        element.blur()
+        event.currentTarget.blur()
       }
     },
-    [clearOnEscapeKeyDown, name, onValueChange, propagateEscapeKeyDown, value]
+    [
+      clearOnEscapeKeyDown,
+      name,
+      onChange,
+      onValueChange,
+      propagateEscapeKeyDown,
+      value
+    ]
   )
 
-  const handleClearButtonClick: JSX.MouseEventHandler<HTMLButtonElement> = useCallback(
-    function (event: MouseEvent) {
-      onValueChange('', name)
-      const element = event.target as HTMLInputElement
-      element.focus()
+  const handleClearButtonClick = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
+      onValueChange('', name, value)
+      onChange(event)
+      event.currentTarget.focus()
     },
-    [name, onValueChange]
+    [name, onChange, onValueChange, value]
   )
 
   return (

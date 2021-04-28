@@ -14,7 +14,7 @@ const icons = {
 
 export interface LayerProps {
   children: ComponentChildren
-  onClick: JSX.MouseEventHandler<HTMLDivElement>
+  onClick?: JSX.MouseEventHandler<HTMLDivElement>
   pageName?: string
   selected?: boolean
   type: LayerType

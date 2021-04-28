@@ -13,7 +13,7 @@ export interface ButtonProps {
   disabled?: boolean
   fullWidth?: boolean
   loading?: boolean
-  onClick: JSX.MouseEventHandler<HTMLButtonElement>
+  onClick?: JSX.MouseEventHandler<HTMLButtonElement>
   propagateEscapeKeyDown?: boolean
   secondary?: boolean
 }
@@ -29,13 +29,13 @@ export function Button({
   secondary = false,
   ...rest
 }: Props<HTMLButtonElement, ButtonProps>): JSX.Element {
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLButtonElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLButtonElement>) {
       if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        ;(event.target as HTMLElement).blur()
+        event.currentTarget.blur()
       }
       if (event.key === 'Enter') {
         event.stopPropagation()

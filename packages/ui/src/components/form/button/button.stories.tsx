@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /** @jsx h */
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus'
 import { Button } from './button'
@@ -8,14 +8,14 @@ import { Button } from './button'
 export default { title: 'Components/Form/Button' }
 
 export const Default = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return <Button onClick={handleClick}>Text</Button>
 }
 
 export const Focused = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
@@ -26,7 +26,7 @@ export const Focused = function () {
 }
 
 export const Loading = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
@@ -37,7 +37,7 @@ export const Loading = function () {
 }
 
 export const Disabled = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
@@ -48,7 +48,7 @@ export const Disabled = function () {
 }
 
 export const FullWidth = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
@@ -60,7 +60,7 @@ export const FullWidth = function () {
 
 export const FullWidthLongText = function () {
   const longText = Array(100).fill('Text').join(' ')
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
@@ -71,7 +71,7 @@ export const FullWidthLongText = function () {
 }
 
 export const Secondary = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
@@ -82,7 +82,7 @@ export const Secondary = function () {
 }
 
 export const Destructive = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
@@ -93,7 +93,7 @@ export const Destructive = function () {
 }
 
 export const DestructiveSecondary = function () {
-  function handleClick(event: MouseEvent) {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (

@@ -15,7 +15,7 @@ export interface FileUploadButtonProps {
   loading?: boolean
   multiple?: boolean
   onClick?: JSX.MouseEventHandler<HTMLButtonElement>
-  onSelectedFiles: OnSelectedFiles
+  onSelectedFiles?: OnSelectedFiles
   propagateEscapeKeyDown?: boolean
 }
 
@@ -31,30 +31,33 @@ export function FileUploadButton({
   propagateEscapeKeyDown = true,
   ...rest
 }: Props<HTMLInputElement, FileUploadButtonProps>): JSX.Element {
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = useCallback(
-    function (event: Event) {
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      if (typeof onSelectedFiles === 'undefined') {
+        return
+      }
       const files = Array.prototype.slice
-        .call((event.target as HTMLInputElement).files)
+        .call(event.currentTarget.files)
         .sort(comparator)
       onSelectedFiles(files)
     },
     [onSelectedFiles]
   )
 
-  const handleClick: JSX.MouseEventHandler<HTMLInputElement> = useCallback(
-    function (event: MouseEvent) {
-      ;(event.target as HTMLElement).focus()
-    },
-    []
-  )
+  const handleClick = useCallback(function (
+    event: JSX.TargetedMouseEvent<HTMLInputElement>
+  ) {
+    event.currentTarget.focus()
+  },
+  [])
 
-  const handleKeyDown: JSX.KeyboardEventHandler<HTMLInputElement> = useCallback(
-    function (event: KeyboardEvent) {
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       if (event.key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        ;(event.target as HTMLElement).blur()
+        event.currentTarget.blur()
       }
     },
     [propagateEscapeKeyDown]
