@@ -11,14 +11,13 @@ export default { title: 'Components/Form/Checkbox' }
 
 export const Unselected = function () {
   const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(!(newValue === 'true'))
+  }
   return (
-    <Checkbox
-      onChange={function (event: JSX.TargetedEvent<HTMLInputElement>) {
-        console.log(event)
-        setValue(!value)
-      }}
-      value={value}
-    >
+    <Checkbox onChange={handleChange} value={value}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -26,15 +25,13 @@ export const Unselected = function () {
 
 export const Focused = function () {
   const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(!(newValue === 'true'))
+  }
   return (
-    <Checkbox
-      {...useInitialFocus()}
-      onChange={function (event: JSX.TargetedEvent<HTMLInputElement>) {
-        console.log(event)
-        setValue(!value)
-      }}
-      value={value}
-    >
+    <Checkbox {...useInitialFocus()} onChange={handleChange} value={value}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -42,14 +39,13 @@ export const Focused = function () {
 
 export const Selected = function () {
   const [value, setValue] = useState(true)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(!(newValue === 'true'))
+  }
   return (
-    <Checkbox
-      onChange={function (event: JSX.TargetedEvent<HTMLInputElement>) {
-        console.log(event)
-        setValue(!value)
-      }}
-      value={value}
-    >
+    <Checkbox onChange={handleChange} value={value}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -57,15 +53,13 @@ export const Selected = function () {
 
 export const Disabled = function () {
   const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(!(newValue === 'true'))
+  }
   return (
-    <Checkbox
-      disabled
-      onChange={function (event: JSX.TargetedEvent<HTMLInputElement>) {
-        console.log(event)
-        setValue(!value)
-      }}
-      value={value}
-    >
+    <Checkbox disabled onChange={handleChange} value={value}>
       <Text>Text</Text>
     </Checkbox>
   )
@@ -74,7 +68,7 @@ export const Disabled = function () {
 export const OnValueChange = function () {
   const [value, setValue] = useState(false)
   return (
-    <Checkbox disabled onValueChange={setValue} value={value}>
+    <Checkbox onValueChange={setValue} value={value}>
       <Text>Text</Text>
     </Checkbox>
   )

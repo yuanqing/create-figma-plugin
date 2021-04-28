@@ -7,10 +7,10 @@ import { OnChange, OnValueChange, Props } from '../../../types'
 import { Stack, StackSpace } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
 
-export interface RadioButtonsOption<S extends boolean | number | string> {
+export interface RadioButtonsOption<V extends boolean | number | string> {
   disabled?: boolean
   children?: ComponentChildren
-  value: S
+  value: V
 }
 export interface RadioButtonsProps<
   N extends string,
@@ -100,6 +100,7 @@ export function RadioButtons<
               onKeyDown={handleKeyDown}
               tabIndex={isOptionDisabled === true ? -1 : 0}
               type="radio"
+              value={`${option.value}`}
               {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}
             />
             <div class={styles.children}>{children}</div>

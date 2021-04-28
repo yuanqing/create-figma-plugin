@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 /** @jsx h */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus'
@@ -11,51 +12,99 @@ export default { title: 'Components/Form/Textbox' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')
-  return <Textbox onValueChange={setValue} value={value} />
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox onChange={handleChange} value={value} />
 }
 
 export const Focused = function () {
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
-    <Textbox {...useInitialFocus()} onValueChange={setValue} value={value} />
+    <Textbox {...useInitialFocus()} onChange={handleChange} value={value} />
   )
 }
 
 export const Placeholder = function () {
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
-    <Textbox onValueChange={setValue} placeholder="Placeholder" value={value} />
+    <Textbox onChange={handleChange} placeholder="Placeholder" value={value} />
   )
 }
 
 export const Filled = function () {
   const [value, setValue] = useState('Text')
-  return <Textbox onValueChange={setValue} value={value} />
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox onChange={handleChange} value={value} />
 }
 
 export const Disabled = function () {
   const [value, setValue] = useState('Text')
-  return <Textbox disabled onValueChange={setValue} value={value} />
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox disabled onChange={handleChange} value={value} />
 }
 
 export const NoBorder = function () {
   const [value, setValue] = useState('Text')
-  return <Textbox noBorder onValueChange={setValue} value={value} />
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox noBorder onChange={handleChange} value={value} />
 }
 
 export const Icon = function () {
   const [value, setValue] = useState('Text')
-  return (
-    <Textbox icon={<IconSearch />} onValueChange={setValue} value={value} />
-  )
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox icon={<IconSearch />} onChange={handleChange} value={value} />
 }
 
 export const TextIcon = function () {
   const [value, setValue] = useState('Text')
-  return <Textbox icon="X" onValueChange={setValue} value={value} />
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox icon="X" onChange={handleChange} value={value} />
 }
 
 export const Mixed = function () {
   const [value, setValue] = useState(MIXED_STRING)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox onChange={handleChange} value={value} />
+}
+
+export const OnValueChange = function () {
+  const [value, setValue] = useState('')
   return <Textbox onValueChange={setValue} value={value} />
 }

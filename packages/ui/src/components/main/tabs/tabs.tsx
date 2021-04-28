@@ -1,8 +1,9 @@
 /** @jsx h */
-import { ComponentChildren, h, JSX } from 'preact'
-import { useCallback } from 'preact/hooks'
+import { ComponentChildren, h, JSX, RefObject } from 'preact'
+import { useCallback, useRef } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './tabs.css'
 
 export interface TabsOption {
@@ -12,7 +13,7 @@ export interface TabsOption {
 }
 export interface TabsProps<T extends string> {
   name?: T
-  onChange?: OnChange<HTMLDivElement | HTMLInputElement>
+  onChange?: OnChange<HTMLInputElement>
   onValueChange?: OnValueChange<string, T, null | string>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
@@ -30,6 +31,8 @@ export function Tabs<T extends string>({
   value,
   ...rest
 }: Props<HTMLInputElement, TabsProps<T>>): JSX.Element {
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
@@ -37,7 +40,7 @@ export function Tabs<T extends string>({
       ) as string
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue, name, value)
-      onChange(event)
+      onChange({ ...event, currentTarget: getCurrentFromRef(inputElementRef) })
     },
     [name, onChange, onValueChange, options, value]
   )
@@ -61,7 +64,10 @@ export function Tabs<T extends string>({
         if (value === null) {
           const newValue = options[0].value
           onValueChange(newValue, name, value)
-          onChange(event)
+          onChange({
+            ...event,
+            currentTarget: getCurrentFromRef(inputElementRef)
+          })
           return
         }
         const currentIndex = options.findIndex(function (option) {
@@ -77,7 +83,10 @@ export function Tabs<T extends string>({
         }
         const newValue = options[nextIndex].value
         onValueChange(newValue, name, value)
-        onChange(event)
+        onChange({
+          ...event,
+          currentTarget: getCurrentFromRef(inputElementRef)
+        })
       }
     },
     [name, onChange, onValueChange, options, propagateEscapeKeyDown, value]

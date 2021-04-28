@@ -17,7 +17,7 @@ export interface SegmentedControlProps<
 > {
   disabled?: boolean
   name?: T
-  onChange?: OnChange<HTMLDivElement | HTMLInputElement>
+  onChange?: OnChange<HTMLInputElement>
   onValueChange?: OnValueChange<S, T>
   options: Array<SegmentedControlOption<S>>
   propagateEscapeKeyDown?: boolean
@@ -88,7 +88,15 @@ export function SegmentedControl<
         }
         const newValue = options[nextIndex].value
         onValueChange(newValue, name, value)
-        onChange(event)
+        const currentTarget = getCurrentFromRef(
+          rootElementRef
+        ).querySelector<HTMLInputElement>(
+          `[${ITEM_ID_DATA_ATTRIBUTE}='${nextIndex}']`
+        )
+        if (currentTarget === null) {
+          throw new Error('`currentTarget` is `null`')
+        }
+        onChange({ ...event, currentTarget })
       }
     },
     [name, onChange, onValueChange, options, propagateEscapeKeyDown, value]
@@ -118,6 +126,7 @@ export function SegmentedControl<
               onChange={handleChange}
               onFocus={handleFocus}
               type="radio"
+              value={`${option.value}`}
               {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}
             />
             <div class={styles.children}>{children}</div>

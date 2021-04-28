@@ -74,6 +74,7 @@ export function Checkbox<N extends string>({
         onKeyDown={handleKeyDown}
         tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
+        value={`${value}`}
       />
       <div class={styles.text}>{children}</div>
     </label>

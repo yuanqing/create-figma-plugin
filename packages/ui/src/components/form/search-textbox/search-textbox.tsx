@@ -1,8 +1,9 @@
 /** @jsx h */
-import { h, JSX } from 'preact'
-import { useCallback } from 'preact/hooks'
+import { h, JSX, RefObject } from 'preact'
+import { useCallback, useRef } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconCross } from '../../icon/icon-cross/icon-cross'
 import { IconSearch } from '../../icon/icon-search/icon-search'
 import styles from './search-textbox.css'
@@ -11,7 +12,7 @@ export interface SearchTextboxProps<N extends string> {
   clearOnEscapeKeyDown?: boolean
   disabled?: boolean
   name?: N
-  onChange?: OnChange<HTMLButtonElement | HTMLInputElement>
+  onChange?: OnChange<HTMLInputElement>
   onValueChange?: OnValueChange<string, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -29,6 +30,8 @@ export function SearchTextbox<T extends string>({
   value,
   ...rest
 }: Props<HTMLInputElement, SearchTextboxProps<T>>): JSX.Element {
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+
   const handleFocus = useCallback(function (
     event: JSX.TargetedFocusEvent<HTMLInputElement>
   ) {
@@ -71,9 +74,11 @@ export function SearchTextbox<T extends string>({
 
   const handleClearButtonClick = useCallback(
     function (event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
+      const inputElement = getCurrentFromRef(inputElementRef)
+      inputElement.value = ''
+      inputElement.focus()
       onValueChange('', name, value)
-      onChange(event)
-      event.currentTarget.focus()
+      onChange({ ...event, currentTarget: inputElement })
     },
     [name, onChange, onValueChange, value]
   )
@@ -82,6 +87,7 @@ export function SearchTextbox<T extends string>({
     <div class={styles.searchTextbox}>
       <input
         {...rest}
+        ref={inputElementRef}
         class={styles.input}
         disabled={disabled === true}
         name={name}

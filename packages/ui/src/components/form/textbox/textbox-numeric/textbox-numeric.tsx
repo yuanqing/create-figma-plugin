@@ -46,7 +46,7 @@ export function TextboxNumeric<T extends string>({
   noBorder = false,
   onChange = function () {},
   onValueChange = function () {},
-  onNumericValueChange,
+  onNumericValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
   value,
@@ -211,9 +211,6 @@ export function TextboxNumeric<T extends string>({
 
   useEffect(
     function () {
-      if (typeof onNumericValueChange === 'undefined') {
-        return
-      }
       if (value === MIXED_STRING) {
         onNumericValueChange(MIXED_NUMBER, name)
         return

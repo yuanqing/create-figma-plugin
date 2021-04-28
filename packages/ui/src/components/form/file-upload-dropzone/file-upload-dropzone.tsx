@@ -46,10 +46,7 @@ export function FileUploadDropzone({
       if (typeof onSelectedFiles === 'undefined') {
         return
       }
-      const files = event.currentTarget.files
-      if (files === null) {
-        throw new Error('`event.currentTarget.files` is `null`')
-      }
+      const files = event.currentTarget.files as FileList
       onSelectedFiles(filterFiles(files))
     },
     [filterFiles, onSelectedFiles]

@@ -1,9 +1,10 @@
 /** @jsx h */
 import classnames from '@sindresorhus/class-names'
-import { ComponentChildren, h, JSX } from 'preact'
-import { useCallback } from 'preact/hooks'
+import { ComponentChildren, h, JSX, RefObject } from 'preact'
+import { useCallback, useRef } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
 
@@ -13,7 +14,7 @@ export interface SelectableItemProps<T extends string> {
   disabled?: boolean
   indent?: boolean
   name?: T
-  onChange?: OnChange<HTMLInputElement | HTMLLabelElement>
+  onChange?: OnChange<HTMLInputElement>
   onValueChange?: OnValueChange<boolean, T>
   propagateEscapeKeyDown?: boolean
   value: boolean
@@ -31,6 +32,8 @@ export function SelectableItem<T extends string>({
   value = false,
   ...rest
 }: Props<HTMLInputElement, SelectableItemProps<T>>): JSX.Element {
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       onValueChange(value === false, name, value)
@@ -53,7 +56,10 @@ export function SelectableItem<T extends string>({
           event.stopPropagation()
           const newValue = value === false
           onValueChange(newValue, name, value)
-          onChange(event)
+          onChange({
+            ...event,
+            currentTarget: getCurrentFromRef(inputElementRef)
+          })
           break
         }
       }
@@ -75,6 +81,7 @@ export function SelectableItem<T extends string>({
     >
       <input
         {...rest}
+        ref={inputElementRef}
         checked={value === true}
         class={styles.input}
         disabled={disabled === true}

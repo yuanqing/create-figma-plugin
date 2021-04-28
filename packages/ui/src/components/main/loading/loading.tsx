@@ -14,8 +14,8 @@ export function Loading({
   ...rest
 }: Props<HTMLDivElement, LoadingProps>): JSX.Element {
   return (
-    <div {...rest} className={styles.loading}>
-      <div className={styles.wrapper}>
+    <div {...rest} class={styles.loading}>
+      <div class={styles.wrapper}>
         <div class={styles.loadingIndicator}>
           <LoadingIndicator />
         </div>
