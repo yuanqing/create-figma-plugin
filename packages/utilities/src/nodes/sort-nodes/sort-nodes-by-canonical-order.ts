@@ -1,5 +1,5 @@
 import { areSiblingNodes } from '../are-sibling-nodes'
-import { getParentNode } from '../get-parent-node'
+import { getParentNode } from '../get-nodes/get-parent-node'
 
 /**
  * Sorts `siblingNodes` according to their layer list order. Does not modify

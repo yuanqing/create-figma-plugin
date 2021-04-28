@@ -1,4 +1,4 @@
-export function getSceneNodeById<T extends SceneNode>(id: string): SceneNode {
+export function getSceneNodeById<T extends SceneNode>(id: string): T {
   const node = figma.getNodeById(id)
   if (node === null) {
     throw new Error(`No node found with \`id\`: ${id}`)

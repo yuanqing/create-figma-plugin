@@ -1,4 +1,4 @@
-import { getParentNode } from '../get-parent-node'
+import { getParentNode } from '../get-nodes/get-parent-node'
 
 /**
  * Inserts `node` before the `referenceNode` in the layer list.

@@ -1,6 +1,6 @@
 import { compareStringArrays } from '../../object'
 import { areSiblingNodes } from '../are-sibling-nodes'
-import { getParentNode } from '../get-parent-node'
+import { getParentNode } from '../get-nodes/get-parent-node'
 
 /**
  * Updates the layer list sort order to follow the sort order of the nodes
