@@ -6,11 +6,8 @@ import { OnChange, OnValueChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './tabs.css'
 
-export interface TabsOption {
-  disabled?: boolean
-  children: ComponentChildren
-  value: string
-}
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
+
 export interface TabsProps<T extends string> {
   name?: T
   onChange?: OnChange<HTMLInputElement>
@@ -19,8 +16,11 @@ export interface TabsProps<T extends string> {
   propagateEscapeKeyDown?: boolean
   value: null | string
 }
-
-const ITEM_ID_DATA_ATTRIBUTE = 'data-tabs-item-id'
+export interface TabsOption {
+  disabled?: boolean
+  children: ComponentChildren
+  value: string
+}
 
 export function Tabs<T extends string>({
   name,
@@ -36,7 +36,7 @@ export function Tabs<T extends string>({
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE
+        ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue, name, value)
@@ -110,7 +110,7 @@ export function Tabs<T extends string>({
                 onChange={handleChange}
                 tabIndex={-1}
                 type="radio"
-                {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}
+                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
               />
               <div class={styles.text}>{option.value}</div>
             </label>

@@ -105,6 +105,6 @@ export const Mixed = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('Text')
   return <Textbox onValueChange={setValue} value={value} />
 }

@@ -151,7 +151,7 @@ export const NumericValue = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState<null | string>(null)
+  const [value, setValue] = useState('bar')
   return (
     <RadioButtons
       onValueChange={setValue}

@@ -1,7 +1,7 @@
 /** @jsx h */
 /* eslint-disable no-console */
-import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
+import { MIXED_STRING } from '@create-figma-plugin/utilities'
+import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus'
@@ -11,180 +11,167 @@ import { TextboxNumeric } from './textbox-numeric'
 export default { title: 'Components/Form/Textbox Numeric' }
 
 export const Empty = function () {
-  const [string, setString] = useState('')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
-    />
-  )
+  return <TextboxNumeric onChange={handleChange} value={value} />
 }
 
 export const Focused = function () {
-  const [string, setString] = useState('')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <TextboxNumeric
       {...useInitialFocus()}
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
+      onChange={handleChange}
+      value={value}
     />
   )
 }
 
 export const Placeholder = function () {
-  const [string, setString] = useState('')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <TextboxNumeric
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
+      onChange={handleChange}
       placeholder="Placeholder"
-      value={string}
+      value={value}
     />
   )
 }
 
 export const Filled = function () {
-  const [string, setString] = useState('42')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('42')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
-    />
-  )
+  return <TextboxNumeric onChange={handleChange} value={value} />
 }
 
 export const Disabled = function () {
-  const [string, setString] = useState('42')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('42')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      disabled
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
-    />
-  )
+  return <TextboxNumeric disabled onChange={handleChange} value={value} />
 }
 
 export const NoBorder = function () {
-  const [string, setString] = useState('42')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('42')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      noBorder
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
-    />
-  )
+  return <TextboxNumeric noBorder onChange={handleChange} value={value} />
 }
 
 export const Icon = function () {
-  const [string, setString] = useState('42')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('42')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <TextboxNumeric
       icon={<IconSpaceHorizontal />}
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
+      onChange={handleChange}
+      value={value}
     />
   )
 }
 
 export const TextIcon = function () {
-  const [string, setString] = useState('42')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('42')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      icon="X"
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
-    />
-  )
+  return <TextboxNumeric icon="X" onChange={handleChange} value={value} />
 }
 
 export const Mixed = function () {
-  const [string, setString] = useState(MIXED_STRING)
-  function handleNumberChange(value: null | number) {
-    console.log(value === MIXED_NUMBER)
+  const [value, setValue] = useState(MIXED_STRING)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
-    />
-  )
+  return <TextboxNumeric onChange={handleChange} value={value} />
 }
 
 export const IntegersOnly = function () {
-  const [string, setString] = useState('42')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('42')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      integer
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
-    />
-  )
+  return <TextboxNumeric integer onChange={handleChange} value={value} />
 }
 
 export const CustomIncrements = function () {
-  const [string, setString] = useState('42')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('42')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <TextboxNumeric
       incrementBig={8}
       incrementSmall={4}
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
+      onChange={handleChange}
+      value={value}
     />
   )
 }
 
 export const MinimumMaximum = function () {
-  const [string, setString] = useState('0')
-  function handleNumberChange(value: null | number) {
-    console.log(value)
+  const [value, setValue] = useState('0')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <TextboxNumeric
       maximum={10}
       minimum={0}
-      onNumericValueChange={handleNumberChange}
-      onValueChange={setString}
-      value={string}
+      onChange={handleChange}
+      value={value}
+    />
+  )
+}
+
+export const OnValueChange = function () {
+  const [value, setValue] = useState('42')
+  function handleNumericValueChange(newNumericValue: null | number) {
+    console.log(newNumericValue)
+  }
+  return (
+    <TextboxNumeric
+      onNumericValueChange={handleNumericValueChange}
+      onValueChange={setValue}
+      value={value}
     />
   )
 }

@@ -2,9 +2,13 @@ import { useEffect } from 'preact/hooks'
 
 const INITIAL_FOCUS_DATA_ATTRIBUTE_NAME = 'data-initial-focus'
 
-export function useInitialFocus(): Record<string, true> {
+export type InitialFocus = {
+  [INITIAL_FOCUS_DATA_ATTRIBUTE_NAME]: true
+}
+
+export function useInitialFocus(): InitialFocus {
   useEffect(function () {
-    const focusableElement = document.querySelector(
+    const focusableElement = document.querySelector<HTMLElement>(
       `[${INITIAL_FOCUS_DATA_ATTRIBUTE_NAME}]`
     )
     if (focusableElement === null) {
@@ -12,9 +16,9 @@ export function useInitialFocus(): Record<string, true> {
         `No element with attribute \`${INITIAL_FOCUS_DATA_ATTRIBUTE_NAME}\``
       )
     }
-    ;(focusableElement as HTMLElement).focus()
+    focusableElement.focus()
   }, [])
   return {
-    [`${INITIAL_FOCUS_DATA_ATTRIBUTE_NAME}`]: true
+    [INITIAL_FOCUS_DATA_ATTRIBUTE_NAME]: true
   }
 }

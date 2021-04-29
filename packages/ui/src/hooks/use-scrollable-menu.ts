@@ -3,34 +3,32 @@ import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
 
+type ItemId = typeof INVALID_ITEM_ID | string
+
 const INVALID_ITEM_ID = null
-const SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
 
 export function useScrollableMenu(options: {
-  scrollableMenuItemDataAttributeName?: string
-  selectedItemId: null | string
-  onItemIdChange: (id: null | string) => void
+  selectedItemId: ItemId
+  onItemIdChange: (id: ItemId) => void
   changeOnMouseOver: boolean
 }): {
   menuElementRef: RefObject<HTMLDivElement>
-  scrollableMenuItemIdDataAttributeName: typeof SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME
+  itemIdDataAttributeName: typeof ITEM_ID_DATA_ATTRIBUTE_NAME
 } {
   const { selectedItemId, onItemIdChange, changeOnMouseOver = true } = options
 
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
-  const getMenuItemId = useCallback(function (
-    element: HTMLElement
-  ): null | string {
-    return element.getAttribute(SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME)
-  },
-  [])
+  const getMenuItemId = useCallback(function (element: HTMLElement): ItemId {
+    return element.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
+  }, [])
 
   const getItemElements = useCallback(
     function (): Array<HTMLElement> {
       return Array.from(
-        getCurrentFromRef(menuElementRef).querySelectorAll(
-          `[${SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME}]`
+        getCurrentFromRef(menuElementRef).querySelectorAll<HTMLElement>(
+          `[${ITEM_ID_DATA_ATTRIBUTE_NAME}]`
         )
       )
     },
@@ -38,7 +36,7 @@ export function useScrollableMenu(options: {
   )
 
   const getItemIndex = useCallback(
-    function (id: null | string): number {
+    function (id: ItemId): number {
       if (id === INVALID_ITEM_ID) {
         return -1
       }
@@ -50,7 +48,7 @@ export function useScrollableMenu(options: {
   )
 
   const updateScrollPosition = useCallback(
-    function (id: null | string) {
+    function (id: ItemId) {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
       if (index === -1) {
@@ -145,7 +143,7 @@ export function useScrollableMenu(options: {
   )
 
   return {
-    menuElementRef,
-    scrollableMenuItemIdDataAttributeName: SCROLLABLE_MENU_ITEM_DATA_ATTRIBUTE_NAME
+    itemIdDataAttributeName: ITEM_ID_DATA_ATTRIBUTE_NAME,
+    menuElementRef
   }
 }

@@ -66,7 +66,7 @@ export const Disabled = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState(true)
   return (
     <Checkbox onValueChange={setValue} value={value}>
       <Text>Text</Text>

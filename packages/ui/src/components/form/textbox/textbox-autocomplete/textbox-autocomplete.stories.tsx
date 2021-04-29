@@ -1,5 +1,6 @@
 /** @jsx h */
-import { h } from 'preact'
+/* eslint-disable no-console */
+import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus'
@@ -21,9 +22,14 @@ export const Empty = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       value={value}
     />
@@ -40,10 +46,15 @@ export const Focused = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
       {...useInitialFocus()}
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       value={value}
     />
@@ -60,9 +71,14 @@ export const Placeholder = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       placeholder="Placeholder"
       value={value}
@@ -80,9 +96,14 @@ export const Filled = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('foo')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       value={value}
     />
@@ -99,10 +120,15 @@ export const Disabled = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('foo')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
       disabled
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       value={value}
     />
@@ -119,10 +145,15 @@ export const NoBorder = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('foo')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
       noBorder
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       value={value}
     />
@@ -139,10 +170,15 @@ export const Icon = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('foo')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
       icon={<IconSearch />}
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       value={value}
     />
@@ -159,10 +195,15 @@ export const TextIcon = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('foo')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
       icon="S"
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       placeholder="Search"
       value={value}
@@ -180,9 +221,14 @@ export const Strict = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       strict
       value={value}
@@ -200,10 +246,15 @@ export const Filter = function () {
     { value: 'qux' }
   ]
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
       filter
-      onValueChange={setValue}
+      onChange={handleChange}
       options={options}
       value={value}
     />
@@ -221,14 +272,38 @@ export const MenuTop = function () {
   ]
   const style = { marginTop: '128px' }
   const [value, setValue] = useState('')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <div style={style}>
       <TextboxAutocomplete
-        onValueChange={setValue}
+        onChange={handleChange}
         options={options}
         top
         value={value}
       />
     </div>
+  )
+}
+
+export const OnValueChange = function () {
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  const [value, setValue] = useState('foo')
+  return (
+    <TextboxAutocomplete
+      onValueChange={setValue}
+      options={options}
+      value={value}
+    />
   )
 }

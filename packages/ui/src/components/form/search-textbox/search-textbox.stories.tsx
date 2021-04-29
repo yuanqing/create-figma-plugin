@@ -71,6 +71,6 @@ export const Disabled = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('Text')
   return <SearchTextbox onValueChange={setValue} value={value} />
 }

@@ -22,7 +22,7 @@ export function useFocusTrap(): void {
 }
 
 function getFocusableElements(): Array<HTMLElement> {
-  const elements = document.querySelectorAll(
+  const elements = document.querySelectorAll<HTMLElement>(
     ':not([disabled])[tabindex]:not([tabindex="-1"])'
   )
   return Array.prototype.slice.call(elements)

@@ -10,6 +10,12 @@ import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import textboxAutocompleteStyles from './textbox-autocomplete.css'
 
+const EMPTY_STRING = ''
+const INVALID_ITEM_ID = null
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
+
+type ItemId = typeof INVALID_ITEM_ID | string
+
 export type TextboxAutocompleteOption =
   | TextboxAutocompleteOptionHeader
   | TextboxAutocompleteOptionValue
@@ -32,7 +38,7 @@ export interface TextboxAutocompleteProps<T extends string> {
   icon?: ComponentChildren
   name?: T
   noBorder?: boolean
-  onChange?: OnChange<HTMLDivElement | HTMLInputElement>
+  onChange?: OnChange<HTMLInputElement>
   onValueChange?: OnValueChange<string, T>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
@@ -41,12 +47,6 @@ export interface TextboxAutocompleteProps<T extends string> {
   top?: boolean
   value: string
 }
-
-type ItemId = typeof INVALID_ITEM_ID | string
-
-const EMPTY_STRING = ''
-const INVALID_ITEM_ID = null
-const ITEM_ID_DATA_ATTRIBUTE = 'data-textbox-autocomplete-item-id'
 
 export function TextboxAutocomplete<T extends string>({
   disabled = false,
@@ -364,7 +364,7 @@ export function TextboxAutocomplete<T extends string>({
     function (event: JSX.TargetedMouseEvent<HTMLDivElement>) {
       scrollTopRef.current = getCurrentFromRef(menuElementRef).scrollTop
       const id = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE
+        ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       setSelectedId(id)
       setIsMenuVisible(false)
@@ -373,7 +373,10 @@ export function TextboxAutocomplete<T extends string>({
       if (menuItem !== null && 'value' in menuItem) {
         const newValue = menuItem.value
         onValueChange(newValue, name, committedValue)
-        onChange(event)
+        onChange({
+          ...event,
+          currentTarget: getCurrentFromRef(inputElementRef)
+        })
       }
     },
     [committedValue, findMenuItemById, name, onChange, onValueChange]
@@ -441,7 +444,8 @@ export function TextboxAutocomplete<T extends string>({
         .call(menuElement.children)
         .find(function (element: HTMLElement) {
           return (
-            element.getAttribute(ITEM_ID_DATA_ATTRIBUTE) === `${selectedId}`
+            element.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME) ===
+            `${selectedId}`
           )
         })
       if (typeof selectedElement === 'undefined') {
@@ -562,7 +566,7 @@ export function TextboxAutocomplete<T extends string>({
                     : null
                 )}
                 onClick={handleOptionClick}
-                {...{ [ITEM_ID_DATA_ATTRIBUTE]: menuItem.id }}
+                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: menuItem.id }}
               >
                 {menuItem.value}
               </div>

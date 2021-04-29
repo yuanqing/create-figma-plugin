@@ -122,7 +122,7 @@ function pick<T, K extends keyof T>(object: T, keys: K[]): Pick<T, K> {
   for (const key of keys) {
     const value = object[key]
     if (typeof value === 'undefined') {
-      throw new Error(`Attribute \`${key}\` does not exist on \`object\``)
+      throw new Error(`Key \`${key}\` does not exist on \`object\``)
     }
     result[key] = value
   }

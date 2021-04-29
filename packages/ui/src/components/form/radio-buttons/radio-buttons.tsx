@@ -7,6 +7,8 @@ import { OnChange, OnValueChange, Props } from '../../../types'
 import { Stack, StackSpace } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
 
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-radio-buttons-item-id'
+
 export interface RadioButtonsOption<V extends boolean | number | string> {
   disabled?: boolean
   children?: ComponentChildren
@@ -26,8 +28,6 @@ export interface RadioButtonsProps<
   value: null | V
 }
 
-const ITEM_ID_DATA_ATTRIBUTE = 'data-radio-buttons-item-id'
-
 export function RadioButtons<
   T extends string,
   S extends boolean | number | string
@@ -45,7 +45,7 @@ export function RadioButtons<
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE
+        ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue, name, value)
@@ -64,7 +64,7 @@ export function RadioButtons<
       }
       if (event.key === 'Enter') {
         const id = event.currentTarget.getAttribute(
-          ITEM_ID_DATA_ATTRIBUTE
+          ITEM_ID_DATA_ATTRIBUTE_NAME
         ) as string
         const newValue = options[parseInt(id, 10)].value
         onValueChange(newValue, name, value)
@@ -101,7 +101,7 @@ export function RadioButtons<
               tabIndex={isOptionDisabled === true ? -1 : 0}
               type="radio"
               value={`${option.value}`}
-              {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}
+              {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
             />
             <div class={styles.children}>{children}</div>
           </label>

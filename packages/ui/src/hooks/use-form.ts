@@ -2,7 +2,7 @@ import { useCallback } from 'preact/hooks'
 
 import { useFocusTrap } from './use-focus-trap'
 import { useFormState } from './use-form-state'
-import { useInitialFocus } from './use-initial-focus'
+import { InitialFocus, useInitialFocus } from './use-initial-focus'
 import { useKeyDownHandler } from './use-key-down-handler'
 
 export function useForm<S>(
@@ -17,7 +17,7 @@ export function useForm<S>(
   disabled: boolean
   formState: S
   handleSubmit: () => void
-  initialFocus: Record<string, true>
+  initialFocus: InitialFocus
   setFormState: <N extends keyof S>(state: S[N], name: undefined | N) => void
 } {
   const { close, submit, transform, validate } = options

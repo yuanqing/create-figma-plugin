@@ -6,6 +6,8 @@ import { OnChange, OnValueChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './segmented-control.css'
 
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'
+
 export interface SegmentedControlOption<S> {
   disabled?: boolean
   children?: ComponentChildren
@@ -23,8 +25,6 @@ export interface SegmentedControlProps<
   propagateEscapeKeyDown?: boolean
   value: S
 }
-
-const ITEM_ID_DATA_ATTRIBUTE = 'data-segmented-control-item-id'
 
 export function SegmentedControl<
   T extends string,
@@ -44,7 +44,7 @@ export function SegmentedControl<
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE
+        ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue, name, value)
@@ -91,7 +91,7 @@ export function SegmentedControl<
         const currentTarget = getCurrentFromRef(
           rootElementRef
         ).querySelector<HTMLInputElement>(
-          `[${ITEM_ID_DATA_ATTRIBUTE}='${nextIndex}']`
+          `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${nextIndex}']`
         )
         if (currentTarget === null) {
           throw new Error('`currentTarget` is `null`')
@@ -127,7 +127,7 @@ export function SegmentedControl<
               onFocus={handleFocus}
               type="radio"
               value={`${option.value}`}
-              {...{ [ITEM_ID_DATA_ATTRIBUTE]: `${index}` }}
+              {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
             />
             <div class={styles.children}>{children}</div>
           </label>

@@ -49,7 +49,9 @@
         2,
         {
           "ignore": [
-            "class"
+            "class",
+            "clip-rule",
+            "fill-rule"
           ]
         }
       ]
