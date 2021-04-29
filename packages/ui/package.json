@@ -82,10 +82,5 @@
     "plugins": [
       "@typescript-eslint/eslint-plugin"
     ]
-  },
-  "storybook-deployer": {
-    "gitUsername": "yuanqing",
-    "gitEmail": "github@yuanqing.sg",
-    "commitMessage": "Deploy Storybook"
   }
 }
