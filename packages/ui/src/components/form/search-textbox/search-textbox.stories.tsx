@@ -60,6 +60,18 @@ export const Filled = function () {
   return <SearchTextbox onChange={handleChange} value={value} />
 }
 
+export const ClearOnEscapeKeyDown = function () {
+  const [value, setValue] = useState('Text')
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <SearchTextbox clearOnEscapeKeyDown onChange={handleChange} value={value} />
+  )
+}
+
 export const Disabled = function () {
   function handleChange() {
     throw new Error('This function should not be called')

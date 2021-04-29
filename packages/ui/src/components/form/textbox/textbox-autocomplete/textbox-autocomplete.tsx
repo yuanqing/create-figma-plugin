@@ -10,11 +10,11 @@ import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 import textboxAutocompleteStyles from './textbox-autocomplete.css'
 
+type ItemId = typeof INVALID_ITEM_ID | string
+
 const EMPTY_STRING = ''
 const INVALID_ITEM_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
-
-type ItemId = typeof INVALID_ITEM_ID | string
 
 export type TextboxAutocompleteProps<N extends string> = {
   disabled?: boolean
@@ -268,12 +268,14 @@ export function TextboxAutocomplete<N extends string>({
         setSelectedId(nextId)
         if (nextId === INVALID_ITEM_ID) {
           onValueChange(currentValue, name, committedValue)
+          getCurrentFromRef(inputElementRef).value = currentValue
           onChange(event)
         } else {
           const menuItem = findMenuItemById(nextId)
           if (menuItem !== null && 'value' in menuItem) {
             const newValue = menuItem.value
             onValueChange(newValue, name, committedValue)
+            getCurrentFromRef(inputElementRef).value = newValue
             onChange(event)
           }
         }

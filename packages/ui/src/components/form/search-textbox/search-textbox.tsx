@@ -20,7 +20,7 @@ export type SearchTextboxProps<N extends string> = {
 }
 
 export function SearchTextbox<N extends string>({
-  clearOnEscapeKeyDown = true,
+  clearOnEscapeKeyDown = false,
   disabled = false,
   name,
   onChange = function () {},
@@ -52,6 +52,8 @@ export function SearchTextbox<N extends string>({
       if (event.key === 'Escape') {
         if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
           event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
+          const inputElement = getCurrentFromRef(inputElementRef)
+          inputElement.value = ''
           onValueChange('', name, value)
           onChange(event)
           return
