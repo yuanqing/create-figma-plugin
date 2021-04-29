@@ -1,9 +1,9 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../../types'
+import { createClassName } from '../../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
@@ -502,11 +502,11 @@ export function TextboxAutocomplete<N extends string>({
   return (
     <div
       ref={rootElementRef}
-      class={classnames(
+      class={createClassName([
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         typeof icon === 'undefined' ? null : styles.hasIcon
-      )}
+      ])}
     >
       <input
         {...rest}
@@ -529,13 +529,13 @@ export function TextboxAutocomplete<N extends string>({
       {disabled === false && isMenuVisible === true && menuItems.length > 0 ? (
         <div
           ref={menuElementRef}
-          class={classnames(
+          class={createClassName([
             textboxAutocompleteStyles.menu,
             top === true ? textboxAutocompleteStyles.top : null,
             typeof icon === 'undefined'
               ? null
               : textboxAutocompleteStyles.hasIcon
-          )}
+          ])}
         >
           {menuItems.map(function (menuItem) {
             if ('separator' in menuItem) {
@@ -559,12 +559,12 @@ export function TextboxAutocomplete<N extends string>({
             return (
               <div
                 key={menuItem.id}
-                class={classnames(
+                class={createClassName([
                   textboxAutocompleteStyles.menuItem,
                   menuItem.id === selectedId
                     ? textboxAutocompleteStyles.menuItemSelected
                     : null
-                )}
+                ])}
                 onClick={handleOptionClick}
                 {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: menuItem.id }}
               >

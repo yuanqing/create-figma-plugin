@@ -1,10 +1,10 @@
 /** @jsx h */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
 
@@ -81,11 +81,11 @@ export function Textbox<N extends string>({
 
   return (
     <div
-      class={classnames(
+      class={createClassName([
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         typeof icon === 'undefined' ? null : styles.hasIcon
-      )}
+      ])}
     >
       <input
         {...rest}

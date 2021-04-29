@@ -1,9 +1,9 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import styles from './checkbox.css'
 
 export type CheckboxProps<N extends string> = {
@@ -59,10 +59,10 @@ export function Checkbox<N extends string>({
 
   return (
     <label
-      class={classnames(
+      class={createClassName([
         styles.label,
         disabled === true ? styles.disabled : null
-      )}
+      ])}
     >
       <input
         {...rest}

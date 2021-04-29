@@ -5,14 +5,16 @@ import {
   MIXED_NUMBER,
   MIXED_STRING
 } from '@create-figma-plugin/utilities'
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../../types'
+import { createClassName } from '../../../../utilities/create-class-name'
 import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
+
+const nonDigitRegex = /[^\d.]/
 
 export type TextboxNumericProps<N extends string> = {
   disabled?: boolean
@@ -31,8 +33,6 @@ export type TextboxNumericProps<N extends string> = {
   propagateEscapeKeyDown?: boolean
   value: string
 }
-
-const nonDigitRegex = /[^\d.]/
 
 export function TextboxNumeric<N extends string>({
   disabled = false,
@@ -223,11 +223,11 @@ export function TextboxNumeric<N extends string>({
 
   return (
     <div
-      class={classnames(
+      class={createClassName([
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
         typeof icon === 'undefined' ? null : styles.hasIcon
-      )}
+      ])}
     >
       <input
         {...rest}

@@ -1,9 +1,9 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import { Stack, StackSpace } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
 
@@ -85,10 +85,10 @@ export function RadioButtons<
         return (
           <label
             key={index}
-            class={classnames(
+            class={createClassName([
               styles.label,
               isOptionDisabled === true ? styles.disabled : null
-            )}
+            ])}
           >
             <input
               {...rest}

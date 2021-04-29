@@ -42,8 +42,7 @@
     "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^0.0.85-alpha.5",
-    "@sindresorhus/class-names": "^1.1.0"
+    "@create-figma-plugin/utilities": "^0.0.85-alpha.5"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

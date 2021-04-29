@@ -1,9 +1,9 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
@@ -69,13 +69,13 @@ export function SelectableItem<N extends string>({
 
   return (
     <label
-      class={classnames(
+      class={createClassName([
         styles.label,
         disabled === true ? styles.disabled : null,
         bold === true ? styles.bold : null,
         indent === true ? styles.indent : null,
         value === true ? styles.checked : null
-      )}
+      ])}
       onKeyDown={disabled === true ? undefined : handleKeyDown}
       tabIndex={disabled === true ? -1 : 0}
     >

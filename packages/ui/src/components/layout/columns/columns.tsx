@@ -1,8 +1,8 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX, toChildArray } from 'preact'
 
 import { Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import styles from './columns.css'
 
 export type ColumnsProps = {
@@ -24,10 +24,10 @@ export function Columns({
   return (
     <div
       {...rest}
-      class={classnames(
+      class={createClassName([
         styles.columns,
         typeof space === 'undefined' ? null : styles[space]
-      )}
+      ])}
     >
       {toChildArray(children).map(function (element, index) {
         return (

@@ -8,13 +8,6 @@ import styles from './segmented-control.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'
 
-export type SegmentedControlOption<
-  V extends boolean | number | string = string
-> = {
-  disabled?: boolean
-  children?: ComponentChildren
-  value: V
-}
 export type SegmentedControlProps<
   N extends string,
   V extends boolean | number | string
@@ -25,6 +18,13 @@ export type SegmentedControlProps<
   onValueChange?: OnValueChange<V, N>
   options: Array<SegmentedControlOption<V>>
   propagateEscapeKeyDown?: boolean
+  value: V
+}
+export type SegmentedControlOption<
+  V extends boolean | number | string = string
+> = {
+  disabled?: boolean
+  children?: ComponentChildren
   value: V
 }
 

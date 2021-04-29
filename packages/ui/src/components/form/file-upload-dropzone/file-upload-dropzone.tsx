@@ -1,9 +1,9 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
 import { OnSelectedFiles, Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import styles from './file-upload-dropzone.css'
 
 export type FileUploadDropzoneProps = {
@@ -105,10 +105,10 @@ export function FileUploadDropzone({
 
   return (
     <div
-      class={classnames(
+      class={createClassName([
         styles.fileUploadDropzone,
         isDropActive === true ? styles.isDropActive : null
-      )}
+      ])}
     >
       <input
         {...rest}

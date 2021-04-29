@@ -1,5 +1,4 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX, toChildArray } from 'preact'
 
 import { Props } from '../../../types'
@@ -22,7 +21,7 @@ export function Stack({
   ...rest
 }: Props<HTMLDivElement, StackProps>): JSX.Element {
   return (
-    <div {...rest} class={classnames(styles[space])}>
+    <div {...rest} class={styles[space]}>
       {toChildArray(children).map(function (element, index) {
         return (
           <div key={index} class={styles.item}>

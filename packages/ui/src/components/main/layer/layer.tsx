@@ -1,8 +1,8 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 
 import { Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import { IconComponent } from '../../icon/icon-component/icon-component'
 import { IconFrame } from '../../icon/icon-frame/icon-frame'
 import styles from './layer.css'
@@ -32,11 +32,11 @@ export function Layer({
   return (
     <div
       {...rest}
-      class={classnames(
+      class={createClassName([
         styles[type],
         styles.layer,
         selected === true ? styles.selected : null
-      )}
+      ])}
       onClick={onClick}
     >
       <div class={styles.icon}>{icons[type]}</div>

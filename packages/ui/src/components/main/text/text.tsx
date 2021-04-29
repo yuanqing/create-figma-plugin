@@ -1,8 +1,8 @@
 /** @jsx h */
-import classnames from '@sindresorhus/class-names'
 import { ComponentChildren, h, JSX } from 'preact'
 
 import { Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import styles from './text.css'
 
 export type TextProps = {
@@ -25,13 +25,13 @@ export function Text({
   return (
     <div
       {...rest}
-      class={classnames(
+      class={createClassName([
         styles.text,
         styles[align],
         bold === true ? styles.bold : null,
         muted === true ? styles.muted : null,
         numeric === true ? styles.numeric : null
-      )}
+      ])}
     >
       {children}
     </div>
