@@ -4,7 +4,7 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { Props } from '../../../types'
 import styles from './container.css'
 
-export interface ContainerProps {
+export type ContainerProps = {
   children: ComponentChildren
   space?: ContainerSpace
 }

@@ -8,20 +8,20 @@ import { OnChange, OnValueChange, Props } from '../../../types'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
 
-export interface TextboxProps<T extends string> {
+export type TextboxProps<N extends string> = {
   disabled?: boolean
   icon?: ComponentChildren
-  name?: T
+  name?: N
   noBorder?: boolean
   onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<string, T>
+  onValueChange?: OnValueChange<string, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   type?: 'text' | 'password'
   value: string
 }
 
-export function Textbox<T extends string>({
+export function Textbox<N extends string>({
   disabled = false,
   icon,
   name,
@@ -33,7 +33,7 @@ export function Textbox<T extends string>({
   type = 'text',
   value,
   ...rest
-}: Props<HTMLInputElement, TextboxProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, TextboxProps<N>>): JSX.Element {
   const handleFocus = useCallback(function (
     event: JSX.TargetedFocusEvent<HTMLInputElement>
   ) {

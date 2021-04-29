@@ -13,6 +13,7 @@ import {
 export default { title: 'Components/Form/Textbox Autocomplete' }
 
 export const Empty = function () {
+  const [value, setValue] = useState('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -21,7 +22,6 @@ export const Empty = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -37,6 +37,7 @@ export const Empty = function () {
 }
 
 export const Focused = function () {
+  const [value, setValue] = useState('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -45,7 +46,6 @@ export const Focused = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -62,6 +62,7 @@ export const Focused = function () {
 }
 
 export const Placeholder = function () {
+  const [value, setValue] = useState('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -70,7 +71,6 @@ export const Placeholder = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -87,6 +87,7 @@ export const Placeholder = function () {
 }
 
 export const Filled = function () {
+  const [value, setValue] = useState('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -95,7 +96,6 @@ export const Filled = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('foo')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -119,23 +119,21 @@ export const Disabled = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('foo')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
+  function handleChange() {
+    throw new Error('This function should not be called')
   }
   return (
     <TextboxAutocomplete
       disabled
       onChange={handleChange}
       options={options}
-      value={value}
+      value="foo"
     />
   )
 }
 
 export const NoBorder = function () {
+  const [value, setValue] = useState('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -144,7 +142,6 @@ export const NoBorder = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('foo')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -161,6 +158,7 @@ export const NoBorder = function () {
 }
 
 export const Icon = function () {
+  const [value, setValue] = useState('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -169,7 +167,6 @@ export const Icon = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('foo')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -186,6 +183,7 @@ export const Icon = function () {
 }
 
 export const TextIcon = function () {
+  const [value, setValue] = useState('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -194,7 +192,6 @@ export const TextIcon = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('foo')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -212,6 +209,7 @@ export const TextIcon = function () {
 }
 
 export const Strict = function () {
+  const [value, setValue] = useState('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -220,7 +218,6 @@ export const Strict = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -237,6 +234,7 @@ export const Strict = function () {
 }
 
 export const Filter = function () {
+  const [value, setValue] = useState('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -245,7 +243,6 @@ export const Filter = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -262,6 +259,7 @@ export const Filter = function () {
 }
 
 export const MenuTop = function () {
+  const [value, setValue] = useState('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -270,13 +268,12 @@ export const MenuTop = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const style = { marginTop: '128px' }
-  const [value, setValue] = useState('')
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
+  const style = { marginTop: '128px' }
   return (
     <div style={style}>
       <TextboxAutocomplete
@@ -290,6 +287,7 @@ export const MenuTop = function () {
 }
 
 export const OnValueChange = function () {
+  const [value, setValue] = useState('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -298,7 +296,6 @@ export const OnValueChange = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const [value, setValue] = useState('foo')
   return (
     <TextboxAutocomplete
       onValueChange={setValue}

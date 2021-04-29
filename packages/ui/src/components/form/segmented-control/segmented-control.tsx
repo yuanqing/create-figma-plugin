@@ -8,27 +8,29 @@ import styles from './segmented-control.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'
 
-export interface SegmentedControlOption<S> {
+export type SegmentedControlOption<
+  V extends boolean | number | string = string
+> = {
   disabled?: boolean
   children?: ComponentChildren
-  value: S
+  value: V
 }
-export interface SegmentedControlProps<
-  T extends string,
-  S extends boolean | number | string
-> {
+export type SegmentedControlProps<
+  N extends string,
+  V extends boolean | number | string
+> = {
   disabled?: boolean
-  name?: T
+  name?: N
   onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<S, T>
-  options: Array<SegmentedControlOption<S>>
+  onValueChange?: OnValueChange<V, N>
+  options: Array<SegmentedControlOption<V>>
   propagateEscapeKeyDown?: boolean
-  value: S
+  value: V
 }
 
 export function SegmentedControl<
-  T extends string,
-  S extends boolean | number | string
+  N extends string,
+  V extends boolean | number | string
 >({
   disabled = false,
   name,
@@ -38,7 +40,7 @@ export function SegmentedControl<
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, SegmentedControlProps<T, S>>): JSX.Element {
+}: Props<HTMLInputElement, SegmentedControlProps<N, V>>): JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
 
   const handleChange = useCallback(
@@ -137,8 +139,8 @@ export function SegmentedControl<
   )
 }
 
-function resolveNextIndex<Value>(
-  options: Array<SegmentedControlOption<Value>>,
+function resolveNextIndex<V extends boolean | number | string = string>(
+  options: Array<SegmentedControlOption<V>>,
   currentIndex: number,
   delta: number
 ): number {

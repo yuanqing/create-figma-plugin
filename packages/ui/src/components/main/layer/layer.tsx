@@ -12,7 +12,7 @@ const icons = {
   frame: <IconFrame />
 }
 
-export interface LayerProps {
+export type LayerProps = {
   children: ComponentChildren
   onClick?: JSX.MouseEventHandler<HTMLDivElement>
   pageName?: string

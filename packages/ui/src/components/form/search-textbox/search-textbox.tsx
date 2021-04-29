@@ -8,7 +8,7 @@ import { IconCross } from '../../icon/icon-cross/icon-cross'
 import { IconSearch } from '../../icon/icon-search/icon-search'
 import styles from './search-textbox.css'
 
-export interface SearchTextboxProps<N extends string> {
+export type SearchTextboxProps<N extends string> = {
   clearOnEscapeKeyDown?: boolean
   disabled?: boolean
   name?: N
@@ -19,7 +19,7 @@ export interface SearchTextboxProps<N extends string> {
   value: string
 }
 
-export function SearchTextbox<T extends string>({
+export function SearchTextbox<N extends string>({
   clearOnEscapeKeyDown = true,
   disabled = false,
   name,
@@ -29,7 +29,7 @@ export function SearchTextbox<T extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, SearchTextboxProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, SearchTextboxProps<N>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleFocus = useCallback(function (

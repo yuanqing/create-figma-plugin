@@ -7,7 +7,7 @@ import { Props } from '../../../types'
 import { LoadingIndicator } from '../../main/loading-indicator/loading-indicator'
 import styles from './button.css'
 
-export interface ButtonProps {
+export type ButtonProps = {
   children: ComponentChildren
   destructive?: boolean
   disabled?: boolean

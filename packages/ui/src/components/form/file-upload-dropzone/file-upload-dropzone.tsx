@@ -6,7 +6,7 @@ import { useCallback, useState } from 'preact/hooks'
 import { OnSelectedFiles, Props } from '../../../types'
 import styles from './file-upload-dropzone.css'
 
-export interface FileUploadDropzoneProps {
+export type FileUploadDropzoneProps = {
   acceptedFileTypes?: Array<string>
   children: ComponentChildren
   multiple?: boolean

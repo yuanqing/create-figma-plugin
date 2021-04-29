@@ -4,7 +4,7 @@ import { h, JSX } from 'preact'
 import { Props } from '../../../types'
 import styles from './vertical-space.css'
 
-export interface VerticalSpaceProps {
+export type VerticalSpaceProps = {
   space?: VerticalSpaceSpace
 }
 export type VerticalSpaceSpace =

@@ -4,7 +4,7 @@ import { ComponentChildren, h, JSX, toChildArray } from 'preact'
 import { Props } from '../../../types'
 import styles from './inline.css'
 
-export interface InlineProps {
+export type InlineProps = {
   children: ComponentChildren
   space?: InlineSpace
 }

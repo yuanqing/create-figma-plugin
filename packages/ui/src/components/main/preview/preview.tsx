@@ -4,7 +4,7 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { Props } from '../../../types'
 import style from './preview.css'
 
-export interface PreviewProps {
+export type PreviewProps = {
   children: ComponentChildren
 }
 

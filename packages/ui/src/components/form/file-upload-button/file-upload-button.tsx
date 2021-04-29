@@ -7,7 +7,7 @@ import { OnSelectedFiles, Props } from '../../../types'
 import { LoadingIndicator } from '../../main/loading-indicator/loading-indicator'
 import styles from './file-upload-button.css'
 
-export interface FileUploadButtonProps {
+export type FileUploadButtonProps = {
   acceptedFileTypes?: Array<string>
   children: ComponentChildren
   disabled?: boolean

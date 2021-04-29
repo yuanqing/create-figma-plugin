@@ -9,15 +9,10 @@ import styles from './radio-buttons.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-radio-buttons-item-id'
 
-export interface RadioButtonsOption<V extends boolean | number | string> {
-  disabled?: boolean
-  children?: ComponentChildren
-  value: V
-}
-export interface RadioButtonsProps<
+export type RadioButtonsProps<
   N extends string,
   V extends boolean | number | string
-> {
+> = {
   disabled?: boolean
   name?: N
   onChange?: OnChange<HTMLInputElement>
@@ -27,10 +22,15 @@ export interface RadioButtonsProps<
   space?: StackSpace
   value: null | V
 }
+export type RadioButtonsOption<V extends boolean | number | string = string> = {
+  disabled?: boolean
+  children?: ComponentChildren
+  value: V
+}
 
 export function RadioButtons<
-  T extends string,
-  S extends boolean | number | string
+  N extends string,
+  V extends boolean | number | string
 >({
   disabled = false,
   name,
@@ -41,7 +41,7 @@ export function RadioButtons<
   space = 'small',
   value,
   ...rest
-}: Props<HTMLInputElement, RadioButtonsProps<T, S>>): JSX.Element {
+}: Props<HTMLInputElement, RadioButtonsProps<N, V>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(

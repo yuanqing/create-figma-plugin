@@ -5,14 +5,14 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { Props } from '../../../types'
 import styles from './text.css'
 
-export type TextAlignment = 'left' | 'center' | 'right'
-export interface TextProps {
+export type TextProps = {
   children: ComponentChildren
   align?: TextAlignment
   bold?: boolean
   muted?: boolean
   numeric?: boolean
 }
+export type TextAlignment = 'left' | 'center' | 'right'
 
 export function Text({
   align = 'left',

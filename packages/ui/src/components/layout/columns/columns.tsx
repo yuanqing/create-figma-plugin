@@ -5,7 +5,7 @@ import { ComponentChildren, h, JSX, toChildArray } from 'preact'
 import { Props } from '../../../types'
 import styles from './columns.css'
 
-export interface ColumnsProps {
+export type ColumnsProps = {
   children: ComponentChildren
   space?: ColumnsSpace
 }

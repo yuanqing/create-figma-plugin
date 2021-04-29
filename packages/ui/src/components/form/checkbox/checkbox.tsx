@@ -6,7 +6,7 @@ import { useCallback } from 'preact/hooks'
 import { OnChange, OnValueChange, Props } from '../../../types'
 import styles from './checkbox.css'
 
-export interface CheckboxProps<N extends string> {
+export type CheckboxProps<N extends string> = {
   children: ComponentChildren
   disabled?: boolean
   name?: N

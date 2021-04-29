@@ -16,30 +16,14 @@ const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
 
 type ItemId = typeof INVALID_ITEM_ID | string
 
-export type TextboxAutocompleteOption =
-  | TextboxAutocompleteOptionHeader
-  | TextboxAutocompleteOptionValue
-  | TextboxAutocompleteOptionSeparator
-export interface TextboxAutocompleteOptionHeader {
-  id?: null | string
-  header: string
-}
-export interface TextboxAutocompleteOptionValue {
-  id?: null | string
-  value: string
-}
-export interface TextboxAutocompleteOptionSeparator {
-  id?: null | string
-  separator: true
-}
-export interface TextboxAutocompleteProps<T extends string> {
+export type TextboxAutocompleteProps<N extends string> = {
   disabled?: boolean
   filter?: boolean
   icon?: ComponentChildren
-  name?: T
+  name?: N
   noBorder?: boolean
   onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<string, T>
+  onValueChange?: OnValueChange<string, N>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -47,8 +31,24 @@ export interface TextboxAutocompleteProps<T extends string> {
   top?: boolean
   value: string
 }
+export type TextboxAutocompleteOption =
+  | TextboxAutocompleteOptionHeader
+  | TextboxAutocompleteOptionValue
+  | TextboxAutocompleteOptionSeparator
+export type TextboxAutocompleteOptionHeader = {
+  id?: null | string
+  header: string
+}
+export type TextboxAutocompleteOptionValue = {
+  id?: null | string
+  value: string
+}
+export type TextboxAutocompleteOptionSeparator = {
+  id?: null | string
+  separator: true
+}
 
-export function TextboxAutocomplete<T extends string>({
+export function TextboxAutocomplete<N extends string>({
   disabled = false,
   filter = false,
   icon,
@@ -63,7 +63,7 @@ export function TextboxAutocomplete<T extends string>({
   top = false,
   value: committedValue,
   ...rest
-}: Props<HTMLInputElement, TextboxAutocompleteProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, TextboxAutocompleteProps<N>>): JSX.Element {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)

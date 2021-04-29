@@ -1,7 +1,7 @@
 import { JSX, RenderableProps } from 'preact'
 
-export type OnChange<RefType extends EventTarget> = OmitThisParameter<
-  JSX.GenericEventHandler<RefType>
+export type OnChange<T extends EventTarget> = OmitThisParameter<
+  JSX.GenericEventHandler<T>
 >
 
 export type OnValueChange<V1, N extends string, V2 = V1> = (
@@ -13,8 +13,6 @@ export type OnValueChange<V1, N extends string, V2 = V1> = (
 export type OnSelectedFiles = (files: Array<File>) => void
 
 export type Props<
-  RefType extends EventTarget = EventTarget,
-  ComponentProps = Record<string, never>
-> = RenderableProps<
-  Omit<JSX.HTMLAttributes<RefType>, keyof ComponentProps> & ComponentProps
->
+  T extends EventTarget = EventTarget,
+  P = Record<string, never>
+> = RenderableProps<Omit<JSX.HTMLAttributes<T>, keyof P> & P>

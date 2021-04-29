@@ -8,21 +8,21 @@ import styles from './tabs.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
 
-export interface TabsProps<T extends string> {
-  name?: T
+export type TabsProps<N extends string> = {
+  name?: N
   onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<string, T, null | string>
+  onValueChange?: OnValueChange<string, N, null | string>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
   value: null | string
 }
-export interface TabsOption {
+export type TabsOption = {
   disabled?: boolean
   children: ComponentChildren
   value: string
 }
 
-export function Tabs<T extends string>({
+export function Tabs<N extends string>({
   name,
   onChange = function () {},
   onValueChange = function () {},
@@ -30,7 +30,7 @@ export function Tabs<T extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, TabsProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, TabsProps<N>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleChange = useCallback(
@@ -70,7 +70,7 @@ export function Tabs<T extends string>({
           })
           return
         }
-        const currentIndex = options.findIndex(function (option) {
+        const currentIndex = options.findIndex(function (option: TabsOption) {
           return option.value === value
         })
         let nextIndex =
@@ -92,14 +92,14 @@ export function Tabs<T extends string>({
     [name, onChange, onValueChange, options, propagateEscapeKeyDown, value]
   )
 
-  const activeOption = options.find(function (option) {
+  const activeOption = options.find(function (option: TabsOption) {
     return option.value === value
   })
 
   return (
     <div>
       <div class={styles.tabs} onKeyDown={handleKeyDown} tabIndex={0}>
-        {options.map(function (option, index) {
+        {options.map(function (option: TabsOption, index: number) {
           return (
             <label key={index} class={styles.label}>
               <input

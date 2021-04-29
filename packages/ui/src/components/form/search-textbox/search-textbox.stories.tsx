@@ -61,13 +61,10 @@ export const Filled = function () {
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState('Text')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
+  function handleChange() {
+    throw new Error('This function should not be called')
   }
-  return <SearchTextbox disabled onChange={handleChange} value={value} />
+  return <SearchTextbox disabled onChange={handleChange} value="Text" />
 }
 
 export const OnValueChange = function () {

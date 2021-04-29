@@ -5,7 +5,7 @@ import { ComponentChildren, h, JSX, toChildArray } from 'preact'
 import { Props } from '../../../types'
 import styles from './stack.css'
 
-export interface StackProps {
+export type StackProps = {
   children: ComponentChildren
   space?: StackSpace
 }

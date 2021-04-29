@@ -36,14 +36,11 @@ export const Selected = function () {
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(!(newValue === 'true'))
+  function handleChange() {
+    throw new Error('This function should not be called')
   }
   return (
-    <SelectableItem disabled onChange={handleChange} value={value}>
+    <SelectableItem disabled onChange={handleChange} value={true}>
       Text
     </SelectableItem>
   )

@@ -5,7 +5,7 @@ import { Props } from '../../../types'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './loading.css'
 
-export interface LoadingProps {
+export type LoadingProps = {
   children: ComponentChildren
 }
 

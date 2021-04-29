@@ -8,19 +8,19 @@ import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
 
-export interface SelectableItemProps<T extends string> {
+export type SelectableItemProps<N extends string> = {
   bold?: boolean
   children: ComponentChildren
   disabled?: boolean
   indent?: boolean
-  name?: T
+  name?: N
   onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<boolean, T>
+  onValueChange?: OnValueChange<boolean, N>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
-export function SelectableItem<T extends string>({
+export function SelectableItem<N extends string>({
   bold = false,
   children,
   disabled = false,
@@ -31,7 +31,7 @@ export function SelectableItem<T extends string>({
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
-}: Props<HTMLInputElement, SelectableItemProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, SelectableItemProps<N>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleChange = useCallback(

@@ -52,14 +52,11 @@ export const Selected = function () {
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState(false)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(!(newValue === 'true'))
+  function handleChange() {
+    throw new Error('This function should not be called')
   }
   return (
-    <Checkbox disabled onChange={handleChange} value={value}>
+    <Checkbox disabled onChange={handleChange} value={false}>
       <Text>Text</Text>
     </Checkbox>
   )

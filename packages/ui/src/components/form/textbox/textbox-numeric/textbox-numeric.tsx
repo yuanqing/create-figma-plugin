@@ -14,7 +14,7 @@ import styles from '../textbox.css'
 import { computeNextValue } from '../utilities/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 
-export interface TextboxNumericProps<T extends string> {
+export type TextboxNumericProps<N extends string> = {
   disabled?: boolean
   icon?: ComponentChildren
   incrementBig?: number
@@ -22,11 +22,11 @@ export interface TextboxNumericProps<T extends string> {
   integer?: boolean
   maximum?: number
   minimum?: number
-  name?: T
+  name?: N
   noBorder?: boolean
   onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<string, T>
-  onNumericValueChange?: (value: null | number, name?: T) => void
+  onValueChange?: OnValueChange<string, N>
+  onNumericValueChange?: (value: null | number, name?: N) => void
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: string
@@ -34,7 +34,7 @@ export interface TextboxNumericProps<T extends string> {
 
 const nonDigitRegex = /[^\d.]/
 
-export function TextboxNumeric<T extends string>({
+export function TextboxNumeric<N extends string>({
   disabled = false,
   icon,
   incrementBig = 10,
@@ -51,7 +51,7 @@ export function TextboxNumeric<T extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, TextboxNumericProps<T>>): JSX.Element {
+}: Props<HTMLInputElement, TextboxNumericProps<N>>): JSX.Element {
   const handleFocus = useCallback(function (
     event: JSX.TargetedFocusEvent<HTMLInputElement>
   ) {

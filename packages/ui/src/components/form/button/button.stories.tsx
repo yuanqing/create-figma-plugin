@@ -37,8 +37,8 @@ export const Loading = function () {
 }
 
 export const Disabled = function () {
-  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
-    console.log(event)
+  function handleClick() {
+    throw new Error('This function should not be called')
   }
   return (
     <Button disabled onClick={handleClick}>

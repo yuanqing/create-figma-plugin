@@ -63,13 +63,10 @@ export const Filled = function () {
 }
 
 export const Disabled = function () {
-  const [value, setValue] = useState('42')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
+  function handleChange() {
+    throw new Error('This function should not be called')
   }
-  return <TextboxNumeric disabled onChange={handleChange} value={value} />
+  return <TextboxNumeric disabled onChange={handleChange} value="42" />
 }
 
 export const NoBorder = function () {
