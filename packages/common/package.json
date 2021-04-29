@@ -42,7 +42,7 @@
     "@types/node": "^15.0.1",
     "@types/tap": "^15.0.0",
     "eslint": "^7.25.0",
-    "eslint-config-yuanqing": "^0.0.4",
+    "eslint-config-yuanqing": "^0.0.5",
     "prettier": "^2.2.1",
     "tap": "^15.0.5",
     "typescript": "^4.2.4"

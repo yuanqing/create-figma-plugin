@@ -59,7 +59,7 @@
     "@types/sade": "^1.7.2",
     "@types/tap": "^15.0.0",
     "eslint": "^7.25.0",
-    "eslint-config-yuanqing": "^0.0.4",
+    "eslint-config-yuanqing": "^0.0.5",
     "preact": "^10.5.13",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",

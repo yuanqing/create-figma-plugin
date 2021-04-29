@@ -43,7 +43,7 @@
     "@types/node": "^15.0.1",
     "@types/tap": "^15.0.0",
     "eslint": "^7.25.0",
-    "eslint-config-yuanqing": "^0.0.4",
+    "eslint-config-yuanqing": "^0.0.5",
     "fs-extra": "^9.1.0",
     "generate-ts-docs": "^0.0.6",
     "prettier": "^2.2.1",

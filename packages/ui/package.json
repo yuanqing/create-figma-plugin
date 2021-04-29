@@ -53,7 +53,7 @@
     "@types/node": "^15.0.1",
     "css-loader": "^5.2.4",
     "eslint": "^7.25.0",
-    "eslint-config-yuanqing": "^0.0.4",
+    "eslint-config-yuanqing": "^0.0.5",
     "fs-extra": "^9.1.0",
     "globby": "^11.0.3",
     "mkdirp": "^1.0.4",
@@ -73,14 +73,5 @@
   },
   "sideEffects": [
     "./lib/css/*.css"
-  ],
-  "eslint": {
-    "ignore": [
-      "src/**/*.css.d.ts"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint/eslint-plugin"
-    ]
-  }
+  ]
 }
