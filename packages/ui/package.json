@@ -46,11 +46,12 @@
     "@sindresorhus/class-names": "^1.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.16",
     "@storybook/addon-storysource": "^6.2.9",
     "@storybook/preact": "^6.2.9",
     "@storybook/source-loader": "^6.2.9",
     "@types/fs-extra": "^9.0.11",
-    "@types/node": "^14.14.41",
+    "@types/node": "^15.0.1",
     "css-loader": "^5.2.4",
     "eslint": "^7.25.0",
     "eslint-config-yuanqing": "^0.0.4",
@@ -59,13 +60,14 @@
     "mkdirp": "^1.0.4",
     "preact": "^10.5.13",
     "prettier": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
     "style-loader": "^2.0.0",
     "stylelint": "^13.13.0",
     "stylelint-config-yuanqing": "^0.0.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "webpack": "^5.36.1"
   },
   "peerDependencies": {
     "preact": "^10"

@@ -37,10 +37,10 @@
     "natural-compare-lite": "1.4.0"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.22.0",
+    "@figma/plugin-typings": "^1",
     "@types/fs-extra": "^9.0.11",
     "@types/natural-compare-lite": "^1.4.0",
-    "@types/node": "^14.14.41",
+    "@types/node": "^15.0.1",
     "@types/tap": "^15.0.0",
     "eslint": "^7.25.0",
     "eslint-config-yuanqing": "^0.0.4",
