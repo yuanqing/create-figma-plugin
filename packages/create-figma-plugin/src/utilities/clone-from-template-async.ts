@@ -11,6 +11,7 @@ export async function cloneFromTemplateAsync(
   const templateDirectory = resolve(
     __dirname,
     '..',
+    '..',
     'plugin-templates',
     template
   )
