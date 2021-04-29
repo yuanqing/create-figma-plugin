@@ -3,6 +3,7 @@ import ncu from 'npm-check-updates'
 import * as path from 'path'
 
 async function main(): Promise<void> {
+  const args = process.argv.slice(2)
   const parentDirectory = path.resolve(__dirname, '..')
   const globs = [
     path.join(parentDirectory, 'package.json'),
@@ -15,7 +16,9 @@ async function main(): Promise<void> {
       await ncu.run({
         packageFile: packageJsonFile,
         packageManager: 'npm',
+        reject: args,
         silent: false,
+        target: 'latest',
         upgrade: true
       })
     }
