@@ -1,5 +1,5 @@
-export { emit, on, once } from './events'
 export type { EventHandler } from './events'
+export { emit, on, once } from './events'
 export { getAbsolutePosition } from './nodes/absolute-position/get-absolute-position'
 export { setAbsolutePosition } from './nodes/absolute-position/set-absolute-position'
 export { areSiblingNodes } from './nodes/are-sibling-nodes'
