@@ -2,11 +2,11 @@ import { log } from '@create-figma-plugin/common'
 import { watch as chokidarWatch } from 'chokidar'
 import { yellow } from 'kleur/colors'
 
-import { buildBundlesAsync } from './build-bundles-async'
-import { buildCssModulesTypingsAsync } from './build-css-modules-typings-async'
-import { buildManifestAsync } from './build-manifest-async'
-import { trackElapsedTime } from './track-elapsed-time'
-import { BuildOptions } from './types/build'
+import { BuildOptions } from '../types/build'
+import { buildBundlesAsync } from '../utilities/build-bundles-async/build-bundles-async'
+import { buildCssModulesTypingsAsync } from '../utilities/build-css-modules-typings-async'
+import { buildManifestAsync } from '../utilities/build-manifest-async'
+import { trackElapsedTime } from '../utilities/track-elapsed-time'
 import { watchIgnoreRegex } from './watch-ignore-regex'
 
 const cssRegex = /\.css$/

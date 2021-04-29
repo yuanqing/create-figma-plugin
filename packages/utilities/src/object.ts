@@ -3,7 +3,7 @@
  *
  * @category Object
  */
-export function cloneObject<T>(object: T): T {
+export function cloneObject<O>(object: O): O {
   if (
     object === null ||
     typeof object === 'undefined' ||
@@ -24,7 +24,7 @@ export function cloneObject<T>(object: T): T {
   for (const key in object) {
     result[key] = cloneObject(object[key])
   }
-  return result as T
+  return result as O
 }
 
 /**
@@ -106,19 +106,18 @@ export function compareStringArrays(
  * @returns Returns an array of plain objects.
  * @category Object
  */
-export function extractAttributes<T, K extends keyof T>(
-  array: Array<T>,
+export function extractAttributes<O, K extends keyof O>(
+  array: Array<O>,
   attributes: K[]
-): Array<Pick<T, K>> {
-  const result: Array<Pick<T, K>> = []
+): Array<Pick<O, K>> {
+  const result: Array<Pick<O, K>> = []
   for (const object of array) {
     result.push(pick(object, attributes))
   }
   return result
 }
-
-function pick<T, K extends keyof T>(object: T, keys: K[]): Pick<T, K> {
-  const result = {} as Pick<T, K>
+function pick<O, K extends keyof O>(object: O, keys: K[]): Pick<O, K> {
+  const result = {} as Pick<O, K>
   for (const key of keys) {
     const value = object[key]
     if (typeof value === 'undefined') {

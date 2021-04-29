@@ -1,10 +1,10 @@
 /** @jsx h */
-import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnChange, OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
+import { MIXED_STRING } from '../../../utilities/mixed-values'
 import styles from './textbox.css'
 import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
 

@@ -8,9 +8,9 @@ import { getParentNode } from '../get-nodes/get-parent-node'
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
-export function sortNodesByCanonicalOrder<T extends SceneNode>(
-  siblingNodes: Array<T>
-): Array<T> {
+export function sortNodesByCanonicalOrder<N extends SceneNode>(
+  siblingNodes: Array<N>
+): Array<N> {
   if (siblingNodes.length < 2) {
     return siblingNodes.slice()
   }

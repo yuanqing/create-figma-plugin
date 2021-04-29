@@ -12,7 +12,7 @@ import {
   ManifestMenuItem,
   ManifestMenuItemSeparator,
   ManifestRelaunchButton
-} from './types/manifest'
+} from '../types/manifest'
 
 export async function buildManifestAsync(minify: boolean): Promise<void> {
   const config = await readConfigAsync()

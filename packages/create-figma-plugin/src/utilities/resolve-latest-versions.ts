@@ -1,7 +1,7 @@
 import packageJson from 'package-json'
 import { parse } from 'semver'
 
-import { CreateFigmaPluginVersions } from './types/create-figma-plugin-versions'
+import { CreateFigmaPluginVersions } from '../types/create-figma-plugin-versions'
 
 export async function resolveLatestVersions(): Promise<CreateFigmaPluginVersions> {
   return {

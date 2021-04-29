@@ -2,13 +2,13 @@ import { log } from '@create-figma-plugin/common'
 import { pathExists } from 'fs-extra'
 import { join } from 'path'
 
-import { cloneFromTemplateAsync } from './clone-from-template-async'
-import { installDependenciesAsync } from './install-dependencies-async'
-import { interpolateValuesIntoFilesAsync } from './interpolate-values-into-files-async'
-import { resolveLatestVersions } from './resolve-latest-versions'
-import { createDefaultSettings } from './settings/create-default-settings'
-import { promptForUserInputAsync } from './settings/prompt-for-user-input-async'
 import { Settings } from './types/settings'
+import { cloneFromTemplateAsync } from './utilities/clone-from-template-async'
+import { installDependenciesAsync } from './utilities/install-dependencies-async'
+import { interpolateValuesIntoFilesAsync } from './utilities/interpolate-values-into-files-async'
+import { resolveLatestVersions } from './utilities/resolve-latest-versions'
+import { createDefaultSettings } from './utilities/settings/create-default-settings'
+import { promptForUserInputAsync } from './utilities/settings/prompt-for-user-input-async'
 
 export async function createFigmaPluginAsync(
   options: Settings,

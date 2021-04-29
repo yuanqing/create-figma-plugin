@@ -10,9 +10,9 @@ import {
 import { build } from 'esbuild'
 import { join } from 'path'
 
+import { BuildOptions } from '../../types/build'
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin'
 import { typeCheckAsync } from './type-check-async'
-import { BuildOptions } from './types/build'
 
 interface EntryFile extends ConfigFile {
   readonly commandId: string

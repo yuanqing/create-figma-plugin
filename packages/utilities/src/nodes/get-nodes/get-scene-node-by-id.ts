@@ -1,4 +1,4 @@
-export function getSceneNodeById<T extends SceneNode>(id: string): T {
+export function getSceneNodeById<N extends SceneNode>(id: string): N {
   const node = figma.getNodeById(id)
   if (node === null) {
     throw new Error(`No node found with \`id\`: ${id}`)
@@ -6,5 +6,5 @@ export function getSceneNodeById<T extends SceneNode>(id: string): T {
   if (node.type === 'DOCUMENT' || node.type === 'PAGE') {
     throw new Error('`node` is not a `SceneNode`')
   }
-  return node as T
+  return node as N
 }

@@ -1,4 +1,3 @@
-export { MIXED_NUMBER, MIXED_STRING } from './constants'
 export { emit, on, once } from './events'
 export type { EventHandler } from './events'
 export { getAbsolutePosition } from './nodes/absolute-position/get-absolute-position'
@@ -23,11 +22,7 @@ export { sortNodesByCanonicalOrder } from './nodes/sort-nodes/sort-nodes-by-cano
 export { sortNodesByName } from './nodes/sort-nodes/sort-nodes-by-name'
 export { updateNodesSortOrder } from './nodes/sort-nodes/update-nodes-sort-order'
 export { traverseNode } from './nodes/traverse-node'
-export {
-  evaluateNumericExpression,
-  isValidNumericInput,
-  mapTextboxNumericValueToString
-} from './number'
+export { evaluateNumericExpression, isValidNumericInput } from './number'
 export {
   cloneObject,
   compareObjects,

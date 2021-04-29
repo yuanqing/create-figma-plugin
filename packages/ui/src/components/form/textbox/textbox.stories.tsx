@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 /** @jsx h */
-import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus'
+import { MIXED_STRING } from '../../../utilities/mixed-values'
 import { IconSearch } from '../../icon/icon-search/icon-search'
 import { Textbox } from './textbox'
 

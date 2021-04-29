@@ -1,10 +1,10 @@
 /** @jsx h */
 /* eslint-disable no-console */
-import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus'
+import { MIXED_STRING } from '../../../../utilities/mixed-values'
 import { IconSpaceHorizontal } from '../../../icon/icon-space-horizontal/icon-space-horizontal'
 import { TextboxNumeric } from './textbox-numeric'
 

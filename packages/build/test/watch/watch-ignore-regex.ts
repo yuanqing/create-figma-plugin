@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { watchIgnoreRegex } from '../src/watch-ignore-regex'
+import { watchIgnoreRegex } from '../../src/watch/watch-ignore-regex'
 
 test('ignored', function (t) {
   t.plan(7)

@@ -5,11 +5,11 @@ import { getParentNode } from './get-nodes/get-parent-node'
  *
  * @category Node
  */
-export function computeSiblingNodes<T extends SceneNode>(
-  nodes: Array<T>
-): Array<Array<T>> {
+export function computeSiblingNodes<N extends SceneNode>(
+  nodes: Array<N>
+): Array<Array<N>> {
   const groups = resolveGroups(nodes)
-  const result: Array<Array<T>> = []
+  const result: Array<Array<N>> = []
   for (const group of groups) {
     const parentNode = getParentNode(group[0])
     const siblingNodes = group
@@ -30,8 +30,8 @@ export function computeSiblingNodes<T extends SceneNode>(
   return result
 }
 
-function resolveGroups<T extends SceneNode>(nodes: Array<T>): Array<Array<T>> {
-  const result: Record<string, Array<T>> = {}
+function resolveGroups<N extends SceneNode>(nodes: Array<N>): Array<Array<N>> {
+  const result: Record<string, Array<N>> = {}
   for (const node of nodes) {
     const parentNode = getParentNode(node)
     const parentId = parentNode.id
