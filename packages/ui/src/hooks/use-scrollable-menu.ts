@@ -10,7 +10,7 @@ const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
 
 export function useScrollableMenu(options: {
   selectedItemId: ItemId
-  onItemIdChange: (id: ItemId) => void
+  onItemIdChange: (id: null | string) => void
   changeOnMouseOver: boolean
 }): {
   menuElementRef: RefObject<HTMLDivElement>
