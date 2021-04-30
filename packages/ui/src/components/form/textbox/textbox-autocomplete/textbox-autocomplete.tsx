@@ -1,6 +1,6 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
-import { useCallback, useLayoutEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 import {
   OnChange,
@@ -75,7 +75,7 @@ export function TextboxAutocomplete<N extends string>({
   const [isMenuVisible, setIsMenuVisible] = useState(false)
 
   // Uncomment to debug
-  // console.table([{ value, savedValue, selectedId, isMenuVisible }])
+  // console.table([{ isMenuVisible, savedValue, selectedId, value }])
 
   const options: Array<Option> = originalOptions
     .filter(function (option: TextboxAutocompleteOption) {
@@ -98,6 +98,11 @@ export function TextboxAutocomplete<N extends string>({
       return option
     })
 
+  const hideMenu = useCallback(function () {
+    setIsMenuVisible(false)
+    setSavedValue(EMPTY_STRING)
+  }, [])
+
   const updateSelectedId = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>, id: string) {
       setSelectedId(id)
@@ -113,24 +118,39 @@ export function TextboxAutocomplete<N extends string>({
     [name, onChange, onValueChange, options, value]
   )
 
+  const updateSavedValue = useCallback(
+    function (value: string) {
+      const newId = getIdByValue(options, value)
+      if (newId === INVALID_ID) {
+        // `newValue` does not match any option in `options`
+        setSavedValue(value)
+        return
+      }
+      // `newValue` matches one of the options in `options`
+      setSavedValue(EMPTY_STRING)
+      setSelectedId(newId)
+    },
+    [options]
+  )
+
   const handleFocus = useCallback(
     function () {
       setIsMenuVisible(true)
-      setSavedValue(value) // Copy over `value` onto `savedValue`
+      updateSavedValue(value)
+      const inputElement = getCurrentFromRef(inputElementRef)
+      inputElement.focus()
+      inputElement.select()
     },
-    [value]
+    [value, updateSavedValue]
   )
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
       const key = event.key
+      const inputElement = getCurrentFromRef(inputElementRef)
       if (key === 'ArrowUp' || key === 'ArrowDown') {
         event.preventDefault()
         if (options.length === 0) {
-          return
-        }
-        if (isMenuVisible === false) {
-          setIsMenuVisible(true)
           return
         }
         const newId =
@@ -138,15 +158,16 @@ export function TextboxAutocomplete<N extends string>({
             ? computePreviousId(options, selectedId)
             : computeNextId(options, selectedId)
         if (newId === INVALID_ID) {
-          // There's no previous/next option, so just restore `savedValue`
+          // Reached beginning/end of list of `options`, so restore `savedValue`
           setSelectedId(INVALID_ID)
-          getCurrentFromRef(inputElementRef).value = savedValue
+          inputElement.value = savedValue
           onValueChange(savedValue, name, value)
           onChange(event)
           return
         }
+        // Set the selected option to `newId`
         updateSelectedId(event, newId)
-        getCurrentFromRef(inputElementRef).select()
+        inputElement.select()
         return
       }
       if (key === 'Enter' || key === 'Escape' || key === 'Tab') {
@@ -154,8 +175,7 @@ export function TextboxAutocomplete<N extends string>({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        setIsMenuVisible(false)
-        setSavedValue(EMPTY_STRING)
+        hideMenu()
         return
       }
       if (strict === false) {
@@ -165,18 +185,15 @@ export function TextboxAutocomplete<N extends string>({
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        // Piece together `newValue`, and exit the `keyDown` event if invalid
-        const newValue = computeNextValue(
-          getCurrentFromRef(inputElementRef),
-          event.key
-        )
+        // Piece together `newValue`, and stop the `keyDown` event if `newValue` is invalid
+        const newValue = computeNextValue(inputElement, event.key)
         if (isValidValue(options, newValue) === false) {
           event.preventDefault()
         }
       }
     },
     [
-      isMenuVisible,
+      hideMenu,
       name,
       onChange,
       onValueChange,
@@ -193,19 +210,11 @@ export function TextboxAutocomplete<N extends string>({
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const newValue = getCurrentFromRef(inputElementRef).value
-      const id = getIdByValue(options, newValue)
-      if (id === INVALID_ID) {
-        // `newValue` does not match any option
-        setSavedValue(newValue)
-        onValueChange(newValue, name, value)
-        onChange(event)
-        return
-      }
-      // `newValue` exactly matches the value of an option
-      setSavedValue(EMPTY_STRING)
-      updateSelectedId(event, id)
+      updateSavedValue(newValue)
+      onValueChange(newValue, name, value)
+      onChange(event)
     },
-    [name, onChange, onValueChange, options, updateSelectedId, value]
+    [name, onChange, onValueChange, updateSavedValue, value]
   )
 
   const handleOptionClick = useCallback(
@@ -213,8 +222,7 @@ export function TextboxAutocomplete<N extends string>({
       const newId = event.currentTarget.getAttribute(
         ID_DATA_ATTRIBUTE_NAME
       ) as string
-      setIsMenuVisible(false)
-      setSavedValue(EMPTY_STRING)
+      hideMenu()
       updateSelectedId(
         {
           ...event,
@@ -223,7 +231,7 @@ export function TextboxAutocomplete<N extends string>({
         newId
       )
     },
-    [updateSelectedId]
+    [hideMenu, updateSelectedId]
   )
 
   const handlePaste = useCallback(
@@ -242,22 +250,8 @@ export function TextboxAutocomplete<N extends string>({
     [options]
   )
 
-  // Restore the original menu scroll position and update focus
-  useLayoutEffect(
-    function () {
-      const inputElement = getCurrentFromRef(inputElementRef)
-      if (isMenuVisible === false) {
-        inputElement.blur()
-        return
-      }
-      inputElement.focus()
-      inputElement.select()
-    },
-    [isMenuVisible]
-  )
-
   // Adjust the menu scroll position so that the selected option is always visible
-  useLayoutEffect(
+  useEffect(
     function () {
       if (isMenuVisible === false || options.length === 0) {
         return
@@ -287,7 +281,7 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   // Blur the input and hide the menu if we clicked outside the component
-  useLayoutEffect(
+  useEffect(
     function () {
       function handleWindowMouseDown(event: MouseEvent) {
         const rootElement = getCurrentFromRef(rootElementRef)
@@ -299,14 +293,14 @@ export function TextboxAutocomplete<N extends string>({
           // Exit if we clicked on any DOM element that is part of the component
           return
         }
-        setIsMenuVisible(false)
+        hideMenu()
       }
       window.addEventListener('mousedown', handleWindowMouseDown)
       return function () {
         window.removeEventListener('mousedown', handleWindowMouseDown)
       }
     },
-    [value, isMenuVisible]
+    [hideMenu, isMenuVisible, value]
   )
 
   return (
@@ -393,7 +387,7 @@ function doesStringContainSubstring(
   return string.toLowerCase().indexOf(substring.toLowerCase()) !== -1
 }
 
-// Returns true if `value` is a substring of `options[i].value` in `options`, else `false`
+// Returns the `id` of an `OptionValueWithId` in `options` with the given `value`
 function getIdByValue(options: Array<Option>, value: string): Id {
   for (const option of options) {
     if ('value' in option) {
@@ -405,7 +399,7 @@ function getIdByValue(options: Array<Option>, value: string): Id {
   return INVALID_ID
 }
 
-// Returns true if `value` is a substring of `options[i].value` in `options`, else `false`
+// Returns `true` if `value` is a substring of `options[i].value` in `options`, else `false`
 function isValidValue(options: Array<Option>, value: string): boolean {
   if (value === EMPTY_STRING) {
     return true
