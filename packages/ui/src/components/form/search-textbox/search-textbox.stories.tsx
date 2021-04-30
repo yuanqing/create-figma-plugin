@@ -15,7 +15,16 @@ export const Empty = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <SearchTextbox onChange={handleChange} value={value} />
+  function handleClear() {
+    setValue('')
+  }
+  return (
+    <SearchTextbox
+      onChange={handleChange}
+      onClear={handleClear}
+      value={value}
+    />
+  )
 }
 
 export const Focused = function () {
@@ -25,10 +34,14 @@ export const Focused = function () {
     console.log(newValue)
     setValue(newValue)
   }
+  function handleClear() {
+    setValue('')
+  }
   return (
     <SearchTextbox
       {...useInitialFocus()}
       onChange={handleChange}
+      onClear={handleClear}
       value={value}
     />
   )
@@ -41,9 +54,13 @@ export const Placeholder = function () {
     console.log(newValue)
     setValue(newValue)
   }
+  function handleClear() {
+    setValue('')
+  }
   return (
     <SearchTextbox
       onChange={handleChange}
+      onClear={handleClear}
       placeholder="Placeholder"
       value={value}
     />
@@ -57,7 +74,16 @@ export const Filled = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <SearchTextbox onChange={handleChange} value={value} />
+  function handleClear() {
+    setValue('')
+  }
+  return (
+    <SearchTextbox
+      onChange={handleChange}
+      onClear={handleClear}
+      value={value}
+    />
+  )
 }
 
 export const ClearOnEscapeKeyDown = function () {
@@ -67,8 +93,16 @@ export const ClearOnEscapeKeyDown = function () {
     console.log(newValue)
     setValue(newValue)
   }
+  function handleClear() {
+    setValue('')
+  }
   return (
-    <SearchTextbox clearOnEscapeKeyDown onChange={handleChange} value={value} />
+    <SearchTextbox
+      clearOnEscapeKeyDown
+      onChange={handleChange}
+      onClear={handleClear}
+      value={value}
+    />
   )
 }
 
@@ -76,10 +110,29 @@ export const Disabled = function () {
   function handleChange() {
     throw new Error('This function should not be called')
   }
-  return <SearchTextbox disabled onChange={handleChange} value="Text" />
+  function handleClear() {
+    throw new Error('This function should not be called')
+  }
+  return (
+    <SearchTextbox
+      disabled
+      onChange={handleChange}
+      onClear={handleClear}
+      value="Text"
+    />
+  )
 }
 
 export const OnValueChange = function () {
   const [value, setValue] = useState('Text')
-  return <SearchTextbox onValueChange={setValue} value={value} />
+  function handleClear() {
+    setValue('')
+  }
+  return (
+    <SearchTextbox
+      onClear={handleClear}
+      onValueChange={setValue}
+      value={value}
+    />
+  )
 }

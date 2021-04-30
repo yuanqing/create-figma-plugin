@@ -13,6 +13,7 @@ export type SearchTextboxProps<N extends string> = {
   disabled?: boolean
   name?: N
   onChange?: OnChange<HTMLInputElement>
+  onClear?: () => void
   onValueChange?: OnValueChange<string, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -24,6 +25,7 @@ export function SearchTextbox<N extends string>({
   disabled = false,
   name,
   onChange = function () {},
+  onClear = function () {},
   onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
@@ -52,10 +54,8 @@ export function SearchTextbox<N extends string>({
       if (event.key === 'Escape') {
         if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
           event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
-          const inputElement = getCurrentFromRef(inputElementRef)
-          inputElement.value = ''
-          onValueChange('', name, value)
-          onChange(event)
+          getCurrentFromRef(inputElementRef).value = ''
+          onClear()
           return
         }
         if (propagateEscapeKeyDown === false) {
@@ -64,25 +64,17 @@ export function SearchTextbox<N extends string>({
         event.currentTarget.blur()
       }
     },
-    [
-      clearOnEscapeKeyDown,
-      name,
-      onChange,
-      onValueChange,
-      propagateEscapeKeyDown,
-      value
-    ]
+    [clearOnEscapeKeyDown, onClear, propagateEscapeKeyDown, value]
   )
 
   const handleClearButtonClick = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
+    function () {
       const inputElement = getCurrentFromRef(inputElementRef)
       inputElement.value = ''
       inputElement.focus()
-      onValueChange('', name, value)
-      onChange({ ...event, currentTarget: inputElement })
+      onClear()
     },
-    [name, onChange, onValueChange, value]
+    [onClear]
   )
 
   return (
@@ -104,7 +96,7 @@ export function SearchTextbox<N extends string>({
       <div class={styles.searchIcon}>
         <IconSearch />
       </div>
-      {value === null || value === '' ? null : (
+      {value === null || value === '' || disabled === true ? null : (
         <button
           class={styles.clearButton}
           onClick={handleClearButtonClick}
