@@ -16,3 +16,14 @@ export type Props<
   T extends EventTarget = EventTarget,
   P = Record<string, never>
 > = RenderableProps<Omit<JSX.HTMLAttributes<T>, keyof P> & P>
+
+export type Option = OptionHeader | OptionValue | OptionSeparator
+export type OptionHeader = {
+  header: string
+}
+export type OptionValue = {
+  value: string
+}
+export type OptionSeparator = {
+  separator: true
+}
