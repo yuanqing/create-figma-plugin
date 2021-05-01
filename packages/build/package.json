@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/build",
-  "version": "0.0.85-alpha.6",
+  "version": "0.0.85-alpha.7",
   "publishConfig": {
     "access": "public"
   },
