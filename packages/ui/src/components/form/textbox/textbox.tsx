@@ -5,8 +5,8 @@ import { useCallback } from 'preact/hooks'
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { MIXED_STRING } from '../../../utilities/mixed-values'
+import { isKeyCodeCharacterGenerating } from './private/is-keycode-character-generating'
 import styles from './textbox.css'
-import { isKeyCodeCharacterGenerating } from './utilities/is-keycode-character-generating'
 
 export type TextboxProps<N extends string> = {
   disabled?: boolean

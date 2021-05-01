@@ -9,9 +9,9 @@ import { useCallback, useEffect } from 'preact/hooks'
 import { OnValueChange, Props } from '../../../../types'
 import { createClassName } from '../../../../utilities/create-class-name'
 import { MIXED_NUMBER, MIXED_STRING } from '../../../../utilities/mixed-values'
+import { computeNextValue } from '../private/compute-next-value'
+import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
 import styles from '../textbox.css'
-import { computeNextValue } from '../utilities/compute-next-value'
-import { isKeyCodeCharacterGenerating } from '../utilities/is-keycode-character-generating'
 
 const nonDigitRegex = /[^\d.]/
 
