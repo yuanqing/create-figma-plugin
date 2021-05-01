@@ -1,35 +1,13 @@
-export type { ButtonProps } from './components/form/button/button'
-export { Button } from './components/form/button/button'
-export type { CheckboxProps } from './components/form/checkbox/checkbox'
-export { Checkbox } from './components/form/checkbox/checkbox'
-export type { FileUploadButtonProps } from './components/form/file-upload-button/file-upload-button'
-export { FileUploadButton } from './components/form/file-upload-button/file-upload-button'
-export type { FileUploadDropzoneProps } from './components/form/file-upload-dropzone/file-upload-dropzone'
-export { FileUploadDropzone } from './components/form/file-upload-dropzone/file-upload-dropzone'
-export type {
-  RadioButtonsOption,
-  RadioButtonsProps
-} from './components/form/radio-buttons/radio-buttons'
-export { RadioButtons } from './components/form/radio-buttons/radio-buttons'
-export type { SearchTextboxProps } from './components/form/search-textbox/search-textbox'
-export { SearchTextbox } from './components/form/search-textbox/search-textbox'
-export type {
-  SegmentedControlOption,
-  SegmentedControlProps
-} from './components/form/segmented-control/segmented-control'
-export { SegmentedControl } from './components/form/segmented-control/segmented-control'
-export type { TextboxProps } from './components/form/textbox/textbox'
-export { Textbox } from './components/form/textbox/textbox'
-export type {
-  TextboxAutocompleteOption,
-  TextboxAutocompleteOptionHeader,
-  TextboxAutocompleteOptionSeparator,
-  TextboxAutocompleteOptionValue,
-  TextboxAutocompleteProps
-} from './components/form/textbox/textbox-autocomplete/textbox-autocomplete'
-export { TextboxAutocomplete } from './components/form/textbox/textbox-autocomplete/textbox-autocomplete'
-export type { TextboxNumericProps } from './components/form/textbox/textbox-numeric/textbox-numeric'
-export { TextboxNumeric } from './components/form/textbox/textbox-numeric/textbox-numeric'
+export type { ButtonProps } from './Components/button/button'
+export { Button } from './Components/button/button'
+export type { CheckboxProps } from './Components/checkbox/checkbox'
+export { Checkbox } from './Components/checkbox/checkbox'
+export type { DividerProps } from './Components/divider/divider'
+export { Divider } from './Components/divider/divider'
+export type { FileUploadButtonProps } from './Components/file-upload-button/file-upload-button'
+export { FileUploadButton } from './Components/file-upload-button/file-upload-button'
+export type { FileUploadDropzoneProps } from './Components/file-upload-dropzone/file-upload-dropzone'
+export { FileUploadDropzone } from './Components/file-upload-dropzone/file-upload-dropzone'
 export type { IconProps } from './components/icon/create-icon'
 export { createIcon } from './components/icon/create-icon'
 export { IconCheck } from './components/icon/icon-check/icon-check'
@@ -43,6 +21,8 @@ export { IconMoveRight } from './components/icon/icon-move-right/icon-move-right
 export { IconSearch } from './components/icon/icon-search/icon-search'
 export { IconSpaceHorizontal } from './components/icon/icon-space-horizontal/icon-space-horizontal'
 export { IconSpaceVertical } from './components/icon/icon-space-vertical/icon-space-vertical'
+export type { LayerProps, LayerType } from './Components/layer/layer'
+export { Layer } from './Components/layer/layer'
 export type {
   ColumnsProps,
   ColumnsSpace
@@ -65,22 +45,42 @@ export type {
   VerticalSpaceSpace
 } from './components/layout/vertical-space/vertical-space'
 export { VerticalSpace } from './components/layout/vertical-space/vertical-space'
-export type { DividerProps } from './components/main/divider/divider'
-export { Divider } from './components/main/divider/divider'
-export type { LayerProps, LayerType } from './components/main/layer/layer'
-export { Layer } from './components/main/layer/layer'
-export type { LoadingProps } from './components/main/loading/loading'
-export { Loading } from './components/main/loading/loading'
-export type { LoadingIndicatorProps } from './components/main/loading-indicator/loading-indicator'
-export { LoadingIndicator } from './components/main/loading-indicator/loading-indicator'
-export type { PreviewProps } from './components/main/preview/preview'
-export { Preview } from './components/main/preview/preview'
-export type { SelectableItemProps } from './components/main/selectable-item/selectable-item'
-export { SelectableItem } from './components/main/selectable-item/selectable-item'
-export type { TabsOption, TabsProps } from './components/main/tabs/tabs'
-export { Tabs } from './components/main/tabs/tabs'
-export type { TextAlignment, TextProps } from './components/main/text/text'
-export { Text } from './components/main/text/text'
+export type { LoadingProps } from './Components/loading/loading'
+export { Loading } from './Components/loading/loading'
+export type { LoadingIndicatorProps } from './Components/loading-indicator/loading-indicator'
+export { LoadingIndicator } from './Components/loading-indicator/loading-indicator'
+export type { PreviewProps } from './Components/preview/preview'
+export { Preview } from './Components/preview/preview'
+export type {
+  RadioButtonsOption,
+  RadioButtonsProps
+} from './Components/radio-buttons/radio-buttons'
+export { RadioButtons } from './Components/radio-buttons/radio-buttons'
+export type { SearchTextboxProps } from './Components/search-textbox/search-textbox'
+export { SearchTextbox } from './Components/search-textbox/search-textbox'
+export type {
+  SegmentedControlOption,
+  SegmentedControlProps
+} from './Components/segmented-control/segmented-control'
+export { SegmentedControl } from './Components/segmented-control/segmented-control'
+export type { SelectableItemProps } from './Components/selectable-item/selectable-item'
+export { SelectableItem } from './Components/selectable-item/selectable-item'
+export type { TabsOption, TabsProps } from './Components/tabs/tabs'
+export { Tabs } from './Components/tabs/tabs'
+export type { TextAlignment, TextProps } from './Components/text/text'
+export { Text } from './Components/text/text'
+export type { TextboxProps } from './Components/textbox/textbox'
+export { Textbox } from './Components/textbox/textbox'
+export type {
+  TextboxAutocompleteOption,
+  TextboxAutocompleteOptionHeader,
+  TextboxAutocompleteOptionSeparator,
+  TextboxAutocompleteOptionValue,
+  TextboxAutocompleteProps
+} from './Components/textbox/textbox-autocomplete/textbox-autocomplete'
+export { TextboxAutocomplete } from './Components/textbox/textbox-autocomplete/textbox-autocomplete'
+export type { TextboxNumericProps } from './Components/textbox/textbox-numeric/textbox-numeric'
+export { TextboxNumeric } from './Components/textbox/textbox-numeric/textbox-numeric'
 export { useFocusTrap } from './hooks/use-focus-trap'
 export { useForm } from './hooks/use-form'
 export { useFormState } from './hooks/use-form-state'
