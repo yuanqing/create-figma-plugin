@@ -73,37 +73,22 @@ export function TextboxAutocomplete<N extends string>({
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
+  const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [savedValue, setSavedValue] = useState<string>(value) // Keep a copy of the original textbox value
   const [selectedId, setSelectedId] = useState<Id>(INVALID_ID)
-  const [isMenuVisible, setIsMenuVisible] = useState(false)
 
   // Uncomment to debug
   // console.table([{ isMenuVisible, savedValue, selectedId, value }])
 
-  const options: Array<Option> = rest.options
-    .filter(function (option: TextboxAutocompleteOption) {
-      if (filter === false || savedValue === EMPTY_STRING) {
-        return true
-      }
-      if ('value' in option) {
-        return doesStringContainSubstring(option.value, savedValue) === true
-      }
-      return false
-    })
-    .map(function (option: TextboxAutocompleteOption, index: number) {
-      if ('value' in option) {
-        const optionValueWithId: OptionValueWithId = {
-          ...option,
-          id: `${index}`
-        }
-        return optionValueWithId
-      }
-      return option
-    })
+  let options: Array<Option> = createOptions(rest.options)
+  if (filter === true) {
+    options = filterOptions(options, value, savedValue)
+  }
 
   const triggerBlur = useCallback(function () {
     setIsMenuVisible(false)
     setSavedValue(EMPTY_STRING)
+    setSelectedId(INVALID_ID)
     const inputElement = getCurrentFromRef(inputElementRef)
     inputElement.blur()
   }, [])
@@ -114,6 +99,7 @@ export function TextboxAutocomplete<N extends string>({
       if (newId === INVALID_ID) {
         // `newValue` does not match any option in `options`
         setSavedValue(value)
+        setSelectedId(INVALID_ID)
         return
       }
       // `newValue` matches one of the options in `options`
@@ -375,6 +361,56 @@ export function TextboxAutocomplete<N extends string>({
       ) : null}
     </div>
   )
+}
+
+// Add an `id` attribute to all the `TextboxAutocompleteOptionValue` items in `options`
+function createOptions(
+  options: Array<TextboxAutocompleteOption>
+): Array<Option> {
+  return options.map(function (
+    option: TextboxAutocompleteOption,
+    index: number
+  ): Option {
+    if ('value' in option) {
+      const optionValueWithId: OptionValueWithId = {
+        ...option,
+        id: `${index}`
+      }
+      return optionValueWithId
+    }
+    return option
+  })
+}
+
+function filterOptions(
+  options: Array<Option>,
+  value: string,
+  savedValue: string
+) {
+  if (value === EMPTY_STRING) {
+    return options
+  }
+  const id = getIdByValue(options, value)
+  if (id === INVALID_ID) {
+    // `value` does not match any option in `options`
+    return options.filter(function (option: Option) {
+      if ('value' in option) {
+        return doesStringContainSubstring(option.value, value) === true
+      }
+      return false
+    })
+  }
+  // `value` matches one of the options in `options`
+  if (savedValue === EMPTY_STRING) {
+    return options
+  }
+  // Filter `options` by `savedValue`
+  return options.filter(function (option: Option) {
+    if ('value' in option) {
+      return doesStringContainSubstring(option.value, savedValue) === true
+    }
+    return false
+  })
 }
 
 // Returns `true` if `string` contains `substring`, else `false`
