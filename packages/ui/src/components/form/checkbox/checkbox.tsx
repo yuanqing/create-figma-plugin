@@ -37,24 +37,15 @@ export function Checkbox<N extends string>({
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
-      switch (event.key) {
-        case 'Escape': {
-          if (propagateEscapeKeyDown === false) {
-            event.stopPropagation()
-          }
-          event.currentTarget.blur()
-          break
-        }
-        case 'Enter': {
-          event.stopPropagation()
-          const newValue = value === false
-          onValueChange(newValue, name)
-          onChange(event)
-          break
-        }
+      if (event.key !== 'Escape') {
+        return
       }
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
+      }
+      event.currentTarget.blur()
     },
-    [name, onChange, onValueChange, propagateEscapeKeyDown, value]
+    [propagateEscapeKeyDown]
   )
 
   return (

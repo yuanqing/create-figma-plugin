@@ -36,6 +36,7 @@ export function Button({
           event.stopPropagation()
         }
         event.currentTarget.blur()
+        return
       }
       if (event.key === 'Enter') {
         event.stopPropagation()

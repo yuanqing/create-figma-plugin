@@ -56,25 +56,26 @@ export function Textbox<N extends string>({
           event.stopPropagation()
         }
         event.currentTarget.blur()
-      }
-      if (
-        value !== MIXED_STRING ||
-        isKeyCodeCharacterGenerating(event.keyCode) === true
-      ) {
         return
       }
-      event.preventDefault()
-      event.currentTarget.select()
+      if (
+        value === MIXED_STRING &&
+        isKeyCodeCharacterGenerating(event.keyCode) === false
+      ) {
+        // Prevent changing the cursor position with the keyboard if `value` is `MIXED_STRING`
+        event.preventDefault()
+        event.currentTarget.select()
+      }
     },
     [propagateEscapeKeyDown, value]
   )
 
   const handleMouseUp = useCallback(
     function (event: JSX.TargetedMouseEvent<HTMLInputElement>) {
-      if (value !== MIXED_STRING) {
-        return
+      if (value === MIXED_STRING) {
+        // Prevent changing the selection if `value` is `MIXED_STRING`
+        event.preventDefault()
       }
-      event.preventDefault()
     },
     [value]
   )

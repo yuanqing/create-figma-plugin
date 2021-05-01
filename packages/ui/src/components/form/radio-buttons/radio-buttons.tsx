@@ -7,7 +7,7 @@ import { createClassName } from '../../../utilities/create-class-name'
 import { Stack, StackSpace } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
 
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-radio-buttons-item-id'
+const ID_DATA_ATTRIBUTE_NAME = 'data-radio-buttons-id'
 
 export type RadioButtonsProps<
   N extends string,
@@ -45,7 +45,7 @@ export function RadioButtons<
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE_NAME
+        ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue, name)
@@ -56,22 +56,15 @@ export function RadioButtons<
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
-      if (event.key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        event.currentTarget.blur()
+      if (event.key !== 'Escape') {
+        return
       }
-      if (event.key === 'Enter') {
-        const id = event.currentTarget.getAttribute(
-          ITEM_ID_DATA_ATTRIBUTE_NAME
-        ) as string
-        const newValue = options[parseInt(id, 10)].value
-        onValueChange(newValue, name)
-        onChange(event)
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
       }
+      event.currentTarget.blur()
     },
-    [name, onChange, onValueChange, options, propagateEscapeKeyDown]
+    [propagateEscapeKeyDown]
   )
 
   return (
@@ -101,7 +94,7 @@ export function RadioButtons<
               tabIndex={isOptionDisabled === true ? -1 : 0}
               type="radio"
               value={`${option.value}`}
-              {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+              {...{ [ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
             />
             <div class={styles.children}>{children}</div>
           </label>

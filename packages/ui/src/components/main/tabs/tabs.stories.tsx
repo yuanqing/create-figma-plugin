@@ -17,13 +17,13 @@ export const Unselected = function () {
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
-    setValue(value)
+    setValue(newValue)
   }
   return <Tabs onChange={handleChange} options={options} value={value} />
 }
 
 export const Selected = function () {
-  const [value, setValue] = useState<null | string>('bar')
+  const [value, setValue] = useState('bar')
   const options: Array<TabsOption> = [
     { children: <div>Foo</div>, value: 'foo' },
     { children: <div>Bar</div>, value: 'bar' },
@@ -32,13 +32,13 @@ export const Selected = function () {
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
-    setValue(value)
+    setValue(newValue)
   }
   return <Tabs onChange={handleChange} options={options} value={value} />
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState<null | string>(null)
+  const [value, setValue] = useState('bar')
   const options: Array<TabsOption> = [
     { children: <div>Foo</div>, value: 'foo' },
     { children: <div>Bar</div>, value: 'bar' },

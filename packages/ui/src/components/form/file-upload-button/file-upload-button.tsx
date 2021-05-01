@@ -53,12 +53,13 @@ export function FileUploadButton({
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
-      if (event.key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        event.currentTarget.blur()
+      if (event.key !== 'Escape') {
+        return
       }
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
+      }
+      event.currentTarget.blur()
     },
     [propagateEscapeKeyDown]
   )

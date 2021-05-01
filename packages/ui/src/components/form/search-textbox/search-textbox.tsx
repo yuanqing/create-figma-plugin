@@ -51,18 +51,19 @@ export function SearchTextbox<N extends string>({
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
-      if (event.key === 'Escape') {
-        if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
-          event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
-          getCurrentFromRef(inputElementRef).value = ''
-          onClear()
-          return
-        }
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        event.currentTarget.blur()
+      if (event.key !== 'Escape') {
+        return
       }
+      if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
+        event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
+        getCurrentFromRef(inputElementRef).value = ''
+        onClear()
+        return
+      }
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
+      }
+      event.currentTarget.blur()
     },
     [clearOnEscapeKeyDown, onClear, propagateEscapeKeyDown, value]
   )

@@ -1,10 +1,9 @@
 /** @jsx h */
-import { ComponentChildren, h, JSX, RefObject } from 'preact'
-import { useCallback, useRef } from 'preact/hooks'
+import { ComponentChildren, h, JSX } from 'preact'
+import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
-import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconCheck } from '../../icon/icon-check/icon-check'
 import styles from './selectable-item.css'
 
@@ -32,39 +31,25 @@ export function SelectableItem<N extends string>({
   value = false,
   ...rest
 }: Props<HTMLInputElement, SelectableItemProps<N>>): JSX.Element {
-  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      onValueChange(value === false, name)
+      onValueChange(!value, name)
       onChange(event)
     },
     [name, onChange, onValueChange, value]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLLabelElement>) {
-      switch (event.key) {
-        case 'Escape': {
-          if (propagateEscapeKeyDown === false) {
-            event.stopPropagation()
-          }
-          event.currentTarget.blur()
-          break
-        }
-        case 'Enter': {
-          event.stopPropagation()
-          const newValue = value === false
-          onValueChange(newValue, name)
-          onChange({
-            ...event,
-            currentTarget: getCurrentFromRef(inputElementRef)
-          })
-          break
-        }
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+      if (event.key !== 'Escape') {
+        return
       }
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
+      }
+      event.currentTarget.blur()
     },
-    [name, value, onChange, onValueChange, propagateEscapeKeyDown]
+    [propagateEscapeKeyDown]
   )
 
   return (
@@ -76,18 +61,16 @@ export function SelectableItem<N extends string>({
         indent === true ? styles.indent : null,
         value === true ? styles.checked : null
       ])}
-      onKeyDown={disabled === true ? undefined : handleKeyDown}
-      tabIndex={disabled === true ? -1 : 0}
     >
       <input
         {...rest}
-        ref={inputElementRef}
         checked={value === true}
         class={styles.input}
         disabled={disabled === true}
         name={name}
         onChange={handleChange}
-        tabIndex={-1}
+        onKeyDown={disabled === true ? undefined : handleKeyDown}
+        tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
       />
       <div class={styles.text}>{children}</div>
