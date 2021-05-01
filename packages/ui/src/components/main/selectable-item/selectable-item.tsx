@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconCheck } from '../../icon/icon-check/icon-check'
@@ -14,7 +14,7 @@ export type SelectableItemProps<N extends string> = {
   disabled?: boolean
   indent?: boolean
   name?: N
-  onChange?: OnChange<HTMLInputElement>
+  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<boolean, N>
   propagateEscapeKeyDown?: boolean
   value: boolean
@@ -36,7 +36,7 @@ export function SelectableItem<N extends string>({
 
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      onValueChange(value === false, name, value)
+      onValueChange(value === false, name)
       onChange(event)
     },
     [name, onChange, onValueChange, value]
@@ -55,7 +55,7 @@ export function SelectableItem<N extends string>({
         case 'Enter': {
           event.stopPropagation()
           const newValue = value === false
-          onValueChange(newValue, name, value)
+          onValueChange(newValue, name)
           onChange({
             ...event,
             currentTarget: getCurrentFromRef(inputElementRef)

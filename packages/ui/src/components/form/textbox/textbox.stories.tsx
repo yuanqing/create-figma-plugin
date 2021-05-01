@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 /** @jsx h */
+/* eslint-disable no-console */
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
@@ -12,93 +12,91 @@ export default { title: 'Components/Form/Textbox' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox onChange={handleChange} value={value} />
+  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const Focused = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <Textbox {...useInitialFocus()} onChange={handleChange} value={value} />
-  )
+  return <Textbox {...useInitialFocus()} onInput={handleInput} value={value} />
 }
 
 export const Placeholder = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
   return (
-    <Textbox onChange={handleChange} placeholder="Placeholder" value={value} />
+    <Textbox onInput={handleInput} placeholder="Placeholder" value={value} />
   )
 }
 
 export const Filled = function () {
   const [value, setValue] = useState('Text')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox onChange={handleChange} value={value} />
+  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const Disabled = function () {
-  function handleChange() {
+  function handleInput() {
     throw new Error('This function should not be called')
   }
-  return <Textbox disabled onChange={handleChange} value="Text" />
+  return <Textbox disabled onInput={handleInput} value="Text" />
 }
 
 export const NoBorder = function () {
   const [value, setValue] = useState('Text')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox noBorder onChange={handleChange} value={value} />
+  return <Textbox noBorder onInput={handleInput} value={value} />
 }
 
 export const Icon = function () {
   const [value, setValue] = useState('Text')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox icon={<IconSearch />} onChange={handleChange} value={value} />
+  return <Textbox icon={<IconSearch />} onInput={handleInput} value={value} />
 }
 
 export const TextIcon = function () {
   const [value, setValue] = useState('Text')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox icon="X" onChange={handleChange} value={value} />
+  return <Textbox icon="X" onInput={handleInput} value={value} />
 }
 
 export const Mixed = function () {
   const [value, setValue] = useState(MIXED_STRING)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox onChange={handleChange} value={value} />
+  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const OnValueChange = function () {

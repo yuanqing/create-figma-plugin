@@ -6,7 +6,7 @@ import {
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useEffect } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../../types'
+import { OnValueChange, Props } from '../../../../types'
 import { createClassName } from '../../../../utilities/create-class-name'
 import { MIXED_NUMBER, MIXED_STRING } from '../../../../utilities/mixed-values'
 import styles from '../textbox.css'
@@ -25,9 +25,9 @@ export type TextboxNumericProps<N extends string> = {
   minimum?: number
   name?: N
   noBorder?: boolean
-  onChange?: OnChange<HTMLInputElement>
+  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<string, N>
-  onNumericValueChange?: (value: null | number, name?: N) => void
+  onNumericValueChange?: OnValueChange<null | number, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: string
@@ -43,7 +43,7 @@ export function TextboxNumeric<N extends string>({
   minimum,
   name,
   noBorder = false,
-  onChange = function () {},
+  onInput = function () {},
   onValueChange = function () {},
   onNumericValueChange = function () {},
   placeholder,
@@ -60,10 +60,10 @@ export function TextboxNumeric<N extends string>({
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      onValueChange(event.currentTarget.value, name, value)
-      onChange(event)
+      onValueChange(event.currentTarget.value, name)
+      onInput(event)
     },
-    [name, onChange, onValueChange, value]
+    [name, onInput, onValueChange]
   )
 
   const handleKeyDown = useCallback(
@@ -102,8 +102,8 @@ export function TextboxNumeric<N extends string>({
           const formattedValue = `${newValue}`
           element.value = formattedValue
           element.select()
-          onValueChange(formattedValue, name, value)
-          onChange(event)
+          onValueChange(formattedValue, name)
+          onInput(event)
           return
         }
         const evaluatedValue = evaluateNumericExpression(value)
@@ -138,8 +138,8 @@ export function TextboxNumeric<N extends string>({
         )
         element.value = formattedValue
         element.select()
-        onValueChange(formattedValue, name, value)
-        onChange(event)
+        onValueChange(formattedValue, name)
+        onInput(event)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
@@ -175,7 +175,7 @@ export function TextboxNumeric<N extends string>({
       maximum,
       minimum,
       name,
-      onChange,
+      onInput,
       onValueChange,
       propagateEscapeKeyDown,
       value

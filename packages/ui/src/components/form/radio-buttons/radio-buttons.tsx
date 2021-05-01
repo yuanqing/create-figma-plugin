@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { Stack, StackSpace } from '../../layout/stack/stack'
 import styles from './radio-buttons.css'
@@ -15,8 +15,8 @@ export type RadioButtonsProps<
 > = {
   disabled?: boolean
   name?: N
-  onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<V, N, null | V>
+  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
+  onValueChange?: OnValueChange<V, N>
   options: Array<RadioButtonsOption<V>>
   propagateEscapeKeyDown?: boolean
   space?: StackSpace
@@ -48,10 +48,10 @@ export function RadioButtons<
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name, value)
+      onValueChange(newValue, name)
       onChange(event)
     },
-    [name, onChange, onValueChange, options, value]
+    [name, onChange, onValueChange, options]
   )
 
   const handleKeyDown = useCallback(
@@ -67,11 +67,11 @@ export function RadioButtons<
           ITEM_ID_DATA_ATTRIBUTE_NAME
         ) as string
         const newValue = options[parseInt(id, 10)].value
-        onValueChange(newValue, name, value)
+        onValueChange(newValue, name)
         onChange(event)
       }
     },
-    [name, onChange, onValueChange, options, propagateEscapeKeyDown, value]
+    [name, onChange, onValueChange, options, propagateEscapeKeyDown]
   )
 
   return (

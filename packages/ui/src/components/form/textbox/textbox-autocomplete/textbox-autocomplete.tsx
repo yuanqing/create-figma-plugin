@@ -2,14 +2,7 @@
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
-import {
-  OnChange,
-  OnValueChange,
-  OptionHeader,
-  OptionSeparator,
-  OptionValue,
-  Props
-} from '../../../../types'
+import { OnValueChange, Props } from '../../../../types'
 import { createClassName } from '../../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
 import textboxStyles from '../textbox.css'
@@ -27,7 +20,8 @@ export type TextboxAutocompleteProps<N extends string> = {
   icon?: ComponentChildren
   name?: N
   noBorder?: boolean
-  onChange?: OnChange<HTMLInputElement>
+  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
+  onOptionClick?: OmitThisParameter<JSX.MouseEventHandler<HTMLDivElement>>
   onValueChange?: OnValueChange<string, N>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
@@ -40,12 +34,21 @@ export type TextboxAutocompleteOption =
   | TextboxAutocompleteOptionHeader
   | TextboxAutocompleteOptionValue
   | TextboxAutocompleteOptionSeparator
-export type TextboxAutocompleteOptionHeader = OptionHeader
-export type TextboxAutocompleteOptionValue = OptionValue
-export type TextboxAutocompleteOptionSeparator = OptionSeparator
+export type TextboxAutocompleteOptionHeader = {
+  header: string
+}
+export type TextboxAutocompleteOptionValue = {
+  value: string
+}
+export type TextboxAutocompleteOptionSeparator = {
+  separator: true
+}
 
-type Option = OptionHeader | OptionValueWithId | OptionSeparator
-type OptionValueWithId = OptionValue & {
+type Option =
+  | TextboxAutocompleteOptionHeader
+  | OptionValueWithId
+  | TextboxAutocompleteOptionSeparator
+type OptionValueWithId = TextboxAutocompleteOptionValue & {
   id: string
 }
 type Id = typeof INVALID_ID | string
@@ -56,9 +59,9 @@ export function TextboxAutocomplete<N extends string>({
   icon,
   name,
   noBorder = false,
-  onChange = function () {},
+  onInput = function () {},
+  onOptionClick = function () {},
   onValueChange = function () {},
-  options: originalOptions,
   placeholder,
   propagateEscapeKeyDown = true,
   strict = false,
@@ -77,7 +80,7 @@ export function TextboxAutocomplete<N extends string>({
   // Uncomment to debug
   // console.table([{ isMenuVisible, savedValue, selectedId, value }])
 
-  const options: Array<Option> = originalOptions
+  const options: Array<Option> = rest.options
     .filter(function (option: TextboxAutocompleteOption) {
       if (filter === false || savedValue === EMPTY_STRING) {
         return true
@@ -98,25 +101,12 @@ export function TextboxAutocomplete<N extends string>({
       return option
     })
 
-  const hideMenu = useCallback(function () {
+  const triggerBlur = useCallback(function () {
     setIsMenuVisible(false)
     setSavedValue(EMPTY_STRING)
+    const inputElement = getCurrentFromRef(inputElementRef)
+    inputElement.blur()
   }, [])
-
-  const updateSelectedId = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>, id: string) {
-      setSelectedId(id)
-      const newOptionValue = findOptionValueById(options, id)
-      if (newOptionValue === null) {
-        throw new Error('Invariant violation') // `id` is valid
-      }
-      const newValue = newOptionValue.value
-      getCurrentFromRef(inputElementRef).value = newValue
-      onValueChange(newValue, name, value)
-      onChange(event)
-    },
-    [name, onChange, onValueChange, options, value]
-  )
 
   const updateSavedValue = useCallback(
     function (value: string) {
@@ -134,20 +124,20 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   const handleFocus = useCallback(
-    function () {
+    function (event: JSX.TargetedFocusEvent<HTMLInputElement>) {
       setIsMenuVisible(true)
       updateSavedValue(value)
-      const inputElement = getCurrentFromRef(inputElementRef)
+      const inputElement = event.currentTarget
       inputElement.focus()
       inputElement.select()
     },
-    [value, updateSavedValue]
+    [updateSavedValue, value]
   )
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+      const inputElement = event.currentTarget
       const key = event.key
-      const inputElement = getCurrentFromRef(inputElementRef)
       if (key === 'ArrowUp' || key === 'ArrowDown') {
         event.preventDefault()
         if (options.length === 0) {
@@ -158,15 +148,23 @@ export function TextboxAutocomplete<N extends string>({
             ? computePreviousId(options, selectedId)
             : computeNextId(options, selectedId)
         if (newId === INVALID_ID) {
-          // Reached beginning/end of list of `options`, so restore `savedValue`
+          // Reached beginning/end of list of `options`, so just restore `savedValue`
           setSelectedId(INVALID_ID)
           inputElement.value = savedValue
-          onValueChange(savedValue, name, value)
-          onChange(event)
+          onValueChange(savedValue, name)
+          onInput(event)
           return
         }
-        // Set the selected option to `newId`
-        updateSelectedId(event, newId)
+        // Set the selected option to `newId`, and update `value`
+        setSelectedId(newId)
+        const newOptionValue = findOptionValueById(options, newId)
+        if (newOptionValue === null) {
+          throw new Error('Invariant violation') // `newId` is valid
+        }
+        const newValue = newOptionValue.value
+        inputElement.value = newValue
+        onValueChange(newValue, name)
+        onInput(event)
         inputElement.select()
         return
       }
@@ -175,7 +173,7 @@ export function TextboxAutocomplete<N extends string>({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        hideMenu()
+        triggerBlur()
         return
       }
       if (strict === false) {
@@ -193,28 +191,26 @@ export function TextboxAutocomplete<N extends string>({
       }
     },
     [
-      hideMenu,
       name,
-      onChange,
+      onInput,
       onValueChange,
       options,
-      updateSelectedId,
       propagateEscapeKeyDown,
+      savedValue,
       selectedId,
       strict,
-      savedValue,
-      value
+      triggerBlur
     ]
   )
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      const newValue = getCurrentFromRef(inputElementRef).value
+      const newValue = event.currentTarget.value
       updateSavedValue(newValue)
-      onValueChange(newValue, name, value)
-      onChange(event)
+      onValueChange(newValue, name)
+      onInput(event)
     },
-    [name, onChange, onValueChange, updateSavedValue, value]
+    [name, onInput, onValueChange, updateSavedValue]
   )
 
   const handleOptionClick = useCallback(
@@ -222,16 +218,18 @@ export function TextboxAutocomplete<N extends string>({
       const newId = event.currentTarget.getAttribute(
         ID_DATA_ATTRIBUTE_NAME
       ) as string
-      hideMenu()
-      updateSelectedId(
-        {
-          ...event,
-          currentTarget: getCurrentFromRef(inputElementRef)
-        },
-        newId
-      )
+      // Set the selected option to `newId`, and update `value`
+      setSelectedId(newId)
+      const newOptionValue = findOptionValueById(options, newId)
+      if (newOptionValue === null) {
+        throw new Error('Invariant violation') // `newId` is valid
+      }
+      const newValue = newOptionValue.value
+      onValueChange(newValue, name)
+      onOptionClick(event)
+      triggerBlur()
     },
-    [hideMenu, updateSelectedId]
+    [name, onOptionClick, onValueChange, options, triggerBlur]
   )
 
   const handlePaste = useCallback(
@@ -240,7 +238,7 @@ export function TextboxAutocomplete<N extends string>({
         throw new Error('`event.clipboardData` is `null`')
       }
       const newValue = computeNextValue(
-        getCurrentFromRef(inputElementRef),
+        event.currentTarget,
         event.clipboardData.getData('Text')
       )
       if (isValidValue(options, newValue) === false) {
@@ -250,7 +248,7 @@ export function TextboxAutocomplete<N extends string>({
     [options]
   )
 
-  // Adjust the menu scroll position so that the selected option is always visible
+  // Adjust the option menu scroll position so that the selected option is always visible
   useEffect(
     function () {
       if (isMenuVisible === false || options.length === 0) {
@@ -293,14 +291,14 @@ export function TextboxAutocomplete<N extends string>({
           // Exit if we clicked on any DOM element that is part of the component
           return
         }
-        hideMenu()
+        triggerBlur()
       }
       window.addEventListener('mousedown', handleWindowMouseDown)
       return function () {
         window.removeEventListener('mousedown', handleWindowMouseDown)
       }
     },
-    [hideMenu, isMenuVisible, value]
+    [isMenuVisible, triggerBlur, value]
   )
 
   return (
@@ -318,10 +316,10 @@ export function TextboxAutocomplete<N extends string>({
         class={textboxStyles.input}
         disabled={disabled === true}
         name={name}
-        onFocus={disabled === true ? undefined : handleFocus}
-        onInput={disabled === true ? undefined : handleInput}
-        onKeyDown={disabled === true ? undefined : handleKeyDown}
-        onPaste={disabled === true ? undefined : handlePaste}
+        onFocus={handleFocus}
+        onInput={handleInput}
+        onKeyDown={handleKeyDown}
+        onPaste={handlePaste}
         placeholder={placeholder}
         tabIndex={disabled === true ? -1 : 0}
         type="text"

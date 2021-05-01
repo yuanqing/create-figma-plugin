@@ -22,14 +22,20 @@ export const Empty = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       value={value}
     />
@@ -46,15 +52,21 @@ export const Focused = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
       {...useInitialFocus()}
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       value={value}
     />
@@ -71,14 +83,20 @@ export const Placeholder = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       placeholder="Placeholder"
       value={value}
@@ -96,14 +114,20 @@ export const Filled = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       value={value}
     />
@@ -119,13 +143,17 @@ export const Disabled = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange() {
+  function handleInput() {
+    throw new Error('This function should not be called')
+  }
+  function handleOptionClick() {
     throw new Error('This function should not be called')
   }
   return (
     <TextboxAutocomplete
       disabled
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       value="foo"
     />
@@ -142,15 +170,21 @@ export const NoBorder = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
       noBorder
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       value={value}
     />
@@ -167,15 +201,21 @@ export const Icon = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
       icon={<IconSearch />}
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       value={value}
     />
@@ -192,15 +232,21 @@ export const TextIcon = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
       icon="S"
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       placeholder="Search"
       value={value}
@@ -218,14 +264,20 @@ export const Strict = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
       strict
       value={value}
@@ -243,16 +295,54 @@ export const Filter = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxAutocomplete
       filter
-      onChange={handleChange}
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
       options={options}
+      value={value}
+    />
+  )
+}
+
+export const StrictFilter = function () {
+  const [value, setValue] = useState('')
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxAutocomplete
+      filter
+      onInput={handleInput}
+      onOptionClick={handleOptionClick}
+      options={options}
+      strict
       value={value}
     />
   )
@@ -268,8 +358,13 @@ export const MenuTop = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleOptionClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    const newValue = event.currentTarget.innerHTML
     console.log(newValue)
     setValue(newValue)
   }
@@ -277,7 +372,8 @@ export const MenuTop = function () {
   return (
     <div style={style}>
       <TextboxAutocomplete
-        onChange={handleChange}
+        onInput={handleInput}
+        onOptionClick={handleOptionClick}
         options={options}
         top
         value={value}

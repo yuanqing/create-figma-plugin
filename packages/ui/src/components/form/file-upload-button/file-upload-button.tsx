@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnSelectedFiles, Props } from '../../../types'
+import { Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { LoadingIndicator } from '../../main/loading-indicator/loading-indicator'
 import styles from './file-upload-button.css'
@@ -15,7 +15,7 @@ export type FileUploadButtonProps = {
   loading?: boolean
   multiple?: boolean
   onClick?: JSX.MouseEventHandler<HTMLButtonElement>
-  onSelectedFiles?: OnSelectedFiles
+  onSelectedFiles?: (files: Array<File>) => void
   propagateEscapeKeyDown?: boolean
 }
 

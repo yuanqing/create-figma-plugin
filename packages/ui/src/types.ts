@@ -1,29 +1,11 @@
 import { JSX, RenderableProps } from 'preact'
 
-export type OnChange<T extends EventTarget> = OmitThisParameter<
-  JSX.GenericEventHandler<T>
->
-
-export type OnValueChange<V1, N extends string, V2 = V1> = (
-  newValue: V1,
-  name: undefined | N,
-  oldValue: V2
+export type OnValueChange<V, N extends string> = (
+  newValue: V,
+  name: undefined | N
 ) => void
-
-export type OnSelectedFiles = (files: Array<File>) => void
 
 export type Props<
   T extends EventTarget = EventTarget,
   P = Record<string, never>
 > = RenderableProps<Omit<JSX.HTMLAttributes<T>, keyof P> & P>
-
-export type Option = OptionHeader | OptionValue | OptionSeparator
-export type OptionHeader = {
-  header: string
-}
-export type OptionValue = {
-  value: string
-}
-export type OptionSeparator = {
-  separator: true
-}

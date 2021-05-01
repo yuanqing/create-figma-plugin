@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './tabs.css'
 
@@ -10,8 +10,8 @@ const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
 
 export type TabsProps<N extends string> = {
   name?: N
-  onChange?: OnChange<HTMLInputElement>
-  onValueChange?: OnValueChange<string, N, null | string>
+  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
+  onValueChange?: OnValueChange<string, N>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
   value: null | string
@@ -39,10 +39,10 @@ export function Tabs<N extends string>({
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name, value)
+      onValueChange(newValue, name)
       onChange({ ...event, currentTarget: getCurrentFromRef(inputElementRef) })
     },
-    [name, onChange, onValueChange, options, value]
+    [name, onChange, onValueChange, options]
   )
 
   const handleKeyDown = useCallback(
@@ -63,7 +63,7 @@ export function Tabs<N extends string>({
       ) {
         if (value === null) {
           const newValue = options[0].value
-          onValueChange(newValue, name, value)
+          onValueChange(newValue, name)
           onChange({
             ...event,
             currentTarget: getCurrentFromRef(inputElementRef)
@@ -82,7 +82,7 @@ export function Tabs<N extends string>({
           nextIndex = 0
         }
         const newValue = options[nextIndex].value
-        onValueChange(newValue, name, value)
+        onValueChange(newValue, name)
         onChange({
           ...event,
           currentTarget: getCurrentFromRef(inputElementRef)

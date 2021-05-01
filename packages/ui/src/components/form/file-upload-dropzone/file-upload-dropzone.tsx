@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { OnSelectedFiles, Props } from '../../../types'
+import { Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import styles from './file-upload-dropzone.css'
 
@@ -10,7 +10,7 @@ export type FileUploadDropzoneProps = {
   acceptedFileTypes?: Array<string>
   children: ComponentChildren
   multiple?: boolean
-  onSelectedFiles?: OnSelectedFiles
+  onSelectedFiles?: (files: Array<File>) => void
   propagateEscapeKeyDown?: boolean
 }
 

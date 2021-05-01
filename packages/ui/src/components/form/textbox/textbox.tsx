@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { MIXED_STRING } from '../../../utilities/mixed-values'
 import styles from './textbox.css'
@@ -13,7 +13,7 @@ export type TextboxProps<N extends string> = {
   icon?: ComponentChildren
   name?: N
   noBorder?: boolean
-  onChange?: OnChange<HTMLInputElement>
+  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<string, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -26,7 +26,7 @@ export function Textbox<N extends string>({
   icon,
   name,
   noBorder = false,
-  onChange = function () {},
+  onInput = function () {},
   onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
@@ -43,10 +43,10 @@ export function Textbox<N extends string>({
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      onValueChange(event.currentTarget.value, name, value)
-      onChange(event)
+      onValueChange(event.currentTarget.value, name)
+      onInput(event)
     },
-    [name, onChange, onValueChange, value]
+    [name, onInput, onValueChange]
   )
 
   const handleKeyDown = useCallback(
@@ -66,7 +66,7 @@ export function Textbox<N extends string>({
       event.preventDefault()
       event.currentTarget.select()
     },
-    [value, propagateEscapeKeyDown]
+    [propagateEscapeKeyDown, value]
   )
 
   const handleMouseUp = useCallback(

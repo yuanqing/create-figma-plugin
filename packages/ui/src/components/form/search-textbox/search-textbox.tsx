@@ -2,7 +2,7 @@
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconCross } from '../../icon/icon-cross/icon-cross'
 import { IconSearch } from '../../icon/icon-search/icon-search'
@@ -12,7 +12,7 @@ export type SearchTextboxProps<N extends string> = {
   clearOnEscapeKeyDown?: boolean
   disabled?: boolean
   name?: N
-  onChange?: OnChange<HTMLInputElement>
+  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onClear?: () => void
   onValueChange?: OnValueChange<string, N>
   placeholder?: string
@@ -24,8 +24,8 @@ export function SearchTextbox<N extends string>({
   clearOnEscapeKeyDown = false,
   disabled = false,
   name,
-  onChange = function () {},
   onClear = function () {},
+  onInput = function () {},
   onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
@@ -43,10 +43,10 @@ export function SearchTextbox<N extends string>({
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      onValueChange(event.currentTarget.value, name, value)
-      onChange(event)
+      onValueChange(event.currentTarget.value, name)
+      onInput(event)
     },
-    [name, onChange, onValueChange, value]
+    [name, onInput, onValueChange]
   )
 
   const handleKeyDown = useCallback(

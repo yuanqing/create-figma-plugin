@@ -12,17 +12,17 @@ export default { title: 'Components/Form/Textbox Numeric' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxNumeric onChange={handleChange} value={value} />
+  return <TextboxNumeric onInput={handleInput} value={value} />
 }
 
 export const Focused = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
@@ -30,7 +30,7 @@ export const Focused = function () {
   return (
     <TextboxNumeric
       {...useInitialFocus()}
-      onChange={handleChange}
+      onInput={handleInput}
       value={value}
     />
   )
@@ -38,14 +38,14 @@ export const Focused = function () {
 
 export const Placeholder = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
   return (
     <TextboxNumeric
-      onChange={handleChange}
+      onInput={handleInput}
       placeholder="Placeholder"
       value={value}
     />
@@ -54,34 +54,34 @@ export const Placeholder = function () {
 
 export const Filled = function () {
   const [value, setValue] = useState('42')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxNumeric onChange={handleChange} value={value} />
+  return <TextboxNumeric onInput={handleInput} value={value} />
 }
 
 export const Disabled = function () {
-  function handleChange() {
+  function handleInput() {
     throw new Error('This function should not be called')
   }
-  return <TextboxNumeric disabled onChange={handleChange} value="42" />
+  return <TextboxNumeric disabled onInput={handleInput} value="42" />
 }
 
 export const NoBorder = function () {
   const [value, setValue] = useState('42')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxNumeric noBorder onChange={handleChange} value={value} />
+  return <TextboxNumeric noBorder onInput={handleInput} value={value} />
 }
 
 export const Icon = function () {
   const [value, setValue] = useState('42')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
@@ -89,7 +89,7 @@ export const Icon = function () {
   return (
     <TextboxNumeric
       icon={<IconSpaceHorizontal />}
-      onChange={handleChange}
+      onInput={handleInput}
       value={value}
     />
   )
@@ -97,37 +97,37 @@ export const Icon = function () {
 
 export const TextIcon = function () {
   const [value, setValue] = useState('42')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxNumeric icon="X" onChange={handleChange} value={value} />
+  return <TextboxNumeric icon="X" onInput={handleInput} value={value} />
 }
 
 export const Mixed = function () {
   const [value, setValue] = useState(MIXED_STRING)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxNumeric onChange={handleChange} value={value} />
+  return <TextboxNumeric onInput={handleInput} value={value} />
 }
 
 export const IntegersOnly = function () {
   const [value, setValue] = useState('42')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxNumeric integer onChange={handleChange} value={value} />
+  return <TextboxNumeric integer onInput={handleInput} value={value} />
 }
 
 export const CustomIncrements = function () {
   const [value, setValue] = useState('42')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
@@ -136,7 +136,7 @@ export const CustomIncrements = function () {
     <TextboxNumeric
       incrementBig={8}
       incrementSmall={4}
-      onChange={handleChange}
+      onInput={handleInput}
       value={value}
     />
   )
@@ -144,7 +144,7 @@ export const CustomIncrements = function () {
 
 export const MinimumMaximum = function () {
   const [value, setValue] = useState('0')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
@@ -153,7 +153,7 @@ export const MinimumMaximum = function () {
     <TextboxNumeric
       maximum={10}
       minimum={0}
-      onChange={handleChange}
+      onInput={handleInput}
       value={value}
     />
   )

@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import styles from './checkbox.css'
 
@@ -10,7 +10,7 @@ export type CheckboxProps<N extends string> = {
   children: ComponentChildren
   disabled?: boolean
   name?: N
-  onChange?: OnChange<HTMLInputElement>
+  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<boolean, N>
   propagateEscapeKeyDown?: boolean
   value: boolean
@@ -29,7 +29,7 @@ export function Checkbox<N extends string>({
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const newValue = value === false
-      onValueChange(newValue, name, value)
+      onValueChange(newValue, name)
       onChange(event)
     },
     [name, onChange, onValueChange, value]
@@ -48,7 +48,7 @@ export function Checkbox<N extends string>({
         case 'Enter': {
           event.stopPropagation()
           const newValue = value === false
-          onValueChange(newValue, name, value)
+          onValueChange(newValue, name)
           onChange(event)
           break
         }

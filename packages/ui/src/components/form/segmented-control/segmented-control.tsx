@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { OnChange, OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import styles from './segmented-control.css'
 
@@ -14,7 +14,7 @@ export type SegmentedControlProps<
 > = {
   disabled?: boolean
   name?: N
-  onChange?: OnChange<HTMLInputElement>
+  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<V, N>
   options: Array<SegmentedControlOption<V>>
   propagateEscapeKeyDown?: boolean
@@ -49,10 +49,10 @@ export function SegmentedControl<
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name, value)
+      onValueChange(newValue, name)
       onChange(event)
     },
-    [name, onChange, onValueChange, options, value]
+    [name, onChange, onValueChange, options]
   )
 
   const handleFocus = useCallback(function () {
@@ -89,7 +89,7 @@ export function SegmentedControl<
           return
         }
         const newValue = options[nextIndex].value
-        onValueChange(newValue, name, value)
+        onValueChange(newValue, name)
         const currentTarget = getCurrentFromRef(
           rootElementRef
         ).querySelector<HTMLInputElement>(

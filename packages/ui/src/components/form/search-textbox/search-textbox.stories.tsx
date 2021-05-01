@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 /** @jsx h */
+/* eslint-disable no-console */
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
@@ -10,38 +10,34 @@ export default { title: 'Components/Form/Search Textbox' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleClear() {
+    setValue('')
+  }
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  function handleClear() {
-    setValue('')
-  }
   return (
-    <SearchTextbox
-      onChange={handleChange}
-      onClear={handleClear}
-      value={value}
-    />
+    <SearchTextbox onClear={handleClear} onInput={handleInput} value={value} />
   )
 }
 
 export const Focused = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleClear() {
+    setValue('')
+  }
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  function handleClear() {
-    setValue('')
-  }
   return (
     <SearchTextbox
       {...useInitialFocus()}
-      onChange={handleChange}
       onClear={handleClear}
+      onInput={handleInput}
       value={value}
     />
   )
@@ -49,18 +45,18 @@ export const Focused = function () {
 
 export const Placeholder = function () {
   const [value, setValue] = useState('')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleClear() {
+    setValue('')
+  }
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  function handleClear() {
-    setValue('')
-  }
   return (
     <SearchTextbox
-      onChange={handleChange}
       onClear={handleClear}
+      onInput={handleInput}
       placeholder="Placeholder"
       value={value}
     />
@@ -69,55 +65,51 @@ export const Placeholder = function () {
 
 export const Filled = function () {
   const [value, setValue] = useState('Text')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleClear() {
+    setValue('')
+  }
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  function handleClear() {
-    setValue('')
-  }
   return (
-    <SearchTextbox
-      onChange={handleChange}
-      onClear={handleClear}
-      value={value}
-    />
+    <SearchTextbox onClear={handleClear} onInput={handleInput} value={value} />
   )
 }
 
 export const ClearOnEscapeKeyDown = function () {
   const [value, setValue] = useState('Text')
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+  function handleClear() {
+    setValue('')
+  }
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  function handleClear() {
-    setValue('')
-  }
   return (
     <SearchTextbox
       clearOnEscapeKeyDown
-      onChange={handleChange}
       onClear={handleClear}
+      onInput={handleInput}
       value={value}
     />
   )
 }
 
 export const Disabled = function () {
-  function handleChange() {
+  function handleClear() {
     throw new Error('This function should not be called')
   }
-  function handleClear() {
+  function handleInput() {
     throw new Error('This function should not be called')
   }
   return (
     <SearchTextbox
       disabled
-      onChange={handleChange}
       onClear={handleClear}
+      onInput={handleInput}
       value="Text"
     />
   )
