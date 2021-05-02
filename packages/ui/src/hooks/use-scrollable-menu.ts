@@ -3,32 +3,32 @@ import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
 
-type ItemId = typeof INVALID_ITEM_ID | string
+const INVALID_ID = null
+const ID_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
 
-const INVALID_ITEM_ID = null
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
+type Id = typeof INVALID_ID | string
 
 export function useScrollableMenu(options: {
-  selectedItemId: ItemId
+  selectedItemId: Id
   onItemIdChange: (id: null | string) => void
   changeOnMouseOver: boolean
 }): {
   menuElementRef: RefObject<HTMLDivElement>
-  itemIdDataAttributeName: typeof ITEM_ID_DATA_ATTRIBUTE_NAME
+  itemIdDataAttributeName: typeof ID_DATA_ATTRIBUTE_NAME
 } {
   const { selectedItemId, onItemIdChange, changeOnMouseOver = true } = options
 
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
-  const getMenuItemId = useCallback(function (element: HTMLElement): ItemId {
-    return element.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
+  const getMenuItemId = useCallback(function (element: HTMLElement): Id {
+    return element.getAttribute(ID_DATA_ATTRIBUTE_NAME)
   }, [])
 
   const getItemElements = useCallback(
     function (): Array<HTMLElement> {
       return Array.from(
         getCurrentFromRef(menuElementRef).querySelectorAll<HTMLElement>(
-          `[${ITEM_ID_DATA_ATTRIBUTE_NAME}]`
+          `[${ID_DATA_ATTRIBUTE_NAME}]`
         )
       )
     },
@@ -36,8 +36,8 @@ export function useScrollableMenu(options: {
   )
 
   const getItemIndex = useCallback(
-    function (id: ItemId): number {
-      if (id === INVALID_ITEM_ID) {
+    function (id: Id): number {
+      if (id === INVALID_ID) {
         return -1
       }
       return getItemElements().findIndex(function (element) {
@@ -48,7 +48,7 @@ export function useScrollableMenu(options: {
   )
 
   const updateScrollPosition = useCallback(
-    function (id: ItemId) {
+    function (id: Id): void {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
       if (index === -1) {
@@ -143,7 +143,7 @@ export function useScrollableMenu(options: {
   )
 
   return {
-    itemIdDataAttributeName: ITEM_ID_DATA_ATTRIBUTE_NAME,
+    itemIdDataAttributeName: ID_DATA_ATTRIBUTE_NAME,
     menuElementRef
   }
 }

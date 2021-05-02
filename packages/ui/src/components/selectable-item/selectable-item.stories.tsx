@@ -10,9 +10,9 @@ export default { title: 'Components/Selectable Item' }
 export const Unselected = function () {
   const [value, setValue] = useState(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const checked = event.currentTarget.checked
-    console.log(checked)
-    setValue(checked)
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <SelectableItem onChange={handleChange} value={value}>
@@ -24,9 +24,9 @@ export const Unselected = function () {
 export const Selected = function () {
   const [value, setValue] = useState(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const checked = event.currentTarget.checked
-    console.log(checked)
-    setValue(checked)
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <SelectableItem onChange={handleChange} value={value}>
@@ -49,9 +49,9 @@ export const Disabled = function () {
 export const Bold = function () {
   const [value, setValue] = useState(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const checked = event.currentTarget.checked
-    console.log(checked)
-    setValue(checked)
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <SelectableItem bold onChange={handleChange} value={value}>
@@ -63,9 +63,9 @@ export const Bold = function () {
 export const Indent = function () {
   const [value, setValue] = useState(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const checked = event.currentTarget.checked
-    console.log(checked)
-    setValue(checked)
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <SelectableItem indent onChange={handleChange} value={value}>
@@ -78,9 +78,9 @@ export const LongText = function () {
   const longText = Array(100).fill('Text').join(' ')
   const [value, setValue] = useState(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const checked = event.currentTarget.checked
-    console.log(checked)
-    setValue(checked)
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <SelectableItem onChange={handleChange} value={value}>

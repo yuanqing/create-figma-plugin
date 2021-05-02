@@ -54,7 +54,7 @@
   width: 100%;
   opacity: 0;
 }
-.input:active + button,
-.input:focus + button {
+.input:active ~ button,
+.input:focus ~ button {
   border-color: var(--color-black-30);
 }

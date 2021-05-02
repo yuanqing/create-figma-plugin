@@ -26,7 +26,7 @@
   color: var(--color-black-80);
   pointer-events: none;
 }
-.input:disabled + .searchIcon {
+.input:disabled ~ .searchIcon {
   opacity: var(--opacity-30);
 }
 

@@ -88,10 +88,11 @@ export function SegmentedControl<
               value={`${option.value}`}
               {...{ [ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
             />
-            <div class={styles.text}>{children}</div>
+            <div class={styles.children}>{children}</div>
           </label>
         )
       })}
+      <div class={styles.border}></div>
     </div>
   )
 }

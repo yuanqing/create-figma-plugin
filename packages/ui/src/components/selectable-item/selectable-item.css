@@ -34,14 +34,14 @@
   height: 0;
 }
 
-.text {
+.children {
   flex-grow: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   pointer-events: none;
 }
-.bold .text {
+.bold .children {
   font-weight: var(--font-weight-bold);
 }
 

@@ -12,9 +12,9 @@ export default { title: 'Components/Checkbox' }
 export const Unselected = function () {
   const [value, setValue] = useState(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
+    const newValue = event.currentTarget.checked
     console.log(newValue)
-    setValue(!(newValue === 'true'))
+    setValue(newValue)
   }
   return (
     <Checkbox onChange={handleChange} value={value}>
@@ -26,9 +26,9 @@ export const Unselected = function () {
 export const Focused = function () {
   const [value, setValue] = useState(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
+    const newValue = event.currentTarget.checked
     console.log(newValue)
-    setValue(!(newValue === 'true'))
+    setValue(newValue)
   }
   return (
     <Checkbox {...useInitialFocus()} onChange={handleChange} value={value}>
@@ -40,9 +40,9 @@ export const Focused = function () {
 export const Selected = function () {
   const [value, setValue] = useState(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
+    const newValue = event.currentTarget.checked
     console.log(newValue)
-    setValue(!(newValue === 'true'))
+    setValue(newValue)
   }
   return (
     <Checkbox onChange={handleChange} value={value}>

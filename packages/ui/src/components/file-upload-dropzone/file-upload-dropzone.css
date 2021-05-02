@@ -26,8 +26,8 @@
   border: 1px dashed var(--color-black-30);
   pointer-events: none;
 }
-.input:active + .dashedLine,
-.input:focus + .dashedLine,
+.input:active ~ .dashedLine,
+.input:focus ~ .dashedLine,
 .isDropActive .dashedLine {
   border-color: var(--color-blue);
 }

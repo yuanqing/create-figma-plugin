@@ -54,11 +54,12 @@
   text-align: center;
   pointer-events: none;
 }
+.input:focus ~ .icon {
+  color: var(--color-blue);
+}
+
 .icon svg {
   width: 16px;
   height: 16px;
-  fill: var(--color-black-30);
-}
-.input:focus + .icon svg {
-  fill: var(--color-blue);
+  fill: currentColor;
 }

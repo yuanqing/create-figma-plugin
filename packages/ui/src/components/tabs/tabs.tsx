@@ -76,7 +76,7 @@ export function Tabs<N extends string>({
                 value={option.value}
                 {...{ [ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
               />
-              <div class={styles.text}>{option.value}</div>
+              <div class={styles.value}>{option.value}</div>
             </label>
           )
         })}

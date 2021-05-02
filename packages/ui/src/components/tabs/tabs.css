@@ -18,7 +18,7 @@
   height: 0;
 }
 
-.input:checked + .text {
+.input:checked ~ .value {
   color: var(--color-black-80);
   font-weight: var(--font-weight-bold);
 }

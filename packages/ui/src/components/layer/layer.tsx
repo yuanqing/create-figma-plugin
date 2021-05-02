@@ -1,7 +1,8 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
+import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../types'
+import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
 import { IconComponent } from '../icon/icon-component/icon-component'
 import { IconFrame } from '../icon/icon-frame/icon-frame'
@@ -12,38 +13,52 @@ const icons = {
   frame: <IconFrame />
 }
 
-export type LayerProps = {
+export type LayerProps<N extends string> = {
   children: ComponentChildren
-  onClick?: JSX.MouseEventHandler<HTMLDivElement>
+  name?: N
+  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
+  onValueChange?: OnValueChange<boolean, N>
   pageName?: string
-  selected?: boolean
   type: LayerType
+  value?: boolean
 }
 export type LayerType = 'frame' | 'component'
 
-export function Layer({
+export function Layer<N extends string>({
   children,
-  onClick,
+  name,
+  onChange = function () {},
+  onValueChange = function () {},
   pageName,
-  selected = false,
+  value = false,
   type,
   ...rest
-}: Props<HTMLDivElement, LayerProps>): JSX.Element {
+}: Props<HTMLDivElement, LayerProps<N>>): JSX.Element {
+  const handleChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      const newValue = event.currentTarget.checked
+      onValueChange(newValue, name)
+      onChange(event)
+    },
+    [name, onChange, onValueChange]
+  )
+
   return (
-    <div
-      {...rest}
-      class={createClassName([
-        styles[type],
-        styles.layer,
-        selected === true ? styles.selected : null
-      ])}
-      onClick={onClick}
-    >
+    <label class={createClassName([styles.layer, styles[type]])}>
+      <input
+        {...rest}
+        checked={value === true}
+        class={styles.input}
+        name={name}
+        onChange={handleChange}
+        tabIndex={0}
+        type="checkbox"
+      />
       <div class={styles.icon}>{icons[type]}</div>
       <div class={styles.layerName}>{children}</div>
       {typeof pageName === 'undefined' ? null : (
         <div class={styles.pageName}>{pageName}</div>
       )}
-    </div>
+    </label>
   )
 }

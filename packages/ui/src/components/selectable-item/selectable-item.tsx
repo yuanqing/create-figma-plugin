@@ -73,7 +73,7 @@ export function SelectableItem<N extends string>({
         tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
       />
-      <div class={styles.text}>{children}</div>
+      <div class={styles.children}>{children}</div>
       {value === true ? (
         <div class={styles.icon}>
           <IconCheck />

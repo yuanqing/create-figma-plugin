@@ -3,7 +3,6 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
-import { createClassName } from '../../utilities/create-class-name'
 import { Stack, StackSpace } from '../layout/stack/stack'
 import styles from './radio-buttons.css'
 
@@ -76,13 +75,8 @@ export function RadioButtons<
             : option.children
         const isOptionDisabled = disabled === true || option.disabled === true
         return (
-          <label
-            key={index}
-            class={createClassName([
-              styles.label,
-              isOptionDisabled === true ? styles.disabled : null
-            ])}
-          >
+          <label key={index} class={styles.label}>
+            <div class={styles.hitArea}></div>
             <input
               {...rest}
               checked={value === option.value}
@@ -96,6 +90,8 @@ export function RadioButtons<
               value={`${option.value}`}
               {...{ [ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
             />
+            <div class={styles.fill} />
+            <div class={styles.border} />
             <div class={styles.children}>{children}</div>
           </label>
         )

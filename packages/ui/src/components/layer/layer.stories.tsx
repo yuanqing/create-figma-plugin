@@ -1,5 +1,6 @@
 /** @jsx h */
-import { h } from 'preact'
+/* eslint-disable no-console */
+import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { Layer } from './layer'
@@ -7,40 +8,46 @@ import { Layer } from './layer'
 export default { title: 'Components/Layer' }
 
 export const Frame = function () {
-  const [selected, setSelected] = useState(false)
-  function handleClick() {
-    setSelected(selected === false)
+  const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
-    <Layer onClick={handleClick} selected={selected} type="frame">
+    <Layer onChange={handleChange} type="frame" value={value}>
       Text
     </Layer>
   )
 }
 
 export const Selected = function () {
-  const [selected, setSelected] = useState(true)
-  function handleClick() {
-    setSelected(selected === false)
+  const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
-    <Layer onClick={handleClick} selected={selected} type="frame">
+    <Layer onChange={handleChange} type="frame" value={value}>
       Text
     </Layer>
   )
 }
 
 export const PageName = function () {
-  const [selected, setSelected] = useState(false)
-  function handleClick() {
-    setSelected(selected === false)
+  const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <Layer
-      onClick={handleClick}
+      onChange={handleChange}
       pageName="Page Name"
-      selected={selected}
       type="frame"
+      value={value}
     >
       Text
     </Layer>
@@ -49,16 +56,18 @@ export const PageName = function () {
 
 export const LongText = function () {
   const longText = Array(100).fill('Text').join(' ')
-  const [selected, setSelected] = useState(false)
-  function handleClick() {
-    setSelected(selected === false)
+  const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <Layer
-      onClick={handleClick}
+      onChange={handleChange}
       pageName="Page Name"
-      selected={selected}
       type="frame"
+      value={value}
     >
       {longText}
     </Layer>
@@ -66,12 +75,14 @@ export const LongText = function () {
 }
 
 export const Component = function () {
-  const [selected, setSelected] = useState(false)
-  function handleClick() {
-    setSelected(selected === false)
+  const [value, setValue] = useState(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
-    <Layer onClick={handleClick} selected={selected} type="component">
+    <Layer onChange={handleChange} type="component" value={value}>
       Text
     </Layer>
   )

@@ -1,21 +1,42 @@
 .layer {
+  position: relative;
   display: flex;
   align-items: center;
   height: 32px;
   padding: 0 12px;
-  color: var(--color-black-80);
-}
-.layer:hover {
-  background-color: var(--color-selection-b);
 }
 
 .component {
   color: var(--color-purple);
 }
+.frame {
+  color: var(--color-black-80);
+}
 
-.selected,
-.selected:hover {
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-index-1);
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.layer:hover .input {
+  background-color: var(--color-selection-b);
+}
+.input:checked,
+.layer:hover .input:checked {
   background-color: var(--color-selection-a);
+}
+
+.icon,
+.layerName,
+.pageName {
+  position: relative;
+  z-index: var(--z-index-2);
 }
 
 .layerName,
@@ -23,7 +44,6 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  pointer-events: none;
 }
 
 .layerName {
@@ -34,23 +54,13 @@
   font-weight: var(--font-weight-bold);
 }
 
-.pageName {
-  flex: 1 0 40px;
-  color: var(--color-black-30);
-}
-
 .icon {
   flex: 0 0 16px;
   height: 16px;
   pointer-events: none;
 }
-.icon svg {
-  width: 16px;
-  height: 16px;
-}
-.component .icon svg {
-  fill: var(--color-purple);
-}
-.frame .icon svg {
-  fill: var(--color-black-80);
+
+.pageName {
+  flex: 1 0 40px;
+  color: var(--color-black-30);
 }

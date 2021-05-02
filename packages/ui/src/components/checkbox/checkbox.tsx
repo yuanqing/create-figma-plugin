@@ -3,7 +3,6 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
-import { createClassName } from '../../utilities/create-class-name'
 import styles from './checkbox.css'
 
 export type CheckboxProps<N extends string> = {
@@ -28,11 +27,11 @@ export function Checkbox<N extends string>({
 }: Props<HTMLInputElement, CheckboxProps<N>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      const newValue = value === false
+      const newValue = event.currentTarget.checked
       onValueChange(newValue, name)
       onChange(event)
     },
-    [name, onChange, onValueChange, value]
+    [name, onChange, onValueChange]
   )
 
   const handleKeyDown = useCallback(
@@ -49,12 +48,8 @@ export function Checkbox<N extends string>({
   )
 
   return (
-    <label
-      class={createClassName([
-        styles.label,
-        disabled === true ? styles.disabled : null
-      ])}
-    >
+    <label class={styles.label}>
+      <div class={styles.hitArea}></div>
       <input
         {...rest}
         checked={value === true}
@@ -65,9 +60,10 @@ export function Checkbox<N extends string>({
         onKeyDown={handleKeyDown}
         tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
-        value={`${value}`}
       />
-      <div class={styles.text}>{children}</div>
+      <div class={styles.fill}></div>
+      <div class={styles.border}></div>
+      <div class={styles.children}>{children}</div>
     </label>
   )
 }
