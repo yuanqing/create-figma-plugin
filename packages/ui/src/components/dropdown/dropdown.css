@@ -1,0 +1,168 @@
+.dropdown {
+  position: relative;
+}
+.enabled:focus {
+  outline: 0;
+}
+.dropdown:not(.enabled) {
+  opacity: var(--opacity-30);
+}
+
+.box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 28px;
+  padding-left: 8px;
+  color: var(--color-black-80);
+}
+.dropdown:not(.enabled) .box {
+  cursor: not-allowed;
+}
+.box > * {
+  pointer-events: none;
+}
+
+.icon {
+  width: 16px;
+  margin-right: 8px;
+  color: var(--color-black-30);
+  text-align: center;
+}
+.enabled:focus .icon,
+.enabled:focus-within .icon {
+  color: var(--color-blue);
+}
+.icon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.value,
+.placeholder {
+  margin-right: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.enabled .box:hover .value,
+.enabled .box:hover .placeholder,
+.enabled:focus .value,
+.enabled:focus .placeholder,
+.enabled:focus-within .value,
+.enabled:focus-within .placeholder {
+  flex-grow: 1;
+}
+.placeholder {
+  color: var(--color-black-30);
+}
+
+.chevronIcon {
+  margin-right: 8px;
+  color: var(--color-black-30);
+}
+.enabled .box:hover .chevronIcon,
+.enabled:focus .chevronIcon,
+.enabled:focus-within .chevronIcon {
+  color: var(--color-black-80);
+}
+
+.border {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-color: var(--color-black-10);
+  border-width: 1px;
+  border-radius: var(--border-radius-2);
+}
+.enabled:focus .border,
+.enabled:focus-within .border {
+  border-color: var(--color-blue);
+  border-width: 2px;
+}
+.noBorder:not(:focus) .border {
+  border-color: transparent;
+}
+.noBorder:not(:focus) .box:hover .border {
+  border-color: var(--color-black-10);
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 120px;
+  padding: 8px 0;
+  overflow-y: auto;
+  color: var(--color-white);
+  font-size: var(--font-size-12);
+  background-color: var(--color-hud);
+  border-radius: var(--border-radius-2);
+  box-shadow: var(--box-shadow);
+}
+.menu::-webkit-scrollbar {
+  display: none;
+}
+.fullWidth {
+  width: 100%;
+}
+.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+.top {
+  top: auto;
+  bottom: 100%;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 1.5),
+  screen and (min-resolution: 1.5dppx) {
+  .menu {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.optionHeader,
+.optionValue {
+  padding: 4px 32px;
+}
+
+.optionHeader {
+  color: var(--color-white-40);
+  font-size: var(--font-size-12);
+}
+
+.optionValue {
+  position: relative;
+}
+.optionValueSelected {
+  background-color: var(--color-blue);
+}
+
+.optionSeparator {
+  width: 100%;
+  height: 1px;
+  margin: 8px 0;
+  background-color: var(--color-white-20);
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.checkIcon {
+  position: absolute;
+  top: 4px;
+  left: 8px;
+}
