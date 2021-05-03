@@ -2,13 +2,14 @@
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
+import menuStyles from '../../css/menu.css'
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
 import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
 import { IconCheck } from '../icon/icon-check/icon-check'
 import { IconChevron } from '../icon/icon-chevron/icon-chevron'
-import styles from './dropdown.css'
+import dropdownStyles from './dropdown.css'
 
 const INVALID_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-dropdown-item-id'
@@ -20,7 +21,6 @@ export type DropdownProps<
   V extends boolean | number | string = string
 > = {
   disabled?: boolean
-  fullWidth?: boolean
   icon?: ComponentChildren
   name?: N
   noBorder?: boolean
@@ -50,7 +50,6 @@ export function Dropdown<
   V extends boolean | number | string = string
 >({
   disabled = false,
-  fullWidth,
   icon,
   name,
   noBorder,
@@ -67,6 +66,7 @@ export function Dropdown<
   }
 
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
+  const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
   const [isMenuVisible, setIsMenuVisible] = useState(false)
 
@@ -82,13 +82,13 @@ export function Dropdown<
   // console.table([{isMenuVisible, selectedId}])
 
   const {
-    itemIdDataAttributeName,
-    menuElementRef,
-    handleScrollableMenuKeyDown
+    handleScrollableMenuKeyDown,
+    handleScrollableMenuItemMouseMove
   } = useScrollableMenu({
-    changeOnMouseOver: true,
-    onItemIdChange: setSelectedId,
-    selectedItemId: selectedId
+    itemIdDataAttributeName: ITEM_ID_DATA_ATTRIBUTE_NAME,
+    menuElementRef,
+    selectedId: selectedId,
+    setSelectedId: setSelectedId
   })
 
   const triggerBlur = useCallback(function (): void {
@@ -97,7 +97,7 @@ export function Dropdown<
     getCurrentFromRef(rootElementRef).blur()
   }, [])
 
-  const handleRootClick = useCallback(
+  const handleClick = useCallback(
     function (): void {
       if (isMenuVisible === true) {
         triggerBlur()
@@ -117,7 +117,7 @@ export function Dropdown<
     [isMenuVisible, options, triggerBlur, value]
   )
 
-  const handleRootKeyDown = useCallback(
+  const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLDivElement>): void {
       if (event.key === 'Escape') {
         triggerBlur()
@@ -155,7 +155,7 @@ export function Dropdown<
   },
   [])
 
-  const handleChange = useCallback(
+  const handleOptionChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
@@ -171,7 +171,7 @@ export function Dropdown<
 
   useEffect(
     function () {
-      function handleWindowMouseDown(event: MouseEvent): void {
+      function handleWindowClick(event: MouseEvent): void {
         const rootElement = getCurrentFromRef(rootElementRef)
         if (
           isMenuVisible === false ||
@@ -181,11 +181,11 @@ export function Dropdown<
           // Exit if we clicked on any DOM element that is part of the component
           return
         }
-        setIsMenuVisible(false)
+        triggerBlur()
       }
-      window.addEventListener('mousedown', handleWindowMouseDown)
+      window.addEventListener('click', handleWindowClick)
       return function (): void {
-        window.removeEventListener('mousedown', handleWindowMouseDown)
+        window.removeEventListener('click', handleWindowClick)
       }
     },
     [isMenuVisible, options, triggerBlur, value]
@@ -195,37 +195,38 @@ export function Dropdown<
     <div
       ref={rootElementRef}
       class={createClassName([
-        styles.dropdown,
-        disabled === true ? null : styles.enabled,
-        noBorder === true ? styles.noBorder : null
+        dropdownStyles.dropdown,
+        disabled === true ? null : dropdownStyles.enabled,
+        noBorder === true ? dropdownStyles.noBorder : null
       ])}
-      onClick={disabled === true ? undefined : handleRootClick}
-      onKeyDown={disabled === true ? undefined : handleRootKeyDown}
+      onClick={disabled === true ? undefined : handleClick}
+      onKeyDown={disabled === true ? undefined : handleKeyDown}
       tabIndex={disabled === true ? -1 : 0}
     >
-      <div class={styles.box}>
+      <div class={dropdownStyles.box}>
         {typeof icon === 'undefined' ? null : (
-          <div class={styles.icon}>{icon}</div>
+          <div class={dropdownStyles.icon}>{icon}</div>
         )}
         {value === null ? (
           typeof placeholder === 'undefined' ? null : (
-            <div class={styles.placeholder}>{placeholder}</div>
+            <div class={dropdownStyles.placeholder}>{placeholder}</div>
           )
         ) : (
-          <div class={styles.value}>{value}</div>
+          <div class={dropdownStyles.value}>{value}</div>
         )}
-        <div class={styles.chevronIcon}>
+        <div class={dropdownStyles.chevronIcon}>
           <IconChevron />
         </div>
-        <div class={styles.border}></div>
+        <div class={dropdownStyles.border}></div>
       </div>
       <div
         ref={menuElementRef}
         class={createClassName([
-          styles.menu,
-          fullWidth === true ? styles.fullWidth : null,
-          isMenuVisible === false ? styles.hidden : null,
-          top === true ? styles.top : null
+          menuStyles.menu,
+          disabled === true || isMenuVisible === false
+            ? menuStyles.hidden
+            : null,
+          top === true ? menuStyles.top : null
         ])}
         onClick={handleMenuClick}
       >
@@ -234,11 +235,11 @@ export function Dropdown<
           index: number
         ): ComponentChildren {
           if ('separator' in option) {
-            return <hr key={index} class={styles.optionSeparator} />
+            return <hr key={index} class={menuStyles.optionSeparator} />
           }
           if ('header' in option) {
             return (
-              <h1 key={index} class={styles.optionHeader}>
+              <h1 key={index} class={menuStyles.optionHeader}>
                 {option.header}
               </h1>
             )
@@ -247,24 +248,29 @@ export function Dropdown<
             <label
               key={index}
               class={createClassName([
-                styles.optionValue,
-                `${index}` === selectedId ? styles.optionValueSelected : null
+                menuStyles.optionValue,
+                `${index}` === selectedId
+                  ? menuStyles.optionValueSelected
+                  : null
               ])}
             >
               <input
                 {...rest}
                 checked={value === option.value}
-                class={styles.input}
+                class={menuStyles.input}
                 name={name}
-                onChange={handleChange}
-                tabIndex={0}
+                onChange={
+                  value === option.value ? undefined : handleOptionChange
+                }
+                onClick={value === option.value ? triggerBlur : undefined}
+                onMouseMove={handleScrollableMenuItemMouseMove}
+                tabIndex={-1}
                 type="radio"
                 value={`${option.value}`}
                 {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
-                {...{ [itemIdDataAttributeName]: `${index}` }}
               />
               {option.value === value ? (
-                <div class={styles.checkIcon}>
+                <div class={menuStyles.checkIcon}>
                   <IconCheck />
                 </div>
               ) : null}

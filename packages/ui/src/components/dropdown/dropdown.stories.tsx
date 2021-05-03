@@ -4,7 +4,7 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../hooks/use-initial-focus'
-import { IconSearch } from '../icon/icon-search/icon-search'
+import { IconFrame } from '../icon/icon-frame/icon-frame'
 import { Dropdown, DropdownOption } from './dropdown'
 
 export default { title: 'Components/Dropdown' }
@@ -154,7 +154,7 @@ export const Icon = function () {
   }
   return (
     <Dropdown
-      icon={<IconSearch />}
+      icon={<IconFrame />}
       onChange={handleChange}
       options={options}
       value={value}

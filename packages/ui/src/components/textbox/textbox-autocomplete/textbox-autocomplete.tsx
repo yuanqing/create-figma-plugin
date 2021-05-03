@@ -2,17 +2,18 @@
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
+import menuStyles from '../../../css/menu.css'
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
+import { IconCheck } from '../../icon/icon-check/icon-check'
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
 import textboxStyles from '../textbox.css'
-import textboxAutocompleteStyles from './textbox-autocomplete.css'
 
 const EMPTY_STRING = ''
 const INVALID_ID = null
-const ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-id'
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-id'
 
 export type TextboxAutocompleteProps<N extends string> = {
   disabled?: boolean
@@ -21,7 +22,6 @@ export type TextboxAutocompleteProps<N extends string> = {
   name?: N
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onOptionClick?: OmitThisParameter<JSX.MouseEventHandler<HTMLDivElement>>
   onValueChange?: OnValueChange<string, N>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
@@ -60,7 +60,6 @@ export function TextboxAutocomplete<N extends string>({
   name,
   noBorder = false,
   onInput = function () {},
-  onOptionClick = function () {},
   onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
@@ -89,8 +88,7 @@ export function TextboxAutocomplete<N extends string>({
     setIsMenuVisible(false)
     setSavedValue(EMPTY_STRING)
     setSelectedId(INVALID_ID)
-    const inputElement = getCurrentFromRef(inputElementRef)
-    inputElement.blur()
+    getCurrentFromRef(inputElementRef).blur()
   }, [])
 
   const updateSavedValue = useCallback(
@@ -100,14 +98,42 @@ export function TextboxAutocomplete<N extends string>({
         // `newValue` does not match any option in `options`
         setSavedValue(value)
         setSelectedId(INVALID_ID)
+        updateScrollPosition(INVALID_ID)
         return
       }
       // `newValue` matches one of the options in `options`
       setSavedValue(EMPTY_STRING)
       setSelectedId(newId)
+      updateScrollPosition(newId)
     },
-    [options]
+    [options, updateScrollPosition]
   )
+
+  // Adjust the menu scroll position so that the selected option is always visible
+  const updateScrollPosition = useCallback(function (id: Id): void {
+    const menuElement = getCurrentFromRef(menuElementRef)
+    if (id === INVALID_ID) {
+      menuElement.scrollTop = 0
+      return
+    }
+    const selectedElement = menuElement.querySelector<HTMLDivElement>(
+      `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${id}']`
+    )
+    if (selectedElement === null) {
+      throw new Error('Invariant violation') // `id` is valid
+    }
+    const y =
+      selectedElement.getBoundingClientRect().y -
+      menuElement.getBoundingClientRect().y
+    if (y < menuElement.scrollTop) {
+      menuElement.scrollTop = y
+      return
+    }
+    const offsetBottom = y + selectedElement.offsetHeight
+    if (offsetBottom > menuElement.scrollTop + menuElement.offsetHeight) {
+      menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
+    }
+  }, [])
 
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>) {
@@ -118,6 +144,16 @@ export function TextboxAutocomplete<N extends string>({
       inputElement.select()
     },
     [updateSavedValue, value]
+  )
+
+  const handleInput = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      const newValue = event.currentTarget.value
+      updateSavedValue(newValue)
+      onValueChange(newValue, name)
+      onInput(event)
+    },
+    [name, onInput, onValueChange, updateSavedValue]
   )
 
   const handleKeyDown = useCallback(
@@ -139,10 +175,12 @@ export function TextboxAutocomplete<N extends string>({
           inputElement.value = savedValue
           onValueChange(savedValue, name)
           onInput(event)
+          updateScrollPosition(INVALID_ID)
           return
         }
         // Set the selected option to `newId`, and update `value`
         setSelectedId(newId)
+        updateScrollPosition(newId)
         const newOptionValue = findOptionValueById(options, newId)
         if (newOptionValue === null) {
           throw new Error('Invariant violation') // `newId` is valid
@@ -185,37 +223,9 @@ export function TextboxAutocomplete<N extends string>({
       savedValue,
       selectedId,
       strict,
-      triggerBlur
+      triggerBlur,
+      updateScrollPosition
     ]
-  )
-
-  const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      const newValue = event.currentTarget.value
-      updateSavedValue(newValue)
-      onValueChange(newValue, name)
-      onInput(event)
-    },
-    [name, onInput, onValueChange, updateSavedValue]
-  )
-
-  const handleOptionClick = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLDivElement>) {
-      const newId = event.currentTarget.getAttribute(
-        ID_DATA_ATTRIBUTE_NAME
-      ) as string
-      // Set the selected option to `newId`, and update `value`
-      setSelectedId(newId)
-      const newOptionValue = findOptionValueById(options, newId)
-      if (newOptionValue === null) {
-        throw new Error('Invariant violation') // `newId` is valid
-      }
-      const newValue = newOptionValue.value
-      onValueChange(newValue, name)
-      onOptionClick(event)
-      triggerBlur()
-    },
-    [name, onOptionClick, onValueChange, options, triggerBlur]
   )
 
   const handlePaste = useCallback(
@@ -234,40 +244,43 @@ export function TextboxAutocomplete<N extends string>({
     [options]
   )
 
-  // Adjust the option menu scroll position so that the selected option is always visible
-  useEffect(
-    function () {
-      if (isMenuVisible === false || options.length === 0) {
-        return
+  const handleOptionChange = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      const newId = event.currentTarget.getAttribute(
+        ITEM_ID_DATA_ATTRIBUTE_NAME
+      ) as string
+      // Set the selected option to `newId`, and update `value`
+      setSelectedId(newId)
+      const newOptionValue = findOptionValueById(options, newId)
+      if (newOptionValue === null) {
+        throw new Error('Invariant violation') // `newId` is valid
       }
-      const menuElement = getCurrentFromRef(menuElementRef)
-      if (selectedId === INVALID_ID) {
-        menuElement.scrollTop = 0
-        return
-      }
-      const selectedElement = menuElement.querySelector<HTMLDivElement>(
-        `[${ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
-      )
-      if (selectedElement === null) {
-        return
-      }
-      if (selectedElement.offsetTop < menuElement.scrollTop) {
-        menuElement.scrollTop = selectedElement.offsetTop
-        return
-      }
-      const offsetBottom =
-        selectedElement.offsetTop + selectedElement.offsetHeight
-      if (offsetBottom > menuElement.scrollTop + menuElement.offsetHeight) {
-        menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
+      const inputElement = getCurrentFromRef(inputElementRef)
+      inputElement.value = newOptionValue.value
+      const inputEvent = document.createEvent('Event')
+      inputEvent.initEvent('input', true, true)
+      inputElement.dispatchEvent(inputEvent)
+      triggerBlur()
+    },
+    [options, triggerBlur]
+  )
+
+  const handleOptionMouseMove = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLInputElement>) {
+      const newId = event.currentTarget.getAttribute(
+        ITEM_ID_DATA_ATTRIBUTE_NAME
+      ) as string
+      if (newId !== selectedId) {
+        setSelectedId(newId)
       }
     },
-    [isMenuVisible, options, selectedId]
+    [selectedId, setSelectedId]
   )
 
   // Blur the input and hide the menu if we clicked outside the component
   useEffect(
     function () {
-      function handleWindowMouseDown(event: MouseEvent) {
+      function handleWindowClick(event: MouseEvent): void {
         const rootElement = getCurrentFromRef(rootElementRef)
         if (
           isMenuVisible === false ||
@@ -279,9 +292,9 @@ export function TextboxAutocomplete<N extends string>({
         }
         triggerBlur()
       }
-      window.addEventListener('mousedown', handleWindowMouseDown)
+      window.addEventListener('click', handleWindowClick)
       return function () {
-        window.removeEventListener('mousedown', handleWindowMouseDown)
+        window.removeEventListener('click', handleWindowClick)
       }
     },
     [isMenuVisible, triggerBlur, value]
@@ -314,51 +327,60 @@ export function TextboxAutocomplete<N extends string>({
       {typeof icon === 'undefined' ? null : (
         <div class={textboxStyles.icon}>{icon}</div>
       )}
-      {disabled === false && isMenuVisible === true && options.length > 0 ? (
-        <div
-          ref={menuElementRef}
-          class={createClassName([
-            textboxAutocompleteStyles.menu,
-            top === true ? textboxAutocompleteStyles.top : null,
-            typeof icon === 'undefined'
-              ? null
-              : textboxAutocompleteStyles.hasIcon
-          ])}
-        >
-          {options.map(function (option: Option, index: number) {
-            if ('separator' in option) {
-              return (
-                <hr
-                  key={index}
-                  class={textboxAutocompleteStyles.optionSeparator}
-                />
-              )
-            }
-            if ('header' in option) {
-              return (
-                <h1 key={index} class={textboxAutocompleteStyles.optionHeader}>
-                  {option.header}
-                </h1>
-              )
-            }
+      <div
+        ref={menuElementRef}
+        class={createClassName([
+          menuStyles.menu,
+          disabled === true || isMenuVisible === false
+            ? menuStyles.hidden
+            : null,
+          top === true ? menuStyles.top : null
+        ])}
+      >
+        {options.map(function (
+          option: Option,
+          index: number
+        ): ComponentChildren {
+          if ('separator' in option) {
+            return <hr key={index} class={menuStyles.optionSeparator} />
+          }
+          if ('header' in option) {
             return (
-              <div
-                key={index}
-                class={createClassName([
-                  textboxAutocompleteStyles.optionValue,
-                  option.id === selectedId
-                    ? textboxAutocompleteStyles.optionValueSelected
-                    : null
-                ])}
-                onClick={handleOptionClick}
-                {...{ [ID_DATA_ATTRIBUTE_NAME]: option.id }}
-              >
-                {option.value}
-              </div>
+              <h1 key={index} class={menuStyles.optionHeader}>
+                {option.header}
+              </h1>
             )
-          })}
-        </div>
-      ) : null}
+          }
+          return (
+            <label
+              key={index}
+              class={createClassName([
+                menuStyles.optionValue,
+                option.id === selectedId ? menuStyles.optionValueSelected : null
+              ])}
+            >
+              <input
+                {...rest}
+                checked={value === option.value}
+                class={menuStyles.input}
+                name={name}
+                onChange={handleOptionChange}
+                onMouseMove={handleOptionMouseMove}
+                tabIndex={-1}
+                type="radio"
+                value={`${option.value}`}
+                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: option.id }}
+              />
+              {option.value === value ? (
+                <div class={menuStyles.checkIcon}>
+                  <IconCheck />
+                </div>
+              ) : null}
+              {option.value}
+            </label>
+          )
+        })}
+      </div>
     </div>
   )
 }

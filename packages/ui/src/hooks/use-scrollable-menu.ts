@@ -1,54 +1,59 @@
-import { RefObject } from 'preact'
-import { useCallback, useEffect, useRef } from 'preact/hooks'
+import { JSX, RefObject } from 'preact'
+import { useCallback } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
 
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
-
 export function useScrollableMenu(options: {
-  selectedItemId: null | string
-  onItemIdChange: (id: string) => void
-  changeOnMouseOver: boolean
-}): {
+  itemIdDataAttributeName: string
   menuElementRef: RefObject<HTMLDivElement>
-  itemIdDataAttributeName: typeof ITEM_ID_DATA_ATTRIBUTE_NAME
-  handleScrollableMenuKeyDown: (event: KeyboardEvent) => void
+  selectedId: null | string
+  setSelectedId: (selectedId: string) => void
+}): {
+  handleScrollableMenuKeyDown: (
+    event: JSX.TargetedKeyboardEvent<HTMLElement>
+  ) => void
+  handleScrollableMenuItemMouseMove: (
+    event: JSX.TargetedMouseEvent<HTMLElement>
+  ) => void
 } {
-  const { selectedItemId, onItemIdChange, changeOnMouseOver = true } = options
-
-  const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
+  const {
+    itemIdDataAttributeName,
+    menuElementRef,
+    selectedId,
+    setSelectedId
+  } = options
 
   const getItemElements = useCallback(
     function (): Array<HTMLElement> {
       return Array.from(
         getCurrentFromRef(menuElementRef).querySelectorAll<HTMLElement>(
-          `[${ITEM_ID_DATA_ATTRIBUTE_NAME}]`
+          `[${itemIdDataAttributeName}]`
         )
       )
     },
-    [menuElementRef]
+    [itemIdDataAttributeName, menuElementRef]
   )
 
-  const getItemIndex = useCallback(
+  const findIndexByItemId = useCallback(
     function (id: null | string): number {
       if (id === null) {
         return -1
       }
       const index = getItemElements().findIndex(function (element) {
-        return getMenuItemId(element) === id
+        return (element.getAttribute(itemIdDataAttributeName) as string) === id
       })
       if (index === -1) {
         throw new Error('Invariant violation') // `id` is valid
       }
       return index
     },
-    [getItemElements]
+    [getItemElements, itemIdDataAttributeName]
   )
 
   const updateScrollPosition = useCallback(
     function (id: string): void {
       const itemElements = getItemElements()
-      const index = getItemIndex(id)
+      const index = findIndexByItemId(id)
       const selectedElement = itemElements[index]
       const menuElement = getCurrentFromRef(menuElementRef)
       const y =
@@ -65,15 +70,15 @@ export function useScrollableMenu(options: {
         menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
       }
     },
-    [getItemElements, getItemIndex, menuElementRef]
+    [findIndexByItemId, getItemElements, menuElementRef]
   )
 
-  const handleKeyDown = useCallback(
-    function (event: KeyboardEvent) {
+  const handleScrollableMenuKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLElement>) {
       const key = event.key
       if (key === 'ArrowDown' || key === 'ArrowUp') {
         const itemElements = getItemElements()
-        const index = getItemIndex(selectedItemId)
+        const index = findIndexByItemId(selectedId)
         let newIndex
         if (key === 'ArrowDown') {
           newIndex =
@@ -83,64 +88,37 @@ export function useScrollableMenu(options: {
             index === -1 || index === 0 ? itemElements.length - 1 : index - 1
         }
         const selectedElement = itemElements[newIndex]
-        const id = getMenuItemId(selectedElement)
-        onItemIdChange(id)
-        updateScrollPosition(id)
+        const newSelectedId = selectedElement.getAttribute(
+          itemIdDataAttributeName
+        ) as string
+        setSelectedId(newSelectedId)
+        updateScrollPosition(newSelectedId)
       }
     },
     [
       getItemElements,
-      getItemIndex,
-      onItemIdChange,
-      selectedItemId,
+      findIndexByItemId,
+      itemIdDataAttributeName,
+      setSelectedId,
+      selectedId,
       updateScrollPosition
     ]
   )
 
-  const handleMouseMove = useCallback(
-    function (event: MouseEvent) {
-      const id = getMenuItemId(event.target as HTMLElement) // FIXME
-      if (id !== selectedItemId) {
-        onItemIdChange(id)
+  const handleScrollableMenuItemMouseMove = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLElement>) {
+      const id = event.currentTarget.getAttribute(
+        itemIdDataAttributeName
+      ) as string
+      if (id !== selectedId) {
+        setSelectedId(id)
       }
     },
-    [onItemIdChange, selectedItemId]
-  )
-
-  useEffect(
-    function () {
-      if (changeOnMouseOver === false) {
-        return
-      }
-      const itemElements = getItemElements()
-      if (itemElements.length === 0) {
-        return
-      }
-      for (const element of itemElements) {
-        element.addEventListener('mousemove', handleMouseMove)
-      }
-      return function () {
-        for (const element of itemElements) {
-          element.removeEventListener('mousemove', handleMouseMove)
-        }
-      }
-    },
-    [changeOnMouseOver, getItemElements, handleMouseMove]
+    [itemIdDataAttributeName, selectedId, setSelectedId]
   )
 
   return {
-    handleScrollableMenuKeyDown: handleKeyDown,
-    itemIdDataAttributeName: ITEM_ID_DATA_ATTRIBUTE_NAME,
-    menuElementRef
+    handleScrollableMenuItemMouseMove,
+    handleScrollableMenuKeyDown
   }
-}
-
-function getMenuItemId(element: HTMLElement): string {
-  const id = element.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
-  if (id === null) {
-    throw new Error(
-      `Element with no attribute \`${ITEM_ID_DATA_ATTRIBUTE_NAME}\``
-    )
-  }
-  return id
 }

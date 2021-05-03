@@ -15,6 +15,10 @@
 .menu::-webkit-scrollbar {
   display: none;
 }
+.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
 .top {
   top: auto;
   bottom: 100%;
@@ -28,11 +32,7 @@
 
 .optionHeader,
 .optionValue {
-  padding: 4px 16px;
-}
-.hasIcon .optionHeader,
-.hasIcon .optionValue {
-  padding-left: 32px;
+  padding: 4px 16px 4px 32px;
 }
 
 .optionHeader {
@@ -40,10 +40,9 @@
   font-size: var(--font-size-12);
 }
 
-.optionValue:hover {
-  background-color: var(--color-blue);
+.optionValue {
+  position: relative;
 }
-
 .optionValueSelected {
   background-color: var(--color-blue);
 }
