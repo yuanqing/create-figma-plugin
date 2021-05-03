@@ -105,6 +105,18 @@ export const TextIcon = function () {
   return <TextboxNumeric icon="X" onInput={handleInput} value={value} />
 }
 
+export const RevertOnEscapeKeyDown = function () {
+  const [value, setValue] = useState('42')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric onInput={handleInput} revertOnEscapeKeyDown value={value} />
+  )
+}
+
 export const Mixed = function () {
   const [value, setValue] = useState(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {

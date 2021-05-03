@@ -207,6 +207,31 @@ export const TextIcon = function () {
   )
 }
 
+export const RevertOnEscapeKeyDown = function () {
+  const [value, setValue] = useState('qux')
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxAutocomplete
+      onInput={handleInput}
+      options={options}
+      revertOnEscapeKeyDown
+      value={value}
+    />
+  )
+}
+
 export const Strict = function () {
   const [value, setValue] = useState('')
   const options: Array<TextboxAutocompleteOption> = [

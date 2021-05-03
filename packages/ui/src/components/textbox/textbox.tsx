@@ -1,12 +1,14 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
-import { useCallback } from 'preact/hooks'
+import { useCallback, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
 import { MIXED_STRING } from '../../utilities/mixed-values'
 import { isKeyCodeCharacterGenerating } from './private/is-keycode-character-generating'
 import styles from './textbox.css'
+
+const EMPTY_STRING = ''
 
 export type TextboxProps<N extends string> = {
   disabled?: boolean
@@ -15,9 +17,10 @@ export type TextboxProps<N extends string> = {
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<string, N>
+  password?: boolean
   placeholder?: string
   propagateEscapeKeyDown?: boolean
-  type?: 'text' | 'password'
+  revertOnEscapeKeyDown?: boolean
   value: string
 }
 
@@ -28,18 +31,26 @@ export function Textbox<N extends string>({
   noBorder = false,
   onInput = function () {},
   onValueChange = function () {},
+  password = false,
   placeholder,
   propagateEscapeKeyDown = true,
-  type = 'text',
+  revertOnEscapeKeyDown = false,
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxProps<N>>): JSX.Element {
-  const handleFocus = useCallback(function (
-    event: JSX.TargetedFocusEvent<HTMLInputElement>
-  ) {
-    event.currentTarget.select()
-  },
-  [])
+  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
+
+  const handleBlur = useCallback(function () {
+    setOriginalValue(EMPTY_STRING)
+  }, [])
+
+  const handleFocus = useCallback(
+    function (event: JSX.TargetedFocusEvent<HTMLInputElement>) {
+      setOriginalValue(value)
+      event.currentTarget.select()
+    },
+    [value]
+  )
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -55,6 +66,16 @@ export function Textbox<N extends string>({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
+        if (revertOnEscapeKeyDown === true) {
+          event.currentTarget.value = originalValue
+          const inputEvent = document.createEvent('Event')
+          inputEvent.initEvent('input', true, true)
+          event.currentTarget.dispatchEvent(inputEvent)
+        }
+        event.currentTarget.blur()
+        return
+      }
+      if (event.key === 'Enter') {
         event.currentTarget.blur()
         return
       }
@@ -67,7 +88,7 @@ export function Textbox<N extends string>({
         event.currentTarget.select()
       }
     },
-    [propagateEscapeKeyDown, value]
+    [originalValue, propagateEscapeKeyDown, revertOnEscapeKeyDown, value]
   )
 
   const handleMouseUp = useCallback(
@@ -93,13 +114,14 @@ export function Textbox<N extends string>({
         class={styles.input}
         disabled={disabled === true}
         name={name}
+        onBlur={handleBlur}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         onMouseUp={handleMouseUp}
         placeholder={placeholder}
         tabIndex={disabled === true ? -1 : 0}
-        type={type}
+        type={password === true ? 'password' : 'text'}
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
       {typeof icon === 'undefined' ? null : (

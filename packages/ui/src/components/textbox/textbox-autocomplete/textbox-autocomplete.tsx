@@ -26,6 +26,7 @@ export type TextboxAutocompleteProps<N extends string> = {
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
+  revertOnEscapeKeyDown?: boolean
   strict?: boolean
   top?: boolean
   value: string
@@ -63,6 +64,7 @@ export function TextboxAutocomplete<N extends string>({
   onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
+  revertOnEscapeKeyDown = false,
   strict = false,
   top = false,
   value,
@@ -73,41 +75,25 @@ export function TextboxAutocomplete<N extends string>({
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
   const [isMenuVisible, setIsMenuVisible] = useState(false)
-  const [savedValue, setSavedValue] = useState<string>(value) // Keep a copy of the original textbox value
   const [selectedId, setSelectedId] = useState<Id>(INVALID_ID)
+  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
+  const [editedValue, setEditedValue] = useState<string>(value) // Value being edited that does not match any of the options
 
   let options: Array<Option> = createOptions(rest.options)
   if (filter === true) {
-    options = filterOptions(options, value, savedValue)
+    options = filterOptions(options, value, editedValue)
   }
 
   // Uncomment to debug
-  // console.table([{ isMenuVisible, savedValue, selectedId, value }])
+  // console.table([{ isMenuVisible, selectedId, originalValue, editedValue, value }])
 
   const triggerBlur = useCallback(function () {
     setIsMenuVisible(false)
-    setSavedValue(EMPTY_STRING)
+    setOriginalValue(EMPTY_STRING)
+    setEditedValue(EMPTY_STRING)
     setSelectedId(INVALID_ID)
     getCurrentFromRef(inputElementRef).blur()
   }, [])
-
-  const updateSavedValue = useCallback(
-    function (value: string) {
-      const newId = getIdByValue(options, value)
-      if (newId === INVALID_ID) {
-        // `newValue` does not match any option in `options`
-        setSavedValue(value)
-        setSelectedId(INVALID_ID)
-        updateScrollPosition(INVALID_ID)
-        return
-      }
-      // `newValue` matches one of the options in `options`
-      setSavedValue(EMPTY_STRING)
-      setSelectedId(newId)
-      updateScrollPosition(newId)
-    },
-    [options, updateScrollPosition]
-  )
 
   // Adjust the menu scroll position so that the selected option is always visible
   const updateScrollPosition = useCallback(function (id: Id): void {
@@ -135,25 +121,44 @@ export function TextboxAutocomplete<N extends string>({
     }
   }, [])
 
+  const updateEditedValue = useCallback(
+    function (editedValue: string) {
+      const newId = getIdByValue(options, editedValue)
+      if (newId === INVALID_ID) {
+        // `newValue` does not match any option in `options`
+        setEditedValue(editedValue)
+        setSelectedId(INVALID_ID)
+        updateScrollPosition(INVALID_ID)
+        return
+      }
+      // `newValue` matches one of the options in `options`
+      setEditedValue(EMPTY_STRING)
+      setSelectedId(newId)
+      updateScrollPosition(newId)
+    },
+    [options, updateScrollPosition]
+  )
+
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>) {
       setIsMenuVisible(true)
-      updateSavedValue(value)
+      setOriginalValue(value)
+      updateEditedValue(value)
       const inputElement = event.currentTarget
       inputElement.focus()
       inputElement.select()
     },
-    [updateSavedValue, value]
+    [updateEditedValue, value]
   )
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const newValue = event.currentTarget.value
-      updateSavedValue(newValue)
+      updateEditedValue(newValue)
       onValueChange(newValue, name)
       onInput(event)
     },
-    [name, onInput, onValueChange, updateSavedValue]
+    [name, onInput, onValueChange, updateEditedValue]
   )
 
   const handleKeyDown = useCallback(
@@ -172,8 +177,8 @@ export function TextboxAutocomplete<N extends string>({
         if (newId === INVALID_ID) {
           // Reached beginning/end of list of `options`, so just restore `savedValue`
           setSelectedId(INVALID_ID)
-          inputElement.value = savedValue
-          onValueChange(savedValue, name)
+          inputElement.value = editedValue
+          onValueChange(editedValue, name)
           onInput(event)
           updateScrollPosition(INVALID_ID)
           return
@@ -197,6 +202,12 @@ export function TextboxAutocomplete<N extends string>({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
+        if (key === 'Escape' && revertOnEscapeKeyDown === true) {
+          inputElement.value = originalValue
+          const inputEvent = document.createEvent('Event')
+          inputEvent.initEvent('input', true, true)
+          inputElement.dispatchEvent(inputEvent)
+        }
         triggerBlur()
         return
       }
@@ -215,12 +226,14 @@ export function TextboxAutocomplete<N extends string>({
       }
     },
     [
+      editedValue,
       name,
       onInput,
       onValueChange,
       options,
+      originalValue,
       propagateEscapeKeyDown,
-      savedValue,
+      revertOnEscapeKeyDown,
       selectedId,
       strict,
       triggerBlur,
@@ -274,7 +287,7 @@ export function TextboxAutocomplete<N extends string>({
         setSelectedId(newId)
       }
     },
-    [selectedId, setSelectedId]
+    [selectedId]
   )
 
   // Blur the input and hide the menu if we clicked outside the component
@@ -371,7 +384,7 @@ export function TextboxAutocomplete<N extends string>({
                 value={`${option.value}`}
                 {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: option.id }}
               />
-              {option.value === value ? (
+              {option.value === originalValue ? ( // Show check icon if option matches `originalValue`
                 <div class={menuStyles.checkIcon}>
                   <IconCheck />
                 </div>
@@ -407,7 +420,7 @@ function createOptions(
 function filterOptions(
   options: Array<Option>,
   value: string,
-  savedValue: string
+  editedValue: string
 ) {
   if (value === EMPTY_STRING) {
     return options
@@ -423,13 +436,13 @@ function filterOptions(
     })
   }
   // `value` matches one of the options in `options`
-  if (savedValue === EMPTY_STRING) {
+  if (editedValue === EMPTY_STRING) {
     return options
   }
-  // Filter `options` by `savedValue`
+  // Filter `options` by `editedValue`
   return options.filter(function (option: Option) {
     if ('value' in option) {
-      return doesStringContainSubstring(option.value, savedValue) === true
+      return doesStringContainSubstring(option.value, editedValue) === true
     }
     return false
   })

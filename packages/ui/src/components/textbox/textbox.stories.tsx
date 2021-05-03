@@ -89,6 +89,16 @@ export const TextIcon = function () {
   return <Textbox icon="X" onInput={handleInput} value={value} />
 }
 
+export const RevertOnEscapeKeyDown = function () {
+  const [value, setValue] = useState('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox onInput={handleInput} revertOnEscapeKeyDown value={value} />
+}
+
 export const Mixed = function () {
   const [value, setValue] = useState(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -97,6 +107,16 @@ export const Mixed = function () {
     setValue(newValue)
   }
   return <Textbox onInput={handleInput} value={value} />
+}
+
+export const Password = function () {
+  const [value, setValue] = useState('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox onInput={handleInput} password value={value} />
 }
 
 export const OnValueChange = function () {

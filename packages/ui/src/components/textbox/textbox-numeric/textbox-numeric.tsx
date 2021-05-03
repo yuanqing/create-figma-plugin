@@ -4,7 +4,7 @@ import {
   isValidNumericInput
 } from '@create-figma-plugin/utilities'
 import { ComponentChildren, h, JSX } from 'preact'
-import { useCallback, useEffect } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
@@ -13,6 +13,7 @@ import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
 import styles from '../textbox.css'
 
+const EMPTY_STRING = ''
 const nonDigitRegex = /[^\d.]/
 
 export type TextboxNumericProps<N extends string> = {
@@ -30,6 +31,7 @@ export type TextboxNumericProps<N extends string> = {
   onNumericValueChange?: OnValueChange<null | number, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
+  revertOnEscapeKeyDown?: boolean
   value: string
 }
 
@@ -48,15 +50,23 @@ export function TextboxNumeric<N extends string>({
   onValueChange = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
+  revertOnEscapeKeyDown = false,
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxNumericProps<N>>): JSX.Element {
-  const handleFocus = useCallback(function (
-    event: JSX.TargetedFocusEvent<HTMLInputElement>
-  ) {
-    event.currentTarget.select()
-  },
-  [])
+  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
+
+  const handleBlur = useCallback(function () {
+    setOriginalValue(EMPTY_STRING)
+  }, [])
+
+  const handleFocus = useCallback(
+    function (event: JSX.TargetedFocusEvent<HTMLInputElement>) {
+      setOriginalValue(value)
+      event.currentTarget.select()
+    },
+    [value]
+  )
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -73,6 +83,17 @@ export function TextboxNumeric<N extends string>({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
+        if (revertOnEscapeKeyDown === true) {
+          event.currentTarget.value = originalValue
+          const inputEvent = document.createEvent('Event')
+          inputEvent.initEvent('input', true, true)
+          event.currentTarget.dispatchEvent(inputEvent)
+          setOriginalValue(EMPTY_STRING)
+        }
+        event.currentTarget.blur()
+        return
+      }
+      if (key === 'Enter') {
         event.currentTarget.blur()
         return
       }
@@ -177,7 +198,9 @@ export function TextboxNumeric<N extends string>({
       name,
       onInput,
       onValueChange,
+      originalValue,
       propagateEscapeKeyDown,
+      revertOnEscapeKeyDown,
       value
     ]
   )
@@ -233,6 +256,7 @@ export function TextboxNumeric<N extends string>({
         class={styles.input}
         disabled={disabled === true}
         name={name}
+        onBlur={handleBlur}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
