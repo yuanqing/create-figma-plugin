@@ -22,7 +22,7 @@ export const Frame = function () {
 }
 
 export const Selected = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)

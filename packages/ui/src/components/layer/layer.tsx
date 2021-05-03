@@ -54,6 +54,7 @@ export function Layer<N extends string>({
         tabIndex={0}
         type="checkbox"
       />
+      <div class={styles.fill}></div>
       <div class={styles.icon}>{icons[type]}</div>
       <div class={styles.layerName}>{children}</div>
       {typeof pageName === 'undefined' ? null : (

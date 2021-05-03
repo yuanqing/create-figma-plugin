@@ -17,11 +17,9 @@
   padding-left: 8px;
   color: var(--color-black-80);
 }
-.disabled .box {
+.disabled .box,
+.disabled .box > * {
   cursor: not-allowed;
-}
-.box > * {
-  pointer-events: none;
 }
 
 .icon {

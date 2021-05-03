@@ -32,7 +32,7 @@ export const Focused = function () {
   }
   return (
     <Checkbox {...useInitialFocus()} onChange={handleChange} value={value}>
-      <Text>Text</Text>
+      <Text>Allow comments</Text>
     </Checkbox>
   )
 }

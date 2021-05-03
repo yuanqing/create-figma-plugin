@@ -1,17 +1,27 @@
-export type { ButtonProps } from './Components/button/button'
-export { Button } from './Components/button/button'
-export type { CheckboxProps } from './Components/checkbox/checkbox'
-export { Checkbox } from './Components/checkbox/checkbox'
-export type { DividerProps } from './Components/divider/divider'
-export { Divider } from './Components/divider/divider'
-export type { FileUploadButtonProps } from './Components/file-upload-button/file-upload-button'
-export { FileUploadButton } from './Components/file-upload-button/file-upload-button'
-export type { FileUploadDropzoneProps } from './Components/file-upload-dropzone/file-upload-dropzone'
-export { FileUploadDropzone } from './Components/file-upload-dropzone/file-upload-dropzone'
+export type { ButtonProps } from './components/button/button'
+export { Button } from './components/button/button'
+export type { CheckboxProps } from './components/checkbox/checkbox'
+export { Checkbox } from './components/checkbox/checkbox'
+export type { DividerProps } from './components/divider/divider'
+export { Divider } from './components/divider/divider'
+export type {
+  DropdownOption,
+  DropdownOptionHeader,
+  DropdownOptionSeparator,
+  DropdownOptionValue,
+  DropdownProps
+} from './components/dropdown/dropdown'
+export { Dropdown } from './components/dropdown/dropdown'
+export type { FileUploadButtonProps } from './components/file-upload-button/file-upload-button'
+export { FileUploadButton } from './components/file-upload-button/file-upload-button'
+export type { FileUploadDropzoneProps } from './components/file-upload-dropzone/file-upload-dropzone'
+export { FileUploadDropzone } from './components/file-upload-dropzone/file-upload-dropzone'
 export type { IconProps } from './components/icon/create-icon'
 export { createIcon } from './components/icon/create-icon'
 export { IconCheck } from './components/icon/icon-check/icon-check'
 export { IconCheckCircle } from './components/icon/icon-check-circle/icon-check-circle'
+export { IconCheckSmall } from './components/icon/icon-check-small/icon-check-small'
+export { IconChevron } from './components/icon/icon-chevron/icon-chevron'
 export { IconComponent } from './components/icon/icon-component/icon-component'
 export { IconCross } from './components/icon/icon-cross/icon-cross'
 export { IconFrame } from './components/icon/icon-frame/icon-frame'
@@ -21,8 +31,8 @@ export { IconMoveRight } from './components/icon/icon-move-right/icon-move-right
 export { IconSearch } from './components/icon/icon-search/icon-search'
 export { IconSpaceHorizontal } from './components/icon/icon-space-horizontal/icon-space-horizontal'
 export { IconSpaceVertical } from './components/icon/icon-space-vertical/icon-space-vertical'
-export type { LayerProps, LayerType } from './Components/layer/layer'
-export { Layer } from './Components/layer/layer'
+export type { LayerProps, LayerType } from './components/layer/layer'
+export { Layer } from './components/layer/layer'
 export type {
   ColumnsProps,
   ColumnsSpace
@@ -45,49 +55,49 @@ export type {
   VerticalSpaceSpace
 } from './components/layout/vertical-space/vertical-space'
 export { VerticalSpace } from './components/layout/vertical-space/vertical-space'
-export type { LoadingProps } from './Components/loading/loading'
-export { Loading } from './Components/loading/loading'
-export type { LoadingIndicatorProps } from './Components/loading-indicator/loading-indicator'
-export { LoadingIndicator } from './Components/loading-indicator/loading-indicator'
-export type { PreviewProps } from './Components/preview/preview'
-export { Preview } from './Components/preview/preview'
+export type { LoadingProps } from './components/loading/loading'
+export { Loading } from './components/loading/loading'
+export type { LoadingIndicatorProps } from './components/loading-indicator/loading-indicator'
+export { LoadingIndicator } from './components/loading-indicator/loading-indicator'
+export type { PreviewProps } from './components/preview/preview'
+export { Preview } from './components/preview/preview'
 export type {
   RadioButtonsOption,
   RadioButtonsProps
-} from './Components/radio-buttons/radio-buttons'
-export { RadioButtons } from './Components/radio-buttons/radio-buttons'
-export type { SearchTextboxProps } from './Components/search-textbox/search-textbox'
-export { SearchTextbox } from './Components/search-textbox/search-textbox'
+} from './components/radio-buttons/radio-buttons'
+export { RadioButtons } from './components/radio-buttons/radio-buttons'
+export type { SearchTextboxProps } from './components/search-textbox/search-textbox'
+export { SearchTextbox } from './components/search-textbox/search-textbox'
 export type {
   SegmentedControlOption,
   SegmentedControlProps
-} from './Components/segmented-control/segmented-control'
-export { SegmentedControl } from './Components/segmented-control/segmented-control'
-export type { SelectableItemProps } from './Components/selectable-item/selectable-item'
-export { SelectableItem } from './Components/selectable-item/selectable-item'
-export type { TabsOption, TabsProps } from './Components/tabs/tabs'
-export { Tabs } from './Components/tabs/tabs'
-export type { TextAlignment, TextProps } from './Components/text/text'
-export { Text } from './Components/text/text'
-export type { TextboxProps } from './Components/textbox/textbox'
-export { Textbox } from './Components/textbox/textbox'
+} from './components/segmented-control/segmented-control'
+export { SegmentedControl } from './components/segmented-control/segmented-control'
+export type { SelectableItemProps } from './components/selectable-item/selectable-item'
+export { SelectableItem } from './components/selectable-item/selectable-item'
+export type { TabsOption, TabsProps } from './components/tabs/tabs'
+export { Tabs } from './components/tabs/tabs'
+export type { TextAlignment, TextProps } from './components/text/text'
+export { Text } from './components/text/text'
+export type { TextboxProps } from './components/textbox/textbox'
+export { Textbox } from './components/textbox/textbox'
 export type {
   TextboxAutocompleteOption,
   TextboxAutocompleteOptionHeader,
   TextboxAutocompleteOptionSeparator,
   TextboxAutocompleteOptionValue,
   TextboxAutocompleteProps
-} from './Components/textbox/textbox-autocomplete/textbox-autocomplete'
-export { TextboxAutocomplete } from './Components/textbox/textbox-autocomplete/textbox-autocomplete'
-export type { TextboxNumericProps } from './Components/textbox/textbox-numeric/textbox-numeric'
-export { TextboxNumeric } from './Components/textbox/textbox-numeric/textbox-numeric'
+} from './components/textbox/textbox-autocomplete/textbox-autocomplete'
+export { TextboxAutocomplete } from './components/textbox/textbox-autocomplete/textbox-autocomplete'
+export type { TextboxNumericProps } from './components/textbox/textbox-numeric/textbox-numeric'
+export { TextboxNumeric } from './components/textbox/textbox-numeric/textbox-numeric'
 export { useFocusTrap } from './hooks/use-focus-trap'
 export { useForm } from './hooks/use-form'
 export { useFormState } from './hooks/use-form-state'
 export type { InitialFocus } from './hooks/use-initial-focus'
 export { useInitialFocus } from './hooks/use-initial-focus'
 export { useScrollableMenu } from './hooks/use-scrollable-menu'
-export { useWindowKeyDownHandler as useKeyDownHandler } from './hooks/use-window-key-down-handler'
+export { useWindowKeyDownHandler } from './hooks/use-window-key-down-handler'
 export type { OnValueChange, Props } from './types'
 export { createClassName } from './utilities/create-class-name'
 export { getCurrentFromRef } from './utilities/get-current-from-ref'

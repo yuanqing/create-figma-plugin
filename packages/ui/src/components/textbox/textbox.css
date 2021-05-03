@@ -31,7 +31,7 @@
   width: 16px;
   color: var(--color-black-30);
   text-align: center;
-  pointer-events: none;
+  pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
 .input:not(:disabled):focus ~ .icon {
   color: var(--color-blue);

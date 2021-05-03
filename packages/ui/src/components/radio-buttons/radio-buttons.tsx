@@ -79,7 +79,6 @@ export function RadioButtons<
         const isOptionDisabled = disabled === true || option.disabled === true
         return (
           <label key={index} class={styles.label}>
-            <div class={styles.hitArea}></div>
             <input
               {...rest}
               checked={value === option.value}

@@ -3,6 +3,7 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
+import { IconCheckSmall } from '../icon/icon-check-small/icon-check-small'
 import styles from './checkbox.css'
 
 export type CheckboxProps<N extends string> = {
@@ -49,7 +50,6 @@ export function Checkbox<N extends string>({
 
   return (
     <label class={styles.label}>
-      <div class={styles.hitArea}></div>
       <input
         {...rest}
         checked={value === true}
@@ -61,7 +61,13 @@ export function Checkbox<N extends string>({
         tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
       />
-      <div class={styles.fill}></div>
+      <div class={styles.fill}>
+        {value === true ? (
+          <div class={styles.checkIcon}>
+            <IconCheckSmall />
+          </div>
+        ) : null}
+      </div>
       <div class={styles.border}></div>
       <div class={styles.children}>{children}</div>
     </label>

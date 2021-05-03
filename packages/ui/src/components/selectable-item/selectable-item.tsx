@@ -75,7 +75,7 @@ export function SelectableItem<N extends string>({
       />
       <div class={styles.children}>{children}</div>
       {value === true ? (
-        <div class={styles.icon}>
+        <div class={styles.checkIcon}>
           <IconCheck />
         </div>
       ) : null}

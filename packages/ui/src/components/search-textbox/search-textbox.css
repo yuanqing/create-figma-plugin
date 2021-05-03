@@ -24,7 +24,7 @@
   top: 12px;
   left: 12px;
   color: var(--color-black-80);
-  pointer-events: none;
+  pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
 .input:disabled ~ .searchIcon {
   opacity: var(--opacity-30);

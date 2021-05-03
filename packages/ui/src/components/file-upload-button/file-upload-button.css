@@ -13,10 +13,11 @@
   border: 2px solid transparent;
   border-radius: var(--border-radius-6);
 }
-.button.disabled {
+
+.disabled {
   opacity: var(--opacity-30);
 }
-.button.disabled button {
+.disabled button {
   background-color: var(--color-black-80);
   cursor: not-allowed;
 }
@@ -35,14 +36,11 @@
 .loading button {
   color: rgba(0, 0, 0, 0);
 }
-.loading .loadingIndicator {
+.loadingIndicator {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.loading .loadingIndicator svg {
-  fill: currentColor;
 }
 
 .input {

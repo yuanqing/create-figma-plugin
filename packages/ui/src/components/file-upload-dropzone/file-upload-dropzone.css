@@ -18,13 +18,13 @@
 }
 
 .input {
+  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
   width: 100%;
   opacity: 0;
 }
 
 .dashedLine {
   border: 1px dashed var(--color-black-30);
-  pointer-events: none;
 }
 .input:active ~ .dashedLine,
 .input:focus ~ .dashedLine,

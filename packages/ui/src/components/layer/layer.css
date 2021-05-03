@@ -13,30 +13,10 @@
   color: var(--color-black-80);
 }
 
-.input {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: var(--z-index-1);
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.layer:hover .input {
-  background-color: var(--color-selection-b);
-}
-.input:checked,
-.layer:hover .input:checked {
-  background-color: var(--color-selection-a);
-}
-
 .icon,
 .layerName,
 .pageName {
   position: relative;
-  z-index: var(--z-index-2);
 }
 
 .layerName,
@@ -57,10 +37,35 @@
 .icon {
   flex: 0 0 16px;
   height: 16px;
-  pointer-events: none;
 }
 
 .pageName {
   flex: 1 0 40px;
   color: var(--color-black-30);
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.layer:hover .input ~ .fill {
+  background-color: var(--color-selection-b);
+}
+.layer .input:checked ~ .fill {
+  background-color: var(--color-selection-a);
 }
