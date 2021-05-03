@@ -36,13 +36,13 @@ export function SearchTextbox<N extends string>({
 
   const handleFocus = useCallback(function (
     event: JSX.TargetedFocusEvent<HTMLInputElement>
-  ) {
+  ): void {
     event.currentTarget.select()
   },
   [])
 
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       onValueChange(event.currentTarget.value, name)
       onInput(event)
     },
@@ -50,7 +50,7 @@ export function SearchTextbox<N extends string>({
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       if (event.key !== 'Escape') {
         return
       }
@@ -69,7 +69,7 @@ export function SearchTextbox<N extends string>({
   )
 
   const handleClearButtonClick = useCallback(
-    function () {
+    function (): void {
       const inputElement = getCurrentFromRef(inputElementRef)
       inputElement.value = ''
       inputElement.focus()

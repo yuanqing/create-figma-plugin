@@ -56,12 +56,12 @@ export function TextboxNumeric<N extends string>({
 }: Props<HTMLInputElement, TextboxNumericProps<N>>): JSX.Element {
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
 
-  const handleBlur = useCallback(function () {
+  const handleBlur = useCallback(function (): void {
     setOriginalValue(EMPTY_STRING)
   }, [])
 
   const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
       setOriginalValue(value)
       event.currentTarget.select()
     },
@@ -69,7 +69,7 @@ export function TextboxNumeric<N extends string>({
   )
 
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       onValueChange(event.currentTarget.value, name)
       onInput(event)
     },
@@ -77,7 +77,7 @@ export function TextboxNumeric<N extends string>({
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       const key = event.key
       if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
@@ -206,7 +206,7 @@ export function TextboxNumeric<N extends string>({
   )
 
   const handleMouseUp = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
       if (value !== MIXED_STRING) {
         return
       }
@@ -216,7 +216,7 @@ export function TextboxNumeric<N extends string>({
   )
 
   const handlePaste = useCallback(
-    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>): void {
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }

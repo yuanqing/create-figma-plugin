@@ -1,7 +1,7 @@
-import { useKeyDownHandler } from './use-key-down-handler'
+import { useWindowKeyDownHandler } from './use-window-key-down-handler'
 
 export function useFocusTrap(): void {
-  useKeyDownHandler('Tab', function (event: KeyboardEvent) {
+  useWindowKeyDownHandler('Tab', function (event: KeyboardEvent): void {
     const focusableElements = getFocusableElements()
     const index = findElementIndex(
       event.target as HTMLElement, // FIXME
@@ -32,10 +32,15 @@ function findElementIndex(
   targetElement: HTMLElement,
   elements: Array<HTMLElement>
 ): number {
-  return elements.reduce(function (result, element, index) {
+  return elements.reduce(function (
+    result: number,
+    element: HTMLElement,
+    index: number
+  ): number {
     if (result === -1 && element.isEqualNode(targetElement)) {
       return index
     }
     return result
-  }, -1)
+  },
+  -1)
 }

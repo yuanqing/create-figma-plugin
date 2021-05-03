@@ -3,7 +3,7 @@ import { useCallback } from 'preact/hooks'
 import { useFocusTrap } from './use-focus-trap'
 import { useFormState } from './use-form-state'
 import { InitialFocus, useInitialFocus } from './use-initial-focus'
-import { useKeyDownHandler } from './use-key-down-handler'
+import { useWindowKeyDownHandler } from './use-window-key-down-handler'
 
 export function useForm<S>(
   initialState: S,
@@ -25,7 +25,7 @@ export function useForm<S>(
   const { formState, setFormState } = useFormState(initialState, transform)
 
   const handleSubmit = useCallback(
-    function () {
+    function (): void {
       if (typeof validate !== 'undefined' && validate(formState) === false) {
         return
       }
@@ -33,15 +33,15 @@ export function useForm<S>(
     },
     [formState, submit, validate]
   )
-  useKeyDownHandler('Enter', handleSubmit)
+  useWindowKeyDownHandler('Enter', handleSubmit)
 
   const handleClose = useCallback(
-    function () {
+    function (): void {
       close(formState)
     },
     [close, formState]
   )
-  useKeyDownHandler('Escape', handleClose)
+  useWindowKeyDownHandler('Escape', handleClose)
 
   useFocusTrap()
 

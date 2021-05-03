@@ -26,7 +26,7 @@ export function Checkbox<N extends string>({
   ...rest
 }: Props<HTMLInputElement, CheckboxProps<N>>): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newValue = event.currentTarget.checked
       onValueChange(newValue, name)
       onChange(event)
@@ -35,7 +35,7 @@ export function Checkbox<N extends string>({
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       if (event.key !== 'Escape') {
         return
       }

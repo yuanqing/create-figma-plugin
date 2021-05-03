@@ -7,7 +7,7 @@ export type InitialFocus = {
 }
 
 export function useInitialFocus(): InitialFocus {
-  useEffect(function () {
+  useEffect(function (): void {
     const focusableElement = document.querySelector<HTMLElement>(
       `[${INITIAL_FOCUS_DATA_ATTRIBUTE_NAME}]`
     )

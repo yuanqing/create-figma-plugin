@@ -233,7 +233,7 @@ export function Dropdown<
         {options.map(function (
           option: DropdownOption<V>,
           index: number
-        ): ComponentChildren {
+        ): JSX.Element {
           if ('separator' in option) {
             return <hr key={index} class={menuStyles.optionSeparator} />
           }

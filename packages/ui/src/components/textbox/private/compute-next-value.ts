@@ -1,7 +1,7 @@
 export function computeNextValue(
   inputElement: HTMLInputElement,
   insertedString: string
-) {
+): string {
   const value = inputElement.value
   const selectionStart = inputElement.selectionStart
   const selectionEnd = inputElement.selectionEnd

@@ -39,7 +39,9 @@ export function useScrollableMenu(options: {
       if (id === null) {
         return -1
       }
-      const index = getItemElements().findIndex(function (element) {
+      const index = getItemElements().findIndex(function (
+        element: HTMLElement
+      ): boolean {
         return (element.getAttribute(itemIdDataAttributeName) as string) === id
       })
       if (index === -1) {
@@ -74,7 +76,7 @@ export function useScrollableMenu(options: {
   )
 
   const handleScrollableMenuKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLElement>): void {
       const key = event.key
       if (key === 'ArrowDown' || key === 'ArrowUp') {
         const itemElements = getItemElements()
@@ -106,7 +108,7 @@ export function useScrollableMenu(options: {
   )
 
   const handleScrollableMenuItemMouseMove = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLElement>) {
+    function (event: JSX.TargetedMouseEvent<HTMLElement>): void {
       const id = event.currentTarget.getAttribute(
         itemIdDataAttributeName
       ) as string

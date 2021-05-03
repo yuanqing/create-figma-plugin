@@ -41,7 +41,7 @@ export function SegmentedControl<
   ...rest
 }: Props<HTMLInputElement, SegmentedControlProps<N, V>>): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -53,7 +53,7 @@ export function SegmentedControl<
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       if (event.key !== 'Escape') {
         return
       }
@@ -67,7 +67,10 @@ export function SegmentedControl<
 
   return (
     <div class={styles.segmentedControl}>
-      {options.map(function (option, index) {
+      {options.map(function (
+        option: SegmentedControlOption<V>,
+        index: number
+      ): JSX.Element {
         const children =
           typeof option.children === 'undefined'
             ? `${option.value}`

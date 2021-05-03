@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'preact/hooks'
 
-export function useKeyDownHandler(
+export function useWindowKeyDownHandler(
   key: KeyboardEvent['key'],
   onKeyDown: (event: KeyboardEvent) => void
 ): void {
   const handleKeyDown = useCallback(
-    function (event: KeyboardEvent) {
+    function (event: KeyboardEvent): void {
       if (event.key !== key) {
         return
       }
@@ -17,7 +17,7 @@ export function useKeyDownHandler(
   useEffect(
     function () {
       window.addEventListener('keydown', handleKeyDown)
-      return function () {
+      return function (): void {
         window.removeEventListener('keydown', handleKeyDown)
       }
     },

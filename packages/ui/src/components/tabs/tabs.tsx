@@ -30,7 +30,7 @@ export function Tabs<N extends string>({
   ...rest
 }: Props<HTMLInputElement, TabsProps<N>>): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -42,7 +42,7 @@ export function Tabs<N extends string>({
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       if (event.key !== 'Escape') {
         return
       }
@@ -54,14 +54,14 @@ export function Tabs<N extends string>({
     [propagateEscapeKeyDown]
   )
 
-  const activeOption = options.find(function (option: TabsOption) {
+  const activeOption = options.find(function (option: TabsOption): boolean {
     return option.value === value
   })
 
   return (
     <div>
       <div class={styles.tabs}>
-        {options.map(function (option: TabsOption, index: number) {
+        {options.map(function (option: TabsOption, index: number): JSX.Element {
           return (
             <label key={index} class={styles.label}>
               <input

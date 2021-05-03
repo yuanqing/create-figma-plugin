@@ -26,23 +26,23 @@ export function FileUploadDropzone({
 
   const filterFiles = useCallback(
     function (files: FileList): Array<File> {
-      const result = Array.prototype.slice.call(files).sort(comparator)
+      const result = Array.prototype.slice.call(files).sort(fileComparator)
       if (typeof acceptedFileTypes === 'undefined') {
         return result
       }
-      return result.filter(function (file) {
+      return result.filter(function (file): boolean {
         return acceptedFileTypes.indexOf(file.type) !== -1
       })
     },
     [acceptedFileTypes]
   )
 
-  const handleBlur = useCallback(function () {
+  const handleBlur = useCallback(function (): void {
     setIsDropActive(false)
   }, [])
 
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       if (typeof onSelectedFiles === 'undefined') {
         return
       }
@@ -61,7 +61,7 @@ export function FileUploadDropzone({
 
   const handleDragOver = useCallback(function (
     event: JSX.TargetedDragEvent<HTMLInputElement>
-  ) {
+  ): void {
     event.preventDefault()
     setIsDropActive(true)
   },
@@ -69,14 +69,14 @@ export function FileUploadDropzone({
 
   const handleDragEnd = useCallback(function (
     event: JSX.TargetedDragEvent<HTMLInputElement>
-  ) {
+  ): void {
     event.preventDefault()
     setIsDropActive(false)
   },
   [])
 
   const handleDrop = useCallback(
-    function (event: JSX.TargetedDragEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedDragEvent<HTMLInputElement>): void {
       if (typeof onSelectedFiles === 'undefined') {
         return
       }
@@ -92,7 +92,7 @@ export function FileUploadDropzone({
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       if (event.key !== 'Escape') {
         return
       }
@@ -127,7 +127,7 @@ export function FileUploadDropzone({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onKeyDown={handleKeyDown}
-        tabIndex={-1}
+        tabIndex={0}
         title=""
         type="file"
       />
@@ -137,7 +137,7 @@ export function FileUploadDropzone({
   )
 }
 
-function comparator(a: File, b: File) {
+function fileComparator(a: File, b: File): number {
   const aName = a.name.toLowerCase()
   const bName = b.name.toLowerCase()
   if (aName !== bName) {

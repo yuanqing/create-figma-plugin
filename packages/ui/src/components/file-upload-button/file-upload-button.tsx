@@ -32,13 +32,13 @@ export function FileUploadButton({
   ...rest
 }: Props<HTMLInputElement, FileUploadButtonProps>): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       if (typeof onSelectedFiles === 'undefined') {
         return
       }
       const files = Array.prototype.slice
         .call(event.currentTarget.files)
-        .sort(comparator)
+        .sort(fileComparator)
       onSelectedFiles(files)
     },
     [onSelectedFiles]
@@ -46,13 +46,13 @@ export function FileUploadButton({
 
   const handleClick = useCallback(function (
     event: JSX.TargetedMouseEvent<HTMLInputElement>
-  ) {
+  ): void {
     event.currentTarget.focus()
   },
   [])
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       if (event.key !== 'Escape') {
         return
       }
@@ -101,7 +101,7 @@ export function FileUploadButton({
   )
 }
 
-function comparator(a: File, b: File) {
+function fileComparator(a: File, b: File): number {
   const aName = a.name.toLowerCase()
   const bName = b.name.toLowerCase()
   if (aName !== bName) {

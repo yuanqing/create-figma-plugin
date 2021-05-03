@@ -87,7 +87,7 @@ export function TextboxAutocomplete<N extends string>({
   // Uncomment to debug
   // console.table([{ isMenuVisible, selectedId, originalValue, editedValue, value }])
 
-  const triggerBlur = useCallback(function () {
+  const triggerBlur = useCallback(function (): void {
     setIsMenuVisible(false)
     setOriginalValue(EMPTY_STRING)
     setEditedValue(EMPTY_STRING)
@@ -122,7 +122,7 @@ export function TextboxAutocomplete<N extends string>({
   }, [])
 
   const updateEditedValue = useCallback(
-    function (editedValue: string) {
+    function (editedValue: string): void {
       const newId = getIdByValue(options, editedValue)
       if (newId === INVALID_ID) {
         // `newValue` does not match any option in `options`
@@ -140,7 +140,7 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
       setIsMenuVisible(true)
       setOriginalValue(value)
       updateEditedValue(value)
@@ -152,7 +152,7 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newValue = event.currentTarget.value
       updateEditedValue(newValue)
       onValueChange(newValue, name)
@@ -162,7 +162,7 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       const inputElement = event.currentTarget
       const key = event.key
       if (key === 'ArrowUp' || key === 'ArrowDown') {
@@ -242,7 +242,7 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   const handlePaste = useCallback(
-    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>): void {
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
@@ -258,7 +258,7 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   const handleOptionChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newId = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -279,7 +279,7 @@ export function TextboxAutocomplete<N extends string>({
   )
 
   const handleOptionMouseMove = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>) {
+    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
       const newId = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -306,7 +306,7 @@ export function TextboxAutocomplete<N extends string>({
         triggerBlur()
       }
       window.addEventListener('click', handleWindowClick)
-      return function () {
+      return function (): void {
         window.removeEventListener('click', handleWindowClick)
       }
     },
@@ -350,10 +350,7 @@ export function TextboxAutocomplete<N extends string>({
           top === true ? menuStyles.top : null
         ])}
       >
-        {options.map(function (
-          option: Option,
-          index: number
-        ): ComponentChildren {
+        {options.map(function (option: Option, index: number): JSX.Element {
           if ('separator' in option) {
             return <hr key={index} class={menuStyles.optionSeparator} />
           }
@@ -421,14 +418,14 @@ function filterOptions(
   options: Array<Option>,
   value: string,
   editedValue: string
-) {
+): Array<Option> {
   if (value === EMPTY_STRING) {
     return options
   }
   const id = getIdByValue(options, value)
   if (id === INVALID_ID) {
     // `value` does not match any option in `options`
-    return options.filter(function (option: Option) {
+    return options.filter(function (option: Option): boolean {
       if ('value' in option) {
         return doesStringContainSubstring(option.value, value) === true
       }
@@ -440,7 +437,7 @@ function filterOptions(
     return options
   }
   // Filter `options` by `editedValue`
-  return options.filter(function (option: Option) {
+  return options.filter(function (option: Option): boolean {
     if ('value' in option) {
       return doesStringContainSubstring(option.value, editedValue) === true
     }
@@ -497,7 +494,7 @@ function findOptionValueById(
 }
 
 // Returns the index of the `OptionValueWithId` in `options` with the given `id`, else `-1`
-function getIndexById(options: Array<Option>, id: string): -1 | number {
+function getIndexById(options: Array<Option>, id: string): number {
   let index = 0
   for (const option of options) {
     if ('id' in option && option.id === id) {

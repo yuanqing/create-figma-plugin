@@ -13,7 +13,7 @@ export function useFormState<S>(
       if (typeof name === 'undefined') {
         throw new Error('`name` is `undefined`')
       }
-      setState(function (previousState: S) {
+      setState(function (previousState: S): S {
         const newState = {
           ...previousState,
           ...{ [name]: value }

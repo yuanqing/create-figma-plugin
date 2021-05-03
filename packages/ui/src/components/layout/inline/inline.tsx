@@ -1,5 +1,5 @@
 /** @jsx h */
-import { ComponentChildren, h, JSX, toChildArray } from 'preact'
+import { ComponentChild, ComponentChildren, h, JSX, toChildArray } from 'preact'
 
 import { Props } from '../../../types'
 import styles from './inline.css'
@@ -25,7 +25,10 @@ export function Inline({
       {...rest}
       class={typeof space === 'undefined' ? undefined : styles[space]}
     >
-      {toChildArray(children).map(function (element, index) {
+      {toChildArray(children).map(function (
+        element: ComponentChild,
+        index: number
+      ): JSX.Element {
         return (
           <div key={index} class={styles.item}>
             {element}
