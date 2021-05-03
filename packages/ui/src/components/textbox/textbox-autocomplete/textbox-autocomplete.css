@@ -23,13 +23,18 @@
   bottom: 100%;
 }
 
-.optionValue,
-.optionHeader {
+.optionHeader,
+.optionValue {
   padding: 5px 16px 3px;
 }
-.hasIcon .optionValue,
-.hasIcon .optionHeader {
-  padding-left: 30px;
+.hasIcon .optionHeader,
+.hasIcon .optionValue {
+  padding-left: 32px;
+}
+
+.optionHeader {
+  color: var(--color-white-40);
+  font-size: var(--font-size-12);
 }
 
 .optionValue:hover {
@@ -41,11 +46,6 @@
 }
 .menu:hover .optionValueSelected {
   background-color: transparent;
-}
-
-.optionHeader {
-  color: var(--color-white-40);
-  font-size: var(--font-size-12);
 }
 
 .optionSeparator {

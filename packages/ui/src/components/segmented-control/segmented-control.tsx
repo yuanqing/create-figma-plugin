@@ -5,7 +5,7 @@ import { useCallback } from 'preact/hooks'
 import { OnValueChange, Props } from '../../types'
 import styles from './segmented-control.css'
 
-const ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-id'
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'
 
 export type SegmentedControlProps<
   N extends string,
@@ -43,7 +43,7 @@ export function SegmentedControl<
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
-        ID_DATA_ATTRIBUTE_NAME
+        ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue, name)
@@ -86,7 +86,7 @@ export function SegmentedControl<
               tabIndex={isOptionDisabled === true ? -1 : 0}
               type="radio"
               value={`${option.value}`}
-              {...{ [ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+              {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
             />
             <div class={styles.children}>{children}</div>
           </label>

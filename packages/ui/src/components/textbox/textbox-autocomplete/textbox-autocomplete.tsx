@@ -77,13 +77,13 @@ export function TextboxAutocomplete<N extends string>({
   const [savedValue, setSavedValue] = useState<string>(value) // Keep a copy of the original textbox value
   const [selectedId, setSelectedId] = useState<Id>(INVALID_ID)
 
-  // Uncomment to debug
-  // console.table([{ isMenuVisible, savedValue, selectedId, value }])
-
   let options: Array<Option> = createOptions(rest.options)
   if (filter === true) {
     options = filterOptions(options, value, savedValue)
   }
+
+  // Uncomment to debug
+  // console.table([{ isMenuVisible, savedValue, selectedId, value }])
 
   const triggerBlur = useCallback(function () {
     setIsMenuVisible(false)
@@ -325,7 +325,7 @@ export function TextboxAutocomplete<N extends string>({
               : textboxAutocompleteStyles.hasIcon
           ])}
         >
-          {options.map(function (option, index) {
+          {options.map(function (option: Option, index: number) {
             if ('separator' in option) {
               return (
                 <hr
@@ -343,7 +343,7 @@ export function TextboxAutocomplete<N extends string>({
             }
             return (
               <div
-                key={option.id}
+                key={index}
                 class={createClassName([
                   textboxAutocompleteStyles.optionValue,
                   option.id === selectedId

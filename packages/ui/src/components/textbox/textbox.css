@@ -4,14 +4,14 @@
 
 .input {
   width: 100%;
-  height: 32px;
-  padding-left: 6px;
+  height: 30px;
+  padding-left: 7px;
   color: var(--color-black-80);
   border: 1px solid var(--color-black-10);
   border-radius: var(--border-radius-2);
 }
 .input:focus {
-  padding-left: 5px;
+  padding-left: 6px;
   border: 2px solid var(--color-blue);
 }
 .input:disabled {
@@ -39,15 +39,15 @@
   border-color: var(--color-blue);
 }
 .hasIcon .input {
-  padding-left: 28px;
+  padding-left: 31px;
 }
 .hasIcon .input:focus {
-  padding-left: 27px;
+  padding-left: 30px;
 }
 
 .icon {
   position: absolute;
-  top: 8px;
+  top: 7px;
   left: 8px;
   width: 16px;
   color: var(--color-black-30);

@@ -244,11 +244,10 @@ export const TextIcon = function () {
   }
   return (
     <TextboxAutocomplete
-      icon="S"
+      icon="X"
       onInput={handleInput}
       onOptionClick={handleOptionClick}
       options={options}
-      placeholder="Search"
       value={value}
     />
   )

@@ -3,32 +3,26 @@ import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
 
-const INVALID_ID = null
-const ID_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-id'
-
-type Id = typeof INVALID_ID | string
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-scrollable-menu-item-id'
 
 export function useScrollableMenu(options: {
-  selectedItemId: Id
-  onItemIdChange: (id: null | string) => void
+  selectedItemId: null | string
+  onItemIdChange: (id: string) => void
   changeOnMouseOver: boolean
 }): {
   menuElementRef: RefObject<HTMLDivElement>
-  itemIdDataAttributeName: typeof ID_DATA_ATTRIBUTE_NAME
+  itemIdDataAttributeName: typeof ITEM_ID_DATA_ATTRIBUTE_NAME
+  handleScrollableMenuKeyDown: (event: KeyboardEvent) => void
 } {
   const { selectedItemId, onItemIdChange, changeOnMouseOver = true } = options
 
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
-  const getMenuItemId = useCallback(function (element: HTMLElement): Id {
-    return element.getAttribute(ID_DATA_ATTRIBUTE_NAME)
-  }, [])
-
   const getItemElements = useCallback(
     function (): Array<HTMLElement> {
       return Array.from(
         getCurrentFromRef(menuElementRef).querySelectorAll<HTMLElement>(
-          `[${ID_DATA_ATTRIBUTE_NAME}]`
+          `[${ITEM_ID_DATA_ATTRIBUTE_NAME}]`
         )
       )
     },
@@ -36,33 +30,36 @@ export function useScrollableMenu(options: {
   )
 
   const getItemIndex = useCallback(
-    function (id: Id): number {
-      if (id === INVALID_ID) {
+    function (id: null | string): number {
+      if (id === null) {
         return -1
       }
-      return getItemElements().findIndex(function (element) {
+      const index = getItemElements().findIndex(function (element) {
         return getMenuItemId(element) === id
       })
+      if (index === -1) {
+        throw new Error('Invariant violation') // `id` is valid
+      }
+      return index
     },
-    [getItemElements, getMenuItemId]
+    [getItemElements]
   )
 
   const updateScrollPosition = useCallback(
-    function (id: Id): void {
+    function (id: string): void {
       const itemElements = getItemElements()
       const index = getItemIndex(id)
-      if (index === -1) {
-        return
-      }
       const selectedElement = itemElements[index]
       const menuElement = getCurrentFromRef(menuElementRef)
-      if (selectedElement.offsetTop < menuElement.scrollTop) {
+      const y =
+        selectedElement.getBoundingClientRect().y -
+        menuElement.getBoundingClientRect().y
+      if (y < menuElement.scrollTop) {
         // Selected element is above the visible items at the current scroll position
-        menuElement.scrollTop = selectedElement.offsetTop
+        menuElement.scrollTop = y
         return
       }
-      const offsetBottom =
-        selectedElement.offsetTop + selectedElement.offsetHeight
+      const offsetBottom = y + selectedElement.offsetHeight
       if (offsetBottom > menuElement.scrollTop + menuElement.offsetHeight) {
         // Selected element is below the visible items at the current scroll position
         menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
@@ -95,7 +92,6 @@ export function useScrollableMenu(options: {
       getItemElements,
       getItemIndex,
       onItemIdChange,
-      getMenuItemId,
       selectedItemId,
       updateScrollPosition
     ]
@@ -108,17 +104,7 @@ export function useScrollableMenu(options: {
         onItemIdChange(id)
       }
     },
-    [onItemIdChange, getMenuItemId, selectedItemId]
-  )
-
-  useEffect(
-    function () {
-      window.addEventListener('keydown', handleKeyDown)
-      return function () {
-        window.removeEventListener('keydown', handleKeyDown)
-      }
-    },
-    [handleKeyDown]
+    [onItemIdChange, selectedItemId]
   )
 
   useEffect(
@@ -143,7 +129,18 @@ export function useScrollableMenu(options: {
   )
 
   return {
-    itemIdDataAttributeName: ID_DATA_ATTRIBUTE_NAME,
+    handleScrollableMenuKeyDown: handleKeyDown,
+    itemIdDataAttributeName: ITEM_ID_DATA_ATTRIBUTE_NAME,
     menuElementRef
   }
+}
+
+function getMenuItemId(element: HTMLElement): string {
+  const id = element.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
+  if (id === null) {
+    throw new Error(
+      `Element with no attribute \`${ITEM_ID_DATA_ATTRIBUTE_NAME}\``
+    )
+  }
+  return id
 }

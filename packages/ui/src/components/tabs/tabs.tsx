@@ -5,7 +5,7 @@ import { useCallback } from 'preact/hooks'
 import { OnValueChange, Props } from '../../types'
 import styles from './tabs.css'
 
-const ID_DATA_ATTRIBUTE_NAME = 'data-tabs-id'
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
 
 export type TabsProps<N extends string> = {
   name?: N
@@ -32,7 +32,7 @@ export function Tabs<N extends string>({
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
-        ID_DATA_ATTRIBUTE_NAME
+        ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue, name)
@@ -74,7 +74,7 @@ export function Tabs<N extends string>({
                 tabIndex={0}
                 type="radio"
                 value={option.value}
-                {...{ [ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
               />
               <div class={styles.value}>{option.value}</div>
             </label>
