@@ -60,7 +60,7 @@ export function Dropdown<
   top,
   value,
   ...rest
-}: Props<HTMLInputElement, DropdownProps<N, V>>): JSX.Element {
+}: Props<HTMLDivElement, DropdownProps<N, V>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
@@ -103,8 +103,14 @@ export function Dropdown<
         triggerBlur()
         return
       }
-      setIsMenuVisible(true)
       getCurrentFromRef(rootElementRef).focus()
+    },
+    [isMenuVisible, triggerBlur]
+  )
+
+  const handleFocus = useCallback(
+    function (): void {
+      setIsMenuVisible(true)
       if (value === null) {
         return
       }
@@ -114,7 +120,7 @@ export function Dropdown<
       }
       setSelectedId(`${index}`)
     },
-    [isMenuVisible, options, triggerBlur, value]
+    [options, value]
   )
 
   const handleKeyDown = useCallback(
@@ -193,13 +199,15 @@ export function Dropdown<
 
   return (
     <div
+      {...rest}
       ref={rootElementRef}
       class={createClassName([
         dropdownStyles.dropdown,
-        disabled === true ? null : dropdownStyles.enabled,
+        disabled === true ? dropdownStyles.disabled : null,
         noBorder === true ? dropdownStyles.noBorder : null
       ])}
       onClick={disabled === true ? undefined : handleClick}
+      onFocus={handleFocus}
       onKeyDown={disabled === true ? undefined : handleKeyDown}
       tabIndex={disabled === true ? -1 : 0}
     >
@@ -209,7 +217,14 @@ export function Dropdown<
         )}
         {value === null ? (
           typeof placeholder === 'undefined' ? null : (
-            <div class={dropdownStyles.placeholder}>{placeholder}</div>
+            <div
+              class={createClassName([
+                dropdownStyles.value,
+                dropdownStyles.placeholder
+              ])}
+            >
+              {placeholder}
+            </div>
           )
         ) : (
           <div class={dropdownStyles.value}>{value}</div>
@@ -255,7 +270,6 @@ export function Dropdown<
               ])}
             >
               <input
-                {...rest}
                 checked={value === option.value}
                 class={menuStyles.input}
                 name={name}

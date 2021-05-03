@@ -28,7 +28,7 @@ export const Empty = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState<null | string>(null)
+  const [value, setValue] = useState('foo')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },

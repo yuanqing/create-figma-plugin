@@ -70,6 +70,10 @@ export function TextboxAutocomplete<N extends string>({
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxAutocompleteProps<N>>): JSX.Element {
+  if (typeof icon === 'string' && icon.length !== 1) {
+    throw new Error(`String \`icon\` must be a single character: ${icon}`)
+  }
+
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
@@ -340,6 +344,7 @@ export function TextboxAutocomplete<N extends string>({
       {typeof icon === 'undefined' ? null : (
         <div class={textboxStyles.icon}>{icon}</div>
       )}
+      <div class={textboxStyles.border}></div>
       <div
         ref={menuElementRef}
         class={createClassName([

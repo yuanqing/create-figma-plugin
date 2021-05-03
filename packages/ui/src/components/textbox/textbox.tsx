@@ -38,6 +38,10 @@ export function Textbox<N extends string>({
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxProps<N>>): JSX.Element {
+  if (typeof icon === 'string' && icon.length !== 1) {
+    throw new Error(`String \`icon\` must be a single character: ${icon}`)
+  }
+
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
 
   const handleBlur = useCallback(function (): void {
@@ -127,6 +131,7 @@ export function Textbox<N extends string>({
       {typeof icon === 'undefined' ? null : (
         <div class={styles.icon}>{icon}</div>
       )}
+      <div class={styles.border}></div>
     </div>
   )
 }

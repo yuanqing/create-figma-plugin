@@ -1,10 +1,10 @@
 .dropdown {
   position: relative;
 }
-.enabled:focus {
+.dropdown:not(.disabled):focus {
   outline: 0;
 }
-.dropdown:not(.enabled) {
+.disabled {
   opacity: var(--opacity-30);
 }
 
@@ -17,7 +17,7 @@
   padding-left: 8px;
   color: var(--color-black-80);
 }
-.dropdown:not(.enabled) .box {
+.disabled .box {
   cursor: not-allowed;
 }
 .box > * {
@@ -30,8 +30,8 @@
   color: var(--color-black-30);
   text-align: center;
 }
-.enabled:focus .icon,
-.enabled:focus-within .icon {
+.dropdown:not(.disabled):focus .icon,
+.dropdown:not(.disabled):focus-within .icon {
   color: var(--color-blue);
 }
 .icon svg {
@@ -40,19 +40,15 @@
   fill: currentColor;
 }
 
-.value,
-.placeholder {
+.value {
   margin-right: 6px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.enabled .box:hover .value,
-.enabled .box:hover .placeholder,
-.enabled:focus .value,
-.enabled:focus .placeholder,
-.enabled:focus-within .value,
-.enabled:focus-within .placeholder {
+.dropdown:not(.disabled) .box:hover .value,
+.dropdown:not(.disabled):focus .value,
+.dropdown:not(.disabled):focus-within .value {
   flex-grow: 1;
 }
 .placeholder {
@@ -63,9 +59,9 @@
   margin-right: 8px;
   color: var(--color-black-30);
 }
-.enabled .box:hover .chevronIcon,
-.enabled:focus .chevronIcon,
-.enabled:focus-within .chevronIcon {
+.dropdown:not(.disabled) .box:hover .chevronIcon,
+.dropdown:not(.disabled):focus .chevronIcon,
+.dropdown:not(.disabled):focus-within .chevronIcon {
   color: var(--color-black-80);
 }
 
@@ -79,8 +75,8 @@
   border-width: 1px;
   border-radius: var(--border-radius-2);
 }
-.enabled:focus .border,
-.enabled:focus-within .border {
+.dropdown:not(.disabled):focus .border,
+.dropdown:not(.disabled):focus-within .border {
   border-color: var(--color-blue);
   border-width: 2px;
 }
