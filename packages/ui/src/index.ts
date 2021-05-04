@@ -91,6 +91,7 @@ export type {
 export { TextboxAutocomplete } from './components/textbox/textbox-autocomplete/textbox-autocomplete'
 export type { TextboxNumericProps } from './components/textbox/textbox-numeric/textbox-numeric'
 export { TextboxNumeric } from './components/textbox/textbox-numeric/textbox-numeric'
+export { useClickOutside } from './hooks/use-click-outside'
 export { useFocusTrap } from './hooks/use-focus-trap'
 export { useForm } from './hooks/use-form'
 export { useFormState } from './hooks/use-form-state'
