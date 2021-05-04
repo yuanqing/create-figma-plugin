@@ -1,8 +1,9 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.css'
+import { useClickOutside } from '../../../hooks/use-click-outside'
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
@@ -13,7 +14,7 @@ import textboxStyles from '../textbox.css'
 
 const EMPTY_STRING = ''
 const INVALID_ID = null
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-id'
+const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
 
 export type TextboxAutocompleteProps<N extends string> = {
   disabled?: boolean
@@ -294,28 +295,19 @@ export function TextboxAutocomplete<N extends string>({
     [selectedId]
   )
 
-  // Blur the input and hide the menu if we clicked outside the component
-  useEffect(
-    function () {
-      function handleWindowClick(event: MouseEvent): void {
-        const rootElement = getCurrentFromRef(rootElementRef)
-        if (
-          isMenuVisible === false ||
-          rootElement === event.target ||
-          rootElement.contains(event.target as HTMLElement) // FIXME
-        ) {
-          // Exit if we clicked on any DOM element that is part of the component
-          return
-        }
-        triggerBlur()
+  const handleClickOutside = useCallback(
+    function (): void {
+      if (isMenuVisible === false) {
+        return
       }
-      window.addEventListener('click', handleWindowClick)
-      return function (): void {
-        window.removeEventListener('click', handleWindowClick)
-      }
+      triggerBlur()
     },
-    [isMenuVisible, triggerBlur, value]
+    [isMenuVisible, triggerBlur]
   )
+  useClickOutside({
+    onClickOutside: handleClickOutside,
+    ref: rootElementRef
+  })
 
   return (
     <div

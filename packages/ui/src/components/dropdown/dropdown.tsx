@@ -1,8 +1,9 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../css/menu.css'
+import { useClickOutside } from '../../hooks/use-click-outside'
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
 import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
@@ -163,27 +164,19 @@ export function Dropdown<
     [name, onChange, onValueChange, options, triggerBlur]
   )
 
-  useEffect(
-    function () {
-      function handleWindowClick(event: MouseEvent): void {
-        const rootElement = getCurrentFromRef(rootElementRef)
-        if (
-          isMenuVisible === false ||
-          rootElement === event.target ||
-          rootElement.contains(event.target as HTMLElement) // FIXME
-        ) {
-          // Exit if we clicked on any DOM element that is part of the component
-          return
-        }
-        triggerBlur()
+  const handleClickOutside = useCallback(
+    function (): void {
+      if (isMenuVisible === false) {
+        return
       }
-      window.addEventListener('click', handleWindowClick)
-      return function (): void {
-        window.removeEventListener('click', handleWindowClick)
-      }
+      triggerBlur()
     },
-    [isMenuVisible, options, triggerBlur, value]
+    [isMenuVisible, triggerBlur]
   )
+  useClickOutside({
+    onClickOutside: handleClickOutside,
+    ref: rootElementRef
+  })
 
   return (
     <div
