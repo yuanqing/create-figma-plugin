@@ -1,4 +1,4 @@
-const SETTINGS_KEY = 'settings'
+const DEFAULT_SETTINGS_KEY = 'settings'
 
 /**
  * Loads your plugin’s `settings` (stored locally on the user’s computer).
@@ -6,8 +6,11 @@ const SETTINGS_KEY = 'settings'
  *
  * @category Settings
  */
-export async function loadSettingsAsync<S>(defaultSettings: S): Promise<S> {
-  const settings: S = await figma.clientStorage.getAsync(SETTINGS_KEY)
+export async function loadSettingsAsync<S>(
+  defaultSettings: S,
+  settingsKey = DEFAULT_SETTINGS_KEY
+): Promise<S> {
+  const settings: S = await figma.clientStorage.getAsync(settingsKey)
   if (typeof settings === 'undefined') {
     return defaultSettings
   }
@@ -20,6 +23,9 @@ export async function loadSettingsAsync<S>(defaultSettings: S): Promise<S> {
  *
  * @category Settings
  */
-export async function saveSettingsAsync<S>(settings: S): Promise<void> {
-  await figma.clientStorage.setAsync(SETTINGS_KEY, settings)
+export async function saveSettingsAsync<S>(
+  settings: S,
+  settingsKey = DEFAULT_SETTINGS_KEY
+): Promise<void> {
+  await figma.clientStorage.setAsync(settingsKey, settings)
 }

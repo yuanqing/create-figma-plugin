@@ -20,16 +20,16 @@ export function sortNodesByCanonicalOrder<N extends SceneNode>(
   }
   return siblingNodes
     .slice()
-    .map(function (node) {
+    .map(function (node: N): { index: number; node: N } {
       return {
         index: parentNode.children.indexOf(node),
         node
       }
     })
-    .sort(function (a, b) {
+    .sort(function (a: { index: number }, b: { index: number }): number {
       return a.index - b.index
     })
-    .map(function ({ node }) {
+    .map(function ({ node }: { node: N }): N {
       return node
     })
 }

@@ -1,8 +1,6 @@
 .textbox {
   position: relative;
-  z-index: var(
-    --z-index-2
-  ); /* make the textbox clickable if it's embedded within another form control (eg. a Checkbox) */
+  z-index: var(--z-index-2);
 }
 
 .input {

@@ -1,5 +1,6 @@
 .button {
   position: relative;
+  z-index: var(--z-index-2);
   display: inline-block;
   color: var(--color-white);
 }

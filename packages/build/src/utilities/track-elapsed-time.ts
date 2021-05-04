@@ -1,6 +1,6 @@
-export function trackElapsedTime(): () => string {
+export function trackElapsedTime(): () => void {
   const time = process.hrtime()
-  return function () {
+  return function (): string {
     return formatTime(process.hrtime(time))
   }
 }

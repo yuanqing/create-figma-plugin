@@ -13,7 +13,7 @@ sade('create-figma-plugin [name]', true)
   .action(async function (
     name: string,
     options: { yes: boolean; template: string }
-  ) {
+  ): Promise<void> {
     const { yes, template } = options
     await createFigmaPluginAsync({ name, template }, yes)
   })

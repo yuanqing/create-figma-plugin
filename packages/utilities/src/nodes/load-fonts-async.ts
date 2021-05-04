@@ -11,7 +11,7 @@ export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
     }
   }
   await Promise.all(
-    Object.values(result).map(function (font) {
+    Object.values(result).map(function (font: FontName): Promise<void> {
       return figma.loadFontAsync(font)
     })
   )
@@ -42,6 +42,6 @@ function collectFontsUsedInNode(
   }
 }
 
-function createKey(fontName: FontName) {
+function createKey(fontName: FontName): string {
   return `${fontName.family}-${fontName.style}`
 }

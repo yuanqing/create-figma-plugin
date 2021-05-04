@@ -64,7 +64,7 @@ async function parseFileExports(
     usedExportNames[exportName] = true
     result.push(exportName)
   }
-  return result.sort(function (a: string, b: string) {
+  return result.sort(function (a: string, b: string): number {
     return a.localeCompare(b)
   })
 }

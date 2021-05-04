@@ -1,5 +1,6 @@
 .segmentedControl {
   position: relative;
+  z-index: var(--z-index-2);
   display: inline-flex;
   overflow: hidden;
   border-radius: var(--border-radius-2);
@@ -23,7 +24,7 @@
 }
 
 .children {
-  padding: 8px 10px;
+  padding: 6px 10px;
   color: var(--color-black-80);
 }
 .input:checked ~ .children {

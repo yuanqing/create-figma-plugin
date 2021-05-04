@@ -23,7 +23,7 @@ test('use default', async function (t) {
   await cleanUpAsync()
 })
 
-async function cleanUpAsync() {
+async function cleanUpAsync(): Promise<void> {
   await new Promise<void>(function (resolve, reject) {
     rimraf(join(process.cwd(), 'figma-plugin'), function (error) {
       if (error) {

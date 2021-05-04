@@ -10,7 +10,7 @@ const rootDirectoryPath = resolve(__dirname, '..', '..', '..')
 const tsconfigFilePath = join(rootDirectoryPath, 'tsconfig.shared.json')
 const outputFilePath = join(rootDirectoryPath, 'docs', 'utilities.md')
 
-async function main() {
+async function main(): Promise<void> {
   const lines: Array<string> = []
   const functionsData = await parseExportedFunctionsAsync(['src/**/*.ts'], {
     tsconfigFilePath

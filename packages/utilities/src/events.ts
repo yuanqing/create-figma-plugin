@@ -20,7 +20,7 @@ export function on<E extends EventHandler>(
   const id = `${currentId}`
   currentId += 1
   eventHandlers[id] = { handler, name }
-  return function () {
+  return function (): void {
     delete eventHandlers[id]
   }
 }
@@ -37,7 +37,7 @@ export function once<E extends EventHandler>(
   handler: E['handler']
 ): () => void {
   let done = false
-  return on(name, function (...args) {
+  return on(name, function (...args): void {
     if (done === true) {
       return
     }
@@ -63,13 +63,13 @@ export const emit =
     ? function <E extends EventHandler>(
         name: E['name'],
         ...args: Parameters<E['handler']>
-      ) {
+      ): void {
         figma.ui.postMessage([name, ...args])
       }
     : function <E extends EventHandler>(
         name: E['name'],
         ...args: Parameters<E['handler']>
-      ) {
+      ): void {
         window.parent.postMessage(
           {
             pluginMessage: [name, ...args]
@@ -78,7 +78,7 @@ export const emit =
         )
       }
 
-function invokeEventHandler(name: string, args: Array<unknown>) {
+function invokeEventHandler(name: string, args: Array<unknown>): void {
   for (const id in eventHandlers) {
     if (eventHandlers[id].name === name) {
       eventHandlers[id].handler.apply(null, args)

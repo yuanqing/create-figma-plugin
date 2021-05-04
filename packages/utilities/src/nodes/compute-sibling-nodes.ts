@@ -13,16 +13,16 @@ export function computeSiblingNodes<N extends SceneNode>(
   for (const group of groups) {
     const parentNode = getParentNode(group[0])
     const siblingNodes = group
-      .map(function (node) {
+      .map(function (node: N): { index: number; node: N } {
         return {
           index: parentNode.children.indexOf(node),
           node
         }
       })
-      .sort(function (a, b) {
+      .sort(function (a: { index: number }, b: { index: number }): number {
         return a.index - b.index
       })
-      .map(function ({ node }) {
+      .map(function ({ node }: { node: N }): N {
         return node
       })
     result.push(siblingNodes)

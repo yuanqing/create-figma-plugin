@@ -11,12 +11,12 @@ const postCssModules = require('postcss-modules')
 export function esbuildCssModulesPlugin(minify: boolean): Plugin {
   return {
     name: 'css-modules',
-    setup: function (build: PluginBuild) {
+    setup: function (build: PluginBuild): void {
       build.onResolve(
         { filter: /\.css$/ },
-        async function (args: OnResolveArgs) {
+        async function (args: OnResolveArgs): Promise<{ path: string }> {
           const cssfilePath = resolve(args.resolveDir, args.path)
-          const js = await createCssModulesJavaScript(cssfilePath, minify)
+          const js = await createCssModulesJavaScriptAsync(cssfilePath, minify)
           const jsFilePath = await tempWrite(
             js,
             `${basename(args.path, extname(args.path))}.js`
@@ -30,10 +30,12 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
   }
 }
 
-async function createCssModulesJavaScript(
+const backQuoteRegex = /`/g
+
+async function createCssModulesJavaScriptAsync(
   cssFilePath: string,
   minify: boolean
-) {
+): Promise<string> {
   const css = await readFile(cssFilePath, 'utf8')
   let classNamesJson: null | string = null
   const plugins: Array<AcceptedPlugin> = []
@@ -70,7 +72,7 @@ async function createCssModulesJavaScript(
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
       element.id = '${elementId}';
-      element.textContent = \`${result.css}\`;
+      element.textContent = \`${result.css.replace(backQuoteRegex, '\\`')}\`;
       document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
     }
     export default ${classNamesJson};

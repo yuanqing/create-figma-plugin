@@ -20,7 +20,7 @@ export async function promptForUserInputAsync(
           validate
         },
     {
-      default: function (values: { name: string }) {
+      default: function (values: { name: string }): undefined | string {
         if (typeof name !== 'undefined') {
           return createPluginDisplayName(name)
         }

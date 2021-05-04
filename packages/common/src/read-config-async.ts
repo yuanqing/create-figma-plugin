@@ -6,6 +6,7 @@ import { constants } from './constants'
 import {
   Config,
   ConfigCommand,
+  ConfigCommandSeparator,
   ConfigFile,
   ConfigRelaunchButton
 } from './types/config'
@@ -82,7 +83,7 @@ function parseCommand(command: RawConfigCommand): ConfigCommand {
         ? null
         : menu.map(function (
             command: RawConfigCommand | RawConfigCommandSeparator
-          ) {
+          ): ConfigCommand | ConfigCommandSeparator {
             if (command === '-') {
               return { separator: true }
             }

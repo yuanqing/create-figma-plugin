@@ -21,10 +21,10 @@ export function watch(options: BuildOptions): void {
       }
     }
   )
-  watcher.on('ready', function () {
+  watcher.on('ready', function (): void {
     log.info('Watching...')
   })
-  watcher.on('change', async function (file: string) {
+  watcher.on('change', async function (file: string): Promise<void> {
     log.info(`Changed ${yellow(file)}`)
     log.info('Building...')
     try {

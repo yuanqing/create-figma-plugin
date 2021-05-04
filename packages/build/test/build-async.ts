@@ -208,7 +208,7 @@ test('preact', async function (t) {
   await cleanUpAsync()
 })
 
-async function createFigmaTypingsSymlinksAsync() {
+async function createFigmaTypingsSymlinksAsync(): Promise<void> {
   const directoryPath = await findUp(join('node_modules', '@figma'), {
     type: 'directory'
   })
@@ -221,7 +221,7 @@ async function createFigmaTypingsSymlinksAsync() {
   )
 }
 
-async function cleanUpAsync() {
+async function cleanUpAsync(): Promise<void> {
   const promises = [
     new Promise<void>(function (resolve, reject) {
       rimraf(join(process.cwd(), '{build,node_modules}'), function (error) {

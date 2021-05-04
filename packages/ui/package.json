@@ -70,5 +70,6 @@
   },
   "peerDependencies": {
     "preact": "^10"
-  }
+  },
+  "sideEffects": false
 }

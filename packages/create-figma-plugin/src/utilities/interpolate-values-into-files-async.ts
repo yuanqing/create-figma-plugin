@@ -19,13 +19,13 @@ export async function interpolateValuesIntoFilesAsync(
     dot: true
   })
   await Promise.all(
-    filePaths.map(async function (filePath) {
+    filePaths.map(async function (filePath): Promise<void> {
       const absolutePath = join(directory, filePath)
       const buffer = await readFile(absolutePath)
       const fileContents = isUtf8(buffer)
         ? mustache.render(buffer.toString(), values)
         : buffer
-      return outputFile(absolutePath, fileContents)
+      await outputFile(absolutePath, fileContents)
     })
   )
 }

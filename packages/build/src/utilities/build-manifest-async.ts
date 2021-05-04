@@ -42,8 +42,8 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   } else {
     if (relaunchButtons !== null) {
       const relaunchButtonsWithUi = relaunchButtons.filter(function (
-        relaunchButton
-      ) {
+        relaunchButton: ConfigRelaunchButton
+      ): boolean {
         return relaunchButton.ui !== null
       })
       if (relaunchButtonsWithUi.length > 0) {
@@ -78,7 +78,9 @@ function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {
     return true
   }
   if (command.menu !== null) {
-    const result = command.menu.filter(function (command) {
+    const result = command.menu.filter(function (
+      command: ConfigCommand | ConfigCommandSeparator
+    ): boolean {
       if ('separator' in command) {
         return false
       }
@@ -90,9 +92,11 @@ function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {
 }
 
 function createMenu(
-  menu: Array<ConfigCommandSeparator | ConfigCommand>
+  menu: Array<ConfigCommand | ConfigCommandSeparator>
 ): Array<ManifestMenuItem | ManifestMenuItemSeparator> {
-  return menu.map(function (item) {
+  return menu.map(function (
+    item: ConfigCommand | ConfigCommandSeparator
+  ): ManifestMenuItem | ManifestMenuItemSeparator {
     if ('separator' in item) {
       return { separator: true }
     }
@@ -112,7 +116,9 @@ function createMenu(
 function createRelaunchButtons(
   relaunchButtons: Array<ConfigRelaunchButton>
 ): Array<ManifestRelaunchButton> {
-  return relaunchButtons.map(function (relaunchButton) {
+  return relaunchButtons.map(function (
+    relaunchButton: ConfigRelaunchButton
+  ): ManifestRelaunchButton {
     const result: ManifestRelaunchButton = {
       command: relaunchButton.commandId,
       name: relaunchButton.name

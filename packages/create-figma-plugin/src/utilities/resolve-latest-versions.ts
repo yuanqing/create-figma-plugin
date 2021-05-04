@@ -20,7 +20,7 @@ async function resolveLatestStableVersion(
   const versions = Object.keys(result.versions).sort(function (
     a: string,
     b: string
-  ) {
+  ): number {
     return b.localeCompare(a, [], { numeric: true }) // sort in reverse alphabetical order
   })
   if (versions.length === 0) {

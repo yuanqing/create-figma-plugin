@@ -16,7 +16,7 @@ sade('build-figma-plugin', true)
     minify: boolean
     typecheck: boolean
     watch: boolean
-  }) {
+  }): Promise<void> {
     const buildOptions: BuildOptions = {
       minify: options.minify,
       typecheck: options.typecheck

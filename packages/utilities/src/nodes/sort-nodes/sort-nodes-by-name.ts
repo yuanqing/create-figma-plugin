@@ -13,7 +13,7 @@ export function sortNodesByName<N extends SceneNode>(
   if (nodes.length < 2) {
     return nodes.slice()
   }
-  return nodes.slice().sort(function (a, b) {
+  return nodes.slice().sort(function (a: N, b: N): number {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName !== bName) {
