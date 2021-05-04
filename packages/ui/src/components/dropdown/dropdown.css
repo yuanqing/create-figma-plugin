@@ -1,5 +1,10 @@
 .dropdown {
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding-left: 8px;
+  color: var(--color-black-80);
 }
 .dropdown:not(.disabled):focus {
   outline: 0;
@@ -8,17 +13,8 @@
   opacity: var(--opacity-30);
 }
 
-.box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 28px;
-  padding-left: 8px;
-  color: var(--color-black-80);
-}
-.disabled .box,
-.disabled .box > * {
+.disabled,
+.disabled > * {
   cursor: not-allowed;
 }
 
@@ -44,7 +40,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.dropdown:not(.disabled) .box:hover .value,
+.dropdown:not(.disabled):hover .value,
 .dropdown:not(.disabled):focus .value,
 .dropdown:not(.disabled):focus-within .value {
   flex-grow: 1;
@@ -57,7 +53,7 @@
   margin-right: 8px;
   color: var(--color-black-30);
 }
-.dropdown:not(.disabled) .box:hover .chevronIcon,
+.dropdown:not(.disabled):hover .chevronIcon,
 .dropdown:not(.disabled):focus .chevronIcon,
 .dropdown:not(.disabled):focus-within .chevronIcon {
   color: var(--color-black-80);
@@ -81,6 +77,6 @@
 .noBorder:not(:focus) .border {
   border-color: transparent;
 }
-.noBorder:not(:focus) .box:hover .border {
+.noBorder:not(:focus):hover .border {
   border-color: var(--color-black-10);
 }

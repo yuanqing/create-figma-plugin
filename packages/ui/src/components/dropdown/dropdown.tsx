@@ -97,17 +97,6 @@ export function Dropdown<
     getCurrentFromRef(rootElementRef).blur()
   }, [])
 
-  const handleClick = useCallback(
-    function (): void {
-      if (isMenuVisible === true) {
-        triggerBlur()
-        return
-      }
-      getCurrentFromRef(rootElementRef).focus()
-    },
-    [isMenuVisible, triggerBlur]
-  )
-
   const handleFocus = useCallback(
     function (): void {
       setIsMenuVisible(true)
@@ -143,7 +132,6 @@ export function Dropdown<
           const changeEvent = document.createEvent('Event')
           changeEvent.initEvent('change', true, true)
           selectedElement.dispatchEvent(changeEvent)
-          return
         }
         triggerBlur()
         return
@@ -206,34 +194,31 @@ export function Dropdown<
         disabled === true ? dropdownStyles.disabled : null,
         noBorder === true ? dropdownStyles.noBorder : null
       ])}
-      onClick={disabled === true ? undefined : handleClick}
       onFocus={handleFocus}
       onKeyDown={disabled === true ? undefined : handleKeyDown}
       tabIndex={disabled === true ? -1 : 0}
     >
-      <div class={dropdownStyles.box}>
-        {typeof icon === 'undefined' ? null : (
-          <div class={dropdownStyles.icon}>{icon}</div>
-        )}
-        {value === null ? (
-          typeof placeholder === 'undefined' ? null : (
-            <div
-              class={createClassName([
-                dropdownStyles.value,
-                dropdownStyles.placeholder
-              ])}
-            >
-              {placeholder}
-            </div>
-          )
-        ) : (
-          <div class={dropdownStyles.value}>{value}</div>
-        )}
-        <div class={dropdownStyles.chevronIcon}>
-          <IconChevron />
-        </div>
-        <div class={dropdownStyles.border}></div>
+      {typeof icon === 'undefined' ? null : (
+        <div class={dropdownStyles.icon}>{icon}</div>
+      )}
+      {value === null ? (
+        typeof placeholder === 'undefined' ? null : (
+          <div
+            class={createClassName([
+              dropdownStyles.value,
+              dropdownStyles.placeholder
+            ])}
+          >
+            {placeholder}
+          </div>
+        )
+      ) : (
+        <div class={dropdownStyles.value}>{value}</div>
+      )}
+      <div class={dropdownStyles.chevronIcon}>
+        <IconChevron />
       </div>
+      <div class={dropdownStyles.border}></div>
       <div
         ref={menuElementRef}
         class={createClassName([

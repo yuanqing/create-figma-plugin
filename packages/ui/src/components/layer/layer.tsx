@@ -33,7 +33,7 @@ export function Layer<N extends string>({
   value = false,
   type,
   ...rest
-}: Props<HTMLDivElement, LayerProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, LayerProps<N>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newValue = event.currentTarget.checked
