@@ -4,10 +4,10 @@ import * as path from 'path'
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2)
-  const parentDirectory = path.resolve(__dirname, '..')
+  const parentDirectoryPath = path.resolve(__dirname, '..')
   const globs = [
-    path.join(parentDirectory, 'package.json'),
-    path.join(parentDirectory, 'packages', '**', 'package.json')
+    path.join(parentDirectoryPath, 'package.json'),
+    path.join(parentDirectoryPath, 'packages', '**', 'package.json')
   ]
   const packageJsonFiles = await globby(globs, { deep: 2 })
   const promises: Array<Promise<void>> = []
