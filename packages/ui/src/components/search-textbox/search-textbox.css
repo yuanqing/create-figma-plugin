@@ -22,8 +22,11 @@
 
 .searchIcon {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
   color: var(--color-black-80);
   pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
@@ -34,7 +37,7 @@
 .clearButton {
   flex: 0 0 40px;
   height: 40px;
-  padding: 12px;
+  padding: 4px;
   color: var(--color-black-30);
 }
 .clearButton:hover {

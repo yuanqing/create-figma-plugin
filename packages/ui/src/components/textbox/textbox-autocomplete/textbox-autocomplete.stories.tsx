@@ -4,7 +4,7 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus'
-import { IconSearch } from '../../icon/icon-search/icon-search'
+import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
 import {
   TextboxAutocomplete,
   TextboxAutocompleteOption
@@ -174,7 +174,7 @@ export const Icon = function () {
   }
   return (
     <TextboxAutocomplete
-      icon={<IconSearch />}
+      icon={<IconLayerFrame16 />}
       onInput={handleInput}
       options={options}
       value={value}

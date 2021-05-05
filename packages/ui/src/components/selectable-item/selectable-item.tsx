@@ -4,7 +4,7 @@ import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
-import { IconCheck } from '../icon/icon-check/icon-check'
+import { IconMenuCheckmarkChecked16 } from '../icon/icon-16/icon-menu-checkmark-checked-16'
 import styles from './selectable-item.css'
 
 export type SelectableItemProps<N extends string> = {
@@ -76,7 +76,7 @@ export function SelectableItem<N extends string>({
       <div class={styles.children}>{children}</div>
       {value === true ? (
         <div class={styles.checkIcon}>
-          <IconCheck />
+          <IconMenuCheckmarkChecked16 />
         </div>
       ) : null}
     </label>

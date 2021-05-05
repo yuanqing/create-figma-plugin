@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../hooks/use-initial-focus'
 import { MIXED_STRING } from '../../utilities/mixed-values'
-import { IconSearch } from '../icon/icon-search/icon-search'
+import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
 import { Textbox } from './textbox'
 
 export default { title: 'Components/Textbox' }
@@ -76,7 +76,9 @@ export const Icon = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox icon={<IconSearch />} onInput={handleInput} value={value} />
+  return (
+    <Textbox icon={<IconLayerFrame16 />} onInput={handleInput} value={value} />
+  )
 }
 
 export const TextIcon = function () {

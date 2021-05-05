@@ -4,8 +4,8 @@ import { useCallback, useRef } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
-import { IconCross } from '../icon/icon-cross/icon-cross'
-import { IconSearch } from '../icon/icon-search/icon-search'
+import { IconCross32 } from '../icon/icon-32/icon-cross-32'
+import { IconSearch32 } from '../icon/icon-32/icon-search-32'
 import styles from './search-textbox.css'
 
 export type SearchTextboxProps<N extends string> = {
@@ -95,7 +95,7 @@ export function SearchTextbox<N extends string>({
         value={value === null ? '' : value}
       />
       <div class={styles.searchIcon}>
-        <IconSearch />
+        <IconSearch32 />
       </div>
       {value === null || value === '' || disabled === true ? null : (
         <button
@@ -103,7 +103,7 @@ export function SearchTextbox<N extends string>({
           onClick={handleClearButtonClick}
           tabIndex={0}
         >
-          <IconCross />
+          <IconCross32 />
         </button>
       )}
     </div>

@@ -8,8 +8,8 @@ import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
 import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
-import { IconCheck } from '../icon/icon-check/icon-check'
-import { IconChevron } from '../icon/icon-chevron/icon-chevron'
+import { IconControlChevronDown8 } from '../icon/icon-8/icon-control-chevron-down-8'
+import { IconMenuCheckmarkChecked16 } from '../icon/icon-16/icon-menu-checkmark-checked-16'
 import dropdownStyles from './dropdown.css'
 
 const INVALID_ID = null
@@ -209,7 +209,7 @@ export function Dropdown<
         <div class={dropdownStyles.value}>{value}</div>
       )}
       <div class={dropdownStyles.chevronIcon}>
-        <IconChevron />
+        <IconControlChevronDown8 />
       </div>
       <div class={dropdownStyles.border}></div>
       <div
@@ -263,7 +263,7 @@ export function Dropdown<
               />
               {option.value === value ? (
                 <div class={menuStyles.checkIcon}>
-                  <IconCheck />
+                  <IconMenuCheckmarkChecked16 />
                 </div>
               ) : null}
               {option.value}

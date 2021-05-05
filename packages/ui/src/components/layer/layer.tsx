@@ -4,13 +4,13 @@ import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
-import { IconComponent } from '../icon/icon-component/icon-component'
-import { IconFrame } from '../icon/icon-frame/icon-frame'
+import { IconLayerComponent16 } from '../icon/icon-16/icon-layer-component-16'
+import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
 import styles from './layer.css'
 
 const icons = {
-  component: <IconComponent />,
-  frame: <IconFrame />
+  component: <IconLayerComponent16 />,
+  frame: <IconLayerFrame16 />
 }
 
 export type LayerProps<N extends string> = {

@@ -3,7 +3,7 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
-import { IconCheckSmall } from '../icon/icon-check-small/icon-check-small'
+import { IconControlCheckboxChecked12 } from '../icon/icon-12/icon-control-checkbox-checked-12'
 import styles from './checkbox.css'
 
 export type CheckboxProps<N extends string> = {
@@ -64,7 +64,7 @@ export function Checkbox<N extends string>({
       <div class={styles.fill}>
         {value === true ? (
           <div class={styles.checkIcon}>
-            <IconCheckSmall />
+            <IconControlCheckboxChecked12 />
           </div>
         ) : null}
       </div>

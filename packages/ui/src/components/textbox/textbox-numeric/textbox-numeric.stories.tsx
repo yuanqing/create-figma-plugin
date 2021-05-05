@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus'
 import { MIXED_STRING } from '../../../utilities/mixed-values'
-import { IconSpaceHorizontal } from '../../icon/icon-space-horizontal/icon-space-horizontal'
+import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
 import { TextboxNumeric } from './textbox-numeric'
 
 export default { title: 'Components/Textbox Numeric' }
@@ -88,7 +88,7 @@ export const Icon = function () {
   }
   return (
     <TextboxNumeric
-      icon={<IconSpaceHorizontal />}
+      icon={<IconLayerFrame16 />}
       onInput={handleInput}
       value={value}
     />

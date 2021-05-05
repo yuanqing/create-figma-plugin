@@ -7,7 +7,7 @@ import { useClickOutside } from '../../../hooks/use-click-outside'
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
-import { IconCheck } from '../../icon/icon-check/icon-check'
+import { IconMenuCheckmarkChecked16 } from '../../icon/icon-16/icon-menu-checkmark-checked-16'
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
 import textboxStyles from '../textbox.css'
@@ -380,7 +380,7 @@ export function TextboxAutocomplete<N extends string>({
               />
               {option.value === originalValue ? ( // Show check icon if option matches `originalValue`
                 <div class={menuStyles.checkIcon}>
-                  <IconCheck />
+                  <IconMenuCheckmarkChecked16 />
                 </div>
               ) : null}
               {option.value}

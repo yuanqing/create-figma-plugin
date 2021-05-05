@@ -7,7 +7,7 @@ export type IconProps = Props<SVGSVGElement>
 
 export function createIcon(
   path: string,
-  options: { width: number; height: number } = { height: 16, width: 16 }
+  options: { width: number; height: number }
 ): (props: IconProps) => JSX.Element {
   const { width, height } = options
   return function Icon(props: IconProps): JSX.Element {
