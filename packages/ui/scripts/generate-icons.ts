@@ -89,9 +89,12 @@ async function readSvgFileAsync(filePath: string): Promise<SvgFile> {
 
 function extractSvgPath(svgString: string, filePath: string): string {
   const result: Array<string> = []
-  const matches = svgString.matchAll(/d="([^"]+)"/g)
+  const matches = svgString.matchAll(/ d="([^"]+)"/g)
   for (const match of matches) {
     result.push(match[1])
+  }
+  if (result.length === 0) {
+    throw new Error(`No paths in ${filePath}`)
   }
   if (result.length > 1) {
     throw new Error(`More than 1 \`path\` in ${filePath}`)

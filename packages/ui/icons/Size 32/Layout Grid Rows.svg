@@ -1,5 +1,3 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="9" y="9" width="14" height="3" fill="black"/>
-<rect x="9" y="14.5" width="14" height="3" fill="black"/>
-<rect x="9" y="20" width="14" height="3" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 9H23V12H9V9ZM9 14.5H23V17.5H9V14.5ZM23 20H9V23H23V20Z" fill="black"/>
 </svg>
