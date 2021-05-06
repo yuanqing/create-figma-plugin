@@ -43,7 +43,7 @@
     ],
     "rules": {
       "react/no-unknown-property": [
-        "warn",
+        "error",
         {
           "ignore": [
             "class",
