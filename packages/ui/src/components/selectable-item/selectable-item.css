@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   height: 32px;
-  padding: 0 16px;
+  padding: 0 var(--space-medium);
   color: var(--color-black-80);
 }
 .label:hover {
@@ -52,7 +52,7 @@
 .checkIcon {
   flex: 0 0 16px;
   height: 16px;
-  margin-left: 8px;
+  margin-left: var(--space-extra-small);
   color: var(--color-blue);
 }
 .disabled .checkIcon {

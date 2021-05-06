@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   height: 32px;
-  padding: 0 12px;
+  padding: 0 var(--space-small);
 }
 .black-30 {
   color: var(--color-black-30);
@@ -30,7 +30,7 @@
 }
 
 .layerName {
-  padding: 0 8px;
+  padding: 0 var(--space-extra-small);
 }
 .bold {
   font-weight: var(--font-weight-bold);

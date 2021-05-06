@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   height: 28px;
-  padding-left: 8px;
+  padding-left: var(--space-extra-small);
   color: var(--color-black-80);
 }
 .dropdown:not(.disabled):focus {
@@ -21,7 +21,7 @@
 
 .icon {
   width: 16px;
-  margin-right: 8px;
+  margin-right: var(--space-extra-small);
   color: var(--color-black-30);
   text-align: center;
 }
@@ -51,7 +51,7 @@
 }
 
 .chevronIcon {
-  margin-right: 8px;
+  margin-right: var(--space-extra-small);
   color: var(--color-black-30);
 }
 .dropdown:not(.disabled):hover .chevronIcon,

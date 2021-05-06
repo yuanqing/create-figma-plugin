@@ -31,8 +31,8 @@
   --space-extra-small: 8px;
   --space-small: 12px;
   --space-medium: 16px;
-  --space-large: 20px;
-  --space-extra-large: 24px;
+  --space-large: 24px;
+  --space-extra-large: 32px;
 }
 
 * {
@@ -84,6 +84,7 @@ label {
 input,
 textarea {
   margin: 0;
+  padding: 0;
   font: inherit;
   border: 0;
   outline: 0;
