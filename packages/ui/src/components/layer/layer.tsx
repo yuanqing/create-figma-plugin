@@ -14,10 +14,10 @@ export type LayerProps<N extends string> = {
   onValueChange?: OnValueChange<boolean, N>
   pageName?: string
   icon?: ComponentChildren
-  color?: LayerNameColor
+  color?: LayerColor
   value?: boolean
 }
-export type LayerNameColor = 'black-30' | 'black-80' | 'purple'
+export type LayerColor = 'black-30' | 'black-80' | 'purple'
 
 export function Layer<N extends string>({
   bold = false,
