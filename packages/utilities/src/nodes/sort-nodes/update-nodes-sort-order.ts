@@ -4,7 +4,8 @@ import { getParentNode } from '../get-nodes/get-parent-node'
 
 /**
  * Updates the layer list sort order to follow the sort order of the nodes
- * in the `siblingNodes` array.
+ * in the `siblingNodes` array. Does not modify the original
+ * `siblingNodes` array.
  *
  * @category Node
  */

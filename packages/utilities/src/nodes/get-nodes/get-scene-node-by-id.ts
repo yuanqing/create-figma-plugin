@@ -1,3 +1,8 @@
+/**
+ * Gets the node in the current document with the given `id`.
+ *
+ * @category Node
+ */
 export function getSceneNodeById<N extends SceneNode>(id: string): N {
   const node = figma.getNodeById(id)
   if (node === null) {

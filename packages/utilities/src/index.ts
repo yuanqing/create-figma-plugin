@@ -23,18 +23,17 @@ export { sortNodesByCanonicalOrder } from './nodes/sort-nodes/sort-nodes-by-cano
 export { sortNodesByName } from './nodes/sort-nodes/sort-nodes-by-name'
 export { updateNodesSortOrder } from './nodes/sort-nodes/update-nodes-sort-order'
 export { traverseNode } from './nodes/traverse-node'
-export { evaluateNumericExpression, isValidNumericInput } from './number'
-export {
-  cloneObject,
-  compareObjects,
-  compareStringArrays,
-  extractAttributes
-} from './object'
+export { evaluateNumericExpression } from './number/evaluate-numeric-expression'
+export { isValidNumericInput } from './number/is-valid-numeric-input'
+export { cloneObject } from './object/clone-object'
+export { compareObjects } from './object/compare-objects'
+export { compareStringArrays } from './object/compare-string-arrays'
+export { extractAttributes } from './object/extract-attributes'
 export { loadSettingsAsync, saveSettingsAsync } from './settings'
 export {
   formatErrorMessage,
   formatSuccessMessage,
-  formatWarningMessage,
-  pluralize
-} from './string'
+  formatWarningMessage
+} from './string/format-message'
+export { pluralize } from './string/pluralize'
 export { showUI } from './ui'

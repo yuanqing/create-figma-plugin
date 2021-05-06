@@ -3,6 +3,7 @@ import { getParentNode } from './get-nodes/get-parent-node'
 /**
  * Splits `nodes` into groups of sibling nodes.
  *
+ * @returns Returns an array of array of sibling `SceneNode` objects.
  * @category Node
  */
 export function computeSiblingNodes<N extends SceneNode>(
