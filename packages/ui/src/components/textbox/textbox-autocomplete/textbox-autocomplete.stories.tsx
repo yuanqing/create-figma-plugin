@@ -10,7 +10,7 @@ import {
   TextboxAutocompleteOption
 } from './textbox-autocomplete'
 
-export default { title: 'Components/Textbox Autocomplete' }
+export default { title: 'Components/Textbox/Textbox Autocomplete' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')

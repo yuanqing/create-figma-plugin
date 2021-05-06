@@ -1,0 +1,48 @@
+.textboxMultiline {
+  position: relative;
+  z-index: var(--z-index-2);
+}
+
+.textArea {
+  display: block;
+  width: 100%;
+  padding: 6px 0 6px 8px;
+  color: var(--color-black-80);
+  border-radius: var(--border-radius-2);
+  resize: none;
+}
+.textArea:disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-30);
+}
+.textArea::placeholder {
+  color: var(--color-black-30);
+}
+
+.textArea::after {
+  display: block;
+  background: orange;
+  content: attr(value);
+}
+
+.border {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-color: var(--color-black-10);
+  border-width: 1px;
+  border-radius: var(--border-radius-2);
+  pointer-events: none;
+}
+.textArea:not(:disabled):focus ~ .border {
+  border-color: var(--color-blue);
+  border-width: 2px;
+}
+.noBorder .textArea:not(:focus) ~ .border {
+  border-color: transparent;
+}
+.noBorder .textArea:not(:focus):hover ~ .border {
+  border-color: var(--color-black-10);
+}

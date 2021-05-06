@@ -4,9 +4,10 @@
 }
 
 .input {
+  display: block;
   width: 100%;
   height: 28px;
-  padding-left: 8px;
+  padding: 0 0 0 8px;
   color: var(--color-black-80);
   border-radius: var(--border-radius-2);
 }

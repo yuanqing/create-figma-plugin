@@ -83,7 +83,8 @@ label {
   display: block;
 }
 
-input {
+input,
+textarea {
   margin: 0;
   font: inherit;
   border: 0;

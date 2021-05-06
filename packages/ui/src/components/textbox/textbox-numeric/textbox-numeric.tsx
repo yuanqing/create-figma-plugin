@@ -11,7 +11,7 @@ import { createClassName } from '../../../utilities/create-class-name'
 import { MIXED_NUMBER, MIXED_STRING } from '../../../utilities/mixed-values'
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
-import styles from '../textbox.css'
+import textboxStyles from '../textbox.css'
 
 const EMPTY_STRING = ''
 const nonDigitRegex = /[^\d.]/
@@ -250,14 +250,14 @@ export function TextboxNumeric<N extends string>({
   return (
     <div
       class={createClassName([
-        styles.textbox,
-        noBorder === true ? styles.noBorder : null,
-        typeof icon === 'undefined' ? null : styles.hasIcon
+        textboxStyles.textbox,
+        noBorder === true ? textboxStyles.noBorder : null,
+        typeof icon === 'undefined' ? null : textboxStyles.hasIcon
       ])}
     >
       <input
         {...rest}
-        class={styles.input}
+        class={textboxStyles.input}
         disabled={disabled === true}
         name={name}
         onBlur={handleBlur}
@@ -272,9 +272,9 @@ export function TextboxNumeric<N extends string>({
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
       {typeof icon === 'undefined' ? null : (
-        <div class={styles.icon}>{icon}</div>
+        <div class={textboxStyles.icon}>{icon}</div>
       )}
-      <div class={styles.border}></div>
+      <div class={textboxStyles.border}></div>
     </div>
   )
 }

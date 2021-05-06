@@ -8,7 +8,7 @@ import { MIXED_STRING } from '../../utilities/mixed-values'
 import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
 import { Textbox } from './textbox'
 
-export default { title: 'Components/Textbox' }
+export default { title: 'Components/Textbox/Textbox' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')
