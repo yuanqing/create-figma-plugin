@@ -8,8 +8,7 @@ export type IconProps = {
   color?: IconColor
 }
 export type IconColor =
-  | 'black-3'
-  | 'black-10'
+  | 'black-30'
   | 'black-80'
   | 'blue'
   | 'purple'

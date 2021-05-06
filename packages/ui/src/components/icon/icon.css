@@ -2,12 +2,6 @@
   fill: currentColor;
 }
 
-.black-3 {
-  fill: var(--color-black-3);
-}
-.black-10 {
-  fill: var(--color-black-10);
-}
 .black-30 {
   fill: var(--color-black-30);
 }

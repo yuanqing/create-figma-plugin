@@ -2,9 +2,10 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../types'
-import { createClassName } from '../../utilities/create-class-name'
-import { LoadingIndicator } from '../loading-indicator/loading-indicator'
+import { Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
+import { LoadingIndicator } from '../../loading-indicator/loading-indicator'
+import { fileComparator } from '../private/file-comparator'
 import styles from './file-upload-button.css'
 
 export type FileUploadButtonProps = {
@@ -99,13 +100,4 @@ export function FileUploadButton({
       </button>
     </div>
   )
-}
-
-function fileComparator(a: File, b: File): number {
-  const aName = a.name.toLowerCase()
-  const bName = b.name.toLowerCase()
-  if (aName !== bName) {
-    return aName.localeCompare(bName)
-  }
-  return a.lastModified - b.lastModified
 }

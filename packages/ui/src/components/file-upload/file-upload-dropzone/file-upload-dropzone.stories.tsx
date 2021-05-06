@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 import { h } from 'preact'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus'
-import { Text } from '../text/text'
+import { useInitialFocus } from '../../../hooks/use-initial-focus'
+import { Text } from '../../text/text'
 import { FileUploadDropzone } from './file-upload-dropzone'
 
 export default { title: 'Components/File Upload/File Upload Dropzone' }

@@ -1,0 +1,9 @@
+.middleAlign {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.children {
+  flex: 1;
+}

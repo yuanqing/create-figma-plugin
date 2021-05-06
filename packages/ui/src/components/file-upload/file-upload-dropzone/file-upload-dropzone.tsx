@@ -2,8 +2,9 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { Props } from '../../types'
-import { createClassName } from '../../utilities/create-class-name'
+import { Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
+import { fileComparator } from '../private/file-comparator'
 import styles from './file-upload-dropzone.css'
 
 export type FileUploadDropzoneProps = {
@@ -135,13 +136,4 @@ export function FileUploadDropzone({
       <div class={styles.children}>{children}</div>
     </div>
   )
-}
-
-function fileComparator(a: File, b: File): number {
-  const aName = a.name.toLowerCase()
-  const bName = b.name.toLowerCase()
-  if (aName !== bName) {
-    return aName.localeCompare(bName)
-  }
-  return a.lastModified - b.lastModified
 }

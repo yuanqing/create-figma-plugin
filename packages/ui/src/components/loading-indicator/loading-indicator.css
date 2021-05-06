@@ -4,7 +4,8 @@
   height: 16px;
   margin: 0 auto;
 }
-.loadingIndicator svg {
+
+.svg {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,6 +13,24 @@
   height: 16px;
   animation: rotating 0.5s linear infinite;
   fill: currentColor;
+}
+.black-30 {
+  fill: var(--color-black-30);
+}
+.black-80 {
+  fill: var(--color-black-80);
+}
+.blue {
+  fill: var(--color-blue);
+}
+.white {
+  fill: var(--color-white);
+}
+.white-20 {
+  fill: var(--color-white-20);
+}
+.white-40 {
+  fill: var(--color-white-40);
 }
 
 @keyframes rotating {
