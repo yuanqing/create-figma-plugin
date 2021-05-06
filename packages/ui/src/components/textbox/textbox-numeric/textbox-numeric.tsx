@@ -274,7 +274,7 @@ export function TextboxNumeric<N extends string>({
       {typeof icon === 'undefined' ? null : (
         <div class={textboxStyles.icon}>{icon}</div>
       )}
-      <div class={textboxStyles.border}></div>
+      <div class={textboxStyles.border} />
     </div>
   )
 }

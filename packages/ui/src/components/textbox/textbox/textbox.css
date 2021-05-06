@@ -50,7 +50,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border-color: var(--color-black-10);
+  border-color: var(--color-silver);
   border-width: 1px;
   border-radius: var(--border-radius-2);
   pointer-events: none;
@@ -63,5 +63,5 @@
   border-color: transparent;
 }
 .noBorder .input:not(:focus):hover ~ .border {
-  border-color: var(--color-black-10);
+  border-color: var(--color-silver);
 }

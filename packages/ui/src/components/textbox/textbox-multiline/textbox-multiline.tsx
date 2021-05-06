@@ -117,7 +117,7 @@ export function TextboxMultiline<N extends string>({
         tabIndex={disabled === true ? -1 : 0}
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
-      <div class={styles.border}></div>
+      <div class={styles.border} />
     </div>
   )
 }

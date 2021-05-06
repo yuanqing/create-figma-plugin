@@ -131,7 +131,7 @@ export function Textbox<N extends string>({
       {typeof icon === 'undefined' ? null : (
         <div class={styles.icon}>{icon}</div>
       )}
-      <div class={styles.border}></div>
+      <div class={styles.border} />
     </div>
   )
 }

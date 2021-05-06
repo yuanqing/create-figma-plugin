@@ -51,7 +51,7 @@ export function Layer<N extends string>({
         tabIndex={0}
         type="checkbox"
       />
-      <div class={styles.fill}></div>
+      <div class={styles.fill} />
       {typeof icon === 'undefined' ? null : (
         <div class={styles.icon}>{icon}</div>
       )}

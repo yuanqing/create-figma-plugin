@@ -101,7 +101,7 @@ export function SegmentedControl<
           </label>
         )
       })}
-      <div class={styles.border}></div>
+      <div class={styles.border} />
     </div>
   )
 }

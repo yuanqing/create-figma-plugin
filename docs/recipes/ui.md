@@ -83,7 +83,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 // src/styles.css
 
 .container {
-  background-color: var(--color-black-10);
+  background-color: var(--color-silver);
 }
 ```
 

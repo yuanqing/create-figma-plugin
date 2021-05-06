@@ -3,7 +3,7 @@
   z-index: var(--z-index-2);
   display: flex;
   padding-left: var(--space-extra-small);
-  border-bottom: 1px solid var(--color-black-10);
+  border-bottom: 1px solid var(--color-silver);
 }
 
 .label {

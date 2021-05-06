@@ -211,7 +211,7 @@ export function Dropdown<
       <div class={dropdownStyles.chevronIcon}>
         <IconControlChevronDown8 />
       </div>
-      <div class={dropdownStyles.border}></div>
+      <div class={dropdownStyles.border} />
       <div
         ref={menuElementRef}
         class={createClassName([

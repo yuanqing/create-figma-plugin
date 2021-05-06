@@ -68,7 +68,7 @@ export function Checkbox<N extends string>({
           </div>
         ) : null}
       </div>
-      <div class={styles.border}></div>
+      <div class={styles.border} />
       <div class={styles.children}>{children}</div>
     </label>
   )

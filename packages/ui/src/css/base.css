@@ -6,10 +6,8 @@
   --box-shadow: 0 5px 17px rgba(0, 0, 0, 0.3), 0 2px 7px rgba(0, 0, 0, 0.26),
     inset 0 0 0 0.5px rgb(0, 0, 0), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --color-black: #000000;
-  --color-black-3: rgba(0, 0, 0, 0.03);
-  --color-black-10: rgba(0, 0, 0, 0.1);
-  --color-black-30: rgba(0, 0, 0, 0.3);
-  --color-black-80: rgba(0, 0, 0, 0.8);
+  --color-black-30: #b3b3b3;
+  --color-black-80: #333333;
   --color-blue: #18a0fb;
   --color-gray: #f7f7f7;
   --color-purple: #7b61ff;
