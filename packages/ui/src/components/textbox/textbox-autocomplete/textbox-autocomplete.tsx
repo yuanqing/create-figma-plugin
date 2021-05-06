@@ -10,7 +10,7 @@ import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconMenuCheckmarkChecked16 } from '../../icon/icon-16/icon-menu-checkmark-checked-16'
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
-import textboxStyles from '../textbox.css'
+import textboxStyles from '../textbox/textbox.css'
 
 const EMPTY_STRING = ''
 const INVALID_ID = null

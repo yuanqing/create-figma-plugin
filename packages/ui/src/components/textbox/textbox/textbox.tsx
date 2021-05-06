@@ -2,10 +2,10 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types'
-import { createClassName } from '../../utilities/create-class-name'
-import { MIXED_STRING } from '../../utilities/mixed-values'
-import { isKeyCodeCharacterGenerating } from './private/is-keycode-character-generating'
+import { OnValueChange, Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
+import { MIXED_STRING } from '../../../utilities/mixed-values'
+import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
 import styles from './textbox.css'
 
 const EMPTY_STRING = ''

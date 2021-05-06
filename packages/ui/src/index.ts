@@ -244,8 +244,8 @@ export type { TabsOption, TabsProps } from './components/tabs/tabs'
 export { Tabs } from './components/tabs/tabs'
 export type { TextAlignment, TextProps } from './components/text/text'
 export { Text } from './components/text/text'
-export type { TextboxProps } from './components/textbox/textbox'
-export { Textbox } from './components/textbox/textbox'
+export type { TextboxProps } from './components/textbox/textbox/textbox'
+export { Textbox } from './components/textbox/textbox/textbox'
 export type {
   TextboxAutocompleteOption,
   TextboxAutocompleteOptionHeader,

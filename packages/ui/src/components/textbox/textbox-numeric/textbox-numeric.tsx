@@ -11,7 +11,7 @@ import { createClassName } from '../../../utilities/create-class-name'
 import { MIXED_NUMBER, MIXED_STRING } from '../../../utilities/mixed-values'
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
-import textboxStyles from '../textbox.css'
+import textboxStyles from '../textbox/textbox.css'
 
 const EMPTY_STRING = ''
 const nonDigitRegex = /[^\d.]/
