@@ -35,12 +35,12 @@
     "build": "yarn run clean && yarn run generate-index-ts && tsc --module ES2020 --moduleResolution Node && ts-node scripts/copy-non-ts-files.ts",
     "clean": "rm -rf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json' '.storybook/**/*.html'",
-    "generate-icons": "ts-node scripts/generate-icons.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}'",
+    "generate-icons": "ts-node scripts/generate-icons.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
     "generate-index-ts": "ts-node ../../scripts/generate-index-ts.ts 'src/**/*.{ts,tsx}' '!src/**/private/**/*' && eslint --fix 'src/index.ts'",
     "lint": "eslint '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && stylelint 'src/**/*.css'",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
     "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
-    "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook"
+    "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook --port 4242"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^0.0.85-alpha.6"
