@@ -45,7 +45,7 @@ import { IconLayerLine16 } from './icon-layer-line-16'
 import { IconLayerMask16 } from './icon-layer-mask-16'
 import { IconLayerRectangle16 } from './icon-layer-rectangle-16'
 import { IconLayerSlice16 } from './icon-layer-slice-16'
-import { IconLayerType16 } from './icon-layer-type-16'
+import { IconLayerText16 } from './icon-layer-text-16'
 import { IconLayerVector16 } from './icon-layer-vector-16'
 import { IconLockLocked16 } from './icon-lock-locked-16'
 import { IconLockUnlocked16 } from './icon-lock-unlocked-16'
@@ -252,8 +252,8 @@ export const LayerSlice = function () {
   return <IconLayerSlice16 />
 }
 
-export const LayerType = function () {
-  return <IconLayerType16 />
+export const LayerText = function () {
+  return <IconLayerText16 />
 }
 
 export const LayerVector = function () {
