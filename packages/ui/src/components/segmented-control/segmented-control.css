@@ -24,8 +24,15 @@
 }
 
 .children {
-  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
   color: var(--color-black-80);
+}
+.text {
+  padding: 6px 10px;
 }
 .input:checked ~ .children {
   background-color: var(--color-silver);

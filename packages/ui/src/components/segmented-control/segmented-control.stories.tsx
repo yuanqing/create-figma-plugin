@@ -4,6 +4,9 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../hooks/use-initial-focus'
+import { IconTextAlignCenter16 } from '../icon/icon-16/icon-text-align-center-16'
+import { IconTextAlignLeft16 } from '../icon/icon-16/icon-text-align-left-16'
+import { IconTextAlignRight16 } from '../icon/icon-16/icon-text-align-right-16'
 import { SegmentedControl, SegmentedControlOption } from './segmented-control'
 
 export default { title: 'Components/Segmented Control' }
@@ -110,6 +113,23 @@ export const NumericValue = function () {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(parseInt(newValue, 10))
+  }
+  return (
+    <SegmentedControl onChange={handleChange} options={options} value={value} />
+  )
+}
+
+export const Icons = function () {
+  const [value, setValue] = useState('left')
+  const options: Array<SegmentedControlOption> = [
+    { children: <IconTextAlignLeft16 />, value: 'left' },
+    { children: <IconTextAlignCenter16 />, value: 'center' },
+    { children: <IconTextAlignRight16 />, value: 'right' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
   }
   return (
     <SegmentedControl onChange={handleChange} options={options} value={value} />
