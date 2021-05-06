@@ -3,7 +3,6 @@ export type { ButtonProps } from './components/button/button'
 export { Button } from './components/button/button'
 export type { CheckboxProps } from './components/checkbox/checkbox'
 export { Checkbox } from './components/checkbox/checkbox'
-export type { DividerProps } from './components/divider/divider'
 export { Divider } from './components/divider/divider'
 export type {
   DropdownOption,
@@ -13,11 +12,11 @@ export type {
   DropdownProps
 } from './components/dropdown/dropdown'
 export { Dropdown } from './components/dropdown/dropdown'
-export type { FileUploadButtonProps } from './components/file-upload-button/file-upload-button'
-export { FileUploadButton } from './components/file-upload-button/file-upload-button'
-export type { FileUploadDropzoneProps } from './components/file-upload-dropzone/file-upload-dropzone'
-export { FileUploadDropzone } from './components/file-upload-dropzone/file-upload-dropzone'
-export type { IconProps } from './components/icon/create-icon'
+export type { FileUploadButtonProps } from './components/file-upload/file-upload-button/file-upload-button'
+export { FileUploadButton } from './components/file-upload/file-upload-button/file-upload-button'
+export type { FileUploadDropzoneProps } from './components/file-upload/file-upload-dropzone/file-upload-dropzone'
+export { FileUploadDropzone } from './components/file-upload/file-upload-dropzone/file-upload-dropzone'
+export type { IconColor, IconProps } from './components/icon/create-icon'
 export { createIcon } from './components/icon/create-icon'
 export { IconControlChevronDown8 } from './components/icon/icon-8/icon-control-chevron-down-8'
 export { IconControlChevronUp8 } from './components/icon/icon-8/icon-control-chevron-up-8'
@@ -66,7 +65,7 @@ export { IconLayerLine16 } from './components/icon/icon-16/icon-layer-line-16'
 export { IconLayerMask16 } from './components/icon/icon-16/icon-layer-mask-16'
 export { IconLayerRectangle16 } from './components/icon/icon-16/icon-layer-rectangle-16'
 export { IconLayerSlice16 } from './components/icon/icon-16/icon-layer-slice-16'
-export { IconLayerType16 } from './components/icon/icon-16/icon-layer-type-16'
+export { IconLayerText16 } from './components/icon/icon-16/icon-layer-text-16'
 export { IconLayerVector16 } from './components/icon/icon-16/icon-layer-vector-16'
 export { IconLockLocked16 } from './components/icon/icon-16/icon-lock-locked-16'
 export { IconLockUnlocked16 } from './components/icon/icon-16/icon-lock-unlocked-16'
@@ -191,7 +190,7 @@ export { IconVisibilityVisible32 } from './components/icon/icon-32/icon-visibili
 export { IconWarning32 } from './components/icon/icon-32/icon-warning-32'
 export { IconWarningFilled32 } from './components/icon/icon-32/icon-warning-filled-32'
 export { IconWorld32 } from './components/icon/icon-32/icon-world-32'
-export type { LayerProps, LayerType } from './components/layer/layer'
+export type { LayerColor, LayerProps } from './components/layer/layer'
 export { Layer } from './components/layer/layer'
 export type {
   ColumnsProps,
@@ -208,6 +207,8 @@ export type {
   InlineSpace
 } from './components/layout/inline/inline'
 export { Inline } from './components/layout/inline/inline'
+export type { MiddleAlignProps } from './components/layout/middle-align/middle-align'
+export { MiddleAlign } from './components/layout/middle-align/middle-align'
 export type { StackProps, StackSpace } from './components/layout/stack/stack'
 export { Stack } from './components/layout/stack/stack'
 export type {
@@ -215,9 +216,10 @@ export type {
   VerticalSpaceSpace
 } from './components/layout/vertical-space/vertical-space'
 export { VerticalSpace } from './components/layout/vertical-space/vertical-space'
-export type { LoadingProps } from './components/loading/loading'
-export { Loading } from './components/loading/loading'
-export type { LoadingIndicatorProps } from './components/loading-indicator/loading-indicator'
+export type {
+  LoadingIndicatorColor,
+  LoadingIndicatorProps
+} from './components/loading-indicator/loading-indicator'
 export { LoadingIndicator } from './components/loading-indicator/loading-indicator'
 export type { PreviewProps } from './components/preview/preview'
 export { Preview } from './components/preview/preview'
@@ -249,6 +251,8 @@ export type {
   TextboxAutocompleteProps
 } from './components/textbox/textbox-autocomplete/textbox-autocomplete'
 export { TextboxAutocomplete } from './components/textbox/textbox-autocomplete/textbox-autocomplete'
+export type { TextboxMultilineProps } from './components/textbox/textbox-multiline/textbox-multiline'
+export { TextboxMultiline } from './components/textbox/textbox-multiline/textbox-multiline'
 export type { TextboxNumericProps } from './components/textbox/textbox-numeric/textbox-numeric'
 export { TextboxNumeric } from './components/textbox/textbox-numeric/textbox-numeric'
 export { useClickOutside } from './hooks/use-click-outside'
