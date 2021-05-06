@@ -104,6 +104,16 @@ export const Mixed = function () {
   return <TextboxMultiline onInput={handleInput} value={value} />
 }
 
+export const Rows = function () {
+  const [value, setValue] = useState('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <TextboxMultiline onInput={handleInput} rows={5} value={value} />
+}
+
 export const OnValueChange = function () {
   const [value, setValue] = useState('Text')
   return <TextboxMultiline onValueChange={setValue} value={value} />

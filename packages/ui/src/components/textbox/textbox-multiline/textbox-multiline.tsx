@@ -12,7 +12,6 @@ const EMPTY_STRING = ''
 
 export type TextboxMultilineProps<N extends string> = {
   disabled?: boolean
-  lineCount?: number
   name?: N
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLTextAreaElement>>
@@ -20,12 +19,12 @@ export type TextboxMultilineProps<N extends string> = {
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
+  rows?: number
   value: string
 }
 
 export function TextboxMultiline<N extends string>({
   disabled = false,
-  lineCount = 3,
   name,
   noBorder = false,
   onInput = function () {},
@@ -33,6 +32,7 @@ export function TextboxMultiline<N extends string>({
   placeholder,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
+  rows = 3,
   value,
   ...rest
 }: Props<HTMLTextAreaElement, TextboxMultilineProps<N>>): JSX.Element {
@@ -113,7 +113,7 @@ export function TextboxMultiline<N extends string>({
         onKeyDown={handleKeyDown}
         onMouseUp={handleMouseUp}
         placeholder={placeholder}
-        rows={lineCount}
+        rows={rows}
         tabIndex={disabled === true ? -1 : 0}
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
