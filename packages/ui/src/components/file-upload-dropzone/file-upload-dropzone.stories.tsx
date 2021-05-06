@@ -6,7 +6,7 @@ import { useInitialFocus } from '../../hooks/use-initial-focus'
 import { Text } from '../text/text'
 import { FileUploadDropzone } from './file-upload-dropzone'
 
-export default { title: 'Components/File Upload Dropzone' }
+export default { title: 'Components/File Upload/File Upload Dropzone' }
 
 export const Default = function () {
   function handleSelectedFiles(files: Array<File>) {
