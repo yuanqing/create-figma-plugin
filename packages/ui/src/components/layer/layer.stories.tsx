@@ -3,6 +3,8 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
+import { IconLayerComponent16 } from '../icon/icon-16/icon-layer-component-16'
+import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
 import { Layer } from './layer'
 
 export default { title: 'Components/Layer' }
@@ -15,7 +17,7 @@ export const Frame = function () {
     setValue(newValue)
   }
   return (
-    <Layer onChange={handleChange} type="frame" value={value}>
+    <Layer icon={<IconLayerFrame16 />} onChange={handleChange} value={value}>
       Text
     </Layer>
   )
@@ -29,7 +31,7 @@ export const Selected = function () {
     setValue(newValue)
   }
   return (
-    <Layer onChange={handleChange} type="frame" value={value}>
+    <Layer icon={<IconLayerFrame16 />} onChange={handleChange} value={value}>
       Text
     </Layer>
   )
@@ -44,9 +46,9 @@ export const PageName = function () {
   }
   return (
     <Layer
+      icon={<IconLayerFrame16 />}
       onChange={handleChange}
       pageName="Page Name"
-      type="frame"
       value={value}
     >
       Text
@@ -64,9 +66,9 @@ export const LongText = function () {
   }
   return (
     <Layer
+      icon={<IconLayerFrame16 />}
       onChange={handleChange}
       pageName="Page Name"
-      type="frame"
       value={value}
     >
       {longText}
@@ -82,7 +84,13 @@ export const Component = function () {
     setValue(newValue)
   }
   return (
-    <Layer onChange={handleChange} type="component" value={value}>
+    <Layer
+      bold
+      color="purple"
+      icon={<IconLayerComponent16 />}
+      onChange={handleChange}
+      value={value}
+    >
       Text
     </Layer>
   )

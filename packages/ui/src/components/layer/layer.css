@@ -6,12 +6,14 @@
   height: 32px;
   padding: 0 12px;
 }
-
-.component {
-  color: var(--color-purple);
+.black-30 {
+  color: var(--color-black-30);
 }
-.frame {
+.black-80 {
   color: var(--color-black-80);
+}
+.purple {
+  color: var(--color-purple);
 }
 
 .icon,
@@ -30,8 +32,7 @@
 .layerName {
   padding: 0 8px;
 }
-.component .layerName,
-.frame .layerName {
+.bold {
   font-weight: var(--font-weight-bold);
 }
 
