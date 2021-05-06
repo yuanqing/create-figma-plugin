@@ -12,7 +12,7 @@ async function main(): Promise<void> {
   const packageJsonFiles = await globby(globs, { deep: 2 })
   const promises: Array<Promise<void>> = []
   packageJsonFiles.forEach(function (packageJsonFile: string): void {
-    async function run(): Promise<void> {
+    async function runAsync(): Promise<void> {
       await ncu.run({
         packageFile: packageJsonFile,
         packageManager: 'npm',
@@ -22,7 +22,7 @@ async function main(): Promise<void> {
         upgrade: true
       })
     }
-    promises.push(run())
+    promises.push(runAsync())
   })
   await Promise.all(promises)
 }
