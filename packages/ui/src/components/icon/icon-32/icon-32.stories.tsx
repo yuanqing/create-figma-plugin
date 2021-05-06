@@ -5,16 +5,17 @@ import { h } from 'preact'
 import { IconAdjust32 } from './icon-adjust-32'
 import { IconAngle32 } from './icon-angle-32'
 import { IconAnimation32 } from './icon-animation-32'
+import { IconArrowDownCircle32 } from './icon-arrow-down-circle-32'
+import { IconArrowLeftCircle32 } from './icon-arrow-left-circle-32'
 import { IconArrowLeftRight32 } from './icon-arrow-left-right-32'
+import { IconArrowRightCircle32 } from './icon-arrow-right-circle-32'
+import { IconArrowUpCircle32 } from './icon-arrow-up-circle-32'
 import { IconArrowUpDown32 } from './icon-arrow-up-down-32'
 import { IconBell32 } from './icon-bell-32'
 import { IconBlend32 } from './icon-blend-32'
 import { IconBlendEmpty32 } from './icon-blend-empty-32'
-import { IconCircleArrowUp32 } from './icon-circle-arrow-up-32'
-import { IconCircleCheck32 } from './icon-circle-check-32'
-import { IconCircleCheckFilled32 } from './icon-circle-check-filled-32'
-import { IconCircleInfo32 } from './icon-circle-info-32'
-import { IconCircleNotice32 } from './icon-circle-notice-32'
+import { IconCheckCircle32 } from './icon-check-circle-32'
+import { IconCheckCircleFilled32 } from './icon-check-circle-filled-32'
 import { IconCode32 } from './icon-code-32'
 import { IconComponent32 } from './icon-component-32'
 import { IconConnectionConnect32 } from './icon-connection-connect-32'
@@ -33,6 +34,7 @@ import { IconFrame32 } from './icon-frame-32'
 import { IconGrid32 } from './icon-grid-32'
 import { IconHyperlinkBreak32 } from './icon-hyperlink-break-32'
 import { IconHyperlinkLinked32 } from './icon-hyperlink-linked-32'
+import { IconInfo32 } from './icon-info-32'
 import { IconLayoutAlignBottom32 } from './icon-layout-align-bottom-32'
 import { IconLayoutAlignHorizontalCenters32 } from './icon-layout-align-horizontal-centers-32'
 import { IconLayoutAlignLeft32 } from './icon-layout-align-left-32'
@@ -58,6 +60,7 @@ import { IconMinus32 } from './icon-minus-32'
 import { IconMissingFonts32 } from './icon-missing-fonts-32'
 import { IconNavigateBack32 } from './icon-navigate-back-32'
 import { IconNavigateTo32 } from './icon-navigate-to-32'
+import { IconNotice32 } from './icon-notice-32'
 import { IconPaddingHorizontal32 } from './icon-padding-horizontal-32'
 import { IconPaddingVertical32 } from './icon-padding-vertical-32'
 import { IconParagraphIndent32 } from './icon-paragraph-indent-32'
@@ -110,8 +113,24 @@ export const Animation = function () {
   return <IconAnimation32 />
 }
 
+export const ArrowDownCircle = function () {
+  return <IconArrowDownCircle32 />
+}
+
+export const ArrowLeftCircle = function () {
+  return <IconArrowLeftCircle32 />
+}
+
 export const ArrowLeftRight = function () {
   return <IconArrowLeftRight32 />
+}
+
+export const ArrowRightCircle = function () {
+  return <IconArrowRightCircle32 />
+}
+
+export const ArrowUpCircle = function () {
+  return <IconArrowUpCircle32 />
 }
 
 export const ArrowUpDown = function () {
@@ -130,24 +149,12 @@ export const Blend = function () {
   return <IconBlend32 />
 }
 
-export const CircleArrowUp = function () {
-  return <IconCircleArrowUp32 />
+export const CheckCircleFilled = function () {
+  return <IconCheckCircleFilled32 />
 }
 
-export const CircleCheckFilled = function () {
-  return <IconCircleCheckFilled32 />
-}
-
-export const CircleCheck = function () {
-  return <IconCircleCheck32 />
-}
-
-export const CircleInfo = function () {
-  return <IconCircleInfo32 />
-}
-
-export const CircleNotice = function () {
-  return <IconCircleNotice32 />
+export const CheckCircle = function () {
+  return <IconCheckCircle32 />
 }
 
 export const Code = function () {
@@ -220,6 +227,10 @@ export const HyperlinkBreak = function () {
 
 export const HyperlinkLinked = function () {
   return <IconHyperlinkLinked32 />
+}
+
+export const Info = function () {
+  return <IconInfo32 />
 }
 
 export const LayoutAlignBottom = function () {
@@ -320,6 +331,10 @@ export const NavigateBack = function () {
 
 export const NavigateTo = function () {
   return <IconNavigateTo32 />
+}
+
+export const Notice = function () {
+  return <IconNotice32 />
 }
 
 export const PaddingHorizontal = function () {
