@@ -11,6 +11,7 @@
     "postinstall": "simple-git-hooks && yarn run build",
     "publish": "yarn run build && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
+    "storybook": "lerna run --stream storybook",
     "test": "lerna run --stream test",
     "version": "lerna version",
     "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook",

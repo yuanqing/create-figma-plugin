@@ -38,9 +38,9 @@
     "generate-icons": "ts-node scripts/generate-icons.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
     "generate-index-ts": "ts-node ../../scripts/generate-index-ts.ts 'src/**/*.{ts,tsx}' '!src/**/private/**/*' && eslint --fix 'src/index.ts'",
     "lint": "eslint '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && stylelint 'src/**/*.css'",
+    "storybook": "yarn run storybook-clean && mkdirp node_modules && start-storybook --port 4242",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
-    "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'",
-    "storybook-watch": "yarn run storybook-clean && mkdirp node_modules && start-storybook --port 4242"
+    "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^0.0.85-alpha.6"
