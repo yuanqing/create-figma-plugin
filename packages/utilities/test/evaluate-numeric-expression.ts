@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { evaluateNumericExpression } from '../src/number'
+import { evaluateNumericExpression } from '../src/number/evaluate-numeric-expression'
 
 test('invalid expressions', function (t) {
   t.plan(3)

@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { isValidNumericInput } from '../../src/number'
+import { isValidNumericInput } from '../../src/number/is-valid-numeric-input'
 
 test('string - empty', async function (t) {
   t.plan(1)

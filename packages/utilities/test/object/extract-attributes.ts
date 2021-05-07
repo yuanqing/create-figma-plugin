@@ -1,6 +1,6 @@
 import { test } from 'tap'
 
-import { extractAttributes } from '../../src/object'
+import { extractAttributes } from '../../src/object/extract-attributes'
 
 test('extract attributes', function (t) {
   t.plan(1)

@@ -1,4 +1,4 @@
-import { compareStringArrays } from '../../object'
+import { compareStringArrays } from '../../object/compare-string-arrays'
 import { areSiblingNodes } from '../are-sibling-nodes'
 import { getParentNode } from '../get-nodes/get-parent-node'
 
