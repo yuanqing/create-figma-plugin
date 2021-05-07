@@ -42,7 +42,7 @@ export function Textbox<N extends string>({
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
 
-  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
+  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
   const handleBlur = useCallback(function (): void {
     setOriginalValue(EMPTY_STRING)

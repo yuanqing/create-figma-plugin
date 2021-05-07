@@ -36,7 +36,7 @@ export function TextboxMultiline<N extends string>({
   value,
   ...rest
 }: Props<HTMLTextAreaElement, TextboxMultilineProps<N>>): JSX.Element {
-  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
+  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
   const handleBlur = useCallback(function (): void {
     setOriginalValue(EMPTY_STRING)

@@ -81,7 +81,7 @@ export function TextboxAutocomplete<N extends string>({
 
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [selectedId, setSelectedId] = useState<Id>(INVALID_ID)
-  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
+  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
   const [editedValue, setEditedValue] = useState<string>(value) // Value being edited that does not match any of the options
 
   let options: Array<Option> = createOptions(rest.options)
