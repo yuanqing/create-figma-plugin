@@ -66,7 +66,8 @@
   },
   "prettier": "eslint-config-yuanqing/prettier",
   "simple-git-hooks": {
-    "pre-commit": "yarn run lint-staged"
+    "pre-commit": "yarn run lint-staged",
+    "pre-push": "yarn run test"
   },
   "single-page-markdown-website": {
     "title": "Create Figma Plugin",
