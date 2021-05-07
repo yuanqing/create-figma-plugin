@@ -258,6 +258,8 @@ export type { TextboxMultilineProps } from './components/textbox/textbox-multili
 export { TextboxMultiline } from './components/textbox/textbox-multiline/textbox-multiline'
 export type { TextboxNumericProps } from './components/textbox/textbox-numeric/textbox-numeric'
 export { TextboxNumeric } from './components/textbox/textbox-numeric/textbox-numeric'
+export type { ToggleProps } from './components/toggle/toggle'
+export { Toggle } from './components/toggle/toggle'
 export { useClickOutside } from './hooks/use-click-outside'
 export { useFocusTrap } from './hooks/use-focus-trap'
 export { useForm } from './hooks/use-form'
