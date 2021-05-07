@@ -171,6 +171,24 @@ export const MinimumMaximum = function () {
   )
 }
 
+export const Suffix = function () {
+  const [value, setValue] = useState('100%')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    // console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      maximum={100}
+      minimum={0}
+      onInput={handleInput}
+      suffix="%"
+      value={value}
+    />
+  )
+}
+
 export const OnValueChange = function () {
   const [value, setValue] = useState('42')
   function handleNumericValueChange(newNumericValue: null | number) {

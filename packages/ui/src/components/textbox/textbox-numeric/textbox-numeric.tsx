@@ -3,11 +3,12 @@ import {
   evaluateNumericExpression,
   isValidNumericInput
 } from '@create-figma-plugin/utilities'
-import { ComponentChildren, h, JSX } from 'preact'
-import { useCallback, useEffect, useState } from 'preact/hooks'
+import { ComponentChildren, h, JSX, RefObject } from 'preact'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { MIXED_NUMBER, MIXED_STRING } from '../../../utilities/mixed-values'
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
@@ -32,6 +33,7 @@ export type TextboxNumericProps<N extends string> = {
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
+  suffix?: string
   value: string
 }
 
@@ -51,6 +53,7 @@ export function TextboxNumeric<N extends string>({
   placeholder,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
+  suffix,
   value,
   ...rest
 }: Props<HTMLInputElement, TextboxNumericProps<N>>): JSX.Element {
@@ -58,11 +61,34 @@ export function TextboxNumeric<N extends string>({
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
 
-  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it is focused
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
-  const handleBlur = useCallback(function (): void {
-    setOriginalValue(EMPTY_STRING)
-  }, [])
+  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
+
+  const handleBlur = useCallback(
+    function (): void {
+      if (typeof suffix !== 'undefined') {
+        let newValue: null | string = null
+        if (value === suffix) {
+          // We don't want a textbox to contain just the `suffix`, so clear the `value`
+          newValue = EMPTY_STRING
+        }
+        if (hasSuffix(value, suffix) === false) {
+          // Need to add the `suffix` to `value`
+          newValue = appendSuffix(value, suffix)
+        }
+        if (newValue !== null) {
+          const inputElement = getCurrentFromRef(inputElementRef)
+          inputElement.value = newValue
+          const inputEvent = document.createEvent('Event')
+          inputEvent.initEvent('input', true, true)
+          inputElement.dispatchEvent(inputEvent)
+        }
+      }
+      setOriginalValue(EMPTY_STRING)
+    },
+    [suffix, value]
+  )
 
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
@@ -124,14 +150,16 @@ export function TextboxNumeric<N extends string>({
               newValue = minimum + delta
             }
           }
-          const formattedValue = `${newValue}`
+          const formattedValue = appendSuffix(`${newValue}`, suffix)
           element.value = formattedValue
           element.select()
           onValueChange(formattedValue, name)
           onInput(event)
           return
         }
-        const evaluatedValue = evaluateNumericExpression(value)
+        const evaluatedValue = evaluateNumericExpression(
+          trimSuffix(value, suffix)
+        )
         if (evaluatedValue === null) {
           return
         }
@@ -157,9 +185,9 @@ export function TextboxNumeric<N extends string>({
         const significantFiguresCount = countSignificantFigures(
           nonDigitRegex.test(value) === true ? `${evaluatedValue}` : value
         )
-        const formattedValue = formatSignificantFigures(
-          newValue,
-          significantFiguresCount
+        const formattedValue = appendSuffix(
+          formatSignificantFigures(newValue, significantFiguresCount),
+          suffix
         )
         element.value = formattedValue
         element.select()
@@ -171,17 +199,20 @@ export function TextboxNumeric<N extends string>({
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        const nextValue =
+        // Piece together `newValue`, and stop the `keyDown` event if `newValue` is invalid
+        const newValue = trimSuffix(
           value === MIXED_STRING
             ? event.key
-            : computeNextValue(element, event.key)
+            : computeNextValue(element, event.key),
+          suffix
+        )
         if (
-          isValidNumericInput(nextValue, { integersOnly: integer }) === false
+          isValidNumericInput(newValue, { integersOnly: integer }) === false
         ) {
           event.preventDefault()
           return
         }
-        const evaluatedValue = evaluateNumericExpression(nextValue)
+        const evaluatedValue = evaluateNumericExpression(newValue)
         if (evaluatedValue === null) {
           return
         }
@@ -205,6 +236,7 @@ export function TextboxNumeric<N extends string>({
       originalValue,
       propagateEscapeKeyDown,
       revertOnEscapeKeyDown,
+      suffix,
       value
     ]
   )
@@ -228,23 +260,30 @@ export function TextboxNumeric<N extends string>({
         event.currentTarget,
         event.clipboardData.getData('Text')
       )
-      if (isValidNumericInput(nextValue, { integersOnly: integer }) === false) {
+      if (
+        isValidNumericInput(trimSuffix(nextValue, suffix), {
+          integersOnly: integer
+        }) === false
+      ) {
         event.preventDefault()
       }
     },
-    [integer]
+    [integer, suffix]
   )
 
   useEffect(
     function () {
+      // Call `onNumericValueChange` if `value` is a valid numeric value
       if (value === MIXED_STRING) {
         onNumericValueChange(MIXED_NUMBER, name)
         return
       }
-      const evaluatedValue = evaluateNumericExpression(value)
+      const evaluatedValue = evaluateNumericExpression(
+        trimSuffix(value, suffix)
+      )
       onNumericValueChange(evaluatedValue, name)
     },
-    [name, onNumericValueChange, value]
+    [name, onNumericValueChange, suffix, value]
   )
 
   return (
@@ -257,6 +296,7 @@ export function TextboxNumeric<N extends string>({
     >
       <input
         {...rest}
+        ref={inputElementRef}
         class={textboxStyles.input}
         disabled={disabled === true}
         name={name}
@@ -303,4 +343,25 @@ function formatSignificantFigures(
   const fractionalPart = result[1]
   const count = significantFiguresCount - fractionalPart.length
   return `${value}${'0'.repeat(count)}`
+}
+
+function appendSuffix(string: string, suffix: undefined | string) {
+  if (typeof suffix === 'undefined') {
+    return string
+  }
+  if (string === EMPTY_STRING) {
+    return EMPTY_STRING
+  }
+  return `${string}${suffix}`
+}
+
+function trimSuffix(string: string, suffix: undefined | string): string {
+  if (typeof suffix === 'undefined') {
+    return string
+  }
+  return string.replace(new RegExp(`${suffix}$`), EMPTY_STRING)
+}
+
+function hasSuffix(string: string, suffix: string): boolean {
+  return new RegExp(`${suffix}$`).test(string)
 }
