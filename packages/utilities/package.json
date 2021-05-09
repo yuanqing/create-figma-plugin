@@ -29,12 +29,12 @@
   "exports": "./lib/index.js",
   "scripts": {
     "build": "yarn run clean && yarn run generate-index-ts && tsc --build",
-    "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{scripts,src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
-    "generate-docs": "node --loader ts-node/esm --no-warnings scripts/generate-docs.ts",
-    "generate-index-ts": "node --loader ts-node/esm --no-warnings ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix 'src/index.ts'",
-    "lint": "eslint '{scripts,src,test}/**/*.ts'",
-    "test": "yarn run build && ava 'test/**/*.ts'"
+    "clean": "rm -rf './*.log' ./lib ./tsconfig.tsbuildinfo",
+    "fix": "eslint --fix './{scripts,src,test}/**/*.ts' && prettier --loglevel error --write './*.json'",
+    "generate-docs": "node --loader ts-node/esm --no-warnings ./scripts/generate-docs.ts",
+    "generate-index-ts": "node --loader ts-node/esm --no-warnings ../../scripts/generate-index-ts.ts -- './src/**/*.ts' '!./src/**/private/**/*' && eslint --fix './src/index.ts'",
+    "lint": "eslint './{scripts,src,test}/**/*.ts'",
+    "test": "yarn run build && ava './test/**/*.ts'"
   },
   "dependencies": {
     "natural-compare-lite": "1.4.0"
