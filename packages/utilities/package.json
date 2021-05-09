@@ -26,7 +26,6 @@
     "./lib"
   ],
   "main": "./lib/index.js",
-  "exports": "./lib/index.js",
   "scripts": {
     "build": "yarn run clean && yarn run generate-index-ts && tsc --build",
     "clean": "rm -rf './*.log' ./lib ./tsconfig.tsbuildinfo",
