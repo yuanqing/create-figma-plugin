@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main(): Promise<void> {
   const allFiles = await globby([
-    join(resolve(__dirname, '', 'src'), '**', '*')
+    join(resolve(__dirname, '..', 'src'), '**', '*')
   ])
   const nonTsFiles = allFiles.filter(function (file): boolean {
     return /\.tsx?$/.test(file) === false
