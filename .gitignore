@@ -2,8 +2,6 @@
 *.log
 *.css.d.ts
 *.tsbuildinfo
-.nyc_output/
-coverage/
 lib/
 node_modules/
 /build/
