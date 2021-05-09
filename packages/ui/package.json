@@ -43,7 +43,7 @@
     "fix": "eslint --fix './{.storybook,scripts,src}/**/*.{js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint --fix './src/**/*.css' && prettier --loglevel error --write './*.json' './.storybook/**/*.html'",
     "generate-icons": "node --loader ts-node/esm --no-warnings scripts/generate-icons.ts && eslint --fix './src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
     "generate-index-ts": "node --loader ts-node/esm --no-warnings ../../scripts/generate-index-ts.ts -- './src/**/*.{ts,tsx}' '!./src/**/private/**/*' && eslint --fix './src/index.ts'",
-    "lint": "eslint './{.storybook,scripts,src}/**/*.{js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint './src/**/*.css'",
+    "lint": "eslint './{.storybook,scripts,src}/**/*.{js,ts,tsx}' && stylelint './src/**/*.css'",
     "storybook": "yarn run storybook-clean && mkdirp ./node_modules && start-storybook --port 4242",
     "storybook-build": "yarn run storybook-clean && mkdirp ./node_modules && build-storybook --output-dir ./build",
     "storybook-clean": "rm -rf './*.log' ./build './src/**/*.css.d.ts'"
@@ -81,5 +81,26 @@
   "peerDependencies": {
     "preact": "^10"
   },
-  "sideEffects": false
+  "eslintConfig": {
+    "extends": "yuanqing",
+    "ignorePatterns": [
+      "*.css.d.ts"
+    ],
+    "rules": {
+      "react/no-unknown-property": [
+        "error",
+        {
+          "ignore": [
+            "class",
+            "clip-rule",
+            "fill-rule"
+          ]
+        }
+      ]
+    }
+  },
+  "sideEffects": false,
+  "stylelint": {
+    "extends": "stylelint-config-yuanqing"
+  }
 }

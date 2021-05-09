@@ -29,8 +29,8 @@
   "scripts": {
     "build": "yarn run clean && tsc --build",
     "clean": "rm -rf './*.log' ./lib ./tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{src,test}/**/*.ts' --ignore-pattern plugin-templates && prettier --loglevel error --write './*.json'",
-    "lint": "eslint './{src,test}/**/*.ts' --ignore-pattern plugin-templates",
+    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write './*.json'",
+    "lint": "eslint './{src,test}/**/*.ts'",
     "test": "yarn run build && ava './test/**/*.ts'"
   },
   "dependencies": {
@@ -77,5 +77,11 @@
       "configurableModuleFormat": true
     },
     "serial": true
+  },
+  "eslintConfig": {
+    "extends": "yuanqing",
+    "ignorePatterns": [
+      "plugin-templates"
+    ]
   }
 }

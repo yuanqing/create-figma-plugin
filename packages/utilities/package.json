@@ -66,5 +66,8 @@
     },
     "serial": true
   },
+  "eslintConfig": {
+    "extends": "yuanqing"
+  },
   "sideEffects": false
 }

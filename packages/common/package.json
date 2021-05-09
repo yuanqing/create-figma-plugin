@@ -62,5 +62,8 @@
       "configurableModuleFormat": true
     },
     "serial": true
+  },
+  "eslintConfig": {
+    "extends": "yuanqing"
   }
 }

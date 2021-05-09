@@ -37,19 +37,7 @@
     "typescript": "^4.2.4"
   },
   "eslintConfig": {
-    "extends": "yuanqing",
-    "rules": {
-      "react/no-unknown-property": [
-        "error",
-        {
-          "ignore": [
-            "class",
-            "clip-rule",
-            "fill-rule"
-          ]
-        }
-      ]
-    }
+    "extends": "yuanqing"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
