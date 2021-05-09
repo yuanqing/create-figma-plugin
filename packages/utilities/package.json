@@ -64,7 +64,8 @@
     "nonSemVerExperiments": {
       "configurableModuleFormat": true
     },
-    "serial": true
+    "serial": true,
+    "timeout": "2m"
   },
   "eslintConfig": {
     "extends": "yuanqing"
