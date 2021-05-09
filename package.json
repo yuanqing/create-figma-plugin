@@ -40,12 +40,11 @@
     "extends": "yuanqing"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
+    "*.{cjs,js,ts,tsx}": [
       "eslint"
     ],
     "*.css": [
-      "stylelint",
-      "prettier"
+      "stylelint"
     ]
   },
   "prettier": "eslint-config-yuanqing/prettier",
