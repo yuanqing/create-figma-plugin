@@ -1,6 +1,6 @@
-import { compareStringArrays } from '../../object/compare-string-arrays'
-import { areSiblingNodes } from '../are-sibling-nodes'
-import { getParentNode } from '../get-nodes/get-parent-node'
+import { compareStringArrays } from '../../object/compare-string-arrays.js'
+import { getParentNode } from '../get-nodes/get-parent-node.js'
+import { areSiblingNodes } from '../sibling-nodes/are-sibling-nodes.js'
 
 /**
  * Updates the layer list sort order to follow the sort order of the nodes

@@ -1,6 +1,6 @@
-import { test } from 'tap'
+import test from 'ava'
 
-import { extractAttributes } from '../../src/object/extract-attributes'
+import { extractAttributes } from '../../src/object/extract-attributes.js'
 
 test('extract attributes', function (t) {
   t.plan(1)

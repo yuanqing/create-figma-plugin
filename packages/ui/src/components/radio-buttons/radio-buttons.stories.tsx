@@ -3,8 +3,8 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus'
-import { Text } from '../text/text'
+import { useInitialFocus } from '../../hooks/use-initial-focus.js'
+import { Text } from '../text/text.js'
 import { RadioButtons, RadioButtonsOption } from './radio-buttons'
 
 export default { title: 'Components/Radio Buttons' }

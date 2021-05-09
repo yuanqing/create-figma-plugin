@@ -1,4 +1,4 @@
-import { getParentNode } from './get-nodes/get-parent-node'
+import { getParentNode } from '../get-nodes/get-parent-node.js'
 
 /**
  * Checks if all nodes in `nodes` are sibling nodes.

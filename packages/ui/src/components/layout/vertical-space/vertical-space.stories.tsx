@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { VerticalSpace } from './vertical-space'
+import { VerticalSpace } from './vertical-space.js'
 
 export default { title: 'Components/Layout/Vertical Space' }
 

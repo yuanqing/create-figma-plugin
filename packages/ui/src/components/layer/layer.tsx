@@ -3,7 +3,7 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
-import { createClassName } from '../../utilities/create-class-name'
+import { createClassName } from '../../utilities/create-class-name.js'
 import styles from './layer.css'
 
 export type LayerProps<N extends string> = {

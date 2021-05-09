@@ -1,4 +1,4 @@
-import { traverseNode } from '../traverse-node'
+import { traverseNode } from '../traverse-node.js'
 
 /**
  * Gets all the components in the current document.

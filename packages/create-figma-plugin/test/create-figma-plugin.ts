@@ -1,25 +1,28 @@
-import { pathExists } from 'fs-extra'
-import { join } from 'path'
+import test from 'ava'
+import fs from 'fs-extra'
+import { dirname, join } from 'path'
 import rimraf from 'rimraf'
-import { test } from 'tap'
+import { fileURLToPath } from 'url'
 
-import { createFigmaPluginAsync } from '../src/create-figma-plugin-async'
+import { createFigmaPluginAsync } from '../src/create-figma-plugin-async.js'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 test('use default', async function (t) {
   t.plan(7)
   process.chdir(join(__dirname, 'fixtures', '1-use-default'))
   await cleanUpAsync()
-  t.notOk(await pathExists('figma-plugin'))
+  t.false(await fs.pathExists('figma-plugin'))
   await createFigmaPluginAsync(
     { name: 'figma-plugin', template: 'default' },
     true
   )
-  t.ok(await pathExists('figma-plugin'))
-  t.ok(await pathExists('figma-plugin/.gitignore'))
-  t.ok(await pathExists('figma-plugin/node_modules'))
-  t.ok(await pathExists('figma-plugin/package.json'))
-  t.ok(await pathExists('figma-plugin/README.md'))
-  t.ok(await pathExists('figma-plugin/src/main.ts'))
+  t.true(await fs.pathExists('figma-plugin'))
+  t.true(await fs.pathExists('figma-plugin/.gitignore'))
+  t.true(await fs.pathExists('figma-plugin/node_modules'))
+  t.true(await fs.pathExists('figma-plugin/package.json'))
+  t.true(await fs.pathExists('figma-plugin/README.md'))
+  t.true(await fs.pathExists('figma-plugin/src/main.ts'))
   await cleanUpAsync()
 })
 

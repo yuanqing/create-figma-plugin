@@ -1,9 +1,9 @@
 import { constants } from '@create-figma-plugin/common'
 import gitUserName from 'git-user-name'
-import { prompt } from 'inquirer'
+import inquirer from 'inquirer'
 
-import { Settings } from '../../types/settings'
-import { createPluginDisplayName } from './create-plugin-display-name'
+import { Settings } from '../../types/settings.js'
+import { createPluginDisplayName } from './create-plugin-display-name.js'
 
 export async function promptForUserInputAsync(
   options: Settings
@@ -79,7 +79,7 @@ export async function promptForUserInputAsync(
     }
   ].filter(Boolean)
   return {
-    ...(await prompt(questions)),
+    ...(await inquirer.prompt(questions)),
     name,
     template
   }

@@ -1,7 +1,7 @@
 /** @jsx h */
 import { ComponentChild, ComponentChildren, h, JSX, toChildArray } from 'preact'
 
-import { Props } from '../../../types'
+import { Props } from '../../../types.js'
 import styles from './inline.css'
 
 export type InlineProps = {

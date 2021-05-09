@@ -1,6 +1,6 @@
-import * as execa from 'execa'
+import { command } from 'execa'
 import findUp from 'find-up'
-import { pathExists } from 'fs-extra'
+import fs from 'fs-extra'
 import { join } from 'path'
 
 export async function typeCheckAsync(): Promise<void> {
@@ -8,11 +8,11 @@ export async function typeCheckAsync(): Promise<void> {
   if (typeof tsc === 'undefined') {
     throw new Error('Cannot find `tsc`')
   }
-  if ((await pathExists('tsconfig.json')) === false) {
+  if ((await fs.pathExists('tsconfig.json')) === false) {
     throw new Error('Need a `tsconfig.json`')
   }
   try {
-    await execa.command(`${tsc} --noEmit --project tsconfig.json`)
+    await command(`${tsc} --noEmit --project ./tsconfig.json`)
   } catch (error) {
     const index = error.message.indexOf('\n')
     if (index === -1) {

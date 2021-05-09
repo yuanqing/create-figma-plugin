@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import sade from 'sade'
 
-import { buildAsync } from './build-async'
-import { BuildOptions } from './types/build'
-import { watch } from './watch/watch'
+import { buildAsync } from './build-async.js'
+import { BuildOptions } from './types/build.js'
+import { watch } from './watch/watch.js'
 
 sade('build-figma-plugin', true)
   .describe(

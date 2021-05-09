@@ -1,13 +1,16 @@
 import globby from 'globby'
 import ncu from 'npm-check-updates'
-import * as path from 'path'
+import { dirname, join, resolve } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main(): Promise<void> {
-  const args = process.argv.slice(2)
-  const parentDirectoryPath = path.resolve(__dirname, '..')
+  const args = process.argv.slice(2) // modules passed in as CLI arguments will _not_ be bumped
+  const parentDirectoryPath = resolve(__dirname, '..')
   const globs = [
-    path.join(parentDirectoryPath, 'package.json'),
-    path.join(parentDirectoryPath, 'packages', '**', 'package.json')
+    join(parentDirectoryPath, 'package.json'),
+    join(parentDirectoryPath, 'packages', '**', 'package.json')
   ]
   const packageJsonFiles = await globby(globs, { deep: 2 })
   const promises: Array<Promise<void>> = []

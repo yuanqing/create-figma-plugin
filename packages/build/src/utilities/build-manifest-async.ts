@@ -5,14 +5,14 @@ import {
   constants,
   readConfigAsync
 } from '@create-figma-plugin/common'
-import { outputFile } from 'fs-extra'
+import fs from 'fs-extra'
 
 import {
   Manifest,
   ManifestMenuItem,
   ManifestMenuItemSeparator,
   ManifestRelaunchButton
-} from '../types/manifest'
+} from '../types/manifest.js'
 
 export async function buildManifestAsync(minify: boolean): Promise<void> {
   const config = await readConfigAsync()
@@ -70,7 +70,7 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     (minify === true
       ? JSON.stringify(result)
       : JSON.stringify(result, null, 2)) + '\n'
-  await outputFile(constants.build.manifestFilePath, string)
+  await fs.outputFile(constants.build.manifestFilePath, string)
 }
 
 function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {

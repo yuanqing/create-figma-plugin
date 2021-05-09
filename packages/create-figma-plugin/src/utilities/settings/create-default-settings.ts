@@ -1,8 +1,8 @@
 import { constants } from '@create-figma-plugin/common'
 import gitUserName from 'git-user-name'
 
-import { Settings } from '../../types/settings'
-import { createPluginDisplayName } from './create-plugin-display-name'
+import { Settings } from '../../types/settings.js'
+import { createPluginDisplayName } from './create-plugin-display-name.js'
 
 export function createDefaultSettings(options: Settings): Settings {
   const { name, template } = options

@@ -1,9 +1,9 @@
-import { test } from 'tap'
+import test from 'ava'
 
-import { constants } from '../src/constants'
+import { constants } from '../src/constants.js'
 
 test('is an object', function (t) {
   t.plan(2)
-  t.ok(typeof constants === 'object')
-  t.ok(Object.keys(constants).length > 0)
+  t.true(typeof constants === 'object')
+  t.true(Object.keys(constants).length > 0)
 })

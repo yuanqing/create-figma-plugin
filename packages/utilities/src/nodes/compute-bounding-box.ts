@@ -1,5 +1,5 @@
-import { getAbsolutePosition } from './absolute-position/get-absolute-position'
-import { getParentNode } from './get-nodes/get-parent-node'
+import { getAbsolutePosition } from './absolute-position/get-absolute-position.js'
+import { getParentNode } from './get-nodes/get-parent-node.js'
 
 /**
  * Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of

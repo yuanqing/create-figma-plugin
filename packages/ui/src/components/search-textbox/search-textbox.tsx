@@ -3,9 +3,9 @@ import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
-import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
-import { IconCross32 } from '../icon/icon-32/icon-cross-32'
-import { IconSearch32 } from '../icon/icon-32/icon-search-32'
+import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
+import { IconCross32 } from '../icon/icon-32/icon-cross-32.js'
+import { IconSearch32 } from '../icon/icon-32/icon-search-32.js'
 import styles from './search-textbox.css'
 
 export type SearchTextboxProps<N extends string> = {

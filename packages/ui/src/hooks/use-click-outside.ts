@@ -1,7 +1,7 @@
 import { RefObject } from 'preact'
 import { useEffect } from 'preact/hooks'
 
-import { getCurrentFromRef } from '../utilities/get-current-from-ref'
+import { getCurrentFromRef } from '../utilities/get-current-from-ref.js'
 
 export function useClickOutside(options: {
   ref: RefObject<HTMLElement>

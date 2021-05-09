@@ -1,4 +1,4 @@
-import { getParentNode } from './get-nodes/get-parent-node'
+import { getParentNode } from '../get-nodes/get-parent-node.js'
 
 /**
  * Splits `nodes` into groups of sibling nodes.

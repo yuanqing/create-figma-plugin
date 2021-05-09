@@ -1,28 +1,31 @@
+import test from 'ava'
 import findUp from 'find-up'
-import { ensureSymlink, pathExists, readFile } from 'fs-extra'
-import { join } from 'path'
+import fs from 'fs-extra'
+import { dirname, join } from 'path'
 import rimraf from 'rimraf'
-import { test } from 'tap'
+import { fileURLToPath } from 'url'
 
-import { buildAsync } from '../src/build-async'
+import { buildAsync } from '../src/build-async.js'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 test('no config', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '1-no-config'))
   await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: 'figma-plugin',
     main: 'build/main.js',
     name: 'figma-plugin'
   })
-  t.ok(await pathExists('build/main.js'))
-  t.notOk(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -30,19 +33,19 @@ test('basic command', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '2-basic-command'))
   await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
     name: 'x'
   })
-  t.ok(await pathExists('build/main.js'))
-  t.notOk(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -50,20 +53,20 @@ test('command with UI', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '3-command-with-ui'))
   await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.ok(await pathExists('build/main.js'))
-  t.ok(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -71,12 +74,12 @@ test('multiple menu commands', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '4-multiple-menu-commands'))
   await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -96,8 +99,8 @@ test('multiple menu commands', async function (t) {
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.ok(await pathExists('build/main.js'))
-  t.ok(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -105,12 +108,12 @@ test('nested menu commands', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '5-nested-menu-commands'))
   await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -127,8 +130,8 @@ test('nested menu commands', async function (t) {
     ],
     name: 'x'
   })
-  t.ok(await pathExists('build/main.js'))
-  t.notOk(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -136,12 +139,12 @@ test('relaunch button', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '6-relaunch-button'))
   await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
@@ -159,8 +162,8 @@ test('relaunch button', async function (t) {
     ],
     ui: 'build/ui.js'
   })
-  t.ok(await pathExists('build/main.js'))
-  t.ok(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -168,22 +171,22 @@ test('custom styles', async function (t) {
   t.plan(7)
   process.chdir(join(__dirname, 'fixtures', '7-custom-styles'))
   await cleanUpAsync()
-  t.notOk(await pathExists('src/styles.css.d.ts'))
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('src/styles.css.d.ts'))
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.ok(await pathExists('src/styles.css.d.ts'))
-  t.ok(await pathExists('build/main.js'))
-  t.ok(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('src/styles.css.d.ts'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
@@ -191,33 +194,36 @@ test('preact', async function (t) {
   t.plan(5)
   process.chdir(join(__dirname, 'fixtures', '8-preact'))
   await cleanUpAsync()
-  t.notOk(await pathExists('build'))
-  t.notOk(await pathExists('node_modules'))
-  await createFigmaTypingsSymlinksAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
   await buildAsync({ minify: false, typecheck: true })
-  const manifestJson = JSON.parse(await readFile('manifest.json', 'utf8'))
-  t.same(manifestJson, {
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.ok(await pathExists('build/main.js'))
-  t.ok(await pathExists('build/ui.js'))
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
-async function createFigmaTypingsSymlinksAsync(): Promise<void> {
-  const directoryPath = await findUp(join('node_modules', '@figma'), {
-    type: 'directory'
-  })
+async function symlinkFigmaPluginTypingsAsync(): Promise<void> {
+  const directoryPath = await findUp(
+    join('node_modules', '@figma', 'plugin-typings'),
+    {
+      type: 'directory'
+    }
+  )
   if (typeof directoryPath === 'undefined') {
     throw new Error('Cannot find `node_modules/@figma`')
   }
-  await ensureSymlink(
+  await fs.ensureSymlink(
     directoryPath,
-    join(process.cwd(), 'node_modules', '@figma')
+    join(process.cwd(), 'node_modules', '@figma', 'plugin-typings')
   )
 }
 

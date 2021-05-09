@@ -5,10 +5,11 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "lib": ["DOM", "ES2020"],
-    "module": "CommonJS",
+    "module": "ES2020",
+    "moduleResolution": "Node",
     "sourceMap": true,
     "strict": true,
     "target": "ES2020",
-    "types": ["@figma/plugin-typings", "node"]
+    "types": ["@figma/plugin-typings", "@types/node"]
   }
 }

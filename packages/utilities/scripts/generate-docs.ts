@@ -1,4 +1,4 @@
-import { outputFile } from 'fs-extra'
+import fs from 'fs-extra'
 import {
   createCategories,
   parseExportedFunctionsAsync,
@@ -54,6 +54,6 @@ async function main(): Promise<void> {
     }
     lines.push('')
   }
-  await outputFile(outputFilePath, lines.join('\n').trim())
+  await fs.outputFile(outputFilePath, lines.join('\n').trim())
 }
 main()

@@ -27,37 +27,43 @@
     "url": "git://github.com/yuanqing/create-figma-plugin.git",
     "directory": "packages/ui"
   },
+  "type": "module",
+  "engines": {
+    "node": ">=12.20"
+  },
   "files": [
-    "lib"
+    "./lib"
   ],
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
+  "exports": "./lib/index.js",
   "scripts": {
-    "build": "yarn run clean && yarn run generate-index-ts && tsc --module ES2020 --moduleResolution Node && ts-node scripts/copy-non-ts-files.ts",
-    "clean": "rm -rf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json' '.storybook/**/*.html'",
-    "generate-icons": "ts-node scripts/generate-icons.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
-    "generate-index-ts": "ts-node ../../scripts/generate-index-ts.ts 'src/**/*.{ts,tsx}' '!src/**/private/**/*' && eslint --fix 'src/index.ts'",
-    "lint": "eslint '{.storybook,scripts,src}/**/*.{js,ts,tsx}' && stylelint 'src/**/*.css'",
-    "storybook": "yarn run storybook-clean && mkdirp node_modules && start-storybook --port 4242",
-    "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
-    "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'"
+    "build": "yarn run clean && yarn run generate-index-ts && tsc --build && yarn run copy-non-ts-files",
+    "clean": "rm -rf './*.log' ./lib './src/**/*.css.d.ts' ./tsconfig.tsbuildinfo",
+    "copy-non-ts-files": "node --loader ts-node/esm --no-warnings ./scripts/copy-non-ts-files.ts",
+    "fix": "eslint --fix './{.storybook,scripts,src}/**/*.{js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint --fix './src/**/*.css' && prettier --loglevel error --write './*.json' './.storybook/**/*.html'",
+    "generate-icons": "node --loader ts-node/esm --no-warnings scripts/generate-icons.ts && eslint --fix './src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
+    "generate-index-ts": "node --loader ts-node/esm --no-warnings ../../scripts/generate-index-ts.ts -- './src/**/*.{ts,tsx}' '!./src/**/private/**/*' && eslint --fix './src/index.ts'",
+    "lint": "eslint './{.storybook,scripts,src}/**/*.{js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint './src/**/*.css'",
+    "storybook": "yarn run storybook-clean && mkdirp ./node_modules && start-storybook --port 4242",
+    "storybook-build": "yarn run storybook-clean && mkdirp ./node_modules && build-storybook --output-dir ./build",
+    "storybook-clean": "rm -rf './*.log' ./build './src/**/*.css.d.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^0.0.85-alpha.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.16",
+    "@babel/core": "^7.14.0",
     "@storybook/addon-storysource": "^6.2.9",
     "@storybook/preact": "^6.2.9",
     "@storybook/source-loader": "^6.2.9",
     "@types/fs-extra": "^9.0.11",
-    "@types/node": "^15.0.1",
+    "@types/node": "^15.0.2",
     "@types/svgo": "^2.3.0",
     "change-case": "^4.1.2",
     "css-loader": "^5.2.4",
-    "eslint": "^7.25.0",
+    "eslint": "^7.26.0",
     "eslint-config-yuanqing": "^0.0.5",
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^10.0.0",
     "globby": "^11.0.3",
     "mkdirp": "^1.0.4",
     "preact": "^10.5.13",
@@ -65,12 +71,12 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "style-loader": "^2.0.0",
-    "stylelint": "^13.13.0",
+    "stylelint": "^13.13.1",
     "stylelint-config-yuanqing": "^0.0.1",
     "svgo": "^2.3.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
-    "webpack": "^5.36.1"
+    "webpack": "^5.36.2"
   },
   "peerDependencies": {
     "preact": "^10"

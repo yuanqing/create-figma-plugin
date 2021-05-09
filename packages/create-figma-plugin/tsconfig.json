@@ -1,9 +1,12 @@
 {
   "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
-    "outDir": "lib",
-    "rootDir": "src"
+    "outDir": "./lib",
+    "paths": {
+      "is-utf8": ["./src/types/untyped-dependencies.d.ts"]
+    },
+    "rootDir": "./src"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["./src/**/*.ts"],
   "references": [{ "path": "../common" }]
 }

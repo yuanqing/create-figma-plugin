@@ -3,9 +3,9 @@
   "compilerOptions": {
     "jsx": "react",
     "jsxFactory": "h",
-    "outDir": "lib",
-    "rootDir": "src"
+    "outDir": "./lib",
+    "rootDir": "./src"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
   "references": [{ "path": "../utilities" }]
 }

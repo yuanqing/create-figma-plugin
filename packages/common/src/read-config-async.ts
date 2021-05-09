@@ -1,22 +1,22 @@
 import slugify from '@sindresorhus/slugify'
-import { pathExists, readFile } from 'fs-extra'
+import fs from 'fs-extra'
 import { join } from 'path'
 
-import { constants } from './constants'
+import { constants } from './constants.js'
 import {
   Config,
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
   ConfigRelaunchButton
-} from './types/config'
+} from './types/config.js'
 import {
   RawConfig,
   RawConfigCommand,
   RawConfigCommandSeparator,
   RawConfigFile,
   RawConfigRelaunchButtons
-} from './types/raw-config'
+} from './types/raw-config.js'
 
 const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
@@ -25,7 +25,10 @@ const defaultConfig: Config = {
   enablePrivatePluginApi: false,
   enableProposedApi: false,
   id: constants.packageJson.defaultPluginName,
-  main: { handler: 'default', src: join(constants.src.directory, 'main.ts') },
+  main: {
+    handler: 'default',
+    src: join(constants.src.directory, 'main.ts')
+  },
   menu: null,
   name: constants.packageJson.defaultPluginName,
   relaunchButtons: null,
@@ -34,10 +37,12 @@ const defaultConfig: Config = {
 
 export async function readConfigAsync(): Promise<Config> {
   const packageJsonPath = join(process.cwd(), 'package.json')
-  if ((await pathExists(packageJsonPath)) === false) {
+  if ((await fs.pathExists(packageJsonPath)) === false) {
     return defaultConfig
   }
-  const packageJson: any = JSON.parse(await readFile(packageJsonPath, 'utf8'))
+  const packageJson: any = JSON.parse(
+    await fs.readFile(packageJsonPath, 'utf8')
+  )
   const config: RawConfig = packageJson[constants.packageJson.configKey]
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig

@@ -3,7 +3,7 @@ import {
   numbersRegex,
   operatorRegex,
   operatorSuffixRegex
-} from './private/regex'
+} from './private/regex.js'
 
 /**
  * Evaluates the given numeric `expression`.

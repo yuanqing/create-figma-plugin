@@ -2,7 +2,7 @@ import {
   floatOperandRegex,
   integerOperandRegex,
   operatorRegex
-} from './private/regex'
+} from './private/regex.js'
 
 /**
  * Checks if `value` is a numeric expression, as input by a user. “Partial”

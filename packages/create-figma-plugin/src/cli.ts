@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import sade from 'sade'
 
-import { createFigmaPluginAsync } from './create-figma-plugin-async'
+import { createFigmaPluginAsync } from './create-figma-plugin-async.js'
 
 sade('create-figma-plugin [name]', true)
   .describe('Initialize a new Figma plugin using a template')

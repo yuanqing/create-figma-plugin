@@ -1,14 +1,14 @@
 import { log } from '@create-figma-plugin/common'
-import { pathExists } from 'fs-extra'
+import fs from 'fs-extra'
 import { join } from 'path'
 
-import { Settings } from './types/settings'
-import { cloneFromTemplateAsync } from './utilities/clone-from-template-async'
-import { installDependenciesAsync } from './utilities/install-dependencies-async'
-import { interpolateValuesIntoFilesAsync } from './utilities/interpolate-values-into-files-async'
-import { resolveLatestVersions } from './utilities/resolve-latest-versions'
-import { createDefaultSettings } from './utilities/settings/create-default-settings'
-import { promptForUserInputAsync } from './utilities/settings/prompt-for-user-input-async'
+import { Settings } from './types/settings.js'
+import { cloneFromTemplateAsync } from './utilities/clone-from-template-async.js'
+import { installDependenciesAsync } from './utilities/install-dependencies-async.js'
+import { interpolateValuesIntoFilesAsync } from './utilities/interpolate-values-into-files-async.js'
+import { resolveLatestVersions } from './utilities/resolve-latest-versions.js'
+import { createDefaultSettings } from './utilities/settings/create-default-settings.js'
+import { promptForUserInputAsync } from './utilities/settings/prompt-for-user-input-async.js'
 
 export async function createFigmaPluginAsync(
   options: Settings,
@@ -41,7 +41,7 @@ export async function createFigmaPluginAsync(
 }
 
 async function throwIfDirectoryExistsAsync(directory: string): Promise<void> {
-  if ((await pathExists(directory)) === true) {
+  if ((await fs.pathExists(directory)) === true) {
     throw new Error(`Directory already exists: ${directory}`)
   }
 }

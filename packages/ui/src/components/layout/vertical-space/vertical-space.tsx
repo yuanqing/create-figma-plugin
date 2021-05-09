@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h, JSX } from 'preact'
 
-import { Props } from '../../../types'
+import { Props } from '../../../types.js'
 import styles from './vertical-space.css'
 
 export type VerticalSpaceProps = {

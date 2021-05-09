@@ -1,4 +1,4 @@
-import { computeBoundingBox } from './compute-bounding-box'
+import { computeBoundingBox } from './compute-bounding-box.js'
 
 /**
  * Computes the absolute coordinates of the top-left and bottom-right

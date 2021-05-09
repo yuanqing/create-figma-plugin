@@ -1,12 +1,11 @@
+import cssNano from 'cssnano'
 import { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
-import { readFile } from 'fs-extra'
+import fs from 'fs-extra'
 import { basename, extname, resolve } from 'path'
 import postcss, { AcceptedPlugin } from 'postcss'
+import postCssModules from 'postcss-modules'
 import revHash from 'rev-hash'
 import tempWrite from 'temp-write'
-
-const cssNano = require('cssnano')
-const postCssModules = require('postcss-modules')
 
 export function esbuildCssModulesPlugin(minify: boolean): Plugin {
   return {
@@ -36,7 +35,7 @@ async function createCssModulesJavaScriptAsync(
   cssFilePath: string,
   minify: boolean
 ): Promise<string> {
-  const css = await readFile(cssFilePath, 'utf8')
+  const css = await fs.readFile(cssFilePath, 'utf8')
   let classNamesJson: null | string = null
   const plugins: Array<AcceptedPlugin> = []
   plugins.push(

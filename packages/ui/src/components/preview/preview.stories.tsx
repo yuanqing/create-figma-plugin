@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Preview } from './preview'
+import { Preview } from './preview.js'
 
 export default { title: 'Components/Preview' }
 
