@@ -21,8 +21,8 @@
   fill: var(--color-white);
 }
 .white-20 {
-  fill: var(--color-white-20);
+  fill: var(--color-white-20-translucent);
 }
 .white-40 {
-  fill: var(--color-white-40);
+  fill: var(--color-white-40-translucent);
 }

@@ -36,7 +36,7 @@
 }
 
 .optionHeader {
-  color: var(--color-white-40);
+  color: var(--color-white-40-translucent);
   font-size: var(--font-size-12);
 }
 
@@ -51,7 +51,7 @@
   width: 100%;
   height: 1px;
   margin: var(--space-extra-small) 0;
-  background-color: var(--color-white-20);
+  background-color: var(--color-white-20-translucent);
 }
 
 .input {

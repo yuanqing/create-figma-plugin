@@ -7,15 +7,19 @@
     inset 0 0 0 0.5px rgb(0, 0, 0), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --color-black: #000000;
   --color-black-30: #b3b3b3;
+  --color-black-30-translucent: rgba(0, 0, 0, 0.3);
   --color-black-80: #333333;
+  --color-black-80-translucent: rgba(0, 0, 0, 0.8);
   --color-blue: #18a0fb;
   --color-gray: #f7f7f7;
   --color-purple: #7b61ff;
   --color-red: #f24822;
   --color-silver: #e5e5e5;
   --color-white: #ffffff;
-  --color-white-20: rgba(255, 255, 255, 0.2);
-  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-20: #333333;
+  --color-white-20-translucent: rgba(255, 255, 255, 0.2);
+  --color-white-40: #666666;
+  --color-white-40-translucent: rgba(255, 255, 255, 0.4);
   --color-hud: #222222;
   --color-selection-a: #daebf7;
   --color-selection-b: #edf5fa;
@@ -26,13 +30,13 @@
   --font-weight-bold: 600;
   --line-height-16: 16px;
   --opacity-30: 0.3;
-  --z-index-1: 1;
-  --z-index-2: 2;
   --space-extra-small: 8px;
   --space-small: 12px;
   --space-medium: 16px;
-  --space-large: 24px;
-  --space-extra-large: 32px;
+  --space-large: 20px;
+  --space-extra-large: 24px;
+  --z-index-1: 1;
+  --z-index-2: 2;
 }
 
 * {

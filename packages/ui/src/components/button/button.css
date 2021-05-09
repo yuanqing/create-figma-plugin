@@ -26,7 +26,7 @@
   border: 2px solid transparent;
 }
 .primary button:focus {
-  border-color: var(--color-black-30);
+  border-color: var(--color-black-30-translucent);
 }
 .primary.destructive {
   color: var(--color-white);
