@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Stack } from './stack.js'
+import { Stack } from './stack'
 
 export default { title: 'Components/Layout/Stack' }
 

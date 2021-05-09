@@ -1,9 +1,9 @@
 import { useCallback } from 'preact/hooks'
 
-import { useFocusTrap } from './use-focus-trap.js'
-import { useFormState } from './use-form-state.js'
+import { useFocusTrap } from './use-focus-trap'
+import { useFormState } from './use-form-state'
 import { InitialFocus, useInitialFocus } from './use-initial-focus'
-import { useWindowKeyDownHandler } from './use-window-key-down-handler.js'
+import { useWindowKeyDownHandler } from './use-window-key-down-handler'
 
 export function useForm<S>(
   initialState: S,

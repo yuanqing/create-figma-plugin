@@ -3,7 +3,7 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { SelectableItem } from './selectable-item.js'
+import { SelectableItem } from './selectable-item'
 
 export default { title: 'Components/Selectable Item' }
 

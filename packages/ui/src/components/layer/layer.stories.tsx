@@ -3,9 +3,9 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { IconLayerComponent16 } from '../icon/icon-16/icon-layer-component-16.js'
-import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16.js'
-import { Layer } from './layer.js'
+import { IconLayerComponent16 } from '../icon/icon-16/icon-layer-component-16'
+import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
+import { Layer } from './layer'
 
 export default { title: 'Components/Layer' }
 

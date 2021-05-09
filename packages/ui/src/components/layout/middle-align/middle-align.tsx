@@ -1,7 +1,7 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../../types.js'
+import { Props } from '../../../types'
 import styles from './middle-align.css'
 
 export type MiddleAlignProps = {

@@ -3,9 +3,9 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus.js'
-import { Text } from '../text/text.js'
-import { Checkbox } from './checkbox.js'
+import { useInitialFocus } from '../../hooks/use-initial-focus'
+import { Text } from '../text/text'
+import { Checkbox } from './checkbox'
 
 export default { title: 'Components/Checkbox' }
 

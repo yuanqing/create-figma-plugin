@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Container } from './container.js'
+import { Container } from './container'
 
 export default { title: 'Components/Layout/Container' }
 

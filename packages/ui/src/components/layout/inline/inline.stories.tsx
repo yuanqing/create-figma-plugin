@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Inline } from './inline.js'
+import { Inline } from './inline'
 
 export default { title: 'Components/Layout/Inline' }
 

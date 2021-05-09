@@ -1,4 +1,4 @@
-import { useWindowKeyDownHandler } from './use-window-key-down-handler.js'
+import { useWindowKeyDownHandler } from './use-window-key-down-handler'
 
 export function useFocusTrap(): void {
   useWindowKeyDownHandler('Tab', function (event: KeyboardEvent): void {

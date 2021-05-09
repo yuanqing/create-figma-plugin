@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h, JSX } from 'preact'
 
-import { Props } from '../../types.js'
-import { createClassName } from '../../utilities/create-class-name.js'
+import { Props } from '../../types'
+import { createClassName } from '../../utilities/create-class-name'
 import styles from './loading-indicator.css'
 
 export type LoadingIndicatorProps = {

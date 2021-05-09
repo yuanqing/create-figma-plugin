@@ -2,10 +2,10 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../../types.js'
-import { createClassName } from '../../../utilities/create-class-name.js'
-import { LoadingIndicator } from '../../loading-indicator/loading-indicator.js'
-import { fileComparator } from '../private/file-comparator.js'
+import { Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
+import { LoadingIndicator } from '../../loading-indicator/loading-indicator'
+import { fileComparator } from '../private/file-comparator'
 import styles from './file-upload-button.css'
 
 export type FileUploadButtonProps = {

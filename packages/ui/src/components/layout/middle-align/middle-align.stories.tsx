@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { MiddleAlign } from './middle-align.js'
+import { MiddleAlign } from './middle-align'
 
 export default { title: 'Components/Layout/Middle Align' }
 

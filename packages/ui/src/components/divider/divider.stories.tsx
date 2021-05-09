@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Divider } from './divider.js'
+import { Divider } from './divider'
 
 export default { title: 'Components/Divider' }
 

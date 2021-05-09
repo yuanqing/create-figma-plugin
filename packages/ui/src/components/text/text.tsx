@@ -1,8 +1,8 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../types.js'
-import { createClassName } from '../../utilities/create-class-name.js'
+import { Props } from '../../types'
+import { createClassName } from '../../utilities/create-class-name'
 import styles from './text.css'
 
 export type TextProps = {

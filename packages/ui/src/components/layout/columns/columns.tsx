@@ -1,8 +1,8 @@
 /** @jsx h */
 import { ComponentChild, h, JSX, toChildArray } from 'preact'
 
-import { Props } from '../../../types.js'
-import { createClassName } from '../../../utilities/create-class-name.js'
+import { Props } from '../../../types'
+import { createClassName } from '../../../utilities/create-class-name'
 import styles from './columns.css'
 
 export type ColumnsProps = {

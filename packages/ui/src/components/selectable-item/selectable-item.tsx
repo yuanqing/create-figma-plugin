@@ -3,8 +3,8 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
-import { createClassName } from '../../utilities/create-class-name.js'
-import { IconMenuCheckmarkChecked16 } from '../icon/icon-16/icon-menu-checkmark-checked-16.js'
+import { createClassName } from '../../utilities/create-class-name'
+import { IconMenuCheckmarkChecked16 } from '../icon/icon-16/icon-menu-checkmark-checked-16'
 import styles from './selectable-item.css'
 
 export type SelectableItemProps<N extends string> = {

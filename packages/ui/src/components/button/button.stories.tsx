@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 import { h, JSX } from 'preact'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus.js'
-import { Button } from './button.js'
+import { useInitialFocus } from '../../hooks/use-initial-focus'
+import { Button } from './button'
 
 export default { title: 'Components/Button' }
 

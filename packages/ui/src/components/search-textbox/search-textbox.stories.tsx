@@ -3,8 +3,8 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus.js'
-import { SearchTextbox } from './search-textbox.js'
+import { useInitialFocus } from '../../hooks/use-initial-focus'
+import { SearchTextbox } from './search-textbox'
 
 export default { title: 'Components/Search Textbox' }
 

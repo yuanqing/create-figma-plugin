@@ -3,9 +3,9 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus.js'
-import { MIXED_STRING } from '../../../utilities/mixed-values.js'
-import { TextboxMultiline } from './textbox-multiline.js'
+import { useInitialFocus } from '../../../hooks/use-initial-focus'
+import { MIXED_STRING } from '../../../utilities/mixed-values'
+import { TextboxMultiline } from './textbox-multiline'
 
 export default { title: 'Components/Textbox/Textbox Multiline' }
 

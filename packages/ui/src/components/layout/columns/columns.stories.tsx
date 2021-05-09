@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Columns } from './columns.js'
+import { Columns } from './columns'
 
 export default { title: 'Components/Layout/Columns' }
 
