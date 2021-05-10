@@ -2,14 +2,14 @@
 export { constants } from './constants.js'
 export { log } from './log.js'
 export { readConfigAsync } from './read-config-async.js'
-export type {
+export {
   Config,
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
   ConfigRelaunchButton
 } from './types/config.js'
-export type {
+export {
   RawConfig,
   RawConfigCommand,
   RawConfigCommandSeparator,

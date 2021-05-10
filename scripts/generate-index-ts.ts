@@ -1,43 +1,75 @@
 /* eslint-disable no-console */
 import fs from 'fs-extra'
 import globby from 'globby'
+import ts from 'typescript'
 
 async function main(): Promise<void> {
-  const args = process.argv.slice(2) // glob patterns are passed in as CLI arguments
+  const args = process.argv.slice(2) // Glob patterns are passed in as CLI arguments
   const filePaths = await globby([
     ...args,
     '!src/index.ts',
     '!**/*.d.ts',
     '!**/*.stories.tsx'
   ])
-  const result: Array<string> = []
-  const usedExportNames: Record<string, true> = {} // this object is mutated by `parseExports`
-  for (const filePath of filePaths.sort()) {
+  const result: Array<string> = [] // Array of export declaration strings
+  const usedExportNames: Record<string, true> = {} // Track the names of exports that were already used
+  const program = ts.createProgram(filePaths, { allowJs: true })
+  for (const filePath of filePaths) {
+    const sourceFile = program.getSourceFile(filePath)
+    if (typeof sourceFile === 'undefined') {
+      console.error(`\`sourceFile\` is \`undefined\`: ${filePath}`)
+      process.exit(1)
+    }
+    const exportNames: Array<string> = []
+    function addExport(exportName: string) {
+      if (usedExportNames[exportName] === true) {
+        console.error(`Export name clash \`${exportName}\`: ${filePath}`)
+        process.exit(1)
+      }
+      usedExportNames[exportName] = true
+      exportNames.push(exportName)
+    }
+    ts.forEachChild(sourceFile, function (node: ts.Node): void {
+      if (
+        ts.isTypeAliasDeclaration(node) ||
+        ts.isInterfaceDeclaration(node) ||
+        ts.isFunctionDeclaration(node)
+      ) {
+        if (
+          typeof node.modifiers !== 'undefined' &&
+          node.modifiers[0].kind === ts.SyntaxKind.ExportKeyword &&
+          typeof node.name !== 'undefined'
+        ) {
+          if (
+            node.modifiers.length > 1 &&
+            node.modifiers[1].kind === ts.SyntaxKind.DefaultKeyword
+          ) {
+            console.error(`Use of \`default\` export detected: ${filePath}`)
+            process.exit(1)
+          }
+          addExport(node.name.text)
+        }
+      }
+      if (ts.isVariableStatement(node)) {
+        if (
+          typeof node.modifiers !== 'undefined' &&
+          node.modifiers[0].kind === ts.SyntaxKind.ExportKeyword
+        ) {
+          const identifier = node.declarationList.declarations[0].name
+          if (ts.isIdentifier(identifier)) {
+            addExport(identifier.text)
+          }
+        }
+      }
+    })
+    console.log(filePath)
     const normalizedFilePath = filePath
-      .replace(/^(\.\/)?src/, '.')
+      .replace(/^(?:\.\/)?src\//, './') // Relace `./src/` with `./`
       .replace(/\.tsx?/, '.js')
-    const moduleExportsRegex = /export (?:(?:(?:async )?function)|const) ([^(<: ]+)/g
-    const moduleExports = await parseFileExports(
-      moduleExportsRegex,
-      filePath,
-      usedExportNames
-    )
-    if (moduleExports.length > 0) {
-      result.push(
-        `export { ${moduleExports.join(', ')} } from '${normalizedFilePath}'`
-      )
-    }
-    const typeExportsRegex = /export (?:interface|type) ([^(<: ]+)/g
-    const typeExports = await parseFileExports(
-      typeExportsRegex,
-      filePath,
-      usedExportNames
-    )
-    if (typeExports.length > 0) {
-      result.push(
-        `export type { ${typeExports.join(', ')} } from '${normalizedFilePath}'`
-      )
-    }
+    const exportDeclaration = `export { ${exportNames
+      .sort()
+      .join(', ')} } from '${normalizedFilePath}'`
+    result.push(exportDeclaration)
   }
   await fs.outputFile(
     'src/index.ts',
@@ -47,29 +79,3 @@ async function main(): Promise<void> {
   )
 }
 main()
-
-async function parseFileExports(
-  regex: RegExp,
-  filePath: string,
-  usedExportNames: Record<string, true>
-): Promise<Array<string>> {
-  const contents = await fs.readFile(filePath, 'utf8')
-  if (/export default/g.test(contents) === true) {
-    console.error(`Use of \`export default\`: ${filePath}`)
-    process.exit(1)
-  }
-  const iterator = contents.matchAll(regex)
-  const result: Array<string> = []
-  for (const match of iterator) {
-    const exportName = match[1]
-    if (usedExportNames[exportName] === true) {
-      console.error(`Export name clash \`${exportName}\`: ${filePath}`)
-      process.exit(1)
-    }
-    usedExportNames[exportName] = true
-    result.push(exportName)
-  }
-  return result.sort(function (a: string, b: string): number {
-    return a.localeCompare(b)
-  })
-}
