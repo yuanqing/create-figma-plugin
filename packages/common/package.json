@@ -65,6 +65,6 @@
     "timeout": "2m"
   },
   "eslintConfig": {
-    "extends": "yuanqing"
+    "extends": "eslint-config-yuanqing"
   }
 }

@@ -82,7 +82,7 @@
     "preact": "^10"
   },
   "eslintConfig": {
-    "extends": "yuanqing",
+    "extends": "eslint-config-yuanqing",
     "ignorePatterns": [
       "*.css.d.ts"
     ],

@@ -9,5 +9,5 @@
     "rootDir": "./src"
   },
   "include": ["./src/**/*.ts"],
-  "references": [{ "path": "../common" }, { "path": "../utilities" }]
+  "references": [{ "path": "../common" }]
 }
