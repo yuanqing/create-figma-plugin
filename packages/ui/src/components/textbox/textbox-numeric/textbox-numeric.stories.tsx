@@ -175,7 +175,7 @@ export const Suffix = function () {
   const [value, setValue] = useState('100%')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
-    // console.log(newValue)
+    console.log(newValue)
     setValue(newValue)
   }
   return (
