@@ -98,8 +98,9 @@ export function Dropdown<
     getCurrentFromRef(rootElementRef).blur()
   }, [])
 
-  const handleFocus = useCallback(
+  const handleRootFocus = useCallback(
     function (): void {
+      // Show the menu and update the `selectedId` on focus
       setIsMenuVisible(true)
       if (value === null) {
         return
@@ -113,7 +114,7 @@ export function Dropdown<
     [options, value]
   )
 
-  const handleKeyDown = useCallback(
+  const handleRootKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLDivElement>): void {
       if (event.key === 'Escape') {
         triggerBlur()
@@ -142,10 +143,22 @@ export function Dropdown<
     [handleScrollableMenuKeyDown, selectedId, triggerBlur]
   )
 
-  const handleMenuClick = useCallback(function (
+  const handleRootMouseDown = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLDivElement>): void {
+      // `mousedown` events from `menuElement` are stopped from propagating to `rootElement` by `handleMenuMouseDown`
+      if (isMenuVisible === false) {
+        return
+      }
+      event.preventDefault()
+      triggerBlur()
+    },
+    [isMenuVisible, triggerBlur]
+  )
+
+  const handleMenuMouseDown = useCallback(function (
     event: JSX.TargetedMouseEvent<HTMLDivElement>
   ): void {
-    // Stop the click from propagating to the `rootElement`
+    // Stop the `mousedown` event from propagating to the `rootElement`
     event.stopPropagation()
   },
   [])
@@ -187,8 +200,9 @@ export function Dropdown<
         disabled === true ? dropdownStyles.disabled : null,
         noBorder === true ? dropdownStyles.noBorder : null
       ])}
-      onFocus={handleFocus}
-      onKeyDown={disabled === true ? undefined : handleKeyDown}
+      onFocus={handleRootFocus}
+      onKeyDown={disabled === true ? undefined : handleRootKeyDown}
+      onMouseDown={handleRootMouseDown}
       tabIndex={disabled === true ? -1 : 0}
     >
       {typeof icon === 'undefined' ? null : (
@@ -221,7 +235,7 @@ export function Dropdown<
             : null,
           top === true ? menuStyles.top : null
         ])}
-        onClick={handleMenuClick}
+        onMouseDown={handleMenuMouseDown}
       >
         {options.map(function (
           option: DropdownOption<V>,
@@ -251,9 +265,11 @@ export function Dropdown<
                 checked={value === option.value}
                 class={menuStyles.input}
                 name={name}
+                // If clicked on an unselected element, set the value
                 onChange={
                   value === option.value ? undefined : handleOptionChange
                 }
+                // Else blur if clicked on an already-selected element
                 onClick={value === option.value ? triggerBlur : undefined}
                 onMouseMove={handleScrollableMenuItemMouseMove}
                 tabIndex={-1}
