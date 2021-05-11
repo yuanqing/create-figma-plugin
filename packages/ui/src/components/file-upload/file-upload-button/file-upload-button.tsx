@@ -15,7 +15,7 @@ export type FileUploadButtonProps = {
   fullWidth?: boolean
   loading?: boolean
   multiple?: boolean
-  onClick?: JSX.MouseEventHandler<HTMLButtonElement>
+  secondary?: boolean
   onSelectedFiles?: (files: Array<File>) => void
   propagateEscapeKeyDown?: boolean
 }
@@ -27,8 +27,8 @@ export function FileUploadButton({
   fullWidth = false,
   loading = false,
   multiple = false,
-  onClick,
   onSelectedFiles,
+  secondary = false,
   propagateEscapeKeyDown = true,
   ...rest
 }: Props<HTMLInputElement, FileUploadButtonProps>): JSX.Element {
@@ -69,6 +69,7 @@ export function FileUploadButton({
     <div
       class={createClassName([
         styles.button,
+        secondary === true ? styles.secondary : styles.primary,
         fullWidth === true ? styles.fullWidth : null,
         disabled === true ? styles.disabled : null,
         loading === true ? styles.loading : null
@@ -87,15 +88,16 @@ export function FileUploadButton({
             : acceptedFileTypes.join(',')
         }
         class={styles.input}
+        disabled={disabled === true}
         multiple={multiple}
-        onChange={handleChange}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
+        onChange={disabled === true ? undefined : handleChange}
+        onClick={disabled === true ? undefined : handleClick}
+        onKeyDown={disabled === true ? undefined : handleKeyDown}
         tabIndex={disabled === true ? -1 : 0}
         title=""
         type="file"
       />
-      <button disabled={disabled === true} onClick={onClick} tabIndex={-1}>
+      <button disabled={disabled === true} tabIndex={-1}>
         {children}
       </button>
     </div>

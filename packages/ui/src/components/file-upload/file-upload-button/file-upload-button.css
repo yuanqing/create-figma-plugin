@@ -2,25 +2,52 @@
   position: relative;
   z-index: var(--z-index-2);
   display: inline-block;
-  color: var(--color-white);
 }
 .button button {
   display: inline-block;
   height: 32px;
   padding: 0 14px;
   color: currentColor;
-  line-height: 28px;
-  background-color: var(--color-blue);
-  border: 2px solid transparent;
   border-radius: var(--border-radius-6);
 }
-
 .disabled {
   opacity: var(--opacity-30);
 }
 .disabled button {
-  background-color: var(--color-black-80);
   cursor: not-allowed;
+}
+
+.primary {
+  color: var(
+    --color-white
+  ); /* Set the color of the `button` element and `LoadingIndicator` */
+}
+.primary button {
+  line-height: 28px;
+  background-color: var(--color-blue);
+  border: 2px solid transparent;
+}
+.primary .input:focus ~ button {
+  border-color: var(--color-black-30-translucent);
+}
+.primary.disabled button {
+  background-color: var(--color-black-80);
+}
+
+.secondary {
+  color: var(--color-black-80);
+}
+.secondary button {
+  padding: 0 15px;
+  line-height: 30px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black-80);
+}
+.secondary .input:focus ~ button {
+  padding: 0 14px;
+  line-height: 28px;
+  border-color: var(--color-blue);
+  border-width: 2px;
 }
 
 .fullWidth {
@@ -35,13 +62,14 @@
 }
 
 .loading button {
-  color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0); /* Hide the button text */
 }
 .loadingIndicator {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .input {
@@ -52,8 +80,4 @@
   left: 0;
   width: 100%;
   opacity: 0;
-}
-.input:active ~ button,
-.input:focus ~ button {
-  border-color: var(--color-black-30);
 }

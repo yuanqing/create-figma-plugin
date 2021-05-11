@@ -4,7 +4,10 @@ import {
   parseExportedFunctionsAsync,
   renderFunctionDataToMarkdown
 } from 'generate-ts-docs'
-import { join, resolve } from 'path'
+import { dirname, join, resolve } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const rootDirectoryPath = resolve(__dirname, '..', '..', '..')
 const tsconfigFilePath = join(rootDirectoryPath, 'tsconfig.shared.json')

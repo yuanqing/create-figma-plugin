@@ -23,7 +23,7 @@
   -webkit-appearance: none;
 }
 .hasIcon .input {
-  padding-left: var(--space-extra-large);
+  padding-left: 32px;
 }
 
 .icon {

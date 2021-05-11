@@ -30,7 +30,7 @@
 }
 
 .layerName {
-  padding: 0 var(--space-extra-small);
+  padding-left: var(--space-extra-small);
 }
 .bold {
   font-weight: var(--font-weight-bold);
@@ -42,7 +42,8 @@
 }
 
 .pageName {
-  flex: 1 0 40px;
+  flex-grow: 1;
+  padding-left: var(--space-extra-small);
   color: var(--color-black-30);
 }
 

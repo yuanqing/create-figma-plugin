@@ -90,3 +90,26 @@ export const FullWidth = function () {
     </FileUploadButton>
   )
 }
+
+export const FullWidthLongText = function () {
+  const longText = Array(100).fill('Text').join(' ')
+  function handleSelectedFiles(files: Array<File>) {
+    console.log(files)
+  }
+  return (
+    <FileUploadButton fullWidth onSelectedFiles={handleSelectedFiles}>
+      {longText}
+    </FileUploadButton>
+  )
+}
+
+export const Secondary = function () {
+  function handleSelectedFiles(files: Array<File>) {
+    console.log(files)
+  }
+  return (
+    <FileUploadButton onSelectedFiles={handleSelectedFiles} secondary>
+      Text
+    </FileUploadButton>
+  )
+}

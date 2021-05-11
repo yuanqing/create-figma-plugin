@@ -17,7 +17,9 @@
 }
 
 .primary {
-  color: var(--color-white);
+  color: var(
+    --color-white
+  ); /* Set the color of the `button` element and `LoadingIndicator` */
 }
 .primary button {
   padding: 0 14px;
@@ -72,11 +74,12 @@
 }
 
 .loading button {
-  color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0); /* Hide the button text */
 }
 .loadingIndicator {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }

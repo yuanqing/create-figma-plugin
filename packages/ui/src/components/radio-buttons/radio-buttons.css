@@ -35,8 +35,7 @@
   border: 1px solid var(--color-black-80);
   border-radius: 6px;
 }
-:focus-within .input:checked ~ .border,
-.input:checked:focus ~ .border {
+.input:focus ~ .border {
   top: -1px;
   left: -1px;
   width: 14px;

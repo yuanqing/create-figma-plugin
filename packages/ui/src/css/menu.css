@@ -32,7 +32,7 @@
 
 .optionHeader,
 .optionValue {
-  padding: 4px var(--space-medium) 4px var(--space-extra-large);
+  padding: 4px var(--space-medium) 4px 32px;
 }
 
 .optionHeader {

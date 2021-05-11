@@ -2,7 +2,7 @@
   position: relative;
   z-index: var(--z-index-2);
   width: 100%;
-  padding: var(--space-extra-large) 0;
+  padding: 32px 0;
 }
 
 .isDropActive {
