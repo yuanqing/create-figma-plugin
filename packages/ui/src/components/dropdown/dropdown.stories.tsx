@@ -24,6 +24,7 @@ export const Empty = function () {
     console.log(newValue)
     setValue(newValue)
   }
+  const style = { marginTop: '80px' }
   return (
     <div style={style}>
       <Dropdown onChange={handleChange} options={options} value={value} />
