@@ -29,7 +29,6 @@ export type DropdownProps<
   onValueChange?: OnValueChange<V, N>
   options: Array<DropdownOption<V>>
   placeholder?: string
-  top?: boolean
   value: null | V
 }
 export type DropdownOption<V extends boolean | number | string = string> =
@@ -58,7 +57,6 @@ export function Dropdown<
   onChange = function () {},
   onValueChange = function () {},
   placeholder,
-  top,
   value,
   ...rest
 }: Props<HTMLDivElement, DropdownProps<N, V>>): JSX.Element {
@@ -110,6 +108,19 @@ export function Dropdown<
         throw new Error(`Invalid \`value\`: ${value}`)
       }
       setSelectedId(`${index}`)
+      // Re-position `menuElement` such that the currently-selected item is
+      // directly above the dropdown UI
+      const menuElement = getCurrentFromRef(menuElementRef)
+      const selectedElement = menuElement.querySelector<HTMLInputElement>(
+        `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${index}']`
+      )
+      if (selectedElement === null) {
+        throw new Error('Invariant violation') // `index` is valid
+      }
+      const top =
+        selectedElement.getBoundingClientRect().top -
+        menuElement.getBoundingClientRect().top
+      menuElement.style.top = `-${top}px`
     },
     [options, value]
   )
@@ -123,7 +134,7 @@ export function Dropdown<
       if (event.key === 'Enter') {
         if (selectedId !== INVALID_ID) {
           const selectedElement = getCurrentFromRef(
-            rootElementRef
+            menuElementRef
           ).querySelector<HTMLInputElement>(
             `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
           )
@@ -232,8 +243,7 @@ export function Dropdown<
           menuStyles.menu,
           disabled === true || isMenuVisible === false
             ? menuStyles.hidden
-            : null,
-          top === true ? menuStyles.top : null
+            : null
         ])}
         onMouseDown={handleMenuMouseDown}
       >
