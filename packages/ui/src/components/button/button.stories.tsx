@@ -26,8 +26,8 @@ export const Focused = function () {
 }
 
 export const Loading = function () {
-  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
-    console.log(event)
+  function handleClick() {
+    throw new Error('This function should not be called')
   }
   return (
     <Button loading onClick={handleClick}>

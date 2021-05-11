@@ -59,8 +59,8 @@ export const Multiple = function () {
 }
 
 export const Loading = function () {
-  function handleSelectedFiles(files: Array<File>) {
-    console.log(files)
+  function handleSelectedFiles() {
+    throw new Error('This function should not be called')
   }
   return (
     <FileUploadButton loading onSelectedFiles={handleSelectedFiles}>
