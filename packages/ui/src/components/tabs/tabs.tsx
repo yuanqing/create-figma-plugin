@@ -1,5 +1,5 @@
 /** @jsx h */
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, Fragment, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
@@ -59,7 +59,7 @@ export function Tabs<N extends string>({
   })
 
   return (
-    <div>
+    <Fragment>
       <div class={styles.tabs}>
         {options.map(function (option: TabsOption, index: number): JSX.Element {
           return (
@@ -82,6 +82,6 @@ export function Tabs<N extends string>({
         })}
       </div>
       {typeof activeOption === 'undefined' ? null : activeOption.children}
-    </div>
+    </Fragment>
   )
 }

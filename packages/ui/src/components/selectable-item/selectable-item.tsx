@@ -55,7 +55,7 @@ export function SelectableItem<N extends string>({
   return (
     <label
       class={createClassName([
-        styles.label,
+        styles.selectableItem,
         disabled === true ? styles.disabled : null,
         bold === true ? styles.bold : null,
         indent === true ? styles.indent : null,

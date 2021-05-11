@@ -45,12 +45,16 @@ export function FileUploadButton({
     [onSelectedFiles]
   )
 
-  const handleClick = useCallback(function (
-    event: JSX.TargetedMouseEvent<HTMLInputElement>
-  ): void {
-    event.currentTarget.focus()
-  },
-  [])
+  const handleClick = useCallback(
+    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
+      if (disabled === true || loading === true) {
+        event.preventDefault()
+        return
+      }
+      event.currentTarget.focus()
+    },
+    [disabled, loading]
+  )
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
@@ -65,10 +69,20 @@ export function FileUploadButton({
     [propagateEscapeKeyDown]
   )
 
+  const handleLoadingMouseDown = useCallback(function (
+    event: JSX.TargetedMouseEvent<HTMLInputElement>
+  ): void {
+    // This is needed so that the `loading` state behaviour will be identical
+    // to the `Button` component ie. clicking the button will focus it.
+    event.preventDefault()
+    event.currentTarget.focus()
+  },
+  [])
+
   return (
     <div
       class={createClassName([
-        styles.button,
+        styles.fileUploadButton,
         secondary === true ? styles.secondary : styles.primary,
         fullWidth === true ? styles.fullWidth : null,
         disabled === true ? styles.disabled : null,
@@ -90,9 +104,14 @@ export function FileUploadButton({
         class={styles.input}
         disabled={disabled === true}
         multiple={multiple}
-        onChange={disabled === true ? undefined : handleChange}
-        onClick={disabled === true ? undefined : handleClick}
-        onKeyDown={disabled === true ? undefined : handleKeyDown}
+        onChange={
+          disabled === true || loading === true ? undefined : handleChange
+        }
+        onClick={handleClick}
+        onKeyDown={
+          disabled === true || loading === true ? undefined : handleKeyDown
+        }
+        onMouseDown={loading === true ? handleLoadingMouseDown : undefined}
         tabIndex={disabled === true ? -1 : 0}
         title=""
         type="file"

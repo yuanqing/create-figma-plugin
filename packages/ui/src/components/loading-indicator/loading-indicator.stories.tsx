@@ -9,6 +9,6 @@ export const Default = function () {
   return <LoadingIndicator />
 }
 
-export const Color = function () {
+export const CustomColor = function () {
   return <LoadingIndicator color="blue" />
 }

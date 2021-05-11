@@ -1,4 +1,4 @@
-.label {
+.selectableItem {
   position: relative;
   z-index: var(--z-index-2);
   display: flex;
@@ -7,7 +7,7 @@
   padding: 0 var(--space-medium);
   color: var(--color-black-80);
 }
-.label:hover {
+.selectableItem:hover {
   background-color: var(--color-selection-b);
 }
 

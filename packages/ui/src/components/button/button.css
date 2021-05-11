@@ -62,6 +62,9 @@
 .secondary.destructive button {
   border-color: var(--color-red);
 }
+.secondary.destructive:not(.disabled) button:focus {
+  border-color: var(--color-red);
+}
 
 .fullWidth {
   display: block;

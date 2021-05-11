@@ -49,7 +49,7 @@ export function Toggle<N extends string>({
   return (
     <label
       class={createClassName([
-        styles.label,
+        styles.toggle,
         disabled === true ? styles.disabled : null
       ])}
     >

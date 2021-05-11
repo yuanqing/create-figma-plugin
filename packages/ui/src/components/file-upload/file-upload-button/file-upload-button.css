@@ -1,9 +1,9 @@
-.button {
+.fileUploadButton {
   position: relative;
   z-index: var(--z-index-2);
   display: inline-block;
 }
-.button button {
+.fileUploadButton button {
   display: inline-block;
   height: 32px;
   padding: 0 14px;
