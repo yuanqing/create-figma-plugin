@@ -3,6 +3,7 @@ import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
+import { createClassName } from '../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
 import { IconCross32 } from '../icon/icon-32/icon-cross-32'
 import { IconSearch32 } from '../icon/icon-32/icon-search-32'
@@ -13,7 +14,6 @@ export type SearchTextboxProps<N extends string> = {
   disabled?: boolean
   name?: N
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onClear?: () => void
   onValueChange?: OnValueChange<string, N>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -24,7 +24,6 @@ export function SearchTextbox<N extends string>({
   clearOnEscapeKeyDown = false,
   disabled = false,
   name,
-  onClear = function () {},
   onInput = function () {},
   onValueChange = function () {},
   placeholder,
@@ -33,6 +32,15 @@ export function SearchTextbox<N extends string>({
   ...rest
 }: Props<HTMLInputElement, SearchTextboxProps<N>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+
+  const handleClearButtonClick = useCallback(function (): void {
+    const inputElement = getCurrentFromRef(inputElementRef)
+    inputElement.value = ''
+    const inputEvent = document.createEvent('Event')
+    inputEvent.initEvent('input', true, true)
+    inputElement.dispatchEvent(inputEvent)
+    inputElement.focus()
+  }, [])
 
   const handleFocus = useCallback(function (
     event: JSX.TargetedFocusEvent<HTMLInputElement>
@@ -56,8 +64,7 @@ export function SearchTextbox<N extends string>({
       }
       if (clearOnEscapeKeyDown === true && value !== '' && value !== null) {
         event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
-        getCurrentFromRef(inputElementRef).value = ''
-        onClear()
+        handleClearButtonClick()
         return
       }
       if (propagateEscapeKeyDown === false) {
@@ -65,21 +72,21 @@ export function SearchTextbox<N extends string>({
       }
       event.currentTarget.blur()
     },
-    [clearOnEscapeKeyDown, onClear, propagateEscapeKeyDown, value]
-  )
-
-  const handleClearButtonClick = useCallback(
-    function (): void {
-      const inputElement = getCurrentFromRef(inputElementRef)
-      inputElement.value = ''
-      inputElement.focus()
-      onClear()
-    },
-    [onClear]
+    [
+      clearOnEscapeKeyDown,
+      handleClearButtonClick,
+      propagateEscapeKeyDown,
+      value
+    ]
   )
 
   return (
-    <div class={styles.searchTextbox}>
+    <div
+      class={createClassName([
+        styles.searchTextbox,
+        disabled === true ? styles.disabled : null
+      ])}
+    >
       <input
         {...rest}
         ref={inputElementRef}

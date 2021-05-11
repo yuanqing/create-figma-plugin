@@ -110,7 +110,8 @@ export function Textbox<N extends string>({
       class={createClassName([
         styles.textbox,
         noBorder === true ? styles.noBorder : null,
-        typeof icon === 'undefined' ? null : styles.hasIcon
+        typeof icon === 'undefined' ? null : styles.hasIcon,
+        disabled === true ? styles.disabled : null
       ])}
     >
       <input

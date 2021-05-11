@@ -10,6 +10,7 @@
   color: currentColor;
   border-radius: var(--border-radius-6);
 }
+
 .disabled {
   opacity: var(--opacity-30);
 }
@@ -27,7 +28,7 @@
   background-color: var(--color-blue);
   border: 2px solid transparent;
 }
-.primary .input:focus ~ button {
+.primary:not(.disabled) .input:focus ~ button {
   border-color: var(--color-black-30-translucent);
 }
 .primary.disabled button {
@@ -43,7 +44,7 @@
   background-color: var(--color-white);
   border: 1px solid var(--color-black-80);
 }
-.secondary .input:focus ~ button {
+.secondary:not(.disabled) .input:focus ~ button {
   padding: 0 14px;
   line-height: 28px;
   border-color: var(--color-blue);

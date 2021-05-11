@@ -9,6 +9,7 @@
   color: currentColor;
   border-radius: var(--border-radius-6);
 }
+
 .disabled {
   opacity: var(--opacity-30);
 }
@@ -27,7 +28,7 @@
   background-color: var(--color-blue);
   border: 2px solid transparent;
 }
-.primary button:focus {
+.primary:not(.disabled) button:focus {
   border-color: var(--color-black-30-translucent);
 }
 .primary.destructive {
@@ -49,7 +50,7 @@
   background-color: var(--color-white);
   border: 1px solid var(--color-black-80);
 }
-.secondary button:focus {
+.secondary:not(.disabled) button:focus {
   padding: 0 14px;
   line-height: 28px;
   border-color: var(--color-blue);

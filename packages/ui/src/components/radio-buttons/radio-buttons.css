@@ -1,3 +1,7 @@
+.disabled {
+  opacity: var(--opacity-30);
+}
+
 .label {
   position: relative;
   z-index: var(--z-index-2);
@@ -12,6 +16,9 @@
   z-index: var(--z-index-1); /* stack `.input` on top of everything else */
   display: block;
   width: calc(100% + 32px);
+}
+.disabled .input {
+  cursor: not-allowed;
 }
 
 .fill {
@@ -35,22 +42,13 @@
   border: 1px solid var(--color-black-80);
   border-radius: 6px;
 }
-.input:focus ~ .border {
+.radioButtons:not(.disabled) .input:focus ~ .border {
   top: -1px;
   left: -1px;
   width: 14px;
   height: 14px;
   border: 2px solid var(--color-blue);
   border-radius: 7px;
-}
-
-.input:disabled {
-  cursor: not-allowed;
-}
-.input:disabled ~ .fill,
-.input:disabled ~ .border,
-.input:disabled ~ .children {
-  opacity: var(--opacity-30);
 }
 
 .children {

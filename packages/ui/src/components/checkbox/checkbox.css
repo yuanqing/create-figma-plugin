@@ -1,6 +1,9 @@
-.label {
+.checkbox {
   position: relative;
   z-index: var(--z-index-2);
+}
+.disabled {
+  opacity: var(--opacity-30);
 }
 
 .input {
@@ -13,7 +16,7 @@
   display: block;
   width: calc(100% + 32px);
 }
-.input:disabled {
+.disabled .input {
   cursor: not-allowed;
 }
 
@@ -30,25 +33,19 @@
 .border {
   border: 1px solid var(--color-black-80);
 }
-.input:focus ~ .border {
+.checkbox:not(.disabled) .input:focus ~ .border {
   border-color: var(--color-blue);
   box-shadow: 0 0 0 1px var(--color-blue);
 }
 .input:checked ~ .border {
   border: 0;
 }
-.input:checked:focus ~ .border {
+.checkbox:not(.disabled) .input:checked:focus ~ .border {
   box-shadow: 0 0 0 1px var(--color-white), 0 0 0 2px var(--color-blue);
 }
 
 .input:checked ~ .fill {
   background-color: var(--color-blue);
-}
-
-.input:disabled ~ .fill,
-.input:disabled ~ .border,
-.input:disabled ~ .children {
-  opacity: var(--opacity-30);
 }
 
 .checkIcon {

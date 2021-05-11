@@ -4,6 +4,9 @@
   display: flex;
   align-items: center;
 }
+.disabled {
+  opacity: var(--opacity-30);
+}
 
 .input {
   flex-grow: 1;
@@ -12,9 +15,8 @@
   padding-left: 36px;
   color: var(--color-black-80);
 }
-.input:disabled {
+.disabled .input {
   cursor: not-allowed;
-  opacity: var(--opacity-30);
 }
 .input::placeholder {
   color: var(--color-black-30);
@@ -30,9 +32,6 @@
   color: var(--color-black-80);
   pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
-.input:disabled ~ .searchIcon {
-  opacity: var(--opacity-30);
-}
 
 .clearButton {
   flex: 0 0 40px;
@@ -40,10 +39,10 @@
   padding: 4px;
   color: var(--color-black-30);
 }
-.clearButton:hover {
+.searchTextbox:not(.disabled) .clearButton:hover {
   color: var(--color-black-80);
 }
-.clearButton:focus {
+.searchTextbox:not(.disabled) .clearButton:focus {
   color: var(--color-black-80);
   outline: 0;
 }

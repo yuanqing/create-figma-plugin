@@ -78,6 +78,6 @@
 .noBorder:not(:focus) .border {
   border-color: transparent;
 }
-.noBorder:not(:focus):hover .border {
+.noBorder:not(.disabled):not(:focus):hover .border {
   border-color: var(--color-silver);
 }

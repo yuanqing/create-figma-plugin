@@ -99,12 +99,13 @@ export function TextboxMultiline<N extends string>({
     <div
       class={createClassName([
         styles.textboxMultiline,
-        noBorder === true ? styles.noBorder : null
+        noBorder === true ? styles.noBorder : null,
+        disabled === true ? styles.disabled : null
       ])}
     >
       <textarea
         {...rest}
-        class={styles.textArea}
+        class={styles.textarea}
         disabled={disabled === true}
         name={name}
         onBlur={handleBlur}

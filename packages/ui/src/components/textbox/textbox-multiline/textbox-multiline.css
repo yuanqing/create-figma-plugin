@@ -3,7 +3,7 @@
   z-index: var(--z-index-2);
 }
 
-.textArea {
+.textarea {
   display: block;
   width: 100%;
   padding: 6px 0 6px var(--space-extra-small);
@@ -11,18 +11,12 @@
   border-radius: var(--border-radius-2);
   resize: none;
 }
-.textArea:disabled {
-  cursor: not-allowed;
-  opacity: var(--opacity-30);
-}
-.textArea::placeholder {
+.textarea::placeholder {
   color: var(--color-black-30);
 }
-
-.textArea::after {
-  display: block;
-  background: orange;
-  content: attr(value);
+.disabled .textarea {
+  cursor: not-allowed;
+  opacity: var(--opacity-30);
 }
 
 .border {
@@ -36,13 +30,13 @@
   border-radius: var(--border-radius-2);
   pointer-events: none;
 }
-.textArea:not(:disabled):focus ~ .border {
+.textboxMultiline:not(.disabled) .textarea:focus ~ .border {
   border-color: var(--color-blue);
   border-width: 2px;
 }
-.noBorder .textArea:not(:focus) ~ .border {
+.noBorder .textarea:not(:focus) ~ .border {
   border-color: transparent;
 }
-.noBorder .textArea:not(:focus):hover ~ .border {
+.noBorder:not(.disabled) .textarea:not(:focus):hover ~ .border {
   border-color: var(--color-silver);
 }

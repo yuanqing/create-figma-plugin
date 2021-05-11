@@ -2,6 +2,9 @@
   position: relative;
   z-index: var(--z-index-2);
 }
+.disabled {
+  opacity: var(--opacity-30);
+}
 
 .input {
   display: block;
@@ -11,19 +14,20 @@
   color: var(--color-black-80);
   border-radius: var(--border-radius-2);
 }
-.input:disabled {
-  cursor: not-allowed;
-  opacity: var(--opacity-30);
+.hasIcon .input {
+  padding-left: 32px;
 }
+.disabled .input {
+  cursor: not-allowed;
+}
+
 .input::placeholder {
   color: var(--color-black-30);
 }
+
 .input::-webkit-inner-spin-button,
 .input::-webkit-outer-spin-button {
   -webkit-appearance: none;
-}
-.hasIcon .input {
-  padding-left: 32px;
 }
 
 .icon {
@@ -35,7 +39,7 @@
   text-align: center;
   pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
-.input:not(:disabled):focus ~ .icon {
+.textbox:not(.disabled) .input:focus ~ .icon {
   color: var(--color-blue);
 }
 .icon svg {
@@ -55,13 +59,13 @@
   border-radius: var(--border-radius-2);
   pointer-events: none;
 }
-.input:not(:disabled):focus ~ .border {
+.textbox:not(.disabled) .input:focus ~ .border {
   border-color: var(--color-blue);
   border-width: 2px;
 }
 .noBorder .input:not(:focus) ~ .border {
   border-color: transparent;
 }
-.noBorder .input:not(:focus):hover ~ .border {
+.noBorder:not(.disabled) .input:not(:focus):hover ~ .border {
   border-color: var(--color-silver);
 }

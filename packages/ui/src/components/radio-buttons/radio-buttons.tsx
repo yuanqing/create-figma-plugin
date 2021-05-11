@@ -3,6 +3,7 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
+import { createClassName } from '../../utilities/create-class-name'
 import { Stack, StackSpace } from '../layout/stack/stack'
 import styles from './radio-buttons.css'
 
@@ -67,37 +68,44 @@ export function RadioButtons<
   )
 
   return (
-    <Stack space={space}>
-      {options.map(function (
-        option: RadioButtonsOption<V>,
-        index: number
-      ): JSX.Element {
-        const children =
-          typeof option.children === 'undefined'
-            ? `${option.value}`
-            : option.children
-        const isOptionDisabled = disabled === true || option.disabled === true
-        return (
-          <label key={index} class={styles.label}>
-            <input
-              {...rest}
-              checked={value === option.value}
-              class={styles.input}
-              disabled={isOptionDisabled === true}
-              name={name}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              tabIndex={isOptionDisabled === true ? -1 : 0}
-              type="radio"
-              value={`${option.value}`}
-              {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
-            />
-            <div class={styles.fill} />
-            <div class={styles.border} />
-            <div class={styles.children}>{children}</div>
-          </label>
-        )
-      })}
-    </Stack>
+    <div
+      class={createClassName([
+        styles.radioButtons,
+        disabled === true ? styles.disabled : null
+      ])}
+    >
+      <Stack space={space}>
+        {options.map(function (
+          option: RadioButtonsOption<V>,
+          index: number
+        ): JSX.Element {
+          const children =
+            typeof option.children === 'undefined'
+              ? `${option.value}`
+              : option.children
+          const isOptionDisabled = disabled === true || option.disabled === true
+          return (
+            <label key={index} class={styles.label}>
+              <input
+                {...rest}
+                checked={value === option.value}
+                class={styles.input}
+                disabled={isOptionDisabled === true}
+                name={name}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                tabIndex={isOptionDisabled === true ? -1 : 0}
+                type="radio"
+                value={`${option.value}`}
+                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+              />
+              <div class={styles.fill} />
+              <div class={styles.border} />
+              <div class={styles.children}>{children}</div>
+            </label>
+          )
+        })}
+      </Stack>
+    </div>
   )
 }

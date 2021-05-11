@@ -18,7 +18,7 @@
   display: block;
   width: calc(100% + 32px);
 }
-.input:disabled {
+.disabled .input {
   cursor: not-allowed;
 }
 
@@ -46,7 +46,7 @@
   border-radius: 6px;
   transition: background-color 0.1s ease-out;
 }
-.input:focus ~ .box {
+.toggle:not(.disabled) .input:focus ~ .box {
   box-shadow: 0 0 0 1px var(--color-white), 0 0 0 2px var(--color-blue);
 }
 .input:checked ~ .box {

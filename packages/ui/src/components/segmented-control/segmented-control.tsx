@@ -3,6 +3,7 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types'
+import { createClassName } from '../../utilities/create-class-name'
 import styles from './segmented-control.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'
@@ -66,7 +67,12 @@ export function SegmentedControl<
   )
 
   return (
-    <div class={styles.segmentedControl}>
+    <div
+      class={createClassName([
+        styles.segmentedControl,
+        disabled === true ? styles.disabled : null
+      ])}
+    >
       {options.map(function (
         option: SegmentedControlOption<V>,
         index: number
