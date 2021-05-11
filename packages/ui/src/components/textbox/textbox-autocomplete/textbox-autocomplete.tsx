@@ -344,7 +344,7 @@ export function TextboxAutocomplete<N extends string>({
           disabled === true || isMenuVisible === false
             ? menuStyles.hidden
             : null,
-          top === true ? menuStyles.top : null
+          top === true ? menuStyles.top : menuStyles.bottom
         ])}
       >
         {options.map(function (option: Option, index: number): JSX.Element {

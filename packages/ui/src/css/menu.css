@@ -1,6 +1,5 @@
 .menu {
   position: absolute;
-  top: 100%;
   left: 0;
   width: 100%;
   max-height: 120px;
@@ -11,6 +10,12 @@
   background-color: var(--color-hud);
   border-radius: var(--border-radius-2);
   box-shadow: var(--box-shadow);
+}
+.bottom {
+  top: 100%;
+}
+.top {
+  bottom: 0;
 }
 .menu::-webkit-scrollbar {
   display: none;
