@@ -100,27 +100,19 @@ export function Dropdown<
     function (): void {
       // Show the menu and update the `selectedId` on focus
       setIsMenuVisible(true)
+      const rootElement = getCurrentFromRef(rootElementRef)
+      const menuElement = getCurrentFromRef(menuElementRef)
       if (value === null) {
+        updateMenuElementLayout(rootElement, menuElement, INVALID_ID)
         return
       }
       const index = findOptionIndexByValue(options, value)
       if (index === -1) {
         throw new Error(`Invalid \`value\`: ${value}`)
       }
-      setSelectedId(`${index}`)
-      // Re-position `menuElement` such that the currently-selected item is
-      // directly above the dropdown UI
-      const menuElement = getCurrentFromRef(menuElementRef)
-      const selectedElement = menuElement.querySelector<HTMLInputElement>(
-        `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${index}']`
-      )
-      if (selectedElement === null) {
-        throw new Error('Invariant violation') // `index` is valid
-      }
-      const top =
-        selectedElement.getBoundingClientRect().top -
-        menuElement.getBoundingClientRect().top
-      menuElement.style.top = `-${top}px`
+      const newSelectedId = `${index}`
+      setSelectedId(newSelectedId)
+      updateMenuElementLayout(rootElement, menuElement, newSelectedId)
     },
     [options, value]
   )
@@ -299,6 +291,47 @@ export function Dropdown<
       </div>
     </div>
   )
+}
+
+const VERTICAL_PADDING = 16
+
+function updateMenuElementLayout(
+  rootElement: HTMLDivElement,
+  menuElement: HTMLDivElement,
+  selectedId: Id
+) {
+  // Maximum height of `menuElement` is viewport height minus top and bottom padding
+  const maxHeight = window.innerHeight - 2 * VERTICAL_PADDING
+  menuElement.style.maxHeight = `${maxHeight}px`
+
+  // Compute `topOffset` (relative to `rootElement`) such that `menuElement`
+  // fits within viewport
+  const topOffset = Math.min(
+    0,
+    window.innerHeight -
+      VERTICAL_PADDING -
+      (rootElement.getBoundingClientRect().top + menuElement.offsetHeight)
+  )
+  if (selectedId === INVALID_ID || topOffset !== 0) {
+    menuElement.style.top = `${topOffset}px`
+    return
+  }
+
+  // `topOffset` is 0 (so `menuElement` comfortably fits within the
+  // viewport) and `selectedId` is valid, so try to adjust the `top` position
+  // of `menuElement` such that `selectedElement` is directly `rootElement`
+  const selectedElement = menuElement.querySelector<HTMLInputElement>(
+    `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
+  )
+  if (selectedElement === null) {
+    throw new Error('Invariant violation') // `index` is valid
+  }
+  const selectedElementTop =
+    selectedElement.getBoundingClientRect().top -
+    menuElement.getBoundingClientRect().top
+  const maximumTopOffset =
+    rootElement.getBoundingClientRect().top - VERTICAL_PADDING
+  menuElement.style.top = `-${Math.min(selectedElementTop, maximumTopOffset)}px`
 }
 
 // Returns the index of the option in `options` with the given `value`, else `-1`
