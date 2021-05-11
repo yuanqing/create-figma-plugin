@@ -37,11 +37,11 @@
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "yarn run clean && yarn run generate-index-ts && tsc --build && node --loader ts-node/esm ./scripts/add-js-extension-to-relative-module-paths.ts -- './lib/**/*.js' && yarn run copy-non-ts-files",
+    "build": "yarn run clean && yarn run generate-index-ts && tsc --build && node --loader ts-node/esm ./scripts/add-js-extension-to-relative-module-paths.ts && yarn run copy-non-ts-files",
     "clean": "rm -rf './*.log' ./lib './src/**/*.css.d.ts' ./tsconfig.tsbuildinfo",
     "copy-non-ts-files": "node --loader ts-node/esm ./scripts/copy-non-ts-files.ts",
     "fix": "eslint --fix './{.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint --fix './src/**/*.css' && prettier --loglevel error --write './*.json' './.storybook/**/*.html'",
-    "generate-icons": "node --loader ts-node/esm scripts/generate-icons.ts && eslint --fix './src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
+    "generate-icons-ts": "node --loader ts-node/esm scripts/generate-icons-ts.ts && eslint --fix './src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- './src/**/*.{ts,tsx}' '!./src/**/private/**/*' && eslint --fix './src/index.ts'",
     "lint": "eslint './{.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' && stylelint './src/**/*.css'",
     "storybook": "yarn run storybook-clean && mkdirp ./node_modules && start-storybook --port 4242",

@@ -15,35 +15,47 @@ type SvgFile = {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main(): Promise<void> {
-  const svgFilesGlob = './icons/**/*.svg'
-  const filePaths = await globby([svgFilesGlob])
+  try {
+    const globPatterns = ['./icons/**/*.svg']
+    const iconDirectoryPath = resolve(
+      __dirname,
+      '..',
+      'src',
+      'components',
+      'icon'
+    )
+    await generateIconsTs(globPatterns, iconDirectoryPath)
+  } catch (error) {
+    console.error(error.message) // eslint-disable-line no-console
+    process.exit(1)
+  }
+}
+main()
+
+async function generateIconsTs(
+  globPatterns: Array<string>,
+  outputDirectoryPath: string
+): Promise<void> {
+  const filePaths = await globby(globPatterns)
   if (filePaths.length === 0) {
-    throw new Error(`No files match the pattern \`${svgFilesGlob}\``)
+    throw new Error(`No files match \`${globPatterns.join(', ')}\``)
   }
   const svgFiles = await readSvgFilesAsync(filePaths)
   const dimensions: Record<string, Array<SvgFile>> = groupSvgFilesByDimension(
     svgFiles
   )
-  const iconDirectoryPath = resolve(
-    __dirname,
-    '..',
-    'src',
-    'components',
-    'icon'
-  )
-  const directories = await globby([join(iconDirectoryPath, 'icon-*')], {
+  const directoryPaths = await globby(join(outputDirectoryPath, 'icon-*'), {
     onlyFiles: false
   })
-  for (const directory of directories) {
-    await fs.remove(directory)
+  for (const directoryPath of directoryPaths) {
+    await fs.remove(directoryPath)
   }
   for (const dimension in dimensions) {
-    const outputDirectory = join(iconDirectoryPath, `icon-${dimension}`)
-    await writePreactComponentsAsync(dimensions[dimension], outputDirectory)
-    await writeStoriesAsync(dimensions[dimension], dimension, outputDirectory)
+    const directoryPath = join(outputDirectoryPath, `icon-${dimension}`)
+    await writePreactComponentsAsync(dimensions[dimension], directoryPath)
+    await writeStoriesAsync(dimensions[dimension], dimension, directoryPath)
   }
 }
-main()
 
 async function readSvgFilesAsync(
   filePaths: Array<string>

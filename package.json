@@ -15,10 +15,10 @@
     "test": "lerna run --stream test",
     "version": "lerna version",
     "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook",
-    "website-build-docs": "yarn run docs && single-page-markdown-website ./docs/index.md",
+    "website-build-docs": "yarn run generate-docs && single-page-markdown-website ./docs/index.md",
     "website-build-storybook": "lerna run --stream storybook-build && cpy ./packages/ui/build ./build/ui",
-    "website-clean": "rm -rf build",
-    "website-deploy": "yarn run website-build && gh-pages --dist build"
+    "website-clean": "rm -rf ./build",
+    "website-deploy": "yarn run website-build && gh-pages --dist ./build"
   },
   "devDependencies": {
     "@types/node": "^15.0.2",

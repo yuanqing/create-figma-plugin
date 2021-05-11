@@ -5,9 +5,20 @@ import ts from 'typescript'
 
 const relativePathRegex = /^\.\.?\// // Starts with either `./` or `../`
 
-async function main() {
-  const args = process.argv.slice(2) // File paths are passed in as CLI arguments
-  const filePaths = await globby(args)
+async function main(): Promise<void> {
+  try {
+    await addJsExtensionToRelativeModulePaths(['./lib/**/*.js'])
+  } catch (error) {
+    console.error(error.message) // eslint-disable-line no-console
+    process.exit(1)
+  }
+}
+main()
+
+async function addJsExtensionToRelativeModulePaths(
+  globPatterns: Array<string>
+): Promise<void> {
+  const filePaths = await globby(globPatterns)
   const result: Record<string, string> = {} // Map each file path to their new contents
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed })
   const program = ts.createProgram(filePaths, { allowJs: true })
@@ -47,4 +58,3 @@ async function main() {
     await fs.outputFile(filePath, result[filePath])
   }
 }
-main()
