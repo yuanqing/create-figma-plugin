@@ -323,7 +323,7 @@ export const MenuTop = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '128px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <TextboxAutocomplete

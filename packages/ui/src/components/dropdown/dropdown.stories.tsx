@@ -24,7 +24,7 @@ export const Empty = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown onChange={handleChange} options={options} value={value} />
@@ -47,7 +47,7 @@ export const Focused = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown
@@ -75,7 +75,7 @@ export const Placeholder = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown
@@ -103,7 +103,7 @@ export const Filled = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
 
   return (
     <div style={style}>
@@ -124,7 +124,7 @@ export const Disabled = function () {
   function handleChange() {
     throw new Error('This function should not be called')
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown
@@ -152,7 +152,7 @@ export const NoBorder = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown
@@ -180,7 +180,7 @@ export const Icon = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown
@@ -208,7 +208,7 @@ export const TextIcon = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown
@@ -231,7 +231,7 @@ export const OnValueChange = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  const style = { marginTop: '80px' }
+  const style = { marginTop: '100px' }
   return (
     <div style={style}>
       <Dropdown onValueChange={setValue} options={options} value={value} />
