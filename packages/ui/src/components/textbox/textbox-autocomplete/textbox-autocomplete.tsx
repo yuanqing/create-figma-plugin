@@ -15,6 +15,7 @@ import textboxStyles from '../textbox/textbox.css'
 const EMPTY_STRING = ''
 const INVALID_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
+const MENU_VERTICAL_MARGIN = 16
 
 export type TextboxAutocompleteProps<N extends string> = {
   disabled?: boolean
@@ -147,13 +148,18 @@ export function TextboxAutocomplete<N extends string>({
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
       setIsMenuVisible(true)
+      updateMenuElementMaxHeight(
+        getCurrentFromRef(rootElementRef),
+        getCurrentFromRef(menuElementRef),
+        top
+      )
       setOriginalValue(value)
       updateEditedValue(value)
       const inputElement = event.currentTarget
       inputElement.focus()
       inputElement.select()
     },
-    [updateEditedValue, value]
+    [top, updateEditedValue, value]
   )
 
   const handleInput = useCallback(
@@ -579,4 +585,20 @@ function findFirstOptionValue(
 // Returns the last `OptionValueWithId` encountered in `options`, else `null`
 function findLastOptionValue(options: Array<Option>): null | OptionValueWithId {
   return findFirstOptionValue(options.slice().reverse())
+}
+
+function updateMenuElementMaxHeight(
+  rootElement: HTMLDivElement,
+  menuElement: HTMLDivElement,
+  top: boolean
+) {
+  const rootElementTop = rootElement.getBoundingClientRect().top
+  const maxHeight =
+    top === true
+      ? rootElementTop - MENU_VERTICAL_MARGIN
+      : window.innerHeight -
+        rootElementTop -
+        rootElement.offsetHeight -
+        MENU_VERTICAL_MARGIN
+  menuElement.style.maxHeight = `${maxHeight}px`
 }

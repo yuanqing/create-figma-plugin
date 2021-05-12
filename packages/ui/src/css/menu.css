@@ -2,7 +2,6 @@
   position: absolute;
   left: 0;
   width: 100%;
-  max-height: 120px;
   padding: var(--space-extra-small) 0;
   overflow-y: auto;
   color: var(--color-white);
