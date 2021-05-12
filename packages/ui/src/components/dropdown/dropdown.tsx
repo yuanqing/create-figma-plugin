@@ -14,6 +14,7 @@ import dropdownStyles from './dropdown.css'
 
 const INVALID_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-dropdown-item-id'
+const MENU_VERTICAL_MARGIN = 16
 
 type Id = typeof INVALID_ID | string
 
@@ -293,15 +294,31 @@ export function Dropdown<
   )
 }
 
-const VERTICAL_PADDING = 16
+// Returns the index of the option in `options` with the given `value`, else `-1`
+function findOptionIndexByValue<V extends boolean | number | string = string>(
+  options: Array<DropdownOption<V>>,
+  value: null | V
+): number {
+  if (value === null) {
+    return -1
+  }
+  let index = 0
+  for (const option of options) {
+    if ('value' in option && option.value === value) {
+      return index
+    }
+    index += 1
+  }
+  return -1
+}
 
 function updateMenuElementLayout(
   rootElement: HTMLDivElement,
   menuElement: HTMLDivElement,
   selectedId: Id
 ) {
-  // Maximum height of `menuElement` is viewport height minus top and bottom padding
-  const maxHeight = window.innerHeight - 2 * VERTICAL_PADDING
+  // Maximum height of `menuElement` is viewport height minus the top and bottom margin
+  const maxHeight = window.innerHeight - 2 * MENU_VERTICAL_MARGIN
   menuElement.style.maxHeight = `${maxHeight}px`
 
   // Compute `topOffset` (relative to `rootElement`) such that `menuElement`
@@ -309,7 +326,7 @@ function updateMenuElementLayout(
   const topOffset = Math.min(
     0,
     window.innerHeight -
-      VERTICAL_PADDING -
+      MENU_VERTICAL_MARGIN -
       (rootElement.getBoundingClientRect().top + menuElement.offsetHeight)
   )
   if (selectedId === INVALID_ID || topOffset !== 0) {
@@ -330,24 +347,6 @@ function updateMenuElementLayout(
     selectedElement.getBoundingClientRect().top -
     menuElement.getBoundingClientRect().top
   const maximumTopOffset =
-    rootElement.getBoundingClientRect().top - VERTICAL_PADDING
+    rootElement.getBoundingClientRect().top - MENU_VERTICAL_MARGIN
   menuElement.style.top = `-${Math.min(selectedElementTop, maximumTopOffset)}px`
-}
-
-// Returns the index of the option in `options` with the given `value`, else `-1`
-function findOptionIndexByValue<V extends boolean | number | string = string>(
-  options: Array<DropdownOption<V>>,
-  value: null | V
-): number {
-  if (value === null) {
-    return -1
-  }
-  let index = 0
-  for (const option of options) {
-    if ('value' in option && option.value === value) {
-      return index
-    }
-    index += 1
-  }
-  return -1
 }
