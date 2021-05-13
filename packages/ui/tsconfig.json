@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "react",
     "jsxFactory": "h",
+    "lib": ["DOM"],
     "outDir": "./lib",
     "rootDir": "./src"
   },

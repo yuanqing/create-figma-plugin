@@ -4,6 +4,7 @@
     "isolatedModules": true,
     "jsx": "react",
     "jsxFactory": "h",
+    "lib": ["DOM"],
     "strict": true
   }
 }
