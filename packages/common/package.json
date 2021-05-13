@@ -20,7 +20,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=12.20"
+    "node": ">=14"
   },
   "files": [
     "./lib"
