@@ -8,7 +8,8 @@ import {
 /**
  * Evaluates the given numeric `expression`.
  *
- * @returns Returns the result of evaluating the given `expression`.
+ * @returns Returns the result of evaluating the given `expression`, else
+ * `null` for an invalid expression.
  * @category Number
  */
 export function evaluateNumericExpression(value: string): null | number {

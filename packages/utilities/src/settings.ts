@@ -1,8 +1,9 @@
 const DEFAULT_SETTINGS_KEY = 'settings'
 
 /**
- * Loads your plugin’s `settings` (stored locally on the user’s computer).
- * Values in `settings` default to an optional `defaultSettings` object.
+ * Loads your plugin’s settings (stored locally on the user’s computer under
+ * the given `settingsKey`). `settingsKey` defaults to `'settings'`. Values
+ * in `settings` default to an optional `defaultSettings` object.
  *
  * @category Settings
  */
@@ -19,7 +20,8 @@ export async function loadSettingsAsync<Settings>(
 
 /**
  * Saves the given `settings` for your plugin (stored locally on the user’s
- * computer).
+ * computer under the given `settingsKey`). `settingsKey` defaults to
+ * `'settings'`.
  *
  * @category Settings
  */

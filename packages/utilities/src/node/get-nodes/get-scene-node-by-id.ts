@@ -1,5 +1,5 @@
 /**
- * Gets the node in the current document with the given `id`.
+ * Returns the node in the current document that has the given `id`.
  *
  * @category Node
  */

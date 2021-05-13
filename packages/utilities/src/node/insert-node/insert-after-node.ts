@@ -1,7 +1,7 @@
 import { getParentNode } from '../get-nodes/get-parent-node.js'
 
 /**
- * Inserts `node` after the `referenceNode` in the layer list.
+ * Inserts `node` *after* the `referenceNode` in the Layer list.
  *
  * @category Node
  */

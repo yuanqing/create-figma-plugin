@@ -1,5 +1,5 @@
 /**
- * Performs a *deep* comparison of objects `a` and `b`.
+ * Performs a *deep* equality comparison of objects `a` and `b`.
  *
  * @returns Returns `true` if `a` and `b` are the same, else `false`.
  * @category Object

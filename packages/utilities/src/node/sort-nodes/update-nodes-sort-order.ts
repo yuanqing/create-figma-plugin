@@ -3,7 +3,7 @@ import { getParentNode } from '../get-nodes/get-parent-node.js'
 import { areSiblingNodes } from '../sibling-nodes/are-sibling-nodes.js'
 
 /**
- * Updates the layer list sort order to follow the sort order of the nodes
+ * Updates the Layer list sort order to follow the sort order of the nodes
  * in the `siblingNodes` array. Does not modify the original
  * `siblingNodes` array.
  *

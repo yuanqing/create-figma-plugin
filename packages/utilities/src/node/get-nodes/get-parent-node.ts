@@ -1,5 +1,5 @@
 /**
- * Gets the parent node of the given `node`.
+ * Returns the parent node of the given `node`.
  *
  * @category Node
  */

@@ -1,7 +1,8 @@
 /**
- * Checks if the given `node` is within an Instance.
+ * Checks if the given `node` is within an Instance node.
  *
- * @returns Returns `true` if the `node` is within an Instance, else `false`.
+ * @returns Returns `true` if the `node` is within an Instance node,
+ * else `false`.
  * @category Node
  */
 export function isWithinInstanceNode(node: SceneNode): boolean {

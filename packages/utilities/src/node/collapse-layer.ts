@@ -1,7 +1,7 @@
 import { traverseNode } from './traverse-node.js'
 
 /**
- * Collapses `node` and all its child nodes in the layer list.
+ * Collapses `node` and all its child nodes in the Layer list.
  *
  * @category Node
  */

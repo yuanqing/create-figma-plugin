@@ -1,6 +1,6 @@
 /**
  * Extracts the specified list of `attributes` from the given `array` of
- * objects.
+ * plain objects.
  *
  * @returns Returns an array of plain objects.
  * @category Object

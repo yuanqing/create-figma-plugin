@@ -1,6 +1,6 @@
 /**
- * Gets the selected nodes, or all the top-level nodes on the current page if
- * no nodes are selected.
+ * Returns the selected nodes, or all the top-level nodes on the current page
+ * if no nodes are selected.
  *
  * @category Node
  */
