@@ -1,5 +1,5 @@
 /**
- * Returns the `x` and `y` position of the given `node` relative to the Page.
+ * Returns the `x` and `y` position of the given `node` relative to the page.
  *
  * @category Node
  */

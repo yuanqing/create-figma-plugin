@@ -1,7 +1,7 @@
 import { traverseNode } from '../traverse-node.js'
 
 /**
- * Returns all the Components in the current Document.
+ * Returns all the Components in the current document.
  *
  * @category Node
  */

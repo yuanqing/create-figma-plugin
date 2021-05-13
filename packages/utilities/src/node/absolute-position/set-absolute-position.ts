@@ -1,5 +1,5 @@
 /**
- * Moves the `node` to the given `x` and `y` position relative to the Page.
+ * Moves the `node` to the given `x` and `y` position relative to the page.
  *
  * @category Node
  */

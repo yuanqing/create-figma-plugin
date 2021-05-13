@@ -1,5 +1,5 @@
 /**
- * Loads the fonts used in all the Text nodes in `nodes`.
+ * Loads the fonts used in all the text nodes in `nodes`.
  *
  * @category Node
  */
