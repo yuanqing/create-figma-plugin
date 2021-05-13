@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsx": "react",
     "jsxFactory": "h",
-    "lib": ["DOM"],
+    "lib": ["DOM", "ES2020"],
     "outDir": "./lib",
     "rootDir": "./src"
   },
