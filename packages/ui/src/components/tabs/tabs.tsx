@@ -7,10 +7,10 @@ import styles from './tabs.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
 
-export type TabsProps<N extends string> = {
-  name?: N
+export type TabsProps<Name extends string> = {
+  name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, N>
+  onValueChange?: OnValueChange<string, Name>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
   value: null | string
@@ -20,7 +20,7 @@ export type TabsOption = {
   value: string
 }
 
-export function Tabs<N extends string>({
+export function Tabs<Name extends string>({
   name,
   onChange = function () {},
   onValueChange = function () {},
@@ -28,7 +28,7 @@ export function Tabs<N extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, TabsProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, TabsProps<Name>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const id = event.currentTarget.getAttribute(

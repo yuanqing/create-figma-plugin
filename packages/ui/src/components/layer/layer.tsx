@@ -6,12 +6,12 @@ import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
 import styles from './layer.css'
 
-export type LayerProps<N extends string> = {
+export type LayerProps<Name extends string> = {
   bold?: boolean
   children: ComponentChildren
-  name?: N
+  name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, N>
+  onValueChange?: OnValueChange<boolean, Name>
   pageName?: string
   icon?: ComponentChildren
   color?: LayerColor
@@ -19,7 +19,7 @@ export type LayerProps<N extends string> = {
 }
 export type LayerColor = 'black-30' | 'black-80' | 'purple'
 
-export function Layer<N extends string>({
+export function Layer<Name extends string>({
   bold = false,
   children,
   color = 'black-80',
@@ -30,7 +30,7 @@ export function Layer<N extends string>({
   value = false,
   icon,
   ...rest
-}: Props<HTMLInputElement, LayerProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, LayerProps<Name>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newValue = event.currentTarget.checked

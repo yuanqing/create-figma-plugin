@@ -17,7 +17,7 @@ import textboxStyles from '../textbox/textbox.css'
 const EMPTY_STRING = ''
 const nonDigitRegex = /[^\d.]/
 
-export type TextboxNumericProps<N extends string> = {
+export type TextboxNumericProps<Name extends string> = {
   disabled?: boolean
   icon?: ComponentChildren
   incrementBig?: number
@@ -25,11 +25,11 @@ export type TextboxNumericProps<N extends string> = {
   integer?: boolean
   maximum?: number
   minimum?: number
-  name?: N
+  name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, N>
-  onNumericValueChange?: OnValueChange<null | number, N>
+  onValueChange?: OnValueChange<string, Name>
+  onNumericValueChange?: OnValueChange<null | number, Name>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
@@ -37,7 +37,7 @@ export type TextboxNumericProps<N extends string> = {
   value: string
 }
 
-export function TextboxNumeric<N extends string>({
+export function TextboxNumeric<Name extends string>({
   disabled = false,
   icon,
   incrementBig = 10,
@@ -56,7 +56,7 @@ export function TextboxNumeric<N extends string>({
   suffix,
   value,
   ...rest
-}: Props<HTMLInputElement, TextboxNumericProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, TextboxNumericProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }

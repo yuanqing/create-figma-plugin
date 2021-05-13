@@ -6,16 +6,16 @@ import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
 import styles from './toggle.css'
 
-export type ToggleProps<N extends string> = {
+export type ToggleProps<Name extends string> = {
   disabled?: boolean
-  name?: N
+  name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, N>
+  onValueChange?: OnValueChange<boolean, Name>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
-export function Toggle<N extends string>({
+export function Toggle<Name extends string>({
   disabled = false,
   name,
   onChange = function () {},
@@ -23,7 +23,7 @@ export function Toggle<N extends string>({
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
-}: Props<HTMLInputElement, ToggleProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, ToggleProps<Name>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newValue = event.currentTarget.checked

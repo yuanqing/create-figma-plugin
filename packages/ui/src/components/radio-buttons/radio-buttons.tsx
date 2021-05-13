@@ -10,27 +10,29 @@ import styles from './radio-buttons.css'
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-radio-buttons-item-id'
 
 export type RadioButtonsProps<
-  N extends string,
-  V extends boolean | number | string
+  Name extends string,
+  Value extends boolean | number | string
 > = {
   disabled?: boolean
-  name?: N
+  name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<V, N>
-  options: Array<RadioButtonsOption<V>>
+  onValueChange?: OnValueChange<Value, Name>
+  options: Array<RadioButtonsOption<Value>>
   propagateEscapeKeyDown?: boolean
   space?: StackSpace
-  value: null | V
+  value: null | Value
 }
-export type RadioButtonsOption<V extends boolean | number | string = string> = {
+export type RadioButtonsOption<
+  Value extends boolean | number | string = string
+> = {
   disabled?: boolean
   children?: ComponentChildren
-  value: V
+  value: Value
 }
 
 export function RadioButtons<
-  N extends string,
-  V extends boolean | number | string
+  Name extends string,
+  Value extends boolean | number | string
 >({
   disabled = false,
   name,
@@ -41,7 +43,7 @@ export function RadioButtons<
   space = 'small',
   value,
   ...rest
-}: Props<HTMLInputElement, RadioButtonsProps<N, V>>): JSX.Element {
+}: Props<HTMLInputElement, RadioButtonsProps<Name, Value>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const id = event.currentTarget.getAttribute(
@@ -76,7 +78,7 @@ export function RadioButtons<
     >
       <Stack space={space}>
         {options.map(function (
-          option: RadioButtonsOption<V>,
+          option: RadioButtonsOption<Value>,
           index: number
         ): JSX.Element {
           const children =

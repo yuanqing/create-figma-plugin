@@ -1,19 +1,25 @@
 import { useCallback, useState } from 'preact/hooks'
 
-export function useFormState<S>(
-  initialState: S,
-  transform?: (state: S) => S
+export function useFormState<State>(
+  initialState: State,
+  transform?: (state: State) => State
 ): {
-  formState: S
-  setFormState: <N extends keyof S>(state: S[N], name: undefined | N) => void
+  formState: State
+  setFormState: <Name extends keyof State>(
+    state: State[Name],
+    name: undefined | Name
+  ) => void
 } {
   const [formState, setState] = useState(initialState)
   const setFormState = useCallback(
-    function <N extends keyof S>(value: S[N], name: undefined | N) {
+    function <Name extends keyof State>(
+      value: State[Name],
+      name: undefined | Name
+    ) {
       if (typeof name === 'undefined') {
         throw new Error('`name` is `undefined`')
       }
-      setState(function (previousState: S): S {
+      setState(function (previousState: State): State {
         const newState = {
           ...previousState,
           ...{ [name]: value }

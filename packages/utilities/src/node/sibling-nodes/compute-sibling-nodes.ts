@@ -6,15 +6,15 @@ import { getParentNode } from '../get-nodes/get-parent-node.js'
  * @returns Returns an array of array of sibling `SceneNode` objects.
  * @category Node
  */
-export function computeSiblingNodes<N extends SceneNode>(
-  nodes: Array<N>
-): Array<Array<N>> {
+export function computeSiblingNodes<Node extends SceneNode>(
+  nodes: Array<Node>
+): Array<Array<Node>> {
   const groups = resolveGroups(nodes)
-  const result: Array<Array<N>> = []
+  const result: Array<Array<Node>> = []
   for (const group of groups) {
     const parentNode = getParentNode(group[0])
     const siblingNodes = group
-      .map(function (node: N): { index: number; node: N } {
+      .map(function (node: Node): { index: number; node: Node } {
         return {
           index: parentNode.children.indexOf(node),
           node
@@ -23,7 +23,7 @@ export function computeSiblingNodes<N extends SceneNode>(
       .sort(function (a: { index: number }, b: { index: number }): number {
         return a.index - b.index
       })
-      .map(function ({ node }: { node: N }): N {
+      .map(function ({ node }: { node: Node }): Node {
         return node
       })
     result.push(siblingNodes)
@@ -31,8 +31,10 @@ export function computeSiblingNodes<N extends SceneNode>(
   return result
 }
 
-function resolveGroups<N extends SceneNode>(nodes: Array<N>): Array<Array<N>> {
-  const result: Record<string, Array<N>> = {}
+function resolveGroups<Node extends SceneNode>(
+  nodes: Array<Node>
+): Array<Array<Node>> {
+  const result: Record<string, Array<Node>> = {}
   for (const node of nodes) {
     const parentNode = getParentNode(node)
     const parentId = parentNode.id

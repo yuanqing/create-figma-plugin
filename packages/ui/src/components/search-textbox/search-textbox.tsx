@@ -9,18 +9,18 @@ import { IconCross32 } from '../icon/icon-32/icon-cross-32'
 import { IconSearch32 } from '../icon/icon-32/icon-search-32'
 import styles from './search-textbox.css'
 
-export type SearchTextboxProps<N extends string> = {
+export type SearchTextboxProps<Name extends string> = {
   clearOnEscapeKeyDown?: boolean
   disabled?: boolean
-  name?: N
+  name?: Name
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, N>
+  onValueChange?: OnValueChange<string, Name>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: string
 }
 
-export function SearchTextbox<N extends string>({
+export function SearchTextbox<Name extends string>({
   clearOnEscapeKeyDown = false,
   disabled = false,
   name,
@@ -30,7 +30,7 @@ export function SearchTextbox<N extends string>({
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, SearchTextboxProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, SearchTextboxProps<Name>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleClearButtonClick = useCallback(function (): void {

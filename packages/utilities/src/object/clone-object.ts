@@ -3,7 +3,7 @@
  *
  * @category Object
  */
-export function cloneObject<O>(object: O): O {
+export function cloneObject<T>(object: T): T {
   if (
     object === null ||
     typeof object === 'undefined' ||
@@ -24,5 +24,5 @@ export function cloneObject<O>(object: O): O {
   for (const key in object) {
     result[key] = cloneObject(object[key])
   }
-  return result as O
+  return result as T
 }

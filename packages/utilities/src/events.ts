@@ -13,9 +13,9 @@ let currentId = 0
  * @returns Returns a function for deregistering the `handler`.
  * @category Events
  */
-export function on<E extends EventHandler>(
-  name: E['name'],
-  handler: E['handler']
+export function on<Handler extends EventHandler>(
+  name: Handler['name'],
+  handler: Handler['handler']
 ): () => void {
   const id = `${currentId}`
   currentId += 1
@@ -32,9 +32,9 @@ export function on<E extends EventHandler>(
  * @returns Returns a function for deregistering the `handler`.
  * @category Events
  */
-export function once<E extends EventHandler>(
-  name: E['name'],
-  handler: E['handler']
+export function once<Handler extends EventHandler>(
+  name: Handler['name'],
+  handler: Handler['handler']
 ): () => void {
   let done = false
   return on(name, function (...args): void {
@@ -60,15 +60,15 @@ export function once<E extends EventHandler>(
  */
 export const emit =
   typeof window === 'undefined'
-    ? function <E extends EventHandler>(
-        name: E['name'],
-        ...args: Parameters<E['handler']>
+    ? function <Handler extends EventHandler>(
+        name: Handler['name'],
+        ...args: Parameters<Handler['handler']>
       ): void {
         figma.ui.postMessage([name, ...args])
       }
-    : function <E extends EventHandler>(
-        name: E['name'],
-        ...args: Parameters<E['handler']>
+    : function <Handler extends EventHandler>(
+        name: Handler['name'],
+        ...args: Parameters<Handler['handler']>
       ): void {
         window.parent.postMessage(
           {

@@ -19,36 +19,36 @@ const MENU_VERTICAL_MARGIN = 16
 type Id = typeof INVALID_ID | string
 
 export type DropdownProps<
-  N extends string,
-  V extends boolean | number | string = string
+  Name extends string,
+  Value extends boolean | number | string = string
 > = {
   disabled?: boolean
   icon?: ComponentChildren
-  name?: N
+  name?: Name
   noBorder?: boolean
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<V, N>
-  options: Array<DropdownOption<V>>
+  onValueChange?: OnValueChange<Value, Name>
+  options: Array<DropdownOption<Value>>
   placeholder?: string
-  value: null | V
+  value: null | Value
 }
-export type DropdownOption<V extends boolean | number | string = string> =
+export type DropdownOption<Value extends boolean | number | string = string> =
   | DropdownOptionHeader
-  | DropdownOptionValue<V>
+  | DropdownOptionValue<Value>
   | DropdownOptionSeparator
 export type DropdownOptionHeader = {
   header: string
 }
-export type DropdownOptionValue<V> = {
-  value: V
+export type DropdownOptionValue<Value> = {
+  value: Value
 }
 export type DropdownOptionSeparator = {
   separator: true
 }
 
 export function Dropdown<
-  N extends string,
-  V extends boolean | number | string = string
+  Name extends string,
+  Value extends boolean | number | string = string
 >({
   disabled = false,
   icon,
@@ -60,7 +60,7 @@ export function Dropdown<
   placeholder,
   value,
   ...rest
-}: Props<HTMLDivElement, DropdownProps<N, V>>): JSX.Element {
+}: Props<HTMLDivElement, DropdownProps<Name, Value>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
@@ -81,15 +81,13 @@ export function Dropdown<
   // Uncomment to debug
   // console.table([{isMenuVisible, selectedId}])
 
-  const {
-    handleScrollableMenuKeyDown,
-    handleScrollableMenuItemMouseMove
-  } = useScrollableMenu({
-    itemIdDataAttributeName: ITEM_ID_DATA_ATTRIBUTE_NAME,
-    menuElementRef,
-    selectedId: selectedId,
-    setSelectedId: setSelectedId
-  })
+  const { handleScrollableMenuKeyDown, handleScrollableMenuItemMouseMove } =
+    useScrollableMenu({
+      itemIdDataAttributeName: ITEM_ID_DATA_ATTRIBUTE_NAME,
+      menuElementRef,
+      selectedId: selectedId,
+      setSelectedId: setSelectedId
+    })
 
   const triggerBlur = useCallback(function (): void {
     setIsMenuVisible(false)
@@ -172,7 +170,9 @@ export function Dropdown<
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
-      const optionValue = options[parseInt(id, 10)] as DropdownOptionValue<V>
+      const optionValue = options[
+        parseInt(id, 10)
+      ] as DropdownOptionValue<Value>
       const newValue = optionValue.value
       onValueChange(newValue, name)
       onChange(event)
@@ -241,7 +241,7 @@ export function Dropdown<
         onMouseDown={handleMenuMouseDown}
       >
         {options.map(function (
-          option: DropdownOption<V>,
+          option: DropdownOption<Value>,
           index: number
         ): JSX.Element {
           if ('separator' in option) {
@@ -295,10 +295,9 @@ export function Dropdown<
 }
 
 // Returns the index of the option in `options` with the given `value`, else `-1`
-function findOptionIndexByValue<V extends boolean | number | string = string>(
-  options: Array<DropdownOption<V>>,
-  value: null | V
-): number {
+function findOptionIndexByValue<
+  Value extends boolean | number | string = string
+>(options: Array<DropdownOption<Value>>, value: null | Value): number {
   if (value === null) {
     return -1
   }

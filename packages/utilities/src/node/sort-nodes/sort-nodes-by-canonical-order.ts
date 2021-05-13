@@ -8,9 +8,9 @@ import { areSiblingNodes } from '../sibling-nodes/are-sibling-nodes.js'
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
-export function sortNodesByCanonicalOrder<N extends SceneNode>(
-  siblingNodes: Array<N>
-): Array<N> {
+export function sortNodesByCanonicalOrder<Node extends SceneNode>(
+  siblingNodes: Array<Node>
+): Array<Node> {
   if (siblingNodes.length < 2) {
     return siblingNodes.slice()
   }
@@ -20,7 +20,7 @@ export function sortNodesByCanonicalOrder<N extends SceneNode>(
   }
   return siblingNodes
     .slice()
-    .map(function (node: N): { index: number; node: N } {
+    .map(function (node: Node): { index: number; node: Node } {
       return {
         index: parentNode.children.indexOf(node),
         node
@@ -29,7 +29,7 @@ export function sortNodesByCanonicalOrder<N extends SceneNode>(
     .sort(function (a: { index: number }, b: { index: number }): number {
       return a.index - b.index
     })
-    .map(function ({ node }: { node: N }): N {
+    .map(function ({ node }: { node: Node }): Node {
       return node
     })
 }

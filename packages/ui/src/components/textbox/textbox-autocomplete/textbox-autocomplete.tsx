@@ -17,14 +17,14 @@ const INVALID_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
 const MENU_VERTICAL_MARGIN = 16
 
-export type TextboxAutocompleteProps<N extends string> = {
+export type TextboxAutocompleteProps<Name extends string> = {
   disabled?: boolean
   filter?: boolean
   icon?: ComponentChildren
-  name?: N
+  name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, N>
+  onValueChange?: OnValueChange<string, Name>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -56,7 +56,7 @@ type OptionValueWithId = TextboxAutocompleteOptionValue & {
 }
 type Id = typeof INVALID_ID | string
 
-export function TextboxAutocomplete<N extends string>({
+export function TextboxAutocomplete<Name extends string>({
   disabled = false,
   filter = false,
   icon,
@@ -71,7 +71,7 @@ export function TextboxAutocomplete<N extends string>({
   top = false,
   value,
   ...rest
-}: Props<HTMLInputElement, TextboxAutocompleteProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, TextboxAutocompleteProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }

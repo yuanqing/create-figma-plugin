@@ -7,17 +7,17 @@ import { createClassName } from '../../utilities/create-class-name'
 import { IconControlCheckboxChecked12 } from '../icon/icon-12/icon-control-checkbox-checked-12'
 import styles from './checkbox.css'
 
-export type CheckboxProps<N extends string> = {
+export type CheckboxProps<Name extends string> = {
   children: ComponentChildren
   disabled?: boolean
-  name?: N
+  name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, N>
+  onValueChange?: OnValueChange<boolean, Name>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
-export function Checkbox<N extends string>({
+export function Checkbox<Name extends string>({
   children,
   disabled = false,
   name,
@@ -26,7 +26,7 @@ export function Checkbox<N extends string>({
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
-}: Props<HTMLInputElement, CheckboxProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, CheckboxProps<Name>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newValue = event.currentTarget.checked

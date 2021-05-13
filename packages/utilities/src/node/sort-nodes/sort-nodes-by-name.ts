@@ -7,13 +7,13 @@ import naturalCompare from 'natural-compare-lite'
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node
  */
-export function sortNodesByName<N extends SceneNode>(
-  nodes: Array<N>
-): Array<N> {
+export function sortNodesByName<Node extends SceneNode>(
+  nodes: Array<Node>
+): Array<Node> {
   if (nodes.length < 2) {
     return nodes.slice()
   }
-  return nodes.slice().sort(function (a: N, b: N): number {
+  return nodes.slice().sort(function (a: Node, b: Node): number {
     const aName = a.name.toLowerCase()
     const bName = b.name.toLowerCase()
     if (aName !== bName) {

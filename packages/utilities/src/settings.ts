@@ -6,11 +6,11 @@ const DEFAULT_SETTINGS_KEY = 'settings'
  *
  * @category Settings
  */
-export async function loadSettingsAsync<S>(
-  defaultSettings: S,
+export async function loadSettingsAsync<Settings>(
+  defaultSettings: Settings,
   settingsKey = DEFAULT_SETTINGS_KEY
-): Promise<S> {
-  const settings: S = await figma.clientStorage.getAsync(settingsKey)
+): Promise<Settings> {
+  const settings: Settings = await figma.clientStorage.getAsync(settingsKey)
   if (typeof settings === 'undefined') {
     return defaultSettings
   }
@@ -23,8 +23,8 @@ export async function loadSettingsAsync<S>(
  *
  * @category Settings
  */
-export async function saveSettingsAsync<S>(
-  settings: S,
+export async function saveSettingsAsync<Settings>(
+  settings: Settings,
   settingsKey = DEFAULT_SETTINGS_KEY
 ): Promise<void> {
   await figma.clientStorage.setAsync(settingsKey, settings)

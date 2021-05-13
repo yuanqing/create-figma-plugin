@@ -7,19 +7,19 @@ import { createClassName } from '../../utilities/create-class-name'
 import { IconMenuCheckmarkChecked16 } from '../icon/icon-16/icon-menu-checkmark-checked-16'
 import styles from './selectable-item.css'
 
-export type SelectableItemProps<N extends string> = {
+export type SelectableItemProps<Name extends string> = {
   bold?: boolean
   children: ComponentChildren
   disabled?: boolean
   indent?: boolean
-  name?: N
+  name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, N>
+  onValueChange?: OnValueChange<boolean, Name>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
-export function SelectableItem<N extends string>({
+export function SelectableItem<Name extends string>({
   bold = false,
   children,
   disabled = false,
@@ -30,7 +30,7 @@ export function SelectableItem<N extends string>({
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
-}: Props<HTMLInputElement, SelectableItemProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, SelectableItemProps<Name>>): JSX.Element {
   const handleChange = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       onValueChange(!value, name)

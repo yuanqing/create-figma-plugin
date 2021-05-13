@@ -10,13 +10,13 @@ import styles from './textbox.css'
 
 const EMPTY_STRING = ''
 
-export type TextboxProps<N extends string> = {
+export type TextboxProps<Name extends string> = {
   disabled?: boolean
   icon?: ComponentChildren
-  name?: N
+  name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, N>
+  onValueChange?: OnValueChange<string, Name>
   password?: boolean
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -24,7 +24,7 @@ export type TextboxProps<N extends string> = {
   value: string
 }
 
-export function Textbox<N extends string>({
+export function Textbox<Name extends string>({
   disabled = false,
   icon,
   name,
@@ -37,7 +37,7 @@ export function Textbox<N extends string>({
   revertOnEscapeKeyDown = false,
   value,
   ...rest
-}: Props<HTMLInputElement, TextboxProps<N>>): JSX.Element {
+}: Props<HTMLInputElement, TextboxProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }

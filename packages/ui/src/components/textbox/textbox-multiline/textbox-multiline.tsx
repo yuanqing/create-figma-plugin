@@ -10,12 +10,12 @@ import styles from './textbox-multiline.css'
 
 const EMPTY_STRING = ''
 
-export type TextboxMultilineProps<N extends string> = {
+export type TextboxMultilineProps<Name extends string> = {
   disabled?: boolean
-  name?: N
+  name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLTextAreaElement>>
-  onValueChange?: OnValueChange<string, N>
+  onValueChange?: OnValueChange<string, Name>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
@@ -23,7 +23,7 @@ export type TextboxMultilineProps<N extends string> = {
   value: string
 }
 
-export function TextboxMultiline<N extends string>({
+export function TextboxMultiline<Name extends string>({
   disabled = false,
   name,
   noBorder = false,
@@ -35,7 +35,7 @@ export function TextboxMultiline<N extends string>({
   rows = 3,
   value,
   ...rest
-}: Props<HTMLTextAreaElement, TextboxMultilineProps<N>>): JSX.Element {
+}: Props<HTMLTextAreaElement, TextboxMultilineProps<Name>>): JSX.Element {
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
   const handleBlur = useCallback(function (): void {
