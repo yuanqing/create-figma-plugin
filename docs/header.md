@@ -4,5 +4,5 @@
 
 - [Initialize a new Figma plugin](#initialize-a-new-plugin) using a template
 - [Bundle your JavaScript/TypeScript plugin code](#build-the-plugin), with support for [multiple menu commands](#specifying-multiple-commands-in-the-plugin-sub-menu) that each have their own [UI implementation](#adding-a-ui-to-a-plugin-command)
-- [An extensive library of utility functions](#utilities) for common plugin operations
+- [An extensive library of utility functions](#utilities) for common Figma plugin operations
 - [Production-grade Preact components](https://yuanqing.github.io/create-figma-plugin/ui/) that replicate the Figma UI design
