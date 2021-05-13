@@ -1,6 +1,7 @@
 {
   "title": "JSON schema for configuring a Figma plugin built with the Create Figma Plugin toolkit",
-	"$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json",
   "type": "object",
   "definitions": {
     "File": {
