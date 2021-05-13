@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "A library of Preact components that replicate the Figma UI design",
+  "description": "Production-grade Preact components that replicate the Figma UI design",
   "keywords": [
     "components",
     "component-library",
