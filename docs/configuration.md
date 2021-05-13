@@ -109,7 +109,7 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](#specif
 
 *Optional.* An object that specifies the commands that can be set as [relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/). Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the following keys:
 
-- **`"name"`** (*`string`*) — *Required.* The name of the Relaunch Button.
+- **`"name"`** (*`string`*) — *Required.* The name of the relaunch button.
 - **`"main"`** (*`string`* or *`object`*) — *Required.* Ditto the **`"main"`** field above.
 - **`"ui"`** (*`string`* or *`object`*) — *Optional.* Ditto the **`"ui"`** field above.
 - **`"multipleSelection"`** (*`boolean`*) — *Optional.* Whether the relaunch button should appear when multiple layers are selected.
