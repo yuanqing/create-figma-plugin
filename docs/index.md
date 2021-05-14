@@ -6,7 +6,7 @@
 
 ---
 
-./figma-plugin-basics.md
+./plugin-basics.md
 
 ---
 
@@ -14,19 +14,15 @@
 
 ---
 
-# Recipes
-
-./recipes/multiple-commands.md
-
-./recipes/data-passing.md
-
-./recipes/ui.md
-
-./recipes/relaunch-buttons.md
+./recipes/recipes.md
 
 ---
 
 ./utilities.md
+
+---
+
+./changelog.md
 
 ---
 

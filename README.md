@@ -8,4 +8,5 @@
 - [Recipes](https://yuanqing.github.io/create-figma-plugin/#recipes)
 - [Utilities](https://yuanqing.github.io/create-figma-plugin/#utilities)
 - [Contributing](https://yuanqing.github.io/create-figma-plugin/#contributing)
+- [Changelog](https://yuanqing.github.io/create-figma-plugin/#changelog)
 - [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)

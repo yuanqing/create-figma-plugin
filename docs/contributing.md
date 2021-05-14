@@ -13,12 +13,12 @@ $ cd create-figma-plugin
 $ yarn install
 ```
 
-## Testing locally on an existing plugin
+## Testing changes locally on an existing plugin
 
 First, build the entire Create Figma Plugin project:
 
 ```
-$ yarn build
+$ yarn run build
 ```
 
 Then, create symlinks to the local copy of the project in your existing Figma plugin (eg. `my-plugin`):
@@ -33,5 +33,5 @@ Finally, build your plugin:
 
 ```
 $ cd my-plugin
-$ yarn build
+$ yarn run build
 ```

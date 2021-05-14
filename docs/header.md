@@ -3,6 +3,6 @@
 > A comprehensive toolkit for developing [Figma plugins](https://figma.com/community/explore?tab=plugins)
 
 - [Initialize a new Figma plugin](#initialize-a-new-plugin) using a template
-- [Bundle your JavaScript/TypeScript plugin code](#build-the-plugin), with support for [multiple menu commands](#specifying-multiple-commands-in-the-plugin-sub-menu) that each have their own [UI implementation](#adding-a-ui-to-a-plugin-command)
-- [An extensive library of utility functions](#utilities) for common Figma plugin operations
-- [Production-grade Preact components](https://yuanqing.github.io/create-figma-plugin/ui/) that replicate the Figma UI design
+- [Bundle your JavaScript or TypeScript plugin code](#build-the-plugin), with support for [multiple menu commands](#specifying-multiple-commands-in-the-plugin-sub-menu) that each have their own [UI implementation](#adding-a-ui-to-a-plugin-command)
+- [An extensive library of utility functions](#utilities) for common Figma plugin operations, including utilities for [passing data between your plugin command’s main and UI contexts](passing-data-between-the-plugin-commands-main-and-ui-contexts)
+- [Production-grade Preact components](https://yuanqing.github.io/create-figma-plugin/ui/) that replicate the Figma editor’s UI design

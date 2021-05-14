@@ -18,7 +18,8 @@
     "website-build-docs": "yarn run generate-docs && single-page-markdown-website ./docs/index.md",
     "website-build-storybook": "lerna run --stream storybook-build && cpy ./packages/ui/build ./build/ui",
     "website-clean": "rm -rf ./build",
-    "website-deploy": "yarn run website-build && gh-pages --dist ./build"
+    "website-deploy": "yarn run website-build && gh-pages --dist ./build",
+    "website-watch-docs": "yarn run generate-docs && single-page-markdown-website --watch ./docs/index.md"
   },
   "devDependencies": {
     "@types/node": "^15.0.3",

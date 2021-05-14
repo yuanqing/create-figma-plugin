@@ -39,12 +39,22 @@ async function generateDocsAsync(
   lines.push('# Utilities')
   lines.push('')
   lines.push(
-    '`@create-figma-plugin/utilities` is a library of helpful utility functions for common Figma plugin operations.'
+    '`@create-figma-plugin/utilities` is an extensive library of utility functions for common Figma plugin operations.'
   )
+  lines.push('')
+  lines.push('To install:')
   lines.push('')
   lines.push('```')
   lines.push('$ npm install @create-figma-plugin/utilities')
   lines.push('```')
+  lines.push('')
+  lines.push('- [Events](#events)')
+  lines.push('- [Node](#node)')
+  lines.push('- [Number](#number)')
+  lines.push('- [Object](#object)')
+  lines.push('- [Settings](#settings)')
+  lines.push('- [String](#string)')
+  lines.push('- [UI](#ui-1)')
   lines.push('')
   for (const category of categories) {
     lines.push(`## ${category.name}`)

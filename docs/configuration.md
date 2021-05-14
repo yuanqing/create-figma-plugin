@@ -1,26 +1,31 @@
 # Configuration
 
+- [Configuration options](#configuration-options)
+- [JSON schema](#json-schema)
+
+## Configuration options
+
 Configure your plugin under the **`"figma-plugin"`** key of your `package.json` file.
 
-## `"apiVersion"`
+### `"apiVersion"`
 
 (*`string`*)
 
 *Optional.* The version of the Figma plugin API to use. Defaults to **`"1.0.0"`**.
 
-## `"id"`
+### `"id"`
 
 (*`string`*)
 
 *Required.* The plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
 
-## `"name"`
+### `"name"`
 
 (*`string`*)
 
 *Required.* The name of the plugin.
 
-## `"main"`
+### `"main"`
 
 (*`string`* or *`object`*)
 
@@ -41,7 +46,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 }
 ```
 
-## `"ui"`
+### `"ui"`
 
 (*`string`* or *`object`*)
 
@@ -65,7 +70,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 
 See the [recipe for adding a UI to a plugin command](#adding-a-ui-to-a-plugin-command).
 
-## `"menu"`
+### `"menu"`
 
 (*`array`*)
 
@@ -103,7 +108,7 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
 
 See the [recipe for specifying multiple commands in the plugin sub-menu](#specifying-multiple-commands-in-the-plugin-sub-menu).
 
-## `"relaunchButtons"`
+### `"relaunchButtons"`
 
 (*`object`*)
 
@@ -146,14 +151,35 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](#specif
 
 See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
 
-## `"enablePrivatePluginApi"`
+### `"enablePrivatePluginApi"`
 
 (*`boolean`*)
 
 *Optional.* Allow use of plugin APIs that are only available to private plugins.
 
-## `"enableProposedApi"`
+### `"enableProposedApi"`
 
 (*`boolean`*)
 
 *Optional.* Allow use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
+
+## JSON schema
+
+Validate the plugin configuration in your `package.json` file using [Create Figma Plugin’s configuration JSON schema](https://yuanqing.github.io/create-figma-plugin/figma-plugin.json).
+
+If you’re developing your plugin in [Visual Studio Code](https://code.visualstudio.com), create a `.vscode/settings.json` file containing the following:
+
+```json
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "package.json"
+      ],
+      "url": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json"
+    }
+  ]
+}
+```
+
+This will enable autocomplete and inline validation of your plugin configuration.

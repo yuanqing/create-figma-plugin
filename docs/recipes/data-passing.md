@@ -1,10 +1,18 @@
 ## Passing data between the plugin command’s main and UI contexts
 
-`@create-figma-plugin/utilities` provides 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#how-a-figma-plugin-works):
+`@create-figma-plugin/utilities` is [an extensive library of utility functions](#utilities) for common Figma plugin operations.
 
-- [`on(name, handler)`](#onname-handler) — Registers an event `handler` for the given event `name`.
-- [`once(name, handler)`](#oncename-handler) — Ditto `on`, only that `handler` will run at most once.
-- [`emit(name, ...args)`](#emitname-args) — Calling `emit` in the main context invokes the event handler for the matching event `name` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching event `name` in the main context. All `arguments` passed after `name` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
+To install:
+
+```
+$ npm install @create-figma-plugin/utilities
+```
+
+The library includes 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#how-a-figma-plugin-works):
+
+- [`on(name, handler)`](#onhandlername-handler) — Registers an event `handler` for the given event `name`.
+- [`once(name, handler)`](#oncehandlername-handler) — Ditto `on`, only that `handler` will run at most once.
+- [`emit(name, ...args)`](#emithandlername-args) — Calling `emit` in the main context invokes the event handler for the matching event `name` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching event `name` in the main context. All `arguments` passed after `name` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
 
 Consider a toy example:
 

@@ -32,3 +32,5 @@ See that:
 The above configuration would result in the following:
 
 ![“Flatten Selection to Bitmap” plugin sub-menu](/media/multiple-commands.png)
+
+See the other [configuration options](#configuration-options).

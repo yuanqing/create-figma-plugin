@@ -1,12 +1,12 @@
 ## Adding a UI to a plugin command
 
-`@create-figma-plugin/ui` is a library of [Preact](https://preactjs.com) components that replicate the Figma UI design:
+`@create-figma-plugin/ui` is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma editor’s UI design.
 
 [![UI components from `@create-figma-plugin/ui`: Icon, Button, Checkbox, Radio Buttons, Segmented Control, Selectable List, Layer, Textbox, Autocomplete](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
 
 (See the [full library of components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).)
 
-To install, do:
+To install:
 
 ```
 $ npm install @create-figma-plugin/ui preact
@@ -28,7 +28,7 @@ export default function () {
 
 `showUI` takes two arguments, and the second `data` argument is useful for passing some initialising data to the UI.
 
-Next, create a file for our UI (eg. `src/ui.tsx` — the file must have either a `tsx` or `jsx` extension for TypeScript or JavaScript respectively):
+Next, create a file for our UI (eg. `src/ui.tsx`):
 
 ```ts
 // src/ui.tsx
@@ -75,7 +75,7 @@ When we rebuild our plugin and run it, we’ll see:
 
 See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
-## Using custom CSS
+### Using custom CSS
 
 Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://github.com/css-modules/css-modules):
 
@@ -106,11 +106,11 @@ function Plugin () {
 export default render(Plugin)
 ```
 
-See the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the CSS variables available for use in your custom CSS.
+Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) that are available for use in your custom CSS.
 
-## Using a custom UI library
+### Using a custom UI library
 
-To use a custom UI library (instead of `@create-figma-plugin/ui`), write our plugin command’s UI implementation as follows:
+To use a custom UI library (instead of `@create-figma-plugin/ui`), write your plugin command’s UI implementation as follows:
 
 ```ts
 // src/ui.ts
