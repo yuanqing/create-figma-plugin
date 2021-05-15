@@ -14,7 +14,7 @@
 
 ---
 
-./recipes/recipes.md
+./recipes/index.md
 
 ---
 
@@ -22,7 +22,7 @@
 
 ---
 
-./changelog.md
+./changelog/index.md
 
 ---
 
