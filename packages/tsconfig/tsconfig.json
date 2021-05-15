@@ -5,6 +5,9 @@
     "jsx": "react",
     "jsxFactory": "h",
     "lib": ["DOM", "ES2020"],
-    "strict": true
+    "module": "ES2020",
+    "moduleResolution": "Node",
+    "strict": true,
+    "target": "ES2020"
   }
 }
