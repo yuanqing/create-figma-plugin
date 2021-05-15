@@ -79,8 +79,8 @@ See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), and the
 
 Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://github.com/css-modules/css-modules):
 
-```scss
-// src/styles.css
+```css
+/* src/styles.css */
 
 .container {
   background-color: var(--color-silver);
@@ -114,6 +114,7 @@ To use a custom UI library (instead of `@create-figma-plugin/ui`), write your pl
 
 ```ts
 // src/ui.ts
+import '@create-figma-plugin/ui/lib/css/base.css'
 
 export default function (rootNode: HTMLElement, data: { greeting: string }) {
   rootNode.innerHTML = `<p>${data.greeting}</p>` //=> <p>Hello, World!</p>
