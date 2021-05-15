@@ -14,7 +14,7 @@ export type SearchTextboxProps<Name extends string> = {
   disabled?: boolean
   name?: Name
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, Name>
+  onValueInput?: OnValueChange<string>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: string
@@ -25,7 +25,7 @@ export function SearchTextbox<Name extends string>({
   disabled = false,
   name,
   onInput = function () {},
-  onValueChange = function () {},
+  onValueInput = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
   value,
@@ -51,10 +51,10 @@ export function SearchTextbox<Name extends string>({
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      onValueChange(event.currentTarget.value, name)
+      onValueInput(event.currentTarget.value, name)
       onInput(event)
     },
-    [name, onInput, onValueChange]
+    [name, onInput, onValueInput]
   )
 
   const handleKeyDown = useCallback(

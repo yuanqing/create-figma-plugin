@@ -14,7 +14,7 @@ export type SelectableItemProps<Name extends string> = {
   indent?: boolean
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, Name>
+  onValueChange?: OnValueChange<boolean>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }

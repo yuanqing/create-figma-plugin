@@ -121,7 +121,7 @@ export const Password = function () {
   return <Textbox onInput={handleInput} password value={value} />
 }
 
-export const OnValueChange = function () {
+export const OnValueInput = function () {
   const [value, setValue] = useState('Text')
-  return <Textbox onValueChange={setValue} value={value} />
+  return <Textbox onValueInput={setValue} value={value} />
 }

@@ -114,7 +114,7 @@ export const Rows = function () {
   return <TextboxMultiline onInput={handleInput} rows={5} value={value} />
 }
 
-export const OnValueChange = function () {
+export const OnValueInput = function () {
   const [value, setValue] = useState('Text')
-  return <TextboxMultiline onValueChange={setValue} value={value} />
+  return <TextboxMultiline onValueInput={setValue} value={value} />
 }

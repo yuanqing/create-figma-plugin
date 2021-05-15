@@ -24,7 +24,7 @@ export type TextboxAutocompleteProps<Name extends string> = {
   name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, Name>
+  onValueInput?: OnValueChange<string>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -63,7 +63,7 @@ export function TextboxAutocomplete<Name extends string>({
   name,
   noBorder = false,
   onInput = function () {},
-  onValueChange = function () {},
+  onValueInput = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
@@ -166,10 +166,10 @@ export function TextboxAutocomplete<Name extends string>({
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
       const newValue = event.currentTarget.value
       updateEditedValue(newValue)
-      onValueChange(newValue, name)
+      onValueInput(newValue, name)
       onInput(event)
     },
-    [name, onInput, onValueChange, updateEditedValue]
+    [name, onInput, onValueInput, updateEditedValue]
   )
 
   const handleKeyDown = useCallback(
@@ -189,7 +189,7 @@ export function TextboxAutocomplete<Name extends string>({
           // Reached beginning/end of list of `options`, so just restore `savedValue`
           setSelectedId(INVALID_ID)
           inputElement.value = editedValue
-          onValueChange(editedValue, name)
+          onValueInput(editedValue, name)
           onInput(event)
           updateScrollPosition(INVALID_ID)
           return
@@ -203,7 +203,7 @@ export function TextboxAutocomplete<Name extends string>({
         }
         const newValue = newOptionValue.value
         inputElement.value = newValue
-        onValueChange(newValue, name)
+        onValueInput(newValue, name)
         onInput(event)
         inputElement.select()
         return
@@ -240,7 +240,7 @@ export function TextboxAutocomplete<Name extends string>({
       editedValue,
       name,
       onInput,
-      onValueChange,
+      onValueInput,
       options,
       originalValue,
       propagateEscapeKeyDown,

@@ -336,7 +336,7 @@ export const MenuTop = function () {
   )
 }
 
-export const OnValueChange = function () {
+export const OnValueInput = function () {
   const [value, setValue] = useState('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
@@ -348,7 +348,7 @@ export const OnValueChange = function () {
   ]
   return (
     <TextboxAutocomplete
-      onValueChange={setValue}
+      onValueInput={setValue}
       options={options}
       value={value}
     />

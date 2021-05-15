@@ -28,8 +28,8 @@ export type TextboxNumericProps<Name extends string> = {
   name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, Name>
-  onNumericValueChange?: OnValueChange<null | number, Name>
+  onNumericValueInput?: OnValueChange<null | number>
+  onValueInput?: OnValueChange<string>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
@@ -48,8 +48,8 @@ export function TextboxNumeric<Name extends string>({
   name,
   noBorder = false,
   onInput = function () {},
-  onNumericValueChange = function () {},
-  onValueChange = function () {},
+  onNumericValueInput = function () {},
+  onValueInput = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
@@ -100,10 +100,10 @@ export function TextboxNumeric<Name extends string>({
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      onValueChange(event.currentTarget.value, name)
+      onValueInput(event.currentTarget.value, name)
       onInput(event)
     },
-    [name, onInput, onValueChange]
+    [name, onInput, onValueInput]
   )
 
   const handleKeyDown = useCallback(
@@ -153,7 +153,7 @@ export function TextboxNumeric<Name extends string>({
           const formattedValue = appendSuffix(`${newValue}`, suffix)
           element.value = formattedValue
           element.select()
-          onValueChange(formattedValue, name)
+          onValueInput(formattedValue, name)
           onInput(event)
           return
         }
@@ -191,7 +191,7 @@ export function TextboxNumeric<Name extends string>({
         )
         element.value = formattedValue
         element.select()
-        onValueChange(formattedValue, name)
+        onValueInput(formattedValue, name)
         onInput(event)
         return
       }
@@ -232,7 +232,7 @@ export function TextboxNumeric<Name extends string>({
       minimum,
       name,
       onInput,
-      onValueChange,
+      onValueInput,
       originalValue,
       propagateEscapeKeyDown,
       revertOnEscapeKeyDown,
@@ -275,15 +275,15 @@ export function TextboxNumeric<Name extends string>({
     function () {
       // Call `onNumericValueChange` if `value` is a valid numeric value
       if (value === MIXED_STRING) {
-        onNumericValueChange(MIXED_NUMBER, name)
+        onNumericValueInput(MIXED_NUMBER, name)
         return
       }
       const evaluatedValue = evaluateNumericExpression(
         trimSuffix(value, suffix)
       )
-      onNumericValueChange(evaluatedValue, name)
+      onNumericValueInput(evaluatedValue, name)
     },
-    [name, onNumericValueChange, suffix, value]
+    [name, onNumericValueInput, suffix, value]
   )
 
   return (

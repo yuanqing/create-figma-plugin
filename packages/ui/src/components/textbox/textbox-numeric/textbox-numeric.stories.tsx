@@ -189,15 +189,15 @@ export const Suffix = function () {
   )
 }
 
-export const OnValueChange = function () {
+export const OnValueInput = function () {
   const [value, setValue] = useState('42')
   function handleNumericValueChange(newNumericValue: null | number) {
     console.log(newNumericValue)
   }
   return (
     <TextboxNumeric
-      onNumericValueChange={handleNumericValueChange}
-      onValueChange={setValue}
+      onNumericValueInput={handleNumericValueChange}
+      onValueInput={setValue}
       value={value}
     />
   )

@@ -27,7 +27,7 @@ export type DropdownProps<
   name?: Name
   noBorder?: boolean
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<Value, Name>
+  onValueChange?: OnValueChange<Value>
   options: Array<DropdownOption<Value>>
   placeholder?: string
   value: null | Value

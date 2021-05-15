@@ -15,7 +15,7 @@ export type TextboxMultilineProps<Name extends string> = {
   name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLTextAreaElement>>
-  onValueChange?: OnValueChange<string, Name>
+  onValueInput?: OnValueChange<string>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
@@ -28,7 +28,7 @@ export function TextboxMultiline<Name extends string>({
   name,
   noBorder = false,
   onInput = function () {},
-  onValueChange = function () {},
+  onValueInput = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
@@ -52,10 +52,10 @@ export function TextboxMultiline<Name extends string>({
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLTextAreaElement>): void {
-      onValueChange(event.currentTarget.value, name)
+      onValueInput(event.currentTarget.value, name)
       onInput(event)
     },
-    [name, onInput, onValueChange]
+    [name, onInput, onValueInput]
   )
 
   const handleKeyDown = useCallback(

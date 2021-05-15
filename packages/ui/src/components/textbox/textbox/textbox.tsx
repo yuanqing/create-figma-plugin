@@ -16,7 +16,7 @@ export type TextboxProps<Name extends string> = {
   name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, Name>
+  onValueInput?: OnValueChange<string>
   password?: boolean
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -30,7 +30,7 @@ export function Textbox<Name extends string>({
   name,
   noBorder = false,
   onInput = function () {},
-  onValueChange = function () {},
+  onValueInput = function () {},
   password = false,
   placeholder,
   propagateEscapeKeyDown = true,
@@ -58,10 +58,10 @@ export function Textbox<Name extends string>({
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      onValueChange(event.currentTarget.value, name)
+      onValueInput(event.currentTarget.value, name)
       onInput(event)
     },
-    [name, onInput, onValueChange]
+    [name, onInput, onValueInput]
   )
 
   const handleKeyDown = useCallback(

@@ -10,7 +10,7 @@ export type ToggleProps<Name extends string> = {
   disabled?: boolean
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, Name>
+  onValueChange?: OnValueChange<boolean>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }
