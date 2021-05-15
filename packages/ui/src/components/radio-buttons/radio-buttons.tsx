@@ -16,7 +16,7 @@ export type RadioButtonsProps<
   disabled?: boolean
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<Value>
+  onValueChange?: OnValueChange<Value, Name>
   options: Array<RadioButtonsOption<Value>>
   propagateEscapeKeyDown?: boolean
   space?: StackSpace

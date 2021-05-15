@@ -28,8 +28,8 @@ export type TextboxNumericProps<Name extends string> = {
   name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onNumericValueInput?: OnValueChange<null | number>
-  onValueInput?: OnValueChange<string>
+  onNumericValueInput?: OnValueChange<null | number, Name>
+  onValueInput?: OnValueChange<string, Name>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean

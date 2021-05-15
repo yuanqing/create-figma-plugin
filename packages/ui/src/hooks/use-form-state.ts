@@ -7,15 +7,12 @@ export function useFormState<State>(
   formState: State
   setFormState: <Name extends keyof State>(
     state: State[Name],
-    name: undefined | Name
+    name?: Name
   ) => void
 } {
   const [formState, setState] = useState(initialState)
   const setFormState = useCallback(
-    function <Name extends keyof State>(
-      value: State[Name],
-      name: undefined | Name
-    ) {
+    function <Name extends keyof State>(value: State[Name], name?: Name) {
       if (typeof name === 'undefined') {
         throw new Error('`name` is `undefined`')
       }

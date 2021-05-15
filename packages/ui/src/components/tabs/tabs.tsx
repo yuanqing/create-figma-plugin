@@ -10,7 +10,7 @@ const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
 export type TabsProps<Name extends string> = {
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string>
+  onValueChange?: OnValueChange<string, Name>
   options: Array<TabsOption>
   propagateEscapeKeyDown?: boolean
   value: null | string

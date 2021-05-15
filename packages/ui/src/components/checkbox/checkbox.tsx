@@ -12,7 +12,7 @@ export type CheckboxProps<Name extends string> = {
   disabled?: boolean
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean>
+  onValueChange?: OnValueChange<boolean, Name>
   propagateEscapeKeyDown?: boolean
   value: boolean
 }

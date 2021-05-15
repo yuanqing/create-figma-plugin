@@ -14,7 +14,7 @@ export type SearchTextboxProps<Name extends string> = {
   disabled?: boolean
   name?: Name
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueInput?: OnValueChange<string>
+  onValueInput?: OnValueChange<string, Name>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: string

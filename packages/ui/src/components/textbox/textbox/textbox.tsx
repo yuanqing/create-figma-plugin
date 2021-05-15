@@ -16,7 +16,7 @@ export type TextboxProps<Name extends string> = {
   name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueInput?: OnValueChange<string>
+  onValueInput?: OnValueChange<string, Name>
   password?: boolean
   placeholder?: string
   propagateEscapeKeyDown?: boolean

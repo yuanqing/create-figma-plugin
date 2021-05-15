@@ -15,7 +15,7 @@ export type SegmentedControlProps<
   disabled?: boolean
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<Value>
+  onValueChange?: OnValueChange<Value, Name>
   options: Array<SegmentedControlOption<Value>>
   propagateEscapeKeyDown?: boolean
   value: Value

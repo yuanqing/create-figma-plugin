@@ -15,7 +15,7 @@ export type TextboxMultilineProps<Name extends string> = {
   name?: Name
   noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLTextAreaElement>>
-  onValueInput?: OnValueChange<string>
+  onValueInput?: OnValueChange<string, Name>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean

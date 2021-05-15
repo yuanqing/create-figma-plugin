@@ -11,7 +11,7 @@ export type LayerProps<Name extends string> = {
   children: ComponentChildren
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean>
+  onValueChange?: OnValueChange<boolean, Name>
   pageName?: string
   icon?: ComponentChildren
   color?: LayerColor
