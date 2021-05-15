@@ -71,6 +71,6 @@
     "extends": "stylelint-config-yuanqing"
   },
   "workspaces": [
-    "packages/*"
+    "./packages/*"
   ]
 }
