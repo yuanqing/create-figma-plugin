@@ -3,7 +3,7 @@ import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.css'
-import { useClickOutside } from '../../../hooks/use-click-outside'
+import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside'
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
@@ -301,7 +301,7 @@ export function TextboxAutocomplete<Name extends string>({
     [selectedId]
   )
 
-  const handleClickOutside = useCallback(
+  const handleMouseDownOutside = useCallback(
     function (): void {
       if (isMenuVisible === false) {
         return
@@ -310,8 +310,8 @@ export function TextboxAutocomplete<Name extends string>({
     },
     [isMenuVisible, triggerBlur]
   )
-  useClickOutside({
-    onClickOutside: handleClickOutside,
+  useMouseDownOutside({
+    onMouseDownOutside: handleMouseDownOutside,
     ref: rootElementRef
   })
 
@@ -324,75 +324,79 @@ export function TextboxAutocomplete<Name extends string>({
         typeof icon === 'undefined' ? null : textboxStyles.hasIcon
       ])}
     >
-      <input
-        {...rest}
-        ref={inputElementRef}
-        class={textboxStyles.input}
-        disabled={disabled === true}
-        name={name}
-        onFocus={handleFocus}
-        onInput={handleInput}
-        onKeyDown={handleKeyDown}
-        onPaste={handlePaste}
-        placeholder={placeholder}
-        tabIndex={disabled === true ? -1 : 0}
-        type="text"
-        value={value}
-      />
-      {typeof icon === 'undefined' ? null : (
-        <div class={textboxStyles.icon}>{icon}</div>
-      )}
-      <div class={textboxStyles.border} />
-      <div
-        ref={menuElementRef}
-        class={createClassName([
-          menuStyles.menu,
-          disabled === true || isMenuVisible === false
-            ? menuStyles.hidden
-            : null,
-          top === true ? menuStyles.top : menuStyles.bottom
-        ])}
-      >
-        {options.map(function (option: Option, index: number): JSX.Element {
-          if ('separator' in option) {
-            return <hr key={index} class={menuStyles.optionSeparator} />
-          }
-          if ('header' in option) {
+      <div class={textboxStyles.inner}>
+        <input
+          {...rest}
+          ref={inputElementRef}
+          class={textboxStyles.input}
+          disabled={disabled === true}
+          name={name}
+          onFocus={handleFocus}
+          onInput={handleInput}
+          onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
+          placeholder={placeholder}
+          tabIndex={disabled === true ? -1 : 0}
+          type="text"
+          value={value}
+        />
+        {typeof icon === 'undefined' ? null : (
+          <div class={textboxStyles.icon}>{icon}</div>
+        )}
+        <div class={textboxStyles.border} />
+        <div
+          ref={menuElementRef}
+          class={createClassName([
+            menuStyles.menu,
+            disabled === true || isMenuVisible === false
+              ? menuStyles.hidden
+              : null,
+            top === true ? menuStyles.top : menuStyles.bottom
+          ])}
+        >
+          {options.map(function (option: Option, index: number): JSX.Element {
+            if ('separator' in option) {
+              return <hr key={index} class={menuStyles.optionSeparator} />
+            }
+            if ('header' in option) {
+              return (
+                <h1 key={index} class={menuStyles.optionHeader}>
+                  {option.header}
+                </h1>
+              )
+            }
             return (
-              <h1 key={index} class={menuStyles.optionHeader}>
-                {option.header}
-              </h1>
+              <label
+                key={index}
+                class={createClassName([
+                  menuStyles.optionValue,
+                  option.id === selectedId
+                    ? menuStyles.optionValueSelected
+                    : null
+                ])}
+              >
+                <input
+                  {...rest}
+                  checked={value === option.value}
+                  class={menuStyles.input}
+                  name={name}
+                  onChange={handleOptionChange}
+                  onMouseMove={handleOptionMouseMove}
+                  tabIndex={-1}
+                  type="radio"
+                  value={`${option.value}`}
+                  {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: option.id }}
+                />
+                {option.value === originalValue ? ( // Show check icon if option matches `originalValue`
+                  <div class={menuStyles.checkIcon}>
+                    <IconMenuCheckmarkChecked16 />
+                  </div>
+                ) : null}
+                {option.value}
+              </label>
             )
-          }
-          return (
-            <label
-              key={index}
-              class={createClassName([
-                menuStyles.optionValue,
-                option.id === selectedId ? menuStyles.optionValueSelected : null
-              ])}
-            >
-              <input
-                {...rest}
-                checked={value === option.value}
-                class={menuStyles.input}
-                name={name}
-                onChange={handleOptionChange}
-                onMouseMove={handleOptionMouseMove}
-                tabIndex={-1}
-                type="radio"
-                value={`${option.value}`}
-                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: option.id }}
-              />
-              {option.value === originalValue ? ( // Show check icon if option matches `originalValue`
-                <div class={menuStyles.checkIcon}>
-                  <IconMenuCheckmarkChecked16 />
-                </div>
-              ) : null}
-              {option.value}
-            </label>
-          )
-        })}
+          })}
+        </div>
       </div>
     </div>
   )

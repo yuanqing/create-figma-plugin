@@ -1,6 +1,6 @@
 .selectableItem {
   position: relative;
-  z-index: var(--z-index-2);
+  z-index: var(--z-index-1);
   display: flex;
   align-items: center;
   height: 32px;

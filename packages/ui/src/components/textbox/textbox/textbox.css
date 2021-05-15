@@ -1,6 +1,9 @@
 .textbox {
   position: relative;
-  z-index: var(--z-index-2);
+  z-index: var(--z-index-1);
+}
+.textbox:focus-within {
+  z-index: var(--z-index-2); /* Stack `.textbox` over its sibling elements */
 }
 .disabled {
   opacity: var(--opacity-30);

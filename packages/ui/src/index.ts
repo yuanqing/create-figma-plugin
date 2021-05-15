@@ -272,11 +272,11 @@ export {
   TextboxNumericProps
 } from './components/textbox/textbox-numeric/textbox-numeric.js'
 export { Toggle, ToggleProps } from './components/toggle/toggle.js'
-export { useClickOutside } from './hooks/use-click-outside.js'
 export { useFocusTrap } from './hooks/use-focus-trap.js'
 export { useForm } from './hooks/use-form.js'
 export { useFormState } from './hooks/use-form-state.js'
 export { InitialFocus, useInitialFocus } from './hooks/use-initial-focus.js'
+export { useMouseDownOutside } from './hooks/use-mouse-down-outside.js'
 export { useScrollableMenu } from './hooks/use-scrollable-menu.js'
 export { useWindowKeyDownHandler } from './hooks/use-window-key-down-handler.js'
 export { OnValueChange, Props } from './types.js'

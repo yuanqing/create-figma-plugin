@@ -1,6 +1,6 @@
 .checkbox {
   position: relative;
-  z-index: var(--z-index-2);
+  z-index: var(--z-index-1);
 }
 .disabled {
   opacity: var(--opacity-30);
@@ -12,7 +12,9 @@
   right: -16px;
   bottom: -8px;
   left: -16px;
-  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
+  z-index: var(
+    --z-index-1
+  ); /* Stack `.input` over all other elements within `.checkbox` */
   display: block;
   width: calc(100% + 32px);
 }

@@ -3,7 +3,7 @@ import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../css/menu.css'
-import { useClickOutside } from '../../hooks/use-click-outside'
+import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside'
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
 import { OnValueChange, Props } from '../../types'
 import { createClassName } from '../../utilities/create-class-name'
@@ -181,7 +181,7 @@ export function Dropdown<
     [name, onChange, onValueChange, options, triggerBlur]
   )
 
-  const handleClickOutside = useCallback(
+  const handleMouseDownOutside = useCallback(
     function (): void {
       if (isMenuVisible === false) {
         return
@@ -190,8 +190,8 @@ export function Dropdown<
     },
     [isMenuVisible, triggerBlur]
   )
-  useClickOutside({
-    onClickOutside: handleClickOutside,
+  useMouseDownOutside({
+    onMouseDownOutside: handleMouseDownOutside,
     ref: rootElementRef
   })
 

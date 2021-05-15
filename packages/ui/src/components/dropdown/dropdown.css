@@ -1,6 +1,6 @@
 .dropdown {
   position: relative;
-  z-index: var(--z-index-2);
+  z-index: var(--z-index-1);
   display: flex;
   align-items: center;
   height: 28px;
@@ -8,6 +8,7 @@
   color: var(--color-black-80);
 }
 .dropdown:not(.disabled):focus {
+  z-index: var(--z-index-2); /* Stack `.dropdown` over its sibling elements */
   outline: 0;
 }
 .disabled {

@@ -1,10 +1,13 @@
-.disabled {
-  opacity: var(--opacity-30);
+.radioButtons {
+  position: relative;
+  z-index: var(--z-index-1);
 }
 
 .label {
   position: relative;
-  z-index: var(--z-index-2);
+}
+.disabled {
+  opacity: var(--opacity-30);
 }
 
 .input {

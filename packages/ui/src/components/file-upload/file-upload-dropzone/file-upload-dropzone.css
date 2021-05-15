@@ -1,6 +1,6 @@
 .fileUploadDropzone {
   position: relative;
-  z-index: var(--z-index-2);
+  z-index: var(--z-index-1);
   width: 100%;
   padding: 32px 0;
 }
@@ -19,7 +19,9 @@
 }
 
 .input {
-  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
+  z-index: var(
+    --z-index-1
+  ); /* Stack `.input` over all other elements within `.fileUploadDropzone` */
   width: 100%;
   opacity: 0;
 }

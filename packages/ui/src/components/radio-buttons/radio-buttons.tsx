@@ -70,12 +70,7 @@ export function RadioButtons<
   )
 
   return (
-    <div
-      class={createClassName([
-        styles.radioButtons,
-        disabled === true ? styles.disabled : null
-      ])}
-    >
+    <div class={styles.radioButtons}>
       <Stack space={space}>
         {options.map(function (
           option: RadioButtonsOption<Value>,
@@ -87,7 +82,13 @@ export function RadioButtons<
               : option.children
           const isOptionDisabled = disabled === true || option.disabled === true
           return (
-            <label key={index} class={styles.label}>
+            <label
+              key={index}
+              class={createClassName([
+                styles.label,
+                isOptionDisabled === true ? styles.disabled : null
+              ])}
+            >
               <input
                 {...rest}
                 checked={value === option.value}

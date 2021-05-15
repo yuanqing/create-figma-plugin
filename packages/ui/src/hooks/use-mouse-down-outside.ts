@@ -3,14 +3,14 @@ import { useEffect } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
 
-export function useClickOutside(options: {
+export function useMouseDownOutside(options: {
   ref: RefObject<HTMLElement>
-  onClickOutside: () => void
+  onMouseDownOutside: () => void
 }): void {
-  const { ref, onClickOutside } = options
+  const { ref, onMouseDownOutside } = options
   useEffect(
     function (): () => void {
-      function handleWindowClick(event: MouseEvent): void {
+      function handleWindowMouseDown(event: MouseEvent): void {
         const element = getCurrentFromRef(ref)
         if (
           element === event.target ||
@@ -18,13 +18,13 @@ export function useClickOutside(options: {
         ) {
           return
         }
-        onClickOutside()
+        onMouseDownOutside()
       }
-      window.addEventListener('click', handleWindowClick)
+      window.addEventListener('mousedown', handleWindowMouseDown)
       return function (): void {
-        window.removeEventListener('click', handleWindowClick)
+        window.removeEventListener('mousedown', handleWindowMouseDown)
       }
     },
-    [ref, onClickOutside]
+    [ref, onMouseDownOutside]
   )
 }

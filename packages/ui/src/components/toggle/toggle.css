@@ -1,6 +1,6 @@
 .toggle {
   position: relative;
-  z-index: var(--z-index-2);
+  z-index: var(--z-index-1);
   width: 24px;
   height: 12px;
 }
@@ -14,7 +14,9 @@
   right: -16px;
   bottom: -8px;
   left: -16px;
-  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
+  z-index: var(
+    --z-index-1
+  ); /* Stack `.input` over all other elements within `.toggle` */
   display: block;
   width: calc(100% + 32px);
 }
