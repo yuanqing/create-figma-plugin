@@ -167,7 +167,7 @@ See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons)
 
 Validate the plugin configuration in your `package.json` file using [Create Figma Plugin’s configuration JSON schema](https://yuanqing.github.io/create-figma-plugin/figma-plugin.json).
 
-If you’re developing your plugin in [Visual Studio Code](https://code.visualstudio.com), create a `.vscode/settings.json` file containing the following:
+To enable autocomplete and inline validation of your plugin configuration in [Visual Studio Code](https://code.visualstudio.com), create a `.vscode/settings.json` file containing the following:
 
 ```json
 {
