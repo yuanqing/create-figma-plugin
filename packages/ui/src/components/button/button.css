@@ -38,7 +38,7 @@
   background-color: var(--color-red);
 }
 .primary.disabled button {
-  background-color: var(--color-black-80);
+  background-color: var(--color-black);
 }
 
 .secondary {
