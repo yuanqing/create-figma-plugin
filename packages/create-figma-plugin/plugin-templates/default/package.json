@@ -30,8 +30,8 @@
     "typescript": "^4"
   },
   "scripts": {
-    "build": "build-figma-plugin --minify --typecheck",
-    "watch": "build-figma-plugin --watch"
+    "build": "build-figma-plugin --typecheck --minify",
+    "watch": "build-figma-plugin --typecheck --watch"
   },
   "figma-plugin": {
     "id": "{{{name}}}",

@@ -56,12 +56,14 @@ In `package.json`, we also have `build` and `watch` scripts set up to invoke the
   {
     ...
     "scripts": {
-+     "build": "build-figma-plugin --minify --typecheck",
-+     "watch": "build-figma-plugin --watch"
++     "build": "build-figma-plugin --typecheck --minify",
++     "watch": "build-figma-plugin --typecheck --watch"
     },
     ...
   }
 ```
+
+The `build-figma-plugin` CLI is powered by [esbuild](https://esbuild.github.io), which enables extremely fast, sub-second builds. When the `--typecheck` flag is specified, your TypeScript code will be type-checked separately by the [TypeScript compiler](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
 
 To build the plugin:
 
@@ -76,12 +78,6 @@ To watch for code changes and rebuild the plugin automatically:
 ```
 $ npm run watch
 ```
-
-### Type checking
-
-The `build-figma-plugin` CLI is powered by [esbuild](https://esbuild.github.io), which enables extremely fast, sub-second builds during development.
-
-When run without the `--typecheck` flag, the `build-figma-plugin` CLI will *not* perform any type checking of your TypeScript code. Instead, you can use a code editor such as [Visual Studio Code](https://code.visualstudio.com) to type check your code during development.
 
 ## Install the plugin
 
