@@ -1,5 +1,5 @@
 import { constants } from '@create-figma-plugin/common'
-import { command } from 'execa'
+import { exec, ExecException } from 'child_process'
 import findUp from 'find-up'
 import { join } from 'path'
 
@@ -8,5 +8,16 @@ export async function buildCssModulesTypingsAsync(): Promise<void> {
   if (typeof tcm === 'undefined') {
     throw new Error('Cannot find `tcm`')
   }
-  await command(`${tcm} ${constants.src.directory}`)
+  return new Promise(function (resolve, reject) {
+    exec(
+      `${tcm} ${constants.src.directory}`,
+      function (error: null | ExecException) {
+        if (error !== null) {
+          reject(error.message)
+          return
+        }
+        resolve()
+      }
+    )
+  })
 }
