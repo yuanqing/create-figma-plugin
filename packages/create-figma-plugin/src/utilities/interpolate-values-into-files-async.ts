@@ -10,7 +10,7 @@ import { Settings } from '../types/settings.js'
 export async function interpolateValuesIntoFilesAsync(
   directory: string,
   values: Settings & {
-    createFigmaPluginVersions: CreateFigmaPluginVersions
+    versions: CreateFigmaPluginVersions
   }
 ): Promise<void> {
   const filePaths = await globby('**/*', {

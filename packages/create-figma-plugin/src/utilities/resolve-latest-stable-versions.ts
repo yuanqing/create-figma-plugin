@@ -3,10 +3,11 @@ import semver from 'semver'
 
 import { CreateFigmaPluginVersions } from '../types/create-figma-plugin-versions.js'
 
-export async function resolveLatestVersions(): Promise<CreateFigmaPluginVersions> {
+export async function resolveLatestStableVersions(): Promise<CreateFigmaPluginVersions> {
   return {
     build: await resolveLatestStableVersion('@create-figma-plugin/build'),
     tsconfig: await resolveLatestStableVersion('@create-figma-plugin/tsconfig'),
+    ui: await resolveLatestStableVersion('@create-figma-plugin/ui'),
     utilities: await resolveLatestStableVersion(
       '@create-figma-plugin/utilities'
     )

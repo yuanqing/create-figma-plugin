@@ -6,7 +6,7 @@ import { Settings } from './types/settings.js'
 import { cloneFromTemplateAsync } from './utilities/clone-from-template-async.js'
 import { installDependenciesAsync } from './utilities/install-dependencies-async.js'
 import { interpolateValuesIntoFilesAsync } from './utilities/interpolate-values-into-files-async.js'
-import { resolveLatestVersions } from './utilities/resolve-latest-versions.js'
+import { resolveLatestStableVersions } from './utilities/resolve-latest-stable-versions.js'
 import { createDefaultSettings } from './utilities/settings/create-default-settings.js'
 import { promptForUserInputAsync } from './utilities/settings/prompt-for-user-input-async.js'
 
@@ -26,10 +26,10 @@ export async function createFigmaPluginAsync(
     await throwIfDirectoryExistsAsync(pluginDirectoryPath)
     log.info('Cloning template...')
     await cloneFromTemplateAsync(pluginDirectoryPath, settings.template)
-    const createFigmaPluginVersions = await resolveLatestVersions()
+    const versions = await resolveLatestStableVersions()
     await interpolateValuesIntoFilesAsync(pluginDirectoryPath, {
       ...settings,
-      createFigmaPluginVersions
+      versions
     })
     log.info('Installing dependencies...')
     await installDependenciesAsync(pluginDirectoryPath)
