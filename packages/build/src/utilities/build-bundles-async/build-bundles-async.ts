@@ -40,7 +40,10 @@ async function buildMainBundleAsync(
         contents: js,
         resolveDir: process.cwd()
       },
-      target: 'es2020'
+      // Spread and rest properties are not supported in the plugin main
+      // context, and must be transpiled down.
+      // See https://esbuild.github.io/content-types/#javascript
+      target: 'es2017'
     })
   } catch (error) {
     throw new Error(formatEsbuildErrorMessage(error.message))
