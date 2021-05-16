@@ -8,27 +8,21 @@ import {
   readConfigAsync
 } from '@create-figma-plugin/common'
 import { build } from 'esbuild'
+import indentString from 'indent-string'
 import { join } from 'path'
 
-import { BuildOptions } from '../../types/build.js'
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
-import { typeCheckAsync } from './type-check-async.js'
 
 interface EntryFile extends ConfigFile {
   readonly commandId: string
 }
 
-export async function buildBundlesAsync(options: BuildOptions): Promise<void> {
+export async function buildBundlesAsync(minify: boolean): Promise<void> {
   const config = await readConfigAsync()
-  if (options.typecheck === true) {
-    await typeCheckAsync()
-  }
-  try {
-    await buildMainBundleAsync(config, options.minify)
-    await buildUiBundleAsync(config, options.minify)
-  } catch (error) {
-    throw new Error(`esbuild error\n${error.message}`)
-  }
+  await Promise.all([
+    buildMainBundleAsync(config, minify),
+    buildUiBundleAsync(config, minify)
+  ])
 }
 
 async function buildMainBundleAsync(
@@ -36,17 +30,21 @@ async function buildMainBundleAsync(
   minify: boolean
 ): Promise<void> {
   const js = createMainEntryFile(config)
-  await build({
-    bundle: true,
-    logLevel: 'error',
-    minify,
-    outfile: join(process.cwd(), constants.build.directoryName, 'main.js'),
-    stdin: {
-      contents: js,
-      resolveDir: process.cwd()
-    },
-    target: 'es2017'
-  })
+  try {
+    await build({
+      bundle: true,
+      logLevel: 'error',
+      minify,
+      outfile: join(process.cwd(), constants.build.directoryName, 'main.js'),
+      stdin: {
+        contents: js,
+        resolveDir: process.cwd()
+      },
+      target: 'es2020'
+    })
+  } catch (error) {
+    throw new Error(formatEsbuildErrorMessage(error.message))
+  }
 }
 
 function createMainEntryFile(config: Config): string {
@@ -76,20 +74,24 @@ async function buildUiBundleAsync(
   if (js === null) {
     return
   }
-  await build({
-    bundle: true,
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment',
-    logLevel: 'error',
-    minify,
-    outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),
-    plugins: [esbuildCssModulesPlugin(minify)],
-    stdin: {
-      contents: js,
-      resolveDir: process.cwd()
-    },
-    target: 'chrome58'
-  })
+  try {
+    await build({
+      bundle: true,
+      jsxFactory: 'h',
+      jsxFragment: 'Fragment',
+      logLevel: 'error',
+      minify,
+      outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),
+      plugins: [esbuildCssModulesPlugin(minify)],
+      stdin: {
+        contents: js,
+        resolveDir: process.cwd()
+      },
+      target: 'chrome58'
+    })
+  } catch (error) {
+    throw new Error(formatEsbuildErrorMessage(error.message))
+  }
 }
 
 function createUiEntryFile(config: Config): null | string {
@@ -160,4 +162,8 @@ function createRequireCode(entryFiles: Array<EntryFile>): string {
     )
   }
   return `{${code.join(',')}}`
+}
+
+function formatEsbuildErrorMessage(string: string): string {
+  return `esbuild error\n${indentString(string, 4)}`
 }

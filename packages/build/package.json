@@ -23,17 +23,17 @@
     "node": ">=14"
   },
   "files": [
-    "./lib"
+    "lib"
   ],
   "bin": {
-    "build-figma-plugin": "./lib/cli.js"
+    "build-figma-plugin": "lib/cli.js"
   },
   "scripts": {
     "build": "yarn run clean && tsc --build",
-    "clean": "rm -rf './*.log' ./lib ./tsconfig.tsbuildinfo",
-    "fix": "eslint --fix './{src,test}/**/*.ts' && prettier --loglevel error --write './*.json' './src/**/*.json' './test/fixtures/**/*.json'",
-    "lint": "eslint './{src,test}/**/*.ts'",
-    "test": "yarn run build && ava './test/**/*.ts'"
+    "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
+    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json' 'src/**/*.json' 'test/fixtures/**/*.json'",
+    "lint": "eslint '{src,test}/**/*.ts'",
+    "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.85-alpha.8",
@@ -44,12 +44,14 @@
     "find-up": "^5.0.0",
     "fs-extra": "^10.0.0",
     "globby": "^11.0.3",
+    "indent-string": "^5.0.0",
     "kleur": "^4.1.4",
     "postcss": "^8.2.15",
     "postcss-modules": "^4.0.0",
     "rev-hash": "^3.0.0",
     "sade": "^1.7.4",
     "temp-write": "^5.0.0",
+    "tempy": "^1.0.1",
     "typed-css-modules": "^0.6.8"
   },
   "devDependencies": {

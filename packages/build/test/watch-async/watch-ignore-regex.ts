@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import { watchIgnoreRegex } from '../../src/watch/watch-ignore-regex.js'
+import { watchIgnoreRegex } from '../../src/watch-async/watch-ignore-regex.js'
 
 test('ignored', function (t) {
   t.plan(7)

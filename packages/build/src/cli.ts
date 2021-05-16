@@ -3,7 +3,7 @@ import sade from 'sade'
 
 import { buildAsync } from './build-async.js'
 import { BuildOptions } from './types/build.js'
-import { watch } from './watch/watch.js'
+import { watchAsync } from './watch-async/watch-async.js'
 
 sade('build-figma-plugin', true)
   .describe(
@@ -21,10 +21,11 @@ sade('build-figma-plugin', true)
       minify: options.minify,
       typecheck: options.typecheck
     }
-    await buildAsync(buildOptions)
     if (options.watch === true) {
-      watch(buildOptions)
+      await buildAsync({ ...buildOptions, typecheck: false })
+      await watchAsync(buildOptions)
       return
     }
+    await buildAsync(buildOptions)
   })
   .parse(process.argv)

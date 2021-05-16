@@ -16,6 +16,7 @@ test('no config', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -36,6 +37,7 @@ test('basic command', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -56,6 +58,7 @@ test('command with UI', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -77,6 +80,7 @@ test('multiple menu commands', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -111,6 +115,7 @@ test('nested menu commands', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -142,6 +147,7 @@ test('relaunch button', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -171,10 +177,11 @@ test('custom styles', async function (t) {
   t.plan(7)
   process.chdir(join(__dirname, 'fixtures', '7-custom-styles'))
   await cleanUpAsync()
-  t.false(await fs.pathExists('src/styles.css.d.ts'))
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
+  t.false(await fs.pathExists('src/styles.css.d.ts'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -184,9 +191,9 @@ test('custom styles', async function (t) {
     name: 'x',
     ui: 'build/ui.js'
   })
-  t.true(await fs.pathExists('src/styles.css.d.ts'))
   t.true(await fs.pathExists('build/main.js'))
   t.true(await fs.pathExists('build/ui.js'))
+  t.true(await fs.pathExists('src/styles.css.d.ts'))
   await cleanUpAsync()
 })
 
@@ -197,6 +204,7 @@ test('preact', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ minify: false, typecheck: true })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -224,6 +232,19 @@ async function symlinkFigmaPluginTypingsAsync(): Promise<void> {
   await fs.ensureSymlink(
     directoryPath,
     join(process.cwd(), 'node_modules', '@figma', 'plugin-typings')
+  )
+}
+
+async function symlinkCreateFigmaPluginTsConfigAsync(): Promise<void> {
+  const directoryPath = await findUp(join('packages', 'tsconfig'), {
+    type: 'directory'
+  })
+  if (typeof directoryPath === 'undefined') {
+    throw new Error('Cannot find the `tsconfig` package')
+  }
+  await fs.ensureSymlink(
+    directoryPath,
+    join(process.cwd(), 'node_modules', '@create-figma-plugin', 'tsconfig')
   )
 }
 
