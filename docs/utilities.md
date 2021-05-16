@@ -89,7 +89,6 @@ Returns a function for deregistering the `handler`.
 () => void
 ```
 
-
 ## Node
 
 ```ts
@@ -461,7 +460,6 @@ Updates the layer list sort order to follow the sort order of the nodes in the `
 boolean
 ```
 
-
 ## Number
 
 ```ts
@@ -504,7 +502,6 @@ Returns `true` if `value` is a valid numeric expression, else `false`.
 ```
 boolean
 ```
-
 
 ## Object
 
@@ -591,7 +588,6 @@ Returns an array of plain objects.
 Array<Pick<PlainObject, Key>>
 ```
 
-
 ## Settings
 
 ```ts
@@ -638,7 +634,6 @@ Saves the given `settings` for your plugin (stored locally on the user’s compu
 ```
 Promise<void>
 ```
-
 
 ## String
 
@@ -708,7 +703,6 @@ Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` d
 ```
 string
 ```
-
 
 ## UI
 

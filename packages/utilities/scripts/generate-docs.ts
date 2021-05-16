@@ -76,7 +76,6 @@ async function generateDocsAsync(
         })
       )
     }
-    lines.push('')
   }
   await fs.outputFile(outputFilePath, lines.join('\n').trim())
 }
