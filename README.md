@@ -3,10 +3,10 @@
 > A comprehensive toolkit for developing Figma plugins
 
 - [Quick start](https://yuanqing.github.io/create-figma-plugin/#quick-start)
-- [Figma plugin basics](https://yuanqing.github.io/create-figma-plugin/#figma-plugin-basics)
+- [Plugin basics](https://yuanqing.github.io/create-figma-plugin/#plugin-basics)
 - [Configuration](https://yuanqing.github.io/create-figma-plugin/#configuration)
 - [Recipes](https://yuanqing.github.io/create-figma-plugin/#recipes)
 - [Utilities](https://yuanqing.github.io/create-figma-plugin/#utilities)
-- [Contributing](https://yuanqing.github.io/create-figma-plugin/#contributing)
 - [Changelog](https://yuanqing.github.io/create-figma-plugin/#changelog)
+- [Contributing](https://yuanqing.github.io/create-figma-plugin/#contributing)
 - [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)
