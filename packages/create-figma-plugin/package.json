@@ -20,18 +20,18 @@
     "node": ">=14"
   },
   "files": [
-    "./lib",
-    "./plugin-templates"
+    "lib",
+    "plugin-templates"
   ],
   "bin": {
     "create-figma-plugin": "./lib/cli.js"
   },
   "scripts": {
     "build": "yarn run clean && tsc --build",
-    "clean": "rm -rf './*.log' ./lib ./tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write './*.json'",
-    "lint": "eslint './{src,test}/**/*.ts'",
-    "test": "yarn run build && ava './test/**/*.ts'"
+    "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
+    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "lint": "eslint '{src,test}/**/*.ts'",
+    "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^0.0.85-alpha.8",

@@ -4,9 +4,9 @@
     "jsx": "react",
     "jsxFactory": "h",
     "lib": ["DOM", "ES2020"],
-    "outDir": "./lib",
-    "rootDir": "./src"
+    "outDir": "lib",
+    "rootDir": "src"
   },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "../utilities" }]
 }

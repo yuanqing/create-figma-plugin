@@ -3,23 +3,23 @@
   "type": "module",
   "scripts": {
     "build": "lerna run --stream build",
-    "bump-dependencies": "TS_NODE_PROJECT=./tsconfig.shared.json node --loader ts-node/esm ./scripts/bump-dependencies.ts react react-dom",
-    "clean": "lerna run --parallel --stream clean && lerna run --stream storybook-clean && yarn run website-clean && rm -rf './*.log'",
-    "fix": "lerna run --parallel --stream fix && eslint --fix './scripts/**/*.ts' && prettier --ignore-path ./lerna.json --loglevel error --write './*.json'",
+    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts react react-dom",
+    "clean": "lerna run --parallel --stream clean && lerna run --stream storybook-clean && yarn run website-clean && rm -rf '*.log'",
+    "fix": "lerna run --parallel --stream fix && eslint --fix 'scripts/**/*.ts' && prettier --ignore-path lerna.json --loglevel error --write '*.json'",
     "generate-docs": "lerna run --stream generate-docs",
-    "lint": "lerna run --parallel --stream lint && eslint './scripts/**/*.ts'",
+    "lint": "lerna run --parallel --stream lint && eslint 'scripts/**/*.ts'",
     "postinstall": "simple-git-hooks && yarn run build",
     "publish": "yarn run build && lerna publish from-package",
-    "reset": "yarn run clean && lerna clean --yes && rm -rf ./node_modules ./yarn.lock && yarn install",
+    "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
     "storybook": "lerna run --stream storybook",
     "test": "lerna run --stream test",
     "version": "lerna version",
-    "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook && cp ./packages/build/src/figma-plugin.json ./build",
-    "website-build-docs": "yarn run generate-docs && single-page-markdown-website ./docs/index.md",
-    "website-build-storybook": "lerna run --stream storybook-build && cpy ./packages/ui/build ./build/ui",
-    "website-clean": "rm -rf ./build",
-    "website-deploy": "yarn run website-build && gh-pages --dist ./build",
-    "website-watch-docs": "yarn run generate-docs && single-page-markdown-website --watch ./docs/index.md"
+    "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook && cp packages/build/src/figma-plugin.json build",
+    "website-build-docs": "yarn run generate-docs && single-page-markdown-website docs/index.md",
+    "website-build-storybook": "lerna run --stream storybook-build && cpy packages/ui/build build/ui",
+    "website-clean": "rm -rf build",
+    "website-deploy": "yarn run website-build && gh-pages --dist build",
+    "website-watch-docs": "yarn run generate-docs && single-page-markdown-website --watch docs/index.md"
   },
   "devDependencies": {
     "@types/node": "^15.0.3",
@@ -71,6 +71,6 @@
     "extends": "stylelint-config-yuanqing"
   },
   "workspaces": [
-    "./packages/*"
+    "packages/*"
   ]
 }

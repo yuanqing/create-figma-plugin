@@ -2,13 +2,13 @@
   "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
     "lib": ["ES2020"],
-    "outDir": "./lib",
+    "outDir": "lib",
     "paths": {
       "cssnano": ["./src/types/untyped-dependencies.d.ts"],
       "postcss-modules": ["./src/types/untyped-dependencies.d.ts"]
     },
-    "rootDir": "./src"
+    "rootDir": "src"
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "references": [{ "path": "../common" }]
 }

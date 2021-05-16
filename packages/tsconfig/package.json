@@ -19,11 +19,11 @@
     "directory": "packages/tsconfig"
   },
   "files": [
-    "./tsconfig.json"
+    "tsconfig.json"
   ],
   "main": "./tsconfig.json",
   "scripts": {
-    "fix": "prettier --loglevel error --write './*.json'"
+    "fix": "prettier --loglevel error --write '*.json'"
   },
   "devDependencies": {
     "prettier": "^2.3.0"
