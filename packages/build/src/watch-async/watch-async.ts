@@ -17,15 +17,11 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
   const watcher = watch(
     ['**/*.{css,js,json,jsx,ts,tsx}', 'package.json', 'tsconfig.json'],
     {
-      ignored: function (path: string) {
+      ignored: function (path: string): boolean {
         return watchIgnoreRegex.test(path) === true
       }
     }
   )
-  // uncomment to debug
-  // watcher.on('add', function (file): void {
-  //   log.info(file)
-  // })
   watcher.on('ready', function (): void {
     log.info('Watching...')
   })
