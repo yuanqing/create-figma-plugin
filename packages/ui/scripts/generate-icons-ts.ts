@@ -16,7 +16,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main(): Promise<void> {
   try {
-    const globPatterns = ['./icons/**/*.svg']
+    const globPatterns = ['icons/**/*.svg']
     const iconDirectoryPath = resolve(
       __dirname,
       '..',
