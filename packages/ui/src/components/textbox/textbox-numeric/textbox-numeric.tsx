@@ -4,7 +4,7 @@ import {
   isValidNumericInput
 } from '@create-figma-plugin/utilities'
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
@@ -65,6 +65,26 @@ export function TextboxNumeric<Name extends string>({
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
+  const restrictValue = useCallback(
+    function (value: number) {
+      if (typeof minimum !== 'undefined') {
+        if (typeof maximum !== 'undefined') {
+          // both `minimum` and `maximum` are defined
+          return Math.min(Math.max(value, minimum), maximum)
+        }
+        // only `minimum` is defined
+        return Math.max(value, minimum)
+      }
+      if (typeof maximum !== 'undefined') {
+        // only `maximum` is defined
+        return Math.min(value, maximum)
+      }
+      // both `minimum` and `maximum` are `undefined`
+      return value
+    },
+    [maximum, minimum]
+  )
+
   const handleBlur = useCallback(
     function (): void {
       if (typeof suffix !== 'undefined') {
@@ -99,11 +119,27 @@ export function TextboxNumeric<Name extends string>({
   )
 
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      onValueInput(event.currentTarget.value, name)
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
       onInput(event)
+      const value = event.currentTarget.value
+      onValueInput(value, name)
+      if (value === MIXED_STRING) {
+        onNumericValueInput(MIXED_NUMBER, name)
+        return
+      }
+      if (value === EMPTY_STRING) {
+        onNumericValueInput(null, name)
+        return
+      }
+      const evaluatedValue = evaluateNumericExpression(
+        trimSuffix(value, suffix)
+      )
+      if (evaluatedValue === null) {
+        throw new Error('Invariant violation') // `value` is a valid numeric expression
+      }
+      onNumericValueInput(evaluatedValue, name)
     },
-    [name, onInput, onValueInput]
+    [name, onInput, onNumericValueInput, onValueInput, suffix]
   )
 
   const handleKeyDown = useCallback(
@@ -130,58 +166,29 @@ export function TextboxNumeric<Name extends string>({
       const element = event.currentTarget
       if (key === 'ArrowDown' || key === 'ArrowUp') {
         event.preventDefault()
-        if (value === MIXED_STRING) {
-          const delta = event.shiftKey === true ? incrementBig : incrementSmall
-          let newValue: number
-          if (typeof minimum === 'undefined') {
-            if (key === 'ArrowDown') {
-              // decrement by `delta`
-              newValue = 0 - delta
-            } else {
-              // increment by `delta`
-              newValue = 0 + delta
-            }
-          } else {
-            if (key === 'ArrowDown') {
-              // can't go below minimum
-              newValue = minimum
-            } else {
-              // increment by `delta` above the `minimum`
-              newValue = minimum + delta
-            }
-          }
+        const delta = event.shiftKey === true ? incrementBig : incrementSmall
+        if (value === '' || value === MIXED_STRING) {
+          event.preventDefault()
+          const startingValue = typeof minimum === 'undefined' ? 0 : minimum
+          const newValue = restrictValue(
+            key === 'ArrowDown' ? startingValue - delta : startingValue + delta
+          )
           const formattedValue = appendSuffix(`${newValue}`, suffix)
           element.value = formattedValue
           element.select()
-          onValueInput(formattedValue, name)
-          onInput(event)
+          handleInput(event)
           return
         }
         const evaluatedValue = evaluateNumericExpression(
           trimSuffix(value, suffix)
         )
         if (evaluatedValue === null) {
-          return
+          throw new Error('Invariant violation') // `value` is a valid numeric expression
         }
-        if (
-          (key === 'ArrowDown' &&
-            typeof minimum !== 'undefined' &&
-            evaluatedValue <= minimum) ||
-          (key === 'ArrowUp' &&
-            typeof maximum !== 'undefined' &&
-            evaluatedValue >= maximum)
-        ) {
-          return
-        }
-        const delta = event.shiftKey === true ? incrementBig : incrementSmall
-        const newValue =
-          key === 'ArrowDown'
-            ? typeof minimum === 'undefined'
-              ? evaluatedValue - delta
-              : Math.max(evaluatedValue - delta, minimum)
-            : typeof maximum === 'undefined'
-            ? evaluatedValue + delta
-            : Math.min(evaluatedValue + delta, maximum)
+        event.preventDefault()
+        const newValue = restrictValue(
+          key === 'ArrowDown' ? evaluatedValue - delta : evaluatedValue + delta
+        )
         const significantFiguresCount = countSignificantFigures(
           nonDigitRegex.test(value) === true ? `${evaluatedValue}` : value
         )
@@ -191,30 +198,31 @@ export function TextboxNumeric<Name extends string>({
         )
         element.value = formattedValue
         element.select()
-        onValueInput(formattedValue, name)
-        onInput(event)
+        handleInput(event)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        // Piece together `newValue`, and stop the `keyDown` event if `newValue` is invalid
-        const newValue = trimSuffix(
+        // Piece together `nextValue` using the key that was pressed, and stop
+        // the `keyDown` event (by calling `event.preventDefault()`) if
+        // `newValue` is found to be invalid
+        const nextValue = trimSuffix(
           value === MIXED_STRING
             ? event.key
             : computeNextValue(element, event.key),
           suffix
         )
         if (
-          isValidNumericInput(newValue, { integersOnly: integer }) === false
+          isValidNumericInput(nextValue, { integersOnly: integer }) === false
         ) {
           event.preventDefault()
           return
         }
-        const evaluatedValue = evaluateNumericExpression(newValue)
+        const evaluatedValue = evaluateNumericExpression(nextValue)
         if (evaluatedValue === null) {
-          return
+          throw new Error('Invariant violation') // `nextValue` is a valid numeric expression
         }
         if (
           (typeof minimum !== 'undefined' && evaluatedValue < minimum) ||
@@ -225,16 +233,15 @@ export function TextboxNumeric<Name extends string>({
       }
     },
     [
+      handleInput,
       incrementBig,
       incrementSmall,
       integer,
       maximum,
       minimum,
-      name,
-      onInput,
-      onValueInput,
       originalValue,
       propagateEscapeKeyDown,
+      restrictValue,
       revertOnEscapeKeyDown,
       suffix,
       value
@@ -269,21 +276,6 @@ export function TextboxNumeric<Name extends string>({
       }
     },
     [integer, suffix]
-  )
-
-  useEffect(
-    function () {
-      // Call `onNumericValueChange` if `value` is a valid numeric value
-      if (value === MIXED_STRING) {
-        onNumericValueInput(MIXED_NUMBER, name)
-        return
-      }
-      const evaluatedValue = evaluateNumericExpression(
-        trimSuffix(value, suffix)
-      )
-      onNumericValueInput(evaluatedValue, name)
-    },
-    [name, onNumericValueInput, suffix, value]
   )
 
   return (
