@@ -2,9 +2,9 @@
 
 `@create-figma-plugin/ui` is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma editor’s UI design.
 
-[![UI components from `@create-figma-plugin/ui`: Icon, Button, Checkbox, Radio Buttons, Segmented Control, Selectable List, Layer, Textbox, Autocomplete](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
+[![UI components from `@create-figma-plugin/ui`: Icon, Button, Checkbox, Radio Buttons, Segmented Control, Selectable List, Layer, Textbox, Autocomplete](/media/ui-figma-components.png)](ui/)
 
-(See the [full library of components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).)
+(See the [full library of components in the Storybook](ui/).)
 
 To install:
 
@@ -73,7 +73,7 @@ When we rebuild our plugin and run it, we’ll see:
 
 ![Figma plugin UI modal containing a “Hello, World” message in the Figma UI style](/media/ui-hello-world-figma.png)
 
-See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
+See the [Storybook](ui/), and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
 ### Using custom CSS
 
