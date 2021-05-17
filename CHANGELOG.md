@@ -48,7 +48,7 @@
 
 ### `@create-figma-plugin/tsconfig@1.0.0`
 
-- The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/tsconfig/tsconfig.json) file has changed significantly, given the move to esbuild.
+- The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/tsconfig/tsconfig.json) file has changed significantly, given the move to esbuild.
 
     ```json
     {
@@ -117,7 +117,7 @@
 
 - The `DropdownMenu` component has been removed. Use the new `Dropdown` component, which has an improved UI design and component API.
 
-- All component styles are now written as “vanilla” CSS modules rather than SCSS. The previous SCSS variables are now expressed as [CSS variables on `:root`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/ui/src/css/base.css). Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) that are available for use in your custom CSS.
+- All component styles are now written as “vanilla” CSS modules rather than SCSS. The previous SCSS variables are now expressed as [CSS variables on `:root`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css). Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) that are available for use in your custom CSS.
 
 - Added new components `Dropdown`, `MiddleAlign`, `TextboxMultiline` and `Toggle`, in addition to a comprehensive collection of **175** icon components extracted from [Figma’s official “UI2” design system file on Figma Community](https://figma.com/community/file/928108847914589057).
 
