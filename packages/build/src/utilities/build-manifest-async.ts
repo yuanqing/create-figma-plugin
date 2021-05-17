@@ -31,12 +31,14 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a `main` entry point')
   }
+  /* eslint-disable sort-keys-fix/sort-keys-fix */
   const result: Manifest = {
-    api: config.apiVersion,
+    name: config.name,
     id: config.id,
-    main: constants.build.pluginCodeFilePath,
-    name: config.name
+    api: config.apiVersion,
+    main: constants.build.pluginCodeFilePath
   }
+  /* eslint-enable sort-keys-fix/sort-keys-fix */
   if (hasBundle(command, 'ui') === true) {
     result.ui = constants.build.pluginUiFilePath
   } else {
@@ -119,10 +121,12 @@ function createRelaunchButtons(
   return relaunchButtons.map(function (
     relaunchButton: ConfigRelaunchButton
   ): ManifestRelaunchButton {
+    /* eslint-disable sort-keys-fix/sort-keys-fix */
     const result: ManifestRelaunchButton = {
-      command: relaunchButton.commandId,
-      name: relaunchButton.name
+      name: relaunchButton.name,
+      command: relaunchButton.commandId
     }
+    /* eslint-enable sort-keys-fix/sort-keys-fix */
     if (relaunchButton.multipleSelection === true) {
       result.multipleSelection = true
     }
