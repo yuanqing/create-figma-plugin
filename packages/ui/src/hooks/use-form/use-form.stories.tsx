@@ -10,41 +10,7 @@ import { useForm } from './use-form'
 
 export default { title: 'Hooks/Use Form' }
 
-export const Simple = function () {
-  type FormState = { text: string }
-  const { disabled, formState, handleSubmit, initialFocus, setFormState } =
-    useForm<FormState>(
-      { text: '' },
-      {
-        close: function (formState: FormState) {
-          console.log('close', formState)
-        },
-        submit: function (formState: FormState) {
-          console.log('submit', formState)
-        },
-        validate: function (formState: FormState) {
-          console.log('validate', formState)
-          return formState.text.length > 0
-        }
-      }
-    )
-  return (
-    <Fragment>
-      <Textbox
-        {...initialFocus}
-        name="text"
-        onValueInput={setFormState}
-        value={formState.text}
-      />
-      <VerticalSpace />
-      <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Fragment>
-  )
-}
-
-export const Transform = function () {
+export const UseForm = function () {
   type FormState = { text: string; wordCount: number }
   const { disabled, formState, handleSubmit, initialFocus, setFormState } =
     useForm<FormState>(
@@ -58,9 +24,10 @@ export const Transform = function () {
         },
         transform: function (formState: FormState) {
           console.log('transform', formState)
+          const trimmed = formState.text.trim()
           return {
             ...formState,
-            wordCount: formState.text.trim().split(' ').length
+            wordCount: trimmed === '' ? 0 : trimmed.split(' ').length
           }
         },
         validate: function (formState: FormState) {
@@ -78,7 +45,9 @@ export const Transform = function () {
         value={formState.text}
       />
       <VerticalSpace />
-      <Text align="center">{formState.wordCount} words</Text>
+      <Text align="center">
+        {formState.wordCount} word{formState.wordCount === 1 ? '' : 's'}
+      </Text>
       <VerticalSpace />
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Submit

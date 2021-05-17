@@ -1,7 +1,7 @@
-import { useWindowKeyDownHandler } from './use-window-key-down-handler'
+import { useWindowKeyDown } from '../private/use-window-key-down'
 
 export function useFocusTrap(): void {
-  useWindowKeyDownHandler('Tab', function (event: KeyboardEvent): void {
+  useWindowKeyDown('Tab', function (event: KeyboardEvent): void {
     const focusableElements = getFocusableElements()
     const index = findElementIndex(
       event.target as HTMLElement, // FIXME

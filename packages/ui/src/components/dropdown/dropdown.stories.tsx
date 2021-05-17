@@ -3,7 +3,7 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus'
+import { useInitialFocus } from '../../hooks/use-initial-focus/use-initial-focus'
 import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
 import { Dropdown, DropdownOption } from './dropdown'
 

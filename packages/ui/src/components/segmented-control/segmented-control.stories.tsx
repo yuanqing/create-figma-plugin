@@ -3,7 +3,7 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus'
+import { useInitialFocus } from '../../hooks/use-initial-focus/use-initial-focus'
 import { IconTextAlignCenter16 } from '../icon/icon-16/icon-text-align-center-16'
 import { IconTextAlignLeft16 } from '../icon/icon-16/icon-text-align-left-16'
 import { IconTextAlignRight16 } from '../icon/icon-16/icon-text-align-right-16'

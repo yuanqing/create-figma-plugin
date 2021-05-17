@@ -272,12 +272,12 @@ export {
   TextboxNumericProps
 } from './components/textbox/textbox-numeric/textbox-numeric.js'
 export { Toggle, ToggleProps } from './components/toggle/toggle.js'
-export { useFocusTrap } from './hooks/use-focus-trap.js'
+export { useFocusTrap } from './hooks/use-focus-trap/use-focus-trap.js'
 export { useForm } from './hooks/use-form/use-form.js'
-export { InitialFocus, useInitialFocus } from './hooks/use-initial-focus.js'
-export { useMouseDownOutside } from './hooks/use-mouse-down-outside.js'
-export { useScrollableMenu } from './hooks/use-scrollable-menu.js'
-export { useWindowKeyDownHandler } from './hooks/use-window-key-down-handler.js'
+export {
+  InitialFocus,
+  useInitialFocus
+} from './hooks/use-initial-focus/use-initial-focus.js'
 export { OnValueChange, Props } from './types.js'
 export { createClassName } from './utilities/create-class-name.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'

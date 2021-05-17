@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'preact/hooks'
 
-export function useWindowKeyDownHandler(
+export function useWindowKeyDown(
   key: KeyboardEvent['key'],
   onKeyDown: (event: KeyboardEvent) => void
 ): void {

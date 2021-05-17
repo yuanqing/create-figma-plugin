@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import { h } from 'preact'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
 import { FileUploadButton } from './file-upload-button'
 
 export default { title: 'Components/File Upload/File Upload Button' }

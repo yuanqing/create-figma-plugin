@@ -1,7 +1,7 @@
 import { RefObject } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { getCurrentFromRef } from '../utilities/get-current-from-ref'
+import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
 
 export function useScrollableMenu(options: {
   itemIdDataAttributeName: string

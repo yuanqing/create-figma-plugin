@@ -3,7 +3,7 @@ import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.css'
-import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside'
+import { useMouseDownOutside } from '../../../hooks/private/use-mouse-down-outside'
 import { OnValueChange, Props } from '../../../types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
