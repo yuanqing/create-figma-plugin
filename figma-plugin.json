@@ -38,6 +38,9 @@
           "type": "object",
           "required": ["name"],
           "additionalProperties": false,
+          "dependencies": {
+            "ui": ["main"]
+          },
           "properties": {
             "name": {
               "description": "(Required)\nThe name of the plugin command.",
@@ -54,6 +57,7 @@
             "menu": {
               "description": "(Required, unless \"main\" is specified)\nSub-menus can be nested.",
               "type": "array",
+              "minItems": 1,
               "items": {
                 "$ref": "#/definitions/MenuItem"
               }
@@ -68,6 +72,9 @@
       "type": "object",
       "required": ["id", "name"],
       "additionalProperties": false,
+      "dependencies": {
+        "ui": ["main"]
+      },
       "properties": {
         "apiVersion": {
           "description": "(Optional)\nThe version of the Figma plugin API to use. Defaults to \"1.0.0\".",
@@ -92,6 +99,7 @@
         "menu": {
           "description": "(Required, unless \"main\" is specified)\nAn array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the keys \"name\" (required), \"main\" (required), \"ui\" (optional), and \"menu\" (optional). Use a \"-\" in the array to specify a separator between commands in the sub-menu.",
           "type": "array",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/MenuItem"
           }
@@ -101,6 +109,9 @@
           "additionalProperties": {
             "type": "object",
             "required": ["name", "main"],
+            "dependencies": {
+              "ui": ["main"]
+            },
             "properties": {
               "name": {
                 "type": "string",
