@@ -1,9 +1,8 @@
-import { useCallback } from 'preact/hooks'
+import { useCallback, useState } from 'preact/hooks'
 
-import { useFocusTrap } from './use-focus-trap'
-import { useFormState } from './use-form-state'
-import { InitialFocus, useInitialFocus } from './use-initial-focus'
-import { useWindowKeyDownHandler } from './use-window-key-down-handler'
+import { useFocusTrap } from '../use-focus-trap'
+import { InitialFocus, useInitialFocus } from '../use-initial-focus'
+import { useWindowKeyDownHandler } from '../use-window-key-down-handler'
 
 export function useForm<State>(
   initialState: State,
@@ -25,7 +24,23 @@ export function useForm<State>(
 } {
   const { close, submit, transform, validate } = options
 
-  const { formState, setFormState } = useFormState(initialState, transform)
+  const [formState, setState] = useState(initialState)
+
+  const setFormState = useCallback(
+    function <Name extends keyof State>(value: State[Name], name?: Name) {
+      if (typeof name === 'undefined') {
+        throw new Error('`name` is `undefined`')
+      }
+      setState(function (previousState: State): State {
+        const newState = {
+          ...previousState,
+          ...{ [name]: value }
+        }
+        return typeof transform === 'undefined' ? newState : transform(newState)
+      })
+    },
+    [transform]
+  )
 
   const handleSubmit = useCallback(
     function (): void {
