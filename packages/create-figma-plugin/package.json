@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "0.0.85-alpha.9",
+  "version": "0.0.85-alpha.10",
   "description": "Initialize a new Figma plugin using a template",
   "keywords": [
     "create-figma-plugin",
@@ -34,7 +34,7 @@
     "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^0.0.85-alpha.9",
+    "@create-figma-plugin/common": "^0.0.85-alpha.10",
     "degit": "^2.8.4",
     "fs-extra": "^10.0.0",
     "git-user-name": "^2.0.0",
