@@ -251,13 +251,16 @@ async function symlinkCreateFigmaPluginTsConfigAsync(): Promise<void> {
 async function cleanUpAsync(): Promise<void> {
   const promises = [
     new Promise<void>(function (resolve, reject) {
-      rimraf(join(process.cwd(), '{build,node_modules}'), function (error) {
-        if (error) {
-          reject(error)
-          return
+      rimraf(
+        join(process.cwd(), '{build,manifest.json,node_modules}'),
+        function (error) {
+          if (error) {
+            reject(error)
+            return
+          }
+          resolve()
         }
-        resolve()
-      })
+      )
     }),
     new Promise<void>(function (resolve, reject) {
       rimraf(join(process.cwd(), 'src', '*.css.d.ts'), function (error) {
