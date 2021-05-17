@@ -6,7 +6,7 @@
 
 ---
 
-./plugin-basics.md
+./figma-plugin-basics.md
 
 ---
 
@@ -19,14 +19,6 @@
 ---
 
 ./utilities.md
-
----
-
-./changelog/index.md
-
----
-
-./contributing.md
 
 <script>
   var sc_project = 12531644

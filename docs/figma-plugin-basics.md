@@ -1,4 +1,4 @@
-# Plugin basics
+# Figma plugin basics
 
 - [How a Figma plugin works](#how-a-figma-plugin-works)
 - [What a Figma plugin can and cannot do](#what-a-figma-plugin-can-and-cannot-do)

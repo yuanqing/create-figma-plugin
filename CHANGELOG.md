@@ -1,6 +1,8 @@
-# `v1.0.0`
+# Changelog
 
-## `@create-figma-plugin/build`
+## 1.0.0
+
+### `@create-figma-plugin/build`
 
 - The `build-figma-plugin` CLI that ships with the `@create-figma-plugin/build` module is now powered by [esbuild](https://esbuild.github.io), replacing Webpack. esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **no more than 1 second**.
 
@@ -39,11 +41,9 @@
     }
     ```
 
----
+### `@create-figma-plugin/tsconfig`
 
-## `@create-figma-plugin/tsconfig`
-
-- The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/tsconfig/tsconfig.json) file that ships with `@create-figma-plugin/tsconfig` has changed significantly given the move to esbuild. Here’s the diff against `v0.0.84`:
+- The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/tsconfig/tsconfig.json) file that ships with `@create-figma-plugin/tsconfig` has changed significantly given the move to esbuild. Here’s the diff against `0.0.84`:
 
     ```diff
       {
@@ -64,11 +64,9 @@
 
 - If you’re not extending from `@create-figma-plugin/tsconfig`, at least [ensure that the `"isolatedModules"` option is enabled in your project’s `tsconfig.json`](https://esbuild.github.io/content-types/#typescript-caveats).
 
----
+### `@create-figma-plugin/ui`
 
-## `@create-figma-plugin/ui`
-
-- There are *many* breaking changes and new features in `@create-figma-plugin/ui`. Your best bet for migrating to `v1.0.0` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
+- There are *many* breaking changes and new features in `@create-figma-plugin/ui`. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
 
 - One of the most significant changes is that the `onChange` prop of all components now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`. See the before and after:
 
@@ -76,7 +74,7 @@
     // ...
     import { Checkbox } from '@create-figma-plugin/ui'
 
-    // Before `v1.0.0`
+    // Before `v1`
     const [state, setState] = useState({ foo: false })
     return (
       <Checkbox name="foo" onChange={setState} value={state.foo}>
@@ -84,7 +82,7 @@
       </Checkbox>
     )
 
-    // `v1.0.0`
+    // `v1`
     const [value, setValue] = useState(false)
     function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
       const newValue = event.currentTarget.checked
@@ -125,11 +123,11 @@
 
 - Added new components `Dropdown`, `MiddleAlign`, `TextboxMultiline` and `Toggle`, in addition to a comprehensive collection of **175** icon components derived from [Figma’s official “UI2” design system file on Figma Community](https://figma.com/community/file/928108847914589057).
 
-### Detailed breakdown of component changes
+#### Detailed breakdown of component changes
 
-#### Icons
+##### Icons
 
-- All icons are exported as Preact functional components. Refer to the following mapping to migrate existing icons to their equivalents in `v1.0.0`:
+- All icons are exported as Preact functional components. Refer to the following mapping to migrate existing icons to their equivalents in `v1`:
 
     - `checkCircleIcon` &rarr; `<IconCheckCircle32 />`
     - `checkIcon` &rarr; `<IconMenuCheckmarkChecked16 />`
@@ -143,38 +141,38 @@
     - `spaceHorizontalIcon` &rarr; `<IconSpacingHorizontal16 />`
     - `spaceVerticalIcon` &rarr; `<IconSpacingVertical16 />`
 
-    Note that `IconCheckCircle32`, `IconCross32` and `IconSearch32` all have a dimension of `32px`, which is double the size of the corresponding icons in versions of `@create-figma-plugin/ui` prior to `v1.0.0`.
+    Note that `IconCheckCircle32`, `IconCross32` and `IconSearch32` all have a dimension of `32px`, which is double the size of the corresponding icons in versions of `@create-figma-plugin/ui` prior to `v1`.
 
 - All icons also now take a `color` prop for customizing the `fill` colour of the icon `svg`.
 
-#### `Button`
+##### `Button`
 
 - The `focused` prop has been removed.
 
-#### `Checkbox`
+##### `Checkbox`
 
 - The `focused` prop has been removed.
 - The `onChange` prop now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`.
 - There’s a new `onValueChange` prop with the signature `(newValue: boolean, name?: string) => void`.
 
-#### `FileUploadButton`
+##### `FileUploadButton`
 
 - The `focused` and `onClick` props have been removed.
 - The `onSelectedFiles` prop now has the signature `(files: Array<File>) => void`.
 
-#### `FileUploadDropzone`
+##### `FileUploadDropzone`
 
 - The `onSelectedFiles` prop now has the signature `(files: Array<File>) => void`.
 
-#### `Layer`
+##### `Layer`
 
 - This component has an almost entirely new API. (The `onClick`, `selected`, and `type` props have been removed. New props include `bold`, `onChange`, `onValueChange`, `icon`, `color`, and `value`.)
 
-#### `LoadingIndicator`
+##### `LoadingIndicator`
 
 - There’s a new `color` prop for customizing the `fill` colour of the `svg` representing the loading indicator.
 
-#### `RadioButtons`
+##### `RadioButtons`
 
 - The `value` prop can now be `null`, or a `boolean`, `number`, or `string`.
 - The `focused` prop has been removed.
@@ -184,13 +182,13 @@
   - The `text` key has been renamed to `children`.
   - `value` can now only be a `boolean`, `number`, or `string`.
 
-#### `SearchTextbox`
+##### `SearchTextbox`
 
 - The `focused` and `onChange` props have been removed.
 - There’s a new `onInput` prop with the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`.
 - There’s a new `onValueInput` prop with the signature `(newValue: string, name?: string) => void`.
 
-#### `SegmentedControl`
+##### `SegmentedControl`
 
 - The height of the component is now `24px` (reduced from `36px`) to be identical to the height of segmented controls in the Figma editor UI.
 - The style of the component’s focused state has been tweaked to follow that of segmented controls in the Figma editor UI.
@@ -202,13 +200,13 @@
   - The `text` key has been renamed to `children`.
   - `value` cannot be `null` and can now only be a `boolean`, `number`, or `string`.
 
-#### `SelectableItem`
+##### `SelectableItem`
 
 - The `onKeyDown` prop has been removed.
 - The `onChange` prop now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`.
 - There’s a new `onValueChange` prop with the signature `(newValue: boolean, name?: string) => void`.
 
-#### `Tabs`
+##### `Tabs`
 
 - The `focused` prop has been removed.
 - The `onChange` prop now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`.
@@ -218,7 +216,7 @@
   - The `view` key has been renamed to `children`.
   - `value` can now only be a `string`.
 
-#### `Textbox`
+##### `Textbox`
 
 - The height of the component is now `28px` (reduced from `32px`) to be identical to the height of textboxes in the Figma editor UI.
 - The `value` prop cannot be `null` and can now only be a `string`.
@@ -229,7 +227,7 @@
 - There’s a new `password` prop for changing the display to a password field. (Previously, you’d set the `type` prop to `'password'`.)
 - There’s a new `revertOnEscapeKeyDown` prop to enable reverting the original `value` when the `Esc` key is pressed.
 
-#### `TextboxAutocomplete`
+##### `TextboxAutocomplete`
 
 - The height of the component is now `28px` (reduced from `32px`) to be identical to the height of textboxes in the Figma editor UI.
 - The height of the autocomplete menu will dynamically expand (while still keeping within the dimensions of `window`) so as to fit as many items as possible in the menu.
@@ -238,7 +236,7 @@
 - There’s a new `onValueInput` prop with the signature `(newValue: string, name?: string) => void`.
 - There’s a new `revertOnEscapeKeyDown` prop to enable reverting the original `value` when the `Esc` key is pressed.
 
-#### `TextboxNumeric`
+##### `TextboxNumeric`
 
 - The height of the component is now `28px` (reduced from `32px`) to be identical to the height of textboxes in the Figma editor UI.
 - The `value` prop cannot be `null` and can now only be a `string`.
@@ -252,9 +250,7 @@
 - There’s a new `revertOnEscapeKeyDown` prop to enable reverting the original `value` when the `Esc` key is pressed.
 - There’s a new `suffix` prop for automatically appending an arbitrary string to the numeric textbox.
 
----
-
-## `@create-figma-plugin/utilities`
+### `@create-figma-plugin/utilities`
 
 - `compareArrays` has been removed. Use `compareObjects` instead.
 - `isWithinInstance` has been renamed to `isWithinInstanceNode`
