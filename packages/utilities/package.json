@@ -43,7 +43,7 @@
     "@figma/plugin-typings": "^1",
     "@types/fs-extra": "^9.0.11",
     "@types/natural-compare-lite": "^1.4.0",
-    "@types/node": "^15.0.3",
+    "@types/node": "^15.3.0",
     "ava": "^3.15.0",
     "eslint": "^7.26.0",
     "eslint-config-yuanqing": "^0.0.5",
