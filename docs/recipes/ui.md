@@ -71,9 +71,9 @@ Finally, in `package.json`, point to our UI file on the [**`"ui"`**](#ui) key:
 
 When we rebuild our plugin and run it, we’ll see:
 
-![Figma plugin UI modal containing a “Hello, World” message in the Figma UI style](/media/ui-hello-world-figma.png)
+![Figma plugin UI modal containing a “Hello, World”](/media/ui-hello-world-figma.png)
 
-See the [Storybook](ui/), and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
+See the [Storybook](ui/) for the full library of Preact components, and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
 ### Using custom CSS
 
