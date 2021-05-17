@@ -2048,10 +2048,10 @@
     escape-string-regexp "^5.0.0"
     lodash.deburr "^4.1.0"
 
-"@single-page-markdown-website/frontend@^0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@single-page-markdown-website/frontend/-/frontend-0.0.15.tgz#8b1d4bb5a4b013fc743bc7802cce1321b0acab99"
-  integrity sha512-n0GgsPjkpKbA7+qPKyeuwzmZTDRFyUrI/gurKrdk8TnDX9gRsPUu6A9YCFIY3yCDzEcDvL+UdLfJceYi0wqjwQ==
+"@single-page-markdown-website/frontend@^0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@single-page-markdown-website/frontend/-/frontend-0.0.16.tgz#378af357f179798a2af9cc8dee8625b30d309dea"
+  integrity sha512-D016e9hKxKvbGi1t+3SG3y59exlM9w9Oyh7TdQFg0BEJpsYa3d7zV4N/ay0Ig+JgjI/YNWjPGtEtcHTKupjWBQ==
 
 "@storybook/addon-storysource@^6.2.9":
   version "6.2.9"
@@ -10674,9 +10674,9 @@ open@^7.0.2, open@^7.0.3:
     is-wsl "^2.1.1"
 
 open@^8.0.8:
-  version "8.0.8"
-  resolved "https://registry.yarnpkg.com/open/-/open-8.0.8.tgz#0e286bb2df3c72e00cb2a0203d604abee002dbdc"
-  integrity sha512-3XmKIU8+H/TVr8wB8C4vj0z748+yBydSvtpzZVS6vQ1dKNHB6AiPbhaoG+89zb80717GPk9y/7OvK0R6FXkNmQ==
+  version "8.0.9"
+  resolved "https://registry.yarnpkg.com/open/-/open-8.0.9.tgz#a7a739fed91dfa3734094255badbeabd71116a12"
+  integrity sha512-vbCrqMav3K8mCCy8NdK4teUky0tpDrBbuiDLduCdVhc5oA9toJMip9rBkuwdwSI9E7NOkz4VkLWPi8DD2MP1gQ==
   dependencies:
     define-lazy-prop "^2.0.0"
     is-docker "^2.1.1"
@@ -13283,12 +13283,12 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-single-page-markdown-website@^0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/single-page-markdown-website/-/single-page-markdown-website-0.0.15.tgz#c9facd8032b3b8659f8c5e53c0268126a0600fd4"
-  integrity sha512-A/jHfHoLpNQvye+RtlfKCcERfuGdE2ArccegRb2vZ6VRkzDGVQRHrf+wClGJit5VyMPkcWIbZzS1Dt1QKatTrw==
+single-page-markdown-website@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/single-page-markdown-website/-/single-page-markdown-website-0.0.16.tgz#f3987c7e25d87840acbdaa0671f21b194137ffff"
+  integrity sha512-HPlI5r0WuOXpZDAGdeDwn+vvqoKnOr40KnbhtHhLi+U3gtj3rTCDHqjjF+oiA17RQql2ih91NXNSe0RCJSLlJg==
   dependencies:
-    "@single-page-markdown-website/frontend" "^0.0.15"
+    "@single-page-markdown-website/frontend" "^0.0.16"
     "@yuanqing/cli" "^0.0.9"
     chokidar "^3.5.1"
     find-up "^5.0.0"
@@ -13312,7 +13312,7 @@ single-page-markdown-website@^0.0.15:
     remark-stringify "^9.0.1"
     remark-strip-badges "^5.0.0"
     unified "^9.2.1"
-    unist-util-visit "^3.0.1"
+    unist-util-visit "^3.1.0"
     vfile "4.2.1"
 
 sisteransi@^1.0.5:
@@ -13519,9 +13519,9 @@ spdx-expression-parse@^3.0.0:
     spdx-license-ids "^3.0.0"
 
 spdx-license-ids@^3.0.0:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.7.tgz#e9c18a410e5ed7e12442a549fbd8afa767038d65"
-  integrity sha512-U+MTEOO0AiDzxwFvoa4JVnMV6mZlJKk2sBLt90s7G0Gd0Mlknc7kxEn3nuDPNZRta7O2uy8oLcZLVT+4sqNZHQ==
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.8.tgz#eb1e97ad99b11bf3f82a3b71a0472dd9a00f2ecf"
+  integrity sha512-NDgA96EnaLSvtbM7trJj+t1LUR3pirkDCcz9nOUlPb5DMBGsH7oES6C3hs3j7R9oHEa1EMvReS/BUAIT5Tcr0g==
 
 specificity@^0.4.1:
   version "0.4.1"
@@ -14220,9 +14220,9 @@ tar@^6.0.2, tar@^6.1.0:
     yallist "^4.0.0"
 
 telejson@^5.1.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/telejson/-/telejson-5.2.0.tgz#c587d0f23c50c9b8749404604e0f9e64589ff180"
-  integrity sha512-5ALKeIIpOyu0qoKJVsCXufWwh40HrxLasi75xK8KhMDzUHLzD7Cb9epdLjnncE+el0NENIN8sHLaRVOvjbN6ug==
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/telejson/-/telejson-5.3.0.tgz#ecda346ee90b89f6078ddfb702c4689a49dcc697"
+  integrity sha512-ddwGFqXmSPKZouZJPVs3yo3+YxsNdwVBS11Oraw+Cv0DDw51Z5OH+HsOkPLMn1h7+PtOG9nGdn+Jpy/rbZt6CA==
   dependencies:
     "@types/is-function" "^1.0.0"
     global "^4.4.0"
@@ -14932,7 +14932,7 @@ unist-util-visit@^2.0.0, unist-util-visit@^2.0.3:
     unist-util-is "^4.0.0"
     unist-util-visit-parents "^3.0.0"
 
-unist-util-visit@^3.0.0, unist-util-visit@^3.0.1:
+unist-util-visit@^3.0.0, unist-util-visit@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-3.1.0.tgz#9420d285e1aee938c7d9acbafc8e160186dbaf7b"
   integrity sha512-Szoh+R/Ll68QWAyQyZZpQzZQm2UPbxibDvaY8Xc9SUtYgPsDzx5AWSk++UUt2hJuow8mvwR+rG+LQLw+KsuAKA==
