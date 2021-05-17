@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'preact/hooks'
 
-import { useWindowKeyDown } from '../private/use-window-key-down'
 import { useFocusTrap } from '../use-focus-trap/use-focus-trap'
 import {
   InitialFocus,
   useInitialFocus
 } from '../use-initial-focus/use-initial-focus'
+import { useWindowKeyDown } from '../use-window-key-down'
 
 export function useForm<State>(
   initialState: State,

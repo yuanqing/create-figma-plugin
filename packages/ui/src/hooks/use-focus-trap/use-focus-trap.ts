@@ -1,4 +1,4 @@
-import { useWindowKeyDown } from '../private/use-window-key-down'
+import { useWindowKeyDown } from '../use-window-key-down'
 
 export function useFocusTrap(): void {
   useWindowKeyDown('Tab', function (event: KeyboardEvent): void {
