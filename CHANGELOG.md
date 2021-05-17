@@ -4,7 +4,7 @@
 
 ### `@create-figma-plugin/build`
 
-- The `build-figma-plugin` CLI that ships with the `@create-figma-plugin/build` module is now powered by [esbuild](https://esbuild.github.io), replacing Webpack. esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **no more than 1 second**.
+- The `build-figma-plugin` CLI is now powered by [esbuild](https://esbuild.github.io), replacing Webpack. esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **no more than 1 second**. (esbuild actually runs in a couple hundred milliseconds, but building of CSS modules still happens via PostCSS, which bumps up the build time.)
 
 - Given the move away from Webpack, the ability to override the build process via a `figma-plugin.config.js` file has also been removed.
 
@@ -43,76 +43,69 @@
 
 ### `@create-figma-plugin/tsconfig`
 
-- The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/tsconfig/tsconfig.json) file that ships with `@create-figma-plugin/tsconfig` has changed significantly given the move to esbuild. Here’s the diff against `0.0.84`:
+- The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/tsconfig/tsconfig.json) file has changed significantly, given the move to esbuild.
 
-    ```diff
-      {
-        "compilerOptions": {
-    -     "allowSyntheticDefaultImports": true,
-    +     "esModuleInterop": true,
-    +     "isolatedModules": true,
-          "jsx": "react",
-          "jsxFactory": "h",
-          "module": "ES2020",
-          "moduleResolution": "Node",
-    -     "target": "es2016"
-    +     "lib": ["DOM", "ES2020"],
-    +     "strict": true
-        }
+    ```json
+    {
+      "compilerOptions": {
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "jsx": "react",
+        "jsxFactory": "h",
+        "lib": ["DOM", "ES2020"],
+        "module": "ES2020",
+        "moduleResolution": "Node",
+        "strict": true
       }
+    }
     ```
 
-- If you’re not extending from `@create-figma-plugin/tsconfig`, at least [ensure that the `"isolatedModules"` option is enabled in your project’s `tsconfig.json`](https://esbuild.github.io/content-types/#typescript-caveats).
+- Either directly extend from `@create-figma-plugin/tsconfig`, or copy the above to your project’s `tsconfig.json`. You should at least [ensure that the `"isolatedModules"` option is enabled in your `tsconfig.json`](https://esbuild.github.io/content-types/#typescript-caveats).
 
 ### `@create-figma-plugin/ui`
 
-- There are *many* breaking changes and new features in `@create-figma-plugin/ui`. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
+- There are *many* breaking changes and new features. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Otherwise, refer to the section below for a comprehensive breakdown of all component changes and usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
 
-- One of the most significant changes is that the `onChange` prop of all components now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`. See the before and after:
+- One of the most significant changes is that the `onChange` prop of all components now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`. See the before and after, using the `Checkbox` component as an example:
 
     ```tsx
-    // ...
-    import { Checkbox } from '@create-figma-plugin/ui'
-
     // Before `v1`
-    const [state, setState] = useState({ foo: false })
-    return (
-      <Checkbox name="foo" onChange={setState} value={state.foo}>
-        Text
-      </Checkbox>
-    )
 
+    const [state, setState] = useState({ foo: false })
+    // ...
+    <Checkbox name="foo" onChange={setState} value={state.foo}>
+      Text
+    </Checkbox>
+    ```
+
+    ```tsx
     // `v1`
+
     const [value, setValue] = useState(false)
     function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
       const newValue = event.currentTarget.checked
       console.log(newValue) //=> either `true` or `false`
       setValue(newValue)
     }
-    return (
-      <Checkbox onChange={handleChange} value={value}>
-        Text
-      </Checkbox>
-    )
+    // ...
+    <Checkbox onChange={handleChange} value={value}>
+      Text
+    </Checkbox>
     ```
 
-- An alternative to writing native DOM event handlers in your code is to use the new `onValueChange` prop. This prop is available on all components that also have an `onChange` prop. The `onValueChange` handler has the signature `<Value, Name extends string>(newValue: Value, name?: Name) => void`, and it is called on every DOM `change` event. The second `name` parameter passed to the handler is precisely the `name` prop that was set on the component. See an example:
+- An alternative to the `onChange` prop is the new `onValueChange` prop. This prop is available on all components that also have an `onChange` prop. The `onValueChange` handler has the signature `<Value, Name extends string>(newValue: Value, name?: Name) => void`, and it is called on every DOM `change` event. The second `name` parameter passed to the handler is precisely the `name` prop that was set on the component. Again, using the `Checkbox` component as an example:
 
     ```tsx
-    // ...
-    import { Checkbox } from '@create-figma-plugin/ui'
-
     const [value, setValue] = useState(false)
     function handleChange(newValue: boolean, name: undefined | string) {
       console.log(newValue) //=> either `true` or `false`
       console.log(name)     //=> 'foo'
       setValue(newValue)
     }
-    return (
-      <Checkbox name="foo" onValueChange={handleValueChange} value={value}>
-        Text
-      </Checkbox>
-    )
+    // ...
+    <Checkbox name="foo" onValueChange={handleValueChange} value={value}>
+      Text
+    </Checkbox>
     ```
 
 - The `onChange` prop has been removed from the `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, and `TextboxNumeric` components. (This prop was inaccurately named because it is actually called on the DOM `input` event.) Instead, use the `onInput` and `onValueInput` props to handle the DOM `input` event.
@@ -127,7 +120,7 @@
 
 ##### Icons
 
-- All icons are exported as Preact functional components. Refer to the following mapping to migrate existing icons to their equivalents in `v1`:
+- All icons are now exported as Preact functional components. Refer to the following mapping to migrate existing icons to their equivalents in `v1`:
 
     - `checkCircleIcon` &rarr; `<IconCheckCircle32 />`
     - `checkIcon` &rarr; `<IconMenuCheckmarkChecked16 />`
