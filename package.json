@@ -57,12 +57,12 @@
     "description": "A comprehensive toolkit for developing Figma plugins",
     "links": [
       {
-        "text": "Storybook",
-        "url": "https://yuanqing.github.io/create-figma-plugin/ui/"
-      },
-      {
         "text": "Changelog",
         "url": "https://github.com/yuanqing/create-figma-plugin/blob/main/CHANGELOG.md#readme"
+      },
+      {
+        "text": "Storybook",
+        "url": "https://yuanqing.github.io/create-figma-plugin/ui/"
       },
       {
         "text": "GitHub",

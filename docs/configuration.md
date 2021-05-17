@@ -1,7 +1,26 @@
 # Configuration
 
-- [Configuration options](#configuration-options)
 - [JSON schema](#json-schema)
+- [Configuration options](#configuration-options)
+
+## JSON schema
+
+Validate the plugin configuration in your `package.json` file using [Create Figma Plugin’s configuration JSON schema](https://yuanqing.github.io/create-figma-plugin/figma-plugin.json).
+
+To enable autocomplete and inline validation of your plugin configuration in [Visual Studio Code](https://code.visualstudio.com), create a `.vscode/settings.json` file containing the following:
+
+```json
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "package.json"
+      ],
+      "url": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json"
+    }
+  ]
+}
+```
 
 ## Configuration options
 
@@ -162,24 +181,3 @@ See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons)
 (*`boolean`*)
 
 *Optional.* Allow use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
-
-## JSON schema
-
-Validate the plugin configuration in your `package.json` file using [Create Figma Plugin’s configuration JSON schema](https://yuanqing.github.io/create-figma-plugin/figma-plugin.json).
-
-To enable autocomplete and inline validation of your plugin configuration in [Visual Studio Code](https://code.visualstudio.com), create a `.vscode/settings.json` file containing the following:
-
-```json
-{
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "package.json"
-      ],
-      "url": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json"
-    }
-  ]
-}
-```
-
-This will enable autocomplete and inline validation of your plugin configuration.

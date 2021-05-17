@@ -63,7 +63,7 @@ In `package.json`, we also have `build` and `watch` scripts set up to invoke the
   }
 ```
 
-The `build-figma-plugin` CLI is powered by [esbuild](https://esbuild.github.io), which enables extremely fast, sub-second builds. When the `--typecheck` flag is specified, your TypeScript code will be type-checked separately by the [TypeScript compiler](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
+The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuild.github.io), which enables extremely fast, sub-second builds. When the `--typecheck` flag is specified, your TypeScript code will be type-checked separately by the [TypeScript compiler](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
 
 To build the plugin:
 

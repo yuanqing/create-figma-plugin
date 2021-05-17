@@ -2,9 +2,14 @@
 
 ## 1.0.0
 
-### `@create-figma-plugin/build`
+- [`@create-figma-plugin/build@1.0.0`](#create-figma-pluginbuild100)
+- [`@create-figma-plugin/tsconfig@1.0.0`](#create-figma-plugintsconfig100)
+- [`@create-figma-plugin/ui@1.0.0`](#create-figma-pluginui100)
+- [`@create-figma-plugin/utilities@1.0.0`](#create-figma-pluginutilities100)
 
-- The `build-figma-plugin` CLI is now powered by [esbuild](https://esbuild.github.io), replacing Webpack. esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **no more than 1 second**. (esbuild actually runs in a couple hundred milliseconds, but building of CSS modules still happens via PostCSS, which bumps up the build time.)
+### `@create-figma-plugin/build@1.0.0`
+
+- The `build-figma-plugin` CLI is now powered by [esbuild](https://esbuild.github.io), replacing [Webpack](https://webpack.js.org/). esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **no more than 1 second**. (esbuild actually runs within a couple hundred milliseconds, but some parts of the build process –  – is still powered by JavaScript, which accounts for the additional build time.)
 
 - Given the move away from Webpack, the ability to override the build process via a `figma-plugin.config.js` file has also been removed.
 
@@ -24,7 +29,7 @@
       }
     ```
 
-- The ability to use SCSS in [CSS Modules](https://github.com/css-modules/css-modules) has been removed. Now, only “vanilla” CSS Modules is supported. To migrate, [use the `sass` CLI to do a one-off conversion of your `.scss` files to `.css`](https://sass-lang.com/documentation/cli/dart-sass), then update your UI code to reference the generated `.css` files.
+- The ability to use SCSS in CSS Modules has been removed. Now, only “vanilla” CSS Modules is supported. To migrate, [use the `sass` CLI to do a one-off conversion of your `.scss` files to `.css`](https://sass-lang.com/documentation/cli/dart-sass), then update your UI code to reference the generated `.css` files.
 
 - There’s now a [JSON schema](https://yuanqing.github.io/create-figma-plugin/figma-plugin.json) for validating the plugin configuration in your `package.json` file. To enable autocomplete and inline validation of your plugin configuration in [Visual Studio Code](https://code.visualstudio.com), create a `.vscode/settings.json` file containing the following:
 
@@ -41,7 +46,7 @@
     }
     ```
 
-### `@create-figma-plugin/tsconfig`
+### `@create-figma-plugin/tsconfig@1.0.0`
 
 - The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/tsconfig/tsconfig.json) file has changed significantly, given the move to esbuild.
 
@@ -60,11 +65,11 @@
     }
     ```
 
-- Either directly extend from `@create-figma-plugin/tsconfig`, or copy the above to your project’s `tsconfig.json`. You should at least [ensure that the `"isolatedModules"` option is enabled in your `tsconfig.json`](https://esbuild.github.io/content-types/#typescript-caveats).
+- Either copy the above to your project’s `tsconfig.json`, or directly extend from `@create-figma-plugin/tsconfig`. You should at least [ensure that the `"isolatedModules"` option is enabled in your `tsconfig.json`](https://esbuild.github.io/content-types/#typescript-caveats).
 
-### `@create-figma-plugin/ui`
+### `@create-figma-plugin/ui@1.0.0`
 
-- There are *many* breaking changes and new features. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Otherwise, refer to the section below for a comprehensive breakdown of all component changes and usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
+- There are *many* breaking changes and new features. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Otherwise, refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), or to the section below for a comprehensive breakdown of all component changes.
 
 - One of the most significant changes is that the `onChange` prop of all components now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`. See the before and after, using the `Checkbox` component as an example:
 
@@ -108,13 +113,13 @@
     </Checkbox>
     ```
 
-- The `onChange` prop has been removed from the `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, and `TextboxNumeric` components. (This prop was inaccurately named because it is actually called on the DOM `input` event.) Instead, use the `onInput` and `onValueInput` props to handle the DOM `input` event.
+- The `onChange` prop has been removed from the `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, and `TextboxNumeric` components. (This prop was inaccurately named for these components because it is actually called on every DOM `input` event.) Instead, use the `onInput` and `onValueInput` props to handle the DOM `input` event.
 
 - The `DropdownMenu` component has been removed. Use the new `Dropdown` component, which has an improved UI design and component API.
 
 - All component styles are now written as “vanilla” CSS modules rather than SCSS. The previous SCSS variables are now expressed as [CSS variables on `:root`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/ui/src/css/base.css). Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/v1.0.0/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) that are available for use in your custom CSS.
 
-- Added new components `Dropdown`, `MiddleAlign`, `TextboxMultiline` and `Toggle`, in addition to a comprehensive collection of **175** icon components derived from [Figma’s official “UI2” design system file on Figma Community](https://figma.com/community/file/928108847914589057).
+- Added new components `Dropdown`, `MiddleAlign`, `TextboxMultiline` and `Toggle`, in addition to a comprehensive collection of **175** icon components extracted from [Figma’s official “UI2” design system file on Figma Community](https://figma.com/community/file/928108847914589057).
 
 #### Detailed breakdown of component changes
 
@@ -239,14 +244,14 @@
 - There’s a new `onValueInput` prop with the signature `(newValue: string, name?: string) => void`.
 - There’s a new `onNumericValueInput` prop with the signature `(newValue: null | number, name?: string) => void`, where `newValue` is the result of evaluating `value` as a numeric expression.
   - If `value` is the empty string, then `newValue` is null.
-  - If `value` is the `MIXED_STRING` constant from `@create-figma-plugin/utilities`, then `newValue` is the `MIXED_NUMBER` constant from the same.
+  - If `value` is the `MIXED_STRING` constant from `@create-figma-plugin/utilities`, then `newValue` will be the `MIXED_NUMBER` constant from the same.
 - There’s a new `revertOnEscapeKeyDown` prop to enable reverting the original `value` when the `Esc` key is pressed.
 - There’s a new `suffix` prop for automatically appending an arbitrary string to the numeric textbox.
 
-### `@create-figma-plugin/utilities`
+### `@create-figma-plugin/utilities@1.0.0`
 
 - `compareArrays` has been removed. Use `compareObjects` instead.
-- `isWithinInstance` has been renamed to `isWithinInstanceNode`
+- `isWithinInstance` has been renamed to `isWithinInstanceNode`.
 - `computeSiblingNodes`, `deduplicateNodes`, `sortNodesByCanonicalOrder`, and `sortNodesByName` all now take a type parameter `<Node extends SceneNode>`. This type parameter allows these functions to accept and return arrays of specific node types, rather than merely an array of `SceneNode`.
 - `loadSettingsAsync` and `saveSettingsAsync` both now take an optional second argument for customizing the key for loading from or saving to `figma.clientStorage`.
 - Added new utilities `compareStringArrays`, `getParentNode`, and `getSceneNodeById`.
