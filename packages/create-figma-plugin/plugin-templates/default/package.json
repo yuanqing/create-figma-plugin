@@ -21,11 +21,11 @@
   "repository": "{{{repositoryUrl}}}",
 {{/repositoryUrl}}
   "dependencies": {
-    "@create-figma-plugin/utilities": "{{{versions.utilities}}}"
+    "@create-figma-plugin/utilities": "^{{{versions.utilities}}}"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "{{{versions.build}}}",
-    "@create-figma-plugin/tsconfig": "{{{versions.tsconfig}}}",
+    "@create-figma-plugin/build": "^{{{versions.build}}}",
+    "@create-figma-plugin/tsconfig": "^{{{versions.tsconfig}}}",
     "@figma/plugin-typings": "^1",
     "typescript": "^4"
   },
