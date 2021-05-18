@@ -10,17 +10,17 @@
 First:
 
 ```
-$ npx create-figma-plugin figma-hello-world --yes
+$ npx --yes -- create-figma-plugin figma-hello-world --yes
 ```
 
-(Omit the `--yes` flag to use a custom plugin template or to customize the initial settings.)
+(Omit the second `--yes` flag to specify a plugin template or to customize the initial settings.)
 
 Then:
 
 ```
 $ cd figma-hello-world
 $ ls -a
-.gitignore  README.md  node_modules  package-lock.json  package.json  tsconfig.json  src
+.gitignore  .vscode  README.md  node_modules  package-lock.json  package.json  tsconfig.json  src
 $ ls src
 main.ts
 ```
@@ -63,7 +63,7 @@ In `package.json`, we also have `build` and `watch` scripts set up to invoke the
   }
 ```
 
-The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuild.github.io), which enables extremely fast, sub-second builds. When the `--typecheck` flag is specified, your TypeScript code will be type-checked separately by the [TypeScript compiler](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
+The `build-figma-plugin` CLI is powered by the [esbuild bundler](https://esbuild.github.io), which enables extremely fast, sub-second builds. When the `--typecheck` flag is specified, your TypeScript code will also be compiled and type-checked by the [TypeScript compiler](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
 
 To build the plugin:
 
