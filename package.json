@@ -53,6 +53,7 @@
     "pre-push": "yarn run lint && yarn run fix && yarn run test"
   },
   "single-page-markdown-website": {
+    "baseUrl": "https://yuanqing.github.io/create-figma-plugin/",
     "title": "Create Figma Plugin",
     "description": "A comprehensive toolkit for developing Figma plugins",
     "links": [
@@ -68,7 +69,8 @@
         "text": "GitHub",
         "url": "https://github.com/yuanqing/create-figma-plugin"
       }
-    ]
+    ],
+    "socialMediaPreviewImage": "media/share.png"
   },
   "stylelint": {
     "extends": "stylelint-config-yuanqing"
