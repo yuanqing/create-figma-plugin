@@ -1,13 +1,13 @@
 # Changelog
 
-## 1.0.0
+## v1
 
-- [`@create-figma-plugin/build@1.0.0`](#create-figma-pluginbuild100)
-- [`@create-figma-plugin/tsconfig@1.0.0`](#create-figma-plugintsconfig100)
-- [`@create-figma-plugin/ui@1.0.0`](#create-figma-pluginui100)
-- [`@create-figma-plugin/utilities@1.0.0`](#create-figma-pluginutilities100)
+- [`@create-figma-plugin/build@1`](#create-figma-pluginbuild1)
+- [`@create-figma-plugin/tsconfig@1`](#create-figma-plugintsconfig1)
+- [`@create-figma-plugin/ui@1`](#create-figma-pluginui1)
+- [`@create-figma-plugin/utilities@1`](#create-figma-pluginutilities1)
 
-### `@create-figma-plugin/build@1.0.0`
+### `@create-figma-plugin/build@1`
 
 - The `build-figma-plugin` CLI is now powered by [esbuild](https://esbuild.github.io), replacing [Webpack](https://webpack.js.org/). esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **no more than 1 second**. (esbuild actually runs within a couple hundred milliseconds, but some parts of the build process – eg. compiling and generating `.d.ts` files for CSS modules, generating the `manifest.json` – still runs in JavaScript-land.)
 
@@ -46,7 +46,7 @@
     }
     ```
 
-### `@create-figma-plugin/tsconfig@1.0.0`
+### `@create-figma-plugin/tsconfig@1`
 
 - The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/tsconfig/tsconfig.json) file has changed significantly, given the move to esbuild.
 
@@ -67,7 +67,7 @@
 
 - Either copy the above to your project’s `tsconfig.json`, or directly extend from `@create-figma-plugin/tsconfig`. You should at least [ensure that the `"isolatedModules"` option is enabled in your `tsconfig.json`](https://esbuild.github.io/content-types/#typescript-caveats).
 
-### `@create-figma-plugin/ui@1.0.0`
+### `@create-figma-plugin/ui@1`
 
 - There are *many* breaking changes and new features. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Otherwise, refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), or see below for a detailed breakdown of all component changes.
 
@@ -248,7 +248,7 @@
 - There’s a new `revertOnEscapeKeyDown` prop to enable reverting the original `value` when the `Esc` key is pressed.
 - There’s a new `suffix` prop for automatically appending an arbitrary string to the numeric textbox.
 
-### `@create-figma-plugin/utilities@1.0.0`
+### `@create-figma-plugin/utilities@1`
 
 - `compareArrays` has been removed. Use `compareObjects` instead.
 - `isWithinInstance` has been renamed to `isWithinInstanceNode`.
