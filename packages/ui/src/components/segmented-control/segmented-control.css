@@ -42,6 +42,9 @@
   background-color: var(--color-silver);
   border-radius: var(--border-radius-2);
 }
+.input:disabled ~ .children {
+  opacity: var(--opacity-30);
+}
 .label:first-child .input:checked ~ .children {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
