@@ -9,7 +9,7 @@
 
 ### `@create-figma-plugin/build@1`
 
-- The `build-figma-plugin` CLI is now powered by [esbuild](https://esbuild.github.io), replacing [Webpack](https://webpack.js.org/). esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **no more than 1 second**. (esbuild actually runs within a couple hundred milliseconds, but some parts of the build process – eg. compiling and generating `.d.ts` files for CSS modules, generating the `manifest.json` – still runs in JavaScript-land.)
+- The `build-figma-plugin` CLI is now powered by [esbuild](https://esbuild.github.io), replacing [Webpack](https://webpack.js.org/). esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **less than 1 second**. (esbuild actually runs within a couple hundred milliseconds, but some parts of the build process – compiling and generating `.d.ts` files for CSS modules, generating the `manifest.json` file – still runs in Node.js-land.)
 
 - Given the move away from Webpack, the ability to override the build process via a `figma-plugin.config.js` file has also been removed.
 
