@@ -17,7 +17,7 @@ The utility functions span the following categories:
 - [Object](#object)
 - [Settings](#settings)
 - [String](#string)
-- [UI](#ui-1)
+- [UI](#ui-2)
 
 ## Events
 
@@ -717,7 +717,7 @@ import {
 ### showUI&lt;Data&gt;(options [, data])
 
 Renders the UI correponding to the command in a modal within the Figma UI. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
- See how to [add a UI to a plugin command](#ui).
+ See how to [add a UI to a plugin command](#ui-1).
 
 ***Type parameters***
 

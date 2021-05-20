@@ -56,7 +56,7 @@ async function generateDocsAsync(
   lines.push('- [Object](#object)')
   lines.push('- [Settings](#settings)')
   lines.push('- [String](#string)')
-  lines.push('- [UI](#ui-1)')
+  lines.push('- [UI](#ui-2)')
   lines.push('')
   for (const category of categories) {
     lines.push(`## ${category.name}`)

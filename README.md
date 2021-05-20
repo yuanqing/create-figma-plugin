@@ -5,7 +5,7 @@
 - [Quick start](https://yuanqing.github.io/create-figma-plugin/#quick-start)
 - [Figma plugin basics](https://yuanqing.github.io/create-figma-plugin/#figma-plugin-basics)
 - [Configuration](https://yuanqing.github.io/create-figma-plugin/#configuration)
-- [UI](https://yuanqing.github.io/create-figma-plugin/#ui)
+- [UI](https://yuanqing.github.io/create-figma-plugin/#ui-1)
 - [Utilities](https://yuanqing.github.io/create-figma-plugin/#utilities)
 - [Recipes](https://yuanqing.github.io/create-figma-plugin/#recipes)
 - [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)
