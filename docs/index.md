@@ -14,11 +14,15 @@
 
 ---
 
-./recipes/index.md
+./ui.md
 
 ---
 
 ./utilities.md
+
+---
+
+./recipes/index.md
 
 <script>
   var sc_project = 12531644

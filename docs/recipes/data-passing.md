@@ -1,14 +1,6 @@
 ## Passing data between the plugin command’s main and UI contexts
 
-`@create-figma-plugin/utilities` is [an extensive library of utility functions](#utilities) for common Figma plugin operations.
-
-To install:
-
-```
-$ npm install @create-figma-plugin/utilities
-```
-
-The library includes 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#how-a-figma-plugin-works):
+The [`@create-figma-plugin/utilities`](#utilities) library includes 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#how-a-figma-plugin-works):
 
 - [`on(name, handler)`](#onhandlername-handler) — Registers an event `handler` for the given event `name`.
 - [`once(name, handler)`](#oncehandlername-handler) — Ditto `on`, only that `handler` will run at most once.
