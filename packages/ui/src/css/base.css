@@ -3,8 +3,8 @@
 :root {
   --border-radius-2: 2px;
   --border-radius-6: 6px;
-  --box-shadow: 0 5px 17px rgba(0, 0, 0, 0.3), 0 2px 7px rgba(0, 0, 0, 0.26),
-    inset 0 0 0 0.5px rgb(0, 0, 0), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 0.5px #000000, 0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --color-black: #000000;
   --color-black-30: #b3b3b3;
   --color-black-30-translucent: rgba(0, 0, 0, 0.3);

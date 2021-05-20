@@ -13,9 +13,9 @@
     "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
     "storybook": "lerna run --stream storybook",
     "test": "lerna run --stream test",
-    "version": "lerna version",
+    "version": "lerna version --force-publish",
     "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook && cp packages/build/src/figma-plugin.json build",
-    "website-build-docs": "yarn run generate-docs && single-page-markdown-website docs/index.md",
+    "website-build-docs": "yarn run generate-docs && single-page-markdown-website docs/index.md && TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/check-html-anchor-links.ts build/index.html",
     "website-build-storybook": "lerna run --stream storybook-build && cpy packages/ui/build build/ui",
     "website-clean": "rm -rf build",
     "website-deploy": "yarn run website-build && gh-pages --dist build"
@@ -32,7 +32,7 @@
     "npm-check-updates": "^11.5.13",
     "prettier": "^2.3.0",
     "simple-git-hooks": "^2.4.1",
-    "single-page-markdown-website": "^0.0.17",
+    "single-page-markdown-website": "^0.0.18",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
@@ -53,6 +53,7 @@
     "pre-push": "yarn run lint && yarn run fix && yarn run test"
   },
   "single-page-markdown-website": {
+    "baseUrl": "https://yuanqing.github.io/create-figma-plugin/",
     "title": "Create Figma Plugin",
     "description": "A comprehensive toolkit for developing Figma plugins",
     "links": [
@@ -62,13 +63,14 @@
       },
       {
         "text": "Storybook",
-        "url": "ui/"
+        "url": "https://yuanqing.github.io/create-figma-plugin/ui/"
       },
       {
         "text": "GitHub",
         "url": "https://github.com/yuanqing/create-figma-plugin"
       }
-    ]
+    ],
+    "socialMediaPreviewImage": "media/share.png"
   },
   "stylelint": {
     "extends": "stylelint-config-yuanqing"

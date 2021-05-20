@@ -36,7 +36,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 
 (*`string`*)
 
-*Required.* The plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
+*Required to publish the plugin on Figma Community.* The plugin ID. This field can be omitted during development but is required if you want to [publish your plugin](https://help.figma.com/hc/en-us/articles/360042293394-Publish-plugins-to-the-Figma-Community). Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
 
 ### `"name"`
 
@@ -87,7 +87,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 }
 ```
 
-See the [recipe for adding a UI to a plugin command](#adding-a-ui-to-a-plugin-command).
+See how to [add a UI to a plugin command](#ui-1).
 
 ### `"menu"`
 

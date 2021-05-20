@@ -1,4 +1,10 @@
-## Adding a UI to a plugin command
+# UI
+
+- [Using the Preact component library](#using-the-preact-component-library)
+- [Using custom CSS](#using-custom-css)
+- [Using a custom UI library](#using-a-custom-ui-library)
+
+## Using the Preact component library
 
 `@create-figma-plugin/ui` is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma editor’s UI design.
 
@@ -75,7 +81,7 @@ When we rebuild our plugin and run it, we’ll see:
 
 See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/) for the full library of Preact components, and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
-### Using custom CSS
+## Using custom CSS
 
 Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://github.com/css-modules/css-modules):
 
@@ -108,12 +114,13 @@ export default render(Plugin)
 
 Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) that are available for use in your custom CSS.
 
-### Using a custom UI library
+## Using a custom UI library
 
 To use a custom UI library (instead of `@create-figma-plugin/ui`), write your plugin command’s UI implementation as follows:
 
 ```ts
 // src/ui.ts
+
 import '@create-figma-plugin/ui/lib/css/base.css'
 
 export default function (rootNode: HTMLElement, data: { greeting: string }) {

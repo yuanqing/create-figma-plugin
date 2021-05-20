@@ -5,8 +5,9 @@
 - [Quick start](https://yuanqing.github.io/create-figma-plugin/#quick-start)
 - [Figma plugin basics](https://yuanqing.github.io/create-figma-plugin/#figma-plugin-basics)
 - [Configuration](https://yuanqing.github.io/create-figma-plugin/#configuration)
-- [Recipes](https://yuanqing.github.io/create-figma-plugin/#recipes)
+- [UI](https://yuanqing.github.io/create-figma-plugin/#ui-1)
 - [Utilities](https://yuanqing.github.io/create-figma-plugin/#utilities)
+- [Recipes](https://yuanqing.github.io/create-figma-plugin/#recipes)
 - [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)
 - [Changelog](/CHANGELOG.md#readme)
 
@@ -25,7 +26,7 @@ $ cd create-figma-plugin
 $ yarn install
 ```
 
-### Testing changes locally on an existing plugin
+### Testing changes on an existing plugin
 
 First, build the entire Create Figma Plugin project:
 

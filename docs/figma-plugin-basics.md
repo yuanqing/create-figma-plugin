@@ -28,7 +28,7 @@ Within this main context:
 
 ### UI context
 
-Showing a UI for a plugin command must be explicitly triggered in the command’s main context. Figma would then display a modal in the Figma editor interface; this modal contains an `<iframe>` within which which we can render a UI. We call this `<iframe>` the plugin command’s **“UI context”**.
+Showing a UI for a plugin command must be [explicitly triggered in the command’s main context](#showuidataoptions--data). Figma would then display a modal in the Figma editor interface; this modal contains an `<iframe>` within which which we can render a UI. We call this `<iframe>` the plugin command’s **“UI context”**.
 
 Within this UI context:
 
@@ -79,7 +79,7 @@ To accomplish this:
 - Run code in response to changes in the user’s selection or the currently-active page, while the plugin is currently running
 - Change the viewport and zoom level
 - Collapse and uncollapse layers in the layer list panel
-- Display a user interface in a modal in the Figma editor interface
+- Display a user interface in a modal in the Figma editor
 - Do anything that can be done in an `<iframe>` using HTML, CSS and JavaScript eg. making API calls over the network, requesting a file from the user, handling images, leveraging web technologies like `<canvas>`, and so on
 
 ### A Figma plugin cannot…
@@ -92,7 +92,7 @@ To accomplish this:
 - Read or modify the document’s comments
 - Read or modify components and styles from a Team library
 - Run code in response to “granular” user actions in the Figma editor, eg. input events in the Figma UI, or mouse events on the canvas
-- Show more than one modal in the Figma editor interface; at most one plugin modal can be shown at a time
+- Show more than one modal in the Figma editor; at most one plugin modal can be shown at a time
 - Run alongside other plugins; at most one plugin can be running at a time
 - Trigger other plugins
 - Trigger native Figma commands

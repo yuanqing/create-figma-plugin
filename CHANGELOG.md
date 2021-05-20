@@ -1,6 +1,16 @@
 # Changelog
 
-## v1
+## 1.0.1
+
+- `@create-figma-plugin/ui`
+  - Made the `--box-shadow` style identical to that in the Figma CSS
+  - Fixed the style of disabled options in the `SegmentedControl` component
+- `create-figma-plugin`
+  - Included `plugin-templates/*/.gitignore` in the published package
+  - Added a `^` prefix to `@create-figma-plugin/*` version numbers in the `default` template
+- Improved documentation
+
+## 1.0.0
 
 - [`@create-figma-plugin/build@1`](#create-figma-pluginbuild1)
 - [`@create-figma-plugin/tsconfig@1`](#create-figma-plugintsconfig1)
