@@ -13,7 +13,7 @@
     "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
     "storybook": "lerna run --stream storybook",
     "test": "lerna run --stream test",
-    "version": "lerna version",
+    "version": "lerna version --force-publish",
     "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook && cp packages/build/src/figma-plugin.json build",
     "website-build-docs": "yarn run generate-docs && single-page-markdown-website docs/index.md && TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/check-html-anchor-links.ts build/index.html",
     "website-build-storybook": "lerna run --stream storybook-build && cpy packages/ui/build build/ui",
