@@ -81,7 +81,7 @@
           "type": "string"
         },
         "id": {
-          "description": "(Required)\nThe plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.",
+          "description": "(Required to publish the plugin on Figma Community)\nThe plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.",
           "type": "string"
         },
         "name": {
