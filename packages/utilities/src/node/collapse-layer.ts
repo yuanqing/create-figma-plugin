@@ -3,6 +3,8 @@ import { traverseNode } from './traverse-node.js'
 /**
  * Collapses `node` and all its child nodes in the layer list.
  *
+ * @returns Returns `true` if at least one layer in the layer list was
+ * collapsed by the function, else `false`.
  * @category Node
  */
 export function collapseLayer(node: SceneNode): boolean {
