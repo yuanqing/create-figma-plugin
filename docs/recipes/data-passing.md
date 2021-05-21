@@ -1,6 +1,6 @@
 ## Passing data between the plugin command’s main and UI contexts
 
-The [`@create-figma-plugin/utilities`](#utilities) library includes 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#how-a-figma-plugin-works):
+The [`@create-figma-plugin/utilities`](#utilities) library includes 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#figmas-plugin-execution-model):
 
 - [`on(name, handler)`](#onhandlername-handler) — Registers an event `handler` for the given event `name`.
 - [`once(name, handler)`](#oncehandlername-handler) — Ditto `on`, only that `handler` will run at most once.
@@ -28,7 +28,6 @@ export default function () {
 ```ts
 // src/ui.tsx
 
-/** @jsx h */
 import { render, Button } from '@create-figma-plugin/ui'
 import {
   emit,

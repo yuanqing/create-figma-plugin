@@ -39,7 +39,6 @@ Next, create a file for our UI (eg. `src/ui.tsx`):
 ```ts
 // src/ui.tsx
 
-/** @jsx h */
 import { render, Container, Text, VerticalSpace } from '@create-figma-plugin/ui'
 import { h } from 'preact'
 
