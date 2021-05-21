@@ -48,7 +48,7 @@ In `package.json`, we’re pointing to `src/main.ts` on the [**`"main"`**](#main
   }
 ```
 
-See the other [configuration options](#configuration-options).
+See the other [configuration options](#configuration-options), or learn how to [add a UI to a plugin command](#ui-1).
 
 ## Build the plugin
 

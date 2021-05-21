@@ -87,7 +87,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 }
 ```
 
-See how to [add a UI to a plugin command](#ui-1).
+Learn how to [add a UI to a plugin command](#ui-1).
 
 ### `"menu"`
 
