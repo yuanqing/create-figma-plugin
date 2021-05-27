@@ -3,8 +3,10 @@ import { getParentNode } from './get-nodes/get-parent-node.js'
 
 /**
  * Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
- * the smallest bounding box that contains the given `node`.
+ * the smallest bounding box that contains the given `node`. (Does not account
+ * for strokes or effects that could extend beyond the node’s bounding box.)
  *
+ * @returns Returns a [`Rect`](https://www.figma.com/plugin-docs/api/Rect/).
  * @category Node
  */
 export function computeBoundingBox(node: SceneNode): Rect {

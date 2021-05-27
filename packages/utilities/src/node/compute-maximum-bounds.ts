@@ -3,7 +3,12 @@ import { computeBoundingBox } from './compute-bounding-box.js'
 /**
  * Computes the absolute coordinates of the top-left and bottom-right
  * corners of the smallest bounding box that contains the given `nodes`.
+ * (Does not account for strokes or effects that could extend beyond the
+ * nodes’ bounding box.)
  *
+ * @returns Returns an array of two [`Vector`](https://www.figma.com/plugin-docs/api/Vector/)
+ * objects, one for the top-left corner and another for the
+ * bottom-right corner.
  * @category Node
  */
 export function computeMaximumBounds(

@@ -87,7 +87,7 @@ To accomplish this:
 - Access or modify Figma documents that are not currently open
 - Create or open a new or existing Figma document
 - Read or modify the ID, name and URL of the currently-open Figma document
-  - **Exception:** Private plugins (plugins not published to Figma Community) can read the [`fileKey`](https://figma.com/plugin-docs/api/figma/#filekey) of the currently-open Figma document if the [`enablePrivatePluginApi`](#enableprivatepluginapi) configuration option is enabled
+  - **Exception:** A private plugin (ie. a plugin not published to Figma Community) can read the [`fileKey`](https://figma.com/plugin-docs/api/figma/#filekey) of the currently-open Figma document if the [`enablePrivatePluginApi`](#enableprivatepluginapi) configuration option is enabled
 - Read or modify the document’s users and their access permissions
 - Read or modify the document’s comments
 - Read or modify components and styles from a Team library

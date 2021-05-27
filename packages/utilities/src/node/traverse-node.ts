@@ -3,7 +3,7 @@
  * manner, passing each node to the specified `processNode` callback.
  *
  * Each node is also passed to a `stopTraversal` function. If you return
- * `false` in `stopTraversal` for a particular node, then its child nodes
+ * `true` in `stopTraversal` for a particular node, then its child nodes
  * will not be traversed.
  *
  * @category Node
