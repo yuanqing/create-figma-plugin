@@ -12,6 +12,8 @@
 
 ## 1.0.0
 
+*Note: 1.0.0 requires Node.js v14.*
+
 - [`@create-figma-plugin/build@1`](#create-figma-pluginbuild1)
 - [`@create-figma-plugin/tsconfig@1`](#create-figma-plugintsconfig1)
 - [`@create-figma-plugin/ui@1`](#create-figma-pluginui1)
