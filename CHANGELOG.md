@@ -3,7 +3,7 @@
 ## 1.0.2
 
 - `create-figma-plugin`
-  - Added `src/**/*.tsx` to the `"include"` key of the `default` template’s `tsconfig.json`
+  - Added `src/**/*.tsx` to the **`"include"`** key of the `default` template’s `tsconfig.json`
 
 ## 1.0.1
 
