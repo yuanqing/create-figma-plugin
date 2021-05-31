@@ -91,8 +91,11 @@ export function Dropdown<
 
   const triggerBlur = useCallback(function (): void {
     setIsMenuVisible(false)
+  }, [])
+
+  const handleRootBlur = useCallback(function (): void {
+    setIsMenuVisible(false)
     setSelectedId(INVALID_ID)
-    getCurrentFromRef(rootElementRef).blur()
   }, [])
 
   const handleRootFocus = useCallback(
@@ -204,6 +207,7 @@ export function Dropdown<
         disabled === true ? dropdownStyles.disabled : null,
         noBorder === true ? dropdownStyles.noBorder : null
       ])}
+      onBlur={handleRootBlur}
       onFocus={handleRootFocus}
       onKeyDown={disabled === true ? undefined : handleRootKeyDown}
       onMouseDown={handleRootMouseDown}

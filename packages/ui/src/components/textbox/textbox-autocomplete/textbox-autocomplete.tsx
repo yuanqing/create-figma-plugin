@@ -94,10 +94,6 @@ export function TextboxAutocomplete<Name extends string>({
   // console.table([{ isMenuVisible, selectedId, originalValue, editedValue, value }])
 
   const triggerBlur = useCallback(function (): void {
-    setIsMenuVisible(false)
-    setOriginalValue(EMPTY_STRING)
-    setEditedValue(EMPTY_STRING)
-    setSelectedId(INVALID_ID)
     getCurrentFromRef(inputElementRef).blur()
   }, [])
 
@@ -144,6 +140,13 @@ export function TextboxAutocomplete<Name extends string>({
     },
     [options, updateScrollPosition]
   )
+
+  const handleBlur = useCallback(function (): void {
+    setIsMenuVisible(false)
+    setOriginalValue(EMPTY_STRING)
+    setEditedValue(EMPTY_STRING)
+    setSelectedId(INVALID_ID)
+  }, [])
 
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
@@ -331,6 +334,7 @@ export function TextboxAutocomplete<Name extends string>({
           class={textboxStyles.input}
           disabled={disabled === true}
           name={name}
+          onBlur={handleBlur}
           onFocus={handleFocus}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
