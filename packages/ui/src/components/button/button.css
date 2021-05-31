@@ -47,7 +47,7 @@
 .secondary button {
   padding: 0 15px;
   line-height: 30px;
-  background-color: var(--color-white);
+  background-color: transparent;
   border: 1px solid var(--color-black-80);
 }
 .secondary:not(.disabled) button:focus {

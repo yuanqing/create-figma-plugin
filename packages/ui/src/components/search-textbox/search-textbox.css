@@ -14,6 +14,7 @@
   height: 40px;
   padding-left: 36px;
   color: var(--color-black-80);
+  background-color: transparent;
 }
 .disabled .input {
   cursor: not-allowed;

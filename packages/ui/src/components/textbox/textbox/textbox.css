@@ -15,6 +15,7 @@
   height: 28px;
   padding-left: var(--space-extra-small);
   color: var(--color-black-80);
+  background-color: transparent;
   border-radius: var(--border-radius-2);
 }
 .hasIcon .input {
