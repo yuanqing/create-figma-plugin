@@ -10,7 +10,11 @@ export function useMouseDownOutside(options: {
   const { ref, onMouseDownOutside } = options
   useEffect(
     function (): () => void {
-      function handleWindowMouseDown(event: MouseEvent): void {
+      function handleBlur() {
+        // This is triggered when clicking outside the plugin `iframe`
+        onMouseDownOutside()
+      }
+      function handleMouseDown(event: MouseEvent): void {
         const element = getCurrentFromRef(ref)
         if (
           element === event.target ||
@@ -20,9 +24,11 @@ export function useMouseDownOutside(options: {
         }
         onMouseDownOutside()
       }
-      window.addEventListener('mousedown', handleWindowMouseDown)
+      window.addEventListener('blur', handleBlur)
+      window.addEventListener('mousedown', handleMouseDown)
       return function (): void {
-        window.removeEventListener('mousedown', handleWindowMouseDown)
+        window.removeEventListener('blur', handleBlur)
+        window.removeEventListener('mousedown', handleMouseDown)
       }
     },
     [ref, onMouseDownOutside]
