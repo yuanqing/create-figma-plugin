@@ -3,10 +3,10 @@
 ## 1.1.0
 
 - `@create-figma-plugin/ui`
-  - Added a new `TextboxColor` component
-  - Added a `spellCheck` prop (that defaults to `false`) to the following components: `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric`
-  - Made the menu of the `Dropdown` and `TextboxAutocomplete` components disappear on blur
+  - Hide the menu of the `Dropdown` and `TextboxAutocomplete` components on clicking outside the plugin modal
   - Set the `background-color` to `transparent` for the following components: secondary `Button`, `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric`
+  - Added a `spellCheck` prop (that defaults to `false`) to the following components: `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric`
+  - Added a new `TextboxColor` component
 
 ## 1.0.2
 
