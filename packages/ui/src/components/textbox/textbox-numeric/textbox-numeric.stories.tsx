@@ -189,6 +189,43 @@ export const Suffix = function () {
   )
 }
 
+export const SuffixRevertOnEscapeKeyDown = function () {
+  const [value, setValue] = useState('100%')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      maximum={100}
+      minimum={0}
+      onInput={handleInput}
+      revertOnEscapeKeyDown
+      suffix="%"
+      value={value}
+    />
+  )
+}
+
+export const SuffixMixed = function () {
+  const [value, setValue] = useState(MIXED_STRING)
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      maximum={100}
+      minimum={0}
+      onInput={handleInput}
+      suffix="%"
+      value={value}
+    />
+  )
+}
+
 export const OnValueInput = function () {
   const [value, setValue] = useState('42')
   function handleNumericValueChange(newNumericValue: null | number) {
