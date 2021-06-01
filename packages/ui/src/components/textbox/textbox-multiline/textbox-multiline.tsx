@@ -19,6 +19,7 @@ export type TextboxMultilineProps<Name extends string> = {
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
+  spellCheck?: boolean
   rows?: number
   value: string
 }
@@ -33,6 +34,7 @@ export function TextboxMultiline<Name extends string>({
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
   rows = 3,
+  spellCheck = false,
   value,
   ...rest
 }: Props<HTMLTextAreaElement, TextboxMultilineProps<Name>>): JSX.Element {
@@ -115,6 +117,7 @@ export function TextboxMultiline<Name extends string>({
         onMouseUp={handleMouseUp}
         placeholder={placeholder}
         rows={rows}
+        spellcheck={spellCheck}
         tabIndex={disabled === true ? -1 : 0}
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
