@@ -29,6 +29,7 @@ export type TextboxAutocompleteProps<Name extends string> = {
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
+  spellCheck?: boolean
   strict?: boolean
   top?: boolean
   value: string
@@ -67,6 +68,7 @@ export function TextboxAutocomplete<Name extends string>({
   placeholder,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
+  spellCheck = false,
   strict = false,
   top = false,
   value,
@@ -386,6 +388,7 @@ export function TextboxAutocomplete<Name extends string>({
                   name={name}
                   onChange={handleOptionChange}
                   onMouseMove={handleOptionMouseMove}
+                  spellcheck={spellCheck}
                   tabIndex={-1}
                   type="radio"
                   value={`${option.value}`}
