@@ -16,7 +16,6 @@
   padding-left: var(--space-extra-small);
   color: var(--color-black-80);
   background-color: transparent;
-  border-radius: var(--border-radius-2);
 }
 .hasIcon .input {
   padding-left: 32px;
@@ -67,9 +66,13 @@
   border-color: var(--color-blue);
   border-width: 2px;
 }
-.noBorder .input:not(:focus) ~ .border {
+.noBorder .border {
   border-color: transparent;
 }
-.noBorder:not(.disabled) .input:not(:focus):hover ~ .border {
+.noBorder:not(.disabled):hover .border {
   border-color: var(--color-silver);
+}
+.noBorder:not(.disabled) .input:focus ~ .border {
+  border-color: var(--color-blue);
+  border-width: 2px;
 }
