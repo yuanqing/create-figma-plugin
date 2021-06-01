@@ -4,8 +4,9 @@
 
 - `@create-figma-plugin/ui`
   - Hide the menu of the `Dropdown` and `TextboxAutocomplete` components on clicking outside the plugin modal
-  - Set the `background-color` to `transparent` for the following components: secondary `Button`, `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric`
-  - Added a `spellCheck` prop (that defaults to `false`) to the following components: `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric`
+  - Fix the dynamic positioning of the menu of the `Dropdown` and `TextboxAutocomplete` components
+  - Set the `background-color` to `transparent` for the the secondary `Button`, `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, and `TextboxNumeric` components
+  - Added a `spellCheck` prop (that defaults to `false`) to the `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, and `TextboxNumeric` components
   - Added a new `TextboxColor` component
 
 ## 1.0.2
