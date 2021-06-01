@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types'
+import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import { IconControlCheckboxChecked12 } from '../icon/icon-12/icon-control-checkbox-checked-12'
 import styles from './checkbox.css'

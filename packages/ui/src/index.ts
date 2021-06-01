@@ -285,7 +285,7 @@ export {
 export { useMouseDownOutside } from './hooks/use-mouse-down-outside.js'
 export { useScrollableMenu } from './hooks/use-scrollable-menu.js'
 export { useWindowKeyDown } from './hooks/use-window-key-down.js'
-export { OnValueChange, Props } from './types.js'
+export { OnValueChange, Props } from './types/types.js'
 export { createClassName } from './utilities/create-class-name.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'
 export { mapTextboxNumericValueToString } from './utilities/map-textbox-numeric-value-to-string.js'

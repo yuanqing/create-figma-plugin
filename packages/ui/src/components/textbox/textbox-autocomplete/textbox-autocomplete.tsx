@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.css'
 import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside'
-import { OnValueChange, Props } from '../../../types'
+import { OnValueChange, Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { IconMenuCheckmarkChecked16 } from '../../icon/icon-16/icon-menu-checkmark-checked-16'

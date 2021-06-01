@@ -2,7 +2,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../../types'
+import { Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { LoadingIndicator } from '../../loading-indicator/loading-indicator'
 import { fileComparator } from '../private/file-comparator'

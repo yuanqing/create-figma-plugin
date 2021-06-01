@@ -1,7 +1,7 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../../types'
+import { Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { RawTextbox, RawTextboxProps } from './private/raw-textbox'
 import styles from './textbox.css'

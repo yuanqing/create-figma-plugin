@@ -6,7 +6,7 @@ import {
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types'
+import { OnValueChange, Props } from '../../../../types/types'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
 import { MIXED_NUMBER, MIXED_STRING } from '../../../../utilities/mixed-values'
 import { computeNextValue } from '../../private/compute-next-value'
