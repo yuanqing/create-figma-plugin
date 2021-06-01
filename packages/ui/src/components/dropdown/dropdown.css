@@ -7,7 +7,7 @@
   padding-left: var(--space-extra-small);
   color: var(--color-black-80);
 }
-.dropdown:not(.disabled):focus {
+.dropdown:not(.disabled):focus-within {
   z-index: var(--z-index-2); /* Stack `.dropdown` over its sibling elements */
   outline: 0;
 }

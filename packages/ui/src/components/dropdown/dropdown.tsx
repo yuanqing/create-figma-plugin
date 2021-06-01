@@ -334,8 +334,9 @@ function updateMenuElementLayout(
   }
 
   // `topOffset` is 0 (so `menuElement` comfortably fits within the
-  // viewport) and `selectedId` is valid, so try to adjust the `top` position
-  // of `menuElement` such that `selectedElement` is directly `rootElement`
+  // viewport) and `selectedId` is valid, so try to adjust the `top`
+  // position of `menuElement` such that `selectedElement` is directly
+  // above the `rootElement`
   const selectedElement = menuElement.querySelector<HTMLInputElement>(
     `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
   )
@@ -345,7 +346,11 @@ function updateMenuElementLayout(
   const selectedElementTop =
     selectedElement.getBoundingClientRect().top -
     menuElement.getBoundingClientRect().top
-  const maximumTopOffset =
+  const maximumTopOffset = Math.max(
+    0,
     rootElement.getBoundingClientRect().top - MENU_VERTICAL_MARGIN
-  menuElement.style.top = `-${Math.min(selectedElementTop, maximumTopOffset)}px`
+  )
+  menuElement.style.top = `${
+    -1 * Math.min(selectedElementTop, maximumTopOffset)
+  }px`
 }
