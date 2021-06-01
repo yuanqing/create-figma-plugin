@@ -264,6 +264,10 @@ export {
   TextboxAutocompleteProps
 } from './components/textbox/textbox-autocomplete/textbox-autocomplete.js'
 export {
+  TextboxColor,
+  TextboxColorProps
+} from './components/textbox/textbox-color/textbox-color.js'
+export {
   TextboxMultiline,
   TextboxMultilineProps
 } from './components/textbox/textbox-multiline/textbox-multiline.js'
