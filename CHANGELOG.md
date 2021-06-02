@@ -3,11 +3,14 @@
 ## 1.1.0
 
 - `@create-figma-plugin/ui`
-  - Hide the menu of the `Dropdown` and `TextboxAutocomplete` components on clicking outside the plugin modal
-  - Fix the dynamic positioning of the menu of the `Dropdown` and `TextboxAutocomplete` components
-  - Set the `background-color` to `transparent` for the the secondary `Button`, `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, and `TextboxNumeric` components
-  - Added a `spellCheck` prop (that defaults to `false`) to the `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, and `TextboxNumeric` components
-  - Added a new `TextboxColor` component
+  - New features:
+    - `TextboxColor` – Added a new component for receiving a user input hex color with opacity
+    - `Dropdown`, `TextboxAutocomplete` – Allow individual menu options to be `disabled`
+    - `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric` – Added a `spellCheck` prop that defaults to `false` to hide squiggly lines from spellchecking
+  - Bug fixes:
+    - `Dropdown`, `TextboxAutocomplete` – Hide the menu on clicking anywhere outside the plugin `iframe` (previously the menu only hides when clicking outside the menu but *within* the plugin `iframe`)
+    - `Dropdown` – Fix dynamic positioning of the menu
+    - `Button`, `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric` – Set the `background-color` of the root element to `transparent`
 
 ## 1.0.2
 
