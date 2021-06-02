@@ -41,6 +41,7 @@ export type DropdownOptionHeader = {
 }
 export type DropdownOptionValue<Value> = {
   value: Value
+  disabled?: boolean
 }
 export type DropdownOptionSeparator = {
   separator: true
@@ -259,7 +260,10 @@ export function Dropdown<
               key={index}
               class={createClassName([
                 menuStyles.optionValue,
-                `${index}` === selectedId
+                option.disabled === true
+                  ? menuStyles.optionValueDisabled
+                  : null,
+                option.disabled !== true && `${index}` === selectedId
                   ? menuStyles.optionValueSelected
                   : null
               ])}
@@ -267,6 +271,7 @@ export function Dropdown<
               <input
                 checked={value === option.value}
                 class={menuStyles.input}
+                disabled={option.disabled === true}
                 name={name}
                 // If clicked on an unselected element, set the value
                 onChange={

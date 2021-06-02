@@ -132,6 +132,32 @@ export const Disabled = function () {
   )
 }
 
+export const DisabledOption = function () {
+  const [value, setValue] = useState('Mixed')
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { disabled: true, value: 'Mixed' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxAutocomplete
+      onInput={handleInput}
+      options={options}
+      value={value}
+    />
+  )
+}
+
 export const NoBorder = function () {
   const [value, setValue] = useState('foo')
   const options: Array<TextboxAutocompleteOption> = [

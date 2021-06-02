@@ -50,6 +50,9 @@
 .optionValueSelected {
   background-color: var(--color-blue);
 }
+.optionValueDisabled {
+  color: var(--color-white-40-translucent);
+}
 
 .optionSeparator {
   width: 100%;

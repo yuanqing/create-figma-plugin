@@ -43,6 +43,7 @@ export type TextboxAutocompleteOptionHeader = {
 }
 export type TextboxAutocompleteOptionValue = {
   value: string
+  disabled?: boolean
 }
 export type TextboxAutocompleteOptionSeparator = {
   separator: true
@@ -372,7 +373,10 @@ export function TextboxAutocomplete<Name extends string>({
                 key={index}
                 class={createClassName([
                   menuStyles.optionValue,
-                  option.id === selectedId
+                  option.disabled === true
+                    ? menuStyles.optionValueDisabled
+                    : null,
+                  option.disabled !== true && option.id === selectedId
                     ? menuStyles.optionValueSelected
                     : null
                 ])}
@@ -381,6 +385,7 @@ export function TextboxAutocomplete<Name extends string>({
                   {...rest}
                   checked={value === option.value}
                   class={menuStyles.input}
+                  disabled={option.disabled === true}
                   name={name}
                   onChange={handleOptionChange}
                   onMouseMove={handleOptionMouseMove}
@@ -582,7 +587,7 @@ function findFirstOptionValue(
   options: Array<Option>
 ): null | OptionValueWithId {
   for (const option of options) {
-    if ('id' in option) {
+    if ('id' in option && option.disabled !== true) {
       return option
     }
   }

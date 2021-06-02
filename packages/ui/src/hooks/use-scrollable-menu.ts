@@ -21,7 +21,9 @@ export function useScrollableMenu(options: {
         getCurrentFromRef(menuElementRef).querySelectorAll<HTMLElement>(
           `[${itemIdDataAttributeName}]`
         )
-      )
+      ).filter(function (element: HTMLElement): boolean {
+        return element.hasAttribute('disabled') === false
+      })
     },
     [itemIdDataAttributeName, menuElementRef]
   )

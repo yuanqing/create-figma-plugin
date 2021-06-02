@@ -137,6 +137,31 @@ export const Disabled = function () {
   )
 }
 
+export const DisabledOption = function () {
+  const [value, setValue] = useState('Mixed')
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { disabled: true, value: 'Mixed' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = { marginTop: '100px' }
+  return (
+    <div style={style}>
+      <Dropdown onChange={handleChange} options={options} value={value} />
+    </div>
+  )
+}
+
 export const NoBorder = function () {
   const [value, setValue] = useState('bar')
   const options: Array<DropdownOption> = [
