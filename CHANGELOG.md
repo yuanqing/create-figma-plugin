@@ -6,10 +6,10 @@
   - New features:
     - `TextboxColor` – Added a new component for receiving a user input hex color with opacity
     - `Dropdown`, `TextboxAutocomplete` – Allow individual menu options to be `disabled`
-    - `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric` – Added a `spellCheck` prop that defaults to `false` to hide squiggly lines from spellchecking
+    - `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric` – Added a `spellCheck` prop that defaults to `false` to hide the red squiggly lines from the browser’s spellchecking
   - Bug fixes:
-    - `Dropdown`, `TextboxAutocomplete` – Hide the menu on clicking anywhere outside the plugin `iframe` (previously the menu only hides when clicking outside the menu but *within* the plugin `iframe`)
-    - `Dropdown` – Fix dynamic positioning of the menu
+    - `Dropdown`, `TextboxAutocomplete` – Fixed a `z-index` bug with the menu, hide the menu on clicking anywhere outside the plugin `iframe` (previously the menu only hides when clicking outside the menu but *within* the plugin `iframe`)
+    - `Dropdown` – Fixed dynamic positioning of the menu
     - `Button`, `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric` – Set the `background-color` of the root element to `transparent`
 
 ## 1.0.2
