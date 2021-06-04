@@ -7,7 +7,7 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { MIXED_STRING } from '../../../utilities/mixed-values'
 import { TextboxMultiline } from './textbox-multiline'
 
-export default { title: 'Components/Textbox/Textbox Multiline' }
+export default { title: 'Components/Textbox Multiline' }
 
 export const Empty = function () {
   const [value, setValue] = useState('')

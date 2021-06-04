@@ -7,7 +7,7 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { MIXED_STRING } from '../../../utilities/mixed-values'
 import { TextboxColor } from './textbox-color'
 
-export default { title: 'Components/Textbox/Textbox Color' }
+export default { title: 'Components/Textbox Color' }
 
 export const Empty = function () {
   const [hexColor, setHexColor] = useState('')

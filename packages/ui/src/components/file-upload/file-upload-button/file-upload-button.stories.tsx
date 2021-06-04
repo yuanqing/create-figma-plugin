@@ -5,7 +5,7 @@ import { h } from 'preact'
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
 import { FileUploadButton } from './file-upload-button'
 
-export default { title: 'Components/File Upload/File Upload Button' }
+export default { title: 'Components/File Upload Button' }
 
 export const Default = function () {
   function handleSelectedFiles(files: Array<File>) {
