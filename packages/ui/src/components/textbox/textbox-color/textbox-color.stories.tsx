@@ -198,3 +198,16 @@ export const Mixed = function () {
     />
   )
 }
+
+export const OnValueInput = function () {
+  const [hexColor, setHexColor] = useState('000000')
+  const [opacity, setOpacity] = useState('100%')
+  return (
+    <TextboxColor
+      hexColor={hexColor}
+      onHexColorValueInput={setHexColor}
+      onOpacityValueInput={setOpacity}
+      opacity={opacity}
+    />
+  )
+}
