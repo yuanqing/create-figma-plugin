@@ -324,7 +324,8 @@ export function TextboxAutocomplete<Name extends string>({
       class={createClassName([
         textboxStyles.textbox,
         noBorder === true ? textboxStyles.noBorder : null,
-        typeof icon === 'undefined' ? null : textboxStyles.hasIcon
+        typeof icon === 'undefined' ? null : textboxStyles.hasIcon,
+        disabled === true ? textboxStyles.disabled : null
       ])}
     >
       <div class={textboxStyles.inner}>
