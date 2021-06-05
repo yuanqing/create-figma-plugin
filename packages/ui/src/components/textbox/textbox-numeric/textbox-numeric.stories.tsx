@@ -215,15 +215,7 @@ export const SuffixMixed = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <TextboxNumeric
-      maximum={100}
-      minimum={0}
-      onInput={handleInput}
-      suffix="%"
-      value={value}
-    />
-  )
+  return <TextboxNumeric onInput={handleInput} suffix="%" value={value} />
 }
 
 export const OnValueInput = function () {
