@@ -11,11 +11,15 @@ export function createRgba(hexColor: string, opacity: string): null | RGBA {
   ) {
     return null
   }
-  const { red, green, blue } = hexRgb(hexColor)
-  return {
-    a: parseInt(opacity, 10) / 100,
-    b: blue,
-    g: green,
-    r: red
+  try {
+    const { red, green, blue } = hexRgb(hexColor)
+    return {
+      a: parseInt(opacity, 10) / 100,
+      b: blue,
+      g: green,
+      r: red
+    }
+  } catch {
+    return null
   }
 }
