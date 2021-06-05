@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0
+## 1.1.1
 
 - `@create-figma-plugin/ui`
   - New features:
@@ -9,6 +9,7 @@
     - `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric` – Added a `spellCheck` prop that defaults to `false` to hide the red squiggly lines from the browser’s spellchecking
   - Bug fixes:
     - `Dropdown`, `TextboxAutocomplete` – Fixed a `z-index` bug with the menu, hide the menu on clicking anywhere outside the plugin `iframe` (previously the menu only hides when clicking outside the menu but *within* the plugin `iframe`)
+    - `TextboxNumeric` – Fixed a bug with `revertOnEscapeKeyDown` not working as expected when the `suffix` prop is also set
     - `Dropdown` – Fixed dynamic positioning of the menu
     - `Button`, `SearchTextbox`, `Textbox`, `TextboxAutocomplete`, `TextboxMultiline`, `TextboxNumeric` – Set the `background-color` of the root element to `transparent`
 
