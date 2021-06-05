@@ -59,21 +59,16 @@ export function TextboxColor<
   onOpacityInput = function () {},
   onOpacityNumericValueInput = function () {},
   onOpacityValueInput = function () {},
-  onRgbaColorValueInput: onRgbaValueInput = function () {},
+  onRgbaColorValueInput = function () {},
   ...rest
 }: Props<
-  HTMLDivElement,
+  HTMLInputElement,
   TextboxColorProps<Name, HexColorName, OpacityName>
 >): JSX.Element {
   const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
-
-  const handleRootFocus = useCallback(function (): void {
-    const hexColorInputElement = getCurrentFromRef(hexColorInputElementRef)
-    hexColorInputElement.focus()
-  }, [])
 
   const handleHexColorSelectorFocus = useCallback(function (
     event: JSX.TargetedEvent<HTMLInputElement>
@@ -152,22 +147,22 @@ export function TextboxColor<
       const newHexColor = event.currentTarget.value
       onHexColorValueInput(newHexColor, hexColorName)
       if (newHexColor === EMPTY_STRING) {
-        onRgbaValueInput(null, name)
+        onRgbaColorValueInput(null, name)
         return
       }
       const normalizedHexColor = normalizeUserInputColor(newHexColor)
       if (normalizedHexColor === null) {
-        onRgbaValueInput(null, name)
+        onRgbaColorValueInput(null, name)
         return
       }
       const rgba = createRgbaColor(normalizedHexColor, opacity)
-      onRgbaValueInput(rgba, name)
+      onRgbaColorValueInput(rgba, name)
     },
     [
       hexColorName,
       onHexColorInput,
       onHexColorValueInput,
-      onRgbaValueInput,
+      onRgbaColorValueInput,
       name,
       opacity
     ]
@@ -238,9 +233,9 @@ export function TextboxColor<
       onOpacityInput(event)
       const newOpacity = event.currentTarget.value
       const rgba = createRgbaColor(hexColor, newOpacity)
-      onRgbaValueInput(rgba, name)
+      onRgbaColorValueInput(rgba, name)
     },
-    [hexColor, onOpacityInput, onRgbaValueInput, name]
+    [hexColor, onOpacityInput, onRgbaColorValueInput, name]
   )
 
   const handleOpacityNumericValueInput = useCallback(
@@ -266,14 +261,11 @@ export function TextboxColor<
 
   return (
     <div
-      {...rest}
       class={createClassName([
         styles.textboxColor,
         noBorder === true ? styles.noBorder : null,
         disabled === true ? styles.disabled : null
       ])}
-      onFocus={handleRootFocus}
-      tabIndex={0}
     >
       <div class={styles.color}>
         <div
@@ -297,10 +289,12 @@ export function TextboxColor<
         onFocus={handleHexColorSelectorFocus}
         onInput={handleHexColorSelectorInput}
         onKeyDown={handleHexColorSelectorKeyDown}
+        tabIndex={-1}
         type="color"
         value={`#${renderedHexColor}`}
       />
       <input
+        {...rest}
         ref={hexColorInputElementRef}
         class={createClassName([styles.input, styles.hexColorInput])}
         disabled={disabled === true}
