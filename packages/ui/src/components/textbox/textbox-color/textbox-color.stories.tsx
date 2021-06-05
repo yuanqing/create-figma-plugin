@@ -22,15 +22,11 @@ export const Empty = function () {
     console.log(newOpacity)
     setOpacity(newOpacity)
   }
-  function handleRgbaValueInput(rgba: null | RGBA) {
-    console.log(rgba)
-  }
   return (
     <TextboxColor
       hexColor={hexColor}
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}
-      onRgbaValueInput={handleRgbaValueInput}
       opacity={opacity}
     />
   )
