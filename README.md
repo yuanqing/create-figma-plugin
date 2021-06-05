@@ -23,8 +23,11 @@
 ```
 $ git clone https://github.com/yuanqing/create-figma-plugin
 $ cd create-figma-plugin
+$ git checkout --track origin/next
 $ yarn install
 ```
+
+Active development on the next release occurs on the [`next`](https://github.com/yuanqing/create-figma-plugin/tree/next) branch. Pull requests should be made into `next`.
 
 ### Testing changes on an existing plugin
 
