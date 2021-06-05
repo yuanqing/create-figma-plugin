@@ -7,6 +7,7 @@ import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { MIXED_STRING } from '../../../utilities/mixed-values'
 import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeric'
+import { createRgba } from './private/create-rgba'
 import { normalizeHexColor } from './private/normalize-hex-color'
 import { updateHexColor } from './private/update-hex-color'
 import styles from './textbox-color.css'
@@ -15,10 +16,12 @@ const EMPTY_STRING = ''
 const EMPTY_HEX_COLOR = 'FFFFFF'
 
 export type TextboxColorProps<
+  Name extends string,
   HexColorName extends string,
   OpacityName extends string
 > = {
   disabled?: boolean
+  name?: Name
   noBorder?: boolean
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
@@ -33,13 +36,16 @@ export type TextboxColorProps<
   onOpacityInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onOpacityNumericValueInput?: OnValueChange<null | number, OpacityName>
   onOpacityValueInput?: OnValueChange<string, OpacityName>
+  onRgbaValueInput?: OnValueChange<null | RGBA, Name>
 }
 
 export function TextboxColor<
+  Name extends string,
   HexColorName extends string,
   OpacityName extends string
 >({
   disabled = false,
+  name,
   noBorder = false,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
@@ -51,13 +57,14 @@ export function TextboxColor<
   opacity,
   opacityName,
   opacityPlaceholder,
-  onOpacityInput,
-  onOpacityNumericValueInput,
-  onOpacityValueInput,
+  onOpacityInput = function () {},
+  onOpacityNumericValueInput = function () {},
+  onOpacityValueInput = function () {},
+  onRgbaValueInput = function () {},
   ...rest
 }: Props<
   HTMLDivElement,
-  TextboxColorProps<HexColorName, OpacityName>
+  TextboxColorProps<Name, HexColorName, OpacityName>
 >): JSX.Element {
   const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
@@ -76,18 +83,17 @@ export function TextboxColor<
   },
   [])
 
-  const handleHexColorSelectorInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      const hexColor = event.currentTarget.value.slice(1).toUpperCase()
-      onHexColorValueInput(hexColor, hexColorName)
-      const hexColorInputElement = getCurrentFromRef(hexColorInputElementRef)
-      hexColorInputElement.value = hexColor
-      const inputEvent = document.createEvent('Event')
-      inputEvent.initEvent('input', true, true)
-      hexColorInputElement.dispatchEvent(inputEvent)
-    },
-    [hexColorName, onHexColorValueInput]
-  )
+  const handleHexColorSelectorInput = useCallback(function (
+    event: JSX.TargetedEvent<HTMLInputElement>
+  ): void {
+    const hexColor = event.currentTarget.value.slice(1).toUpperCase()
+    const hexColorInputElement = getCurrentFromRef(hexColorInputElementRef)
+    hexColorInputElement.value = hexColor
+    const inputEvent = document.createEvent('Event')
+    inputEvent.initEvent('input', true, true)
+    hexColorInputElement.dispatchEvent(inputEvent)
+  },
+  [])
 
   const handleHexColorSelectorKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
@@ -112,7 +118,6 @@ export function TextboxColor<
 
   const handleHexColorBlur = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
-      const hexColor = getCurrentFromRef(hexColorInputElementRef).value
       if (hexColor !== EMPTY_STRING && hexColor !== MIXED_STRING) {
         const normalizedHexColor = normalizeHexColor(hexColor)
         const newHexColor =
@@ -126,7 +131,7 @@ export function TextboxColor<
       }
       setOriginalHexColor(EMPTY_STRING)
     },
-    [originalHexColor]
+    [hexColor, originalHexColor]
   )
 
   const handleHexColorFocus = useCallback(
@@ -142,8 +147,17 @@ export function TextboxColor<
       onHexColorInput(event)
       const newHexColor = event.currentTarget.value
       onHexColorValueInput(newHexColor, hexColorName)
+      const rgba = createRgba(newHexColor, opacity)
+      onRgbaValueInput(rgba, name)
     },
-    [hexColorName, onHexColorInput, onHexColorValueInput]
+    [
+      hexColorName,
+      onHexColorInput,
+      onHexColorValueInput,
+      onRgbaValueInput,
+      name,
+      opacity
+    ]
   )
 
   const handleHexColorKeyDown = useCallback(
@@ -183,20 +197,16 @@ export function TextboxColor<
         )
         element.value = newHexColor
         element.select()
-        handleHexColorInput(event)
+        const inputEvent = document.createEvent('Event')
+        inputEvent.initEvent('input', true, true)
+        event.currentTarget.dispatchEvent(inputEvent)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
         return
       }
     },
-    [
-      handleHexColorInput,
-      hexColor,
-      originalHexColor,
-      propagateEscapeKeyDown,
-      revertOnEscapeKeyDown
-    ]
+    [hexColor, originalHexColor, propagateEscapeKeyDown, revertOnEscapeKeyDown]
   )
 
   const handleHexColorMouseUp = useCallback(
@@ -207,6 +217,16 @@ export function TextboxColor<
       event.preventDefault()
     },
     [hexColor]
+  )
+
+  const handleOpacityInput = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      onOpacityInput(event)
+      const newOpacity = event.currentTarget.value
+      const rgba = createRgba(hexColor, newOpacity)
+      onRgbaValueInput(rgba, name)
+    },
+    [hexColor, onOpacityInput, onRgbaValueInput, name]
   )
 
   const parsedOpacity = parseOpacity(opacity)
@@ -278,7 +298,7 @@ export function TextboxColor<
         maximum={100}
         minimum={0}
         name={opacityName}
-        onInput={onOpacityInput}
+        onInput={handleOpacityInput}
         onNumericValueInput={onOpacityNumericValueInput}
         onValueInput={onOpacityValueInput}
         placeholder={opacityPlaceholder}
