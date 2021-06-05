@@ -5,7 +5,7 @@ import { useCallback, useRef, useState } from 'preact/hooks'
 import { OnValueChange, Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
-import { MIXED_STRING } from '../../../utilities/mixed-values'
+import { MIXED_NUMBER, MIXED_STRING } from '../../../utilities/mixed-values'
 import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeric'
 import { createRgbaColor } from './private/create-rgba-color'
 import { normalizeUserInputColor } from './private/normalize-hex-color'
@@ -243,6 +243,15 @@ export function TextboxColor<
     [hexColor, onOpacityInput, onRgbaValueInput, name]
   )
 
+  const handleOpacityNumericValueInput = useCallback(
+    function (opacity: number | null) {
+      onOpacityNumericValueInput(
+        opacity === null || opacity === MIXED_NUMBER ? opacity : opacity / 100
+      )
+    },
+    [onOpacityNumericValueInput]
+  )
+
   const parsedOpacity = parseOpacity(opacity)
 
   const normalizedHexColor =
@@ -314,7 +323,7 @@ export function TextboxColor<
         minimum={0}
         name={opacityName}
         onInput={handleOpacityInput}
-        onNumericValueInput={onOpacityNumericValueInput}
+        onNumericValueInput={handleOpacityNumericValueInput}
         onValueInput={onOpacityValueInput}
         placeholder={opacityPlaceholder}
         propagateEscapeKeyDown={propagateEscapeKeyDown}
