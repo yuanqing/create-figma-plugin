@@ -11,6 +11,7 @@ $ npm install @create-figma-plugin/utilities
 
 The utility functions span the following categories:
 
+- [Color](#color)
 - [Events](#events)
 - [Node](#node)
 - [Number](#number)
@@ -18,6 +19,79 @@ The utility functions span the following categories:
 - [Settings](#settings)
 - [String](#string)
 - [UI](#ui-2)
+
+## Color
+
+```ts
+import {
+  convertHexColorToRgbColor,
+  convertNamedColorToHexColor,
+  convertRgbColorToHexColor,
+  isValidHexColor
+} from '@create-figma-plugin/utilities'
+```
+
+### convertHexColorToRgbColor(hexColor)
+
+Converts the given `hexColor` (eg. `000000`) to RGB format (eg. `{ r: 0, g: 0, b: 0 }`). Note that each value in the returned [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object is between `0` and `1`.
+
+***Parameters***
+
+- **`hexColor`** (`string`)
+
+***Return type***
+
+Returns an [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object, else `null` if `hexColor` was invalid.
+
+```
+null | RGB
+```
+
+### convertNamedColorToHexColor(namedColor)
+
+Converts the given `namedColor` (eg. `black`) to hexadecimal format (eg. `000000`).
+
+***Parameters***
+
+- **`namedColor`** (`string`)
+
+***Return type***
+
+Returns a hexadecimal color as an uppercase string, else `null` if `namedColor` was invalid.
+
+```
+null | string
+```
+
+### convertRgbColorToHexColor(rgbColor)
+
+Converts the given `rgbColor` (eg. `{ r: 0, g: 0, b: 0 }`) to hexadecimal format (eg. `000000`). Each value in the given `rgbColor` must be between `0` and `1`.
+
+***Parameters***
+
+- **`rgbColor`** (`RGB`)
+
+***Return type***
+
+Returns a hexadecimal color as an uppercase string, else `null` if `rgbColor` was invalid.
+
+```
+null | string
+```
+
+### isValidHexColor(hexColor)
+
+Returns `true` if `hexColor` is a valid hexadecimal color.
+
+***Parameters***
+
+- **`hexColor`** (`string`)
+
+***Return type***
+
+```
+boolean
+```
 
 ## Events
 
