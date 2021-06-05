@@ -202,15 +202,15 @@ export const Mixed = function () {
 export const OnRgbaValueInput = function () {
   const [hexColor, setHexColor] = useState('000000')
   const [opacity, setOpacity] = useState('100%')
-  function handleRgbaValueInput(rgba: null | RGBA) {
-    console.log(rgba)
+  function handleRgbaColorValueInput(rgbaColor: null | RGBA) {
+    console.log(rgbaColor)
   }
   return (
     <TextboxColor
       hexColor={hexColor}
       onHexColorValueInput={setHexColor}
       onOpacityValueInput={setOpacity}
-      onRgbaValueInput={handleRgbaValueInput}
+      onRgbaColorValueInput={handleRgbaColorValueInput}
       opacity={opacity}
     />
   )

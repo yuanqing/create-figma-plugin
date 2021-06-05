@@ -1,15 +1,26 @@
-import hexRgb from 'hex-rgb'
-import rgbHex from 'rgb-hex'
+import {
+  convertHexColorToRgbColor,
+  convertRgbColorToHexColor
+} from '@create-figma-plugin/utilities'
 
 export function updateHexColor(hexColor: string, delta: number): string {
-  const { red, green, blue } = hexRgb(hexColor)
-  return rgbHex(
-    restrictValue(red + delta),
-    restrictValue(green + delta),
-    restrictValue(blue + delta)
-  ).toUpperCase()
+  const rgbColor = convertHexColorToRgbColor(hexColor)
+  if (rgbColor === null) {
+    throw new Error('Invalid `hexColor`')
+  }
+  const { r, g, b } = rgbColor
+  const result = convertRgbColorToHexColor({
+    b: updateValue(b, delta),
+    g: updateValue(g, delta),
+    r: updateValue(r, delta)
+  })
+  if (result === null) {
+    throw new Error('Invalid `rgbColor`')
+  }
+  return result
 }
 
-function restrictValue(value: number): number {
-  return Math.min(255, Math.max(0, value))
+function updateValue(value: number, delta: number): number {
+  const newValue = value * 255 + delta
+  return Math.min(Math.max(newValue, 0), 255) / 255
 }

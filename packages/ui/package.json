@@ -49,11 +49,7 @@
     "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^1.1.1",
-    "css-color-names": "^1.0.1",
-    "hex-color-regex": "^1.1.0",
-    "hex-rgb": "^5.0.0",
-    "rgb-hex": "^4.0.0"
+    "@create-figma-plugin/utilities": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.14.2",

@@ -7,13 +7,12 @@ import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { MIXED_STRING } from '../../../utilities/mixed-values'
 import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeric'
-import { createRgba } from './private/create-rgba'
-import { normalizeHexColor } from './private/normalize-hex-color'
+import { createRgbaColor } from './private/create-rgba-color'
+import { normalizeUserInputColor } from './private/normalize-hex-color'
 import { updateHexColor } from './private/update-hex-color'
 import styles from './textbox-color.css'
 
 const EMPTY_STRING = ''
-const EMPTY_HEX_COLOR = 'FFFFFF'
 
 export type TextboxColorProps<
   Name extends string,
@@ -36,7 +35,7 @@ export type TextboxColorProps<
   onOpacityInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onOpacityNumericValueInput?: OnValueChange<null | number, OpacityName>
   onOpacityValueInput?: OnValueChange<string, OpacityName>
-  onRgbaValueInput?: OnValueChange<null | RGBA, Name>
+  onRgbaColorValueInput?: OnValueChange<null | RGBA, Name>
 }
 
 export function TextboxColor<
@@ -60,7 +59,7 @@ export function TextboxColor<
   onOpacityInput = function () {},
   onOpacityNumericValueInput = function () {},
   onOpacityValueInput = function () {},
-  onRgbaValueInput = function () {},
+  onRgbaColorValueInput: onRgbaValueInput = function () {},
   ...rest
 }: Props<
   HTMLDivElement,
@@ -124,7 +123,7 @@ export function TextboxColor<
         return
       }
       if (hexColor !== EMPTY_STRING && hexColor !== MIXED_STRING) {
-        const normalizedHexColor = normalizeHexColor(hexColor)
+        const normalizedHexColor = normalizeUserInputColor(hexColor)
         const newHexColor =
           normalizedHexColor === null ? originalHexColor : normalizedHexColor
         if (newHexColor !== hexColor) {
@@ -156,12 +155,12 @@ export function TextboxColor<
         onRgbaValueInput(null, name)
         return
       }
-      const normalizedHexColor = normalizeHexColor(newHexColor)
+      const normalizedHexColor = normalizeUserInputColor(newHexColor)
       if (normalizedHexColor === null) {
         onRgbaValueInput(null, name)
         return
       }
-      const rgba = createRgba(normalizedHexColor, opacity)
+      const rgba = createRgbaColor(normalizedHexColor, opacity)
       onRgbaValueInput(rgba, name)
     },
     [
@@ -238,7 +237,7 @@ export function TextboxColor<
     function (event: JSX.TargetedEvent<HTMLInputElement>) {
       onOpacityInput(event)
       const newOpacity = event.currentTarget.value
-      const rgba = createRgba(hexColor, newOpacity)
+      const rgba = createRgbaColor(hexColor, newOpacity)
       onRgbaValueInput(rgba, name)
     },
     [hexColor, onOpacityInput, onRgbaValueInput, name]
@@ -248,8 +247,8 @@ export function TextboxColor<
 
   const normalizedHexColor =
     hexColor === EMPTY_STRING || hexColor === MIXED_STRING
-      ? EMPTY_HEX_COLOR
-      : normalizeHexColor(hexColor)
+      ? 'FFFFFF'
+      : normalizeUserInputColor(hexColor)
   const renderedHexColor =
     normalizedHexColor === null ? originalHexColor : normalizedHexColor
 
@@ -285,7 +284,7 @@ export function TextboxColor<
       </div>
       <input
         class={styles.hexColorSelector}
-        disabled={disabled}
+        disabled={disabled === true}
         onFocus={handleHexColorSelectorFocus}
         onInput={handleHexColorSelectorInput}
         onKeyDown={handleHexColorSelectorKeyDown}
@@ -310,6 +309,7 @@ export function TextboxColor<
       />
       <RawTextboxNumeric
         class={createClassName([styles.input, styles.opacityInput])}
+        disabled={disabled === true}
         maximum={100}
         minimum={0}
         name={opacityName}

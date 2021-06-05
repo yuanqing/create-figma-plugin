@@ -37,7 +37,9 @@
     "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
-    "natural-compare-lite": "1.4.0"
+    "hex-rgb": "^5.0.0",
+    "natural-compare-lite": "1.4.0",
+    "rgb-hex": "^4.0.0"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1",

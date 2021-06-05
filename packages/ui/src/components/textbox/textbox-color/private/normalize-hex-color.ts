@@ -1,12 +1,18 @@
-import cssColorNames from 'css-color-names'
-import hexColorRegex from 'hex-color-regex'
+import {
+  convertNamedColorToHexColor,
+  isValidHexColor
+} from '@create-figma-plugin/utilities'
 
-export function normalizeHexColor(hexColor: string): null | string {
-  if (typeof cssColorNames[hexColor] !== 'undefined') {
-    return cssColorNames[hexColor].slice(1).toUpperCase()
+export function normalizeUserInputColor(string: string): null | string {
+  const parsedNamedColor = convertNamedColorToHexColor(string)
+  if (parsedNamedColor !== null) {
+    return parsedNamedColor
   }
-  const result = createHexColor(hexColor)
-  return isValidHexColor(result) === true ? result.toUpperCase() : null
+  const hexColor = createHexColor(string).toUpperCase()
+  if (isValidHexColor(hexColor) === false) {
+    return null
+  }
+  return hexColor
 }
 
 function createHexColor(string: string): string {
@@ -32,8 +38,4 @@ function createHexColor(string: string): string {
       return string.slice(0, 6)
     }
   }
-}
-
-function isValidHexColor(hexColor: string): boolean {
-  return hexColorRegex().test(`#${hexColor}`)
 }

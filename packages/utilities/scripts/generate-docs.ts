@@ -50,6 +50,7 @@ async function generateDocsAsync(
   lines.push('')
   lines.push('The utility functions span the following categories:')
   lines.push('')
+  lines.push('- [Color](#color)')
   lines.push('- [Events](#events)')
   lines.push('- [Node](#node)')
   lines.push('- [Number](#number)')
