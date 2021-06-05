@@ -52,6 +52,7 @@ export function RawTextboxNumeric<Name extends string>({
   ...rest
 }: Props<HTMLInputElement, RawTextboxNumericProps<Name>>): JSX.Element {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+  const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
@@ -77,8 +78,11 @@ export function RawTextboxNumeric<Name extends string>({
 
   const handleBlur = useCallback(
     function (): void {
+      if (isRevertOnEscapeKeyDownRef.current === true) {
+        isRevertOnEscapeKeyDownRef.current = false
+        return
+      }
       if (typeof suffix !== 'undefined') {
-        const inputElement = getCurrentFromRef(inputElementRef)
         let newValue: null | string = null
         if (value === suffix) {
           // We don't want a textbox to contain just the `suffix`, so clear the `value`
@@ -89,6 +93,7 @@ export function RawTextboxNumeric<Name extends string>({
           newValue = appendSuffix(value, suffix)
         }
         if (newValue !== null) {
+          const inputElement = getCurrentFromRef(inputElementRef)
           inputElement.value = newValue
           const inputEvent = document.createEvent('Event')
           inputEvent.initEvent('input', true, true)
@@ -140,6 +145,7 @@ export function RawTextboxNumeric<Name extends string>({
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
+          isRevertOnEscapeKeyDownRef.current = true
           event.currentTarget.value = originalValue
           const inputEvent = document.createEvent('Event')
           inputEvent.initEvent('input', true, true)

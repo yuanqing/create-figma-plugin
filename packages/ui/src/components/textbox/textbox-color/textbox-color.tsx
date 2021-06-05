@@ -67,6 +67,7 @@ export function TextboxColor<
   TextboxColorProps<Name, HexColorName, OpacityName>
 >): JSX.Element {
   const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
+  const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
 
@@ -118,6 +119,10 @@ export function TextboxColor<
 
   const handleHexColorBlur = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
+      if (isRevertOnEscapeKeyDownRef.current === true) {
+        isRevertOnEscapeKeyDownRef.current = false
+        return
+      }
       if (hexColor !== EMPTY_STRING && hexColor !== MIXED_STRING) {
         const normalizedHexColor = normalizeHexColor(hexColor)
         const newHexColor =
@@ -147,7 +152,16 @@ export function TextboxColor<
       onHexColorInput(event)
       const newHexColor = event.currentTarget.value
       onHexColorValueInput(newHexColor, hexColorName)
-      const rgba = createRgba(newHexColor, opacity)
+      if (newHexColor === EMPTY_STRING) {
+        onRgbaValueInput(null, name)
+        return
+      }
+      const normalizedHexColor = normalizeHexColor(newHexColor)
+      if (normalizedHexColor === null) {
+        onRgbaValueInput(null, name)
+        return
+      }
+      const rgba = createRgba(normalizedHexColor, opacity)
       onRgbaValueInput(rgba, name)
     },
     [
@@ -168,6 +182,7 @@ export function TextboxColor<
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
+          isRevertOnEscapeKeyDownRef.current = true
           event.currentTarget.value = originalHexColor
           const inputEvent = document.createEvent('Event')
           inputEvent.initEvent('input', true, true)
