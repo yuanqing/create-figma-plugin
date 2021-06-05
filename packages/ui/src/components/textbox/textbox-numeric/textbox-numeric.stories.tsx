@@ -228,12 +228,12 @@ export const SuffixMixed = function () {
 
 export const OnValueInput = function () {
   const [value, setValue] = useState('42')
-  function handleNumericValueChange(newNumericValue: null | number) {
+  function handleNumericValueInput(newNumericValue: null | number) {
     console.log(newNumericValue)
   }
   return (
     <TextboxNumeric
-      onNumericValueInput={handleNumericValueChange}
+      onNumericValueInput={handleNumericValueInput}
       onValueInput={setValue}
       value={value}
     />
