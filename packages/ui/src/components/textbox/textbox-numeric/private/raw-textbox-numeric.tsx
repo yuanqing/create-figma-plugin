@@ -79,7 +79,6 @@ export function RawTextboxNumeric<Name extends string>({
     function (): void {
       if (typeof suffix !== 'undefined') {
         const inputElement = getCurrentFromRef(inputElementRef)
-        const value = inputElement.value
         let newValue: null | string = null
         if (value === suffix) {
           // We don't want a textbox to contain just the `suffix`, so clear the `value`
@@ -98,7 +97,7 @@ export function RawTextboxNumeric<Name extends string>({
       }
       setOriginalValue(EMPTY_STRING)
     },
-    [suffix]
+    [value, suffix]
   )
 
   const handleFocus = useCallback(
