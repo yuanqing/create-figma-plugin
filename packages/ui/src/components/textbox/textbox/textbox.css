@@ -35,19 +35,17 @@
 
 .icon {
   position: absolute;
-  top: 6px;
-  left: var(--space-extra-small);
-  width: 16px;
+  top: 14px;
+  left: 16px;
   color: var(--color-black-30);
   text-align: center;
+  transform: translate(-50%, -50%);
   pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
 .textbox:not(.disabled) .input:focus ~ .icon {
   color: var(--color-blue);
 }
 .icon svg {
-  width: 16px;
-  height: 16px;
   fill: currentColor;
 }
 
