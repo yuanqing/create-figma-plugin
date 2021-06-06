@@ -119,7 +119,7 @@ export function Dropdown<
 
   const handleRootKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLDivElement>): void {
-      if (event.key === 'Escape') {
+      if (event.key === 'Escape' || event.key === 'Tab') {
         triggerBlur()
         return
       }
