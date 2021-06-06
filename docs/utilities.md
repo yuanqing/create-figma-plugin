@@ -190,6 +190,7 @@ import {
   sortNodesByCanonicalOrder,
   sortNodesByName,
   traverseNode,
+  unsetRelaunchButton,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
 ```
@@ -461,7 +462,7 @@ void
 
 ### setRelaunchButton(node, relaunchButtonId [, options])
 
-Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `node` for the command with the given `relaunchButtonId` as configured under the [**`"relaunchButtons"`**](#relaunchbuttons) key in `package.json`. `description` is the text displayed below the relaunch button in the Figma UI.
+Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `node` for the command with the given `relaunchButtonId` as configured under the [**`"relaunchButtons"`**](#relaunchbuttons) key in `package.json`. Any relaunch buttons set previously will be retained. `description` is the text displayed below the relaunch button in the Figma UI.
  See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
 
 ***Parameters***
@@ -527,6 +528,21 @@ Traverses `node` and its child nodes recursively in a *depth-first* manner, pass
 - **`node`** (`SceneNode`)
 - **`processNode`** (`(node: SceneNode) => void`)
 - **`stopTraversal`** (`(node: SceneNode) => boolean`) – *Optional.*
+
+***Return type***
+
+```
+void
+```
+
+### unsetRelaunchButton(node [, relaunchButtonId])
+
+Unsets the [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `node` for the command with the given `relaunchButtonId`. If `relaunchButtonId` is not specified, unsets all relaunch buttons on `node`.
+
+***Parameters***
+
+- **`node`** (`BaseNode`)
+- **`relaunchButtonId`** (`string`) – *Optional.*
 
 ***Return type***
 
