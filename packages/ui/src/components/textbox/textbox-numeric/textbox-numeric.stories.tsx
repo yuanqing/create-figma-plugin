@@ -117,6 +117,26 @@ export const RevertOnEscapeKeyDown = function () {
   )
 }
 
+export const ValidateOnBlur = function () {
+  const [value, setValue] = useState('42')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function validateOnBlur(value: null | number): number | boolean {
+    console.log(value)
+    return value !== null
+  }
+  return (
+    <TextboxNumeric
+      onInput={handleInput}
+      validateOnBlur={validateOnBlur}
+      value={value}
+    />
+  )
+}
+
 export const Mixed = function () {
   const [value, setValue] = useState(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -203,6 +223,32 @@ export const SuffixRevertOnEscapeKeyDown = function () {
       onInput={handleInput}
       revertOnEscapeKeyDown
       suffix="%"
+      value={value}
+    />
+  )
+}
+
+export const SuffixValidateOnBlur = function () {
+  const [value, setValue] = useState('100%')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function validateOnBlur(value: null | number): number | boolean {
+    if (value === null) {
+      return 100
+    }
+    return true
+  }
+  return (
+    <TextboxNumeric
+      maximum={100}
+      minimum={0}
+      onInput={handleInput}
+      revertOnEscapeKeyDown
+      suffix="%"
+      validateOnBlur={validateOnBlur}
       value={value}
     />
   )

@@ -70,6 +70,17 @@ export function TextboxColor<
 
   const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
 
+  const setHexColorInputElementValue = useCallback(function (
+    value: string
+  ): void {
+    const inputElement = getCurrentFromRef(hexColorInputElementRef)
+    inputElement.value = value
+    const inputEvent = document.createEvent('Event')
+    inputEvent.initEvent('input', true, true)
+    inputElement.dispatchEvent(inputEvent)
+  },
+  [])
+
   const handleHexColorSelectorFocus = useCallback(function (
     event: JSX.TargetedEvent<HTMLInputElement>
   ): void {
@@ -78,17 +89,13 @@ export function TextboxColor<
   },
   [])
 
-  const handleHexColorSelectorInput = useCallback(function (
-    event: JSX.TargetedEvent<HTMLInputElement>
-  ): void {
-    const hexColor = event.currentTarget.value.slice(1).toUpperCase()
-    const hexColorInputElement = getCurrentFromRef(hexColorInputElementRef)
-    hexColorInputElement.value = hexColor
-    const inputEvent = document.createEvent('Event')
-    inputEvent.initEvent('input', true, true)
-    hexColorInputElement.dispatchEvent(inputEvent)
-  },
-  [])
+  const handleHexColorSelectorInput = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
+      const hexColor = event.currentTarget.value.slice(1).toUpperCase()
+      setHexColorInputElementValue(hexColor)
+    },
+    [setHexColorInputElementValue]
+  )
 
   const handleHexColorSelectorKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
@@ -99,38 +106,43 @@ export function TextboxColor<
         event.stopPropagation()
       }
       if (revertOnEscapeKeyDown === true) {
-        const hexColorInputElement = getCurrentFromRef(hexColorInputElementRef)
-        hexColorInputElement.value = originalHexColor
-        const inputEvent = document.createEvent('Event')
-        inputEvent.initEvent('input', true, true)
-        hexColorInputElement.dispatchEvent(inputEvent)
+        setHexColorInputElementValue(originalHexColor)
         setOriginalHexColor(EMPTY_STRING)
       }
       event.currentTarget.blur()
     },
-    [originalHexColor, propagateEscapeKeyDown, revertOnEscapeKeyDown]
+    [
+      originalHexColor,
+      propagateEscapeKeyDown,
+      revertOnEscapeKeyDown,
+      setHexColorInputElementValue
+    ]
   )
 
   const handleHexColorBlur = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
+    function (): void {
       if (isRevertOnEscapeKeyDownRef.current === true) {
         isRevertOnEscapeKeyDownRef.current = false
         return
       }
-      if (hexColor !== EMPTY_STRING && hexColor !== MIXED_STRING) {
+      if (hexColor === EMPTY_STRING) {
+        if (originalHexColor !== EMPTY_STRING) {
+          setHexColorInputElementValue(originalHexColor)
+        }
+        setOriginalHexColor(EMPTY_STRING)
+        return
+      }
+      if (hexColor !== MIXED_STRING) {
         const normalizedHexColor = normalizeUserInputColor(hexColor)
         const newHexColor =
           normalizedHexColor === null ? originalHexColor : normalizedHexColor
         if (newHexColor !== hexColor) {
-          event.currentTarget.value = newHexColor
-          const inputEvent = document.createEvent('Event')
-          inputEvent.initEvent('input', true, true)
-          event.currentTarget.dispatchEvent(inputEvent)
+          setHexColorInputElementValue(newHexColor)
         }
       }
       setOriginalHexColor(EMPTY_STRING)
     },
-    [hexColor, originalHexColor]
+    [hexColor, originalHexColor, setHexColorInputElementValue]
   )
 
   const handleHexColorFocus = useCallback(
@@ -177,10 +189,7 @@ export function TextboxColor<
         }
         if (revertOnEscapeKeyDown === true) {
           isRevertOnEscapeKeyDownRef.current = true
-          event.currentTarget.value = originalHexColor
-          const inputEvent = document.createEvent('Event')
-          inputEvent.initEvent('input', true, true)
-          event.currentTarget.dispatchEvent(inputEvent)
+          setHexColorInputElementValue(originalHexColor)
           setOriginalHexColor(EMPTY_STRING)
         }
         event.currentTarget.blur()
@@ -204,18 +213,21 @@ export function TextboxColor<
           startingHexColor,
           key === 'ArrowDown' ? -1 * delta : delta
         )
-        element.value = newHexColor
+        setHexColorInputElementValue(newHexColor)
         element.select()
-        const inputEvent = document.createEvent('Event')
-        inputEvent.initEvent('input', true, true)
-        event.currentTarget.dispatchEvent(inputEvent)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
         return
       }
     },
-    [hexColor, originalHexColor, propagateEscapeKeyDown, revertOnEscapeKeyDown]
+    [
+      hexColor,
+      originalHexColor,
+      propagateEscapeKeyDown,
+      revertOnEscapeKeyDown,
+      setHexColorInputElementValue
+    ]
   )
 
   const handleHexColorMouseUp = useCallback(
@@ -239,13 +251,17 @@ export function TextboxColor<
   )
 
   const handleOpacityNumericValueInput = useCallback(
-    function (opacity: number | null) {
+    function (opacity: null | number) {
       onOpacityNumericValueInput(
         opacity === null || opacity === MIXED_NUMBER ? opacity : opacity / 100
       )
     },
     [onOpacityNumericValueInput]
   )
+
+  const validateOpacityOnBlur = useCallback(function (opacity: null | number) {
+    return opacity !== null // Revert the original value if empty
+  }, [])
 
   const parsedOpacity = parseOpacity(opacity)
 
@@ -323,6 +339,7 @@ export function TextboxColor<
         propagateEscapeKeyDown={propagateEscapeKeyDown}
         revertOnEscapeKeyDown={revertOnEscapeKeyDown}
         suffix="%"
+        validateOnBlur={validateOpacityOnBlur}
         value={opacity}
       />
       <div class={styles.divider} />
