@@ -55,7 +55,7 @@
   left: 0;
   z-index: var(
     --z-index-1
-  ); /* Stack `.input` over all other elements within `.layer` */
+  ); /* stack `.input` over all other elements within `.layer` */
   display: block;
   width: 100%;
   height: 100%;

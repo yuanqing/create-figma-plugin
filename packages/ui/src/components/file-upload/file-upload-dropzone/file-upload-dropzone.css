@@ -21,7 +21,7 @@
 .input {
   z-index: var(
     --z-index-1
-  ); /* Stack `.input` over all other elements within `.fileUploadDropzone` */
+  ); /* stack `.input` over all other elements within `.fileUploadDropzone` */
   width: 100%;
   opacity: 0;
 }

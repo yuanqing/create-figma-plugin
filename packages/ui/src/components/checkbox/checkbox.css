@@ -14,7 +14,7 @@
   left: -16px;
   z-index: var(
     --z-index-1
-  ); /* Stack `.input` over all other elements within `.checkbox` */
+  ); /* stack `.input` over all other elements within `.checkbox` */
   display: block;
   width: calc(100% + 32px);
 }

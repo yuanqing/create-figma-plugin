@@ -16,7 +16,7 @@
   left: -16px;
   z-index: var(
     --z-index-1
-  ); /* Stack `.input` over all other elements within `.toggle` */
+  ); /* stack `.input` over all other elements within `.toggle` */
   display: block;
   width: calc(100% + 32px);
 }
