@@ -61,6 +61,8 @@
   pointer-events: none;
 }
 .textbox:not(.disabled) .input:focus ~ .border {
+  top: -1px;
+  bottom: -1px;
   border-color: var(--color-blue);
   border-width: 2px;
 }

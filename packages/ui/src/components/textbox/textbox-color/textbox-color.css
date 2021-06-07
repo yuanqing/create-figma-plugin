@@ -7,7 +7,7 @@
 .textboxColor:focus-within {
   z-index: var(
     --z-index-2
-  ); /* Stack `.textboxColor` over its sibling elements */
+  ); /* stack `.textboxColor` over its sibling elements */
 }
 .disabled {
   opacity: var(--opacity-30);
@@ -90,6 +90,8 @@
 }
 .textboxColor:not(.disabled) .input:focus ~ .border,
 .textboxColor:not(.disabled) .hexColorSelector:focus ~ .border {
+  top: -1px;
+  bottom: -1px;
   border-color: var(--color-blue);
   border-width: 2px;
 }

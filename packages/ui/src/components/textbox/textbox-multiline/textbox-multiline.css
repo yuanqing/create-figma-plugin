@@ -32,6 +32,8 @@
   pointer-events: none;
 }
 .textboxMultiline:not(.disabled) .textarea:focus ~ .border {
+  top: -1px;
+  bottom: -1px;
   border-color: var(--color-blue);
   border-width: 2px;
 }
