@@ -1,12 +1,15 @@
 .segmentedControl {
   position: relative;
   z-index: var(--z-index-1);
-  display: inline-flex;
-  overflow: hidden;
+  display: inline-block;
   border-radius: var(--border-radius-2);
 }
 .disabled {
   opacity: var(--opacity-30);
+}
+
+.labels {
+  display: flex;
 }
 
 .label {
@@ -45,17 +48,23 @@
 .input:disabled ~ .children {
   opacity: var(--opacity-30);
 }
-.label:first-child .input:checked ~ .children {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.label:last-child .input:checked ~ .children {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
 .segmentedControl:not(.disabled):hover .input:checked ~ .children,
 .segmentedControl:not(.disabled):focus-within .input:checked ~ .children {
   border-radius: 0;
+}
+.segmentedControl:not(.disabled):hover
+  .label:first-child
+  .input:checked
+  ~ .children {
+  border-top-left-radius: var(--border-radius-2);
+  border-bottom-left-radius: var(--border-radius-2);
+}
+.segmentedControl:not(.disabled):hover
+  .label:last-child
+  .input:checked
+  ~ .children {
+  border-top-right-radius: var(--border-radius-2);
+  border-bottom-right-radius: var(--border-radius-2);
 }
 
 .text {
@@ -75,5 +84,7 @@
   border: 1px solid var(--color-silver);
 }
 .segmentedControl:not(.disabled):focus-within .border {
+  top: -1px;
+  bottom: -1px;
   border: 2px solid var(--color-blue);
 }

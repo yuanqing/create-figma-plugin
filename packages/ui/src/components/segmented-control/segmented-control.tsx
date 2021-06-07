@@ -73,40 +73,42 @@ export function SegmentedControl<
         disabled === true ? styles.disabled : null
       ])}
     >
-      {options.map(function (
-        option: SegmentedControlOption<Value>,
-        index: number
-      ): JSX.Element {
-        const children =
-          typeof option.children === 'undefined'
-            ? `${option.value}`
-            : option.children
-        const isOptionDisabled = disabled === true || option.disabled === true
-        return (
-          <label key={index} class={styles.label}>
-            <input
-              {...rest}
-              checked={value === option.value}
-              class={styles.input}
-              disabled={isOptionDisabled === true}
-              name={name}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              tabIndex={isOptionDisabled === true ? -1 : 0}
-              type="radio"
-              value={`${option.value}`}
-              {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
-            />
-            <div class={styles.children}>
-              <div
-                class={typeof children === 'string' ? styles.text : undefined}
-              >
-                {children}
+      <div class={styles.labels}>
+        {options.map(function (
+          option: SegmentedControlOption<Value>,
+          index: number
+        ): JSX.Element {
+          const children =
+            typeof option.children === 'undefined'
+              ? `${option.value}`
+              : option.children
+          const isOptionDisabled = disabled === true || option.disabled === true
+          return (
+            <label key={index} class={styles.label}>
+              <input
+                {...rest}
+                checked={value === option.value}
+                class={styles.input}
+                disabled={isOptionDisabled === true}
+                name={name}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                tabIndex={isOptionDisabled === true ? -1 : 0}
+                type="radio"
+                value={`${option.value}`}
+                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+              />
+              <div class={styles.children}>
+                <div
+                  class={typeof children === 'string' ? styles.text : undefined}
+                >
+                  {children}
+                </div>
               </div>
-            </div>
-          </label>
-        )
-      })}
+            </label>
+          )
+        })}
+      </div>
       <div class={styles.border} />
     </div>
   )
