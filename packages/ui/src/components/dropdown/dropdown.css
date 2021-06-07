@@ -8,7 +8,7 @@
   color: var(--color-black-80);
 }
 .dropdown:not(.disabled):focus-within {
-  z-index: var(--z-index-2); /* Stack `.dropdown` over its sibling elements */
+  z-index: var(--z-index-2); /* stack `.dropdown` over its sibling elements */
   outline: 0;
 }
 .disabled {
@@ -21,19 +21,13 @@
 }
 
 .icon {
-  width: 16px;
-  margin-right: var(--space-extra-small);
+  position: absolute;
+  top: 14px;
+  left: 16px;
   color: var(--color-black-30);
   text-align: center;
-}
-.dropdown:not(.disabled):focus .icon,
-.dropdown:not(.disabled):focus-within .icon {
-  color: var(--color-blue);
-}
-.icon svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* so that clicking the icon focuses the dropdown */
 }
 
 .value {
@@ -50,14 +44,15 @@
 .placeholder {
   color: var(--color-black-30);
 }
+.hasIcon .value {
+  padding-left: var(--space-extra-large);
+}
 
 .chevronIcon {
   margin-right: var(--space-extra-small);
   color: var(--color-black-30);
 }
-.dropdown:not(.disabled):hover .chevronIcon,
-.dropdown:not(.disabled):focus .chevronIcon,
-.dropdown:not(.disabled):focus-within .chevronIcon {
+.dropdown:not(.disabled):hover .chevronIcon {
   color: var(--color-black-80);
 }
 
@@ -71,14 +66,9 @@
   border-width: 1px;
   border-radius: var(--border-radius-2);
 }
-.dropdown:not(.disabled):focus .border,
-.dropdown:not(.disabled):focus-within .border {
-  border-color: var(--color-blue);
-  border-width: 2px;
-}
-.noBorder:not(:focus) .border {
+.noBorder .border {
   border-color: transparent;
 }
-.noBorder:not(.disabled):not(:focus):hover .border {
+.noBorder:not(.disabled):hover .border {
   border-color: var(--color-silver);
 }

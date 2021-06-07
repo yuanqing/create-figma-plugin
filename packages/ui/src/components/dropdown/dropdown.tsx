@@ -202,8 +202,9 @@ export function Dropdown<
       ref={rootElementRef}
       class={createClassName([
         dropdownStyles.dropdown,
-        disabled === true ? dropdownStyles.disabled : null,
-        noBorder === true ? dropdownStyles.noBorder : null
+        noBorder === true ? dropdownStyles.noBorder : null,
+        typeof icon === 'undefined' ? null : dropdownStyles.hasIcon,
+        disabled === true ? dropdownStyles.disabled : null
       ])}
       onFocus={handleRootFocus}
       onKeyDown={disabled === true ? undefined : handleRootKeyDown}
