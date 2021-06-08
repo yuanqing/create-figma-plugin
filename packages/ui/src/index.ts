@@ -198,6 +198,10 @@ export { IconVisibilityVisible32 } from './components/icon/icon-32/icon-visibili
 export { IconWarning32 } from './components/icon/icon-32/icon-warning-32.js'
 export { IconWarningFilled32 } from './components/icon/icon-32/icon-warning-filled-32.js'
 export { IconWorld32 } from './components/icon/icon-32/icon-world-32.js'
+export {
+  IconButton,
+  IconButtonProps
+} from './components/icon-button/icon-button.js'
 export { Layer, LayerColor, LayerProps } from './components/layer/layer.js'
 export {
   Columns,
