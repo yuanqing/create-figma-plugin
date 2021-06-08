@@ -36,6 +36,9 @@
 .iconButton:not(.disabled) .input:focus ~ .fill {
   border-color: var(--color-blue);
 }
+.iconButton:not(.disabled) .input:checked:focus ~ .fill {
+  border-color: var(--color-black-30-translucent);
+}
 .input:checked ~ .fill {
   color: var(--color-white);
   background-color: var(--color-blue);
