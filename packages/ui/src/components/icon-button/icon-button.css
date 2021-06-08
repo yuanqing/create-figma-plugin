@@ -1,0 +1,52 @@
+.iconButton {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.disabled {
+  opacity: var(--opacity-30);
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-index-1); /* stack above .icon */
+  display: block;
+  width: 100%;
+}
+.disabled .input {
+  cursor: not-allowed;
+}
+
+.fill {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: var(--color-black-80);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-2);
+}
+.iconButton:not(.disabled) .input:not(:checked):hover ~ .fill {
+  background-color: var(--color-black-6-translucent);
+}
+.iconButton:not(.disabled) .input:focus ~ .fill {
+  border-color: var(--color-blue);
+}
+.input:checked ~ .fill {
+  color: var(--color-white);
+  background-color: var(--color-blue);
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.icon svg {
+  color: currentColor;
+}
