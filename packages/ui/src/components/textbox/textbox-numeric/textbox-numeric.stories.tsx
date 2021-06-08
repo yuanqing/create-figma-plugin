@@ -124,7 +124,7 @@ export const ValidateOnBlur = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  function validateOnBlur(value: null | number): number | boolean {
+  function validateOnBlur(value: null | number): null | number | boolean {
     console.log(value)
     return value !== null
   }

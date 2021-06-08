@@ -30,7 +30,7 @@ export type RawTextboxNumericProps<Name extends string> = {
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   suffix?: string
-  validateOnBlur?: (value: null | number) => boolean | number
+  validateOnBlur?: (value: null | number) => null | number | boolean
   value: string
 }
 
@@ -78,6 +78,12 @@ export function RawTextboxNumeric<Name extends string>({
         if (typeof result === 'number') {
           // Set to the value returned by `validateOnBlur`
           setInputElementValue(formatEvaluatedValue(result, value, suffix))
+          setOriginalValue(EMPTY_STRING)
+          return
+        }
+        if (result === null) {
+          // Set value to the empty string
+          setInputElementValue(EMPTY_STRING)
           setOriginalValue(EMPTY_STRING)
           return
         }
