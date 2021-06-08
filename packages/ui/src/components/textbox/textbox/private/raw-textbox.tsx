@@ -19,7 +19,7 @@ export type RawTextboxProps<Name extends string> = {
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   spellCheck?: boolean
-  validateOnBlur?: (value: string) => boolean | string
+  validateOnBlur?: (value: string) => string | boolean
   value: string
 }
 
