@@ -5,24 +5,6 @@
   --border-radius-6: 6px;
   --box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15),
     inset 0 0 0 0.5px #000000, 0 0 0 0.5px rgba(0, 0, 0, 0.1);
-  --color-black: #000000;
-  --color-black-30: #b3b3b3;
-  --color-black-30-translucent: rgba(0, 0, 0, 0.3);
-  --color-black-80: #333333;
-  --color-black-80-translucent: rgba(0, 0, 0, 0.8);
-  --color-blue: #18a0fb;
-  --color-gray: #f7f7f7;
-  --color-purple: #7b61ff;
-  --color-red: #f24822;
-  --color-silver: #e5e5e5;
-  --color-white: #ffffff;
-  --color-white-20: #333333;
-  --color-white-20-translucent: rgba(255, 255, 255, 0.2);
-  --color-white-40: #666666;
-  --color-white-40-translucent: rgba(255, 255, 255, 0.4);
-  --color-hud: #222222;
-  --color-selection-a: #daebf7;
-  --color-selection-b: #edf5fa;
   --font-family: 'Inter', 'Helvetica', sans-serif;
   --font-size-11: 11px;
   --font-size-12: 12px;
@@ -37,6 +19,48 @@
   --space-extra-large: 24px;
   --z-index-1: 1;
   --z-index-2: 2;
+}
+
+:root {
+  /* black */
+  --color-black: #000000;
+  --color-black-80: #333333;
+  --color-black-80-translucent: rgba(0, 0, 0, 0.8);
+  --color-black-30: #b3b3b3;
+  --color-black-30-translucent: rgba(0, 0, 0, 0.3);
+  --color-black-10: #e6e6e6;
+  --color-black-10-translucent: rgba(0, 0, 0, 0.1);
+  --color-black-6: #f0f0f0;
+  --color-black-6-translucent: rgba(0, 0, 0, 0.06);
+  --color-black-3: #b3b3b3;
+  --color-black-3-translucent: rgba(0, 0, 0, 0.03);
+  /* white */
+  --color-white: #ffffff;
+  --color-white-80: #cccccc;
+  --color-white-80-translucent: rgba(255, 255, 255, 0.8);
+  --color-white-40: #666666;
+  --color-white-40-translucent: rgba(255, 255, 255, 0.4);
+  --color-white-20: #333333;
+  --color-white-20-translucent: rgba(255, 255, 255, 0.2);
+  /* grays */
+  --color-gray: #f7f7f7; /* deprecated */
+  --color-gray-f0: #f0f0f0;
+  --color-silver: #e5e5e5;
+  --color-hud: #222222;
+  --color-toolbar: #2c2c2c;
+  /* accent */
+  --color-blue: #18a0fb;
+  --color-blue-30-translucent: rgba(24, 145, 251, 0.3);
+  --color-green: #1bc47d;
+  --color-hot-pink: #f531b3;
+  --color-purple: #7b61ff;
+  --color-purple-40-translucent: rgba(123, 97, 255, 0.4);
+  --color-red: #f24822;
+  --color-yellow: #ffeb00;
+  /* special */
+  --color-selection-a: #daebf7;
+  --color-selection-b: #edf5fa;
+  --color-hover-translucent: rgba(0, 0, 0, 0.06);
 }
 
 * {
