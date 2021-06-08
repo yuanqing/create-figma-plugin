@@ -1,8 +1,9 @@
 /** @jsx h */
-import { h, JSX } from 'preact'
-import { useCallback, useState } from 'preact/hooks'
+import { h, JSX, RefObject } from 'preact'
+import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../../types/types'
+import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
 import { MIXED_STRING } from '../../../../utilities/mixed-values'
 import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating'
 
@@ -18,6 +19,7 @@ export type RawTextboxProps<Name extends string> = {
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   spellCheck?: boolean
+  validateOnBlur?: (value: string) => boolean | string
   value: string
 }
 
@@ -31,14 +33,50 @@ export function RawTextbox<Name extends string>({
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
   spellCheck = false,
+  validateOnBlur,
   value,
   ...rest
 }: Props<HTMLInputElement, RawTextboxProps<Name>>): JSX.Element {
+  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+  const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
-  const handleBlur = useCallback(function (): void {
-    setOriginalValue(EMPTY_STRING)
+  const setInputElementValue = useCallback(function (value: string): void {
+    const inputElement = getCurrentFromRef(inputElementRef)
+    inputElement.value = value
+    const inputEvent = document.createEvent('Event')
+    inputEvent.initEvent('input', true, true)
+    inputElement.dispatchEvent(inputEvent)
   }, [])
+
+  const handleBlur = useCallback(
+    function (): void {
+      if (isRevertOnEscapeKeyDownRef.current === true) {
+        isRevertOnEscapeKeyDownRef.current = false
+        return
+      }
+      if (typeof validateOnBlur !== 'undefined') {
+        const result = validateOnBlur(value)
+        if (typeof result === 'string') {
+          // Set to the value returned by `validateOnBlur`
+          setInputElementValue(result)
+          setOriginalValue(EMPTY_STRING)
+          return
+        }
+        if (result === false) {
+          // Revert the original value
+          if (value !== originalValue) {
+            setInputElementValue(originalValue)
+          }
+          setOriginalValue(EMPTY_STRING)
+          return
+        }
+      }
+      setOriginalValue(EMPTY_STRING)
+    },
+    [originalValue, setInputElementValue, validateOnBlur, value]
+  )
 
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
@@ -58,20 +96,20 @@ export function RawTextbox<Name extends string>({
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
-      if (event.key === 'Escape') {
+      const key = event.key
+      if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
-          event.currentTarget.value = originalValue
-          const inputEvent = document.createEvent('Event')
-          inputEvent.initEvent('input', true, true)
-          event.currentTarget.dispatchEvent(inputEvent)
+          isRevertOnEscapeKeyDownRef.current = true
+          setInputElementValue(originalValue)
+          setOriginalValue(EMPTY_STRING)
         }
         event.currentTarget.blur()
         return
       }
-      if (event.key === 'Enter') {
+      if (key === 'Enter') {
         event.currentTarget.blur()
         return
       }
@@ -84,7 +122,13 @@ export function RawTextbox<Name extends string>({
         event.currentTarget.select()
       }
     },
-    [originalValue, propagateEscapeKeyDown, revertOnEscapeKeyDown, value]
+    [
+      originalValue,
+      propagateEscapeKeyDown,
+      revertOnEscapeKeyDown,
+      setInputElementValue,
+      value
+    ]
   )
 
   const handleMouseUp = useCallback(
@@ -100,6 +144,7 @@ export function RawTextbox<Name extends string>({
   return (
     <input
       {...rest}
+      ref={inputElementRef}
       disabled={disabled === true}
       name={name}
       onBlur={handleBlur}

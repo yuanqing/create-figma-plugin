@@ -101,6 +101,25 @@ export const RevertOnEscapeKeyDown = function () {
   return <Textbox onInput={handleInput} revertOnEscapeKeyDown value={value} />
 }
 
+export const ValidateOnBlur = function () {
+  const [value, setValue] = useState('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function validateOnBlur(value: string): string | boolean {
+    return value !== ''
+  }
+  return (
+    <Textbox
+      onInput={handleInput}
+      validateOnBlur={validateOnBlur}
+      value={value}
+    />
+  )
+}
+
 export const Mixed = function () {
   const [value, setValue] = useState(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
