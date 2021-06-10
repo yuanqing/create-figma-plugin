@@ -17,7 +17,12 @@ test('no config', async function (t) {
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -38,7 +43,12 @@ test('basic command', async function (t) {
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -59,7 +69,12 @@ test('command with UI', async function (t) {
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -81,7 +96,12 @@ test('multiple menu commands', async function (t) {
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -116,7 +136,12 @@ test('nested menu commands', async function (t) {
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -148,7 +173,12 @@ test('relaunch button', async function (t) {
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -182,7 +212,12 @@ test('custom styles', async function (t) {
   t.false(await fs.pathExists('src/styles.css.d.ts'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -205,7 +240,12 @@ test('preact', async function (t) {
   t.false(await fs.pathExists('node_modules'))
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({ minify: false, typecheck: true })
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -217,6 +257,63 @@ test('preact', async function (t) {
   t.true(await fs.pathExists('build/main.js'))
   t.true(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
+})
+
+test('esbuild main config', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '9-esbuild-main-config'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    mainConfigFilePath: join(process.cwd(), 'esbuild.main.config.js'),
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: null
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    name: 'x'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  const mainJs = await fs.readFile('build/main.js', 'utf8')
+  t.true(/\/\/ comment appended to main\.js/.test(mainJs) === true)
+  t.false(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('esbuild ui config', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '10-esbuild-ui-config'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    mainConfigFilePath: null,
+    minify: false,
+    typecheck: true,
+    uiConfigFilePath: join(process.cwd(), 'esbuild.ui.config.js')
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    name: 'x',
+    ui: 'build/ui.js'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
+  const uiJs = await fs.readFile('build/ui.js', 'utf8')
+  t.true(/\/\/ comment appended to ui\.js/.test(uiJs) === true)
+  // await cleanUpAsync()
 })
 
 async function symlinkFigmaPluginTypingsAsync(): Promise<void> {

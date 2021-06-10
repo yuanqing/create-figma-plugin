@@ -7,7 +7,7 @@ import {
   constants,
   readConfigAsync
 } from '@create-figma-plugin/common'
-import { build } from 'esbuild'
+import { build, BuildOptions } from 'esbuild'
 import indentString from 'indent-string'
 import { join } from 'path'
 
@@ -17,21 +17,47 @@ interface EntryFile extends ConfigFile {
   readonly commandId: string
 }
 
-export async function buildBundlesAsync(minify: boolean): Promise<void> {
+export async function buildBundlesAsync(options: {
+  minify: boolean
+  mainConfigFilePath: null | string
+  uiConfigFilePath: null | string
+}): Promise<void> {
+  const { minify, uiConfigFilePath, mainConfigFilePath } = options
   const config = await readConfigAsync()
   await Promise.all([
-    buildMainBundleAsync(config, minify),
-    buildUiBundleAsync(config, minify)
+    buildMainBundleAsync({
+      config,
+      esbuildConfigFilePath: mainConfigFilePath,
+      minify
+    }),
+    buildUiBundleAsync({
+      config,
+      esbuildConfigFilePath: uiConfigFilePath,
+      minify
+    })
   ])
 }
 
-async function buildMainBundleAsync(
-  config: Config,
+async function createEsbuildConfig(
+  buildOptions: BuildOptions,
+  esbuildConfigFilePath: null | string
+): Promise<BuildOptions> {
+  if (esbuildConfigFilePath === null) {
+    return buildOptions
+  }
+  const { default: overrideEsbuildConfig } = await import(esbuildConfigFilePath)
+  return overrideEsbuildConfig(buildOptions)
+}
+
+async function buildMainBundleAsync(options: {
+  config: Config
   minify: boolean
-): Promise<void> {
+  esbuildConfigFilePath: null | string
+}): Promise<void> {
+  const { config, minify, esbuildConfigFilePath } = options
   const js = createMainEntryFile(config)
   try {
-    await build({
+    const esbuildConfig: BuildOptions = {
       bundle: true,
       logLevel: 'error',
       minify,
@@ -44,7 +70,8 @@ async function buildMainBundleAsync(
       // context, and must be transpiled down.
       // See https://esbuild.github.io/content-types/#javascript
       target: 'es2017'
-    })
+    }
+    await build(await createEsbuildConfig(esbuildConfig, esbuildConfigFilePath))
   } catch (error) {
     throw new Error(formatEsbuildErrorMessage(error.message))
   }
@@ -69,16 +96,18 @@ function createMainEntryFile(config: Config): string {
   `
 }
 
-async function buildUiBundleAsync(
-  config: Config,
+async function buildUiBundleAsync(options: {
+  config: Config
   minify: boolean
-): Promise<void> {
+  esbuildConfigFilePath: null | string
+}): Promise<void> {
+  const { config, minify, esbuildConfigFilePath } = options
   const js = createUiEntryFile(config)
   if (js === null) {
     return
   }
   try {
-    await build({
+    const esbuildConfig: BuildOptions = {
       bundle: true,
       jsxFactory: 'h',
       jsxFragment: 'Fragment',
@@ -91,7 +120,8 @@ async function buildUiBundleAsync(
         resolveDir: process.cwd()
       },
       target: 'chrome58'
-    })
+    }
+    await build(await createEsbuildConfig(esbuildConfig, esbuildConfigFilePath))
   } catch (error) {
     throw new Error(formatEsbuildErrorMessage(error.message))
   }

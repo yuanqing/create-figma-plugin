@@ -1,0 +1,7 @@
+{
+  "figma-plugin": {
+    "name": "x",
+    "id": "42",
+    "main": "src/foo.ts"
+  }
+}

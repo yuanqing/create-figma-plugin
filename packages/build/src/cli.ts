@@ -10,16 +10,32 @@ sade('build-figma-plugin', true)
     'Build a Figma plugin, with support for multiple menu commands that each have their own UI implementation'
   )
   .option('-m, --minify', 'Minify the plugin bundle', false)
+  .option(
+    '--main-config',
+    'Path to a JavaScript file for customizing the esbuild config for building the plugin’s main bundle',
+    ''
+  )
   .option('-t, --typecheck', 'Type check the plugin code before build', false)
+  .option(
+    '--ui-config',
+    'Path to a JavaScript file for customizing the esbuild config for building the plugin’s UI bundle',
+    ''
+  )
   .option('-w, --watch', 'Rebuild the plugin on code changes', false)
   .action(async function (options: {
     minify: boolean
     typecheck: boolean
     watch: boolean
+    ['main-config']: string
+    ['ui-config']: string
   }): Promise<void> {
     const buildOptions: BuildOptions = {
+      mainConfigFilePath:
+        options['main-config'] === '' ? null : options['main-config'],
       minify: options.minify,
-      typecheck: options.typecheck
+      typecheck: options.typecheck,
+      uiConfigFilePath:
+        options['ui-config'] === '' ? null : options['ui-config']
     }
     if (options.watch === true) {
       await buildAsync({ ...buildOptions, typecheck: false })

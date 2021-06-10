@@ -14,6 +14,7 @@ const cssRegex = /\.css$/
 const packageJsonRegex = /^package\.json$/
 
 export async function watchAsync(options: BuildOptions): Promise<void> {
+  const { minify, uiConfigFilePath, mainConfigFilePath, typecheck } = options
   const watcher = watch(
     ['**/*.{css,js,json,jsx,ts,tsx}', 'package.json', 'tsconfig.json'],
     {
@@ -30,18 +31,20 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
     log.info(`Changed ${yellow(file)}`)
     const promises: Array<Promise<void>> = []
     if (packageJsonRegex.test(file) === true) {
-      promises.push(buildManifestAsync(options.minify))
+      promises.push(buildManifestAsync(minify))
     } else {
       if (cssRegex.test(file) === true) {
         promises.push(buildCssModulesTypingsAsync())
       }
     }
-    promises.push(buildBundlesAsync(options.minify))
+    promises.push(
+      buildBundlesAsync({ mainConfigFilePath, minify, uiConfigFilePath })
+    )
     await Promise.all(promises)
     log.success(`Built in ${yellow(elapsedTime())}`)
   })
 
-  if (options.typecheck === true) {
+  if (typecheck === true) {
     await typeCheckAsync(true)
   }
 }
