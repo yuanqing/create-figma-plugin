@@ -37,7 +37,7 @@ function findElementIndex(
     element: HTMLElement,
     index: number
   ): number {
-    if (result === -1 && element.isEqualNode(targetElement)) {
+    if (result === -1 && element.isSameNode(targetElement) === true) {
       return index
     }
     return result
