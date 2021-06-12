@@ -10,7 +10,6 @@ import { typeCheckAsync } from './utilities/type-check-async/type-check-async.js
 
 export async function buildAsync(options: BuildOptions): Promise<void> {
   const { minify, typecheck, mainConfigFilePath, uiConfigFilePath } = options
-  const getElapsedTime = trackElapsedTime()
   try {
     if (
       mainConfigFilePath !== null &&
@@ -25,25 +24,35 @@ export async function buildAsync(options: BuildOptions): Promise<void> {
       throw new Error(`UI config file does not exist: ${uiConfigFilePath}`)
     }
     if (typecheck === true) {
+      const getTypeCheckElapsedTime = trackElapsedTime()
       await buildCssModulesTypingsAsync() // This must occur before `typeCheckAsync`
       await typeCheckAsync(false)
+      const typeCheckElapsedTime = getTypeCheckElapsedTime()
+      log.clearPreviousLine()
+      log.success(`Type checked in ${typeCheckElapsedTime}`)
+      log.info('Building...')
+      const getBuildElapsedTime = trackElapsedTime()
       await Promise.all([
         buildBundlesAsync({ mainConfigFilePath, minify, uiConfigFilePath }),
         buildManifestAsync(minify)
       ])
+      const buildElapsedTime = getBuildElapsedTime()
+      log.clearPreviousLine()
+      log.success(`Built in ${buildElapsedTime}`)
     } else {
       log.info('Building...')
+      const getBuildElapsedTime = trackElapsedTime()
       await Promise.all([
         buildCssModulesTypingsAsync(),
         buildBundlesAsync({ mainConfigFilePath, minify, uiConfigFilePath }),
         buildManifestAsync(minify)
       ])
+      const buildElapsedTime = getBuildElapsedTime()
       log.clearPreviousLine()
+      log.success(`Built in ${buildElapsedTime}`)
     }
   } catch (error) {
     log.error(error.message)
     process.exit(1)
   }
-  const elapsedTime = getElapsedTime()
-  log.success(`Built in ${elapsedTime}`)
 }

@@ -35,12 +35,9 @@ async function typeCheckBuildAsync(
   if (filePaths.length === 0) {
     return
   }
-  log.info('Type checking...')
   const program = ts.createProgram(filePaths, compilerOptions)
   const diagnostics = ts.getPreEmitDiagnostics(program)
   if (diagnostics.length === 0) {
-    log.clearPreviousLine()
-    log.success('Type checked')
     return
   }
   throw new Error(formatTypeScriptErrorMessage(diagnostics))
