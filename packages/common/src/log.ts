@@ -1,5 +1,14 @@
 import { blue, green, red } from 'kleur/colors'
 
+function clearPreviousLine(): void {
+  process.stdout.moveCursor(0, -1)
+  process.stdout.clearLine(1)
+}
+
+function clearViewport(): void {
+  console.clear() // eslint-disable-line no-console
+}
+
 function error(message: string): void {
   console.error(`${red('error')} ${message}`) // eslint-disable-line no-console
 }
@@ -13,6 +22,8 @@ function success(message: string): void {
 }
 
 export const log = {
+  clearPreviousLine,
+  clearViewport,
   error,
   info,
   success

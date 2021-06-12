@@ -15,6 +15,9 @@ const packageJsonRegex = /^package\.json$/
 
 export async function watchAsync(options: BuildOptions): Promise<void> {
   const { minify, uiConfigFilePath, mainConfigFilePath, typecheck } = options
+  if (typecheck === true) {
+    await typeCheckAsync(true)
+  }
   const watcher = watch(
     ['**/*.{css,js,json,jsx,ts,tsx}', 'package.json', 'tsconfig.json'],
     {
@@ -23,10 +26,13 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
       }
     }
   )
-  watcher.on('ready', function (): void {
-    log.info('Watching...')
-  })
+  if (typecheck === false) {
+    watcher.on('ready', function (): void {
+      log.info('Watching...')
+    })
+  }
   watcher.on('change', async function (file: string): Promise<void> {
+    log.clearViewport()
     const elapsedTime = trackElapsedTime()
     log.info(`Changed ${yellow(file)}`)
     const promises: Array<Promise<void>> = []
@@ -42,9 +48,8 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
     )
     await Promise.all(promises)
     log.success(`Built in ${yellow(elapsedTime())}`)
+    if (typecheck === false) {
+      log.info('Watching...')
+    }
   })
-
-  if (typecheck === true) {
-    await typeCheckAsync(true)
-  }
 }

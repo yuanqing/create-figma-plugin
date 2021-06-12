@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { log } from '@create-figma-plugin/common'
 import sade from 'sade'
 
 import { buildAsync } from './build-async.js'
@@ -38,6 +39,7 @@ sade('build-figma-plugin', true)
         options['ui-config'] === '' ? null : options['ui-config']
     }
     if (options.watch === true) {
+      log.clearViewport()
       await buildAsync({ ...buildOptions, typecheck: false })
       await watchAsync(buildOptions)
       return

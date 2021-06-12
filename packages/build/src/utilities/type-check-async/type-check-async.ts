@@ -2,6 +2,7 @@ import { log } from '@create-figma-plugin/common'
 import tempy from 'tempy'
 import ts from 'typescript'
 
+import { trackElapsedTime } from '../track-elapsed-time.js'
 import { formatTypeScriptErrorMessage } from './format-typescript-error-message.js'
 import { readTsConfig } from './read-tsconfig.js'
 
@@ -34,9 +35,12 @@ async function typeCheckBuildAsync(
   if (filePaths.length === 0) {
     return
   }
+  log.info('Type checking...')
   const program = ts.createProgram(filePaths, compilerOptions)
   const diagnostics = ts.getPreEmitDiagnostics(program)
   if (diagnostics.length === 0) {
+    log.clearPreviousLine()
+    log.success('Type checked')
     return
   }
   throw new Error(formatTypeScriptErrorMessage(diagnostics))
@@ -46,6 +50,7 @@ function typeCheckWatch(
   tsConfigFilePath: string,
   compilerOptions: ts.CompilerOptions
 ): void {
+  let getElapsedTime: () => string
   const host = ts.createWatchCompilerHost(
     tsConfigFilePath,
     {
@@ -58,7 +63,23 @@ function typeCheckWatch(
     function reportDiagnostic(diagnostic: ts.Diagnostic) {
       log.error(formatTypeScriptErrorMessage([diagnostic]))
     },
-    function reportWatchStatus() {} // no-op
+    function reportWatchStatus(diagnostic: ts.Diagnostic) {
+      if (
+        diagnostic.code === 6031 || // 'Starting compilation in watch mode...'
+        diagnostic.code === 6032 // 'File change detected. Starting incremental compilation...'
+      ) {
+        getElapsedTime = trackElapsedTime()
+        log.info('Type checking...')
+        return
+      }
+      if (diagnostic.code === 6194) {
+        // 'Found 0 errors. Watching for file changes.'
+        log.clearPreviousLine()
+        log.success(`Type checked in ${getElapsedTime()}`)
+        log.info('Watching...')
+        return
+      }
+    }
   )
   ts.createWatchProgram(host)
 }
