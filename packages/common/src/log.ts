@@ -1,11 +1,20 @@
 import { blue, green, red } from 'kleur/colors'
+const ESC = '\u001B['
 
 function clearPreviousLine(): void {
-  process.stdout.moveCursor(0, -1)
-  process.stdout.clearLine(1)
+  if (process.stdout.isTTY === false) {
+    return
+  }
+  // Move cursor to start of previous line
+  process.stdout.write(`${ESC}F`)
+  // Delete from cursor to end of current line
+  process.stdout.write(`${ESC}K`)
 }
 
 function clearViewport(): void {
+  if (process.stdout.isTTY === false) {
+    return
+  }
   console.clear() // eslint-disable-line no-console
 }
 
