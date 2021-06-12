@@ -41,8 +41,9 @@ async function generateIconsTs(
     throw new Error(`No files match \`${globPatterns.join(', ')}\``)
   }
   const svgFiles = await readSvgFilesAsync(filePaths)
-  const dimensions: Record<string, Array<SvgFile>> =
-    groupSvgFilesByDimension(svgFiles)
+  const dimensions: Record<string, Array<SvgFile>> = groupSvgFilesByDimension(
+    svgFiles
+  )
   const directoryPaths = await globby(join(outputDirectoryPath, 'icon-*'), {
     onlyFiles: false
   })
