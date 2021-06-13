@@ -1,9 +1,10 @@
 /** @jsx h */
-import { h, JSX } from 'preact'
-import { useCallback, useState } from 'preact/hooks'
+import { h, JSX, RefObject } from 'preact'
+import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { MIXED_STRING } from '../../../utilities/mixed-values'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
 import styles from './textbox-multiline.css'
@@ -21,6 +22,7 @@ export type TextboxMultilineProps<Name extends string> = {
   revertOnEscapeKeyDown?: boolean
   spellCheck?: boolean
   rows?: number
+  validateOnBlur?: (value: string) => string | boolean
   value: string
 }
 
@@ -35,14 +37,50 @@ export function TextboxMultiline<Name extends string>({
   revertOnEscapeKeyDown = false,
   rows = 3,
   spellCheck = false,
+  validateOnBlur,
   value,
   ...rest
 }: Props<HTMLTextAreaElement, TextboxMultilineProps<Name>>): JSX.Element {
+  const textAreaElementRef: RefObject<HTMLTextAreaElement> = useRef(null)
+  const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
-  const handleBlur = useCallback(function (): void {
-    setOriginalValue(EMPTY_STRING)
+  const setTextAreaElementValue = useCallback(function (value: string): void {
+    const textAreaElement = getCurrentFromRef(textAreaElementRef)
+    textAreaElement.value = value
+    const inputEvent = document.createEvent('Event')
+    inputEvent.initEvent('input', true, true)
+    textAreaElement.dispatchEvent(inputEvent)
   }, [])
+
+  const handleBlur = useCallback(
+    function (): void {
+      if (isRevertOnEscapeKeyDownRef.current === true) {
+        isRevertOnEscapeKeyDownRef.current = false
+        return
+      }
+      if (typeof validateOnBlur !== 'undefined') {
+        const result = validateOnBlur(value)
+        if (typeof result === 'string') {
+          // Set to the value returned by `validateOnBlur`
+          setTextAreaElementValue(result)
+          setOriginalValue(EMPTY_STRING)
+          return
+        }
+        if (result === false) {
+          // Revert the original value
+          if (value !== originalValue) {
+            setTextAreaElementValue(originalValue)
+          }
+          setOriginalValue(EMPTY_STRING)
+          return
+        }
+      }
+      setOriginalValue(EMPTY_STRING)
+    },
+    [originalValue, setTextAreaElementValue, validateOnBlur, value]
+  )
 
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLTextAreaElement>): void {
@@ -67,10 +105,9 @@ export function TextboxMultiline<Name extends string>({
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
-          event.currentTarget.value = originalValue
-          const inputEvent = document.createEvent('Event')
-          inputEvent.initEvent('input', true, true)
-          event.currentTarget.dispatchEvent(inputEvent)
+          isRevertOnEscapeKeyDownRef.current = true
+          setTextAreaElementValue(originalValue)
+          setOriginalValue(EMPTY_STRING)
         }
         event.currentTarget.blur()
         return
@@ -84,7 +121,13 @@ export function TextboxMultiline<Name extends string>({
         event.currentTarget.select()
       }
     },
-    [originalValue, propagateEscapeKeyDown, revertOnEscapeKeyDown, value]
+    [
+      originalValue,
+      propagateEscapeKeyDown,
+      revertOnEscapeKeyDown,
+      setTextAreaElementValue,
+      value
+    ]
   )
 
   const handleMouseUp = useCallback(
@@ -107,6 +150,7 @@ export function TextboxMultiline<Name extends string>({
     >
       <textarea
         {...rest}
+        ref={textAreaElementRef}
         class={styles.textarea}
         disabled={disabled === true}
         name={name}
