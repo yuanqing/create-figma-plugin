@@ -18,6 +18,7 @@ test('no config', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -44,6 +45,7 @@ test('basic command', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -70,6 +72,7 @@ test('command with UI', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -97,6 +100,7 @@ test('multiple menu commands', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -137,6 +141,7 @@ test('nested menu commands', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -174,6 +179,7 @@ test('relaunch button', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -213,6 +219,7 @@ test('custom styles', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -241,6 +248,7 @@ test('preact', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
@@ -268,6 +276,7 @@ test('esbuild main config', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: join(process.cwd(), 'esbuild.main.config.js'),
     minify: false,
     typecheck: true,
@@ -296,6 +305,7 @@ test('esbuild ui config', async function (t) {
   await symlinkFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
+    clearPreviousLine: false,
     mainConfigFilePath: null,
     minify: false,
     typecheck: true,
