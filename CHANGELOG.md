@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.2.0
+
+- `@create-figma-plugin/build`
+  - Added the ability to override the esbuild configuration for the `main` bundle (via the `--main-config` flag) and `ui` bundle (via the `--ui-config` flag)
+  - Improve the UX of the `build-figma-plugin --watch --typecheck` terminal output
+
+- `@create-figma-plugin/ui`
+  - New features:
+    - Added a new `IconButton` component
+    - Added a `validateOnBlur` prop to `Textbox`, `TextboxNumeric`, and `TextboxMultiline`
+  - Bug fixes:
+    - Allow pressing `Tab` to hide the menu in the `Dropdown` component
+    - Fixed a bug for when the `suffix` prop is specified in `TextboxNumeric`
+    - Fixed UI bugs in the `useFocusTrap` and `useScrollableMenu` hooks
+    - Middle-aligned the `icon` relative to the height of the textbox in the `Textbox`, `TextboxAutocomplete`, `TextboxNumeric` components
+    - Adjusted the focused style (the height of the blue outlined box) and the selected style (the background color of the selected text) of all textboxes (ie. `Textbox` etc.) to be identical to that in the Figma editor
+  - CSS:
+    - Added colors `--color-black-6-translucent`, `--color-black-3-translucent`, and `--color-blue-30-translucent` to `@create-figma-plugin/ui/lib/css/base.css`
+
+- `@create-figma-plugin/utilities`
+  - New features:
+    - `convertHexColorToRgbColor`
+    - `convertNamedColorToHexColor`
+    - `convertRgbColorToHexColor`
+    - `isValidHexColor`
+    - `unsetRelaunchButton` – This is a new utility for removing a relaunch button with a given `relaunchButtonId`.
+  - Bug fixes:
+    - `setRelaunchButton` – When this function is called, any relaunch buttons (with a different `relaunchButtonId`) previously set by the plugin on the particular node will be retained rather than overriden.
+
 ## 1.1.1
 
 - `@create-figma-plugin/ui`
