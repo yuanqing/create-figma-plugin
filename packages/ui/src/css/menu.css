@@ -74,6 +74,6 @@
 
 .checkIcon {
   position: absolute;
-  top: 4px;
+  top: 5px;
   left: var(--space-extra-small);
 }
