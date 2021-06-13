@@ -33,7 +33,7 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
   }
   watcher.on('change', async function (file: string): Promise<void> {
     log.clearViewport()
-    const elapsedTime = trackElapsedTime()
+    const getElapsedTime = trackElapsedTime()
     log.info(`Changed ${yellow(file)}`)
     const promises: Array<Promise<void>> = []
     if (packageJsonRegex.test(file) === true) {
@@ -47,7 +47,7 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
       buildBundlesAsync({ mainConfigFilePath, minify, uiConfigFilePath })
     )
     await Promise.all(promises)
-    log.success(`Built in ${yellow(elapsedTime())}`)
+    log.success(`Built in ${getElapsedTime()}`)
     if (typecheck === false) {
       log.info('Watching...')
     }

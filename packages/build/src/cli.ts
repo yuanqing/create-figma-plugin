@@ -40,10 +40,14 @@ sade('build-figma-plugin', true)
     }
     if (options.watch === true) {
       log.clearViewport()
-      await buildAsync({ ...buildOptions, typecheck: false })
+      await buildAsync({
+        ...buildOptions,
+        clearPreviousLine: true,
+        typecheck: false
+      })
       await watchAsync(buildOptions)
       return
     }
-    await buildAsync(buildOptions)
+    await buildAsync({ ...buildOptions, clearPreviousLine: false })
   })
   .parse(process.argv)

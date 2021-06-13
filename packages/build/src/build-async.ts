@@ -8,8 +8,16 @@ import { buildManifestAsync } from './utilities/build-manifest-async.js'
 import { trackElapsedTime } from './utilities/track-elapsed-time.js'
 import { typeCheckAsync } from './utilities/type-check-async/type-check-async.js'
 
-export async function buildAsync(options: BuildOptions): Promise<void> {
-  const { minify, typecheck, mainConfigFilePath, uiConfigFilePath } = options
+export async function buildAsync(
+  options: BuildOptions & { clearPreviousLine: boolean }
+): Promise<void> {
+  const {
+    minify,
+    typecheck,
+    mainConfigFilePath,
+    uiConfigFilePath,
+    clearPreviousLine
+  } = options
   try {
     if (
       mainConfigFilePath !== null &&
@@ -29,7 +37,9 @@ export async function buildAsync(options: BuildOptions): Promise<void> {
       log.info('Type checking...')
       await typeCheckAsync(false)
       const typeCheckElapsedTime = getTypeCheckElapsedTime()
-      log.clearPreviousLine()
+      if (clearPreviousLine === true) {
+        log.clearPreviousLine()
+      }
       log.success(`Type checked in ${typeCheckElapsedTime}`)
       log.info('Building...')
       const getBuildElapsedTime = trackElapsedTime()
@@ -38,7 +48,9 @@ export async function buildAsync(options: BuildOptions): Promise<void> {
         buildManifestAsync(minify)
       ])
       const buildElapsedTime = getBuildElapsedTime()
-      log.clearPreviousLine()
+      if (clearPreviousLine === true) {
+        log.clearPreviousLine()
+      }
       log.success(`Built in ${buildElapsedTime}`)
     } else {
       log.info('Building...')
@@ -49,7 +61,9 @@ export async function buildAsync(options: BuildOptions): Promise<void> {
         buildManifestAsync(minify)
       ])
       const buildElapsedTime = getBuildElapsedTime()
-      log.clearPreviousLine()
+      if (clearPreviousLine === true) {
+        log.clearPreviousLine()
+      }
       log.success(`Built in ${buildElapsedTime}`)
     }
   } catch (error) {
