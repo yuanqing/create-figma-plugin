@@ -25,9 +25,9 @@
     - `convertNamedColorToHexColor`
     - `convertRgbColorToHexColor`
     - `isValidHexColor`
-    - `unsetRelaunchButton` – This is a new utility for removing a relaunch button with a given `relaunchButtonId`.
+    - `unsetRelaunchButton`
   - Bug fixes:
-    - `setRelaunchButton` – When this function is called, any relaunch buttons (with a different `relaunchButtonId`) previously set by the plugin on the particular node will be retained rather than overriden.
+    - When `setRelaunchButton` is called, any relaunch buttons (with a different `relaunchButtonId`) previously set by the plugin on the particular node will be retained rather than overriden
 
 ## 1.1.1
 
