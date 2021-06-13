@@ -44,7 +44,7 @@
 .pageName {
   flex-grow: 1;
   padding-left: var(--space-extra-small);
-  color: var(--color-black-30);
+  color: var(--color-black-30-translucent);
 }
 
 .input {
