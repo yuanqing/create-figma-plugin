@@ -37,10 +37,9 @@ export async function buildAsync(
       log.info('Type checking...')
       await typeCheckAsync(false)
       const typeCheckElapsedTime = getTypeCheckElapsedTime()
-      if (clearPreviousLine === true) {
-        log.clearPreviousLine()
-      }
-      log.success(`Type checked in ${typeCheckElapsedTime}`)
+      log.success(`Type checked in ${typeCheckElapsedTime}`, {
+        clearPreviousLine
+      })
       log.info('Building...')
       const getBuildElapsedTime = trackElapsedTime()
       await Promise.all([
@@ -48,10 +47,7 @@ export async function buildAsync(
         buildManifestAsync(minify)
       ])
       const buildElapsedTime = getBuildElapsedTime()
-      if (clearPreviousLine === true) {
-        log.clearPreviousLine()
-      }
-      log.success(`Built in ${buildElapsedTime}`)
+      log.success(`Built in ${buildElapsedTime}`, { clearPreviousLine })
     } else {
       log.info('Building...')
       const getBuildElapsedTime = trackElapsedTime()
@@ -61,10 +57,7 @@ export async function buildAsync(
         buildManifestAsync(minify)
       ])
       const buildElapsedTime = getBuildElapsedTime()
-      if (clearPreviousLine === true) {
-        log.clearPreviousLine()
-      }
-      log.success(`Built in ${buildElapsedTime}`)
+      log.success(`Built in ${buildElapsedTime}`, { clearPreviousLine })
     }
   } catch (error) {
     log.error(error.message)

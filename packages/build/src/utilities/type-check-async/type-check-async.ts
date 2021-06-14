@@ -71,8 +71,9 @@ function typeCheckWatch(
       }
       if (diagnostic.code === 6194) {
         // 'Found 0 errors. Watching for file changes.'
-        log.clearPreviousLine()
-        log.success(`Type checked in ${getElapsedTime()}`)
+        log.success(`Type checked in ${getElapsedTime()}`, {
+          clearPreviousLine: true
+        })
         log.info('Watching...')
         return
       }
