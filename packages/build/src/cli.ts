@@ -7,19 +7,17 @@ import { BuildOptions } from './types/build.js'
 import { watchAsync } from './watch-async/watch-async.js'
 
 sade('build-figma-plugin', true)
-  .describe(
-    'Build a Figma plugin, with support for multiple menu commands that each have their own UI implementation'
-  )
+  .describe('Build a Figma plugin')
   .option('-m, --minify', 'Minify the plugin bundle', false)
   .option(
     '--main-config',
-    'Path to a JavaScript file for customizing the esbuild config for building the plugin’s main bundle',
+    'Path to a JavaScript file for customizing the esbuild config for generating the plugin’s main bundle',
     ''
   )
   .option('-t, --typecheck', 'Type check the plugin code before build', false)
   .option(
     '--ui-config',
-    'Path to a JavaScript file for customizing the esbuild config for building the plugin’s UI bundle',
+    'Path to a JavaScript file for customizing the esbuild config for generating the plugin’s UI bundle',
     ''
   )
   .option('-w, --watch', 'Rebuild the plugin on code changes', false)
