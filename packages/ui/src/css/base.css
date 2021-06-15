@@ -40,8 +40,10 @@
   /* accent */
   --color-blue: #18a0fb;
   --color-blue-30-translucent: rgba(24, 160, 251, 0.3);
+  --color-green: #1bc47d;
   --color-purple: #7b61ff;
   --color-red: #f24822;
+  --color-yellow: #ffeb00;
   /* special */
   --color-selection-a: #daebf7;
   --color-selection-b: #edf5fa;
