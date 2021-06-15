@@ -20,3 +20,11 @@ export const Muted = function () {
 export const Numeric = function () {
   return <Text numeric>3.142</Text>
 }
+
+export const Link = function () {
+  return (
+    <Text>
+      <a href="#">Link</a>
+    </Text>
+  )
+}

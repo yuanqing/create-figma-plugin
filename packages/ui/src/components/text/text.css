@@ -19,8 +19,11 @@
   text-decoration: none;
   pointer-events: all;
 }
+.text a:hover {
+  text-decoration: underline;
+}
 .text a:focus {
-  background-color: var(--color-selection-a);
+  background-color: var(--color-blue-30-translucent);
   border-radius: var(--border-radius-2);
   outline: 0;
 }
