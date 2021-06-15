@@ -11,6 +11,7 @@ import { IconMenuCheckmarkChecked16 } from '../../icon/icon-16/icon-menu-checkma
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
 import textboxStyles from '../textbox/textbox.css'
+import textboxAutocompleteStyles from './textbox-autocomplete.css'
 
 const EMPTY_STRING = ''
 const INVALID_ID = null
@@ -355,7 +356,9 @@ export function TextboxAutocomplete<Name extends string>({
             disabled === true || isMenuVisible === false
               ? menuStyles.hidden
               : null,
-            top === true ? menuStyles.top : menuStyles.bottom
+            top === true
+              ? textboxAutocompleteStyles.top
+              : textboxAutocompleteStyles.bottom
           ])}
         >
           {options.map(function (option: Option, index: number): JSX.Element {

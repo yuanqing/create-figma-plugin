@@ -1,0 +1,7 @@
+.top {
+  bottom: calc(100% + 1px);
+}
+
+.bottom {
+  top: calc(100% + 1px);
+}

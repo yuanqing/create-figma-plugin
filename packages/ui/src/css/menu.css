@@ -10,23 +10,15 @@
   border-radius: var(--border-radius-2);
   box-shadow: var(--box-shadow);
 }
-.bottom {
-  top: 100%;
-}
-.top {
-  bottom: 0;
-}
 .menu::-webkit-scrollbar {
   display: none;
 }
+
 .hidden {
   visibility: hidden;
   pointer-events: none;
 }
-.top {
-  top: auto;
-  bottom: 100%;
-}
+
 @media screen and (-webkit-min-device-pixel-ratio: 1.5),
   screen and (min-resolution: 1.5dppx) {
   .menu {
