@@ -11,6 +11,7 @@ export type IconColor =
   | 'black-30'
   | 'black-80'
   | 'blue'
+  | 'green'
   | 'purple'
   | 'red'
   | 'white'

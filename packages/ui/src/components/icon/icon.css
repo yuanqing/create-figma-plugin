@@ -11,6 +11,9 @@
 .blue {
   fill: var(--color-blue);
 }
+.green {
+  fill: var(--color-green);
+}
 .purple {
   fill: var(--color-purple);
 }
