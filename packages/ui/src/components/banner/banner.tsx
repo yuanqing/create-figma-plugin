@@ -7,7 +7,7 @@ import styles from './banner.css'
 
 export type BannerProps = {
   children: ComponentChildren
-  icon?: ComponentChildren
+  icon: ComponentChildren
   type?: BannerType
 }
 export type BannerType = 'informative' | 'upsell' | 'warning'
