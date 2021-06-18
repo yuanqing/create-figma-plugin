@@ -1,0 +1,52 @@
+{
+  "name": "@create-figma-plugin/monetization",
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Utilities to help you monetize your Figma plugins",
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin",
+    "figma-plugins"
+  ],
+  "license": "MIT",
+  "author": "Yuan Qing Lim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/create-figma-plugin.git",
+    "directory": "packages/monetization"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "lib"
+  ],
+  "exports": "./lib/index.js",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "yarn run clean && yarn run generate-index-ts && tsc --build",
+    "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
+    "fix": "eslint --fix 'src/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "@create-figma-plugin/utilities": "^1.2.0-alpha.0"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1",
+    "eslint": "^7.26.0",
+    "eslint-config-yuanqing": "^0.0.5",
+    "prettier": "^2.3.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-yuanqing"
+  },
+  "sideEffects": false
+}
