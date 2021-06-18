@@ -34,9 +34,6 @@
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "lint": "eslint 'src/**/*.ts'"
   },
-  "dependencies": {
-    "@create-figma-plugin/utilities": "^1.2.0-alpha.0"
-  },
   "devDependencies": {
     "@figma/plugin-typings": "^1",
     "eslint": "^7.26.0",
