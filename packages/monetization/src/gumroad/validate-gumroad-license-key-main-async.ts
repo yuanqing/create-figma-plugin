@@ -47,7 +47,7 @@ export async function validateGumroadLicenseKeyMainAsync(options: {
               purchaseTimestamp: purchase.sale_timestamp
             }
           } catch {
-            return ${trimmedLicenseKey !== null ? 'VALID' : 'ENDPOINT_DOWN'}
+            return { result: 'ENDPOINT_DOWN' }
           }
         }
         async function main () {
