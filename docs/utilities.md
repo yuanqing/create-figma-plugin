@@ -33,7 +33,10 @@ import {
 
 ### convertHexColorToRgbColor(hexColor)
 
-Converts the given `hexColor` (eg. `000000`) to RGB format (eg. `{ r: 0, g: 0, b: 0 }`). Note that each value in the returned [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object is between `0` and `1`.
+Converts the given `hexColor` (eg. `000000`) to RGB format
+(eg. `{ r: 0, g: 0, b: 0 }`). Note that each value in the returned
+[RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object is
+between `0` and `1`.
 
 ***Parameters***
 
@@ -41,7 +44,8 @@ Converts the given `hexColor` (eg. `000000`) to RGB format (eg. `{ r: 0, g: 0, b
 
 ***Return type***
 
-Returns an [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object, else `null` if `hexColor` was invalid.
+Returns an [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain
+object, else `null` if `hexColor` was invalid.
 
 ```
 null | RGB
@@ -49,7 +53,8 @@ null | RGB
 
 ### convertNamedColorToHexColor(namedColor)
 
-Converts the given `namedColor` (eg. `black`) to hexadecimal format (eg. `000000`).
+Converts the given `namedColor` (eg. `black`) to hexadecimal format
+(eg. `000000`).
 
 ***Parameters***
 
@@ -57,7 +62,8 @@ Converts the given `namedColor` (eg. `black`) to hexadecimal format (eg. `000000
 
 ***Return type***
 
-Returns a hexadecimal color as an uppercase string, else `null` if `namedColor` was invalid.
+Returns a hexadecimal color as an uppercase string, else `null`
+if `namedColor` was invalid.
 
 ```
 null | string
@@ -65,7 +71,9 @@ null | string
 
 ### convertRgbColorToHexColor(rgbColor)
 
-Converts the given `rgbColor` (eg. `{ r: 0, g: 0, b: 0 }`) to hexadecimal format (eg. `000000`). Each value in the given `rgbColor` must be between `0` and `1`.
+Converts the given `rgbColor` (eg. `{ r: 0, g: 0, b: 0 }`) to hexadecimal
+format (eg. `000000`). Each value in the given `rgbColor` must be between
+`0` and `1`.
 
 ***Parameters***
 
@@ -73,7 +81,8 @@ Converts the given `rgbColor` (eg. `{ r: 0, g: 0, b: 0 }`) to hexadecimal format
 
 ***Return type***
 
-Returns a hexadecimal color as an uppercase string, else `null` if `rgbColor` was invalid.
+Returns a hexadecimal color as an uppercase string, else `null`
+if `rgbColor` was invalid.
 
 ```
 null | string
@@ -105,8 +114,14 @@ import {
 
 ### emit&lt;Handler&gt;(name, args)
 
-Calling `emit` in the main context invokes the event handler for the matching event `name` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching event `name` in the main context.
- All `args` passed after `name` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
+Calling `emit` in the main context invokes the event handler for the
+matching event `name` in your UI. Correspondingly, calling `emit` in your
+UI invokes the event handler for the matching event `name` in the main
+context.
+
+All `args` passed after `name` will be directly
+[applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+on the event handler.
 
 ***Type parameters***
 
@@ -146,7 +161,8 @@ Returns a function for deregistering the `handler`.
 
 ### once&lt;Handler&gt;(name, handler)
 
-Registers an event `handler` that will run at most once for the given event `name`.
+Registers an event `handler` that will run at most once for the given
+event `name`.
 
 ***Type parameters***
 
@@ -205,7 +221,8 @@ Checks if all nodes in `nodes` are sibling nodes.
 
 ***Return type***
 
-Returns `true` if all nodes in `nodes` are sibling nodes, else `false`.
+Returns `true` if all nodes in `nodes` are sibling nodes,
+else `false`.
 
 ```
 boolean
@@ -221,7 +238,8 @@ Collapses `node` and all its child nodes in the layer list.
 
 ***Return type***
 
-Returns `true` if at least one layer in the layer list was collapsed by the function, else `false`.
+Returns `true` if at least one layer in the layer list was
+collapsed by the function, else `false`.
 
 ```
 boolean
@@ -229,7 +247,9 @@ boolean
 
 ### computeBoundingBox(node)
 
-Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of the smallest bounding box that contains the given `node`. (Does not account for strokes or effects that could extend beyond the node’s bounding box.)
+Computes the coordinates (`x`, `y`) and dimensions (`width`, `height`) of
+the smallest bounding box that contains the given `node`. (Does not account
+for strokes or effects that could extend beyond the node’s bounding box.)
 
 ***Parameters***
 
@@ -245,7 +265,10 @@ Rect
 
 ### computeMaximumBounds(nodes)
 
-Computes the absolute coordinates of the top-left and bottom-right corners of the smallest bounding box that contains the given `nodes`. (Does not account for strokes or effects that could extend beyond the nodes’ bounding box.)
+Computes the absolute coordinates of the top-left and bottom-right
+corners of the smallest bounding box that contains the given `nodes`.
+(Does not account for strokes or effects that could extend beyond the
+nodes’ bounding box.)
 
 ***Parameters***
 
@@ -253,7 +276,9 @@ Computes the absolute coordinates of the top-left and bottom-right corners of th
 
 ***Return type***
 
-Returns an array of two [`Vector`](https://www.figma.com/plugin-docs/api/Vector/) objects, one for the top-left corner and another for the bottom-right corner.
+Returns an array of two [`Vector`](https://www.figma.com/plugin-docs/api/Vector/)
+objects, one for the top-left corner and another for the
+bottom-right corner.
 
 ```
 [Vector, Vector]
@@ -281,7 +306,8 @@ Array<Array<Node>>
 
 ### createImagePaint(bytes)
 
-Creates an [`ImagePaint`](https://www.figma.com/plugin-docs/api/Paint/#imagepaint) object from the `bytes` of an image.
+Creates an [`ImagePaint`](https://www.figma.com/plugin-docs/api/Paint/#imagepaint)
+object from the `bytes` of an image.
 
 ***Parameters***
 
@@ -295,7 +321,8 @@ ImagePaint
 
 ### deduplicateNodes&lt;Node&gt;(nodes)
 
-Deduplicates the nodes in `nodes`. Does not modify the original `nodes` array.
+Deduplicates the nodes in `nodes`. Does not modify the original
+`nodes` array.
 
 ***Type parameters***
 
@@ -349,7 +376,8 @@ Returns the parent node of the given `node`.
 
 ***Return type***
 
-Throws an error if `node.parent` is `null`, else returns `node.parent`.
+Throws an error if `node.parent` is `null`, else returns
+`node.parent`.
 
 ```
 BaseNode & ChildrenMixin
@@ -357,7 +385,9 @@ BaseNode & ChildrenMixin
 
 ### getSceneNodeById&lt;Node&gt;(id)
 
-Returns `SceneNode` in the current document with the given `id`. This is a convenience function that wraps the [`figma.getNodeById`](https://www.figma.com/plugin-docs/api/figma/#getnodebyid) function.
+Returns `SceneNode` in the current document with the given `id`. This is a
+convenience function that wraps the [`figma.getNodeById`](https://www.figma.com/plugin-docs/api/figma/#getnodebyid)
+function.
 
 ***Type parameters***
 
@@ -369,7 +399,8 @@ Returns `SceneNode` in the current document with the given `id`. This is a conve
 
 ***Return type***
 
-Throws an error if no `SceneNode` with the given `id` exists, else returns the node cast to the specified `Node` type parameter.
+Throws an error if no `SceneNode` with the given `id` exists, else
+returns the node cast to the specified `Node` type parameter.
 
 ```
 Node
@@ -377,7 +408,8 @@ Node
 
 ### getSelectedNodesOrAllNodes()
 
-Returns the selected nodes, or all the top-level nodes on the current page if no nodes are selected.
+Returns the selected nodes, or all the top-level nodes on the current page
+if no nodes are selected.
 
 ***Return type***
 
@@ -425,7 +457,8 @@ Checks if the given `node` is within an Instance node.
 
 ***Return type***
 
-Returns `true` if the `node` is within an Instance node, else `false`.
+Returns `true` if the `node` is within an Instance node,
+else `false`.
 
 ```
 boolean
@@ -433,7 +466,9 @@ boolean
 
 ### loadFontsAsync(nodes)
 
-Loads the fonts used in all the text nodes within the `nodes` array. [This function must be called before modifying any property of a text node that may cause the rendered text to change.](https://www.figma.com/plugin-docs/api/TextNode/#loading-fonts)
+Loads the fonts used in all the text nodes within the `nodes` array. [This
+function must be called before modifying any property of a text node that
+may cause the rendered text to change.](https://www.figma.com/plugin-docs/api/TextNode/#loading-fonts)
 
 ***Parameters***
 
@@ -447,7 +482,8 @@ Promise<void>
 
 ### setAbsolutePosition(node, vector)
 
-Moves the `node` to the given `x` and `y` position relative to the page. At least one of `x` or `y` must be specified.
+Moves the `node` to the given `x` and `y` position relative to the page.
+At least one of `x` or `y` must be specified.
 
 ***Parameters***
 
@@ -462,8 +498,13 @@ void
 
 ### setRelaunchButton(node, relaunchButtonId [, options])
 
-Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `node` for the command with the given `relaunchButtonId` as configured under the [**`"relaunchButtons"`**](#relaunchbuttons) key in `package.json`. Any relaunch buttons set previously will be retained. `description` is the text displayed below the relaunch button in the Figma UI.
- See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
+Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
+on `node` for the command with the given `relaunchButtonId` as configured
+under the [**`"relaunchButtons"`**](#relaunchbuttons) key in `package.json`.
+Any relaunch buttons set previously will be retained. `description` is the
+text displayed below the relaunch button in the Figma UI.
+
+See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
 
 ***Parameters***
 
@@ -480,7 +521,8 @@ void
 
 ### sortNodesByCanonicalOrder&lt;Node&gt;(siblingNodes)
 
-Sorts `siblingNodes` according to their layer list order. Does not modify the original `siblingNodes` array.
+Sorts `siblingNodes` according to their layer list order. Does not modify
+the original `siblingNodes` array.
 
 ***Type parameters***
 
@@ -500,7 +542,8 @@ Array<Node>
 
 ### sortNodesByName&lt;Node&gt;(nodes)
 
-Sorts `nodes` in alphabetical order. Does not modify the original `nodes` array.
+Sorts `nodes` in alphabetical order. Does not modify the original
+`nodes` array.
 
 ***Type parameters***
 
@@ -520,8 +563,12 @@ Array<Node>
 
 ### traverseNode(node, processNode [, stopTraversal])
 
-Traverses `node` and its child nodes recursively in a *depth-first* manner, passing each node to the specified `processNode` callback.
- Each node is also passed to a `stopTraversal` function. If you return `true` in `stopTraversal` for a particular node, then its child nodes will not be traversed.
+Traverses `node` and its child nodes recursively in a *depth-first*
+manner, passing each node to the specified `processNode` callback.
+
+Each node is also passed to a `stopTraversal` function. If you return
+`true` in `stopTraversal` for a particular node, then its child nodes
+will not be traversed.
 
 ***Parameters***
 
@@ -537,7 +584,9 @@ void
 
 ### unsetRelaunchButton(node [, relaunchButtonId])
 
-Unsets the [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) on `node` for the command with the given `relaunchButtonId`. If `relaunchButtonId` is not specified, unsets all relaunch buttons on `node`.
+Unsets the [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
+on `node` for the command with the given `relaunchButtonId`. If
+`relaunchButtonId` is not specified, unsets all relaunch buttons on `node`.
 
 ***Parameters***
 
@@ -552,7 +601,9 @@ void
 
 ### updateNodesSortOrder(siblingNodes)
 
-Updates the layer list sort order to follow the sort order of the nodes in the `siblingNodes` array. Does not modify the original `siblingNodes` array.
+Updates the layer list sort order to follow the sort order of the nodes
+in the `siblingNodes` array. Does not modify the original
+`siblingNodes` array.
 
 ***Parameters***
 
@@ -560,7 +611,8 @@ Updates the layer list sort order to follow the sort order of the nodes in the `
 
 ***Return type***
 
-Returns `true` if the layer list sort order was changed by the function, else `false`.
+Returns `true` if the layer list sort order was changed by the
+function, else `false`.
 
 ```
 boolean
@@ -585,7 +637,8 @@ Evaluates the given numeric `expression`.
 
 ***Return type***
 
-Returns the result of evaluating the given `expression`, else `null` for an invalid expression.
+Returns the result of evaluating the given `expression`, else
+`null` for an invalid expression.
 
 ```
 null | number
@@ -593,7 +646,10 @@ null | number
 
 ### isValidNumericInput(value [, options])
 
-Checks if `value` is a numeric expression, as input by a user. “Partial” inputs are considered valid. Set `options.integersOnly` to `true` to check that the expression contains only integers. `options.integersOnly` defaults to `false` if not specified.
+Checks if `value` is a numeric expression, as input by a user. “Partial”
+inputs are considered valid. Set `options.integersOnly` to `true` to check
+that the expression contains only integers. `options.integersOnly` defaults
+to `false` if not specified.
 
 ***Parameters***
 
@@ -603,7 +659,8 @@ Checks if `value` is a numeric expression, as input by a user. “Partial” inp
 
 ***Return type***
 
-Returns `true` if `value` is a valid numeric expression, else `false`.
+Returns `true` if `value` is a valid numeric expression,
+else `false`.
 
 ```
 boolean
@@ -674,7 +731,8 @@ boolean
 
 ### extractAttributes&lt;PlainObject, Key&gt;(array, attributes)
 
-Extracts the specified list of `attributes` from the given `array` of plain objects.
+Extracts the specified list of `attributes` from the given `array` of
+plain objects.
 
 ***Type parameters***
 
@@ -705,7 +763,9 @@ import {
 
 ### loadSettingsAsync&lt;Settings&gt;(defaultSettings [, settingsKey])
 
-Loads your plugin’s settings (stored locally on the user’s computer under the given `settingsKey`). `settingsKey` defaults to `'settings'`. Values in `settings` default to an optional `defaultSettings` object.
+Loads your plugin’s settings (stored locally on the user’s computer under
+the given `settingsKey`). `settingsKey` defaults to `'settings'`. Values
+in `settings` default to an optional `defaultSettings` object.
 
 ***Type parameters***
 
@@ -724,7 +784,9 @@ Promise<Settings>
 
 ### saveSettingsAsync&lt;Settings&gt;(settings [, settingsKey])
 
-Saves the given `settings` for your plugin (stored locally on the user’s computer under the given `settingsKey`). `settingsKey` defaults to `'settings'`.
+Saves the given `settings` for your plugin (stored locally on the user’s
+computer under the given `settingsKey`). `settingsKey` defaults to
+`'settings'`.
 
 ***Type parameters***
 
@@ -796,7 +858,8 @@ string
 
 ### pluralize(number, singular [, plural])
 
-Returns `singular` if `number` is exactly `1`, else returns `plural`. `plural` defaults to `${singular}s` if not specified.
+Returns `singular` if `number` is exactly `1`, else returns `plural`.
+`plural` defaults to `${singular}s` if not specified.
 
 ***Parameters***
 
@@ -820,8 +883,11 @@ import {
 
 ### showUI&lt;Data&gt;(options [, data])
 
-Renders the UI correponding to the command in a modal within the Figma UI. Specify the width, height, and visibility of the UI via `options`. Optionally pass on some initialising `data` from the command to the UI.
- See how to [add a UI to a plugin command](#ui-1).
+Renders the UI correponding to the command in a modal within the Figma UI.
+Specify the width, height, and visibility of the UI via `options`.
+Optionally pass on some initialising `data` from the command to the UI.
+
+See how to [add a UI to a plugin command](#ui-1).
 
 ***Type parameters***
 
