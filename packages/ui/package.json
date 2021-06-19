@@ -101,6 +101,7 @@
       ]
     }
   },
+  "prettier": "eslint-config-yuanqing/prettier",
   "sideEffects": false,
   "stylelint": {
     "extends": "stylelint-config-yuanqing"

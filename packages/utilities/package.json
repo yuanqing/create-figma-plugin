@@ -72,5 +72,6 @@
   "eslintConfig": {
     "extends": "eslint-config-yuanqing"
   },
+  "prettier": "eslint-config-yuanqing/prettier",
   "sideEffects": false
 }

@@ -86,5 +86,6 @@
     "ignorePatterns": [
       "plugin-templates"
     ]
-  }
+  },
+  "prettier": "eslint-config-yuanqing/prettier"
 }
