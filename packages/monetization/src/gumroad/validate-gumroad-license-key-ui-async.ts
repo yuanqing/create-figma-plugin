@@ -1,5 +1,12 @@
 import { LicenseKeyValidationResult } from '../utilities/types.js'
 
+const emptyLicense = {
+  email: null,
+  licenseKey: null,
+  purchaseTimestamp: null,
+  validationTimestamp: null
+}
+
 export async function validateGumroadLicenseKeyUiAsync(options: {
   incrementUsesCount: boolean
   licenseKey: string
@@ -8,10 +15,10 @@ export async function validateGumroadLicenseKeyUiAsync(options: {
   const { incrementUsesCount, licenseKey, productPermalink } = options
   const trimmedLicenseKey = licenseKey.trim()
   if (trimmedLicenseKey === '') {
-    return { result: 'EMPTY' }
+    return { ...emptyLicense, result: 'INVALID_EMPTY' }
   }
   if (trimmedLicenseKey.length !== 35) {
-    return { result: 'INVALID' }
+    return { ...emptyLicense, result: 'INVALID' }
   }
   try {
     const response = await window.fetch(
@@ -38,7 +45,7 @@ export async function validateGumroadLicenseKeyUiAsync(options: {
       purchase.disputed === true ||
       purchase.refunded === true
     ) {
-      return { result: 'INVALID' }
+      return { ...emptyLicense, result: 'INVALID' }
     }
     return {
       email: purchase.email,
@@ -48,6 +55,6 @@ export async function validateGumroadLicenseKeyUiAsync(options: {
       validationTimestamp: new Date().toISOString()
     }
   } catch {
-    return { result: 'ENDPOINT_DOWN' }
+    return { ...emptyLicense, result: 'ENDPOINT_DOWN' }
   }
 }

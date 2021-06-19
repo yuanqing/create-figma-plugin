@@ -1,4 +1,10 @@
 async function main() {
+  const emptyLicense = {
+    email: null,
+    licenseKey: null,
+    purchaseTimestamp: null,
+    validationTimestamp: null
+  }
   async function validateLicenseKeyAsync() {
     try {
       const response = await window.fetch(
@@ -23,7 +29,7 @@ async function main() {
         purchase.disputed === true ||
         purchase.refunded === true
       ) {
-        return { result: 'INVALID' }
+        return { ...emptyLicense, result: 'INVALID' }
       }
       return {
         email: purchase.email,
@@ -33,7 +39,7 @@ async function main() {
         validationTimestamp: '__validationTimestamp__'
       }
     } catch {
-      return { result: 'ENDPOINT_DOWN' }
+      return { ...emptyLicense, result: 'ENDPOINT_DOWN' }
     }
   }
   window.parent.postMessage(
