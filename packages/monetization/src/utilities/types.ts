@@ -1,7 +1,3 @@
-export type DocumentUseCountPluginData = {
-  useCount: number
-}
-
 export type LicenseKeyValidationResult =
   | {
       result: 'EMPTY' | 'ENDPOINT_DOWN' | 'INVALID'
@@ -11,4 +7,5 @@ export type LicenseKeyValidationResult =
       email: string
       licenseKey: string
       purchaseTimestamp: string
+      validationTimestamp: string
     }

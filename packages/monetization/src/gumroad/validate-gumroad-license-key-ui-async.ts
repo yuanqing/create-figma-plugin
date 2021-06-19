@@ -44,7 +44,8 @@ export async function validateGumroadLicenseKeyUiAsync(options: {
       email: purchase.email,
       licenseKey: trimmedLicenseKey,
       purchaseTimestamp: purchase.sale_timestamp,
-      result: 'VALID'
+      result: 'VALID',
+      validationTimestamp: new Date().toISOString()
     }
   } catch {
     return { result: 'ENDPOINT_DOWN' }

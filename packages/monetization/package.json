@@ -28,14 +28,16 @@
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "yarn run clean && yarn run generate-index-ts && tsc --build",
+    "build": "yarn run clean && yarn run interpolate-gumroad-script && yarn run generate-index-ts && tsc --build",
     "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
-    "fix": "eslint --fix 'src/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "fix": "eslint --fix '{scripts,src}/**/*.{js,ts}' && prettier --loglevel error --write '*.json'",
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
-    "lint": "eslint 'src/**/*.ts'"
+    "interpolate-gumroad-script": "node --loader ts-node/esm ./scripts/interpolate-gumroad-script.ts",
+    "lint": "eslint '{scripts,src}/**/*.{js,ts}'"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1",
+    "esbuild": "^0.11.23",
     "eslint": "^7.26.0",
     "eslint-config-yuanqing": "^0.0.5",
     "prettier": "^2.3.0",

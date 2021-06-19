@@ -2,14 +2,13 @@
 export { validateGumroadLicenseKeyMainAsync } from './gumroad/validate-gumroad-license-key-main-async.js'
 export { validateGumroadLicenseKeyUiAsync } from './gumroad/validate-gumroad-license-key-ui-async.js'
 export {
-  getDocumentUseCountAsync,
-  incrementDocumentUseCountAsync
+  getDocumentUseCount,
+  incrementDocumentUseCount,
+  resetDocumentUseCount
 } from './utilities/document-use-count.js'
 export {
-  getPluginTotalUseCountAsync,
-  incrementPluginTotalUseCountAsync
-} from './utilities/plugin-total-use-count.js'
-export {
-  DocumentUseCountPluginData,
-  LicenseKeyValidationResult
-} from './utilities/types.js'
+  getTotalUseCountAsync,
+  incrementTotalUseCountAsync,
+  resetTotalUseCountAsync
+} from './utilities/total-use-count.js'
+export { LicenseKeyValidationResult } from './utilities/types.js'

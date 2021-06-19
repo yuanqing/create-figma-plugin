@@ -1,11 +1,11 @@
-import { DocumentUseCountPluginData } from './types.js'
+type DocumentUseCountPluginData = {
+  useCount: number
+}
 
 const DEFAULT_KEY = 'documentUseCount'
 
-export async function getDocumentUseCountAsync(
-  pluginDataKey = DEFAULT_KEY
-): Promise<number> {
-  const value = figma.root.getPluginData(pluginDataKey)
+export function getDocumentUseCount(key = DEFAULT_KEY): number {
+  const value = figma.root.getPluginData(key)
   if (value === '') {
     return 0
   }
@@ -13,13 +13,18 @@ export async function getDocumentUseCountAsync(
   return pluginData.useCount
 }
 
-export async function incrementDocumentUseCountAsync(
-  settingsKey = DEFAULT_KEY
-): Promise<number> {
-  const useCount = await getDocumentUseCountAsync(settingsKey)
+export function incrementDocumentUseCount(key = DEFAULT_KEY): number {
+  const useCount = getDocumentUseCount(key)
   const pluginData: DocumentUseCountPluginData = {
     useCount: useCount + 1
   }
-  figma.root.setPluginData(settingsKey, JSON.stringify(pluginData))
+  figma.root.setPluginData(key, JSON.stringify(pluginData))
   return pluginData.useCount
+}
+
+export function resetDocumentUseCount(key = DEFAULT_KEY): void {
+  const pluginData: DocumentUseCountPluginData = {
+    useCount: 0
+  }
+  figma.root.setPluginData(key, JSON.stringify(pluginData))
 }
