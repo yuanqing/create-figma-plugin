@@ -119,7 +119,7 @@ export const NumericValue = function () {
   )
 }
 
-export const Icons = function () {
+export const Children = function () {
   const [value, setValue] = useState('left')
   const options: Array<SegmentedControlOption> = [
     { children: <IconTextAlignLeft16 />, value: 'left' },
