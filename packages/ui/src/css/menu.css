@@ -1,7 +1,7 @@
 .menu {
   position: absolute;
   left: 0;
-  width: 100%;
+  min-width: 100%;
   padding: var(--space-extra-small) 0;
   overflow-y: auto;
   color: var(--color-white);
@@ -29,6 +29,7 @@
 .optionHeader,
 .optionValue {
   padding: 4px var(--space-medium) 4px 32px;
+  white-space: nowrap;
 }
 
 .optionHeader {

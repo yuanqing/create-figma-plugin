@@ -14,7 +14,7 @@ import dropdownStyles from './dropdown.css'
 
 const INVALID_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-dropdown-item-id'
-const MENU_VERTICAL_MARGIN = 16
+const VIEWPORT_MARGIN = 16
 
 type Id = typeof INVALID_ID | string
 
@@ -40,8 +40,9 @@ export type DropdownOptionHeader = {
   header: string
 }
 export type DropdownOptionValue<Value> = {
-  value: Value
+  children?: ComponentChildren
   disabled?: boolean
+  value: Value
 }
 export type DropdownOptionSeparator = {
   separator: true
@@ -78,6 +79,10 @@ export function Dropdown<
   const [selectedId, setSelectedId] = useState<Id>(
     index === -1 ? null : `${index}`
   )
+  const children =
+    typeof options[index] === 'undefined'
+      ? ''
+      : getDropdownOptionValue(options[index])
 
   // Uncomment to debug
   // console.table([{ isMenuVisible, selectedId }])
@@ -94,6 +99,8 @@ export function Dropdown<
     setIsMenuVisible(false)
     setSelectedId(INVALID_ID)
     getCurrentFromRef(rootElementRef).blur()
+    const menuElement = getCurrentFromRef(menuElementRef)
+    menuElement.removeAttribute('style') // Clear inline styles
   }, [])
 
   const handleRootFocus = useCallback(
@@ -226,7 +233,7 @@ export function Dropdown<
           </div>
         )
       ) : (
-        <div class={dropdownStyles.value}>{value}</div>
+        <div class={dropdownStyles.value}>{children}</div>
       )}
       <div class={dropdownStyles.chevronIcon}>
         <IconControlChevronDown8 />
@@ -291,13 +298,27 @@ export function Dropdown<
                   <IconMenuCheckmarkChecked16 />
                 </div>
               ) : null}
-              {option.value}
+              {typeof option.children === 'undefined'
+                ? option.value
+                : option.children}
             </label>
           )
         })}
       </div>
     </div>
   )
+}
+
+function getDropdownOptionValue<
+  Value extends boolean | number | string = string
+>(option: DropdownOption<Value>): ComponentChildren {
+  if ('children' in option) {
+    return option.children
+  }
+  if ('value' in option) {
+    return option.value
+  }
+  throw new Error('Invariant violation')
 }
 
 // Returns the index of the option in `options` with the given `value`, else `-1`
@@ -322,8 +343,21 @@ function updateMenuElementLayout(
   menuElement: HTMLDivElement,
   selectedId: Id
 ) {
+  // Nudge `menuElement` left. `leftOffset` will be a negative value if the
+  // menu exceeds the window bounds.
+  const menuElementBoundingClientRect = menuElement.getBoundingClientRect()
+  const leftOffset =
+    window.innerWidth -
+    VIEWPORT_MARGIN -
+    (menuElementBoundingClientRect.left + menuElement.offsetWidth)
+  if (leftOffset < 0) {
+    const maximumLeftOffset =
+      VIEWPORT_MARGIN - menuElementBoundingClientRect.left
+    menuElement.style.left = `${Math.max(maximumLeftOffset, leftOffset)}px`
+  }
+
   // Maximum height of `menuElement` is viewport height minus the top and bottom margin
-  const maxHeight = window.innerHeight - 2 * MENU_VERTICAL_MARGIN
+  const maxHeight = window.innerHeight - 2 * VIEWPORT_MARGIN
   menuElement.style.maxHeight = `${maxHeight}px`
 
   // Compute `topOffset` (relative to `rootElement`) such that `menuElement`
@@ -331,7 +365,7 @@ function updateMenuElementLayout(
   const topOffset = Math.min(
     0,
     window.innerHeight -
-      MENU_VERTICAL_MARGIN -
+      VIEWPORT_MARGIN -
       (rootElement.getBoundingClientRect().top + menuElement.offsetHeight)
   )
   if (selectedId === INVALID_ID || topOffset !== 0) {
@@ -351,10 +385,10 @@ function updateMenuElementLayout(
   }
   const selectedElementTop =
     selectedElement.getBoundingClientRect().top -
-    menuElement.getBoundingClientRect().top
+    menuElementBoundingClientRect.top
   const maximumTopOffset = Math.max(
     0,
-    rootElement.getBoundingClientRect().top - MENU_VERTICAL_MARGIN
+    rootElement.getBoundingClientRect().top - VIEWPORT_MARGIN
   )
   menuElement.style.top = `${
     -1 * Math.min(selectedElementTop, maximumTopOffset)

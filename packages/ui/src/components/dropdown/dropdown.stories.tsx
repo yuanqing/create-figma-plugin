@@ -246,6 +246,32 @@ export const TextIcon = function () {
   )
 }
 
+export const Children = function () {
+  const [value, setValue] = useState('foo')
+  const options: Array<DropdownOption> = [
+    {
+      children: 'A',
+      value: 'foo'
+    },
+    { children: 'B', value: 'bar' },
+    { children: 'C', value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { children: 'D', value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = { marginTop: '100px' }
+  return (
+    <div style={style}>
+      <Dropdown onChange={handleChange} options={options} value={value} />
+    </div>
+  )
+}
+
 export const OnValueChange = function () {
   const [value, setValue] = useState('foo')
   const options: Array<DropdownOption> = [
