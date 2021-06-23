@@ -3,12 +3,17 @@
 ## 1.2.0
 
 - `@create-figma-plugin/build`
-  - Added the ability to override the esbuild configuration for the `main` bundle (via the `--main-config` flag) and `ui` bundle (via the `--ui-config` flag)
+  - Added the ability to override the esbuild configuration for the `main` bundle (via a `build-figma-plugin.main.js` file) and the `ui` bundle (via a `build-figma-plugin.ui.js` file)
   - Improve the UX of the `build-figma-plugin --watch --typecheck` terminal output
+
+- `@create-figma-plugin/monetization`
+  - This is a new package that includes utilities for:
+    - Tracking the number of plugin runs
+    - Verifying a Gumroad license key
 
 - `@create-figma-plugin/ui`
   - New features:
-    - Added a new `IconButton` component
+    - Added `Banner` and `IconButton` components
     - Added a `validateOnBlur` prop to `Textbox`, `TextboxNumeric`, and `TextboxMultiline`
   - Bug fixes:
     - Allow pressing `Tab` to hide the menu in the `Dropdown` component
@@ -16,6 +21,8 @@
     - Fixed UI bugs in the `useFocusTrap` and `useScrollableMenu` hooks
     - Middle-aligned the `icon` relative to the height of the textbox in the `Textbox`, `TextboxAutocomplete`, `TextboxNumeric` components
     - Adjusted the focused style (the height of the blue outlined box) and the selected style (the background color of the selected text) of all textboxes (ie. `Textbox` etc.) to be identical to that in the Figma editor
+    - Prevent menu items in `Dropdown` and `TextboxAutocomplete` from wrapping
+    - Dynamically adjust the horizontal menu position of `Dropdown`
   - CSS:
     - Added colors `--color-black-6-translucent`, `--color-black-3-translucent`, and `--color-blue-30-translucent` to `@create-figma-plugin/ui/lib/css/base.css`
 
