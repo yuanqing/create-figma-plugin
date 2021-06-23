@@ -19,10 +19,8 @@ test('no config', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -46,10 +44,8 @@ test('basic command', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -73,10 +69,8 @@ test('command with UI', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -101,10 +95,8 @@ test('multiple menu commands', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -142,10 +134,8 @@ test('nested menu commands', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -180,10 +170,8 @@ test('relaunch button', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -220,10 +208,8 @@ test('custom styles', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -249,10 +235,8 @@ test('preact', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -277,10 +261,8 @@ test('esbuild main config', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: join(process.cwd(), 'esbuild.main.config.js'),
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: null
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -306,10 +288,8 @@ test('esbuild ui config', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
-    mainConfigFilePath: null,
     minify: false,
-    typecheck: true,
-    uiConfigFilePath: join(process.cwd(), 'esbuild.ui.config.js')
+    typecheck: true
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -323,7 +303,7 @@ test('esbuild ui config', async function (t) {
   t.true(await fs.pathExists('build/ui.js'))
   const uiJs = await fs.readFile('build/ui.js', 'utf8')
   t.true(/\/\/ comment appended to ui\.js/.test(uiJs) === true)
-  // await cleanUpAsync()
+  await cleanUpAsync()
 })
 
 async function symlinkFigmaPluginTypingsAsync(): Promise<void> {

@@ -1,5 +1,4 @@
 import { log } from '@create-figma-plugin/common'
-import fs from 'fs-extra'
 
 import { BuildOptions } from './types/build.js'
 import { buildBundlesAsync } from './utilities/build-bundles-async/build-bundles-async.js'
@@ -11,26 +10,8 @@ import { typeCheckAsync } from './utilities/type-check-async/type-check-async.js
 export async function buildAsync(
   options: BuildOptions & { clearPreviousLine: boolean }
 ): Promise<void> {
-  const {
-    minify,
-    typecheck,
-    mainConfigFilePath,
-    uiConfigFilePath,
-    clearPreviousLine
-  } = options
+  const { minify, typecheck, clearPreviousLine } = options
   try {
-    if (
-      mainConfigFilePath !== null &&
-      (await fs.pathExists(mainConfigFilePath)) === false
-    ) {
-      throw new Error(`Main config file does not exist: ${mainConfigFilePath}`)
-    }
-    if (
-      uiConfigFilePath !== null &&
-      (await fs.pathExists(uiConfigFilePath)) === false
-    ) {
-      throw new Error(`UI config file does not exist: ${uiConfigFilePath}`)
-    }
     if (typecheck === true) {
       const getTypeCheckElapsedTime = trackElapsedTime()
       await buildCssModulesTypingsAsync() // This must occur before `typeCheckAsync`
@@ -42,10 +23,7 @@ export async function buildAsync(
       })
       log.info('Building...')
       const getBuildElapsedTime = trackElapsedTime()
-      await Promise.all([
-        buildBundlesAsync({ mainConfigFilePath, minify, uiConfigFilePath }),
-        buildManifestAsync(minify)
-      ])
+      await Promise.all([buildBundlesAsync(minify), buildManifestAsync(minify)])
       const buildElapsedTime = getBuildElapsedTime()
       log.success(`Built in ${buildElapsedTime}`, { clearPreviousLine })
     } else {
@@ -53,7 +31,7 @@ export async function buildAsync(
       const getBuildElapsedTime = trackElapsedTime()
       await Promise.all([
         buildCssModulesTypingsAsync(),
-        buildBundlesAsync({ mainConfigFilePath, minify, uiConfigFilePath }),
+        buildBundlesAsync(minify),
         buildManifestAsync(minify)
       ])
       const buildElapsedTime = getBuildElapsedTime()

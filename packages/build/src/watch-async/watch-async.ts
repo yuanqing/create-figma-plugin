@@ -14,7 +14,7 @@ const cssRegex = /\.css$/
 const packageJsonRegex = /^package\.json$/
 
 export async function watchAsync(options: BuildOptions): Promise<void> {
-  const { minify, uiConfigFilePath, mainConfigFilePath, typecheck } = options
+  const { minify, typecheck } = options
   if (typecheck === true) {
     await typeCheckAsync(true)
   }
@@ -43,9 +43,7 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
         promises.push(buildCssModulesTypingsAsync())
       }
     }
-    promises.push(
-      buildBundlesAsync({ mainConfigFilePath, minify, uiConfigFilePath })
-    )
+    promises.push(buildBundlesAsync(minify))
     await Promise.all(promises)
     log.success(`Built in ${getElapsedTime()}`)
     if (typecheck === false) {
