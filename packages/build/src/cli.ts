@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { log } from '@create-figma-plugin/common'
+import { resolve } from 'path'
 import sade from 'sade'
 
 import { buildAsync } from './build-async.js'
@@ -30,11 +31,11 @@ sade('build-figma-plugin', true)
   }): Promise<void> {
     const buildOptions: BuildOptions = {
       mainConfigFilePath:
-        options['main-config'] === '' ? null : options['main-config'],
+        options['main-config'] === '' ? null : resolve(options['main-config']),
       minify: options.minify,
       typecheck: options.typecheck,
       uiConfigFilePath:
-        options['ui-config'] === '' ? null : options['ui-config']
+        options['ui-config'] === '' ? null : resolve(options['ui-config'])
     }
     if (options.watch === true) {
       log.clearViewport()
