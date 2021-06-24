@@ -161,16 +161,8 @@ export function RawTextboxNumeric<Name extends string>({
         const delta = event.shiftKey === true ? incrementBig : incrementSmall
         if (value === EMPTY_STRING || value === MIXED_STRING) {
           event.preventDefault()
-          const startingValue =
-            key === 'ArrowDown'
-              ? typeof maximum === 'undefined'
-                ? 0
-                : maximum
-              : typeof minimum === 'undefined'
-              ? 0
-              : minimum
           const newValue = restrictValue(
-            key === 'ArrowDown' ? startingValue - delta : startingValue + delta,
+            key === 'ArrowDown' ? -1 * delta : delta,
             minimum,
             maximum
           )
