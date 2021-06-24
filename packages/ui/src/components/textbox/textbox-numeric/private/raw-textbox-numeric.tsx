@@ -53,6 +53,14 @@ export function RawTextboxNumeric<Name extends string>({
   value,
   ...rest
 }: Props<HTMLInputElement, RawTextboxNumericProps<Name>>): JSX.Element {
+  if (
+    typeof minimum !== 'undefined' &&
+    typeof maximum !== 'undefined' &&
+    minimum >= maximum
+  ) {
+    throw new Error('`minimum` must be less than `maximum`')
+  }
+
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
@@ -161,8 +169,18 @@ export function RawTextboxNumeric<Name extends string>({
         const delta = event.shiftKey === true ? incrementBig : incrementSmall
         if (value === EMPTY_STRING || value === MIXED_STRING) {
           event.preventDefault()
+          // `startingValue` is biased towards 0
+          const startingValue = (function () {
+            if (typeof minimum !== 'undefined' && minimum > 0) {
+              return minimum
+            }
+            if (typeof maximum !== 'undefined' && maximum < 0) {
+              return maximum
+            }
+            return 0
+          })()
           const newValue = restrictValue(
-            key === 'ArrowDown' ? -1 * delta : delta,
+            key === 'ArrowDown' ? startingValue - delta : startingValue + delta,
             minimum,
             maximum
           )
