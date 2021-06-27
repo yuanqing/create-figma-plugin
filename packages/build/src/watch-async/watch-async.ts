@@ -32,22 +32,26 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
     })
   }
   watcher.on('change', async function (file: string): Promise<void> {
-    log.clearViewport()
-    const getElapsedTime = trackElapsedTime()
-    log.info(`Changed ${yellow(file)}`)
-    const promises: Array<Promise<void>> = []
-    if (packageJsonRegex.test(file) === true) {
-      promises.push(buildManifestAsync(minify))
-    } else {
-      if (cssRegex.test(file) === true) {
-        promises.push(buildCssModulesTypingsAsync())
+    try {
+      log.clearViewport()
+      const getElapsedTime = trackElapsedTime()
+      log.info(`Changed ${yellow(file)}`)
+      const promises: Array<Promise<void>> = []
+      if (packageJsonRegex.test(file) === true) {
+        promises.push(buildManifestAsync(minify))
+      } else {
+        if (cssRegex.test(file) === true) {
+          promises.push(buildCssModulesTypingsAsync())
+        }
       }
-    }
-    promises.push(buildBundlesAsync(minify))
-    await Promise.all(promises)
-    log.success(`Built in ${getElapsedTime()}`)
-    if (typecheck === false) {
-      log.info('Watching...')
+      promises.push(buildBundlesAsync(minify))
+      await Promise.all(promises)
+      log.success(`Built in ${getElapsedTime()}`)
+      if (typecheck === false) {
+        log.info('Watching...')
+      }
+    } catch (error) {
+      log.error(error.message)
     }
   })
 }
