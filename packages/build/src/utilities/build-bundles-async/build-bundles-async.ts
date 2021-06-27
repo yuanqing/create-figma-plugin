@@ -53,7 +53,7 @@ async function buildMainBundleAsync(options: {
   try {
     const esbuildConfig: BuildOptions = {
       bundle: true,
-      logLevel: 'error',
+      logLevel: 'silent',
       minify,
       outfile: join(process.cwd(), constants.build.directoryName, 'main.js'),
       stdin: {
@@ -109,7 +109,7 @@ async function buildUiBundleAsync(options: {
       bundle: true,
       jsxFactory: 'h',
       jsxFragment: 'Fragment',
-      logLevel: 'error',
+      logLevel: 'silent',
       minify,
       outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),
       plugins: [esbuildCssModulesPlugin(minify)],
