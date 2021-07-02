@@ -109,6 +109,12 @@ async function buildUiBundleAsync(options: {
       bundle: true,
       jsxFactory: 'h',
       jsxFragment: 'Fragment',
+      loader: {
+        '.gif': 'dataurl',
+        '.jpg': 'dataurl',
+        '.png': 'dataurl',
+        '.svg': 'dataurl'
+      },
       logLevel: 'silent',
       minify,
       outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),

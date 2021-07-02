@@ -306,6 +306,34 @@ test('esbuild ui config', async function (t) {
   await cleanUpAsync()
 })
 
+test('UI with image asset', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '11-ui-with-image-asset'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    name: 'x',
+    ui: 'build/ui.js'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
+  const uiJs = await fs.readFile('build/ui.js', 'utf8')
+  t.true(/data:image\/svg\+xml/.test(uiJs) === true)
+  await cleanUpAsync()
+})
+
 async function symlinkFigmaPluginTypingsAsync(): Promise<void> {
   const directoryPath = await findUp(
     join('node_modules', '@figma', 'plugin-typings'),
