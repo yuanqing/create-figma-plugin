@@ -11,7 +11,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 test('no config', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '1-no-config'))
+  process.chdir(join(__dirname, 'fixtures', '01-no-config'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -36,7 +36,7 @@ test('no config', async function (t) {
 
 test('basic command', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '2-basic-command'))
+  process.chdir(join(__dirname, 'fixtures', '02-basic-command'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -61,7 +61,7 @@ test('basic command', async function (t) {
 
 test('command with UI', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '3-command-with-ui'))
+  process.chdir(join(__dirname, 'fixtures', '03-command-with-ui'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -87,7 +87,7 @@ test('command with UI', async function (t) {
 
 test('multiple menu commands', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '4-multiple-menu-commands'))
+  process.chdir(join(__dirname, 'fixtures', '04-multiple-menu-commands'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -126,7 +126,7 @@ test('multiple menu commands', async function (t) {
 
 test('nested menu commands', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '5-nested-menu-commands'))
+  process.chdir(join(__dirname, 'fixtures', '05-nested-menu-commands'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -162,7 +162,7 @@ test('nested menu commands', async function (t) {
 
 test('relaunch button', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '6-relaunch-button'))
+  process.chdir(join(__dirname, 'fixtures', '06-relaunch-button'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -199,7 +199,7 @@ test('relaunch button', async function (t) {
 
 test('custom styles', async function (t) {
   t.plan(7)
-  process.chdir(join(__dirname, 'fixtures', '7-custom-styles'))
+  process.chdir(join(__dirname, 'fixtures', '07-custom-styles'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -227,7 +227,7 @@ test('custom styles', async function (t) {
 
 test('preact', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '8-preact'))
+  process.chdir(join(__dirname, 'fixtures', '08-preact'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -253,7 +253,7 @@ test('preact', async function (t) {
 
 test('esbuild main config', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '9-esbuild-main-config'))
+  process.chdir(join(__dirname, 'fixtures', '09-esbuild-main-config'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))

@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 test('use default', async function (t) {
   t.plan(7)
-  process.chdir(join(__dirname, 'fixtures', '1-use-default'))
+  process.chdir(join(__dirname, 'fixtures', '01-use-default'))
   await cleanUpAsync()
   t.false(await fs.pathExists('figma-plugin'))
   await createFigmaPluginAsync(
