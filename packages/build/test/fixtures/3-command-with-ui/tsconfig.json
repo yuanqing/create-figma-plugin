@@ -3,5 +3,5 @@
   "compilerOptions": {
     "typeRoots": ["node_modules/@figma"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.ts"]
 }
