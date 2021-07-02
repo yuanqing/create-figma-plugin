@@ -4,6 +4,7 @@
 *.tsbuildinfo
 lib/
 node_modules/
+sandbox/
 /build/
 /packages/**/fixtures/**/build/
 /packages/**/fixtures/**/figma-plugin/
