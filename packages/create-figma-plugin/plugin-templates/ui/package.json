@@ -1,0 +1,46 @@
+{
+  "name": "{{{name}}}",
+{{#version}}
+  "version": "{{{version}}}",
+{{/version}}
+{{#description}}
+  "description": "{{{description}}}",
+{{/description}}
+  "keywords": [
+    "create-figma-plugin",
+    "figma",
+    "figma-plugin"
+  ],
+{{#license}}
+  "license": "{{{license}}}",
+{{/license}}
+{{#author}}
+  "author": "{{{author}}}",
+{{/author}}
+{{#repositoryUrl}}
+  "repository": "{{{repositoryUrl}}}",
+{{/repositoryUrl}}
+  "dependencies": {
+    "@create-figma-plugin/ui": "^{{{versions.ui}}}",
+    "@create-figma-plugin/utilities": "^{{{versions.utilities}}}",
+    "preact": "^10"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "^{{{versions.build}}}",
+    "@create-figma-plugin/tsconfig": "^{{{versions.tsconfig}}}",
+    "@figma/plugin-typings": "^1",
+    "typescript": "^4"
+  },
+  "scripts": {
+    "build": "build-figma-plugin --typecheck --minify",
+    "watch": "build-figma-plugin --typecheck --watch"
+  },
+  "figma-plugin": {
+    "id": "{{{name}}}",
+{{#displayName}}
+    "name": "{{{displayName}}}",
+{{/displayName}}
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
+  }
+}
