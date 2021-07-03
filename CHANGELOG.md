@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1
+
+- `create-figma-plugin`
+  - Add a `ui` template
+  - Simplify the CLI; now, only a `name`, `displayName` and `template` are necessary
+
 ## 1.2.0
 
 - `@create-figma-plugin/build`
