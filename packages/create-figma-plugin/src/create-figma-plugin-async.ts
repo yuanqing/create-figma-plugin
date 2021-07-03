@@ -1,6 +1,6 @@
 import { log } from '@create-figma-plugin/common'
 import fs from 'fs-extra'
-import { join } from 'path'
+import { join, resolve } from 'path'
 
 import { copyTemplateAsync } from './utilities/copy-template-async.js'
 import { installDependenciesAsync } from './utilities/install-dependencies-async.js'
@@ -18,6 +18,17 @@ export async function createFigmaPluginAsync(options: {
   try {
     if (typeof name !== 'undefined') {
       await throwIfDirectoryExistsAsync(join(process.cwd(), name))
+    }
+    if (typeof template !== 'undefined') {
+      const templateDirectory = resolve(
+        __dirname,
+        '..',
+        'plugin-templates',
+        template
+      )
+      if ((await fs.pathExists(templateDirectory)) === false) {
+        throw new Error(`Invalid template: ${template}`)
+      }
     }
     log.info('Scaffolding a new plugin...')
     const settings = useDefaults
