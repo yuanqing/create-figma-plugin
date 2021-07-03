@@ -9,12 +9,15 @@ sade('create-figma-plugin [name]', true)
     '-t, --template',
     'Pass in the URL of a GitHub repository to use as a template'
   )
-  .option('-y, --yes', 'Use defaults')
+  .option('-y, --yes', 'Use defaults', false)
   .action(async function (
     name: string,
     options: { yes: boolean; template: string }
   ): Promise<void> {
-    const { yes, template } = options
-    await createFigmaPluginAsync({ name, template }, yes)
+    await createFigmaPluginAsync({
+      name,
+      template: options.template,
+      useDefaults: options.yes
+    })
   })
   .parse(process.argv)

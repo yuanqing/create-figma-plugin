@@ -36,9 +36,7 @@
   },
   "dependencies": {
     "@create-figma-plugin/common": "^1.2.0",
-    "degit": "^2.8.4",
     "fs-extra": "^10.0.0",
-    "git-user-name": "^2.0.0",
     "globby": "^11.0.4",
     "inquirer": "^8.1.1",
     "is-utf8": "^0.2.1",

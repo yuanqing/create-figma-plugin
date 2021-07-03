@@ -2,30 +2,31 @@ import { log } from '@create-figma-plugin/common'
 import fs from 'fs-extra'
 import { join } from 'path'
 
-import { Settings } from './types/settings.js'
-import { cloneFromTemplateAsync } from './utilities/clone-from-template-async.js'
+import { copyTemplateAsync } from './utilities/copy-template-async.js'
 import { installDependenciesAsync } from './utilities/install-dependencies-async.js'
 import { interpolateValuesIntoFilesAsync } from './utilities/interpolate-values-into-files-async.js'
 import { resolveLatestStableVersions } from './utilities/resolve-latest-stable-versions.js'
 import { createDefaultSettings } from './utilities/settings/create-default-settings.js'
 import { promptForUserInputAsync } from './utilities/settings/prompt-for-user-input-async.js'
 
-export async function createFigmaPluginAsync(
-  options: Settings,
+export async function createFigmaPluginAsync(options: {
+  name?: string
+  template?: string
   useDefaults: boolean
-): Promise<void> {
+}): Promise<void> {
+  const { name, template, useDefaults } = options
   try {
-    if (typeof options.name !== 'undefined') {
-      await throwIfDirectoryExistsAsync(join(process.cwd(), options.name))
+    if (typeof name !== 'undefined') {
+      await throwIfDirectoryExistsAsync(join(process.cwd(), name))
     }
     log.info('Scaffolding a new plugin...')
     const settings = useDefaults
-      ? createDefaultSettings(options)
-      : await promptForUserInputAsync(options)
+      ? createDefaultSettings({ name, template })
+      : await promptForUserInputAsync({ name, template })
     const pluginDirectoryPath = join(process.cwd(), settings.name)
     await throwIfDirectoryExistsAsync(pluginDirectoryPath)
-    log.info('Cloning template...')
-    await cloneFromTemplateAsync(pluginDirectoryPath, settings.template)
+    log.info('Copying template...')
+    await copyTemplateAsync(pluginDirectoryPath, settings.template)
     const versions = await resolveLatestStableVersions()
     await interpolateValuesIntoFilesAsync(pluginDirectoryPath, {
       ...settings,

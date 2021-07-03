@@ -1,25 +1,4 @@
 {
-  "name": "{{{name}}}",
-{{#version}}
-  "version": "{{{version}}}",
-{{/version}}
-{{#description}}
-  "description": "{{{description}}}",
-{{/description}}
-  "keywords": [
-    "create-figma-plugin",
-    "figma",
-    "figma-plugin"
-  ],
-{{#license}}
-  "license": "{{{license}}}",
-{{/license}}
-{{#author}}
-  "author": "{{{author}}}",
-{{/author}}
-{{#repositoryUrl}}
-  "repository": "{{{repositoryUrl}}}",
-{{/repositoryUrl}}
   "dependencies": {
     "@create-figma-plugin/ui": "^{{{versions.ui}}}",
     "@create-figma-plugin/utilities": "^{{{versions.utilities}}}",

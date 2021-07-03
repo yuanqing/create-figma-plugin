@@ -1,87 +1,56 @@
 import { constants } from '@create-figma-plugin/common'
-import gitUserName from 'git-user-name'
 import inquirer from 'inquirer'
 
 import { Settings } from '../../types/settings.js'
 import { createPluginDisplayName } from './create-plugin-display-name.js'
 
-export async function promptForUserInputAsync(
-  options: Settings
-): Promise<Settings> {
+export async function promptForUserInputAsync(options: {
+  name?: string
+  template?: string
+}): Promise<Settings> {
   const { name, template } = options
   const questions = [
     typeof name === 'undefined'
-      ? false
-      : {
+      ? {
           filter,
-          message: 'name',
+          message: 'Name',
           name: 'name',
           type: 'input',
           validate
-        },
+        }
+      : false,
     {
-      default: function (values: { name: string }): undefined | string {
+      default: function (answers: { name: string }): undefined | string {
         if (typeof name !== 'undefined') {
           return createPluginDisplayName(name)
         }
-        if (typeof values.name !== 'undefined') {
-          return createPluginDisplayName(values.name)
+        if (typeof answers.name !== 'undefined') {
+          return createPluginDisplayName(answers.name)
         }
         return undefined
       },
       filter,
-      message: 'display name',
+      message: 'Display name',
       name: 'displayName',
       type: 'input',
       validate
     },
     typeof template === 'undefined'
-      ? false
-      : {
+      ? {
+          choices: [constants.defaultTemplate, 'ui'],
           default: constants.defaultTemplate,
           filter,
-          message: 'template',
+          message: 'Template',
           name: 'template',
-          type: 'input'
-        },
-    {
-      default: constants.packageJson.defaultVersion,
-      filter,
-      message: 'version',
-      name: 'version',
-      type: 'input'
-    },
-    {
-      filter,
-      message: 'description',
-      name: 'description',
-      type: 'input'
-    },
-    {
-      filter,
-      message: 'repository url',
-      name: 'repositoryUrl',
-      type: 'input'
-    },
-    {
-      default: gitUserName(),
-      filter,
-      message: 'author',
-      name: 'author',
-      type: 'input'
-    },
-    {
-      default: constants.packageJson.defaultLicense,
-      filter,
-      message: 'license',
-      name: 'license',
-      type: 'input'
-    }
+          type: 'list'
+        }
+      : false
   ].filter(Boolean)
+  const answers = await inquirer.prompt(questions)
   return {
-    ...(await inquirer.prompt(questions)),
-    name,
-    template
+    displayName: answers.displayName,
+    name: typeof name === 'undefined' ? answers.name : name,
+    template: typeof template === 'undefined' ? answers.template : template
   }
 }
 
