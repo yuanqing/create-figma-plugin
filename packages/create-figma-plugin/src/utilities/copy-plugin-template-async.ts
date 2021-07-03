@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-export async function copyTemplateAsync(
+export async function copyPluginTemplateAsync(
   pluginDirectoryPath: string,
   template: string
 ): Promise<void> {

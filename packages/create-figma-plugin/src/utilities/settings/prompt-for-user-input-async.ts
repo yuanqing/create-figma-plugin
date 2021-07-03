@@ -2,6 +2,7 @@ import { constants } from '@create-figma-plugin/common'
 import inquirer from 'inquirer'
 
 import { Settings } from '../../types/settings.js'
+import { readPluginTemplateNamesAsync } from '../read-template-names-async.js'
 import { createPluginDisplayName } from './create-plugin-display-name.js'
 
 export async function promptForUserInputAsync(options: {
@@ -37,7 +38,7 @@ export async function promptForUserInputAsync(options: {
     },
     typeof template === 'undefined'
       ? {
-          choices: [constants.defaultTemplate, 'ui'],
+          choices: await readPluginTemplateNamesAsync(),
           default: constants.defaultTemplate,
           filter,
           message: 'template',

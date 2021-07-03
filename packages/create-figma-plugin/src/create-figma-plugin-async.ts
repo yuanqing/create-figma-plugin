@@ -1,10 +1,11 @@
 import { log } from '@create-figma-plugin/common'
 import fs from 'fs-extra'
-import { join, resolve } from 'path'
+import { join } from 'path'
 
-import { copyTemplateAsync } from './utilities/copy-template-async.js'
+import { copyPluginTemplateAsync } from './utilities/copy-plugin-template-async.js'
 import { installDependenciesAsync } from './utilities/install-dependencies-async.js'
 import { interpolateValuesIntoFilesAsync } from './utilities/interpolate-values-into-files-async.js'
+import { readPluginTemplateNamesAsync } from './utilities/read-template-names-async.js'
 import { resolveLatestStableVersions } from './utilities/resolve-latest-stable-versions.js'
 import { createDefaultSettings } from './utilities/settings/create-default-settings.js'
 import { promptForUserInputAsync } from './utilities/settings/prompt-for-user-input-async.js'
@@ -20,14 +21,11 @@ export async function createFigmaPluginAsync(options: {
       await throwIfDirectoryExistsAsync(join(process.cwd(), name))
     }
     if (typeof template !== 'undefined') {
-      const templateDirectory = resolve(
-        __dirname,
-        '..',
-        'plugin-templates',
-        template
-      )
-      if ((await fs.pathExists(templateDirectory)) === false) {
-        throw new Error(`Invalid template: ${template}`)
+      const templateNames = await readPluginTemplateNamesAsync()
+      if (templateNames.indexOf(template) === -1) {
+        throw new Error(
+          `Template must be one of "${templateNames.join('", "')}"`
+        )
       }
     }
     log.info('Scaffolding a new plugin...')
@@ -36,8 +34,8 @@ export async function createFigmaPluginAsync(options: {
       : await promptForUserInputAsync({ name, template })
     const pluginDirectoryPath = join(process.cwd(), settings.name)
     await throwIfDirectoryExistsAsync(pluginDirectoryPath)
-    log.info('Copying template...')
-    await copyTemplateAsync(pluginDirectoryPath, settings.template)
+    log.info(`Copying "${settings.template}" template...`)
+    await copyPluginTemplateAsync(pluginDirectoryPath, settings.template)
     const versions = await resolveLatestStableVersions()
     await interpolateValuesIntoFilesAsync(pluginDirectoryPath, {
       ...settings,
