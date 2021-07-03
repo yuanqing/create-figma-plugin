@@ -13,7 +13,7 @@ export async function promptForUserInputAsync(options: {
     typeof name === 'undefined'
       ? {
           filter,
-          message: 'Name',
+          message: 'name',
           name: 'name',
           type: 'input',
           validate
@@ -30,7 +30,7 @@ export async function promptForUserInputAsync(options: {
         return undefined
       },
       filter,
-      message: 'Display name',
+      message: 'display name',
       name: 'displayName',
       type: 'input',
       validate
@@ -40,7 +40,7 @@ export async function promptForUserInputAsync(options: {
           choices: [constants.defaultTemplate, 'ui'],
           default: constants.defaultTemplate,
           filter,
-          message: 'Template',
+          message: 'template',
           name: 'template',
           type: 'list'
         }
