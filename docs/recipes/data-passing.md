@@ -35,8 +35,6 @@ import {
 } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
 
-export default render(Plugin)
-
 function Plugin () {
   // ...
   function handleClick () {
@@ -49,6 +47,8 @@ function Plugin () {
     // ...
   )
 }
+
+export default render(Plugin)
 ```
 
 See that:

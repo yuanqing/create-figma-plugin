@@ -3,6 +3,8 @@
 The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuild.github.io). To customize the underlying build configuration for the [`main`](#main-context) bundle, create a `build-figma-plugin.main.js` file:
 
 ```js
+// build-figma-plugin.main.js
+
 module.exports = function (buildOptions) {
   // ...
   return {
