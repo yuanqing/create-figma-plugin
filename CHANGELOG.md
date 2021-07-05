@@ -1,10 +1,17 @@
 # Changelog
 
+## 1.2.2
+
+- Docs
+  - Add a recipe for using image assets in the plugin UI
+
 ## 1.2.1
 
 - `create-figma-plugin`
   - Add a `ui` template
   - Simplify the CLI; now, only a `name`, `displayName` and `template` are necessary
+- Docs
+  - Add a recipe for customizing the underlying esbuild configuration
 
 ## 1.2.0
 
