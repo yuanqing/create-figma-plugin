@@ -8,7 +8,6 @@ import { LoadingIndicator } from '../loading-indicator/loading-indicator'
 import styles from './button.css'
 
 export type ButtonProps = {
-  className?: string
   children: ComponentChildren
   destructive?: boolean
   disabled?: boolean
