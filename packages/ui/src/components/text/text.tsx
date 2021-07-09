@@ -15,6 +15,8 @@ export type TextProps = {
 export type TextAlignment = 'left' | 'center' | 'right'
 
 export function Text({
+  className,
+  class: cssClass,
   align = 'left',
   bold = false,
   children,
@@ -26,6 +28,8 @@ export function Text({
     <div
       {...rest}
       class={createClassName([
+        className,
+        cssClass,
         styles.text,
         styles[align],
         bold === true ? styles.bold : null,

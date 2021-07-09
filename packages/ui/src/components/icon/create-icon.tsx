@@ -2,6 +2,7 @@
 import { h, JSX } from 'preact'
 
 import { Props } from '../../types/types'
+import { createClassName } from '../../utilities/create-class-name'
 import styles from './icon.css'
 
 export type IconProps = {
@@ -25,14 +26,18 @@ export function createIcon(
   const { width, height } = options
   return function Icon({
     color,
+    className,
+    class: cssClass,
     ...rest
   }: Props<SVGSVGElement, IconProps>): JSX.Element {
     return (
       <svg
         {...rest}
-        class={
+        class={createClassName([
+          className,
+          cssClass,
           typeof color === 'undefined' ? styles.currentColor : styles[color]
-        }
+        ])}
         height={height}
         width={width}
         xmlns="http://www.w3.org/2000/svg"

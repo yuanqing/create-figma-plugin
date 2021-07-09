@@ -34,6 +34,8 @@ export function RadioButtons<
   Name extends string,
   Value extends boolean | number | string
 >({
+  className,
+  class: cssClass,
   disabled = false,
   name,
   onChange = function () {},
@@ -70,7 +72,7 @@ export function RadioButtons<
   )
 
   return (
-    <div class={styles.radioButtons}>
+    <div class={createClassName([className, cssClass, styles.radioButtons])}>
       <Stack space={space}>
         {options.map(function (
           option: RadioButtonsOption<Value>,

@@ -17,6 +17,8 @@ export type IconButtonProps<Name extends string> = {
 }
 
 export function IconButton<Name extends string>({
+  className,
+  class: cssClass,
   children,
   disabled = false,
   name,
@@ -50,6 +52,8 @@ export function IconButton<Name extends string>({
   return (
     <label
       class={createClassName([
+        className,
+        cssClass,
         styles.iconButton,
         disabled === true ? styles.disabled : null
       ])}

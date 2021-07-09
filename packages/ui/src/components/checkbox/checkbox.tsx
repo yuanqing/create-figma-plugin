@@ -18,6 +18,8 @@ export type CheckboxProps<Name extends string> = {
 }
 
 export function Checkbox<Name extends string>({
+  className,
+  class: cssClass,
   children,
   disabled = false,
   name,
@@ -52,6 +54,8 @@ export function Checkbox<Name extends string>({
   return (
     <label
       class={createClassName([
+        className,
+        cssClass,
         styles.checkbox,
         disabled === true ? styles.disabled : null
       ])}

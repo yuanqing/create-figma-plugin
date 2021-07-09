@@ -16,6 +16,8 @@ export type ToggleProps<Name extends string> = {
 }
 
 export function Toggle<Name extends string>({
+  className,
+  class: cssClass,
   disabled = false,
   name,
   onChange = function () {},
@@ -49,6 +51,8 @@ export function Toggle<Name extends string>({
   return (
     <label
       class={createClassName([
+        className,
+        cssClass,
         styles.toggle,
         disabled === true ? styles.disabled : null
       ])}
