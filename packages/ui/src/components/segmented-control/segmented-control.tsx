@@ -32,6 +32,8 @@ export function SegmentedControl<
   Name extends string,
   Value extends boolean | number | string
 >({
+  className,
+  class: cssClass,
   disabled = false,
   name,
   onChange = function () {},
@@ -69,6 +71,8 @@ export function SegmentedControl<
   return (
     <div
       class={createClassName([
+        className,
+        cssClass,
         styles.segmentedControl,
         disabled === true ? styles.disabled : null
       ])}

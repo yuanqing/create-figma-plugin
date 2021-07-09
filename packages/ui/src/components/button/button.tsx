@@ -19,6 +19,8 @@ export type ButtonProps = {
 }
 
 export function Button({
+  className,
+  class: cssClass,
   children,
   destructive = false,
   disabled = false,
@@ -48,6 +50,8 @@ export function Button({
   return (
     <div
       class={createClassName([
+        className,
+        cssClass,
         styles.button,
         secondary === true ? styles.secondary : styles.primary,
         destructive === true ? styles.destructive : null,

@@ -52,6 +52,8 @@ export function Dropdown<
   Name extends string,
   Value extends boolean | number | string = string
 >({
+  className,
+  class: cssClass,
   disabled = false,
   icon,
   name,
@@ -208,6 +210,8 @@ export function Dropdown<
       {...rest}
       ref={rootElementRef}
       class={createClassName([
+        className,
+        cssClass,
         dropdownStyles.dropdown,
         noBorder === true ? dropdownStyles.noBorder : null,
         typeof icon === 'undefined' ? null : dropdownStyles.hasIcon,

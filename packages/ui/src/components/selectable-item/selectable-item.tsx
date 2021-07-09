@@ -20,6 +20,8 @@ export type SelectableItemProps<Name extends string> = {
 }
 
 export function SelectableItem<Name extends string>({
+  className,
+  class: cssClass,
   bold = false,
   children,
   disabled = false,
@@ -55,6 +57,8 @@ export function SelectableItem<Name extends string>({
   return (
     <label
       class={createClassName([
+        className,
+        cssClass,
         styles.selectableItem,
         disabled === true ? styles.disabled : null,
         bold === true ? styles.bold : null,

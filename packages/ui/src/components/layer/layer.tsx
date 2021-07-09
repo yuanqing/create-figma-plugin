@@ -20,6 +20,8 @@ export type LayerProps<Name extends string> = {
 export type LayerColor = 'black-30' | 'black-80' | 'purple'
 
 export function Layer<Name extends string>({
+  className,
+  class: cssClass,
   bold = false,
   children,
   color = 'black-80',
@@ -41,7 +43,14 @@ export function Layer<Name extends string>({
   )
 
   return (
-    <label class={createClassName([styles.layer, styles[color]])}>
+    <label
+      class={createClassName([
+        className,
+        cssClass,
+        styles.layer,
+        styles[color]
+      ])}
+    >
       <input
         {...rest}
         checked={value === true}

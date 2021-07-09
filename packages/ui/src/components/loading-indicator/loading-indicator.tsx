@@ -17,11 +17,16 @@ export type LoadingIndicatorColor =
   | 'white-40'
 
 export function LoadingIndicator({
+  className,
+  class: cssClass,
   color,
   ...rest
 }: Props<HTMLDivElement, LoadingIndicatorProps>): JSX.Element {
   return (
-    <div {...rest} class={styles.loadingIndicator}>
+    <div
+      {...rest}
+      class={createClassName([className, cssClass, styles.loadingIndicator])}
+    >
       <svg
         class={createClassName([
           styles.svg,

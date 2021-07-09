@@ -24,6 +24,8 @@ export type SearchTextboxProps<Name extends string> = {
 }
 
 export function SearchTextbox<Name extends string>({
+  className,
+  class: cssClass,
   clearOnEscapeKeyDown = false,
   disabled = false,
   name,
@@ -91,6 +93,8 @@ export function SearchTextbox<Name extends string>({
   return (
     <div
       class={createClassName([
+        className,
+        cssClass,
         styles.searchTextbox,
         disabled === true ? styles.disabled : null
       ])}
