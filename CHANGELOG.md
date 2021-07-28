@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.3
+
+- `@create-figma-plugin/build`
+  - Fix a bug with how CSS file paths are resolved
+
 ## 1.2.2
 
 - Docs
