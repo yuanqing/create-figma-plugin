@@ -21,7 +21,7 @@ To build the plugin:
 $ npm run build
 ```
 
-This will generate a [`manifest.json`](https://figma.com/plugin-docs/manifest/) file and a `build/` directory containing a JavaScript bundle for the plugin.
+This will generate a [`manifest.json`](https://figma.com/plugin-docs/manifest/) file and a `build/` directory containing the JavaScript bundle(s) for the plugin.
 
 To watch for code changes and rebuild the plugin automatically:
 
