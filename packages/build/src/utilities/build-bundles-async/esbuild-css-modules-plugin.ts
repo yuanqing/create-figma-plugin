@@ -1,7 +1,8 @@
 import cssNano from 'cssnano'
 import { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
+import findUp from 'find-up'
 import fs from 'fs-extra'
-import { basename, extname, resolve } from 'path'
+import { basename, extname, join, resolve } from 'path'
 import postcss, { AcceptedPlugin } from 'postcss'
 import postCssModules from 'postcss-modules'
 import revHash from 'rev-hash'
@@ -14,7 +15,16 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
       build.onResolve(
         { filter: /\.css$/ },
         async function (args: OnResolveArgs): Promise<{ path: string }> {
-          const cssfilePath = resolve(args.resolveDir, args.path)
+          const cssfilePath = await createCssFilePathAsync(
+            args.path,
+            args.resolveDir
+          )
+          if (
+            cssfilePath === null ||
+            (await fs.pathExists(cssfilePath)) === false
+          ) {
+            throw new Error(`CSS file not found: ${args.path}`)
+          }
           const js = await createCssModulesJavaScriptAsync(cssfilePath, minify)
           const jsFilePath = await tempWrite(
             js,
@@ -27,6 +37,23 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
       )
     }
   }
+}
+
+async function createCssFilePathAsync(
+  path: string,
+  resolveDir: string
+): Promise<null | string> {
+  if (path[0] === '/') {
+    return path
+  }
+  if (path[0] === '.') {
+    return resolve(resolveDir, path)
+  }
+  const result = await findUp(join('node_modules', path))
+  if (typeof result === 'undefined') {
+    return null
+  }
+  return result
 }
 
 const backQuoteRegex = /`/g
@@ -66,7 +93,7 @@ async function createCssModulesJavaScriptAsync(
   }
   const elementId: string = revHash(cssFilePath)
   const isBaseCss =
-    cssFilePath.indexOf('create-figma-plugin/packages/ui/lib/css') !== -1
+    cssFilePath.indexOf('@create-figma-plugin/ui/lib/css/base.css') !== -1
   return `
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
