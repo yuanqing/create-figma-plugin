@@ -1,6 +1,7 @@
 import {
   ConfigCommand,
   ConfigCommandSeparator,
+  ConfigParameter,
   ConfigRelaunchButton,
   constants,
   readConfigAsync
@@ -11,6 +12,7 @@ import {
   Manifest,
   ManifestMenuItem,
   ManifestMenuItemSeparator,
+  ManifestParameter,
   ManifestRelaunchButton
 } from '../types/manifest.js'
 
@@ -25,9 +27,11 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     main,
     ui,
     menu,
-    relaunchButtons
+    relaunchButtons,
+    parameters,
+    parameterOnly
   } = config
-  const command = { commandId, main, menu, name, ui }
+  const command = { commandId, main, menu, name, parameterOnly, parameters, ui }
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a `main` entry point')
   }
@@ -52,6 +56,12 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
         result.ui = constants.build.pluginUiFilePath
       }
     }
+  }
+  if (command.parameters !== null) {
+    result.parameters = createParameters(command.parameters)
+  }
+  if (command.parameterOnly === true) {
+    result.parameterOnly = true
   }
   if (command.menu !== null) {
     result.menu = createMenu(command.menu)
@@ -93,6 +103,27 @@ function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {
   return false
 }
 
+function createParameters(
+  parameters: Array<ConfigParameter>
+): Array<ManifestParameter> {
+  return parameters.map(function (
+    parameter: ConfigParameter
+  ): ManifestParameter {
+    const result: ManifestParameter = {
+      key: parameter.key,
+      name: parameter.name,
+      type: parameter.type
+    }
+    if (parameter.description !== null) {
+      result.description = parameter.description
+    }
+    if (parameter.allowFreeform === true) {
+      result.allowFreeform = true
+    }
+    return result
+  })
+}
+
 function createMenu(
   menu: Array<ConfigCommand | ConfigCommandSeparator>
 ): Array<ManifestMenuItem | ManifestMenuItemSeparator> {
@@ -107,6 +138,12 @@ function createMenu(
     }
     if (item.commandId !== null) {
       result.command = item.commandId
+    }
+    if (item.parameters !== null) {
+      result.parameters = createParameters(item.parameters)
+    }
+    if (item.parameterOnly === true) {
+      result.parameterOnly = true
     }
     if (item.menu !== null) {
       result.menu = createMenu(item.menu)
@@ -125,6 +162,12 @@ function createRelaunchButtons(
     const result: ManifestRelaunchButton = {
       name: relaunchButton.name,
       command: relaunchButton.commandId
+    }
+    if (relaunchButton.parameters !== null) {
+      result.parameters = createParameters(relaunchButton.parameters)
+    }
+    if (relaunchButton.parameterOnly === true) {
+      result.parameterOnly = true
     }
     /* eslint-enable sort-keys-fix/sort-keys-fix */
     if (relaunchButton.multipleSelection === true) {

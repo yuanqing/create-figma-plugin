@@ -1,0 +1,30 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "id": "42",
+    "menu": [
+      {
+        "name": "b",
+        "main": "src/foo/main.ts",
+        "ui": "src/foo/ui.ts"
+      },
+      "-",
+      {
+        "name": "c",
+        "menu": [
+          {
+            "name": "d",
+            "main": "src/bar.ts",
+            "parameters": [
+              {
+                "name": "e",
+                "key": "f"
+              }
+            ],
+            "parameterOnly": true
+          }
+        ]
+      }
+    ]
+  }
+}

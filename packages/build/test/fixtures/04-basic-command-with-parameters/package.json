@@ -1,0 +1,14 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "id": "42",
+    "main": "src/main.ts",
+    "parameters": [
+      {
+        "name": "b",
+        "key": "c"
+      }
+    ],
+    "parameterOnly": true
+  }
+}

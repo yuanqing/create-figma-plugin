@@ -1,6 +1,6 @@
 {
   "figma-plugin": {
-    "name": "x",
+    "name": "a",
     "id": "42",
     "main": "src/main.ts",
     "ui": "src/ui.tsx"

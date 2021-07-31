@@ -52,16 +52,16 @@ test('basic command', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x'
+    name: 'a'
   })
   t.true(await fs.pathExists('build/main.js'))
   t.false(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
-test('command with UI', async function (t) {
+test('basic command with UI', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '03-command-with-ui'))
+  process.chdir(join(__dirname, 'fixtures', '03-basic-command-with-ui'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -77,17 +77,152 @@ test('command with UI', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x',
+    name: 'a',
     ui: 'build/ui.js'
   })
   t.true(await fs.pathExists('build/main.js'))
   t.true(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('basic command with parameters', async function (t) {
+  t.plan(5)
+  process.chdir(join(__dirname, 'fixtures', '04-basic-command-with-parameters'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    name: 'a',
+    parameterOnly: true,
+    parameters: [
+      {
+        key: 'c',
+        name: 'b',
+        type: 'string'
+      }
+    ]
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('menu command', async function (t) {
+  t.plan(5)
+  process.chdir(join(__dirname, 'fixtures', '05-menu-command'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    menu: [
+      {
+        command: 'src/main.ts--default',
+        name: 'b'
+      }
+    ],
+    name: 'a'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('menu command with UI', async function (t) {
+  t.plan(5)
+  process.chdir(join(__dirname, 'fixtures', '06-menu-command-with-ui'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    menu: [
+      {
+        command: 'src/main.ts--default',
+        name: 'b'
+      }
+    ],
+    name: 'a',
+    ui: 'build/ui.js'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('menu command with parameters', async function (t) {
+  t.plan(5)
+  process.chdir(join(__dirname, 'fixtures', '07-menu-command-with-parameters'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await symlinkFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    id: '42',
+    main: 'build/main.js',
+    menu: [
+      {
+        command: 'src/main.ts--default',
+        name: 'b',
+        parameterOnly: true,
+        parameters: [
+          {
+            key: 'd',
+            name: 'c',
+            type: 'string'
+          }
+        ]
+      }
+    ],
+    name: 'a'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
 
 test('multiple menu commands', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '04-multiple-menu-commands'))
+  process.chdir(join(__dirname, 'fixtures', '08-multiple-menu-commands'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -105,18 +240,31 @@ test('multiple menu commands', async function (t) {
     main: 'build/main.js',
     menu: [
       {
-        command: 'src/foo.ts--default',
-        name: 'y'
+        command: 'src/foo/main.ts--default',
+        name: 'b'
       },
       {
         separator: true
       },
       {
-        command: 'src/bar/main.ts--default',
-        name: 'z'
+        menu: [
+          {
+            command: 'src/bar.ts--default',
+            name: 'd',
+            parameterOnly: true,
+            parameters: [
+              {
+                key: 'f',
+                name: 'e',
+                type: 'string'
+              }
+            ]
+          }
+        ],
+        name: 'c'
       }
     ],
-    name: 'x',
+    name: 'a',
     ui: 'build/ui.js'
   })
   t.true(await fs.pathExists('build/main.js'))
@@ -124,45 +272,9 @@ test('multiple menu commands', async function (t) {
   await cleanUpAsync()
 })
 
-test('nested menu commands', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '05-nested-menu-commands'))
-  await cleanUpAsync()
-  t.false(await fs.pathExists('build'))
-  t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
-  await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
-  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
-  t.deepEqual(manifestJson, {
-    api: '1.0.0',
-    id: '42',
-    main: 'build/main.js',
-    menu: [
-      {
-        menu: [
-          {
-            command: 'src/foo.ts--default',
-            name: 'z'
-          }
-        ],
-        name: 'y'
-      }
-    ],
-    name: 'x'
-  })
-  t.true(await fs.pathExists('build/main.js'))
-  t.false(await fs.pathExists('build/ui.js'))
-  await cleanUpAsync()
-})
-
 test('relaunch button', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '06-relaunch-button'))
+  process.chdir(join(__dirname, 'fixtures', '09-relaunch-button'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -178,16 +290,24 @@ test('relaunch button', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x',
+    name: 'a',
     relaunchButtons: [
       {
-        command: 'foo',
-        name: 'x'
+        command: 'b',
+        multipleSelection: true,
+        name: 'c'
       },
       {
-        command: 'bar',
-        multipleSelection: true,
-        name: 'y'
+        command: 'd',
+        name: 'e',
+        parameterOnly: true,
+        parameters: [
+          {
+            key: 'g',
+            name: 'f',
+            type: 'string'
+          }
+        ]
       }
     ],
     ui: 'build/ui.js'
@@ -199,7 +319,7 @@ test('relaunch button', async function (t) {
 
 test('custom styles', async function (t) {
   t.plan(7)
-  process.chdir(join(__dirname, 'fixtures', '07-custom-styles'))
+  process.chdir(join(__dirname, 'fixtures', '10-custom-styles'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -216,7 +336,7 @@ test('custom styles', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x',
+    name: 'a',
     ui: 'build/ui.js'
   })
   t.true(await fs.pathExists('build/main.js'))
@@ -227,7 +347,7 @@ test('custom styles', async function (t) {
 
 test('preact', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '08-preact'))
+  process.chdir(join(__dirname, 'fixtures', '11-preact'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -243,7 +363,7 @@ test('preact', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x',
+    name: 'a',
     ui: 'build/ui.js'
   })
   t.true(await fs.pathExists('build/main.js'))
@@ -253,7 +373,7 @@ test('preact', async function (t) {
 
 test('esbuild main config', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '09-esbuild-main-config'))
+  process.chdir(join(__dirname, 'fixtures', '12-esbuild-main-config'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -269,7 +389,7 @@ test('esbuild main config', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x'
+    name: 'a'
   })
   t.true(await fs.pathExists('build/main.js'))
   const mainJs = await fs.readFile('build/main.js', 'utf8')
@@ -280,7 +400,7 @@ test('esbuild main config', async function (t) {
 
 test('esbuild ui config', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '10-esbuild-ui-config'))
+  process.chdir(join(__dirname, 'fixtures', '13-esbuild-ui-config'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -296,7 +416,7 @@ test('esbuild ui config', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x',
+    name: 'a',
     ui: 'build/ui.js'
   })
   t.true(await fs.pathExists('build/main.js'))
@@ -308,7 +428,7 @@ test('esbuild ui config', async function (t) {
 
 test('UI with image asset', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '11-ui-with-image-asset'))
+  process.chdir(join(__dirname, 'fixtures', '14-ui-with-image-asset'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -324,7 +444,7 @@ test('UI with image asset', async function (t) {
     api: '1.0.0',
     id: '42',
     main: 'build/main.js',
-    name: 'x',
+    name: 'a',
     ui: 'build/ui.js'
   })
   t.true(await fs.pathExists('build/main.js'))
