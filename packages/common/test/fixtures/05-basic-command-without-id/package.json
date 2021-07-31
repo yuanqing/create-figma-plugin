@@ -1,7 +1,0 @@
-{
-  "figma-plugin": {
-    "name": "foo",
-    "main": "bar",
-    "ui": "baz"
-  }
-}

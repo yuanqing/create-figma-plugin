@@ -3,6 +3,8 @@ interface BaseConfigMixin {
   readonly commandId: null | string
   readonly main: null | ConfigFile
   readonly ui: null | ConfigFile
+  readonly parameters: null | Array<ConfigParameter>
+  readonly parameterOnly: boolean
 }
 
 export interface Config extends BaseConfigMixin {
@@ -24,6 +26,14 @@ export type ConfigCommandSeparator = { readonly separator: true }
 export interface ConfigFile {
   readonly src: string
   readonly handler: string
+}
+
+export interface ConfigParameter {
+  readonly name: string
+  readonly key: string
+  readonly type: 'string'
+  readonly description: null | string
+  readonly allowFreeform: boolean
 }
 
 export interface ConfigRelaunchButton extends BaseConfigMixin {

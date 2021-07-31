@@ -1,0 +1,16 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "menu": [
+      {
+        "name": "b",
+        "menu": [
+          {
+            "name": "c",
+            "main": "d"
+          }
+        ]
+      }
+    ]
+  }
+}

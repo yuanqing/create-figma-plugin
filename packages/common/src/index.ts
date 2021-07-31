@@ -7,6 +7,7 @@ export {
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
+  ConfigParameter,
   ConfigRelaunchButton
 } from './types/config.js'
 export {
@@ -14,6 +15,7 @@ export {
   RawConfigCommand,
   RawConfigCommandSeparator,
   RawConfigFile,
+  RawConfigParameter,
   RawConfigRelaunchButton,
   RawConfigRelaunchButtons
 } from './types/raw-config.js'

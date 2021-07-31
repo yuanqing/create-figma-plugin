@@ -1,0 +1,10 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "ui": {
+      "src": "c",
+      "handler": "d"
+    }
+  }
+}

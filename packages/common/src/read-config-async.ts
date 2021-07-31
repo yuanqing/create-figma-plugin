@@ -8,6 +8,7 @@ import {
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
+  ConfigParameter,
   ConfigRelaunchButton
 } from './types/config.js'
 import {
@@ -15,6 +16,7 @@ import {
   RawConfigCommand,
   RawConfigCommandSeparator,
   RawConfigFile,
+  RawConfigParameter,
   RawConfigRelaunchButtons
 } from './types/raw-config.js'
 
@@ -31,6 +33,8 @@ const defaultConfig: Config = {
   },
   menu: null,
   name: constants.packageJson.defaultPluginName,
+  parameterOnly: false,
+  parameters: null,
   relaunchButtons: null,
   ui: null
 }
@@ -57,6 +61,8 @@ export async function readConfigAsync(): Promise<Config> {
     main,
     ui,
     menu,
+    parameters,
+    parameterOnly,
     relaunchButtons
   } = config
   return {
@@ -70,7 +76,7 @@ export async function readConfigAsync(): Promise<Config> {
     enableProposedApi:
       typeof enableProposedApi === 'undefined' ? false : enableProposedApi,
     id: typeof id === 'undefined' ? slugify(name) : id,
-    ...parseCommand({ main, menu, name, ui }),
+    ...parseCommand({ main, menu, name, parameterOnly, parameters, ui }),
     relaunchButtons:
       typeof relaunchButtons === 'undefined'
         ? null
@@ -79,7 +85,7 @@ export async function readConfigAsync(): Promise<Config> {
 }
 
 function parseCommand(command: RawConfigCommand): ConfigCommand {
-  const { name, main, ui, menu } = command
+  const { name, main, ui, menu, parameters, parameterOnly } = command
   return {
     commandId: typeof main === 'undefined' ? null : parseCommandId(main),
     main: typeof main === 'undefined' ? null : parseFile(main),
@@ -95,8 +101,29 @@ function parseCommand(command: RawConfigCommand): ConfigCommand {
             return parseCommand(command)
           }),
     name,
+    parameterOnly: typeof parameterOnly === 'undefined' ? false : parameterOnly,
+    parameters:
+      typeof parameters === 'undefined' ? null : parseParameters(parameters),
     ui: typeof ui === 'undefined' ? null : parseFile(ui)
   }
+}
+
+function parseParameters(
+  parameters: Array<RawConfigParameter>
+): Array<ConfigParameter> {
+  const result: Array<ConfigParameter> = []
+  for (const parameter of parameters) {
+    const { name, key, type, description, allowFreeform } = parameter
+    result.push({
+      allowFreeform:
+        typeof allowFreeform === 'undefined' ? false : allowFreeform,
+      description: typeof description === 'undefined' ? null : description,
+      key,
+      name,
+      type: typeof type === 'undefined' ? 'string' : type
+    })
+  }
+  return result
 }
 
 function parseRelaunchButtons(
@@ -104,7 +131,8 @@ function parseRelaunchButtons(
 ): Array<ConfigRelaunchButton> {
   const result: Array<ConfigRelaunchButton> = []
   for (const commandId in relaunchButtons) {
-    const { name, main, ui, multipleSelection } = relaunchButtons[commandId]
+    const { name, main, ui, multipleSelection, parameters, parameterOnly } =
+      relaunchButtons[commandId]
     if (typeof main === 'undefined') {
       throw new Error(`Need a \`main\` for relaunch button: ${name}`)
     }
@@ -114,6 +142,10 @@ function parseRelaunchButtons(
       multipleSelection:
         typeof multipleSelection === 'undefined' ? false : multipleSelection,
       name,
+      parameterOnly:
+        typeof parameterOnly === 'undefined' ? false : parameterOnly,
+      parameters:
+        typeof parameters === 'undefined' ? null : parseParameters(parameters),
       ui: typeof ui === 'undefined' ? null : parseFile(ui)
     })
   }

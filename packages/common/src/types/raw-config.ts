@@ -2,6 +2,8 @@ interface BaseRawConfigMixin {
   readonly name: string
   readonly main?: RawConfigFile
   readonly ui?: RawConfigFile
+  readonly parameters?: Array<RawConfigParameter>
+  readonly parameterOnly?: boolean
 }
 
 export interface RawConfig extends BaseRawConfigMixin {
@@ -26,6 +28,14 @@ export type RawConfigFile =
       readonly src: string
       readonly handler?: string
     }
+
+export interface RawConfigParameter {
+  readonly name: string
+  readonly key: string
+  readonly type?: 'string'
+  readonly description?: string
+  readonly allowFreeform?: boolean
+}
 
 export interface RawConfigRelaunchButton extends BaseRawConfigMixin {
   readonly multipleSelection?: boolean
