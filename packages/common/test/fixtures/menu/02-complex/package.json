@@ -9,28 +9,26 @@
       "-",
       {
         "name": "d",
-        "main": {
-          "src": "e",
-          "handler": "f"
-        },
-        "ui": {
-          "src": "g",
-          "handler": "h"
-        },
-        "parameters": [
+        "menu": [
           {
-            "name": "i",
-            "key": "j"
-          },
-          {
-            "name": "k",
-            "key": "l",
-            "type": "string",
-            "description": "m",
-            "allowFreeform": true
+            "name": "e",
+            "main": "f",
+            "parameters": [
+              {
+                "name": "g",
+                "key": "h"
+              },
+              {
+                "name": "i",
+                "key": "j",
+                "type": "string",
+                "description": "k",
+                "allowFreeform": true
+              }
+            ],
+            "parameterOnly": true
           }
-        ],
-        "parameterOnly": true
+        ]
       }
     ]
   }

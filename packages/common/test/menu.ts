@@ -65,60 +65,38 @@ test('complex', async function (t) {
         separator: true
       },
       {
-        commandId: 'e--f',
-        main: {
-          handler: 'f',
-          src: 'e'
-        },
-        menu: null,
-        name: 'd',
-        parameterOnly: true,
-        parameters: [
-          {
-            allowFreeform: false,
-            description: null,
-            key: 'j',
-            name: 'i',
-            type: 'string'
-          },
-          {
-            allowFreeform: true,
-            description: 'm',
-            key: 'l',
-            name: 'k',
-            type: 'string'
-          }
-        ],
-        ui: {
-          handler: 'h',
-          src: 'g'
-        }
-      }
-    ]
-  })
-})
-
-test('nested', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', 'menu', '03-nested'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    menu: [
-      {
         commandId: null,
         main: null,
         menu: [
           {
-            commandId: 'd--default',
-            main: { handler: 'default', src: 'd' },
+            commandId: 'f--default',
+            main: {
+              handler: 'default',
+              src: 'f'
+            },
             menu: null,
-            name: 'c',
-            parameterOnly: false,
-            parameters: null,
+            name: 'e',
+            parameterOnly: true,
+            parameters: [
+              {
+                allowFreeform: false,
+                description: null,
+                key: 'h',
+                name: 'g',
+                type: 'string'
+              },
+              {
+                allowFreeform: true,
+                description: 'k',
+                key: 'j',
+                name: 'i',
+                type: 'string'
+              }
+            ],
             ui: null
           }
         ],
-        name: 'b',
+        name: 'd',
         parameterOnly: false,
         parameters: null,
         ui: null
