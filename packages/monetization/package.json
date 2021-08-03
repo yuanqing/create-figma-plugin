@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/monetization",
-  "version": "1.2.4-alpha.0",
+  "version": "1.2.4",
   "publishConfig": {
     "access": "public"
   },
