@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.4
+
+- `@create-figma-plugin/build`
+  - Fix a bug with the `build-figma-plugin` CLI throwing an error when the current working directory absolute path contains spaces
+
 ## 1.2.3
 
 - `@create-figma-plugin/build`
