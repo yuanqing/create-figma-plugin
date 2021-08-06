@@ -37,10 +37,10 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   }
   /* eslint-disable sort-keys-fix/sort-keys-fix */
   const result: Manifest = {
-    name: config.name,
-    id: config.id,
     api: config.apiVersion,
     editorType: config.editorType,
+    name: config.name,
+    id: config.id,
     main: constants.build.pluginCodeFilePath
   }
   /* eslint-enable sort-keys-fix/sort-keys-fix */

@@ -1,12 +1,12 @@
 {
   "figma-plugin": {
-    "name": "a",
-    "id": "42",
-    "apiVersion": "43",
+    "apiVersion": "42",
     "editorType": [
       "figjam",
       "figma"
     ],
+    "name": "a",
+    "id": "43",
     "main": "src/main.ts",
     "build": "a",
     "enablePrivatePluginApi": true,

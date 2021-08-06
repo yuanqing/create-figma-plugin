@@ -292,12 +292,12 @@ test('additional fields', async function (t) {
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
-    api: '43',
+    api: '42',
     build: 'a',
     editorType: ['figjam', 'figma'],
     enablePrivatePluginApi: true,
     enableProposedApi: true,
-    id: '42',
+    id: '43',
     main: 'build/main.js',
     name: 'a'
   })
