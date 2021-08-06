@@ -1,0 +1,7 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "enablePrivatePluginApi": true
+  }
+}

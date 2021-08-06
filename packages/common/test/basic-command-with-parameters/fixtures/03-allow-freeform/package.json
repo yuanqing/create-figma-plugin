@@ -1,0 +1,13 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "parameters": [
+      {
+        "name": "c",
+        "key": "d",
+        "allowFreeform": true
+      }
+    ]
+  }
+}

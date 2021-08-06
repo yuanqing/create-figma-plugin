@@ -40,6 +40,7 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     name: config.name,
     id: config.id,
     api: config.apiVersion,
+    editorType: config.editorType,
     main: constants.build.pluginCodeFilePath
   }
   /* eslint-enable sort-keys-fix/sort-keys-fix */
@@ -111,8 +112,7 @@ function createParameters(
   ): ManifestParameter {
     const result: ManifestParameter = {
       key: parameter.key,
-      name: parameter.name,
-      type: parameter.type
+      name: parameter.name
     }
     if (parameter.description !== null) {
       result.description = parameter.description
@@ -162,12 +162,6 @@ function createRelaunchButtons(
     const result: ManifestRelaunchButton = {
       name: relaunchButton.name,
       command: relaunchButton.commandId
-    }
-    if (relaunchButton.parameters !== null) {
-      result.parameters = createParameters(relaunchButton.parameters)
-    }
-    if (relaunchButton.parameterOnly === true) {
-      result.parameterOnly = true
     }
     /* eslint-enable sort-keys-fix/sort-keys-fix */
     if (relaunchButton.multipleSelection === true) {

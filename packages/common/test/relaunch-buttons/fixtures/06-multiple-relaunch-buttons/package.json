@@ -1,0 +1,18 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "relaunchButtons": {
+      "c": {
+        "name": "d",
+        "main": "e"
+      },
+      "f": {
+        "name": "g",
+        "main": "h",
+        "ui": "i",
+        "multipleSelection": true
+      }
+    }
+  }
+}

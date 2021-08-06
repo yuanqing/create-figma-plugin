@@ -1,0 +1,15 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "relaunchButtons": {
+      "c": {
+        "name": "d",
+        "main": {
+          "src": "e",
+          "handler": "f"
+        }
+      }
+    }
+  }
+}

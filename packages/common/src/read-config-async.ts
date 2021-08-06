@@ -24,6 +24,7 @@ const defaultConfig: Config = {
   apiVersion: constants.apiVersion,
   build: null,
   commandId: join(constants.src.directory, 'main.ts--default'),
+  editorType: ['figma'],
   enablePrivatePluginApi: false,
   enableProposedApi: false,
   id: constants.packageJson.defaultPluginName,
@@ -54,6 +55,7 @@ export async function readConfigAsync(): Promise<Config> {
   const {
     apiVersion,
     build,
+    editorType,
     enableProposedApi,
     enablePrivatePluginApi,
     id,
@@ -69,6 +71,7 @@ export async function readConfigAsync(): Promise<Config> {
     apiVersion:
       typeof apiVersion === 'undefined' ? constants.apiVersion : apiVersion,
     build: typeof build === 'undefined' ? null : build,
+    editorType: typeof editorType === 'undefined' ? ['figma'] : editorType,
     enablePrivatePluginApi:
       typeof enablePrivatePluginApi === 'undefined'
         ? false
@@ -113,14 +116,14 @@ function parseParameters(
 ): Array<ConfigParameter> {
   const result: Array<ConfigParameter> = []
   for (const parameter of parameters) {
-    const { name, key, type, description, allowFreeform } = parameter
+    const { allowFreeform, description, key, name, optional } = parameter
     result.push({
       allowFreeform:
         typeof allowFreeform === 'undefined' ? false : allowFreeform,
       description: typeof description === 'undefined' ? null : description,
       key,
       name,
-      type: typeof type === 'undefined' ? 'string' : type
+      optional: typeof optional === 'undefined' ? false : optional
     })
   }
   return result
@@ -131,8 +134,7 @@ function parseRelaunchButtons(
 ): Array<ConfigRelaunchButton> {
   const result: Array<ConfigRelaunchButton> = []
   for (const commandId in relaunchButtons) {
-    const { name, main, ui, multipleSelection, parameters, parameterOnly } =
-      relaunchButtons[commandId]
+    const { name, main, ui, multipleSelection } = relaunchButtons[commandId]
     if (typeof main === 'undefined') {
       throw new Error(`Need a \`main\` for relaunch button: ${name}`)
     }
@@ -142,10 +144,6 @@ function parseRelaunchButtons(
       multipleSelection:
         typeof multipleSelection === 'undefined' ? false : multipleSelection,
       name,
-      parameterOnly:
-        typeof parameterOnly === 'undefined' ? false : parameterOnly,
-      parameters:
-        typeof parameters === 'undefined' ? null : parseParameters(parameters),
       ui: typeof ui === 'undefined' ? null : parseFile(ui)
     })
   }

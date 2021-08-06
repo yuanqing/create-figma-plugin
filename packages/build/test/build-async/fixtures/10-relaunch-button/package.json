@@ -1,0 +1,19 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "id": "42",
+    "main": "src/foo.ts",
+    "relaunchButtons": {
+      "b": {
+        "name": "c",
+        "main": "src/foo.ts"
+      },
+      "d": {
+        "name": "e",
+        "main": "src/bar/main.ts",
+        "ui": "src/bar/ui.ts",
+        "multipleSelection": true
+      }
+    }
+  }
+}

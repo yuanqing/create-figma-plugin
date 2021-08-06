@@ -1,0 +1,30 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "menu": [
+      {
+        "name": "b",
+        "main": "c"
+      },
+      {
+        "name": "d",
+        "main": "e",
+        "ui": "f",
+        "parameters": [
+          {
+            "name": "g",
+            "key": "h",
+            "allowFreeform": true
+          },
+          {
+            "name": "i",
+            "key": "j",
+            "description": "k",
+            "optional": true
+          }
+        ],
+        "parameterOnly": true
+      }
+    ]
+  }
+}

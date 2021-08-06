@@ -3,22 +3,22 @@ interface BaseConfigMixin {
   readonly commandId: null | string
   readonly main: null | ConfigFile
   readonly ui: null | ConfigFile
-  readonly parameters: null | Array<ConfigParameter>
-  readonly parameterOnly: boolean
-}
-
-export interface Config extends BaseConfigMixin {
-  readonly apiVersion: string
-  readonly id: string
-  readonly menu: null | Array<ConfigCommand | ConfigCommandSeparator>
-  readonly relaunchButtons: null | Array<ConfigRelaunchButton>
-  readonly enableProposedApi: boolean
-  readonly enablePrivatePluginApi: boolean
-  readonly build: null | string
 }
 
 export interface ConfigCommand extends BaseConfigMixin {
   readonly menu: null | Array<ConfigCommand | ConfigCommandSeparator>
+  readonly parameters: null | Array<ConfigParameter>
+  readonly parameterOnly: boolean
+}
+
+export interface Config extends ConfigCommand {
+  readonly apiVersion: string
+  readonly editorType: Array<string>
+  readonly id: string
+  readonly relaunchButtons: null | Array<ConfigRelaunchButton>
+  readonly enableProposedApi: boolean
+  readonly enablePrivatePluginApi: boolean
+  readonly build: null | string
 }
 
 export type ConfigCommandSeparator = { readonly separator: true }
@@ -31,9 +31,9 @@ export interface ConfigFile {
 export interface ConfigParameter {
   readonly name: string
   readonly key: string
-  readonly type: 'string'
   readonly description: null | string
   readonly allowFreeform: boolean
+  readonly optional: boolean
 }
 
 export interface ConfigRelaunchButton extends BaseConfigMixin {

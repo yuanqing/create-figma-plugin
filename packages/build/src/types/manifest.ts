@@ -2,6 +2,7 @@ export type Manifest = {
   name: string
   id?: string
   api: string
+  editorType: Array<string>
   main: string
   ui?: string
   menu?: Array<ManifestMenuItem | ManifestMenuItemSeparator>
@@ -26,15 +27,13 @@ export type ManifestMenuItemSeparator = { separator: true }
 export type ManifestParameter = {
   name: string
   key: string
-  type: 'string'
   description?: string
   allowFreeform?: boolean
+  option?: boolean
 }
 
 export type ManifestRelaunchButton = {
   command: string
   name: string
   multipleSelection?: true
-  parameters?: Array<ManifestParameter>
-  parameterOnly?: boolean
 }

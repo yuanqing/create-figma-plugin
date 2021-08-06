@@ -1,0 +1,14 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "menu": [
+      {
+        "name": "b",
+        "main": {
+          "src": "c",
+          "handler": "d"
+        }
+      }
+    ]
+  }
+}

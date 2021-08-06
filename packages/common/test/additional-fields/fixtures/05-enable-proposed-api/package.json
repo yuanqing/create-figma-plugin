@@ -1,0 +1,7 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "enableProposedApi": true
+  }
+}
