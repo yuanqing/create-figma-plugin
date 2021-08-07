@@ -4,6 +4,19 @@ export { convertNamedColorToHexColor } from './color/convert-named-color-to-hex-
 export { convertRgbColorToHexColor } from './color/convert-rgb-color-to-hex-color.js'
 export { isValidHexColor } from './color/is-valid-hex-color.js'
 export { emit, EventHandler, on, once } from './events.js'
+export {
+  getDocumentUseCount,
+  incrementDocumentUseCount,
+  resetDocumentUseCount
+} from './monetization/document-use-count.js'
+export { validateGumroadLicenseKeyMainAsync } from './monetization/gumroad/validate-gumroad-license-key-main-async.js'
+export { validateGumroadLicenseKeyUiAsync } from './monetization/gumroad/validate-gumroad-license-key-ui-async.js'
+export {
+  getTotalUseCountAsync,
+  incrementTotalUseCountAsync,
+  resetTotalUseCountAsync
+} from './monetization/total-use-count.js'
+export { LicenseKeyValidationResult } from './monetization/types.js'
 export { getAbsolutePosition } from './node/absolute-position/get-absolute-position.js'
 export { setAbsolutePosition } from './node/absolute-position/set-absolute-position.js'
 export { collapseLayer } from './node/collapse-layer.js'

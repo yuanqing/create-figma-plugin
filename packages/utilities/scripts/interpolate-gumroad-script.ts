@@ -7,20 +7,18 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main(): Promise<void> {
   try {
-    const rootDirectoryPath = resolve(__dirname, '..')
-    const tsFilePath = join(
-      rootDirectoryPath,
+    const directoryPath = resolve(
+      __dirname,
+      '..',
       'src',
-      'gumroad',
+      'monetization',
+      'gumroad'
+    )
+    const tsFilePath = join(
+      directoryPath,
       'validate-gumroad-license-key-main-async.ts'
     )
-    const scriptFilePath = join(
-      rootDirectoryPath,
-      'src',
-      'gumroad',
-      'private',
-      'script.js'
-    )
+    const scriptFilePath = join(directoryPath, 'private', 'script.js')
     await interpolateScriptAsync(tsFilePath, scriptFilePath)
   } catch (error) {
     console.error(error.message) // eslint-disable-line no-console

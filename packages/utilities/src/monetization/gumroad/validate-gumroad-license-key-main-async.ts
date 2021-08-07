@@ -1,4 +1,4 @@
-import { LicenseKeyValidationResult } from '../utilities/types.js'
+import { LicenseKeyValidationResult } from '../types.js'
 
 const emptyLicense = {
   email: null,
