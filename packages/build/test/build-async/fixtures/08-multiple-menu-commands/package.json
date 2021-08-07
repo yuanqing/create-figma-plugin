@@ -18,7 +18,10 @@
             "parameters": [
               {
                 "name": "e",
-                "key": "f"
+                "key": "f",
+                "description": "g",
+                "allowFreeform": true,
+                "optional": true
               }
             ],
             "parameterOnly": true

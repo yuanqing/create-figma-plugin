@@ -111,8 +111,11 @@ test('basic command with parameters', async function (t) {
     parameterOnly: true,
     parameters: [
       {
+        allowFreeform: true,
+        description: 'd',
         key: 'c',
-        name: 'b'
+        name: 'b',
+        optional: true
       }
     ]
   })
@@ -212,8 +215,11 @@ test('menu command with parameters', async function (t) {
         parameterOnly: true,
         parameters: [
           {
+            allowFreeform: true,
+            description: 'e',
             key: 'd',
-            name: 'c'
+            name: 'c',
+            optional: true
           }
         ]
       }
@@ -260,8 +266,11 @@ test('multiple menu commands', async function (t) {
             parameterOnly: true,
             parameters: [
               {
+                allowFreeform: true,
+                description: 'g',
                 key: 'f',
-                name: 'e'
+                name: 'e',
+                optional: true
               }
             ]
           }

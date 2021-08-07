@@ -6,7 +6,10 @@
     "parameters": [
       {
         "name": "b",
-        "key": "c"
+        "key": "c",
+        "description": "d",
+        "allowFreeform": true,
+        "optional": true
       }
     ],
     "parameterOnly": true
