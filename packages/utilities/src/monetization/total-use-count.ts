@@ -1,7 +1,7 @@
 const DEFAULT_KEY = 'totalUseCount'
 
 /**
- * Returns the plugin’s total use count.
+ * Returns the plugin’s total use count. `key` defaults to `'totalUseCount'`.
  *
  * @category Monetization
  */
@@ -16,7 +16,8 @@ export async function getTotalUseCountAsync(
 }
 
 /**
- * Increments the plugin’s total use count.
+ * Increments the plugin’s total use count. `key` defaults
+ * to `'totalUseCount'`.
  *
  * @returns Returns the plugin’s new total use count.
  * @category Monetization
@@ -31,7 +32,8 @@ export async function incrementTotalUseCountAsync(
 }
 
 /**
- * Resets the plugin’s total use count to `0`.
+ * Resets the plugin’s total use count to `0`. `key` defaults
+ * to `'totalUseCount'`.
  *
  * @category Monetization
  */

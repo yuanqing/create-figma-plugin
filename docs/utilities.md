@@ -199,7 +199,8 @@ import {
 
 ### getDocumentUseCount( [, key])
 
-Returns the plugin’s use count for the current document.
+Returns the plugin’s use count for the current document. `key` defaults
+to `'documentUseCount'`.
 
 ***Parameters***
 
@@ -213,7 +214,7 @@ number
 
 ### getTotalUseCountAsync( [, key])
 
-Returns the plugin’s total use count.
+Returns the plugin’s total use count. `key` defaults to `'totalUseCount'`.
 
 ***Parameters***
 
@@ -227,7 +228,8 @@ Promise<number>
 
 ### incrementDocumentUseCount( [, key])
 
-Increments the plugin’s use count for the current document.
+Increments the plugin’s use count for the current document. `key` defaults
+to `'documentUseCount'`.
 
 ***Parameters***
 
@@ -243,7 +245,8 @@ number
 
 ### incrementTotalUseCountAsync( [, key])
 
-Increments the plugin’s total use count.
+Increments the plugin’s total use count. `key` defaults
+to `'totalUseCount'`.
 
 ***Parameters***
 
@@ -259,7 +262,8 @@ Promise<number>
 
 ### resetDocumentUseCount( [, key])
 
-Resets the plugin’s use count for the current document to `0`.
+Resets the plugin’s use count for the current document to `0`. `key`
+defaults to `'documentUseCount'`.
 
 ***Parameters***
 
@@ -273,7 +277,8 @@ void
 
 ### resetTotalUseCountAsync( [, key])
 
-Resets the plugin’s total use count to `0`.
+Resets the plugin’s total use count to `0`. `key` defaults
+to `'totalUseCount'`.
 
 ***Parameters***
 
