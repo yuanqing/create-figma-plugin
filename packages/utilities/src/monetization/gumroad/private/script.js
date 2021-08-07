@@ -11,7 +11,7 @@ async function main() {
         'https://api.gumroad.com/v2/licenses/verify',
         {
           body:
-            'increment_uses_count=__incrementUsesCount__&license_key=' +
+            'increment_uses_count=__incrementUseCount__&license_key=' +
             encodeURIComponent('__trimmedLicenseKey__') +
             '&product_permalink=' +
             encodeURIComponent('__productPermalink__'),

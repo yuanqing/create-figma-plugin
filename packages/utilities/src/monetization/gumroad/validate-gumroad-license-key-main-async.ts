@@ -7,12 +7,23 @@ const emptyLicense = {
   validationTimestamp: null
 }
 
+/**
+ * Validates the given [Gumroad](https://help.gumroad.com/article/76-license-keys)
+ * `licenseKey` for the product with the given `productPermalink` in the
+ * [main context](#main-context). Set `options.incrementUseCount` to `true` to
+ * increment the license key use count in Gumroad. `options.incrementUseCount`
+ * defaults to `false`.
+ *
+ * @category Monetization
+ */
 export async function validateGumroadLicenseKeyMainAsync(options: {
-  incrementUsesCount: boolean
+  incrementUseCount?: boolean
   licenseKey: string
   productPermalink: string
 }): Promise<LicenseKeyValidationResult> {
-  const { incrementUsesCount, licenseKey, productPermalink } = options
+  const { licenseKey, productPermalink } = options
+  const incrementUseCount =
+    options.incrementUseCount === true ? 'true' : 'false'
   const trimmedLicenseKey = licenseKey.trim()
   if (trimmedLicenseKey === '') {
     return { ...emptyLicense, result: 'INVALID_EMPTY' }
@@ -31,7 +42,7 @@ export async function validateGumroadLicenseKeyMainAsync(options: {
     }
     const validationTimestamp = new Date().toISOString()
     // The script below is inserted via `scripts/interpolate-gumroad-script.ts`
-    const __html__ = `<script>async function main(){const n={email:null,licenseKey:null,purchaseTimestamp:null,validationTimestamp:null};async function t(){try{const s=await(await window.fetch("https://api.gumroad.com/v2/licenses/verify",{body:"increment_uses_count=${incrementUsesCount}&license_key="+encodeURIComponent("${trimmedLicenseKey}")+"&product_permalink="+encodeURIComponent("${productPermalink}"),headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},method:"POST"})).json(),{purchase:e,success:a}=s;return a===!1||e.chargebacked===!0||e.disputed===!0||e.refunded===!0?{...n,result:"INVALID"}:{email:e.email,licenseKey:"${trimmedLicenseKey}",purchaseTimestamp:e.sale_timestamp,result:"VALID",validationTimestamp:"${validationTimestamp}"}}catch{return{...n,result:"ENDPOINT_DOWN"}}}window.parent.postMessage({pluginMessage:await t()},"*")}main();</script>`
+    const __html__ = `<script>async function main(){const n={email:null,licenseKey:null,purchaseTimestamp:null,validationTimestamp:null};async function t(){try{const s=await(await window.fetch("https://api.gumroad.com/v2/licenses/verify",{body:"increment_uses_count=${incrementUseCount}&license_key="+encodeURIComponent("${trimmedLicenseKey}")+"&product_permalink="+encodeURIComponent("${productPermalink}"),headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},method:"POST"})).json(),{purchase:e,success:a}=s;return a===!1||e.chargebacked===!0||e.disputed===!0||e.refunded===!0?{...n,result:"INVALID"}:{email:e.email,licenseKey:"${trimmedLicenseKey}",purchaseTimestamp:e.sale_timestamp,result:"VALID",validationTimestamp:"${validationTimestamp}"}}catch{return{...n,result:"ENDPOINT_DOWN"}}}window.parent.postMessage({pluginMessage:await t()},"*")}main();</script>`
     figma.showUI(__html__, { visible: false })
   })
 }

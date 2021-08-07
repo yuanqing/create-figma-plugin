@@ -1,5 +1,10 @@
 const DEFAULT_KEY = 'totalUseCount'
 
+/**
+ * Returns the plugin’s total use count.
+ *
+ * @category Monetization
+ */
 export async function getTotalUseCountAsync(
   key = DEFAULT_KEY
 ): Promise<number> {
@@ -10,6 +15,12 @@ export async function getTotalUseCountAsync(
   return useCount
 }
 
+/**
+ * Increments the plugin’s total use count.
+ *
+ * @returns Returns the plugin’s new total use count.
+ * @category Monetization
+ */
 export async function incrementTotalUseCountAsync(
   key = DEFAULT_KEY
 ): Promise<number> {
@@ -19,6 +30,11 @@ export async function incrementTotalUseCountAsync(
   return newUseCount
 }
 
+/**
+ * Resets the plugin’s total use count to `0`.
+ *
+ * @category Monetization
+ */
 export async function resetTotalUseCountAsync(
   key = DEFAULT_KEY
 ): Promise<void> {
