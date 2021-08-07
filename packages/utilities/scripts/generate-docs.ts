@@ -52,6 +52,7 @@ async function generateDocsAsync(
   lines.push('')
   lines.push('- [Color](#color)')
   lines.push('- [Events](#events)')
+  lines.push('- [Monetization](#monetization)')
   lines.push('- [Node](#node)')
   lines.push('- [Number](#number)')
   lines.push('- [Object](#object)')

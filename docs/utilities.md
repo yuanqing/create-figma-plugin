@@ -13,6 +13,7 @@ The utility functions span the following categories:
 
 - [Color](#color)
 - [Events](#events)
+- [Monetization](#monetization)
 - [Node](#node)
 - [Number](#number)
 - [Object](#object)
@@ -179,6 +180,151 @@ Returns a function for deregistering the `handler`.
 
 ```
 () => void
+```
+
+## Monetization
+
+```ts
+import {
+  getDocumentUseCount,
+  getTotalUseCountAsync,
+  incrementDocumentUseCount,
+  incrementTotalUseCountAsync,
+  resetDocumentUseCount,
+  resetTotalUseCountAsync,
+  validateGumroadLicenseKeyMainAsync,
+  validateGumroadLicenseKeyUiAsync
+} from '@create-figma-plugin/utilities'
+```
+
+### getDocumentUseCount( [, key])
+
+Returns the plugin’s use count for the current document.
+
+***Parameters***
+
+- **`key`** (`string`) – *Optional.*
+
+***Return type***
+
+```
+number
+```
+
+### getTotalUseCountAsync( [, key])
+
+Returns the plugin’s total use count.
+
+***Parameters***
+
+- **`key`** (`string`) – *Optional.*
+
+***Return type***
+
+```
+Promise<number>
+```
+
+### incrementDocumentUseCount( [, key])
+
+Increments the plugin’s use count for the current document.
+
+***Parameters***
+
+- **`key`** (`string`) – *Optional.*
+
+***Return type***
+
+Returns the plugin’s new use count.
+
+```
+number
+```
+
+### incrementTotalUseCountAsync( [, key])
+
+Increments the plugin’s total use count.
+
+***Parameters***
+
+- **`key`** (`string`) – *Optional.*
+
+***Return type***
+
+Returns the plugin’s new total use count.
+
+```
+Promise<number>
+```
+
+### resetDocumentUseCount( [, key])
+
+Resets the plugin’s use count for the current document to `0`.
+
+***Parameters***
+
+- **`key`** (`string`) – *Optional.*
+
+***Return type***
+
+```
+void
+```
+
+### resetTotalUseCountAsync( [, key])
+
+Resets the plugin’s total use count to `0`.
+
+***Parameters***
+
+- **`key`** (`string`) – *Optional.*
+
+***Return type***
+
+```
+Promise<void>
+```
+
+### validateGumroadLicenseKeyMainAsync(options)
+
+Validates the given [Gumroad](https://help.gumroad.com/article/76-license-keys)
+`licenseKey` for the product with the given `productPermalink` in the
+[main context](#main-context). Set `options.incrementUseCount` to `true` to
+increment the license key use count in Gumroad. `options.incrementUseCount`
+defaults to `false`.
+
+***Parameters***
+
+- **`options`** (`object`)
+  - **`incrementUseCount`** (`boolean`) – *Optional.*
+  - **`licenseKey`** (`string`)
+  - **`productPermalink`** (`string`)
+
+***Return type***
+
+```
+Promise<LicenseKeyValidationResult>
+```
+
+### validateGumroadLicenseKeyUiAsync(options)
+
+Validates the given [Gumroad](https://help.gumroad.com/article/76-license-keys)
+`licenseKey` for the product with the given `productPermalink` in the
+[UI context](#ui-context). Set `options.incrementUseCount` to `true` to
+increment the license key use count in Gumroad. `options.incrementUseCount`
+defaults to `false`.
+
+***Parameters***
+
+- **`options`** (`object`)
+  - **`incrementUseCount`** (`boolean`) – *Optional.*
+  - **`licenseKey`** (`string`)
+  - **`productPermalink`** (`string`)
+
+***Return type***
+
+```
+Promise<LicenseKeyValidationResult>
 ```
 
 ## Node
