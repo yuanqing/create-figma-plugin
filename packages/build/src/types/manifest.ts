@@ -29,7 +29,7 @@ export type ManifestParameter = {
   key: string
   description?: string
   allowFreeform?: boolean
-  option?: boolean
+  optional?: boolean
 }
 
 export type ManifestRelaunchButton = {

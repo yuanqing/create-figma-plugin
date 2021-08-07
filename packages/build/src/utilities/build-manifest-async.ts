@@ -120,6 +120,9 @@ function createParameters(
     if (parameter.allowFreeform === true) {
       result.allowFreeform = true
     }
+    if (parameter.optional === true) {
+      result.optional = true
+    }
     return result
   })
 }
