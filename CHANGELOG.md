@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+- `@create-figma-plugin/monetization`
+  - This package is deprecated. All monetization-related utility functions have been moved into `@create-figma-plugin/utilities`.
+- `@create-figma-plugin/utilities`
+  - Improve docs.
+
 ## 1.2.4
 
 - `@create-figma-plugin/build`
