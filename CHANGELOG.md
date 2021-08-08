@@ -3,38 +3,35 @@
 ## 1.3.0
 
 - `@create-figma-plugin/monetization`
-  - This package is deprecated. All monetization-related utility functions have been moved into `@create-figma-plugin/utilities`.
-- `@create-figma-plugin/utilities`
-  - Improve docs.
+  - This package is deprecated; all monetization-related utility functions have been moved into `@create-figma-plugin/utilities`
 
 ## 1.2.4
 
 - `@create-figma-plugin/build`
-  - Fix a bug with the `build-figma-plugin` CLI throwing an error when the current working directory absolute path contains spaces
+  - Fixed a bug with the `build-figma-plugin` CLI throwing an error when the current working directory absolute path contains spaces
 
 ## 1.2.3
 
 - `@create-figma-plugin/build`
-  - Fix a bug with how CSS file paths are resolved
+  - Fixed a bug with how CSS file paths are resolved
 
 ## 1.2.2
 
-- Docs
-  - Add a recipe for using image assets in the plugin UI
+- Added a recipe for using image assets in the plugin UI
 
 ## 1.2.1
 
 - `create-figma-plugin`
-  - Add a `ui` template
-  - Simplify the CLI; now, only a `name`, `displayName` and `template` are necessary
-- Docs
-  - Add a recipe for customizing the underlying esbuild configuration
+  - Added a `ui` template
+  - Simplified the CLI; now, only a `name`, `displayName` and `template` are necessary
+
+- Added a recipe for customizing the underlying esbuild configuration
 
 ## 1.2.0
 
 - `@create-figma-plugin/build`
   - Added the ability to override the esbuild configuration for the `main` bundle (via a `build-figma-plugin.main.js` file) and the `ui` bundle (via a `build-figma-plugin.ui.js` file)
-  - Improve the UX of the `build-figma-plugin --watch --typecheck` terminal output
+  - Improved the UX of the `build-figma-plugin --watch --typecheck` terminal output
 
 - `@create-figma-plugin/monetization`
   - This is a new package that includes utilities for:
@@ -89,9 +86,11 @@
 - `@create-figma-plugin/ui`
   - Made the `--box-shadow` style identical to that in the Figma CSS
   - Fixed the style of disabled options in the `SegmentedControl` component
+
 - `create-figma-plugin`
   - Included `plugin-templates/*/.gitignore` in the published package
   - Added a `^` prefix to `@create-figma-plugin/*` version numbers in the `default` template
+
 - Improved documentation
 
 ## 1.0.0
