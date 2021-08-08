@@ -21,6 +21,8 @@ The utility functions span the following categories:
 - [String](#string)
 - [UI](#ui-2)
 
+When used with the `build-figma-plugin` CLI, only the functions explicitly imported by your plugin will be included in your plugin bundle(s).
+
 ## Color
 
 ```ts
@@ -35,8 +37,8 @@ import {
 ### convertHexColorToRgbColor(hexColor)
 
 Converts the given `hexColor` (eg. `000000`) to RGB format
-(eg. `{ r: 0, g: 0, b: 0 }`). Note that each value in the returned
-[RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object is
+(eg. `{ r: 0, g: 0, b: 0 }`). Each value in the returned
+[RGB](https://figma.com/plugin-docs/api/RGB/) plain object is
 between `0` and `1`.
 
 ***Parameters***
@@ -45,7 +47,7 @@ between `0` and `1`.
 
 ***Return type***
 
-Returns an [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain
+Returns an [RGB](https://figma.com/plugin-docs/api/RGB/) plain
 object, else `null` if `hexColor` was invalid.
 
 ```
@@ -73,8 +75,9 @@ null | string
 ### convertRgbColorToHexColor(rgbColor)
 
 Converts the given `rgbColor` (eg. `{ r: 0, g: 0, b: 0 }`) to hexadecimal
-format (eg. `000000`). Each value in the given `rgbColor` must be between
-`0` and `1`.
+format (eg. `000000`). Each value in the given
+[RGB](https://figma.com/plugin-docs/api/RGB/) plain object must be
+between `0` and `1`.
 
 ***Parameters***
 
@@ -113,16 +116,18 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-### emit&lt;Handler&gt;(name, args)
+### emit&lt;Handler&gt;(name, ...args)
 
-Calling `emit` in the main context invokes the event handler for the
-matching event `name` in your UI. Correspondingly, calling `emit` in your
-UI invokes the event handler for the matching event `name` in the main
-context.
+Calling `emit` in the [main context](#main-context) invokes the event
+handler for the matching event `name` in your UI. Correspondingly, calling
+`emit` in your UI invokes the event handler for the matching event `name`
+in the main context.
 
 All `args` passed after `name` will be directly
 [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
 on the event handler.
+
+See the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
 ***Type parameters***
 
@@ -199,12 +204,12 @@ import {
 
 ### getDocumentUseCount( [, key])
 
-Returns the plugin’s use count for the current document. `key` defaults
-to `'documentUseCount'`.
+Returns the plugin’s use count for the current document.
 
 ***Parameters***
 
-- **`key`** (`string`) – *Optional.*
+- **`key`** (`string`) – *Optional.* The key on the current document on which to store the use
+count. Defaults to `'documentUseCount'`.
 
 ***Return type***
 
@@ -214,11 +219,12 @@ number
 
 ### getTotalUseCountAsync( [, key])
 
-Returns the plugin’s total use count. `key` defaults to `'totalUseCount'`.
+Returns the plugin’s total use count.
 
 ***Parameters***
 
-- **`key`** (`string`) – *Optional.*
+- **`key`** (`string`) – *Optional.* The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+on which to store the use count. Defaults to `'totalUseCount'`.
 
 ***Return type***
 
@@ -228,16 +234,16 @@ Promise<number>
 
 ### incrementDocumentUseCount( [, key])
 
-Increments the plugin’s use count for the current document. `key` defaults
-to `'documentUseCount'`.
+Increments the plugin’s use count for the current document.
 
 ***Parameters***
 
-- **`key`** (`string`) – *Optional.*
+- **`key`** (`string`) – *Optional.* The key on the current document on which to store the use
+count. Defaults to `'documentUseCount'`.
 
 ***Return type***
 
-Returns the plugin’s new use count.
+Returns the plugin’s new use count for the current document.
 
 ```
 number
@@ -245,12 +251,12 @@ number
 
 ### incrementTotalUseCountAsync( [, key])
 
-Increments the plugin’s total use count. `key` defaults
-to `'totalUseCount'`.
+Increments the plugin’s total use count.
 
 ***Parameters***
 
-- **`key`** (`string`) – *Optional.*
+- **`key`** (`string`) – *Optional.* The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+on which to store the use count. Defaults to `'totalUseCount'`.
 
 ***Return type***
 
@@ -262,12 +268,12 @@ Promise<number>
 
 ### resetDocumentUseCount( [, key])
 
-Resets the plugin’s use count for the current document to `0`. `key`
-defaults to `'documentUseCount'`.
+Resets the plugin’s use count for the current document to `0`.
 
 ***Parameters***
 
-- **`key`** (`string`) – *Optional.*
+- **`key`** (`string`) – *Optional.* The key on the current document on which to store the use
+count. Defaults to `'documentUseCount'`.
 
 ***Return type***
 
@@ -277,12 +283,12 @@ void
 
 ### resetTotalUseCountAsync( [, key])
 
-Resets the plugin’s total use count to `0`. `key` defaults
-to `'totalUseCount'`.
+Resets the plugin’s total use count to `0`.
 
 ***Parameters***
 
-- **`key`** (`string`) – *Optional.*
+- **`key`** (`string`) – *Optional.* The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+on which to store the use count. Defaults to `'totalUseCount'`.
 
 ***Return type***
 
@@ -292,20 +298,24 @@ Promise<void>
 
 ### validateGumroadLicenseKeyMainAsync(options)
 
-Validates the given [Gumroad](https://help.gumroad.com/article/76-license-keys)
-`licenseKey` for the product with the given `productPermalink` in the
-[main context](#main-context). Set `options.incrementUseCount` to `true` to
-increment the license key use count in Gumroad. `options.incrementUseCount`
-defaults to `false`.
+Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
+for the product with the given `productPermalink` in the
+[main context](#main-context).
 
 ***Parameters***
 
 - **`options`** (`object`)
-  - **`incrementUseCount`** (`boolean`) – *Optional.*
-  - **`licenseKey`** (`string`)
-  - **`productPermalink`** (`string`)
+  - **`incrementUseCount`** (`boolean`) – *Optional.* Set to `true` to increment the license
+key use count tracked by Gumroad. Defaults to `false`.
+  - **`licenseKey`** (`string`) – The Gumroad license key to validate.
+  - **`productPermalink`** (`string`) – The Gumroad product permalink. If your
+product URL is `https://gumroad.com/l/QGMY`, then the product permalink
+is `'QGMY'`.
 
 ***Return type***
+
+Returns a
+[`LicenseKeyValidationResult`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/utilities/src/monetization/types.ts) object.
 
 ```
 Promise<LicenseKeyValidationResult>
@@ -313,20 +323,24 @@ Promise<LicenseKeyValidationResult>
 
 ### validateGumroadLicenseKeyUiAsync(options)
 
-Validates the given [Gumroad](https://help.gumroad.com/article/76-license-keys)
-`licenseKey` for the product with the given `productPermalink` in the
-[UI context](#ui-context). Set `options.incrementUseCount` to `true` to
-increment the license key use count in Gumroad. `options.incrementUseCount`
-defaults to `false`.
+Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
+for the product with the given `productPermalink` in the
+[UI context](#ui-context).
 
 ***Parameters***
 
 - **`options`** (`object`)
-  - **`incrementUseCount`** (`boolean`) – *Optional.*
-  - **`licenseKey`** (`string`)
-  - **`productPermalink`** (`string`)
+  - **`incrementUseCount`** (`boolean`) – *Optional.* Set to `true` to increment the license
+key use count tracked by Gumroad. Defaults to `false`.
+  - **`licenseKey`** (`string`) – The Gumroad license key to validate.
+  - **`productPermalink`** (`string`) – The Gumroad product permalink. If your
+product URL is `https://gumroad.com/l/QGMY`, then the product permalink
+is `'QGMY'`.
 
 ***Return type***
+
+Returns a
+[`LicenseKeyValidationResult`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/utilities/src/monetization/types.ts) object.
 
 ```
 Promise<LicenseKeyValidationResult>
@@ -408,7 +422,7 @@ for strokes or effects that could extend beyond the node’s bounding box.)
 
 ***Return type***
 
-Returns a [`Rect`](https://www.figma.com/plugin-docs/api/Rect/).
+Returns the bounding box as a [`Rect`](https://figma.com/plugin-docs/api/Rect/).
 
 ```
 Rect
@@ -427,7 +441,7 @@ nodes’ bounding box.)
 
 ***Return type***
 
-Returns an array of two [`Vector`](https://www.figma.com/plugin-docs/api/Vector/)
+Returns an array of two [`Vector`](https://figma.com/plugin-docs/api/Vector/)
 objects, one for the top-left corner and another for the
 bottom-right corner.
 
@@ -457,7 +471,7 @@ Array<Array<Node>>
 
 ### createImagePaint(bytes)
 
-Creates an [`ImagePaint`](https://www.figma.com/plugin-docs/api/Paint/#imagepaint)
+Creates an [`ImagePaint`](https://figma.com/plugin-docs/api/Paint/#imagepaint)
 object from the `bytes` of an image.
 
 ***Parameters***
@@ -501,7 +515,7 @@ Returns the `x` and `y` position of the given `node` relative to the page.
 
 ***Return type***
 
-Returns a [`Vector`](https://www.figma.com/plugin-docs/api/Vector/).
+Returns a [`Vector`](https://figma.com/plugin-docs/api/Vector/).
 
 ```
 Vector
@@ -536,8 +550,8 @@ BaseNode & ChildrenMixin
 
 ### getSceneNodeById&lt;Node&gt;(id)
 
-Returns `SceneNode` in the current document with the given `id`. This is a
-convenience function that wraps the [`figma.getNodeById`](https://www.figma.com/plugin-docs/api/figma/#getnodebyid)
+Returns the `SceneNode` in the current document with the given `id`. This
+is a convenience function that wraps the [`figma.getNodeById`](https://figma.com/plugin-docs/api/figma/#getnodebyid)
 function.
 
 ***Type parameters***
@@ -619,7 +633,7 @@ boolean
 
 Loads the fonts used in all the text nodes within the `nodes` array. [This
 function must be called before modifying any property of a text node that
-may cause the rendered text to change.](https://www.figma.com/plugin-docs/api/TextNode/#loading-fonts)
+may cause the rendered text to change.](https://figma.com/plugin-docs/api/TextNode/#loading-fonts)
 
 ***Parameters***
 
@@ -634,7 +648,7 @@ Promise<void>
 ### setAbsolutePosition(node, vector)
 
 Moves the `node` to the given `x` and `y` position relative to the page.
-At least one of `x` or `y` must be specified.
+At least one of `x` or `y` of `vector` must be specified.
 
 ***Parameters***
 
@@ -652,8 +666,7 @@ void
 Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
 on `node` for the command with the given `relaunchButtonId` as configured
 under the [**`"relaunchButtons"`**](#relaunchbuttons) key in `package.json`.
-Any relaunch buttons set previously will be retained. `description` is the
-text displayed below the relaunch button in the Figma UI.
+Any relaunch buttons set previously will be retained.
 
 See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
 
@@ -662,7 +675,8 @@ See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons)
 - **`node`** (`BaseNode`)
 - **`relaunchButtonId`** (`string`)
 - **`options`** (`object`) – *Optional.*
-  - **`description`** (`string`)
+  - **`description`** (`string`) – The text to display below the relaunch button
+in the Figma UI.
 
 ***Return type***
 
@@ -753,8 +767,8 @@ void
 ### updateNodesSortOrder(siblingNodes)
 
 Updates the layer list sort order to follow the sort order of the nodes
-in the `siblingNodes` array. Does not modify the original
-`siblingNodes` array.
+in the `siblingNodes` array. Does not modify the original `siblingNodes`
+array.
 
 ***Parameters***
 
@@ -788,8 +802,8 @@ Evaluates the given numeric `expression`.
 
 ***Return type***
 
-Returns the result of evaluating the given `expression`, else
-`null` for an invalid expression.
+Returns the result of evaluating the given numeric `expression`,
+else `null` for an invalid expression.
 
 ```
 null | number
@@ -798,15 +812,14 @@ null | number
 ### isValidNumericInput(value [, options])
 
 Checks if `value` is a numeric expression, as input by a user. “Partial”
-inputs are considered valid. Set `options.integersOnly` to `true` to check
-that the expression contains only integers. `options.integersOnly` defaults
-to `false` if not specified.
+inputs are considered valid.
 
 ***Parameters***
 
 - **`value`** (`string`)
 - **`options`** (`object`) – *Optional.*
-  - **`integersOnly`** (`boolean`)
+  - **`integersOnly`** (`boolean`) – Set to `true` to check that the expression
+contains only integers. Defaults to `false`.
 
 ***Return type***
 
@@ -915,8 +928,7 @@ import {
 ### loadSettingsAsync&lt;Settings&gt;(defaultSettings [, settingsKey])
 
 Loads your plugin’s settings (stored locally on the user’s computer under
-the given `settingsKey`). `settingsKey` defaults to `'settings'`. Values
-in `settings` default to an optional `defaultSettings` object.
+the given `settingsKey`).
 
 ***Type parameters***
 
@@ -925,7 +937,8 @@ in `settings` default to an optional `defaultSettings` object.
 ***Parameters***
 
 - **`defaultSettings`** (`Settings`)
-- **`settingsKey`** (`string`) – *Optional.*
+- **`settingsKey`** (`string`) – *Optional.* The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+on which to store the settings. Defaults to `'settings'`.
 
 ***Return type***
 
@@ -936,8 +949,7 @@ Promise<Settings>
 ### saveSettingsAsync&lt;Settings&gt;(settings [, settingsKey])
 
 Saves the given `settings` for your plugin (stored locally on the user’s
-computer under the given `settingsKey`). `settingsKey` defaults to
-`'settings'`.
+computer under the given `settingsKey`).
 
 ***Type parameters***
 
@@ -946,7 +958,8 @@ computer under the given `settingsKey`). `settingsKey` defaults to
 ***Parameters***
 
 - **`settings`** (`Settings`)
-- **`settingsKey`** (`string`) – *Optional.*
+- **`settingsKey`** (`string`) – *Optional.* The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+on which to store the settings. Defaults to `'settings'`.
 
 ***Return type***
 
@@ -1010,7 +1023,7 @@ string
 ### pluralize(number, singular [, plural])
 
 Returns `singular` if `number` is exactly `1`, else returns `plural`.
-`plural` defaults to `${singular}s` if not specified.
+`plural` defaults to `` `${singular}s` `` if not specified.
 
 ***Parameters***
 
@@ -1035,7 +1048,8 @@ import {
 ### showUI&lt;Data&gt;(options [, data])
 
 Renders the UI correponding to the command in a modal within the Figma UI.
-Specify the width, height, and visibility of the UI via `options`.
+Specify the modal’s `width`, `height`, `title`, and whether it is `visible`
+via [`options`](https://figma.com/plugin-docs/api/properties/figma-showui/).
 Optionally pass on some initialising `data` from the command to the UI.
 
 See how to [add a UI to a plugin command](#ui-1).

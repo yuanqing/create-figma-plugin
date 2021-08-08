@@ -6,10 +6,10 @@ import {
 
 /**
  * Checks if `value` is a numeric expression, as input by a user. “Partial”
- * inputs are considered valid. Set `options.integersOnly` to `true` to check
- * that the expression contains only integers. `options.integersOnly` defaults
- * to `false` if not specified.
+ * inputs are considered valid.
  *
+ * @param options.integersOnly  Set to `true` to check that the expression
+ * contains only integers. Defaults to `false`.
  * @returns Returns `true` if `value` is a valid numeric expression,
  * else `false`.
  * @category Number

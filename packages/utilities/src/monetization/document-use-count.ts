@@ -5,9 +5,10 @@ type DocumentUseCountPluginData = {
 const DEFAULT_KEY = 'documentUseCount'
 
 /**
- * Returns the plugin’s use count for the current document. `key` defaults
- * to `'documentUseCount'`.
+ * Returns the plugin’s use count for the current document.
  *
+ * @param key  The key on the current document on which to store the use
+ * count. Defaults to `'documentUseCount'`.
  * @category Monetization
  */
 export function getDocumentUseCount(key = DEFAULT_KEY): number {
@@ -20,9 +21,10 @@ export function getDocumentUseCount(key = DEFAULT_KEY): number {
 }
 
 /**
- * Increments the plugin’s use count for the current document. `key` defaults
- * to `'documentUseCount'`.
+ * Increments the plugin’s use count for the current document.
  *
+ * @param key  The key on the current document on which to store the use
+ * count. Defaults to `'documentUseCount'`.
  * @returns Returns the plugin’s new use count for the current document.
  * @category Monetization
  */
@@ -36,9 +38,10 @@ export function incrementDocumentUseCount(key = DEFAULT_KEY): number {
 }
 
 /**
- * Resets the plugin’s use count for the current document to `0`. `key`
- * defaults to `'documentUseCount'`.
+ * Resets the plugin’s use count for the current document to `0`.
  *
+ * @param key  The key on the current document on which to store the use
+ * count. Defaults to `'documentUseCount'`.
  * @category Monetization
  */
 export function resetDocumentUseCount(key = DEFAULT_KEY): void {

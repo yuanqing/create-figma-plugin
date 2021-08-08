@@ -3,10 +3,10 @@ import hexRgb from 'hex-rgb'
 /**
  * Converts the given `hexColor` (eg. `000000`) to RGB format
  * (eg. `{ r: 0, g: 0, b: 0 }`). Each value in the returned
- * [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object is
+ * [RGB](https://figma.com/plugin-docs/api/RGB/) plain object is
  * between `0` and `1`.
  *
- * @returns Returns an [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain
+ * @returns Returns an [RGB](https://figma.com/plugin-docs/api/RGB/) plain
  * object, else `null` if `hexColor` was invalid.
  * @category Color
  */

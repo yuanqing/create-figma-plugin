@@ -1,5 +1,5 @@
 /**
- * Creates an [`ImagePaint`](https://www.figma.com/plugin-docs/api/Paint/#imagepaint)
+ * Creates an [`ImagePaint`](https://figma.com/plugin-docs/api/Paint/#imagepaint)
  * object from the `bytes` of an image.
  *
  * @category Node

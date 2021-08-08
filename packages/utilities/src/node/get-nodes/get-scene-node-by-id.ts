@@ -1,6 +1,6 @@
 /**
- * Returns `SceneNode` in the current document with the given `id`. This is a
- * convenience function that wraps the [`figma.getNodeById`](https://www.figma.com/plugin-docs/api/figma/#getnodebyid)
+ * Returns the `SceneNode` in the current document with the given `id`. This
+ * is a convenience function that wraps the [`figma.getNodeById`](https://figma.com/plugin-docs/api/figma/#getnodebyid)
  * function.
  *
  * @returns Throws an error if no `SceneNode` with the given `id` exists, else

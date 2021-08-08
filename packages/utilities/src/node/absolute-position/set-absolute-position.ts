@@ -1,6 +1,6 @@
 /**
  * Moves the `node` to the given `x` and `y` position relative to the page.
- * At least one of `x` or `y` must be specified.
+ * At least one of `x` or `y` of `vector` must be specified.
  *
  * @category Node
  */

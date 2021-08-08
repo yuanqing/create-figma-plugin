@@ -1,8 +1,10 @@
 const DEFAULT_KEY = 'totalUseCount'
 
 /**
- * Returns the plugin’s total use count. `key` defaults to `'totalUseCount'`.
+ * Returns the plugin’s total use count.
  *
+ * @param key  The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+ * on which to store the use count. Defaults to `'totalUseCount'`.
  * @category Monetization
  */
 export async function getTotalUseCountAsync(
@@ -16,9 +18,10 @@ export async function getTotalUseCountAsync(
 }
 
 /**
- * Increments the plugin’s total use count. `key` defaults
- * to `'totalUseCount'`.
+ * Increments the plugin’s total use count.
  *
+ * @param key  The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+ * on which to store the use count. Defaults to `'totalUseCount'`.
  * @returns Returns the plugin’s new total use count.
  * @category Monetization
  */
@@ -32,9 +35,10 @@ export async function incrementTotalUseCountAsync(
 }
 
 /**
- * Resets the plugin’s total use count to `0`. `key` defaults
- * to `'totalUseCount'`.
+ * Resets the plugin’s total use count to `0`.
  *
+ * @param key  The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+ * on which to store the use count. Defaults to `'totalUseCount'`.
  * @category Monetization
  */
 export async function resetTotalUseCountAsync(

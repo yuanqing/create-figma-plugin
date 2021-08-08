@@ -6,7 +6,7 @@ import { computeBoundingBox } from './compute-bounding-box.js'
  * (Does not account for strokes or effects that could extend beyond the
  * nodes’ bounding box.)
  *
- * @returns Returns an array of two [`Vector`](https://www.figma.com/plugin-docs/api/Vector/)
+ * @returns Returns an array of two [`Vector`](https://figma.com/plugin-docs/api/Vector/)
  * objects, one for the top-left corner and another for the
  * bottom-right corner.
  * @category Node

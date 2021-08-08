@@ -10,10 +10,14 @@ const emptyLicense = {
 /**
  * Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
  * for the product with the given `productPermalink` in the
- * [UI context](#ui-context). Set `options.incrementUseCount` to `true`
- * to increment the license key use count tracked by Gumroad.
- * `options.incrementUseCount` defaults to `false`.
+ * [UI context](#ui-context).
  *
+ * @param options.productPermalink  The Gumroad product permalink. If your
+ * product URL is `https://gumroad.com/l/QGMY`, then the product permalink
+ * is `'QGMY'`.
+ * @param options.licenseKey  The Gumroad license key to validate.
+ * @param options.incrementUseCount  Set to `true` to increment the license
+ * key use count tracked by Gumroad. Defaults to `false`.
  * @return Returns a
  * [`LicenseKeyValidationResult`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/utilities/src/monetization/types.ts) object.
  * @category Monetization

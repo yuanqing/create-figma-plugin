@@ -4,8 +4,8 @@ import { areSiblingNodes } from '../sibling-nodes/are-sibling-nodes.js'
 
 /**
  * Updates the layer list sort order to follow the sort order of the nodes
- * in the `siblingNodes` array. Does not modify the original
- * `siblingNodes` array.
+ * in the `siblingNodes` array. Does not modify the original `siblingNodes`
+ * array.
  *
  * @returns Returns `true` if the layer list sort order was changed by the
  * function, else `false`.

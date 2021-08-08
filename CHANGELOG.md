@@ -307,7 +307,7 @@
 
 - The height of the component is now `28px` (reduced from `32px`) to be identical to the height of textboxes in the Figma editor UI.
 - The `value` prop cannot be `null` and can now only be a `string`.
-  - A [“Mixed” value](https://www.figma.com/plugin-docs/api/properties/figma-mixed/) is represented by the `MIXED_STRING` constant from `@create-figma-plugin/utilities`.
+  - A [“Mixed” value](https://figma.com/plugin-docs/api/properties/figma-mixed/) is represented by the `MIXED_STRING` constant from `@create-figma-plugin/utilities`.
 - The `focused`, `onChange`, and `type` props have been removed.
 - There’s a new `onInput` prop with the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`.
 - There’s a new `onValueInput` prop with the signature `(newValue: string, name?: string) => void`.
@@ -327,7 +327,7 @@
 
 - The height of the component is now `28px` (reduced from `32px`) to be identical to the height of textboxes in the Figma editor UI.
 - The `value` prop cannot be `null` and can now only be a `string`.
-  - A [“Mixed” value](https://www.figma.com/plugin-docs/api/properties/figma-mixed/) is represented by the `MIXED_STRING` constant from `@create-figma-plugin/utilities`.
+  - A [“Mixed” value](https://figma.com/plugin-docs/api/properties/figma-mixed/) is represented by the `MIXED_STRING` constant from `@create-figma-plugin/utilities`.
 - The `focused`, and `onChange` props have been removed.
 - There’s a new `onInput` prop with the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`.
 - There’s a new `onValueInput` prop with the signature `(newValue: string, name?: string) => void`.

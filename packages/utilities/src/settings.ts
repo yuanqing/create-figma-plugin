@@ -2,9 +2,10 @@ const DEFAULT_SETTINGS_KEY = 'settings'
 
 /**
  * Loads your plugin’s settings (stored locally on the user’s computer under
- * the given `settingsKey`). `settingsKey` defaults to `'settings'`. Values
- * in `settings` default to an optional `defaultSettings` object.
+ * the given `settingsKey`).
  *
+ * @param settingsKey  The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+ * on which to store the settings. Defaults to `'settings'`.
  * @category Settings
  */
 export async function loadSettingsAsync<Settings>(
@@ -20,9 +21,10 @@ export async function loadSettingsAsync<Settings>(
 
 /**
  * Saves the given `settings` for your plugin (stored locally on the user’s
- * computer under the given `settingsKey`). `settingsKey` defaults to
- * `'settings'`.
+ * computer under the given `settingsKey`).
  *
+ * @param settingsKey  The key in [`figma.clientStorage`](https://figma.com/plugin-docs/api/figma-clientStorage/)
+ * on which to store the settings. Defaults to `'settings'`.
  * @category Settings
  */
 export async function saveSettingsAsync<Settings>(

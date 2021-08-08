@@ -1,6 +1,6 @@
 /**
  * Returns `singular` if `number` is exactly `1`, else returns `plural`.
- * `plural` defaults to `${singular}s` if not specified.
+ * `plural` defaults to `` `${singular}s` `` if not specified.
  *
  * @category String
  */
