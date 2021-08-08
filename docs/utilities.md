@@ -308,9 +308,9 @@ for the product with the given `productPermalink` in the
   - **`incrementUseCount`** (`boolean`) – *Optional.* Set to `true` to increment the license
 key use count tracked by Gumroad. Defaults to `false`.
   - **`licenseKey`** (`string`) – The Gumroad license key to validate.
-  - **`productPermalink`** (`string`) – The Gumroad product permalink. If your
-product URL is `https://gumroad.com/l/QGMY`, then the product permalink
-is `'QGMY'`.
+  - **`productPermalink`** (`string`) – The Gumroad “product permalink”. If the
+Gumroad product URL is `https://gumroad.com/l/QGMY`, then the product
+permalink is `'QGMY'`.
 
 ***Return type***
 
@@ -333,9 +333,9 @@ for the product with the given `productPermalink` in the
   - **`incrementUseCount`** (`boolean`) – *Optional.* Set to `true` to increment the license
 key use count tracked by Gumroad. Defaults to `false`.
   - **`licenseKey`** (`string`) – The Gumroad license key to validate.
-  - **`productPermalink`** (`string`) – The Gumroad product permalink. If your
-product URL is `https://gumroad.com/l/QGMY`, then the product permalink
-is `'QGMY'`.
+  - **`productPermalink`** (`string`) – The Gumroad “product permalink”. If the
+Gumroad product URL is `https://gumroad.com/l/QGMY`, then the product
+permalink is `'QGMY'`.
 
 ***Return type***
 
