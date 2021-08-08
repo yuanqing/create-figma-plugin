@@ -23,7 +23,7 @@ export function getDocumentUseCount(key = DEFAULT_KEY): number {
  * Increments the plugin’s use count for the current document. `key` defaults
  * to `'documentUseCount'`.
  *
- * @returns Returns the plugin’s new use count.
+ * @returns Returns the plugin’s new use count for the current document.
  * @category Monetization
  */
 export function incrementDocumentUseCount(key = DEFAULT_KEY): number {

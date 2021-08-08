@@ -2,8 +2,9 @@ import rgbHex from 'rgb-hex'
 
 /**
  * Converts the given `rgbColor` (eg. `{ r: 0, g: 0, b: 0 }`) to hexadecimal
- * format (eg. `000000`). Each value in the given `rgbColor` must be between
- * `0` and `1`.
+ * format (eg. `000000`). Each value in the given
+ * [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object must be
+ * between `0` and `1`.
  *
  * @returns Returns a hexadecimal color as an uppercase string, else `null`
  * if `rgbColor` was invalid.

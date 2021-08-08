@@ -47,14 +47,16 @@ export function once<Handler extends EventHandler>(
 }
 
 /**
- * Calling `emit` in the main context invokes the event handler for the
- * matching event `name` in your UI. Correspondingly, calling `emit` in your
- * UI invokes the event handler for the matching event `name` in the main
- * context.
+ * Calling `emit` in the [main context](#main-context) invokes the event
+ * handler for the matching event `name` in your UI. Correspondingly, calling
+ * `emit` in your UI invokes the event handler for the matching event `name`
+ * in the main context.
  *
  * All `args` passed after `name` will be directly
  * [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
  * on the event handler.
+ *
+ * See the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
  *
  * @category Events
  */

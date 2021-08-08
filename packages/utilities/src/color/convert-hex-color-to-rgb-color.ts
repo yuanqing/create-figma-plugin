@@ -2,7 +2,7 @@ import hexRgb from 'hex-rgb'
 
 /**
  * Converts the given `hexColor` (eg. `000000`) to RGB format
- * (eg. `{ r: 0, g: 0, b: 0 }`). Note that each value in the returned
+ * (eg. `{ r: 0, g: 0, b: 0 }`). Each value in the returned
  * [RGB](https://www.figma.com/plugin-docs/api/RGB/) plain object is
  * between `0` and `1`.
  *

@@ -60,6 +60,10 @@ async function generateDocsAsync(
   lines.push('- [String](#string)')
   lines.push('- [UI](#ui-2)')
   lines.push('')
+  lines.push(
+    'When used with the `build-figma-plugin` CLI, only the functions explicitly imported by your plugin will be included in your plugin bundle(s).'
+  )
+  lines.push('')
   for (const category of categories) {
     lines.push(`## ${category.name}`)
     lines.push('')
