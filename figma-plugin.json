@@ -15,16 +15,43 @@
           "additionalProperties": false,
           "properties": {
             "src": {
-              "description": "Required.\nPath to the main entry point of the plugin command.",
+              "description": "(Required)\nPath to the main entry point of the plugin command.",
               "type": "string"
             },
             "handler": {
-              "description": "Required.\nThe name of the exported function in the file.",
+              "description": "(Required)\nThe name of the exported function in the file.",
               "type": "string"
             }
           }
         }
       ]
+    },
+    "Parameter": {
+      "type": "object",
+      "required": ["name", "key"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "(Required)",
+          "type": "string"
+        },
+        "key": {
+          "description": "(Required)",
+          "type": "string"
+        },
+        "description": {
+          "description": "(Optional)",
+          "type": "string"
+        },
+        "allowFreeform": {
+          "description": "(Optional)",
+          "type": "boolean"
+        },
+        "optional": {
+          "description": "(Optional)",
+          "type": "boolean"
+        }
+      }
     },
     "MenuItem": {
       "oneOf": [
@@ -61,6 +88,18 @@
               "items": {
                 "$ref": "#/definitions/MenuItem"
               }
+            },
+            "parameters": {
+              "description": "(Optional)",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/definitions/Parameter"
+              }
+            },
+            "parameterOnly": {
+              "description": "(Optional)",
+              "type": "boolean"
             }
           }
         }
@@ -79,6 +118,14 @@
         "apiVersion": {
           "description": "(Optional)\nThe version of the Figma plugin API to use. Defaults to \"1.0.0\".",
           "type": "string"
+        },
+        "editorType": {
+          "description": "(Optional)",
+          "type": "array",
+          "minItems": 1,
+          "items": [
+            { "enum": ["figjam", "figma"] }
+          ]
         },
         "id": {
           "description": "(Required to publish the plugin on Figma Community)\nThe plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.",
@@ -103,6 +150,18 @@
           "items": {
             "$ref": "#/definitions/MenuItem"
           }
+        },
+        "parameters": {
+          "description": "(Optional)",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        },
+        "parameterOnly": {
+          "description": "(Optional)",
+          "type": "boolean"
         },
         "relaunchButtons": {
           "description": "(Optional)\nAn object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the keys \"name\" (required), \"main\" (required), \"ui\" (optional), and \"multipleSelection\" (optional).",
