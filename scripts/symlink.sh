@@ -22,7 +22,6 @@ main() {
   mkdir -p "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/build "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/common "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
-  ln -s "$SOURCE_DIRECTORY"/packages/monetization "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/tsconfig "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/ui "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
   ln -s "$SOURCE_DIRECTORY"/packages/utilities "$TARGET_DIRECTORY"/node_modules/@create-figma-plugin
