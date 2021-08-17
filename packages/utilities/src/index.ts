@@ -45,6 +45,7 @@ export { isValidNumericInput } from './number/is-valid-numeric-input.js'
 export { cloneObject } from './object/clone-object.js'
 export { compareObjects } from './object/compare-objects.js'
 export { compareStringArrays } from './object/compare-string-arrays.js'
+export { deduplicateArray } from './object/deduplicate-array.js'
 export { extractAttributes } from './object/extract-attributes.js'
 export { loadSettingsAsync, saveSettingsAsync } from './settings.js'
 export {
