@@ -28,11 +28,11 @@
     },
     "Parameter": {
       "type": "object",
-      "required": ["name", "key"],
+      "required": ["key"],
       "additionalProperties": false,
       "properties": {
         "name": {
-          "description": "(Required)",
+          "description": "(Optional)",
           "type": "string"
         },
         "key": {
