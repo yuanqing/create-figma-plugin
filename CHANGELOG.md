@@ -2,6 +2,8 @@
 
 ## 1.3.0
 
+- `@create-figma-plugin/build`
+  - Support the new `editorType`, `parameters`, and `paramtersOnly` config in the `manifest.json `
 - `@create-figma-plugin/monetization`
   - This package is deprecated; all monetization-related utility functions have been moved into `@create-figma-plugin/utilities`
 
