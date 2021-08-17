@@ -175,14 +175,14 @@ test('parameters', async function (t) {
           {
             allowFreeform: true,
             description: null,
-            key: 'h',
-            name: 'g',
+            key: 'g',
+            name: 'h',
             optional: false
           },
           {
             allowFreeform: false,
-            description: 'k',
-            key: 'j',
+            description: 'j',
+            key: 'i',
             name: 'i',
             optional: true
           }

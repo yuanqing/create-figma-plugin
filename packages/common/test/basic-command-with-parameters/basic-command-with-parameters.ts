@@ -31,8 +31,26 @@ test('single parameter', async function (t) {
       {
         allowFreeform: false,
         description: null,
-        key: 'd',
+        key: 'c',
         name: 'c',
+        optional: false
+      }
+    ]
+  })
+})
+
+test('name', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '02-name'))
+  t.deepEqual(await readConfigAsync(), {
+    ...config,
+    parameterOnly: false,
+    parameters: [
+      {
+        allowFreeform: false,
+        description: null,
+        key: 'c',
+        name: 'd',
         optional: false
       }
     ]
@@ -41,15 +59,15 @@ test('single parameter', async function (t) {
 
 test('description', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '02-description'))
+  process.chdir(join(__dirname, 'fixtures', '03-description'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     parameterOnly: false,
     parameters: [
       {
         allowFreeform: false,
-        description: 'e',
-        key: 'd',
+        description: 'd',
+        key: 'c',
         name: 'c',
         optional: false
       }
@@ -59,7 +77,7 @@ test('description', async function (t) {
 
 test('allow freeform', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '03-allow-freeform'))
+  process.chdir(join(__dirname, 'fixtures', '04-allow-freeform'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     parameterOnly: false,
@@ -67,7 +85,7 @@ test('allow freeform', async function (t) {
       {
         allowFreeform: true,
         description: null,
-        key: 'd',
+        key: 'c',
         name: 'c',
         optional: false
       }
@@ -77,7 +95,7 @@ test('allow freeform', async function (t) {
 
 test('optional', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '04-optional'))
+  process.chdir(join(__dirname, 'fixtures', '05-optional'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     parameterOnly: false,
@@ -85,7 +103,7 @@ test('optional', async function (t) {
       {
         allowFreeform: false,
         description: null,
-        key: 'd',
+        key: 'c',
         name: 'c',
         optional: true
       }
@@ -95,7 +113,7 @@ test('optional', async function (t) {
 
 test('multiple parameters', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '05-multiple-parameters'))
+  process.chdir(join(__dirname, 'fixtures', '06-multiple-parameters'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     parameterOnly: false,
@@ -103,14 +121,14 @@ test('multiple parameters', async function (t) {
       {
         allowFreeform: true,
         description: null,
-        key: 'd',
-        name: 'c',
+        key: 'c',
+        name: 'd',
         optional: false
       },
       {
         allowFreeform: false,
-        description: 'g',
-        key: 'f',
+        description: 'f',
+        key: 'e',
         name: 'e',
         optional: true
       }
@@ -120,7 +138,7 @@ test('multiple parameters', async function (t) {
 
 test('parameter only', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '06-parameter-only'))
+  process.chdir(join(__dirname, 'fixtures', '07-parameter-only'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     parameterOnly: true,
@@ -128,7 +146,7 @@ test('parameter only', async function (t) {
       {
         allowFreeform: false,
         description: null,
-        key: 'd',
+        key: 'c',
         name: 'c',
         optional: false
       }

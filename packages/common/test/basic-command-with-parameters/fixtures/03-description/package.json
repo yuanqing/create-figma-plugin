@@ -4,10 +4,9 @@
     "main": "b",
     "parameters": [
       {
-        "name": "c",
-        "key": "d"
+        "key": "c",
+        "description": "d"
       }
-    ],
-    "parameterOnly": true
+    ]
   }
 }

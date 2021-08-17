@@ -122,7 +122,7 @@ function parseParameters(
         typeof allowFreeform === 'undefined' ? false : allowFreeform,
       description: typeof description === 'undefined' ? null : description,
       key,
-      name,
+      name: typeof name === 'undefined' ? key : name,
       optional: typeof optional === 'undefined' ? false : optional
     })
   }

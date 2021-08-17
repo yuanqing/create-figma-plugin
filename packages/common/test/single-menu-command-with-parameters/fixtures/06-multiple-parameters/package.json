@@ -7,14 +7,13 @@
         "main": "c",
         "parameters": [
           {
-            "name": "d",
-            "key": "e",
+            "key": "d",
+            "name": "e",
             "allowFreeform": true
           },
           {
-            "name": "f",
-            "key": "g",
-            "description": "h",
+            "key": "f",
+            "description": "g",
             "optional": true
           }
         ]

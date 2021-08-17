@@ -4,8 +4,7 @@
     "main": "b",
     "parameters": [
       {
-        "name": "c",
-        "key": "d",
+        "key": "c",
         "optional": true
       }
     ]

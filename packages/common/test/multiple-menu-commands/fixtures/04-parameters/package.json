@@ -12,14 +12,13 @@
         "ui": "f",
         "parameters": [
           {
-            "name": "g",
-            "key": "h",
+            "key": "g",
+            "name": "h",
             "allowFreeform": true
           },
           {
-            "name": "i",
-            "key": "j",
-            "description": "k",
+            "key": "i",
+            "description": "j",
             "optional": true
           }
         ],

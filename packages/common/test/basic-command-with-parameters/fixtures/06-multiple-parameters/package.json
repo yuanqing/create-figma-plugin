@@ -4,14 +4,13 @@
     "main": "b",
     "parameters": [
       {
-        "name": "c",
-        "key": "d",
+        "key": "c",
+        "name": "d",
         "allowFreeform": true
       },
       {
-        "name": "e",
-        "key": "f",
-        "description": "g",
+        "key": "e",
+        "description": "f",
         "optional": true
       }
     ]

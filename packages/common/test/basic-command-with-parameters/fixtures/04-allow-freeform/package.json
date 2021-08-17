@@ -4,9 +4,8 @@
     "main": "b",
     "parameters": [
       {
-        "name": "c",
-        "key": "d",
-        "description": "e"
+        "key": "c",
+        "allowFreeform": true
       }
     ]
   }

@@ -29,8 +29,8 @@ export interface ConfigFile {
 }
 
 export interface ConfigParameter {
-  readonly name: string
   readonly key: string
+  readonly name: string
   readonly description: null | string
   readonly allowFreeform: boolean
   readonly optional: boolean

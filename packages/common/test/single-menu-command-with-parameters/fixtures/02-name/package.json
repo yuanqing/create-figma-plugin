@@ -7,9 +7,8 @@
         "main": "c",
         "parameters": [
           {
-            "name": "d",
-            "key": "e",
-            "description": "f"
+            "key": "d",
+            "name": "e"
           }
         ]
       }

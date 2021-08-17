@@ -7,9 +7,8 @@
         "main": "c",
         "parameters": [
           {
-            "name": "d",
-            "key": "e",
-            "optional": true
+            "key": "d",
+            "allowFreeform": true
           }
         ]
       }

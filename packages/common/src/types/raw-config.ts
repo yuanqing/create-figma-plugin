@@ -30,8 +30,8 @@ export type RawConfigFile =
     }
 
 export interface RawConfigParameter {
-  readonly name: string
   readonly key: string
+  readonly name?: string
   readonly description?: string
   readonly allowFreeform?: boolean
   readonly optional?: boolean
