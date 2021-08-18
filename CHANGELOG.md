@@ -5,12 +5,12 @@
 - `@create-figma-plugin/utilities`
   - Added `deduplicateArray`
 
-- Updated the JSON schema and added docs for `parameters` and `paramterOnly`
+- Updated the JSON schema and added docs for `parameters` and `parameterOnly`
 
 ## 1.3.0
 
 - `@create-figma-plugin/build`
-  - Added support for the new `parameters` and `paramterOnly` config
+  - Added support for the new `parameters` and `parameterOnly` config
 
 - `@create-figma-plugin/monetization`
   - This package is deprecated; all monetization-related utility functions have been moved into `@create-figma-plugin/utilities`
