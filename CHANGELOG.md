@@ -4,6 +4,7 @@
 
 - `@create-figma-plugin/build`
   - Support the new `editorType`, `parameters`, and `paramtersOnly` config in the `manifest.json `
+
 - `@create-figma-plugin/monetization`
   - This package is deprecated; all monetization-related utility functions have been moved into `@create-figma-plugin/utilities`
 
@@ -32,7 +33,7 @@
 ## 1.2.0
 
 - `@create-figma-plugin/build`
-  - Added the ability to override the esbuild configuration for the `main` bundle (via a `build-figma-plugin.main.js` file) and the `ui` bundle (via a `build-figma-plugin.ui.js` file)
+  - Added the ability to override the esbuild configuration for the main bundle (via a `build-figma-plugin.main.js` file) and the UI bundle (via a `build-figma-plugin.ui.js` file)
   - Improved the UX of the `build-figma-plugin --watch --typecheck` terminal output
 
 - `@create-figma-plugin/monetization`
