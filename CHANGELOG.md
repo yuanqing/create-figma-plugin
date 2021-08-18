@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.1
+
+- `@create-figma-plugin/utilities`
+  - Added `deduplicateArray`
+
+- Updated the JSON schema and added docs for `parameters` and `paramtersOnly`
+
 ## 1.3.0
 
 - `@create-figma-plugin/build`
