@@ -1,8 +1,8 @@
 /**
- * Deduplicates the nodes in `nodes`. Does not modify the original
- * `nodes` array.
+ * Returns the result of deduplicating the nodes in `nodes`. Does not modify
+ * the original `nodes` array.
  *
- * @returns Returns a new array of `SceneNode` objects.
+ * @returns Returns a new array of unique `SceneNode` objects.
  * @category Node
  */
 export function deduplicateNodes<Node extends SceneNode>(

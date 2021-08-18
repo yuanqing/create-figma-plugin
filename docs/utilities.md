@@ -486,8 +486,8 @@ ImagePaint
 
 ### deduplicateNodes&lt;Node&gt;(nodes)
 
-Deduplicates the nodes in `nodes`. Does not modify the original
-`nodes` array.
+Returns the result of deduplicating the nodes in `nodes`. Does not modify
+the original `nodes` array.
 
 ***Type parameters***
 
@@ -499,7 +499,7 @@ Deduplicates the nodes in `nodes`. Does not modify the original
 
 ***Return type***
 
-Returns a new array of `SceneNode` objects.
+Returns a new array of unique `SceneNode` objects.
 
 ```
 Array<Node>
@@ -837,6 +837,7 @@ import {
   cloneObject,
   compareObjects,
   compareStringArrays,
+  deduplicateArray,
   extractAttributes
 } from '@create-figma-plugin/utilities'
 ```
@@ -891,6 +892,27 @@ Returns `true` if `a` and `b` are the same, else `false`.
 
 ```
 boolean
+```
+
+### deduplicateArray&lt;T&gt;(array)
+
+Returns the result of deduplicating the given `array`. Does not modify the
+original `array`.
+
+***Type parameters***
+
+- **`T`** (`boolean | number | string`)
+
+***Parameters***
+
+- **`array`** (`Array<T>`)
+
+***Return type***
+
+Returns a new array with unique values.
+
+```
+Array<T>
 ```
 
 ### extractAttributes&lt;PlainObject, Key&gt;(array, attributes)

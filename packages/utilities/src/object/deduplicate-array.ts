@@ -1,7 +1,8 @@
 /**
- * Deduplicates the given `array`. Does not modify the original `array`.
+ * Returns the result of deduplicating the given `array`. Does not modify the
+ * original `array`.
  *
- * @returns Returns a new array without duplicated values.
+ * @returns Returns a new array with unique values.
  * @category Object
  */
 export function deduplicateArray<T extends boolean | number | string>(
