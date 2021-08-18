@@ -34,10 +34,15 @@ main() {
   ln -s "$SOURCE_DIRECTORY"/packages/build/lib/cli.js "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
   chmod +x "$TARGET_DIRECTORY"/node_modules/.bin/build-figma-plugin
 
-  # We need to create a symlink for `preact` to the copy in `create-figma-plugin`
-  # so that hooks will work correctly
+  # Symlink to the copy of `preact` in `create-figma-plugin` so that hooks
+  # will work correctly
   rm -rf "$TARGET_DIRECTORY"/node_modules/preact
   ln -s "$SOURCE_DIRECTORY"/node_modules/preact "$TARGET_DIRECTORY"/node_modules
+
+  # Symlink to the copy of `@figma/plugin-typings` in `create-figma-plugin`
+  # to avoid version conflicts when building
+  rm -rf "$TARGET_DIRECTORY"/node_modules/@figma/plugin-typings
+  ln -s "$SOURCE_DIRECTORY"/node_modules/@figma/plugin-typings "$TARGET_DIRECTORY"/node_modules/@figma
 }
 
 main "$@"
