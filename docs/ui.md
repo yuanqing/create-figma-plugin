@@ -8,9 +8,9 @@
 
 `@create-figma-plugin/ui` is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma editor’s UI design.
 
-[![UI components from `@create-figma-plugin/ui`: Icon, Button, Checkbox, Radio Buttons, Segmented Control, Selectable List, Layer, Textbox, Autocomplete](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
+[![UI components from `@create-figma-plugin/ui`: Button, File Upload Dropzone, Textbox Numeric, Textbox Autocomplete, Checkbox, Selectable Item, Segmented Control](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
 
-(See the [full library of components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).)
+See the [full library of components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
 
 To install:
 

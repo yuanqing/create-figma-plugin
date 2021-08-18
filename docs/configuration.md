@@ -89,6 +89,28 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 
 Learn how to [add a UI to a plugin command](#ui-1).
 
+### `"parameters"`
+
+(*`array`*)
+
+*Optional.* Defines the list of parameters that the plugin command accepts via Figma’s Quick Action UI. Each paramter is an object with the following keys:
+
+- **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
+- **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling `"key"` key.
+- **`"description"`** (*`string`*) — *Optional.* The description for the parameter shown in the Quick Actions UI.
+- **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
+- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Note that:
+  - Optional parameters can only occur at the end of the `parameters` array.
+  - There must be at least one non-optional parameter in the array.
+
+Learn how to [accept parameters via the Quick Actions UI in your plugin command](https://figma.com/plugin-docs/plugin-parameters/).
+
+### `"parameterOnly"`
+
+(*`boolean`*)
+
+*Optional.* Set to `true` to always prompt for parameters in Figma’s Quick Action UI when the plugin command is run.
+
 ### `"menu"`
 
 (*`array`*)
@@ -98,6 +120,8 @@ Learn how to [add a UI to a plugin command](#ui-1).
 - **`"name"`** (*`string`*) — *Required.* The name of the plugin command.
 - **`"main"`** (*`string`* or *`object`*) — *Required, unless* **`"menu"`** *is specified.* Ditto the **`"main"`** field above.
 - **`"ui"`** (*`string`* or *`object`*) — *Optional.* Ditto the **`"ui"`** field above.
+- **`"parameters"`** (*`array`*) — *Optional.* Ditto the **`"parameters"`** field above.
+- **`"parameterOnly"`** (*`boolean`*) — *Optional.* Ditto the **`"parameterOnly"`** field above.
 - **`"menu"`** (*`array`*) — *Required, unless* **`"main"`** *is specified.* Sub-menus can be nested.
 
 Use a **`"-"`** in the array to specify a separator between commands in the sub-menu.
@@ -118,7 +142,13 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
       {
         "name": "Settings",
         "main": "src/settings/main.ts",
-        "ui": "src/settings/ui.tsx"
+        "parameters": [
+          {
+            "key": "resolution",
+            "description": "Enter a bitmap resolution"
+          }
+        ],
+        "parameterOnly": true
       }
     ]
   }
