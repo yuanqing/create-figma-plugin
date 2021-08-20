@@ -52,7 +52,7 @@
     "eslint": "^7.29.0",
     "eslint-config-yuanqing": "^0.0.5",
     "fs-extra": "^10.0.0",
-    "generate-ts-docs": "^0.0.11",
+    "generate-ts-docs": "^0.0.12",
     "prettier": "^2.3.1",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
