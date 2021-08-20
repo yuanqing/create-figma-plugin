@@ -96,10 +96,10 @@ Learn how to [add a UI to a plugin command](#ui-1).
 *Optional.* Defines the list of parameters that the plugin command accepts via Figma’s Quick Action UI. Each parameter is an object with the following keys:
 
 - **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
-- **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling `"key"` key.
+- **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions UI. Defaults to `"key"` if not specified.
 - **`"description"`** (*`string`*) — *Optional.* The description for the parameter shown in the Quick Actions UI.
 - **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
-- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the `parameters` array. There must be at least one non-optional parameter in the array.
+- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the `"parameters"` array. There must be at least one non-optional parameter in the array.
 
 Learn how to [accept parameters via the Quick Actions UI in your plugin command](https://figma.com/plugin-docs/plugin-parameters/).
 
@@ -134,7 +134,8 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
     "menu": [
       {
         "name": "Flatten Selection to Bitmap",
-        "main": "src/flatten-selection-to-bitmap/main.ts"
+        "main": "src/flatten-selection-to-bitmap/main.ts",
+        "ui": "src/flatten-selection-to-bitmap/ui.ts"
       },
       "-",
       {
