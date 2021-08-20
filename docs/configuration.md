@@ -99,7 +99,7 @@ Learn how to [add a UI to a plugin command](#ui-1).
 - **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions UI. Defaults to `"key"` if not specified.
 - **`"description"`** (*`string`*) — *Optional.* The description for the parameter shown in the Quick Actions UI.
 - **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
-- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the `"parameters"` array. There must be at least one non-optional parameter in the array.
+- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of list of parameters. There must be at least one non-optional parameter.
 
 Learn how to [accept parameters via the Quick Actions UI in your plugin command](https://figma.com/plugin-docs/plugin-parameters/).
 
@@ -203,10 +203,10 @@ See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons)
 
 (*`boolean`*)
 
-*Optional.* Allow use of plugin APIs that are only available to private plugins.
+*Optional.* Set to `true` to allow the use of plugin APIs that are only available to private plugins.
 
 ### `"enableProposedApi"`
 
 (*`boolean`*)
 
-*Optional.* Allow use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
+*Optional.* Set to `true` to allow the use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.

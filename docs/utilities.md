@@ -202,7 +202,7 @@ import {
 } from '@create-figma-plugin/utilities'
 ```
 
-### getDocumentUseCount( [, key])
+### getDocumentUseCount([key])
 
 Returns the plugin’s use count for the current document.
 
@@ -217,7 +217,7 @@ count. Defaults to `'documentUseCount'`.
 number
 ```
 
-### getTotalUseCountAsync( [, key])
+### getTotalUseCountAsync([key])
 
 Returns the plugin’s total use count.
 
@@ -232,7 +232,7 @@ on which to store the use count. Defaults to `'totalUseCount'`.
 Promise<number>
 ```
 
-### incrementDocumentUseCount( [, key])
+### incrementDocumentUseCount([key])
 
 Increments the plugin’s use count for the current document.
 
@@ -249,7 +249,7 @@ Returns the plugin’s new use count for the current document.
 number
 ```
 
-### incrementTotalUseCountAsync( [, key])
+### incrementTotalUseCountAsync([key])
 
 Increments the plugin’s total use count.
 
@@ -266,7 +266,7 @@ Returns the plugin’s new total use count.
 Promise<number>
 ```
 
-### resetDocumentUseCount( [, key])
+### resetDocumentUseCount([key])
 
 Resets the plugin’s use count for the current document to `0`.
 
@@ -281,7 +281,7 @@ count. Defaults to `'documentUseCount'`.
 void
 ```
 
-### resetTotalUseCountAsync( [, key])
+### resetTotalUseCountAsync([key])
 
 Resets the plugin’s total use count to `0`.
 
