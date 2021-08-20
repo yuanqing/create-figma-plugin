@@ -38,7 +38,7 @@ export async function buildAsync(
       log.success(`Built in ${buildElapsedTime}`, { clearPreviousLine })
     }
   } catch (error) {
-    log.error(error.message)
+    log.error(error)
     process.exit(1)
   }
 }
