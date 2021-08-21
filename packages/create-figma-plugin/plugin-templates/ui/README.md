@@ -49,4 +49,5 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 - [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)
 - [Figma plugin API docs](https://figma.com/plugin-docs/api/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples)
+- [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
