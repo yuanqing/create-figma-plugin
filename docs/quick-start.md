@@ -13,7 +13,7 @@ First:
 $ npx --yes -- create-figma-plugin figma-hello-world --yes
 ```
 
-(Here, the [**`default`**](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template will be used. Omit the second `--yes` flag to customize the plugin display name or to use a different plugin template – eg. the [**`ui`**](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/ui) template.)
+(Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template will be used. Omit the second `--yes` flag to customize the plugin display name or to use a different plugin template – eg. the [`ui`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/ui) template.)
 
 Then:
 
@@ -105,4 +105,5 @@ Figma will generate a unique plugin ID for you when you first try to publish you
 
 - [Figma plugin API docs](https://figma.com/plugin-docs/api/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples)
+- [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
