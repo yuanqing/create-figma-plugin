@@ -1,11 +1,21 @@
 # Changelog
 
+## 1.3.2
+
+- `@create-figma-plugin/build`
+  - Fixed the building of CSS Module typings in Windows ([#51](https://github.com/yuanqing/create-figma-plugin/issues/51))
+
+- Improved documentation
+
 ## 1.3.1
+
+- `@create-figma-plugin/build`
+  - Updated the configuration JSON schema
 
 - `@create-figma-plugin/utilities`
   - Added `deduplicateArray`
 
-- Updated the JSON schema and added docs for `parameters` and `parameterOnly`
+- Added docs for `parameters` and `parameterOnly`
 
 ## 1.3.0
 
@@ -18,30 +28,32 @@
 ## 1.2.4
 
 - `@create-figma-plugin/build`
-  - Fixed a bug with the `build-figma-plugin` CLI throwing an error when the current working directory absolute path contains spaces
+  - Fixed a bug with the `build-figma-plugin` CLI throwing an error when the current working directory absolute path contains spaces ([#49](https://github.com/yuanqing/create-figma-plugin/issues/49))
 
 ## 1.2.3
 
 - `@create-figma-plugin/build`
-  - Fixed a bug with how CSS file paths are resolved
+  - Fixed a bug with how CSS file paths are resolved ([#48](https://github.com/yuanqing/create-figma-plugin/issues/48))
 
 ## 1.2.2
 
-- Added a recipe for using image assets in the plugin UI
+- Added a recipe for using image assets in the plugin UI ([#45](https://github.com/yuanqing/create-figma-plugin/issues/45))
 
 ## 1.2.1
 
 - `create-figma-plugin`
   - Added a `ui` template
   - Simplified the CLI; now, only a `name`, `displayName` and `template` are necessary
+  - Fixed a bug with CLI arguments parsing ([#41](https://github.com/yuanqing/create-figma-plugin/issues/41#issuecomment-873329396))
 
 - Added a recipe for customizing the underlying esbuild configuration
 
 ## 1.2.0
 
 - `@create-figma-plugin/build`
-  - Added the ability to override the esbuild configuration for the main bundle (via a `build-figma-plugin.main.js` file) and the UI bundle (via a `build-figma-plugin.ui.js` file)
-  - Improved the UX of the `build-figma-plugin --watch --typecheck` terminal output
+  - Added the ability to override the esbuild configuration for the main bundle (via a `build-figma-plugin.main.js` file) and the UI bundle (via a `build-figma-plugin.ui.js` file) ([#34](https://github.com/yuanqing/create-figma-plugin/issues/34))
+  - Improved the UX of the `build-figma-plugin --watch --typecheck` terminal output ([#38](https://github.com/yuanqing/create-figma-plugin/issues/38))
+    - Fixed a bug with watch mode terminating on error ([#40](https://github.com/yuanqing/create-figma-plugin/issues/40))
 
 - `@create-figma-plugin/monetization`
   - This is a new package that includes utilities for:
@@ -59,7 +71,7 @@
     - Middle-aligned the `icon` relative to the height of the textbox in the `Textbox`, `TextboxAutocomplete`, `TextboxNumeric` components
     - Adjusted the focused style (the height of the blue outlined box) and the selected style (the background color of the selected text) of all textboxes (ie. `Textbox` etc.) to be identical to that in the Figma editor
     - Prevent menu items in `Dropdown` and `TextboxAutocomplete` from wrapping
-    - Dynamically adjust the horizontal menu position of `Dropdown`
+    - Dynamically adjust the horizontal menu position of `Dropdown` ([#37](https://github.com/yuanqing/create-figma-plugin/issues/37))
   - CSS:
     - Added colors `--color-black-6-translucent`, `--color-black-3-translucent`, and `--color-blue-30-translucent` to `@create-figma-plugin/ui/lib/css/base.css`
 
