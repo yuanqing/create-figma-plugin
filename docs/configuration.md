@@ -38,6 +38,14 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 
 *Required to publish the plugin on Figma Community.* The plugin ID. This field can be omitted during development but is required if you want to [publish your plugin](https://help.figma.com/hc/en-us/articles/360042293394-Publish-plugins-to-the-Figma-Community). Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
 
+### `"editorType"`
+
+(*`Array<string>`*)
+
+*Optional.* For specifying the editor that the plugin is intended for. One of `["figma"]`, `["figjam"]`, or `["figma", "figjam"]`. Defaults to `["figma"]`.
+
+Learn how to [create a plugin for both Figma and FigJam](https://figma.com/plugin-docs/figma-figjam-plugins/).
+
 ### `"name"`
 
 (*`string`*)
