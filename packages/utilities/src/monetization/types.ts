@@ -5,6 +5,7 @@ export type LicenseKeyValidationResult =
       licenseKey: null
       purchaseTimestamp: null
       validationTimestamp: null
+      variant: null
     }
   | {
       result: 'VALID'
@@ -12,4 +13,5 @@ export type LicenseKeyValidationResult =
       licenseKey: string
       purchaseTimestamp: string
       validationTimestamp: string
+      variant: null | string
     }

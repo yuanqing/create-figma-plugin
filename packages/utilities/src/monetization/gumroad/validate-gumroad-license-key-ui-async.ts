@@ -1,11 +1,5 @@
 import { LicenseKeyValidationResult } from '../types.js'
-
-const emptyLicense = {
-  email: null,
-  licenseKey: null,
-  purchaseTimestamp: null,
-  validationTimestamp: null
-}
+import { emptyLicense } from './private/empty-license.js'
 
 /**
  * Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
@@ -67,9 +61,23 @@ export async function validateGumroadLicenseKeyUiAsync(options: {
       licenseKey: trimmedLicenseKey,
       purchaseTimestamp: purchase.sale_timestamp,
       result: 'VALID',
-      validationTimestamp: new Date().toISOString()
+      validationTimestamp: new Date().toISOString(),
+      variant: parseVariant(purchase.variants)
     }
   } catch {
     return { ...emptyLicense, result: 'ENDPOINT_DOWN' }
   }
+}
+
+const variantRegex = /\(([^)]+)\)/
+
+function parseVariant(value: string): null | string {
+  if (value === '') {
+    return null
+  }
+  const matches = value.match(variantRegex)
+  if (matches === null) {
+    return null
+  }
+  return matches[1]
 }
