@@ -30,11 +30,11 @@
   "scripts": {
     "build": "yarn run clean && yarn run interpolate-gumroad-script && yarn run generate-index-ts && tsc --build",
     "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{scripts,src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
+    "fix": "eslint --fix '{scripts,src,test}/**/*.{js,ts}' && prettier --loglevel error --write '*.json'",
     "generate-docs": "node --loader ts-node/esm scripts/generate-docs.ts",
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "interpolate-gumroad-script": "node --loader ts-node/esm ./scripts/interpolate-gumroad-script.ts",
-    "lint": "eslint '{scripts,src,test}/**/*.ts'",
+    "lint": "eslint '{scripts,src,test}/**/*.{js,ts}'",
     "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
