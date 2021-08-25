@@ -62,22 +62,9 @@ export async function validateGumroadLicenseKeyUiAsync(options: {
       purchaseTimestamp: purchase.sale_timestamp,
       result: 'VALID',
       validationTimestamp: new Date().toISOString(),
-      variant: parseVariant(purchase.variants)
+      variant: purchase.variants === '' ? null : purchase.variants
     }
   } catch {
     return { ...emptyLicense, result: 'ENDPOINT_DOWN' }
   }
-}
-
-const variantRegex = /\(([^)]+)\)/
-
-function parseVariant(value: string): null | string {
-  if (value === '') {
-    return null
-  }
-  const matches = value.match(variantRegex)
-  if (matches === null) {
-    return null
-  }
-  return matches[1]
 }

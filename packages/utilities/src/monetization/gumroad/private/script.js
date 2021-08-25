@@ -6,19 +6,6 @@ const emptyLicense = {
   variant: null
 }
 
-const variantRegex = /\(([^)]+)\)/
-
-function parseVariant(value) {
-  if (value === '') {
-    return null
-  }
-  const matches = value.match(variantRegex)
-  if (matches === null) {
-    return null
-  }
-  return matches[1]
-}
-
 async function main() {
   async function validateLicenseKeyAsync() {
     try {
@@ -52,7 +39,7 @@ async function main() {
         purchaseTimestamp: purchase.sale_timestamp,
         result: 'VALID',
         validationTimestamp: '__validationTimestamp__',
-        variant: parseVariant(purchase.variants)
+        variant: purchase.variants === '' ? null : purchase.variants
       }
     } catch {
       return { ...emptyLicense, result: 'ENDPOINT_DOWN' }
