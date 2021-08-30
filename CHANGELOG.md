@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.4
+
+- `create-figma-plugin`
+  - Pin to a specific version of `@figma/plugin-typings`
+
+- `@create-figma-plugin/ui`
+  - Return `variant` data in `validateGumroadLicenseKeyMainAsync` and `validateGumroadLicenseKeyUiAsync`
+
 ## 1.3.3
 
 - Added docs for `editorType`
