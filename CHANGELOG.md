@@ -5,7 +5,7 @@
 - `create-figma-plugin`
   - Pin to a specific version of `@figma/plugin-typings` in all plugin templates
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/utilities`
   - Return `variant` data in `validateGumroadLicenseKeyMainAsync` and `validateGumroadLicenseKeyUiAsync`
 
 ## 1.3.3
