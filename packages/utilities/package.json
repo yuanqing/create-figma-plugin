@@ -28,14 +28,13 @@
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "yarn run clean && yarn run patch-figma-plugin-typings && yarn run interpolate-gumroad-script && tsc --build",
+    "build": "yarn run clean && yarn run interpolate-gumroad-script && tsc --build",
     "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{scripts,src,test}/**/*.{js,ts}' && prettier --loglevel error --write '*.json'",
     "generate-docs": "node --loader ts-node/esm scripts/generate-docs.ts",
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "interpolate-gumroad-script": "node --loader ts-node/esm scripts/interpolate-gumroad-script.ts",
     "lint": "eslint '{scripts,src,test}/**/*.{js,ts}'",
-    "patch-figma-plugin-typings": "node --loader ts-node/esm scripts/patch-figma-plugin-typings.ts",
     "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
