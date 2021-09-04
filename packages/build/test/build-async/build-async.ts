@@ -1,5 +1,5 @@
 import test from 'ava'
-import findUp from 'find-up'
+import { findUp } from 'find-up'
 import fs from 'fs-extra'
 import { dirname, join } from 'path'
 import rimraf from 'rimraf'

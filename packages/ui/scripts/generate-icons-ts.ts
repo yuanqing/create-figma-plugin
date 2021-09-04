@@ -1,6 +1,6 @@
 import { paramCase, pascalCase, pascalCaseTransformMerge } from 'change-case'
 import fs from 'fs-extra'
-import globby from 'globby'
+import { globby } from 'globby'
 import { basename, dirname, extname, join, resolve } from 'path'
 import { optimize } from 'svgo'
 import { fileURLToPath } from 'url'

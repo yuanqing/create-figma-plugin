@@ -1,5 +1,5 @@
 import fs from 'fs-extra'
-import globby from 'globby'
+import { globby } from 'globby'
 
 async function main(): Promise<void> {
   const globPatterns = process.argv.slice(2)

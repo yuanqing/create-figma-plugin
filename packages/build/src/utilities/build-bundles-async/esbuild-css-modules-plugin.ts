@@ -1,6 +1,6 @@
 import cssNano from 'cssnano'
 import { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
-import findUp from 'find-up'
+import { findUp } from 'find-up'
 import fs from 'fs-extra'
 import { basename, extname, join, resolve } from 'path'
 import postcss, { AcceptedPlugin } from 'postcss'

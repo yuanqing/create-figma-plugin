@@ -1,5 +1,5 @@
 import fs from 'fs-extra'
-import globby from 'globby'
+import { globby } from 'globby'
 import { extname } from 'path'
 import ts from 'typescript'
 

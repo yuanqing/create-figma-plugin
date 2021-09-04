@@ -1,4 +1,4 @@
-import globby from 'globby'
+import { globby } from 'globby'
 import ncu, { RunResults } from 'npm-check-updates'
 import { dirname, join, resolve } from 'path'
 import { fileURLToPath } from 'url'

@@ -1,5 +1,5 @@
 import fs from 'fs-extra'
-import globby from 'globby'
+import { globby } from 'globby'
 import ts from 'typescript'
 
 async function main(): Promise<void> {

@@ -1,5 +1,5 @@
 import fs from 'fs-extra'
-import globby from 'globby'
+import { globby } from 'globby'
 import isUtf8 from 'is-utf8'
 import mustache from 'mustache'
 import { join } from 'path'

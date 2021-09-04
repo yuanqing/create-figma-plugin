@@ -1,4 +1,4 @@
-import globby from 'globby'
+import { globby } from 'globby'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
