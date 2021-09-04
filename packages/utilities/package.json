@@ -43,19 +43,19 @@
     "rgb-hex": "^4.0.0"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1",
-    "@types/fs-extra": "^9.0.11",
+    "@figma/plugin-typings": "1.33.0",
+    "@types/fs-extra": "^9.0.12",
     "@types/natural-compare-lite": "^1.4.0",
-    "@types/node": "^15.12.4",
+    "@types/node": "^16.7.10",
     "ava": "^3.15.0",
-    "esbuild": "^0.12.9",
-    "eslint": "^7.29.0",
+    "esbuild": "^0.12.25",
+    "eslint": "^7.32.0",
     "eslint-config-yuanqing": "^0.0.5",
     "fs-extra": "^10.0.0",
     "generate-ts-docs": "^0.0.12",
-    "prettier": "^2.3.1",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.3.4"
+    "prettier": "^2.3.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.0"
   },
   "ava": {
     "extensions": {
