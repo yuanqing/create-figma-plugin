@@ -86,8 +86,8 @@ $ npm run watch
 In the Figma desktop app:
 
 1. Open a Figma document.
-2. Go to `Plugins` → `Development` → `Create plugin…`.
-3. Click the `Click to choose a manifest.json file` box, and select the `manifest.json` file that was generated.
+2. Go to `Plugins` → `Development` → `Import plugin from manifest…`.
+3. Select the `manifest.json` file that was generated.
 
 ## Debugging
 
