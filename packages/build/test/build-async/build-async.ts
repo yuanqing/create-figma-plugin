@@ -1,4 +1,5 @@
 import test from 'ava'
+import { exec, ExecException } from 'child_process'
 import { findUp } from 'find-up'
 import fs from 'fs-extra'
 import { dirname, join } from 'path'
@@ -6,6 +7,8 @@ import rimraf from 'rimraf'
 import { fileURLToPath } from 'url'
 
 import { buildAsync } from '../../src/build-async.js'
+
+const figmaPluginsTypingsVersion = '1.33.0'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -15,7 +18,7 @@ test('no config', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -41,7 +44,7 @@ test('basic command', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -67,7 +70,7 @@ test('basic command with UI', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -94,7 +97,7 @@ test('basic command with parameters', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -130,7 +133,7 @@ test('menu command', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -162,7 +165,7 @@ test('menu command with UI', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -195,7 +198,7 @@ test('menu command with parameters', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -237,7 +240,7 @@ test('multiple menu commands', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -292,7 +295,7 @@ test('additional fields', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -321,7 +324,7 @@ test('relaunch button', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -359,7 +362,7 @@ test('UI with image asset', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -389,7 +392,7 @@ test('custom styles', async function (t) {
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
   t.false(await fs.pathExists('src/styles.css.d.ts'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -417,7 +420,7 @@ test('preact', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -444,7 +447,7 @@ test('esbuild main config', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -472,7 +475,7 @@ test('esbuild ui config', async function (t) {
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
-  await symlinkFigmaPluginTypingsAsync()
+  await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     clearPreviousLine: false,
@@ -495,20 +498,21 @@ test('esbuild ui config', async function (t) {
   await cleanUpAsync()
 })
 
-async function symlinkFigmaPluginTypingsAsync(): Promise<void> {
-  const directoryPath = await findUp(
-    join('node_modules', '@figma', 'plugin-typings'),
-    {
-      type: 'directory'
-    }
-  )
-  if (typeof directoryPath === 'undefined') {
-    throw new Error('Cannot find `node_modules/@figma`')
-  }
-  await fs.ensureSymlink(
-    directoryPath,
-    join(process.cwd(), 'node_modules', '@figma', 'plugin-typings')
-  )
+async function installFigmaPluginTypingsAsync(): Promise<void> {
+  await fs.ensureDir(join(process.cwd(), 'node_modules'))
+  await new Promise<void>(function (resolve, reject) {
+    exec(
+      `npm install --no-save --prefer-offline @figma/plugin-typings@${figmaPluginsTypingsVersion}`,
+      {},
+      function (error: ExecException | null): void {
+        if (error) {
+          reject(error)
+          return
+        }
+        resolve()
+      }
+    )
+  })
 }
 
 async function symlinkCreateFigmaPluginTsConfigAsync(): Promise<void> {
@@ -518,6 +522,7 @@ async function symlinkCreateFigmaPluginTsConfigAsync(): Promise<void> {
   if (typeof directoryPath === 'undefined') {
     throw new Error('Cannot find the `tsconfig` package')
   }
+
   await fs.ensureSymlink(
     directoryPath,
     join(process.cwd(), 'node_modules', '@create-figma-plugin', 'tsconfig')
