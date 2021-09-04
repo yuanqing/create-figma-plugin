@@ -103,7 +103,9 @@ function filterDiagnostics(
     const fileName = diagnostic.file.fileName
     if (
       fileName.indexOf('/node_modules/typescript/lib/lib.dom.d.ts') === -1 &&
-      fileName.indexOf('/node_modules/@figma/plugin-typings/index.d.ts') === -1
+      fileName.indexOf('/node_modules/@figma/plugin-typings/index.d.ts') ===
+        -1 &&
+      fileName.indexOf('/node_modules/@types/node/globals.d.ts') === -1
     ) {
       return true
     }
