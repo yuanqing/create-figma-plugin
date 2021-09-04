@@ -43,7 +43,7 @@ export async function createFigmaPluginAsync(options: {
     })
     log.info('Installing dependencies...')
     await installDependenciesAsync(pluginDirectoryPath)
-  } catch (error) {
+  } catch (error: any) {
     log.error(error.message)
     process.exit(1)
   }

@@ -13,7 +13,7 @@ async function main(): Promise<void> {
       join(parentDirectoryPath, 'packages', '**', 'package.json')
     ]
     await bumpDependencies(globPatterns)
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

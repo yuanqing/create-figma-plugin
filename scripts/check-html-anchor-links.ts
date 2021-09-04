@@ -5,7 +5,7 @@ async function main(): Promise<void> {
   const globPatterns = process.argv.slice(2)
   try {
     await checkHtmlAnchorLinks(globPatterns)
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

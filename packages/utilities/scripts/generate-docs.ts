@@ -16,7 +16,7 @@ async function main(): Promise<void> {
     const tsconfigFilePath = join(rootDirectoryPath, 'tsconfig.shared.json')
     const outputFilePath = join(rootDirectoryPath, 'docs', 'utilities.md')
     await generateDocsAsync(globPatterns, tsconfigFilePath, outputFilePath)
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

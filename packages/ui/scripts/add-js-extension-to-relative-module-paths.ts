@@ -8,7 +8,7 @@ const relativePathRegex = /^\.\.?\// // Starts with either `./` or `../`
 async function main(): Promise<void> {
   try {
     await addJsExtensionToRelativeModulePaths(['lib/**/*.js'])
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

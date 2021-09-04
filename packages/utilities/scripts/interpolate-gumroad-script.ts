@@ -20,7 +20,7 @@ async function main(): Promise<void> {
     )
     const scriptFilePath = join(directoryPath, 'private', 'script.js')
     await interpolateScriptAsync(tsFilePath, scriptFilePath)
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

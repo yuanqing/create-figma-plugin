@@ -25,7 +25,7 @@ async function main(): Promise<void> {
       'icon'
     )
     await generateIconsTs(globPatterns, iconDirectoryPath)
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

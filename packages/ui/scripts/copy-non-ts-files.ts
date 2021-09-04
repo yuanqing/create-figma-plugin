@@ -9,7 +9,7 @@ async function main() {
   try {
     const globPatterns = [join(resolve(__dirname, '..', 'src'), '**', '*')]
     await copyNonTsFiles(globPatterns)
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

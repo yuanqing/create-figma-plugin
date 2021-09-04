@@ -6,7 +6,7 @@ async function main(): Promise<void> {
   const globPatterns = process.argv.slice(2)
   try {
     await generateIndexTs(globPatterns, 'src/index.ts')
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
   }

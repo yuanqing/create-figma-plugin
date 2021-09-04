@@ -50,7 +50,7 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
       if (typecheck === false) {
         log.info('Watching...')
       }
-    } catch (error) {
+    } catch (error: any) {
       log.error(error.message)
     }
   })

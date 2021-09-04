@@ -37,7 +37,7 @@ export async function buildAsync(
       const buildElapsedTime = getBuildElapsedTime()
       log.success(`Built in ${buildElapsedTime}`, { clearPreviousLine })
     }
-  } catch (error) {
+  } catch (error: any) {
     log.error(error.message)
     process.exit(1)
   }

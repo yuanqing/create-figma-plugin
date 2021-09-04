@@ -71,7 +71,7 @@ async function buildMainBundleAsync(options: {
         constants.build.mainConfigFilePath
       )
     )
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(formatEsbuildErrorMessage(error.message))
   }
 }
@@ -128,7 +128,7 @@ async function buildUiBundleAsync(options: {
     await build(
       await createEsbuildConfig(esbuildConfig, constants.build.uiConfigFilePath)
     )
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(formatEsbuildErrorMessage(error.message))
   }
 }
