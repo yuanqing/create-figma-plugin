@@ -6,7 +6,8 @@
     "paths": {
       "is-utf8": ["./src/types/untyped-dependencies.d.ts"]
     },
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": ["@types/node"]
   },
   "include": ["src/**/*.ts"],
   "references": [{ "path": "../common" }]

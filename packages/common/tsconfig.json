@@ -3,7 +3,8 @@
   "compilerOptions": {
     "lib": ["ES2020"],
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": ["@types/node"]
   },
   "include": ["src/**/*.ts"]
 }

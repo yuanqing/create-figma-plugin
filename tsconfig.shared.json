@@ -9,7 +9,6 @@
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ES2020",
-    "types": ["@figma/plugin-typings", "@types/node"]
+    "target": "ES2020"
   }
 }
