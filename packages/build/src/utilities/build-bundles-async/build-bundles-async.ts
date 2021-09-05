@@ -32,7 +32,7 @@ export async function buildBundlesAsync(minify: boolean): Promise<void> {
   ])
 }
 
-async function createEsbuildConfig(
+async function overrideEsbuildConfigAsync(
   buildOptions: BuildOptions,
   esbuildConfigFilePath: string
 ): Promise<BuildOptions> {
@@ -66,7 +66,7 @@ async function buildMainBundleAsync(options: {
       target: 'es2017'
     }
     await build(
-      await createEsbuildConfig(
+      await overrideEsbuildConfigAsync(
         esbuildConfig,
         constants.build.mainConfigFilePath
       )
@@ -126,7 +126,10 @@ async function buildUiBundleAsync(options: {
       target: 'chrome58'
     }
     await build(
-      await createEsbuildConfig(esbuildConfig, constants.build.uiConfigFilePath)
+      await overrideEsbuildConfigAsync(
+        esbuildConfig,
+        constants.build.uiConfigFilePath
+      )
     )
   } catch (error: any) {
     throw new Error(formatEsbuildErrorMessage(error.message))
