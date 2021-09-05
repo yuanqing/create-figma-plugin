@@ -1,12 +1,26 @@
 # Changelog
 
+## 1.4.0
+
+- `@create-figma-plugin/build`
+  - Suppressed the `Cannot redeclare block-scoped variable 'console'.` type-check error when using `@figma/plugin-typings@^1.32.0`
+  - Added an escape hatch for modifying the `manifest.json` file just before it gets written to disk
+
+- `@create-figma-plugin/utilities`
+  - `computeBoundingBox` – Accounted for FigJam-specific nodes (eg. `Connector`, `Sticky`) which do not have a `rotation` property
+
+- `create-figma-plugin`
+  - Updated the plugin installation instructions
+
+- Bumped dependencies in all packages
+
 ## 1.3.4
 
 - `create-figma-plugin`
-  - Pin to a specific version of `@figma/plugin-typings` in all plugin templates
+  - Pinned to a specific version of `@figma/plugin-typings` in all plugin templates
 
 - `@create-figma-plugin/utilities`
-  - Return `variant` data in `validateGumroadLicenseKeyMainAsync` and `validateGumroadLicenseKeyUiAsync`
+  - Returned `variant` data in `validateGumroadLicenseKeyMainAsync` and `validateGumroadLicenseKeyUiAsync`
 
 ## 1.3.3
 
