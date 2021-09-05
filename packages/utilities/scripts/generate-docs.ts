@@ -13,7 +13,7 @@ async function main(): Promise<void> {
   try {
     const rootDirectoryPath = resolve(__dirname, '..', '..', '..')
     const globPatterns = ['src/**/*.ts', '!src/**/private/**/*']
-    const tsconfigFilePath = join(rootDirectoryPath, 'tsconfig.shared.json')
+    const tsconfigFilePath = resolve(__dirname, '..', 'tsconfig.json')
     const outputFilePath = join(rootDirectoryPath, 'docs', 'utilities.md')
     await generateDocsAsync(globPatterns, tsconfigFilePath, outputFilePath)
   } catch (error: any) {
