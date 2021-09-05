@@ -1,9 +1,9 @@
 import { constants } from '@create-figma-plugin/common'
+import { titleCase } from 'title-case'
 
-import { Settings } from '../../types/settings.js'
-import { createPluginDisplayName } from './create-plugin-display-name.js'
+import { Settings } from '../types/settings.js'
 
-export function createDefaultSettings(options: {
+export function createSettings(options: {
   name?: string
   template?: string
 }): Settings {
@@ -18,6 +18,10 @@ export function createDefaultSettings(options: {
         ? constants.packageJson.defaultPluginName
         : name,
     template:
-      typeof template === 'undefined' ? constants.defaultTemplate : template
+      typeof template === 'undefined' ? constants.defaultTemplateName : template
   }
+}
+
+function createPluginDisplayName(name: string): string {
+  return titleCase(name.replace(/^figma-/, '').replace(/-/g, ' '))
 }

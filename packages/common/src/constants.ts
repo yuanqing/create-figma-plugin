@@ -9,7 +9,7 @@ export const constants = {
     pluginUiFilePath: 'build/ui.js',
     uiConfigFilePath: 'build-figma-plugin.ui.js'
   },
-  defaultTemplate: 'default',
+  defaultTemplateName: 'default',
   packageJson: {
     configKey: 'figma-plugin',
     defaultPluginDisplayName: 'Figma Plugin',

@@ -5,19 +5,14 @@ import { createFigmaPluginAsync } from './create-figma-plugin-async.js'
 
 sade('create-figma-plugin [name]', true)
   .describe('Initialize a new Figma plugin using a template')
-  .option(
-    '-t, --template',
-    'Pass in the URL of a GitHub repository to use as a template'
-  )
-  .option('-y, --yes', 'Use defaults', false)
+  .option('-t, --template', 'The name of the template to use')
   .action(async function (
     name: undefined | string,
-    options: { yes: boolean; template?: string }
+    options: { template?: string }
   ): Promise<void> {
     await createFigmaPluginAsync({
       name,
-      template: options.template,
-      useDefaults: options.yes
+      template: options.template
     })
   })
   .parse(process.argv)

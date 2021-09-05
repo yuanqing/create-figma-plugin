@@ -15,8 +15,7 @@ test('default template', async function (t) {
   t.false(await fs.pathExists('figma-plugin'))
   await createFigmaPluginAsync({
     name: 'figma-plugin',
-    template: 'default',
-    useDefaults: true
+    template: 'default'
   })
   t.true(await fs.pathExists('figma-plugin'))
   t.true(await fs.pathExists('figma-plugin/.gitignore'))
@@ -36,8 +35,7 @@ test('ui template', async function (t) {
   t.false(await fs.pathExists('figma-plugin'))
   await createFigmaPluginAsync({
     name: 'figma-plugin',
-    template: 'ui',
-    useDefaults: true
+    template: 'ui'
   })
   t.true(await fs.pathExists('figma-plugin'))
   t.true(await fs.pathExists('figma-plugin/.gitignore'))
