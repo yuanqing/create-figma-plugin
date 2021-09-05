@@ -4,7 +4,7 @@
 - [Specifying multiple commands in the plugin sub-menu](#specifying-multiple-commands-in-the-plugin-sub-menu)
 - [Configuring relaunch buttons](#configuring-relaunch-buttons)
 - [Using image assets in your plugin UI](#using-image-assets-in-your-plugin-ui)
-- [Customizing the underlying esbuild configuration](#customizing-the-underlying-esbuild-configuration)
+- [Customizing the build](#customizing-the-build)
 
 ./data-passing.md
 
@@ -14,4 +14,4 @@
 
 ./image-assets.md
 
-./custom-esbuild-configuration.md
+./custom-build.md
