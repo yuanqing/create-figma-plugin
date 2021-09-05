@@ -10,10 +10,10 @@
 First:
 
 ```
-$ npx --yes -- create-figma-plugin figma-hello-world --yes
+$ npx --yes -- create-figma-plugin figma-hello-world
 ```
 
-(Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template will be used. Omit the second `--yes` flag to customize the plugin display name or to use a different plugin template – eg. the [`ui`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/ui) template.)
+(Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template is used. Append `--template ui` to use the [`ui`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/ui) template.)
 
 Then:
 
