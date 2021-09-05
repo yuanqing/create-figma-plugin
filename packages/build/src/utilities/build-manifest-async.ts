@@ -7,6 +7,7 @@ import {
   readConfigAsync
 } from '@create-figma-plugin/common'
 import fs from 'fs-extra'
+import { resolve } from 'path'
 
 import {
   Manifest,
@@ -36,7 +37,7 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     throw new Error('Need a `main` entry point')
   }
   /* eslint-disable sort-keys-fix/sort-keys-fix */
-  const result: Manifest = {
+  const manifest: Manifest = {
     api: config.apiVersion,
     editorType: config.editorType,
     name: config.name,
@@ -45,7 +46,7 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   }
   /* eslint-enable sort-keys-fix/sort-keys-fix */
   if (hasBundle(command, 'ui') === true) {
-    result.ui = constants.build.pluginUiFilePath
+    manifest.ui = constants.build.pluginUiFilePath
   } else {
     if (relaunchButtons !== null) {
       const relaunchButtonsWithUi = relaunchButtons.filter(function (
@@ -54,31 +55,32 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
         return relaunchButton.ui !== null
       })
       if (relaunchButtonsWithUi.length > 0) {
-        result.ui = constants.build.pluginUiFilePath
+        manifest.ui = constants.build.pluginUiFilePath
       }
     }
   }
   if (command.parameters !== null) {
-    result.parameters = createParameters(command.parameters)
+    manifest.parameters = createParameters(command.parameters)
   }
   if (command.parameterOnly === true) {
-    result.parameterOnly = true
+    manifest.parameterOnly = true
   }
   if (command.menu !== null) {
-    result.menu = createMenu(command.menu)
+    manifest.menu = createMenu(command.menu)
   }
   if (relaunchButtons !== null) {
-    result.relaunchButtons = createRelaunchButtons(relaunchButtons)
+    manifest.relaunchButtons = createRelaunchButtons(relaunchButtons)
   }
   if (enableProposedApi === true) {
-    result.enableProposedApi = true
+    manifest.enableProposedApi = true
   }
   if (enablePrivatePluginApi === true) {
-    result.enablePrivatePluginApi = true
+    manifest.enablePrivatePluginApi = true
   }
   if (build !== null) {
-    result.build = build
+    manifest.build = build
   }
+  const result = await overrideManifestAsync(manifest)
   const string =
     (minify === true
       ? JSON.stringify(result)
@@ -172,4 +174,15 @@ function createRelaunchButtons(
     }
     return result
   })
+}
+
+async function overrideManifestAsync(
+  manifest: Manifest
+): Promise<Record<string, any>> {
+  const absolutePath = resolve(constants.build.manifestConfigFilePath)
+  if ((await fs.pathExists(absolutePath)) === false) {
+    return manifest
+  }
+  const { default: overrideManifest } = await import(absolutePath)
+  return overrideManifest(manifest)
 }

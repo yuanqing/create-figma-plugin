@@ -3,6 +3,7 @@ export const constants = {
   build: {
     directoryName: 'build',
     mainConfigFilePath: 'build-figma-plugin.main.js',
+    manifestConfigFilePath: 'build-figma-plugin.manifest.js',
     manifestFilePath: 'manifest.json',
     pluginCodeFilePath: 'build/main.js',
     pluginUiFilePath: 'build/ui.js',
