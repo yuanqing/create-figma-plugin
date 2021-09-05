@@ -10,7 +10,9 @@
   - `computeBoundingBox` – Accounted for FigJam-specific nodes (eg. `Connector`, `Sticky`) which do not have a `rotation` property
 
 - `create-figma-plugin`
-  - Updated the plugin installation instructions
+  - Removed the `--yes` flag and the ability to customize the display name
+  - Removed the CLI interactive prompt
+  - Updated the plugin installation instructions in all templates
 
 - Bumped dependencies in all packages
 
