@@ -11,10 +11,19 @@ const parseConfigHost: ts.ParseConfigHost = {
   useCaseSensitiveFileNames: true
 }
 
-export function readTsConfig(tsConfigFilePath: string): {
+export function readTsConfig(): {
   compilerOptions: ts.CompilerOptions
   filePaths: Array<string>
+  tsConfigFilePath: string
 } {
+  const tsConfigFilePath = ts.findConfigFile(
+    process.cwd(),
+    ts.sys.fileExists,
+    'tsconfig.json'
+  )
+  if (typeof tsConfigFilePath === 'undefined') {
+    throw new Error('Need a `tsconfig.json`')
+  }
   const jsonConfigFile = ts.readJsonConfigFile(
     tsConfigFilePath,
     function (path: string) {
@@ -29,5 +38,9 @@ export function readTsConfig(tsConfigFilePath: string): {
   if (result.errors.length > 0) {
     throw new Error(formatTypeScriptErrorMessage(result.errors))
   }
-  return { compilerOptions: result.options, filePaths: result.fileNames }
+  return {
+    compilerOptions: result.options,
+    filePaths: result.fileNames,
+    tsConfigFilePath
+  }
 }

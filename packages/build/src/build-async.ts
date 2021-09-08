@@ -5,7 +5,7 @@ import { buildBundlesAsync } from './utilities/build-bundles-async/build-bundles
 import { buildCssModulesTypingsAsync } from './utilities/build-css-modules-typings-async.js'
 import { buildManifestAsync } from './utilities/build-manifest-async.js'
 import { trackElapsedTime } from './utilities/track-elapsed-time.js'
-import { typeCheckAsync } from './utilities/type-check-async/type-check-async.js'
+import { typeCheckBuild } from './utilities/type-check/type-check-build.js'
 
 export async function buildAsync(
   options: BuildOptions & { clearPreviousLine: boolean }
@@ -16,7 +16,7 @@ export async function buildAsync(
       const getTypeCheckElapsedTime = trackElapsedTime()
       await buildCssModulesTypingsAsync() // This must occur before `typeCheckAsync`
       log.info('Type checking...')
-      await typeCheckAsync(false)
+      typeCheckBuild()
       const typeCheckElapsedTime = getTypeCheckElapsedTime()
       log.success(`Type checked in ${typeCheckElapsedTime}`, {
         clearPreviousLine

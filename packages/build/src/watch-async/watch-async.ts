@@ -7,7 +7,7 @@ import { buildBundlesAsync } from '../utilities/build-bundles-async/build-bundle
 import { buildCssModulesTypingsAsync } from '../utilities/build-css-modules-typings-async.js'
 import { buildManifestAsync } from '../utilities/build-manifest-async.js'
 import { trackElapsedTime } from '../utilities/track-elapsed-time.js'
-import { typeCheckAsync } from '../utilities/type-check-async/type-check-async.js'
+import { typeCheckWatch } from '../utilities/type-check/type-check-watch.js'
 import { watchIgnoreRegex } from './watch-ignore-regex.js'
 
 const cssRegex = /\.css$/
@@ -15,8 +15,9 @@ const packageJsonRegex = /^package\.json$/
 
 export async function watchAsync(options: BuildOptions): Promise<void> {
   const { minify, typecheck } = options
+  let endTypeCheckWatch: () => void
   if (typecheck === true) {
-    await typeCheckAsync(true)
+    endTypeCheckWatch = typeCheckWatch()
   }
   const watcher = watch(
     ['**/*.{css,js,json,jsx,ts,tsx}', 'package.json', 'tsconfig.json'],
@@ -33,6 +34,9 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
   }
   watcher.on('change', async function (file: string): Promise<void> {
     try {
+      if (typecheck === true && file.indexOf('tsconfig.json') !== -1) {
+        endTypeCheckWatch()
+      }
       log.clearViewport()
       const getElapsedTime = trackElapsedTime()
       log.info(`Changed ${yellow(file)}`)
@@ -49,6 +53,11 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
       log.success(`Built in ${getElapsedTime()}`)
       if (typecheck === false) {
         log.info('Watching...')
+        return
+      }
+      if (file.indexOf('tsconfig.json') !== -1) {
+        // Restart the type-check watcher program
+        endTypeCheckWatch = typeCheckWatch()
       }
     } catch (error: any) {
       log.error(error.message)
