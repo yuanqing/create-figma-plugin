@@ -8,8 +8,15 @@
 export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
   const result: Record<string, FontName> = {}
   for (const node of nodes) {
-    if (node.type === 'TEXT') {
-      collectFontsUsedInNode(node, result)
+    switch (node.type) {
+      case 'STICKY':
+      case 'SHAPE_WITH_TEXT':
+      case 'CONNECTOR':
+        collectFontsUsedInNode(node.text, result)
+        break
+      case 'TEXT':
+        collectFontsUsedInNode(node, result)
+        break
     }
   }
   await Promise.all(
@@ -20,7 +27,7 @@ export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
 }
 
 function collectFontsUsedInNode(
-  node: TextNode,
+  node: TextSublayerNode,
   result: Record<string, FontName>
 ): void {
   const length = node.characters.length
