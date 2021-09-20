@@ -88,7 +88,9 @@ function createMainEntryFile(config: Config): string {
   }
   return `
     const modules = ${createRequireCode(entryFiles)};
-    const commandId = (${entryFiles.length === 1} || figma.command === '') ? '${
+    const commandId = (${
+      entryFiles.length === 1
+    } || typeof figma.command === 'undefined' || figma.command === '') ? '${
     entryFiles[0].commandId
   }' : figma.command;
     modules[commandId]();
