@@ -13,6 +13,7 @@ import indentString from 'indent-string'
 import { join, resolve } from 'path'
 
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
+import { esbuildPreactCompatPlugin } from './esbuild-preact-compat-plugin.js'
 
 interface EntryFile extends ConfigFile {
   readonly commandId: string
@@ -120,7 +121,7 @@ async function buildUiBundleAsync(options: {
       logLevel: 'silent',
       minify,
       outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),
-      plugins: [esbuildCssModulesPlugin(minify)],
+      plugins: [esbuildPreactCompatPlugin(), esbuildCssModulesPlugin(minify)],
       stdin: {
         contents: js,
         resolveDir: process.cwd()

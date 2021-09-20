@@ -31,9 +31,10 @@
   "scripts": {
     "build": "yarn run clean && tsc --build",
     "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
-    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json' 'src/**/*.json' 'test/**/fixtures/**/*.json'",
-    "lint": "eslint '{src,test}/**/*.ts'",
-    "test": "yarn run build && ava 'test/**/*.ts'"
+    "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json' 'src/**/*.json' 'test/**/fixtures/**/*.json'",
+    "lint": "eslint '{src,test}/**/*.{ts,tsx}'",
+    "test": "yarn run build && ava 'test/**/*.ts'",
+    "test2": "yarn run build && ava 'test/build-async/build-async.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^1.4.0",
@@ -65,6 +66,7 @@
     "eslint-config-yuanqing": "^0.0.5",
     "preact": "^10.5.14",
     "prettier": "^2.3.2",
+    "react": "^17.0.2",
     "rimraf": "^3.0.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.2.4"
