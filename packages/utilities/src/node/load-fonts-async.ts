@@ -9,14 +9,16 @@ export async function loadFontsAsync(nodes: Array<SceneNode>): Promise<void> {
   const result: Record<string, FontName> = {}
   for (const node of nodes) {
     switch (node.type) {
-      case 'STICKY':
-      case 'SHAPE_WITH_TEXT':
       case 'CONNECTOR':
+      case 'SHAPE_WITH_TEXT':
+      case 'STICKY': {
         collectFontsUsedInNode(node.text, result)
         break
-      case 'TEXT':
+      }
+      case 'TEXT': {
         collectFontsUsedInNode(node, result)
         break
+      }
     }
   }
   await Promise.all(
