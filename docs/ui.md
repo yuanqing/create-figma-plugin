@@ -80,6 +80,8 @@ When we rebuild our plugin and run it, we’ll see:
 
 See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/) for the full library of Preact components, and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
 
+Note that it’s possible to use React components alongside the `@create-figma-plugin/ui` Preact library. The `build-figma-plugin` CLI will automatically swap out all `react` and `react-dom` imports with `preact/compat`.
+
 ## Using custom CSS
 
 Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://github.com/css-modules/css-modules):
@@ -103,6 +105,27 @@ function Plugin () {
   // ...
   return (
     <div class={styles.container}>
+      {/* ... */}
+    </div>
+  )
+}
+
+export default render(Plugin)
+```
+
+To import a “global” CSS file (ie. a CSS file containing class names to be left as-is, without hashing), add a `!` prefix before the CSS file path:
+
+```ts
+// src/ui.tsx
+
+import { render } from '@create-figma-plugin/ui'
+import { h } from 'preact'
+import '!./styles.css'
+
+function Plugin () {
+  // ...
+  return (
+    <div class="container">
       {/* ... */}
     </div>
   )
