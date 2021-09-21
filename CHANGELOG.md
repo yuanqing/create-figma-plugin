@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.5.0
+
+- `@create-figma-plugin/build`
+  - Restart the TypeScript watcher when changes are made to `tsconfig.json`
+  - Enable usage of React components by swapping out `react` and `react-dom` imports with `preact/compat`
+  - Allow importing of “global” CSS by adding a `!` prefix before the CSS file path
+  - Account for the case (eg. in a FigJam widget) where `figma.command` is `undefined`
+
+- `@create-figma-plugin/utilities`
+  - Support FigJam nodes in `loadFontsAsync`
+
 ## 1.4.0
 
 - `@create-figma-plugin/build`
