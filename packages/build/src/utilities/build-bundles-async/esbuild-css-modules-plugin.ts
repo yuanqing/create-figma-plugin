@@ -15,8 +15,9 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
       build.onResolve(
         { filter: /\.css$/ },
         async function (args: OnResolveArgs): Promise<{ path: string }> {
+          const { path, isGlobalCss } = parseCssFilePath(args.path)
           const cssfilePath = await createCssFilePathAsync(
-            args.path,
+            path,
             args.resolveDir
           )
           if (
@@ -25,7 +26,9 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
           ) {
             throw new Error(`CSS file not found: ${args.path}`)
           }
-          const js = await createCssModulesJavaScriptAsync(cssfilePath, minify)
+          const js = isGlobalCss
+            ? await createGlobalCssJavaScriptAsync(cssfilePath, minify)
+            : await createCssModulesJavaScriptAsync(cssfilePath, minify)
           const jsFilePath = await tempWrite(
             js,
             `${basename(args.path, extname(args.path))}.js`
@@ -36,6 +39,22 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
         }
       )
     }
+  }
+}
+
+function parseCssFilePath(path: string): {
+  path: string
+  isGlobalCss: boolean
+} {
+  if (path[0] === '!') {
+    return {
+      isGlobalCss: true,
+      path: path.slice(1)
+    }
+  }
+  return {
+    isGlobalCss: false,
+    path
   }
 }
 
@@ -58,11 +77,43 @@ async function createCssFilePathAsync(
 
 const backQuoteRegex = /`/g
 
+async function createGlobalCssJavaScriptAsync(
+  cssFilePath: string,
+  minify: boolean
+): Promise<string> {
+  let css = await fs.readFile(cssFilePath, 'utf8')
+  if (minify === true) {
+    const plugins: Array<AcceptedPlugin> = [cssNano()]
+    const result = await postcss(plugins).process(css, {
+      from: cssFilePath,
+      map:
+        minify === true
+          ? false
+          : {
+              inline: true
+            }
+    })
+    css = result.css
+  }
+  const elementId: string = revHash(cssFilePath)
+  const isBaseCss =
+    cssFilePath.indexOf('@create-figma-plugin/ui/lib/css/base.css') !== -1
+  return `
+    if (document.getElementById('${elementId}') === null) {
+      const element = document.createElement('style');
+      element.id = '${elementId}';
+      element.textContent = \`${css.replace(backQuoteRegex, '\\`')}\`;
+      document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
+    }
+    export default {};
+  `
+}
+
 async function createCssModulesJavaScriptAsync(
   cssFilePath: string,
   minify: boolean
 ): Promise<string> {
-  const css = await fs.readFile(cssFilePath, 'utf8')
+  let css = await fs.readFile(cssFilePath, 'utf8')
   let classNamesJson: null | string = null
   const plugins: Array<AcceptedPlugin> = []
   plugins.push(
@@ -88,18 +139,17 @@ async function createCssModulesJavaScriptAsync(
             inline: true
           }
   })
+  css = result.css
   if (classNamesJson === null) {
     throw new Error('`getJSON` callback was not called')
   }
   const elementId: string = revHash(cssFilePath)
-  const isBaseCss =
-    cssFilePath.indexOf('@create-figma-plugin/ui/lib/css/base.css') !== -1
   return `
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
       element.id = '${elementId}';
-      element.textContent = \`${result.css.replace(backQuoteRegex, '\\`')}\`;
-      document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
+      element.textContent = \`${css.replace(backQuoteRegex, '\\`')}\`;
+      document.head.append(element);
     }
     export default ${classNamesJson};
   `
