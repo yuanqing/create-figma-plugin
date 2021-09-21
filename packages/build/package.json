@@ -33,8 +33,7 @@
     "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json' 'src/**/*.json' 'test/**/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.{ts,tsx}'",
-    "test": "yarn run build && ava 'test/**/*.ts'",
-    "test2": "yarn run build && ava 'test/build-async/build-async.ts'"
+    "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^1.5.0-alpha.0",
