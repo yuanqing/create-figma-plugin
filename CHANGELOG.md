@@ -11,6 +11,8 @@
 - `@create-figma-plugin/utilities`
   - Support FigJam nodes in `loadFontsAsync`
 
+- Improved documentation
+
 ## 1.4.0
 
 - `@create-figma-plugin/build`
