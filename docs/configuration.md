@@ -30,7 +30,7 @@ Configure your plugin under the **`"figma-plugin"`** key of your `package.json` 
 
 (*`string`*)
 
-*Optional.* The version of the Figma plugin API to use. Defaults to **`"1.0.0"`**.
+*Optional.* The version of the Figma/FigJam plugin API to use. Defaults to **`"1.0.0"`**.
 
 ### `"id"`
 
@@ -101,7 +101,7 @@ Learn how to [add a UI to a plugin command](#ui-1).
 
 (*`array`*)
 
-*Optional.* Defines the list of parameters that the plugin command accepts via Figma’s Quick Action UI. Each parameter is an object with the following keys:
+*Optional.* Defines the list of [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via Figma’s Quick Action UI. Each parameter is an object with the following keys:
 
 - **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
 - **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling `"key"` if not specified.
@@ -115,7 +115,7 @@ Learn how to [accept parameters via the Quick Actions UI in your plugin command]
 
 (*`boolean`*)
 
-*Optional.* Set to `true` to always prompt for parameters in Figma’s Quick Action UI when the plugin command is run.
+*Optional.* When **`"parameters"`** is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Action UI. Set **`"parameterOnly"`** to `false` to make parameter input optional.
 
 ### `"menu"`
 

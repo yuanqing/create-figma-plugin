@@ -85,7 +85,7 @@ $ npm run watch
 
 In the Figma desktop app:
 
-1. Open a Figma document.
+1. Open a Figma or FigJam document.
 2. Go to `Plugins` → `Development` → `Import plugin from manifest…`.
 3. Select the `manifest.json` file that was generated.
 
@@ -103,7 +103,7 @@ Figma will generate a unique plugin ID for you when you first try to publish you
 
 ## See also
 
-- [Figma plugin API docs](https://figma.com/plugin-docs/api/)
+- [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/api/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples)
 - [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)

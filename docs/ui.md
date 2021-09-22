@@ -1,6 +1,7 @@
 # UI
 
 - [Using the Preact component library](#using-the-preact-component-library)
+- [Using React](#using-react)
 - [Using custom CSS](#using-custom-css)
 - [Using a custom UI library](#using-a-custom-ui-library)
 
@@ -32,7 +33,7 @@ export default function () {
 }
 ```
 
-`showUI` takes two arguments, and the second `data` argument is useful for passing some initialising data to the UI.
+`showUI` takes two arguments, and the second `data` argument is useful for passing some initializing data to the UI.
 
 Next, create a file for our UI (eg. `src/ui.tsx`):
 
@@ -82,7 +83,13 @@ See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/) for the 
 
 ## Using React
 
-It’s possible to seamlessly use [React](https://reactjs.org/) components alongside components from the `@create-figma-plugin/ui` Preact library. The `build-figma-plugin` CLI will automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/).
+When building your plugin, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use [React](https://reactjs.org) components alongside the Preact components from the `@create-figma-plugin/ui` library.
+
+To use React components in your plugin UI, ensure that `react` and `@types/react` are installed:
+
+```
+$ npm install --dev react @types/react
+```
 
 ## Using custom CSS
 
@@ -115,9 +122,9 @@ function Plugin () {
 export default render(Plugin)
 ```
 
-By default, class names in CSS files imported via an `import` statement (as in the above example) will be “hashed” to [ensure that each local class name is globally unique](https://github.com/css-modules/css-modules#implementations).
+By default, class names in a CSS file imported via an `import` statement (as in the above example) will be “hashed”. This is to ensure that [each class name in the CSS file is globally unique](https://github.com/css-modules/css-modules#implementations).
 
-To preserve the class names in an imported CSS file, add a `!` prefix before the CSS file path:
+To directly “inline” a CSS file *without* hashing its class names, add a `!` prefix before the import path:
 
 ```ts
 // src/ui.tsx
@@ -142,7 +149,7 @@ Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/m
 
 ## Using a custom UI library
 
-To use a custom UI library (instead of `@create-figma-plugin/ui`), write your plugin command’s UI implementation as follows:
+To use a custom UI library instead of `@create-figma-plugin/ui`, write your plugin command’s UI implementation as follows:
 
 ```ts
 // src/ui.ts

@@ -6,7 +6,7 @@
 
 ---
 
-./figma-plugin-basics.md
+./plugin-basics.md
 
 ---
 
