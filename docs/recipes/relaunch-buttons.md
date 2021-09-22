@@ -57,7 +57,7 @@ This would result in the following:
 
 ![“Organize Layers” relaunch button](/media/relaunch-button.png)
 
-If we want to show additional text below the relaunch button, we can pass a third argument to `setRelaunchButton`:
+To show additional text below the relaunch button, pass a third argument to `setRelaunchButton`:
 
 ```ts
 setRelaunchButton(

@@ -1,6 +1,6 @@
 ## Using image assets in your plugin UI
 
-Image assets used in your plugin UI must be “inlined” into you plugin’s UI bundle. Consider the following example where a `png` image is used in the UI:
+Image assets used in your plugin UI must be “inlined” into you plugin’s UI bundle. Consider the following example where a PNG image is used in the UI:
 
 ```ts
 // src/ui.tsx
