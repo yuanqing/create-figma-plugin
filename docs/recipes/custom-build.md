@@ -20,9 +20,9 @@ module.exports = function (buildOptions) {
 
 Correspondingly, use a `build-figma-plugin.ui.js` file to customize the build configuration for the [UI bundle](#ui-context).
 
-### Customizing the `manifest.json`
+### Customizing the `manifest.json` file
 
-To modify the `manifest.json` just before it gets output by the `build-figma-plugin` CLI, create a `build-figma-plugin.manifest.js` file as follows:
+To modify the `manifest.json` file just before it gets output by the `build-figma-plugin` CLI, create a `build-figma-plugin.manifest.js` file as follows:
 
 ```js
 // build-figma-plugin.manifest.js
