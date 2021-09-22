@@ -7,7 +7,7 @@ import { BuildOptions } from './types/build.js'
 import { watchAsync } from './watch-async/watch-async.js'
 
 sade('build-figma-plugin', true)
-  .describe('Build a Figma plugin')
+  .describe('Build a Figma/FigJam plugin')
   .option('-m, --minify', 'Minify the plugin bundle', false)
   .option('-t, --typecheck', 'Type check the plugin code before build', false)
   .option('-w, --watch', 'Rebuild the plugin on code changes', false)

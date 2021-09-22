@@ -4,9 +4,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "An extensive library of utility functions for common Figma plugin operations",
+  "description": "An extensive library of utility functions for common Figma/FigJam plugin operations",
   "keywords": [
     "create-figma-plugin",
+    "figjam",
     "figma",
     "figma-plugin",
     "figma-plugins"

@@ -7,6 +7,7 @@
   "description": "TypeScript config for plugins built using the Create Figma Plugin toolkit",
   "keywords": [
     "create-figma-plugin",
+    "figjam",
     "figma",
     "figma-plugin",
     "figma-plugins"

@@ -7,6 +7,7 @@
   "description": "Internal utilities used across the `create-figma-plugin` monorepo",
   "keywords": [
     "create-figma-plugin",
+    "figjam",
     "figma",
     "figma-plugin",
     "figma-plugins"

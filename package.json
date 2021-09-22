@@ -56,7 +56,7 @@
   "single-page-markdown-website": {
     "baseUrl": "https://yuanqing.github.io/create-figma-plugin/",
     "title": "Create Figma Plugin",
-    "description": "A comprehensive toolkit for developing Figma plugins",
+    "description": "A comprehensive toolkit for developing plugins for Figma and FigJam",
     "links": [
       {
         "text": "Changelog",
