@@ -88,7 +88,7 @@ When building your plugin, the `build-figma-plugin` CLI will detect and automati
 To use React components in your plugin UI, ensure that `react` and `@types/react` are installed:
 
 ```
-$ npm install --dev react @types/react
+$ npm install --save-dev react @types/react
 ```
 
 ## Using custom CSS
