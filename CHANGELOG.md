@@ -1,18 +1,22 @@
 # Changelog
 
+## 1.5.1
+
+- Moved constants `MIXED_NUMBER` and `MIXED_STRING` from `@create-figma-plugin/ui` to `@create-figma-plugin/utilities`
+
 ## 1.5.0
 
 - `@create-figma-plugin/build`
   - Restart the TypeScript watcher when changes are made to `tsconfig.json`
-  - Enable usage of React components by swapping out `react` and `react-dom` imports with `preact/compat`
-  - Allow importing of “global” CSS by adding a `!` prefix before the CSS file path
-  - Account for the case (eg. in a FigJam widget) where `figma.command` is `undefined`
+  - Enabled usage of React components by swapping out `react` and `react-dom` imports with `preact/compat`
+  - Added the ability to import “global” CSS by adding a `!` prefix before the CSS file path
+  - Accounted for the case where `figma.command` is `undefined` (eg. in a FigJam widget)
 
 - `@create-figma-plugin/common`
-  - Add the latest compatible `@figma/plugin-typings` version as a constant
+  - Added the latest compatible `@figma/plugin-typings` version as a constant
 
 - `@create-figma-plugin/utilities`
-  - Support FigJam nodes in `loadFontsAsync`
+  - Added support for FigJam nodes in `loadFontsAsync`
 
 - Improved documentation
 
