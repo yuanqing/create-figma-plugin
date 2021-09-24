@@ -4,6 +4,7 @@ export { convertNamedColorToHexColor } from './color/convert-named-color-to-hex-
 export { convertRgbColorToHexColor } from './color/convert-rgb-color-to-hex-color.js'
 export { isValidHexColor } from './color/is-valid-hex-color.js'
 export { emit, EventHandler, on, once } from './events.js'
+export { MIXED_NUMBER, MIXED_STRING } from './mixed-values.js'
 export {
   getDocumentUseCount,
   incrementDocumentUseCount,

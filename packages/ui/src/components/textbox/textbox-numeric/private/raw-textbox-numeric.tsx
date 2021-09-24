@@ -3,12 +3,12 @@ import {
   evaluateNumericExpression,
   isValidNumericInput
 } from '@create-figma-plugin/utilities'
+import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../../types/types'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
-import { MIXED_NUMBER, MIXED_STRING } from '../../../../utilities/mixed-values'
 import { computeNextValue } from '../../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating'
 import { formatEvaluatedValue } from './format-evaluated-value'

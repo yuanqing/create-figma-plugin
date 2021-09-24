@@ -1,11 +1,11 @@
 /** @jsx h */
+import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
-import { MIXED_NUMBER, MIXED_STRING } from '../../../utilities/mixed-values'
 import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeric'
 import { createRgbaColor } from './private/create-rgba-color'
 import { normalizeUserInputColor } from './private/normalize-hex-color'
