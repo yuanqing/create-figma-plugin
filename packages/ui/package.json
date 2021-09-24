@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/ui",
-  "version": "1.5.0-alpha.1",
+  "version": "1.5.0",
   "publishConfig": {
     "access": "public"
   },
@@ -50,7 +50,7 @@
     "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^1.5.0-alpha.1"
+    "@create-figma-plugin/utilities": "^1.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
