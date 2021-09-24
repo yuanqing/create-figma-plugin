@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "build": "lerna run --stream build",
-    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts react react-dom",
+    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts css-loader style-loader",
     "clean": "lerna run --parallel --stream clean && lerna run --stream storybook-clean && yarn run website-clean && rm -rf '*.log'",
     "fix": "lerna run --parallel --stream fix && eslint --fix 'scripts/**/*.ts' && prettier --ignore-path lerna.json --loglevel error --write '*.json'",
     "generate-docs": "lerna run --stream generate-docs",
