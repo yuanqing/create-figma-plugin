@@ -1,5 +1,5 @@
 {
-  "title": "JSON schema for configuring a Figma plugin built with the Create Figma Plugin toolkit",
+  "title": "JSON schema for configuring a Figma/FigJam plugin built with the Create Figma Plugin toolkit",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json",
   "type": "object",
@@ -116,7 +116,7 @@
       },
       "properties": {
         "apiVersion": {
-          "description": "(Optional)\nThe version of the Figma plugin API to use. Defaults to \"1.0.0\".",
+          "description": "(Optional)\nThe version of the Figma/FigJam plugin API to use. Defaults to \"1.0.0\".",
           "type": "string"
         },
         "editorType": {
