@@ -8,6 +8,9 @@
   - Allow importing of “global” CSS by adding a `!` prefix before the CSS file path
   - Account for the case (eg. in a FigJam widget) where `figma.command` is `undefined`
 
+- `@create-figma-plugin/common`
+  - Add the latest compatible `@figma/plugin-typings` version as a constant
+
 - `@create-figma-plugin/utilities`
   - Support FigJam nodes in `loadFontsAsync`
 
