@@ -1,3 +1,4 @@
+import { constants } from '@create-figma-plugin/common'
 import test from 'ava'
 import { exec, ExecException } from 'child_process'
 import { findUp } from 'find-up'
@@ -7,8 +8,6 @@ import rimraf from 'rimraf'
 import { fileURLToPath } from 'url'
 
 import { buildAsync } from '../../src/build-async.js'
-
-const figmaPluginsTypingsVersion = '1.33.0'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -589,7 +588,7 @@ async function installFigmaPluginTypingsAsync(): Promise<void> {
   await fs.ensureDir(join(process.cwd(), 'node_modules'))
   await new Promise<void>(function (resolve, reject) {
     exec(
-      `npm install --no-save --prefer-offline @figma/plugin-typings@${figmaPluginsTypingsVersion}`,
+      `npm install --no-save --prefer-offline @figma/plugin-typings@${constants.figmaPluginTypingsVersion}`,
       {},
       function (error: ExecException | null): void {
         if (error) {

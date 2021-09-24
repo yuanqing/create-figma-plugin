@@ -13,6 +13,7 @@ export function createSettings(options: {
       typeof name === 'undefined'
         ? constants.packageJson.defaultPluginDisplayName
         : createPluginDisplayName(name),
+    figmaPluginTypingsVersion: constants.figmaPluginTypingsVersion,
     name:
       typeof name === 'undefined'
         ? constants.packageJson.defaultPluginName

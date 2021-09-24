@@ -1,5 +1,6 @@
 export type Settings = {
-  readonly name: string
   readonly displayName?: string
+  readonly figmaPluginTypingsVersion: string
+  readonly name: string
   readonly template: string
 }

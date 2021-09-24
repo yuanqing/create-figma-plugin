@@ -10,6 +10,7 @@ export const constants = {
     uiConfigFilePath: 'build-figma-plugin.ui.js'
   },
   defaultTemplateName: 'default',
+  figmaPluginTypingsVersion: '1.35.0',
   packageJson: {
     configKey: 'figma-plugin',
     defaultPluginDisplayName: 'Figma Plugin',
