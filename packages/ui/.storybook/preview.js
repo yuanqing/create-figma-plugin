@@ -13,7 +13,6 @@ export const decorators = [
   }
 ]
 
-// https://storybook.js.org/docs/react/configure/story-layout#global-layout
 export const parameters = {
   layout: 'centered',
   options: {
