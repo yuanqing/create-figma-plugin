@@ -171,7 +171,6 @@ export const CloseButton = function () {
       <Modal
         isOpen={isOpen}
         onCloseButtonClick={handleCloseButtonClick}
-        secondary
         title="foo"
       >
         <div style={style}>bar</div>
@@ -198,7 +197,6 @@ export const CloseButtonPosition = function () {
         closeButtonPosition="left"
         isOpen={isOpen}
         onCloseButtonClick={handleCloseButtonClick}
-        secondary
         title="foo"
       >
         <div style={style}>bar</div>
@@ -226,7 +224,6 @@ export const CloseButtonIcon = function () {
         closeButtonPosition="left"
         isOpen={isOpen}
         onCloseButtonClick={handleCloseButtonClick}
-        secondary
         title="foo"
       >
         <div style={style}>bar</div>
