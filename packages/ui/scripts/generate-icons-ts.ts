@@ -136,7 +136,7 @@ async function writePreactComponentsAsync(
   directoryPath: string
 ): Promise<void> {
   for (const { baseName, componentName, svgPath, dimension } of svgFiles) {
-    const fileContents = `import { createIcon } from '../create-icon.js'
+    const fileContents = `import { createIcon } from '../create-icon'
 
 export const ${componentName} = createIcon(
   '${svgPath}',
