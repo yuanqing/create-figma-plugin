@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconSpaceHorizontal16 = createIcon(
-  'M2 3h2v10H2v1h3V2H2v1zm10-1h3v1h-2v10h2v1h-3V2zm-4 9V5h1v6H8z',
+  'M2 3h2v10H2v1h3V2H2v1Zm10-1h3v1h-2v10h2v1h-3V2Zm-4 9V5h1v6H8Z',
   { height: 16, width: 16 }
 )

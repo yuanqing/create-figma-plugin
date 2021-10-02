@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconOptionCheck16 = createIcon(
-  'M12.654 5.40701 7 11.061 3.646 7.70701l.708-.707L7 9.64601l4.947-4.946.707.707z',
+  'M12.654 5.40701 7 11.061 3.646 7.70701l.708-.707L7 9.64601l4.947-4.946.707.707Z',
   { height: 16, width: 16 }
 )

@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconLayerSlice16 = createIcon(
-  'M10 3H6v1h4V3zM4 4V3H3v1h1zM3 6h1v4H3V6zm9 0h1v4h-1V6zm1-2h-1V3h1v1zm-7 8h4v1H6v-1zm-2 0H3v1h1v-1zm8 1v-1h1v1h-1z',
+  'M10 3H6v1h4V3ZM4 4V3H3v1h1ZM3 6h1v4H3V6Zm9 0h1v4h-1V6Zm1-2h-1V3h1v1Zm-7 8h4v1H6v-1Zm-2 0H3v1h1v-1Zm8 1v-1h1v1h-1Z',
   { height: 16, width: 16 }
 )

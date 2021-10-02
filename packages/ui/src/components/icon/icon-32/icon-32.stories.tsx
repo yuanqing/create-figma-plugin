@@ -16,6 +16,10 @@ import { IconBlend32 } from './icon-blend-32'
 import { IconBlendEmpty32 } from './icon-blend-empty-32'
 import { IconCheckCircle32 } from './icon-check-circle-32'
 import { IconCheckCircleFilled32 } from './icon-check-circle-filled-32'
+import { IconChevronDown32 } from './icon-chevron-down-32'
+import { IconChevronLeft32 } from './icon-chevron-left-32'
+import { IconChevronRight32 } from './icon-chevron-right-32'
+import { IconChevronUp32 } from './icon-chevron-up-32'
 import { IconCode32 } from './icon-code-32'
 import { IconComponent32 } from './icon-component-32'
 import { IconConnectionConnect32 } from './icon-connection-connect-32'
@@ -155,6 +159,22 @@ export const CheckCircleFilled = function () {
 
 export const CheckCircle = function () {
   return <IconCheckCircle32 />
+}
+
+export const ChevronDown = function () {
+  return <IconChevronDown32 />
+}
+
+export const ChevronLeft = function () {
+  return <IconChevronLeft32 />
+}
+
+export const ChevronRight = function () {
+  return <IconChevronRight32 />
+}
+
+export const ChevronUp = function () {
+  return <IconChevronUp32 />
 }
 
 export const Code = function () {

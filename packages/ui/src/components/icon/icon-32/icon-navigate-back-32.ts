@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconNavigateBack32 = createIcon(
-  'M14.7574 11.2574 10.5 15.5m0 0 4.2574 4.2426M10.5 15.5H23',
+  'M23 15H11.7101l3.4002-3.3885-.7059-.7083L9.79167 15.5l4.61273 4.5968.7059-.7083L11.7101 16H23v-1Z',
   { height: 32, width: 32 }
 )

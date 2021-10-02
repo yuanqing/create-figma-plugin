@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconFolder32 = createIcon(
-  'M9 10h7v2H9v-2zm-1 2V9h9v3h7v11H8V12zm9 1H9v9h14v-9h-6z',
+  'M9 10h7v2H9v-2Zm-1 2V9h9v3h7v11H8V12Zm9 1H9v9h14v-9h-6Z',
   { height: 32, width: 32 }
 )

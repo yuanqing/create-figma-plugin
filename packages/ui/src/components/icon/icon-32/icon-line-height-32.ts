@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconLineHeight32 = createIcon(
-  'M23 10H9V9h14v1zm0 13H9v-1h14v1zm-10.4517-3 2.8-8h1.3036l2.8 8h-.9536l-.7-2h-3.5964l-.7 2h-.9536zm3.4518-7.1378L17.4483 17h-2.8964l1.4482-4.1378z',
+  'M23 10H9V9h14v1Zm0 13H9v-1h14v1Zm-10.4517-3 2.8-8h1.3036l2.8 8h-.9536l-.7-2h-3.5964l-.7 2h-.9536Zm3.4518-7.1378L17.4483 17h-2.8964l1.4482-4.1378Z',
   { height: 32, width: 32 }
 )
