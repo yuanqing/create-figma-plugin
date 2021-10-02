@@ -5,7 +5,12 @@ import { IconInfo32 } from '../icon/icon-32/icon-info-32'
 import { IconWarningFilled32 } from '../icon/icon-32/icon-warning-filled-32'
 import { Banner } from './banner'
 
-export default { title: 'Components/Banner' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Banner'
+}
 
 export const Default = function () {
   return <Banner icon={<IconInfo32 />}>Text</Banner>

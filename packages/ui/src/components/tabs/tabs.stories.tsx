@@ -5,7 +5,12 @@ import { useState } from 'preact/hooks'
 
 import { Tabs, TabsOption } from './tabs'
 
-export default { title: 'Components/Tabs' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Tabs'
+}
 
 export const Unselected = function () {
   const [value, setValue] = useState<null | string>(null)

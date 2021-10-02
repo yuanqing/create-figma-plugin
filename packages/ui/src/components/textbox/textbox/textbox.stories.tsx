@@ -8,7 +8,12 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
 import { Textbox } from './textbox'
 
-export default { title: 'Components/Textbox' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Textbox'
+}
 
 export const Empty = function () {
   const [value, setValue] = useState('')

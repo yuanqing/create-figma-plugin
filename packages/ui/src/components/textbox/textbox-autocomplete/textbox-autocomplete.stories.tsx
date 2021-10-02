@@ -10,7 +10,12 @@ import {
   TextboxAutocompleteOption
 } from './textbox-autocomplete'
 
-export default { title: 'Components/Textbox Autocomplete' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Textbox Autocomplete'
+}
 
 export const Empty = function () {
   const [value, setValue] = useState('')
@@ -349,16 +354,13 @@ export const MenuTop = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  const style = { marginTop: '100px' }
   return (
-    <div style={style}>
-      <TextboxAutocomplete
-        onInput={handleInput}
-        options={options}
-        top
-        value={value}
-      />
-    </div>
+    <TextboxAutocomplete
+      onInput={handleInput}
+      options={options}
+      top
+      value={value}
+    />
   )
 }
 

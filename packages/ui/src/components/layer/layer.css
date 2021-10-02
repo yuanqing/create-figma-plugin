@@ -42,7 +42,7 @@
 }
 
 .pageName {
-  flex-grow: 1;
+  flex-shrink: 0.5;
   padding-left: var(--space-extra-small);
   color: var(--color-black-30-translucent);
 }

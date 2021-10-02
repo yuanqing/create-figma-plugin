@@ -5,7 +5,12 @@ import { useState } from 'preact/hooks'
 
 import { SelectableItem } from './selectable-item'
 
-export default { title: 'Components/Selectable Item' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Selectable Item'
+}
 
 export const Unselected = function () {
   const [value, setValue] = useState(false)

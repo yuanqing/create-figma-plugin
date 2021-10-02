@@ -3,7 +3,12 @@ import { h } from 'preact'
 
 import { VerticalSpace } from './vertical-space'
 
-export default { title: 'Components/Layout/Vertical Space' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Layout/Vertical Space'
+}
 
 export const ExtraSmallSpace = function () {
   const style = { backgroundColor: '#daebf7' }

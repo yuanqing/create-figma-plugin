@@ -57,6 +57,9 @@ export const FullWidth = function () {
     </Button>
   )
 }
+FullWidth.parameters = {
+  fixedWidth: true
+}
 
 export const FullWidthLongText = function () {
   const longText = Array(100).fill('Text').join(' ')
@@ -68,6 +71,9 @@ export const FullWidthLongText = function () {
       {longText}
     </Button>
   )
+}
+FullWidthLongText.parameters = {
+  fixedWidth: true
 }
 
 export const Secondary = function () {

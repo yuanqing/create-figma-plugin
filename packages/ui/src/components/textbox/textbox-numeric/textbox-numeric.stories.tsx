@@ -8,7 +8,12 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
 import { TextboxNumeric } from './textbox-numeric'
 
-export default { title: 'Components/Textbox Numeric' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Textbox Numeric'
+}
 
 export const Empty = function () {
   const [value, setValue] = useState('')

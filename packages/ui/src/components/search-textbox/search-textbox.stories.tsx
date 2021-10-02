@@ -6,7 +6,12 @@ import { useState } from 'preact/hooks'
 import { useInitialFocus } from '../../hooks/use-initial-focus/use-initial-focus'
 import { SearchTextbox } from './search-textbox'
 
-export default { title: 'Components/Search Textbox' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Components/Search Textbox'
+}
 
 export const Empty = function () {
   const [value, setValue] = useState('')

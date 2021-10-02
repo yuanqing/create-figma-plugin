@@ -90,6 +90,9 @@ export const FullWidth = function () {
     </FileUploadButton>
   )
 }
+FullWidth.parameters = {
+  fixedWidth: true
+}
 
 export const FullWidthLongText = function () {
   const longText = Array(100).fill('Text').join(' ')
@@ -101,6 +104,9 @@ export const FullWidthLongText = function () {
       {longText}
     </FileUploadButton>
   )
+}
+FullWidthLongText.parameters = {
+  fixedWidth: true
 }
 
 export const Secondary = function () {
