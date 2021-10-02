@@ -242,6 +242,12 @@ export {
   LoadingIndicatorColor,
   LoadingIndicatorProps
 } from './components/loading-indicator/loading-indicator.js'
+export {
+  Modal,
+  ModalCloseButtonPosition,
+  ModalPosition,
+  ModalProps
+} from './components/modal/modal.js'
 export { Preview, PreviewProps } from './components/preview/preview.js'
 export {
   RadioButtons,
