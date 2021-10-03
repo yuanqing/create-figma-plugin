@@ -3,8 +3,10 @@
 :root {
   --border-radius-2: 2px;
   --border-radius-6: 6px;
-  --box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15),
-    inset 0 0 0 0.5px #000000, 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  --box-shadow: var(--box-shadow-menu);
+  --box-shadow-menu: 0 5px 17px rgba(0, 0, 0, 0.2),
+    0 2px 7px rgba(0, 0, 0, 0.15), inset 0 0 0 0.5px #000000,
+    0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
     0 0 0 0.5px rgba(0, 0, 0, 0.2);
   --font-family: 'Inter', 'Helvetica', sans-serif;
