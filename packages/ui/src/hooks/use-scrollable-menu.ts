@@ -1,4 +1,4 @@
-import { RefObject } from 'preact'
+import { JSX, RefObject } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref'
@@ -9,8 +9,12 @@ export function useScrollableMenu(options: {
   selectedId: null | string
   setSelectedId: (selectedId: string) => void
 }): {
-  handleScrollableMenuKeyDown: (event: KeyboardEvent) => void
-  handleScrollableMenuItemMouseMove: (event: MouseEvent) => void
+  handleScrollableMenuKeyDown: (
+    event: JSX.TargetedKeyboardEvent<HTMLElement>
+  ) => void
+  handleScrollableMenuItemMouseMove: (
+    event: JSX.TargetedMouseEvent<HTMLElement>
+  ) => void
 } {
   const { itemIdDataAttributeName, menuElementRef, selectedId, setSelectedId } =
     options
@@ -69,7 +73,7 @@ export function useScrollableMenu(options: {
   )
 
   const handleScrollableMenuKeyDown = useCallback(
-    function (event: KeyboardEvent): void {
+    function (event: JSX.TargetedKeyboardEvent<HTMLElement>): void {
       const key = event.key
       if (key === 'ArrowDown' || key === 'ArrowUp') {
         const itemElements = getItemElements()
@@ -101,9 +105,8 @@ export function useScrollableMenu(options: {
   )
 
   const handleScrollableMenuItemMouseMove = useCallback(
-    function (event: MouseEvent): void {
-      const id = (event.currentTarget as HTMLElement).getAttribute(
-        // FIXME
+    function (event: JSX.TargetedMouseEvent<HTMLElement>): void {
+      const id = event.currentTarget.getAttribute(
         itemIdDataAttributeName
       ) as string
       if (id !== selectedId) {
