@@ -18,7 +18,7 @@ export type ModalProps = {
   isOpen: boolean
 }
 export type ModalCloseButtonPosition = 'left' | 'right'
-export type ModalPosition = 'bottom' | 'center' | 'left' | 'right' | 'top'
+export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
 
 export function Modal({
   children,
