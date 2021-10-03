@@ -105,5 +105,5 @@ Figma will generate a unique plugin ID for you when you first try to publish you
 
 - [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/api/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples)
-- [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin)
+- [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin#readme)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
