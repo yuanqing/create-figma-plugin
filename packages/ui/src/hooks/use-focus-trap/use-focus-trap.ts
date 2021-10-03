@@ -4,7 +4,7 @@ export function useFocusTrap(): void {
   useWindowKeyDown('Tab', function (event: KeyboardEvent): void {
     const focusableElements = getFocusableElements()
     const index = findElementIndex(
-      event.target as HTMLElement, // FIXME
+      event.target as HTMLElement,
       focusableElements
     )
     if (index === focusableElements.length - 1 && event.shiftKey === false) {

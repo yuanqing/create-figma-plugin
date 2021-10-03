@@ -18,7 +18,7 @@ export function useMouseDownOutside(options: {
         const element = getCurrentFromRef(ref)
         if (
           element === event.target ||
-          element.contains(event.target as HTMLElement) // FIXME
+          element.contains(event.target as HTMLElement)
         ) {
           return
         }
