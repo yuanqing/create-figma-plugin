@@ -51,7 +51,7 @@ export function Modal({
         <Fragment>
           <div
             {...rest}
-            className={createClassName([
+            class={createClassName([
               styles.modal,
               isOpen === true ? styles.isOpen : null,
               styles[position]
@@ -59,15 +59,15 @@ export function Modal({
           >
             {typeof onCloseButtonClick === 'undefined' &&
             typeof title === 'undefined' ? null : (
-              <div className={styles.topBar}>
-                <div className={styles.title}>
+              <div class={styles.topBar}>
+                <div class={styles.title}>
                   {typeof title === 'undefined' ? null : (
                     <Text bold>{title}</Text>
                   )}
                 </div>
                 {typeof onCloseButtonClick === 'undefined' ? null : (
                   <button
-                    className={createClassName([
+                    class={createClassName([
                       styles.closeButton,
                       closeButtonPosition === 'left'
                         ? styles.closeButtonLeft
@@ -75,13 +75,13 @@ export function Modal({
                     ])}
                     onClick={onCloseButtonClick}
                   >
-                    <div className={styles.closeButtonBorder} />
+                    <div class={styles.closeButtonBorder} />
                     {closeButtonIcon}
                   </button>
                 )}
               </div>
             )}
-            <div {...rest} className={styles.children}>
+            <div {...rest} class={styles.children}>
               {children}
             </div>
           </div>
