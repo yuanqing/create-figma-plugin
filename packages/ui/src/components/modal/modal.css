@@ -13,7 +13,7 @@
   width: 100%;
   transition-property: bottom;
 }
-.visible.bottom {
+.isOpen.bottom {
   bottom: 0;
 }
 

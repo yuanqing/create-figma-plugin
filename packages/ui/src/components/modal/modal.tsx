@@ -11,11 +11,11 @@ export type ModalProps = {
   children: ComponentChild
   closeButtonIcon?: ComponentChild
   closeButtonPosition?: ModalCloseButtonPosition
-  onOverlayClick?: JSX.MouseEventHandler<HTMLElement>
+  isOpen: boolean
   onCloseButtonClick?: JSX.MouseEventHandler<HTMLElement>
+  onOverlayClick?: JSX.MouseEventHandler<HTMLElement>
   position?: ModalPosition
   title?: string
-  isOpen: boolean
 }
 export type ModalCloseButtonPosition = 'left' | 'right'
 export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
@@ -24,11 +24,11 @@ export function Modal({
   children,
   closeButtonIcon = <IconCross32 />,
   closeButtonPosition = 'right',
+  isOpen,
   onCloseButtonClick,
   onOverlayClick,
   position = 'center',
   title,
-  isOpen,
   ...rest
 }: ModalProps): null {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
@@ -53,7 +53,7 @@ export function Modal({
             {...rest}
             className={createClassName([
               styles.modal,
-              isOpen === true ? styles.visible : null,
+              isOpen === true ? styles.isOpen : null,
               styles[position]
             ])}
           >
