@@ -1,0 +1,31 @@
+.title,
+.children {
+  padding: var(--space-extra-small) var(--space-small) var(--space-extra-small)
+    var(--space-large);
+}
+
+.title {
+  position: relative;
+  font-weight: var(--font-weight-bold);
+}
+.title:hover {
+  background-color: var(--color-black-6-translucent);
+}
+
+.icon {
+  position: absolute;
+  top: var(--space-extra-small);
+  left: 0;
+}
+.isOpen .icon {
+  top: calc(var(--space-extra-small) - 2px);
+  left: 2px;
+  transform: rotate(90deg);
+}
+
+.children {
+  display: none;
+}
+.isOpen .children {
+  display: block;
+}
