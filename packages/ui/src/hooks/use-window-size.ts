@@ -1,87 +1,225 @@
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
+type ResizeDirection = 'both' | 'horizontal' | 'vertical'
+
+const RESIZE_HANDLE_SIZE = 12
+
+const mapResizeDirectionToStyles: Record<
+  ResizeDirection,
+  { cursor: string; height: string; width: string }
+> = {
+  both: {
+    cursor: 'nwse-resize',
+    height: `${RESIZE_HANDLE_SIZE}px`,
+    width: `${RESIZE_HANDLE_SIZE}px`
+  },
+  horizontal: {
+    cursor: 'ew-resize',
+    height: '100%',
+    width: `${RESIZE_HANDLE_SIZE}px`
+  },
+  vertical: {
+    cursor: 'ns-resize',
+    height: `${RESIZE_HANDLE_SIZE}px`,
+    width: '100%'
+  }
+}
+
 export function useWindowSize(
   onWindowResize: (size: { width: number; height: number }) => void,
-  options?: {
+  options: {
     maxHeight?: number
     maxWidth?: number
     minHeight?: number
     minWidth?: number
-    direction?: 'horizontal' | 'vertical'
-  }
-): {
-  setWindowSize: (size: { width: number; height: number }) => void
-} {
-  const size = useRef({ height: window.innerHeight, width: window.innerWidth })
+    resizeDirection?: ResizeDirection
+    toggleWindowSizeOnDoubleClick?: boolean
+  } = {}
+): (size: { width: number; height: number }) => void {
+  const toggleWindowSizeOnDoubleClick =
+    typeof options.toggleWindowSizeOnDoubleClick === 'undefined' ? false : true
+  const resizeDirection =
+    typeof options.resizeDirection === 'undefined'
+      ? 'both'
+      : options.resizeDirection
+  const maxHeight =
+    typeof options.maxHeight === 'undefined'
+      ? Number.MAX_VALUE
+      : options.maxHeight
+  const maxWidth =
+    typeof options.maxWidth === 'undefined'
+      ? Number.MAX_VALUE
+      : options.maxWidth
+  const minHeight =
+    typeof options.minHeight === 'undefined'
+      ? window.innerHeight
+      : options.minHeight
+  const minWidth =
+    typeof options.minWidth === 'undefined'
+      ? window.innerWidth
+      : options.minWidth
+
+  const windowSize = useRef({
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+
   const setWindowSize = useCallback(
-    ({ width, height }: { width: number; height: number }) => {
-      if (!options?.direction || options.direction === 'vertical')
-        size.current.height = Math.min(
-          options?.maxHeight || Infinity,
-          Math.max(options?.minHeight || 0, height)
+    function ({ width, height }: { width?: number; height?: number }) {
+      if (typeof width === 'undefined' && typeof height === 'undefined') {
+        throw new Error('Need at least one of `width` or `height`')
+      }
+      if (typeof width !== 'undefined') {
+        windowSize.current.width = Math.min(maxWidth, Math.max(minWidth, width))
+      }
+      if (typeof height !== 'undefined') {
+        windowSize.current.height = Math.min(
+          maxHeight,
+          Math.max(minHeight, height)
         )
-      if (!options?.direction || options.direction === 'horizontal')
-        size.current.width = Math.min(
-          options?.maxWidth || Infinity,
-          Math.max(options?.minWidth || 0, width)
+      }
+      onWindowResize(windowSize.current)
+    },
+    [maxHeight, maxWidth, minHeight, minWidth, onWindowResize]
+  )
+
+  const toggleWindowSize = useCallback(
+    function (resizeDirection: ResizeDirection) {
+      if (resizeDirection === 'both' || resizeDirection === 'horizontal') {
+        if (
+          maxWidth !== Number.MAX_VALUE &&
+          windowSize.current.width < maxWidth
+        ) {
+          // Set to `maxWidth` if `options.maxWidth` was specified and the current width
+          // is less than `maxWidth`
+          windowSize.current.width = maxWidth
+        } else {
+          windowSize.current.width = minWidth
+        }
+      }
+      if (resizeDirection === 'both' || resizeDirection === 'vertical') {
+        if (
+          maxHeight !== Number.MAX_VALUE &&
+          windowSize.current.height < maxHeight
+        ) {
+          // Set to `maxHeight` if `options.maxHeight` was specified and the current height
+          // is less than `maxHeight`
+          windowSize.current.height = maxHeight
+        } else {
+          windowSize.current.height = minHeight
+        }
+      }
+      onWindowResize(windowSize.current)
+    },
+    [maxHeight, maxWidth, minHeight, minWidth, onWindowResize]
+  )
+
+  useEffect(
+    function () {
+      const removeResizeHandleElements: Array<() => void> = []
+      const options = {
+        resizeDirection,
+        setWindowSize,
+        toggleWindowSize:
+          toggleWindowSizeOnDoubleClick === true ? toggleWindowSize : null
+      }
+      if (resizeDirection === 'both') {
+        removeResizeHandleElements.push(
+          createResizeHandleElement({
+            ...options,
+            resizeDirection: 'horizontal'
+          })
         )
-      onWindowResize(size.current)
+        removeResizeHandleElements.push(
+          createResizeHandleElement({ ...options, resizeDirection: 'vertical' })
+        )
+      }
+      removeResizeHandleElements.push(createResizeHandleElement(options))
+      return function () {
+        for (const removeResizeHandleElement of removeResizeHandleElements) {
+          removeResizeHandleElement()
+        }
+      }
     },
     [
-      onWindowResize,
-      options?.maxHeight,
-      options?.maxWidth,
-      options?.minHeight,
-      options?.minWidth,
-      options?.direction
+      maxHeight,
+      maxWidth,
+      minHeight,
+      maxHeight,
+      resizeDirection,
+      setWindowSize,
+      toggleWindowSize,
+      toggleWindowSizeOnDoubleClick
     ]
   )
+  return setWindowSize
+}
 
-  const handleResize:
-    | ((this: GlobalEventHandlers, e: PointerEvent) => void)
-    | null = useCallback(
-    function (this: GlobalEventHandlers, e: PointerEvent) {
-      setWindowSize({
-        height: Math.floor(e.clientY + 5),
-        width: Math.floor(e.clientX + 5)
-      })
-    },
-    [setWindowSize]
-  )
-
-  useEffect(() => {
-    const resizeHandle = document.createElement('div')
-    document.body.append(resizeHandle)
-    resizeHandle.style.cssText = `
-      cursor: ${
-        !options?.direction
-          ? 'nwse-resize'
-          : options?.direction === 'horizontal'
-          ? 'ew-resize'
-          : 'ns-resize'
-      };
-      position: fixed;
-      z-index: 100;
-      bottom: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      background: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='5.40839' y1='9.40645' x2='9.40839' y2='5.40645' stroke='%23666666'/%3E%3Cline x1='1.77164' y1='9.40646' x2='9.4084' y2='1.7697' stroke='%23666666'/%3E%3C/svg%3E%0A")
-    `
-
-    resizeHandle.onpointerdown = (e) => {
-      resizeHandle.onpointermove = handleResize
-      resizeHandle.setPointerCapture(e.pointerId)
-    }
-    resizeHandle.onpointerup = (e) => {
-      if (resizeHandle) {
-        resizeHandle.onpointermove = null
-        resizeHandle.releasePointerCapture(e.pointerId)
+function createResizeHandleElement(options: {
+  resizeDirection: ResizeDirection
+  setWindowSize: (windowSize: { width?: number; height?: number }) => void
+  toggleWindowSize: null | ((resizeDirection: ResizeDirection) => void)
+}): () => void {
+  const { resizeDirection, setWindowSize, toggleWindowSize } = options
+  const resizeHandleElement = document.createElement('div')
+  document.body.append(resizeHandleElement)
+  const { cursor, height, width } = mapResizeDirectionToStyles[resizeDirection]
+  resizeHandleElement.style.cssText = `
+    cursor: ${cursor};
+    position: fixed;
+    z-index: var(--z-index-2);
+    bottom: 0;
+    right: 0;
+    width: ${width};
+    height: ${height};
+  `
+  let pointerDownCursorPosition: null | { x: number; y: number } = null
+  resizeHandleElement.addEventListener(
+    'pointerdown',
+    function (event: PointerEvent) {
+      pointerDownCursorPosition = {
+        x: event.offsetX,
+        y: event.offsetY
       }
+      resizeHandleElement.setPointerCapture(event.pointerId)
     }
-    return function () {
-      resizeHandle.remove()
+  )
+  resizeHandleElement.addEventListener(
+    'pointerup',
+    function (event: PointerEvent) {
+      pointerDownCursorPosition = null
+      resizeHandleElement.releasePointerCapture(event.pointerId)
     }
-  }, [handleResize, options?.direction])
-  return { setWindowSize }
+  )
+  resizeHandleElement.addEventListener(
+    'pointermove',
+    function (event: PointerEvent) {
+      if (pointerDownCursorPosition === null) {
+        return
+      }
+      const width =
+        resizeDirection === 'both' || resizeDirection === 'horizontal'
+          ? Math.round(
+              event.clientX +
+                (resizeHandleElement.offsetWidth - pointerDownCursorPosition.x)
+            )
+          : undefined
+      const height =
+        resizeDirection === 'both' || resizeDirection === 'vertical'
+          ? Math.round(
+              event.clientY +
+                (resizeHandleElement.offsetHeight - pointerDownCursorPosition.y)
+            )
+          : undefined
+      setWindowSize({ height, width })
+    }
+  )
+  if (toggleWindowSize !== null) {
+    resizeHandleElement.addEventListener('dblclick', function () {
+      toggleWindowSize(resizeDirection)
+    })
+  }
+  return function () {
+    resizeHandleElement.remove()
+  }
 }
