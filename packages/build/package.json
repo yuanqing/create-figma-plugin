@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Build a Figma plugin",
+  "description": "Build a Figma/FigJam plugin",
   "keywords": [
     "create-figma-plugin",
     "figjam",
