@@ -6,6 +6,6 @@ export const watchIgnoreRegex = new RegExp(
     '^manifest.json$',
     '^package-lock.json$',
     '.css.d.ts$',
-    `^${constants.build.directoryName}`
+    `^${constants.build.directoryName}/`
   ].join('|')
 )

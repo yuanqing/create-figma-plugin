@@ -1,4 +1,4 @@
-import { log } from '@create-figma-plugin/common'
+import { constants, log } from '@create-figma-plugin/common'
 import { watch } from 'chokidar'
 import { yellow } from 'kleur/colors'
 
@@ -20,7 +20,14 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
     endTypeCheckWatch = typeCheckWatch()
   }
   const watcher = watch(
-    ['**/*.{css,js,json,jsx,ts,tsx}', 'package.json', 'tsconfig.json'],
+    [
+      '**/*.{css,js,json,jsx,ts,tsx}',
+      constants.build.mainConfigFilePath,
+      constants.build.manifestConfigFilePath,
+      constants.build.uiConfigFilePath,
+      'package.json',
+      'tsconfig.json'
+    ],
     {
       ignored: function (path: string): boolean {
         return watchIgnoreRegex.test(path) === true
