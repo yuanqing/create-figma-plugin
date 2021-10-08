@@ -57,8 +57,8 @@ export function useWindowSize(
     typeof options.minWidth === 'undefined' ? initialWidth : options.minWidth
 
   const windowSize = useRef({
-    height: initialWidth,
-    width: initialHeight
+    height: initialHeight,
+    width: initialWidth
   })
 
   const setWindowSize = useCallback(
