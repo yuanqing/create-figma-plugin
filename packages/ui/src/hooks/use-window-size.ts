@@ -2,25 +2,23 @@ import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 type ResizeDirection = 'both' | 'horizontal' | 'vertical'
 
-const RESIZE_HANDLE_SIZE = 12
-
 const mapResizeDirectionToStyles: Record<
   ResizeDirection,
   { cursor: string; height: string; width: string }
 > = {
   both: {
     cursor: 'nwse-resize',
-    height: `${RESIZE_HANDLE_SIZE}px`,
-    width: `${RESIZE_HANDLE_SIZE}px`
+    height: '12px',
+    width: '12px'
   },
   horizontal: {
     cursor: 'ew-resize',
     height: '100%',
-    width: `${RESIZE_HANDLE_SIZE}px`
+    width: '8px'
   },
   vertical: {
     cursor: 'ns-resize',
-    height: `${RESIZE_HANDLE_SIZE}px`,
+    height: '8px',
     width: '100%'
   }
 }
