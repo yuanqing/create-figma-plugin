@@ -1,3 +1,7 @@
+*This page is for contributors. If you’re looking to use Create Figma Plugin, go to the [official docs](https://yuanqing.github.io/create-figma-plugin/).*
+
+---
+
 # [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin/) [![npm Version](https://img.shields.io/npm/v/create-figma-plugin?cacheSeconds=1800)](https://npmjs.com/package/create-figma-plugin) [![build](https://img.shields.io/github/workflow/status/yuanqing/create-figma-plugin/build?cacheSeconds=1800)](https://github.com/yuanqing/create-figma-plugin/actions?query=workflow%3Abuild)
 
 > A comprehensive toolkit for developing plugins for Figma and FigJam
