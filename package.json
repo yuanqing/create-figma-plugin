@@ -22,14 +22,14 @@
     "website-deploy": "yarn run website-build && gh-pages --dist build"
   },
   "devDependencies": {
-    "@types/node": "^16.9.6",
+    "@types/node": "^16.10.3",
     "cpy-cli": "^3.1.1",
     "eslint": "^7.32.0",
     "eslint-config-yuanqing": "^0.0.5",
     "gh-pages": "^3.2.3",
     "globby": "^12.0.2",
     "lerna": "^4.0.0",
-    "lint-staged": "^11.1.2",
+    "lint-staged": "^11.2.1",
     "npm-check-updates": "^11.8.5",
     "prettier": "^2.4.1",
     "simple-git-hooks": "^2.6.1",
