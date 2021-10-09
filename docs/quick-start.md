@@ -13,7 +13,7 @@ First:
 $ npx --yes -- create-figma-plugin figma-hello-world
 ```
 
-(Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template is used. Append `--template ui` to use the [`ui`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/ui) template.)
+Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template is used. (Learn how to [use a different plugin template](#use-a-different-plugin-template).)
 
 Then:
 
@@ -80,6 +80,20 @@ To watch for code changes and rebuild the plugin automatically:
 ```
 $ npm run watch
 ```
+
+## Use a different plugin template
+
+To initialize your plugin with a different plugin template, use the `--template` flag. For example:
+
+```
+$ npx --yes -- create-figma-plugin figma-hello-world --template preact-rectangles
+```
+
+Besides the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template, three other templates are available:
+
+- [`preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-rectangles) — Plugin with a UI built using the `@create-figma-plugin/ui` [Preact component library](#using-the-preact-component-library).
+- [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-resizable) — Plugin with a resizable UI window.
+- [`react`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/react) — Plugin with a UI [containing a React component](#using-react).
 
 ## Install the plugin
 
