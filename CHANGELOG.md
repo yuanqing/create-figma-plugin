@@ -5,13 +5,16 @@
 - `@create-figma-plugin/build`
   - Watch the `build-figma-plugin.*.js` files
 
+- `@create-figma-plugin/common`
+  - Updated the `@figma/plugin-typings` version to `1.37.0`
+
 - `@create-figma-plugin/ui`
   - Added new components `Disclosure`, `IconChevronDown32`, `IconChevronLeft32` `IconChevronRight32`, `IconChevronUp32`, and `Modal`
   - Regenerated all icon components
   - Added a `useWindowResize` hook
   - Fixed a bug in `useFocusTrap` (by adding a call to `useEffect`)
   - Added CSS variables `--box-shadow-menu`, `--box-shadow-modal`, and `--font-family-code`
-  - Updated `computeBoundingBox` for compatibility with the latest `@figma/plugin-typings`
+  - Made `computeBoundingBox` compatibile with `@figma/plugin-typings@1.37.0`
 
 - `create-figma-plugin`
   - Renamed the `ui` template to `preact-rectangles`
