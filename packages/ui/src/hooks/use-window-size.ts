@@ -84,7 +84,7 @@ export function useWindowSize(
   )
 
   const toggleWindowSize = useCallback(
-    function (resizeDirection: ResizeDirection) {
+    function (resizeDirection: ResizeDirection): void {
       if (resizeDirection === 'both' || resizeDirection === 'horizontal') {
         if (windowSize.current.width !== initialWidth) {
           windowSize.current.width = initialWidth
@@ -104,19 +104,19 @@ export function useWindowSize(
       onWindowResize(windowSize.current)
     },
     [
-      resizeBehaviorOnDoubleClick,
       initialHeight,
       initialWidth,
       maxHeight,
       maxWidth,
       minHeight,
       minWidth,
-      onWindowResize
+      onWindowResize,
+      resizeBehaviorOnDoubleClick
     ]
   )
 
   useEffect(
-    function () {
+    function (): () => void {
       const removeResizeHandleElements: Array<() => void> = []
       const options = {
         resizeDirection,
@@ -136,7 +136,7 @@ export function useWindowSize(
         )
       }
       removeResizeHandleElements.push(createResizeHandleElement(options))
-      return function () {
+      return function (): void {
         for (const removeResizeHandleElement of removeResizeHandleElements) {
           removeResizeHandleElement()
         }
@@ -146,7 +146,7 @@ export function useWindowSize(
       maxHeight,
       maxWidth,
       minHeight,
-      maxHeight,
+      minWidth,
       resizeBehaviorOnDoubleClick,
       resizeDirection,
       setWindowSize,
@@ -172,7 +172,7 @@ function createResizeHandleElement(options: {
   let pointerDownCursorPosition: null | { x: number; y: number } = null
   resizeHandleElement.addEventListener(
     'pointerdown',
-    function (event: PointerEvent) {
+    function (event: PointerEvent): void {
       pointerDownCursorPosition = {
         x: event.offsetX,
         y: event.offsetY
@@ -182,14 +182,14 @@ function createResizeHandleElement(options: {
   )
   resizeHandleElement.addEventListener(
     'pointerup',
-    function (event: PointerEvent) {
+    function (event: PointerEvent): void {
       pointerDownCursorPosition = null
       resizeHandleElement.releasePointerCapture(event.pointerId)
     }
   )
   resizeHandleElement.addEventListener(
     'pointermove',
-    function (event: PointerEvent) {
+    function (event: PointerEvent): void {
       if (pointerDownCursorPosition === null) {
         return
       }
@@ -211,12 +211,12 @@ function createResizeHandleElement(options: {
     }
   )
   if (toggleWindowSize !== null) {
-    resizeHandleElement.addEventListener('dblclick', function () {
+    resizeHandleElement.addEventListener('dblclick', function (): void {
       toggleWindowSize(resizeDirection)
     })
   }
 
-  return function () {
+  return function (): void {
     resizeHandleElement.remove()
   }
 }

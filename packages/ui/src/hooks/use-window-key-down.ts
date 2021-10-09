@@ -15,7 +15,7 @@ export function useWindowKeyDown(
   )
 
   useEffect(
-    function () {
+    function (): () => void {
       window.addEventListener('keydown', handleKeyDown)
       return function (): void {
         window.removeEventListener('keydown', handleKeyDown)
