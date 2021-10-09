@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
+type ResizeBehaviorOnDoubleClick = 'minimize' | 'maximize'
 type ResizeDirection = 'both' | 'horizontal' | 'vertical'
 
 const mapResizeDirectionToStyles: Record<
@@ -30,19 +31,17 @@ export function useWindowSize(
     maxWidth?: number
     minHeight?: number
     minWidth?: number
+    resizeBehaviorOnDoubleClick?: ResizeBehaviorOnDoubleClick
     resizeDirection?: ResizeDirection
-    toggleWindowSizeOnDoubleClick?: boolean
   } = {}
 ): (size: { width: number; height: number }) => void {
-  const initialWidth = window.innerWidth
   const initialHeight = window.innerHeight
+  const initialWidth = window.innerWidth
 
-  const toggleWindowSizeOnDoubleClick =
-    typeof options.toggleWindowSizeOnDoubleClick === 'undefined' ? false : true
-  const resizeDirection =
-    typeof options.resizeDirection === 'undefined'
-      ? 'both'
-      : options.resizeDirection
+  const resizeBehaviorOnDoubleClick =
+    typeof options.resizeBehaviorOnDoubleClick === 'undefined'
+      ? null
+      : options.resizeBehaviorOnDoubleClick
   const maxHeight =
     typeof options.maxHeight === 'undefined'
       ? Number.MAX_VALUE
@@ -55,6 +54,10 @@ export function useWindowSize(
     typeof options.minHeight === 'undefined' ? initialHeight : options.minHeight
   const minWidth =
     typeof options.minWidth === 'undefined' ? initialWidth : options.minWidth
+  const resizeDirection =
+    typeof options.resizeDirection === 'undefined'
+      ? 'both'
+      : options.resizeDirection
 
   const windowSize = useRef({
     height: initialHeight,
@@ -83,42 +86,33 @@ export function useWindowSize(
   const toggleWindowSize = useCallback(
     function (resizeDirection: ResizeDirection) {
       if (resizeDirection === 'both' || resizeDirection === 'horizontal') {
-        if (windowSize.current.width < initialWidth) {
-          // Set to `initialWidth` if the current width is less than `initialWidth`
+        if (windowSize.current.width !== initialWidth) {
           windowSize.current.width = initialWidth
         } else {
-          if (
-            maxWidth !== Number.MAX_VALUE &&
-            windowSize.current.width < maxWidth
-          ) {
-            // Set to `maxWidth` if `options.maxWidth` was specified and the current width
-            // is less than `maxWidth`
-            windowSize.current.width = maxWidth
-          } else {
-            windowSize.current.width = initialWidth
-          }
+          windowSize.current.width =
+            resizeBehaviorOnDoubleClick === 'minimize' ? minWidth : maxWidth
         }
       }
       if (resizeDirection === 'both' || resizeDirection === 'vertical') {
-        if (windowSize.current.height < initialHeight) {
-          // Set to `initialHeight` if the current height is less than `initialHeight`
+        if (windowSize.current.height !== initialHeight) {
           windowSize.current.height = initialHeight
         } else {
-          if (
-            maxHeight !== Number.MAX_VALUE &&
-            windowSize.current.height < maxHeight
-          ) {
-            // Set to `maxHeight` if `options.maxHeight` was specified and the current height
-            // is less than `maxHeight`
-            windowSize.current.height = maxHeight
-          } else {
-            windowSize.current.height = initialWidth
-          }
+          windowSize.current.height =
+            resizeBehaviorOnDoubleClick === 'minimize' ? minHeight : maxHeight
         }
       }
       onWindowResize(windowSize.current)
     },
-    [initialHeight, initialWidth, maxHeight, maxWidth, onWindowResize]
+    [
+      resizeBehaviorOnDoubleClick,
+      initialHeight,
+      initialWidth,
+      maxHeight,
+      maxWidth,
+      minHeight,
+      minWidth,
+      onWindowResize
+    ]
   )
 
   useEffect(
@@ -128,7 +122,7 @@ export function useWindowSize(
         resizeDirection,
         setWindowSize,
         toggleWindowSize:
-          toggleWindowSizeOnDoubleClick === true ? toggleWindowSize : null
+          resizeBehaviorOnDoubleClick === null ? null : toggleWindowSize
       }
       if (resizeDirection === 'both') {
         removeResizeHandleElements.push(
@@ -153,12 +147,13 @@ export function useWindowSize(
       maxWidth,
       minHeight,
       maxHeight,
+      resizeBehaviorOnDoubleClick,
       resizeDirection,
       setWindowSize,
-      toggleWindowSize,
-      toggleWindowSizeOnDoubleClick
+      toggleWindowSize
     ]
   )
+
   return setWindowSize
 }
 
@@ -168,6 +163,7 @@ function createResizeHandleElement(options: {
   toggleWindowSize: null | ((resizeDirection: ResizeDirection) => void)
 }): () => void {
   const { resizeDirection, setWindowSize, toggleWindowSize } = options
+
   const resizeHandleElement = document.createElement('div')
   document.body.append(resizeHandleElement)
   const { cursor, height, width } = mapResizeDirectionToStyles[resizeDirection]
@@ -180,6 +176,7 @@ function createResizeHandleElement(options: {
     width: ${width};
     height: ${height};
   `
+
   let pointerDownCursorPosition: null | { x: number; y: number } = null
   resizeHandleElement.addEventListener(
     'pointerdown',
@@ -226,6 +223,7 @@ function createResizeHandleElement(options: {
       toggleWindowSize(resizeDirection)
     })
   }
+
   return function () {
     resizeHandleElement.remove()
   }
