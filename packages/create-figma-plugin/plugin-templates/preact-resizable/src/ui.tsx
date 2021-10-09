@@ -1,10 +1,10 @@
-import { render, useWindowSize } from '@create-figma-plugin/ui'
+import { render, useWindowResize } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
 
 import { ResizeWindowHandler } from './types'
 
 function Plugin() {
-  useWindowSize(
+  useWindowResize(
     function (windowSize: { width: number; height: number }) {
       emit<ResizeWindowHandler>('RESIZE_WINDOW', windowSize)
     },
