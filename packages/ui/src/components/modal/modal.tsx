@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'preact/hooks'
 
 import { createClassName } from '../../utilities/create-class-name'
 import { createFocusTrapKeyDownHandler } from '../../utilities/create-focus-trap-key-down-handler'
+import { getFocusableElements } from '../../utilities/get-focusable-elements'
 import { IconCross32 } from '../icon/icon-32/icon-cross-32'
 import { Text } from '../text/text'
 import styles from './modal.css'
@@ -35,6 +36,7 @@ export function Modal({
   ...rest
 }: ModalProps): null {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
+  const previousFocusedElementRef: RefObject<HTMLElement> = useRef(null)
 
   useEffect(function () {
     const rootElement = document.createElement('div')
@@ -50,6 +52,7 @@ export function Modal({
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
+
       render(
         <Fragment>
           <div
@@ -60,6 +63,9 @@ export function Modal({
               styles[position]
             ])}
           >
+            <div {...rest} class={styles.children}>
+              {children}
+            </div>
             {typeof onCloseButtonClick === 'undefined' &&
             typeof title === 'undefined' ? null : (
               <div class={styles.topBar}>
@@ -85,9 +91,6 @@ export function Modal({
                 )}
               </div>
             )}
-            <div {...rest} class={styles.children}>
-              {children}
-            </div>
           </div>
           <div
             class={styles.overlay}
@@ -108,15 +111,25 @@ export function Modal({
       const handleTabKeyDown = createFocusTrapKeyDownHandler(
         rootElementRef.current
       )
-
       if (isOpen === true) {
         window.addEventListener('keydown', handleEscapeKeyDown)
         window.addEventListener('keydown', handleTabKeyDown)
+        previousFocusedElementRef.current =
+          document.activeElement as HTMLElement
+        const focusableElements = getFocusableElements(rootElementRef.current)
+        if (focusableElements.length > 0) {
+          focusableElements[0].focus()
+        } else {
+          previousFocusedElementRef.current.blur()
+        }
       }
       return function (): void {
         if (isOpen === true) {
-          window.addEventListener('keydown', handleEscapeKeyDown)
+          window.removeEventListener('keydown', handleEscapeKeyDown)
           window.removeEventListener('keydown', handleTabKeyDown)
+          if (previousFocusedElementRef.current !== null) {
+            previousFocusedElementRef.current.focus()
+          }
         }
       }
     },
