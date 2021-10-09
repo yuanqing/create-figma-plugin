@@ -167,15 +167,7 @@ function createResizeHandleElement(options: {
   const resizeHandleElement = document.createElement('div')
   document.body.append(resizeHandleElement)
   const { cursor, height, width } = mapResizeDirectionToStyles[resizeDirection]
-  resizeHandleElement.style.cssText = `
-    cursor: ${cursor};
-    position: fixed;
-    z-index: var(--z-index-2);
-    bottom: 0;
-    right: 0;
-    width: ${width};
-    height: ${height};
-  `
+  resizeHandleElement.style.cssText = `cursor: ${cursor}; position: fixed; z-index: var(--z-index-2); bottom: 0; right: 0; width: ${width}; height: ${height};`
 
   let pointerDownCursorPosition: null | { x: number; y: number } = null
   resizeHandleElement.addEventListener(
