@@ -1,46 +1,16 @@
-import { useWindowKeyDown } from '../use-window-key-down'
+import { useEffect } from 'preact/hooks'
 
-export function useFocusTrap(): void {
-  useWindowKeyDown('Tab', function (event: KeyboardEvent): void {
-    const focusableElements = getFocusableElements()
-    const index = findElementIndex(
-      event.target as HTMLElement,
-      focusableElements
-    )
-    if (index === focusableElements.length - 1 && event.shiftKey === false) {
-      // Focus the first element
-      event.preventDefault()
-      focusableElements[0].focus()
-      return
-    }
-    if (index === 0 && event.shiftKey === true) {
-      // Focus the last element
-      event.preventDefault()
-      focusableElements[focusableElements.length - 1].focus()
-    }
-  })
-}
+import { createFocusTrapKeyDownHandler } from '../../utilities/create-focus-trap-key-down-handler'
 
-function getFocusableElements(): Array<HTMLElement> {
-  const elements = document.querySelectorAll<HTMLElement>(
-    ':not([disabled])[tabindex]:not([tabindex="-1"])'
+export function useFocusTrap(rootElement?: HTMLElement): void {
+  useEffect(
+    function () {
+      const handleKeyDown = createFocusTrapKeyDownHandler(rootElement)
+      window.addEventListener('keydown', handleKeyDown)
+      return function (): void {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    },
+    [rootElement]
   )
-  return Array.prototype.slice.call(elements)
-}
-
-function findElementIndex(
-  targetElement: HTMLElement,
-  elements: Array<HTMLElement>
-): number {
-  return elements.reduce(function (
-    result: number,
-    element: HTMLElement,
-    index: number
-  ): number {
-    if (result === -1 && element.isSameNode(targetElement) === true) {
-      return index
-    }
-    return result
-  },
-  -1)
 }
