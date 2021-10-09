@@ -2,8 +2,8 @@
 
 > A comprehensive toolkit for developing [plugins for Figma and FigJam](https://figma.com/community/plugins)
 
-- [Initialize a new plugin](#initialize-a-new-plugin-from-a-template) using a template
-- [Bundle and minify your TypeScript or JavaScript plugin code](#build-the-plugin), with sub-second build times made possible by the [esbuild compiler](https://esbuild.github.io)
+- [Initialize a new plugin](#initializing-a-new-plugin-from-a-template) using a template
+- [Bundle and minify your TypeScript or JavaScript plugin code](#building-the-plugin), with sub-second build times made possible by the [esbuild compiler](https://esbuild.github.io)
 - [Write plugin commands in separate files](#specifying-multiple-commands-in-the-plugin-sub-menu), with support for each command having their own [UI implementation](#ui-1)
 - [Leverage an extensive set of utility functions](#utilities) for common plugin operations, including [utilities for passing data between your plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts)
 - [Create a UI for your plugin](#ui-1) using [a library of Preact components that replicate the Figma UI](https://yuanqing.github.io/create-figma-plugin/ui/), or [write custom styles as CSS Modules](#using-custom-css)

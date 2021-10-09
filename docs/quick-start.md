@@ -5,7 +5,7 @@
 - [Node.js](https://nodejs.org) – v14
 - [Figma desktop app](https://figma.com/downloads/)
 
-## Initialize a new plugin from a template
+## Initializing a new plugin from a template
 
 First:
 
@@ -13,7 +13,7 @@ First:
 $ npx --yes -- create-figma-plugin figma-hello-world
 ```
 
-Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template is used. (Learn how to [use a different plugin template](#use-a-different-plugin-template).)
+(Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template is used. Learn how to [use a different plugin template](#using-a-different-plugin-template).)
 
 Then:
 
@@ -50,7 +50,7 @@ In `package.json`, we’re pointing to `src/main.ts` on the [**`"main"`**](#main
 
 See the other [configuration options](#configuration-options), or learn how to [add a UI to a plugin command](#ui-1).
 
-## Build the plugin
+## Building the plugin
 
 In `package.json`, we also have `build` and `watch` scripts set up to invoke the `build-figma-plugin` CLI:
 
@@ -81,7 +81,7 @@ To watch for code changes and rebuild the plugin automatically:
 $ npm run watch
 ```
 
-## Install the plugin
+## Installing the plugin
 
 In the Figma desktop app:
 
@@ -101,7 +101,7 @@ Learn how to [publish your plugin to Figma Community](https://help.figma.com/hc/
 
 Figma will generate a unique plugin ID for you when you first try to publish your plugin. Copy and paste that ID into your plugin’s **`"figma-plugin"`** configuration (under the [**`"id"`**](#id) key), then rebuild the plugin to regenerate its `manifest.json` file.
 
-## Use a different plugin template
+## Using a different plugin template
 
 To initialize your plugin with a different plugin template, use the `--template` flag. For example:
 
