@@ -311,8 +311,6 @@ export {
 } from './hooks/use-window-resize.js'
 export { OnValueChange, Props } from './types/types.js'
 export { createClassName } from './utilities/create-class-name.js'
-export { createFocusTrapKeyDownHandler } from './utilities/create-focus-trap-key-down-handler.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'
-export { getFocusableElements } from './utilities/get-focusable-elements.js'
 export { mapTextboxNumericValueToString } from './utilities/map-textbox-numeric-value-to-string.js'
 export { render } from './utilities/render.js'
