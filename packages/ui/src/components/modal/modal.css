@@ -1,5 +1,5 @@
 .modal {
-  position: absolute;
+  position: fixed;
   z-index: var(--z-index-2);
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-modal);

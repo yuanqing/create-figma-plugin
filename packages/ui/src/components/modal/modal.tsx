@@ -3,6 +3,7 @@ import { ComponentChild, Fragment, h, JSX, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
 import { createClassName } from '../../utilities/create-class-name'
+import { createFocusTrapKeyDownHandler } from '../../utilities/create-focus-trap-key-down-handler'
 import { IconCross32 } from '../icon/icon-32/icon-cross-32'
 import { Text } from '../text/text'
 import styles from './modal.css'
@@ -11,9 +12,10 @@ export type ModalProps = {
   children: ComponentChild
   closeButtonIcon?: ComponentChild
   closeButtonPosition?: ModalCloseButtonPosition
+  onCloseButtonClick?: JSX.MouseEventHandler<HTMLButtonElement>
+  onEscapeKeyDown?: (event: KeyboardEvent) => void
+  onOverlayClick?: JSX.MouseEventHandler<HTMLDivElement>
   isOpen: boolean
-  onCloseButtonClick?: JSX.MouseEventHandler<HTMLElement>
-  onOverlayClick?: JSX.MouseEventHandler<HTMLElement>
   position?: ModalPosition
   title?: string
 }
@@ -26,6 +28,7 @@ export function Modal({
   closeButtonPosition = 'right',
   isOpen,
   onCloseButtonClick,
+  onEscapeKeyDown,
   onOverlayClick,
   position = 'center',
   title,
@@ -74,6 +77,7 @@ export function Modal({
                         : null
                     ])}
                     onClick={onCloseButtonClick}
+                    tabIndex={1}
                   >
                     <div class={styles.closeButtonBorder} />
                     {closeButtonIcon}
@@ -94,6 +98,27 @@ export function Modal({
         </Fragment>,
         rootElementRef.current
       )
+
+      function handleEscapeKeyDown(event: KeyboardEvent) {
+        if (event.key !== 'Escape' || typeof onEscapeKeyDown === 'undefined') {
+          return
+        }
+        onEscapeKeyDown(event)
+      }
+      const handleTabKeyDown = createFocusTrapKeyDownHandler(
+        rootElementRef.current
+      )
+
+      if (isOpen === true) {
+        window.addEventListener('keydown', handleEscapeKeyDown)
+        window.addEventListener('keydown', handleTabKeyDown)
+      }
+      return function (): void {
+        if (isOpen === true) {
+          window.addEventListener('keydown', handleEscapeKeyDown)
+          window.removeEventListener('keydown', handleTabKeyDown)
+        }
+      }
     },
     [
       children,
@@ -101,6 +126,7 @@ export function Modal({
       closeButtonPosition,
       isOpen,
       onCloseButtonClick,
+      onEscapeKeyDown,
       onOverlayClick,
       position,
       rest,

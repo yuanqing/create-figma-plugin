@@ -129,6 +129,27 @@ export const CloseOnOverlayClick = function () {
   )
 }
 
+export const CloseOnEscapeKeyDown = function () {
+  const [isOpen, setIsOpen] = useState(false)
+  function handleOpenButtonClick() {
+    setIsOpen(true)
+  }
+  function handleEscapeKeyDown() {
+    setIsOpen(false)
+  }
+  const style = { height: '160px', padding: '12px', width: '240px' }
+  return (
+    <Fragment>
+      <Button fullWidth onClick={handleOpenButtonClick}>
+        Open
+      </Button>
+      <Modal isOpen={isOpen} onEscapeKeyDown={handleEscapeKeyDown}>
+        <div style={style}>foo</div>
+      </Modal>
+    </Fragment>
+  )
+}
+
 export const Title = function () {
   const [isOpen, setIsOpen] = useState(false)
   function handleOpenButtonClick() {
