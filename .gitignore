@@ -7,5 +7,5 @@ node_modules/
 sandbox/
 /build/
 /packages/**/fixtures/**/build/
-/packages/**/fixtures/**/figma-plugin/
+/packages/create-figma-plugin/test/figma-plugin/
 /packages/ui/build/
