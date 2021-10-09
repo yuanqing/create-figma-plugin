@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'preact/hooks'
 
-type ResizeBehaviorOnDoubleClick = 'minimize' | 'maximize'
-type ResizeDirection = 'both' | 'horizontal' | 'vertical'
+export type ResizeBehaviorOnDoubleClick = 'minimize' | 'maximize'
+export type ResizeDirection = 'both' | 'horizontal' | 'vertical'
 
 const mapResizeDirectionToStyles: Record<
   ResizeDirection,
