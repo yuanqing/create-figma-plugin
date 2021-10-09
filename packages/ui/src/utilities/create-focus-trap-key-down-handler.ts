@@ -1,11 +1,13 @@
+import { getFocusableElements } from './get-focusable-elements'
+
 export function createFocusTrapKeyDownHandler(rootElement?: HTMLElement) {
   return function (event: KeyboardEvent): void {
     if (event.key !== 'Tab') {
       return
     }
+    event.preventDefault()
     const focusableElements = getFocusableElements(rootElement)
     if (focusableElements.length === 0) {
-      event.preventDefault()
       return
     }
     const index = findElementIndex(
@@ -14,15 +16,15 @@ export function createFocusTrapKeyDownHandler(rootElement?: HTMLElement) {
     )
     if (index === focusableElements.length - 1 && event.shiftKey === false) {
       // Focus the first element
-      event.preventDefault()
       focusableElements[0].focus()
       return
     }
     if (index === 0 && event.shiftKey === true) {
       // Focus the last element
-      event.preventDefault()
       focusableElements[focusableElements.length - 1].focus()
+      return
     }
+    focusableElements[event.shiftKey === true ? index - 1 : index + 1].focus()
   }
 }
 
@@ -41,13 +43,4 @@ function findElementIndex(
     return result
   },
   -1)
-}
-
-function getFocusableElements(rootElement?: HTMLElement): Array<HTMLElement> {
-  const elements = (
-    typeof rootElement === 'undefined' ? document : rootElement
-  ).querySelectorAll<HTMLElement>(
-    ':not([disabled])[tabindex]:not([tabindex="-1"])'
-  )
-  return Array.prototype.slice.call(elements)
 }
