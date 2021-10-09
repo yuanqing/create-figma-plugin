@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "1.5.1",
+  "version": "1.6.0-alpha.0",
   "description": "Initialize a new Figma/FigJam plugin using a template",
   "keywords": [
     "create-figma-plugin",
@@ -36,7 +36,7 @@
     "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^1.5.1",
+    "@create-figma-plugin/common": "^1.6.0-alpha.0",
     "fs-extra": "^10.0.0",
     "globby": "^12.0.2",
     "is-utf8": "^0.2.1",
