@@ -28,8 +28,7 @@
   outline: 0;
 }
 .text code {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
+  font-family: var(--font-family-code);
 }
 
 .bold {
