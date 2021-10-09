@@ -15,6 +15,7 @@ export function computeBoundingBox(node: SceneNode): Rect {
     node.type === 'SHAPE_WITH_TEXT' ||
     node.type === 'STAMP' ||
     node.type === 'STICKY' ||
+    node.type === 'WIDGET' ||
     node.rotation === 0
   ) {
     const absolutePosition = getAbsolutePosition(node)
