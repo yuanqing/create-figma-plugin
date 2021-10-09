@@ -300,6 +300,7 @@ export {
 export { useMouseDownOutside } from './hooks/use-mouse-down-outside.js'
 export { useScrollableMenu } from './hooks/use-scrollable-menu.js'
 export { useWindowKeyDown } from './hooks/use-window-key-down.js'
+export { useWindowSize } from './hooks/use-window-size.js'
 export { OnValueChange, Props } from './types/types.js'
 export { createClassName } from './utilities/create-class-name.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'
