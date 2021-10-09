@@ -2,12 +2,17 @@
   "dependencies": {
     "@create-figma-plugin/ui": "^{{{versions.ui}}}",
     "@create-figma-plugin/utilities": "^{{{versions.utilities}}}",
-    "preact": "^10"
+    "preact": "^10",
+    "prismjs": "^1.25.0",
+    "react-simple-code-editor": "^0.11.0"
   },
   "devDependencies": {
     "@create-figma-plugin/build": "^{{{versions.build}}}",
     "@create-figma-plugin/tsconfig": "^{{{versions.tsconfig}}}",
     "@figma/plugin-typings": "{{{figmaPluginTypingsVersion}}}",
+    "@types/prismjs": "^1.16.6",
+    "@types/react": "^16",
+    "react": "^16",
     "typescript": "^4"
   },
   "scripts": {
