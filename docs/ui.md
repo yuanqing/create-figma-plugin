@@ -122,7 +122,9 @@ function Plugin () {
 export default render(Plugin)
 ```
 
-By default, class names in a CSS file imported via an `import` statement (as in the above example) will be “hashed”. This is to ensure that [each class name in the CSS file is globally unique](https://github.com/css-modules/css-modules#implementations).
+Class names in your CSS should be written in camel case – ie. `.fooBar` rather than `.foo-bar` or `.foo_bar`.
+
+By default, all the class names in a CSS file imported via an `import` statement (as in the above example) will be hashed. This is to ensure that [each class name in the CSS file is globally unique](https://github.com/css-modules/css-modules#implementations).
 
 To directly “inline” a CSS file *without* hashing its class names, add a `!` prefix before the import path:
 
@@ -144,6 +146,8 @@ function Plugin () {
 
 export default render(Plugin)
 ```
+
+Because the `.container` class is now a “global” class that’s no longer hashed, we’ll need to reference it as a plain string.
 
 Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) that are available for use in your custom CSS.
 
