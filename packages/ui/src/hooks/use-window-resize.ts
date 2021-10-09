@@ -24,7 +24,7 @@ const mapResizeDirectionToStyles: Record<
   }
 }
 
-export function useWindowSize(
+export function useWindowResize(
   onWindowResize: (size: { width: number; height: number }) => void,
   options: {
     maxHeight?: number
