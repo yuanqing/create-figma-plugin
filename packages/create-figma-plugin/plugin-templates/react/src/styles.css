@@ -1,0 +1,10 @@
+.container {
+  height: 164px;
+  overflow: auto;
+}
+
+.editor {
+  min-height: 100%;
+  font-size: var(--font-size-12);
+  font-family: var(--font-family-code);
+}

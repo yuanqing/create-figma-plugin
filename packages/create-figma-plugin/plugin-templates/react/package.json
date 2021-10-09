@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@create-figma-plugin/utilities": "^{{{versions.utilities}}}"
+    "@create-figma-plugin/ui": "^{{{versions.ui}}}",
+    "@create-figma-plugin/utilities": "^{{{versions.utilities}}}",
+    "preact": "^10"
   },
   "devDependencies": {
     "@create-figma-plugin/build": "^{{{versions.build}}}",
@@ -20,6 +22,7 @@
 {{#displayName}}
     "name": "{{{displayName}}}",
 {{/displayName}}
-    "main": "src/main.ts"
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
   }
 }

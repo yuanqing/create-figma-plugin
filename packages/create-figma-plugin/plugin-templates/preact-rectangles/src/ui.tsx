@@ -16,7 +16,7 @@ import { CloseHandler, CreateRectanglesHandler } from './types'
 function Plugin() {
   const [count, setCount] = useState<number | null>(5)
   const [countString, setCountString] = useState('5')
-  const handleCreateRectanglesClick = useCallback(
+  const handleCreateRectanglesButtonClick = useCallback(
     function () {
       if (count !== null) {
         emit<CreateRectanglesHandler>('CREATE_RECTANGLES', count)
@@ -24,7 +24,7 @@ function Plugin() {
     },
     [count]
   )
-  const handleCloseClick = useCallback(function () {
+  const handleCloseButtonClick = useCallback(function () {
     emit<CloseHandler>('CLOSE')
   }, [])
   return (
@@ -39,10 +39,10 @@ function Plugin() {
       />
       <VerticalSpace space="extraLarge" />
       <Columns space="extraSmall">
-        <Button fullWidth onClick={handleCreateRectanglesClick}>
+        <Button fullWidth onClick={handleCreateRectanglesButtonClick}>
           Create
         </Button>
-        <Button fullWidth onClick={handleCloseClick} secondary>
+        <Button fullWidth onClick={handleCloseButtonClick} secondary>
           Close
         </Button>
       </Columns>

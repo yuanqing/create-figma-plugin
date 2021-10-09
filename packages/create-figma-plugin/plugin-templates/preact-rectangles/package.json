@@ -16,7 +16,9 @@
   },
   "figma-plugin": {
     "id": "{{{name}}}",
-    "editorType": ["figma"],
+    "editorType": [
+      "figma"
+    ],
 {{#displayName}}
     "name": "{{{displayName}}}",
 {{/displayName}}
