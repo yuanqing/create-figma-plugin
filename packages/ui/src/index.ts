@@ -2,6 +2,10 @@
 export { Banner, BannerProps, BannerType } from './components/banner/banner.js'
 export { Button, ButtonProps } from './components/button/button.js'
 export { Checkbox, CheckboxProps } from './components/checkbox/checkbox.js'
+export {
+  Disclosure,
+  DisclosureProps
+} from './components/disclosure/disclosure.js'
 export { Divider } from './components/divider/divider.js'
 export {
   Dropdown,
@@ -300,9 +304,15 @@ export {
 export { useMouseDownOutside } from './hooks/use-mouse-down-outside.js'
 export { useScrollableMenu } from './hooks/use-scrollable-menu.js'
 export { useWindowKeyDown } from './hooks/use-window-key-down.js'
-export { useWindowSize } from './hooks/use-window-size.js'
+export {
+  ResizeBehaviorOnDoubleClick,
+  ResizeDirection,
+  useWindowResize
+} from './hooks/use-window-resize.js'
 export { OnValueChange, Props } from './types/types.js'
 export { createClassName } from './utilities/create-class-name.js'
+export { createFocusTrapKeyDownHandler } from './utilities/create-focus-trap-key-down-handler.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'
+export { getFocusableElements } from './utilities/get-focusable-elements.js'
 export { mapTextboxNumericValueToString } from './utilities/map-textbox-numeric-value-to-string.js'
 export { render } from './utilities/render.js'
