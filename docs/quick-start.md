@@ -81,20 +81,6 @@ To watch for code changes and rebuild the plugin automatically:
 $ npm run watch
 ```
 
-## Use a different plugin template
-
-To initialize your plugin with a different plugin template, use the `--template` flag. For example:
-
-```
-$ npx --yes -- create-figma-plugin figma-hello-world --template preact-rectangles
-```
-
-Besides the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template, three other templates are available:
-
-- [`preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-rectangles) — Plugin with a UI built using the `@create-figma-plugin/ui` [Preact component library](#using-the-preact-component-library).
-- [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-resizable) — Plugin with a resizable UI window.
-- [`react`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/react) — Plugin with a UI [containing a React component](#using-react).
-
 ## Install the plugin
 
 In the Figma desktop app:
@@ -114,6 +100,20 @@ To open the developer console in the Figma desktop app, go to `Plugins` → `Dev
 Learn how to [publish your plugin to Figma Community](https://help.figma.com/hc/en-us/articles/360042293394-Publish-plugins-to-the-Figma-Community).
 
 Figma will generate a unique plugin ID for you when you first try to publish your plugin. Copy and paste that ID into your plugin’s **`"figma-plugin"`** configuration (under the [**`"id"`**](#id) key), then rebuild the plugin to regenerate its `manifest.json` file.
+
+## Use a different plugin template
+
+To initialize your plugin with a different plugin template, use the `--template` flag. For example:
+
+```
+$ npx --yes -- create-figma-plugin figma-hello-world --template preact-rectangles
+```
+
+Besides the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template, three other templates are available:
+
+- [`preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-rectangles) — A plugin with a UI built using the `@create-figma-plugin/ui` [Preact component library](#using-the-preact-component-library).
+- [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-resizable) — A plugin with a resizable UI window.
+- [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/react-editor) — A plugin with a UI [containing a React component](#using-react).
 
 ## See also
 

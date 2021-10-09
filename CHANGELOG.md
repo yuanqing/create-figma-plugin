@@ -18,7 +18,7 @@
 
 - `create-figma-plugin`
   - Renamed the `ui` template to `preact-rectangles`
-  - Added new templates `preact-resizable` and `react`
+  - Added new templates `preact-resizable` and `react-editor`
 
 - Bumped dependencies in all packages
 
