@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.6.0
+
+- `@create-figma-plugin/build`
+  - Watch the `build-figma-plugin.*.js` files
+
+- `@create-figma-plugin/ui`
+  - Added new components `Disclosure`, `IconChevronDown32`, `IconChevronLeft32` `IconChevronRight32`, `IconChevronUp32`, and `Modal`
+  - Regenerated all icon components
+  - Added a `useWindowResize` hook
+  - Fixed a bug in `useFocusTrap` (by adding a call to `useEffect`)
+  - Added CSS variables `--box-shadow-menu`, `--box-shadow-modal`, and `--font-family-code`
+  - Updated `computeBoundingBox` for compatibility with the latest `@figma/plugin-typings`
+
+- `create-figma-plugin`
+  - Renamed the `ui` template to `preact-rectangles`
+  - Added new templates `preact-resizable` and `react`
+
+- Bumped dependencies in all packages
+
 ## 1.5.1
 
 - Moved constants `MIXED_NUMBER` and `MIXED_STRING` from `@create-figma-plugin/ui` to `@create-figma-plugin/utilities`
