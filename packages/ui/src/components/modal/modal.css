@@ -26,7 +26,7 @@
   transition-property: opacity;
   pointer-events: none;
 }
-.visible.center {
+.isOpen.center {
   opacity: 1;
   pointer-events: all;
 }
@@ -37,7 +37,7 @@
   height: 100%;
   transition-property: left;
 }
-.visible.left {
+.isOpen.left {
   left: 0;
 }
 
@@ -47,7 +47,7 @@
   height: 100%;
   transition-property: right;
 }
-.visible.right {
+.isOpen.right {
   right: 0;
 }
 
@@ -102,7 +102,7 @@
   transition: opacity ease 0.3s;
   pointer-events: none;
 }
-.visible + .overlay {
+.isOpen + .overlay {
   opacity: 1;
   pointer-events: all;
 }
