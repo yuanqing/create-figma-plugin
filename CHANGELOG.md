@@ -9,7 +9,8 @@
   - Updated the `@figma/plugin-typings` version to `1.37.0`
 
 - `@create-figma-plugin/ui`
-  - Added new components `Disclosure`, `IconChevronDown32`, `IconChevronLeft32` `IconChevronRight32`, `IconChevronUp32`, and `Modal`
+  - Added a `Modal` component ([#47](https://github.com/yuanqing/create-figma-plugin/issues/47))
+  - Added new components `Disclosure`, `IconChevronDown32`, `IconChevronLeft32` `IconChevronRight32`, and `IconChevronUp32`
   - Regenerated all icon components
   - Added a `useWindowResize` hook ([#59](https://github.com/yuanqing/create-figma-plugin/issues/59))
   - Added a call to `useEffect` in the `useFocusTrap` hook
