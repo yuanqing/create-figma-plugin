@@ -3,7 +3,7 @@
 ## 1.6.0
 
 - `@create-figma-plugin/build`
-  - Made `build-figma-plugin --watch` aware of changes to `build-figma-plugin.*.js`
+  - Made `build-figma-plugin --watch` aware of changes to `build-figma-plugin.*.js` files
 
 - `@create-figma-plugin/common`
   - Updated the `@figma/plugin-typings` version to `1.37.0`
