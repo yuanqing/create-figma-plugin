@@ -85,21 +85,43 @@ export function useWindowResize(
 
   const toggleWindowSize = useCallback(
     function (resizeDirection: ResizeDirection): void {
-      if (resizeDirection === 'both' || resizeDirection === 'horizontal') {
-        if (windowSize.current.width !== initialWidth) {
-          windowSize.current.width = initialWidth
-        } else {
+      if (resizeDirection === 'horizontal') {
+        if (windowSize.current.width === initialWidth) {
+          // Minimize or maximize if currently at `initialWidth`
           windowSize.current.width =
             resizeBehaviorOnDoubleClick === 'minimize' ? minWidth : maxWidth
-        }
-      }
-      if (resizeDirection === 'both' || resizeDirection === 'vertical') {
-        if (windowSize.current.height !== initialHeight) {
-          windowSize.current.height = initialHeight
         } else {
+          // Else restore `initialWidth`
+          windowSize.current.width = initialWidth
+        }
+        onWindowResize(windowSize.current)
+        return
+      }
+      if (resizeDirection === 'vertical') {
+        if (windowSize.current.height === initialHeight) {
+          // Minimize or maximize if currently at `initialHeight`
           windowSize.current.height =
             resizeBehaviorOnDoubleClick === 'minimize' ? minHeight : maxHeight
+        } else {
+          // Else restore `initialHeight`
+          windowSize.current.height = initialHeight
         }
+        onWindowResize(windowSize.current)
+        return
+      }
+      if (
+        windowSize.current.width === initialWidth &&
+        windowSize.current.height === initialHeight
+      ) {
+        // Minimize or maximize if currently at `initialWidth` and `initialHeight`
+        windowSize.current.width =
+          resizeBehaviorOnDoubleClick === 'minimize' ? minWidth : maxWidth
+        windowSize.current.height =
+          resizeBehaviorOnDoubleClick === 'minimize' ? minHeight : maxHeight
+      } else {
+        // Else restore `initialWidth` and `initialHeight`
+        windowSize.current.width = initialWidth
+        windowSize.current.height = initialHeight
       }
       onWindowResize(windowSize.current)
     },
