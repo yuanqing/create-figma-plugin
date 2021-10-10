@@ -22,8 +22,7 @@ Commands are specified on the [**`"menu"`**](#menu) key under **`"figma-plugin"`
 +              "key": "resolution",
 +              "description": "Enter a bitmap resolution"
 +            }
-+          ],
-+          "parameterOnly": true
++          ]
 +        }
 +      ]
 +    }
@@ -35,7 +34,7 @@ See that:
 
 - **`"Flatten Selection to Bitmap"`** and **`"Settings"`** are the two commands in the plugin sub-menu.
 - The **`"Flatten Selection to Bitmap"`** command has a UI implementation.
-- **`"Settings"`** is a parameter-only command that receives a single `resolution` parameter via the Quick Actions UI.
+- **`"Settings"`** is a [parameter command](https://figma.com/plugin-docs/plugin-parameters/) that receives a single `resolution` parameter via the Quick Actions UI.
 - A **`"-"`** is used to specify a separator between the two commands in the plugin sub-menu.
 
 The above configuration would result in the following:

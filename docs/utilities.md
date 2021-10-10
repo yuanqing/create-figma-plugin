@@ -1074,7 +1074,7 @@ Specify the modal’s `width`, `height`, `title`, and whether it is `visible`
 via [`options`](https://figma.com/plugin-docs/api/properties/figma-showui/).
 Optionally pass on some initialising `data` from the command to the UI.
 
-See how to [add a UI to a plugin command](#ui-1).
+Learn how to [add a UI to a plugin command](#ui-1).
 
 ***Type parameters***
 

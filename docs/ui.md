@@ -7,13 +7,13 @@
 
 ## Using the Preact component library
 
-`@create-figma-plugin/ui` is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma editor’s UI design.
+[`@create-figma-plugin/ui`](https://yuanqing.github.io/create-figma-plugin/ui/) is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma editor’s UI design.
 
 [![UI components from `@create-figma-plugin/ui`: Button, File Upload Dropzone, Textbox Numeric, Textbox Autocomplete, Checkbox, Selectable Item, Segmented Control](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
 
 See the [full library of components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
 
-To install:
+To install, do:
 
 ```
 $ npm install @create-figma-plugin/ui preact
@@ -61,7 +61,7 @@ See that:
 - `render` takes a single argument, `Plugin`, which is a [Preact functional component](https://preactjs.com/guide/v10/components#functional-components).
 - The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from our plugin command’s main entry point.
 
-Finally, in `package.json`, point to our UI file on the [**`"ui"`**](#ui) key:
+Finally, in `package.json`, point to our UI file on the [**`"ui"`**](#ui) key under **`"figma-plugin"`**:
 
 ```diff
   {
@@ -83,12 +83,18 @@ See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/) for the 
 
 ## Using React
 
-When building your plugin, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use [React](https://reactjs.org) components alongside the Preact components from the `@create-figma-plugin/ui` library.
+When building your plugin, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use React components alongside the Preact components from the `@create-figma-plugin/ui` library.
 
 To use React components in your plugin UI, ensure that `react` and `@types/react` are installed:
 
 ```
 $ npm install --save-dev react @types/react
+```
+
+For a runnable example, try the [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/react-editor) plugin template:
+
+```
+$ npx --yes -- create-figma-plugin my-plugin --template react-editor
 ```
 
 ## Using custom CSS
@@ -122,11 +128,11 @@ function Plugin () {
 export default render(Plugin)
 ```
 
-Class names in your CSS should be written in camel case – ie. `.fooBar` rather than `.foo-bar` or `.foo_bar`.
+Note that class names in your CSS must be written in camel case – eg. `.fooBar` rather than `.foo-bar` or `.foo_bar`.
 
-By default, all the class names in a CSS file imported via an `import` statement (as in the above example) will be hashed. This is to ensure that [each class name in the CSS file is globally unique](https://github.com/css-modules/css-modules#implementations).
+By default, all the class names in CSS files imported via an `import` statement (as in the above example) will be hashed. This is to ensure that [each class name is globally unique](https://github.com/css-modules/css-modules#implementations).
 
-To directly “inline” a CSS file *without* hashing its class names, add a `!` prefix before the import path:
+To directly “inline” a CSS file in your UI *without* hashing its class names, add a `!` prefix to the import path:
 
 ```ts
 // src/ui.tsx
@@ -147,9 +153,7 @@ function Plugin () {
 export default render(Plugin)
 ```
 
-Because the `.container` class is now a “global” class that’s no longer hashed, we’ll need to reference it as a plain string.
-
-Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) that are available for use in your custom CSS.
+Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of CSS variables that are available for use in your custom CSS.
 
 ## Using a custom UI library
 

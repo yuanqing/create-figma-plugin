@@ -10,7 +10,7 @@
 First:
 
 ```
-$ npx --yes -- create-figma-plugin figma-hello-world
+$ npx --yes -- create-figma-plugin my-plugin
 ```
 
 (Here, the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template is used. Learn how to [use a different plugin template](#using-a-different-plugin-template).)
@@ -18,14 +18,14 @@ $ npx --yes -- create-figma-plugin figma-hello-world
 Then:
 
 ```
-$ cd figma-hello-world
+$ cd my-plugin
 $ ls -a
 .gitignore  .vscode  README.md  node_modules  package-lock.json  package.json  tsconfig.json  src
 $ ls src
 main.ts
 ```
 
-`src/main.ts` is the main entry point for our plugin:
+`src/main.ts` is the [main entry point](#main-context) for our plugin:
 
 ```ts
 // src/main.ts
@@ -42,7 +42,7 @@ In `package.json`, we’re pointing to `src/main.ts` on the [**`"main"`**](#main
     ...
     "figma-plugin": {
       ...
-      "name": "Hello World",
+      "name": "My Plugin",
 +     "main": "src/main.ts"
     }
   }
@@ -106,18 +106,18 @@ Figma will generate a unique plugin ID for you when you first try to publish you
 To initialize your plugin with a different plugin template, use the `--template` flag. For example:
 
 ```
-$ npx --yes -- create-figma-plugin figma-hello-world --template preact-rectangles
+$ npx --yes -- create-figma-plugin my-plugin --template preact-rectangles
 ```
 
 Besides the [`default`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/default) template, three other templates are available:
 
-- [`preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-rectangles) — A plugin with a UI built using the `@create-figma-plugin/ui` [Preact component library](#using-the-preact-component-library).
-- [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-resizable) — A plugin with a resizable UI window.
-- [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/react-editor) — A plugin with a UI [containing a React component](#using-react).
+- [`preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-rectangles) — A plugin with a UI built using the [`@create-figma-plugin/ui`](#using-the-preact-component-library) Preact component library.
+- [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-resizable) — A plugin with a [resizable UI window](#making-the-plugin-window-resizable).
+- [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/react-editor) — A plugin with a UI that [uses a React component](#using-react).
 
 ## See also
 
-- [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/api/)
-- [`figma/plugin-samples`](https://github.com/figma/plugin-samples)
+- [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/)
+- [`figma/plugin-samples`](https://github.com/figma/plugin-samples#readme)
 - [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin#readme)
-- [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins)
+- [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins#readme)

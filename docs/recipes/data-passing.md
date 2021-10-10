@@ -53,6 +53,6 @@ export default render(Plugin)
 
 See that:
 
-- In the main context, we’re using `once` to register the `handleSubmit` event handler for the event name `SUBMIT`.
-- In the UI context, we’re using `emit` to trigger the event handler in the main context for the event name `SUBMIT`.
+- In the main context, we’re using `once` to register the `handleSubmit` event handler for the event name **`SUBMIT`**.
+- In the UI context, we’re using `emit` to trigger the event handler in the main context for the event name **`SUBMIT`**.
 - In the main context, the `data` received by the `handleSubmit` event handler is precisely the `data` object that was passed to `emit` in the plugin UI context.
