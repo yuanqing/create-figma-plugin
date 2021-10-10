@@ -3,7 +3,7 @@
 ## 1.6.0
 
 - `@create-figma-plugin/build`
-  - Watch the `build-figma-plugin.*.js` files
+  - Made `build-figma-plugin --watch` aware of changes to `build-figma-plugin.*.js`
 
 - `@create-figma-plugin/common`
   - Updated the `@figma/plugin-typings` version to `1.37.0`
@@ -11,8 +11,8 @@
 - `@create-figma-plugin/ui`
   - Added new components `Disclosure`, `IconChevronDown32`, `IconChevronLeft32` `IconChevronRight32`, `IconChevronUp32`, and `Modal`
   - Regenerated all icon components
-  - Added a `useWindowResize` hook
-  - Fixed a bug in `useFocusTrap` (by adding a call to `useEffect`)
+  - Added a `useWindowResize` hook ([#59](https://github.com/yuanqing/create-figma-plugin/issues/59))
+  - Added a call to `useEffect` in the `useFocusTrap` hook
   - Added CSS variables `--box-shadow-menu`, `--box-shadow-modal`, and `--font-family-code`
   - Made `computeBoundingBox` compatibile with `@figma/plugin-typings@1.37.0`
 
@@ -29,23 +29,23 @@
 ## 1.5.0
 
 - `@create-figma-plugin/build`
-  - Restart the TypeScript watcher when changes are made to `tsconfig.json`
+  - Restart the TypeScript watcher when changes are made to `tsconfig.json` ([#56](https://github.com/yuanqing/create-figma-plugin/issues/56))
   - Enabled usage of React components by swapping out `react` and `react-dom` imports with `preact/compat`
-  - Added the ability to import “global” CSS by adding a `!` prefix before the CSS file path
+  - Added the ability to import “global” CSS by adding a `!` prefix before the CSS file path ([#60](https://github.com/yuanqing/create-figma-plugin/issues/60))
   - Accounted for the case where `figma.command` is `undefined` (eg. in a FigJam widget)
 
 - `@create-figma-plugin/common`
   - Added the latest compatible `@figma/plugin-typings` version as a constant
 
 - `@create-figma-plugin/utilities`
-  - Added support for FigJam nodes in `loadFontsAsync`
+  - Added support for FigJam nodes in `loadFontsAsync` ([#57](https://github.com/yuanqing/create-figma-plugin/pull/57))
 
 - Improved documentation
 
 ## 1.4.0
 
 - `@create-figma-plugin/build`
-  - Suppressed the `Cannot redeclare block-scoped variable 'console'.` type-check error when using `@figma/plugin-typings@^1.32.0`
+  - Suppressed the `Cannot redeclare block-scoped variable 'console'.` type-check error when using `@figma/plugin-typings@^1.32.0` ([#54](https://github.com/yuanqing/create-figma-plugin/issues/54))
   - Added an escape hatch for modifying the `manifest.json` file just before it gets written to disk
 
 - `@create-figma-plugin/utilities`
