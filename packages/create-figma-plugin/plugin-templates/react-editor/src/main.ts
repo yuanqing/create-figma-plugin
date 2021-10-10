@@ -9,5 +9,5 @@ export default function () {
     text.characters = code
     figma.closePlugin()
   })
-  showUI({ height: 240, width: 320 })
+  showUI({ width: 320, height: 240 })
 }

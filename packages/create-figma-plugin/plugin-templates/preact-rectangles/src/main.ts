@@ -10,8 +10,8 @@ export default function () {
       rect.x = i * 150
       rect.fills = [
         {
-          color: { b: 0, g: 0.5, r: 1 },
-          type: 'SOLID'
+          type: 'SOLID',
+          color: { r: 1, g: 0.5, b: 0 }
         }
       ]
       figma.currentPage.appendChild(rect)
@@ -25,7 +25,7 @@ export default function () {
     figma.closePlugin()
   })
   showUI({
-    height: 137,
-    width: 240
+    width: 240,
+    height: 137
   })
 }
