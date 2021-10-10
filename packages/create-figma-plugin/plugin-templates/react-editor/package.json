@@ -20,7 +20,6 @@
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "figma-plugin": {
-    "id": "{{{name}}}",
     "editorType": [
       "figma"
     ],
