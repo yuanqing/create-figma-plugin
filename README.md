@@ -1,4 +1,4 @@
-*This page is for contributors. If you’re looking to use Create Figma Plugin, go to the [official docs](https://yuanqing.github.io/create-figma-plugin/).*
+*This page is for contributors. If you’re looking to use Create Figma Plugin, [go to the official docs](https://yuanqing.github.io/create-figma-plugin/).*
 
 ---
 
