@@ -33,7 +33,7 @@
     "npm-check-updates": "^11.8.5",
     "prettier": "^2.4.1",
     "simple-git-hooks": "^2.6.1",
-    "single-page-markdown-website": "^0.0.22",
+    "single-page-markdown-website": "^0.0.24",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
@@ -71,7 +71,8 @@
         "url": "https://github.com/yuanqing/create-figma-plugin"
       }
     ],
-    "socialMediaPreviewImage": "media/share.png"
+    "faviconImage": "media/favicon.svg",
+    "shareImage": "media/share.png"
   },
   "stylelint": {
     "extends": "stylelint-config-yuanqing"
