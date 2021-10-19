@@ -63,9 +63,7 @@ export function Modal({
               styles[position]
             ])}
           >
-            <div {...rest} class={styles.children}>
-              {children}
-            </div>
+            {children}
             {typeof onCloseButtonClick === 'undefined' &&
             typeof title === 'undefined' ? null : (
               <div class={styles.topBar}>
