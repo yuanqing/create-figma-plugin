@@ -41,6 +41,7 @@ export { sortNodesByCanonicalOrder } from './node/sort-nodes/sort-nodes-by-canon
 export { sortNodesByName } from './node/sort-nodes/sort-nodes-by-name.js'
 export { updateNodesSortOrder } from './node/sort-nodes/update-nodes-sort-order.js'
 export { traverseNode } from './node/traverse-node.js'
+export { traverseNodeAsync } from './node/traverse-node-async.js'
 export { evaluateNumericExpression } from './number/evaluate-numeric-expression.js'
 export { isValidNumericInput } from './number/is-valid-numeric-input.js'
 export { cloneObject } from './object/clone-object.js'
