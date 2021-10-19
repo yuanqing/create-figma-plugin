@@ -371,6 +371,7 @@ import {
   sortNodesByCanonicalOrder,
   sortNodesByName,
   traverseNode,
+  traverseNodeAsync,
   unsetRelaunchButton,
   updateNodesSortOrder
 } from '@create-figma-plugin/utilities'
@@ -745,6 +746,23 @@ will not be traversed.
 
 ```
 void
+```
+
+### traverseNodeAsync(node, processNodeAsync [, stopTraversalAsync])
+
+Async version of [`traverseNode`](#traversenodenode-processnode--stoptraversal)
+in which both callbacks are async.
+
+***Parameters***
+
+- **`node`** (`SceneNode`)
+- **`processNodeAsync`** (`(node: SceneNode) => Promise<void>`)
+- **`stopTraversalAsync`** (`(node: SceneNode) => Promise<boolean>`) – *Optional.*
+
+***Return type***
+
+```
+Promise<void>
 ```
 
 ### unsetRelaunchButton(node [, relaunchButtonId])
