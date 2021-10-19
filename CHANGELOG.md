@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.2
+
+- `@create-figma-plugin/ui`
+  - Fix positioning logic in the `Modal` component
+
+- `@create-figma-plugin/utilities`
+  - Add `traverseNodeAsync`
+
 ## 1.6.1
 
 - Documentation updates
