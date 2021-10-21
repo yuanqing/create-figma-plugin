@@ -123,8 +123,7 @@ async function createCssModulesJavaScriptAsync(
           throw new Error('`getJSON` callback called more than once')
         }
         classNamesJson = JSON.stringify(json)
-      },
-      localsConvention: 'camelCaseOnly'
+      }
     })
   )
   if (minify === true) {

@@ -128,8 +128,6 @@ function Plugin () {
 export default render(Plugin)
 ```
 
-Note that class names in your CSS must be written in camel case – eg. `.fooBar` rather than `.foo-bar` or `.foo_bar`.
-
 By default, all the class names in CSS files imported via an `import` statement (as in the above example) will be hashed. This is to ensure that [each class name is globally unique](https://github.com/css-modules/css-modules#implementations).
 
 To directly “inline” a CSS file in your UI *without* hashing its class names, add a `!` prefix to the import path:
