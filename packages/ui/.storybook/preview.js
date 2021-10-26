@@ -31,7 +31,7 @@ export const parameters = {
     default: 'Figma',
     list: [
       { class: 'theme-figma', color: '#18a0fb', name: 'Figma' },
-      { class: 'theme-figjam', color: '#7b61ff', name: 'FigJam' }
+      { class: 'theme-figjam', color: '#974bff', name: 'FigJam' }
     ]
   }
 }
