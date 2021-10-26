@@ -1,13 +1,17 @@
 /** @jsx h */
-import { h } from 'preact'
-
 import '../src/css/base.css'
+
+import { h } from 'preact'
 
 export const decorators = [
   function (Story, storyContext) {
     if (storyContext.parameters.fixedWidth === true) {
-      const style = {width: '240px'}
-    return <div style={style}><Story /></div>
+      const style = { width: '240px' }
+      return (
+        <div style={style}>
+          <Story />
+        </div>
+      )
     }
     return <Story />
   }

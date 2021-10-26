@@ -1,9 +1,11 @@
-function webpackFinal (config) {
+function webpackFinal(config) {
   const index = config.module.rules.findIndex(function (rule) {
     return rule.test.toString() === '/\\.css$/'
   })
   if (index === -1) {
-    throw new Error('Module rule for `.css` files not found in Storybook webpack config')
+    throw new Error(
+      'Module rule for `.css` files not found in Storybook webpack config'
+    )
   }
   config.module.rules[index] = {
     sideEffects: true,
@@ -25,7 +27,7 @@ function webpackFinal (config) {
 }
 
 module.exports = {
-  webpackFinal,
+  addons: ['@storybook/addon-storysource'],
   stories: ['../src/**/*.stories.tsx'],
-  addons: ['@storybook/addon-storysource']
+  webpackFinal
 }
