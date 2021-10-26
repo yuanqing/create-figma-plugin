@@ -26,5 +26,12 @@ export const parameters = {
       }
       return x[1].id.localeCompare(y[1].id, undefined, { numeric: true })
     }
+  },
+  themes: {
+    default: 'Figma',
+    list: [
+      { class: 'theme-figma', color: '#18a0fb', name: 'Figma' },
+      { class: 'theme-figjam', color: '#7b61ff', name: 'FigJam' }
+    ]
   }
 }

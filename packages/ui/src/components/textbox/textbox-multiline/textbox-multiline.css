@@ -34,7 +34,7 @@
 .textboxMultiline:not(.disabled) .textarea:focus ~ .border {
   top: -1px;
   bottom: -1px;
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
   border-width: 2px;
 }
 .noBorder .textarea:not(:focus) ~ .border {

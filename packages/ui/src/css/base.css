@@ -50,6 +50,9 @@
   /* special */
   --color-selection-a: #daebf7;
   --color-selection-b: #edf5fa;
+  /* accent */
+  --color-accent-figjam: #974bff;
+  --color-accent-figma: #18a0fb;
 }
 
 * {
@@ -115,4 +118,11 @@ svg {
 
 ::selection {
   background-color: var(--color-blue-30-translucent);
+}
+
+.theme-figjam {
+  --color-accent: var(--color-accent-figjam);
+}
+.theme-figma {
+  --color-accent: var(--color-accent-figma);
 }

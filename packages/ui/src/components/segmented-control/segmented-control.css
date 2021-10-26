@@ -86,5 +86,5 @@
 .segmentedControl:not(.disabled):focus-within .border {
   top: -1px;
   bottom: -1px;
-  border: 2px solid var(--color-blue);
+  border: 2px solid var(--color-accent);
 }

@@ -15,7 +15,7 @@
   font-weight: var(--font-weight-bold);
 }
 .text a {
-  color: var(--color-blue);
+  color: var(--color-accent);
   text-decoration: none;
   pointer-events: all;
 }

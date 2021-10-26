@@ -36,18 +36,18 @@
   border: 1px solid var(--color-black-80);
 }
 .checkbox:not(.disabled) .input:focus ~ .border {
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 1px var(--color-blue);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
 }
 .input:checked ~ .border {
   border: 0;
 }
 .checkbox:not(.disabled) .input:checked:focus ~ .border {
-  box-shadow: 0 0 0 1px var(--color-white), 0 0 0 2px var(--color-blue);
+  box-shadow: 0 0 0 1px var(--color-white), 0 0 0 2px var(--color-accent);
 }
 
 .input:checked ~ .fill {
-  background-color: var(--color-blue);
+  background-color: var(--color-accent);
 }
 
 .checkIcon {

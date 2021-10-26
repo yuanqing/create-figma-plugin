@@ -9,7 +9,7 @@
   fill: var(--color-black-80);
 }
 .blue {
-  fill: var(--color-blue);
+  fill: var(--color-accent);
 }
 .green {
   fill: var(--color-green);

@@ -21,7 +21,7 @@
   fill: var(--color-black-80);
 }
 .blue {
-  fill: var(--color-blue);
+  fill: var(--color-accent);
 }
 .white {
   fill: var(--color-white);

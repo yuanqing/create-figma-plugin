@@ -15,7 +15,9 @@ export function showUI<Data extends Record<string, unknown>>(
   if (typeof __html__ === 'undefined') {
     throw new Error('No UI defined')
   }
-  const html = `<div id="create-figma-plugin"></div><script>const __FIGMA_COMMAND__='${
+  const html = `<div id="create-figma-plugin" class="theme-${
+    figma.editorType
+  }"></div><script>const __FIGMA_COMMAND__='${
     typeof figma.command === 'undefined' ? '' : figma.command
   }';const __SHOW_UI_DATA__=${JSON.stringify(
     typeof data === 'undefined' ? {} : data

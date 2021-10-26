@@ -53,7 +53,7 @@
   flex: 0 0 16px;
   height: 16px;
   margin-left: var(--space-extra-small);
-  color: var(--color-blue);
+  color: var(--color-accent);
 }
 .disabled .checkIcon {
   color: var(--color-black-80);

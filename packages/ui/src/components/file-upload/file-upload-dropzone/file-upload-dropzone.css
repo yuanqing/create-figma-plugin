@@ -32,7 +32,7 @@
 .input:active ~ .dashedLine,
 .input:focus ~ .dashedLine,
 .isDropActive .dashedLine {
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
 }
 
 .children {

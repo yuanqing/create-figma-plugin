@@ -92,7 +92,7 @@
 .textboxColor:not(.disabled) .hexColorSelector:focus ~ .border {
   top: -1px;
   bottom: -1px;
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
   border-width: 2px;
 }
 .noBorder .border {
@@ -103,7 +103,7 @@
 }
 .noBorder:not(.disabled) .input:focus ~ .border,
 .noBorder:not(.disabled) .hexColorSelector:focus ~ .border {
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
   border-width: 2px;
 }
 

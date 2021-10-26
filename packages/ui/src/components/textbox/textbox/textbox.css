@@ -43,7 +43,7 @@
   pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
 .textbox:not(.disabled) .input:focus ~ .icon {
-  color: var(--color-blue);
+  color: var(--color-accent);
 }
 .icon svg {
   fill: currentColor;
@@ -63,7 +63,7 @@
 .textbox:not(.disabled) .input:focus ~ .border {
   top: -1px;
   bottom: -1px;
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
   border-width: 2px;
 }
 .noBorder .border {
@@ -73,6 +73,6 @@
   border-color: var(--color-silver);
 }
 .noBorder:not(.disabled) .input:focus ~ .border {
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
   border-width: 2px;
 }

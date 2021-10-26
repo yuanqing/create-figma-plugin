@@ -25,7 +25,7 @@
 }
 .primary button {
   line-height: 28px;
-  background-color: var(--color-blue);
+  background-color: var(--color-accent);
   border: 2px solid transparent;
 }
 .primary:not(.disabled) .input:focus ~ button {
@@ -47,7 +47,7 @@
 .secondary:not(.disabled) .input:focus ~ button {
   padding: 0 14px;
   line-height: 28px;
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
   border-width: 2px;
 }
 

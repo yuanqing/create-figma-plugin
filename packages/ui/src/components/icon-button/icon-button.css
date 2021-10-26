@@ -34,14 +34,14 @@
   background-color: var(--color-black-6-translucent);
 }
 .iconButton:not(.disabled) .input:focus ~ .fill {
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
 }
 .iconButton:not(.disabled) .input:checked:focus ~ .fill {
   border-color: var(--color-black-30-translucent);
 }
 .input:checked ~ .fill {
   color: var(--color-white);
-  background-color: var(--color-blue);
+  background-color: var(--color-accent);
 }
 
 .icon {

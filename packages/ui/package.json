@@ -72,6 +72,7 @@
     "prettier": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "storybook-addon-themes": "^6.1.0",
     "style-loader": "2.0.0",
     "stylelint": "^13.13.1",
     "stylelint-config-yuanqing": "^0.0.1",

@@ -85,7 +85,7 @@
   border-radius: var(--border-radius-2);
 }
 .closeButton:focus .closeButtonBorder {
-  border-color: var(--color-blue);
+  border-color: var(--color-accent);
 }
 
 .title {
