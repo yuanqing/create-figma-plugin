@@ -115,7 +115,7 @@
         "ui": ["main"]
       },
       "properties": {
-        "apiVersion": {
+        "api": {
           "description": "(Optional)\nThe version of the Figma/FigJam plugin API to use. Defaults to \"1.0.0\".",
           "type": "string"
         },

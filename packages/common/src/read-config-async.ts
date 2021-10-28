@@ -21,7 +21,7 @@ import {
 } from './types/raw-config.js'
 
 const defaultConfig: Config = {
-  apiVersion: constants.apiVersion,
+  api: constants.api,
   build: null,
   commandId: join(constants.src.directory, 'main.ts--default'),
   editorType: ['figma'],
@@ -53,7 +53,7 @@ export async function readConfigAsync(): Promise<Config> {
     return defaultConfig
   }
   const {
-    apiVersion,
+    api,
     build,
     editorType,
     enableProposedApi,
@@ -68,8 +68,7 @@ export async function readConfigAsync(): Promise<Config> {
     relaunchButtons
   } = config
   return {
-    apiVersion:
-      typeof apiVersion === 'undefined' ? constants.apiVersion : apiVersion,
+    api: typeof api === 'undefined' ? constants.api : api,
     build: typeof build === 'undefined' ? null : build,
     editorType: typeof editorType === 'undefined' ? ['figma'] : editorType,
     enablePrivatePluginApi:

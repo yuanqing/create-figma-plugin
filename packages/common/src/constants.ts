@@ -1,5 +1,5 @@
 export const constants = {
-  apiVersion: '1.0.0',
+  api: '1.0.0',
   build: {
     directoryName: 'build',
     mainConfigFilePath: 'build-figma-plugin.main.js',

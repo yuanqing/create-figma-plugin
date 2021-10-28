@@ -1,6 +1,6 @@
 {
   "figma-plugin": {
-    "apiVersion": "42",
+    "api": "42",
     "editorType": [
       "figjam",
       "figma"

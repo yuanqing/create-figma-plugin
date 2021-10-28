@@ -12,7 +12,7 @@ export interface ConfigCommand extends BaseConfigMixin {
 }
 
 export interface Config extends ConfigCommand {
-  readonly apiVersion: string
+  readonly api: string
   readonly editorType: Array<string>
   readonly id: string
   readonly relaunchButtons: null | Array<ConfigRelaunchButton>

@@ -11,7 +11,7 @@ export interface RawConfigCommand extends BaseRawConfigMixin {
 }
 
 export interface RawConfig extends RawConfigCommand {
-  readonly apiVersion?: string
+  readonly api?: string
   readonly editorType?: Array<string>
   readonly id?: string
   readonly relaunchButtons?: RawConfigRelaunchButtons

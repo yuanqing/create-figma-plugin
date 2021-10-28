@@ -38,7 +38,7 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   }
   /* eslint-disable sort-keys-fix/sort-keys-fix */
   const manifest: Manifest = {
-    api: config.apiVersion,
+    api: config.api,
     editorType: config.editorType,
     name: config.name,
     id: config.id,

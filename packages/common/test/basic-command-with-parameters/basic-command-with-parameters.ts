@@ -7,7 +7,7 @@ import { readConfigAsync } from '../../src/read-config-async.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
-  apiVersion: '1.0.0',
+  api: '1.0.0',
   build: null,
   commandId: 'b--default',
   editorType: ['figma'],

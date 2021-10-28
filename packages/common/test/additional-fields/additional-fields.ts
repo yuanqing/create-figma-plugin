@@ -18,12 +18,12 @@ const config = {
   ui: null
 }
 
-test('`apiVersion`', async function (t) {
+test('`api`', async function (t) {
   t.plan(1)
   process.chdir(join(__dirname, 'fixtures', '01-api-version'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    apiVersion: '42',
+    api: '42',
     build: null,
     editorType: ['figma'],
     enablePrivatePluginApi: false,
@@ -36,7 +36,7 @@ test('`build`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '02-build'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    apiVersion: '1.0.0',
+    api: '1.0.0',
     build: 'c',
     editorType: ['figma'],
     enablePrivatePluginApi: false,
@@ -49,7 +49,7 @@ test('`editorType`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '03-editor-type'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    apiVersion: '1.0.0',
+    api: '1.0.0',
     build: null,
     editorType: ['figjam', 'figma'],
     enablePrivatePluginApi: false,
@@ -62,7 +62,7 @@ test('`enablePrivatePluginApi`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '04-enable-private-plugin-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    apiVersion: '1.0.0',
+    api: '1.0.0',
     build: null,
     editorType: ['figma'],
     enablePrivatePluginApi: true,
@@ -75,7 +75,7 @@ test('`enableProposedApi`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '05-enable-proposed-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    apiVersion: '1.0.0',
+    api: '1.0.0',
     build: null,
     editorType: ['figma'],
     enablePrivatePluginApi: false,

@@ -7,7 +7,7 @@
 
 Configure your plugin under the **`"figma-plugin"`** key of your `package.json` file.
 
-### `"apiVersion"`
+### `"api"`
 
 (*`string`*)
 
