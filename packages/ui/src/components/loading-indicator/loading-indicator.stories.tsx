@@ -10,5 +10,5 @@ export const Default = function () {
 }
 
 export const CustomColor = function () {
-  return <LoadingIndicator color="blue" />
+  return <LoadingIndicator color="accent" />
 }

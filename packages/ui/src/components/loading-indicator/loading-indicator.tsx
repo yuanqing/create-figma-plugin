@@ -9,6 +9,7 @@ export type LoadingIndicatorProps = {
   color?: LoadingIndicatorColor
 }
 export type LoadingIndicatorColor =
+  | 'accent'
   | 'black-30'
   | 'black-80'
   | 'blue'
