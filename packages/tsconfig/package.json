@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "TypeScript config for plugins built using the Create Figma Plugin toolkit",
+  "description": "TypeScript config for plugins/widgets built using the Create Figma Plugin toolkit",
   "keywords": [
     "create-figma-plugin",
     "figjam",

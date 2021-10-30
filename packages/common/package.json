@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Internal utilities used across the `create-figma-plugin` monorepo",
+  "description": "Internal utilities for the Create Figma Plugin toolkit",
   "keywords": [
     "create-figma-plugin",
     "figjam",
