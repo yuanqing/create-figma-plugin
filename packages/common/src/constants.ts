@@ -11,6 +11,7 @@ export const constants = {
   },
   defaultTemplateName: 'default',
   figmaPluginTypingsVersion: '1.37.0',
+  figmaWidgetTypingsVersion: '1.0.2',
   packageJson: {
     configKey: 'figma-plugin',
     defaultPluginDisplayName: 'Figma Plugin',

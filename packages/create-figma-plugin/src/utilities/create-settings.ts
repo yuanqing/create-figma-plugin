@@ -14,6 +14,7 @@ export function createSettings(options: {
         ? constants.packageJson.defaultPluginDisplayName
         : createPluginDisplayName(name),
     figmaPluginTypingsVersion: constants.figmaPluginTypingsVersion,
+    figmaWidgetTypingsVersion: constants.figmaWidgetTypingsVersion,
     name:
       typeof name === 'undefined'
         ? constants.packageJson.defaultPluginName
