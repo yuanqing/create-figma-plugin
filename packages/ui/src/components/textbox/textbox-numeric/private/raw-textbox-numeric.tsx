@@ -13,6 +13,7 @@ import { computeNextValue } from '../../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating'
 import { formatEvaluatedValue } from './format-evaluated-value'
 
+const FRACTION_DIGITS = 3
 const EMPTY_STRING = ''
 
 export type RawTextboxNumericProps<Name extends string> = {
@@ -180,7 +181,10 @@ export function RawTextboxNumeric<Name extends string>({
             return 0
           })()
           const newValue = restrictValue(
-            key === 'ArrowDown' ? startingValue - delta : startingValue + delta,
+            evaluateValueWithDelta(
+              startingValue,
+              key === 'ArrowDown' ? -1 * delta : delta
+            ),
             minimum,
             maximum
           )
@@ -196,7 +200,10 @@ export function RawTextboxNumeric<Name extends string>({
         }
         event.preventDefault()
         const newValue = restrictValue(
-          key === 'ArrowDown' ? evaluatedValue - delta : evaluatedValue + delta,
+          evaluateValueWithDelta(
+            evaluatedValue,
+            key === 'ArrowDown' ? -1 * delta : delta
+          ),
           minimum,
           maximum
         )
@@ -338,6 +345,10 @@ function evaluateValue(value: string, suffix?: string): null | number {
     return null
   }
   return evaluateNumericExpression(trimSuffix(value, suffix))
+}
+
+function evaluateValueWithDelta(value: number, delta: number): number {
+  return parseFloat((value + delta).toFixed(FRACTION_DIGITS))
 }
 
 function trimSuffix(string: string, suffix?: string): string {

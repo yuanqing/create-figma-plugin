@@ -179,6 +179,23 @@ export const CustomIncrements = function () {
   )
 }
 
+export const CustomSmallIncrements = function () {
+  const [value, setValue] = useState('0')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      incrementBig={0.5}
+      incrementSmall={0.1}
+      onInput={handleInput}
+      value={value}
+    />
+  )
+}
+
 export const MinimumMaximum = function () {
   const [value, setValue] = useState('0')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
