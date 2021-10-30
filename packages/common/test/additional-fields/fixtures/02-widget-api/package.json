@@ -1,0 +1,8 @@
+{
+  "figma-plugin": {
+    "widgetApi": "42",
+    "containsWidget": true,
+    "name": "a",
+    "main": "b"
+  }
+}

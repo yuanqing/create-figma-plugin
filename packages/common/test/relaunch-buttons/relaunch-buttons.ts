@@ -10,6 +10,7 @@ const config = {
   api: '1.0.0',
   build: null,
   commandId: 'b--default',
+  containsWidget: false,
   editorType: ['figma'],
   enablePrivatePluginApi: false,
   enableProposedApi: false,
@@ -19,7 +20,9 @@ const config = {
   name: 'a',
   parameterOnly: false,
   parameters: null,
-  ui: null
+  permissions: null,
+  ui: null,
+  widgetApi: '1.0.0'
 }
 
 test('`main`', async function (t) {

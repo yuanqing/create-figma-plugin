@@ -5,41 +5,56 @@
 
 ## Configuration options
 
-Configure your plugin under the **`"figma-plugin"`** key of your `package.json` file.
+Configure your plugin/widget under the **`"figma-plugin"`** key of your `package.json` file.
+
+The configuration options map closely to the plugin and widget `manifest.json` APIs:
+
+- [Plugin Manifest](https://figma.com/plugin-docs/manifest/)
+- [Widget Manifest](https://figma.com/widget-docs/widget-manifest/)
 
 ### `"api"`
 
 (*`string`*)
 
-*Optional.* The version of the Figma/FigJam plugin API to use. Defaults to **`"1.0.0"`**.
+*Optional.* The version of the Figma/FigJam plugin API to use. Defaults to `"1.0.0"`.
 
-### `"id"`
+### `"widgetApi"`
 
 (*`string`*)
 
-*Required to publish the plugin on Figma Community.* The plugin ID. This field can be omitted during development but is required if you want to [publish your plugin](https://help.figma.com/hc/en-us/articles/360042293394-Publish-plugins-to-the-Figma-Community). Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.
+*Optional.* The version of the FigJam widget API to use. Defaults to `"1.0.0"`.
 
 ### `"editorType"`
 
 (*`Array<string>`*)
 
-*Optional.* For specifying the editor that the plugin is intended for. One of `["figma"]`, `["figjam"]`, or `["figma", "figjam"]`. Defaults to `["figma"]`.
+*Optional.* For specifying the editor that the plugin/widget is intended for. One of `["figma"]`, `["figjam"]`, or `["figma", "figjam"]`. Defaults to `["figma"]`.
 
-Learn how to [create a plugin for both Figma and FigJam](https://figma.com/plugin-docs/figma-figjam-plugins/).
+### `"containsWidget"`
+
+(*`boolean`*)
+
+*Optional.* Set to `true` for a FigJam widget. Defaults to `false`.
+
+### `"id"`
+
+(*`string`*)
+
+*Required to publish the plugin/widget on Figma Community.* The plugin/widget ID. This field can be omitted during development but is required if you want to publish your plugin/widget. Figma will generate a unique ID for you when you first try to publish your plugin/widget; copy and paste that ID here.
 
 ### `"name"`
 
 (*`string`*)
 
-*Required.* The name of the plugin.
+*Required.* The name of the plugin/widget.
 
 ### `"main"`
 
 (*`string`* or *`object`*)
 
-*Required, unless* **`"menu"`** *is specified.* Path to the main entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
+*Required, unless* **`"menu"`** *is specified.* Path to the main entry point of the plugin command or widget. The main entry point must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
 
-- **`"src"`** (*`string`*) — *Required.* Path to the main entry point of the plugin command.
+- **`"src"`** (*`string`*) — *Required.* Path to the main entry point.
 - **`"handler"`** (*`string`*) — *Required.* The name of the exported function in the file.
 
 ***Example***
@@ -58,7 +73,7 @@ Learn how to [create a plugin for both Figma and FigJam](https://figma.com/plugi
 
 (*`string`* or *`object`*)
 
-*Optional.* Path to the UI implementation of the plugin command (as specified via the sibling **`"main"`** key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
+*Optional.* Path to the UI implementation of the plugin command or widget (as specified via the sibling **`"main"`** key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with the following keys:
 
 - **`"src"`** (*`string`*) — *Required.* Path to the UI implementation of the plugin command.
 - **`"handler"`** (*`string`*) — *Required.* The name of the exported function in the file.
@@ -85,10 +100,10 @@ Learn how to [add a UI to a plugin command](#ui-1).
 *Optional.* Defines the list of [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via Figma’s Quick Action UI. Each parameter is an object with the following keys:
 
 - **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
-- **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling `"key"` if not specified.
+- **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling `"key"` key.
 - **`"description"`** (*`string`*) — *Optional.* The description for the parameter shown in the Quick Actions UI.
 - **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
-- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of list of parameters. There must be at least one non-optional parameter.
+- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.
 
 Learn how to [accept parameters via the Quick Actions UI in your plugin command](https://figma.com/plugin-docs/plugin-parameters/).
 
@@ -187,11 +202,17 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](#specif
 
 See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
 
+### `"permissions"`
+
+(*`Array<string>`*)
+
+*Optional.* For specifying the permissions that the plugin/widget needs access to. One of `["activeusers"]`, `["currentuser"]`, or `["activeusers", "currentuser"]`.
+
 ### `"enablePrivatePluginApi"`
 
 (*`boolean`*)
 
-*Optional.* Set to `true` to allow the use of plugin APIs that are only available to private plugins.
+*Optional.* Set to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.
 
 ### `"enableProposedApi"`
 

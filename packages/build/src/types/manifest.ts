@@ -1,14 +1,17 @@
 export type Manifest = {
-  name: string
-  id?: string
   api: string
+  widgetApi?: string
   editorType: Array<string>
+  containsWidget?: boolean
+  id?: string
+  name: string
   main: string
   ui?: string
-  menu?: Array<ManifestMenuItem | ManifestMenuItemSeparator>
   parameters?: Array<ManifestParameter>
   parameterOnly?: boolean
+  menu?: Array<ManifestMenuItem | ManifestMenuItemSeparator>
   relaunchButtons?: Array<ManifestRelaunchButton>
+  permissions?: Array<string>
   enableProposedApi?: boolean
   enablePrivatePluginApi?: boolean
   build?: string

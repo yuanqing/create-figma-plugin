@@ -13,9 +13,12 @@ export interface ConfigCommand extends BaseConfigMixin {
 
 export interface Config extends ConfigCommand {
   readonly api: string
+  readonly widgetApi: string
   readonly editorType: Array<string>
+  readonly containsWidget: boolean
   readonly id: string
   readonly relaunchButtons: null | Array<ConfigRelaunchButton>
+  readonly permissions: null | Array<string>
   readonly enableProposedApi: boolean
   readonly enablePrivatePluginApi: boolean
   readonly build: null | string

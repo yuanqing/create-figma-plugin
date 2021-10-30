@@ -18,5 +18,6 @@ export const constants = {
   },
   src: {
     directory: 'src'
-  }
+  },
+  widgetApi: '1.0.0'
 }

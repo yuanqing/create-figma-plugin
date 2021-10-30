@@ -30,56 +30,52 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     menu,
     relaunchButtons,
     parameters,
-    parameterOnly
+    parameterOnly,
+    api,
+    permissions,
+    editorType,
+    id,
+    widgetApi,
+    containsWidget
   } = config
   const command = { commandId, main, menu, name, parameterOnly, parameters, ui }
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a `main` entry point')
   }
-  /* eslint-disable sort-keys-fix/sort-keys-fix */
-  const manifest: Manifest = {
-    api: config.api,
-    editorType: config.editorType,
-    name: config.name,
-    id: config.id,
-    main: constants.build.pluginCodeFilePath
-  }
-  /* eslint-enable sort-keys-fix/sort-keys-fix */
-  if (hasBundle(command, 'ui') === true) {
-    manifest.ui = constants.build.pluginUiFilePath
-  } else {
-    if (relaunchButtons !== null) {
-      const relaunchButtonsWithUi = relaunchButtons.filter(function (
+  const hasUi =
+    hasBundle(command, 'ui') === true ||
+    (relaunchButtons !== null &&
+      relaunchButtons.filter(function (
         relaunchButton: ConfigRelaunchButton
       ): boolean {
         return relaunchButton.ui !== null
-      })
-      if (relaunchButtonsWithUi.length > 0) {
-        manifest.ui = constants.build.pluginUiFilePath
-      }
-    }
+      }).length > 0)
+  /* eslint-disable sort-keys-fix/sort-keys-fix */
+  const manifest: Manifest = {
+    api,
+    widgetApi: containsWidget === true ? widgetApi : undefined,
+    editorType,
+    containsWidget: containsWidget === true ? containsWidget : undefined,
+    id,
+    name,
+    main: constants.build.pluginCodeFilePath,
+    ui: hasUi === true ? constants.build.pluginUiFilePath : undefined,
+    parameters:
+      command.parameters !== null
+        ? createParameters(command.parameters)
+        : undefined,
+    parameterOnly: command.parameterOnly === true ? true : undefined,
+    menu: command.menu !== null ? createMenu(command.menu) : undefined,
+    relaunchButtons:
+      relaunchButtons !== null
+        ? createRelaunchButtons(relaunchButtons)
+        : undefined,
+    permissions: permissions !== null ? permissions : undefined,
+    enableProposedApi: enableProposedApi === true ? true : undefined,
+    enablePrivatePluginApi: enablePrivatePluginApi === true ? true : undefined,
+    build: build !== null ? build : undefined
   }
-  if (command.parameters !== null) {
-    manifest.parameters = createParameters(command.parameters)
-  }
-  if (command.parameterOnly === true) {
-    manifest.parameterOnly = true
-  }
-  if (command.menu !== null) {
-    manifest.menu = createMenu(command.menu)
-  }
-  if (relaunchButtons !== null) {
-    manifest.relaunchButtons = createRelaunchButtons(relaunchButtons)
-  }
-  if (enableProposedApi === true) {
-    manifest.enableProposedApi = true
-  }
-  if (enablePrivatePluginApi === true) {
-    manifest.enablePrivatePluginApi = true
-  }
-  if (build !== null) {
-    manifest.build = build
-  }
+  /* eslint-enable sort-keys-fix/sort-keys-fix */
   const result = await overrideManifestAsync(manifest)
   const string =
     (minify === true

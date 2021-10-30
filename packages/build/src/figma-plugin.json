@@ -4,7 +4,7 @@
   "id": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json",
   "type": "object",
   "definitions": {
-    "File": {
+    "FileMain": {
       "anyOf": [
         {
           "type": "string"
@@ -15,11 +15,33 @@
           "additionalProperties": false,
           "properties": {
             "src": {
-              "description": "(Required)\nPath to the main entry point of the plugin command.",
+              "description": "(required)\nPath to the main entry point.",
               "type": "string"
             },
             "handler": {
-              "description": "(Required)\nThe name of the exported function in the file.",
+              "description": "(required)\nThe name of the exported function in the file.",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "FileUI": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "required": ["src", "handler"],
+          "additionalProperties": false,
+          "properties": {
+            "src": {
+              "description": "(required)\nPath to the UI implementation of the plugin command.",
+              "type": "string"
+            },
+            "handler": {
+              "description": "(required)\nThe name of the exported function in the file.",
               "type": "string"
             }
           }
@@ -32,23 +54,23 @@
       "additionalProperties": false,
       "properties": {
         "key": {
-          "description": "(Required)\nThe unique key used to identify the parameter.",
+          "description": "(required)\nThe unique key used to identify the parameter.",
           "type": "string"
         },
         "name": {
-          "description": "(Optional)\nThe name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling \"key\" key.",
+          "description": "(optional)\nThe name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling \"key\" key.",
           "type": "string"
         },
         "description": {
-          "description": "(Optional)\nThe description for the parameter shown in the Quick Actions UI.",
+          "description": "(optional)\nThe description for the parameter shown in the Quick Actions UI.",
           "type": "string"
         },
         "allowFreeform": {
-          "description": "(Optional)\nSet to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.",
+          "description": "(optional)\nSet to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.",
           "type": "boolean"
         },
         "optional": {
-          "description": "(Optional) Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the `parameters` array. There must be at least one non-optional parameter in the array.",
+          "description": "(optional)\nSet to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.",
           "type": "boolean"
         }
       }
@@ -70,27 +92,19 @@
           },
           "properties": {
             "name": {
-              "description": "(Required)\nThe name of the plugin command.",
+              "description": "(required)\nThe name of the plugin command.",
               "type": "string"
             },
             "main": {
-              "description": "(Required, unless \"menu\" is specified)\nPath to the main entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
-              "$ref": "#/definitions/File"
+              "description": "(required, unless \"menu\" is specified)\nPath to the main entry point of the plugin command. The main entry point must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
+              "$ref": "#/definitions/FileMain"
             },
             "ui": {
-              "description": "(Optional)\nPath to the UI implementation of the plugin command (as specified via the sibling \"main\" key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
-              "$ref": "#/definitions/File"
-            },
-            "menu": {
-              "description": "(Required, unless \"main\" is specified)\nSub-menus can be nested.",
-              "type": "array",
-              "minItems": 1,
-              "items": {
-                "$ref": "#/definitions/MenuItem"
-              }
+              "description": "(optional)\nPath to the UI implementation of the plugin command (as specified via the sibling \"main\" key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
+              "$ref": "#/definitions/FileUI"
             },
             "parameters": {
-              "description": "(Optional) Defines the list of parameters that the plugin command accepts via Figma’s Quick Action UI.",
+              "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Action UI.",
               "type": "array",
               "minItems": 1,
               "items": {
@@ -98,8 +112,16 @@
               }
             },
             "parameterOnly": {
-              "description": "(Optional) Set to `true` to always prompt for parameters in Figma’s Quick Action UI when the plugin command is run.",
+              "description": "(optional)\nWhen \"parameters\" is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Action UI. Set \"parameterOnly\" to `false` to make parameter input optional.",
               "type": "boolean"
+            },
+            "menu": {
+              "description": "(required, unless \"main\" is specified)\nSub-menus can be nested.",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/definitions/MenuItem"
+              }
             }
           }
         }
@@ -116,41 +138,41 @@
       },
       "properties": {
         "api": {
-          "description": "(Optional)\nThe version of the Figma/FigJam plugin API to use. Defaults to \"1.0.0\".",
+          "description": "(optional)\nThe version of the Figma/FigJam plugin API to use. Defaults to \"1.0.0\".",
+          "type": "string"
+        },
+        "widgetApi": {
+          "description": "(optional)\nThe version of the FigJam widget API to use. Defaults to \"1.0.0\".",
           "type": "string"
         },
         "editorType": {
-          "description": "(Optional)",
+          "description": "(optional)\nFor specifying the editor that the plugin/widget is intended for. One of [\"figma\"], [\"figjam\"], or [\"figma\", \"figjam\"]. Defaults to [\"figma\"].",
           "type": "array",
           "minItems": 1,
           "items": [{ "enum": ["figjam", "figma"] }]
         },
+        "containsWidget": {
+          "description": "(optional)\nSet to `true` for a FigJam widget. Defaults to `false`.",
+          "type": "boolean"
+        },
         "id": {
-          "description": "(Required to publish the plugin on Figma Community)\nThe plugin ID. This field can be omitted during development but is required if you want to publish your plugin. Figma will generate a unique plugin ID for you when you first try to publish the plugin; copy and paste that ID here.",
+          "description": "(required to publish the plugin/widget on Figma Community)\nThe plugin/widget ID. This field can be omitted during development but is required if you want to publish your plugin/widget. Figma will generate a unique ID for you when you first try to publish your plugin/widget; copy and paste that ID here.",
           "type": "string"
         },
         "name": {
-          "description": "(Required)\nThe name of the plugin.",
+          "description": "(required)\nThe name of the plugin/widget.",
           "type": "string"
         },
         "main": {
-          "description": "(Required, unless \"menu\" is specified)\nPath to the main entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
-          "$ref": "#/definitions/File"
+          "description": "(required, unless \"menu\" is specified)\nPath to the main entry point of the plugin command or widget. The main entry point must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
+          "$ref": "#/definitions/FileMain"
         },
         "ui": {
-          "description": "(Optional)\nPath to the UI implementation of the plugin command (as specified via the sibling \"main\" key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
-          "$ref": "#/definitions/File"
-        },
-        "menu": {
-          "description": "(Required, unless \"main\" is specified)\nAn array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the keys \"name\" (required), \"main\" (required), \"ui\" (optional), and \"menu\" (optional). Use a \"-\" in the array to specify a separator between commands in the sub-menu.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/MenuItem"
-          }
+          "description": "(optional)\nPath to the UI implementation of the plugin command or widget (as specified via the sibling \"main\" key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
+          "$ref": "#/definitions/FileUI"
         },
         "parameters": {
-          "description": "(Optional) Defines the list of parameters that the plugin command accepts via Figma’s Quick Action UI.",
+          "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Action UI.",
           "type": "array",
           "minItems": 1,
           "items": {
@@ -158,11 +180,19 @@
           }
         },
         "parameterOnly": {
-          "description": "(Optional) Set to `true` to always prompt for parameters in Figma’s Quick Action UI when the plugin command is run.",
+          "description": "(optional)\nWhen \"parameters\" is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Action UI. Set \"parameterOnly\" to `false` to make parameter input optional.",
           "type": "boolean"
         },
+        "menu": {
+          "description": "(required, unless \"main\" is specified)\nAn array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the keys \"name\" (required), \"main\" (required, unless \"main\" is specified), \"ui\" (optional), \"parameters\" (optional), \"parameterOnly\" (optional), and \"menu\" (optional). Use a \"-\" in the array to specify a separator between commands in the sub-menu.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        },
         "relaunchButtons": {
-          "description": "(Optional)\nAn object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the keys \"name\" (required), \"main\" (required), \"ui\" (optional), and \"multipleSelection\" (optional).",
+          "description": "(optional)\nAn object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the keys \"name\" (required), \"main\" (required), \"ui\" (optional), and \"multipleSelection\" (optional).",
           "additionalProperties": {
             "type": "object",
             "required": ["name", "main"],
@@ -172,29 +202,35 @@
             "properties": {
               "name": {
                 "type": "string",
-                "description": "(Required)\nThe name of the relaunch button."
+                "description": "(required)\nThe name of the relaunch button."
               },
               "main": {
-                "$ref": "#/definitions/File",
-                "description": "(Required)\nPath to the main entry point of the plugin command. The plugin command must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys."
+                "$ref": "#/definitions/FileMain",
+                "description": "(required, unless \"menu\" is specified)\nPath to the main entry point of the plugin command. The main entry point must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys."
               },
               "ui": {
-                "$ref": "#/definitions/File",
-                "description": "(Optional)\nPath to the UI implementation of the plugin command (as specified via the sibling \"main\" key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys."
+                "$ref": "#/definitions/FileUI",
+                "description": "(optional)\nPath to the UI implementation of the plugin command (as specified via the sibling \"main\" key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys."
               },
               "multipleSelection": {
                 "type": "boolean",
-                "description": "(Optional)\nWhether the relaunch button should appear when multiple layers are selected."
+                "description": "(optional)\nWhether the relaunch button should appear when multiple layers are selected."
               }
             }
           }
         },
+        "permissions": {
+          "description": "(optional)\nFor specifying the permissions that the plugin/widget needs access to. One of [\"activeusers\"], [\"currentuser\"], or [\"activeusers\", \"currentuser\"].",
+          "type": "array",
+          "minItems": 1,
+          "items": [{ "enum": ["activeusers", "currentuser"] }]
+        },
         "enablePrivatePluginApi": {
-          "description": "(Optional)\nAllow use of plugin APIs that are only available to private plugins.",
+          "description": "(optional)\nSet to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.",
           "type": "boolean"
         },
         "enableProposedApi": {
-          "description": "(Optional)\nAllow use of Proposed APIs that are only available during development.",
+          "description": "(optional)\nSet to `true` to allow the use of Proposed APIs that are only available during development.",
           "type": "boolean"
         }
       }

@@ -10,6 +10,7 @@ const config = {
   api: '1.0.0',
   build: null,
   commandId: null,
+  containsWidget: false,
   editorType: ['figma'],
   enablePrivatePluginApi: false,
   enableProposedApi: false,
@@ -18,8 +19,10 @@ const config = {
   name: 'a',
   parameterOnly: false,
   parameters: null,
+  permissions: null,
   relaunchButtons: null,
-  ui: null
+  ui: null,
+  widgetApi: '1.0.0'
 }
 
 const menuItemConfig = {

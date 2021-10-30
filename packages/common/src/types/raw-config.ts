@@ -12,9 +12,12 @@ export interface RawConfigCommand extends BaseRawConfigMixin {
 
 export interface RawConfig extends RawConfigCommand {
   readonly api?: string
+  readonly widgetApi?: string
   readonly editorType?: Array<string>
+  readonly containsWidget?: boolean
   readonly id?: string
   readonly relaunchButtons?: RawConfigRelaunchButtons
+  readonly permissions?: Array<string>
   readonly enableProposedApi?: boolean
   readonly enablePrivatePluginApi?: boolean
   readonly build?: string

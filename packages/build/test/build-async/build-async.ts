@@ -305,12 +305,15 @@ test('additional fields', async function (t) {
   t.deepEqual(manifestJson, {
     api: '42',
     build: 'a',
-    editorType: ['figjam', 'figma'],
+    containsWidget: true,
+    editorType: ['figjam'],
     enablePrivatePluginApi: true,
     enableProposedApi: true,
-    id: '43',
+    id: '44',
     main: 'build/main.js',
-    name: 'a'
+    name: 'a',
+    permissions: ['activeusers'],
+    widgetApi: '43'
   })
   t.true(await fs.pathExists('build/main.js'))
   t.false(await fs.pathExists('build/ui.js'))

@@ -10,6 +10,7 @@ const config = {
   api: '1.0.0',
   build: null,
   commandId: 'src/main.ts--default',
+  containsWidget: false,
   editorType: ['figma'],
   enablePrivatePluginApi: false,
   enableProposedApi: false,
@@ -19,8 +20,10 @@ const config = {
   name: 'figma-plugin',
   parameterOnly: false,
   parameters: null,
+  permissions: null,
   relaunchButtons: null,
-  ui: null
+  ui: null,
+  widgetApi: '1.0.0'
 }
 
 test('no `package.json`', async function (t) {

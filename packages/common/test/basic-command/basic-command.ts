@@ -9,13 +9,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const config = {
   api: '1.0.0',
   build: null,
+  containsWidget: false,
   editorType: ['figma'],
   enablePrivatePluginApi: false,
   enableProposedApi: false,
   menu: null,
   parameterOnly: false,
   parameters: null,
-  relaunchButtons: null
+  permissions: null,
+  relaunchButtons: null,
+  widgetApi: '1.0.0'
 }
 
 test('`main`', async function (t) {

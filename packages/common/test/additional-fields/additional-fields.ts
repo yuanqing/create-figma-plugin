@@ -20,27 +20,33 @@ const config = {
 
 test('`api`', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '01-api-version'))
+  process.chdir(join(__dirname, 'fixtures', '01-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     api: '42',
     build: null,
+    containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: false,
-    enableProposedApi: false
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
   })
 })
 
-test('`build`', async function (t) {
+test('`widgetApi`', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '02-build'))
+  process.chdir(join(__dirname, 'fixtures', '02-widget-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     api: '1.0.0',
-    build: 'c',
+    build: null,
+    containsWidget: true,
     editorType: ['figma'],
     enablePrivatePluginApi: false,
-    enableProposedApi: false
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '42'
   })
 })
 
@@ -51,34 +57,75 @@ test('`editorType`', async function (t) {
     ...config,
     api: '1.0.0',
     build: null,
+    containsWidget: false,
     editorType: ['figjam', 'figma'],
     enablePrivatePluginApi: false,
-    enableProposedApi: false
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
+  })
+})
+
+test('`containsWidget`', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '04-contains-widget'))
+  t.deepEqual(await readConfigAsync(), {
+    ...config,
+    api: '1.0.0',
+    build: null,
+    containsWidget: true,
+    editorType: ['figjam'],
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
   })
 })
 
 test('`enablePrivatePluginApi`', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '04-enable-private-plugin-api'))
+  process.chdir(join(__dirname, 'fixtures', '05-enable-private-plugin-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     api: '1.0.0',
     build: null,
+    containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: true,
-    enableProposedApi: false
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
   })
 })
 
 test('`enableProposedApi`', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '05-enable-proposed-api'))
+  process.chdir(join(__dirname, 'fixtures', '06-enable-proposed-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     api: '1.0.0',
     build: null,
+    containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: false,
-    enableProposedApi: true
+    enableProposedApi: true,
+    permissions: null,
+    widgetApi: '1.0.0'
+  })
+})
+
+test('`build`', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '07-build'))
+  t.deepEqual(await readConfigAsync(), {
+    ...config,
+    api: '1.0.0',
+    build: 'c',
+    containsWidget: false,
+    editorType: ['figma'],
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
   })
 })

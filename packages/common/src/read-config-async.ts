@@ -24,6 +24,7 @@ const defaultConfig: Config = {
   api: constants.api,
   build: null,
   commandId: join(constants.src.directory, 'main.ts--default'),
+  containsWidget: false,
   editorType: ['figma'],
   enablePrivatePluginApi: false,
   enableProposedApi: false,
@@ -36,8 +37,10 @@ const defaultConfig: Config = {
   name: constants.packageJson.defaultPluginName,
   parameterOnly: false,
   parameters: null,
+  permissions: null,
   relaunchButtons: null,
-  ui: null
+  ui: null,
+  widgetApi: constants.widgetApi
 }
 
 export async function readConfigAsync(): Promise<Config> {
@@ -55,6 +58,7 @@ export async function readConfigAsync(): Promise<Config> {
   const {
     api,
     build,
+    containsWidget,
     editorType,
     enableProposedApi,
     enablePrivatePluginApi,
@@ -65,11 +69,15 @@ export async function readConfigAsync(): Promise<Config> {
     menu,
     parameters,
     parameterOnly,
-    relaunchButtons
+    permissions,
+    relaunchButtons,
+    widgetApi
   } = config
   return {
     api: typeof api === 'undefined' ? constants.api : api,
     build: typeof build === 'undefined' ? null : build,
+    containsWidget:
+      typeof containsWidget === 'undefined' ? false : containsWidget,
     editorType: typeof editorType === 'undefined' ? ['figma'] : editorType,
     enablePrivatePluginApi:
       typeof enablePrivatePluginApi === 'undefined'
@@ -78,6 +86,9 @@ export async function readConfigAsync(): Promise<Config> {
     enableProposedApi:
       typeof enableProposedApi === 'undefined' ? false : enableProposedApi,
     id: typeof id === 'undefined' ? slugify(name) : id,
+    permissions: typeof permissions === 'undefined' ? null : permissions,
+    widgetApi:
+      typeof widgetApi === 'undefined' ? constants.widgetApi : widgetApi,
     ...parseCommand({ main, menu, name, parameterOnly, parameters, ui }),
     relaunchButtons:
       typeof relaunchButtons === 'undefined'

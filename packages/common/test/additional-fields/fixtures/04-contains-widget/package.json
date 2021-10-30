@@ -1,0 +1,10 @@
+{
+  "figma-plugin": {
+    "editorType": [
+      "figjam"
+    ],
+    "containsWidget": true,
+    "name": "a",
+    "main": "b"
+  }
+}
