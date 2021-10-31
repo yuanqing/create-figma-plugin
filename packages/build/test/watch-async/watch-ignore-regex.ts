@@ -7,8 +7,8 @@ test('ignored', function (t) {
   t.true(watchIgnoreRegex.test('node_modules'))
   t.true(watchIgnoreRegex.test('manifest.json'))
   t.true(watchIgnoreRegex.test('package-lock.json'))
-  t.true(watchIgnoreRegex.test('style.css.d.ts'))
-  t.true(watchIgnoreRegex.test('src/style.css.d.ts'))
+  t.true(watchIgnoreRegex.test('styles.css.d.ts'))
+  t.true(watchIgnoreRegex.test('src/styles.css.d.ts'))
   t.true(watchIgnoreRegex.test('build/main.js'))
 })
 
