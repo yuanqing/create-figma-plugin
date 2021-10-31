@@ -591,7 +591,7 @@ async function installFigmaPluginTypingsAsync(): Promise<void> {
   await fs.ensureDir(join(process.cwd(), 'node_modules'))
   await new Promise<void>(function (resolve, reject) {
     exec(
-      `npm install --no-save @figma/plugin-typings@${constants.figmaPluginTypingsVersion}`,
+      `npm install --no-save @figma/plugin-typings@${constants.packageJson.versions.pluginTypings}`,
       {},
       function (error: ExecException | null): void {
         if (error) {
