@@ -3,16 +3,18 @@
 ## 1.7.0
 
 - `@create-figma-plugin/build`
-  - Added support for building FigJam widgets. Added new configuration options `widgetApi`, `containsWidget`, and `permissions`.
-  - Renamed the `apiVersion` configuration option to `api`, to be aligned with the plugin `manifest.json` API.
+  - Added support for building FigJam widgets
+    - Added new configuration options `widgetApi`, `containsWidget`, and `permissions`
+  - Renamed the `apiVersion` configuration option to `api`, to be aligned with the plugin `manifest.json` API
 
 - `@create-figma-plugin/ui`
-  - Added a FigJam theme. Components will automatically render using the Figma theme if the UI is launched from a Figma plugin, and the FigJam theme if the UI is launched from a FigJam plugin/widget. ([#63](https://github.com/yuanqing/create-figma-plugin/issues/63))
-  - Fixed a bug with small custom increments in the `TextboxNumeric` component. ([#70](https://github.com/yuanqing/create-figma-plugin/issues/70))
+  - Added a FigJam theme ([#63](https://github.com/yuanqing/create-figma-plugin/issues/63))
+    - Components will automatically render using the Figma theme if the UI is launched from a Figma plugin, and the FigJam theme if the UI is launched from a FigJam plugin/widget
+  - Fixed a bug with small custom increments in the `TextboxNumeric` component ([#70](https://github.com/yuanqing/create-figma-plugin/issues/70))
 
 - `create-figma-plugin`
-  - Refactored the `create-figma-plugin` CLI. A template can now be selected via an interactive interface.
-  - Added a `widget/notepad` template, and reorganized existing templates.
+  - Refactored the `create-figma-plugin` CLI; a template can now be selected via an interactive interface
+  - Added a `widget/notepad` template, and reorganized existing templates
 
 - Documentation updates
 
