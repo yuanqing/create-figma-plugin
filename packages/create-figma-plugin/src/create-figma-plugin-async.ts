@@ -22,18 +22,21 @@ export async function createFigmaPluginAsync(options: {
       }
     }
     const templateName = await resolveTemplateNameAsync(options.template)
-    const name = typeof options.name !== 'undefined' ? options.name : basename(templateName)
+    const name =
+      typeof options.name !== 'undefined'
+        ? options.name
+        : basename(templateName)
     const directoryPath = await resolveDirectoryPathAsync(name)
     log.info(`Copying "${templateName}" template...`)
     await copyTemplateAsync(templateName, directoryPath)
     log.info('Resolving package versions...')
     const versions = await resolveCreateFigmaPluginLatestStableVersions()
     await interpolateValuesIntoFilesAsync(directoryPath, {
-      name,
       displayName: createDisplayName(name),
+      name,
       versions: {
-        figma: constants.packageJson.versions,
-        createFigmaPlugin: versions
+        createFigmaPlugin: versions,
+        figma: constants.packageJson.versions
       }
     })
     log.info('Installing dependencies...')

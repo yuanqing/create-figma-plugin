@@ -88,7 +88,9 @@ export async function readConfigAsync(): Promise<Config> {
     id: typeof id === 'undefined' ? slugify(name) : id,
     permissions: typeof permissions === 'undefined' ? null : permissions,
     widgetApi:
-      typeof widgetApi === 'undefined' ? constants.build.manifestWidgetApi : widgetApi,
+      typeof widgetApi === 'undefined'
+        ? constants.build.manifestWidgetApi
+        : widgetApi,
     ...parseCommand({ main, menu, name, parameterOnly, parameters, ui }),
     relaunchButtons:
       typeof relaunchButtons === 'undefined'

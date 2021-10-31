@@ -22,8 +22,8 @@
   },
   "files": [
     "lib",
-    "plugin-templates",
-    "plugin-templates/*/.gitignore"
+    "templates",
+    "templates/*/.gitignore"
   ],
   "bin": {
     "create-figma-plugin": "./lib/cli.js"
@@ -80,7 +80,7 @@
   "eslintConfig": {
     "extends": "eslint-config-yuanqing",
     "ignorePatterns": [
-      "plugin-templates"
+      "templates"
     ]
   },
   "prettier": "eslint-config-yuanqing/prettier"

@@ -1,10 +1,10 @@
 import packageJson from 'package-json'
 import semver from 'semver'
 
-export async function resolveCreateFigmaPluginLatestStableVersions() : Promise<{
-  build: string,
-  tsconfig: string,
-  ui: string,
+export async function resolveCreateFigmaPluginLatestStableVersions(): Promise<{
+  build: string
+  tsconfig: string
+  ui: string
   utilities: string
 }> {
   return {

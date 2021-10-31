@@ -56,7 +56,11 @@ async function buildMainBundleAsync(options: {
       bundle: true,
       logLevel: 'silent',
       minify,
-      outfile: join(process.cwd(), constants.build.buildDirectoryName, 'main.js'),
+      outfile: join(
+        process.cwd(),
+        constants.build.buildDirectoryName,
+        'main.js'
+      ),
       stdin: {
         contents: js,
         resolveDir: process.cwd()
