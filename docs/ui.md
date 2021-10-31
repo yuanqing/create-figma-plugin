@@ -7,11 +7,15 @@
 
 ## Using the Preact component library
 
-[`@create-figma-plugin/ui`](https://yuanqing.github.io/create-figma-plugin/ui/) is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma editor’s UI design.
+[`@create-figma-plugin/ui`](https://yuanqing.github.io/create-figma-plugin/ui/) is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma/FigJam editor’s UI design.
 
 [![UI components from `@create-figma-plugin/ui`: Button, File Upload Dropzone, Textbox Numeric, Textbox Autocomplete, Checkbox, Selectable Item, Segmented Control](/media/ui-figma-components.png)](https://yuanqing.github.io/create-figma-plugin/ui/)
 
 See the [full library of components in the Storybook](https://yuanqing.github.io/create-figma-plugin/ui/).
+
+The component library ships with two themes, one for Figma and one for FigJam. Components will automatically render using the Figma theme if the UI is launched from a Figma plugin, and the FigJam theme if the UI is launched from a FigJam plugin/widget.
+
+![UI of the Insert Big Image plugin rendered using the Figma and FigJam themes](/media/ui-themes.png)
 
 To install, do:
 
@@ -19,7 +23,9 @@ To install, do:
 $ npm install @create-figma-plugin/ui preact
 ```
 
-Then, include a call to [`showUI`](#showuidataoptions--data) in our plugin command’s main entry point:
+Then, include a call to [`showUI`](#showuidataoptions--data) in your plugin/widget’s main entry point.
+
+Consider a toy Figma plugin:
 
 ```ts
 // src/main.ts
@@ -59,7 +65,7 @@ export default render(Plugin)
 See that:
 
 - `render` takes a single argument, `Plugin`, which is a [Preact functional component](https://preactjs.com/guide/v10/components#functional-components).
-- The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from our plugin command’s main entry point.
+- The `props` received by the `Plugin` component is precisely the `data` object that was passed to `showUI` from the plugin/widget’s main entry point.
 
 Finally, in `package.json`, point to our UI file on the [**`"ui"`**](#ui) key under **`"figma-plugin"`**:
 
@@ -77,15 +83,15 @@ Finally, in `package.json`, point to our UI file on the [**`"ui"`**](#ui) key un
 
 When we rebuild our plugin and run it, we’ll see:
 
-![Figma plugin UI modal containing a “Hello, World”](/media/ui-hello-world-figma.png)
+![Figma plugin UI modal with “Hello, World” text](/media/ui-hello-world-figma.png)
 
-See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/) for the full library of Preact components, and the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
+See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/) for the full library of Preact components, and the [recipe for passing data between the plugin/widget’s main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
 
 ## Using React
 
-When building your plugin, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use React components alongside the Preact components from the `@create-figma-plugin/ui` library.
+When building your plugin/widget, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use React components alongside the Preact components from the `@create-figma-plugin/ui` library.
 
-To use React components in your plugin UI, ensure that `react` and `@types/react` are installed:
+To use React components in your UI, ensure that `react` and `@types/react` are installed:
 
 ```
 $ npm install --save-dev react @types/react
@@ -94,7 +100,7 @@ $ npm install --save-dev react @types/react
 For a runnable example, try the [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) plugin template:
 
 ```
-$ npx --yes -- create-figma-plugin my-plugin --template react-editor
+$ npx --yes -- create-figma-plugin my-plugin --template plugin/react-editor
 ```
 
 ## Using custom CSS
@@ -155,7 +161,7 @@ Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/m
 
 ## Using a custom UI library
 
-To use a custom UI library instead of `@create-figma-plugin/ui`, write your plugin command’s UI implementation as follows:
+To use a custom UI library instead of `@create-figma-plugin/ui`, write your UI implementation as follows:
 
 ```ts
 // src/ui.ts
@@ -167,4 +173,4 @@ export default function (rootNode: HTMLElement, data: { greeting: string }) {
 
 The exported function receives two arguments:
 - `rootNode` — An empty `<div>` element within which you can render your UI.
-- `data` — This corresponds to the `data` object that was passed to `showUI` from the plugin command’s main entry point.
+- `data` — This corresponds to the `data` object that was passed to `showUI` from the plugin/widget’s main entry point.

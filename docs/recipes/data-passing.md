@@ -6,7 +6,7 @@ The [`@create-figma-plugin/utilities`](#utilities) library includes 3 functions 
 - [`once(name, handler)`](#oncehandlername-handler) — Ditto `on`, only that `handler` will run at most once.
 - [`emit(name, ...args)`](#emithandlername-args) — Calling `emit` in the main context invokes the event handler for the matching event `name` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching event `name` in the main context. All `args` passed after `name` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
 
-Consider a toy example:
+Consider a toy Figma plugin:
 
 ```ts
 // src/main.ts

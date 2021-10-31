@@ -6,4 +6,4 @@
 - [Bundle and minify your TypeScript or JavaScript code](#building-the-pluginwidget), with sub-second build times made possible by the [esbuild compiler](https://esbuild.github.io)
 - [Leverage an extensive set of utility functions](#utilities), including [utilities for passing data between your plugin/widget’s main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts)
 - [Write plugin menu commands in separate files](#specifying-multiple-commands-in-the-plugin-sub-menu), with support for each command having their own [UI implementation](#ui-1)
-- [Create a UI for your plugin/widget](#ui-1) using [a library of Preact components that replicate the Figma editor’s UI design](#using-the-preact-component-library), or [write custom styles as CSS Modules](#using-custom-css)
+- [Create a UI for your plugin/widget](#ui-1) using [a library of Preact components that replicate the Figma/FigJam editor’s UI design](#using-the-preact-component-library), or [write custom styles as CSS Modules](#using-custom-css)
