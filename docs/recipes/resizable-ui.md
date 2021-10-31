@@ -1,11 +1,11 @@
-## Making the plugin window resizable
+## Making the plugin/widget UI window resizable
 
-The Figma/FigJam plugin window is *not* resizable by default; this must be implemented by the plugin itself. In practice, this involves:
+The plugin/widget UI window is *not* resizable by default; this must be implemented by the plugin/widget itself. In practice, this involves:
 
-1. Listening to click-and-drag events in the plugin window, and calculating an updated window size based on the mouse position.
+1. Listening to click-and-drag events in the UI window, and calculating an updated window size based on the mouse position.
 2. Calling [`figma.ui.resize`](https://figma.com/plugin-docs/api/figma-ui/#resize) with the updated window size.
 
-[`@create-figma-plugin/ui`](#using-the-preact-component-library) includes a `useWindowResize` hook that makes it easier to implement a resizable plugin window:
+[`@create-figma-plugin/ui`](#using-the-preact-component-library) includes a `useWindowResize` hook that makes it easier to implement a resizable UI window:
 
 ```ts
 // src/ui.tsx
@@ -33,10 +33,10 @@ export default render(Plugin)
 
 The hook takes two arguments:
 
-- The first argument is an `onWindowResize` callback that will be invoked with the updated `windowSize` in response to click-and-drag events on the bottom and right edges of the plugin window. Within this callback, we `emit` the **`RESIZE_WINDOW`** event, and pass along the updated `windowSize`.
-- The second argument is an optional configuration object where we can set a minimum and maximum size for the resizable plugin window.
+- The first argument is an `onWindowResize` callback that will be invoked with the updated `windowSize` in response to click-and-drag events on the bottom and right edges of the UI window. Within this callback, we `emit` the **`RESIZE_WINDOW`** event, and pass along the updated `windowSize`.
+- The second argument is an optional configuration object where we can set a minimum and maximum size for the resizable UI window.
 
-In the [main context](#main-context), we register a handler for the **`RESIZE_WINDOW`** event, and invoke [`figma.ui.resize`](https://figma.com/plugin-docs/api/figma-ui/#resize) with the new window size:
+In the [main context](https://figma.com/plugin-docs/how-plugins-run/), we register a handler for the **`RESIZE_WINDOW`** event, and invoke [`figma.ui.resize`](https://figma.com/plugin-docs/api/figma-ui/#resize) with the new window size:
 
 ```ts
 // src/main.ts
@@ -67,7 +67,7 @@ To restrict the resize direction, set `options.resizeDirection` to either `horiz
   })
 ```
 
-The `useWindowResize` hook also supports toggling the plugin window size on double-clicking the bottom and right edges of the plugin window:
+The `useWindowResize` hook also supports toggling the UI window size on double-clicking the bottom and right edges of the UI window:
 
 ```diff
   useWindowResize(onWindowResize, {
@@ -79,9 +79,9 @@ The `useWindowResize` hook also supports toggling the plugin window size on doub
   })
 ```
 
-Setting `options.resizeBehaviorOnDoubleClick` to `minimize` means that the plugin window will be set to the minimum size on double-click. Correspondingly, setting it to `maximize` means that the plugin window will be set to the maximum size on double-click.
+Setting `options.resizeBehaviorOnDoubleClick` to `minimize` means that the UI window will be set to the minimum size on double-click. Correspondingly, setting it to `maximize` means that the UI window will be set to the maximum size on double-click.
 
-For a runnable example, try the [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/plugin-templates/preact-resizable) plugin template:
+For a runnable example, try the [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-resizable) plugin template:
 
 ```
 $ npx --yes -- create-figma-plugin my-plugin --template preact-resizable

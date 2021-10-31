@@ -1,6 +1,8 @@
 ## Specifying multiple commands in the plugin sub-menu
 
-Commands are specified on the [**`"menu"`**](#menu) key under **`"figma-plugin"`**:
+*This is applicable to Figma/FigJam plugins only.*
+
+Menu commands are specified on the [**`"menu"`**](#menu) key under **`"figma-plugin"`**:
 
 ```diff
   {
@@ -34,7 +36,7 @@ See that:
 
 - **`"Flatten Selection to Bitmap"`** and **`"Settings"`** are the two commands in the plugin sub-menu.
 - The **`"Flatten Selection to Bitmap"`** command has a UI implementation.
-- **`"Settings"`** is a [parameter command](https://figma.com/plugin-docs/plugin-parameters/) that receives a single `resolution` parameter via the Quick Actions UI.
+- **`"Settings"`** is a [parameter command](https://figma.com/plugin-docs/plugin-parameters/) that receives a single `resolution` parameter via the Quick Actions search bar.
 - A **`"-"`** is used to specify a separator between the two commands in the plugin sub-menu.
 
 The above configuration would result in the following:

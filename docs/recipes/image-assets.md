@@ -1,6 +1,6 @@
-## Using image assets in your plugin UI
+## Using image assets in your plugin/widget UI
 
-Image assets used in your plugin UI must be “inlined” into you plugin’s UI bundle. Consider the following example where a PNG image is used in the UI:
+Image assets used in your plugin/widget UI must be “inlined” into the UI bundle. Consider the following example where a PNG image is used in the UI:
 
 ```ts
 // src/ui.tsx
@@ -24,7 +24,7 @@ export default render(Plugin)
 
 Note that `image` is a [Base64-encoded data URL](https://esbuild.github.io/content-types/#data-url) string of the imported `image.png` file, so it is set as the `src` attribute of the `img` HTML element.
 
-If you’re writing your plugin in TypeScript, you’ll also need to add a `.d.ts` typings file to your plugin’s `src` directory containing the following:
+If you’re writing your plugin/widget in TypeScript, you’ll also need to add a `.d.ts` typings file to your project’s `src` directory containing the following:
 
 ```ts
 // src/image-assets.d.ts

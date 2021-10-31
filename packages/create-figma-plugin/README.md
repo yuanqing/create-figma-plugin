@@ -3,10 +3,9 @@
 > A comprehensive toolkit for developing plugins and widgets for Figma and FigJam
 
 - [Quick start](https://yuanqing.github.io/create-figma-plugin/#quick-start)
-- [Plugin basics](https://yuanqing.github.io/create-figma-plugin/#plugin-basics)
 - [Configuration](https://yuanqing.github.io/create-figma-plugin/#configuration)
 - [UI](https://yuanqing.github.io/create-figma-plugin/#ui-1)
 - [Utilities](https://yuanqing.github.io/create-figma-plugin/#utilities)
 - [Recipes](https://yuanqing.github.io/create-figma-plugin/#recipes)
 - [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)
-- [Changelog](https://github.com/yuanqing/create-figma-plugin/blob/main/CHANGELOG.md#readme)
+- [Changelog](/CHANGELOG.md#readme)

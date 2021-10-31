@@ -47,7 +47,7 @@ export function once<Handler extends EventHandler>(
 }
 
 /**
- * Calling `emit` in the [main context](#main-context) invokes the event
+ * Calling `emit` in the [main context](https://figma.com/plugin-docs/how-plugins-run/) invokes the event
  * handler for the matching event `name` in your UI. Correspondingly, calling
  * `emit` in your UI invokes the event handler for the matching event `name`
  * in the main context.
@@ -56,7 +56,7 @@ export function once<Handler extends EventHandler>(
  * [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
  * on the event handler.
  *
- * See the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
+ * See the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
  *
  * @category Events
  */

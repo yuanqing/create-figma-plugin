@@ -1,5 +1,7 @@
 ## Configuring relaunch buttons
 
+*This is applicable to Figma/FigJam plugins only.*
+
 [Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](#relaunchbuttons) key under **`"figma-plugin"`**:
 
 ```diff

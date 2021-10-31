@@ -58,11 +58,11 @@
           "type": "string"
         },
         "name": {
-          "description": "(optional)\nThe name of the parameter shown in the Quick Actions UI. Defaults to the value of the sibling \"key\" key.",
+          "description": "(optional)\nThe name of the parameter shown in the Quick Actions search bar. Defaults to the value of the sibling \"key\" key.",
           "type": "string"
         },
         "description": {
-          "description": "(optional)\nThe description for the parameter shown in the Quick Actions UI.",
+          "description": "(optional)\nThe description for the parameter shown in the Quick Actions search bar.",
           "type": "string"
         },
         "allowFreeform": {
@@ -104,7 +104,7 @@
               "$ref": "#/definitions/FileUI"
             },
             "parameters": {
-              "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Action UI.",
+              "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Actions search bar.",
               "type": "array",
               "minItems": 1,
               "items": {
@@ -112,7 +112,7 @@
               }
             },
             "parameterOnly": {
-              "description": "(optional)\nWhen \"parameters\" is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Action UI. Set \"parameterOnly\" to `false` to make parameter input optional.",
+              "description": "(optional)\nWhen \"parameters\" is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Actions search bar. Set \"parameterOnly\" to `false` to make parameter input optional.",
               "type": "boolean"
             },
             "menu": {
@@ -172,7 +172,7 @@
           "$ref": "#/definitions/FileUI"
         },
         "parameters": {
-          "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Action UI.",
+          "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Actions search bar.",
           "type": "array",
           "minItems": 1,
           "items": {
@@ -180,7 +180,7 @@
           }
         },
         "parameterOnly": {
-          "description": "(optional)\nWhen \"parameters\" is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Action UI. Set \"parameterOnly\" to `false` to make parameter input optional.",
+          "description": "(optional)\nWhen \"parameters\" is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Actions search bar. Set \"parameterOnly\" to `false` to make parameter input optional.",
           "type": "boolean"
         },
         "menu": {

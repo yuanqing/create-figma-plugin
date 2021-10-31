@@ -118,7 +118,7 @@ import {
 
 ### emit&lt;Handler&gt;(name, ...args)
 
-Calling `emit` in the [main context](#main-context) invokes the event
+Calling `emit` in the [main context](https://figma.com/plugin-docs/how-plugins-run/) invokes the event
 handler for the matching event `name` in your UI. Correspondingly, calling
 `emit` in your UI invokes the event handler for the matching event `name`
 in the main context.
@@ -127,7 +127,7 @@ All `args` passed after `name` will be directly
 [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
 on the event handler.
 
-See the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts).
+See the [recipe for passing data between the plugin command’s main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
 
 ***Type parameters***
 
@@ -300,7 +300,7 @@ Promise<void>
 
 Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
 for the product with the given `productPermalink` in the
-[main context](#main-context).
+[main context](https://figma.com/plugin-docs/how-plugins-run/).
 
 ***Parameters***
 
@@ -325,7 +325,7 @@ Promise<LicenseKeyValidationResult>
 
 Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
 for the product with the given `productPermalink` in the
-[UI context](#ui-context).
+[UI context](https://figma.com/plugin-docs/how-plugins-run/).
 
 ***Parameters***
 

@@ -4,7 +4,7 @@ import { emptyLicense } from './private/empty-license.js'
 /**
  * Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
  * for the product with the given `productPermalink` in the
- * [UI context](#ui-context).
+ * [UI context](https://figma.com/plugin-docs/how-plugins-run/).
  *
  * @param options.productPermalink  The Gumroad “product permalink”. If the
  * Gumroad product URL is `https://gumroad.com/l/QGMY`, then the product

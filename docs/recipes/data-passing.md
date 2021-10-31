@@ -1,6 +1,6 @@
-## Passing data between the plugin command’s main and UI contexts
+## Passing data between the plugin/widget’s main and UI contexts
 
-The [`@create-figma-plugin/utilities`](#utilities) library includes 3 functions to facilitate data passing (in both directions) between our plugin command’s [main and UI contexts](#the-plugin-execution-model):
+The [`@create-figma-plugin/utilities`](#utilities) library includes 3 functions to facilitate data passing (in both directions) between the plugin/widget’s [main and UI contexts](https://figma.com/plugin-docs/how-plugins-run/):
 
 - [`on(name, handler)`](#onhandlername-handler) — Registers an event `handler` for the given event `name`.
 - [`once(name, handler)`](#oncehandlername-handler) — Ditto `on`, only that `handler` will run at most once.
@@ -55,4 +55,4 @@ See that:
 
 - In the main context, we’re using `once` to register the `handleSubmit` event handler for the event name **`SUBMIT`**.
 - In the UI context, we’re using `emit` to trigger the event handler in the main context for the event name **`SUBMIT`**.
-- In the main context, the `data` received by the `handleSubmit` event handler is precisely the `data` object that was passed to `emit` in the plugin UI context.
+- In the main context, the `data` received by the `handleSubmit` event handler is precisely the `data` object that was passed to `emit` in the UI context.

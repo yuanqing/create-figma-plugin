@@ -1,10 +1,10 @@
 # Recipes
 
-- [Passing data between the plugin command’s main and UI contexts](#passing-data-between-the-plugin-commands-main-and-ui-contexts)
+- [Passing data between the plugin/widget’s main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts)
 - [Specifying multiple commands in the plugin sub-menu](#specifying-multiple-commands-in-the-plugin-sub-menu)
 - [Configuring relaunch buttons](#configuring-relaunch-buttons)
-- [Using image assets in your plugin UI](#using-image-assets-in-your-plugin-ui)
-- [Making the plugin window resizable](#making-the-plugin-window-resizable)
+- [Using image assets in your plugin/widget UI](#using-image-assets-in-your-pluginwidget-ui)
+- [Making the plugin/widget UI window resizable](#making-the-pluginwidget-ui-window-resizable)
 - [Customizing the build](#customizing-the-build)
 
 ./data-passing.md

@@ -6,10 +6,6 @@
 
 ---
 
-./plugin-basics.md
-
----
-
 ./configuration.md
 
 ---
