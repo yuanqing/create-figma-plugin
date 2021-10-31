@@ -4,14 +4,9 @@ import isUtf8 from 'is-utf8'
 import mustache from 'mustache'
 import { join } from 'path'
 
-import { CreateFigmaPluginVersions } from '../types/create-figma-plugin-versions.js'
-import { Settings } from '../types/settings.js'
-
 export async function interpolateValuesIntoFilesAsync(
   directory: string,
-  values: Settings & {
-    versions: CreateFigmaPluginVersions
-  }
+  values: Record<string, any>
 ): Promise<void> {
   const filePaths = await globby('**/*', {
     cwd: directory,

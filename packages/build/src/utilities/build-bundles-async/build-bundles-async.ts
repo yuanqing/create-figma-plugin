@@ -56,7 +56,7 @@ async function buildMainBundleAsync(options: {
       bundle: true,
       logLevel: 'silent',
       minify,
-      outfile: join(process.cwd(), constants.build.directoryName, 'main.js'),
+      outfile: join(process.cwd(), constants.build.buildDirectoryName, 'main.js'),
       stdin: {
         contents: js,
         resolveDir: process.cwd()
@@ -120,7 +120,7 @@ async function buildUiBundleAsync(options: {
       },
       logLevel: 'silent',
       minify,
-      outfile: join(process.cwd(), constants.build.directoryName, 'ui.js'),
+      outfile: join(process.cwd(), constants.build.buildDirectoryName, 'ui.js'),
       plugins: [esbuildPreactCompatPlugin(), esbuildCssModulesPlugin(minify)],
       stdin: {
         contents: js,

@@ -4,16 +4,16 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-export async function copyPluginTemplateAsync(
-  pluginDirectoryPath: string,
-  template: string
+export async function copyTemplateAsync(
+  templateName: string,
+  pluginDirectoryPath: string
 ): Promise<void> {
   const templateDirectory = resolve(
     __dirname,
     '..',
     '..',
-    'plugin-templates',
-    template
+    'templates',
+    templateName
   )
   await fs.ensureDir(pluginDirectoryPath, 0o2775)
   await fs.copy(templateDirectory, pluginDirectoryPath)

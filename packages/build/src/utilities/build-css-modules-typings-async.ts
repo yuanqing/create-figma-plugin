@@ -10,7 +10,7 @@ export async function buildCssModulesTypingsAsync(): Promise<void> {
   }
   return new Promise(function (resolve, reject) {
     exec(
-      `"${tcm}" ${constants.src.directory}`,
+      `"${tcm}" ${constants.build.srcDirectoryName}`,
       function (error: null | ExecException) {
         if (error !== null) {
           reject(error)

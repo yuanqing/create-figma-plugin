@@ -1,43 +1,46 @@
-import { log } from '@create-figma-plugin/common'
+import { constants, log } from '@create-figma-plugin/common'
 import fs from 'fs-extra'
-import { join } from 'path'
+import { basename, join } from 'path'
 
-import { copyPluginTemplateAsync } from './utilities/copy-plugin-template-async.js'
-import { createSettings } from './utilities/create-settings.js'
+import { copyTemplateAsync } from './utilities/copy-template-async.js'
+import { createDisplayName } from './utilities/create-plugin-display-name.js'
 import { installDependenciesAsync } from './utilities/install-dependencies-async.js'
 import { interpolateValuesIntoFilesAsync } from './utilities/interpolate-values-into-files-async.js'
-import { readPluginTemplateNamesAsync } from './utilities/read-template-names-async.js'
-import { resolveLatestStableVersions } from './utilities/resolve-latest-stable-versions.js'
+import { resolveCreateFigmaPluginLatestStableVersions } from './utilities/resolve-create-figma-plugin-latest-stable-versions.js'
+import { resolveDirectoryPathAsync } from './utilities/resolve-directory-path-async.js'
+import { resolveTemplateNameAsync } from './utilities/resolve-template-name-async.js'
 
 export async function createFigmaPluginAsync(options: {
   name?: string
   template?: string
 }): Promise<void> {
   try {
-    const settings = createSettings(options)
-
-    const pluginDirectoryPath = join(process.cwd(), settings.name)
-    if ((await fs.pathExists(pluginDirectoryPath)) === true) {
-      throw new Error(`Directory already exists: ${pluginDirectoryPath}`)
+    if (typeof options.name !== 'undefined') {
+      const directoryPath = join(process.cwd(), options.name)
+      if ((await fs.pathExists(directoryPath)) === true) {
+        throw new Error(`Directory already exists: ./${options.name}`)
+      }
     }
-    const templateNames = await readPluginTemplateNamesAsync()
-    if (templateNames.indexOf(settings.template) === -1) {
-      throw new Error(`Template must be one of "${templateNames.join('", "')}"`)
-    }
-
-    log.info(`Copying "${settings.template}" template...`)
-    await copyPluginTemplateAsync(pluginDirectoryPath, settings.template)
-
-    log.info('Installing dependencies...')
-    const versions = await resolveLatestStableVersions()
-    await interpolateValuesIntoFilesAsync(pluginDirectoryPath, {
-      ...settings,
-      versions
+    const templateName = await resolveTemplateNameAsync(options.template)
+    const name = typeof options.name !== 'undefined' ? options.name : basename(templateName)
+    const directoryPath = await resolveDirectoryPathAsync(name)
+    log.info(`Copying "${templateName}" template...`)
+    await copyTemplateAsync(templateName, directoryPath)
+    log.info('Resolving package versions...')
+    const versions = await resolveCreateFigmaPluginLatestStableVersions()
+    await interpolateValuesIntoFilesAsync(directoryPath, {
+      name,
+      displayName: createDisplayName(name),
+      versions: {
+        figma: constants.packageJson.versions,
+        createFigmaPlugin: versions
+      }
     })
-    await installDependenciesAsync(pluginDirectoryPath)
+    log.info('Installing dependencies...')
+    await installDependenciesAsync(directoryPath)
+    log.success('Done')
   } catch (error: any) {
     log.error(error.message)
     process.exit(1)
   }
-  log.success('Done')
 }

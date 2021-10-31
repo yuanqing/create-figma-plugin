@@ -21,26 +21,26 @@ import {
 } from './types/raw-config.js'
 
 const defaultConfig: Config = {
-  api: constants.api,
+  api: constants.build.manifestPluginApi,
   build: null,
-  commandId: join(constants.src.directory, 'main.ts--default'),
+  commandId: join(constants.build.srcDirectoryName, 'main.ts--default'),
   containsWidget: false,
   editorType: ['figma'],
   enablePrivatePluginApi: false,
   enableProposedApi: false,
-  id: constants.packageJson.defaultPluginName,
+  id: constants.packageJson.defaultName,
   main: {
     handler: 'default',
-    src: join(constants.src.directory, 'main.ts')
+    src: join(constants.build.srcDirectoryName, 'main.ts')
   },
   menu: null,
-  name: constants.packageJson.defaultPluginName,
+  name: constants.packageJson.defaultName,
   parameterOnly: false,
   parameters: null,
   permissions: null,
   relaunchButtons: null,
   ui: null,
-  widgetApi: constants.widgetApi
+  widgetApi: constants.build.manifestWidgetApi
 }
 
 export async function readConfigAsync(): Promise<Config> {
@@ -74,7 +74,7 @@ export async function readConfigAsync(): Promise<Config> {
     widgetApi
   } = config
   return {
-    api: typeof api === 'undefined' ? constants.api : api,
+    api: typeof api === 'undefined' ? constants.build.manifestPluginApi : api,
     build: typeof build === 'undefined' ? null : build,
     containsWidget:
       typeof containsWidget === 'undefined' ? false : containsWidget,
@@ -88,7 +88,7 @@ export async function readConfigAsync(): Promise<Config> {
     id: typeof id === 'undefined' ? slugify(name) : id,
     permissions: typeof permissions === 'undefined' ? null : permissions,
     widgetApi:
-      typeof widgetApi === 'undefined' ? constants.widgetApi : widgetApi,
+      typeof widgetApi === 'undefined' ? constants.build.manifestWidgetApi : widgetApi,
     ...parseCommand({ main, menu, name, parameterOnly, parameters, ui }),
     relaunchButtons:
       typeof relaunchButtons === 'undefined'
