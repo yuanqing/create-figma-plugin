@@ -1,6 +1,6 @@
 /**
- * Async version of [`traverseNode`](#traversenodenode-processnode--stoptraversal)
- * in which both callbacks are async.
+ * An `async` version of [`traverseNode`](#traversenodenode-processnode--stoptraversal),
+ * in which both callbacks are `async`.
  *
  * @category Node
  */

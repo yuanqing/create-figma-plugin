@@ -43,7 +43,7 @@ async function generateDocsAsync(
   lines.push('# Utilities')
   lines.push('')
   lines.push(
-    '`@create-figma-plugin/utilities` is an extensive library of utility functions for common plugin operations. It is meant to complement the [Figma/FigJam plugin API](https://figma.com/plugin-docs/api/api-overview/).'
+    '`@create-figma-plugin/utilities` is an extensive library of utility functions for common Figma/FigJam plugin/widget operations. It is meant to complement the Figma/FigJam [plugin API](https://figma.com/plugin-docs/api/api-reference/) and [widget API](https://figma.com/widget-docs/api/api-reference/).'
   )
   lines.push('')
   lines.push('To install:')
@@ -65,7 +65,7 @@ async function generateDocsAsync(
   lines.push('- [UI](#ui-2)')
   lines.push('')
   lines.push(
-    'When used with the `build-figma-plugin` CLI, only the functions explicitly imported by your plugin will be included in your plugin bundle(s).'
+    'When used with the `build-figma-plugin` CLI, only the functions explicitly imported by your plugin/widget will be included in the generated JavaScript bundle(s).'
   )
   lines.push('')
   for (const category of categories) {
