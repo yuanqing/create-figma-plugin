@@ -17,7 +17,7 @@ export async function interpolateValuesIntoFilesAsync(
       const absolutePath = join(directory, filePath)
       const buffer = await fs.readFile(absolutePath)
       const fileContents = isUtf8(buffer)
-        ? mustache.render(buffer.toString(), values)
+        ? mustache.render(buffer.toString(), values, {}, ['<%', '%>'])
         : buffer
       await fs.outputFile(absolutePath, fileContents)
     })
