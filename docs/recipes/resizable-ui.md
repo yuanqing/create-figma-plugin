@@ -84,5 +84,5 @@ Setting `options.resizeBehaviorOnDoubleClick` to `minimize` means that the UI wi
 For a runnable example, try the [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-resizable) plugin template:
 
 ```
-$ npx --yes -- create-figma-plugin my-plugin --template preact-resizable
+$ npx --yes create-figma-plugin my-plugin --template plugin/preact-resizable
 ```
