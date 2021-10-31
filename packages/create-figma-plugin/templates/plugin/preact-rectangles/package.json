@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "@create-figma-plugin/ui": "^{{{versions.createFigmaPlugin.ui}}}",
-    "@create-figma-plugin/utilities": "^{{{versions.createFigmaPlugin.utilities}}}",
+    "@create-figma-plugin/ui": "^<%{versions.createFigmaPlugin.ui}%>",
+    "@create-figma-plugin/utilities": "^<%{versions.createFigmaPlugin.utilities}%>",
     "preact": "^10"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "^{{{versions.createFigmaPlugin.build}}}",
-    "@create-figma-plugin/tsconfig": "^{{{versions.createFigmaPlugin.tsconfig}}}",
-    "@figma/plugin-typings": "{{{versions.figma.pluginTypings}}}",
+    "@create-figma-plugin/build": "^<%{versions.createFigmaPlugin.build}%>",
+    "@create-figma-plugin/tsconfig": "^<%{versions.createFigmaPlugin.tsconfig}%>",
+    "@figma/plugin-typings": "<%{versions.figma.pluginTypings}%>",
     "typescript": "^4"
   },
   "scripts": {
@@ -18,10 +18,10 @@
     "editorType": [
       "figma"
     ],
-    "id": "{{{name}}}",
-{{#displayName}}
-    "name": "{{{displayName}}}",
-{{/displayName}}
+    "id": "<%{name}%>",
+<%#displayName%>
+    "name": "<%{displayName}%>",
+<%/displayName%>
     "main": "src/main.ts",
     "ui": "src/ui.tsx"
   }

@@ -1,4 +1,4 @@
-# {{name}}
+# <%{displayName}%>
 
 ## Development guide
 
@@ -43,6 +43,8 @@ To open the developer console in the Figma desktop app, search for and run **`Op
 - [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)
 - [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin#readme)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins#readme)
+
+Official docs and code samples from Figma:
 
 - [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples#readme)

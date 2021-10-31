@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "@create-figma-plugin/utilities": "^{{{versions.createFigmaPlugin.utilities}}}"
+    "@create-figma-plugin/utilities": "^<%{versions.createFigmaPlugin.utilities}%>"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "^{{{versions.createFigmaPlugin.build}}}",
-    "@create-figma-plugin/tsconfig": "^{{{versions.createFigmaPlugin.tsconfig}}}",
-    "@figma/plugin-typings": "{{{versions.figma.pluginTypings}}}",
+    "@create-figma-plugin/build": "^<%{versions.createFigmaPlugin.build}%>",
+    "@create-figma-plugin/tsconfig": "^<%{versions.createFigmaPlugin.tsconfig}%>",
+    "@figma/plugin-typings": "<%{versions.figma.pluginTypings}%>",
     "typescript": "^4"
   },
   "scripts": {
@@ -16,10 +16,10 @@
     "editorType": [
       "figma"
     ],
-    "id": "{{{name}}}",
-{{#displayName}}
-    "name": "{{{displayName}}}",
-{{/displayName}}
+    "id": "<%{name}%>",
+<%#displayName%>
+    "name": "<%{displayName}%>",
+<%/displayName%>
     "main": "src/main.ts"
   }
 }
