@@ -26,37 +26,37 @@ You’ll then be prompted to select from the following templates:
 
 [Configuration options](#configuration-options) for your plugin/widget go under the **`"figma-plugin"`** key of your `package.json` file.
 
-- A Figma plugin (eg. [`plugin/preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-rectangles)) would be configured as follows:
+A Figma plugin (eg. [`plugin/preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-rectangles)) would be configured as follows:
 
-    ```json
-    {
-      "figma-plugin": {
-        "editorType": [
-          "figma"
-        ],
-        // ...
-        "name": "Rectangles",
-        "main": "src/main.ts",
-        "ui": "src/ui.tsx"
-      }
-    }
-    ```
+```json
+{
+  "figma-plugin": {
+    "editorType": [
+      "figma"
+    ],
+    // ...
+    "name": "Rectangles",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
+  }
+}
+```
 
-- A FigJam widget (eg. [`widget/notepad`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/widget/notepad)) would be configured as follows:
+A FigJam widget (eg. [`widget/notepad`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/widget/notepad)) would be configured as follows:
 
-    ```json
-    {
-      "figma-plugin": {
-        "editorType": [
-          "figjam"
-        ],
-        // ...
-        "name": "Notepad",
-        "main": "src/main.tsx",
-        "ui": "src/ui.tsx"
-      }
-    }
-    ```
+```json
+{
+  "figma-plugin": {
+    "editorType": [
+      "figjam"
+    ],
+    // ...
+    "name": "Notepad",
+    "main": "src/main.tsx",
+    "ui": "src/ui.tsx"
+  }
+}
+```
 
 See all the other [configuration options](#configuration-options).
 
@@ -102,7 +102,7 @@ $ npm run watch
 
 Use `console.log` statements to inspect values in your code.
 
-To open the developer console in the Figma desktop app, search for and run **`Open Console`** via the Quick Actions search bar.
+To open the developer console, search for and run **`Open Console`** via the Quick Actions search bar.
 
 ## Publishing to Figma Community
 
