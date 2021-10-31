@@ -1,12 +1,28 @@
 # Changelog
 
+## 1.7.0
+
+- `@create-figma-plugin/build`
+  - Added support for building FigJam widgets. Added new configuration options `widgetApi`, `containsWidget`, and `permissions`.
+  - Renamed the `apiVersion` configuration option to `api`, to be aligned with the plugin `manifest.json` API.
+
+- `@create-figma-plugin/ui`
+  - Added a FigJam theme. Components will automatically render using the Figma theme if the UI is launched from a Figma plugin, and the FigJam theme if the UI is launched from a FigJam plugin/widget. ([#63](https://github.com/yuanqing/create-figma-plugin/issues/63))
+  - Fixed a bug with small custom increments in the `TextboxNumeric` component. ([#70](https://github.com/yuanqing/create-figma-plugin/issues/70))
+
+- `create-figma-plugin`
+  - Refactored the `create-figma-plugin` CLI. A template can now be selected via an interactive interface.
+  - Added a `widget/notepad` template, and reorganized existing templates.
+
+- Documentation updates
+
 ## 1.6.2
 
 - `@create-figma-plugin/ui`
-  - Fix positioning logic in the `Modal` component
+  - Fixed positioning logic in the `Modal` component
 
 - `@create-figma-plugin/utilities`
-  - Add `traverseNodeAsync`
+  - Added `traverseNodeAsync`
 
 ## 1.6.1
 
@@ -16,9 +32,6 @@
 
 - `@create-figma-plugin/build`
   - Made `build-figma-plugin --watch` aware of changes to `build-figma-plugin.*.js` files
-
-- `@create-figma-plugin/common`
-  - Updated the `@figma/plugin-typings` version to `1.37.0`
 
 - `@create-figma-plugin/ui`
   - Added a `Modal` component ([#47](https://github.com/yuanqing/create-figma-plugin/issues/47))
@@ -32,6 +45,7 @@
 - `create-figma-plugin`
   - Renamed the `ui` template to `preact-rectangles`
   - Added new templates `preact-resizable` and `react-editor`
+  - Updated the `@figma/plugin-typings` version to `1.37.0`
 
 - Bumped dependencies in all packages
 
@@ -46,9 +60,6 @@
   - Enabled usage of React components by swapping out `react` and `react-dom` imports with `preact/compat`
   - Added the ability to import “global” CSS by adding a `!` prefix before the CSS file path ([#60](https://github.com/yuanqing/create-figma-plugin/issues/60))
   - Accounted for the case where `figma.command` is `undefined` (eg. in a FigJam widget)
-
-- `@create-figma-plugin/common`
-  - Added the latest compatible `@figma/plugin-typings` version as a constant
 
 - `@create-figma-plugin/utilities`
   - Added support for FigJam nodes in `loadFontsAsync` ([#57](https://github.com/yuanqing/create-figma-plugin/pull/57))
