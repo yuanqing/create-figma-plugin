@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.1
+
+- Documentation updates
+
 ## 1.7.0
 
 - `@create-figma-plugin/build`

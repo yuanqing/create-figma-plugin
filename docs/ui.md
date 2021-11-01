@@ -100,7 +100,7 @@ $ npm install --save-dev react @types/react
 For a runnable example, try the [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) plugin template:
 
 ```
-$ npx --yes create-figma-plugin my-plugin --template plugin/react-editor
+$ npx --yes create-figma-plugin --template plugin/react-editor
 ```
 
 ## Using custom CSS
