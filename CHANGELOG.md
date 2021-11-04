@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.7.2
+
+- `@create-figma-plugin/build`
+  - Suppressed TypeScript error that occurs when the type definition of an imported package contains `<reference types="node" />` ([#71](https://github.com/yuanqing/create-figma-plugin/issues/71))
+
+- `@create-figma-plugin/utilities`
+  - `computeBoundingBox` – Accounted for `CodeBlock` node which does not have a `rotation` property
+
+- Bumped dependencies in all packages
+- Replaced `ts-node` with `tsm`
+- Use `stylelint-config-idiomatic-order` instead of `stylelint-config-rational-order` (via `stylelint-config-yuanqing`)
+
 ## 1.7.1
 
 - Documentation updates
