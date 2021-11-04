@@ -11,6 +11,7 @@ import { getParentNode } from './get-nodes/get-parent-node.js'
  */
 export function computeBoundingBox(node: SceneNode): Rect {
   if (
+    node.type === 'CODE_BLOCK' ||
     node.type === 'CONNECTOR' ||
     node.type === 'SHAPE_WITH_TEXT' ||
     node.type === 'STAMP' ||
