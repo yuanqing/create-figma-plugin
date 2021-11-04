@@ -68,7 +68,7 @@
     "prettier": "^2.4.1",
     "react": "^17.0.2",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.2.1",
+    "tsm": "^2.1.4",
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
@@ -81,7 +81,7 @@
     },
     "nodeArguments": [
       "--loader",
-      "ts-node/esm"
+      "tsm"
     ],
     "nonSemVerExperiments": {
       "configurableModuleFormat": true

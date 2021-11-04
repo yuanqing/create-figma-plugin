@@ -8,7 +8,7 @@
     "fix": "lerna run --parallel --stream fix && eslint --fix 'scripts/**/*.ts' && prettier --ignore-path lerna.json --loglevel error --write '*.json'",
     "generate-docs": "lerna run --stream generate-docs",
     "lint": "lerna run --parallel --stream lint && eslint 'scripts/**/*.ts'",
-    "patch-figma-plugin-typings": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/patch-figma-plugin-typings.ts",
+    "patch-figma-plugin-typings": "TS_NODE_PROJECT=tsconfig.shared.json node --loader tsm scripts/patch-figma-plugin-typings.ts",
     "postinstall": "simple-git-hooks && yarn run patch-figma-plugin-typings && yarn run build",
     "publish": "yarn run build && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rm -rf node_modules yarn.lock && yarn install",
@@ -16,7 +16,7 @@
     "test": "lerna run --stream test",
     "version": "lerna version --force-publish",
     "website-build": "yarn run website-clean && yarn run website-build-docs && yarn run website-build-storybook && cp packages/build/src/figma-plugin.json build",
-    "website-build-docs": "yarn run generate-docs && single-page-markdown-website docs/index.md && TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/check-html-anchor-links.ts build/index.html",
+    "website-build-docs": "yarn run generate-docs && single-page-markdown-website docs/index.md && TS_NODE_PROJECT=tsconfig.shared.json node --loader tsm scripts/check-html-anchor-links.ts build/index.html",
     "website-build-storybook": "lerna run --stream storybook-build && cpy packages/ui/build build/ui",
     "website-clean": "rm -rf build",
     "website-deploy": "yarn run website-build && gh-pages --dist build"
@@ -34,7 +34,7 @@
     "prettier": "^2.4.1",
     "simple-git-hooks": "^2.7.0",
     "single-page-markdown-website": "^0.0.24",
-    "ts-node": "^10.2.1",
+    "tsm": "^2.1.4",
     "typescript": "^4.4.4"
   },
   "eslintConfig": {
