@@ -53,18 +53,18 @@
     "@create-figma-plugin/utilities": "^1.7.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@storybook/addon-storysource": "^6.3.10",
-    "@storybook/preact": "^6.3.10",
-    "@storybook/source-loader": "^6.3.10",
+    "@babel/core": "^7.16.0",
+    "@storybook/addon-storysource": "^6.3.12",
+    "@storybook/preact": "^6.3.12",
+    "@storybook/source-loader": "^6.3.12",
     "@types/fs-extra": "^9.0.13",
     "@types/hex-color-regex": "^1.1.1",
-    "@types/node": "^16.10.3",
+    "@types/node": "^16.11.6",
     "@types/svgo": "^2.6.0",
     "change-case": "^4.1.2",
     "css-loader": "5.2.7",
-    "eslint": "^7.32.0",
-    "eslint-config-yuanqing": "^0.0.5",
+    "eslint": "^8.1.0",
+    "eslint-config-yuanqing": "^0.0.6",
     "fs-extra": "^10.0.0",
     "globby": "^12.0.2",
     "mkdirp": "^1.0.4",
@@ -74,12 +74,12 @@
     "react-dom": "^17.0.2",
     "storybook-addon-themes": "^6.1.0",
     "style-loader": "2.0.0",
-    "stylelint": "^13.13.1",
-    "stylelint-config-yuanqing": "^0.0.1",
-    "svgo": "^2.7.0",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.3",
-    "webpack": "^5.58.1"
+    "stylelint": "^14.0.1",
+    "stylelint-config-yuanqing": "^0.0.3",
+    "svgo": "^2.8.0",
+    "typescript": "^4.4.4",
+    "webpack": "^5.61.0"
   },
   "peerDependencies": {
     "preact": "^10"
