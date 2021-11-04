@@ -1,6 +1,9 @@
 {
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "build": "lerna run --stream build",
     "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts css-loader style-loader",
