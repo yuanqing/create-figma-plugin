@@ -2,8 +2,8 @@
   position: relative;
   z-index: var(--z-index-1);
   display: flex;
-  align-items: center;
   height: 32px;
+  align-items: center;
   padding: 0 var(--space-small);
 }
 .black-30 {
@@ -25,8 +25,8 @@
 .layerName,
 .pageName {
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .layerName {
@@ -37,8 +37,8 @@
 }
 
 .icon {
-  flex: 0 0 16px;
   height: 16px;
+  flex: 0 0 16px;
 }
 
 .pageName {
@@ -49,13 +49,13 @@
 
 .input {
   position: absolute;
+  z-index: var(
+    --z-index-1
+  ); /* stack `.input` over all other elements within `.layer` */
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(
-    --z-index-1
-  ); /* stack `.input` over all other elements within `.layer` */
   display: block;
   width: 100%;
   height: 100%;

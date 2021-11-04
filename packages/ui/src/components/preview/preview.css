@@ -1,8 +1,8 @@
 .preview {
   position: relative;
+  overflow: auto;
   height: 121px;
   padding: var(--space-medium) 0;
-  overflow: auto;
-  background-color: var(--color-black-3-translucent);
   border-bottom: 1px solid var(--color-silver);
+  background-color: var(--color-black-3-translucent);
 }

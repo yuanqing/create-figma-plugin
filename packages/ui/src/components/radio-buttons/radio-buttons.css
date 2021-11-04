@@ -12,11 +12,11 @@
 
 .input {
   position: absolute;
+  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
   top: -8px;
   right: -16px;
   bottom: -8px;
   left: -16px;
-  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
   display: block;
   width: calc(100% + 32px);
 }

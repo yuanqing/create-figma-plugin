@@ -3,20 +3,20 @@
   left: 0;
   min-width: 100%;
   padding: var(--space-extra-small) 0;
-  overflow-y: auto;
-  color: var(--color-white);
-  font-size: var(--font-size-12);
   background-color: var(--color-hud);
   border-radius: var(--border-radius-2);
   box-shadow: var(--box-shadow-menu);
+  color: var(--color-white);
+  font-size: var(--font-size-12);
+  overflow-y: auto;
 }
 .menu::-webkit-scrollbar {
   display: none;
 }
 
 .hidden {
-  visibility: hidden;
   pointer-events: none;
+  visibility: hidden;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 1.5),

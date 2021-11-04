@@ -1,8 +1,8 @@
 .text {
   padding-top: 1px;
   color: var(--color-black-80);
-  transform: translateY(4px);
   pointer-events: none;
+  transform: translateY(4px);
 }
 .text:before {
   display: block;
@@ -16,8 +16,8 @@
 }
 .text a {
   color: var(--color-accent);
-  text-decoration: none;
   pointer-events: all;
+  text-decoration: none;
 }
 .text a:hover {
   text-decoration: underline;

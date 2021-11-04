@@ -8,13 +8,13 @@
 
 .input {
   position: absolute;
+  z-index: var(
+    --z-index-1
+  ); /* stack `.input` over all other elements within `.checkbox` */
   top: -8px;
   right: -16px;
   bottom: -8px;
   left: -16px;
-  z-index: var(
-    --z-index-1
-  ); /* stack `.input` over all other elements within `.checkbox` */
   display: block;
   width: calc(100% + 32px);
 }

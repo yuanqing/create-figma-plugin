@@ -2,8 +2,8 @@
   position: relative;
   z-index: var(--z-index-1);
   display: flex;
-  align-items: center;
   height: 32px;
+  align-items: center;
   padding: 0 var(--space-medium);
   color: var(--color-black-80);
 }
@@ -40,18 +40,18 @@
 }
 
 .children {
-  flex-grow: 1;
   overflow: hidden;
-  white-space: nowrap;
+  flex-grow: 1;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .bold .children {
   font-weight: var(--font-weight-bold);
 }
 
 .checkIcon {
-  flex: 0 0 16px;
   height: 16px;
+  flex: 0 0 16px;
   margin-left: var(--space-extra-small);
   color: var(--color-blue);
 }

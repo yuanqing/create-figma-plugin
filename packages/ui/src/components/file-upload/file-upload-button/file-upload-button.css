@@ -7,8 +7,8 @@
   display: inline-block;
   height: 32px;
   padding: 0 14px;
-  color: currentColor;
   border-radius: var(--border-radius-6);
+  color: currentColor;
 }
 
 .disabled {
@@ -24,9 +24,9 @@
   ); /* Set the color of the `button` element and `LoadingIndicator` */
 }
 .primary button {
-  line-height: 28px;
-  background-color: var(--color-accent);
   border: 2px solid transparent;
+  background-color: var(--color-accent);
+  line-height: 28px;
 }
 .primary:not(.disabled) .input:focus ~ button {
   border-color: var(--color-black-30-translucent);
@@ -40,15 +40,15 @@
 }
 .secondary button {
   padding: 0 15px;
-  line-height: 30px;
-  background-color: var(--color-white);
   border: 1px solid var(--color-black-80);
+  background-color: var(--color-white);
+  line-height: 30px;
 }
 .secondary:not(.disabled) .input:focus ~ button {
   padding: 0 14px;
-  line-height: 28px;
-  border-color: var(--color-accent);
   border-width: 2px;
+  border-color: var(--color-accent);
+  line-height: 28px;
 }
 
 .fullWidth {
@@ -56,10 +56,10 @@
 }
 .fullWidth button {
   display: block;
-  width: 100%;
   overflow: hidden;
-  white-space: nowrap;
+  width: 100%;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .loading button {
@@ -69,8 +69,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 
 .input {

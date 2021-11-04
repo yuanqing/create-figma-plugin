@@ -7,9 +7,9 @@
   display: block;
   width: 100%;
   padding: 6px 0 6px var(--space-extra-small);
-  color: var(--color-black-80);
   background-color: transparent;
   border-radius: var(--border-radius-2);
+  color: var(--color-black-80);
   resize: none;
 }
 .textarea::placeholder {
@@ -26,16 +26,16 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border-color: var(--color-silver);
   border-width: 1px;
+  border-color: var(--color-silver);
   border-radius: var(--border-radius-2);
   pointer-events: none;
 }
 .textboxMultiline:not(.disabled) .textarea:focus ~ .border {
   top: -1px;
   bottom: -1px;
-  border-color: var(--color-accent);
   border-width: 2px;
+  border-color: var(--color-accent);
 }
 .noBorder .textarea:not(:focus) ~ .border {
   border-color: transparent;

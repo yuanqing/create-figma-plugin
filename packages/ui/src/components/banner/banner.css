@@ -1,8 +1,8 @@
 .banner {
   position: relative;
   display: flex;
-  align-items: center;
   min-height: 48px;
+  align-items: center;
   padding: var(--space-small) var(--space-medium) var(--space-small) 44px;
 }
 
@@ -10,8 +10,8 @@
   background-color: var(--color-selection-b);
 }
 .upsell {
-  color: var(--color-white);
   background-color: var(--color-green);
+  color: var(--color-white);
 }
 .warning {
   background-color: var(--color-yellow);

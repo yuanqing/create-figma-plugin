@@ -34,10 +34,10 @@
 
 .children {
   display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: 24px;
   height: 24px;
+  align-items: center;
+  justify-content: center;
   color: var(--color-black-80);
   cursor: not-allowed;
 }
@@ -56,15 +56,15 @@
   .label:first-child
   .input:checked
   ~ .children {
-  border-top-left-radius: var(--border-radius-2);
   border-bottom-left-radius: var(--border-radius-2);
+  border-top-left-radius: var(--border-radius-2);
 }
 .segmentedControl:not(.disabled):hover
   .label:last-child
   .input:checked
   ~ .children {
-  border-top-right-radius: var(--border-radius-2);
   border-bottom-right-radius: var(--border-radius-2);
+  border-top-right-radius: var(--border-radius-2);
 }
 
 .text {
