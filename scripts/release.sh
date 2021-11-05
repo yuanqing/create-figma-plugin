@@ -18,3 +18,6 @@ git push --no-verify origin :next
 # create and push `next`
 git checkout -b next
 git push --no-verify origin next
+
+# update docs
+yarn run website-deploy
