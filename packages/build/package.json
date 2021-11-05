@@ -40,7 +40,7 @@
     "@create-figma-plugin/common": "^1.7.2",
     "chokidar": "^3.5.2",
     "cssnano": "^5.0.9",
-    "esbuild": "~0.13.12",
+    "esbuild": "^0.13.12",
     "find-up": "^6.2.0",
     "fs-extra": "^10.0.0",
     "globby": "^12.0.2",
