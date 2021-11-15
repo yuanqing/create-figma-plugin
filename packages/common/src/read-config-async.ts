@@ -35,7 +35,7 @@ const defaultConfig: Config = {
   },
   menu: null,
   name: constants.packageJson.defaultName,
-  parameterOnly: false,
+  parameterOnly: null,
   parameters: null,
   permissions: null,
   relaunchButtons: null,
@@ -116,7 +116,7 @@ function parseCommand(command: RawConfigCommand): ConfigCommand {
             return parseCommand(command)
           }),
     name,
-    parameterOnly: typeof parameterOnly === 'undefined' ? false : parameterOnly,
+    parameterOnly: typeof parameterOnly === 'undefined' ? null : parameterOnly,
     parameters:
       typeof parameters === 'undefined' ? null : parseParameters(parameters),
     ui: typeof ui === 'undefined' ? null : parseFile(ui)

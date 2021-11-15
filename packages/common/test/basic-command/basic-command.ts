@@ -14,7 +14,7 @@ const config = {
   enablePrivatePluginApi: false,
   enableProposedApi: false,
   menu: null,
-  parameterOnly: false,
+  parameterOnly: null,
   parameters: null,
   permissions: null,
   relaunchButtons: null,

@@ -18,7 +18,7 @@ const config = {
   main: { handler: 'default', src: 'src/main.ts' },
   menu: null,
   name: 'figma-plugin',
-  parameterOnly: false,
+  parameterOnly: null,
   parameters: null,
   permissions: null,
   relaunchButtons: null,

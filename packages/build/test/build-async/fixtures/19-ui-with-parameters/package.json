@@ -1,0 +1,16 @@
+{
+  "figma-plugin": {
+    "id": "42",
+    "name": "a",
+    "main": "src/main.ts",
+    "ui": "src/ui.ts",
+    "parameters": [
+      {
+        "name": "Option",
+        "key": "option",
+        "description": "Some option"
+      }
+    ],
+    "parameterOnly": false
+  }
+}

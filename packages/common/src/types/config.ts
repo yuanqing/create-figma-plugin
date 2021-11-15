@@ -8,7 +8,7 @@ interface BaseConfigMixin {
 export interface ConfigCommand extends BaseConfigMixin {
   readonly menu: null | Array<ConfigCommand | ConfigCommandSeparator>
   readonly parameters: null | Array<ConfigParameter>
-  readonly parameterOnly: boolean
+  readonly parameterOnly: null | boolean
 }
 
 export interface Config extends ConfigCommand {

@@ -17,7 +17,7 @@ const config = {
   id: 'a',
   main: null,
   name: 'a',
-  parameterOnly: false,
+  parameterOnly: null,
   parameters: null,
   permissions: null,
   relaunchButtons: null,
@@ -39,7 +39,7 @@ test('multiple commands', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: null
       },
@@ -51,7 +51,7 @@ test('multiple commands', async function (t) {
         },
         menu: null,
         name: 'd',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: {
           handler: 'default',
@@ -76,7 +76,7 @@ test('separator', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: null
       },
@@ -89,7 +89,7 @@ test('separator', async function (t) {
         },
         menu: null,
         name: 'd',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: {
           handler: 'default',
@@ -114,7 +114,7 @@ test('nested', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: null
       },
@@ -130,7 +130,7 @@ test('nested', async function (t) {
             },
             menu: null,
             name: 'e',
-            parameterOnly: false,
+            parameterOnly: null,
             parameters: null,
             ui: {
               handler: 'default',
@@ -139,7 +139,7 @@ test('nested', async function (t) {
           }
         ],
         name: 'd',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: null
       }
@@ -161,7 +161,7 @@ test('parameters', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: null
       },

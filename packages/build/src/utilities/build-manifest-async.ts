@@ -64,7 +64,8 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
       command.parameters !== null
         ? createParameters(command.parameters)
         : undefined,
-    parameterOnly: command.parameterOnly === true ? true : undefined,
+    parameterOnly:
+      command.parameterOnly !== null ? command.parameterOnly : undefined,
     menu: command.menu !== null ? createMenu(command.menu) : undefined,
     relaunchButtons:
       relaunchButtons !== null
