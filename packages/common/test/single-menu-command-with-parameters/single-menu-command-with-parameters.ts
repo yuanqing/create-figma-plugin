@@ -181,15 +181,15 @@ test('multiple parameters', async function (t) {
   })
 })
 
-test('parameter only', async function (t) {
+test('not parameter only', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '07-parameter-only'))
+  process.chdir(join(__dirname, 'fixtures', '07-not-parameter-only'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: true,
+        parameterOnly: false,
         parameters: [
           {
             allowFreeform: false,
