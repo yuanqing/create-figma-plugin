@@ -12,6 +12,6 @@
         "optional": true
       }
     ],
-    "parameterOnly": true
+    "parameterOnly": false
   }
 }
