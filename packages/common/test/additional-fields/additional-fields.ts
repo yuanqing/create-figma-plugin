@@ -12,7 +12,7 @@ const config = {
   main: { handler: 'default', src: 'b' },
   menu: null,
   name: 'a',
-  parameterOnly: false,
+  parameterOnly: null,
   parameters: null,
   relaunchButtons: null,
   ui: null

@@ -16,7 +16,7 @@ const config = {
   enableProposedApi: false,
   main: null,
   name: 'a',
-  parameterOnly: false,
+  parameterOnly: null,
   parameters: null,
   permissions: null,
   relaunchButtons: null,
@@ -39,7 +39,7 @@ test('`main`', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: null
       }
@@ -62,7 +62,7 @@ test('`main` with named export', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: null
       }
@@ -85,7 +85,7 @@ test('`ui`', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: {
           handler: 'default',
@@ -111,7 +111,7 @@ test('`ui` with named export', async function (t) {
         },
         menu: null,
         name: 'b',
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: null,
         ui: {
           handler: 'e',

@@ -9,7 +9,6 @@
         "name": "Option",
         "key": "option",
         "description": "Some option"
-  
       }
     ],
     "parameterOnly": false

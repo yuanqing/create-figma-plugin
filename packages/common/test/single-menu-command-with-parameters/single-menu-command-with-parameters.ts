@@ -17,7 +17,7 @@ const config = {
   id: 'a',
   main: null,
   name: 'a',
-  parameterOnly: false,
+  parameterOnly: null,
   parameters: null,
   permissions: null,
   relaunchButtons: null,
@@ -44,7 +44,7 @@ test('single parameter', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: [
           {
             allowFreeform: false,
@@ -67,7 +67,7 @@ test('name', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: [
           {
             allowFreeform: false,
@@ -90,7 +90,7 @@ test('description', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: [
           {
             allowFreeform: false,
@@ -113,7 +113,7 @@ test('allow freeform', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: [
           {
             allowFreeform: true,
@@ -136,7 +136,7 @@ test('optional', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: [
           {
             allowFreeform: false,
@@ -159,7 +159,7 @@ test('multiple parameters', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: false,
+        parameterOnly: null,
         parameters: [
           {
             allowFreeform: true,
