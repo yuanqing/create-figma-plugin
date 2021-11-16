@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.3
+
+- `@create-figma-plugin/build`
+  - Allow `parameterOnly` to be set to `false` ([#74](https://github.com/yuanqing/create-figma-plugin/pull/74))
+
 ## 1.7.2
 
 - `@create-figma-plugin/build`
