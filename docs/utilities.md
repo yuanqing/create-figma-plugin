@@ -364,6 +364,8 @@ import {
   getSelectedNodesOrAllNodes,
   insertAfterNode,
   insertBeforeNode,
+  isLocked,
+  isVisible,
   isWithinInstanceNode,
   loadFontsAsync,
   setAbsolutePosition,
@@ -611,6 +613,40 @@ Inserts `node` *before* the `referenceNode` in the layer list.
 
 ```
 void
+```
+
+### isLocked(node)
+
+Checks if the given `node` is locked.
+
+***Parameters***
+
+- **`node`** (`SceneNode`)
+
+***Return type***
+
+Returns `true` if the `node` or one of its parent nodes is locked,
+else `false`.
+
+```
+boolean
+```
+
+### isVisible(node)
+
+Checks if the given `node` is visible.
+
+***Parameters***
+
+- **`node`** (`SceneNode`)
+
+***Return type***
+
+Returns `true` if the `node` and all its parent nodes are visible,
+else `false`.
+
+```
+boolean
 ```
 
 ### isWithinInstanceNode(node)
