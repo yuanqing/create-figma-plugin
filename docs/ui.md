@@ -91,6 +91,8 @@ See the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/) for the 
 
 When building your plugin/widget, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use React components alongside the Preact components from the `@create-figma-plugin/ui` library.
 
+(If you still prefer to bundle React rather than Preact, see the [recipe to disable the automatic swapping of React imports](#disabling-automatic-swapping-of-react-imports).)
+
 To use React components in your UI, ensure that `react` and `@types/react` are installed:
 
 ```

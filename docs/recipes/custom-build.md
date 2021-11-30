@@ -20,6 +20,23 @@ module.exports = function (buildOptions) {
 
 Correspondingly, use a `build-figma-plugin.ui.js` file to customize the build configuration for the [UI bundle](https://figma.com/plugin-docs/how-plugins-run/).
 
+#### Disabling automatic swapping of React imports
+
+The `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). To disable this behaviour, create a `build-figma-plugin.ui.js` file:
+
+```js
+// build-figma-plugin.ui.js
+
+module.exports = function (buildOptions) {
+  return {
+    ...buildOptions,
+    plugins: buildOptions.plugins.filter(function (plugin) {
+      return plugin.name !== 'preact-compat'
+    })
+  }
+}
+```
+
 ### Customizing the `manifest.json` file
 
 To modify the `manifest.json` file just before it gets output by the `build-figma-plugin` CLI, create a `build-figma-plugin.manifest.js` file as follows:
