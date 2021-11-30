@@ -32,6 +32,7 @@ export { getSelectedNodesOrAllNodes } from './node/get-nodes/get-selected-nodes-
 export { insertAfterNode } from './node/insert-node/insert-after-node.js'
 export { insertBeforeNode } from './node/insert-node/insert-before-node.js'
 export { isLocked } from './node/is-locked.js'
+export { isVisible } from './node/is-visible.js'
 export { isWithinInstanceNode } from './node/is-within-instance-node.js'
 export { loadFontsAsync } from './node/load-fonts-async.js'
 export { setRelaunchButton } from './node/relaunch-button/set-relaunch-button.js'
