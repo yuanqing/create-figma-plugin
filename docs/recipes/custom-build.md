@@ -39,7 +39,7 @@ module.exports = function (buildOptions) {
 
 ### Customizing the `manifest.json` file
 
-To modify the `manifest.json` file just before it gets output by the `build-figma-plugin` CLI, create a `build-figma-plugin.manifest.js` file as follows:
+To modify the `manifest.json` file just before it gets output by the `build-figma-plugin` CLI, create a `build-figma-plugin.manifest.js` file:
 
 ```js
 // build-figma-plugin.manifest.js
