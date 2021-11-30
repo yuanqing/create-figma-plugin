@@ -1,13 +1,13 @@
 /**
- * Checks if the given `node` is truely locked
+ * Checks if the given `node` is locked.
  *
- * @returns Returns `true` if the `node` or one of its parents is locked,
+ * @returns Returns `true` if the `node` or one of its parent nodes is locked,
  * else `false`.
  * @category Node
  */
 
 export function isLocked(node: SceneNode): boolean {
-  if (node.locked) {
+  if (node.locked === true) {
     return true
   }
   if (node.parent === null || node.parent.type === 'PAGE') {
