@@ -6,13 +6,12 @@
  * @category Node
  */
 
-export function isLocked(node: BaseNode): boolean {
-  if ((node as SceneNode).locked) {
-    if (node.parent) {
-      if (node.parent.type === 'PAGE') return true
-      return isLocked(node.parent)
-    }
+export function isLocked(node: SceneNode): boolean {
+  if (node.locked) {
     return true
   }
-  return false
+  if (node.parent === null || node.parent.type === 'PAGE') {
+    return false
+  }
+  return isLocked(node.parent as SceneNode)
 }

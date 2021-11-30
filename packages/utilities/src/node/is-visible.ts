@@ -6,13 +6,12 @@
  * @category Node
  */
 
-export function isVisible(node: BaseNode): boolean {
-  if ((node as SceneNode).visible) {
-    if (node.parent) {
-      if (node.parent.type === 'PAGE') return true
-      return isVisible(node.parent)
-    }
+export function isVisible(node: SceneNode): boolean {
+  if (!node.visible) {
+    return false
+  }
+  if (node.parent === null || node.parent.type === 'PAGE') {
     return true
   }
-  return false
+  return isVisible(node.parent as SceneNode)
 }
