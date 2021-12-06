@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.8.0
+
+- `@create-figma-plugin/utilities`
+  - Added `isLocked` and `isVisible` utilities ([#75](https://github.com/yuanqing/create-figma-plugin/pull/75))
+
+- Added a recipe for disabling the automatic swapping of React imports using a `build-figma-plugin.ui.js` file
+
 ## 1.7.3
 
 - `@create-figma-plugin/build`
