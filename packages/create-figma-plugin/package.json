@@ -23,7 +23,7 @@
   "files": [
     "lib",
     "templates",
-    "templates/*/.gitignore"
+    "templates/**/*/.gitignore"
   ],
   "bin": {
     "create-figma-plugin": "./lib/cli.js"
