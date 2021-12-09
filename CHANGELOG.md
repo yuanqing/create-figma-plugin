@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.1
+
+- `create-figma-plugin`
+  - Fixed a bug to include the `.gitignore` file when bootstrapping from a template ([#76](https://github.com/yuanqing/create-figma-plugin/pull/76))
+
 ## 1.8.0
 
 - `@create-figma-plugin/utilities`
