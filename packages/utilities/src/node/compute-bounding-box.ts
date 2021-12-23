@@ -10,15 +10,7 @@ import { getParentNode } from './get-nodes/get-parent-node.js'
  * @category Node
  */
 export function computeBoundingBox(node: SceneNode): Rect {
-  if (
-    node.type === 'CODE_BLOCK' ||
-    node.type === 'CONNECTOR' ||
-    node.type === 'SHAPE_WITH_TEXT' ||
-    node.type === 'STAMP' ||
-    node.type === 'STICKY' ||
-    node.type === 'WIDGET' ||
-    node.rotation === 0
-  ) {
+  if ('rotation' in node && node.rotation === 0) {
     const absolutePosition = getAbsolutePosition(node)
     const { width, height } = node
     return { ...absolutePosition, height, width }
