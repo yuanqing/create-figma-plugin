@@ -91,7 +91,10 @@ export function setUpToc() {
   }
   window.addEventListener('scroll', handleWindowScroll)
 
-  updateTocActiveElement()
+  const id = window.location.hash.slice(1)
+  if (id !== '') {
+    scrollToId(id, { pushState: false })
+  }
 }
 
 function parseHeaders() {
