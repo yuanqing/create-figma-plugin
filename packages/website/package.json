@@ -40,23 +40,23 @@
     "unified": "^10.1.1"
   },
   "scripts": {
-    "clean": "rm -rf '*.log' build",
     "build": "yarn run clean && concurrently npm:build-*",
-    "build-html": "node --loader tsm scripts/build-html/build-html.ts create-figma-plugin",
     "build-css": "esbuild --bundle src/css/style.css --minify --outfile=build/create-figma-plugin/style.css",
+    "build-html": "node --loader tsm scripts/build-html/build-html.ts create-figma-plugin",
     "build-js": "esbuild --bundle src/js/script.js --minify --outfile=build/create-figma-plugin/script.js",
     "build-media": "cpy 'media/**/*.png' build/create-figma-plugin/media",
+    "clean": "rm -rf '*.log' build",
+    "fix": "eslint --fix 'scripts/**/*.ts' 'src/**/*.js' && stylelint --fix 'src/**/*.css' && yarn run fix-data",
+    "fix-data": "node --loader tsm scripts/prettify-data.ts data/plugins.json && node --loader tsm scripts/prettify-data.ts data/widgets.json",
+    "lint": "eslint 'scripts/**/*.ts' 'src/**/*.js' && stylelint 'src/**/*.css'",
     "scrape-plugins": "node --loader tsm scripts/scrape/scrape.ts plugin data/plugins.json",
     "scrape-widgets": "node --loader tsm scripts/scrape/scrape.ts widget data/widgets.json",
+    "serve": "sirv build --dev --host --port 4242",
     "watch": "concurrently npm:watch-*",
     "watch-css": "chokidar --command 'yarn run build-css' --initial --silent 'src/**/*.css'",
     "watch-html": "chokidar --command 'yarn run build-html' --initial --silent 'data/**/*' 'docs/**/*' 'scripts/**/*' 'src/**/*.html'",
     "watch-js": "chokidar --command 'yarn run build-js' --initial --silent 'src/**/*.js'",
-    "watch-media": "chokidar --command 'yarn run build-media' --initial --silent 'media/**/*.png'",
-    "fix": "eslint --fix 'scripts/**/*.ts' 'src/**/*.js' && stylelint --fix 'src/**/*.css' && yarn run fix-data",
-    "fix-data": "node --loader tsm scripts/prettify-data.ts data/plugins.json && node --loader tsm scripts/prettify-data.ts data/widgets.json",
-    "lint": "eslint 'scripts/**/*.ts' 'src/**/*.js' && stylelint 'src/**/*.css'",
-    "serve": "sirv build --dev --host --port 4242"
+    "watch-media": "chokidar --command 'yarn run build-media' --initial --silent 'media/**/*.png'"
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing"
