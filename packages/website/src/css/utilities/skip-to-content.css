@@ -1,0 +1,14 @@
+.skip-to-content a {
+  position: absolute;
+  z-index: var(--z-index-2);
+  top: 0;
+  left: 0;
+  display: block;
+  padding: var(--space-100);
+  background-color: var(--color-fg-1);
+  color: var(--color-bg-1);
+  transform: translateY(-100%);
+}
+.skip-to-content a:focus {
+  transform: translateY(0);
+}
