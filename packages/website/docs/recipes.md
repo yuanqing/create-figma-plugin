@@ -113,7 +113,7 @@ See the other [configuration options](#configuration-options).
 
 ## Configuring relaunch buttons
 
-*This is applicable to Figma plugins only.*
+*Relaunch buttons are applicable to Figma plugins only.*
 
 [Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](#relaunchbuttons) key under **`"figma-plugin"`**:
 
