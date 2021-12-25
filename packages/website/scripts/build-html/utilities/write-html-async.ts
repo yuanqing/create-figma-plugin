@@ -100,7 +100,7 @@ async function renderMarkdownToHtmlAsync(content: string): Promise<string> {
   const processor = unified()
   processor.use(remarkParse)
   processor.use(remarkGfm)
-  processor.use(remarkExternalLinks, { rel: 'nofollow', target: '_blank' })
+  processor.use(remarkExternalLinks, { rel: false, target: '_blank' })
   processor.use(remarkToRehype, {
     allowDangerousHtml: true
   })

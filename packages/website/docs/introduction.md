@@ -56,7 +56,7 @@ return ['Color Kitchen', 'Copy & Rotate', 'Draw Connector', 'Free Hands', 'Proto
 }) %>
 <% for (const plugin of featuredPlugins) { %>
 <li class="featured-plugin">
-<a href="https://figma.com/community/plugin/<%- plugin.id %>" target="_blank" rel="nofollow">
+<a href="https://figma.com/community/plugin/<%- plugin.id %>" target="_blank">
 <span class="image"><img src="https://figma.com/community/plugin/<%- plugin.id %>/icon" /></span>
 <span class="featured-plugin__name"><%- plugin.name %></span>
 </a>
@@ -70,7 +70,7 @@ return ['Color Kitchen', 'Copy & Rotate', 'Draw Connector', 'Free Hands', 'Proto
 <% const featuredWidgets = widgets.slice(0, 7) %>
 <% for (const widget of featuredWidgets) { %>
 <li class="featured-plugin">
-<a href="https://figma.com/community/widget/<%- widget.id %>" target="_blank" rel="nofollow">
+<a href="https://figma.com/community/widget/<%- widget.id %>" target="_blank">
 <span class="image"><img src="https://figma.com/community/widget/<%- widget.id %>/icon" /></span>
 <span class="featured-plugin__name"><%- widget.name %></span>
 </a>
