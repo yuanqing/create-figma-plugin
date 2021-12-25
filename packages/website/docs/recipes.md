@@ -326,7 +326,7 @@ $ npx --yes create-figma-plugin --template plugin/preact-resizable
 
 The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuild.github.io). To customize the underlying build configuration for the [main bundle](https://figma.com/plugin-docs/how-plugins-run/), create a `build-figma-plugin.main.js` file:
 
-```js
+```ts
 // build-figma-plugin.main.js
 
 module.exports = function (buildOptions) {
@@ -346,7 +346,7 @@ Correspondingly, use a `build-figma-plugin.ui.js` file to customize the build co
 
 The `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). To disable this behaviour, create a `build-figma-plugin.ui.js` file:
 
-```js
+```ts
 // build-figma-plugin.ui.js
 
 module.exports = function (buildOptions) {
@@ -363,7 +363,7 @@ module.exports = function (buildOptions) {
 
 To modify the `manifest.json` file just before it gets output by the `build-figma-plugin` CLI, create a `build-figma-plugin.manifest.js` file:
 
-```js
+```ts
 // build-figma-plugin.manifest.js
 
 module.exports = function (manifest) {

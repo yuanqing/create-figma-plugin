@@ -10,7 +10,9 @@
   --color-fg-2: #bababa; /* 73% */
   --color-fg-3: #7f7f7f; /* 50% */
   --color-fg-4: #333; /* 20% */
-  --color-accent: #f7eab2;
+  --color-accent-1: #a3d9fd;
+  --color-accent-2: #d5b7ff;
+  --color-accent-3: #f5f1bf;
   --color-addition-fg: #aff5b4;
   --color-addition-bg: #033a16;
   --color-deletion-fg: #ffdcd7;
