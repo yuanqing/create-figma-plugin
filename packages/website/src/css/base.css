@@ -1,0 +1,32 @@
+html {
+  font-size: var(--base-font-size-sm);
+}
+
+body {
+  background-color: var(--color-bg-1);
+  color: var(--color-fg-1);
+  font-family: var(--font-family);
+}
+
+code {
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-code);
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: var(--base-font-size-md);
+  }
+}
+
+@media (min-width: 960px) {
+  html {
+    font-size: var(--base-font-size-lg);
+  }
+}
+
+@media (min-width: 1400px) {
+  html {
+    font-size: var(--base-font-size-xl);
+  }
+}

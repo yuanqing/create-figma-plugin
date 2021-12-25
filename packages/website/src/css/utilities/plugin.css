@@ -1,0 +1,69 @@
+.plugin {
+  position: relative;
+  display: flex;
+}
+.plugin + .plugin {
+  margin-top: var(--space-100);
+}
+
+.plugin__image {
+  display: block;
+}
+.plugin__main {
+  flex: 1;
+  margin-left: var(--space-075);
+}
+
+.plugin__meta-inner {
+  display: flex;
+  color: var(--color-fg-3);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+.plugin__name a {
+  padding: var(--space-050) 0;
+}
+
+.plugin__authors a {
+  padding: var(--space-050) 0;
+}
+.plugin__authors a:hover {
+  color: var(--color-fg-2);
+}
+
+.plugin__github:before {
+  margin: 0 var(--space-050);
+  content: '·';
+}
+.plugin__github a {
+  padding: var(--space-050) 0;
+}
+.plugin__github a:hover {
+  color: var(--color-fg-2);
+}
+.plugin__github a:after {
+  content: ' ↗';
+}
+
+.plugin__description {
+  margin-top: var(--space-025);
+  color: var(--color-fg-2);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+@media (min-width: 640px) {
+  .plugin__image {
+    position: relative;
+    top: 0.125rem;
+  }
+  .plugin__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .plugin__meta-inner {
+    margin-left: var(--space-050);
+  }
+}

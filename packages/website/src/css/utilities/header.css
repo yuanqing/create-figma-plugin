@@ -1,0 +1,10 @@
+@media (min-width: 960px) {
+  .header {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--width-secondary);
+    overflow-y: auto;
+  }
+}

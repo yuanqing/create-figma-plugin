@@ -1,0 +1,654 @@
+[
+  {
+    "authors": [
+      {
+        "name": "Nick Radford",
+        "url": "https://figma.com/@9742655e_9f3b_4"
+      }
+    ],
+    "description": "Catch insensitive, inconsiderate writing",
+    "githubUrl": "https://github.com/nickradford/figma-plugin-alex",
+    "id": "872001708828653182",
+    "name": "Alex"
+  },
+  {
+    "authors": [
+      {
+        "name": "Amplitude",
+        "url": "https://figma.com/@amplitude"
+      }
+    ],
+    "description": "Annotate your design with Amplitude event labels",
+    "githubUrl": "https://github.com/amplitude/amplitude-figma",
+    "id": "921207224854227439",
+    "name": "Amplitude Event Planner"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Automagically organize and clean up your Figma document",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-clean-document",
+    "id": "767379019764649932",
+    "name": "Clean Document"
+  },
+  {
+    "authors": [
+      {
+        "name": "Richard Bruskowski",
+        "url": "https://twitter.com/bruskowski"
+      }
+    ],
+    "description": "Create recipes for working with colors and color styles systematically",
+    "githubUrl": null,
+    "id": "1049477946127252395",
+    "name": "Color Kitchen"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "Apply a custom fill color to any object in your FigJam document",
+    "githubUrl": null,
+    "id": "1030933889092035687",
+    "name": "Color Picker for FigJam"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Copy and create components, and replace layers with components",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-component-utilities",
+    "id": "785894722513806497",
+    "name": "Component Utilities"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Copy properties of the selected layers from the Quick Actions bar",
+    "githubUrl": null,
+    "id": "1048003170461690444",
+    "name": "Copy"
+  },
+  {
+    "authors": [
+      {
+        "name": "Alex Widua",
+        "url": "https://twitter.com/alexwidua"
+      }
+    ],
+    "description": "Create radial interfaces and patterns in Figma with instantiated, rotated copies of elements",
+    "githubUrl": "https://github.com/alexwidua/figma-copy-and-rotate",
+    "id": "1003651932772848456",
+    "name": "Copy & Rotate"
+  },
+  {
+    "authors": [
+      {
+        "name": "Maxim Artyushenko",
+        "url": "https://figma.com/@maxart2007"
+      }
+    ],
+    "description": "Copy and paste Auto Layout properties",
+    "githubUrl": null,
+    "id": "923016403442923783",
+    "name": "Copy and Paste Autolayout"
+  },
+  {
+    "authors": [
+      {
+        "name": "Maarten Zilverberg",
+        "url": "https://twitter.com/mzilverberg"
+      }
+    ],
+    "description": "Delete multiple pages at once",
+    "githubUrl": null,
+    "id": "953656637827255284",
+    "name": "Delete Multiple Pages"
+  },
+  {
+    "authors": [
+      {
+        "name": "DhiWise",
+        "url": "https://dhiwise.com"
+      }
+    ],
+    "description": "Convert your design to Swift, Kotlin, or Flutter code",
+    "githubUrl": null,
+    "id": "1037309320238203168",
+    "name": "DhiWise"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Distribute layers in a given direction and offset",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-distribute-layers",
+    "id": "767379264700569551",
+    "name": "Distribute Layers"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Draw perfect orthogonal connectors between layers",
+    "githubUrl": null,
+    "id": "988836825341227586",
+    "name": "Draw Connector"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Draw a mask under the selection",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-draw-mask-under-selection",
+    "id": "806532458729477508",
+    "name": "Draw Mask Under Selection"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Draw a slice over the selection",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-draw-slice-over-selection",
+    "id": "767379335945775056",
+    "name": "Draw Slice Over Selection"
+  },
+  {
+    "authors": [
+      {
+        "name": "Alex Widua",
+        "url": "https://twitter.com/alexwidua"
+      }
+    ],
+    "description": "Create smooth gradient transitions with cubic easing functions",
+    "githubUrl": "https://github.com/alexwidua/figma-easing-gradients",
+    "id": "907899097995668330",
+    "name": "Easing Gradients"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Replace layers with library components that have a matching name",
+    "githubUrl": null,
+    "id": "981531596501862559",
+    "name": "FigLink"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Apply tags to frames",
+    "githubUrl": null,
+    "id": "998914249119019489",
+    "name": "FigTag"
+  },
+  {
+    "authors": [
+      {
+        "name": "Wei Zhong",
+        "url": "https://figma.com/@wei"
+      }
+    ],
+    "description": "Find and replace colors",
+    "githubUrl": null,
+    "id": "806266638862897503",
+    "name": "Find and Replace Colors"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Rasterize layers at a high resolution",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-flatten-selection-to-bitmap",
+    "id": "837846252158418235",
+    "name": "Flatten Selection to Bitmap"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Change the font via Quick Actions while preserving the font weight",
+    "githubUrl": null,
+    "id": "1039430358164496626",
+    "name": "Font Switcher"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Format and convert between currencies",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-format-currency",
+    "id": "780785006732555859",
+    "name": "Format Currency"
+  },
+  {
+    "authors": [
+      {
+        "name": "ShuaiQi Sun",
+        "url": "https://twitter.com/SShuaiqi"
+      }
+    ],
+    "description": "Directly manipulate spacing and Auto Layout properties on the canvas",
+    "githubUrl": null,
+    "id": "986640827067490181",
+    "name": "Free Hands"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "Use Bob Ross’s happy quotes as placeholder text",
+    "githubUrl": null,
+    "id": "1040116132312926263",
+    "name": "Happy Ipsum"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "Free and open source health icons",
+    "githubUrl": "https://github.com/iamtekeste/health-icons-figma-plugin",
+    "id": "992844281461869440",
+    "name": "Health Icons"
+  },
+  {
+    "authors": [
+      {
+        "name": "Jorge Martins",
+        "url": "https://twitter.com/jorgemartns"
+      }
+    ],
+    "description": "Automatically create variants for different icon sizes",
+    "githubUrl": null,
+    "id": "1000211110592209830",
+    "name": "Icon Sizes"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Insert and retain the original resolution of big images",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-insert-big-image",
+    "id": "799646392992487942",
+    "name": "Insert Big Image"
+  },
+  {
+    "authors": [
+      {
+        "name": "Karim Shakirov",
+        "url": "https://figma.com/@k2589"
+      }
+    ],
+    "description": "Manage Jira issues from Figma",
+    "githubUrl": null,
+    "id": "957889474923510992",
+    "name": "J4F"
+  },
+  {
+    "authors": [
+      {
+        "name": "Guillermo Velasquez",
+        "url": "https://figma.com/@moquez"
+      },
+      {
+        "name": "Michelle Guzmán O.",
+        "url": "https://figma.com/@michelleguzmano"
+      },
+      {
+        "name": "Peanutbuttr",
+        "url": "https://figma.com/@peanutbuttr"
+      }
+    ],
+    "description": "Generate accessible color combinations",
+    "githubUrl": null,
+    "id": "1044333944861264414",
+    "name": "Juliette"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Test your UI in different languages",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-language-tester",
+    "id": "767379122107077581",
+    "name": "Language Tester"
+  },
+  {
+    "authors": [
+      {
+        "name": "Meni Zanzibar",
+        "url": "https://figma.com/@meni"
+      }
+    ],
+    "description": "Generate dummy text for your mockups",
+    "githubUrl": null,
+    "id": "941410492434902618",
+    "name": "Lorepsum"
+  },
+  {
+    "authors": [
+      {
+        "name": "Gregor Vostrak",
+        "url": "https://twitter.com/fullsnack_"
+      }
+    ],
+    "description": "Generate social media link preview images",
+    "githubUrl": null,
+    "id": "1040077180224578586",
+    "name": "Metaimage"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Precisely move layers",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-move-layers",
+    "id": "767379204511357902",
+    "name": "Move Layers"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Create one or more pages via Quick Actions",
+    "githubUrl": null,
+    "id": "1037336302051693897",
+    "name": "New Page"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Organize layers on the page",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-organize-layers",
+    "id": "786286754606650597",
+    "name": "Organize Layers"
+  },
+  {
+    "authors": [
+      {
+        "name": "ShuaiQi Sun",
+        "url": "https://twitter.com/SShuaiqi"
+      }
+    ],
+    "description": "Convert filled vectors back to editable single-line vectors",
+    "githubUrl": null,
+    "id": "1027037684003682350",
+    "name": "Outline to Single Stroke"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Draw flow arrows based on prototype interactions",
+    "githubUrl": null,
+    "id": "989539821393693492",
+    "name": "ProToFlow"
+  },
+  {
+    "authors": [
+      {
+        "name": "Santiago Moreno",
+        "url": "https://twitter.com/sntiagomoreno"
+      }
+    ],
+    "description": "Create, save and reuse prototype interactions",
+    "githubUrl": null,
+    "id": "1021879782774011952",
+    "name": "Protofly"
+  },
+  {
+    "authors": [
+      {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Automatically create gamepad navigation prototypes",
+    "githubUrl": "https://github.com/aashreys/prototyper",
+    "id": "1020894954864594118",
+    "name": "Prototyper"
+  },
+  {
+    "authors": [
+      {
+        "name": "Afnizar Nur Ghifari",
+        "url": "https://twitter.com/afnizarnur"
+      }
+    ],
+    "description": "Quickly create one or more pages",
+    "githubUrl": "https://github.com/afnizarnur/quick-new-page-figma-plugin",
+    "id": "841200074370852792",
+    "name": "Quick New Page"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "A crisp set of icons designed by Modulz",
+    "githubUrl": "https://github.com/colmtuite/icons-figma",
+    "id": "1004461092590904310",
+    "name": "Radix Icons"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Write in RTL",
+    "githubUrl": "https://github.com/saeedalipoor/RTLPLZ",
+    "id": "742121299910255177",
+    "name": "RTL PLZ"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Companion to RTL PLZ to allow text selection and developer handoff",
+    "githubUrl": null,
+    "id": "947478767900326156",
+    "name": "RTL PLZ Handoff"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "RTL PLZ as a single command to perform a one-time reverse",
+    "githubUrl": null,
+    "id": "940631928923964752",
+    "name": "RTL PLZ Reverse"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Select layers based on name, type, or similarity",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-select-layers",
+    "id": "799648692768237063",
+    "name": "Select Layers"
+  },
+  {
+    "authors": [
+      {
+        "name": "Gleb Sabirzyanov",
+        "url": "https://twitter.com/zyumbik"
+      },
+      {
+        "name": "Richard Guerre",
+        "url": "https://twitter.com/RichardGuerre_"
+      }
+    ],
+    "description": "Control nested variants instances within the selection",
+    "githubUrl": null,
+    "id": "1027413532986522043",
+    "name": "Selection Variants"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Precisely set the size of layers, while ignoring constraints",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-set-layer-size",
+    "id": "817982008781589678",
+    "name": "Set Layer Size"
+  },
+  {
+    "authors": [
+      {
+        "name": "Saeed Alipoor",
+        "url": "https://twitter.com/Sali__Pure"
+      }
+    ],
+    "description": "Create themes for the Sonnat UI kit",
+    "githubUrl": null,
+    "id": "1037849474159092686",
+    "name": "Sonnat Theme Builder"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Sort layers by name or position",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-sort-layers",
+    "id": "767379414704079825",
+    "name": "Sort Layers"
+  },
+  {
+    "authors": [
+      {
+        "name": "Ika Pkhakadze",
+        "url": "https://figma.com/@ddramone"
+      },
+      {
+        "name": "Zviad Sichinava",
+        "url": "https://figma.com/@zikosichi"
+      }
+    ],
+    "description": "Create themes for Stack Browser",
+    "githubUrl": null,
+    "id": "1038822221814377265",
+    "name": "Stack Theme Builder"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Split, normalize, and bulk copy and paste text layers",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-text-utilities",
+    "id": "899501266127939530",
+    "name": "Text Utilities"
+  },
+  {
+    "authors": [
+      {
+        "name": "Osung Jung",
+        "url": "https://figma.com/@7c961091_9f98_4"
+      }
+    ],
+    "description": "Align and distribute layers using an 8-pixel grid",
+    "githubUrl": null,
+    "id": "983672137155100557",
+    "name": "Token Space 8"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Upscale low resolution images using machine learning",
+    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-upscale-image",
+    "id": "939832535166467194",
+    "name": "Upscale Image"
+  }
+]

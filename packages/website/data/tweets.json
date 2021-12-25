@@ -1,0 +1,26 @@
+[
+  {
+    "date": "Aug 21",
+    "handle": "alexwidua",
+    "id": "1428782856998989827",
+    "name": "Alex Widua",
+    "profilePhoto": "https://pbs.twimg.com/profile_images/1460377348621148168/yroE2ckE_400x400.jpg",
+    "text": "This was also the first time I used @yuanqinglim’s create-figma-plugin toolkit and wow – what a comprehensive and thought-out library. Allowed me to have the first prototype up and running in just an hour. A staple for building Figma plugins from now on 😌"
+  },
+  {
+    "date": "Aug 19",
+    "handle": "tkmadeit",
+    "id": "1428024307511402499",
+    "name": "tkmadeit",
+    "profilePhoto": "https://pbs.twimg.com/profile_images/1322343885172051970/7r2g2q0E_400x400.jpg",
+    "text": "If you build plugins for @figmadesign do yourself a favor and start using Create Figma Plugin toolkit by @yuanqinglim!"
+  },
+  {
+    "date": "Aug 19",
+    "handle": "abynim",
+    "id": "1428137898142883840",
+    "name": "Aby Nimbalkar",
+    "profilePhoto": "https://pbs.twimg.com/profile_images/1344094978868277248/qLAKgG8e_400x400.jpg",
+    "text": "I know I’m late to this party but I just published my first @figmadesign plugin 🥳 (org-only so can’t share yet). @yuanqinglim’s create-figma-plugin library made building the UI so easy and helped me focus on the logic instead. Highly recommended!"
+  }
+]

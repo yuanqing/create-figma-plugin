@@ -1,0 +1,30 @@
+@media (max-width: 959px) {
+  .menu-toggle-button {
+    position: fixed;
+    z-index: var(--z-index-3);
+    top: 0;
+    right: 0;
+    display: block;
+    width: var(--space-300);
+    height: var(--space-300);
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .menu-toggle-button:before {
+    display: block;
+    color: var(--color-fg-3);
+    content: '≡';
+    font-size: 1rem;
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+  }
+  .menu-toggle-button[aria-expanded='true']:before {
+    content: '×';
+  }
+}
+
+@media (min-width: 960px) {
+  .menu-toggle-button {
+    display: none;
+  }
+}

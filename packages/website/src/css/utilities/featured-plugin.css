@@ -1,0 +1,15 @@
+.featured-plugin a {
+  display: flex;
+  align-items: center;
+  padding: var(--space-025) 0;
+}
+.featured-plugin:first-child {
+  margin-top: var(--space-050);
+}
+.featured-plugin:last-child {
+  margin-bottom: calc(-1 * var(--space-025));
+}
+
+.featured-plugin__name {
+  margin-left: var(--space-050);
+}

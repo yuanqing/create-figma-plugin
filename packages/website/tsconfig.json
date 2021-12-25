@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.shared.json",
+  "compilerOptions": {
+    "lib": ["ES2020"],
+    "outDir": "lib",
+    "rootDir": "scripts",
+    "types": ["@types/node"]
+  },
+  "include": ["scripts/**/*.ts"]
+}

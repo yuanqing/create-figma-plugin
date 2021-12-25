@@ -9,3 +9,4 @@ sandbox/
 /packages/**/fixtures/**/build/
 /packages/create-figma-plugin/test/figma-plugin/
 /packages/ui/build/
+/packages/website/build/

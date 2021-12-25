@@ -1,0 +1,15 @@
+.emoji-list-item {
+  display: flex;
+}
+.emoji-list-item + .emoji-list-item {
+  margin-top: var(--space-050);
+}
+
+.emoji-list-item__emoji {
+  user-select: none;
+}
+
+.emoji-list-item__text {
+  flex: 1;
+  margin-left: var(--space-050);
+}

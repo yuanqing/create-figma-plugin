@@ -1,0 +1,86 @@
+[
+  {
+    "authors": [
+      {
+        "name": "Felix Tesche",
+        "url": "https://twitter.com/mrfesch"
+      }
+    ],
+    "description": "Scribble quick interfaces on device mockups in FigJam",
+    "githubUrl": "https://github.com/brechtknecht/Figjam-Device-Frames-Widget",
+    "id": "1045386129853518633",
+    "name": "Device Frames"
+  },
+  {
+    "authors": [
+      {
+        "name": "Cameron Yick",
+        "url": "https://twitter.com/hydrosquall"
+      }
+    ],
+    "description": "Build data visualizations and graphs with the Vega-Lite language",
+    "githubUrl": null,
+    "id": "1027276088284051809",
+    "name": "Graphpad"
+  },
+  {
+    "authors": [
+      {
+        "name": "Roman Nurik",
+        "url": "https://twitter.com/romannurik"
+      }
+    ],
+    "description": "Fill in the blanks, together",
+    "githubUrl": null,
+    "id": "1051929673182125608",
+    "name": "Mad Lib"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "Write notes in Markdown",
+    "githubUrl": null,
+    "id": "1028465458230585901",
+    "name": "Markdown Notes"
+  },
+  {
+    "authors": [
+      {
+        "name": "Ward Meremans",
+        "url": "https://twitter.com/drawm"
+      }
+    ],
+    "description": "A story mapping widget to focus on outcomes instead of outputs",
+    "githubUrl": "https://github.com/WardMe/storymapper-widget",
+    "id": "1047983508317374017",
+    "name": "Storymapper"
+  },
+  {
+    "authors": [
+      {
+        "name": "Roman Nurik",
+        "url": "https://twitter.com/romannurik"
+      }
+    ],
+    "description": "Split up into teams, useful for virtual workshops",
+    "githubUrl": null,
+    "id": "1047172873295538762",
+    "name": "Teams"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "Run quick polls in FigJam",
+    "githubUrl": null,
+    "id": "1037535899287211554",
+    "name": "Voting Sessions"
+  }
+]
