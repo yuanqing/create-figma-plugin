@@ -6,7 +6,8 @@
 .content > table a,
 .emoji-list-item a,
 .featured-plugin a,
-.plugin__name a {
+.plugin__name a,
+.tweet__text a {
   color: currentColor;
   text-decoration: underline;
   text-decoration-color: var(--color-fg-3);
@@ -22,7 +23,8 @@
 .content > table a:hover,
 .emoji-list-item a:hover,
 .featured-plugin a:hover,
-.plugin__name a:hover {
+.plugin__name a:hover,
+.tweet__text a:hover {
   text-decoration: none;
 }
 
@@ -35,7 +37,8 @@
   .content > table a,
   .emoji-list-item a,
   .featured-plugin a,
-  .plugin__name a {
+  .plugin__name a,
+  .tweet__text a {
     text-underline-offset: 2px;
   }
 }

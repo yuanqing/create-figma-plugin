@@ -2,19 +2,19 @@
   margin-top: var(--space-100);
 }
 
-.menu a {
+.menu ul a {
   display: block;
   padding: var(--space-025) var(--space-100);
   color: var(--color-fg-3);
 }
-.menu a:not(.menu__active):hover {
+.menu ul a:not(.menu__active):hover {
   color: var(--color-fg-2);
 }
-.menu .menu__active {
+.menu ul .menu__active {
   color: var(--color-fg-1);
 }
 
-.menu a[target='_blank']:after {
+.menu ul a[target='_blank']:after {
   content: ' ↗';
 }
 

@@ -13,6 +13,11 @@ code {
   font-size: var(--font-size-code);
 }
 
+::selection {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-bg-1);
+}
+
 @media (min-width: 640px) {
   html {
     font-size: var(--base-font-size-md);

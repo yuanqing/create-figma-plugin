@@ -104,6 +104,7 @@
   color: var(--color-fg-3);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
+  user-select: none;
 }
 .content__header-link:hover {
   color: var(--color-fg-2);

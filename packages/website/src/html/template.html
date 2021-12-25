@@ -14,9 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/<%- urlPrefix %>/style.css" rel="stylesheet" />
   </head>
-  <body class="page-<%- metadata.id %>">
-    <div class="skip-to-content"><a href="#content">Skip to content</a></div>
-    <header class="header">
+  <body class="page">
+    <div class="page__skip-to-content">
+      <a href="#content">Skip to content</a>
+    </div>
+    <header class="page__header">
       <h1 class="title">
         <% if (metadata.order === 1) { %>
           <span><%- globals.name %></span>
@@ -56,8 +58,8 @@
         </ul>
       </nav>
     </header>
-    <main role="main" class="main">
-      <div class="main__inner">
+    <main role="main" class="page__main">
+      <div class="page__main-inner">
         <div class="content" id="content">
           <%= content %>
         </div>
