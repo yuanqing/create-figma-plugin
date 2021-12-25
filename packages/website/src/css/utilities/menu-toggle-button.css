@@ -10,6 +10,7 @@
     background-color: transparent;
     cursor: pointer;
   }
+
   .menu-toggle-button:before {
     display: block;
     color: var(--color-fg-3);
@@ -20,6 +21,13 @@
   }
   .menu-toggle-button[aria-expanded='true']:before {
     content: '×';
+  }
+
+  .menu-toggle-button__inner {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    text-indent: -9999em;
   }
 }
 

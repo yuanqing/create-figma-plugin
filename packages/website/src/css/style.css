@@ -7,7 +7,6 @@
 @import './utilities/emoji-list-item.css';
 @import './utilities/featured-plugin.css';
 @import './utilities/header.css';
-@import './utilities/hidden.css';
 @import './utilities/image.css';
 @import './utilities/links.css';
 @import './utilities/main.css';
@@ -16,5 +15,6 @@
 @import './utilities/muted.css';
 @import './utilities/pagination.css';
 @import './utilities/plugin.css';
+@import './utilities/skip-to-content.css';
 @import './utilities/title.css';
 @import './utilities/tweet.css';

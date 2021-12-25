@@ -23,11 +23,8 @@
           <a href="<%- pages[0].metadata.url %>"><%- globals.name %></a>
         <% } %>
       </h1>
-      <hr class="hidden" />
       <button class="menu-toggle-button" aria-expanded="false">
-        <span class="hidden">
           Toggle menu
-        </span>
       </button>
       <nav class="menu">
         <ul>
@@ -56,13 +53,11 @@
         </ul>
       </nav>
     </header>
-    <hr class="hidden" />
     <main role="main" class="main">
       <div class="main__inner">
         <div class="content">
           <%= content %>
         </div>
-        <hr class="hidden" />
         <ul class="pagination">
           <% if (previousPage !== null) { %>
             <li class="pagination__previous"><a href="<%- previousPage.metadata.url %>"><%- previousPage.metadata.title %></a></li>
