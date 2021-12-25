@@ -80,7 +80,6 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.03125rem;
   line-height: 1.75rem;
-  scroll-margin-top: var(--space-300);
 }
 .content > h3 {
   border-top: 1px solid var(--color-fg-4);
@@ -89,7 +88,6 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.03125rem;
   line-height: 1.5rem;
-  scroll-margin-top: var(--space-300);
 }
 .content > h4 {
   margin: var(--space-200) 0 var(--space-050);
@@ -98,7 +96,6 @@
   font-style: italic;
   font-weight: var(--font-weight-regular);
   line-height: 1.5rem;
-  scroll-margin-top: var(--space-200);
 }
 
 .content__header-link {
@@ -135,10 +132,16 @@ h4 .content__header-link {
   .content > h4 {
     position: relative;
   }
+  .content > h2,
+  .content > h3 {
+    scroll-margin-top: var(--space-250);
+  }
+  .content > h4 {
+    scroll-margin-top: var(--space-150);
+  }
   .content > h1 {
     margin-top: calc(var(--space-200) + 0.0625rem);
   }
-
   .content__header-link {
     position: absolute;
     top: 0;
@@ -146,6 +149,16 @@ h4 .content__header-link {
     bottom: 0;
     display: block;
     padding: var(--space-075) var(--space-100) 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .content > h2,
+  .content > h3 {
+    scroll-margin-top: var(--space-300);
+  }
+  .content > h4 {
+    scroll-margin-top: var(--space-200);
   }
 }
 
