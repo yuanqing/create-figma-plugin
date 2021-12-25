@@ -80,6 +80,7 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.03125rem;
   line-height: 1.75rem;
+  scroll-margin-top: var(--space-300);
 }
 .content > h3 {
   border-top: 1px solid var(--color-fg-4);
@@ -88,6 +89,7 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.03125rem;
   line-height: 1.5rem;
+  scroll-margin-top: var(--space-300);
 }
 .content > h4 {
   margin: var(--space-200) 0 var(--space-050);
@@ -96,6 +98,7 @@
   font-style: italic;
   font-weight: var(--font-weight-regular);
   line-height: 1.5rem;
+  scroll-margin-top: var(--space-200);
 }
 
 .content__header-link {
@@ -123,10 +126,6 @@ h4 .content__header-link {
   .content > h1 {
     margin-top: var(--space-500);
   }
-
-  .content [id] {
-    scroll-margin-top: var(--space-500);
-  }
 }
 
 @media (min-width: 960px) {
@@ -138,10 +137,6 @@ h4 .content__header-link {
   }
   .content > h1 {
     margin-top: calc(var(--space-200) + 0.0625rem);
-  }
-
-  .content [id] {
-    scroll-margin-top: var(--space-300);
   }
 
   .content__header-link {
