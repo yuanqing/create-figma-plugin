@@ -24,6 +24,9 @@
 .menu__toc li li a {
   padding-left: var(--space-300);
 }
+.menu__toc li li li a {
+  padding-left: var(--space-400);
+}
 
 @media (max-width: 479px) {
   .menu {
@@ -109,5 +112,8 @@
   }
   .menu__toc li li a {
     padding-left: var(--space-200);
+  }
+  .menu__toc li li li a {
+    padding-left: var(--space-300);
   }
 }

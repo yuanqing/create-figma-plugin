@@ -13,7 +13,6 @@
   background-color: var(--color-fg-1);
   color: var(--color-bg-1);
 }
-
 .button a:after {
   content: ' →';
 }
