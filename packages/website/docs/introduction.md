@@ -9,16 +9,16 @@ title: Introduction
 
 <div>
 <ul>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤗</span> <span class="emoji-list-item__text"><a href="<%- pagesById['quick-start'].metadata.url %>#bootstrapping-a-new-pluginwidget-from-a-template">Bootstrap a new plugin/widget from a template</a></span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤯</span> <span class="emoji-list-item__text"><a href="<%- pagesById['quick-start'].metadata.url %>#building-the-pluginwidget">Bundle and minify your TypeScript or JavaScript code</a>, with sub-second build times made possible by the esbuild compiler</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">😌</span> <span class="emoji-list-item__text"><a href="<%- pagesById['recipes'].metadata.url %>#specifying-multiple-commands-in-the-plugin-sub-menu">Write plugin menu commands in separate files</a>, with support for each command having their own UI implementation</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤩</span> <span class="emoji-list-item__text"><a href="<%- pagesById['ui'].metadata.url %>#using-the-preact-component-library">Create a UI for your plugin/widget</a> using a library of Preact components that replicate the Figma/FigJam editor’s UI design</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤓</span> <span class="emoji-list-item__text"><a href="<%- pagesById['utilities'].metadata.url %>">Leverage an extensive set of utility functions</a>, including utilities for passing data between your plugin/widget’s main and UI contexts</span></li>
+<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤗</span> <span class="emoji-list-item__text"><a href="<%- getPageUrlById('quick-start') %>#bootstrapping-a-new-pluginwidget-from-a-template">Bootstrap a new plugin/widget from a template</a></span></li>
+<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤯</span> <span class="emoji-list-item__text"><a href="<%- getPageUrlById('quick-start') %>#building-the-pluginwidget">Bundle and minify your TypeScript or JavaScript code</a>, with sub-second build times made possible by the esbuild compiler</span></li>
+<li class="emoji-list-item"><span class="emoji-list-item__emoji">😌</span> <span class="emoji-list-item__text"><a href="<%- getPageUrlById('recipes') %>#specifying-multiple-commands-in-the-plugin-sub-menu">Write plugin menu commands in separate files</a>, with support for each command having their own UI implementation</span></li>
+<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤩</span> <span class="emoji-list-item__text"><a href="<%- getPageUrlById('ui') %>#using-the-preact-component-library">Create a UI for your plugin/widget</a> using a library of Preact components that replicate the Figma/FigJam editor’s UI design</span></li>
+<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤓</span> <span class="emoji-list-item__text"><a href="<%- getPageUrlById('utilities') %>">Leverage an extensive set of utility functions</a>, including utilities for passing data between your plugin/widget’s main and UI contexts</span></li>
 </ul>
 </div>
 
 <div class="button">
-<a href="<%- pagesById['quick-start'].metadata.url %>">Get started</a>
+<a href="<%- getPageUrlById('quick-start') %>">Get started</a>
 </div>
 
 ## What people say about Create&nbsp;Figma&nbsp;Plugin
@@ -81,5 +81,5 @@ return ['Color Kitchen', 'Copy & Rotate', 'Draw Connector', 'Free Hands', 'Proto
 </div>
 
 <div class="button">
-<a href="<%- pagesById['reference-plugins-and-widgets'].metadata.url %>">More reference plugins/widgets</a>
+<a href="<%- getPageUrlById('reference-plugins-and-widgets') %>">More reference plugins/widgets</a>
 </div>

@@ -122,7 +122,7 @@ All `args` passed after `name` will be directly
 [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
 on the event handler.
 
-See the [recipe for passing data between the main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
+See the [recipe for passing data between the main and UI contexts](<%- getPageUrlById('recipes') %>#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
 
 ***Type parameters***
 
@@ -697,10 +697,10 @@ void
 
 Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
 on `node` for the command with the given `relaunchButtonId` as configured
-under the [**`"relaunchButtons"`**](#relaunchbuttons) key in `package.json`.
+under the [**`"relaunchButtons"`**](<%- getPageUrlById('configuration') %>#relaunchbuttons) key in `package.json`.
 Any relaunch buttons set previously will be retained.
 
-See the [recipe for configuring relaunch buttons](#configuring-relaunch-buttons).
+See the [recipe for configuring relaunch buttons](<%- getPageUrlById('recipes') %>#configuring-relaunch-buttons).
 
 ***Parameters***
 
@@ -1123,7 +1123,7 @@ Specify the modal’s `width`, `height`, `title`, and whether it is `visible`
 via [`options`](https://figma.com/plugin-docs/api/properties/figma-showui/).
 Optionally pass on some initialising `data` from the command to the UI.
 
-Learn how to [add a UI to your plugin/widget](#ui-1).
+Learn how to [add a UI to your plugin/widget](<%- getPageUrlById('ui') %>).
 
 ***Type parameters***
 

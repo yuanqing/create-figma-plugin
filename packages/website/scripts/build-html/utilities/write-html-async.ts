@@ -63,17 +63,18 @@ async function renderToHtmlAsync(options: {
     options
   const interpolatedData = {
     ...data,
+    getPageUrlById: function (id: string) {
+      const result = pages.find(function (page: Page) {
+        return page.metadata.id === id
+      })
+      if (typeof result === 'undefined') {
+        throw new Error(`Invalid \`id\`: ${id}`)
+      }
+      return result.metadata.url
+    },
     metadata: page.metadata,
     nextPage,
     pages,
-    pagesById: pages.reduce(function (
-      result: Record<string, Page>,
-      page: Page
-    ): Record<string, Page> {
-      result[page.metadata.id] = page
-      return result
-    },
-    {}),
     previousPage,
     urlPrefix
   }

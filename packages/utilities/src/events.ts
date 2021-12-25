@@ -56,7 +56,7 @@ export function once<Handler extends EventHandler>(
  * [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
  * on the event handler.
  *
- * See the [recipe for passing data between the main and UI contexts](#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
+ * See the [recipe for passing data between the main and UI contexts](<%- getPageUrlById('recipes') %>#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
  *
  * @category Events
  */
