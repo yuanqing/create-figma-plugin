@@ -7,7 +7,7 @@ title: Reference plugins/widgets
 
 <% let authors %>
 
-## Figma/FigJam plugins
+## Plugins
 
 <div>
 <ul>
@@ -41,7 +41,7 @@ by <%= authors.join(', ') %>
 </ul>
 </div>
 
-## FigJam widgets
+## Widgets
 
 <div>
 <ul>

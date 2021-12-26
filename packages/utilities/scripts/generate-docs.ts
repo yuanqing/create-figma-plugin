@@ -54,7 +54,7 @@ async function generateDocsAsync(
   lines.push('## Overview')
   lines.push('')
   lines.push(
-    '`@create-figma-plugin/utilities` is an extensive library of utility functions for common Figma/FigJam plugin/widget operations. It is meant to complement the Figma/FigJam [plugin API](https://figma.com/plugin-docs/api/api-reference/) and [widget API](https://figma.com/widget-docs/api/api-reference/).'
+    '`@create-figma-plugin/utilities` is a library of utility functions for common Figma/FigJam plugin/widget operations. It is meant to complement the Figma/FigJam [plugin API](https://figma.com/plugin-docs/api/api-reference/) and [widget API](https://figma.com/widget-docs/api/api-reference/).'
   )
   lines.push('')
   lines.push('To install:')

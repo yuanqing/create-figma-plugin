@@ -26,8 +26,8 @@ You’ll then be prompted to select from the following templates:
 
 ## Configuring the plugin/widget
 
-- [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/)
-- [FigJam widget API docs](https://figma.com/widget-docs/)
+- [Plugin API docs](https://figma.com/plugin-docs/)
+- [Widget API docs](https://figma.com/widget-docs/)
 
 Configuration options for your plugin/widget go under the **`"figma-plugin"`** key of your `package.json` file.
 
@@ -129,12 +129,12 @@ Figma will generate a unique ID for you when you first try to publish your plugi
 
 ## See also
 
-- [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin#readme)
+- [Reference plugins/widgets](<%- getPageUrlById('reference-plugins-and-widgets') %>)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins#readme)
 
 Official docs and code samples from Figma:
 
-- [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/)
-- [FigJam widget API docs](https://figma.com/widget-docs/)
+- [Plugin API docs](https://figma.com/plugin-docs/)
+- [Widget API docs](https://figma.com/widget-docs/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples#readme)
 - [`figma/widget-samples`](https://github.com/figma/widget-samples#readme)

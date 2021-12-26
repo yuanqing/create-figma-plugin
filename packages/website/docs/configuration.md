@@ -11,8 +11,8 @@ Configure your plugin/widget under the **`"figma-plugin"`** key of your `package
 
 The configuration options map closely to the plugin and widget `manifest.json` APIs:
 
-- [Plugin Manifest](https://figma.com/plugin-docs/manifest/)
-- [Widget Manifest](https://figma.com/widget-docs/widget-manifest/)
+- [Plugin Manifest API](https://figma.com/plugin-docs/manifest/)
+- [Widget Manifest API](https://figma.com/widget-docs/widget-manifest/)
 
 ### `api`
 
