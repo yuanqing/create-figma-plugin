@@ -1,12 +1,14 @@
 import fs from 'fs-extra'
 import { join } from 'path'
 
-export async function resolveDirectoryPathAsync(name: string): Promise<string> {
-  let directoryPath = join(process.cwd(), name)
+export async function resolveDirectoryPathAsync(
+  directoryName: string
+): Promise<string> {
+  let result = join(process.cwd(), directoryName)
   let suffix = 2
-  while ((await fs.pathExists(directoryPath)) === true) {
-    directoryPath = join(process.cwd(), `${name}-${suffix}`)
+  while ((await fs.pathExists(result)) === true) {
+    result = join(process.cwd(), `${directoryName}-${suffix}`)
     suffix += 1
   }
-  return directoryPath
+  return result
 }

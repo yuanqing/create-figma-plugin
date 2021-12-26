@@ -1,14 +1,14 @@
 {
   "dependencies": {
-    "@create-figma-plugin/ui": "^<%{versions.createFigmaPlugin.ui}%>",
-    "@create-figma-plugin/utilities": "^<%{versions.createFigmaPlugin.utilities}%>",
+    "@create-figma-plugin/ui": "^<%- versions.createFigmaPlugin.ui %>",
+    "@create-figma-plugin/utilities": "^<%- versions.createFigmaPlugin.utilities %>",
     "preact": "^10"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "^<%{versions.createFigmaPlugin.build}%>",
-    "@create-figma-plugin/tsconfig": "^<%{versions.createFigmaPlugin.tsconfig}%>",
-    "@figma/plugin-typings": "<%{versions.figma.pluginTypings}%>",
-    "@figma/widget-typings": "<%{versions.figma.widgetTypings}%>",
+    "@create-figma-plugin/build": "^<%- versions.createFigmaPlugin.build %>",
+    "@create-figma-plugin/tsconfig": "^<%- versions.createFigmaPlugin.tsconfig %>",
+    "@figma/plugin-typings": "<%- versions.figma.pluginTypings %>",
+    "@figma/widget-typings": "<%- versions.figma.widgetTypings %>",
     "typescript": "^4"
   },
   "scripts": {
@@ -20,10 +20,8 @@
       "figjam"
     ],
     "containsWidget": true,
-    "id": "<%{name}%>",
-<%#displayName%>
-    "name": "<%{displayName}%>",
-<%/displayName%>
+    "id": "<%- id %>",
+    "name": "<%- name %>",
     "main": "src/main.tsx",
     "ui": "src/ui.tsx"
   }

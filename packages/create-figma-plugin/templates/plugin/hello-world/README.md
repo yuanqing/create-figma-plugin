@@ -1,4 +1,4 @@
-# <%{displayName}%>
+# <%- name %>
 
 ## Development guide
 
@@ -40,8 +40,6 @@ To open the developer console, search for and run `Open Console` via the Quick A
 ## See also
 
 - [Create Figma Plugin docs](https://yuanqing.github.io/create-figma-plugin/)
-- [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/)
-- [`yuanqing/awesome-create-figma-plugin`](https://github.com/yuanqing/awesome-create-figma-plugin#readme)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins#readme)
 
 Official docs and code samples from Figma:

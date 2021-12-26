@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import { globby } from 'globby'
 import isUtf8 from 'is-utf8'
-import mustache from 'mustache'
+import lodashTemplate from 'lodash.template'
 import { join } from 'path'
 
 export async function interpolateValuesIntoFilesAsync(
@@ -17,7 +17,7 @@ export async function interpolateValuesIntoFilesAsync(
       const absolutePath = join(directory, filePath)
       const buffer = await fs.readFile(absolutePath)
       const fileContents = isUtf8(buffer)
-        ? mustache.render(buffer.toString(), values, {}, ['<%', '%>'])
+        ? lodashTemplate(buffer.toString())(values)
         : buffer
       await fs.outputFile(absolutePath, fileContents)
     })

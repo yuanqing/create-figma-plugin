@@ -28,9 +28,9 @@ export async function resolveTemplateNameAsync(
 
 async function readTemplateNamesAsync(): Promise<Array<string>> {
   const pluginTemplatesDirectory = resolve(__dirname, '..', '..', 'templates')
-  const pluginTemplateNames = await globby('*/*', {
+  const result = await globby('*/*', {
     cwd: pluginTemplatesDirectory,
     onlyDirectories: true
   })
-  return pluginTemplateNames
+  return result
 }
