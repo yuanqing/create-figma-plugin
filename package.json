@@ -22,7 +22,7 @@
     "website-build-docs": "yarn run generate-docs && lerna run build --scope website && cpy --cwd packages/website/build --parents '**/*' ../../../build",
     "website-build-storybook": "lerna run storybook-build --scope @create-figma-plugin/ui --stream && cpy --cwd packages/ui/build --parents '**/*' ../../../build/create-figma-plugin/storybook",
     "website-clean": "rm -rf build",
-    "website-deploy": "yarn run website-build && gh-pages --dist build",
+    "website-deploy": "yarn run website-build && gh-pages --dist build/create-figma-plugin",
     "website-serve": "sirv build --dev --host --port 4242"
   },
   "devDependencies": {
