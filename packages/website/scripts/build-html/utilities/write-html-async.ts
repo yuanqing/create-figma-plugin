@@ -20,8 +20,10 @@ export async function writeHtmlAsync(options: {
   outputDirectoryPath: string
   pages: Array<Page>
   urlPrefix: string
+  version: string
 }): Promise<void> {
-  const { data, htmlTemplate, outputDirectoryPath, pages, urlPrefix } = options
+  const { data, htmlTemplate, outputDirectoryPath, pages, urlPrefix, version } =
+    options
   for (const page of pages) {
     const previousPage = pages.find(function ({
       metadata: { order }
@@ -40,7 +42,8 @@ export async function writeHtmlAsync(options: {
       page,
       pages,
       previousPage: typeof previousPage === 'undefined' ? null : previousPage,
-      urlPrefix
+      urlPrefix,
+      version
     })
     const outputFilePath =
       page.metadata.order === 1
@@ -58,9 +61,18 @@ async function renderToHtmlAsync(options: {
   pages: Array<Page>
   previousPage: null | Page
   urlPrefix: string
+  version: string
 }): Promise<string> {
-  const { data, htmlTemplate, pages, page, previousPage, nextPage, urlPrefix } =
-    options
+  const {
+    data,
+    htmlTemplate,
+    pages,
+    page,
+    previousPage,
+    nextPage,
+    urlPrefix,
+    version
+  } = options
   const interpolatedData = {
     ...data,
     getPageUrlById: function (id: string) {
@@ -76,7 +88,8 @@ async function renderToHtmlAsync(options: {
     nextPage,
     pages,
     previousPage,
-    urlPrefix
+    urlPrefix,
+    version
   }
   const content = await renderMarkdownToHtmlAsync(
     lodashTemplate(page.content, { interpolate: /<%=([\s\S]+?)%>/g })(

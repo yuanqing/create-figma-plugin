@@ -7,18 +7,18 @@
   color: var(--color-addition-fg);
 }
 
+.language-json .hljs-comment {
+  color: var(--color-fg-3);
+}
 .language-json .hljs-attr {
   color: var(--color-accent-1);
-}
-.language-json .hljs-number,
-.language-json .hljs-keyword {
-  color: var(--color-fg-1);
 }
 .language-json .hljs-string {
   color: var(--color-accent-2);
 }
-.language-json .hljs-comment {
-  color: var(--color-fg-3);
+.language-json .hljs-number,
+.language-json .hljs-keyword {
+  color: var(--color-accent-3);
 }
 
 .language-ts .hljs-function,

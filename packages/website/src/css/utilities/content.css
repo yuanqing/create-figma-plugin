@@ -74,7 +74,7 @@
   padding-top: var(--space-075);
 }
 .content > h2 {
-  border-top: 1px solid var(--color-fg-4);
+  border-top: 1px solid var(--color-fg-5);
   margin: var(--space-400) 0 var(--space-150);
   font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
@@ -82,7 +82,7 @@
   line-height: 1.75rem;
 }
 .content > h3 {
-  border-top: 1px solid var(--color-fg-4);
+  border-top: 1px solid var(--color-fg-5);
   margin: var(--space-300) 0 var(--space-050);
   font-size: 1.25rem;
   font-weight: var(--font-weight-bold);

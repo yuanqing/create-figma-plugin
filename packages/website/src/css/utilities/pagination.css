@@ -1,7 +1,7 @@
 .pagination {
   display: flex;
   flex-direction: row;
-  border-top: 1px solid var(--color-fg-4);
+  border-top: 1px solid var(--color-fg-5);
   margin: var(--space-400) 0 var(--space-100);
   white-space: nowrap;
 }

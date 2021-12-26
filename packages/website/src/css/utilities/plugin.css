@@ -42,9 +42,6 @@
 .plugin__github a:hover {
   color: var(--color-fg-2);
 }
-.plugin__github a:after {
-  content: ' ↗';
-}
 
 .plugin__description {
   margin-top: var(--space-025);

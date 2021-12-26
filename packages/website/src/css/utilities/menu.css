@@ -28,6 +28,12 @@
   padding-left: var(--space-400);
 }
 
+.menu__version {
+  padding: var(--space-025) var(--space-100);
+  margin-top: var(--space-100);
+  color: var(--color-fg-4);
+}
+
 @media (max-width: 479px) {
   .menu {
     left: 0;
@@ -37,14 +43,14 @@
 @media (min-width: 480px) {
   .menu {
     width: 50%;
-    border-left: 1px solid var(--color-fg-4);
+    border-left: 1px solid var(--color-fg-5);
   }
 }
 
 @media (min-width: 760px) {
   .menu {
     width: 33%;
-    border-left: 1px solid var(--color-fg-4);
+    border-left: 1px solid var(--color-fg-5);
   }
 }
 
@@ -105,7 +111,7 @@
     );
     overflow: auto;
     width: var(--width-secondary);
-    border-left: 1px solid var(--color-fg-4);
+    border-left: 1px solid var(--color-fg-5);
   }
 
   .menu__toc li a {

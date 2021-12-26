@@ -12,6 +12,10 @@ async function main(): Promise<void> {
   try {
     const urlPrefix = process.argv[2]
     const rootDirectoryPath = resolve(__dirname, '..', '..')
+    const pageJsonFilePath = resolve(rootDirectoryPath, 'package.json')
+    const version = JSON.parse(
+      await fs.readFile(pageJsonFilePath, 'utf8')
+    ).version
     const dataDirectoryPath = resolve(rootDirectoryPath, 'data')
     const data = await readDataAsync([`${dataDirectoryPath}/*.json`])
     const pagesDirectoryPath = resolve(rootDirectoryPath, 'docs')
@@ -33,7 +37,8 @@ async function main(): Promise<void> {
       htmlTemplate,
       outputDirectoryPath,
       pages,
-      urlPrefix
+      urlPrefix,
+      version
     })
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
