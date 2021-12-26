@@ -3,8 +3,8 @@
   overflow: hidden;
   width: 1.25rem;
   height: 1.25rem;
+  background-color: #fff;
   border-radius: 50%;
-  /* background-color: #fff; */
   user-select: none;
 }
 .image--large {
