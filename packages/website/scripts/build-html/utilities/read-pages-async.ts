@@ -32,7 +32,7 @@ export async function readPagesAsync(
         id,
         order,
         title,
-        url: order === 1 ? `/${urlPrefix}/` : `/${urlPrefix}/${id}/`
+        url: order === 1 ? urlPrefix : `${urlPrefix}${id}/`
       },
       toc: await createMarkdownTocAsync(parsed.content)
     })

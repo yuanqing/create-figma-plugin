@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main(): Promise<void> {
   try {
-    const urlPrefix = process.argv[2]
+    const urlPrefix = `/${process.argv[2]}/`
     const rootDirectoryPath = resolve(__dirname, '..', '..')
     const pageJsonFilePath = resolve(rootDirectoryPath, 'package.json')
     const version = JSON.parse(
@@ -31,7 +31,11 @@ async function main(): Promise<void> {
       'template.html'
     )
     const htmlTemplate = await fs.readFile(templateFilePath, 'utf8')
-    const outputDirectoryPath = resolve(rootDirectoryPath, 'build', urlPrefix)
+    const outputDirectoryPath = resolve(
+      rootDirectoryPath,
+      'build',
+      process.argv[2]
+    )
     await writeHtmlAsync({
       data,
       htmlTemplate,

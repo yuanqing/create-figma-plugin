@@ -9,11 +9,19 @@
         <%- metadata.title %> &mdash; <%- globals.name %>
       <% } %>
     </title>
-    <meta property="og:title" content="<%- metadata.title %>">
-    <meta name="twitter:title" content="<%- metadata.title %>">
+    <meta name="description" content="<%- globals.description %>">
+    <% const shareImage = `${urlPrefix}media/share.png` %>
+    <% const title = metadata.order === 1 ? globals.name : `${metadata.title} — ${globals.name}` %>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="<%- globals.description %>">
+    <meta name="twitter:image" content="<%- shareImage %>">
+    <meta name="twitter:title" content="<%- title %>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/<%- urlPrefix %>/style.css" rel="stylesheet" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3E circle %7B fill: %23000; %7D @media (prefers-color-scheme: dark) %7B circle %7B fill: %23fff; %7D %7D %3C/style%3E%3Ccircle cx='50' cy='50' r='50' /%3E%3C/svg%3E%0A" />
+    <meta property="og:description" content="<%- globals.description %>">
+    <meta property="og:image" content="<%- shareImage %>">
+    <meta property="og:title" content="<%- title %>">
+    <link href="<%- urlPrefix %>style.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3E circle %7B fill: %23000; %7D @media (prefers-color-scheme: dark) %7B circle %7B fill: %23fff; %7D %7D %3C/style%3E%3Ccircle cx='50' cy='50' r='50' /%3E%3C/svg%3E%0A">
   </head>
   <body class="page">
     <div class="page__skip-to-content">
@@ -75,6 +83,13 @@
         </ul>
       </div>
     </main>
-    <script src="/<%- urlPrefix %>/script.js"></script>
+    <script src="<%- urlPrefix %>script.js"></script>
+    <script>
+      var sc_project = 12531644
+      var sc_invisible = 1
+      var sc_security = "95d0263e"
+    </script>
+    <script async src="https://www.statcounter.com/counter/counter.js"></script>
+    <noscript><img src="https://c.statcounter.com/12531644/0/95d0263e/1/" alt="" /></noscript>
   </body>
 </html>
