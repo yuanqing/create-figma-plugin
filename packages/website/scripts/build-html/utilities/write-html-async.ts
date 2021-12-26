@@ -105,6 +105,8 @@ async function renderToHtmlAsync(options: {
   })
   return htmlMinifier.minify(html, {
     collapseWhitespace: true,
+    minifyCSS: true,
+    minifyJS: true,
     removeComments: true,
     removeTagWhitespace: true
   })
