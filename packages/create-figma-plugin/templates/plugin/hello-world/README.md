@@ -44,5 +44,5 @@ To open the developer console, search for and run `Open Console` via the Quick A
 
 Official docs and code samples from Figma:
 
-- [Figma/FigJam plugin API docs](https://figma.com/plugin-docs/)
+- [Plugin API docs](https://figma.com/plugin-docs/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples#readme)

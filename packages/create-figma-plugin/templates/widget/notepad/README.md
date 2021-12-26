@@ -44,5 +44,5 @@ To open the developer console, search for and run `Open Console` via the Quick A
 
 Official docs and code samples from Figma:
 
-- [FigJam widget API docs](https://figma.com/widget-docs/)
+- [Widget API docs](https://figma.com/widget-docs/)
 - [`figma/widget-samples`](https://github.com/figma/widget-samples#readme)
