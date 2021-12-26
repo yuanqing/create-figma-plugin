@@ -9,13 +9,13 @@ title: UI
 
 `@create-figma-plugin/ui` is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma/FigJam editor’s UI design.
 
-[![UI components from `@create-figma-plugin/ui`: Button, File Upload Dropzone, Textbox Numeric, Textbox Autocomplete, Checkbox, Selectable Item, Segmented Control](/create-figma-plugin/media/ui-figma-components.png)](/create-figma-plugin/storybook/)
+[![UI components from `@create-figma-plugin/ui`: Button, File Upload Dropzone, Textbox Numeric, Textbox Autocomplete, Checkbox, Selectable Item, Segmented Control](<%- urlPrefix %>media/ui-figma-components.png)](<%- urlPrefix %>storybook/)
 
-See the [full library of components in the Storybook](/create-figma-plugin/storybook/).
+See the [full library of components in the Storybook](<%- urlPrefix %>storybook/).
 
 The component library ships with two themes, one for Figma and one for FigJam. Components will automatically render using the Figma theme if the UI is launched from a Figma plugin, and the FigJam theme if the UI is launched from a FigJam plugin/widget.
 
-![UI of the Insert Big Image plugin rendered using the Figma and FigJam themes](/create-figma-plugin/media/ui-themes.png)
+![UI of the Insert Big Image plugin rendered using the Figma and FigJam themes](<%- urlPrefix %>media/ui-themes.png)
 
 To install, do:
 
@@ -83,9 +83,9 @@ Finally, in `package.json`, point to our UI file on the [**`"ui"`**](<%- getPage
 
 When we rebuild our plugin and run it, we’ll see:
 
-![Figma plugin UI modal with “Hello, World” text](/create-figma-plugin/media/ui-hello-world-figma.png)
+![Figma plugin UI modal with “Hello, World” text](<%- urlPrefix %>media/ui-hello-world-figma.png)
 
-See the [Storybook](/create-figma-plugin/storybook/) for the full library of Preact components, and the [recipe for passing data between the plugin/widget’s main and UI contexts](<%- getPageUrlById('recipes') %>#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
+See the [Storybook](<%- urlPrefix %>storybook/) for the full library of Preact components, and the [recipe for passing data between the plugin/widget’s main and UI contexts](<%- getPageUrlById('recipes') %>#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
 
 ## Using React
 

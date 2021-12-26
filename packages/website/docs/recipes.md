@@ -107,7 +107,7 @@ See that:
 
 The above configuration would result in the following:
 
-![“Flatten Selection to Bitmap” plugin sub-menu](/create-figma-plugin/media/multiple-commands.png)
+![“Flatten Selection to Bitmap” plugin sub-menu](<%- urlPrefix %>media/multiple-commands.png)
 
 See the other [configuration options](<%- getPageUrlById('configuration') %>#configuration-options).
 
@@ -170,7 +170,7 @@ The second argument passed to `setRelaunchButton` must be a particular `relaunch
 
 This would result in the following:
 
-![“Organize Layers” relaunch button](/create-figma-plugin/media/relaunch-button.png)
+![“Organize Layers” relaunch button](<%- urlPrefix %>media/relaunch-button.png)
 
 To show additional text below the relaunch button, pass a third argument to `setRelaunchButton`:
 
