@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.2
+
+- Revamped the [documentation website](https://yuanqing.github.io/create-figma-plugin/)
+- Bumped dependencies in all packages
+
 ## 1.8.1
 
 - `create-figma-plugin`
@@ -315,7 +320,7 @@
 
 ### `@create-figma-plugin/ui@1`
 
-- There are *many* breaking changes and new features. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Otherwise, refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/ui/), or see below for a detailed breakdown of all component changes.
+- There are *many* breaking changes and new features. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Otherwise, refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/storybook/), or see below for a detailed breakdown of all component changes.
 
 - One of the most significant changes is that the `onChange` prop of all components now has the signature `(event: JSX.TargetedEvent<HTMLInputElement>) => void`. See the before and after, using the `Checkbox` component as an example:
 
