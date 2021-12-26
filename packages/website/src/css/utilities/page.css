@@ -14,6 +14,8 @@
 }
 
 .page__main {
+  position: relative;
+  z-index: var(--z-index-1);
   font-size: var(--font-size-md);
   line-height: var(--line-height-md);
 }
@@ -29,17 +31,10 @@
   }
 }
 
-@media (max-width: 959px) {
-  .page__main {
-    position: relative;
-    z-index: var(--z-index-1);
-  }
-}
-
 @media (min-width: 960px) {
   .page__header {
     position: fixed;
-    z-index: var(--z-index-1);
+    z-index: var(--z-index-2);
     top: 0;
     bottom: 0;
     left: 0;
