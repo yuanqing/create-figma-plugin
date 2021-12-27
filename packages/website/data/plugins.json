@@ -266,6 +266,18 @@
   {
     "authors": [
       {
+        "name": "Frad Lee",
+        "url": "https://twitter.com/FradSer"
+      }
+    ],
+    "description": "Increase the spacing at the four edges of the frame, centering the original content",
+    "githubUrl": null,
+    "id": "1054060403452308301",
+    "name": "Frame Resizer"
+  },
+  {
+    "authors": [
+      {
         "name": "ShuaiQi Sun",
         "url": "https://twitter.com/SShuaiqi"
       }
@@ -534,6 +546,18 @@
     "githubUrl": null,
     "id": "940631928923964752",
     "name": "RTL PLZ Reverse"
+  },
+  {
+    "authors": [
+      {
+        "name": "LaMoore",
+        "url": "https://figma.com/@la_moore"
+      }
+    ],
+    "description": "More than 2800 custom icons available for you, organized and for free",
+    "githubUrl": null,
+    "id": "1053846082213772972",
+    "name": "Scarlab Icons"
   },
   {
     "authors": [
