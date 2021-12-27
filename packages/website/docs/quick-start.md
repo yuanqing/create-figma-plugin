@@ -138,3 +138,8 @@ Official docs and code samples from Figma:
 - [Widget API docs](https://figma.com/widget-docs/)
 - [`figma/plugin-samples`](https://github.com/figma/plugin-samples#readme)
 - [`figma/widget-samples`](https://github.com/figma/widget-samples#readme)
+
+Community:
+
+- [Figma Plugins Slack](https://figmaplugins.slack.com/join/shared_invite/zt-wxiou90z-uvQxCXD5eIOrP9fw2B0bPw)
+- [Twitter List: Figma Society](https://twitter.com/i/lists/1426096037383581697)
