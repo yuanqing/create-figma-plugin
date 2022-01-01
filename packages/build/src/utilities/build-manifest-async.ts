@@ -20,23 +20,23 @@ import {
 export async function buildManifestAsync(minify: boolean): Promise<void> {
   const config = await readConfigAsync()
   const {
+    api,
     build,
+    commandId,
+    containsWidget,
+    editorType,
     enablePrivatePluginApi,
     enableProposedApi,
-    name,
-    commandId,
-    main,
-    ui,
-    menu,
-    relaunchButtons,
-    parameters,
-    parameterOnly,
-    api,
-    permissions,
-    editorType,
     id,
-    widgetApi,
-    containsWidget
+    main,
+    menu,
+    name,
+    parameterOnly,
+    parameters,
+    permissions,
+    relaunchButtons,
+    ui,
+    widgetApi
   } = config
   const command = { commandId, main, menu, name, parameterOnly, parameters, ui }
   if (hasBundle(command, 'main') === false) {
