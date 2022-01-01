@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { Argv } from 'mri'
 import sade from 'sade'
 
 import { createFigmaPluginAsync } from './create-figma-plugin-async.js'
@@ -6,9 +7,9 @@ import { createFigmaPluginAsync } from './create-figma-plugin-async.js'
 sade('create-figma-plugin [name]', true)
   .describe('Initialize a new Figma/FigJam plugin using a template')
   .option('-t, --template', 'The name of the template to use')
-  .action(async function (
-    name: undefined | string,
-    options: { template?: string }
+  .action<[string]>(async function (
+    name: string,
+    options: Argv<{ template?: string }>
   ): Promise<void> {
     await createFigmaPluginAsync({
       name,
