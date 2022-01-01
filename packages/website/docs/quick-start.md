@@ -1,6 +1,8 @@
 ---
-order: 2
-title: Quick start
+{
+  "order": 2,
+  "title": "Quick start"
+}
 ---
 
 # Quick start
@@ -19,9 +21,9 @@ $ npx --yes create-figma-plugin
 You’ll then be prompted to select from the following templates:
 
 - [`plugin/hello-world`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/hello-world) — A plugin without a UI.
-- [`plugin/preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-rectangles) — A plugin with a UI built using [Create Figma Plugin’s Preact component library](<%- getPageUrlById('ui') %>#using-the-preact-component-library).
-- [`plugin/preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-resizable) — A plugin with a [resizable UI window](<%- getPageUrlById('ui') %>#making-the-pluginwidget-ui-window-resizable).
-- [`plugin/react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) — A plugin with a UI that [uses a React component](<%- getPageUrlById('ui') %>#using-react).
+- [`plugin/preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-rectangles) — A plugin with a UI built using [Create Figma Plugin’s Preact component library](<%- query('page', 'ui').url %>#using-the-preact-component-library).
+- [`plugin/preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-resizable) — A plugin with a [resizable UI window](<%- query('page', 'ui').url %>#making-the-pluginwidget-ui-window-resizable).
+- [`plugin/react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) — A plugin with a UI that [uses a React component](<%- query('page', 'ui').url %>#using-react).
 - [`widget/notepad`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/widget/notepad) — A FigJam widget with a UI.
 
 ## Configuring the plugin/widget
@@ -49,8 +51,8 @@ A Figma plugin (eg. [`plugin/preact-rectangles`](https://github.com/yuanqing/cre
 
 See that:
 
-- [**`"main"`**](<%- getPageUrlById('configuration') %>#main) is set to `src/main.ts`, which is the main entry point for the plugin.
-- [**`"ui"`**](<%- getPageUrlById('configuration') %>#ui) is set to `src/ui.tsx`, which is the plugin’s [UI implementation](<%- getPageUrlById('ui') %>).
+- [**`"main"`**](<%- query('page', 'configuration').url %>#main) is set to `src/main.ts`, which is the main entry point for the plugin.
+- [**`"ui"`**](<%- query('page', 'configuration').url %>#ui) is set to `src/ui.tsx`, which is the plugin’s [UI implementation](<%- query('page', 'ui').url %>).
 
 A FigJam widget (eg. [`widget/notepad`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/widget/notepad)) would be configured as follows:
 
@@ -71,10 +73,10 @@ A FigJam widget (eg. [`widget/notepad`](https://github.com/yuanqing/create-figma
 
 Because this is a FigJam widget, see that:
 
-- [**`"editorType"`**](<%- getPageUrlById('configuration') %>#editortype) is set to `figjam`.
-- [**`"containsWidget"`**](<%- getPageUrlById('configuration') %>#containswidget) is set to `true`.
+- [**`"editorType"`**](<%- query('page', 'configuration').url %>#editortype) is set to `figjam`.
+- [**`"containsWidget"`**](<%- query('page', 'configuration').url %>#containswidget) is set to `true`.
 
-See all the supported [configuration options](<%- getPageUrlById('configuration') %>#configuration-options).
+See all the supported [configuration options](<%- query('page', 'configuration').url %>#configuration-options).
 
 ## Building the plugin/widget
 
@@ -125,11 +127,11 @@ To open the developer console, search for and run `Open Console` via the Quick A
 - [Publishing a plugin](https://help.figma.com/hc/en-us/articles/360042293394-Publish-plugins-to-the-Figma-Community)
 - [Publishing a widget](https://help.figma.com/hc/en-us/articles/4410337103639-Publish-widgets-to-the-Figma-Community)
 
-Figma will generate a unique ID for you when you first try to publish your plugin/widget. Copy and paste that ID into the **`"figma-plugin"`** configuration (under the [**`"id"`**](<%- getPageUrlById('configuration') %>#id) key), then run the `build` script again to regenerate the plugin/widget’s `manifest.json` file.
+Figma will generate a unique ID for you when you first try to publish your plugin/widget. Copy and paste that ID into the **`"figma-plugin"`** configuration (under the [**`"id"`**](<%- query('page', 'configuration').url %>#id) key), then run the `build` script again to regenerate the plugin/widget’s `manifest.json` file.
 
 ## See also
 
-- [Reference plugins/widgets](<%- getPageUrlById('reference-plugins-and-widgets') %>)
+- [Reference plugins/widgets](<%- query('page', 'reference-plugins-and-widgets').url %>)
 - [`yuanqing/figma-plugins`](https://github.com/yuanqing/figma-plugins#readme)
 
 Official docs and code samples from Figma:

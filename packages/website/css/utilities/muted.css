@@ -1,0 +1,5 @@
+.muted {
+  color: var(--color-gray-4);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}

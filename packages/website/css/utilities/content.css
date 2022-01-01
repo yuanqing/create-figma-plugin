@@ -1,0 +1,169 @@
+.content > :not(pre) {
+  overflow-wrap: break-word;
+}
+
+.content > blockquote,
+.content > p,
+.content > pre,
+.content > ul,
+.content > ol,
+.content > table {
+  margin-top: var(--space-100);
+}
+
+.content > pre {
+  background-color: var(--color-gray-1);
+  border-radius: var(--border-radius);
+}
+.content > pre code {
+  display: block;
+  padding: var(--space-100) var(--space-100) var(--space-100) var(--space-150);
+  overflow-x: auto;
+}
+
+.content > blockquote code,
+.content > p code,
+.content > pre code,
+.content > ul code,
+.content > ol code,
+.content > table code {
+  color: var(--color-gray-5);
+}
+
+.content > ol {
+  counter-reset: count;
+}
+
+.content > ul li,
+.content > ol li {
+  position: relative;
+  padding-left: var(--space-150);
+}
+.content > ol li {
+  counter-increment: count;
+}
+
+.content > ul li:before,
+.content > ol li:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  color: var(--color-gray-4);
+}
+.content > ul li:before {
+  content: '◦';
+}
+.content > ol li:before {
+  content: counter(count);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-code);
+  font-variant-numeric: tabular-nums;
+}
+
+.content > h1 {
+  margin: var(--space-400) 0;
+  font-size: 2.125rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.0625rem;
+  line-height: 2.25rem;
+}
+.content > h2,
+.content > h3,
+.content > h4 {
+  padding-top: var(--space-075);
+}
+.content > h2 {
+  border-top: 1px solid var(--color-gray-2);
+  margin: var(--space-400) 0 var(--space-150);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03125rem;
+  line-height: 1.75rem;
+}
+.content > h3 {
+  border-top: 1px solid var(--color-gray-2);
+  margin: var(--space-300) 0 var(--space-050);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03125rem;
+  line-height: 1.5rem;
+}
+.content > h4 {
+  margin: var(--space-200) 0 var(--space-050);
+  color: var(--color-gray-5);
+  font-size: 1.125rem;
+  font-style: italic;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5rem;
+}
+
+.header-link {
+  display: inline-block;
+  padding: 0 var(--space-050);
+  color: var(--color-gray-4);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  user-select: none;
+}
+.header-link:hover {
+  color: var(--color-gray-5);
+}
+
+h4 .header-link {
+  font-style: normal;
+}
+
+.content > p img {
+  display: inline-block;
+  max-width: 100%;
+}
+
+@media (min-width: 960px) {
+  .content > h1,
+  .content > h2,
+  .content > h3,
+  .content > h4 {
+    position: relative;
+  }
+  .content > h1 {
+    margin-top: calc(var(--space-200) + 0.0625rem);
+  }
+  .content > h2,
+  .content > h3 {
+    scroll-margin-top: var(--space-250);
+  }
+  .content > h4 {
+    scroll-margin-top: var(--space-150);
+  }
+  .header-link {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    display: block;
+    padding: var(--space-075) var(--space-100) 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .content > h2,
+  .content > h3 {
+    scroll-margin-top: var(--space-300);
+  }
+  .content > h4 {
+    scroll-margin-top: var(--space-200);
+  }
+}
+
+@media (hover: hover) {
+  .header-link {
+    opacity: 0;
+  }
+  h1:hover .header-link,
+  h2:hover .header-link,
+  h3:hover .header-link,
+  h4:hover .header-link {
+    opacity: 1;
+  }
+}

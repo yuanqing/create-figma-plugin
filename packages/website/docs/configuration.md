@@ -1,6 +1,8 @@
 ---
-order: 3
-title: Configuration
+{
+  "order": 3,
+  "title": "Configuration"
+}
 ---
 
 # Configuration
@@ -93,7 +95,7 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 }
 ```
 
-Learn how to [add a UI to a plugin command](<%- getPageUrlById('ui') %>).
+Learn how to [add a UI to a plugin command](<%- query('page', 'ui').url %>).
 
 ### `parameters`
 
@@ -159,7 +161,7 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
 }
 ```
 
-See the [recipe for specifying multiple commands in the plugin sub-menu](<%- getPageUrlById('recipes') %>#specifying-multiple-commands-in-the-plugin-sub-menu).
+See the [recipe for specifying multiple commands in the plugin sub-menu](<%- query('page', 'recipes').url %>#specifying-multiple-commands-in-the-plugin-sub-menu).
 
 ### `relaunchButtons`
 
@@ -202,7 +204,7 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](<%- get
 }
 ```
 
-See the [recipe for configuring relaunch buttons](<%- getPageUrlById('recipes') %>#configuring-relaunch-buttons).
+See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').url %>#configuring-relaunch-buttons).
 
 ### `permissions`
 

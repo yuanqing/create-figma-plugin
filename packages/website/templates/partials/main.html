@@ -1,0 +1,17 @@
+<main role="main" class="page__main">
+  <div class="page__main-inner">
+    <div class="content" id="content">
+      <%= content %>
+    </div>
+    <ul class="pagination">
+      <% const previous = getPrevious() %>
+      <% if (previous !== null) { %>
+        <li class="pagination__previous"><a href="<%- previous.url %>"><%- previous.title %></a></li>
+      <% } %>
+      <% const next = getNext() %>
+      <% if (next !== null) { %>
+        <li class="pagination__next"><a href="<%- next.url %>"><%- next.title %></a></li>
+      <% } %>
+    </ul>
+  </div>
+</main>

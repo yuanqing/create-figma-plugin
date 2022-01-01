@@ -1,0 +1,41 @@
+<header class="page__header">
+  <h1 class="title">
+    <% if (order === 1) { %>
+      <span><%- globals.name %></span>
+    <% } else { %>
+      <a href="<%- query('page')[0].url %>"><%- globals.name %></a>
+    <% } %>
+  </h1>
+  <button class="menu-toggle-button" aria-expanded="false">
+    <div class="menu-toggle-button__inner">
+      Toggle menu
+    </div>
+  </button>
+  <nav class="menu">
+    <ul>
+      <% for (const page of query('page')) { %>
+        <% if (page.url === url) { %>
+          <li>
+            <a href="<%- page.url %>" class="menu__active"><%- page.title %></a>
+            <div class="menu__toc">
+              <%= toc %>
+            </div>
+          </li>
+        <% } else { %>
+          <li><a href="<%- page.url %>"><%- page.title %></a></li>
+        <% } %>
+      <% } %>
+    </ul>
+    <ul>
+      <% for (const link of globals.links) { %>
+        <li><a href="<%- link.url %>" target="_blank"><%- link.title %></a></li>
+      <% } %>
+    </ul>
+    <ul>
+      <% for (const link of globals.externalLinks) { %>
+        <li><a href="<%- link.url %>" target="_blank"><%- link.title %></a></li>
+      <% } %>
+    </ul>
+    <div class="menu__version">v<%- version %></div>
+  </nav>
+</header>

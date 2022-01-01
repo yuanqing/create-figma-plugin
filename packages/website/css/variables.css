@@ -1,0 +1,47 @@
+:root {
+  --base-font-size-sm: 15px;
+  --base-font-size-md: 16px;
+  --base-font-size-lg: 18px;
+  --base-font-size-xl: 20px;
+  --border-radius: 0.25rem;
+  --color-black: #000;
+  --color-gray-1: #171717; /* 91% */
+  --color-gray-2: #333; /* 80% */
+  --color-gray-3: #4d4d4d; /* 70% */
+  --color-gray-4: #808080; /* 50% */
+  --color-gray-5: #bababa; /* 27% */
+  --color-white: #fff;
+  --color-accent-1: #a3d9fd;
+  --color-accent-2: #d5b7ff;
+  --color-accent-3: #f5f1bf;
+  --color-addition-fg: #aff5b4;
+  --color-addition-bg: #033a16;
+  --color-deletion-fg: #ffdcd7;
+  --color-deletion-bg: #67060c;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-family-code: SFMono-Regular, Consolas, 'Liberation Mono', Menlo,
+    monospace;
+  --font-weight-regular: normal;
+  --font-weight-bold: bold;
+  --font-size-code: 90%;
+  --font-size-sm: 0.8rem;
+  --font-size-md: 1rem;
+  --line-height-sm: 1.25rem;
+  --line-height-md: 1.75rem;
+  --space-025: 0.25rem;
+  --space-050: 0.5rem;
+  --space-075: 0.75rem;
+  --space-100: 1rem;
+  --space-150: 1.5rem;
+  --space-200: 2rem;
+  --space-250: 2.5rem;
+  --space-300: 3rem;
+  --space-400: 4rem;
+  --space-500: 5rem;
+  --width-main: 40rem;
+  --width-secondary: 14rem;
+  --z-index-1: 1;
+  --z-index-2: 2;
+  --z-index-3: 3;
+}

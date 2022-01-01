@@ -4,7 +4,7 @@
  * via [`options`](https://figma.com/plugin-docs/api/properties/figma-showui/).
  * Optionally pass on some initialising `data` from the command to the UI.
  *
- * Learn how to [add a UI to your plugin/widget](<%- getPageUrlById('ui') %>).
+ * Learn how to [add a UI to your plugin/widget](<%- query('page', 'ui').url %>).
  *
  * @category UI
  */

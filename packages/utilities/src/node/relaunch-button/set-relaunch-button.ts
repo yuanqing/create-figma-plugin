@@ -6,10 +6,10 @@ import {
 /**
  * Sets a [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
  * on `node` for the command with the given `relaunchButtonId` as configured
- * under the [**`"relaunchButtons"`**](<%- getPageUrlById('configuration') %>#relaunchbuttons) key in `package.json`.
+ * under the [**`"relaunchButtons"`**](<%- query('page', 'configuration').url %>#relaunchbuttons) key in `package.json`.
  * Any relaunch buttons set previously will be retained.
  *
- * See the [recipe for configuring relaunch buttons](<%- getPageUrlById('recipes') %>#configuring-relaunch-buttons).
+ * See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').url %>#configuring-relaunch-buttons).
  *
  * @param options.description  The text to display below the relaunch button
  * in the Figma UI.

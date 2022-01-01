@@ -1,0 +1,18 @@
+.button a {
+  display: block;
+  padding: var(--space-100);
+  border: 1px solid var(--color-gray-4);
+  margin-top: var(--space-200);
+  border-radius: var(--border-radius);
+  color: var(--color-white);
+  text-align: center;
+  user-select: none;
+}
+.button a:hover {
+  border-color: transparent;
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+.button a:after {
+  content: ' →';
+}

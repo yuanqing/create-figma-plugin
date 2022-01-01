@@ -1,0 +1,44 @@
+.content > blockquote a,
+.content > p a,
+.content > pre a,
+.content > ul a,
+.content > ol a,
+.content > table a,
+.emoji-list-item a,
+.featured-plugin a,
+.plugin__name a,
+.tweet__text a {
+  color: currentColor;
+  text-decoration: underline;
+  text-decoration-color: var(--color-gray-4);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
+}
+
+.content > blockquote a:hover,
+.content > p a:hover,
+.content > pre a:hover,
+.content > ul a:hover,
+.content > ol a:hover,
+.content > table a:hover,
+.emoji-list-item a:hover,
+.featured-plugin a:hover,
+.plugin__name a:hover,
+.tweet__text a:hover {
+  text-decoration: none;
+}
+
+@media (min-width: 960px) {
+  .content > blockquote a,
+  .content > p a,
+  .content > pre a,
+  .content > ul a,
+  .content > ol a,
+  .content > table a,
+  .emoji-list-item a,
+  .featured-plugin a,
+  .plugin__name a,
+  .tweet__text a {
+    text-underline-offset: 2px;
+  }
+}

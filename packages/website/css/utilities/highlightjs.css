@@ -1,0 +1,45 @@
+.language-diff .hljs-deletion {
+  background-color: var(--color-deletion-bg);
+  color: var(--color-deletion-fg);
+}
+.language-diff .hljs-addition {
+  background-color: var(--color-addition-bg);
+  color: var(--color-addition-fg);
+}
+
+.language-json .hljs-comment {
+  color: var(--color-gray-4);
+}
+.language-json .hljs-attr {
+  color: var(--color-accent-1);
+}
+.language-json .hljs-string {
+  color: var(--color-accent-2);
+}
+.language-json .hljs-number,
+.language-json .hljs-keyword {
+  color: var(--color-accent-3);
+}
+
+.language-ts .hljs-function,
+.language-ts .hljs-class,
+.language-ts .xml .hljs-name,
+.language-ts .xml .hljs-string {
+  color: var(--color-white);
+}
+.language-ts .hljs-params,
+.language-ts .hljs-attr {
+  color: var(--color-gray-5);
+}
+.language-ts .hljs-comment {
+  color: var(--color-gray-4);
+}
+.language-ts .hljs-keyword {
+  color: var(--color-accent-1);
+}
+.language-ts .hljs-string {
+  color: var(--color-accent-2);
+}
+.language-ts .hljs-number {
+  color: var(--color-accent-3);
+}

@@ -1,17 +1,19 @@
 ---
-order: 6
-title: Recipes
+{
+  "order": 6,
+  "title": "Recipes"
+}
 ---
 
 # Recipes
 
 ## Passing data between the plugin/widget’s main and UI contexts
 
-The [`@create-figma-plugin/utilities`](<%- getPageUrlById('utilities') %>) library includes 3 functions to facilitate data passing (in both directions) between the plugin/widget’s [main and UI contexts](https://figma.com/plugin-docs/how-plugins-run/):
+The [`@create-figma-plugin/utilities`](<%- query('page', 'utilities').url %>) library includes 3 functions to facilitate data passing (in both directions) between the plugin/widget’s [main and UI contexts](https://figma.com/plugin-docs/how-plugins-run/):
 
-- [`on(name, handler)`](<%- getPageUrlById('utilities') %>#onhandlername-handler) — Registers an event `handler` for the given event `name`.
-- [`once(name, handler)`](<%- getPageUrlById('utilities') %>#oncehandlername-handler) — Ditto `on`, only that `handler` will run at most once.
-- [`emit(name, ...args)`](<%- getPageUrlById('utilities') %>#emithandlername-args) — Calling `emit` in the main context invokes the event handler for the matching event `name` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching event `name` in the main context. All `args` passed after `name` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
+- [`on(name, handler)`](<%- query('page', 'utilities').url %>#onhandlername-handler) — Registers an event `handler` for the given event `name`.
+- [`once(name, handler)`](<%- query('page', 'utilities').url %>#oncehandlername-handler) — Ditto `on`, only that `handler` will run at most once.
+- [`emit(name, ...args)`](<%- query('page', 'utilities').url %>#emithandlername-args) — Calling `emit` in the main context invokes the event handler for the matching event `name` in your UI. Correspondingly, calling `emit` in your UI invokes the event handler for the matching event `name` in the main context. All `args` passed after `name` will be directly [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) on the event handler.
 
 Consider a toy Figma plugin:
 
@@ -68,7 +70,7 @@ See that:
 
 *This is applicable to Figma/FigJam plugins only.*
 
-Menu commands are specified on the [**`"menu"`**](<%- getPageUrlById('configuration') %>#menu) key under **`"figma-plugin"`**:
+Menu commands are specified on the [**`"menu"`**](<%- query('page', 'configuration').url %>#menu) key under **`"figma-plugin"`**:
 
 ```diff
   {
@@ -107,15 +109,15 @@ See that:
 
 The above configuration would result in the following:
 
-![“Flatten Selection to Bitmap” plugin sub-menu](<%- urlPrefix %>media/multiple-commands.png)
+![“Flatten Selection to Bitmap” plugin sub-menu](<%- media['multiple-commands'] %>)
 
-See the other [configuration options](<%- getPageUrlById('configuration') %>#configuration-options).
+See the other [configuration options](<%- query('page', 'configuration').url %>#configuration-options).
 
 ## Configuring relaunch buttons
 
 *Relaunch buttons are applicable to Figma plugins only.*
 
-[Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](<%- getPageUrlById('configuration') %>#relaunchbuttons) key under **`"figma-plugin"`**:
+[Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](<%- query('page', 'configuration').url %>#relaunchbuttons) key under **`"figma-plugin"`**:
 
 ```diff
   {
@@ -150,7 +152,7 @@ See that:
 - **`"organizeLayers"`** is the `relaunchButtonId`.
 - The object corresponding to **`"organizeLayers"`** specifies the command that runs when the relaunch button is clicked.
 
-Then, call [`setRelaunchButton`](<%- getPageUrlById('utilities') %>#setrelaunchbuttonnode-relaunchbuttonid--options) in our plugin command’s main entry point:
+Then, call [`setRelaunchButton`](<%- query('page', 'utilities').url %>#setrelaunchbuttonnode-relaunchbuttonid--options) in our plugin command’s main entry point:
 
 ```ts
 // src/organize-layers/main.js
@@ -170,7 +172,7 @@ The second argument passed to `setRelaunchButton` must be a particular `relaunch
 
 This would result in the following:
 
-![“Organize Layers” relaunch button](<%- urlPrefix %>media/relaunch-button.png)
+![“Organize Layers” relaunch button](media['relaunch-button'])
 
 To show additional text below the relaunch button, pass a third argument to `setRelaunchButton`:
 
@@ -238,7 +240,7 @@ The plugin/widget UI window is *not* resizable by default; this must be implemen
 1. Listening to click-and-drag events in the UI window, and calculating an updated window size based on the mouse position.
 2. Calling [`figma.ui.resize`](https://figma.com/plugin-docs/api/figma-ui/#resize) with the updated window size.
 
-[`@create-figma-plugin/ui`](<%- getPageUrlById('ui') %>#using-the-preact-component-library) includes a `useWindowResize` hook that makes it easier to implement a resizable UI window:
+[`@create-figma-plugin/ui`](<%- query('page', 'ui').url %>#using-the-preact-component-library) includes a `useWindowResize` hook that makes it easier to implement a resizable UI window:
 
 ```ts
 // src/ui.tsx

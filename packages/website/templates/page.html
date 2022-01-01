@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= include('head') %>
+  <body class="page">
+    <div class="page__skip-to-content">
+      <a href="#content">Skip to content</a>
+    </div>
+    <%= include('header') %>
+    <%= include('main') %>
+    <script src="<%- jsUrl %>"></script>
+    <%= include('analytics') %>
+  </body>
+</html>

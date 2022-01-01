@@ -1,0 +1,122 @@
+.menu > ul + ul {
+  margin-top: var(--space-100);
+}
+
+.menu ul a,
+.menu__version {
+  padding: var(--space-050) var(--space-100);
+}
+
+.menu ul a {
+  display: block;
+  color: var(--color-gray-4);
+}
+.menu ul a:not(.menu__active):hover {
+  color: var(--color-gray-5);
+}
+.menu ul .menu__active {
+  color: var(--color-white);
+}
+
+.menu ul a[target='_blank']:after {
+  content: ' ↗';
+}
+
+.menu__toc li a {
+  padding-left: var(--space-200);
+}
+.menu__toc li li a {
+  padding-left: var(--space-300);
+}
+.menu__toc li li li a {
+  padding-left: var(--space-400);
+}
+
+.menu__version {
+  margin-top: var(--space-100);
+  color: var(--color-gray-3);
+}
+
+@media (max-width: 959px) {
+  .--menu-visible {
+    overflow: hidden;
+  }
+
+  .menu {
+    position: fixed;
+    z-index: var(--z-index-2);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    padding: var(--space-200) 0;
+    background-color: var(--color-black);
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    overflow-y: auto;
+  }
+  .--menu-visible .menu {
+    display: block;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 959px) {
+  .menu {
+    left: auto;
+    width: 50%;
+    border-left: 1px solid var(--color-gray-2);
+  }
+}
+
+@media (min-width: 760px) and (max-width: 959px) {
+  .menu {
+    width: 33%;
+  }
+}
+
+@media (min-width: 960px) {
+  .menu {
+    width: var(--width-secondary);
+    margin-top: calc(var(--space-050));
+    margin-bottom: var(--space-200);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+  }
+
+  .menu ul a,
+  .menu__version {
+    padding-top: var(--space-025);
+    padding-bottom: var(--space-025);
+  }
+}
+
+@media (min-width: 1400px) {
+  .menu__toc {
+    position: fixed;
+    top: var(--space-200);
+    bottom: var(--space-200);
+    left: calc(
+      var(--width-secondary) +
+        (
+          (
+              100% - var(--width-secondary) - var(--width-secondary) -
+                var(--width-main)
+            ) / 2
+        ) + var(--width-main) + var(--space-100)
+    );
+    overflow: auto;
+    width: var(--width-secondary);
+    border-left: 1px solid var(--color-gray-2);
+  }
+
+  .menu__toc li a {
+    padding-left: var(--space-100);
+  }
+  .menu__toc li li a {
+    padding-left: var(--space-200);
+  }
+  .menu__toc li li li a {
+    padding-left: var(--space-300);
+  }
+}
