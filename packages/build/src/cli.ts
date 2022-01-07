@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import { log } from '@create-figma-plugin/common'
-import { Argv } from 'mri'
 import sade from 'sade'
 
 import { buildAsync } from './build-async.js'
@@ -12,13 +11,11 @@ sade('build-figma-plugin', true)
   .option('-m, --minify', 'Minify the plugin bundle', false)
   .option('-t, --typecheck', 'Type check the plugin code before build', false)
   .option('-w, --watch', 'Rebuild the plugin on code changes', false)
-  .action(async function (
-    options: Argv<{
-      minify?: boolean
-      typecheck?: boolean
-      watch?: boolean
-    }>
-  ): Promise<void> {
+  .action(async function (options: {
+    minify: boolean
+    typecheck: boolean
+    watch: boolean
+  }): Promise<void> {
     const buildOptions: BuildOptions = {
       minify: options.minify === true,
       typecheck: options.typecheck === true

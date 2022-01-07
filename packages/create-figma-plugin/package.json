@@ -42,10 +42,9 @@
     "inquirer": "^8.2.0",
     "is-utf8": "^0.2.1",
     "lodash.template": "^4.5.0",
-    "mri": "^1.1.0",
     "package-json": "^7.0.0",
     "param-case": "^3.0.4",
-    "sade": "^1.8.0",
+    "sade": "^1.8.1",
     "semver": "^7.3.5",
     "title-case": "^3.0.3"
   },
