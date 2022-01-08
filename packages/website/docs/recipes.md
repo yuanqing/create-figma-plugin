@@ -34,7 +34,7 @@ export default function () {
 }
 ```
 
-```ts
+```tsx
 // src/ui.tsx
 
 import { render, Button } from '@create-figma-plugin/ui'
@@ -72,32 +72,32 @@ See that:
 
 Menu commands are specified on the [**`"menu"`**](<%- query('page', 'configuration').url %>#menu) key under **`"figma-plugin"`**:
 
-```diff
-  {
-    "figma-plugin": {
-      "id": "837846252158418235",
-      "name": "Flatten Selection to Bitmap",
-+     "menu": [
-+        {
-+          "name": "Flatten Selection to Bitmap",
-+          "main": "src/flatten-selection-to-bitmap/main.ts",
-+          "ui": "src/flatten-selection-to-bitmap/ui.ts"
-+        },
-+        "-",
-+        {
-+          "name": "Settings",
-+          "main": "src/settings/main.ts",
-+          "parameters": [
-+            {
-+              "key": "resolution",
-+              "description": "Enter a bitmap resolution"
-+            }
-+          ]
-+        }
-+      ]
-+    }
+```json {5-22}
+{
+  "figma-plugin": {
+    "id": "837846252158418235",
+    "name": "Flatten Selection to Bitmap",
+    "menu": [
+        {
+          "name": "Flatten Selection to Bitmap",
+          "main": "src/flatten-selection-to-bitmap/main.ts",
+          "ui": "src/flatten-selection-to-bitmap/ui.ts"
+        },
+        "-",
+        {
+          "name": "Settings",
+          "main": "src/settings/main.ts",
+          "parameters": [
+            {
+              "key": "resolution",
+              "description": "Enter a bitmap resolution"
+            }
+          ]
+        }
+      ]
     }
   }
+}
 ```
 
 See that:
@@ -119,32 +119,32 @@ See the other [configuration options](<%- query('page', 'configuration').url %>#
 
 [Relaunch buttons](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/) are configured on the [**`"relaunchButtons"`**](<%- query('page', 'configuration').url %>#relaunchbuttons) key under **`"figma-plugin"`**:
 
-```diff
-  {
-    "figma-plugin": {
-      "id": "786286754606650597",
-      "name": "Organize Layers",
-      "menu": [
-        {
-          "name": "Organize Layers",
-          "main": "src/organize-layers/main.ts",
-          "ui": "src/organize-layers/ui.tsx"
-        },
-        "-",
-        {
-          "name": "Reset Plugin",
-          "main": "src/reset-plugin/main.ts"
-        }
-      ],
-+     "relaunchButtons": {
-+       "organizeLayers": {
-+         "name": "Organize Layers",
-+         "main": "src/organize-layers/main.ts",
-+         "ui": "src/organize-layers/ui.tsx"
-+       }
-+     }
+```json {17-23}
+{
+  "figma-plugin": {
+    "id": "786286754606650597",
+    "name": "Organize Layers",
+    "menu": [
+      {
+        "name": "Organize Layers",
+        "main": "src/organize-layers/main.ts",
+        "ui": "src/organize-layers/ui.tsx"
+      },
+      "-",
+      {
+        "name": "Reset Plugin",
+        "main": "src/reset-plugin/main.ts"
+      }
+    ],
+    "relaunchButtons": {
+      "organizeLayers": {
+        "name": "Organize Layers",
+        "main": "src/organize-layers/main.ts",
+        "ui": "src/organize-layers/ui.tsx"
+      }
     }
   }
+}
 ```
 
 See that:
@@ -188,7 +188,7 @@ setRelaunchButton(
 
 Image assets used in your plugin/widget UI must be “inlined” into the UI bundle. Consider the following example where a PNG image is used in the UI:
 
-```ts
+```tsx
 // src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'
@@ -242,7 +242,7 @@ The plugin/widget UI window is *not* resizable by default; this must be implemen
 
 [`@create-figma-plugin/ui`](<%- query('page', 'ui').url %>#using-the-preact-component-library) includes a `useWindowResize` hook that makes it easier to implement a resizable UI window:
 
-```ts
+```tsx
 // src/ui.tsx
 
 import { render, useWindowResize } from '@create-figma-plugin/ui'
@@ -294,31 +294,31 @@ export default function () {
 
 To restrict the resize direction, set `options.resizeDirection` to either `horizontal` or `vertical`:
 
-```diff
-  useWindowResize(onWindowResize, {
-    minWidth: 120,
-    maxWidth: 320,
-+   resizeDirection: 'horizontal'
-  })
+```ts {4}
+useWindowResize(onWindowResize, {
+  minWidth: 120,
+  maxWidth: 320,
+  resizeDirection: 'horizontal'
+})
 ```
 
 The `useWindowResize` hook also supports toggling the UI window size on double-clicking the bottom and right edges of the UI window:
 
-```diff
-  useWindowResize(onWindowResize, {
-    minWidth: 120,
-    minHeight: 120,
-    maxWidth: 320,
-    maxHeight: 320,
-+   resizeBehaviorOnDoubleClick: 'minimize'
-  })
+```ts {6}
+useWindowResize(onWindowResize, {
+  minWidth: 120,
+  minHeight: 120,
+  maxWidth: 320,
+  maxHeight: 320,
+  resizeBehaviorOnDoubleClick: 'minimize'
+})
 ```
 
 Setting `options.resizeBehaviorOnDoubleClick` to `minimize` means that the UI window will be set to the minimum size on double-click. Correspondingly, setting it to `maximize` means that the UI window will be set to the maximum size on double-click.
 
 For a runnable example, try the [`preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-resizable) plugin template:
 
-```
+```sh
 $ npx --yes create-figma-plugin --template plugin/preact-resizable
 ```
 
@@ -328,7 +328,7 @@ $ npx --yes create-figma-plugin --template plugin/preact-resizable
 
 The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuild.github.io). To customize the underlying build configuration for the [main bundle](https://figma.com/plugin-docs/how-plugins-run/), create a `build-figma-plugin.main.js` file:
 
-```ts
+```js
 // build-figma-plugin.main.js
 
 module.exports = function (buildOptions) {
@@ -348,7 +348,7 @@ Correspondingly, use a `build-figma-plugin.ui.js` file to customize the build co
 
 The `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). To disable this behaviour, create a `build-figma-plugin.ui.js` file:
 
-```ts
+```js
 // build-figma-plugin.ui.js
 
 module.exports = function (buildOptions) {
@@ -365,7 +365,7 @@ module.exports = function (buildOptions) {
 
 To modify the `manifest.json` file just before it gets output by the `build-figma-plugin` CLI, create a `build-figma-plugin.manifest.js` file:
 
-```ts
+```js
 // build-figma-plugin.manifest.js
 
 module.exports = function (manifest) {

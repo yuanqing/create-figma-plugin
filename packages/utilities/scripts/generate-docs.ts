@@ -61,7 +61,7 @@ async function generateDocsAsync(
   lines.push('')
   lines.push('To install:')
   lines.push('')
-  lines.push('```')
+  lines.push('```sh')
   lines.push('$ npm install @create-figma-plugin/utilities')
   lines.push('```')
   lines.push('')

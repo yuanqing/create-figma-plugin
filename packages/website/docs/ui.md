@@ -21,7 +21,7 @@ The component library ships with two themes, one for Figma and one for FigJam. C
 
 To install, do:
 
-```
+```sh
 $ npm install @create-figma-plugin/ui preact
 ```
 
@@ -45,7 +45,7 @@ export default function () {
 
 Next, create a file for our UI (eg. `src/ui.tsx`):
 
-```ts
+```tsx
 // src/ui.tsx
 
 import { render, Container, Text, VerticalSpace } from '@create-figma-plugin/ui'
@@ -71,16 +71,16 @@ See that:
 
 Finally, in `package.json`, point to our UI file on the [**`"ui"`**](<%- query('page', 'configuration').url %>#ui) key under **`"figma-plugin"`**:
 
-```diff
-  {
-    ...
-    "figma-plugin": {
-      ...
-      "name": "Hello World",
-      "main": "src/main.ts",
-+     "ui": "src/ui.tsx"
-    }
+```json {7}
+{
+  // ...
+  "figma-plugin": {
+    // ...
+    "name": "Hello World",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
   }
+}
 ```
 
 When we rebuild our plugin and run it, we’ll see:
@@ -119,7 +119,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 }
 ```
 
-```ts
+```tsx
 // src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'
@@ -142,7 +142,7 @@ By default, all the class names in CSS files imported via an `import` statement 
 
 To directly “inline” a CSS file in your UI *without* hashing its class names, add a `!` prefix to the import path:
 
-```ts
+```tsx
 // src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'

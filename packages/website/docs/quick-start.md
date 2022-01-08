@@ -14,7 +14,7 @@
 
 ## Bootstrapping a new plugin/widget from a template
 
-```
+```sh
 $ npx --yes create-figma-plugin
 ```
 
@@ -95,7 +95,7 @@ The `build-figma-plugin` CLI is powered by [esbuild](https://esbuild.github.io),
 
 To build the plugin/widget:
 
-```
+```sh
 $ npm run build
 ```
 
@@ -106,7 +106,7 @@ This will generate a `manifest.json` file and a `build/` directory containing th
 
 To watch for code changes and rebuild the plugin/widget automatically:
 
-```
+```sh
 $ npm run watch
 ```
 
