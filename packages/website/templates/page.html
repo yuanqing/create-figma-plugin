@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%= include('head') %>
+  <%= partial('head') %>
   <body class="page">
     <div class="page__skip-to-content">
       <a href="#content">Skip to content</a>
     </div>
-    <%= include('header') %>
-    <%= include('main') %>
+    <%= partial('header') %>
+    <%= partial('main') %>
     <script src="<%- jsUrl %>"></script>
-    <%= include('analytics') %>
+    <%= partial('analytics') %>
   </body>
 </html>
