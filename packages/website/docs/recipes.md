@@ -172,7 +172,7 @@ The second argument passed to `setRelaunchButton` must be a particular `relaunch
 
 This would result in the following:
 
-![“Organize Layers” relaunch button](media['relaunch-button'])
+![“Organize Layers” relaunch button](<%- media['relaunch-button'] %>)
 
 To show additional text below the relaunch button, pass a third argument to `setRelaunchButton`:
 
