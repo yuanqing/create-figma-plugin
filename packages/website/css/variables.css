@@ -11,7 +11,8 @@
   --color-gray-4: #808080; /* 50% */
   --color-gray-5: #bababa; /* 27% */
   --color-white: #fff;
-  --color-accent-1: #a3d9fd;
+  --color-highlight-bg: rgba(187, 128, 9, 0.15);
+  --color-highlight-fg: rgba(187, 128, 9, 0.4);
   --color-accent-2: #d5b7ff;
   --color-accent-3: #f5f1bf;
   --color-addition-fg: #aff5b4;

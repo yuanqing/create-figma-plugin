@@ -21,5 +21,6 @@ export default {
   dataDirectory: 'docs',
   filterToc: function (_, { level }) {
     return level !== 1
-  }
+  },
+  rehypePrettyCodeTheme: 'github-dark'
 }

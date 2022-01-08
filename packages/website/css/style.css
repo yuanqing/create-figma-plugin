@@ -6,7 +6,6 @@
 @import './utilities/content.css';
 @import './utilities/emoji-list-item.css';
 @import './utilities/featured-plugin.css';
-@import './utilities/highlightjs.css';
 @import './utilities/image.css';
 @import './utilities/links.css';
 @import './utilities/menu-toggle-button.css';
@@ -15,5 +14,6 @@
 @import './utilities/page.css';
 @import './utilities/pagination.css';
 @import './utilities/plugin.css';
+@import './utilities/rehype-pretty-code-fragment.css';
 @import './utilities/title.css';
 @import './utilities/tweet.css';

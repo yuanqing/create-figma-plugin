@@ -11,16 +11,6 @@
   margin-top: var(--space-100);
 }
 
-.content > pre {
-  background-color: var(--color-gray-1);
-  border-radius: var(--border-radius);
-}
-.content > pre code {
-  display: block;
-  padding: var(--space-100) var(--space-100) var(--space-100) var(--space-150);
-  overflow-x: auto;
-}
-
 .content > blockquote code,
 .content > p code,
 .content > pre code,
