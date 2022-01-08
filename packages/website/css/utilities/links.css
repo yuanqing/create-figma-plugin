@@ -10,7 +10,7 @@
 .tweet__text a {
   color: currentColor;
   text-decoration: underline;
-  text-decoration-color: var(--color-gray-4);
+  text-decoration-color: var(--color-gray-5);
   text-decoration-thickness: 1px;
   text-underline-offset: 1px;
 }
