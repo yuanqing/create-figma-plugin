@@ -14,7 +14,7 @@
 
 To install:
 
-```
+```sh
 $ npm install @create-figma-plugin/utilities
 ```
 
