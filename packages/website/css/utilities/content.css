@@ -109,6 +109,14 @@ h4 .header-link {
   max-width: 100%;
 }
 
+@media (max-width: 959px) {
+  .content > h2,
+  .content > h3,
+  .content > h4 {
+    scroll-margin-top: var(--space-400);
+  }
+}
+
 @media (min-width: 960px) {
   .content > h1,
   .content > h2,

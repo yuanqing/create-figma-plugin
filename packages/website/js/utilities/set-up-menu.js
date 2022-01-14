@@ -1,10 +1,9 @@
+import { HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT } from './constants.js'
 import { parseInternalLinkHref } from './parse-internal-link-href.js'
 
 const MENU_ELEMENT_SELECTOR = '.menu'
 const MENU_TOGGLE_BUTTON_ELEMENT_SELECTOR = '.menu-toggle-button'
 const MENU_VISIBLE_BODY_CLASS_NAME = '--menu-visible'
-
-const HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT = 960
 
 export function setUpMenu() {
   const menuElement = document.querySelector(MENU_ELEMENT_SELECTOR)

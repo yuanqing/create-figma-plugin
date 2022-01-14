@@ -1,3 +1,4 @@
+import { HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT } from './constants.js'
 import { parseInternalLinkHref } from './parse-internal-link-href.js'
 
 const TOC_ELEMENT_SELECTOR = '.menu__toc'
@@ -52,7 +53,11 @@ export function setUpToc() {
   }
 
   function handleInternalLinkClick(event) {
-    if (event.metaKey === true || event.shiftKey === true) {
+    if (
+      event.metaKey === true ||
+      event.shiftKey === true ||
+      window.innerWidth < HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT
+    ) {
       return
     }
     const id = parseInternalLinkHref(event.target)
