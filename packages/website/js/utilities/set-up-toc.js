@@ -6,65 +6,27 @@ const ACTIVE_TOC_ELEMENT_CLASSNAME = 'menu__active'
 const HEADER_ELEMENTS_SELECTOR = 'h2[id], h3[id], h4[id]'
 
 export function setUpToc() {
-  window.history.scrollRestoration = 'manual'
+  let headers = parseHeaders()
 
-  const tocElement = document.querySelector(TOC_ELEMENT_SELECTOR)
-  if (tocElement === null) {
+  if (window.innerWidth < HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT) {
+    function handleWindowScroll() {
+      updateTocActiveElement(headers)
+    }
+    window.addEventListener('scroll', handleWindowScroll)
     return
   }
 
-  let headers = parseHeaders()
-
-  function scrollToId(id, { pushState }) {
-    const header = headers.find(function (header) {
-      return header.id === id
-    })
-    if (typeof header === 'undefined') {
-      updateTocActiveElement()
-      return false
-    }
-    const state = { scrollY: header.scrollY }
-    if (pushState === true) {
-      history.pushState(state, null, `#${id}`)
-    } else {
-      history.replaceState(state, null, `#${id}`)
-    }
-    window.scrollTo({ top: header.scrollY })
-    updateTocActiveElement()
-    return true
-  }
-
-  function updateTocActiveElement() {
-    const previousActiveElement = tocElement.querySelector(
-      `.${ACTIVE_TOC_ELEMENT_CLASSNAME}`
-    )
-    if (previousActiveElement !== null) {
-      previousActiveElement.classList.remove(ACTIVE_TOC_ELEMENT_CLASSNAME)
-    }
-    const id = computeActiveId(headers)
-    if (id === null) {
-      return
-    }
-    const activeElement = tocElement.querySelector(`[href="#${id}"]`)
-    if (activeElement === null) {
-      return
-    }
-    activeElement.classList.add(ACTIVE_TOC_ELEMENT_CLASSNAME)
-  }
+  window.history.scrollRestoration = 'manual'
 
   function handleInternalLinkClick(event) {
-    if (
-      event.metaKey === true ||
-      event.shiftKey === true ||
-      window.innerWidth < HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT
-    ) {
+    if (event.metaKey === true || event.shiftKey === true) {
       return
     }
     const id = parseInternalLinkHref(event.target)
     if (id === null) {
       return
     }
-    if (scrollToId(id, { pushState: true }) === true) {
+    if (scrollToId(headers, id, { pushState: true }) === true) {
       event.preventDefault()
     }
   }
@@ -87,7 +49,7 @@ export function setUpToc() {
   window.addEventListener('resize', handleWindowResize)
 
   function handleWindowScroll() {
-    updateTocActiveElement()
+    updateTocActiveElement(headers)
     history.replaceState(
       { scrollY: window.scrollY },
       null,
@@ -98,7 +60,7 @@ export function setUpToc() {
 
   const id = window.location.hash.slice(1)
   if (id !== '') {
-    scrollToId(id, { pushState: false })
+    scrollToId(headers, id, { pushState: false })
   }
 }
 
@@ -137,6 +99,44 @@ function parseHeaders() {
       )
     }
   })
+}
+
+function scrollToId(headers, id, { pushState }) {
+  const header = headers.find(function (header) {
+    return header.id === id
+  })
+  if (typeof header === 'undefined') {
+    updateTocActiveElement(headers)
+    return false
+  }
+  const state = { scrollY: header.scrollY }
+  if (pushState === true) {
+    history.pushState(state, null, `#${id}`)
+  } else {
+    history.replaceState(state, null, `#${id}`)
+  }
+  window.scrollTo({ top: header.scrollY })
+  updateTocActiveElement(headers)
+  return true
+}
+
+function updateTocActiveElement(headers) {
+  const tocElement = document.querySelector(TOC_ELEMENT_SELECTOR)
+  const previousActiveElement = tocElement.querySelector(
+    `.${ACTIVE_TOC_ELEMENT_CLASSNAME}`
+  )
+  if (previousActiveElement !== null) {
+    previousActiveElement.classList.remove(ACTIVE_TOC_ELEMENT_CLASSNAME)
+  }
+  const id = computeActiveId(headers)
+  if (id === null) {
+    return
+  }
+  const activeElement = tocElement.querySelector(`[href="#${id}"]`)
+  if (activeElement === null) {
+    return
+  }
+  activeElement.classList.add(ACTIVE_TOC_ELEMENT_CLASSNAME)
 }
 
 function computeActiveId(headers) {
