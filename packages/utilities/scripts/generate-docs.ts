@@ -73,13 +73,19 @@ async function generateDocsAsync(
     lines.push(`## ${category.name}`)
     lines.push('')
     lines.push('```ts')
-    lines.push('import {')
-    const functionNames: Array<string> = []
-    for (const { name } of category.functionsData) {
-      functionNames.push(`  ${name}`)
+    if (category.functionsData.length === 1) {
+      lines.push(
+        `import { ${category.functionsData[0].name} } from '@create-figma-plugin/utilities'`
+      )
+    } else {
+      lines.push('import {')
+      const functionNames: Array<string> = []
+      for (const { name } of category.functionsData) {
+        functionNames.push(`  ${name}`)
+      }
+      lines.push(functionNames.join(',\n'))
+      lines.push("} from '@create-figma-plugin/utilities'")
     }
-    lines.push(functionNames.join(',\n'))
-    lines.push("} from '@create-figma-plugin/utilities'")
     lines.push('```')
     lines.push('')
     for (const functionData of category.functionsData) {
