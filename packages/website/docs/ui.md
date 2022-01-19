@@ -87,7 +87,7 @@ When we rebuild our plugin and run it, we’ll see:
 
 ![Figma plugin UI modal with “Hello, World” text](<%- media['ui-hello-world-figma'] %>)
 
-See the [Storybook](<%- baseUrl %>storybook/) for the full library of Preact components, and the [recipe for passing data between the plugin/widget’s main and UI contexts](<%- query('page', 'recipes').url %>#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
+See the [Storybook](<%- baseUrl %>storybook/) for the full library of Preact components, and the [recipe for passing data between the plugin/widget’s main and UI contexts](<%- query('page', 'recipes').url %>#passing-data-between-the-plugin-widgets-main-and-ui-contexts).
 
 ## Using React
 

@@ -124,7 +124,7 @@ All `args` passed after `name` will be directly
 [applied](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
 on the event handler.
 
-See the [recipe for passing data between the main and UI contexts](<%- query('page', 'recipes').url %>#passing-data-between-the-pluginwidgets-main-and-ui-contexts).
+See the [recipe for passing data between the main and UI contexts](<%- query('page', 'recipes').url %>#passing-data-between-the-plugin-widgets-main-and-ui-contexts).
 
 ***Type parameters***
 
@@ -1113,9 +1113,7 @@ string
 ## UI
 
 ```ts
-import {
-  showUI
-} from '@create-figma-plugin/utilities'
+import { showUI } from '@create-figma-plugin/utilities'
 ```
 
 ### `showUI<Data>(options [, data])`
