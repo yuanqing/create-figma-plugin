@@ -271,7 +271,7 @@
       }
     ],
     "description": "Increase the spacing at the four edges of the frame, centering the original content",
-    "githubUrl": null,
+    "githubUrl": "https://github.com/FradSer/figma-frame-resizer",
     "id": "1054060403452308301",
     "name": "Frame Resizer"
   },
@@ -310,6 +310,18 @@
     "githubUrl": "https://github.com/iamtekeste/health-icons-figma-plugin",
     "id": "992844281461869440",
     "name": "Health Icons"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "The definitive open source icon library",
+    "githubUrl": null,
+    "id": "1064682537072050696",
+    "name": "Iconoir"
   },
   {
     "authors": [
@@ -558,6 +570,18 @@
     "githubUrl": null,
     "id": "1053846082213772972",
     "name": "Scarlab Icons"
+  },
+  {
+    "authors": [
+      {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Quickly add a scrim over the selected layer",
+    "githubUrl": "https://github.com/aashreys/scrim-that",
+    "id": "1062137197474406566",
+    "name": "Scrim That"
   },
   {
     "authors": [

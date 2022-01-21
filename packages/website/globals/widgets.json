@@ -26,6 +26,18 @@
   {
     "authors": [
       {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "Quickly import and embed PDF files into your FigJam boards",
+    "githubUrl": null,
+    "id": "1064675123479620100",
+    "name": "Import PDF Into FigJam"
+  },
+  {
+    "authors": [
+      {
         "name": "Roman Nurik",
         "url": "https://twitter.com/romannurik"
       }
