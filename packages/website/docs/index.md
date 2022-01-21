@@ -80,7 +80,7 @@
 <p class="muted">Plugins</p>
 <ul>
 <% const featuredPlugins = plugins.filter(function (plugin) {
-return ['Color Kitchen', 'Copy & Rotate', 'Draw Connector', 'Free Hands', 'Protofly', 'RTL PLZ', 'Selection Variants'].indexOf(plugin.name) !== -1
+return ['Copy & Rotate', 'Draw Connector', 'Free Hands', 'Protofly', 'Prototyper', 'RTL PLZ', 'Selection Variants'].indexOf(plugin.name) !== -1
 }) %>
 <% for (const { id, name } of featuredPlugins) { %>
 <li class="featured-plugin">
@@ -95,7 +95,9 @@ return ['Color Kitchen', 'Copy & Rotate', 'Draw Connector', 'Free Hands', 'Proto
 <div class="columns__column">
 <p class="muted">Widgets</p>
 <ul>
-<% const featuredWidgets = widgets.slice(0, 7) %>
+<% const featuredWidgets = widgets.filter(function (widget) {
+return ['Device Frames', 'Graphpad', 'Import PDF Into FigJam', 'Mad Lib', 'Markdown Notes', 'Storymapper', 'Teams'].indexOf(widget.name) !== -1
+}) %>
 <% for (const { id, name } of featuredWidgets) { %>
 <li class="featured-plugin">
 <a href="https://figma.com/community/widget/<%- id %>" target="_blank">
