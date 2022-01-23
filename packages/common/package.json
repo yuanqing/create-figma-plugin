@@ -59,6 +59,9 @@
       "--loader",
       "tsm"
     ],
+    "nonSemVerExperiments": {
+      "configurableModuleFormat": true
+    },
     "serial": true,
     "timeout": "2m"
   },
