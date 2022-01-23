@@ -314,18 +314,6 @@
   {
     "authors": [
       {
-        "name": "Tekeste Kidanu",
-        "url": "https://twitter.com/tkmadeit"
-      }
-    ],
-    "description": "The definitive open source icon library",
-    "githubUrl": null,
-    "id": "1064682537072050696",
-    "name": "Iconoir"
-  },
-  {
-    "authors": [
-      {
         "name": "Jorge Martins",
         "url": "https://twitter.com/jorgemartns"
       }
@@ -334,6 +322,18 @@
     "githubUrl": null,
     "id": "1000211110592209830",
     "name": "Icon Sizes"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tekeste Kidanu",
+        "url": "https://twitter.com/tkmadeit"
+      }
+    ],
+    "description": "The definitive open source icon library",
+    "githubUrl": null,
+    "id": "1064682537072050696",
+    "name": "Iconoir"
   },
   {
     "authors": [
