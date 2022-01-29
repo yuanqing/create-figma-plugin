@@ -16,7 +16,7 @@ export async function loadSettingsAsync<Settings>(
   if (typeof settings === 'undefined') {
     return defaultSettings
   }
-  return Object.assign(defaultSettings, settings)
+  return Object.assign({}, defaultSettings, settings)
 }
 
 /**
