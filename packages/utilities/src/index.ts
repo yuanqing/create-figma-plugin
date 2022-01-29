@@ -3,7 +3,14 @@ export { convertHexColorToRgbColor } from './color/convert-hex-color-to-rgb-colo
 export { convertNamedColorToHexColor } from './color/convert-named-color-to-hex-color.js'
 export { convertRgbColorToHexColor } from './color/convert-rgb-color-to-hex-color.js'
 export { isValidHexColor } from './color/is-valid-hex-color.js'
-export { emit, EventHandler, on, once } from './events.js'
+export {
+  DropEventHandler,
+  emitDrop,
+  onceDrop,
+  onDrop
+} from './events/drop-events.js'
+export { emit, EventHandler, on, once } from './events/events.js'
+export { ensureMinimumTime } from './function/ensure-minimum-time.js'
 export { MIXED_NUMBER, MIXED_STRING } from './mixed-values.js'
 export {
   getDocumentUseCount,
