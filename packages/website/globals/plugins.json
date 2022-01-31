@@ -26,6 +26,34 @@
   {
     "authors": [
       {
+        "name": "Alex Widua",
+        "url": "https://twitter.com/alexwidua"
+      }
+    ],
+    "description": "Create beautiful, smooth shadows in Figma",
+    "githubUrl": "https://github.com/alexwidua/figma-beautiful-shadows",
+    "id": "1068595505353552645",
+    "name": "Beautiful Shadows"
+  },
+  {
+    "authors": [
+      {
+        "name": "Drew Okenfuss",
+        "url": "https://figma.com/@professoroakie"
+      },
+      {
+        "name": "Sagar Ramesh",
+        "url": "https://twitter.com/sawgur"
+      }
+    ],
+    "description": "Generate brand asset templates in Figma",
+    "githubUrl": null,
+    "id": "1068010542677347310",
+    "name": "Brand Buddy"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
