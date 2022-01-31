@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.8.3
+
+- `@create-figma-plugin/ui`
+  - Fixed a bug with the `Modal` component incorrectly trapping focus on the first input it contains on subsequent renders ([#80](https://github.com/yuanqing/create-figma-plugin/issues/80))
+
+- `@create-figma-plugin/utilities`
+  - Added a `ensureMinimumTime` utility
+  - Prevent modification of `defaultSettings` in `loadSettingsAsync` ([#79](https://github.com/yuanqing/create-figma-plugin/pull/79))
+
+- Bumped dependencies in all packages
+
 ## 1.8.2
 
 - Revamped the [documentation website](https://yuanqing.github.io/create-figma-plugin/)
