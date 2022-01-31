@@ -24,7 +24,7 @@
       "handle": "abynim",
       "id": "1428137898142883840",
       "name": "Aby Nimbalkar",
-      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1344094978868277248/qLAKgG8e_400x400.jpg",
+      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1484323185185427456/o6Nzp-Hb_400x400.jpg",
       "text": "I know I’m late to this party but I just published my first <a href=\"https://twitter.com/figmadesign\" target=\"_blank\">@figmadesign</a> plugin 🥳 (org-only so can’t share yet). <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin library made building the UI so easy and helped me focus on the logic instead. Highly recommended!"
     }
   ]
