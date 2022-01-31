@@ -1,6 +1,6 @@
 /**
- * Creates an `async` function that will invoke the given `callback` but run
- * for the `minimumTime` (in milliseconds).
+ * Creates an `async` function that will invoke the given `callback` and run
+ * for at least `minimumTime` (in milliseconds).
  *
  * @category Function
  */
