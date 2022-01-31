@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "website",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "type": "module",
   "scripts": {
     "build": "yarn run clean && build-website --minify",
