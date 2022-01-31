@@ -38,21 +38,85 @@ export function Modal({
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const previousFocusedElementRef: RefObject<HTMLElement> = useRef(null)
 
-  useEffect(function () {
+  useEffect(function (): () => void {
     const rootElement = document.createElement('div')
     document.body.appendChild(rootElement)
     rootElementRef.current = rootElement
-    return function () {
+    return function (): void {
       document.body.removeChild(rootElement)
     }
   }, [])
 
   useEffect(
-    function () {
+    function (): () => void {
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
+      const focusTrapKeyDownHandler = createFocusTrapKeyDownHandler(
+        rootElementRef.current
+      )
+      function handleTabKeyDown(event: KeyboardEvent) {
+        if (isOpen === true) {
+          focusTrapKeyDownHandler(event)
+        }
+      }
+      window.addEventListener('keydown', handleTabKeyDown)
+      return function (): void {
+        window.removeEventListener('keydown', handleTabKeyDown)
+      }
+    },
+    [isOpen]
+  )
 
+  useEffect(
+    function (): () => void {
+      function handleEscapeKeyDown(event: KeyboardEvent) {
+        if (
+          isOpen === false ||
+          event.key !== 'Escape' ||
+          typeof onEscapeKeyDown === 'undefined'
+        ) {
+          return
+        }
+        onEscapeKeyDown(event)
+      }
+      window.addEventListener('keydown', handleEscapeKeyDown)
+      return function (): void {
+        window.removeEventListener('keydown', handleEscapeKeyDown)
+      }
+    },
+    [isOpen, onEscapeKeyDown]
+  )
+
+  useEffect(
+    function (): () => void {
+      if (rootElementRef.current === null) {
+        throw new Error('`rootElementRef.current` is `null`')
+      }
+      if (isOpen === true) {
+        previousFocusedElementRef.current =
+          document.activeElement as HTMLElement
+        const focusableElements = getFocusableElements(rootElementRef.current)
+        if (focusableElements.length > 0) {
+          focusableElements[0].focus()
+        } else {
+          previousFocusedElementRef.current.blur()
+        }
+      }
+      return function (): void {
+        if (previousFocusedElementRef.current !== null) {
+          previousFocusedElementRef.current.focus()
+        }
+      }
+    },
+    [isOpen]
+  )
+
+  useEffect(
+    function (): void {
+      if (rootElementRef.current === null) {
+        throw new Error('`rootElementRef.current` is `null`')
+      }
       render(
         <Fragment>
           <div
@@ -99,37 +163,6 @@ export function Modal({
         </Fragment>,
         rootElementRef.current
       )
-
-      function handleEscapeKeyDown(event: KeyboardEvent) {
-        if (event.key !== 'Escape' || typeof onEscapeKeyDown === 'undefined') {
-          return
-        }
-        onEscapeKeyDown(event)
-      }
-      const handleTabKeyDown = createFocusTrapKeyDownHandler(
-        rootElementRef.current
-      )
-      if (isOpen === true) {
-        window.addEventListener('keydown', handleEscapeKeyDown)
-        window.addEventListener('keydown', handleTabKeyDown)
-        previousFocusedElementRef.current =
-          document.activeElement as HTMLElement
-        const focusableElements = getFocusableElements(rootElementRef.current)
-        if (focusableElements.length > 0) {
-          focusableElements[0].focus()
-        } else {
-          previousFocusedElementRef.current.blur()
-        }
-      }
-      return function (): void {
-        if (isOpen === true) {
-          window.removeEventListener('keydown', handleEscapeKeyDown)
-          window.removeEventListener('keydown', handleTabKeyDown)
-          if (previousFocusedElementRef.current !== null) {
-            previousFocusedElementRef.current.focus()
-          }
-        }
-      }
     },
     [
       children,
@@ -137,7 +170,6 @@ export function Modal({
       closeButtonPosition,
       isOpen,
       onCloseButtonClick,
-      onEscapeKeyDown,
       onOverlayClick,
       position,
       rest,
