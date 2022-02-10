@@ -184,6 +184,33 @@ Returns a function for deregistering the `handler`.
 () => void
 ```
 
+## Function
+
+```ts
+import { ensureMinimumTime } from '@create-figma-plugin/utilities'
+```
+
+### `ensureMinimumTime<S, T>(minimumTime, callback)`
+
+Creates an `async` function that will invoke the given `callback` and run
+for at least `minimumTime` (in milliseconds).
+
+***Type parameters***
+
+- `S`
+- `T` (`any[]`)
+
+***Parameters***
+
+- `minimumTime` (`number`)
+- `callback` (`(...args: T) => Promise<S>`)
+
+***Return type***
+
+```
+(...args: T) => Promise<S>
+```
+
 ## Monetization
 
 ```ts
