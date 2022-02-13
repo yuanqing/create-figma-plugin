@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.4
+
+- `@create-figma-plugin/build`
+  - Resolve paths to `tcm` and `preact-compat` starting from `__dirname` so that `build-figma-plugin` will work when used in a `pnpm` monorepo ([#84](https://github.com/yuanqing/create-figma-plugin/issues/84))
+
 ## 1.8.3
 
 - `@create-figma-plugin/ui`
