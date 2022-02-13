@@ -14,7 +14,7 @@ export async function buildAsync(
   try {
     if (typecheck === true) {
       const getTypeCheckElapsedTime = trackElapsedTime()
-      await buildCssModulesTypingsAsync() // This must occur before `typeCheckAsync`
+      await buildCssModulesTypingsAsync() // This must occur before `typeCheckBuild`
       log.info('Type checking...')
       typeCheckBuild()
       const typeCheckElapsedTime = getTypeCheckElapsedTime()
