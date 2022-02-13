@@ -39,7 +39,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "build": "yarn run clean && yarn run generate-index-ts && tsc --build && node --loader tsm scripts/add-js-extension-to-relative-module-paths.ts && yarn run copy-non-ts-files",
-    "clean": "rm -rf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
+    "clean": "rimraf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
     "copy-non-ts-files": "node --loader tsm scripts/copy-non-ts-files.ts",
     "fix": "eslint --fix '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json'",
     "generate-icons-ts": "node --loader tsm scripts/generate-icons-ts.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
@@ -47,7 +47,7 @@
     "lint": "eslint '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' && stylelint 'src/**/*.css'",
     "storybook": "yarn run storybook-clean && mkdirp node_modules && start-storybook --port 4242",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
-    "storybook-clean": "rm -rf '*.log' build 'src/**/*.css.d.ts'"
+    "storybook-clean": "rimraf '*.log' build 'src/**/*.css.d.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^1.8.4-alpha.0"
@@ -72,6 +72,7 @@
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "storybook-addon-themes": "^6.1.0",
     "style-loader": "2.0.0",
     "stylelint": "^14.3.0",

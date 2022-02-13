@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "yarn run clean && tsc --build",
-    "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
+    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
     "test": "yarn run build && ava 'test/**/*.ts'"

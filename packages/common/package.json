@@ -30,7 +30,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "build": "yarn run clean && yarn run generate-index-ts && tsc --build",
-    "clean": "rm -rf '*.log' lib tsconfig.tsbuildinfo",
+    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "generate-index-ts": "node --loader tsm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' && eslint --fix src/index.ts",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json' 'test/**/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
@@ -48,6 +48,7 @@
     "eslint": "^8.8.0",
     "eslint-config-yuanqing": "^0.0.6",
     "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
     "tsm": "^2.2.1",
     "typescript": "^4.5.5"
   },
