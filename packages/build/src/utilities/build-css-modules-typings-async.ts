@@ -4,7 +4,9 @@ import { findUp } from 'find-up'
 import { join } from 'path'
 
 export async function buildCssModulesTypingsAsync(): Promise<void> {
-  const tcm = await findUp(join('node_modules', '.bin', 'tcm'))
+  const tcm = await findUp(
+    join('node_modules', 'typed-css-modules', 'lib', 'cli.js')
+  )
   if (typeof tcm === 'undefined') {
     throw new Error('Cannot find `tcm`')
   }
