@@ -20,6 +20,23 @@
   color: var(--color-gray-5);
 }
 
+.content pre {
+  margin-top: var(--space-100);
+  background-color: var(--color-gray-1);
+  border-radius: var(--border-radius);
+}
+.content pre code {
+  display: grid;
+  padding: var(--space-100);
+  overflow-x: auto;
+}
+.content pre code .line--highlighted {
+  padding: 0 var(--space-100);
+  margin: 0 calc(-1 * var(--space-100));
+  background-color: var(--color-highlight-bg);
+  box-shadow: inset 3px 0 0 var(--color-highlight-fg);
+}
+
 .content > ol {
   counter-reset: count;
 }
