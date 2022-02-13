@@ -104,6 +104,8 @@ This will generate a `manifest.json` file and a `build/` directory containing th
 - [Plugin Manifest](https://figma.com/plugin-docs/manifest/)
 - [Widget Manifest](https://figma.com/widget-docs/widget-manifest/)
 
+(Configuring your plugin/widget is done via `package.json`. Avoid manually editing the `manifest.json` file. Because the `manifest.json` file is always regenerated on build, any changes you make will always get overridden.)
+
 To watch for code changes and rebuild the plugin/widget automatically:
 
 ```sh
