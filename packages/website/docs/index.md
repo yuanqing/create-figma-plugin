@@ -41,7 +41,7 @@
 <li class="emoji-list-item"><span class="emoji-list-item__emoji">🤯</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'quick-start').url %>#building-the-plugin-widget">Bundle and minify your TypeScript or JavaScript code</a>, with sub-second build times made possible by the esbuild compiler</span></li>
 <li class="emoji-list-item"><span class="emoji-list-item__emoji">😌</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'recipes').url %>#specifying-multiple-commands-in-the-plugin-sub-menu">Write plugin menu commands in separate files</a>, with support for each command having their own UI implementation</span></li>
 <li class="emoji-list-item"><span class="emoji-list-item__emoji">🤩</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'ui').url %>#using-the-preact-component-library">Create a UI for your plugin/widget</a> using a library of Preact components that replicate the Figma/FigJam editor’s UI design</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤓</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'utilities').url %>">Leverage an extensive set of utility functions</a>, including utilities for passing data between your plugin/widget’s main and UI contexts</span></li>
+<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤓</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'utilities').url %>#passing-data-between-the-plugin-widgets-main-and-ui-contexts">Leverage an extensive set of utility functions</a>, including <a href="<%- query('page', 'recipes').url %>">utilities for passing data between your plugin/widget’s main and UI contexts</a></span></li>
 </ul>
 </div>
 
