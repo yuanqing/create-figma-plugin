@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/ui",
-  "version": "1.8.4-alpha.0",
+  "version": "1.8.4",
   "publishConfig": {
     "access": "public"
   },
@@ -50,7 +50,7 @@
     "storybook-clean": "rimraf '*.log' build 'src/**/*.css.d.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^1.8.4-alpha.0"
+    "@create-figma-plugin/utilities": "^1.8.4"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",

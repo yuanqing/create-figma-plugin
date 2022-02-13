@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/build",
-  "version": "1.8.4-alpha.0",
+  "version": "1.8.4",
   "publishConfig": {
     "access": "public"
   },
@@ -37,7 +37,7 @@
     "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^1.8.4-alpha.0",
+    "@create-figma-plugin/common": "^1.8.4",
     "chokidar": "^3.5.3",
     "cssnano": "^5.0.16",
     "esbuild": "^0.14.15",
@@ -55,8 +55,8 @@
     "typed-css-modules": "^0.7.0"
   },
   "devDependencies": {
-    "@create-figma-plugin/tsconfig": "^1.8.4-alpha.0",
-    "@create-figma-plugin/utilities": "^1.8.4-alpha.0",
+    "@create-figma-plugin/tsconfig": "^1.8.4",
+    "@create-figma-plugin/utilities": "^1.8.4",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^17.0.13",
     "@types/rimraf": "^3.0.2",
