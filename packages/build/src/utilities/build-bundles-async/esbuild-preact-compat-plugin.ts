@@ -2,7 +2,10 @@
 
 import { Plugin, PluginBuild } from 'esbuild'
 import { findUp } from 'find-up'
-import { join } from 'path'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export function esbuildPreactCompatPlugin(): Plugin {
   return {
@@ -14,7 +17,14 @@ export function esbuildPreactCompatPlugin(): Plugin {
           path: string
         }> {
           const preactCompatPath = await findUp(
-            join('node_modules', 'preact', 'compat', 'dist', 'compat.module.js')
+            join(
+              'node_modules',
+              'preact',
+              'compat',
+              'dist',
+              'compat.module.js'
+            ),
+            { cwd: __dirname }
           )
           if (typeof preactCompatPath === 'undefined') {
             throw new Error('Cannot find `preact`')
