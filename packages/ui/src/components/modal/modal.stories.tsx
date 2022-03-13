@@ -252,3 +252,45 @@ export const CloseButtonIcon = function () {
     </Fragment>
   )
 }
+
+export const Nested = function () {
+  const [isParentOpen, setIsParentOpen] = useState(false)
+  function handleParentOpenButtonClick() {
+    setIsParentOpen(true)
+  }
+  function handleParentCloseButtonClick() {
+    setIsParentOpen(false)
+  }
+  const parentStyle = { height: '160px', padding: '12px', width: '240px' }
+  const [isChildOpen, setIsChildOpen] = useState(false)
+  function handleChildOpenButtonClick() {
+    setIsChildOpen(true)
+  }
+  function handleChildCloseButtonClick() {
+    setIsChildOpen(false)
+  }
+  const childStyle = { height: '120px', padding: '12px', width: '160px' }
+  return (
+    <Fragment>
+      <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
+      <Modal
+        isOpen={isParentOpen}
+        onCloseButtonClick={handleParentCloseButtonClick}
+        onEscapeKeyDown={handleParentCloseButtonClick}
+        title="Parent"
+      >
+        <div style={parentStyle}>
+          <Button onClick={handleChildOpenButtonClick}>Open child modal</Button>
+          <Modal
+            isOpen={isChildOpen}
+            onCloseButtonClick={handleChildCloseButtonClick}
+            onEscapeKeyDown={handleChildCloseButtonClick}
+            title="Child"
+          >
+            <div style={childStyle} />
+          </Modal>
+        </div>
+      </Modal>
+    </Fragment>
+  )
+}

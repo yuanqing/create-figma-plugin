@@ -23,6 +23,8 @@ export type ModalProps = {
 export type ModalCloseButtonPosition = 'left' | 'right'
 export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
 
+const rootElements: Array<HTMLDivElement> = [] // Stack of currently-open modals
+
 export function Modal({
   children,
   closeButtonIcon = <IconCross32 />,
@@ -74,7 +76,8 @@ export function Modal({
         if (
           isOpen === false ||
           event.key !== 'Escape' ||
-          typeof onEscapeKeyDown === 'undefined'
+          typeof onEscapeKeyDown === 'undefined' ||
+          rootElements[rootElements.length - 1] !== rootElementRef.current
         ) {
           return
         }
@@ -94,6 +97,9 @@ export function Modal({
         throw new Error('`rootElementRef.current` is `null`')
       }
       if (isOpen === true) {
+        rootElements.push(rootElementRef.current)
+        rootElementRef.current.style.cssText =
+          'position:absolute;top:0;left:0;bottom:0;right:0;z-index:1'
         previousFocusedElementRef.current =
           document.activeElement as HTMLElement
         const focusableElements = getFocusableElements(rootElementRef.current)
@@ -102,6 +108,9 @@ export function Modal({
         } else {
           previousFocusedElementRef.current.blur()
         }
+      } else {
+        rootElements.pop()
+        rootElementRef.current.style.cssText = 'position:static'
       }
       return function (): void {
         if (previousFocusedElementRef.current !== null) {
