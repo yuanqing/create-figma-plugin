@@ -253,6 +253,31 @@ export const CloseButtonIcon = function () {
   )
 }
 
+export const TransitionDuration = function () {
+  const [isOpen, setIsOpen] = useState(false)
+  function handleOpenButtonClick() {
+    setIsOpen(true)
+  }
+  function handleCloseButtonClick() {
+    setIsOpen(false)
+  }
+  const style = { height: '160px', padding: '12px', width: '240px' }
+  return (
+    <Fragment>
+      <Button fullWidth onClick={handleOpenButtonClick}>
+        Open
+      </Button>
+      <Modal isOpen={isOpen} transitionDuration={0}>
+        <div style={style}>
+          <Button onClick={handleCloseButtonClick} secondary>
+            Close
+          </Button>
+        </div>
+      </Modal>
+    </Fragment>
+  )
+}
+
 export const Nested = function () {
   const [isParentOpen, setIsParentOpen] = useState(false)
   function handleParentOpenButtonClick() {
