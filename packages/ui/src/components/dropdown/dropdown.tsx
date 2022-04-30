@@ -1,6 +1,6 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
-import { useCallback, useRef, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../css/menu.css'
 import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside'
@@ -99,8 +99,6 @@ export function Dropdown<
     setIsMenuVisible(false)
     setSelectedId(INVALID_ID)
     getCurrentFromRef(rootElementRef).blur()
-    const menuElement = getCurrentFromRef(menuElementRef)
-    menuElement.removeAttribute('style') // Clear inline styles
   }, [])
 
   const handleRootFocus = useCallback(
@@ -202,6 +200,23 @@ export function Dropdown<
     onMouseDownOutside: handleMouseDownOutside,
     ref: rootElementRef
   })
+
+  const triggerUpdateMenuElementLayout = useCallback(function () {
+    const rootElement = getCurrentFromRef(rootElementRef)
+    const menuElement = getCurrentFromRef(menuElementRef)
+    updateMenuElementLayout(rootElement, menuElement, INVALID_ID)
+  }, [])
+
+  useEffect(
+    function () {
+      triggerUpdateMenuElementLayout()
+      window.addEventListener('resize', triggerUpdateMenuElementLayout)
+      return function () {
+        window.removeEventListener('resize', triggerUpdateMenuElementLayout)
+      }
+    },
+    [triggerUpdateMenuElementLayout]
+  )
 
   return (
     <div
@@ -343,54 +358,48 @@ function updateMenuElementLayout(
   menuElement: HTMLDivElement,
   selectedId: Id
 ) {
-  // Nudge `menuElement` left. `leftOffset` will be a negative value if the
-  // menu exceeds the window bounds.
-  const menuElementBoundingClientRect = menuElement.getBoundingClientRect()
-  const leftOffset =
-    window.innerWidth -
-    VIEWPORT_MARGIN -
-    (menuElementBoundingClientRect.left + menuElement.offsetWidth)
-  if (leftOffset < 0) {
-    const maximumLeftOffset =
-      VIEWPORT_MARGIN - menuElementBoundingClientRect.left
-    menuElement.style.left = `${Math.max(maximumLeftOffset, leftOffset)}px`
-  }
-
-  // Maximum height of `menuElement` is viewport height minus the top and bottom margin
+  // Set a maximum width and height
   const maxHeight = window.innerHeight - 2 * VIEWPORT_MARGIN
   menuElement.style.maxHeight = `${maxHeight}px`
+  const maxWidth = window.innerWidth - 2 * VIEWPORT_MARGIN
+  menuElement.style.maxWidth = `${maxWidth}px`
 
-  // Compute `topOffset` (relative to `rootElement`) such that `menuElement`
-  // fits within viewport
-  const topOffset = Math.min(
-    0,
-    window.innerHeight -
-      VIEWPORT_MARGIN -
-      (rootElement.getBoundingClientRect().top + menuElement.offsetHeight)
-  )
-  if (selectedId === INVALID_ID || topOffset !== 0) {
-    menuElement.style.top = `${topOffset}px`
+  const menuElementBoundingClientRect = menuElement.getBoundingClientRect()
+
+  // Nudge `menuElement` left if needed.
+  const leftOffset =
+    menuElementBoundingClientRect.left +
+    menuElement.offsetWidth -
+    (window.innerWidth - VIEWPORT_MARGIN)
+  if (leftOffset > 0) {
+    menuElement.style.left = `-${leftOffset}px`
+  }
+
+  // Exit if `selectedId` is invalid.
+  if (selectedId === INVALID_ID) {
+    // Nudge `menuElement` up if needed.
+    const topOffset =
+      menuElementBoundingClientRect.top +
+      menuElement.offsetHeight -
+      (window.innerHeight - VIEWPORT_MARGIN)
+    if (topOffset > 0) {
+      menuElement.style.top = `-${topOffset}px`
+    }
     return
   }
 
-  // `topOffset` is 0 (so `menuElement` comfortably fits within the
-  // viewport) and `selectedId` is valid, so try to adjust the `top`
-  // position of `menuElement` such that `selectedElement` is directly
-  // above the `rootElement`
+  // Try to adjust the `top` position of `menuElement` such that
+  // `selectedElement` is directly above the `rootElement`
   const selectedElement = menuElement.querySelector<HTMLInputElement>(
     `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
   )
   if (selectedElement === null) {
-    throw new Error('Invariant violation') // `index` is valid
+    throw new Error('Invariant violation') // `selectedId` is valid
   }
   const selectedElementTop =
     selectedElement.getBoundingClientRect().top -
     menuElementBoundingClientRect.top
-  const maximumTopOffset = Math.max(
-    0,
+  const maximumTopOffset =
     rootElement.getBoundingClientRect().top - VIEWPORT_MARGIN
-  )
-  menuElement.style.top = `${
-    -1 * Math.min(selectedElementTop, maximumTopOffset)
-  }px`
+  menuElement.style.top = `-${Math.min(selectedElementTop, maximumTopOffset)}px`
 }

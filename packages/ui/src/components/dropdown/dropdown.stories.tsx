@@ -100,6 +100,24 @@ export const Filled = function () {
   return <Dropdown onChange={handleChange} options={options} value={value} />
 }
 
+export const FilledLongText = function () {
+  const [value, setValue] = useState(Array(20).fill('foo').join(' '))
+  const options: Array<DropdownOption> = [
+    { value: Array(20).fill('foo').join(' ') },
+    { value: Array(20).fill('bar').join(' ') },
+    { value: Array(20).fill('baz').join(' ') },
+    { separator: true },
+    { header: 'Header' },
+    { value: Array(4).fill('qux').join(' ') }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Dropdown onChange={handleChange} options={options} value={value} />
+}
+
 export const Disabled = function () {
   const options: Array<DropdownOption> = [
     { value: 'foo' },

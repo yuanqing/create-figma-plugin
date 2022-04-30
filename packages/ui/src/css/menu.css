@@ -28,7 +28,9 @@
 
 .optionHeader,
 .optionValue {
+  overflow: hidden;
   padding: 4px var(--space-medium) 4px 32px;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
