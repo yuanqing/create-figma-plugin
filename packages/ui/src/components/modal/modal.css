@@ -7,15 +7,8 @@
   transition-duration: 0.3s;
   transition-timing-function: ease;
 }
-
-.bottom {
-  top: 100%;
-  left: 0;
-  width: 100%;
-}
-.isOpen.bottom {
-  box-shadow: var(--box-shadow-modal);
-  transform: translate(0, -100%);
+.noTransition {
+  transition: none;
 }
 
 .center {
@@ -31,6 +24,16 @@
 .isOpen.center {
   opacity: 1;
   pointer-events: all;
+}
+
+.bottom {
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+.isOpen.bottom {
+  box-shadow: var(--box-shadow-modal);
+  transform: translate(0, -100%);
 }
 
 .left {
@@ -108,4 +111,7 @@
 .isOpen + .overlay {
   opacity: 1;
   pointer-events: all;
+}
+.noTransition + .overlay {
+  transition: none;
 }

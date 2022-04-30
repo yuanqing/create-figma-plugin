@@ -17,9 +17,9 @@ export type ModalProps = {
   onEscapeKeyDown?: (event: KeyboardEvent) => void
   onOverlayClick?: JSX.MouseEventHandler<HTMLDivElement>
   isOpen: boolean
+  noTransition?: boolean
   position?: ModalPosition
   title?: string
-  transitionDuration?: number
 }
 export type ModalCloseButtonPosition = 'left' | 'right'
 export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
@@ -31,11 +31,11 @@ export function Modal({
   closeButtonIcon = <IconCross32 />,
   closeButtonPosition = 'right',
   isOpen,
+  noTransition = false,
   onCloseButtonClick,
   onEscapeKeyDown,
   onOverlayClick,
   position = 'center',
-  transitionDuration = 300,
   title,
   ...rest
 }: ModalProps): null {
@@ -128,10 +128,6 @@ export function Modal({
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
-      const transitionStyle =
-        transitionDuration === 0
-          ? { transition: 'none' }
-          : { transitionDuration: `${transitionDuration}ms` }
       render(
         <Fragment>
           <div
@@ -139,9 +135,9 @@ export function Modal({
             class={createClassName([
               styles.modal,
               isOpen === true ? styles.isOpen : null,
+              noTransition === true ? styles.noTransition : null,
               styles[position]
             ])}
-            style={transitionStyle}
           >
             {children}
             {typeof onCloseButtonClick === 'undefined' &&
@@ -175,7 +171,6 @@ export function Modal({
             onClick={
               typeof onOverlayClick === 'undefined' ? undefined : onOverlayClick
             }
-            style={transitionStyle}
           />
         </Fragment>,
         rootElementRef.current
@@ -186,12 +181,12 @@ export function Modal({
       closeButtonIcon,
       closeButtonPosition,
       isOpen,
+      noTransition,
       onCloseButtonClick,
       onOverlayClick,
       position,
       rest,
-      title,
-      transitionDuration
+      title
     ]
   )
 

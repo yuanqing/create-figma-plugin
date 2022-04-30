@@ -253,7 +253,7 @@ export const CloseButtonIcon = function () {
   )
 }
 
-export const TransitionDuration = function () {
+export const NoTransition = function () {
   const [isOpen, setIsOpen] = useState(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
@@ -267,7 +267,7 @@ export const TransitionDuration = function () {
       <Button fullWidth onClick={handleOpenButtonClick}>
         Open
       </Button>
-      <Modal isOpen={isOpen} transitionDuration={0}>
+      <Modal isOpen={isOpen} noTransition>
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
             Close
