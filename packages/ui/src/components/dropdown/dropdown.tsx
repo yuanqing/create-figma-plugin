@@ -77,7 +77,7 @@ export function Dropdown<
     throw new Error(`Invalid \`value\`: ${value}`)
   }
   const [selectedId, setSelectedId] = useState<Id>(
-    index === -1 ? null : `${index}`
+    index === -1 ? INVALID_ID : `${index}`
   )
   const children =
     typeof options[index] === 'undefined'
@@ -101,14 +101,17 @@ export function Dropdown<
     getCurrentFromRef(rootElementRef).blur()
   }, [])
 
+  const triggerUpdateMenuElementLayout = useCallback(function (selectedId: Id) {
+    const rootElement = getCurrentFromRef(rootElementRef)
+    const menuElement = getCurrentFromRef(menuElementRef)
+    updateMenuElementLayout(rootElement, menuElement, selectedId)
+  }, [])
+
   const handleRootFocus = useCallback(
     function (): void {
       // Show the menu and update the `selectedId` on focus
       setIsMenuVisible(true)
-      const rootElement = getCurrentFromRef(rootElementRef)
-      const menuElement = getCurrentFromRef(menuElementRef)
       if (value === null) {
-        updateMenuElementLayout(rootElement, menuElement, INVALID_ID)
         return
       }
       const index = findOptionIndexByValue(options, value)
@@ -117,9 +120,9 @@ export function Dropdown<
       }
       const newSelectedId = `${index}`
       setSelectedId(newSelectedId)
-      updateMenuElementLayout(rootElement, menuElement, newSelectedId)
+      triggerUpdateMenuElementLayout(newSelectedId)
     },
-    [options, value]
+    [options, triggerUpdateMenuElementLayout, value]
   )
 
   const handleRootKeyDown = useCallback(
@@ -201,21 +204,18 @@ export function Dropdown<
     ref: rootElementRef
   })
 
-  const triggerUpdateMenuElementLayout = useCallback(function () {
-    const rootElement = getCurrentFromRef(rootElementRef)
-    const menuElement = getCurrentFromRef(menuElementRef)
-    updateMenuElementLayout(rootElement, menuElement, INVALID_ID)
-  }, [])
-
   useEffect(
     function () {
-      triggerUpdateMenuElementLayout()
-      window.addEventListener('resize', triggerUpdateMenuElementLayout)
+      triggerUpdateMenuElementLayout(selectedId)
+      function handleWindowResize() {
+        triggerUpdateMenuElementLayout(selectedId)
+      }
+      window.addEventListener('resize', handleWindowResize)
       return function () {
-        window.removeEventListener('resize', triggerUpdateMenuElementLayout)
+        window.removeEventListener('resize', handleWindowResize)
       }
     },
-    [triggerUpdateMenuElementLayout]
+    [triggerUpdateMenuElementLayout, selectedId]
   )
 
   return (
@@ -359,11 +359,12 @@ function updateMenuElementLayout(
   selectedId: Id
 ) {
   // Set a maximum width and height
-  const maxHeight = window.innerHeight - 2 * VIEWPORT_MARGIN
-  menuElement.style.maxHeight = `${maxHeight}px`
-  const maxWidth = window.innerWidth - 2 * VIEWPORT_MARGIN
-  menuElement.style.maxWidth = `${maxWidth}px`
+  const menuElementMaxWidth = window.innerWidth - 2 * VIEWPORT_MARGIN
+  menuElement.style.maxWidth = `${menuElementMaxWidth}px`
+  const menuElementMaxHeight = window.innerHeight - 2 * VIEWPORT_MARGIN
+  menuElement.style.maxHeight = `${menuElementMaxHeight}px`
 
+  const rootElementBoundingClientRect = rootElement.getBoundingClientRect()
   const menuElementBoundingClientRect = menuElement.getBoundingClientRect()
 
   // Nudge `menuElement` left if needed.
@@ -375,31 +376,36 @@ function updateMenuElementLayout(
     menuElement.style.left = `-${leftOffset}px`
   }
 
-  // Exit if `selectedId` is invalid.
-  if (selectedId === INVALID_ID) {
-    // Nudge `menuElement` up if needed.
-    const topOffset =
-      menuElementBoundingClientRect.top +
-      menuElement.offsetHeight -
-      (window.innerHeight - VIEWPORT_MARGIN)
-    if (topOffset > 0) {
-      menuElement.style.top = `-${topOffset}px`
+  const topOffset =
+    rootElementBoundingClientRect.top +
+    menuElement.offsetHeight -
+    (window.innerHeight - VIEWPORT_MARGIN)
+  const maximumTopOffset = rootElementBoundingClientRect.top - VIEWPORT_MARGIN
+
+  if (menuElement.offsetHeight < menuElementMaxHeight) {
+    if (selectedId === INVALID_ID) {
+      return
     }
+
+    // Try to adjust the `top` position of `menuElement` such that
+    // `selectedElement` is directly above the `rootElement`
+    const selectedElement = menuElement.querySelector<HTMLInputElement>(
+      `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
+    )
+    if (selectedElement === null) {
+      throw new Error('Invariant violation') // `selectedId` is valid
+    }
+    const selectedElementTopOffset =
+      selectedElement.getBoundingClientRect().top -
+      menuElementBoundingClientRect.top
+    menuElement.style.top = `-${Math.min(
+      selectedElementTopOffset,
+      maximumTopOffset
+    )}px`
     return
   }
 
-  // Try to adjust the `top` position of `menuElement` such that
-  // `selectedElement` is directly above the `rootElement`
-  const selectedElement = menuElement.querySelector<HTMLInputElement>(
-    `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
-  )
-  if (selectedElement === null) {
-    throw new Error('Invariant violation') // `selectedId` is valid
-  }
-  const selectedElementTop =
-    selectedElement.getBoundingClientRect().top -
-    menuElementBoundingClientRect.top
-  const maximumTopOffset =
-    rootElement.getBoundingClientRect().top - VIEWPORT_MARGIN
-  menuElement.style.top = `-${Math.min(selectedElementTop, maximumTopOffset)}px`
+  // Adjust the `top` position of `menuElement` such that it fits within
+  // the viewport height.
+  menuElement.style.top = `-${Math.min(topOffset, maximumTopOffset)}px`
 }
