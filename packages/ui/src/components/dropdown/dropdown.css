@@ -72,3 +72,8 @@
 .noBorder:not(.disabled):hover .border {
   border-color: var(--color-silver);
 }
+
+.menu {
+  max-width: 0;
+  max-height: 0;
+}

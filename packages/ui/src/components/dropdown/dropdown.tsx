@@ -1,6 +1,6 @@
 /** @jsx h */
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../css/menu.css'
 import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside'
@@ -204,20 +204,6 @@ export function Dropdown<
     ref: rootElementRef
   })
 
-  useEffect(
-    function () {
-      triggerUpdateMenuElementLayout(selectedId)
-      function handleWindowResize() {
-        triggerUpdateMenuElementLayout(selectedId)
-      }
-      window.addEventListener('resize', handleWindowResize)
-      return function () {
-        window.removeEventListener('resize', handleWindowResize)
-      }
-    },
-    [triggerUpdateMenuElementLayout, selectedId]
-  )
-
   return (
     <div
       {...rest}
@@ -258,6 +244,7 @@ export function Dropdown<
         ref={menuElementRef}
         class={createClassName([
           menuStyles.menu,
+          dropdownStyles.menu,
           disabled === true || isMenuVisible === false
             ? menuStyles.hidden
             : null
@@ -398,9 +385,9 @@ function updateMenuElementLayout(
     const selectedElementTopOffset =
       selectedElement.getBoundingClientRect().top -
       menuElementBoundingClientRect.top
-    menuElement.style.top = `-${Math.min(
-      selectedElementTopOffset,
-      maximumTopOffset
+    menuElement.style.top = `-${Math.max(
+      Math.min(selectedElementTopOffset, maximumTopOffset),
+      topOffset
     )}px`
     return
   }
