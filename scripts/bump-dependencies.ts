@@ -1,5 +1,6 @@
 import { globby } from 'globby'
-import ncu, { RunResults } from 'npm-check-updates'
+import ncu from 'npm-check-updates'
+import { Index, PackageFile } from 'npm-check-updates/build/src/types'
 import { dirname, join, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -25,10 +26,10 @@ async function bumpDependencies(globPatterns: Array<string>): Promise<void> {
   const packageJsonFilePaths = await globby(globPatterns, {
     deep: 2
   })
-  const promises: Array<Promise<RunResults>> = []
+  const promises: Array<Promise<void | PackageFile | Index<string>>> = []
   for (const filePath of packageJsonFilePaths) {
     promises.push(
-      ncu.run({
+      ncu({
         packageFile: filePath,
         packageManager: 'npm',
         reject: args,
