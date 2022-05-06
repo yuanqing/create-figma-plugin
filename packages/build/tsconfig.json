@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
-    "lib": ["ES2020"],
+    "lib": ["DOM", "ES2020"],
     "outDir": "lib",
     "paths": {
       "cssnano": ["./src/types/untyped-dependencies.d.ts"],
