@@ -4,6 +4,11 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+const strings = [
+  'const console: Console\n',
+  'const fetch: (url: string, init?: FetchOptions) => Promise<FetchResponse>\n'
+]
+
 async function main(): Promise<void> {
   try {
     const tsFilePath = resolve(
@@ -14,12 +19,10 @@ async function main(): Promise<void> {
       'plugin-typings',
       'index.d.ts'
     )
-    const ts = await fs.readFile(tsFilePath, 'utf8')
-    const constConsoleRegex = /const console: Console\n/
-    if (constConsoleRegex.test(ts) === false) {
-      return
+    let result = await fs.readFile(tsFilePath, 'utf8')
+    for (const string of strings) {
+      result = result.replace(string, '')
     }
-    const result = ts.replace(constConsoleRegex, '')
     await fs.writeFile(tsFilePath, result)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console

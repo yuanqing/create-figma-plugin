@@ -4,11 +4,9 @@ export function filterTypeScriptDiagnostics(
   diagnostics: Array<ts.Diagnostic>
 ): Array<ts.Diagnostic> {
   return diagnostics.filter(function (diagnostic: ts.Diagnostic): boolean {
-    // The `console` global defined in `@figma/plugin-typings` clashes with
-    // the `console` global defined by the `dom` and `@types/nodes` libraries.
-    // We suppress this specific error when type-checking.
-    // See https://github.com/figma/plugin-typings/pull/52/files#diff-7aa4473ede4abd9ec099e87fec67fd57afafaf39e05d493ab4533acc38547eb8
-
+    // The `console` and `fetch` globals defined in `@figma/plugin-typings`
+    // clashes with the `console` and `fetch` globals defined by the `dom`
+    // and `@types/nodes` libraries. We suppress this specific error when type-checking.
     if (typeof diagnostic.file === 'undefined') {
       return true
     }
@@ -23,7 +21,8 @@ export function filterTypeScriptDiagnostics(
     const { code, messageText } = diagnostic
     if (
       code === 2451 &&
-      messageText !== "Cannot redeclare block-scoped variable 'console'."
+      messageText !== "Cannot redeclare block-scoped variable 'console'." &&
+      messageText !== "Cannot redeclare block-scoped variable 'fetch'."
     ) {
       return true
     }
