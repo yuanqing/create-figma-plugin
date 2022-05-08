@@ -60,8 +60,8 @@
     "eslint-config-yuanqing": "^0.0.6",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
-    "tsm": "^2.2.1",
     "typescript": "^4.5.5"
+    "ts-node": "^10.7.0",
   },
   "ava": {
     "extensions": {
@@ -69,7 +69,7 @@
     },
     "nodeArguments": [
       "--loader",
-      "tsm"
+      "ts-node/esm"
     ],
     "nonSemVerExperiments": {
       "configurableModuleFormat": true

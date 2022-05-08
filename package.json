@@ -6,12 +6,12 @@
   },
   "scripts": {
     "build": "lerna run build --ignore website --stream",
-    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader tsm scripts/bump-dependencies.ts ava css-loader style-loader",
+    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts ava css-loader style-loader",
     "clean": "rimraf '*.log'",
     "fix": "lerna run fix --parallel --stream && eslint --fix 'scripts/**/*.ts' && prettier --ignore-path lerna.json --loglevel error --write '*.json'",
     "generate-docs": "lerna run generate-docs --stream",
     "lint": "lerna run lint --parallel --stream && eslint 'scripts/**/*.ts'",
-    "patch-figma-plugin-typings": "TS_NODE_PROJECT=tsconfig.shared.json node --loader tsm scripts/patch-figma-plugin-typings.ts",
+    "patch-figma-plugin-typings": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/patch-figma-plugin-typings.ts",
     "postinstall": "simple-git-hooks && yarn run patch-figma-plugin-typings && yarn run build",
     "publish": "yarn run build && lerna publish from-package",
     "reset": "yarn run clean && lerna clean --yes && rimraf node_modules yarn.lock && yarn install",
@@ -39,8 +39,8 @@
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.7.0",
     "sirv-cli": "^2.0.2",
-    "tsm": "^2.2.1",
     "typescript": "^4.5.5"
+    "ts-node": "^10.7.0",
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing"

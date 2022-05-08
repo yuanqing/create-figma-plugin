@@ -38,12 +38,12 @@
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "yarn run clean && yarn run generate-index-ts && tsc --build && node --loader tsm scripts/add-js-extension-to-relative-module-paths.ts && yarn run copy-non-ts-files",
+    "build": "yarn run clean && yarn run generate-index-ts && tsc --build && node --loader ts-node/esm scripts/add-js-extension-to-relative-module-paths.ts && yarn run copy-non-ts-files",
     "clean": "rimraf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
-    "copy-non-ts-files": "node --loader tsm scripts/copy-non-ts-files.ts",
+    "copy-non-ts-files": "node --loader ts-node/esm scripts/copy-non-ts-files.ts",
     "fix": "eslint --fix '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json'",
-    "generate-icons-ts": "node --loader tsm scripts/generate-icons-ts.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
-    "generate-index-ts": "node --loader tsm ../../scripts/generate-index-ts.ts -- 'src/**/*.{ts,tsx}' '!src/**/private/**/*' && eslint --fix src/index.ts",
+    "generate-icons-ts": "node --loader ts-node/esm scripts/generate-icons-ts.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
+    "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.{ts,tsx}' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "lint": "eslint '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' && stylelint 'src/**/*.css'",
     "storybook": "yarn run storybook-clean && mkdirp node_modules && start-storybook --port 4242",
     "storybook-build": "yarn run storybook-clean && mkdirp node_modules && build-storybook --output-dir build",
@@ -78,9 +78,9 @@
     "stylelint": "^14.3.0",
     "stylelint-config-yuanqing": "^0.0.3",
     "svgo": "^2.8.0",
-    "tsm": "^2.2.1",
     "typescript": "^4.5.5",
     "webpack": "^5.68.0"
+    "ts-node": "^10.7.0",
   },
   "peerDependencies": {
     "preact": "^10"
