@@ -40,7 +40,7 @@
     "simple-git-hooks": "^2.7.0",
     "sirv-cli": "^2.0.2",
     "ts-node": "^10.7.0",
-    "typescript": "^4.4.4"
+    "typescript": "4.4.4"
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing"
