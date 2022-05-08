@@ -1,5 +1,5 @@
 import { log } from '@create-figma-plugin/common'
-import tempy from 'tempy'
+import { temporaryFile } from 'tempy'
 import ts from 'typescript'
 
 import { trackElapsedTime } from '../track-elapsed-time.js'
@@ -20,7 +20,7 @@ export function typeCheckWatch(): () => void {
     {
       ...compilerOptions,
       incremental: true,
-      tsBuildInfoFile: tempy.file()
+      tsBuildInfoFile: temporaryFile()
     },
     ts.sys,
     ts.createSemanticDiagnosticsBuilderProgram,
