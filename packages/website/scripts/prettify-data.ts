@@ -11,7 +11,7 @@ async function main(): Promise<void> {
       })
       .map(function (data: Record<string, any>) {
         return {
-          authors: data.authors.sort(function (x, y) {
+          authors: data.authors.sort(function (x: any, y: any) {
             return x.name.localeCompare(y.name)
           }),
           description: data.description,
