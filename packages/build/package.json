@@ -78,15 +78,14 @@
     "extensions": {
       "ts": "module"
     },
+    "failFast": true,
     "nodeArguments": [
       "--loader",
       "ts-node/esm"
     ],
-    "nonSemVerExperiments": {
-      "configurableModuleFormat": true
-    },
     "serial": true,
-    "timeout": "2m"
+    "timeout": "2m",
+    "workerThreads": false
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing"
