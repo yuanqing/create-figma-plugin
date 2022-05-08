@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.1
+
+- `@create-figma-plugin/ui`
+  - Revert to `css-loader@5.2.7` and `style-loader@2.0.0`
+
+- Revert to `cpy-cli@3.1.1`
+
 ## 1.9.0
 
 - `@create-figma-plugin/build`
