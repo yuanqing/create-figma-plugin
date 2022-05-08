@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.9.0
+
+- `@create-figma-plugin/build`
+  - Fixed build error in Windows caused by `exec` call to `tcm` ([#96](https://github.com/yuanqing/create-figma-plugin/issues/96))
+  - Suppressed the `Cannot redeclare block-scoped variable 'fetch'.` type-check error when using `@figma/plugin-typings@^1.44.0` ([#98](https://github.com/yuanqing/create-figma-plugin/issues/98))
+
+- `@create-figma-plugin/ui`
+  - Fixed a bug with scrollbars appearing in the `Dropdown` component ([#97](https://github.com/yuanqing/create-figma-plugin/issues/97))
+  - Added a `noTransition` prop to the `Modal` component
+
+- Bumped dependencies in all packages
+  - Used `ava@4`, which required replacing `tsm` with `ts-node`
+  - Pinned to `typescript@4.4.4`
+
 ## 1.8.4
 
 - `@create-figma-plugin/build`
