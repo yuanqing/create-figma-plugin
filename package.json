@@ -6,7 +6,7 @@
   },
   "scripts": {
     "build": "lerna run build --ignore website --stream",
-    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts ava css-loader style-loader",
+    "bump-dependencies": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/bump-dependencies.ts css-loader style-loader",
     "clean": "rimraf '*.log'",
     "fix": "lerna run fix --parallel --stream && eslint --fix 'scripts/**/*.ts' && prettier --ignore-path lerna.json --loglevel error --write '*.json'",
     "generate-docs": "lerna run generate-docs --stream",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.31",
-    "cpy-cli": "^4.1.0",
+    "cpy-cli": "^3.1.1",
     "eslint": "^8.15.0",
     "eslint-config-yuanqing": "^0.0.6",
     "gh-pages": "^3.2.3",
