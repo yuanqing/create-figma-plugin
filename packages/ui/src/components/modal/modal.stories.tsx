@@ -19,9 +19,7 @@ export const Default = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen}>
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
@@ -44,9 +42,7 @@ export const PositionBottom = function () {
   const style = { height: '160px', padding: '12px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen} position="bottom">
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
@@ -69,9 +65,7 @@ export const PositionLeft = function () {
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen} position="left">
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
@@ -94,9 +88,7 @@ export const PositionRight = function () {
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen} position="right">
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
@@ -119,9 +111,7 @@ export const CloseOnOverlayClick = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen} onOverlayClick={handleOverlayClick}>
         <div style={style}>foo</div>
       </Modal>
@@ -140,9 +130,7 @@ export const CloseOnEscapeKeyDown = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen} onEscapeKeyDown={handleEscapeKeyDown}>
         <div style={style}>foo</div>
       </Modal>
@@ -161,9 +149,7 @@ export const Title = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen} title="foo">
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
@@ -186,9 +172,7 @@ export const CloseButton = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
         isOpen={isOpen}
         onCloseButtonClick={handleCloseButtonClick}
@@ -211,9 +195,7 @@ export const CloseButtonPosition = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
         closeButtonPosition="left"
         isOpen={isOpen}
@@ -237,9 +219,7 @@ export const CloseButtonIcon = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
         closeButtonIcon={<IconReturn32 />}
         closeButtonPosition="left"
@@ -264,9 +244,7 @@ export const NoTransition = function () {
   const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
-      <Button fullWidth onClick={handleOpenButtonClick}>
-        Open
-      </Button>
+      <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal isOpen={isOpen} noTransition>
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
