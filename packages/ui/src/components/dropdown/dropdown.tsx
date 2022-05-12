@@ -112,6 +112,7 @@ export function Dropdown<
       // Show the menu and update the `selectedId` on focus
       setIsMenuVisible(true)
       if (value === null) {
+        triggerUpdateMenuElementLayout(selectedId)
         return
       }
       const index = findOptionIndexByValue(options, value)
@@ -122,7 +123,7 @@ export function Dropdown<
       setSelectedId(newSelectedId)
       triggerUpdateMenuElementLayout(newSelectedId)
     },
-    [options, triggerUpdateMenuElementLayout, value]
+    [options, selectedId, triggerUpdateMenuElementLayout, value]
   )
 
   const handleRootKeyDown = useCallback(
