@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.2
+
+- `@create-figma-plugin/ui`
+  - Fix a bug with the `Dropdown` menu not re-calculating its height when `value` is `null` ([#100](https://github.com/yuanqing/create-figma-plugin/issues/100))
+
 ## 1.9.1
 
 - `@create-figma-plugin/ui`
