@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "Initialize a new Figma/FigJam plugin/widget using a template",
   "keywords": [
     "create-figma-plugin",
@@ -36,7 +36,7 @@
     "test": "yarn run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^1.9.1",
+    "@create-figma-plugin/common": "^1.9.2",
     "fs-extra": "^10.1.0",
     "globby": "^13.1.1",
     "inquirer": "^8.2.4",
