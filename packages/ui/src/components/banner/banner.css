@@ -7,14 +7,16 @@
 }
 
 .informative {
-  background-color: var(--color-selection-b);
+  background-color: var(--figma-color-bg-brand-tertiary);
+  color: var(--figma-color-text);
 }
 .upsell {
-  background-color: var(--color-green);
-  color: var(--color-white);
+  background-color: var(--figma-color-bg-success);
+  color: var(--figma-color-text-oninverse);
 }
 .warning {
-  background-color: var(--color-yellow);
+  background-color: var(--figma-color-bg-warning);
+  color: var(--figma-color-text);
 }
 
 .icon {

@@ -65,6 +65,7 @@
 
 body {
   margin: 0;
+  background-color: var(--figma-color-bg);
   font-family: var(--font-family);
   font-size: var(--font-size-11);
   font-weight: var(--font-weight-regular);

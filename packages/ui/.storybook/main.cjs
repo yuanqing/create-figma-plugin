@@ -1,4 +1,4 @@
-const baseCssRegex = /css\/base\.css$/
+const baseCssRegex = /css\/(?:base|theme)\.css$/
 
 function webpackFinal(config) {
   const index = config.module.rules.findIndex(function (rule) {

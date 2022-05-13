@@ -10,35 +10,35 @@
   color: currentColor;
 }
 
-.disabled {
-  opacity: var(--opacity-30);
-}
 .disabled button {
   cursor: not-allowed;
 }
 
 .primary {
   color: var(
-    --color-white
+    --figma-color-text-onbrand
   ); /* Set the color of the `button` element and `LoadingIndicator` */
 }
 .primary button {
   padding: 0 14px;
   border: 2px solid transparent;
-  background-color: var(--color-accent);
+  background-color: var(--figma-color-bg-brand);
   line-height: 28px;
 }
 .primary:not(.disabled) button:focus {
-  border-color: var(--color-black-30-translucent);
+  border-color: var(--figma-color-border-selected-strong);
 }
 .primary.destructive {
-  color: var(--color-white);
+  color: var(--figma-color-text-onbrand);
 }
 .primary.destructive button {
-  background-color: var(--color-red);
+  background-color: var(--figma-color-bg-danger);
+}
+.primary.destructive:not(.disabled) button:focus {
+  border-color: var(--figma-color-border-danger-strong);
 }
 .primary.disabled button {
-  background-color: var(--color-black);
+  background-color: var(--figma-color-text-disabled);
 }
 
 .secondary {

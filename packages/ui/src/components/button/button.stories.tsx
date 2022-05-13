@@ -25,23 +25,23 @@ export const Focused = function () {
   )
 }
 
-export const Loading = function () {
-  function handleClick() {
-    throw new Error('This function should not be called')
-  }
-  return (
-    <Button loading onClick={handleClick}>
-      Text
-    </Button>
-  )
-}
-
 export const Disabled = function () {
   function handleClick() {
     throw new Error('This function should not be called')
   }
   return (
     <Button disabled onClick={handleClick}>
+      Text
+    </Button>
+  )
+}
+
+export const Loading = function () {
+  function handleClick() {
+    throw new Error('This function should not be called')
+  }
+  return (
+    <Button loading onClick={handleClick}>
       Text
     </Button>
   )
@@ -87,6 +87,28 @@ export const Secondary = function () {
   )
 }
 
+export const SecondaryFocused = function () {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
+    console.log(event)
+  }
+  return (
+    <Button {...useInitialFocus()} onClick={handleClick} secondary>
+      Text
+    </Button>
+  )
+}
+
+export const SecondaryDisabled = function () {
+  function handleClick() {
+    throw new Error('This function should not be called')
+  }
+  return (
+    <Button disabled onClick={handleClick} secondary>
+      Text
+    </Button>
+  )
+}
+
 export const Destructive = function () {
   function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
@@ -98,12 +120,56 @@ export const Destructive = function () {
   )
 }
 
+export const DestructiveFocused = function () {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
+    console.log(event)
+  }
+  return (
+    <Button {...useInitialFocus()} destructive onClick={handleClick}>
+      Text
+    </Button>
+  )
+}
+
+export const DestructiveDisabled = function () {
+  function handleClick() {
+    throw new Error('This function should not be called')
+  }
+  return (
+    <Button destructive disabled onClick={handleClick}>
+      Text
+    </Button>
+  )
+}
+
 export const DestructiveSecondary = function () {
   function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
   return (
     <Button destructive onClick={handleClick} secondary>
+      Text
+    </Button>
+  )
+}
+
+export const DestructiveSecondaryFocused = function () {
+  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
+    console.log(event)
+  }
+  return (
+    <Button {...useInitialFocus()} destructive onClick={handleClick} secondary>
+      Text
+    </Button>
+  )
+}
+
+export const DestructiveSecondaryDisabled = function () {
+  function handleClick() {
+    throw new Error('This function should not be called')
+  }
+  return (
+    <Button destructive disabled onClick={handleClick} secondary>
       Text
     </Button>
   )

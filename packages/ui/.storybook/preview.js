@@ -1,4 +1,5 @@
 /** @jsx h */
+import '../src/css/theme.css'
 import '../src/css/base.css'
 
 import { h } from 'preact'
@@ -28,10 +29,12 @@ export const parameters = {
     }
   },
   themes: {
-    default: 'Figma',
+    clearable: false,
+    default: 'Figma Light',
     list: [
-      { class: 'theme-figma', color: '#18a0fb', name: 'Figma' },
-      { class: 'theme-figjam', color: '#974bff', name: 'FigJam' }
+      { class: 'theme-figma-light', color: '#0d99ff', name: 'Figma Light' },
+      { class: 'theme-figma-dark', color: '#0c8ce9', name: 'Figma Dark' },
+      { class: 'theme-figjam', color: '#9747ff', name: 'FigJam' }
     ]
   }
 }
