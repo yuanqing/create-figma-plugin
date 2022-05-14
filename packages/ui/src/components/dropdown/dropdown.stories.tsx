@@ -34,35 +34,6 @@ export const Empty = function () {
   return <Dropdown onChange={handleChange} options={options} value={value} />
 }
 
-export const DynamicallySetOptions = function () {
-  const [value, setValue] = useState<null | string>(null)
-  const [options, setOptions] = useState<Array<DropdownOption>>([
-    { value: 'foo' }
-  ])
-  function handleClick() {
-    setOptions([
-      { value: 'foo' },
-      { value: 'bar' },
-      { value: 'baz' },
-      { separator: true },
-      { header: 'Header' },
-      { value: 'qux' }
-    ])
-  }
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Fragment>
-      <Button onClick={handleClick}>Set Options</Button>
-      <VerticalSpace />
-      <Dropdown onChange={handleChange} options={options} value={value} />
-    </Fragment>
-  )
-}
-
 export const Focused = function () {
   const [value, setValue] = useState('foo')
   const options: Array<DropdownOption> = [
@@ -321,5 +292,34 @@ export const FlexParent = function () {
       <Dropdown onChange={handleChangeA} options={optionsA} value={valueA} />
       <Dropdown onChange={handleChangeB} options={optionsB} value={valueB} />
     </div>
+  )
+}
+
+export const DynamicallySetOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const [options, setOptions] = useState<Array<DropdownOption>>([
+    { value: 'foo' }
+  ])
+  function handleClick() {
+    setOptions([
+      { value: 'foo' },
+      { value: 'bar' },
+      { value: 'baz' },
+      { separator: true },
+      { header: 'Header' },
+      { value: 'qux' }
+    ])
+  }
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Fragment>
+      <Button onClick={handleClick}>Set Options</Button>
+      <VerticalSpace />
+      <Dropdown onChange={handleChange} options={options} value={value} />
+    </Fragment>
   )
 }
