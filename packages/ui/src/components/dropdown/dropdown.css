@@ -2,6 +2,8 @@
   position: relative;
   z-index: var(--z-index-1);
   display: flex;
+  width: 100%;
+  min-width: 0; /* See https://css-tricks.com/flexbox-truncated-text/ */
   height: 28px;
   align-items: center;
   padding-left: var(--space-extra-small);
