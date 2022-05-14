@@ -294,3 +294,32 @@ export const OnValueChange = function () {
   ]
   return <Dropdown onValueChange={setValue} options={options} value={value} />
 }
+
+export const FlexParent = function () {
+  const [valueA, setValueA] = useState(Array(20).fill('foo').join(' '))
+  const optionsA: Array<DropdownOption> = [
+    { value: Array(20).fill('foo').join(' ') },
+    { value: 'bar' }
+  ]
+  function handleChangeA(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValueA(newValue)
+  }
+  const [valueB, setValueB] = useState('qux')
+  const optionsB: Array<DropdownOption> = [
+    { value: Array(20).fill('baz').join(' ') },
+    { value: 'qux' }
+  ]
+  function handleChangeB(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValueB(newValue)
+  }
+  return (
+    <div style={{ display: 'flex' }}>
+      <Dropdown onChange={handleChangeA} options={optionsA} value={valueA} />
+      <Dropdown onChange={handleChangeB} options={optionsB} value={valueB} />
+    </div>
+  )
+}
