@@ -6,7 +6,7 @@
 }
 
 .isDropActive {
-  background-color: var(--color-selection-b);
+  background-color: var(--figma-color-bg-selected-secondary);
 }
 
 .input,
@@ -22,17 +22,17 @@
   z-index: var(
     --z-index-1
   ); /* stack `.input` over all other elements within `.fileUploadDropzone` */
-  width: 100%;
+  display: block;
   opacity: 0;
 }
 
 .dashedLine {
-  border: 1px dashed var(--color-black-30);
+  border: 1px dashed var(--figma-color-border);
 }
 .input:active ~ .dashedLine,
 .input:focus ~ .dashedLine,
 .isDropActive .dashedLine {
-  border-color: var(--color-accent);
+  border-color: var(--figma-color-border-brand);
 }
 
 .children {

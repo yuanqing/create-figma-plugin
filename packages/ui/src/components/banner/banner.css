@@ -4,24 +4,35 @@
   min-height: 48px;
   align-items: center;
   padding: var(--space-small) var(--space-medium) var(--space-small) 44px;
-}
-
-.informative {
   background-color: var(--figma-color-bg-brand-tertiary);
-  color: var(--figma-color-text);
 }
-.upsell {
-  background-color: var(--figma-color-bg-success);
-  color: var(--figma-color-text-oninverse);
-}
-.warning {
-  background-color: var(--figma-color-bg-warning);
-  color: var(--figma-color-text);
-}
-
 .icon {
   position: absolute;
   top: 24px;
   left: 24px;
+  color: var(--figma-color-icon);
   transform: translate(-50%, -50%);
+}
+.children {
+  color: var(--figma-color-text);
+}
+
+.success {
+  background-color: var(--figma-color-bg-success);
+}
+.success .icon {
+  color: var(--figma-color-icon-onsuccess);
+}
+.success .children {
+  color: var(--figma-color-text-onsuccess);
+}
+
+.warning {
+  background-color: var(--figma-color-bg-warning);
+}
+.warning .icon {
+  color: var(--figma-color-icon-onwarning);
+}
+.warning .children {
+  color: var(--figma-color-text-onwarning);
 }

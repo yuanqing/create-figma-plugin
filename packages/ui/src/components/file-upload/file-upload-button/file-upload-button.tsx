@@ -2,11 +2,11 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
+import styles from '../../../css/button.css'
 import { Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { LoadingIndicator } from '../../loading-indicator/loading-indicator'
 import { fileComparator } from '../private/file-comparator'
-import styles from './file-upload-button.css'
 
 export type FileUploadButtonProps = {
   acceptedFileTypes?: Array<string>
@@ -82,7 +82,7 @@ export function FileUploadButton({
   return (
     <div
       class={createClassName([
-        styles.fileUploadButton,
+        styles.button,
         secondary === true ? styles.secondary : styles.primary,
         fullWidth === true ? styles.fullWidth : null,
         disabled === true ? styles.disabled : null,
@@ -117,7 +117,7 @@ export function FileUploadButton({
         type="file"
       />
       <button disabled={disabled === true} tabIndex={-1}>
-        {children}
+        <div class={styles.children}>{children}</div>
       </button>
     </div>
   )

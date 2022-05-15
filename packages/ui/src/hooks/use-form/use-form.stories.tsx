@@ -3,9 +3,9 @@
 import { Fragment, h } from 'preact'
 
 import { Button } from '../../components/button/button'
-import { VerticalSpace } from '../../components/layout/vertical-space/vertical-space'
 import { Text } from '../../components/text/text'
 import { Textbox } from '../../components/textbox/textbox/textbox'
+import { VerticalSpace } from '../../components/vertical-space/vertical-space'
 import { useForm } from './use-form'
 
 export default { title: 'Hooks/Use Form' }

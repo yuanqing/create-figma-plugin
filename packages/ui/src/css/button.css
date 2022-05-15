@@ -1,0 +1,133 @@
+.button {
+  position: relative;
+  z-index: var(--z-index-1);
+  display: inline-block;
+}
+.button button {
+  display: inline-block;
+  height: 32px;
+  border-radius: var(--border-radius-6);
+}
+
+.disabled button {
+  cursor: not-allowed;
+}
+
+.loadingIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.children {
+  display: inline;
+}
+.loading .children {
+  visibility: hidden;
+}
+
+.fullWidth {
+  display: block;
+}
+.fullWidth button {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.primary button {
+  padding: 0 14px;
+  border: 2px solid transparent;
+  background-color: var(--figma-color-bg-brand);
+  color: var(--figma-color-text-onbrand);
+  line-height: 28px;
+}
+.primary:not(.disabled) button:focus,
+.primary:not(.disabled) .input:focus ~ button {
+  border-color: var(--figma-color-border-selected-strong);
+}
+.primary.disabled button {
+  background-color: var(--figma-color-bg-disabled);
+  color: var(--figma-color-text-ondisabled);
+}
+.primary .loadingIndicator {
+  color: var(--figma-color-icon-onbrand);
+}
+.primary.disabled .loadingIndicator {
+  color: var(--figma-color-icon-ondisabled);
+}
+
+.primary.danger button {
+  background-color: var(--figma-color-bg-danger);
+  color: var(--figma-color-text-ondanger);
+}
+.primary.danger:not(.disabled) button:focus {
+  border-color: var(--figma-color-border-danger-strong);
+}
+.primary.danger.disabled button {
+  background-color: var(--figma-color-bg-disabled);
+  color: var(--figma-color-text-ondisabled);
+}
+.primary.danger .loadingIndicator {
+  color: var(--figma-color-icon-ondanger);
+}
+.primary.danger.disabled .loadingIndicator {
+  color: var(--figma-color-icon-ondisabled);
+}
+
+.secondary button {
+  padding: 0 15px;
+  border: 1px solid var(--figma-color-border-strong);
+  background-color: transparent;
+  color: var(--figma-color-text);
+  line-height: 30px;
+}
+.secondary:not(.disabled) button:focus,
+.secondary:not(.disabled) .input:focus ~ button {
+  padding: 0 14px;
+  border-width: 2px;
+  border-color: var(--figma-color-border-selected);
+  line-height: 28px;
+}
+.secondary.disabled button {
+  border-color: var(--figma-color-border-disabled-strong);
+  color: var(--figma-color-text-disabled);
+}
+.secondary .loadingIndicator {
+  color: var(--figma-color-text);
+}
+.secondary.disabled .loadingIndicator {
+  color: var(--figma-color-text-disabled);
+}
+
+.secondary.danger button {
+  border-color: var(--figma-color-border-danger-strong);
+  color: var(--figma-color-text-danger);
+}
+.secondary.danger:not(.disabled) button:focus {
+  border-color: var(--figma-color-border-danger-strong);
+}
+.secondary.danger.disabled button {
+  border-color: var(--figma-color-border-disabled-strong);
+  color: var(--figma-color-text-disabled);
+}
+.secondary.danger .loadingIndicator {
+  color: var(--figma-color-text-danger);
+}
+.secondary.danger.disabled .loadingIndicator {
+  color: var(--figma-color-text-disabled);
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+}

@@ -2,7 +2,7 @@ import { paramCase, pascalCase, pascalCaseTransformMerge } from 'change-case'
 import fs from 'fs-extra'
 import { globby } from 'globby'
 import { basename, dirname, extname, join, resolve } from 'path'
-import { optimize } from 'svgo'
+import { optimize, OptimizedError, OptimizedSvg } from 'svgo'
 import { fileURLToPath } from 'url'
 
 type SvgFile = {
@@ -77,7 +77,7 @@ async function readSvgFilesAsync(
 async function readSvgFileAsync(filePath: string): Promise<SvgFile> {
   const baseName = basename(filePath, extname(filePath))
   const svgString = await fs.readFile(filePath, 'utf8')
-  const result = optimize(svgString, {
+  const result: OptimizedSvg | OptimizedError = optimize(svgString, {
     plugins: [
       {
         name: 'convertPathData',
@@ -87,18 +87,22 @@ async function readSvgFileAsync(filePath: string): Promise<SvgFile> {
       }
     ]
   })
-  const { width, height } = result.info
+  if (typeof result.error !== 'undefined') {
+    throw new Error(`\`svgo\` error: ${result.error}`)
+  }
+  const optimizedSvg = result as OptimizedSvg
+  const { width, height } = optimizedSvg.info
   if (width !== height) {
     throw new Error(`Different \`width\` and \`height\`: ${filePath}`)
   }
-  const dimension = parseInt(result.info.width, 10)
+  const dimension = parseInt(optimizedSvg.info.width, 10)
   return {
     baseName: paramCase(`icon-${baseName}-${dimension}`),
     componentName: pascalCase(`Icon ${baseName} ${dimension}`, {
       transform: pascalCaseTransformMerge
     }),
     dimension,
-    svgPath: extractSvgPath(result.data, filePath)
+    svgPath: extractSvgPath(optimizedSvg.data, filePath)
   }
 }
 
@@ -156,7 +160,7 @@ async function writeStoriesAsync(
   const imports = []
   const stories = []
   for (const { baseName, componentName } of svgFiles) {
-    imports.push(`import { ${componentName} } from './${baseName}'`)
+    imports.push(`import { ${componentName} } from '../${baseName}'`)
     stories.push(`export const ${componentName
       .replace(/^Icon/, '')
       .replace(/\d+$/, '')} = function () {
@@ -172,7 +176,11 @@ export default { title: 'Components/Icon/Size ${dimension}' }
 
 ${stories.join('\n\n')}
 `
-  const filePath = join(directoryPath, `icon-${dimension}.stories.tsx`)
+  const filePath = join(
+    directoryPath,
+    'stories',
+    `icon-${dimension}.stories.tsx`
+  )
   await writeFileAsync(filePath, fileContents)
 }
 

@@ -66,6 +66,7 @@
 body {
   margin: 0;
   background-color: var(--figma-color-bg);
+  color: var(--figma-color-text);
   font-family: var(--font-family);
   font-size: var(--font-size-11);
   font-weight: var(--font-weight-regular);
@@ -118,16 +119,6 @@ svg {
   display: block;
 }
 
-.theme-figjam {
-  --color-accent: var(--color-figjam-purple);
-}
-.theme-figjam ::selection {
-  background-color: var(--color-figjam-purple-20-translucent);
-}
-
-.theme-figma {
-  --color-accent: var(--color-blue);
-}
-.theme-figma ::selection {
-  background-color: var(--color-blue-30-translucent);
+::selection {
+  background-color: var(--figma-color-bg-onselected);
 }

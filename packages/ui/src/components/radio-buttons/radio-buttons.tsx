@@ -4,7 +4,7 @@ import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
-import { Stack, StackSpace } from '../layout/stack/stack'
+import { Stack, StackSpace } from '../stack/stack'
 import styles from './radio-buttons.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-radio-buttons-item-id'

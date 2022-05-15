@@ -3,6 +3,16 @@ export { Banner, BannerProps, BannerType } from './components/banner/banner.js'
 export { Button, ButtonProps } from './components/button/button.js'
 export { Checkbox, CheckboxProps } from './components/checkbox/checkbox.js'
 export {
+  Columns,
+  ColumnsProps,
+  ColumnsSpace
+} from './components/columns/columns.js'
+export {
+  Container,
+  ContainerProps,
+  ContainerSpace
+} from './components/container/container.js'
+export {
   Disclosure,
   DisclosureProps
 } from './components/disclosure/disclosure.js'
@@ -208,44 +218,20 @@ export { IconWarning32 } from './components/icon/icon-32/icon-warning-32.js'
 export { IconWarningFilled32 } from './components/icon/icon-32/icon-warning-filled-32.js'
 export { IconWorld32 } from './components/icon/icon-32/icon-world-32.js'
 export {
-  IconButton,
-  IconButtonProps
-} from './components/icon-button/icon-button.js'
+  IconToggleButton,
+  IconToggleButtonProps
+} from './components/icon-toggle-button/icon-toggle-button.js'
+export { Inline, InlineProps, InlineSpace } from './components/inline/inline.js'
 export { Layer, LayerColor, LayerProps } from './components/layer/layer.js'
-export {
-  Columns,
-  ColumnsProps,
-  ColumnsSpace
-} from './components/layout/columns/columns.js'
-export {
-  Container,
-  ContainerProps,
-  ContainerSpace
-} from './components/layout/container/container.js'
-export {
-  Inline,
-  InlineProps,
-  InlineSpace
-} from './components/layout/inline/inline.js'
-export {
-  MiddleAlign,
-  MiddleAlignProps
-} from './components/layout/middle-align/middle-align.js'
-export {
-  Stack,
-  StackProps,
-  StackSpace
-} from './components/layout/stack/stack.js'
-export {
-  VerticalSpace,
-  VerticalSpaceProps,
-  VerticalSpaceSpace
-} from './components/layout/vertical-space/vertical-space.js'
 export {
   LoadingIndicator,
   LoadingIndicatorColor,
   LoadingIndicatorProps
 } from './components/loading-indicator/loading-indicator.js'
+export {
+  MiddleAlign,
+  MiddleAlignProps
+} from './components/middle-align/middle-align.js'
 export {
   Modal,
   ModalCloseButtonPosition,
@@ -271,6 +257,7 @@ export {
   SelectableItem,
   SelectableItemProps
 } from './components/selectable-item/selectable-item.js'
+export { Stack, StackProps, StackSpace } from './components/stack/stack.js'
 export { Tabs, TabsOption, TabsProps } from './components/tabs/tabs.js'
 export { Text, TextAlignment, TextProps } from './components/text/text.js'
 export { Textbox, TextboxProps } from './components/textbox/textbox/textbox.js'
@@ -295,6 +282,11 @@ export {
   TextboxNumericProps
 } from './components/textbox/textbox-numeric/textbox-numeric.js'
 export { Toggle, ToggleProps } from './components/toggle/toggle.js'
+export {
+  VerticalSpace,
+  VerticalSpaceProps,
+  VerticalSpaceSpace
+} from './components/vertical-space/vertical-space.js'
 export { useFocusTrap } from './hooks/use-focus-trap/use-focus-trap.js'
 export { useForm } from './hooks/use-form/use-form.js'
 export {

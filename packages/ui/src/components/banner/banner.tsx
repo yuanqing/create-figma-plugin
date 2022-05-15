@@ -10,18 +10,24 @@ export type BannerProps = {
   icon: ComponentChildren
   type?: BannerType
 }
-export type BannerType = 'informative' | 'upsell' | 'warning'
+export type BannerType = 'success' | 'warning'
 
 export function Banner({
   children,
   icon,
-  type = 'informative',
+  type,
   ...rest
 }: Props<HTMLDivElement, BannerProps>): JSX.Element {
   return (
-    <div {...rest} class={createClassName([styles.banner, styles[type]])}>
+    <div
+      {...rest}
+      class={createClassName([
+        styles.banner,
+        typeof type === 'undefined' ? null : styles[type]
+      ])}
+    >
       <div class={styles.icon}>{icon}</div>
-      <div>{children}</div>
+      <div class={styles.children}>{children}</div>
     </div>
   )
 }

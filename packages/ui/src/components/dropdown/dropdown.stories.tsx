@@ -6,7 +6,7 @@ import { useState } from 'preact/hooks'
 import { useInitialFocus } from '../../hooks/use-initial-focus/use-initial-focus'
 import { Button } from '../button/button'
 import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
-import { VerticalSpace } from '../layout/vertical-space/vertical-space'
+import { VerticalSpace } from '../vertical-space/vertical-space'
 import { Dropdown, DropdownOption } from './dropdown'
 
 export default {

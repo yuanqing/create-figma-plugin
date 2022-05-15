@@ -6,9 +6,6 @@
 .label {
   position: relative;
 }
-.disabled {
-  opacity: var(--opacity-30);
-}
 
 .input {
   position: absolute;
@@ -33,7 +30,10 @@
   border-radius: 3px;
 }
 .input:checked ~ .fill {
-  background-color: var(--color-black-80);
+  background-color: var(--figma-color-icon);
+}
+.disabled .input:checked ~ .fill {
+  background-color: var(--figma-color-icon-disabled);
 }
 
 .border {
@@ -42,7 +42,7 @@
   left: 0;
   width: 12px;
   height: 12px;
-  border: 1px solid var(--color-black-80);
+  border: 1px solid var(--figma-color-border-strong);
   border-radius: 6px;
 }
 .radioButtons:not(.disabled) .input:focus ~ .border {
@@ -50,11 +50,17 @@
   left: -1px;
   width: 14px;
   height: 14px;
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--figma-color-border-selected);
   border-radius: 7px;
+}
+.disabled .input ~ .border {
+  border-color: var(--figma-color-border-disabled-strong);
 }
 
 .children {
   min-height: 12px;
   padding: 2px 0 0 20px;
+}
+.disabled .children {
+  opacity: var(--opacity-30);
 }

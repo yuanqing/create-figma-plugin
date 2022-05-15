@@ -6,6 +6,7 @@
 
 .title {
   position: relative;
+  color: var(--figma-color-text);
   font-weight: var(--font-weight-bold);
 }
 .title:hover {
@@ -16,6 +17,7 @@
   position: absolute;
   top: var(--space-extra-small);
   left: 0;
+  color: var(--figma-color-icon);
 }
 .isOpen .icon {
   top: calc(var(--space-extra-small) - 2px);
@@ -25,6 +27,7 @@
 
 .children {
   display: none;
+  color: var(--figma-color-text);
 }
 .isOpen .children {
   display: block;

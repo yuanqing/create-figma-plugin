@@ -2,14 +2,14 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
+import styles from '../../css/button.css'
 import { Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
-import styles from './button.css'
 
 export type ButtonProps = {
   children: ComponentChildren
-  destructive?: boolean
+  danger?: boolean
   disabled?: boolean
   fullWidth?: boolean
   loading?: boolean
@@ -20,7 +20,7 @@ export type ButtonProps = {
 
 export function Button({
   children,
-  destructive = false,
+  danger = false,
   disabled = false,
   fullWidth = false,
   loading = false,
@@ -50,7 +50,7 @@ export function Button({
       class={createClassName([
         styles.button,
         secondary === true ? styles.secondary : styles.primary,
-        destructive === true ? styles.destructive : null,
+        danger === true ? styles.danger : null,
         fullWidth === true ? styles.fullWidth : null,
         disabled === true ? styles.disabled : null,
         loading === true ? styles.loading : null
@@ -70,7 +70,7 @@ export function Button({
         }
         tabIndex={disabled === true ? -1 : 0}
       >
-        {children}
+        <div class={styles.children}>{children}</div>
       </button>
     </div>
   )

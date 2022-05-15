@@ -4,9 +4,9 @@
   display: flex;
   align-items: center;
 }
-.disabled {
+/* .disabled {
   opacity: var(--opacity-30);
-}
+} */
 
 .input {
   width: 100%;
@@ -14,13 +14,14 @@
   flex-grow: 1;
   padding-left: 36px;
   background-color: transparent;
-  color: var(--color-black-80);
+  color: var(--figma-color-text);
 }
 .disabled .input {
+  color: var(--figma-color-text-disabled);
   cursor: not-allowed;
 }
 .input::placeholder {
-  color: var(--color-black-30);
+  color: var(--figma-color-text-tertiary);
 }
 
 .searchIcon {
@@ -30,20 +31,26 @@
   width: 40px;
   height: 40px;
   padding: 4px;
-  color: var(--color-black-80);
+  color: var(--figma-color-icon);
   pointer-events: none; /* so that clicking the icon focuses the textbox */
+}
+.disabled .searchIcon {
+  color: var(--figma-color-icon-disabled);
 }
 
 .clearButton {
   height: 40px;
   flex: 0 0 40px;
   padding: 4px;
-  color: var(--color-black-30);
+  color: var(--figma-color-icon-secondary);
 }
 .searchTextbox:not(.disabled) .clearButton:hover {
-  color: var(--color-black-80);
+  color: var(--figma-color-icon);
 }
 .searchTextbox:not(.disabled) .clearButton:focus {
-  color: var(--color-black-80);
+  color: var(--figma-color-icon);
   outline: 0;
+}
+.disabled .clearButton {
+  color: var(--figma-color-icon-disabled);
 }
