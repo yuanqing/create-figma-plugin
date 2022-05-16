@@ -48,24 +48,7 @@ export const UnselectedFocused = function () {
   )
 }
 
-export const UnselectedOneDisabled = function () {
-  const [value, setValue] = useState<null | string>(null)
-  const options: Array<RadioButtonsOption> = [
-    { children: <Text>foo</Text>, value: 'foo' },
-    { children: <Text>bar</Text>, disabled: true, value: 'bar' },
-    { children: <Text>baz</Text>, value: 'baz' }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <RadioButtons onChange={handleChange} options={options} value={value} />
-  )
-}
-
-export const UnselectedAllDisabled = function () {
+export const UnselectedDisabled = function () {
   const options: Array<RadioButtonsOption> = [
     { children: <Text>foo</Text>, value: 'foo' },
     { children: <Text>bar</Text>, value: 'bar' },
@@ -81,6 +64,23 @@ export const UnselectedAllDisabled = function () {
       options={options}
       value={null}
     />
+  )
+}
+
+export const UnselectedDisabledOption = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<RadioButtonsOption> = [
+    { children: <Text>foo</Text>, value: 'foo' },
+    { children: <Text>bar</Text>, disabled: true, value: 'bar' },
+    { children: <Text>baz</Text>, value: 'baz' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <RadioButtons onChange={handleChange} options={options} value={value} />
   )
 }
 
@@ -123,24 +123,7 @@ export const SelectedFocused = function () {
   )
 }
 
-export const SelectedOneDisabled = function () {
-  const [value, setValue] = useState<string>('bar')
-  const options: Array<RadioButtonsOption> = [
-    { children: <Text>foo</Text>, value: 'foo' },
-    { children: <Text>bar</Text>, disabled: true, value: 'bar' },
-    { children: <Text>baz</Text>, value: 'baz' }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <RadioButtons onChange={handleChange} options={options} value={value} />
-  )
-}
-
-export const SelectedAllDisabled = function () {
+export const SelectedDisabled = function () {
   const options: Array<RadioButtonsOption> = [
     { children: <Text>foo</Text>, value: 'foo' },
     { children: <Text>bar</Text>, value: 'bar' },
@@ -156,6 +139,23 @@ export const SelectedAllDisabled = function () {
       options={options}
       value="bar"
     />
+  )
+}
+
+export const SelectedDisabledOption = function () {
+  const [value, setValue] = useState<string>('bar')
+  const options: Array<RadioButtonsOption> = [
+    { children: <Text>foo</Text>, value: 'foo' },
+    { children: <Text>bar</Text>, disabled: true, value: 'bar' },
+    { children: <Text>baz</Text>, value: 'baz' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <RadioButtons onChange={handleChange} options={options} value={value} />
   )
 }
 
@@ -199,7 +199,15 @@ export const OnValueChange = function () {
     { children: <Text>bar</Text>, value: 'bar' },
     { children: <Text>baz</Text>, value: 'baz' }
   ]
+  function handleChange(newValue: null | string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
-    <RadioButtons onValueChange={setValue} options={options} value={value} />
+    <RadioButtons
+      onValueChange={handleChange}
+      options={options}
+      value={value}
+    />
   )
 }

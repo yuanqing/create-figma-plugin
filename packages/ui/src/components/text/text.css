@@ -11,33 +11,6 @@
   content: '';
   pointer-events: none;
 }
-.text strong {
-  font-weight: var(--font-weight-bold);
-}
-.text a {
-  color: var(--color-accent);
-  pointer-events: all;
-  text-decoration: none;
-}
-.text a:hover {
-  text-decoration: underline;
-}
-.text a:focus {
-  background-color: var(--color-blue-30-translucent);
-  border-radius: var(--border-radius-2);
-  outline: 0;
-}
-.text code {
-  font-family: var(--font-family-code);
-}
-
-.bold {
-  font-weight: var(--font-weight-bold);
-}
-
-.muted {
-  color: var(--color-black-30);
-}
 
 .numeric {
   font-variant-numeric: tabular-nums;
@@ -46,11 +19,34 @@
 .left {
   text-align: left;
 }
-
 .center {
   text-align: center;
 }
-
 .right {
   text-align: right;
+}
+
+.text small {
+  color: var(--figma-color-text-secondary);
+  font-size: inherit;
+}
+.text strong {
+  font-weight: var(--font-weight-bold);
+}
+.text code {
+  font-family: var(--font-family-code);
+}
+
+.text a {
+  color: var(--figma-color-text-brand);
+  pointer-events: all;
+  text-decoration: none;
+}
+.text a:hover {
+  text-decoration: underline;
+}
+.text a:focus {
+  background-color: var(--figma-color-bg-selected);
+  border-radius: var(--border-radius-2);
+  outline: 0;
 }

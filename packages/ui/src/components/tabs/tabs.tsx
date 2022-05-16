@@ -81,7 +81,9 @@ export function Tabs<Name extends string>({
           )
         })}
       </div>
-      {typeof activeOption === 'undefined' ? null : activeOption.children}
+      {typeof activeOption === 'undefined' ? null : (
+        <div class={styles.children}>{activeOption.children}</div>
+      )}
     </Fragment>
   )
 }

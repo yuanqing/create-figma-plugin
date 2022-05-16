@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, JSX } from 'preact'
+import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types/types'
@@ -7,6 +7,7 @@ import { createClassName } from '../../utilities/create-class-name'
 import styles from './toggle.css'
 
 export type ToggleProps<Name extends string> = {
+  children: ComponentChildren
   disabled?: boolean
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
@@ -16,6 +17,7 @@ export type ToggleProps<Name extends string> = {
 }
 
 export function Toggle<Name extends string>({
+  children,
   disabled = false,
   name,
   onChange = function () {},
@@ -66,6 +68,7 @@ export function Toggle<Name extends string>({
       />
       <div class={styles.box} />
       <div class={styles.switch} />
+      <div class={styles.children}>{children}</div>
     </label>
   )
 }

@@ -3,7 +3,7 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { Tabs, TabsOption } from './tabs'
+import { Tabs, TabsOption } from '../tabs'
 
 export default {
   parameters: {
@@ -28,7 +28,7 @@ export const Unselected = function () {
 }
 
 export const Selected = function () {
-  const [value, setValue] = useState('bar')
+  const [value, setValue] = useState<string>('bar')
   const options: Array<TabsOption> = [
     { children: <div>Foo</div>, value: 'foo' },
     { children: <div>Bar</div>, value: 'bar' },
@@ -43,11 +43,17 @@ export const Selected = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState('bar')
+  const [value, setValue] = useState<string>('bar')
   const options: Array<TabsOption> = [
     { children: <div>Foo</div>, value: 'foo' },
     { children: <div>Bar</div>, value: 'bar' },
     { children: <div>Baz</div>, value: 'baz' }
   ]
-  return <Tabs onValueChange={setValue} options={options} value={value} />
+  function handleValueChange(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Tabs onValueChange={handleValueChange} options={options} value={value} />
+  )
 }

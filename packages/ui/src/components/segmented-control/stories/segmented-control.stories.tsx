@@ -3,16 +3,16 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../hooks/use-initial-focus/use-initial-focus'
-import { IconTextAlignCenter16 } from '../icon/icon-16/icon-text-align-center-16'
-import { IconTextAlignLeft16 } from '../icon/icon-16/icon-text-align-left-16'
-import { IconTextAlignRight16 } from '../icon/icon-16/icon-text-align-right-16'
-import { SegmentedControl, SegmentedControlOption } from './segmented-control'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
+import { IconTextAlignCenter16 } from '../../icon/icon-16/icon-text-align-center-16'
+import { IconTextAlignLeft16 } from '../../icon/icon-16/icon-text-align-left-16'
+import { IconTextAlignRight16 } from '../../icon/icon-16/icon-text-align-right-16'
+import { SegmentedControl, SegmentedControlOption } from '../segmented-control'
 
 export default { title: 'Components/Segmented Control' }
 
 export const Selected = function () {
-  const [value, setValue] = useState('bar')
+  const [value, setValue] = useState<string>('bar')
   const options: Array<SegmentedControlOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -29,7 +29,7 @@ export const Selected = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState('bar')
+  const [value, setValue] = useState<string>('bar')
   const options: Array<SegmentedControlOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -73,8 +73,8 @@ export const DisabledOption = function () {
   const [value, setValue] = useState('bar')
   const options: Array<SegmentedControlOption> = [
     { value: 'foo' },
-    { value: 'bar' },
-    { disabled: true, value: 'baz' }
+    { disabled: true, value: 'bar' },
+    { value: 'baz' }
   ]
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -87,7 +87,7 @@ export const DisabledOption = function () {
 }
 
 export const BooleanValue = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
   const options: Array<SegmentedControlOption<boolean>> = [
     { children: 'foo', value: true },
     { children: 'bar', value: false }
@@ -102,8 +102,8 @@ export const BooleanValue = function () {
   )
 }
 
-export const NumericValue = function () {
-  const [value, setValue] = useState(2)
+export const NumberValue = function () {
+  const [value, setValue] = useState<number>(2)
   const options: Array<SegmentedControlOption<number>> = [
     { children: 'foo', value: 1 },
     { children: 'bar', value: 2 },
@@ -119,7 +119,7 @@ export const NumericValue = function () {
   )
 }
 
-export const Children = function () {
+export const IconChildren = function () {
   const [value, setValue] = useState('left')
   const options: Array<SegmentedControlOption> = [
     { children: <IconTextAlignLeft16 />, value: 'left' },
@@ -137,10 +137,14 @@ export const Children = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState('bar')
+  const [value, setValue] = useState<string>('bar')
+  function handleValueChange(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <SegmentedControl
-      onValueChange={setValue}
+      onValueChange={handleValueChange}
       options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
       value={value}
     />
