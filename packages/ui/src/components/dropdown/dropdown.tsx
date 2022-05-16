@@ -371,14 +371,13 @@ function updateMenuElementLayout(
   const maximumTopOffset = rootElementBoundingClientRect.top - VIEWPORT_MARGIN
 
   if (menuElement.offsetHeight < menuElementMaxHeight) {
-    if (selectedId === INVALID_ID) {
-      return
-    }
-
     // Try to adjust the `top` position of `menuElement` such that
-    // `selectedElement` is directly above the `rootElement`
+    // either `selectedElement` or the first element is
+    // directly above the `rootElement`
     const selectedElement = menuElement.querySelector<HTMLInputElement>(
-      `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
+      selectedId === INVALID_ID
+        ? 'label:first-child input'
+        : `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
     )
     if (selectedElement === null) {
       throw new Error('Invariant violation') // `selectedId` is valid
