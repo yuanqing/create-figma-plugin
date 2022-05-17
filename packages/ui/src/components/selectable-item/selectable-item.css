@@ -4,39 +4,46 @@
   display: flex;
   height: 32px;
   align-items: center;
-  padding: 0 var(--space-medium);
-  color: var(--color-black-80);
-}
-.selectableItem:hover {
-  background-color: var(--color-selection-b);
-}
-
-.checked,
-.checked:hover {
-  background-color: var(--color-selection-a);
-}
-
-.disabled {
-  background-color: var(--color-black-30);
-  cursor: not-allowed;
-  opacity: var(--opacity-30);
-}
-.disabled:hover {
-  background-color: var(--color-black-30);
+  padding: 0 var(--space-small) 0 var(--space-medium);
 }
 
 .indent {
   padding-left: 36px;
 }
 
-.input {
+.input,
+.box {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.input {
+  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
   display: block;
-  width: 100%;
+}
+.disabled .input {
+  cursor: not-allowed;
+}
+
+.selectableItem:not(.disabled) .input:checked ~ .box {
+  background-color: var(--figma-color-bg-selected);
+}
+.disabled .input:checked ~ .box {
+  background-color: var(--figma-color-bg-disabled);
+}
+.selectableItem:not(.disabled) .input:not(:checked):hover ~ .box {
+  background-color: var(--figma-color-bg-selected-secondary);
+}
+.selectableItem:not(.disabled) .input:focus ~ .box {
+  border: 1px solid var(--figma-color-border-brand-strong);
+}
+
+.icon,
+.children {
+  position: relative;
 }
 
 .children {
@@ -48,13 +55,22 @@
 .bold .children {
   font-weight: var(--font-weight-bold);
 }
+.selectableItem:not(.disabled) .input ~ .children {
+  color: var(--figma-color-text);
+}
+.disabled .input:not(:checked) ~ .children {
+  color: var(--figma-color-text-disabled);
+}
+.disabled .input:checked ~ .children {
+  color: var(--figma-color-text-ondisabled);
+}
 
-.checkIcon {
+.icon {
   height: 16px;
   flex: 0 0 16px;
   margin-left: var(--space-extra-small);
-  color: var(--color-blue);
+  color: var(--figma-color-icon-brand);
 }
-.disabled .checkIcon {
-  color: var(--color-black-80);
+.disabled .icon {
+  color: var(--figma-color-icon-ondisabled);
 }

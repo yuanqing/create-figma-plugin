@@ -58,8 +58,7 @@ export function SelectableItem<Name extends string>({
         styles.selectableItem,
         disabled === true ? styles.disabled : null,
         bold === true ? styles.bold : null,
-        indent === true ? styles.indent : null,
-        value === true ? styles.checked : null
+        indent === true ? styles.indent : null
       ])}
     >
       <input
@@ -73,9 +72,10 @@ export function SelectableItem<Name extends string>({
         tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
       />
+      <div class={styles.box} />
       <div class={styles.children}>{children}</div>
       {value === true ? (
-        <div class={styles.checkIcon}>
+        <div class={styles.icon}>
           <IconMenuCheckmarkChecked16 />
         </div>
       ) : null}

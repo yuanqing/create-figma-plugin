@@ -3,17 +3,19 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
 import { SelectableItem } from '../selectable-item'
 
 export default {
   parameters: {
-    fixedWidth: true
+    fixedWidth: true,
+    order: 2
   },
-  title: 'Components/Selectable Item'
+  title: 'Components/Selectable Item/Selected'
 }
 
-export const Unselected = function () {
-  const [value, setValue] = useState(false)
+export const Default = function () {
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -26,15 +28,19 @@ export const Unselected = function () {
   )
 }
 
-export const Selected = function () {
-  const [value, setValue] = useState(true)
+export const Focused = function () {
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
     setValue(newValue)
   }
   return (
-    <SelectableItem onChange={handleChange} value={value}>
+    <SelectableItem
+      {...useInitialFocus()}
+      onChange={handleChange}
+      value={value}
+    >
       Text
     </SelectableItem>
   )
@@ -51,8 +57,23 @@ export const Disabled = function () {
   )
 }
 
+export const LongText = function () {
+  const longText = Array(100).fill('Text').join(' ')
+  const [value, setValue] = useState<boolean>(true)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <SelectableItem onChange={handleChange} value={value}>
+      {longText}
+    </SelectableItem>
+  )
+}
+
 export const Bold = function () {
-  const [value, setValue] = useState(true)
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -66,7 +87,7 @@ export const Bold = function () {
 }
 
 export const Indent = function () {
-  const [value, setValue] = useState(true)
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -79,25 +100,14 @@ export const Indent = function () {
   )
 }
 
-export const LongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  const [value, setValue] = useState(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
+export const OnValueChange = function () {
+  const [value, setValue] = useState<boolean>(true)
+  function handleValueChange(newValue: boolean) {
     console.log(newValue)
     setValue(newValue)
   }
   return (
-    <SelectableItem onChange={handleChange} value={value}>
-      {longText}
-    </SelectableItem>
-  )
-}
-
-export const OnValueChange = function () {
-  const [value, setValue] = useState(false)
-  return (
-    <SelectableItem onValueChange={setValue} value={value}>
+    <SelectableItem onValueChange={handleValueChange} value={value}>
       Text
     </SelectableItem>
   )

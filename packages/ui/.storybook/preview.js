@@ -27,11 +27,20 @@ export const parameters = {
       }
       if (
         parseComponentId(x[1].componentId) ===
-          parseComponentId(y[1].componentId) &&
-        typeof x[1].parameters.order !== 'undefined' &&
-        typeof y[1].parameters.order !== 'undefined'
+        parseComponentId(y[1].componentId)
       ) {
-        return x[1].parameters.order - y[1].parameters.order
+        if (
+          typeof x[1].parameters.order !== 'undefined' &&
+          typeof y[1].parameters.order !== 'undefined'
+        ) {
+          return x[1].parameters.order - y[1].parameters.order
+        }
+        if (typeof x[1].parameters.order !== 'undefined') {
+          return -1
+        }
+        if (typeof y[1].parameters.order !== 'undefined') {
+          return 1
+        }
       }
       return x[1].id.localeCompare(y[1].id, undefined, { numeric: true })
     }
