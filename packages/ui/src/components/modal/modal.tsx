@@ -145,7 +145,9 @@ export function Modal({
               <div class={styles.topBar}>
                 <div class={styles.title}>
                   {typeof title === 'undefined' ? null : (
-                    <Text bold>{title}</Text>
+                    <Text>
+                      <strong>{title}</strong>
+                    </Text>
                   )}
                 </div>
                 {typeof onCloseButtonClick === 'undefined' ? null : (
