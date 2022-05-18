@@ -33,11 +33,7 @@ export {
   FileUploadDropzone,
   FileUploadDropzoneProps
 } from './components/file-upload/file-upload-dropzone/file-upload-dropzone.js'
-export {
-  createIcon,
-  IconColor,
-  IconProps
-} from './components/icon/create-icon.js'
+export { createIcon, IconProps } from './components/icon/create-icon.js'
 export { IconControlChevronDown8 } from './components/icon/icon-8/icon-control-chevron-down-8.js'
 export { IconControlChevronUp8 } from './components/icon/icon-8/icon-control-chevron-up-8.js'
 export { IconControlCheckboxChecked12 } from './components/icon/icon-12/icon-control-checkbox-checked-12.js'
@@ -301,6 +297,12 @@ export {
   ResizeDirection,
   useWindowResize
 } from './hooks/use-window-resize.js'
+export {
+  BackgroundColor,
+  BorderColor,
+  IconColor,
+  TextColor
+} from './types/colors.js'
 export { OnValueChange, Props } from './types/types.js'
 export { createClassName } from './utilities/create-class-name.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'
