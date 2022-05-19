@@ -73,8 +73,8 @@ export const DisabledOption = function () {
   const [value, setValue] = useState<string>('bar')
   const options: Array<SegmentedControlOption> = [
     { value: 'foo' },
-    { disabled: true, value: 'bar' },
-    { value: 'baz' }
+    { value: 'bar' },
+    { disabled: true, value: 'baz' }
   ]
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value

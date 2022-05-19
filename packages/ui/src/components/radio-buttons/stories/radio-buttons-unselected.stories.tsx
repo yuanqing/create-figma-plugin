@@ -105,7 +105,7 @@ export const BooleanValue = function () {
   )
 }
 
-export const NumericValue = function () {
+export const NumberValue = function () {
   const [value, setValue] = useState<null | number>(null)
   const options: Array<RadioButtonsOption<number>> = [
     { children: <Text>foo</Text>, value: 1 },
