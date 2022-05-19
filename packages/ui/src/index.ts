@@ -221,7 +221,6 @@ export { Inline, InlineProps, InlineSpace } from './components/inline/inline.js'
 export { Layer, LayerColor, LayerProps } from './components/layer/layer.js'
 export {
   LoadingIndicator,
-  LoadingIndicatorColor,
   LoadingIndicatorProps
 } from './components/loading-indicator/loading-indicator.js'
 export {
