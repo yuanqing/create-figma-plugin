@@ -9,7 +9,7 @@ import { Modal } from './modal'
 export default { title: 'Components/Modal' }
 
 export const Default = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -32,7 +32,7 @@ export const Default = function () {
 }
 
 export const PositionBottom = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -55,7 +55,7 @@ export const PositionBottom = function () {
 }
 
 export const PositionLeft = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -78,7 +78,7 @@ export const PositionLeft = function () {
 }
 
 export const PositionRight = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -101,7 +101,7 @@ export const PositionRight = function () {
 }
 
 export const CloseOnOverlayClick = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -120,7 +120,7 @@ export const CloseOnOverlayClick = function () {
 }
 
 export const CloseOnEscapeKeyDown = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -139,7 +139,7 @@ export const CloseOnEscapeKeyDown = function () {
 }
 
 export const Title = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -162,7 +162,7 @@ export const Title = function () {
 }
 
 export const CloseButton = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -185,7 +185,7 @@ export const CloseButton = function () {
 }
 
 export const CloseButtonPosition = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -209,7 +209,7 @@ export const CloseButtonPosition = function () {
 }
 
 export const CloseButtonIcon = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -234,7 +234,7 @@ export const CloseButtonIcon = function () {
 }
 
 export const NoTransition = function () {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
     setIsOpen(true)
   }
@@ -257,7 +257,7 @@ export const NoTransition = function () {
 }
 
 export const Nested = function () {
-  const [isParentOpen, setIsParentOpen] = useState(false)
+  const [isParentOpen, setIsParentOpen] = useState<boolean>(false)
   function handleParentOpenButtonClick() {
     setIsParentOpen(true)
   }
@@ -265,7 +265,7 @@ export const Nested = function () {
     setIsParentOpen(false)
   }
   const parentStyle = { height: '160px', padding: '12px', width: '240px' }
-  const [isChildOpen, setIsChildOpen] = useState(false)
+  const [isChildOpen, setIsChildOpen] = useState<boolean>(false)
   function handleChildOpenButtonClick() {
     setIsChildOpen(true)
   }

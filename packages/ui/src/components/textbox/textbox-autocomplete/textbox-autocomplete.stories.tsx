@@ -18,7 +18,7 @@ export default {
 }
 
 export const Empty = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -42,7 +42,7 @@ export const Empty = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -67,7 +67,7 @@ export const Focused = function () {
 }
 
 export const Placeholder = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -92,7 +92,7 @@ export const Placeholder = function () {
 }
 
 export const Filled = function () {
-  const [value, setValue] = useState('qux')
+  const [value, setValue] = useState<string>('qux')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -138,7 +138,7 @@ export const Disabled = function () {
 }
 
 export const DisabledOption = function () {
-  const [value, setValue] = useState('Mixed')
+  const [value, setValue] = useState<string>('Mixed')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -164,7 +164,7 @@ export const DisabledOption = function () {
 }
 
 export const NoBorder = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -189,7 +189,7 @@ export const NoBorder = function () {
 }
 
 export const Icon = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -214,7 +214,7 @@ export const Icon = function () {
 }
 
 export const TextIcon = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -239,7 +239,7 @@ export const TextIcon = function () {
 }
 
 export const RevertOnEscapeKeyDown = function () {
-  const [value, setValue] = useState('qux')
+  const [value, setValue] = useState<string>('qux')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -264,7 +264,7 @@ export const RevertOnEscapeKeyDown = function () {
 }
 
 export const Strict = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -289,7 +289,7 @@ export const Strict = function () {
 }
 
 export const Filter = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -314,7 +314,7 @@ export const Filter = function () {
 }
 
 export const StrictFilter = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -340,7 +340,7 @@ export const StrictFilter = function () {
 }
 
 export const MenuTop = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -365,7 +365,7 @@ export const MenuTop = function () {
 }
 
 export const OnValueInput = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -374,9 +374,13 @@ export const OnValueInput = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
     <TextboxAutocomplete
-      onValueInput={setValue}
+      onValueInput={handleValueInput}
       options={options}
       value={value}
     />

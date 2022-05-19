@@ -11,7 +11,7 @@ import { useInitialFocus } from './use-initial-focus'
 export default { title: 'Hooks/Use Initial Focus' }
 
 export const UseInitialFocus = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   const initialFocus = useInitialFocus()
   function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)

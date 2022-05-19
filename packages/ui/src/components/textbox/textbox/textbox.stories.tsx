@@ -16,7 +16,7 @@ export default {
 }
 
 export const Empty = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -26,7 +26,7 @@ export const Empty = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -36,7 +36,7 @@ export const Focused = function () {
 }
 
 export const Placeholder = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -48,7 +48,7 @@ export const Placeholder = function () {
 }
 
 export const Filled = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -65,7 +65,7 @@ export const Disabled = function () {
 }
 
 export const NoBorder = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -75,7 +75,7 @@ export const NoBorder = function () {
 }
 
 export const Icon = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -87,7 +87,7 @@ export const Icon = function () {
 }
 
 export const TextIcon = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -97,7 +97,7 @@ export const TextIcon = function () {
 }
 
 export const RevertOnEscapeKeyDown = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -107,7 +107,7 @@ export const RevertOnEscapeKeyDown = function () {
 }
 
 export const ValidateOnBlur = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -126,7 +126,7 @@ export const ValidateOnBlur = function () {
 }
 
 export const Mixed = function () {
-  const [value, setValue] = useState(MIXED_STRING)
+  const [value, setValue] = useState<string>(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -136,7 +136,7 @@ export const Mixed = function () {
 }
 
 export const Password = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -146,6 +146,10 @@ export const Password = function () {
 }
 
 export const OnValueInput = function () {
-  const [value, setValue] = useState('Text')
-  return <Textbox onValueInput={setValue} value={value} />
+  const [value, setValue] = useState<string>('Text')
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox onValueInput={handleValueInput} value={value} />
 }

@@ -14,27 +14,6 @@
   animation: rotating 0.5s linear infinite;
   fill: currentColor;
 }
-.accent {
-  fill: var(--color-accent);
-}
-.black-30 {
-  fill: var(--color-black-30);
-}
-.black-80 {
-  fill: var(--color-black-80);
-}
-.blue {
-  fill: var(--color-blue);
-}
-.white {
-  fill: var(--color-white);
-}
-.white-20 {
-  fill: var(--color-white-20-translucent);
-}
-.white-40 {
-  fill: var(--color-white-40-translucent);
-}
 
 @keyframes rotating {
   from {

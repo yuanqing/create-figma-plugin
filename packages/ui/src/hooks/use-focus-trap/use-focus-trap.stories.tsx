@@ -11,7 +11,7 @@ import { useFocusTrap } from './use-focus-trap'
 export default { title: 'Hooks/Use Focus Trap' }
 
 export const UseFocusTrap = function () {
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState<string>('Text')
   useFocusTrap()
   function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)

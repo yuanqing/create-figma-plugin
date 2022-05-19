@@ -11,7 +11,7 @@ export default {
 }
 
 export const Default = function () {
-  return <Preview>Preview</Preview>
+  return <Preview>foo</Preview>
 }
 
 export const Overflow = function () {

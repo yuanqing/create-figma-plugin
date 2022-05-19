@@ -99,7 +99,11 @@ export const ClearOnEscapeKeyDown = function () {
   )
 }
 
-export const OnValueChange = function () {
-  const [value, setValue] = useState('Text')
-  return <SearchTextbox onValueInput={setValue} value={value} />
+export const OnValueInput = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <SearchTextbox onValueInput={handleValueInput} value={value} />
 }

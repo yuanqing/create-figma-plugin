@@ -10,7 +10,7 @@ import { IconToggleButton } from '../icon-toggle-button'
 export default { title: 'Components/Icon Toggle Button' }
 
 export const Unselected = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -24,7 +24,7 @@ export const Unselected = function () {
 }
 
 export const UnselectedFocused = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -53,7 +53,7 @@ export const UnselectedDisabled = function () {
 }
 
 export const Selected = function () {
-  const [value, setValue] = useState(true)
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -67,7 +67,7 @@ export const Selected = function () {
 }
 
 export const SelectedFocused = function () {
-  const [value, setValue] = useState(true)
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -96,9 +96,13 @@ export const SelectedDisabled = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
+  function handleValueChange(newValue: boolean) {
+    console.log(newValue)
+    setValue(newValue)
+  }
   return (
-    <IconToggleButton onValueChange={setValue} value={value}>
+    <IconToggleButton onValueChange={handleValueChange} value={value}>
       <IconEllipsis32 />
     </IconToggleButton>
   )

@@ -16,7 +16,7 @@ export default {
 }
 
 export const Empty = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -26,7 +26,7 @@ export const Empty = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -42,7 +42,7 @@ export const Focused = function () {
 }
 
 export const Placeholder = function () {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -58,7 +58,7 @@ export const Placeholder = function () {
 }
 
 export const Filled = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -75,7 +75,7 @@ export const Disabled = function () {
 }
 
 export const NoBorder = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -85,7 +85,7 @@ export const NoBorder = function () {
 }
 
 export const Icon = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -101,7 +101,7 @@ export const Icon = function () {
 }
 
 export const TextIcon = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -111,7 +111,7 @@ export const TextIcon = function () {
 }
 
 export const RevertOnEscapeKeyDown = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -123,7 +123,7 @@ export const RevertOnEscapeKeyDown = function () {
 }
 
 export const ValidateOnBlur = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -143,7 +143,7 @@ export const ValidateOnBlur = function () {
 }
 
 export const Mixed = function () {
-  const [value, setValue] = useState(MIXED_STRING)
+  const [value, setValue] = useState<string>(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -153,7 +153,7 @@ export const Mixed = function () {
 }
 
 export const IntegersOnly = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -163,7 +163,7 @@ export const IntegersOnly = function () {
 }
 
 export const CustomIncrements = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -180,7 +180,7 @@ export const CustomIncrements = function () {
 }
 
 export const CustomSmallIncrements = function () {
-  const [value, setValue] = useState('0')
+  const [value, setValue] = useState<string>('0')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -197,7 +197,7 @@ export const CustomSmallIncrements = function () {
 }
 
 export const MinimumMaximum = function () {
-  const [value, setValue] = useState('0')
+  const [value, setValue] = useState<string>('0')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -214,7 +214,7 @@ export const MinimumMaximum = function () {
 }
 
 export const Suffix = function () {
-  const [value, setValue] = useState('100%')
+  const [value, setValue] = useState<string>('100%')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -232,7 +232,7 @@ export const Suffix = function () {
 }
 
 export const SuffixRevertOnEscapeKeyDown = function () {
-  const [value, setValue] = useState('100%')
+  const [value, setValue] = useState<string>('100%')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -251,7 +251,7 @@ export const SuffixRevertOnEscapeKeyDown = function () {
 }
 
 export const SuffixValidateOnBlur = function () {
-  const [value, setValue] = useState('100%')
+  const [value, setValue] = useState<string>('100%')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -277,7 +277,7 @@ export const SuffixValidateOnBlur = function () {
 }
 
 export const SuffixMixed = function () {
-  const [value, setValue] = useState(MIXED_STRING)
+  const [value, setValue] = useState<string>(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -287,14 +287,18 @@ export const SuffixMixed = function () {
 }
 
 export const OnValueInput = function () {
-  const [value, setValue] = useState('42')
+  const [value, setValue] = useState<string>('42')
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
   function handleNumericValueInput(newNumericValue: null | number) {
     console.log(newNumericValue)
   }
   return (
     <TextboxNumeric
       onNumericValueInput={handleNumericValueInput}
-      onValueInput={setValue}
+      onValueInput={handleValueInput}
       value={value}
     />
   )

@@ -70,7 +70,7 @@ export const Disabled = function () {
 }
 
 export const DisabledOption = function () {
-  const [value, setValue] = useState('bar')
+  const [value, setValue] = useState<string>('bar')
   const options: Array<SegmentedControlOption> = [
     { value: 'foo' },
     { disabled: true, value: 'bar' },
@@ -120,11 +120,11 @@ export const NumberValue = function () {
 }
 
 export const IconChildren = function () {
-  const [value, setValue] = useState('left')
+  const [value, setValue] = useState<string>('align-left')
   const options: Array<SegmentedControlOption> = [
-    { children: <IconTextAlignLeft16 />, value: 'left' },
-    { children: <IconTextAlignCenter16 />, value: 'center' },
-    { children: <IconTextAlignRight16 />, value: 'right' }
+    { children: <IconTextAlignLeft16 />, value: 'align-left' },
+    { children: <IconTextAlignCenter16 />, value: 'align-center' },
+    { children: <IconTextAlignRight16 />, value: 'align-right' }
   ]
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value

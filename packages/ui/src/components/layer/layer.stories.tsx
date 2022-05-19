@@ -15,7 +15,7 @@ export default {
 }
 
 export const Frame = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -29,7 +29,7 @@ export const Frame = function () {
 }
 
 export const Selected = function () {
-  const [value, setValue] = useState(true)
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -43,7 +43,7 @@ export const Selected = function () {
 }
 
 export const PageName = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -63,7 +63,7 @@ export const PageName = function () {
 
 export const LongText = function () {
   const longText = Array(100).fill('Text').join(' ')
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -82,7 +82,7 @@ export const LongText = function () {
 }
 
 export const Component = function () {
-  const [value, setValue] = useState(false)
+  const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)

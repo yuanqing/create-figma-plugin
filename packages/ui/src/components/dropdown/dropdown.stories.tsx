@@ -35,7 +35,7 @@ export const Empty = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -85,7 +85,7 @@ export const Placeholder = function () {
 }
 
 export const Filled = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -103,7 +103,7 @@ export const Filled = function () {
 }
 
 export const FilledLongText = function () {
-  const [value, setValue] = useState(Array(20).fill('foo').join(' '))
+  const [value, setValue] = useState<string>(Array(20).fill('foo').join(' '))
   const options: Array<DropdownOption> = [
     { value: Array(20).fill('foo').join(' ') },
     { value: Array(20).fill('bar').join(' ') },
@@ -138,7 +138,7 @@ export const Disabled = function () {
 }
 
 export const DisabledOption = function () {
-  const [value, setValue] = useState('Mixed')
+  const [value, setValue] = useState<string>('Mixed')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -158,7 +158,7 @@ export const DisabledOption = function () {
 }
 
 export const NoBorder = function () {
-  const [value, setValue] = useState('bar')
+  const [value, setValue] = useState<string>('bar')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -183,7 +183,7 @@ export const NoBorder = function () {
 }
 
 export const Icon = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -208,7 +208,7 @@ export const Icon = function () {
 }
 
 export const TextIcon = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -233,7 +233,7 @@ export const TextIcon = function () {
 }
 
 export const Children = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
     {
       children: 'A',
@@ -254,7 +254,7 @@ export const Children = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState('foo')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -263,11 +263,21 @@ export const OnValueChange = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
-  return <Dropdown onValueChange={setValue} options={options} value={value} />
+  function handleValueChange(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Dropdown
+      onValueChange={handleValueChange}
+      options={options}
+      value={value}
+    />
+  )
 }
 
 export const FlexParent = function () {
-  const [valueA, setValueA] = useState(Array(20).fill('foo').join(' '))
+  const [valueA, setValueA] = useState<string>(Array(20).fill('foo').join(' '))
   const optionsA: Array<DropdownOption> = [
     { value: Array(20).fill('foo').join(' ') },
     { value: 'bar' }
@@ -277,7 +287,7 @@ export const FlexParent = function () {
     console.log(newValue)
     setValueA(newValue)
   }
-  const [valueB, setValueB] = useState('qux')
+  const [valueB, setValueB] = useState<string>('qux')
   const optionsB: Array<DropdownOption> = [
     { value: Array(20).fill('baz').join(' ') },
     { value: 'qux' }

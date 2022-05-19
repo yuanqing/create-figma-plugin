@@ -3,6 +3,7 @@ import { h, JSX } from 'preact'
 
 import { IconColor } from '../../types/colors'
 import { Props } from '../../types/types'
+import styles from './icon.css'
 
 export type IconProps = {
   color?: IconColor
@@ -20,13 +21,15 @@ export function createIcon(
     return (
       <svg
         {...rest}
+        class={styles.icon}
         height={height}
-        style={{
-          fill:
-            typeof color === 'undefined'
-              ? 'currentColor'
-              : `var(--figma-color-icon-${color})`
-        }}
+        style={
+          typeof color === 'undefined'
+            ? undefined
+            : {
+                fill: `var(--figma-color-icon-${color})`
+              }
+        }
         width={width}
         xmlns="http://www.w3.org/2000/svg"
       >
