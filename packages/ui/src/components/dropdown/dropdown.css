@@ -7,7 +7,7 @@
   height: 28px;
   align-items: center;
   padding-left: var(--space-extra-small);
-  color: var(--color-black-80);
+  color: var(--figma-color-text);
 }
 .dropdown:not(.disabled):focus-within {
   z-index: var(--z-index-2); /* stack `.dropdown` over its sibling elements */
@@ -26,7 +26,7 @@
   position: absolute;
   top: 14px;
   left: 16px;
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
   pointer-events: none; /* so that clicking the icon focuses the dropdown */
   text-align: center;
   transform: translate(-50%, -50%);
@@ -44,7 +44,7 @@
   flex-grow: 1;
 }
 .placeholder {
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
 }
 .hasIcon .value {
   padding-left: var(--space-extra-large);
@@ -52,10 +52,10 @@
 
 .chevronIcon {
   margin-right: var(--space-extra-small);
-  color: var(--color-black-30);
+  color: var(--figma-color-text-secondary);
 }
 .dropdown:not(.disabled):hover .chevronIcon {
-  color: var(--color-black-80);
+  color: var(--figma-color-text);
 }
 
 .border {
@@ -65,14 +65,14 @@
   bottom: 0;
   left: 0;
   border-width: 1px;
-  border-color: var(--color-silver);
+  border-color: var(--figma-color-border);
   border-radius: var(--border-radius-2);
 }
 .noBorder .border {
   border-color: transparent;
 }
 .noBorder:not(.disabled):hover .border {
-  border-color: var(--color-silver);
+  border-color: var(--figma-color-border);
 }
 
 .menu {

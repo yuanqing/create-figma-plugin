@@ -3,18 +3,19 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { IconLayerComponent16 } from '../icon/icon-16/icon-layer-component-16'
-import { IconLayerFrame16 } from '../icon/icon-16/icon-layer-frame-16'
-import { Layer } from './layer'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
+import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
+import { Layer } from '../layer'
 
 export default {
   parameters: {
-    fixedWidth: true
+    fixedWidth: true,
+    order: 1
   },
-  title: 'Components/Layer'
+  title: 'Components/Layer/Unselected'
 }
 
-export const Frame = function () {
+export const Default = function () {
   const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
@@ -28,21 +29,7 @@ export const Frame = function () {
   )
 }
 
-export const Selected = function () {
-  const [value, setValue] = useState<boolean>(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Layer icon={<IconLayerFrame16 />} onChange={handleChange} value={value}>
-      Text
-    </Layer>
-  )
-}
-
-export const PageName = function () {
+export const Focused = function () {
   const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
@@ -52,8 +39,47 @@ export const PageName = function () {
   return (
     <Layer
       icon={<IconLayerFrame16 />}
+      {...useInitialFocus()}
       onChange={handleChange}
-      pageName="Page Name"
+      value={value}
+    >
+      Text
+    </Layer>
+  )
+}
+
+export const Bold = function () {
+  const [value, setValue] = useState<boolean>(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Layer
+      bold
+      description="Description"
+      icon={<IconLayerFrame16 />}
+      onChange={handleChange}
+      value={value}
+    >
+      Text
+    </Layer>
+  )
+}
+
+export const Description = function () {
+  const [value, setValue] = useState<boolean>(false)
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.checked
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Layer
+      description="Description"
+      icon={<IconLayerFrame16 />}
+      onChange={handleChange}
       value={value}
     >
       Text
@@ -70,18 +96,15 @@ export const LongText = function () {
     setValue(newValue)
   }
   return (
-    <Layer
-      icon={<IconLayerFrame16 />}
-      onChange={handleChange}
-      pageName="Page Name"
-      value={value}
-    >
+    <Layer icon={<IconLayerFrame16 />} onChange={handleChange} value={value}>
       {longText}
     </Layer>
   )
 }
 
-export const Component = function () {
+export const LongTextDescription = function () {
+  const longText = Array(100).fill('Text').join(' ')
+  const description = Array(100).fill('Text').join(' ')
   const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
@@ -90,13 +113,30 @@ export const Component = function () {
   }
   return (
     <Layer
-      bold
-      color="purple"
-      icon={<IconLayerComponent16 />}
+      description={description}
+      icon={<IconLayerFrame16 />}
       onChange={handleChange}
       value={value}
     >
-      Text
+      {longText}
+    </Layer>
+  )
+}
+
+export const OnValueChange = function () {
+  const longText = Array(100).fill('Text').join(' ')
+  const [value, setValue] = useState<boolean>(false)
+  function handleValueChange(newValue: boolean) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Layer
+      icon={<IconLayerFrame16 />}
+      onValueChange={handleValueChange}
+      value={value}
+    >
+      {longText}
     </Layer>
   )
 }

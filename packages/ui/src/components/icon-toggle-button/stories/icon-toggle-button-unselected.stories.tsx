@@ -7,9 +7,12 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { IconEllipsis32 } from '../../icon/icon-32/icon-ellipsis-32'
 import { IconToggleButton } from '../icon-toggle-button'
 
-export default { title: 'Components/Icon Toggle Button' }
+export default {
+  parameters: { order: 1 },
+  title: 'Components/Icon Toggle Button/Unselected'
+}
 
-export const Unselected = function () {
+export const Default = function () {
   const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
@@ -23,7 +26,7 @@ export const Unselected = function () {
   )
 }
 
-export const UnselectedFocused = function () {
+export const Focused = function () {
   const [value, setValue] = useState<boolean>(false)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
@@ -41,55 +44,12 @@ export const UnselectedFocused = function () {
   )
 }
 
-export const UnselectedDisabled = function () {
+export const Disabled = function () {
   function handleChange() {
     throw new Error('This function should not be called')
   }
   return (
     <IconToggleButton disabled onChange={handleChange} value={false}>
-      <IconEllipsis32 />
-    </IconToggleButton>
-  )
-}
-
-export const Selected = function () {
-  const [value, setValue] = useState<boolean>(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <IconToggleButton onChange={handleChange} value={value}>
-      <IconEllipsis32 />
-    </IconToggleButton>
-  )
-}
-
-export const SelectedFocused = function () {
-  const [value, setValue] = useState<boolean>(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <IconToggleButton
-      {...useInitialFocus()}
-      onChange={handleChange}
-      value={value}
-    >
-      <IconEllipsis32 />
-    </IconToggleButton>
-  )
-}
-
-export const SelectedDisabled = function () {
-  function handleChange() {
-    throw new Error('This function should not be called')
-  }
-  return (
-    <IconToggleButton disabled onChange={handleChange} value={true}>
       <IconEllipsis32 />
     </IconToggleButton>
   )

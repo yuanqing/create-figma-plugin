@@ -3,7 +3,7 @@
   z-index: var(--z-index-2);
   display: flex;
   flex-direction: column;
-  background-color: var(--color-white);
+  background-color: var(--figma-color-bg);
   transition-duration: 0.3s;
   transition-timing-function: ease;
 }
@@ -62,7 +62,7 @@
   align-items: center;
   order: -1;
   padding: 4px;
-  border-bottom: 1px solid var(--color-silver);
+  border-bottom: 1px solid var(--figma-color-border);
 }
 
 .closeButton {
@@ -72,7 +72,7 @@
 }
 .closeButton:hover,
 .closeButton:focus {
-  background-color: var(--color-black-6-translucent);
+  background-color: var(--figma-color-bg-hover);
 }
 .closeButtonLeft {
   order: -1;
@@ -88,7 +88,7 @@
   border-radius: var(--border-radius-2);
 }
 .closeButton:focus .closeButtonBorder {
-  border-color: var(--color-accent);
+  border-color: var(--figma-color-border-brand-strong);
 }
 
 .title {
@@ -103,7 +103,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--color-black-30-translucent);
+  background-color: var(--figma-color-text-tertiary);
   opacity: 0;
   pointer-events: none;
   transition: opacity ease 0.3s;

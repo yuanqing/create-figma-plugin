@@ -6,71 +6,78 @@
   align-items: center;
   padding: 0 var(--space-small);
 }
-.black-30 {
-  color: var(--color-black-30);
+
+.input,
+.box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
-.black-80 {
-  color: var(--color-black-80);
+
+.input {
+  z-index: var(--z-index-1); /* stack `.input` on top of everything else */
+  display: block;
 }
-.purple {
-  color: var(--color-purple);
+.disabled .input {
+  cursor: not-allowed;
+}
+
+.input:checked ~ .box {
+  background-color: var(--figma-color-bg-selected);
+}
+.input:not(:checked):hover ~ .box,
+.input:focus ~ .box {
+  border: 1px solid var(--figma-color-border-brand-strong);
+}
+
+.component .input:checked ~ .box {
+  background-color: var(--figma-color-bg-component-tertiary);
+}
+.component .input:not(:checked):hover ~ .box,
+.component .input:focus ~ .box {
+  border-color: var(--figma-color-border-component-strong);
 }
 
 .icon,
-.layerName,
-.pageName {
+.children,
+.description {
   position: relative;
 }
 
-.layerName,
-.pageName {
+.children,
+.description {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.layerName {
+.children {
   padding-left: var(--space-extra-small);
+  color: var(--figma-color-text);
 }
-.bold {
+.component .children {
+  color: var(--figma-color-text-component);
+}
+.bold .children {
   font-weight: var(--font-weight-bold);
 }
 
 .icon {
   height: 16px;
   flex: 0 0 16px;
+  color: var(--figma-color-icon-secondary);
+}
+.input:checked ~ .icon {
+  color: var(--figma-color-icon);
+}
+.component .icon,
+.component .input:checked ~ .icon {
+  color: var(--figma-color-icon-component);
 }
 
-.pageName {
-  flex-shrink: 0.5;
+.description {
   padding-left: var(--space-extra-small);
-  color: var(--color-black-30-translucent);
-}
-
-.input {
-  position: absolute;
-  z-index: var(
-    --z-index-1
-  ); /* stack `.input` over all other elements within `.layer` */
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.fill {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-.layer:hover .input ~ .fill {
-  background-color: var(--color-selection-b);
-}
-.layer .input:checked ~ .fill {
-  background-color: var(--color-selection-a);
+  color: var(--figma-color-text-secondary);
 }

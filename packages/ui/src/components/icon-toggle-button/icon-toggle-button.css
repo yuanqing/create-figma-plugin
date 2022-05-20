@@ -26,7 +26,7 @@
   border-radius: var(--border-radius-2);
 }
 .iconButton:not(.disabled) .input:not(:checked):hover ~ .fill {
-  background-color: var(--figma-color-bg-tertiary);
+  background-color: var(--figma-color-bg-hover);
 }
 .iconButton:not(.disabled) .input:not(:checked):focus ~ .fill {
   border-color: var(--figma-color-border-selected);

@@ -218,7 +218,7 @@ export {
   IconToggleButtonProps
 } from './components/icon-toggle-button/icon-toggle-button.js'
 export { Inline, InlineProps, InlineSpace } from './components/inline/inline.js'
-export { Layer, LayerColor, LayerProps } from './components/layer/layer.js'
+export { Layer, LayerProps } from './components/layer/layer.js'
 export {
   LoadingIndicator,
   LoadingIndicatorProps

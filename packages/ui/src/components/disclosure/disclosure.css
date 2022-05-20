@@ -10,7 +10,7 @@
   font-weight: var(--font-weight-bold);
 }
 .title:hover {
-  background-color: var(--color-black-6-translucent);
+  background-color: var(--figma-color-bg-hover);
 }
 
 .icon {
