@@ -25,12 +25,12 @@ export type DropdownProps<
   disabled?: boolean
   icon?: ComponentChildren
   name?: Name
-  noBorder?: boolean
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<Value, Name>
   options: Array<DropdownOption<Value>>
   placeholder?: string
   value: null | Value
+  variant?: DropdownVariant
 }
 export type DropdownOption<Value extends boolean | number | string = string> =
   | DropdownOptionHeader
@@ -40,13 +40,14 @@ export type DropdownOptionHeader = {
   header: string
 }
 export type DropdownOptionValue<Value> = {
-  children?: ComponentChildren
   disabled?: boolean
+  text?: string
   value: Value
 }
 export type DropdownOptionSeparator = {
   separator: true
 }
+export type DropdownVariant = 'border' | 'underline'
 
 export function Dropdown<
   Name extends string,
@@ -55,12 +56,12 @@ export function Dropdown<
   disabled = false,
   icon,
   name,
-  noBorder,
   options,
   onChange = function () {},
   onValueChange = function () {},
   placeholder,
   value,
+  variant,
   ...rest
 }: Props<HTMLDivElement, DropdownProps<Name, Value>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -211,7 +212,11 @@ export function Dropdown<
       ref={rootElementRef}
       class={createClassName([
         dropdownStyles.dropdown,
-        noBorder === true ? dropdownStyles.noBorder : null,
+        typeof variant === 'undefined'
+          ? null
+          : variant === 'border'
+          ? dropdownStyles.hasBorder
+          : dropdownStyles.hasUnderline,
         typeof icon === 'undefined' ? null : dropdownStyles.hasIcon,
         disabled === true ? dropdownStyles.disabled : null
       ])}
@@ -224,7 +229,9 @@ export function Dropdown<
         <div class={dropdownStyles.icon}>{icon}</div>
       )}
       {value === null ? (
-        typeof placeholder === 'undefined' ? null : (
+        typeof placeholder === 'undefined' ? (
+          <div class={dropdownStyles.empty} />
+        ) : (
           <div
             class={createClassName([
               dropdownStyles.value,
@@ -240,6 +247,9 @@ export function Dropdown<
       <div class={dropdownStyles.chevronIcon}>
         <IconControlChevronDown8 />
       </div>
+      {variant === 'underline' ? (
+        <div class={dropdownStyles.underline} />
+      ) : null}
       <div class={dropdownStyles.border} />
       <div
         ref={menuElementRef}
