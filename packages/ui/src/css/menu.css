@@ -6,7 +6,7 @@
   background-color: var(--color-hud);
   border-radius: var(--border-radius-2);
   box-shadow: var(--box-shadow-menu);
-  color: var(--figma-color-text-oninverse);
+  color: var(--color-white);
   font-size: var(--font-size-12);
   overflow-y: auto;
 }
@@ -43,7 +43,7 @@
   position: relative;
 }
 .optionValueSelected {
-  background-color: var(--color-accent);
+  background-color: var(--figma-color-bg-brand);
 }
 .optionValueDisabled {
   color: var(--color-white-40-translucent);
