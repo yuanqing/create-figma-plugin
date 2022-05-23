@@ -89,7 +89,8 @@
   height: 1px;
   background-color: var(--figma-color-border);
 }
-.dropdown:not(.disabled):hover .underline {
+.dropdown:not(.disabled):hover .underline,
+.dropdown:not(.disabled):focus .underline {
   background-color: transparent;
 }
 
