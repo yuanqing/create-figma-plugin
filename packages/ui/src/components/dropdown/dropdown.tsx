@@ -311,9 +311,7 @@ export function Dropdown<
                   <IconMenuCheckmarkChecked16 />
                 </div>
               ) : null}
-              {typeof option.children === 'undefined'
-                ? option.value
-                : option.children}
+              {typeof option.text === 'undefined' ? option.value : option.text}
             </label>
           )
         })}
@@ -325,8 +323,8 @@ export function Dropdown<
 function getDropdownOptionValue<
   Value extends boolean | number | string = string
 >(option: DropdownOption<Value>): ComponentChildren {
-  if ('children' in option) {
-    return option.children
+  if ('text' in option) {
+    return option.text
   }
   if ('value' in option) {
     return option.value
