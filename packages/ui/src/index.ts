@@ -23,7 +23,8 @@ export {
   DropdownOptionHeader,
   DropdownOptionSeparator,
   DropdownOptionValue,
-  DropdownProps
+  DropdownProps,
+  DropdownVariant
 } from './components/dropdown/dropdown.js'
 export {
   FileUploadButton,
