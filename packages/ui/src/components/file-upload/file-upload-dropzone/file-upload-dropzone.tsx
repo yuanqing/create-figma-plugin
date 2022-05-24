@@ -133,7 +133,7 @@ export function FileUploadDropzone({
         type="file"
       />
       <div class={styles.fill} />
-      <div class={styles.dashedLine} />
+      <div class={styles.border} />
       <div class={styles.children}>{children}</div>
     </div>
   )

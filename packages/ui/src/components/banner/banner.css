@@ -6,6 +6,13 @@
   padding: var(--space-small) var(--space-medium) var(--space-small) 44px;
   background-color: var(--figma-color-bg-brand-tertiary);
 }
+.success {
+  background-color: var(--figma-color-bg-success);
+}
+.warning {
+  background-color: var(--figma-color-bg-warning);
+}
+
 .icon {
   position: absolute;
   top: 24px;
@@ -13,25 +20,18 @@
   color: var(--figma-color-icon);
   transform: translate(-50%, -50%);
 }
-.children {
-  color: var(--figma-color-text);
-}
-
-.success {
-  background-color: var(--figma-color-bg-success);
-}
 .success .icon {
   color: var(--figma-color-icon-onsuccess);
 }
-.success .children {
-  color: var(--figma-color-text-onsuccess);
-}
-
-.warning {
-  background-color: var(--figma-color-bg-warning);
-}
 .warning .icon {
   color: var(--figma-color-icon-onwarning);
+}
+
+.children {
+  color: var(--figma-color-text);
+}
+.success .children {
+  color: var(--figma-color-text-onsuccess);
 }
 .warning .children {
   color: var(--figma-color-text-onwarning);

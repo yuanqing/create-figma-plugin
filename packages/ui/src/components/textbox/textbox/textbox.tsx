@@ -11,11 +11,11 @@ export type TextboxProps<Name extends string> = RawTextboxProps<Name> & {
   variant?: TextboxVariant
 }
 
-export type TextboxVariant = 'default' | 'border' | 'underline'
+export type TextboxVariant = 'border' | 'underline'
 
 export function Textbox<Name extends string>({
   icon,
-  variant = 'default',
+  variant,
   ...rest
 }: Props<HTMLInputElement, TextboxProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -26,7 +26,7 @@ export function Textbox<Name extends string>({
     <div
       class={createClassName([
         styles.textbox,
-        variant === 'default'
+        typeof variant === 'undefined'
           ? null
           : variant === 'border'
           ? styles.hasBorder

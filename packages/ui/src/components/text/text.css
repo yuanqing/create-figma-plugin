@@ -25,28 +25,3 @@
 .right {
   text-align: right;
 }
-
-.text small {
-  color: var(--figma-color-text-secondary);
-  font-size: inherit;
-}
-.text strong {
-  font-weight: var(--font-weight-bold);
-}
-.text code {
-  font-family: var(--font-family-code);
-}
-
-.text a {
-  color: var(--figma-color-text-brand);
-  pointer-events: all;
-  text-decoration: none;
-}
-.text a:hover {
-  text-decoration: underline;
-}
-.text a:focus {
-  background-color: var(--figma-color-bg-selected);
-  border-radius: var(--border-radius-2);
-  outline: 0;
-}

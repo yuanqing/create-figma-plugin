@@ -297,7 +297,7 @@ export const DynamicallySetOptions = function () {
   return (
     <Fragment>
       <Button onClick={handleClick}>Set</Button>
-      <VerticalSpace />
+      <VerticalSpace space="small" />
       <Dropdown
         onChange={handleChange}
         options={options}

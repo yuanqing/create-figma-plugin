@@ -10,7 +10,7 @@
 }
 
 .input,
-.dashedLine {
+.border {
   position: absolute;
   top: 0;
   right: 0;
@@ -26,12 +26,12 @@
   opacity: 0;
 }
 
-.dashedLine {
+.border {
   border: 1px dashed var(--figma-color-border);
 }
-.input:active ~ .dashedLine,
-.input:focus ~ .dashedLine,
-.isDropActive .dashedLine {
+.input:active ~ .border,
+.input:focus ~ .border,
+.isDropActive .border {
   border-color: var(--figma-color-border-brand);
 }
 

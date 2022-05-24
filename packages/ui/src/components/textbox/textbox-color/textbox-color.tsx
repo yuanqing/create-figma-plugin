@@ -37,7 +37,7 @@ export type TextboxColorProps<
   onRgbaColorValueInput?: OnValueChange<null | RGBA, Name>
   variant?: TextboxColorVariant
 }
-export type TextboxColorVariant = 'default' | 'border' | 'underline'
+export type TextboxColorVariant = 'border' | 'underline'
 
 export function TextboxColor<
   Name extends string,
@@ -60,7 +60,7 @@ export function TextboxColor<
   onOpacityNumericValueInput = function () {},
   onOpacityValueInput = function () {},
   onRgbaColorValueInput = function () {},
-  variant = 'default',
+  variant,
   ...rest
 }: Props<
   HTMLInputElement,
@@ -280,7 +280,7 @@ export function TextboxColor<
     <div
       class={createClassName([
         styles.textboxColor,
-        variant === 'default'
+        typeof variant === 'undefined'
           ? null
           : variant === 'border'
           ? styles.hasBorder

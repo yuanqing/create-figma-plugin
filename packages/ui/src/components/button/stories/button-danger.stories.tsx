@@ -7,16 +7,20 @@ import { Button } from '../button'
 
 export default {
   parameters: {
-    order: 1
+    order: 2
   },
-  title: 'Components/Button/Primary'
+  title: 'Components/Button/Danger'
 }
 
 export const Default = function () {
   function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }
-  return <Button onClick={handleClick}>Text</Button>
+  return (
+    <Button danger onClick={handleClick}>
+      Text
+    </Button>
+  )
 }
 
 export const Focused = function () {
@@ -24,7 +28,7 @@ export const Focused = function () {
     console.log(event)
   }
   return (
-    <Button {...useInitialFocus()} onClick={handleClick}>
+    <Button {...useInitialFocus()} danger onClick={handleClick}>
       Text
     </Button>
   )
@@ -35,7 +39,7 @@ export const Disabled = function () {
     throw new Error('This function should not be called')
   }
   return (
-    <Button disabled onClick={handleClick}>
+    <Button danger disabled onClick={handleClick}>
       Text
     </Button>
   )
@@ -46,7 +50,7 @@ export const Loading = function () {
     throw new Error('This function should not be called')
   }
   return (
-    <Button loading onClick={handleClick}>
+    <Button danger loading onClick={handleClick}>
       Text
     </Button>
   )
@@ -57,7 +61,7 @@ export const LoadingFocused = function () {
     throw new Error('This function should not be called')
   }
   return (
-    <Button {...useInitialFocus()} loading onClick={handleClick}>
+    <Button {...useInitialFocus()} danger loading onClick={handleClick}>
       Text
     </Button>
   )
@@ -68,7 +72,7 @@ export const LoadingDisabled = function () {
     throw new Error('This function should not be called')
   }
   return (
-    <Button disabled loading onClick={handleClick}>
+    <Button danger disabled loading onClick={handleClick}>
       Text
     </Button>
   )
@@ -79,7 +83,7 @@ export const FullWidth = function () {
     console.log(event)
   }
   return (
-    <Button fullWidth onClick={handleClick}>
+    <Button danger fullWidth onClick={handleClick}>
       Text
     </Button>
   )
@@ -94,7 +98,7 @@ export const FullWidthLongText = function () {
     console.log(event)
   }
   return (
-    <Button fullWidth onClick={handleClick}>
+    <Button danger fullWidth onClick={handleClick}>
       {longText}
     </Button>
   )

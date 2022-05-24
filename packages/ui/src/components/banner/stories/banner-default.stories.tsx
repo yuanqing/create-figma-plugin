@@ -9,7 +9,7 @@ export default {
     fixedWidth: true,
     order: 1
   },
-  title: 'Components/Banner/Primary'
+  title: 'Components/Banner/Default'
 }
 
 export const Default = function () {

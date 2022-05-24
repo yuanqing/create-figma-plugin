@@ -9,7 +9,7 @@ export default {
   parameters: {
     order: 1
   },
-  title: 'Components/File Upload Button/Primary'
+  title: 'Components/File Upload Button/Default'
 }
 
 export const Default = function () {
@@ -129,7 +129,7 @@ export const AcceptedFileTypes = function () {
   )
 }
 
-export const Multiple = function () {
+export const MultipleFiles = function () {
   function handleSelectedFiles(files: Array<File>) {
     console.log(files)
   }

@@ -5,7 +5,7 @@ import { Props } from '../../types/types'
 import styles from './vertical-space.css'
 
 export type VerticalSpaceProps = {
-  space?: VerticalSpaceSpace
+  space: VerticalSpaceSpace
 }
 export type VerticalSpaceSpace =
   | 'extraSmall'
@@ -15,7 +15,7 @@ export type VerticalSpaceSpace =
   | 'extraLarge'
 
 export function VerticalSpace({
-  space = 'small',
+  space,
   ...rest
 }: Props<HTMLDivElement, VerticalSpaceProps>): JSX.Element {
   return <div {...rest} class={styles[space]} />

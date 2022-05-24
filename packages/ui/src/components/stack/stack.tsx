@@ -6,7 +6,7 @@ import styles from './stack.css'
 
 export type StackProps = {
   children: ComponentChildren
-  space?: StackSpace
+  space: StackSpace
 }
 export type StackSpace =
   | 'extraSmall'
@@ -17,7 +17,7 @@ export type StackSpace =
 
 export function Stack({
   children,
-  space = 'small',
+  space,
   ...rest
 }: Props<HTMLDivElement, StackProps>): JSX.Element {
   return (
@@ -27,7 +27,7 @@ export function Stack({
         index: number
       ): JSX.Element {
         return (
-          <div key={index} class={styles.item}>
+          <div key={index} class={styles.child}>
             {element}
           </div>
         )

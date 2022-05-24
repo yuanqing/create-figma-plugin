@@ -4,9 +4,10 @@ import { useCallback } from 'preact/hooks'
 
 import { Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
-import styles from '../../button/button.css'
+import buttonStyles from '../../button/button.css'
 import { LoadingIndicator } from '../../loading-indicator/loading-indicator'
 import { fileComparator } from '../private/file-comparator'
+import fileUploadButtonStyles from './file-upload-button.css'
 
 export type FileUploadButtonProps = {
   acceptedFileTypes?: Array<string>
@@ -82,15 +83,19 @@ export function FileUploadButton({
   return (
     <div
       class={createClassName([
-        styles.button,
-        secondary === true ? styles.secondary : styles.primary,
-        fullWidth === true ? styles.fullWidth : null,
-        disabled === true ? styles.disabled : null,
-        loading === true ? styles.loading : null
+        buttonStyles.button,
+        secondary === true ? buttonStyles.secondary : buttonStyles.default,
+        secondary === true
+          ? fileUploadButtonStyles.secondary
+          : fileUploadButtonStyles.default,
+        fullWidth === true ? buttonStyles.fullWidth : null,
+        disabled === true ? buttonStyles.disabled : null,
+        disabled === true ? fileUploadButtonStyles.disabled : null,
+        loading === true ? buttonStyles.loading : null
       ])}
     >
       {loading === true ? (
-        <div class={styles.loadingIndicator}>
+        <div class={buttonStyles.loadingIndicator}>
           <LoadingIndicator />
         </div>
       ) : null}
@@ -101,7 +106,7 @@ export function FileUploadButton({
             ? undefined
             : acceptedFileTypes.join(',')
         }
-        class={styles.input}
+        class={fileUploadButtonStyles.input}
         disabled={disabled === true}
         multiple={multiple}
         onChange={
@@ -117,7 +122,7 @@ export function FileUploadButton({
         type="file"
       />
       <button disabled={disabled === true} tabIndex={-1}>
-        <div class={styles.children}>{children}</div>
+        <div class={buttonStyles.children}>{children}</div>
       </button>
     </div>
   )

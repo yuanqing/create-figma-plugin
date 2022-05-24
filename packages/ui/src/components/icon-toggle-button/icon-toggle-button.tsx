@@ -50,7 +50,7 @@ export function IconToggleButton<Name extends string>({
   return (
     <label
       class={createClassName([
-        styles.iconButton,
+        styles.iconToggleButton,
         disabled === true ? styles.disabled : null
       ])}
     >
@@ -65,7 +65,7 @@ export function IconToggleButton<Name extends string>({
         tabIndex={disabled === true ? -1 : 0}
         type="checkbox"
       />
-      <div class={styles.fill}>
+      <div class={styles.box}>
         <div class={styles.icon}>{children}</div>
       </div>
     </label>

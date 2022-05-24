@@ -11,7 +11,7 @@ export default {
 }
 
 export const ExtraSmallSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <div style={style}>
       <VerticalSpace space="extraSmall" />
@@ -20,7 +20,7 @@ export const ExtraSmallSpace = function () {
 }
 
 export const SmallSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <div style={style}>
       <VerticalSpace space="small" />
@@ -29,7 +29,7 @@ export const SmallSpace = function () {
 }
 
 export const MediumSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <div style={style}>
       <VerticalSpace space="medium" />
@@ -38,7 +38,7 @@ export const MediumSpace = function () {
 }
 
 export const LargeSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <div style={style}>
       <VerticalSpace space="large" />
@@ -47,7 +47,7 @@ export const LargeSpace = function () {
 }
 
 export const ExtraLargeSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <div style={style}>
       <VerticalSpace space="extraLarge" />

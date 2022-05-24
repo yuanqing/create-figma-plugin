@@ -7,7 +7,7 @@ export default { title: 'Components/Middle Align' }
 
 export const Default = function () {
   const style = {
-    backgroundColor: 'var(--figma-color-bg-selected)',
+    backgroundColor: 'var(--figma-color-bg-brand-tertiary)',
     height: 240
   }
   return (

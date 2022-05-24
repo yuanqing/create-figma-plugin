@@ -11,29 +11,6 @@
     0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
     0 0 0 0.5px rgba(0, 0, 0, 0.2);
-  /* color */
-  --color-black: #000000;
-  --color-black-3-translucent: rgba(0, 0, 0, 0.03);
-  --color-black-6-translucent: rgba(0, 0, 0, 0.06);
-  --color-black-30: #b3b3b3;
-  --color-black-30-translucent: rgba(0, 0, 0, 0.3);
-  --color-black-80: #333333;
-  --color-black-80-translucent: rgba(0, 0, 0, 0.8);
-  --color-blue: #18a0fb;
-  --color-blue-30-translucent: rgba(24, 160, 251, 0.3);
-  --color-figjam-purple: #974bff;
-  --color-figjam-purple-20-translucent: rgba(151, 71, 255, 0.2);
-  --color-green: #1bc47d;
-  --color-hud: #222222;
-  --color-purple: #7b61ff;
-  --color-red: #f24822;
-  --color-selection-a: #daebf7;
-  --color-selection-b: #edf5fa;
-  --color-silver: #e5e5e5;
-  --color-white: #ffffff;
-  --color-white-20-translucent: rgba(255, 255, 255, 0.2);
-  --color-white-40-translucent: rgba(255, 255, 255, 0.4);
-  --color-yellow: #ffeb00;
   /* font */
   --font-family: 'Inter', 'Helvetica', sans-serif;
   --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',

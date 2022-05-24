@@ -47,7 +47,7 @@ export type DropdownOptionValue<Value> = {
 export type DropdownOptionSeparator = {
   separator: true
 }
-export type DropdownVariant = 'default' | 'border' | 'underline'
+export type DropdownVariant = 'border' | 'underline'
 
 export function Dropdown<
   Name extends string,
@@ -61,7 +61,7 @@ export function Dropdown<
   onValueChange = function () {},
   placeholder,
   value,
-  variant = 'default',
+  variant,
   ...rest
 }: Props<HTMLDivElement, DropdownProps<Name, Value>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -212,7 +212,7 @@ export function Dropdown<
       ref={rootElementRef}
       class={createClassName([
         dropdownStyles.dropdown,
-        variant === 'default'
+        typeof variant === 'undefined'
           ? null
           : variant === 'border'
           ? dropdownStyles.hasBorder

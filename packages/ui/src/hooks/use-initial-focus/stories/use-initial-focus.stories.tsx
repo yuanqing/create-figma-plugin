@@ -24,7 +24,7 @@ export const UseInitialFocus = function () {
         onValueInput={setValue}
         value={value}
       />
-      <VerticalSpace />
+      <VerticalSpace space="small" />
       <Button fullWidth onClick={handleClick}>
         Submit
       </Button>

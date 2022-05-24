@@ -1,4 +1,4 @@
-.iconButton {
+.iconToggleButton {
   position: relative;
   width: 30px;
   height: 30px;
@@ -18,27 +18,35 @@
   cursor: not-allowed;
 }
 
-.fill {
+.box {
   position: relative;
   width: 100%;
   height: 100%;
   border: 2px solid transparent;
   border-radius: var(--border-radius-2);
 }
-.iconButton:not(.disabled) .input:not(:checked):hover ~ .fill {
+.iconToggleButton:not(.disabled) .input:not(:checked) ~ .box {
+  color: var(--figma-color-icon);
+}
+.iconToggleButton:not(.disabled) .input:not(:checked):hover ~ .box {
   background-color: var(--figma-color-bg-hover);
 }
-.iconButton:not(.disabled) .input:not(:checked):focus ~ .fill {
+.iconToggleButton:not(.disabled) .input:not(:checked):focus ~ .box {
   border-color: var(--figma-color-border-selected);
 }
-.iconButton:not(.disabled) .input:checked ~ .fill {
+.iconToggleButton:not(.disabled) .input:checked ~ .box {
   background-color: var(--figma-color-bg-brand);
+  color: var(--figma-color-icon-onbrand);
 }
-.iconButton:not(.disabled) .input:checked:focus ~ .fill {
+.iconToggleButton:not(.disabled) .input:checked:focus ~ .box {
   border-color: var(--figma-color-border-selected-strong);
 }
-.disabled .input:checked ~ .fill {
+.disabled .input:not(:checked) ~ .box {
+  color: var(--figma-color-icon-disabled);
+}
+.disabled .input:checked ~ .box {
   background-color: var(--figma-color-bg-disabled);
+  color: var(--figma-color-icon-ondisabled);
 }
 
 .icon {
@@ -46,17 +54,4 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.input ~ .fill svg {
-  color: var(--figma-color-icon);
-}
-.input:checked ~ .fill svg {
-  color: var(--figma-color-icon-onbrand);
-}
-.disabled .input ~ .fill svg {
-  color: var(--figma-color-icon-disabled);
-}
-.disabled .input:checked ~ .fill svg {
-  color: var(--figma-color-icon-ondisabled);
 }

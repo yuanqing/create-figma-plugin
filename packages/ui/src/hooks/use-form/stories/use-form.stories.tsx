@@ -44,11 +44,11 @@ export const UseForm = function () {
         onValueInput={setFormState}
         value={formState.text}
       />
-      <VerticalSpace />
+      <VerticalSpace space="small" />
       <Text align="center">
         {formState.wordCount} word{formState.wordCount === 1 ? '' : 's'}
       </Text>
-      <VerticalSpace />
+      <VerticalSpace space="small" />
       <Button disabled={disabled === true} fullWidth onClick={handleSubmit}>
         Submit
       </Button>

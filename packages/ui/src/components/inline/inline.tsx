@@ -26,12 +26,12 @@ export function Inline({
       class={typeof space === 'undefined' ? undefined : styles[space]}
     >
       {toChildArray(children).map(function (
-        element: ComponentChild,
+        child: ComponentChild,
         index: number
       ): JSX.Element {
         return (
-          <div key={index} class={styles.item}>
-            {element}
+          <div key={index} class={styles.child}>
+            {child}
           </div>
         )
       })}

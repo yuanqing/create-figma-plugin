@@ -8,14 +8,14 @@ import styles from './banner.css'
 export type BannerProps = {
   children: ComponentChildren
   icon: ComponentChildren
-  type?: BannerType
+  variant?: BannerVariant
 }
-export type BannerType = 'success' | 'warning'
+export type BannerVariant = 'success' | 'warning'
 
 export function Banner({
   children,
   icon,
-  type,
+  variant,
   ...rest
 }: Props<HTMLDivElement, BannerProps>): JSX.Element {
   return (
@@ -23,7 +23,7 @@ export function Banner({
       {...rest}
       class={createClassName([
         styles.banner,
-        typeof type === 'undefined' ? null : styles[type]
+        typeof variant === 'undefined' ? null : styles[variant]
       ])}
     >
       <div class={styles.icon}>{icon}</div>

@@ -59,7 +59,7 @@ export const AcceptedFileTypes = function () {
   )
 }
 
-export const Multiple = function () {
+export const MultipleFiles = function () {
   function handleSelectedFiles(files: Array<File>) {
     console.log(files)
   }

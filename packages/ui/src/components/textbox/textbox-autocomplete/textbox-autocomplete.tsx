@@ -49,7 +49,7 @@ export type TextboxAutocompleteOptionValue = {
 export type TextboxAutocompleteOptionSeparator = {
   separator: true
 }
-export type TextboxAutocompleteVariant = 'default' | 'border' | 'underline'
+export type TextboxAutocompleteVariant = 'border' | 'underline'
 
 type Option =
   | TextboxAutocompleteOptionHeader
@@ -74,7 +74,7 @@ export function TextboxAutocomplete<Name extends string>({
   strict = false,
   top = false,
   value,
-  variant = 'default',
+  variant,
   ...rest
 }: Props<HTMLInputElement, TextboxAutocompleteProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -325,7 +325,7 @@ export function TextboxAutocomplete<Name extends string>({
       ref={rootElementRef}
       class={createClassName([
         textboxStyles.textbox,
-        variant === 'default'
+        typeof variant === 'undefined'
           ? null
           : variant === 'border'
           ? textboxStyles.hasBorder

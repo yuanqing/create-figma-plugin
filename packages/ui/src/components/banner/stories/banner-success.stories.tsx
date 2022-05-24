@@ -14,7 +14,7 @@ export default {
 
 export const Default = function () {
   return (
-    <Banner icon={<IconCheckCircle32 />} type="success">
+    <Banner icon={<IconCheckCircle32 />} variant="success">
       Text
     </Banner>
   )
@@ -23,7 +23,7 @@ export const Default = function () {
 export const LongText = function () {
   const longText = Array(100).fill('Text').join(' ')
   return (
-    <Banner icon={<IconCheckCircle32 />} type="success">
+    <Banner icon={<IconCheckCircle32 />} variant="success">
       {longText}
     </Banner>
   )

@@ -1,0 +1,20 @@
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+}
+
+.default:not(.disabled) .input:focus ~ button {
+  border-color: var(--figma-color-border-selected-strong);
+}
+
+.secondary:not(.disabled) .input:focus ~ button {
+  padding: 0 14px;
+  border-width: 2px;
+  border-color: var(--figma-color-border-selected);
+  line-height: 28px;
+}

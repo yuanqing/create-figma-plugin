@@ -5,8 +5,8 @@ import { Inline } from '../inline'
 
 export default { title: 'Components/Inline' }
 
-export const NoSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+export const Default = function () {
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Inline>
       <div style={style}>foo</div>
@@ -17,7 +17,7 @@ export const NoSpace = function () {
 }
 
 export const ExtraSmallSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Inline space="extraSmall">
       <div style={style}>foo</div>
@@ -28,7 +28,7 @@ export const ExtraSmallSpace = function () {
 }
 
 export const SmallSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Inline space="small">
       <div style={style}>foo</div>
@@ -39,7 +39,7 @@ export const SmallSpace = function () {
 }
 
 export const MediumSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Inline space="medium">
       <div style={style}>foo</div>
@@ -50,7 +50,7 @@ export const MediumSpace = function () {
 }
 
 export const LargeSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Inline space="large">
       <div style={style}>foo</div>
@@ -61,7 +61,7 @@ export const LargeSpace = function () {
 }
 
 export const ExtraLargeSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Inline space="extraLarge">
       <div style={style}>foo</div>

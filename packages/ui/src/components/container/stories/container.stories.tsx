@@ -6,7 +6,7 @@ import { Container } from '../container'
 export default { title: 'Components/Container' }
 
 export const ExtraSmallSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Container space="extraSmall" style={style}>
       Text
@@ -15,7 +15,7 @@ export const ExtraSmallSpace = function () {
 }
 
 export const SmallSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Container space="small" style={style}>
       Text
@@ -24,7 +24,7 @@ export const SmallSpace = function () {
 }
 
 export const MediumSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Container space="medium" style={style}>
       Text
@@ -33,7 +33,7 @@ export const MediumSpace = function () {
 }
 
 export const LargeSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Container space="large" style={style}>
       Text
@@ -42,7 +42,7 @@ export const LargeSpace = function () {
 }
 
 export const ExtraLargeSpace = function () {
-  const style = { backgroundColor: 'var(--figma-color-bg-selected)' }
+  const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }
   return (
     <Container space="extraLarge" style={style}>
       Text

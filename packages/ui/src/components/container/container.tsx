@@ -6,7 +6,7 @@ import styles from './container.css'
 
 export type ContainerProps = {
   children: ComponentChildren
-  space?: ContainerSpace
+  space: ContainerSpace
 }
 export type ContainerSpace =
   | 'extraSmall'
@@ -16,7 +16,7 @@ export type ContainerSpace =
   | 'extraLarge'
 
 export function Container({
-  space = 'small',
+  space,
   ...rest
 }: Props<HTMLDivElement, ContainerProps>): JSX.Element {
   return <div {...rest} class={styles[space]} />

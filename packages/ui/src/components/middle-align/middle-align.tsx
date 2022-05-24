@@ -14,7 +14,7 @@ export function MiddleAlign({
 }: Props<HTMLDivElement, MiddleAlignProps>): JSX.Element {
   return (
     <div {...rest} class={styles.middleAlign}>
-      <div>{children}</div>
+      <div class={styles.children}>{children}</div>
     </div>
   )
 }

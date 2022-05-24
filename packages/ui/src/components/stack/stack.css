@@ -1,18 +1,15 @@
-.extraSmall > .item {
+.extraSmall > .child:not(:first-child) {
   margin-top: var(--space-extra-small);
 }
-.small > .item {
+.small > .child:not(:first-child) {
   margin-top: var(--space-small);
 }
-.medium > .item {
+.medium > .child:not(:first-child) {
   margin-top: var(--space-medium);
 }
-.large > .item {
+.large > .child:not(:first-child) {
   margin-top: var(--space-large);
 }
-.extraLarge > .item {
+.extraLarge > .child:not(:first-child) {
   margin-top: var(--space-extra-large);
-}
-.item:first-child {
-  margin-top: 0;
 }

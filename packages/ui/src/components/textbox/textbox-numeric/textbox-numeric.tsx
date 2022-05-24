@@ -16,11 +16,11 @@ export type TextboxNumericProps<Name extends string> =
     variant?: TextboxNumericVariant
   }
 
-export type TextboxNumericVariant = 'default' | 'border' | 'underline'
+export type TextboxNumericVariant = 'border' | 'underline'
 
 export function TextboxNumeric<Name extends string>({
   icon,
-  variant = 'default',
+  variant,
   ...rest
 }: Props<HTMLInputElement, TextboxNumericProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -31,7 +31,7 @@ export function TextboxNumeric<Name extends string>({
     <div
       class={createClassName([
         textboxStyles.textbox,
-        variant === 'default'
+        typeof variant === 'undefined'
           ? null
           : variant === 'border'
           ? textboxStyles.hasBorder

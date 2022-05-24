@@ -34,10 +34,6 @@
   flex-grow: 1;
 }
 
-.placeholder {
-  color: var(--figma-color-text-tertiary);
-}
-
 .value {
   overflow: hidden;
   margin-right: 6px;
@@ -54,6 +50,10 @@
 }
 .hasIcon .value {
   padding-left: var(--space-extra-large);
+}
+
+.placeholder {
+  color: var(--figma-color-text-tertiary);
 }
 
 .chevronIcon {

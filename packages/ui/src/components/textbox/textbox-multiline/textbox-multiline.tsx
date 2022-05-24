@@ -26,7 +26,7 @@ export type TextboxMultilineProps<Name extends string> = {
   variant?: TextboxMultilineVariant
 }
 
-export type TextboxMultilineVariant = 'default' | 'border' | 'underline'
+export type TextboxMultilineVariant = 'border' | 'underline'
 
 export function TextboxMultiline<Name extends string>({
   disabled = false,
@@ -146,7 +146,7 @@ export function TextboxMultiline<Name extends string>({
     <div
       class={createClassName([
         styles.textboxMultiline,
-        variant === 'default'
+        typeof variant === 'undefined'
           ? null
           : variant === 'border'
           ? styles.hasBorder

@@ -49,7 +49,7 @@ export function Button({
     <div
       class={createClassName([
         styles.button,
-        secondary === true ? styles.secondary : styles.primary,
+        secondary === true ? styles.secondary : styles.default,
         danger === true ? styles.danger : null,
         fullWidth === true ? styles.fullWidth : null,
         disabled === true ? styles.disabled : null,

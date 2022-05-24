@@ -34,7 +34,7 @@ export function Columns({
         index: number
       ): JSX.Element {
         return (
-          <div key={index} class={styles.column}>
+          <div key={index} class={styles.child}>
             {element}
           </div>
         )
