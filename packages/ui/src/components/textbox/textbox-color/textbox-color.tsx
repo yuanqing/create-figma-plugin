@@ -21,7 +21,6 @@ export type TextboxColorProps<
 > = {
   disabled?: boolean
   name?: Name
-  noBorder?: boolean
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   hexColor: string
@@ -36,7 +35,9 @@ export type TextboxColorProps<
   onOpacityNumericValueInput?: OnValueChange<null | number, OpacityName>
   onOpacityValueInput?: OnValueChange<string, OpacityName>
   onRgbaColorValueInput?: OnValueChange<null | RGBA, Name>
+  variant?: TextboxColorVariant
 }
+export type TextboxColorVariant = 'default' | 'border' | 'underline'
 
 export function TextboxColor<
   Name extends string,
@@ -45,7 +46,6 @@ export function TextboxColor<
 >({
   disabled = false,
   name,
-  noBorder = false,
   propagateEscapeKeyDown = true,
   revertOnEscapeKeyDown = false,
   hexColor,
@@ -60,6 +60,7 @@ export function TextboxColor<
   onOpacityNumericValueInput = function () {},
   onOpacityValueInput = function () {},
   onRgbaColorValueInput = function () {},
+  variant = 'default',
   ...rest
 }: Props<
   HTMLInputElement,
@@ -279,7 +280,11 @@ export function TextboxColor<
     <div
       class={createClassName([
         styles.textboxColor,
-        noBorder === true ? styles.noBorder : null,
+        variant === 'default'
+          ? null
+          : variant === 'border'
+          ? styles.hasBorder
+          : null,
         disabled === true ? styles.disabled : null
       ])}
     >
@@ -344,6 +349,7 @@ export function TextboxColor<
       />
       <div class={styles.divider} />
       <div class={styles.border} />
+      {variant === 'underline' ? <div class={styles.underline} /> : null}
     </div>
   )
 }

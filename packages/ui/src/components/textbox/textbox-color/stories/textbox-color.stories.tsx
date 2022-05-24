@@ -4,8 +4,8 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { TextboxColor } from './textbox-color'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
+import { TextboxColor } from '../textbox-color'
 
 export default { title: 'Components/Textbox Color' }
 
@@ -121,30 +121,6 @@ export const Disabled = function () {
     <TextboxColor
       disabled
       hexColor={hexColor}
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
-      opacity={opacity}
-    />
-  )
-}
-
-export const NoBorder = function () {
-  const [hexColor, setHexColor] = useState<string>('000000')
-  const [opacity, setOpacity] = useState<string>('100%')
-  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newHexColor = event.currentTarget.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newOpacity = event.currentTarget.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      hexColor={hexColor}
-      noBorder
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}
       opacity={opacity}

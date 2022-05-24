@@ -14,7 +14,6 @@ const EMPTY_STRING = ''
 export type TextboxMultilineProps<Name extends string> = {
   disabled?: boolean
   name?: Name
-  noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLTextAreaElement>>
   onValueInput?: OnValueChange<string, Name>
   placeholder?: string
@@ -24,12 +23,14 @@ export type TextboxMultilineProps<Name extends string> = {
   rows?: number
   validateOnBlur?: (value: string) => string | boolean
   value: string
+  variant?: TextboxMultilineVariant
 }
+
+export type TextboxMultilineVariant = 'default' | 'border' | 'underline'
 
 export function TextboxMultiline<Name extends string>({
   disabled = false,
   name,
-  noBorder = false,
   onInput = function () {},
   onValueInput = function () {},
   placeholder,
@@ -38,6 +39,7 @@ export function TextboxMultiline<Name extends string>({
   rows = 3,
   spellCheck = false,
   validateOnBlur,
+  variant,
   value,
   ...rest
 }: Props<HTMLTextAreaElement, TextboxMultilineProps<Name>>): JSX.Element {
@@ -144,7 +146,11 @@ export function TextboxMultiline<Name extends string>({
     <div
       class={createClassName([
         styles.textboxMultiline,
-        noBorder === true ? styles.noBorder : null,
+        variant === 'default'
+          ? null
+          : variant === 'border'
+          ? styles.hasBorder
+          : null,
         disabled === true ? styles.disabled : null
       ])}
     >
@@ -166,6 +172,7 @@ export function TextboxMultiline<Name extends string>({
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
       <div class={styles.border} />
+      {variant === 'underline' ? <div class={styles.underline} /> : null}
     </div>
   )
 }

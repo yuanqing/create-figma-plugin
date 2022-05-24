@@ -2,9 +2,9 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import styles from '../../../css/button.css'
 import { Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
+import styles from '../../button/button.css'
 import { LoadingIndicator } from '../../loading-indicator/loading-indicator'
 import { fileComparator } from '../private/file-comparator'
 

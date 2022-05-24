@@ -23,7 +23,6 @@ export type TextboxAutocompleteProps<Name extends string> = {
   filter?: boolean
   icon?: ComponentChildren
   name?: Name
-  noBorder?: boolean
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueInput?: OnValueChange<string, Name>
   options: Array<TextboxAutocompleteOption>
@@ -34,6 +33,7 @@ export type TextboxAutocompleteProps<Name extends string> = {
   strict?: boolean
   top?: boolean
   value: string
+  variant?: TextboxAutocompleteVariant
 }
 export type TextboxAutocompleteOption =
   | TextboxAutocompleteOptionHeader
@@ -49,6 +49,7 @@ export type TextboxAutocompleteOptionValue = {
 export type TextboxAutocompleteOptionSeparator = {
   separator: true
 }
+export type TextboxAutocompleteVariant = 'default' | 'border' | 'underline'
 
 type Option =
   | TextboxAutocompleteOptionHeader
@@ -64,7 +65,6 @@ export function TextboxAutocomplete<Name extends string>({
   filter = false,
   icon,
   name,
-  noBorder = false,
   onInput = function () {},
   onValueInput = function () {},
   placeholder,
@@ -74,6 +74,7 @@ export function TextboxAutocomplete<Name extends string>({
   strict = false,
   top = false,
   value,
+  variant = 'default',
   ...rest
 }: Props<HTMLInputElement, TextboxAutocompleteProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -324,7 +325,11 @@ export function TextboxAutocomplete<Name extends string>({
       ref={rootElementRef}
       class={createClassName([
         textboxStyles.textbox,
-        noBorder === true ? textboxStyles.noBorder : null,
+        variant === 'default'
+          ? null
+          : variant === 'border'
+          ? textboxStyles.hasBorder
+          : null,
         typeof icon === 'undefined' ? null : textboxStyles.hasIcon,
         disabled === true ? textboxStyles.disabled : null
       ])}
@@ -349,6 +354,9 @@ export function TextboxAutocomplete<Name extends string>({
           <div class={textboxStyles.icon}>{icon}</div>
         )}
         <div class={textboxStyles.border} />
+        {variant === 'underline' ? (
+          <div class={textboxStyles.underline} />
+        ) : null}
         <div
           ref={menuElementRef}
           class={createClassName([

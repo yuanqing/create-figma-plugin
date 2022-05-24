@@ -2,10 +2,10 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import styles from '../../css/button.css'
 import { Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator'
+import styles from './button.css'
 
 export type ButtonProps = {
   children: ComponentChildren

@@ -3,12 +3,12 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
+import { IconLayerFrame16 } from '../../../icon/icon-16/icon-layer-frame-16'
 import {
   TextboxAutocomplete,
   TextboxAutocompleteOption
-} from './textbox-autocomplete'
+} from '../textbox-autocomplete'
 
 export default {
   parameters: {
@@ -156,31 +156,6 @@ export const DisabledOption = function () {
   }
   return (
     <TextboxAutocomplete
-      onInput={handleInput}
-      options={options}
-      value={value}
-    />
-  )
-}
-
-export const NoBorder = function () {
-  const [value, setValue] = useState<string>('foo')
-  const options: Array<TextboxAutocompleteOption> = [
-    { value: 'foo' },
-    { value: 'bar' },
-    { value: 'baz' },
-    { separator: true },
-    { header: 'Header' },
-    { value: 'qux' }
-  ]
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <TextboxAutocomplete
-      noBorder
       onInput={handleInput}
       options={options}
       value={value}

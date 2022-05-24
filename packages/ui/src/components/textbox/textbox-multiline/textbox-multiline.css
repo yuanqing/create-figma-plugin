@@ -9,15 +9,15 @@
   padding: 6px 0 6px var(--space-extra-small);
   background-color: transparent;
   border-radius: var(--border-radius-2);
-  color: var(--color-black-80);
+  color: var(--figma-color-text);
   resize: none;
 }
 .textarea::placeholder {
-  color: var(--color-black-30);
+  color: var(--figma-color-text-tertiary);
 }
 .disabled .textarea {
+  color: var(--figma-color-text-disabled);
   cursor: not-allowed;
-  opacity: var(--opacity-30);
 }
 
 .border {
@@ -26,20 +26,17 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border-width: 1px;
-  border-color: var(--color-silver);
+  border: 1px solid transparent;
   border-radius: var(--border-radius-2);
   pointer-events: none;
+}
+.hasBorder .border,
+.textboxMultiline:not(.disabled):hover .border {
+  border-color: var(--figma-color-border);
 }
 .textboxMultiline:not(.disabled) .textarea:focus ~ .border {
   top: -1px;
   bottom: -1px;
   border-width: 2px;
-  border-color: var(--color-accent);
-}
-.noBorder .textarea:not(:focus) ~ .border {
-  border-color: transparent;
-}
-.noBorder:not(.disabled) .textarea:not(:focus):hover ~ .border {
-  border-color: var(--color-silver);
+  border-color: var(--figma-color-border-brand-strong);
 }

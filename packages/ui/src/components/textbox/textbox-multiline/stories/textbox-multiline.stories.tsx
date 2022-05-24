@@ -4,8 +4,8 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { TextboxMultiline } from './textbox-multiline'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
+import { TextboxMultiline } from '../textbox-multiline'
 
 export default {
   parameters: {
@@ -21,7 +21,9 @@ export const Empty = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxMultiline onInput={handleInput} value={value} />
+  return (
+    <TextboxMultiline onInput={handleInput} value={value} variant="border" />
+  )
 }
 
 export const Focused = function () {
@@ -71,16 +73,6 @@ export const Disabled = function () {
     throw new Error('This function should not be called')
   }
   return <TextboxMultiline disabled onInput={handleInput} value="Text" />
-}
-
-export const NoBorder = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <TextboxMultiline noBorder onInput={handleInput} value={value} />
 }
 
 export const RevertOnEscapeKeyDown = function () {

@@ -8,12 +8,14 @@ import styles from './textbox.css'
 
 export type TextboxProps<Name extends string> = RawTextboxProps<Name> & {
   icon?: ComponentChildren
-  noBorder?: boolean
+  variant?: TextboxVariant
 }
+
+export type TextboxVariant = 'default' | 'border' | 'underline'
 
 export function Textbox<Name extends string>({
   icon,
-  noBorder = false,
+  variant = 'default',
   ...rest
 }: Props<HTMLInputElement, TextboxProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -24,7 +26,11 @@ export function Textbox<Name extends string>({
     <div
       class={createClassName([
         styles.textbox,
-        noBorder === true ? styles.noBorder : null,
+        variant === 'default'
+          ? null
+          : variant === 'border'
+          ? styles.hasBorder
+          : null,
         typeof icon === 'undefined' ? null : styles.hasIcon,
         rest.disabled === true ? styles.disabled : null
       ])}
@@ -34,6 +40,7 @@ export function Textbox<Name extends string>({
         <div class={styles.icon}>{icon}</div>
       )}
       <div class={styles.border} />
+      {variant === 'underline' ? <div class={styles.underline} /> : null}
     </div>
   )
 }

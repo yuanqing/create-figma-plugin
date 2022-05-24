@@ -4,9 +4,9 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
-import { Textbox } from './textbox'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
+import { IconLayerFrame16 } from '../../../icon/icon-16/icon-layer-frame-16'
+import { Textbox } from '../textbox'
 
 export default {
   parameters: {
@@ -25,16 +25,6 @@ export const Empty = function () {
   return <Textbox onInput={handleInput} value={value} />
 }
 
-export const Focused = function () {
-  const [value, setValue] = useState<string>('')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Textbox {...useInitialFocus()} onInput={handleInput} value={value} />
-}
-
 export const Placeholder = function () {
   const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -47,14 +37,82 @@ export const Placeholder = function () {
   )
 }
 
-export const Filled = function () {
-  const [value, setValue] = useState<string>('Text')
+export const Border = function () {
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox onInput={handleInput} value={value} />
+  return (
+    <Textbox
+      onInput={handleInput}
+      placeholder="Placeholder"
+      value={value}
+      variant="border"
+    />
+  )
+}
+
+export const Underline = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Textbox
+      onInput={handleInput}
+      placeholder="Placeholder"
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const Focused = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox {...useInitialFocus()} onInput={handleInput} value={value} />
+}
+
+export const FocusedBorder = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Textbox
+      {...useInitialFocus()}
+      onInput={handleInput}
+      value={value}
+      variant="border"
+    />
+  )
+}
+
+export const FocusedUnderline = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Textbox
+      {...useInitialFocus()}
+      onInput={handleInput}
+      value={value}
+      variant="underline"
+    />
+  )
 }
 
 export const Disabled = function () {
@@ -64,14 +122,14 @@ export const Disabled = function () {
   return <Textbox disabled onInput={handleInput} value="Text" />
 }
 
-export const NoBorder = function () {
-  const [value, setValue] = useState<string>('Text')
+export const Mixed = function () {
+  const [value, setValue] = useState<string>(MIXED_STRING)
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox noBorder onInput={handleInput} value={value} />
+  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const Icon = function () {
@@ -86,7 +144,24 @@ export const Icon = function () {
   )
 }
 
-export const TextIcon = function () {
+export const IconDisabled = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Textbox
+      disabled
+      icon={<IconLayerFrame16 />}
+      onInput={handleInput}
+      value={value}
+    />
+  )
+}
+
+export const IconText = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -123,16 +198,6 @@ export const ValidateOnBlur = function () {
       value={value}
     />
   )
-}
-
-export const Mixed = function () {
-  const [value, setValue] = useState<string>(MIXED_STRING)
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const Password = function () {

@@ -8,16 +8,19 @@ import {
   RawTextboxNumeric,
   RawTextboxNumericProps
 } from './private/raw-textbox-numeric'
+import textboxNumericStyles from './textbox-numeric.css'
 
 export type TextboxNumericProps<Name extends string> =
   RawTextboxNumericProps<Name> & {
     icon?: ComponentChildren
-    noBorder?: boolean
+    variant?: TextboxNumericVariant
   }
+
+export type TextboxNumericVariant = 'default' | 'border' | 'underline'
 
 export function TextboxNumeric<Name extends string>({
   icon,
-  noBorder = false,
+  variant = 'default',
   ...rest
 }: Props<HTMLInputElement, TextboxNumericProps<Name>>): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
@@ -28,16 +31,27 @@ export function TextboxNumeric<Name extends string>({
     <div
       class={createClassName([
         textboxStyles.textbox,
-        noBorder === true ? textboxStyles.noBorder : null,
+        variant === 'default'
+          ? null
+          : variant === 'border'
+          ? textboxStyles.hasBorder
+          : null,
         typeof icon === 'undefined' ? null : textboxStyles.hasIcon,
         rest.disabled === true ? textboxStyles.disabled : null
       ])}
     >
-      <RawTextboxNumeric {...rest} class={textboxStyles.input} />
+      <RawTextboxNumeric
+        {...rest}
+        class={createClassName([
+          textboxStyles.input,
+          textboxNumericStyles.input
+        ])}
+      />
       {typeof icon === 'undefined' ? null : (
         <div class={textboxStyles.icon}>{icon}</div>
       )}
       <div class={textboxStyles.border} />
+      {variant === 'underline' ? <div class={textboxStyles.underline} /> : null}
     </div>
   )
 }

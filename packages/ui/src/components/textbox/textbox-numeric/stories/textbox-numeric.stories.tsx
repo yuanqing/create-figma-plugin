@@ -4,9 +4,9 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconLayerFrame16 } from '../../icon/icon-16/icon-layer-frame-16'
-import { TextboxNumeric } from './textbox-numeric'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
+import { IconLayerFrame16 } from '../../../icon/icon-16/icon-layer-frame-16'
+import { TextboxNumeric } from '../textbox-numeric'
 
 export default {
   parameters: {
@@ -25,22 +25,6 @@ export const Empty = function () {
   return <TextboxNumeric onInput={handleInput} value={value} />
 }
 
-export const Focused = function () {
-  const [value, setValue] = useState<string>('')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <TextboxNumeric
-      {...useInitialFocus()}
-      onInput={handleInput}
-      value={value}
-    />
-  )
-}
-
 export const Placeholder = function () {
   const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -52,6 +36,22 @@ export const Placeholder = function () {
     <TextboxNumeric
       onInput={handleInput}
       placeholder="Placeholder"
+      value={value}
+    />
+  )
+}
+
+export const Focused = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      {...useInitialFocus()}
+      onInput={handleInput}
       value={value}
     />
   )
@@ -74,14 +74,150 @@ export const Disabled = function () {
   return <TextboxNumeric disabled onInput={handleInput} value="42" />
 }
 
-export const NoBorder = function () {
-  const [value, setValue] = useState<string>('42')
+export const BorderEmpty = function () {
+  const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxNumeric noBorder onInput={handleInput} value={value} />
+  return <TextboxNumeric onInput={handleInput} value={value} variant="border" />
+}
+
+export const BorderPlaceholder = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      onInput={handleInput}
+      placeholder="Placeholder"
+      value={value}
+      variant="border"
+    />
+  )
+}
+
+export const BorderFocused = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      {...useInitialFocus()}
+      onInput={handleInput}
+      value={value}
+      variant="border"
+    />
+  )
+}
+
+export const BorderFilled = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <TextboxNumeric onInput={handleInput} value={value} variant="border" />
+}
+
+export const BorderDisabled = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      disabled
+      onInput={handleInput}
+      value={value}
+      variant="border"
+    />
+  )
+}
+
+export const UnderlineEmpty = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric onInput={handleInput} value={value} variant="underline" />
+  )
+}
+
+export const UnderlinePlaceholder = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      onInput={handleInput}
+      placeholder="Placeholder"
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const UnderlineFocused = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      {...useInitialFocus()}
+      onInput={handleInput}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const UnderlineFilled = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric onInput={handleInput} value={value} variant="underline" />
+  )
+}
+
+export const UnderlineDisabled = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxNumeric
+      disabled
+      onInput={handleInput}
+      value={value}
+      variant="underline"
+    />
+  )
 }
 
 export const Icon = function () {
