@@ -1,4 +1,4 @@
-:root .theme-figma-light {
+:root .figma-light {
   --figma-color-bg: rgba(255, 255, 255, 1);
   --figma-color-bg-brand: #0d99ff;
   --figma-color-bg-brand-hover: #007be5;
@@ -173,7 +173,7 @@
   --figma-color-text-warning-tertiary: #b86200;
 }
 
-:root .theme-figma-dark {
+:root .figma-dark {
   --figma-color-bg: #2c2c2c;
   --figma-color-bg-brand: #0c8ce9;
   --figma-color-bg-brand-hover: #0a6dc2;
@@ -348,7 +348,7 @@
   --figma-color-text-warning-tertiary: #f7d15f;
 }
 
-:root .theme-figjam {
+:root .figjam {
   --figma-color-bg: rgba(255, 255, 255, 1);
   --figma-color-bg-brand: #9747ff;
   --figma-color-bg-brand-hover: #8638e5;

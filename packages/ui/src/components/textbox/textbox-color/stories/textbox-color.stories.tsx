@@ -82,7 +82,7 @@ export const Placeholder = function () {
 }
 
 export const Filled = function () {
-  const [hexColor, setHexColor] = useState<string>('000000')
+  const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
   function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newHexColor = event.currentTarget.value
@@ -105,7 +105,7 @@ export const Filled = function () {
 }
 
 export const Disabled = function () {
-  const [hexColor, setHexColor] = useState<string>('000000')
+  const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
   function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newHexColor = event.currentTarget.value
@@ -129,7 +129,7 @@ export const Disabled = function () {
 }
 
 export const RevertOnEscapeKeyDown = function () {
-  const [hexColor, setHexColor] = useState<string>('000000')
+  const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
   function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newHexColor = event.currentTarget.value
@@ -176,7 +176,7 @@ export const Mixed = function () {
 }
 
 export const OnRgbaValueInput = function () {
-  const [hexColor, setHexColor] = useState<string>('000000')
+  const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
   function handleRgbaColorValueInput(rgbaColor: null | RGBA) {
     console.log(rgbaColor)
