@@ -4,10 +4,7 @@ import { h } from 'preact'
 import { VerticalSpace } from '../vertical-space'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
-  title: 'Components/Vertical Space'
+  title: 'Layout/Vertical Space'
 }
 
 export const ExtraSmallSpace = function () {

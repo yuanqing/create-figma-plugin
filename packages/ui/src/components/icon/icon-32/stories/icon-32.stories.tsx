@@ -103,7 +103,12 @@ import { IconWarning32 } from '../icon-warning-32'
 import { IconWarningFilled32 } from '../icon-warning-filled-32'
 import { IconWorld32 } from '../icon-world-32'
 
-export default { title: 'Components/Icon/Size 32' }
+export default {
+  parameters: {
+    fixedWidth: false
+  },
+  title: 'Icons/Size 32'
+}
 
 export const Adjust = function () {
   return <IconAdjust32 />

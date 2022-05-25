@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Inline } from '../inline'
 
-export default { title: 'Components/Inline' }
+export default { title: 'Layout/Inline' }
 
 export const Default = function () {
   const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }

@@ -2,10 +2,12 @@
 export {
   Banner,
   BannerProps,
-  BannerVariant as BannerType
+  BannerVariant
 } from './components/banner/banner.js'
+export { Bold, BoldProps } from './components/bold/bold.js'
 export { Button, ButtonProps } from './components/button/button.js'
 export { Checkbox, CheckboxProps } from './components/checkbox/checkbox.js'
+export { Code, CodeProps } from './components/code/code.js'
 export {
   Columns,
   ColumnsProps,
@@ -224,6 +226,7 @@ export {
 } from './components/icon-toggle-button/icon-toggle-button.js'
 export { Inline, InlineProps, InlineSpace } from './components/inline/inline.js'
 export { Layer, LayerProps } from './components/layer/layer.js'
+export { Link, LinkProps } from './components/link/link.js'
 export {
   LoadingIndicator,
   LoadingIndicatorProps
@@ -238,6 +241,7 @@ export {
   ModalPosition,
   ModalProps
 } from './components/modal/modal.js'
+export { Muted, MutedProps } from './components/muted/muted.js'
 export { Preview, PreviewProps } from './components/preview/preview.js'
 export {
   RadioButtons,
@@ -260,26 +264,34 @@ export {
 export { Stack, StackProps, StackSpace } from './components/stack/stack.js'
 export { Tabs, TabsOption, TabsProps } from './components/tabs/tabs.js'
 export { Text, TextAlignment, TextProps } from './components/text/text.js'
-export { Textbox, TextboxProps } from './components/textbox/textbox/textbox.js'
+export {
+  Textbox,
+  TextboxProps,
+  TextboxVariant
+} from './components/textbox/textbox/textbox.js'
 export {
   TextboxAutocomplete,
   TextboxAutocompleteOption,
   TextboxAutocompleteOptionHeader,
   TextboxAutocompleteOptionSeparator,
   TextboxAutocompleteOptionValue,
-  TextboxAutocompleteProps
+  TextboxAutocompleteProps,
+  TextboxAutocompleteVariant
 } from './components/textbox/textbox-autocomplete/textbox-autocomplete.js'
 export {
   TextboxColor,
-  TextboxColorProps
+  TextboxColorProps,
+  TextboxColorVariant
 } from './components/textbox/textbox-color/textbox-color.js'
 export {
   TextboxMultiline,
-  TextboxMultilineProps
+  TextboxMultilineProps,
+  TextboxMultilineVariant
 } from './components/textbox/textbox-multiline/textbox-multiline.js'
 export {
   TextboxNumeric,
-  TextboxNumericProps
+  TextboxNumericProps,
+  TextboxNumericVariant
 } from './components/textbox/textbox-numeric/textbox-numeric.js'
 export { Toggle, ToggleProps } from './components/toggle/toggle.js'
 export {

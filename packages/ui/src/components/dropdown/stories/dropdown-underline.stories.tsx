@@ -11,7 +11,6 @@ import { Dropdown, DropdownOption } from '../dropdown'
 
 export default {
   parameters: {
-    fixedWidth: true,
     order: 3
   },
   title: 'Components/Dropdown/Underline'

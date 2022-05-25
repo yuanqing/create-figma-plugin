@@ -62,13 +62,15 @@
   align-items: center;
   order: -1;
   padding: 4px;
-  border-bottom: 1px solid var(--figma-color-border);
+  border-color: var(--figma-color-border);
+  border-bottom-width: 1px;
 }
 
 .closeButton {
   position: relative;
   display: block;
   border-radius: var(--border-radius-2);
+  color: var(--figma-color-icon);
 }
 .closeButton:hover,
 .closeButton:focus {
@@ -84,11 +86,12 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border: 2px solid transparent;
+  border-width: 2px;
+  border-color: transparent;
   border-radius: var(--border-radius-2);
 }
 .closeButton:focus .closeButtonBorder {
-  border-color: var(--figma-color-border-brand-strong);
+  border-color: var(--figma-color-border-selected);
 }
 
 .title {
@@ -103,15 +106,15 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--figma-color-text-tertiary);
+  background-color: rgba(0, 0, 0, 0.5); /* FIXME */
   opacity: 0;
   pointer-events: none;
   transition: opacity ease 0.3s;
 }
-.isOpen + .overlay {
+.isOpen ~ .overlay {
   opacity: 1;
   pointer-events: all;
 }
-.noTransition + .overlay {
+.noTransition ~ .overlay {
   transition: none;
 }

@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { MiddleAlign } from '../middle-align'
 
-export default { title: 'Components/Middle Align' }
+export default { title: 'Layout/Middle Align' }
 
 export const Default = function () {
   const style = {

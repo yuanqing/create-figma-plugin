@@ -6,29 +6,44 @@ import { h } from 'preact'
 
 export const decorators = [
   function (Story, storyContext) {
-    if (storyContext.parameters.fixedWidth === true) {
-      const style = { width: '240px' }
-      return (
-        <div style={style}>
-          <Story />
-        </div>
-      )
+    if (storyContext.parameters.fixedWidth === false) {
+      return <Story />
     }
-    return <Story />
+    const style = { width: '240px' }
+    return (
+      <div style={style}>
+        <Story />
+      </div>
+    )
   }
 ]
+
+const groupOrder = ['components', 'inline-text', 'icons', 'layout', 'hooks']
 
 export const parameters = {
   layout: 'centered',
   options: {
     storySort: function (x, y) {
       if (x[1].componentId === y[1].componentId) {
+        // Same file
         return 0
       }
-      if (
-        parseComponentId(x[1].componentId) ===
-        parseComponentId(y[1].componentId)
-      ) {
+      const xSplit = x[1].componentId.split(/-+/g).slice(0, 2)
+      const ySplit = y[1].componentId.split(/-+/g).slice(0, 2)
+      // Different top-level group
+      if (xSplit[0] !== ySplit[0]) {
+        const xGroupOrder = groupOrder.indexOf(xSplit[0])
+        const yGroupOrder = groupOrder.indexOf(ySplit[0])
+        if (xGroupOrder === -1) {
+          return 1
+        }
+        if (yGroupOrder === -1) {
+          return -1
+        }
+        return xGroupOrder - yGroupOrder
+      }
+      // Same component
+      if (xSplit[1] === ySplit[1]) {
         if (
           typeof x[1].parameters.order !== 'undefined' &&
           typeof y[1].parameters.order !== 'undefined'
@@ -54,9 +69,4 @@ export const parameters = {
       { class: 'theme-figjam', color: '#9747ff', name: 'FigJam' }
     ]
   }
-}
-
-function parseComponentId(componentId) {
-  const split = componentId.split(/-/g)
-  return split.slice(0, 2).join('-')
 }

@@ -5,10 +5,7 @@ import { Text } from '../../text/text'
 import { Bold } from '../bold'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
-  title: 'Components/Bold'
+  title: 'Inline Text/Bold'
 }
 
 export const Default = function () {

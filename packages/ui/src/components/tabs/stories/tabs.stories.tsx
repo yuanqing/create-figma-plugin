@@ -6,9 +6,6 @@ import { useState } from 'preact/hooks'
 import { Tabs, TabsOption } from '../tabs'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
   title: 'Components/Tabs'
 }
 

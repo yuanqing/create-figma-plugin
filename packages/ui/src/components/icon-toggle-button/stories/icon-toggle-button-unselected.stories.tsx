@@ -8,7 +8,10 @@ import { IconEllipsis32 } from '../../icon/icon-32/icon-ellipsis-32'
 import { IconToggleButton } from '../icon-toggle-button'
 
 export default {
-  parameters: { order: 1 },
+  parameters: {
+    fixedWidth: false,
+    order: 1
+  },
   title: 'Components/Icon Toggle Button/Unselected'
 }
 

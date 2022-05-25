@@ -8,9 +8,6 @@ import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial
 import { TextboxMultiline } from '../textbox-multiline'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
   title: 'Components/Textbox Multiline'
 }
 

@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Stack } from '../stack'
 
-export default { title: 'Components/Stack' }
+export default { title: 'Layout/Stack' }
 
 export const ExtraSmallSpace = function () {
   const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }

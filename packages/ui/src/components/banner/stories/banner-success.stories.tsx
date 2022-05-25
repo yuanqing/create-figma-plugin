@@ -6,7 +6,6 @@ import { Banner } from '../banner'
 
 export default {
   parameters: {
-    fixedWidth: true,
     order: 3
   },
   title: 'Components/Banner/Success'

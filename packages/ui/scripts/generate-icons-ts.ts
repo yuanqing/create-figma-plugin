@@ -172,7 +172,12 @@ import { h } from 'preact'
 
 ${imports.join('\n')}
 
-export default { title: 'Components/Icon/Size ${dimension}' }
+export default { 
+  parameters: {
+    fixedWidth: false
+  },
+  title: 'Icons/Size ${dimension}' 
+}
 
 ${stories.join('\n\n')}
 `

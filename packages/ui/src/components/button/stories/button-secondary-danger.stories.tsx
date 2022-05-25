@@ -7,6 +7,7 @@ import { Button } from '../button'
 
 export default {
   parameters: {
+    fixedWidth: false,
     order: 4
   },
   title: 'Components/Button/Secondary Danger'

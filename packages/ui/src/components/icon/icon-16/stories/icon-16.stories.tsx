@@ -78,7 +78,12 @@ import { IconVisibilityVisible16 } from '../icon-visibility-visible-16'
 import { IconWarning16 } from '../icon-warning-16'
 import { IconWorld16 } from '../icon-world-16'
 
-export default { title: 'Components/Icon/Size 16' }
+export default {
+  parameters: {
+    fixedWidth: false
+  },
+  title: 'Icons/Size 16'
+}
 
 export const AlignBottom = function () {
   return <IconAlignBottom16 />

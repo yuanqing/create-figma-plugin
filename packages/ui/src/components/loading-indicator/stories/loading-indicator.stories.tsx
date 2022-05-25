@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { LoadingIndicator } from './loading-indicator'
+import { LoadingIndicator } from '../loading-indicator'
 
 export default { title: 'Components/Loading Indicator' }
 

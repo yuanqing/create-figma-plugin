@@ -11,9 +11,6 @@ import {
 } from '../textbox-autocomplete'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
   title: 'Components/Textbox Autocomplete'
 }
 

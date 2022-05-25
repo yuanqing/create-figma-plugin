@@ -5,10 +5,7 @@ import { Text } from '../../text/text'
 import { Muted } from '../muted'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
-  title: 'Components/Muted'
+  title: 'Inline Text/Muted'
 }
 
 export const Default = function () {

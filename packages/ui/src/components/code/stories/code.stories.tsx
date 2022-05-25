@@ -5,10 +5,7 @@ import { Text } from '../../text/text'
 import { Code } from '../code'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
-  title: 'Components/Code'
+  title: 'Inline Text/Code'
 }
 
 export const Default = function () {

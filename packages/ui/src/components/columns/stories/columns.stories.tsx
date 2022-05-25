@@ -3,7 +3,7 @@ import { h } from 'preact'
 
 import { Columns } from '../columns'
 
-export default { title: 'Components/Columns' }
+export default { title: 'Layout/Columns' }
 
 export const Default = function () {
   const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }

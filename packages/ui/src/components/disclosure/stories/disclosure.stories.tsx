@@ -5,9 +5,6 @@ import { useState } from 'preact/hooks'
 import { Disclosure } from '../disclosure'
 
 export default {
-  parameters: {
-    fixedWidth: true
-  },
   title: 'Components/Disclosure'
 }
 
