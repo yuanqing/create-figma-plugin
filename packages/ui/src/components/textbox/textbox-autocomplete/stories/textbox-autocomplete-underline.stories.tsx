@@ -11,7 +11,10 @@ import {
 } from '../textbox-autocomplete'
 
 export default {
-  title: 'Components/Textbox Autocomplete'
+  parameters: {
+    order: 3
+  },
+  title: 'Components/Textbox Autocomplete/Underline'
 }
 
 export const Empty = function () {
@@ -34,11 +37,12 @@ export const Empty = function () {
       onInput={handleInput}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }
 
-export const Focused = function () {
+export const EmptyFocused = function () {
   const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
@@ -55,6 +59,7 @@ export const Focused = function () {
   }
   return (
     <TextboxAutocomplete
+      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       options={options}
@@ -84,12 +89,13 @@ export const Placeholder = function () {
       options={options}
       placeholder="Placeholder"
       value={value}
+      variant="underline"
     />
   )
 }
 
-export const Filled = function () {
-  const [value, setValue] = useState<string>('qux')
+export const PlaceholderFocused = function () {
+  const [value, setValue] = useState<string>('')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -105,6 +111,60 @@ export const Filled = function () {
   }
   return (
     <TextboxAutocomplete
+      variant="underline"
+      {...useInitialFocus()}
+      onInput={handleInput}
+      options={options}
+      placeholder="Placeholder"
+      value={value}
+    />
+  )
+}
+
+export const Filled = function () {
+  const [value, setValue] = useState<string>('foo')
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxAutocomplete
+      onInput={handleInput}
+      options={options}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const Focused = function () {
+  const [value, setValue] = useState<string>('foo')
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxAutocomplete
+      variant="underline"
+      {...useInitialFocus()}
       onInput={handleInput}
       options={options}
       value={value}
@@ -130,18 +190,17 @@ export const Disabled = function () {
       onInput={handleInput}
       options={options}
       value="foo"
+      variant="underline"
     />
   )
 }
 
 export const DisabledOption = function () {
-  const [value, setValue] = useState<string>('Mixed')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
-    { value: 'bar' },
+    { disabled: true, value: 'bar' },
     { value: 'baz' },
-    { separator: true },
-    { disabled: true, value: 'Mixed' },
     { separator: true },
     { header: 'Header' },
     { value: 'qux' }
@@ -156,6 +215,7 @@ export const DisabledOption = function () {
       onInput={handleInput}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }
@@ -181,11 +241,39 @@ export const Icon = function () {
       onInput={handleInput}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }
 
-export const TextIcon = function () {
+export const IconDisabled = function () {
+  const [value, setValue] = useState<string>('foo')
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxAutocomplete
+      disabled
+      icon={<IconLayerFrame16 />}
+      onInput={handleInput}
+      options={options}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const IconText = function () {
   const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
@@ -206,12 +294,40 @@ export const TextIcon = function () {
       onInput={handleInput}
       options={options}
       value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const IconTextDisabled = function () {
+  const [value, setValue] = useState<string>('foo')
+  const options: Array<TextboxAutocompleteOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxAutocomplete
+      disabled
+      icon="X"
+      onInput={handleInput}
+      options={options}
+      value={value}
+      variant="underline"
     />
   )
 }
 
 export const RevertOnEscapeKeyDown = function () {
-  const [value, setValue] = useState<string>('qux')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -231,12 +347,13 @@ export const RevertOnEscapeKeyDown = function () {
       options={options}
       revertOnEscapeKeyDown
       value={value}
+      variant="underline"
     />
   )
 }
 
 export const Strict = function () {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -256,12 +373,13 @@ export const Strict = function () {
       options={options}
       strict
       value={value}
+      variant="underline"
     />
   )
 }
 
 export const Filter = function () {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -281,12 +399,13 @@ export const Filter = function () {
       onInput={handleInput}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }
 
 export const StrictFilter = function () {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -307,12 +426,13 @@ export const StrictFilter = function () {
       options={options}
       strict
       value={value}
+      variant="underline"
     />
   )
 }
 
 export const MenuTop = function () {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TextboxAutocompleteOption> = [
     { value: 'foo' },
     { value: 'bar' },
@@ -332,6 +452,7 @@ export const MenuTop = function () {
       options={options}
       top
       value={value}
+      variant="underline"
     />
   )
 }
@@ -355,6 +476,7 @@ export const OnValueInput = function () {
       onValueInput={handleValueInput}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }

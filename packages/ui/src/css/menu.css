@@ -46,7 +46,7 @@
   background-color: var(--figma-color-bg-brand);
 }
 .optionValueDisabled {
-  color: rgba(255, 255, 255, 0.7); /* FIXME */
+  color: rgba(255, 255, 255, 0.4); /* FIXME */
 }
 
 .optionSeparator {

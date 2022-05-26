@@ -8,7 +8,10 @@ import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial
 import { TextboxMultiline } from '../textbox-multiline'
 
 export default {
-  title: 'Components/Textbox Multiline'
+  parameters: {
+    order: 3
+  },
+  title: 'Components/Textbox Multiline/Underline'
 }
 
 export const Empty = function () {
@@ -19,11 +22,11 @@ export const Empty = function () {
     setValue(newValue)
   }
   return (
-    <TextboxMultiline onInput={handleInput} value={value} variant="border" />
+    <TextboxMultiline onInput={handleInput} value={value} variant="underline" />
   )
 }
 
-export const Focused = function () {
+export const EmptyFocused = function () {
   const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
     const newValue = event.currentTarget.value
@@ -32,6 +35,7 @@ export const Focused = function () {
   }
   return (
     <TextboxMultiline
+      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       value={value}
@@ -51,6 +55,25 @@ export const Placeholder = function () {
       onInput={handleInput}
       placeholder="Placeholder"
       value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const PlaceholderFocused = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxMultiline
+      variant="underline"
+      {...useInitialFocus()}
+      onInput={handleInput}
+      placeholder="Placeholder"
+      value={value}
     />
   )
 }
@@ -62,14 +85,52 @@ export const Filled = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxMultiline onInput={handleInput} value={value} />
+  return (
+    <TextboxMultiline onInput={handleInput} value={value} variant="underline" />
+  )
+}
+
+export const Focused = function () {
+  const [value, setValue] = useState<string>('')
+  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxMultiline
+      variant="underline"
+      {...useInitialFocus()}
+      onInput={handleInput}
+      value={value}
+    />
+  )
 }
 
 export const Disabled = function () {
   function handleInput() {
     throw new Error('This function should not be called')
   }
-  return <TextboxMultiline disabled onInput={handleInput} value="Text" />
+  return (
+    <TextboxMultiline
+      disabled
+      onInput={handleInput}
+      value="Text"
+      variant="underline"
+    />
+  )
+}
+
+export const Mixed = function () {
+  const [value, setValue] = useState<string>(MIXED_STRING)
+  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxMultiline onInput={handleInput} value={value} variant="underline" />
+  )
 }
 
 export const RevertOnEscapeKeyDown = function () {
@@ -84,6 +145,7 @@ export const RevertOnEscapeKeyDown = function () {
       onInput={handleInput}
       revertOnEscapeKeyDown
       value={value}
+      variant="underline"
     />
   )
 }
@@ -103,18 +165,9 @@ export const ValidateOnBlur = function () {
       onInput={handleInput}
       validateOnBlur={validateOnBlur}
       value={value}
+      variant="underline"
     />
   )
-}
-
-export const Mixed = function () {
-  const [value, setValue] = useState<string>(MIXED_STRING)
-  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <TextboxMultiline onInput={handleInput} value={value} />
 }
 
 export const Rows = function () {
@@ -124,7 +177,14 @@ export const Rows = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxMultiline onInput={handleInput} rows={5} value={value} />
+  return (
+    <TextboxMultiline
+      onInput={handleInput}
+      rows={5}
+      value={value}
+      variant="underline"
+    />
+  )
 }
 
 export const OnValueInput = function () {
@@ -133,5 +193,11 @@ export const OnValueInput = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <TextboxMultiline onValueInput={handleValueInput} value={value} />
+  return (
+    <TextboxMultiline
+      onValueInput={handleValueInput}
+      value={value}
+      variant="underline"
+    />
+  )
 }

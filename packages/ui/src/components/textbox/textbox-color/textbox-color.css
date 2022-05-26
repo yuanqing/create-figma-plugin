@@ -119,3 +119,16 @@
 .textboxColor:not(.disabled) .input:focus ~ .divider {
   background-color: var(--figma-color-border);
 }
+
+.underline {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background-color: var(--figma-color-border);
+}
+.textboxColor:not(.disabled) .input:focus ~ .underline,
+.textboxColor:not(.disabled):hover .underline {
+  background-color: transparent;
+}

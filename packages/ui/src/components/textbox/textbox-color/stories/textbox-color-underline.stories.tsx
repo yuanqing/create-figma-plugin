@@ -7,7 +7,12 @@ import { useState } from 'preact/hooks'
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
 import { TextboxColor } from '../textbox-color'
 
-export default { title: 'Components/Textbox Color' }
+export default {
+  parameters: {
+    order: 3
+  },
+  title: 'Components/Textbox Color/Underline'
+}
 
 export const Empty = function () {
   const [hexColor, setHexColor] = useState<string>('')
@@ -28,11 +33,12 @@ export const Empty = function () {
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}
       opacity={opacity}
+      variant="underline"
     />
   )
 }
 
-export const Focused = function () {
+export const EmptyFocused = function () {
   const [hexColor, setHexColor] = useState<string>('')
   const [opacity, setOpacity] = useState<string>('')
   function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -47,6 +53,7 @@ export const Focused = function () {
   }
   return (
     <TextboxColor
+      variant="underline"
       {...useInitialFocus()}
       hexColor={hexColor}
       onHexColorInput={handleHexColorInput}
@@ -77,6 +84,34 @@ export const Placeholder = function () {
       onOpacityInput={handleOpacityInput}
       opacity={opacity}
       opacityPlaceholder="%"
+      variant="underline"
+    />
+  )
+}
+
+export const PlaceholderFocused = function () {
+  const [hexColor, setHexColor] = useState<string>('')
+  const [opacity, setOpacity] = useState<string>('')
+  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newHexColor = event.currentTarget.value
+    console.log(newHexColor)
+    setHexColor(newHexColor)
+  }
+  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newOpacity = event.currentTarget.value
+    console.log(newOpacity)
+    setOpacity(newOpacity)
+  }
+  return (
+    <TextboxColor
+      variant="underline"
+      {...useInitialFocus()}
+      hexColor={hexColor}
+      hexColorPlaceholder="Color"
+      onHexColorInput={handleHexColorInput}
+      onOpacityInput={handleOpacityInput}
+      opacity={opacity}
+      opacityPlaceholder="%"
     />
   )
 }
@@ -96,6 +131,32 @@ export const Filled = function () {
   }
   return (
     <TextboxColor
+      hexColor={hexColor}
+      onHexColorInput={handleHexColorInput}
+      onOpacityInput={handleOpacityInput}
+      opacity={opacity}
+      variant="underline"
+    />
+  )
+}
+
+export const Focused = function () {
+  const [hexColor, setHexColor] = useState<string>('0D99FF')
+  const [opacity, setOpacity] = useState<string>('100%')
+  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newHexColor = event.currentTarget.value
+    console.log(newHexColor)
+    setHexColor(newHexColor)
+  }
+  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newOpacity = event.currentTarget.value
+    console.log(newOpacity)
+    setOpacity(newOpacity)
+  }
+  return (
+    <TextboxColor
+      variant="underline"
+      {...useInitialFocus()}
       hexColor={hexColor}
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}
@@ -124,6 +185,31 @@ export const Disabled = function () {
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}
       opacity={opacity}
+      variant="underline"
+    />
+  )
+}
+
+export const Mixed = function () {
+  const [hexColor, setHexColor] = useState<string>(MIXED_STRING)
+  const [opacity, setOpacity] = useState<string>(MIXED_STRING)
+  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newHexColor = event.currentTarget.value
+    console.log(newHexColor)
+    setHexColor(newHexColor)
+  }
+  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newOpacity = event.currentTarget.value
+    console.log(newOpacity)
+    setOpacity(newOpacity)
+  }
+  return (
+    <TextboxColor
+      hexColor={hexColor}
+      onHexColorInput={handleHexColorInput}
+      onOpacityInput={handleOpacityInput}
+      opacity={opacity}
+      variant="underline"
     />
   )
 }
@@ -148,46 +234,29 @@ export const RevertOnEscapeKeyDown = function () {
       onOpacityInput={handleOpacityInput}
       opacity={opacity}
       revertOnEscapeKeyDown
+      variant="underline"
     />
   )
 }
 
-export const Mixed = function () {
-  const [hexColor, setHexColor] = useState<string>(MIXED_STRING)
-  const [opacity, setOpacity] = useState<string>(MIXED_STRING)
-  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newHexColor = event.currentTarget.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newOpacity = event.currentTarget.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      hexColor={hexColor}
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
-      opacity={opacity}
-    />
-  )
-}
-
-export const OnRgbaValueInput = function () {
+export const OnValueInput = function () {
   const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
-  function handleRgbaColorValueInput(rgbaColor: null | RGBA) {
-    console.log(rgbaColor)
+  function handleRgbaColorValueInput(newRgbaColor: null | RGBA) {
+    console.log(newRgbaColor)
+  }
+  function handleOpacityNumericValueInput(newOpacity: null | number) {
+    console.log(newOpacity)
   }
   return (
     <TextboxColor
       hexColor={hexColor}
       onHexColorValueInput={setHexColor}
+      onOpacityNumericValueInput={handleOpacityNumericValueInput}
       onOpacityValueInput={setOpacity}
       onRgbaColorValueInput={handleRgbaColorValueInput}
       opacity={opacity}
+      variant="underline"
     />
   )
 }
