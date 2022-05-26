@@ -18,19 +18,11 @@ export const decorators = [
   }
 ]
 
-const groupOrder = ['layout', 'components', 'inline-text', 'icons', 'hooks']
+const groupOrder = ['Layout', 'Components', 'Inline Text', 'Icons', 'Hooks']
 
-const componentIdRegex = new RegExp(`^(${groupOrder.join('|')})-(.+)`)
-
-function parseComponentId(componentId) {
-  const matches = componentId.match(componentIdRegex)
-  if (matches === null) {
-    return null
-  }
-  return {
-    groupName: matches[1],
-    title: matches[2]
-  }
+function parseStory(story) {
+  const split = story.title.split(/\//g)
+  return [split[0], split[1], [...split.slice(2), story.story].join('/')]
 }
 
 export const parameters = {
@@ -41,16 +33,12 @@ export const parameters = {
       if (x[1].componentId === y[1].componentId) {
         return 0
       }
-      const xx = parseComponentId(x[1].componentId)
-      const yy = parseComponentId(y[1].componentId)
-      // `componentId` doesn’t match the expected pattern
-      if (xx === null || yy === null) {
-        return x[1].id.localeCompare(y[1].id, undefined, { numeric: true })
-      }
-      // Different group name
-      if (xx.groupName !== yy.groupName) {
-        const xGroupOrder = groupOrder.indexOf(xx.groupName)
-        const yGroupOrder = groupOrder.indexOf(yy.groupName)
+      const xx = parseStory(x[1])
+      const yy = parseStory(y[1])
+      // Different `[0]`
+      if (xx[0] !== yy[0]) {
+        const xGroupOrder = groupOrder.indexOf(xx[0])
+        const yGroupOrder = groupOrder.indexOf(yy[0])
         if (xGroupOrder === -1) {
           return 1
         }
@@ -58,6 +46,10 @@ export const parameters = {
           return -1
         }
         return xGroupOrder - yGroupOrder
+      }
+      // Different `[1]`
+      if (xx[1] !== yy[1]) {
+        return xx[1].localeCompare(yy[1], undefined, { numeric: true })
       }
       // Both `order` defined
       if (
@@ -74,7 +66,7 @@ export const parameters = {
         return 1
       }
       // Both `order` undefined
-      return xx.title.localeCompare(yy.title, undefined, { numeric: true })
+      return xx[2].localeCompare(yy[2], undefined, { numeric: true })
     }
   },
   themes: {
