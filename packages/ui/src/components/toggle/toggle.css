@@ -48,7 +48,7 @@
   top: 0;
   width: 12px;
   height: 12px;
-  border-width: 1px;
+  border: 1px solid transparent;
   background-color: var(--figma-color-bg);
   border-radius: 6px;
   transition: left 0.1s ease-out;

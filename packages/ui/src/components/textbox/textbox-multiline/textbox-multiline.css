@@ -37,6 +37,5 @@
 .textboxMultiline:not(.disabled) .textarea:focus ~ .border {
   top: -1px;
   bottom: -1px;
-  border-width: 2px;
-  border-color: var(--figma-color-border-brand-strong);
+  border: 2px solid var(--figma-color-border-brand-strong);
 }
