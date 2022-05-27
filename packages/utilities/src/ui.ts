@@ -22,5 +22,9 @@ export function showUI<Data extends Record<string, unknown>>(
   }';const __SHOW_UI_DATA__=${JSON.stringify(
     typeof data === 'undefined' ? {} : data
   )};${__html__}</script>`
-  figma.showUI(html, options)
+  figma.showUI(html, {
+    ...options,
+    themeColors:
+      typeof options.themeColors === 'undefined' ? true : options.themeColors
+  })
 }
