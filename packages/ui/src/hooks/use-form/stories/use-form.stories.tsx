@@ -43,6 +43,7 @@ export const UseForm = function () {
         name="text"
         onValueInput={setFormState}
         value={formState.text}
+        variant="border"
       />
       <VerticalSpace space="small" />
       <Text align="center">

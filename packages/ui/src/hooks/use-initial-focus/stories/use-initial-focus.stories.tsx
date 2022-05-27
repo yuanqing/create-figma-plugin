@@ -23,6 +23,7 @@ export const UseInitialFocus = function () {
         name="text"
         onValueInput={setValue}
         value={value}
+        variant="border"
       />
       <VerticalSpace space="small" />
       <Button fullWidth onClick={handleClick}>

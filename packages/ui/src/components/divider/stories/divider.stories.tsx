@@ -1,12 +1,12 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Divider } from '../divider'
+import { Divider as DividerComponent } from '../divider'
 
 export default {
   title: 'Components/Divider'
 }
 
-export const Default = function () {
-  return <Divider />
+export const Divider = function () {
+  return <DividerComponent />
 }

@@ -2,16 +2,16 @@
 import { h } from 'preact'
 
 import { Text } from '../../text/text'
-import { Bold } from '../bold'
+import { Bold as BoldComponent } from '../bold'
 
 export default {
   title: 'Inline Text/Bold'
 }
 
-export const Default = function () {
+export const Bold = function () {
   return (
     <Text>
-      <Bold>Text</Bold>
+      <BoldComponent>Text</BoldComponent>
     </Text>
   )
 }
