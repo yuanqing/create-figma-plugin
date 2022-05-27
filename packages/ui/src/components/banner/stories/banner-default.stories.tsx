@@ -11,7 +11,7 @@ export default {
   title: 'Components/Banner/Default'
 }
 
-export const Default = function () {
+export const ShortText = function () {
   return <Banner icon={<IconInfo32 />}>Text</Banner>
 }
 

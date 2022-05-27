@@ -78,7 +78,7 @@ export const Placeholder = function () {
   return (
     <SearchTextbox
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
     />
   )

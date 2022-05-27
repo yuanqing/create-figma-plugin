@@ -13,7 +13,7 @@ export default {
   title: 'Components/Button/Secondary'
 }
 
-export const Default = function () {
+export const Passive = function () {
   function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
     console.log(event)
   }

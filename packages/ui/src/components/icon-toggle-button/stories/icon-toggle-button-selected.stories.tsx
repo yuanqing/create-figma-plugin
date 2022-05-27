@@ -15,7 +15,7 @@ export default {
   title: 'Components/Icon Toggle Button/Selected'
 }
 
-export const Default = function () {
+export const Passive = function () {
   const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked

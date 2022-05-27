@@ -14,7 +14,7 @@ export default {
   title: 'Components/Radio Buttons/Unselected'
 }
 
-export const Default = function () {
+export const Passive = function () {
   const [value, setValue] = useState<null | string>(null)
   const options: Array<RadioButtonsOption> = [
     { children: <Text>foo</Text>, value: 'foo' },

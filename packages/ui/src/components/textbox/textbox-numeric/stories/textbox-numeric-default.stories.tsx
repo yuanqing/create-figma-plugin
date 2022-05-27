@@ -51,7 +51,7 @@ export const Placeholder = function () {
   return (
     <TextboxNumeric
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
     />
   )
@@ -68,7 +68,7 @@ export const PlaceholderFocused = function () {
     <TextboxNumeric
       {...useInitialFocus()}
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
     />
   )

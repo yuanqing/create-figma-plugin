@@ -53,7 +53,7 @@ export const Placeholder = function () {
   return (
     <TextboxMultiline
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
       variant="underline"
     />
@@ -72,7 +72,7 @@ export const PlaceholderFocused = function () {
       variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
     />
   )

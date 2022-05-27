@@ -11,7 +11,7 @@ export default {
   title: 'Components/Banner/Success'
 }
 
-export const Default = function () {
+export const ShortText = function () {
   return (
     <Banner icon={<IconCheckCircle32 />} variant="success">
       Text

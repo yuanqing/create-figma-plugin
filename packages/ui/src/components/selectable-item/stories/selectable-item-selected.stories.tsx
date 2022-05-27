@@ -13,7 +13,7 @@ export default {
   title: 'Components/Selectable Item/Selected'
 }
 
-export const Default = function () {
+export const Passive = function () {
   const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked

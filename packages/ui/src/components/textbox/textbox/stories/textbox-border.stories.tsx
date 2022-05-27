@@ -52,7 +52,7 @@ export const Placeholder = function () {
   return (
     <Textbox
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
       variant="border"
     />
@@ -71,7 +71,7 @@ export const PlaceholderFocused = function () {
       variant="border"
       {...useInitialFocus()}
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
     />
   )

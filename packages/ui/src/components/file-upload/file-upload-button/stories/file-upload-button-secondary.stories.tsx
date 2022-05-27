@@ -13,7 +13,7 @@ export default {
   title: 'Components/File Upload Button/Secondary'
 }
 
-export const Default = function () {
+export const Passive = function () {
   function handleSelectedFiles(files: Array<File>) {
     console.log(files)
   }

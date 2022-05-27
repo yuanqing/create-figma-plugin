@@ -43,7 +43,7 @@ export const Placeholder = function () {
     setValue(newValue)
   }
   return (
-    <Textbox onInput={handleInput} placeholder="Placeholder" value={value} />
+    <Textbox onInput={handleInput} placeholder="placeholder" value={value} />
   )
 }
 
@@ -58,7 +58,7 @@ export const PlaceholderFocused = function () {
     <Textbox
       {...useInitialFocus()}
       onInput={handleInput}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
     />
   )

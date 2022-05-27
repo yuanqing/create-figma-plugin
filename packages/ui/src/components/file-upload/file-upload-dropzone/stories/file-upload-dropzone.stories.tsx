@@ -10,7 +10,7 @@ export default {
   title: 'Components/File Upload Dropzone'
 }
 
-export const Default = function () {
+export const Passive = function () {
   function handleSelectedFiles(files: Array<File>) {
     console.log(files)
   }

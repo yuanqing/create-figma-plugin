@@ -60,7 +60,7 @@ export const Placeholder = function () {
     <Dropdown
       onChange={handleChange}
       options={options}
-      placeholder="Placeholder"
+      placeholder="placeholder"
       value={value}
       variant="underline"
     />
@@ -134,11 +134,11 @@ export const Focused = function () {
   }
   return (
     <Dropdown
+      variant="underline"
       {...useInitialFocus()}
       onChange={handleChange}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -167,12 +167,10 @@ export const Disabled = function () {
 }
 
 export const OptionDisabled = function () {
-  const [value, setValue] = useState<string>('Mixed')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
-    { disabled: true, value: 'Mixed' },
-    { separator: true },
     { value: 'foo' },
-    { value: 'bar' },
+    { disabled: true, value: 'bar' },
     { value: 'baz' },
     { separator: true },
     { header: 'Header' },
@@ -194,17 +192,17 @@ export const OptionDisabled = function () {
 }
 
 export const OptionText = function () {
-  const [value, setValue] = useState<string>('foo')
+  const [value, setValue] = useState<string>('a')
   const options: Array<DropdownOption> = [
     {
-      text: 'A',
-      value: 'foo'
+      text: 'foo',
+      value: 'a'
     },
-    { text: 'B', value: 'bar' },
-    { text: 'C', value: 'baz' },
+    { text: 'bar', value: 'b' },
+    { text: 'baz', value: 'c' },
     { separator: true },
     { header: 'Header' },
-    { text: 'D', value: 'qux' }
+    { text: 'qux', value: 'd' }
   ]
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -247,6 +245,33 @@ export const Icon = function () {
   )
 }
 
+export const IconDisabled = function () {
+  const [value, setValue] = useState<string>('foo')
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Dropdown
+      disabled
+      icon={<IconLayerFrame16 />}
+      onChange={handleChange}
+      options={options}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
 export const IconText = function () {
   const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
@@ -264,6 +289,33 @@ export const IconText = function () {
   }
   return (
     <Dropdown
+      icon="X"
+      onChange={handleChange}
+      options={options}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const IconTextDisabled = function () {
+  const [value, setValue] = useState<string>('foo')
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Dropdown
+      disabled
       icon="X"
       onChange={handleChange}
       options={options}
@@ -300,7 +352,7 @@ export const DynamicallySetOptions = function () {
       <Dropdown
         onChange={handleChange}
         options={options}
-        placeholder="Placeholder"
+        placeholder="placeholder"
         value={value}
         variant="underline"
       />
@@ -338,12 +390,14 @@ export const FlexParent = function () {
         value={valueA}
         variant="underline"
       />
+      )
       <Dropdown
         onChange={handleChangeB}
         options={optionsB}
         value={valueB}
         variant="underline"
       />
+      )
     </div>
   )
 }
