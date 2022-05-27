@@ -4,6 +4,9 @@ import { h } from 'preact'
 import { Preview } from '../preview'
 
 export default {
+  parameters: {
+    fixedWidth: true
+  },
   title: 'Components/Preview'
 }
 

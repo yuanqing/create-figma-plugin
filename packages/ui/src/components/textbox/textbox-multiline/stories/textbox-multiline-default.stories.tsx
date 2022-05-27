@@ -84,7 +84,7 @@ export const Filled = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)

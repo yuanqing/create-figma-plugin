@@ -8,7 +8,7 @@ import { Text } from '../../text/text'
 import { Checkbox } from '../checkbox'
 
 export default {
-  parameters: { fixedWidth: true, order: 1 },
+  parameters: { order: 1 },
   title: 'Components/Checkbox/Unselected'
 }
 

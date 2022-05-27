@@ -6,6 +6,7 @@ import { Banner } from '../banner'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 1
   },
   title: 'Components/Banner/Default'

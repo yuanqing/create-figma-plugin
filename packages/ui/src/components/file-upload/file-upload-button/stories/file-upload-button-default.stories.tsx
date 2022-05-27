@@ -7,7 +7,6 @@ import { FileUploadButton } from '../file-upload-button'
 
 export default {
   parameters: {
-    fixedWidth: false,
     order: 1
   },
   title: 'Components/File Upload Button/Default'

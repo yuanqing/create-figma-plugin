@@ -9,7 +9,6 @@ import { IconToggleButton } from '../icon-toggle-button'
 
 export default {
   parameters: {
-    fixedWidth: false,
     order: 2
   },
   title: 'Components/Icon Toggle Button/Selected'

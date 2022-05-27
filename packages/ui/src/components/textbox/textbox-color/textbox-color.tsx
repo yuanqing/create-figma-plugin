@@ -266,10 +266,9 @@ export function TextboxColor<
 
   const parsedOpacity = parseOpacity(opacity)
 
+  const isHexColorValid = hexColor !== EMPTY_STRING && hexColor !== MIXED_STRING
   const normalizedHexColor =
-    hexColor === EMPTY_STRING || hexColor === MIXED_STRING
-      ? 'FFFFFF'
-      : normalizeUserInputColor(hexColor)
+    isHexColorValid === true ? normalizeUserInputColor(hexColor) : 'FFFFFF'
   const renderedHexColor =
     normalizedHexColor === null ? originalHexColor : normalizedHexColor
 
@@ -291,15 +290,23 @@ export function TextboxColor<
       <div class={styles.color}>
         <div
           class={styles.colorFill}
-          style={{ backgroundColor: `#${renderedHexColor}` }}
+          style={
+            isHexColorValid === true
+              ? { backgroundColor: `#${renderedHexColor}` }
+              : {}
+          }
         ></div>
         {parsedOpacity === 1 ? null : (
           <div
             class={styles.colorFill}
-            style={{
-              backgroundColor: `#${renderedHexColor}`,
-              opacity: parsedOpacity
-            }}
+            style={
+              isHexColorValid === true
+                ? {
+                    backgroundColor: `#${renderedHexColor}`,
+                    opacity: parsedOpacity
+                  }
+                : {}
+            }
           ></div>
         )}
         <div class={styles.colorBorder} />

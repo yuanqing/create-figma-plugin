@@ -7,6 +7,9 @@ import { Text } from '../../../text/text'
 import { FileUploadDropzone } from '../file-upload-dropzone'
 
 export default {
+  parameters: {
+    fixedWidth: true
+  },
   title: 'Components/File Upload Dropzone'
 }
 

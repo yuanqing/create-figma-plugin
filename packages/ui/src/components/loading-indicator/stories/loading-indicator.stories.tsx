@@ -3,7 +3,12 @@ import { h } from 'preact'
 
 import { LoadingIndicator } from '../loading-indicator'
 
-export default { title: 'Components/Loading Indicator' }
+export default {
+  parameters: {
+    fixedWidth: false
+  },
+  title: 'Components/Loading Indicator'
+}
 
 export const Default = function () {
   return <LoadingIndicator />

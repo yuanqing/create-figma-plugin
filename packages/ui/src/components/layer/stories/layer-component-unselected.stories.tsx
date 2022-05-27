@@ -9,6 +9,7 @@ import { Layer } from '../layer'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 3
   },
   title: 'Components/Layer/Component Unselected'

@@ -8,7 +8,6 @@ import { Modal } from '../modal'
 
 export default {
   parameters: {
-    fixedWidth: false,
     order: 2
   },
   title: 'Components/Modal/Bottom'

@@ -7,6 +7,9 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { SearchTextbox } from '../search-textbox'
 
 export default {
+  parameters: {
+    fixedWidth: true
+  },
   title: 'Components/Search Textbox'
 }
 

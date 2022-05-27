@@ -8,6 +8,7 @@ import { SelectableItem } from '../selectable-item'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 1
   },
   title: 'Components/Selectable Item/Unselected'

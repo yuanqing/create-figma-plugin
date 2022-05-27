@@ -11,6 +11,7 @@ import { Dropdown, DropdownOption } from '../dropdown'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 2
   },
   title: 'Components/Dropdown/Border'
