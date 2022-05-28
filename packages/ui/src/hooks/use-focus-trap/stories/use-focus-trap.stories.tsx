@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks'
 
 import { Button } from '../../../components/button/button'
 import { Textbox } from '../../../components/textbox/textbox/textbox'
-import { VerticalSpace } from '../../../components/vertical-space/vertical-space'
+import { VerticalSpace } from '../../../layout/vertical-space/vertical-space'
 import { useFocusTrap } from '../use-focus-trap'
 
 export default { title: 'Hooks/Use Focus Trap' }

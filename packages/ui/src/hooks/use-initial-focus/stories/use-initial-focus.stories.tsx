@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks'
 
 import { Button } from '../../../components/button/button'
 import { Textbox } from '../../../components/textbox/textbox/textbox'
-import { VerticalSpace } from '../../../components/vertical-space/vertical-space'
+import { VerticalSpace } from '../../../layout/vertical-space/vertical-space'
 import { useInitialFocus } from '../use-initial-focus'
 
 export default { title: 'Hooks/Use Initial Focus' }

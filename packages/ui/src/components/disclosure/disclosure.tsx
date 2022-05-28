@@ -1,8 +1,8 @@
 /** @jsx h */
 import { ComponentChild, h, JSX } from 'preact'
 
+import { IconCaretRight16 } from '../../icons/icon-16/icon-caret-right-16'
 import { Props } from '../../types/types'
-import { IconCaretRight16 } from '../icon/icon-16/icon-caret-right-16'
 import styles from './disclosure.css'
 
 export type DisclosureProps = {

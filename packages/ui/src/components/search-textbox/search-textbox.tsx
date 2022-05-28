@@ -2,11 +2,11 @@
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
+import { IconCross32 } from '../../icons/icon-32/icon-cross-32'
+import { IconSearch32 } from '../../icons/icon-32/icon-search-32'
 import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
-import { IconCross32 } from '../icon/icon-32/icon-cross-32'
-import { IconSearch32 } from '../icon/icon-32/icon-search-32'
 import styles from './search-textbox.css'
 
 const EMPTY_STRING = ''

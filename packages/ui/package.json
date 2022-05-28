@@ -43,7 +43,7 @@
     "copy-non-ts-files": "node --loader ts-node/esm scripts/copy-non-ts-files.ts",
     "fix": "eslint --fix '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' --ignore-pattern '*.css.d.ts' && stylelint --fix 'src/**/*.css' && prettier --loglevel error --write '*.json'",
     "generate-colors-ts": "node --loader ts-node/esm scripts/generate-colors-ts.ts",
-    "generate-icons-ts": "node --loader ts-node/esm scripts/generate-icons-ts.ts && eslint --fix 'src/components/icon/**/*.{ts,tsx}' && yarn run generate-index-ts",
+    "generate-icons-ts": "node --loader ts-node/esm scripts/generate-icons-ts.ts && eslint --fix 'src/icons/**/*.{ts,tsx}' && yarn run generate-index-ts",
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.{ts,tsx}' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "lint": "eslint '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' && stylelint 'src/**/*.css'",
     "storybook": "yarn run storybook-clean && mkdirp node_modules && start-storybook --port 4242",

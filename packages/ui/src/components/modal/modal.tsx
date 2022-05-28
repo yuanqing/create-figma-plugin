@@ -2,10 +2,10 @@
 import { ComponentChild, Fragment, h, JSX, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
+import { IconCross32 } from '../../icons/icon-32/icon-cross-32'
 import { createClassName } from '../../utilities/create-class-name'
 import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler'
 import { getFocusableElements } from '../../utilities/private/get-focusable-elements'
-import { IconCross32 } from '../icon/icon-32/icon-cross-32'
 import { Text } from '../text/text'
 import styles from './modal.css'
 

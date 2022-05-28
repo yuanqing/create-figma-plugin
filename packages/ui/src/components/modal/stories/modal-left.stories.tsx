@@ -2,8 +2,8 @@
 import { Fragment, h } from 'preact'
 import { useState } from 'preact/hooks'
 
+import { IconChevronLeft32 } from '../../../icons/icon-32/icon-chevron-left-32'
 import { Button } from '../../button/button'
-import { IconChevronLeft32 } from '../../icon/icon-32/icon-chevron-left-32'
 import { Modal } from '../modal'
 
 export default {

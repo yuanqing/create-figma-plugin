@@ -17,13 +17,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 async function main(): Promise<void> {
   try {
     const globPatterns = ['icons/**/*.svg']
-    const outputDirectoryPath = resolve(
-      __dirname,
-      '..',
-      'src',
-      'components',
-      'icon'
-    )
+    const outputDirectoryPath = resolve(__dirname, '..', 'src', 'icons')
     await generateIconsTsAsync(globPatterns, outputDirectoryPath)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console

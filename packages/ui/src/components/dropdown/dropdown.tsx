@@ -5,11 +5,11 @@ import { useCallback, useRef, useState } from 'preact/hooks'
 import menuStyles from '../../css/menu.css'
 import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside'
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
+import { IconControlChevronDown8 } from '../../icons/icon-8/icon-control-chevron-down-8'
+import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16'
 import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
-import { IconControlChevronDown8 } from '../icon/icon-8/icon-control-chevron-down-8'
-import { IconMenuCheckmarkChecked16 } from '../icon/icon-16/icon-menu-checkmark-checked-16'
 import dropdownStyles from './dropdown.css'
 
 const INVALID_ID = null

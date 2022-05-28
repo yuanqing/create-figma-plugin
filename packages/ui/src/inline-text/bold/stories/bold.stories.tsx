@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Text } from '../../text/text'
+import { Text } from '../../../components/text/text'
 import { Bold as BoldComponent } from '../bold'
 
 export default {
