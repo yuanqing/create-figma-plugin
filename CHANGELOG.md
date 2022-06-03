@@ -2,33 +2,43 @@
 
 ## 2.0.0
 
-### `@create-figma-plugin/ui`
+- In your `package.json`, ensure that `@figma/plugin-typings` is set to `1.47.0` and `@figma/widget-typings` (for a widget) is set to `1.3.0`
 
-#### `Banner`
+### `@create-figma-plugin/ui@2.0.0`
+
+#### CSS
+
+- All CSS color variables (ie. variables with a `--color` prefix) have been removed. Use [Figma’s official color tokens](https://www.figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens) to style your custom components instead.
+
+#### Components
+
+- All components now utilize Figma’s color tokens, and support Dark Mode out of the box.
+
+##### `Banner`
 
 - Renamed the `type` prop to `variant`.
   - Use `variant="success"` to render a green banner.
 
-#### `Button`
+##### `Button`
 
 - Renamed the `destructive` prop to `danger`.
 
-#### `Dropdown`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`
+##### `Dropdown`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`
 
 - Removed the `noBorder` prop. The default behavior is to not show a gray border in the passive state.
 - Added a `variant` prop (*`string`*; optional).
   - Use `variant="border"` to show a gray border in the passive state.
   - Use `variant="underline"` to show a gray border only on the bottom side in the passive state.
 
-#### `LoadingIndicator`, all icon components
+##### `LoadingIndicator`, all icon components
 
 - The `color` prop must be a specific [Figma color token](https://github.com/yuanqing/create-figma-plugin/blob/36effe20059964672ce44daa6f772254b29baf53/packages/ui/src/types/colors.ts#L76-L130).
 
-#### `IconButton`
+##### `IconButton`
 
 - Renamed to **`IconToggleButton`**.
 
-#### `Layer`
+##### `Layer`
 
 - The focus state now shows a border.
 - Removed the `color` prop.
@@ -36,18 +46,22 @@
 - Made the `icon` prop mandatory.
 - Renamed the `pageName` prop to `description`.
 
-#### `SelectableItem`
+##### `SelectableItem`
 
 - The focus state now shows a border.
 
-#### `Text`
+##### `Text`
 
 - Removed the `bold` and `muted` props.
   - Styling inline text should be done via the new inline text components **`Bold`**, **`Code`**, **`Link`**, and **`Muted`**.
 
-#### `Toggle`
+##### `Toggle`
 
 - Added a `children` prop (*`ComponentChildren`*; mandatory).
+
+### `@create-figma-plugin/utilities@2.0.0`
+
+- `showUI` now takes a `themeColors` option (*`boolean`*; optional), which defaults to `true`. (`themeColors` must be set to `true` if you’re using the components in `@create-figma-plugin/ui`.)
 
 ## 1.9.2
 
