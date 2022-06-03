@@ -15,19 +15,19 @@ export type LayerProps<Name extends string> = {
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<boolean, Name>
-  value?: boolean
+  value: boolean
 }
 
 export function Layer<Name extends string>({
-  bold,
+  bold = false,
   children,
   description,
-  component,
+  component = false,
   icon,
   name,
   onChange = function () {},
   onValueChange = function () {},
-  value = false,
+  value,
   ...rest
 }: Props<HTMLInputElement, LayerProps<Name>>): JSX.Element {
   const handleChange = useCallback(

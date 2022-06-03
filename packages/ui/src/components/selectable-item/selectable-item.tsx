@@ -28,7 +28,7 @@ export function SelectableItem<Name extends string>({
   onChange = function () {},
   onValueChange = function () {},
   propagateEscapeKeyDown = true,
-  value = false,
+  value,
   ...rest
 }: Props<HTMLInputElement, SelectableItemProps<Name>>): JSX.Element {
   const handleChange = useCallback(
