@@ -1,5 +1,41 @@
 # Changelog
 
+## 2.0.0
+
+### `@create-figma-plugin/ui`
+
+- **`Banner`**
+  - Renamed the `type` prop to `variant`.
+    - Use `variant="success"` to render a green banner.
+
+- **`Button`**
+  - Renamed the `destructive` prop to `danger`.
+
+- **`Dropdown`**, **`Textbox`**, **`TextboxAutocomplete`**, **`TextboxColor`**, **`TextboxMultiline`**, and **`TextboxNumeric`**
+  - Removed the `noBorder` prop. The default behavior is to *not* show a gray border in the passive state.
+  - Added a `variant` prop (`string`, optional):
+    - Use `variant="border"` to show a gray border in the passive state.
+    - Use `variant="underline"` to show a gray border only on the bottom side in the passive state.
+
+- **`LoadingIndicator`**, and all icon components
+  - The `color` prop must be a specific [Figma color token]().
+
+- **`IconButton`**
+  - Renamed to `IconToggleButton`.
+
+- **`Layer`**
+  - The focus state now includes a border.
+  - Removed the `color` prop.
+  - Made the `icon` prop mandatory.
+  - Renamed the `pageName` prop to `description`.
+  - Added a `component` prop (`boolean`, optional) for rendering a component layer (ie. purple icon and text).
+
+- **`Text`**
+  - Removed the `bold` and `muted` props. Styling inline text should be done via the new inline text components: `Bold`, `Code`, `Link`, and `Muted`.
+
+- **`Toggle`**
+  - Added a `children` prop (`ComponentChildren`; mandatory) is now mandatory.
+
 ## 1.9.2
 
 - `@create-figma-plugin/ui`
