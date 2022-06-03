@@ -29,8 +29,8 @@ export function FileUploadButton({
   loading = false,
   multiple = false,
   onSelectedFiles,
-  secondary = false,
   propagateEscapeKeyDown = true,
+  secondary = false,
   ...rest
 }: Props<HTMLInputElement, FileUploadButtonProps>): JSX.Element {
   const handleChange = useCallback(
