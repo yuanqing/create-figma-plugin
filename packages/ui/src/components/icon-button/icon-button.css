@@ -1,0 +1,29 @@
+.iconButton {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-2);
+}
+
+.iconButton:not(:disabled) {
+  color: var(--figma-color-icon);
+}
+.iconButton:not(:disabled):hover {
+  background-color: var(--figma-color-bg-hover);
+}
+.iconButton:not(:disabled):focus {
+  border-color: var(--figma-color-border-selected);
+}
+.iconButton:disabled {
+  color: var(--figma-color-icon-disabled);
+  cursor: not-allowed;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
