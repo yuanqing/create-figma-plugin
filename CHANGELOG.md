@@ -8,11 +8,12 @@
 
 #### CSS
 
-- All CSS color variables (ie. variables with a `--color` prefix) have been removed. Use [Figma’s official color tokens](https://www.figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens) to style your custom components instead.
+- All CSS color variables (ie. variables with a `--color` prefix) have been removed. Use Figma’s official color tokens to style your custom components.
+  - To migrate, do a search for `--color` in your CSS and [replace these variables with an appropriate color token](https://www.figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens) (ie. variables with a `--figma-color` prefix).
 
 #### Components
 
-- All components now utilize Figma’s color tokens, and support Dark Mode out of the box.
+- All components now utilize Figma’s color tokens, and support dark mode out of the box.
 
 ##### `Banner`
 
@@ -23,6 +24,10 @@
 
 - Renamed the `destructive` prop to `danger`.
 
+##### `Disclosure`, `Modal`
+
+- Renamed the `isOpen` prop to `open`.
+
 ##### `Dropdown`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`
 
 - Removed the `noBorder` prop. The default behavior is to not show a gray border in the passive state.
@@ -30,7 +35,7 @@
   - Use `variant="border"` to show a gray border in the passive state.
   - Use `variant="underline"` to show a gray border only on the bottom side in the passive state.
 
-##### `LoadingIndicator`, all icon components
+##### `LoadingIndicator`, and all icon components
 
 - The `color` prop must be a specific [Figma color token](https://github.com/yuanqing/create-figma-plugin/blob/36effe20059964672ce44daa6f772254b29baf53/packages/ui/src/types/colors.ts#L76-L130).
 
