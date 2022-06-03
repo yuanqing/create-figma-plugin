@@ -66,31 +66,8 @@
   border-bottom-width: 1px;
 }
 
-.closeButton {
-  position: relative;
-  display: block;
-  border-radius: var(--border-radius-2);
-  color: var(--figma-color-icon);
-}
-.closeButton:hover,
-.closeButton:focus {
-  background-color: var(--figma-color-bg-hover);
-}
 .closeButtonLeft {
   order: -1;
-}
-
-.closeButtonBorder {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 2px solid transparent;
-  border-radius: var(--border-radius-2);
-}
-.closeButton:focus .closeButtonBorder {
-  border-color: var(--figma-color-border-selected);
 }
 
 .title {

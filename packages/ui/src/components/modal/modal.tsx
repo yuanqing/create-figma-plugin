@@ -6,6 +6,7 @@ import { IconCross32 } from '../../icons/icon-32/icon-cross-32'
 import { createClassName } from '../../utilities/create-class-name'
 import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler'
 import { getFocusableElements } from '../../utilities/private/get-focusable-elements'
+import { IconButton } from '../icon-button/icon-button'
 import { Text } from '../text/text'
 import styles from './modal.css'
 
@@ -151,19 +152,17 @@ export function Modal({
                   )}
                 </div>
                 {typeof onCloseButtonClick === 'undefined' ? null : (
-                  <button
-                    class={createClassName([
-                      styles.closeButton,
+                  <div
+                    class={
                       closeButtonPosition === 'left'
                         ? styles.closeButtonLeft
-                        : null
-                    ])}
-                    onClick={onCloseButtonClick}
-                    tabIndex={1}
+                        : undefined
+                    }
                   >
-                    <div class={styles.closeButtonBorder} />
-                    {closeButtonIcon}
-                  </button>
+                    <IconButton onClick={onCloseButtonClick}>
+                      {closeButtonIcon}
+                    </IconButton>
+                  </div>
                 )}
               </div>
             )}
