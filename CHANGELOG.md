@@ -4,37 +4,50 @@
 
 ### `@create-figma-plugin/ui`
 
-- **`Banner`**
-  - Renamed the `type` prop to `variant`.
-    - Use `variant="success"` to render a green banner.
+#### `Banner`
 
-- **`Button`**
-  - Renamed the `destructive` prop to `danger`.
+- Renamed the `type` prop to `variant`.
+  - Use `variant="success"` to render a green banner.
 
-- **`Dropdown`**, **`Textbox`**, **`TextboxAutocomplete`**, **`TextboxColor`**, **`TextboxMultiline`**, and **`TextboxNumeric`**
-  - Removed the `noBorder` prop. The default behavior is to *not* show a gray border in the passive state.
-  - Added a `variant` prop (`string`, optional):
-    - Use `variant="border"` to show a gray border in the passive state.
-    - Use `variant="underline"` to show a gray border only on the bottom side in the passive state.
+#### `Button`
 
-- **`LoadingIndicator`**, and all icon components
-  - The `color` prop must be a specific [Figma color token]().
+- Renamed the `destructive` prop to `danger`.
 
-- **`IconButton`**
-  - Renamed to `IconToggleButton`.
+#### `Dropdown`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`
 
-- **`Layer`**
-  - The focus state now includes a border.
-  - Removed the `color` prop.
-  - Made the `icon` prop mandatory.
-  - Renamed the `pageName` prop to `description`.
-  - Added a `component` prop (`boolean`, optional) for rendering a component layer (ie. purple icon and text).
+- Removed the `noBorder` prop. The default behavior is to not show a gray border in the passive state.
+- Added a `variant` prop (*`string`*; optional).
+  - Use `variant="border"` to show a gray border in the passive state.
+  - Use `variant="underline"` to show a gray border only on the bottom side in the passive state.
 
-- **`Text`**
-  - Removed the `bold` and `muted` props. Styling inline text should be done via the new inline text components: `Bold`, `Code`, `Link`, and `Muted`.
+#### `LoadingIndicator`, all icon components
 
-- **`Toggle`**
-  - Added a `children` prop (`ComponentChildren`; mandatory) is now mandatory.
+- The `color` prop must be a specific [Figma color token](https://github.com/yuanqing/create-figma-plugin/blob/36effe20059964672ce44daa6f772254b29baf53/packages/ui/src/types/colors.ts#L76-L130).
+
+#### `IconButton`
+
+- Renamed to **`IconToggleButton`**.
+
+#### `Layer`
+
+- The focus state now shows a border.
+- Removed the `color` prop.
+- Added a `component` prop (*`boolean`*; optional) for rendering a component layer (ie. purple icon and text).
+- Made the `icon` prop mandatory.
+- Renamed the `pageName` prop to `description`.
+
+#### `SelectableItem`
+
+- The focus state now shows a border.
+
+#### `Text`
+
+- Removed the `bold` and `muted` props.
+  - Styling inline text should be done via the new inline text components **`Bold`**, **`Code`**, **`Link`**, and **`Muted`**.
+
+#### `Toggle`
+
+- Added a `children` prop (*`ComponentChildren`*; mandatory).
 
 ## 1.9.2
 
