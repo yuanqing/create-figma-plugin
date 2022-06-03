@@ -9,9 +9,9 @@ import styles from './layer.css'
 export type LayerProps<Name extends string> = {
   bold?: boolean
   children: ComponentChildren
+  component?: boolean
   description?: string
   icon: ComponentChildren
-  component?: boolean
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<boolean, Name>

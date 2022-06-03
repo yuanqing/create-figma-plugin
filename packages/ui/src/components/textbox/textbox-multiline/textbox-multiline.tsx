@@ -19,8 +19,8 @@ export type TextboxMultilineProps<Name extends string> = {
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
-  spellCheck?: boolean
   rows?: number
+  spellCheck?: boolean
   validateOnBlur?: (value: string) => string | boolean
   value: string
   variant?: TextboxMultilineVariant

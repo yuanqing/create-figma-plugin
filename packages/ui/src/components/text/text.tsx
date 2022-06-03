@@ -6,8 +6,8 @@ import { createClassName } from '../../utilities/create-class-name'
 import styles from './text.css'
 
 export type TextProps = {
-  children: ComponentChildren
   align?: TextAlignment
+  children: ComponentChildren
   numeric?: boolean
 }
 export type TextAlignment = 'left' | 'center' | 'right'

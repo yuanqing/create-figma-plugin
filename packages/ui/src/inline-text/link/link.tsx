@@ -6,8 +6,8 @@ import { createClassName } from '../../utilities/create-class-name'
 import styles from './link.css'
 
 export type LinkProps = {
-  fullWidth?: boolean
   children: ComponentChildren
+  fullWidth?: boolean
   href: string
   target?: string
 }

@@ -13,11 +13,11 @@ export type ModalProps = {
   children: ComponentChild
   closeButtonIcon?: ComponentChild
   closeButtonPosition?: ModalCloseButtonPosition
+  isOpen: boolean
+  noTransition?: boolean
   onCloseButtonClick?: JSX.MouseEventHandler<HTMLButtonElement>
   onEscapeKeyDown?: (event: KeyboardEvent) => void
   onOverlayClick?: JSX.MouseEventHandler<HTMLDivElement>
-  isOpen: boolean
-  noTransition?: boolean
   position?: ModalPosition
   title?: string
 }

@@ -16,9 +16,9 @@ export type FileUploadButtonProps = {
   fullWidth?: boolean
   loading?: boolean
   multiple?: boolean
-  secondary?: boolean
   onSelectedFiles?: (files: Array<File>) => void
   propagateEscapeKeyDown?: boolean
+  secondary?: boolean
 }
 
 export function FileUploadButton({

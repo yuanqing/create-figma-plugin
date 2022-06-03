@@ -20,21 +20,21 @@ export type TextboxColorProps<
   OpacityName extends string
 > = {
   disabled?: boolean
-  name?: Name
-  propagateEscapeKeyDown?: boolean
-  revertOnEscapeKeyDown?: boolean
   hexColor: string
   hexColorName?: HexColorName
   hexColorPlaceholder?: string
+  name?: Name
   onHexColorInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onHexColorValueInput?: OnValueChange<string, HexColorName>
-  opacity: string
-  opacityName?: OpacityName
-  opacityPlaceholder?: string
   onOpacityInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onOpacityNumericValueInput?: OnValueChange<null | number, OpacityName>
   onOpacityValueInput?: OnValueChange<string, OpacityName>
   onRgbaColorValueInput?: OnValueChange<null | RGBA, Name>
+  opacity: string
+  opacityName?: OpacityName
+  opacityPlaceholder?: string
+  propagateEscapeKeyDown?: boolean
+  revertOnEscapeKeyDown?: boolean
   variant?: TextboxColorVariant
 }
 export type TextboxColorVariant = 'border' | 'underline'
@@ -45,21 +45,21 @@ export function TextboxColor<
   OpacityName extends string
 >({
   disabled = false,
-  name,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
   hexColor,
   hexColorName,
   hexColorPlaceholder,
+  name,
   onHexColorInput = function () {},
   onHexColorValueInput = function () {},
-  opacity,
-  opacityName,
-  opacityPlaceholder,
   onOpacityInput = function () {},
   onOpacityNumericValueInput = function () {},
   onOpacityValueInput = function () {},
   onRgbaColorValueInput = function () {},
+  opacity,
+  opacityName,
+  opacityPlaceholder,
+  propagateEscapeKeyDown = true,
+  revertOnEscapeKeyDown = false,
   variant,
   ...rest
 }: Props<
