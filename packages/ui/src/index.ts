@@ -29,6 +29,10 @@ export {
   FileUploadDropzoneProps
 } from './components/file-upload/file-upload-dropzone/file-upload-dropzone.js'
 export {
+  IconButton,
+  IconButtonProps
+} from './components/icon-button/icon-button.js'
+export {
   IconToggleButton,
   IconToggleButtonProps
 } from './components/icon-toggle-button/icon-toggle-button.js'
