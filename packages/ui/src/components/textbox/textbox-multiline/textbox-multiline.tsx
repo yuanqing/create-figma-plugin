@@ -44,7 +44,7 @@ export function TextboxMultiline<Name extends string>({
   ...rest
 }: Props<HTMLTextAreaElement, TextboxMultilineProps<Name>>): JSX.Element {
   const textAreaElementRef: RefObject<HTMLTextAreaElement> = useRef(null)
-  const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
@@ -58,8 +58,8 @@ export function TextboxMultiline<Name extends string>({
 
   const handleBlur = useCallback(
     function (): void {
-      if (isRevertOnEscapeKeyDownRef.current === true) {
-        isRevertOnEscapeKeyDownRef.current = false
+      if (revertOnEscapeKeyDownRef.current === true) {
+        revertOnEscapeKeyDownRef.current = false
         return
       }
       if (typeof validateOnBlur !== 'undefined') {
@@ -107,7 +107,7 @@ export function TextboxMultiline<Name extends string>({
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
-          isRevertOnEscapeKeyDownRef.current = true
+          revertOnEscapeKeyDownRef.current = true
           setTextAreaElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }

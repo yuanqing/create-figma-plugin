@@ -67,7 +67,7 @@ export function TextboxColor<
   TextboxColorProps<Name, HexColorName, OpacityName>
 >): JSX.Element {
   const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
-  const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
 
@@ -122,8 +122,8 @@ export function TextboxColor<
 
   const handleHexColorBlur = useCallback(
     function (): void {
-      if (isRevertOnEscapeKeyDownRef.current === true) {
-        isRevertOnEscapeKeyDownRef.current = false
+      if (revertOnEscapeKeyDownRef.current === true) {
+        revertOnEscapeKeyDownRef.current = false
         return
       }
       if (hexColor === EMPTY_STRING) {
@@ -189,7 +189,7 @@ export function TextboxColor<
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
-          isRevertOnEscapeKeyDownRef.current = true
+          revertOnEscapeKeyDownRef.current = true
           setHexColorInputElementValue(originalHexColor)
           setOriginalHexColor(EMPTY_STRING)
         }

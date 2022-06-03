@@ -63,7 +63,7 @@ export function RawTextboxNumeric<Name extends string>({
   }
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-  const isRevertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
@@ -77,8 +77,8 @@ export function RawTextboxNumeric<Name extends string>({
 
   const handleBlur = useCallback(
     function (): void {
-      if (isRevertOnEscapeKeyDownRef.current === true) {
-        isRevertOnEscapeKeyDownRef.current = false
+      if (revertOnEscapeKeyDownRef.current === true) {
+        revertOnEscapeKeyDownRef.current = false
         return
       }
       if (typeof validateOnBlur !== 'undefined') {
@@ -154,7 +154,7 @@ export function RawTextboxNumeric<Name extends string>({
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
-          isRevertOnEscapeKeyDownRef.current = true
+          revertOnEscapeKeyDownRef.current = true
           setInputElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }
