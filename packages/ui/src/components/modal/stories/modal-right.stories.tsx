@@ -14,18 +14,18 @@ export default {
 }
 
 export const Default = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleCloseButtonClick() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
-      <Modal isOpen={isOpen} position="right">
+      <Modal open={open} position="right">
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
             Close
@@ -37,18 +37,18 @@ export const Default = function () {
 }
 
 export const NoTransition = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleCloseButtonClick() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
-      <Modal isOpen={isOpen} noTransition position="right">
+      <Modal noTransition open={open} position="right">
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
             Close
@@ -60,22 +60,18 @@ export const NoTransition = function () {
 }
 
 export const CloseOnOverlayClick = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleOverlayClick() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
-      <Modal
-        isOpen={isOpen}
-        onOverlayClick={handleOverlayClick}
-        position="right"
-      >
+      <Modal onOverlayClick={handleOverlayClick} open={open} position="right">
         <div style={style}>foo</div>
       </Modal>
     </Fragment>
@@ -83,22 +79,18 @@ export const CloseOnOverlayClick = function () {
 }
 
 export const CloseOnEscapeKeyDown = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleEscapeKeyDown() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
-      <Modal
-        isOpen={isOpen}
-        onEscapeKeyDown={handleEscapeKeyDown}
-        position="right"
-      >
+      <Modal onEscapeKeyDown={handleEscapeKeyDown} open={open} position="right">
         <div style={style}>foo</div>
       </Modal>
     </Fragment>
@@ -106,18 +98,18 @@ export const CloseOnEscapeKeyDown = function () {
 }
 
 export const Title = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleCloseButtonClick() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
-      <Modal isOpen={isOpen} position="right" title="foo">
+      <Modal open={open} position="right" title="foo">
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
             Close
@@ -129,20 +121,20 @@ export const Title = function () {
 }
 
 export const CloseButton = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleCloseButtonClick() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
-        isOpen={isOpen}
         onCloseButtonClick={handleCloseButtonClick}
+        open={open}
         position="right"
         title="foo"
       >
@@ -153,12 +145,12 @@ export const CloseButton = function () {
 }
 
 export const CloseButtonIcon = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleCloseButtonClick() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
@@ -166,8 +158,8 @@ export const CloseButtonIcon = function () {
       <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
         closeButtonIcon={<IconChevronRight32 />}
-        isOpen={isOpen}
         onCloseButtonClick={handleCloseButtonClick}
+        open={open}
         position="right"
         title="foo"
       >
@@ -178,12 +170,12 @@ export const CloseButtonIcon = function () {
 }
 
 export const CloseButtonPositionLeft = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick() {
-    setIsOpen(true)
+    setOpen(true)
   }
   function handleCloseButtonClick() {
-    setIsOpen(false)
+    setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
   return (
@@ -191,8 +183,8 @@ export const CloseButtonPositionLeft = function () {
       <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
         closeButtonPosition="right"
-        isOpen={isOpen}
         onCloseButtonClick={handleCloseButtonClick}
+        open={open}
         position="right"
         title="foo"
       >
@@ -223,18 +215,18 @@ export const Nested = function () {
     <Fragment>
       <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
       <Modal
-        isOpen={isParentOpen}
         onCloseButtonClick={handleParentCloseButtonClick}
         onEscapeKeyDown={handleParentCloseButtonClick}
+        open={isParentOpen}
         position="right"
         title="Parent"
       >
         <div style={parentStyle}>
           <Button onClick={handleChildOpenButtonClick}>Open child modal</Button>
           <Modal
-            isOpen={isChildOpen}
             onCloseButtonClick={handleChildCloseButtonClick}
             onEscapeKeyDown={handleChildCloseButtonClick}
+            open={isChildOpen}
             position="right"
             title="Child"
           >

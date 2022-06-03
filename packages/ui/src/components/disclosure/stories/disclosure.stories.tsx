@@ -12,14 +12,14 @@ export default {
 }
 
 export const Closed = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   function handleClick() {
-    setIsOpen(!(isOpen === true))
+    setOpen(!(open === true))
   }
   const style = { height: '64px' }
   return (
     <div style={style}>
-      <Disclosure isOpen={isOpen} onClick={handleClick} title="foo">
+      <Disclosure onClick={handleClick} open={open} title="foo">
         bar
       </Disclosure>
     </div>
@@ -27,14 +27,14 @@ export const Closed = function () {
 }
 
 export const Open = function () {
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [open, setOpen] = useState<boolean>(true)
   function handleClick() {
-    setIsOpen(!(isOpen === true))
+    setOpen(!(open === true))
   }
   const style = { height: '64px' }
   return (
     <div style={style}>
-      <Disclosure isOpen={isOpen} onClick={handleClick} title="foo">
+      <Disclosure onClick={handleClick} open={open} title="foo">
         bar
       </Disclosure>
     </div>

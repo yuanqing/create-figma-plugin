@@ -7,7 +7,7 @@ import styles from './disclosure.css'
 
 export type DisclosureProps = {
   children: ComponentChild
-  isOpen: boolean
+  open: boolean
   onClick: JSX.MouseEventHandler<HTMLElement>
   title: string
 }
@@ -15,12 +15,12 @@ export type DisclosureProps = {
 export function Disclosure({
   children,
   onClick,
-  isOpen,
+  open,
   title,
   ...rest
 }: Props<HTMLDivElement, DisclosureProps>): JSX.Element {
   return (
-    <div {...rest} class={isOpen === true ? styles.isOpen : undefined}>
+    <div {...rest} class={open === true ? styles.open : undefined}>
       <div class={styles.title} onClick={onClick}>
         <div class={styles.icon}>
           <IconCaretRight16 />

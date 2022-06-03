@@ -13,7 +13,7 @@ export type ModalProps = {
   children: ComponentChild
   closeButtonIcon?: ComponentChild
   closeButtonPosition?: ModalCloseButtonPosition
-  isOpen: boolean
+  open: boolean
   noTransition?: boolean
   onCloseButtonClick?: JSX.MouseEventHandler<HTMLButtonElement>
   onEscapeKeyDown?: (event: KeyboardEvent) => void
@@ -30,7 +30,7 @@ export function Modal({
   children,
   closeButtonIcon = <IconCross32 />,
   closeButtonPosition = 'right',
-  isOpen,
+  open,
   noTransition = false,
   onCloseButtonClick,
   onEscapeKeyDown,
@@ -60,7 +60,7 @@ export function Modal({
         rootElementRef.current
       )
       function handleTabKeyDown(event: KeyboardEvent) {
-        if (isOpen === true) {
+        if (open === true) {
           focusTrapKeyDownHandler(event)
         }
       }
@@ -69,14 +69,14 @@ export function Modal({
         window.removeEventListener('keydown', handleTabKeyDown)
       }
     },
-    [isOpen]
+    [open]
   )
 
   useEffect(
     function (): () => void {
       function handleEscapeKeyDown(event: KeyboardEvent) {
         if (
-          isOpen === false ||
+          open === false ||
           event.key !== 'Escape' ||
           typeof onEscapeKeyDown === 'undefined' ||
           rootElements[rootElements.length - 1] !== rootElementRef.current
@@ -90,7 +90,7 @@ export function Modal({
         window.removeEventListener('keydown', handleEscapeKeyDown)
       }
     },
-    [isOpen, onEscapeKeyDown]
+    [open, onEscapeKeyDown]
   )
 
   useEffect(
@@ -98,7 +98,7 @@ export function Modal({
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
-      if (isOpen === true) {
+      if (open === true) {
         rootElements.push(rootElementRef.current)
         rootElementRef.current.style.cssText =
           'position:absolute;top:0;left:0;bottom:0;right:0;z-index:1'
@@ -120,7 +120,7 @@ export function Modal({
         }
       }
     },
-    [isOpen]
+    [open]
   )
 
   useEffect(
@@ -134,7 +134,7 @@ export function Modal({
             {...rest}
             class={createClassName([
               styles.modal,
-              isOpen === true ? styles.isOpen : null,
+              open === true ? styles.open : null,
               noTransition === true ? styles.noTransition : null,
               styles[position]
             ])}
@@ -182,10 +182,10 @@ export function Modal({
       children,
       closeButtonIcon,
       closeButtonPosition,
-      isOpen,
       noTransition,
       onCloseButtonClick,
       onOverlayClick,
+      open,
       position,
       rest,
       title

@@ -19,7 +19,7 @@
   left: 0;
   color: var(--figma-color-icon);
 }
-.isOpen .icon {
+.open .icon {
   top: calc(var(--space-extra-small) - 2px);
   left: 2px;
   transform: rotate(90deg);
@@ -29,6 +29,6 @@
   display: none;
   color: var(--figma-color-text);
 }
-.isOpen .children {
+.open .children {
   display: block;
 }
