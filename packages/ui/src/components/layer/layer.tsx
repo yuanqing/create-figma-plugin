@@ -15,6 +15,7 @@ export type LayerProps<Name extends string> = {
   name?: Name
   onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueChange?: OnValueChange<boolean, Name>
+  propagateEscapeKeyDown?: boolean
   value: boolean
 }
 
@@ -27,6 +28,7 @@ export function Layer<Name extends string>({
   name,
   onChange = function () {},
   onValueChange = function () {},
+  propagateEscapeKeyDown = true,
   value,
   ...rest
 }: Props<HTMLInputElement, LayerProps<Name>>): JSX.Element {
@@ -37,6 +39,19 @@ export function Layer<Name extends string>({
       onChange(event)
     },
     [name, onChange, onValueChange]
+  )
+
+  const handleKeyDown = useCallback(
+    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+      if (event.key !== 'Escape') {
+        return
+      }
+      if (propagateEscapeKeyDown === false) {
+        event.stopPropagation()
+      }
+      event.currentTarget.blur()
+    },
+    [propagateEscapeKeyDown]
   )
 
   return (
@@ -53,6 +68,7 @@ export function Layer<Name extends string>({
         class={styles.input}
         name={name}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         tabIndex={0}
         type="checkbox"
       />

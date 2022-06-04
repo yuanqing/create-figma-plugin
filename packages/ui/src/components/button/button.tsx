@@ -31,16 +31,13 @@ export function Button({
 }: Props<HTMLButtonElement, ButtonProps>): JSX.Element {
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLButtonElement>): void {
-      if (event.key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        event.currentTarget.blur()
+      if (event.key !== 'Escape') {
         return
       }
-      if (event.key === 'Enter') {
+      if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
+      event.currentTarget.blur()
     },
     [propagateEscapeKeyDown]
   )
