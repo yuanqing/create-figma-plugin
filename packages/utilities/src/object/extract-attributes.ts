@@ -23,7 +23,7 @@ function pick<PlainObject, Key extends keyof PlainObject>(
   for (const key of keys) {
     const value = object[key]
     if (typeof value === 'undefined') {
-      throw new Error(`Key \`${key}\` does not exist on \`object\``)
+      throw new Error(`Key \`${String(key)}\` does not exist on \`object\``)
     }
     result[key] = value
   }
