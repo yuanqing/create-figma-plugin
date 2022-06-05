@@ -34,7 +34,7 @@
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' && eslint --fix src/index.ts",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json' 'test/**/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
-    "test": "npm run build && ava 'test/**/*.ts'"
+    "test": "npm run build && ava --serial 'test/**/*.ts'"
   },
   "dependencies": {
     "@sindresorhus/slugify": "2.1.0",
@@ -61,7 +61,6 @@
       "--loader",
       "ts-node/esm"
     ],
-    "serial": true,
     "timeout": "2m",
     "workerThreads": false
   },

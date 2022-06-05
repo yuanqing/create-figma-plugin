@@ -33,7 +33,7 @@
     "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
-    "test": "npm run build && ava 'test/**/*.ts'"
+    "test": "npm run build && ava --serial 'test/**/*.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^1.9.2",
@@ -72,7 +72,6 @@
       "--loader",
       "ts-node/esm"
     ],
-    "serial": true,
     "timeout": "2m",
     "workerThreads": false
   },
