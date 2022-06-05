@@ -6,7 +6,7 @@
 
 ### Pre-requisites
 
-- [Node.js](https://nodejs.org) – v14
+- [Node.js](https://nodejs.org) – v16
 - [Figma desktop app](https://figma.com/downloads/)
 
 ### Build the widget
