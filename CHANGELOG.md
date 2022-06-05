@@ -2,7 +2,11 @@
 
 ## 2.0.0
 
-- In your `package.json`, ensure that `@figma/plugin-typings` (for a plugin) is set to `1.47.0`, and `@figma/widget-typings` (for a widget) is set to `1.3.0`.
+- In your `package.json`, ensure that `@figma/plugin-typings` (for a plugin) is set to `1.47.0`, and `@figma/widget-typings` (for a widget) is set to `1.3.0`
+
+- Bumped dependencies in all packages
+
+- Replaced `yarn@1` with `npm@8` (for local development)
 
 ### `@create-figma-plugin/ui@2.0.0`
 
