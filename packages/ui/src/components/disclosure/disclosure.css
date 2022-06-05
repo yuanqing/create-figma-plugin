@@ -1,3 +1,15 @@
+.disclosure {
+  position: relative;
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 .title,
 .children {
   padding: var(--space-extra-small) var(--space-small) var(--space-extra-small)
@@ -9,7 +21,8 @@
   color: var(--figma-color-text);
   font-weight: var(--font-weight-bold);
 }
-.title:hover {
+.title:hover,
+.input:focus ~ .title {
   background-color: var(--figma-color-bg-hover);
 }
 
@@ -19,7 +32,7 @@
   left: 0;
   color: var(--figma-color-icon);
 }
-.open .icon {
+.input:checked ~ .title .icon {
   top: calc(var(--space-extra-small) - 2px);
   left: 2px;
   transform: rotate(90deg);
@@ -29,6 +42,6 @@
   display: none;
   color: var(--figma-color-text);
 }
-.open .children {
+.input:checked ~ .children {
   display: block;
 }

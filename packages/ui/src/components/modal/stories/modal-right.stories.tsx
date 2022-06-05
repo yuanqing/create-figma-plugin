@@ -1,8 +1,9 @@
 /** @jsx h */
-import { Fragment, h } from 'preact'
+/* eslint-disable no-console */
+import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { IconChevronRight32 } from '../../../icons/icon-32/icon-chevron-right-32'
+import { IconChevronDown32 } from '../../../icons/icon-32/icon-chevron-down-32'
 import { Button } from '../../button/button'
 import { Modal } from '../modal'
 
@@ -15,10 +16,16 @@ export default {
 
 export const Default = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleCloseButtonClick() {
+  function handleCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -38,10 +45,16 @@ export const Default = function () {
 
 export const NoTransition = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleCloseButtonClick() {
+  function handleCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -61,10 +74,14 @@ export const NoTransition = function () {
 
 export const CloseOnOverlayClick = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleOverlayClick() {
+  function handleOverlayClick(event: JSX.TargetedMouseEvent<HTMLDivElement>) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -80,10 +97,14 @@ export const CloseOnOverlayClick = function () {
 
 export const CloseOnEscapeKeyDown = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleEscapeKeyDown() {
+  function handleEscapeKeyDown(event: KeyboardEvent) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -99,10 +120,16 @@ export const CloseOnEscapeKeyDown = function () {
 
 export const Title = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleCloseButtonClick() {
+  function handleCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -122,10 +149,16 @@ export const Title = function () {
 
 export const CloseButton = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleCloseButtonClick() {
+  function handleCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -146,10 +179,16 @@ export const CloseButton = function () {
 
 export const CloseButtonIcon = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleCloseButtonClick() {
+  function handleCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -157,7 +196,7 @@ export const CloseButtonIcon = function () {
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
-        closeButtonIcon={<IconChevronRight32 />}
+        closeButtonIcon={<IconChevronDown32 />}
         onCloseButtonClick={handleCloseButtonClick}
         open={open}
         position="right"
@@ -171,10 +210,16 @@ export const CloseButtonIcon = function () {
 
 export const CloseButtonPositionLeft = function () {
   const [open, setOpen] = useState<boolean>(false)
-  function handleOpenButtonClick() {
+  function handleOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(true)
   }
-  function handleCloseButtonClick() {
+  function handleCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
     setOpen(false)
   }
   const style = { padding: '12px', width: '240px' }
@@ -182,7 +227,7 @@ export const CloseButtonPositionLeft = function () {
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
-        closeButtonPosition="right"
+        closeButtonPosition="left"
         onCloseButtonClick={handleCloseButtonClick}
         open={open}
         position="right"
@@ -195,29 +240,40 @@ export const CloseButtonPositionLeft = function () {
 }
 
 export const Nested = function () {
-  const [isParentOpen, setIsParentOpen] = useState<boolean>(false)
-  function handleParentOpenButtonClick() {
-    setIsParentOpen(true)
+  const [parentOpen, setParentOpen] = useState<boolean>(false)
+  function handleParentOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setParentOpen(true)
   }
-  function handleParentCloseButtonClick() {
-    setIsParentOpen(false)
+  function handleParentCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setParentOpen(false)
   }
-  const parentStyle = { padding: '12px', width: '240px' }
-  const [isChildOpen, setIsChildOpen] = useState<boolean>(false)
-  function handleChildOpenButtonClick() {
-    setIsChildOpen(true)
+  const parentStyle = { height: '160px', padding: '12px' }
+  const [childOpen, setChildOpen] = useState<boolean>(false)
+  function handleChildOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setChildOpen(true)
   }
-  function handleChildCloseButtonClick() {
-    setIsChildOpen(false)
+  function handleChildCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setChildOpen(false)
   }
-  const childStyle = { padding: '12px', width: '160px' }
+  const childStyle = { height: '120px', padding: '12px' }
   return (
     <Fragment>
       <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
       <Modal
         onCloseButtonClick={handleParentCloseButtonClick}
-        onEscapeKeyDown={handleParentCloseButtonClick}
-        open={isParentOpen}
+        open={parentOpen}
         position="right"
         title="Parent"
       >
@@ -225,8 +281,7 @@ export const Nested = function () {
           <Button onClick={handleChildOpenButtonClick}>Open child modal</Button>
           <Modal
             onCloseButtonClick={handleChildCloseButtonClick}
-            onEscapeKeyDown={handleChildCloseButtonClick}
-            open={isChildOpen}
+            open={childOpen}
             position="right"
             title="Child"
           >
