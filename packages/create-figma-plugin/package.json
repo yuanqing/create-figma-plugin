@@ -18,7 +18,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "lib",
@@ -29,11 +29,11 @@
     "create-figma-plugin": "./lib/cli.js"
   },
   "scripts": {
-    "build": "yarn run clean && tsc --build",
+    "build": "npm run clean && tsc --build",
     "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
-    "test": "yarn run build && ava 'test/**/*.ts'"
+    "test": "npm run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^1.9.2",
@@ -52,16 +52,16 @@
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^8.2.1",
     "@types/lodash.template": "^4.5.1",
-    "@types/node": "^17.0.31",
+    "@types/node": "^17.0.40",
     "@types/rimraf": "^3.0.2",
     "@types/semver": "^7.3.9",
-    "ava": "^4.2.0",
-    "eslint": "^8.15.0",
+    "ava": "^4.3.0",
+    "eslint": "^8.17.0",
     "eslint-config-yuanqing": "^0.0.6",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.7.0",
-    "typescript": "4.4.4"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "ava": {
     "extensions": {

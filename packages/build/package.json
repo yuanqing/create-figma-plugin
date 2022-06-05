@@ -21,7 +21,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "lib"
@@ -30,23 +30,23 @@
     "build-figma-plugin": "lib/cli.js"
   },
   "scripts": {
-    "build": "yarn run clean && tsc --build",
+    "build": "npm run clean && tsc --build",
     "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{src,test}/**/*.{ts,tsx}' && prettier --loglevel error --write '*.json' 'src/**/*.json' 'test/**/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.{ts,tsx}'",
-    "test": "yarn run build && ava 'test/**/*.ts'"
+    "test": "npm run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
     "@create-figma-plugin/common": "^1.9.2",
     "chokidar": "^3.5.3",
-    "cssnano": "^5.1.7",
-    "esbuild": "^0.14.38",
+    "cssnano": "^5.1.11",
+    "esbuild": "^0.14.42",
     "find-up": "^6.3.0",
     "fs-extra": "^10.1.0",
     "globby": "^13.1.1",
     "indent-string": "^5.0.0",
     "kleur": "^4.1.4",
-    "postcss": "^8.4.13",
+    "postcss": "^8.4.14",
     "postcss-modules": "^4.3.1",
     "rev-hash": "^4.0.0",
     "sade": "^1.8.1",
@@ -58,17 +58,17 @@
     "@create-figma-plugin/tsconfig": "^1.9.2",
     "@create-figma-plugin/utilities": "^1.9.2",
     "@types/fs-extra": "^9.0.13",
-    "@types/node": "^17.0.31",
+    "@types/node": "^17.0.40",
     "@types/rimraf": "^3.0.2",
-    "ava": "^4.2.0",
-    "eslint": "^8.15.0",
+    "ava": "^4.3.0",
+    "eslint": "^8.17.0",
     "eslint-config-yuanqing": "^0.0.6",
-    "preact": "^10.7.2",
+    "preact": "^10.7.3",
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.7.0",
-    "typescript": "^4.5.5"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "peerDependencies": {
     "@figma/plugin-typings": "^1",

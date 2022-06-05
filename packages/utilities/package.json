@@ -21,7 +21,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "files": [
     "lib"
@@ -29,14 +29,14 @@
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "yarn run clean && yarn run interpolate-gumroad-script && yarn run generate-index-ts && tsc --build",
+    "build": "npm run clean && npm run interpolate-gumroad-script && npm run generate-index-ts && tsc --build",
     "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "eslint --fix '{scripts,src,test}/**/*.{js,ts}' && prettier --loglevel error --write '*.json'",
     "generate-docs": "node --loader ts-node/esm scripts/generate-docs.ts",
     "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "interpolate-gumroad-script": "node --loader ts-node/esm scripts/interpolate-gumroad-script.ts",
     "lint": "eslint '{scripts,src,test}/**/*.{js,ts}'",
-    "test": "yarn run build && ava 'test/**/*.ts'"
+    "test": "npm run build && ava 'test/**/*.ts'"
   },
   "dependencies": {
     "hex-rgb": "^5.0.0",
@@ -47,17 +47,17 @@
     "@figma/plugin-typings": "1.47.0",
     "@types/fs-extra": "^9.0.13",
     "@types/natural-compare-lite": "^1.4.0",
-    "@types/node": "^17.0.31",
-    "ava": "^4.2.0",
-    "esbuild": "^0.14.38",
-    "eslint": "^8.15.0",
+    "@types/node": "^17.0.40",
+    "ava": "^4.3.0",
+    "esbuild": "^0.14.42",
+    "eslint": "^8.17.0",
     "eslint-config-yuanqing": "^0.0.6",
     "fs-extra": "^10.1.0",
     "generate-ts-docs": "^0.0.13",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.7.0",
-    "typescript": "4.4.4"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "ava": {
     "extensions": {

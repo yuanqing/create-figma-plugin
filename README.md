@@ -20,8 +20,8 @@
 
 ### Pre-requisites
 
-- [Node.js](https://nodejs.org) – v14
-- [Yarn](https://classic.yarnpkg.com) – v1
+- [Node.js](https://nodejs.org) – v16
+- [npm](https://docs.npmjs.com/cli/) – v8
 
 ### Building the project locally
 
@@ -39,7 +39,7 @@ Active development on the next release occurs on the [`next`](https://github.com
 First, build the entire Create Figma Plugin project:
 
 ```
-$ yarn run build
+$ npm run build
 ```
 
 Then, create symlinks to the local copy of the project in your existing plugin/widget (eg. `my-project`):
@@ -54,5 +54,5 @@ Finally, build your plugin/widget:
 
 ```
 $ cd my-project
-$ yarn run build
+$ npm run build
 ```

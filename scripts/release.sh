@@ -5,8 +5,8 @@ git checkout main
 git merge next
 
 # create a new version and publish to `npm`
-yarn run version
-yarn run publish
+npm run version
+npm run publish
 
 # push `main`, including tags
 git push --no-verify --tags origin main
@@ -20,4 +20,4 @@ git checkout -b next
 git push --no-verify origin next
 
 # update docs
-yarn run website-deploy
+npm run website-deploy

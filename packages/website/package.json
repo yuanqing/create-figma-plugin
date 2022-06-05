@@ -4,9 +4,9 @@
   "version": "1.9.2",
   "type": "module",
   "scripts": {
-    "build": "yarn run clean && build-website --minify",
+    "build": "npm run clean && build-website --minify",
     "clean": "rimraf '*.log' build",
-    "fix": "eslint --fix build-website.config.js 'scripts/**/*.ts' 'js/**/*.js' && stylelint --fix 'css/**/*.css' && yarn run fix-data",
+    "fix": "eslint --fix build-website.config.js 'scripts/**/*.ts' 'js/**/*.js' && stylelint --fix 'css/**/*.css' && npm run fix-data",
     "fix-data": "node --loader ts-node/esm scripts/prettify-data.ts globals/plugins.json && node --loader ts-node/esm scripts/prettify-data.ts globals/widgets.json",
     "lint": "eslint build-website.config.js 'scripts/**/*.ts' 'js/**/*.js' && stylelint 'css/**/*.css'",
     "open": "open-cli http://0.0.0.0:4242/create-figma-plugin/",
@@ -18,18 +18,18 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "@yuanqing/build-website": "^0.0.2",
-    "eslint": "^8.15.0",
+    "eslint": "^8.17.0",
     "eslint-config-yuanqing": "^0.0.6",
     "fs-extra": "^10.1.0",
-    "node-fetch": "^3.2.4",
+    "node-fetch": "^3.2.5",
     "open-cli": "^7.0.1",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "sirv-cli": "^2.0.2",
-    "stylelint": "^14.8.2",
+    "stylelint": "^14.8.5",
     "stylelint-config-yuanqing": "^0.0.3",
-    "ts-node": "^10.7.0",
-    "typescript": "4.4.4"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing"
