@@ -74,6 +74,7 @@
     "react-dom": "^18.1.0",
     "rimraf": "^3.0.2",
     "storybook-addon-themes": "^6.1.0",
+    "storybook-dark-mode": "^1.1.0",
     "style-loader": "2.0.0",
     "stylelint": "^14.8.5",
     "stylelint-config-yuanqing": "^0.0.3",

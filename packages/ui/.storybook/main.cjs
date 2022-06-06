@@ -35,7 +35,11 @@ function webpackFinal(config) {
 }
 
 module.exports = {
-  addons: ['@storybook/addon-storysource', 'storybook-addon-themes'],
+  addons: [
+    '@storybook/addon-storysource',
+    'storybook-dark-mode',
+    'storybook-addon-themes'
+  ],
   stories: ['../src/**/stories/*.stories.tsx'],
   webpackFinal
 }
