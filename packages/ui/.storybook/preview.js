@@ -25,6 +25,8 @@ function parseStory(story) {
   return [split[0], split[1], [...split.slice(2), story.story].join('/')]
 }
 
+const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+
 export const parameters = {
   layout: 'centered',
   options: {
@@ -75,10 +77,15 @@ export const parameters = {
       {
         class: 'figma-light',
         color: '#0d99ff',
-        default: true,
+        default: isDarkMode === false,
         name: 'Figma Light'
       },
-      { class: 'figma-dark', color: '#0c8ce9', name: 'Figma Dark' },
+      {
+        class: 'figma-dark',
+        color: '#0c8ce9',
+        default: isDarkMode === true,
+        name: 'Figma Dark'
+      },
       { class: 'figjam', color: '#9747ff', name: 'FigJam' }
     ]
   }
