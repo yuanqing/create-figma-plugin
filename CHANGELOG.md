@@ -6,7 +6,7 @@
 
 - Bumped dependencies in all packages
 
-- Replaced `yarn@1` with `npm@8` (for local development)
+- Replaced `yarn@1` with `npm@8` for local development
 
 ### `@create-figma-plugin/ui@2.0.0`
 
@@ -194,7 +194,7 @@
   - Added a `useWindowResize` hook ([#59](https://github.com/yuanqing/create-figma-plugin/issues/59))
   - Added a call to `useEffect` in the `useFocusTrap` hook
   - Added CSS variables `--box-shadow-menu`, `--box-shadow-modal`, and `--font-family-code`
-  - Made `computeBoundingBox` compatibile with `@figma/plugin-typings@1.37.0`
+  - Made `computeBoundingBox` compatible with `@figma/plugin-typings@1.37.0`
 
 - `create-figma-plugin`
   - Renamed the `ui` template to `preact-rectangles`
