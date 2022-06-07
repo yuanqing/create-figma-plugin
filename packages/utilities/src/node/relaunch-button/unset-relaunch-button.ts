@@ -1,7 +1,7 @@
 import {
   getRelaunchButtonsData,
   setRelaunchButtonsData
-} from './private/update-relaunch-buttons-data'
+} from './private/update-relaunch-buttons-data.js'
 
 /**
  * Unsets the [relaunch button](https://figma.com/plugin-docs/api/properties/nodes-setrelaunchdata/)
