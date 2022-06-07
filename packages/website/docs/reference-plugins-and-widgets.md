@@ -28,9 +28,7 @@
 by <%= pluginAuthors.join(', ') %>
 </div>
 <% if (githubUrl !== null) { %>
-<div class="plugin__github">
-<a href="<%- githubUrl %>" target="_blank">GitHub</a>
-</div>
+<div class="plugin__github"><a href="<%- githubUrl %>" target="_blank">GitHub</a></div>
 <% } %>
 </div>
 </div>
@@ -62,9 +60,7 @@ by <%= pluginAuthors.join(', ') %>
 by <%= widgetAuthors.join(', ') %>
 </div>
 <% if (githubUrl !== null) { %>
-<div class="plugin__github">
-<a href="<%- githubUrl %>" target="_blank">GitHub</a>
-</div>
+<div class="plugin__github"><a href="<%- githubUrl %>" target="_blank">GitHub</a></div>
 <% } %>
 </div>
 </div>

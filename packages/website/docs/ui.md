@@ -15,7 +15,13 @@
 
 See the [full library of components in the Storybook](<%- baseUrl %>storybook/).
 
-The component library ships with two themes, one for Figma and one for FigJam. Components will automatically render using the Figma theme if the UI is launched from a Figma plugin, and the FigJam theme if the UI is launched from a FigJam plugin/widget.
+The component library ships with [three themes](https://figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens):
+
+1. *Figma Design: Light*
+2. *Figma Design: Dark*
+3. *FigJam*
+
+If the UI is launched from a Figma plugin, components will automatically render using the *Figma Design* theme (either *Light* or *Dark*, based on the user’s preferences as set in the Figma app). If the UI is launched from a FigJam plugin/widget, components will automatically render using the *FigJam* theme.
 
 ![UI of the Insert Big Image plugin rendered using the Figma and FigJam themes](<%- media['ui-themes'] %>)
 
@@ -115,7 +121,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 /* src/styles.css */
 
 .container {
-  background-color: var(--color-silver);
+  background-color: var(--figma-color-bg-secondary);
 }
 ```
 

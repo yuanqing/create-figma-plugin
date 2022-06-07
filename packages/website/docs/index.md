@@ -4,28 +4,28 @@
   "title": "Introduction",
   "tweets": [
     {
-      "date": "Aug 21",
+      "date": "Aug 21, 2021",
       "handle": "alexwidua",
       "id": "1428782856998989827",
       "name": "Alex Widua",
-      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1460377348621148168/yroE2ckE_400x400.jpg",
+      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1517443003891261440/G8rWekk3_400x400.jpg",
       "text": "This was also the first time I used <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin toolkit and wow – what a comprehensive and thought-out library. Allowed me to have the first prototype up and running in just an hour. A staple for building Figma plugins from now on 😌"
     },
     {
-      "date": "Aug 19",
+      "date": "Aug 19, 2021",
       "handle": "tkmadeit",
       "id": "1428024307511402499",
       "name": "tkmadeit",
       "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1322343885172051970/7r2g2q0E_400x400.jpg",
-      "text": "If you build plugins for <a href=\"https://twitter.com/figmadesign\" target=\"_blank\">@figmadesign</a> do yourself a favor and start using Create Figma Plugin toolkit by <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>!"
+      "text": "If you build plugins for <a href=\"https://twitter.com/figma\" target=\"_blank\">@figmadesign</a> do yourself a favor and start using Create Figma Plugin toolkit by <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>!"
     },
     {
-      "date": "Aug 19",
+      "date": "Aug 19, 2021",
       "handle": "abynim",
       "id": "1428137898142883840",
       "name": "Aby Nimbalkar",
       "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1484323185185427456/o6Nzp-Hb_400x400.jpg",
-      "text": "I know I’m late to this party but I just published my first <a href=\"https://twitter.com/figmadesign\" target=\"_blank\">@figmadesign</a> plugin 🥳 (org-only so can’t share yet). <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin library made building the UI so easy and helped me focus on the logic instead. Highly recommended!"
+      "text": "I know I’m late to this party but I just published my first <a href=\"https://twitter.com/figma\" target=\"_blank\">@figmadesign</a> plugin 🥳 (org-only so can’t share yet). <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin library made building the UI so easy and helped me focus on the logic instead. Highly recommended!"
     }
   ]
 }
@@ -40,7 +40,7 @@
 <li class="emoji-list-item"><span class="emoji-list-item__emoji">🤗</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'quick-start').url %>#bootstrapping-a-new-plugin-widget-from-a-template">Bootstrap a new plugin/widget from a template</a></span></li>
 <li class="emoji-list-item"><span class="emoji-list-item__emoji">🤯</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'quick-start').url %>#building-the-plugin-widget">Bundle and minify your TypeScript or JavaScript code</a>, with sub-second build times made possible by the esbuild compiler</span></li>
 <li class="emoji-list-item"><span class="emoji-list-item__emoji">😌</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'recipes').url %>#specifying-multiple-commands-in-the-plugin-sub-menu">Write plugin menu commands in separate files</a>, with support for each command having their own UI implementation</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤩</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'ui').url %>#using-the-preact-component-library">Create a UI for your plugin/widget</a> using a library of Preact components that replicate the Figma/FigJam editor’s UI design</span></li>
+<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤩</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'ui').url %>#using-the-preact-component-library">Create a UI for your plugin/widget</a> using a library of Preact components that replicate the Figma/FigJam editor’s UI design, with support for dark mode</span></li>
 <li class="emoji-list-item"><span class="emoji-list-item__emoji">🤓</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'utilities').url %>#passing-data-between-the-plugin-widgets-main-and-ui-contexts">Leverage an extensive set of utility functions</a>, including <a href="<%- query('page', 'recipes').url %>">utilities for passing data between your plugin/widget’s main and UI contexts</a></span></li>
 </ul>
 </div>
@@ -80,7 +80,7 @@
 <p class="muted">Plugins</p>
 <ul>
 <% const featuredPlugins = plugins.filter(function (plugin) {
-return ['Copy & Rotate', 'Draw Connector', 'Free Hands', 'Protofly', 'Prototyper', 'RTL PLZ', 'Selection Variants'].indexOf(plugin.name) !== -1
+return ['Beautiful Shadows', 'Draw Connector', 'Free Hands', 'Protofly', 'Prototyper', 'RTL PLZ', 'Selection Variants'].indexOf(plugin.name) !== -1
 }) %>
 <% for (const { id, name } of featuredPlugins) { %>
 <li class="featured-plugin">
@@ -96,7 +96,7 @@ return ['Copy & Rotate', 'Draw Connector', 'Free Hands', 'Protofly', 'Prototyper
 <p class="muted">Widgets</p>
 <ul>
 <% const featuredWidgets = widgets.filter(function (widget) {
-return ['Device Frames', 'Graphpad', 'Import PDF Into FigJam', 'Mad Lib', 'Markdown Notes', 'Storymapper', 'Teams'].indexOf(widget.name) !== -1
+return ['Device Frames', 'Graphpad', 'Import PDF Into FigJam', 'Mad Lib', 'Scrum-A-Lot', 'Storymapper', 'Teams'].indexOf(widget.name) !== -1
 }) %>
 <% for (const { id, name } of featuredWidgets) { %>
 <li class="featured-plugin">
