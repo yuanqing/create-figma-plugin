@@ -13,7 +13,7 @@
 #### CSS
 
 - All CSS color variables (ie. variables with a `--color` prefix) have been removed. Use Figma’s official color tokens to style your custom components.
-  - To migrate, do a search for `--color` in your CSS and [replace these variables with an appropriate color token](https://www.figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens) (ie. variables with a `--figma-color` prefix).
+  - To migrate, do a search for `--color` in your CSS and [replace these variables with an appropriate color token](https://figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens) (ie. variables with a `--figma-color` prefix).
 
 #### Components
 
