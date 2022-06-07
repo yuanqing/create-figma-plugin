@@ -2,26 +2,14 @@
   {
     "authors": [
       {
-        "name": "Nick Radford",
-        "url": "https://figma.com/@9742655e_9f3b_4"
+        "name": "João Barros",
+        "url": "https://figma.com/@joao208"
       }
     ],
-    "description": "Catch insensitive, inconsiderate writing",
-    "githubUrl": "https://github.com/nickradford/figma-plugin-alex",
-    "id": "872001708828653182",
-    "name": "Alex"
-  },
-  {
-    "authors": [
-      {
-        "name": "Amplitude",
-        "url": "https://figma.com/@amplitude"
-      }
-    ],
-    "description": "Annotate your design with Amplitude event labels",
-    "githubUrl": "https://github.com/amplitude/amplitude-figma",
-    "id": "921207224854227439",
-    "name": "Amplitude Event Planner"
+    "description": "Easily generate random avatars from DiceBear",
+    "githubUrl": null,
+    "id": "1087220559503205766",
+    "name": "Avatar Generator"
   },
   {
     "authors": [
@@ -50,6 +38,18 @@
     "githubUrl": null,
     "id": "1068010542677347310",
     "name": "Brand Buddy"
+  },
+  {
+    "authors": [
+      {
+        "name": "Campsite",
+        "url": "https://figma.com/@campsite"
+      }
+    ],
+    "description": "The home for your team's work in progress",
+    "githubUrl": null,
+    "id": "1108886817260186751",
+    "name": "Campsite"
   },
   {
     "authors": [
@@ -138,6 +138,18 @@
   {
     "authors": [
       {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Darken or lighten the background color of all pages in your file",
+    "githubUrl": "https://github.com/aashreys/darken-pages",
+    "id": "1106710311855118659",
+    "name": "Darken Pages"
+  },
+  {
+    "authors": [
+      {
         "name": "Maarten Zilverberg",
         "url": "https://twitter.com/mzilverberg"
       }
@@ -146,6 +158,18 @@
     "githubUrl": null,
     "id": "953656637827255284",
     "name": "Delete Multiple Pages"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kirk Bentley",
+        "url": "https://figma.com/@kirkbentley"
+      }
+    ],
+    "description": "Recursively detach instances, remove auto layouts and detach styles",
+    "githubUrl": null,
+    "id": "1076733710017310027",
+    "name": "Destroyer"
   },
   {
     "authors": [
@@ -270,6 +294,18 @@
   {
     "authors": [
       {
+        "name": "Kristin Baumann",
+        "url": "https://twitter.com/kristin_baumann"
+      }
+    ],
+    "description": "Easily replace font families and font styles",
+    "githubUrl": null,
+    "id": "738840446766071906",
+    "name": "Font Replacer"
+  },
+  {
+    "authors": [
+      {
         "name": "Saeed Alipoor",
         "url": "https://twitter.com/Sali__Pure"
       }
@@ -314,6 +350,30 @@
     "githubUrl": null,
     "id": "986640827067490181",
     "name": "Free Hands"
+  },
+  {
+    "authors": [
+      {
+        "name": "Mike Wilson",
+        "url": "https://twitter.com/mk_wlsn"
+      }
+    ],
+    "description": "Write in Markdown or link documentation and attach it to your components",
+    "githubUrl": null,
+    "id": "1073059820691713754",
+    "name": "Gist"
+  },
+  {
+    "authors": [
+      {
+        "name": "Alex Widua",
+        "url": "https://twitter.com/alexwidua"
+      }
+    ],
+    "description": "Apply a smooth, beautiful glow to your elements",
+    "githubUrl": "https://github.com/alexwidua/figma-glow",
+    "id": "1078011857203492445",
+    "name": "Glow"
   },
   {
     "authors": [
@@ -374,6 +434,18 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-insert-big-image",
     "id": "799646392992487942",
     "name": "Insert Big Image"
+  },
+  {
+    "authors": [
+      {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Meme generator for Figma and FigJam",
+    "githubUrl": "https://github.com/aashreys/is-this-a-meme",
+    "id": "1079668442847380531",
+    "name": "Is This A Meme?"
   },
   {
     "authors": [
@@ -470,6 +542,18 @@
   {
     "authors": [
       {
+        "name": "zekiblue",
+        "url": "https://twitter.com/zekiblue"
+      }
+    ],
+    "description": "Insert beautiful NFTs to your designs easily",
+    "githubUrl": null,
+    "id": "1109558289539963731",
+    "name": "Nifty Paste"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -482,6 +566,18 @@
   {
     "authors": [
       {
+        "name": "Manuel Muñoz Solera",
+        "url": "https://twitter.com/mamuso"
+      }
+    ],
+    "description": "Create an org chart in Figma from a JSON or a YAML file",
+    "githubUrl": null,
+    "id": "1091247524080548244",
+    "name": "Orgchart"
+  },
+  {
+    "authors": [
+      {
         "name": "ShuaiQi Sun",
         "url": "https://twitter.com/SShuaiqi"
       }
@@ -490,6 +586,30 @@
     "githubUrl": null,
     "id": "1027037684003682350",
     "name": "Outline to Single Stroke"
+  },
+  {
+    "authors": [
+      {
+        "name": "Gautham Sajith",
+        "url": "https://twitter.com/GuamHat"
+      }
+    ],
+    "description": "Drag-and-drop import of PDF files into Figma",
+    "githubUrl": "https://github.com/gsajith/pdf-to-figma",
+    "id": "1105316927173658462",
+    "name": "PDF to Figma"
+  },
+  {
+    "authors": [
+      {
+        "name": "Gautham Sajith",
+        "url": "https://twitter.com/GuamHat"
+      }
+    ],
+    "description": "Generates and inserts AI-generated faces",
+    "githubUrl": "https://github.com/gsajith/person-generator",
+    "id": "1104262872207297670",
+    "name": "Person Generator"
   },
   {
     "authors": [
@@ -530,14 +650,26 @@
   {
     "authors": [
       {
-        "name": "Afnizar Nur Ghifari",
-        "url": "https://twitter.com/afnizarnur"
+        "name": "Quest",
+        "url": "https://quest.ai/"
       }
     ],
-    "description": "Quickly create one or more pages",
-    "githubUrl": "https://github.com/afnizarnur/quick-new-page-figma-plugin",
-    "id": "841200074370852792",
-    "name": "Quick New Page"
+    "description": "Convert your Figma to React code components automatically",
+    "githubUrl": null,
+    "id": "862039267149408972",
+    "name": "Quest"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kirk Bentley",
+        "url": "https://figma.com/@kirkbentley"
+      }
+    ],
+    "description": "Apply status indicators to your layers in a flash",
+    "githubUrl": null,
+    "id": "1081181836422264345",
+    "name": "Quick Status"
   },
   {
     "authors": [
@@ -590,6 +722,18 @@
   {
     "authors": [
       {
+        "name": "Marco Montalbano",
+        "url": "https://figma.com/@marcomontalbano"
+      }
+    ],
+    "description": "Run GitHub Actions workflows from Figma",
+    "githubUrl": "https://github.com/marcomontalbano/figma-plugin-run-github-actions-workflows",
+    "id": "1096890502176164513",
+    "name": "Run GitHub Actions Workflows"
+  },
+  {
+    "authors": [
+      {
         "name": "LaMoore",
         "url": "https://figma.com/@la_moore"
       }
@@ -598,6 +742,18 @@
     "githubUrl": null,
     "id": "1053846082213772972",
     "name": "Scarlab Icons"
+  },
+  {
+    "authors": [
+      {
+        "name": "Ishan Chhabra",
+        "url": "https://twitter.com/chh_abracadabra"
+      }
+    ],
+    "description": "Automate and mass generate frames with real data",
+    "githubUrl": null,
+    "id": "952689592792995578",
+    "name": "Scribe"
   },
   {
     "authors": [
@@ -694,6 +850,42 @@
   {
     "authors": [
       {
+        "name": "Francois Valdy",
+        "url": "https://twitter.com/gluckies"
+      }
+    ],
+    "description": "Turn your Storybook or Backlight stories into a Figma UI Kit",
+    "githubUrl": null,
+    "id": "1075741140914731351",
+    "name": "story.to.design"
+  },
+  {
+    "authors": [
+      {
+        "name": "Christoph Johns",
+        "url": "https://figma.com/@cajohns"
+      }
+    ],
+    "description": "Generate links for your prototype based on your frame contents",
+    "githubUrl": "https://github.com/christophajohns/suggested-links",
+    "id": "1085560724786600653",
+    "name": "Suggested Links"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kirk Bentley",
+        "url": "https://figma.com/@kirkbentley"
+      }
+    ],
+    "description": "Quickly export and import CSV copy decks",
+    "githubUrl": null,
+    "id": "1099277867718022006",
+    "name": "Text Porter"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -702,6 +894,18 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-text-utilities",
     "id": "899501266127939530",
     "name": "Text Utilities"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kyler Phillips",
+        "url": "https://twitter.com/kylerjphillips"
+      }
+    ],
+    "description": "Quickly generate thumbnail covers for your project",
+    "githubUrl": "https://github.com/kylerphillips/thumbnail-kit",
+    "id": "1087800204796905364",
+    "name": "Thumbnail Kit"
   },
   {
     "authors": [
@@ -726,5 +930,29 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-upscale-image",
     "id": "939832535166467194",
     "name": "Upscale Image"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kirk Bentley",
+        "url": "https://figma.com/@kirkbentley"
+      }
+    ],
+    "description": "Quickly apply flexible Auto Layout presets and align Auto Layout content",
+    "githubUrl": "https://figma.com/community/plugin/1082201909715309983/XAuto",
+    "id": "1082201909715309983",
+    "name": "XAuto"
+  },
+  {
+    "authors": [
+      {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Easily create, convert or wrap layers in zero frames",
+    "githubUrl": "https://github.com/aashreys/zero-frame",
+    "id": "1069750945133910671",
+    "name": "Zero Frame"
   }
 ]

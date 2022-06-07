@@ -62,6 +62,22 @@
   {
     "authors": [
       {
+        "name": "Felix",
+        "url": "https://twitter.com/subbotnik_io"
+      },
+      {
+        "name": "Tobias Schwerdtfeger",
+        "url": "https://figma.com/@_tobias"
+      }
+    ],
+    "description": "Team estimations made easy",
+    "githubUrl": null,
+    "id": "1072985192032373399",
+    "name": "Scrum-A-Lot"
+  },
+  {
+    "authors": [
+      {
         "name": "Ward Meremans",
         "url": "https://twitter.com/drawm"
       }
