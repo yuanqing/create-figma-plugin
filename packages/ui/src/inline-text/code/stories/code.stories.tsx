@@ -2,16 +2,16 @@
 import { h } from 'preact'
 
 import { Text } from '../../../components/text/text'
-import { Code as CodeComponent } from '../code'
+import { Code } from '../code'
 
 export default {
   title: 'Inline Text/Code'
 }
 
-export const Code = function () {
+export const Default = function () {
   return (
     <Text>
-      <CodeComponent>Text</CodeComponent>
+      <Code>Text</Code>
     </Text>
   )
 }

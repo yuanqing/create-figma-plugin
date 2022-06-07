@@ -2,16 +2,16 @@
 import { h } from 'preact'
 
 import { Text } from '../../../components/text/text'
-import { Muted as MutedComponent } from '../muted'
+import { Muted } from '../muted'
 
 export default {
   title: 'Inline Text/Muted'
 }
 
-export const Muted = function () {
+export const Default = function () {
   return (
     <Text>
-      <MutedComponent>Text</MutedComponent>
+      <Muted>Text</Muted>
     </Text>
   )
 }

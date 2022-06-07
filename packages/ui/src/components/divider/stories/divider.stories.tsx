@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'preact'
 
-import { Divider as DividerComponent } from '../divider'
+import { Divider } from '../divider'
 
 export default {
   parameters: {
@@ -10,6 +10,6 @@ export default {
   title: 'Components/Divider'
 }
 
-export const Divider = function () {
-  return <DividerComponent />
+export const Default = function () {
+  return <Divider />
 }
