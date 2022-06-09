@@ -7,10 +7,12 @@ function main() {
     menuToggleButtonElementSelector: '.menu-toggle-button',
     menuVisibleBodyClassName: '--menu-visible'
   })
-  setUpToc({
-    activeTocItemClassName: 'menu__active',
-    headersElementSelector: 'h2[id], h3[id], h4[id]',
-    tocElementSelector: '.menu__toc'
+  window.addEventListener('load', function () {
+    setUpToc({
+      activeTocItemClassName: 'menu__active',
+      headersElementSelector: 'h2[id], h3[id], h4[id]',
+      tocElementSelector: '.menu__toc'
+    })
   })
 }
 main()
