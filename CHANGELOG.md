@@ -2,11 +2,9 @@
 
 ## 2.0.0
 
-- In your `package.json`, ensure that `@figma/plugin-typings` (for a plugin) is set to `1.47.0`, and `@figma/widget-typings` (for a widget) is set to `1.3.0`.
+- Replaced `yarn@1` with `npm@8` for local development.
 
 - Bumped dependencies in all packages.
-
-- Replaced `yarn@1` with `npm@8` for local development.
 
 ### `@create-figma-plugin/ui@2.0.0`
 
@@ -47,7 +45,11 @@
 
 ##### `IconButton`
 
-- Renamed to **`IconToggleButton`**.
+- This ia new, non-toggleable version of the `IconToggleButton` component. ([#102](https://github.com/yuanqing/create-figma-plugin/issues/102))
+
+##### `IconToggleButton`
+
+- This component was renamed from **`IconButton`**.
 
 ##### `Layer`
 
@@ -74,7 +76,7 @@
 
 - `showUI` now takes a `themeColors` option (*`boolean`*; optional), which defaults to `true`. (`themeColors` must be set to `true` if you’re using the components in `@create-figma-plugin/ui`.)
 
-- Fix compilation issue caused by missing `.js` extensions in `set-relaunch-button.ts` and `unset-relaunch-button.ts`. ([#109](https://github.com/yuanqing/create-figma-plugin/issues/109))
+- Fix a compilation problem caused by missing `.js` extensions in the import statements in `set-relaunch-button.ts` and `unset-relaunch-button.ts`. ([#109](https://github.com/yuanqing/create-figma-plugin/issues/109))
 
 ## 1.9.2
 
