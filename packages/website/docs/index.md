@@ -80,7 +80,7 @@
 <p class="muted">Plugins</p>
 <ul>
 <% const featuredPlugins = plugins.filter(function (plugin) {
-return ['Beautiful Shadows', 'Draw Connector', 'Free Hands', 'Protofly', 'Prototyper', 'RTL PLZ', 'Selection Variants'].indexOf(plugin.name) !== -1
+return ['Beautiful Shadows', 'Draw Connector', 'Font Switcher', 'Free Hands', 'Protofly', 'Prototyper', 'Selection Variants'].indexOf(plugin.name) !== -1
 }) %>
 <% for (const { id, name } of featuredPlugins) { %>
 <li class="featured-plugin">
