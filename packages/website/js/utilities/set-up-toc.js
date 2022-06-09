@@ -74,12 +74,14 @@ export function setUpToc({
   if (id === '') {
     return
   }
-  scrollToId({
-    activeTocItemClassName,
-    headers,
-    id,
-    pushState: false,
-    tocElementSelector
+  window.addEventListener('load', function () {
+    scrollToId({
+      activeTocItemClassName,
+      headers,
+      id,
+      pushState: false,
+      tocElementSelector
+    })
   })
 }
 
