@@ -1,23 +1,21 @@
 import { HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT } from './constants.js'
 import { parseInternalLinkHref } from './parse-internal-link-href.js'
 
-const MENU_ELEMENT_SELECTOR = '.menu'
-const MENU_TOGGLE_BUTTON_ELEMENT_SELECTOR = '.menu-toggle-button'
-const MENU_VISIBLE_BODY_CLASS_NAME = '--menu-visible'
-
-export function setUpMenu() {
-  const menuElement = document.querySelector(MENU_ELEMENT_SELECTOR)
+export function setUpMenu({
+  menuElementSelector,
+  menuToggleButtonElementSelector,
+  menuVisibleBodyClassName
+}) {
+  const menuElement = document.querySelector(menuElementSelector)
   const menuToggleButtonElement = document.querySelector(
-    MENU_TOGGLE_BUTTON_ELEMENT_SELECTOR
+    menuToggleButtonElementSelector
   )
 
   function toggleMenuVisibility() {
-    if (
-      document.body.classList.contains(MENU_VISIBLE_BODY_CLASS_NAME) === true
-    ) {
-      document.body.classList.remove(MENU_VISIBLE_BODY_CLASS_NAME)
+    if (document.body.classList.contains(menuVisibleBodyClassName) === true) {
+      document.body.classList.remove(menuVisibleBodyClassName)
     } else {
-      document.body.classList.add(MENU_VISIBLE_BODY_CLASS_NAME)
+      document.body.classList.add(menuVisibleBodyClassName)
     }
     menuToggleButtonElement.setAttribute(
       'aria-expanded',
@@ -45,8 +43,7 @@ export function setUpMenu() {
 
   function handleWindowClick(event) {
     if (
-      document.body.classList.contains(MENU_VISIBLE_BODY_CLASS_NAME) ===
-        false ||
+      document.body.classList.contains(menuVisibleBodyClassName) === false ||
       menuToggleButtonElement === event.target ||
       menuElement.contains(event.target) === true
     ) {

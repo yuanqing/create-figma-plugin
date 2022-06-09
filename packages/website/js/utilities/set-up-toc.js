@@ -1,12 +1,12 @@
 import { HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT } from './constants.js'
 import { parseInternalLinkHref } from './parse-internal-link-href.js'
 
-const TOC_ELEMENT_SELECTOR = '.menu__toc'
-const ACTIVE_TOC_ELEMENT_CLASSNAME = 'menu__active'
-const HEADER_ELEMENTS_SELECTOR = 'h2[id], h3[id], h4[id]'
-
-export function setUpToc() {
-  let headers = parseHeaders()
+export function setUpToc({
+  headersElementSelector,
+  tocElementSelector,
+  activeTocItemClassName
+}) {
+  let headers = parseHeaders(headersElementSelector)
 
   if (window.innerWidth < HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT) {
     function handleWindowScroll() {
@@ -26,7 +26,15 @@ export function setUpToc() {
     if (id === null) {
       return
     }
-    if (scrollToId(headers, id, { pushState: true }) === true) {
+    if (
+      scrollToId({
+        activeTocItemClassName,
+        headers,
+        id,
+        pushState: true,
+        tocElementSelector
+      }) === true
+    ) {
       event.preventDefault()
     }
   }
@@ -43,13 +51,17 @@ export function setUpToc() {
   window.addEventListener('popstate', handlePopState)
 
   function handleWindowResize() {
-    headers = parseHeaders()
+    headers = parseHeaders(headersElementSelector)
     handleWindowScroll()
   }
   window.addEventListener('resize', handleWindowResize)
 
   function handleWindowScroll() {
-    updateTocActiveElement(headers)
+    updateTocActiveElement({
+      activeTocItemClassName,
+      headers,
+      tocElementSelector
+    })
     history.replaceState(
       { scrollY: window.scrollY },
       null,
@@ -59,14 +71,21 @@ export function setUpToc() {
   window.addEventListener('scroll', handleWindowScroll)
 
   const id = window.location.hash.slice(1)
-  if (id !== '') {
-    scrollToId(headers, id, { pushState: false })
+  if (id === '') {
+    return
   }
+  scrollToId({
+    activeTocItemClassName,
+    headers,
+    id,
+    pushState: false,
+    tocElementSelector
+  })
 }
 
-function parseHeaders() {
+function parseHeaders(headersElementSelector) {
   const headerElements = Array.prototype.slice.call(
-    document.body.querySelectorAll(HEADER_ELEMENTS_SELECTOR)
+    document.body.querySelectorAll(headersElementSelector)
   )
 
   const headers = []
@@ -78,35 +97,64 @@ function parseHeaders() {
   }
 
   const maxScrollY = document.documentElement.offsetHeight - window.innerHeight
-  const lastScrollY = headers[headers.length - 1].scrollY
-  if (lastScrollY <= maxScrollY) {
+  if (headers[headers.length - 1].scrollY <= maxScrollY) {
     return headers
   }
 
-  const startScrollY = maxScrollY - window.innerHeight
-  const ratio = window.innerHeight / (lastScrollY - startScrollY)
+  const lastHeaderAboveMaxScrollYIndex = (function () {
+    let index = headers.length - 1
+    while (index >= 0) {
+      if (headers[index].scrollY <= maxScrollY) {
+        return index
+      }
+      index -= 1
+    }
+    return 0
+  })()
+
+  const numerator = maxScrollY - headers[lastHeaderAboveMaxScrollYIndex].scrollY
+  const denominator =
+    headers[headers.length - 1].scrollY -
+    headers[lastHeaderAboveMaxScrollYIndex].scrollY
+  const ratio = numerator / denominator
+
   return headers.map(function (header, index) {
-    if (header.scrollY <= startScrollY) {
+    if (index <= lastHeaderAboveMaxScrollYIndex) {
       return header
     }
     if (index === headers.length - 1) {
-      return { ...header, scrollY: maxScrollY }
+      return {
+        ...header,
+        scrollY: maxScrollY
+      }
     }
     return {
       ...header,
       scrollY: Math.round(
-        startScrollY + (header.scrollY - startScrollY) * ratio
+        headers[lastHeaderAboveMaxScrollYIndex].scrollY +
+          (header.scrollY - headers[lastHeaderAboveMaxScrollYIndex].scrollY) *
+            ratio
       )
     }
   })
 }
 
-function scrollToId(headers, id, { pushState }) {
+function scrollToId({
+  headers,
+  id,
+  pushState,
+  tocElementSelector,
+  activeTocItemClassName
+}) {
   const header = headers.find(function (header) {
     return header.id === id
   })
   if (typeof header === 'undefined') {
-    updateTocActiveElement(headers)
+    updateTocActiveElement({
+      activeTocItemClassName,
+      headers,
+      tocElementSelector
+    })
     return false
   }
   const state = { scrollY: header.scrollY }
@@ -116,17 +164,25 @@ function scrollToId(headers, id, { pushState }) {
     history.replaceState(state, null, `#${id}`)
   }
   window.scrollTo({ top: header.scrollY })
-  updateTocActiveElement(headers)
+  updateTocActiveElement({
+    activeTocItemClassName,
+    headers,
+    tocElementSelector
+  })
   return true
 }
 
-function updateTocActiveElement(headers) {
-  const tocElement = document.querySelector(TOC_ELEMENT_SELECTOR)
+function updateTocActiveElement({
+  headers,
+  tocElementSelector,
+  activeTocItemClassName
+}) {
+  const tocElement = document.querySelector(tocElementSelector)
   const previousActiveElement = tocElement.querySelector(
-    `.${ACTIVE_TOC_ELEMENT_CLASSNAME}`
+    `.${activeTocItemClassName}`
   )
   if (previousActiveElement !== null) {
-    previousActiveElement.classList.remove(ACTIVE_TOC_ELEMENT_CLASSNAME)
+    previousActiveElement.classList.remove(activeTocItemClassName)
   }
   const id = computeActiveId(headers)
   if (id === null) {
@@ -136,12 +192,13 @@ function updateTocActiveElement(headers) {
   if (activeElement === null) {
     return
   }
-  activeElement.classList.add(ACTIVE_TOC_ELEMENT_CLASSNAME)
+  activeElement.classList.add(activeTocItemClassName)
 }
 
 function computeActiveId(headers) {
+  const scrollY = Math.ceil(window.scrollY)
   for (const header of headers.slice().reverse()) {
-    if (header.scrollY <= window.scrollY) {
+    if (header.scrollY <= scrollY) {
       return header.id
     }
   }
