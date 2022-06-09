@@ -34,7 +34,7 @@
   line-height: 28px;
 }
 .default:not(.disabled) button:focus {
-  border-color: var(--figma-color-border-selected-strong);
+  border-color: var(--figma-color-border-brand-strong);
 }
 .default.disabled button {
   background-color: var(--figma-color-bg-disabled);
@@ -63,7 +63,7 @@
 .secondary:not(.disabled) button:focus {
   padding: 0 14px;
   border-width: 2px;
-  border-color: var(--figma-color-border-selected);
+  border-color: var(--figma-color-border-brand-strong);
   line-height: 28px;
 }
 .secondary.disabled button {

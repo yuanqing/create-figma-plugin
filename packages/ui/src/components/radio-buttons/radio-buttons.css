@@ -50,7 +50,7 @@
   left: -1px;
   width: 14px;
   height: 14px;
-  border: 2px solid var(--figma-color-border-selected);
+  border: 2px solid var(--figma-color-border-brand-strong);
   border-radius: 7px;
 }
 .disabled .input ~ .border {

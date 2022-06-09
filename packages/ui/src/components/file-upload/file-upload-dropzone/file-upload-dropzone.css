@@ -32,7 +32,7 @@
 .input:active ~ .border,
 .input:focus ~ .border,
 .isDropActive .border {
-  border-color: var(--figma-color-border-brand);
+  border-color: var(--figma-color-border-brand-strong);
 }
 
 .children {

@@ -31,7 +31,7 @@
 }
 .toggle:not(.disabled) .input:focus ~ .box {
   box-shadow: 0 0 0 1px var(--figma-color-bg),
-    0 0 0 3px var(--figma-color-border-selected);
+    0 0 0 3px var(--figma-color-border-brand-strong);
 }
 .toggle:not(.disabled) .input:checked ~ .box {
   background-color: var(--figma-color-bg-inverse);

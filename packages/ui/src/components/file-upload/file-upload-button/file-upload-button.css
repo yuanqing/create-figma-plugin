@@ -9,12 +9,12 @@
 }
 
 .default:not(.disabled) .input:focus ~ button {
-  border-color: var(--figma-color-border-selected-strong);
+  border-color: var(--figma-color-border-brand-strong);
 }
 
 .secondary:not(.disabled) .input:focus ~ button {
   padding: 0 14px;
   border-width: 2px;
-  border-color: var(--figma-color-border-selected);
+  border-color: var(--figma-color-border-brand-strong);
   line-height: 28px;
 }

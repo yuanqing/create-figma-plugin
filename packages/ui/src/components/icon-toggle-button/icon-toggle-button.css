@@ -31,15 +31,12 @@
 .iconToggleButton:not(.disabled) .input:not(:checked):hover ~ .box {
   background-color: var(--figma-color-bg-hover);
 }
-.iconToggleButton:not(.disabled) .input:not(:checked):focus ~ .box {
-  border-color: var(--figma-color-border-selected);
+.iconToggleButton:not(.disabled) .input:focus ~ .box {
+  border-color: var(--figma-color-border-brand-strong);
 }
 .iconToggleButton:not(.disabled) .input:checked ~ .box {
   background-color: var(--figma-color-bg-brand);
   color: var(--figma-color-icon-onbrand);
-}
-.iconToggleButton:not(.disabled) .input:checked:focus ~ .box {
-  border-color: var(--figma-color-border-selected-strong);
 }
 .disabled .input:not(:checked) ~ .box {
   color: var(--figma-color-icon-disabled);

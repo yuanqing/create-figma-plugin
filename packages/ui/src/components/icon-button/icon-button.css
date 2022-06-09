@@ -13,7 +13,7 @@
   background-color: var(--figma-color-bg-hover);
 }
 .iconButton:not(:disabled):focus {
-  border-color: var(--figma-color-border-selected);
+  border-color: var(--figma-color-border-brand-strong);
 }
 .iconButton:disabled {
   color: var(--figma-color-icon-disabled);
