@@ -31,7 +31,7 @@
 }
 ---
 
-# The comprehensive toolkit for developing plugins and widgets for Figma and&nbsp;FigJam
+# The comprehensive toolkit for developing&nbsp;plugins and widgets for Figma and&nbsp;FigJam
 
 ## Features
 
