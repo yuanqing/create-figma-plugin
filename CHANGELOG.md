@@ -4,7 +4,8 @@
 
 ### `create-figma-plugin`
 
-- Fix usage of the `Container` component in the `plugins/preact-rectangles` and `plugin/react-editor` templates.
+- Fix usage of the `Container` component in the `plugin/preact-rectangles` and `plugin/react-editor` templates.
+- Bump dependencies in the `plugin/react-editor` template.
 
 ## 2.0.0
 
