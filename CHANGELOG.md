@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1
+
+### `create-figma-plugin`
+
+- Fix usage of the `Container` component in the `plugins/preact-rectangles` and `plugin/react-editor` templates.
+
 ## 2.0.0
 
 - Replaced `yarn@1` with `npm@8` for local development.
@@ -26,6 +32,10 @@
 
 - Renamed the `destructive` prop to `danger`.
 
+##### `Container`
+
+- The `space` prop is now required rather than optional.
+
 ##### `Disclosure`, `Modal`
 
 - Renamed the `isOpen` prop to `open`.
@@ -37,7 +47,7 @@
   - Use `variant="border"` to show a gray border in the passive state.
   - Use `variant="underline"` to show a gray border only on the bottom side in the passive state.
 - Fixed a bug with `Dropdown` not truncating when embedded within a `flex` parent. ([#101](https://github.com/yuanqing/create-figma-plugin/issues/101))
-- Skip validation of clipboard content when `strict` is `true` in `TextboxAutocomplete`. ([#107](https://github.com/yuanqing/create-figma-plugin/issues/107))
+- Skip validation of clipboard content when `strict` is `false` in `TextboxAutocomplete`. ([#107](https://github.com/yuanqing/create-figma-plugin/issues/107))
 
 ##### `LoadingIndicator`, and all icon components
 
@@ -45,7 +55,7 @@
 
 ##### `IconButton`
 
-- This ia new, non-toggleable version of the `IconToggleButton` component. ([#102](https://github.com/yuanqing/create-figma-plugin/issues/102))
+- This is new, non-toggleable version of the `IconToggleButton` component. ([#102](https://github.com/yuanqing/create-figma-plugin/issues/102))
 
 ##### `IconToggleButton`
 
