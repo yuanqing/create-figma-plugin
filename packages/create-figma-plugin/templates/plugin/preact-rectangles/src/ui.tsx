@@ -28,7 +28,7 @@ function Plugin() {
     emit<CloseHandler>('CLOSE')
   }, [])
   return (
-    <Container>
+    <Container space="medium">
       <VerticalSpace space="large" />
       <Text muted>Count</Text>
       <VerticalSpace space="small" />

@@ -26,7 +26,7 @@ function Plugin() {
     [code]
   )
   return (
-    <Container>
+    <Container space="medium">
       <VerticalSpace space="small" />
       <div class={styles.container}>
         <Editor
