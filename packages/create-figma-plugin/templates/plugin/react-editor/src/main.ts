@@ -7,6 +7,8 @@ export default function () {
     const text = figma.createText()
     await loadFontsAsync([text])
     text.characters = code
+    figma.currentPage.selection = [text]
+    figma.viewport.scrollAndZoomIntoView([text])
     figma.closePlugin()
   })
   showUI({ width: 320, height: 240 })
