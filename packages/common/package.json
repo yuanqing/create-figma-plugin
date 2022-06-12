@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
-    "@types/node": "^17.0.40",
+    "@types/node": "^17.0.42",
     "ava": "^4.3.0",
     "eslint": "^8.17.0",
     "eslint-config-yuanqing": "^0.0.6",
