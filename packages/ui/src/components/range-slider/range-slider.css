@@ -1,0 +1,51 @@
+.rangeSlider {
+  position: relative;
+  margin: 0 -3px;
+}
+
+.vertical {
+  transform: rotate(-90deg);
+}
+
+.border {
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  left: 3px;
+  height: 1px;
+  background-color: var(--figma-color-border-strong);
+  transform: translateY(-50%);
+}
+.disabled .border {
+  background-color: var(--figma-color-border-disabled-strong);
+}
+
+.input {
+  position: relative;
+  z-index: var(
+    --z-index-1
+  ); /* stack `.input` over all other elements within `.rangeSlider` */
+  display: block;
+  min-width: 120px;
+  height: 32px;
+  background-color: transparent;
+}
+.disabled .input {
+  cursor: not-allowed;
+}
+
+.input::-webkit-slider-thumb {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--figma-color-bg);
+  -webkit-appearance: none;
+  background-color: var(--figma-color-bg-inverse);
+  border-radius: 50%;
+}
+.input:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px var(--figma-color-border-brand-strong);
+}
+.disabled .input::-webkit-slider-thumb {
+  background-color: var(--figma-color-bg-disabled-secondary);
+}
