@@ -78,13 +78,13 @@ export const parameters = {
         class: 'figma-light',
         color: '#0d99ff',
         default: isDarkMode === false,
-        name: 'Figma Light'
+        name: 'Figma Design: Light'
       },
       {
         class: 'figma-dark',
         color: '#0c8ce9',
         default: isDarkMode === true,
-        name: 'Figma Dark'
+        name: 'Figma Design: Dark'
       },
       { class: 'figjam', color: '#9747ff', name: 'FigJam' }
     ]
