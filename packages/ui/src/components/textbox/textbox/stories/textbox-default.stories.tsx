@@ -10,6 +10,7 @@ import { Textbox } from '../textbox'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 1
   },
   title: 'Components/Textbox/Default'

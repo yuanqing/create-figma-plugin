@@ -9,6 +9,7 @@ import { TextboxMultiline } from '../textbox-multiline'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 3
   },
   title: 'Components/Textbox Multiline/Underline'

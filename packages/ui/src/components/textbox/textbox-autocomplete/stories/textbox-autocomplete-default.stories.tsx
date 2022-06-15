@@ -12,6 +12,7 @@ import {
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 1
   },
   title: 'Components/Textbox Autocomplete/Default'

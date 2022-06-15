@@ -10,6 +10,7 @@ import { Textbox } from '../textbox'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 2
   },
   title: 'Components/Textbox/Border'

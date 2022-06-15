@@ -10,6 +10,7 @@ import { TextboxNumeric } from '../textbox-numeric'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 2
   },
   title: 'Components/Textbox Numeric/Border'

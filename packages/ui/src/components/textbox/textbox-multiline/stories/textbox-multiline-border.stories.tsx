@@ -9,6 +9,7 @@ import { TextboxMultiline } from '../textbox-multiline'
 
 export default {
   parameters: {
+    fixedWidth: true,
     order: 2
   },
   title: 'Components/Textbox Multiline/Border'
