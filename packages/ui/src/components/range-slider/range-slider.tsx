@@ -2,32 +2,46 @@
 import { h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../types/types'
+import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import styles from './range-slider.css'
 
-export type RangeSliderProps = {
+export type RangeSliderProps<Name extends string> = {
   disabled?: boolean
   increment?: number
   maximum: number
   minimum: number
+  name?: Name
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
+  onNumericValueInput?: OnValueChange<number, Name>
+  onValueInput?: OnValueChange<string, Name>
   propagateEscapeKeyDown?: boolean
-  value: number
-  vertical?: boolean
+  value: string
 }
 
-export function RangeSlider({
+export function RangeSlider<Name extends string>({
   disabled = false,
   increment = 1,
   maximum,
   minimum,
+  name,
   onInput = function () {},
+  onNumericValueInput = function () {},
+  onValueInput = function () {},
   propagateEscapeKeyDown = true,
   value,
-  vertical = false,
   ...rest
-}: Props<HTMLInputElement, RangeSliderProps>): JSX.Element {
+}: Props<HTMLInputElement, RangeSliderProps<Name>>): JSX.Element {
+  const handleInput = useCallback(
+    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+      onInput(event)
+      const value = event.currentTarget.value
+      onValueInput(value, name)
+      onNumericValueInput(parseFloat(value), name)
+    },
+    [name, onInput, onNumericValueInput, onValueInput]
+  )
+
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
       if (event.key !== 'Escape') {
@@ -45,8 +59,7 @@ export function RangeSlider({
     <label
       class={createClassName([
         styles.rangeSlider,
-        disabled === true ? styles.disabled : null,
-        vertical === true ? styles.vertical : null
+        disabled === true ? styles.disabled : null
       ])}
     >
       <input
@@ -54,7 +67,7 @@ export function RangeSlider({
         disabled={disabled}
         max={maximum}
         min={minimum}
-        onInput={onInput}
+        onInput={handleInput}
         onKeyDown={handleKeyDown}
         step={increment}
         type="range"

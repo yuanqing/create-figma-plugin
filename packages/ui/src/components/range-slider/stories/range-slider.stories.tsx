@@ -1,21 +1,25 @@
 /** @jsx h */
 /* eslint-disable no-console */
-import { h, JSX } from 'preact'
+import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
+import { TextboxNumeric } from '../../textbox/textbox-numeric/textbox-numeric'
 import { RangeSlider } from '../range-slider'
 
 export default {
+  parameters: {
+    fixedWidth: true
+  },
   title: 'Components/Range Slider'
 }
 
 export const Passive = function () {
-  const [value, setValue] = useState<number>(0)
+  const [value, setValue] = useState<string>('0')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
-    setValue(parseFloat(newValue))
+    setValue(newValue)
   }
   return (
     <RangeSlider
@@ -28,11 +32,11 @@ export const Passive = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState<number>(0)
+  const [value, setValue] = useState<string>('0')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
-    setValue(parseFloat(newValue))
+    setValue(newValue)
   }
   return (
     <RangeSlider
@@ -55,17 +59,17 @@ export const Disabled = function () {
       maximum={100}
       minimum={0}
       onInput={handleInput}
-      value={0}
+      value="0"
     />
   )
 }
 
 export const CustomIncrement = function () {
-  const [value, setValue] = useState<number>(0)
+  const [value, setValue] = useState<string>('0')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
-    setValue(parseFloat(newValue))
+    setValue(newValue)
   }
   return (
     <RangeSlider
@@ -75,5 +79,51 @@ export const CustomIncrement = function () {
       onInput={handleInput}
       value={value}
     />
+  )
+}
+
+export const OnValueInput = function () {
+  const [value, setValue] = useState<string>('0')
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  function handleNumericValueInput(newNumericValue: number) {
+    console.log(newNumericValue)
+  }
+  return (
+    <RangeSlider
+      maximum={100}
+      minimum={0}
+      onNumericValueInput={handleNumericValueInput}
+      onValueInput={handleValueInput}
+      value={value}
+    />
+  )
+}
+
+export const WithTextboxNumeric = function () {
+  const [value, setValue] = useState<string>('0')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Fragment>
+      <RangeSlider
+        maximum={100}
+        minimum={0}
+        onInput={handleInput}
+        value={value}
+      />
+      <TextboxNumeric
+        maximum={100}
+        minimum={0}
+        onInput={handleInput}
+        value={value}
+        variant="border"
+      />
+    </Fragment>
   )
 }
