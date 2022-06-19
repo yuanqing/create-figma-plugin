@@ -1,11 +1,21 @@
 # Changelog
 
+## 2.1.0
+
+- `@create-figma-plugin/ui@2.1.0`
+
+  - Added a `RangeSlider` component.
+  - Added left and right padding to the `underline` variant of `Dropdown`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, and `TextboxNumeric`.
+  - Added missing styles for the `underline` variant of `TextboxMultiline`.
+
+- Bumped dependencies in all packages.
+
 ## 2.0.1
 
-### `create-figma-plugin`
+- `create-figma-plugin@2.0.1`
 
-- Fix usage of the `Container` component in the `plugin/preact-rectangles` and `plugin/react-editor` templates.
-- Bump dependencies in the `plugin/react-editor` template.
+  - Fix usage of the `Container` component in the `plugin/preact-rectangles` and `plugin/react-editor` templates.
+  - Bump dependencies in the `plugin/react-editor` template.
 
 ## 2.0.0
 
@@ -56,7 +66,7 @@
 
 ##### `IconButton`
 
-- This is new, non-toggleable version of the `IconToggleButton` component. ([#102](https://github.com/yuanqing/create-figma-plugin/issues/102))
+- This is a new, non-toggleable version of the `IconToggleButton` component. ([#102](https://github.com/yuanqing/create-figma-plugin/issues/102))
 
 ##### `IconToggleButton`
 
@@ -91,23 +101,25 @@
 
 ## 1.9.2
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.9.2`
   - Fix a bug with the `Dropdown` menu not re-calculating its height when `value` is `null`. ([#100](https://github.com/yuanqing/create-figma-plugin/issues/100))
 
 ## 1.9.1
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.9.1`
   - Revert to `css-loader@5.2.7` and `style-loader@2.0.0`.
 
 - Revert to `cpy-cli@3.1.1`.
 
 ## 1.9.0
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.9.0`
+
   - Fixed build error in Windows caused by `exec` call to `tcm`. ([#96](https://github.com/yuanqing/create-figma-plugin/issues/96))
   - Suppressed the `Cannot redeclare block-scoped variable 'fetch'.` type-check error when using `@figma/plugin-typings@^1.44.0`. ([#98](https://github.com/yuanqing/create-figma-plugin/issues/98))
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.9.0`
+
   - Fixed a bug with scrollbars appearing in the `Dropdown` component. ([#97](https://github.com/yuanqing/create-figma-plugin/issues/97))
   - Added a `noTransition` prop to the `Modal` component.
 
@@ -117,15 +129,18 @@
 
 ## 1.8.4
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.8.4`
+
   - Resolve paths to `tcm` and `preact-compat` starting from `__dirname` so that `build-figma-plugin` will work when used in a `pnpm` monorepo. ([#84](https://github.com/yuanqing/create-figma-plugin/issues/84))
 
 ## 1.8.3
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.8.3`
+
   - Fixed a bug with the `Modal` component incorrectly trapping focus on the first input it contains on subsequent renders. ([#80](https://github.com/yuanqing/create-figma-plugin/issues/80))
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.8.3`
+
   - Added a `ensureMinimumTime` utility.
   - Prevent modification of `defaultSettings` in `loadSettingsAsync`. ([#79](https://github.com/yuanqing/create-figma-plugin/pull/79))
 
@@ -138,27 +153,32 @@
 
 ## 1.8.1
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.8.1`
+
   - Fixed a bug to include the `.gitignore` file when bootstrapping from a template. ([#76](https://github.com/yuanqing/create-figma-plugin/pull/76))
 
 ## 1.8.0
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.8.0`
+
   - Added `isLocked` and `isVisible` utilities. ([#75](https://github.com/yuanqing/create-figma-plugin/pull/75))
 
 - Added a recipe for disabling the automatic swapping of React imports using a `build-figma-plugin.ui.js` file.
 
 ## 1.7.3
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.7.3`
+
   - Allow `parameterOnly` to be set to `false`. ([#74](https://github.com/yuanqing/create-figma-plugin/pull/74))
 
 ## 1.7.2
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.7.2`
+
   - Suppressed TypeScript error that occurs when the type definition of an imported package contains `<reference types="node" />`. ([#71](https://github.com/yuanqing/create-figma-plugin/issues/71))
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.7.2`
+
   - `computeBoundingBox` – Accounted for `CodeBlock` node which does not have a `rotation` property.
 
 - Bumped dependencies in all packages.
@@ -171,17 +191,20 @@
 
 ## 1.7.0
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.7.0`
+
   - Added support for building FigJam widgets.
     - Added new configuration options `widgetApi`, `containsWidget`, and `permissions`.
   - Renamed the `apiVersion` configuration option to `api`, to be aligned with the plugin `manifest.json` API.
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.7.0`
+
   - Added a FigJam theme. ([#63](https://github.com/yuanqing/create-figma-plugin/issues/63))
     - Components will automatically render using the Figma theme if the UI is launched from a Figma plugin, and the FigJam theme if the UI is launched from a FigJam plugin/widget.
   - Fixed a bug with small custom increments in the `TextboxNumeric` component. ([#70](https://github.com/yuanqing/create-figma-plugin/issues/70))
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.7.0`
+
   - Refactored the `create-figma-plugin` CLI; a template can now be selected via an interactive interface.
   - Added a `widget/notepad` template, and reorganized existing templates.
 
@@ -189,10 +212,12 @@
 
 ## 1.6.2
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.6.2`
+
   - Fixed positioning logic in the `Modal` component.
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.6.2`
+
   - Added `traverseNodeAsync`.
 
 ## 1.6.1
@@ -201,10 +226,12 @@
 
 ## 1.6.0
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.6.0`
+
   - Made `build-figma-plugin --watch` aware of changes to `build-figma-plugin.*.js` files.
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.6.0`
+
   - Added a `Modal` component. ([#47](https://github.com/yuanqing/create-figma-plugin/issues/47))
   - Added new components `Disclosure`, `IconChevronDown32`, `IconChevronLeft32` `IconChevronRight32`, and `IconChevronUp32`.
   - Regenerated all icon components.
@@ -213,7 +240,8 @@
   - Added CSS variables `--box-shadow-menu`, `--box-shadow-modal`, and `--font-family-code`.
   - Made `computeBoundingBox` compatible with `@figma/plugin-typings@1.37.0`.
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.6.0`
+
   - Renamed the `ui` template to `preact-rectangles`.
   - Added new templates `preact-resizable` and `react-editor`.
   - Updated the `@figma/plugin-typings` version to `1.37.0`.
@@ -222,31 +250,37 @@
 
 ## 1.5.1
 
-- Moved constants `MIXED_NUMBER` and `MIXED_STRING` from `@create-figma-plugin/ui` to `@create-figma-plugin/utilities`.
+- `@create-figma-plugin/utilities@1.5.1`
+
+  - Moved constants `MIXED_NUMBER` and `MIXED_STRING` from `@create-figma-plugin/ui` to `@create-figma-plugin/utilities`.
 
 ## 1.5.0
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.5.0`
+
   - Restart the TypeScript watcher when changes are made to `tsconfig.json`. ([#56](https://github.com/yuanqing/create-figma-plugin/issues/56))
   - Enabled usage of React components by swapping out `react` and `react-dom` imports with `preact/compat`.
   - Added the ability to import “global” CSS by adding a `!` prefix before the CSS file path. ([#60](https://github.com/yuanqing/create-figma-plugin/issues/60))
   - Accounted for the case where `figma.command` is `undefined` (eg. in a FigJam widget).
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.5.0`
+
   - Added support for FigJam nodes in `loadFontsAsync`. ([#57](https://github.com/yuanqing/create-figma-plugin/pull/57))
 
 - Improved documentation.
 
 ## 1.4.0
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.4.0`
+
   - Suppressed the `Cannot redeclare block-scoped variable 'console'.` type-check error when using `@figma/plugin-typings@^1.32.0`. ([#54](https://github.com/yuanqing/create-figma-plugin/issues/54))
   - Added an escape hatch for modifying the `manifest.json` file just before it gets written to disk.
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.4.0`
+
   - `computeBoundingBox` – Accounted for FigJam-specific nodes (eg. `Connector`, `Sticky`) which do not have a `rotation` property.
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.4.0`
   - Removed the `--yes` flag and the ability to customize the display name.
   - Removed the CLI interactive prompt.
   - Updated the plugin installation instructions in all templates.
@@ -255,10 +289,12 @@
 
 ## 1.3.4
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.3.4`
+
   - Pinned to a specific version of `@figma/plugin-typings` in all plugin templates.
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.3.4`
+
   - Returned `variant` data in `validateGumroadLicenseKeyMainAsync` and `validateGumroadLicenseKeyUiAsync`.
 
 ## 1.3.3
@@ -267,37 +303,44 @@
 
 ## 1.3.2
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.3.2`
+
   - Fixed the building of CSS Module typings in Windows. ([#51](https://github.com/yuanqing/create-figma-plugin/issues/51))
 
 - Improved documentation.
 
 ## 1.3.1
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.3.1`
+
   - Updated the configuration JSON schema.
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.3.1`
+
   - Added `deduplicateArray`.
 
 - Added docs for `parameters` and `parameterOnly`.
 
 ## 1.3.0
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.3.0`
+
   - Added support for the new `editorType`, `parameters` and `parameterOnly` config.
 
-- `@create-figma-plugin/monetization`
+- `@create-figma-plugin/monetization@1.3.0`
+
   - This package is deprecated; all monetization-related utility functions have been moved into `@create-figma-plugin/utilities`.
 
 ## 1.2.4
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.2.4`
+
   - Fixed a bug with the `build-figma-plugin` CLI throwing an error when the current working directory absolute path contains spaces. ([#49](https://github.com/yuanqing/create-figma-plugin/issues/49))
 
 ## 1.2.3
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.2.3`
+
   - Fixed a bug with how CSS file paths are resolved. ([#48](https://github.com/yuanqing/create-figma-plugin/issues/48))
 
 ## 1.2.2
@@ -306,7 +349,8 @@
 
 ## 1.2.1
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.2.1`
+
   - Added a `ui` template.
   - Simplified the CLI; now, only a `name`, `displayName` and `template` are necessary.
   - Fixed a bug with CLI arguments parsing. ([#41](https://github.com/yuanqing/create-figma-plugin/issues/41#issuecomment-873329396))
@@ -315,17 +359,20 @@
 
 ## 1.2.0
 
-- `@create-figma-plugin/build`
+- `@create-figma-plugin/build@1.2.0`
+
   - Added the ability to override the esbuild configuration for the main bundle (via a `build-figma-plugin.main.js` file) and the UI bundle (via a `build-figma-plugin.ui.js` file). ([#34](https://github.com/yuanqing/create-figma-plugin/issues/34))
   - Improved the UX of the `build-figma-plugin --watch --typecheck` terminal output. ([#38](https://github.com/yuanqing/create-figma-plugin/issues/38))
     - Fixed a bug with watch mode terminating on error. ([#40](https://github.com/yuanqing/create-figma-plugin/issues/40))
 
-- `@create-figma-plugin/monetization`
+- `@create-figma-plugin/monetization@1.2.0`
+
   - This is a new package that includes utilities for:
     - Tracking the number of plugin runs.
     - Verifying a Gumroad license key.
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.2.0`
+
   - New features:
     - Added `Banner` and `IconButton` components.
     - Added a `validateOnBlur` prop to `Textbox`, `TextboxNumeric`, and `TextboxMultiline`.
@@ -340,7 +387,8 @@
   - CSS:
     - Added colors `--color-black-6-translucent`, `--color-black-3-translucent`, and `--color-blue-30-translucent` to `@create-figma-plugin/ui/lib/css/base.css`.
 
-- `@create-figma-plugin/utilities`
+- `@create-figma-plugin/utilities@1.2.0`
+
   - New features:
     - `convertHexColorToRgbColor`
     - `convertNamedColorToHexColor`
@@ -352,7 +400,8 @@
 
 ## 1.1.1
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.1.1`
+
   - New features:
     - `TextboxColor` – Added a new component for receiving a user input hex color with opacity.
     - `Dropdown`, `TextboxAutocomplete` – Allow individual menu options to be `disabled`.
@@ -365,16 +414,19 @@
 
 ## 1.0.2
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.0.2`
+
   - Added `src/**/*.tsx` to the **`"include"`** key of the `default` template’s `tsconfig.json`.
 
 ## 1.0.1
 
-- `@create-figma-plugin/ui`
+- `@create-figma-plugin/ui@1.0.1`
+
   - Made the `--box-shadow` style identical to that in the Figma CSS.
   - Fixed the style of disabled options in the `SegmentedControl` component.
 
-- `create-figma-plugin`
+- `create-figma-plugin@1.0.1`
+
   - Included `plugin-templates/*/.gitignore` in the published package.
   - Added a `^` prefix to `@create-figma-plugin/*` version numbers in the `default` template.
 
@@ -384,12 +436,12 @@
 
 *Note: 1.0.0 requires Node.js v14.*
 
-- [`@create-figma-plugin/build@1`](#create-figma-pluginbuild1)
-- [`@create-figma-plugin/tsconfig@1`](#create-figma-plugintsconfig1)
-- [`@create-figma-plugin/ui@1`](#create-figma-pluginui1)
-- [`@create-figma-plugin/utilities@1`](#create-figma-pluginutilities1)
+- [`@create-figma-plugin/build@1.0.0`](#create-figma-pluginbuild100)
+- [`@create-figma-plugin/tsconfig@1.0.0`](#create-figma-plugintsconfig100)
+- [`@create-figma-plugin/ui@1.0.0`](#create-figma-pluginui100)
+- [`@create-figma-plugin/utilities@1.0.0`](#create-figma-pluginutilities100)
 
-### `@create-figma-plugin/build@1`
+### `@create-figma-plugin/build@1.0.0`
 
 - The `build-figma-plugin` CLI is now powered by [esbuild](https://esbuild.github.io), replacing [Webpack](https://webpack.js.org/). esbuild is *extremely* fast, and building any non-trivial plugin should reliably take **less than 1 second**. (esbuild actually runs within a couple hundred milliseconds, but some parts of the build process – compiling and generating `.d.ts` files for CSS modules, generating the `manifest.json` file – still runs in Node.js-land.)
 
@@ -428,7 +480,7 @@
     }
     ```
 
-### `@create-figma-plugin/tsconfig@1`
+### `@create-figma-plugin/tsconfig@1.0.0`
 
 - The [`tsconfig.json`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/tsconfig/tsconfig.json) file has changed significantly, given the move to esbuild.
 
@@ -449,7 +501,7 @@
 
 - Either copy the above to your project’s `tsconfig.json`, or directly extend from `@create-figma-plugin/tsconfig`. You should at least [ensure that the `"isolatedModules"` option is enabled in your `tsconfig.json`](https://esbuild.github.io/content-types/#typescript-caveats).
 
-### `@create-figma-plugin/ui@1`
+### `@create-figma-plugin/ui@1.0.0`
 
 - There are *many* breaking changes and new features. Your best bet for migrating to `v1` might be to try to build your plugin using the `build-figma-plugin --typecheck --watch` command, and then incrementally fixing the errors surfaced by the TypeScript compiler. Otherwise, refer to usage examples of all the components in the [Storybook](https://yuanqing.github.io/create-figma-plugin/storybook/), or see below for a detailed breakdown of all component changes.
 
@@ -630,7 +682,7 @@
 - There’s a new `revertOnEscapeKeyDown` prop to enable reverting the original `value` when the `Esc` key is pressed.
 - There’s a new `suffix` prop for automatically appending an arbitrary string to the numeric textbox.
 
-### `@create-figma-plugin/utilities@1`
+### `@create-figma-plugin/utilities@1.0.0`
 
 - `compareArrays` has been removed. Use `compareObjects` instead.
 - `isWithinInstance` has been renamed to `isWithinInstanceNode`.
