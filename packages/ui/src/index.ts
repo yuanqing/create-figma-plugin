@@ -54,6 +54,10 @@ export {
   RadioButtonsProps
 } from './components/radio-buttons/radio-buttons.js'
 export {
+  RangeSlider,
+  RangeSliderProps
+} from './components/range-slider/range-slider.js'
+export {
   SearchTextbox,
   SearchTextboxProps
 } from './components/search-textbox/search-textbox.js'
