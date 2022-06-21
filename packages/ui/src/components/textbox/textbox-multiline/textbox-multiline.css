@@ -3,6 +3,21 @@
   z-index: var(--z-index-1);
 }
 
+.autoGrow {
+  display: grid;
+}
+
+.ghost,
+.autoGrow .textarea {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.ghost {
+  padding: 6px 0 6px var(--space-extra-small);
+  visibility: hidden;
+  white-space: pre-wrap;
+}
+
 .textarea {
   display: block;
   width: 100%;

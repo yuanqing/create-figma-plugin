@@ -181,7 +181,25 @@ export const Rows = function () {
   return (
     <TextboxMultiline
       onInput={handleInput}
-      rows={5}
+      rows={1}
+      value={value}
+      variant="border"
+    />
+  )
+}
+
+export const AutoGrow = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxMultiline
+      autoGrow
+      onInput={handleInput}
+      rows={1}
       value={value}
       variant="border"
     />
