@@ -197,7 +197,7 @@ export const AutoGrow = function () {
   }
   return (
     <TextboxMultiline
-      autoGrow
+      grow
       onInput={handleInput}
       rows={1}
       value={value}

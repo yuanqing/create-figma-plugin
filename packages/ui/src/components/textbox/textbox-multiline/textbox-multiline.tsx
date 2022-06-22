@@ -12,7 +12,7 @@ import styles from './textbox-multiline.css'
 const EMPTY_STRING = ''
 
 export type TextboxMultilineProps<Name extends string> = {
-  autoGrow?: boolean
+  grow?: boolean
   disabled?: boolean
   name?: Name
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLTextAreaElement>>
@@ -30,7 +30,7 @@ export type TextboxMultilineProps<Name extends string> = {
 export type TextboxMultilineVariant = 'border' | 'underline'
 
 export function TextboxMultiline<Name extends string>({
-  autoGrow = false,
+  grow = false,
   disabled = false,
   name,
   onInput = function () {},
@@ -153,11 +153,11 @@ export function TextboxMultiline<Name extends string>({
           : variant === 'border'
           ? styles.hasBorder
           : null,
-        autoGrow === true ? styles.autoGrow : null,
+        grow === true ? styles.grow : null,
         disabled === true ? styles.disabled : null
       ])}
     >
-      {autoGrow === true ? (
+      {grow === true ? (
         <div class={styles.ghost}>
           {value === MIXED_STRING ? 'Mixed' : `${value} `}
         </div>

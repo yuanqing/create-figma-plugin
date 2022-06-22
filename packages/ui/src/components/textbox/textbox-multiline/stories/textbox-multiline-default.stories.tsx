@@ -169,9 +169,7 @@ export const AutoGrow = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <TextboxMultiline autoGrow onInput={handleInput} rows={1} value={value} />
-  )
+  return <TextboxMultiline grow onInput={handleInput} rows={1} value={value} />
 }
 
 export const OnValueInput = function () {

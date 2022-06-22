@@ -3,12 +3,12 @@
   z-index: var(--z-index-1);
 }
 
-.autoGrow {
+.grow {
   display: grid;
 }
 
 .ghost,
-.autoGrow .textarea {
+.grow .textarea {
   grid-area: 1 / 1 / 2 / 2;
 }
 
