@@ -60,11 +60,11 @@ export const EmptyFocused = function () {
   }
   return (
     <TextboxAutocomplete
-      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }
@@ -112,12 +112,12 @@ export const PlaceholderFocused = function () {
   }
   return (
     <TextboxAutocomplete
-      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       options={options}
       placeholder="placeholder"
       value={value}
+      variant="underline"
     />
   )
 }
@@ -164,11 +164,11 @@ export const Focused = function () {
   }
   return (
     <TextboxAutocomplete
-      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }

@@ -179,11 +179,11 @@ export const Focused = function () {
   }
   return (
     <Dropdown
-      variant="border"
       {...useInitialFocus()}
       onChange={handleChange}
       options={options}
       value={value}
+      variant="border"
     />
   )
 }

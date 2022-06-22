@@ -179,11 +179,11 @@ export const Focused = function () {
   }
   return (
     <Dropdown
-      variant="underline"
       {...useInitialFocus()}
       onChange={handleChange}
       options={options}
       value={value}
+      variant="underline"
     />
   )
 }

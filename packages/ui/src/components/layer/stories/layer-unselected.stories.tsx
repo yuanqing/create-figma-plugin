@@ -38,8 +38,8 @@ export const Focused = function () {
   }
   return (
     <Layer
-      icon={<IconLayerFrame16 />}
       {...useInitialFocus()}
+      icon={<IconLayerFrame16 />}
       onChange={handleChange}
       value={value}
     >

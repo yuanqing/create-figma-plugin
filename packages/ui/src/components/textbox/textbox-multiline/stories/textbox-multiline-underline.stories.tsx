@@ -36,10 +36,10 @@ export const EmptyFocused = function () {
   }
   return (
     <TextboxMultiline
-      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       value={value}
+      variant="underline"
     />
   )
 }
@@ -70,11 +70,11 @@ export const PlaceholderFocused = function () {
   }
   return (
     <TextboxMultiline
-      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       placeholder="placeholder"
       value={value}
+      variant="underline"
     />
   )
 }
@@ -100,10 +100,10 @@ export const Focused = function () {
   }
   return (
     <TextboxMultiline
-      variant="underline"
       {...useInitialFocus()}
       onInput={handleInput}
       value={value}
+      variant="underline"
     />
   )
 }

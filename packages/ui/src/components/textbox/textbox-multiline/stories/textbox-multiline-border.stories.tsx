@@ -36,10 +36,10 @@ export const EmptyFocused = function () {
   }
   return (
     <TextboxMultiline
-      variant="border"
       {...useInitialFocus()}
       onInput={handleInput}
       value={value}
+      variant="border"
     />
   )
 }
@@ -70,11 +70,11 @@ export const PlaceholderFocused = function () {
   }
   return (
     <TextboxMultiline
-      variant="border"
       {...useInitialFocus()}
       onInput={handleInput}
       placeholder="placeholder"
       value={value}
+      variant="border"
     />
   )
 }
@@ -100,10 +100,10 @@ export const Focused = function () {
   }
   return (
     <TextboxMultiline
-      variant="border"
       {...useInitialFocus()}
       onInput={handleInput}
       value={value}
+      variant="border"
     />
   )
 }

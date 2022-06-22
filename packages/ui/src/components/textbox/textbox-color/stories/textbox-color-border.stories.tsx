@@ -53,12 +53,12 @@ export const EmptyFocused = function () {
   }
   return (
     <TextboxColor
-      variant="border"
       {...useInitialFocus()}
       hexColor={hexColor}
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}
       opacity={opacity}
+      variant="border"
     />
   )
 }
@@ -104,7 +104,6 @@ export const PlaceholderFocused = function () {
   }
   return (
     <TextboxColor
-      variant="border"
       {...useInitialFocus()}
       hexColor={hexColor}
       hexColorPlaceholder="Color"
@@ -112,6 +111,7 @@ export const PlaceholderFocused = function () {
       onOpacityInput={handleOpacityInput}
       opacity={opacity}
       opacityPlaceholder="%"
+      variant="border"
     />
   )
 }
@@ -155,12 +155,12 @@ export const Focused = function () {
   }
   return (
     <TextboxColor
-      variant="border"
       {...useInitialFocus()}
       hexColor={hexColor}
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}
       opacity={opacity}
+      variant="border"
     />
   )
 }

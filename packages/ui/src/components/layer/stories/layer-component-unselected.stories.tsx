@@ -43,9 +43,9 @@ export const Focused = function () {
   }
   return (
     <Layer
+      {...useInitialFocus()}
       component
       icon={<IconLayerComponent16 />}
-      {...useInitialFocus()}
       onChange={handleChange}
       value={value}
     >
