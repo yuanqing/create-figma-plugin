@@ -42,6 +42,28 @@ export const Empty = function () {
   )
 }
 
+export const EmptyManyOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Dropdown
+      onChange={handleChange}
+      options={options}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
 export const Placeholder = function () {
   const [value, setValue] = useState<null | string>(null)
   const options: Array<DropdownOption> = [
@@ -78,6 +100,28 @@ export const Filled = function () {
     { header: 'Header' },
     { value: 'qux' }
   ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Dropdown
+      onChange={handleChange}
+      options={options}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const FilledManyOptions = function () {
+  const [value, setValue] = useState<string>('42')
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
