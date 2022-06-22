@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.1
+
+- `@create-figma-plugin/ui@2.1.1`
+
+  - Rewrote the logic for recalculating the `Dropdown` component’s menu size and position ([#112](https://github.com/yuanqing/create-figma-plugin/issues/112))
+  - Added the ability for `TextboxMultiline` to grow to fit its text contents, via the `grow` prop
+
 ## 2.1.0
 
 - `@create-figma-plugin/ui@2.1.0`
