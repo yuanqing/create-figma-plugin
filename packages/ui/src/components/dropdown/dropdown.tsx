@@ -361,47 +361,92 @@ function updateMenuElementLayout(
   menuElement.style.maxHeight = `${menuElementMaxHeight}px`
 
   const rootElementBoundingClientRect = rootElement.getBoundingClientRect()
-  const menuElementBoundingClientRect = menuElement.getBoundingClientRect()
 
-  // Nudge `menuElement` left if needed.
+  // Nudge `menuElement` left if needed
   const leftOffset =
-    menuElementBoundingClientRect.left +
+    menuElement.getBoundingClientRect().left +
     menuElement.offsetWidth -
     (window.innerWidth - VIEWPORT_MARGIN)
   if (leftOffset > 0) {
     menuElement.style.left = `-${leftOffset}px`
   }
 
-  const topOffset =
-    rootElementBoundingClientRect.top +
-    menuElement.offsetHeight -
-    (window.innerHeight - VIEWPORT_MARGIN)
+  const idealTopOffset = Math.max(
+    (menuElement.offsetHeight - rootElement.offsetHeight) / 2,
+    0
+  )
+  const minimumTopOffset =
+    rootElementBoundingClientRect.top -
+    (window.innerHeight - menuElement.offsetHeight - VIEWPORT_MARGIN)
   const maximumTopOffset = rootElementBoundingClientRect.top - VIEWPORT_MARGIN
 
-  if (menuElement.offsetHeight < menuElementMaxHeight) {
-    if (selectedId === INVALID_ID) {
-      return
-    }
+  // Uncomment to debug
+  // console.table([{ maximumTopOffset, minimumTopOffset }])
 
-    // Try to adjust the `top` position of `menuElement` such that
-    // `selectedElement` is directly above the `rootElement`
-    const selectedElement = menuElement.querySelector<HTMLInputElement>(
-      `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
+  if (selectedId === INVALID_ID) {
+    // Uncomment to debug
+    // console.log('Dropdown Menu Case 1')
+
+    // Set the `top` position of `menuElement` such that it fits within the
+    // viewport height
+    const topOffset = Math.min(
+      Math.max(idealTopOffset, minimumTopOffset),
+      maximumTopOffset
     )
-    if (selectedElement === null) {
-      throw new Error('Invariant violation') // `selectedId` is valid
-    }
-    const selectedElementTopOffset =
-      selectedElement.getBoundingClientRect().top -
-      menuElementBoundingClientRect.top
-    menuElement.style.top = `-${Math.max(
-      Math.min(selectedElementTopOffset, maximumTopOffset),
-      topOffset
-    )}px`
+    menuElement.style.top = `-${topOffset}px`
+    menuElement.scrollTop = 0
     return
   }
 
-  // Adjust the `top` position of `menuElement` such that it fits within
-  // the viewport height.
-  menuElement.style.top = `-${Math.min(topOffset, maximumTopOffset)}px`
+  const selectedInputElement = menuElement.querySelector<HTMLInputElement>(
+    `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
+  )
+  if (selectedInputElement === null) {
+    throw new Error('Invariant violation')
+  }
+  const selectedLabelElement = selectedInputElement.parentElement
+  if (selectedLabelElement === null) {
+    throw new Error('Invariant violation')
+  }
+
+  const isScrollable = menuElement.offsetHeight === menuElementMaxHeight
+  if (isScrollable === false) {
+    // Uncomment to debug
+    // console.log('Dropdown Menu Case 2')
+
+    // Set the `top` position of `menuElement` such that `selectedElement`
+    // is directly above the `rootElement`
+    const topOffset = Math.min(
+      Math.max(selectedLabelElement.offsetTop, minimumTopOffset),
+      maximumTopOffset
+    )
+    menuElement.style.top = `-${topOffset}px`
+    return
+  }
+  // Uncomment to debug
+  // console.log('Dropdown Menu Case 3')
+
+  // Set the `top` position of `menuElement` such that it fits within the
+  // viewport height
+  const topOffset = Math.min(
+    Math.max(idealTopOffset, minimumTopOffset),
+    maximumTopOffset
+  )
+  menuElement.style.top = `-${topOffset}px`
+
+  // Set the `scrollTop` of `menuElement` such that `selectedElement` is
+  // directly above the `rootElement`
+  const minScrollTop = 0
+  const maxScrollTop = menuElement.scrollHeight - menuElement.offsetHeight
+  const scrollTop = Math.min(
+    Math.max(
+      selectedLabelElement.offsetTop -
+        (rootElementBoundingClientRect.top -
+          menuElement.getBoundingClientRect().top) -
+        2,
+      minScrollTop
+    ),
+    maxScrollTop
+  )
+  menuElement.scrollTop = scrollTop
 }
