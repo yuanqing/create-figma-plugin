@@ -470,3 +470,385 @@ export const OnValueChange = function () {
     />
   )
 }
+
+export const TopLeft = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    left: '-24px',
+    position: 'absolute',
+    top: '-12px',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const TopLeftManyOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    left: '-24px',
+    position: 'absolute',
+    top: '-12px',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const TopRight = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    position: 'absolute',
+    right: '-24px',
+    top: '-12px',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const TopRightManyOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    position: 'absolute',
+    right: '-24px',
+    top: '-12px',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const MiddleLeft = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    left: '-24px',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const MiddleLeftManyOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    left: '-24px',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const MiddleRight = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    position: 'absolute',
+    right: '-24px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const MiddleRightManyOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    position: 'absolute',
+    right: '-24px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const BottomLeft = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    bottom: '-12px',
+    left: '-24px',
+    position: 'absolute',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const BottomLeftManyOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    bottom: '-12px',
+    left: '-24px',
+    position: 'absolute',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const BottomRight = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' },
+    { separator: true },
+    { header: 'Header' },
+    { value: 'qux' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    bottom: '-12px',
+    position: 'absolute',
+    right: '-24px',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}
+
+export const BottomRightManyOptions = function () {
+  const [value, setValue] = useState<null | string>(null)
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
+    index
+  ) {
+    return { value: `${index + 1}` }
+  })
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  const style = {
+    bottom: '-12px',
+    position: 'absolute',
+    right: '-24px',
+    width: '240px'
+  }
+  return (
+    <div style={style}>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
+  )
+}

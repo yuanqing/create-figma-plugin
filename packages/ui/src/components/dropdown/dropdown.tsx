@@ -11,12 +11,9 @@ import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
 import dropdownStyles from './dropdown.css'
-
-const INVALID_ID = null
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-dropdown-item-id'
-const VIEWPORT_MARGIN = 16
-
-type Id = typeof INVALID_ID | string
+import { INVALID_ID, ITEM_ID_DATA_ATTRIBUTE_NAME } from './private/constants'
+import { Id } from './private/types'
+import { updateMenuElementLayout } from './private/update-menu-element-layout'
 
 export type DropdownProps<
   Name extends string,
@@ -347,106 +344,4 @@ function findOptionIndexByValue<
     index += 1
   }
   return -1
-}
-
-function updateMenuElementLayout(
-  rootElement: HTMLDivElement,
-  menuElement: HTMLDivElement,
-  selectedId: Id
-) {
-  // Set a maximum width and height
-  const menuElementMaxWidth = window.innerWidth - 2 * VIEWPORT_MARGIN
-  menuElement.style.maxWidth = `${menuElementMaxWidth}px`
-  const menuElementMaxHeight = window.innerHeight - 2 * VIEWPORT_MARGIN
-  menuElement.style.maxHeight = `${menuElementMaxHeight}px`
-
-  const rootElementBoundingClientRect = rootElement.getBoundingClientRect()
-
-  // Nudge `menuElement` left if needed
-  const leftOffset =
-    menuElement.getBoundingClientRect().left +
-    menuElement.offsetWidth -
-    (window.innerWidth - VIEWPORT_MARGIN)
-  if (leftOffset > 0) {
-    menuElement.style.left = `-${leftOffset}px`
-  }
-
-  const idealTopOffset = Math.max(
-    (menuElement.offsetHeight - rootElement.offsetHeight) / 2,
-    0
-  )
-  const minimumTopOffset =
-    rootElementBoundingClientRect.top -
-    (window.innerHeight - menuElement.offsetHeight - VIEWPORT_MARGIN)
-  const maximumTopOffset = rootElementBoundingClientRect.top - VIEWPORT_MARGIN
-
-  // Uncomment to debug
-  // console.table([{ maximumTopOffset, minimumTopOffset }])
-
-  if (selectedId === INVALID_ID) {
-    // Uncomment to debug
-    // console.log('Dropdown Menu Case 1')
-
-    // Set the `top` position of `menuElement` such that it fits within the
-    // viewport height
-    const topOffset = Math.min(
-      Math.max(idealTopOffset, minimumTopOffset),
-      maximumTopOffset
-    )
-    menuElement.style.top = `-${topOffset}px`
-    menuElement.scrollTop = 0
-    return
-  }
-
-  const selectedInputElement = menuElement.querySelector<HTMLInputElement>(
-    `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
-  )
-  if (selectedInputElement === null) {
-    throw new Error('Invariant violation')
-  }
-  const selectedLabelElement = selectedInputElement.parentElement
-  if (selectedLabelElement === null) {
-    throw new Error('Invariant violation')
-  }
-
-  const isScrollable = menuElement.offsetHeight === menuElementMaxHeight
-  if (isScrollable === false) {
-    // Uncomment to debug
-    // console.log('Dropdown Menu Case 2')
-
-    // Set the `top` position of `menuElement` such that `selectedElement`
-    // is directly above the `rootElement`
-    const topOffset = Math.min(
-      Math.max(selectedLabelElement.offsetTop, minimumTopOffset),
-      maximumTopOffset
-    )
-    menuElement.style.top = `-${topOffset}px`
-    return
-  }
-  // Uncomment to debug
-  // console.log('Dropdown Menu Case 3')
-
-  // Set the `top` position of `menuElement` such that it fits within the
-  // viewport height
-  const topOffset = Math.min(
-    Math.max(idealTopOffset, minimumTopOffset),
-    maximumTopOffset
-  )
-  menuElement.style.top = `-${topOffset}px`
-
-  // Set the `scrollTop` of `menuElement` such that `selectedElement` is
-  // directly above the `rootElement`
-  const minScrollTop = 0
-  const maxScrollTop = menuElement.scrollHeight - menuElement.offsetHeight
-  const scrollTop = Math.min(
-    Math.max(
-      selectedLabelElement.offsetTop -
-        (rootElementBoundingClientRect.top -
-          menuElement.getBoundingClientRect().top) -
-        2,
-      minScrollTop
-    ),
-    maxScrollTop
-  )
-  menuElement.scrollTop = scrollTop
 }
