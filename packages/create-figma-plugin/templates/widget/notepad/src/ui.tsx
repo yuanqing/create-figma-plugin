@@ -19,7 +19,7 @@ function Plugin (props: { text: string }) {
     [text]
   )
   return (
-    <Container>
+    <Container space='medium'>
       <VerticalSpace space='large' />
       <TextboxMultiline
         {...useInitialFocus()}
