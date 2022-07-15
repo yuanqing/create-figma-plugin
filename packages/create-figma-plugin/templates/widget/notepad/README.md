@@ -17,7 +17,7 @@ To build the widget:
 $ npm run build
 ```
 
-This will generate a [`manifest.json`](https://figma.com/widget-docs/manifest/) file and a `build/` directory containing the JavaScript bundle(s) for the widget.
+This will generate a [`manifest.json`](https://figma.com/widget-docs/widget-manifest/) file and a `build/` directory containing the JavaScript bundle(s) for the widget.
 
 To watch for code changes and rebuild the widget automatically:
 
