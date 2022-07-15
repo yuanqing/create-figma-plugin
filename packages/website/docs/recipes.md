@@ -68,7 +68,7 @@ See that:
 
 ## Specifying multiple commands in the plugin sub-menu
 
-*This is applicable to Figma/FigJam plugins only.*
+*This is applicable to plugins only.*
 
 Menu commands are specified on the [**`"menu"`**](<%- query('page', 'configuration').url %>#menu) key under **`"figma-plugin"`**:
 

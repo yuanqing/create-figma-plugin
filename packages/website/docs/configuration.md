@@ -20,13 +20,13 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 
 (*`string`*)
 
-*Optional.* The version of the Figma/FigJam plugin API to use. Defaults to `"1.0.0"`.
+*Optional.* The version of the plugin API to use. Defaults to `"1.0.0"`.
 
 ### `widgetApi`
 
 (*`string`*)
 
-*Optional.* The version of the FigJam widget API to use. Defaults to `"1.0.0"`.
+*Optional.* The version of the widget API to use. Defaults to `"1.0.0"`.
 
 ### `editorType`
 
@@ -38,7 +38,7 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 
 (*`boolean`*)
 
-*Optional.* Set to `true` if you’re creating a FigJam widget. Defaults to `false`.
+*Optional.* Set to `true` if you’re creating a widget. Defaults to `false`.
 
 ### `id`
 
@@ -101,7 +101,7 @@ Learn how to [add a UI to a plugin command](<%- query('page', 'ui').url %>).
 
 (*`array`*)
 
-*Optional.* Defines the list of [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via Figma’s Quick Actions search bar. Each parameter is an object with the following keys:
+*Optional.* Defines the list of [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via the Quick Actions search bar. Each parameter is an object with the following keys:
 
 - **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
 - **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions search bar. Defaults to the value of the sibling `"key"` key.
@@ -115,7 +115,7 @@ Learn how to [accept parameters via the Quick Actions search bar in your plugin 
 
 (*`boolean`*)
 
-*Optional.* When **`"parameters"`** is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Actions search bar. Set **`"parameterOnly"`** to `false` to make parameter input optional.
+*Optional.* When **`"parameters"`** is specified, the default behavior is that the user will be required to input parameters via the Quick Actions search bar. Set **`"parameterOnly"`** to `false` to make parameter input optional.
 
 ### `menu`
 
