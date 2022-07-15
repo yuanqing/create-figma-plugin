@@ -6,6 +6,7 @@
 
   - Rewrote the logic for recalculating the `Dropdown` component’s menu size and position ([#112](https://github.com/yuanqing/create-figma-plugin/issues/112))
   - Added the ability for `TextboxMultiline` to grow to fit its text contents, via the `grow` prop
+  - Fixed missing `space` prop in the `widget/notepad` template ([#115](https://github.com/yuanqing/create-figma-plugin/issues/115))
 
 ## 2.1.0
 
