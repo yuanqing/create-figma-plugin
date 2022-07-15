@@ -694,7 +694,7 @@ boolean
 
 Loads the fonts used in all the text nodes within the `nodes` array. [This
 function must be called before modifying any property of a text node that
-may cause the rendered text to change.](https://figma.com/plugin-docs/api/TextNode/#loading-fonts)
+may cause the rendered text to change.](https://www.figma.com/plugin-docs/working-with-text/#loading-fonts)
 
 ***Parameters***
 
