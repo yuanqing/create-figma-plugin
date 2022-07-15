@@ -4,9 +4,9 @@ export async function fetchDataAsync(
   type: 'plugin' | 'widget'
 ): Promise<Array<Record<string, any>>> {
   let result: Array<Record<string, any>> = []
-  let url = `https://www.figma.com/api/${type}s/browse?sort_order=desc&resource_type=${type}s&page_size=50`
+  let url = `/api/${type}s/browse?sort_order=desc&resource_type=${type}s&page_size=50`
   while (typeof url !== 'undefined') {
-    const response = await fetch(url, {
+    const response = await fetch(`https://www.figma.com${url}`, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       }
