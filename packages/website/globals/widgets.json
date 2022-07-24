@@ -78,6 +78,18 @@
   {
     "authors": [
       {
+        "name": "mottox2",
+        "url": "https://twitter.com/mottox2"
+      }
+    ],
+    "description": "Make it easy to take notes in Markdown",
+    "githubUrl": null,
+    "id": "1124191550873158701",
+    "name": "Simple Markdown Notes"
+  },
+  {
+    "authors": [
+      {
         "name": "Ward Meremans",
         "url": "https://twitter.com/drawm"
       }

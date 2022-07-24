@@ -2,6 +2,18 @@
   {
     "authors": [
       {
+        "name": "Roman Nurik",
+        "url": "https://twitter.com/romannurik"
+      }
+    ],
+    "description": "Utilities for working with top-level frames",
+    "githubUrl": "https://github.com/romannurik/Figma-ArtboardTricks",
+    "id": "911261236876701307",
+    "name": "Artboard Tricks"
+  },
+  {
+    "authors": [
+      {
         "name": "João Barros",
         "url": "https://figma.com/@joao208"
       }
@@ -66,6 +78,30 @@
   {
     "authors": [
       {
+        "name": "Cyril Diagne",
+        "url": "https://twitter.com/cyrildiagne"
+      }
+    ],
+    "description": "Use the most advanced image processing tools from ClipDrop directly in Figma",
+    "githubUrl": null,
+    "id": "1123355421740529204",
+    "name": "ClipDrop"
+  },
+  {
+    "authors": [
+      {
+        "name": "Diego Silva",
+        "url": "https://twitter.com/diegosilvatech"
+      }
+    ],
+    "description": "Create a beautiful color token with contrast according to WCAG",
+    "githubUrl": null,
+    "id": "1119749356529142486",
+    "name": "Color Contrast Generator"
+  },
+  {
+    "authors": [
+      {
         "name": "Richard Bruskowski",
         "url": "https://twitter.com/bruskowski"
       }
@@ -98,6 +134,18 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-component-utilities",
     "id": "785894722513806497",
     "name": "Component Utilities"
+  },
+  {
+    "authors": [
+      {
+        "name": "Roman Nurik",
+        "url": "https://twitter.com/romannurik"
+      }
+    ],
+    "description": "Quickly and easily evaluate color contrast for accessibility across all your artboards",
+    "githubUrl": "https://github.com/romannurik/Figma-Contrast",
+    "id": "911262488575486588",
+    "name": "Contrast"
   },
   {
     "authors": [
@@ -670,6 +718,18 @@
     "githubUrl": null,
     "id": "1081181836422264345",
     "name": "Quick Status"
+  },
+  {
+    "authors": [
+      {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Design radial menus in Figma",
+    "githubUrl": "https://github.com/aashreys/radial-generator",
+    "id": "1118321937703348544",
+    "name": "Radial Generator"
   },
   {
     "authors": [
