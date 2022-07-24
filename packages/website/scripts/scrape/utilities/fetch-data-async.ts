@@ -15,7 +15,9 @@ export async function fetchDataAsync(
     result = result.concat(json.meta[`${type}s`])
     url = json.pagination.next_page
   }
-  return deduplicateArray(result)
+  return deduplicateArray(result).sort(function (x, y) {
+    return x.id.localeCompare(y.id, [], { numeric: true })
+  })
 }
 
 function deduplicateArray(

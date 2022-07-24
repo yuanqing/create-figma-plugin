@@ -25,15 +25,17 @@ async function main(): Promise<void> {
     )
     const data: Array<Record<string, any>> = await fetchDataAsync(type)
     for (const { versions, id } of data) {
-      const manifest = Object.values(versions as Record<string, any>)[0]
-        .manifest
-      if (manifest.main !== 'build/main.js' && manifest.ui !== 'build/ui.js') {
+      const version = Object.values(versions as Record<string, any>)[0]
+      if (
+        version.manifest.main !== 'build/main.js' &&
+        version.manifest.ui !== 'build/ui.js'
+      ) {
         continue
       }
       if (validIds.indexOf(id) !== -1 || invalidIds.indexOf(id) !== -1) {
         continue
       }
-      console.log(`https://figma.com/community/${type}/${id}`) // eslint-disable-line no-console
+      console.log(`https://figma.com/community/${type}/${id}\t${version.name}`) // eslint-disable-line no-console
     }
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
