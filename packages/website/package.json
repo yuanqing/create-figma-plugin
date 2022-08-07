@@ -23,6 +23,7 @@
     "fs-extra": "^10.1.0",
     "node-fetch": "^3.2.6",
     "open-cli": "^7.0.1",
+    "p-all": "^4.0.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "sirv-cli": "^2.0.2",

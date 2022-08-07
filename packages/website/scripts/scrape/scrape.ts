@@ -24,18 +24,15 @@ async function main(): Promise<void> {
       await fs.readFile(invalidIdsFilePath, 'utf8')
     )
     const data: Array<Record<string, any>> = await fetchDataAsync(type)
-    for (const { versions, id } of data) {
-      const version = Object.values(versions as Record<string, any>)[0]
+    for (const { id, isMatch, name } of data) {
       if (
-        version.manifest.main !== 'build/main.js' &&
-        version.manifest.ui !== 'build/ui.js'
+        isMatch === false ||
+        validIds.indexOf(id) !== -1 ||
+        invalidIds.indexOf(id) !== -1
       ) {
         continue
       }
-      if (validIds.indexOf(id) !== -1 || invalidIds.indexOf(id) !== -1) {
-        continue
-      }
-      console.log(`https://figma.com/community/${type}/${id}\t${version.name}`) // eslint-disable-line no-console
+      console.log(`https://figma.com/community/${type}/${id} - ${name}`) // eslint-disable-line no-console
     }
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
