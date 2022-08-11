@@ -11,7 +11,7 @@ export default function () {
     }
   )
   showUI({
-    width: 240,
-    height: 240
+    height: 240,
+    width: 240
   })
 }

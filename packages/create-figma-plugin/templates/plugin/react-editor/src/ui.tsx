@@ -1,3 +1,7 @@
+import 'prismjs/components/prism-clike.js'
+import 'prismjs/components/prism-javascript.js'
+import '!prismjs/themes/prism.css'
+
 import {
   Button,
   Container,
@@ -12,10 +16,6 @@ import Editor from 'react-simple-code-editor'
 
 import styles from './styles.css'
 import { InsertCodeHandler } from './types'
-
-import 'prismjs/components/prism-clike.js'
-import 'prismjs/components/prism-javascript.js'
-import '!prismjs/themes/prism.css'
 
 function Plugin() {
   const [code, setCode] = useState(`function add(a, b) {\n  return a + b;\n}`)
