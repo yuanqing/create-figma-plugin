@@ -2,6 +2,7 @@ import {
   Button,
   Columns,
   Container,
+  Muted,
   render,
   Text,
   TextboxNumeric,
@@ -30,7 +31,9 @@ function Plugin() {
   return (
     <Container space="medium">
       <VerticalSpace space="large" />
-      <Text muted>Count</Text>
+      <Text>
+        <Muted>Count</Muted>
+      </Text>
       <VerticalSpace space="small" />
       <TextboxNumeric
         onNumericValueInput={setCount}
