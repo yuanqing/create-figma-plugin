@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.2
+
+- `@create-figma-plugin/ui@2.1.2`
+
+  - Add `color-scheme: dark;` to dark mode base CSS 
+
+- `create-figma-plugin@2.1.2`
+
+  - Bump `@figma/plugin-typings` and `@figma/widget-typings` versions
+
 ## 2.1.1
 
 - `@create-figma-plugin/ui@2.1.1`
