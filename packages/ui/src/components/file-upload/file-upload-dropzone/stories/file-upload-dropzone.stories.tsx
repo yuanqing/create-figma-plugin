@@ -3,6 +3,7 @@
 import { h } from 'preact'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
+import { Muted } from '../../../../inline-text/muted/muted'
 import { Text } from '../../../text/text'
 import { FileUploadDropzone } from '../file-upload-dropzone'
 
@@ -19,8 +20,8 @@ export const Passive = function () {
   }
   return (
     <FileUploadDropzone onSelectedFiles={handleSelectedFiles}>
-      <Text align="center" muted>
-        Text
+      <Text align="center">
+        <Muted>Text</Muted>
       </Text>
     </FileUploadDropzone>
   )
@@ -35,8 +36,8 @@ export const Focused = function () {
       {...useInitialFocus()}
       onSelectedFiles={handleSelectedFiles}
     >
-      <Text align="center" muted>
-        Text
+      <Text align="center">
+        <Muted>Text</Muted>
       </Text>
     </FileUploadDropzone>
   )
@@ -52,8 +53,8 @@ export const AcceptedFileTypes = function () {
       acceptedFileTypes={acceptedFileTypes}
       onSelectedFiles={handleSelectedFiles}
     >
-      <Text align="center" muted>
-        Text
+      <Text align="center">
+        <Muted>Text</Muted>
       </Text>
     </FileUploadDropzone>
   )
@@ -65,8 +66,8 @@ export const MultipleFiles = function () {
   }
   return (
     <FileUploadDropzone multiple onSelectedFiles={handleSelectedFiles}>
-      <Text align="center" muted>
-        Text
+      <Text align="center">
+        <Muted>Text</Muted>
       </Text>
     </FileUploadDropzone>
   )
