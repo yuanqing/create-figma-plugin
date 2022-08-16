@@ -13,10 +13,13 @@
     "scrape-plugins": "node --loader ts-node/esm scripts/scrape/scrape.ts plugin globals/plugins.json scripts/scrape/invalid-ids.json",
     "scrape-widgets": "node --loader ts-node/esm scripts/scrape/scrape.ts widget globals/widgets.json scripts/scrape/invalid-ids.json",
     "serve": "sirv build --dev --host --port 4242",
+    "stats-plugins": "node --loader ts-node/esm scripts/fetch-stats.ts plugin globals/plugins.json",
+    "stats-widgets": "node --loader ts-node/esm scripts/fetch-stats.ts widget globals/widgets.json",
     "watch": "build-website --watch"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
+    "@types/text-table": "^0.2.2",
     "@yuanqing/build-website": "^0.0.2",
     "eslint": "^8.17.0",
     "eslint-config-yuanqing": "^0.0.6",
@@ -29,6 +32,7 @@
     "sirv-cli": "^2.0.2",
     "stylelint": "^14.9.1",
     "stylelint-config-yuanqing": "^0.0.3",
+    "text-table": "^0.2.0",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
   },
