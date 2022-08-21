@@ -105,7 +105,12 @@ async function fetchVersionsAsync(options: {
   )
   const json: any = await response.json()
   const meta = json.meta[Object.keys(json.meta)[0]]
-  const version = meta.versions[Object.keys(meta.versions)[0]]
+  const version =
+    meta.versions[
+      Object.keys(meta.versions).sort(function (a, b) {
+        return b.localeCompare(a, [], { numeric: true })
+      })[0]
+    ]
   const isMatch =
     version.manifest.main === 'build/main.js' ||
     version.manifest.ui === 'build/ui.js'
