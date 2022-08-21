@@ -26,6 +26,18 @@
   {
     "authors": [
       {
+        "name": "Youssef Bouzidi",
+        "url": "https://twitter.com/Yusof_Bz"
+      }
+    ],
+    "description": "Generate avatars for your app design prototype with one click",
+    "githubUrl": null,
+    "id": "1120329159944131602",
+    "name": "Avatarg"
+  },
+  {
+    "authors": [
+      {
         "name": "Alex Widua",
         "url": "https://twitter.com/alexwidua"
       }
@@ -282,6 +294,18 @@
   {
     "authors": [
       {
+        "name": "Raphael S.",
+        "url": "https://twitter.com/raf_underscore"
+      }
+    ],
+    "description": "Make it easier to create gradients",
+    "githubUrl": "https://github.com/raf-underscore/easier-gradients",
+    "id": "1137005439156522237",
+    "name": "Easier Gradients"
+  },
+  {
+    "authors": [
+      {
         "name": "Alex Widua",
         "url": "https://twitter.com/alexwidua"
       }
@@ -290,6 +314,18 @@
     "githubUrl": "https://github.com/alexwidua/figma-easing-gradients",
     "id": "907899097995668330",
     "name": "Easing Gradients"
+  },
+  {
+    "authors": [
+      {
+        "name": "Raphael S.",
+        "url": "https://twitter.com/raf_underscore"
+      }
+    ],
+    "description": "Create images for all social media platforms",
+    "githubUrl": "https://github.com/raf-underscore/exacto",
+    "id": "1134091253154887126",
+    "name": "Exacto"
   },
   {
     "authors": [
