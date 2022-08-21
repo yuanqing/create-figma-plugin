@@ -9,6 +9,7 @@ import {
 } from '@create-figma-plugin/common'
 import { build, BuildOptions } from 'esbuild'
 import fs from 'fs-extra'
+import importFresh from 'import-fresh'
 import indentString from 'indent-string'
 import { join, resolve } from 'path'
 
@@ -41,7 +42,9 @@ async function overrideEsbuildConfigAsync(
   if ((await fs.pathExists(absolutePath)) === false) {
     return buildOptions
   }
-  const { default: overrideEsbuildConfig } = await import(absolutePath)
+  const overrideEsbuildConfig: (
+    buildOptions: BuildOptions
+  ) => Promise<BuildOptions> = importFresh(absolutePath)
   return overrideEsbuildConfig(buildOptions)
 }
 

@@ -44,6 +44,7 @@
     "find-up": "^6.3.0",
     "fs-extra": "^10.1.0",
     "globby": "^13.1.2",
+    "import-fresh": "^3.3.0",
     "indent-string": "^5.0.0",
     "kleur": "^4.1.5",
     "postcss": "^8.4.16",
