@@ -426,18 +426,6 @@
   {
     "authors": [
       {
-        "name": "ShuaiQi Sun",
-        "url": "https://twitter.com/SShuaiqi"
-      }
-    ],
-    "description": "Directly manipulate spacing and Auto Layout properties on the canvas",
-    "githubUrl": null,
-    "id": "986640827067490181",
-    "name": "Free Hands"
-  },
-  {
-    "authors": [
-      {
         "name": "Mike Wilson",
         "url": "https://twitter.com/mk_wlsn"
       }
