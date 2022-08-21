@@ -1,5 +1,17 @@
 #!/bin/sh
 
+# generate docs
+npm run generate-docs
+
+# build
+npm run build
+
+# exit if there were uncommitted files
+if [[ $(git diff) != '' ]]; then
+  echo 'Error: Uncommitted files'
+  exit 1
+fi
+
 # merge `next` into `main`
 git checkout main
 git merge next

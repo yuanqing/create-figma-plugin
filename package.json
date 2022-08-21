@@ -14,6 +14,7 @@
     "patch-figma-plugin-typings": "TS_NODE_PROJECT=tsconfig.shared.json node --loader ts-node/esm scripts/patch-figma-plugin-typings.ts",
     "postinstall": "simple-git-hooks && npm run patch-figma-plugin-typings && npm run build",
     "publish": "npm run build && lerna publish from-package",
+    "release": "sh scripts/release.sh",
     "reset": "npm run clean && lerna clean --yes && rimraf node_modules package-lock.json && npm install",
     "storybook": "lerna run storybook --scope @create-figma-plugin/ui --stream",
     "test": "lerna run test --stream",
