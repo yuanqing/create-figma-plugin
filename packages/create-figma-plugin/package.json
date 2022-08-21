@@ -41,6 +41,7 @@
     "globby": "^13.1.2",
     "inquirer": "^9.1.0",
     "is-utf8": "^0.2.1",
+    "kleur": "^4.1.4",
     "lodash.template": "^4.5.0",
     "package-json": "^8.1.0",
     "param-case": "^3.0.4",
