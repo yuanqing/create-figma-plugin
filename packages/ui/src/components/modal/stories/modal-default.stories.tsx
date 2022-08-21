@@ -28,7 +28,7 @@ export const Default = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -57,7 +57,7 @@ export const NoTransition = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -84,7 +84,7 @@ export const CloseOnOverlayClick = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -107,7 +107,7 @@ export const CloseOnEscapeKeyDown = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -132,7 +132,7 @@ export const Title = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -161,7 +161,7 @@ export const CloseButton = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -190,7 +190,7 @@ export const CloseButtonIcon = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -220,7 +220,7 @@ export const CloseButtonPositionLeft = function () {
     console.log(event)
     setOpen(false)
   }
-  const style = { height: '160px', padding: '12px' }
+  const style = { height: '160px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
@@ -250,7 +250,7 @@ export const Nested = function () {
     console.log(event)
     setParentOpen(false)
   }
-  const parentStyle = { height: '160px', padding: '12px' }
+  const parentStyle = { height: '160px', padding: '12px', width: '240px' }
   const [childOpen, setChildOpen] = useState<boolean>(false)
   function handleChildOpenButtonClick(
     event: JSX.TargetedMouseEvent<HTMLButtonElement>
@@ -264,7 +264,7 @@ export const Nested = function () {
     console.log(event)
     setChildOpen(false)
   }
-  const childStyle = { height: '120px', padding: '12px' }
+  const childStyle = { height: '120px', padding: '12px', width: '240px' }
   return (
     <Fragment>
       <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
