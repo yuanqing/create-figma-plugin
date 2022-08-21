@@ -747,8 +747,9 @@ void
 
 ### `sortNodesByCanonicalOrder<Node>(siblingNodes)`
 
-Sorts `siblingNodes` according to their layer list order. Does not modify
-the original `siblingNodes` array.
+Returns the result of sorting the nodes in `siblingNodes` by
+their layer list order. Does not modify the original
+`siblingNodes` array.
 
 ***Type parameters***
 
@@ -768,8 +769,8 @@ Array<Node>
 
 ### `sortNodesByName<Node>(nodes)`
 
-Sorts `nodes` in alphabetical order. Does not modify the original
-`nodes` array.
+Returns the result of sorting `nodes` in alphabetical order. Does not
+modify the original `nodes` array.
 
 ***Type parameters***
 

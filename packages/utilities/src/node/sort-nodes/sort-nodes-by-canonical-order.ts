@@ -2,8 +2,9 @@ import { getParentNode } from '../get-nodes/get-parent-node.js'
 import { areSiblingNodes } from '../sibling-nodes/are-sibling-nodes.js'
 
 /**
- * Sorts `siblingNodes` according to their layer list order. Does not modify
- * the original `siblingNodes` array.
+ * Returns the result of sorting the nodes in `siblingNodes` by
+ * their layer list order. Does not modify the original
+ * `siblingNodes` array.
  *
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node

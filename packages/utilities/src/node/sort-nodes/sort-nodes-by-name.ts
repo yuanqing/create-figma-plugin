@@ -1,8 +1,8 @@
 import naturalCompare from 'natural-compare-lite'
 
 /**
- * Sorts `nodes` in alphabetical order. Does not modify the original
- * `nodes` array.
+ * Returns the result of sorting `nodes` in alphabetical order. Does not
+ * modify the original `nodes` array.
  *
  * @returns Returns a new array of `SceneNode` objects.
  * @category Node
