@@ -26,21 +26,21 @@
     "website-serve": "sirv build --dev --host --port 4242"
   },
   "devDependencies": {
-    "@types/node": "^17.0.42",
+    "@types/node": "^18.7.8",
     "cpy-cli": "3.1.1",
-    "eslint": "^8.17.0",
+    "eslint": "^8.22.0",
     "eslint-config-yuanqing": "0.0.6",
     "gh-pages": "^4.0.0",
     "globby": "^13.1.2",
-    "lerna": "^5.1.1",
-    "lint-staged": "^13.0.1",
-    "npm-check-updates": "^13.1.3",
-    "prettier": "^2.6.2",
+    "lerna": "^5.4.3",
+    "lint-staged": "^13.0.3",
+    "npm-check-updates": "^16.0.5",
+    "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.8.0",
     "sirv-cli": "^2.0.2",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing"
