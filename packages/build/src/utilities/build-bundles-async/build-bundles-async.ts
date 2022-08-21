@@ -64,6 +64,7 @@ async function buildMainBundleAsync(options: {
         constants.build.buildDirectoryName,
         'main.js'
       ),
+      plugins: [],
       stdin: {
         contents: js,
         resolveDir: process.cwd()
