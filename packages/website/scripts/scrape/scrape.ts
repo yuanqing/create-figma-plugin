@@ -2,6 +2,8 @@ import fs from 'fs-extra'
 import fetch from 'node-fetch'
 import pAll from 'p-all'
 
+const CONCURRENCY = 20
+
 async function main(): Promise<void> {
   try {
     const args = process.argv.slice(2)
@@ -52,7 +54,7 @@ export async function fetchDataAsync(
       return fetchVersionsAsync({ id: item.id, type })
     }
   })
-  return pAll(callbacks, { concurrency: 20 })
+  return pAll(callbacks, { concurrency: CONCURRENCY })
 }
 
 async function fetchFeedAsync(
