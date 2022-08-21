@@ -1,22 +1,36 @@
 # Changelog
 
+## 2.1.3
+
+- `@create-figma-plugin/build@2.1.3`
+
+  - Made the `build-figma-plugin` CLI pick up changes in `build-figma-plugin.(main|ui|manifest).json` configuration files during `--watch`. ([#119](https://github.com/yuanqing/create-figma-plugin/issues/119))
+
+- `create-figma-plugin@2.1.3`
+
+  - Updated the `create-figma-plugin` CLI terminal output to include commands for getting started.
+  - Fixed usage of components from `@create-figma-plugin/ui@2` (eg. removed use of the `muted` prop in the `Text` component).
+  - Prettified all templates.
+
+- Bumped dependencies in all packages.
+
 ## 2.1.2
 
 - `@create-figma-plugin/ui@2.1.2`
 
-  - Add `color-scheme: dark;` to dark mode base CSS 
+  - Added `color-scheme: dark;` to dark mode base CSS.
 
 - `create-figma-plugin@2.1.2`
 
-  - Bump `@figma/plugin-typings` and `@figma/widget-typings` versions
+  - Bumped `@figma/plugin-typings` and `@figma/widget-typings` versions.
 
 ## 2.1.1
 
 - `@create-figma-plugin/ui@2.1.1`
 
-  - Rewrote the logic for recalculating the `Dropdown` component’s menu size and position ([#112](https://github.com/yuanqing/create-figma-plugin/issues/112))
-  - Added the ability for `TextboxMultiline` to grow to fit its text contents, via the `grow` prop
-  - Fixed missing `space` prop in the `widget/notepad` template ([#115](https://github.com/yuanqing/create-figma-plugin/issues/115))
+  - Rewrote the logic for recalculating the `Dropdown` component’s menu size and position. ([#112](https://github.com/yuanqing/create-figma-plugin/issues/112))
+  - Added the ability for `TextboxMultiline` to grow to fit its text contents, via the `grow` prop.
+  - Fixed missing `space` prop in the `widget/notepad` template. ([#115](https://github.com/yuanqing/create-figma-plugin/issues/115))
 
 ## 2.1.0
 
