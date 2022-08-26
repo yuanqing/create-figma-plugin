@@ -1,6 +1,7 @@
 import { globby } from 'globby'
 import { run } from 'npm-check-updates'
-import { Index, PackageFile } from 'npm-check-updates/build/src/types'
+import { Index } from 'npm-check-updates/build/src/types/IndexType'
+import { PackageFile } from 'npm-check-updates/build/src/types/PackageFile'
 import { dirname, join, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
