@@ -14,7 +14,8 @@ export function filterTypeScriptDiagnostics(
     if (
       fileName.indexOf('typescript/lib/lib.dom.d.ts') === -1 &&
       fileName.indexOf('@figma/plugin-typings/index.d.ts') === -1 &&
-      fileName.indexOf('@types/node/globals.d.ts') === -1
+      fileName.indexOf('@types/node/globals.d.ts') === -1 &&
+      fileName.indexOf('@types/node/ts4.8/globals.d.ts') === -1
     ) {
       return true
     }
