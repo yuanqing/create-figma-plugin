@@ -1,11 +1,12 @@
 import '!../css/base.css'
 
-import { FunctionComponent, h, render as preactRender } from 'preact'
+import { FunctionComponent, h, JSX, render as preactRender } from 'preact'
 
-export function render<P extends h.JSX.IntrinsicAttributes>(
-  Plugin: FunctionComponent<P>
-) {
-  return function (rootNode: HTMLElement, props: P): void {
+export function render<P>(Plugin: FunctionComponent<P>) {
+  return function (
+    rootNode: HTMLElement,
+    props: P & JSX.IntrinsicAttributes
+  ): void {
     preactRender(<Plugin {...props} />, rootNode)
   }
 }
