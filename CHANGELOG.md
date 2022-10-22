@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.4
+
+- `@create-figma-plugin/build@2.1.4`
+  - Suppressed the `Cannot redeclare block-scoped variable 'console'.` type-check error when using `@types/node`. ([#126](https://github.com/yuanqing/create-figma-plugin/issues/126))
+
+- `create-figma-plugin@2.1.4`
+  - Removed unnecessary imports in the `plugin/react-editor` template. ([#126](https://github.com/yuanqing/create-figma-plugin/issues/125))
+
+- Bumped dependencies in all packages, and removed usage of `untyped-dependencies.d.ts`.
+
 ## 2.1.3
 
 - `@create-figma-plugin/build@2.1.3`
