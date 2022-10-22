@@ -69,7 +69,12 @@ async function fetchFeedAsync(
       }
     })
     const json: any = await response.json()
-    result = result.concat(json.meta.resources)
+    const resources = json.meta.resources.filter(function (resource: {
+      roles: { is_public: boolean }
+    }) {
+      return resource.roles.is_public === true
+    })
+    result = result.concat(resources)
     url = json.pagination.next_page
   }
   return deduplicateArray(result)
