@@ -3,10 +3,6 @@
   "compilerOptions": {
     "lib": ["DOM", "ES2020"],
     "outDir": "lib",
-    "paths": {
-      "cssnano": ["./src/types/untyped-dependencies.d.ts"],
-      "postcss-modules": ["./src/types/untyped-dependencies.d.ts"]
-    },
     "rootDir": "src",
     "types": ["@types/node"]
   },

@@ -3,10 +3,8 @@
   "compilerOptions": {
     "lib": ["ES2020"],
     "outDir": "lib",
-    "paths": {
-      "is-utf8": ["./src/types/untyped-dependencies.d.ts"]
-    },
     "rootDir": "src",
+    "skipLibCheck": true,
     "types": ["@types/node"]
   },
   "include": ["src/**/*.ts"],
