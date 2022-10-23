@@ -4,6 +4,14 @@
   "title": "Introduction",
   "tweets": [
     {
+      "date": "Aug 19, 2022",
+      "handle": "markdalgleish",
+      "id": "1560442043683700736",
+      "name": "Mark Dalgleish",
+      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/754886061872979968/BzaOWhs1_400x400.jpg",
+      "text": "Create Figma Plugin is so great. It provides a suite of utilities and Preact components that fit with Figma’s UI, and it gives you a local dev setup with TypeScript and CSS Modules support. Thanks <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a> for your amazing work 🙏"
+    },
+    {
       "date": "Aug 21, 2021",
       "handle": "alexwidua",
       "id": "1428782856998989827",
@@ -80,7 +88,7 @@
 <p class="muted">Plugins</p>
 <ul>
 <% const featuredPlugins = plugins.filter(function (plugin) {
-return ['Beautiful Shadows', 'Contrast', 'Draw Connector', 'Gist', 'Protofly', 'Prototyper', 'Selection Variants'].indexOf(plugin.name) !== -1
+return ['Ando', 'Beautiful Shadows', 'Contrast', 'Draw Connector', 'Gist', 'html.to.design', 'Leading Trim', 'Protofly', 'Prototyper'].indexOf(plugin.name) !== -1
 }) %>
 <% for (const { id, name } of featuredPlugins) { %>
 <li class="featured-plugin">
@@ -96,7 +104,7 @@ return ['Beautiful Shadows', 'Contrast', 'Draw Connector', 'Gist', 'Protofly', '
 <p class="muted">Widgets</p>
 <ul>
 <% const featuredWidgets = widgets.filter(function (widget) {
-return ['Device Frames', 'Graphpad', 'Import PDF Into FigJam', 'Mad Lib', 'Scrum-A-Lot', 'Storymapper', 'Teams'].indexOf(widget.name) !== -1
+return ['Changelog', 'Device Frames', 'Graphpad', 'Import PDF Into FigJam', 'Markdown Notes', 'Mad Lib', 'Scrum-A-Lot', 'Storymapper', 'Teams'].indexOf(widget.name) !== -1
 }) %>
 <% for (const { id, name } of featuredWidgets) { %>
 <li class="featured-plugin">
