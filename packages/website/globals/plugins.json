@@ -198,6 +198,18 @@
   {
     "authors": [
       {
+        "name": "Maxim Artyushenko",
+        "url": "https://figma.com/@maxart2007"
+      }
+    ],
+    "description": "Copy and paste Auto Layout properties",
+    "githubUrl": null,
+    "id": "923016403442923783",
+    "name": "Copy and Paste Autolayout"
+  },
+  {
+    "authors": [
+      {
         "name": "Michael Yagudaev",
         "url": "https://twitter.com/yagudaev"
       }

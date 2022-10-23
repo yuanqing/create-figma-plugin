@@ -1,8 +1,15 @@
 import fs from 'fs-extra'
 import fetch from 'node-fetch'
 import pAll from 'p-all'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 const CONCURRENCY = 20
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const invalidIdsFilePath = join(__dirname, 'invalid-ids.json')
+const ignoredIdsFilePath = join(__dirname, 'ignored-ids.json')
 
 async function main(): Promise<void> {
   try {
@@ -20,19 +27,19 @@ async function main(): Promise<void> {
     ).map(function (item: { id: string }) {
       return item.id
     })
-    if (typeof args[2] === 'undefined') {
-      throw new Error('Need a file path')
-    }
-    const invalidIdsFilePath = args[2]
     const invalidIds: Array<string> = JSON.parse(
       await fs.readFile(invalidIdsFilePath, 'utf8')
+    )
+    const ignoredIds: Array<string> = JSON.parse(
+      await fs.readFile(ignoredIdsFilePath, 'utf8')
     )
     const data: Array<Record<string, any>> = await fetchDataAsync(type)
     for (const { id, isMatch, name } of data) {
       if (
         isMatch === false ||
         validIds.indexOf(id) !== -1 ||
-        invalidIds.indexOf(id) !== -1
+        invalidIds.indexOf(id) !== -1 ||
+        ignoredIds.indexOf(id) !== -1
       ) {
         continue
       }
