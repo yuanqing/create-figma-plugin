@@ -814,18 +814,6 @@
   {
     "authors": [
       {
-        "name": "Saeed Alipoor",
-        "url": "https://twitter.com/Sali__Pure"
-      }
-    ],
-    "description": "RTL PLZ as a single command to perform a one-time reverse",
-    "githubUrl": null,
-    "id": "940631928923964752",
-    "name": "RTL PLZ Reverse"
-  },
-  {
-    "authors": [
-      {
         "name": "LaMoore",
         "url": "https://figma.com/@la_moore"
       }
