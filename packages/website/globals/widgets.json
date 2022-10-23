@@ -6,6 +6,18 @@
         "url": "https://twitter.com/mrfesch"
       }
     ],
+    "description": "Seamlessly create changelogs for you and your team",
+    "githubUrl": null,
+    "id": "1121039535668586157",
+    "name": "Changelog"
+  },
+  {
+    "authors": [
+      {
+        "name": "Felix Tesche",
+        "url": "https://twitter.com/mrfesch"
+      }
+    ],
     "description": "Scribble quick interfaces on device mockups in FigJam",
     "githubUrl": "https://github.com/brechtknecht/Figjam-Device-Frames-Widget",
     "id": "1045386129853518633",

@@ -2,6 +2,18 @@
   {
     "authors": [
       {
+        "name": "Antonio Cao",
+        "url": "https://twitter.com/RemitNotPaucity"
+      }
+    ],
+    "description": "AI copilot for designers",
+    "githubUrl": null,
+    "id": "1145446664512862540",
+    "name": "Ando"
+  },
+  {
+    "authors": [
+      {
         "name": "Roman Nurik",
         "url": "https://twitter.com/romannurik"
       }
@@ -186,14 +198,14 @@
   {
     "authors": [
       {
-        "name": "Maxim Artyushenko",
-        "url": "https://figma.com/@maxart2007"
+        "name": "Michael Yagudaev",
+        "url": "https://twitter.com/yagudaev"
       }
     ],
-    "description": "Copy and paste Auto Layout properties",
-    "githubUrl": null,
-    "id": "923016403442923783",
-    "name": "Copy and Paste Autolayout"
+    "description": "Import a CSS gradient into Figma",
+    "githubUrl": "https://github.com/yagudaev/css-gradient-to-figma",
+    "id": "1157089605295322526",
+    "name": "CSS Gradient to Figma"
   },
   {
     "authors": [
@@ -230,18 +242,6 @@
     "githubUrl": null,
     "id": "1076733710017310027",
     "name": "Destroyer"
-  },
-  {
-    "authors": [
-      {
-        "name": "DhiWise",
-        "url": "https://dhiwise.com"
-      }
-    ],
-    "description": "Convert your design to Swift, Kotlin, or Flutter code",
-    "githubUrl": null,
-    "id": "1037309320238203168",
-    "name": "DhiWise"
   },
   {
     "authors": [
@@ -342,6 +342,18 @@
   {
     "authors": [
       {
+        "name": "Quest",
+        "url": "https://quest.ai/"
+      }
+    ],
+    "description": "Convert your Figma to React code components automatically",
+    "githubUrl": null,
+    "id": "862039267149408972",
+    "name": "Figma to React"
+  },
+  {
+    "authors": [
+      {
         "name": "Saeed Alipoor",
         "url": "https://twitter.com/Sali__Pure"
       }
@@ -374,6 +386,18 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-flatten-selection-to-bitmap",
     "id": "837846252158418235",
     "name": "Flatten Selection to Bitmap"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kristin Baumann",
+        "url": "https://twitter.com/kristin_baumann"
+      }
+    ],
+    "description": "View all your fonts directly to pick the right one for your design",
+    "githubUrl": null,
+    "id": "1139667456056598424",
+    "name": "Font Picker"
   },
   {
     "authors": [
@@ -474,6 +498,18 @@
   {
     "authors": [
       {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Convert any website into fully editable Figma designs",
+    "githubUrl": null,
+    "id": "1159123024924461424",
+    "name": "html.to.design"
+  },
+  {
+    "authors": [
+      {
         "name": "Jorge Martins",
         "url": "https://twitter.com/jorgemartns"
       }
@@ -522,38 +558,6 @@
   {
     "authors": [
       {
-        "name": "Karim Shakirov",
-        "url": "https://figma.com/@k2589"
-      }
-    ],
-    "description": "Manage Jira issues from Figma",
-    "githubUrl": null,
-    "id": "957889474923510992",
-    "name": "J4F"
-  },
-  {
-    "authors": [
-      {
-        "name": "Guillermo Velasquez",
-        "url": "https://figma.com/@moquez"
-      },
-      {
-        "name": "Michelle Guzmán O.",
-        "url": "https://figma.com/@michelleguzmano"
-      },
-      {
-        "name": "Peanutbuttr",
-        "url": "https://figma.com/@peanutbuttr"
-      }
-    ],
-    "description": "Generate accessible color combinations",
-    "githubUrl": null,
-    "id": "1044333944861264414",
-    "name": "Juliette"
-  },
-  {
-    "authors": [
-      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -566,6 +570,18 @@
   {
     "authors": [
       {
+        "name": "Mark Dalgleish",
+        "url": "https://twitter.com/markdalgleish"
+      }
+    ],
+    "description": "Trim your text elements, removing space above capital letters and below the baseline",
+    "githubUrl": "https://github.com/markdalgleish/figma-leading-trim",
+    "id": "1143761729202073143",
+    "name": "Leading Trim"
+  },
+  {
+    "authors": [
+      {
         "name": "Meni Zanzibar",
         "url": "https://figma.com/@meni"
       }
@@ -574,18 +590,6 @@
     "githubUrl": null,
     "id": "941410492434902618",
     "name": "Lorepsum"
-  },
-  {
-    "authors": [
-      {
-        "name": "Gregor Vostrak",
-        "url": "https://twitter.com/fullsnack_"
-      }
-    ],
-    "description": "Generate social media link preview images",
-    "githubUrl": null,
-    "id": "1040077180224578586",
-    "name": "Metaimage"
   },
   {
     "authors": [
@@ -614,18 +618,6 @@
   {
     "authors": [
       {
-        "name": "zekiblue",
-        "url": "https://twitter.com/zekiblue"
-      }
-    ],
-    "description": "Insert beautiful NFTs to your designs easily",
-    "githubUrl": null,
-    "id": "1109558289539963731",
-    "name": "Nifty Paste"
-  },
-  {
-    "authors": [
-      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -634,18 +626,6 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-organize-layers",
     "id": "786286754606650597",
     "name": "Organize Layers"
-  },
-  {
-    "authors": [
-      {
-        "name": "Manuel Muñoz Solera",
-        "url": "https://twitter.com/mamuso"
-      }
-    ],
-    "description": "Create an org chart in Figma from a JSON or a YAML file",
-    "githubUrl": null,
-    "id": "1091247524080548244",
-    "name": "Orgchart"
   },
   {
     "authors": [
@@ -686,6 +666,18 @@
   {
     "authors": [
       {
+        "name": "Ben Katz",
+        "url": "https://twitter.com/benktz"
+      }
+    ],
+    "description": "Create print-ready documents directly in Figma",
+    "githubUrl": null,
+    "id": "874441781480244375",
+    "name": "Print for Figma"
+  },
+  {
+    "authors": [
+      {
         "name": "Saeed Alipoor",
         "url": "https://twitter.com/Sali__Pure"
       }
@@ -718,18 +710,6 @@
     "githubUrl": "https://github.com/aashreys/prototyper",
     "id": "1020894954864594118",
     "name": "Prototyper"
-  },
-  {
-    "authors": [
-      {
-        "name": "Quest",
-        "url": "https://quest.ai/"
-      }
-    ],
-    "description": "Convert your Figma to React code components automatically",
-    "githubUrl": null,
-    "id": "862039267149408972",
-    "name": "Quest"
   },
   {
     "authors": [
@@ -770,6 +750,34 @@
   {
     "authors": [
       {
+        "name": "Flexcode Labs",
+        "url": "https://twitter.com/flexcodelabs"
+      },
+      {
+        "name": "Neema Adam",
+        "url": "https://twitter.com/neicoree"
+      }
+    ],
+    "description": "Generates hues, tints, and/or shades from a given color",
+    "githubUrl": "https://github.com/flexcodelabs/rangi",
+    "id": "1153959136228678599",
+    "name": "rangi"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kirk Bentley",
+        "url": "https://figma.com/@kirkbentley"
+      }
+    ],
+    "description": "Quickly resize your device mockups using a top-down responsive layout method",
+    "githubUrl": null,
+    "id": "1140490231443213828",
+    "name": "Reframer"
+  },
+  {
+    "authors": [
+      {
         "name": "Saeed Alipoor",
         "url": "https://twitter.com/Sali__Pure"
       }
@@ -806,18 +814,6 @@
   {
     "authors": [
       {
-        "name": "Marco Montalbano",
-        "url": "https://figma.com/@marcomontalbano"
-      }
-    ],
-    "description": "Run GitHub Actions workflows from Figma",
-    "githubUrl": "https://github.com/marcomontalbano/figma-plugin-run-github-actions-workflows",
-    "id": "1096890502176164513",
-    "name": "Run GitHub Actions Workflows"
-  },
-  {
-    "authors": [
-      {
         "name": "LaMoore",
         "url": "https://figma.com/@la_moore"
       }
@@ -826,18 +822,6 @@
     "githubUrl": null,
     "id": "1053846082213772972",
     "name": "Scarlab Icons"
-  },
-  {
-    "authors": [
-      {
-        "name": "Ishan Chhabra",
-        "url": "https://twitter.com/chh_abracadabra"
-      }
-    ],
-    "description": "Automate and mass generate frames with real data",
-    "githubUrl": null,
-    "id": "952689592792995578",
-    "name": "Scribe"
   },
   {
     "authors": [
@@ -894,18 +878,6 @@
   {
     "authors": [
       {
-        "name": "Saeed Alipoor",
-        "url": "https://twitter.com/Sali__Pure"
-      }
-    ],
-    "description": "Create themes for the Sonnat UI kit",
-    "githubUrl": null,
-    "id": "1037849474159092686",
-    "name": "Sonnat Theme Builder"
-  },
-  {
-    "authors": [
-      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -918,42 +890,14 @@
   {
     "authors": [
       {
-        "name": "Ika Pkhakadze",
-        "url": "https://figma.com/@ddramone"
-      },
-      {
-        "name": "Zviad Sichinava",
-        "url": "https://figma.com/@zikosichi"
-      }
-    ],
-    "description": "Create themes for Stack Browser",
-    "githubUrl": null,
-    "id": "1038822221814377265",
-    "name": "Stack Theme Builder"
-  },
-  {
-    "authors": [
-      {
-        "name": "Francois Valdy",
-        "url": "https://twitter.com/gluckies"
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
       }
     ],
     "description": "Turn your Storybook or Backlight stories into a Figma UI Kit",
     "githubUrl": null,
     "id": "1075741140914731351",
     "name": "story.to.design"
-  },
-  {
-    "authors": [
-      {
-        "name": "Christoph Johns",
-        "url": "https://figma.com/@cajohns"
-      }
-    ],
-    "description": "Generate links for your prototype based on your frame contents",
-    "githubUrl": "https://github.com/christophajohns/suggested-links",
-    "id": "1085560724786600653",
-    "name": "Suggested Links"
   },
   {
     "authors": [
@@ -994,18 +938,6 @@
   {
     "authors": [
       {
-        "name": "Osung Jung",
-        "url": "https://figma.com/@7c961091_9f98_4"
-      }
-    ],
-    "description": "Align and distribute layers using an 8-pixel grid",
-    "githubUrl": null,
-    "id": "983672137155100557",
-    "name": "Token Space 8"
-  },
-  {
-    "authors": [
-      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -1026,6 +958,18 @@
     "githubUrl": "https://figma.com/community/plugin/1082201909715309983/XAuto",
     "id": "1082201909715309983",
     "name": "XAuto"
+  },
+  {
+    "authors": [
+      {
+        "name": "Frad Lee",
+        "url": "https://twitter.com/FradSer"
+      }
+    ],
+    "description": "Tools to help you design XR applications",
+    "githubUrl": "https://github.com/FradSer/figma-xr-design-tools",
+    "id": "1149634536150338038",
+    "name": "XR Design Tools"
   },
   {
     "authors": [
