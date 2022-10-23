@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/ui",
-  "version": "2.1.4-alpha.0",
+  "version": "2.1.4",
   "publishConfig": {
     "access": "public"
   },
@@ -51,7 +51,7 @@
     "storybook-clean": "rimraf '*.log' build 'src/**/*.css.d.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^2.1.4-alpha.0"
+    "@create-figma-plugin/utilities": "^2.1.4"
   },
   "devDependencies": {
     "@storybook/addon-storysource": "^6.5.12",
