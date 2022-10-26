@@ -87,6 +87,26 @@ function printStats(stats: Array<Stat>, type: 'plugin' | 'widget'): void {
     ]
   })
   data.splice(0, 0, ['name', 'runs', 'likes', 'url'])
+  const totalRunCount = stats.reduce(function (
+    total: number,
+    { runCount }: Stat
+  ) {
+    return total + runCount
+  },
+  0)
+  const totalLikeCount = stats.reduce(function (
+    total: number,
+    { likeCount }: Stat
+  ) {
+    return total + likeCount
+  },
+  0)
+  data.push([
+    '',
+    new Intl.NumberFormat().format(totalRunCount),
+    new Intl.NumberFormat().format(totalLikeCount),
+    ''
+  ])
   const table = textTable(data)
   console.log(table) // eslint-disable-line no-console
 }
