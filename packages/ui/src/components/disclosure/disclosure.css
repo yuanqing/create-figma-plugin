@@ -1,4 +1,4 @@
-.disclosure {
+.label {
   position: relative;
 }
 
@@ -39,9 +39,5 @@
 }
 
 .children {
-  display: none;
   color: var(--figma-color-text);
-}
-.input:checked ~ .children {
-  display: block;
 }

@@ -1,5 +1,5 @@
 /** @jsx h */
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, Fragment, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { IconCaretRight16 } from '../../icons/icon-16/icon-caret-right-16'
@@ -36,23 +36,25 @@ export function Disclosure({
   )
 
   return (
-    <label class={styles.disclosure}>
-      <input
-        {...rest}
-        checked={open === true}
-        class={styles.input}
-        onClick={onClick}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
-        type="checkbox"
-      />
-      <div class={styles.title}>
-        <div class={styles.icon}>
-          <IconCaretRight16 />
+    <Fragment>
+      <label class={styles.label}>
+        <input
+          {...rest}
+          checked={open === true}
+          class={styles.input}
+          onClick={onClick}
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
+          type="checkbox"
+        />
+        <div class={styles.title}>
+          <div class={styles.icon}>
+            <IconCaretRight16 />
+          </div>
+          {title}
         </div>
-        {title}
-      </div>
-      <div class={styles.children}>{children}</div>
-    </label>
+      </label>
+      {open === true ? <div class={styles.children}>{children}</div> : null}
+    </Fragment>
   )
 }
