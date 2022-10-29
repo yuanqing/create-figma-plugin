@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.5
+
+- `@create-figma-plugin/ui@2.1.5`
+  - Limit the hit area of the `Disclosure` component to the title. ([#128](https://github.com/yuanqing/create-figma-plugin/issues/128))
+
 ## 2.1.4
 
 - `@create-figma-plugin/build@2.1.4`
