@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.6
+
+- `@create-figma-plugin/ui@2.1.6`
+  - Added padding to the `Textbox`, `TextboxAutocomplete`, `TextboxMultiline` and `TextboxNumeric` components to prevent overflowing text from being clipped ([#136](https://github.com/yuanqing/create-figma-plugin/issues/136))
+
+- `@create-figma-plugin/utilities@2.1.6`
+  - Fixed a bug with `setAbsolutePosition` incorrectly setting the node position for a node nested within a `Section` node ([#137](https://github.com/yuanqing/create-figma-plugin/issues/137))
+  - Fixed a bug with Event utilities throwing an error when `window.parent.postMessage` is called ([#138](https://github.com/yuanqing/create-figma-plugin/issues/138))
+
 ## 2.1.5
 
 - `@create-figma-plugin/ui@2.1.5`
