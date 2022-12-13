@@ -21,7 +21,7 @@
 .textarea {
   display: block;
   width: 100%;
-  padding: 6px 0 6px var(--space-extra-small);
+  padding: 6px var(--space-extra-small) 6px var(--space-extra-small);
   background-color: transparent;
   border-radius: var(--border-radius-2);
   color: var(--figma-color-text);
