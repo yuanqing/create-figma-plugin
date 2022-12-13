@@ -15,7 +15,7 @@ export function setAbsolutePosition(
   let y = typeof vector.y === 'undefined' ? null : vector.y
   let parentNode = node.parent
   while (parentNode !== null && parentNode.type !== 'PAGE') {
-    if (parentNode.type === 'FRAME') {
+    if (parentNode.type === 'FRAME' || parentNode.type === 'SECTION') {
       if (x !== null) {
         x = x - parentNode.x
       }
