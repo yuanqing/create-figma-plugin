@@ -22,6 +22,7 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
   const {
     api,
     build,
+    capabilities,
     commandId,
     containsWidget,
     editorType,
@@ -73,7 +74,8 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     permissions: permissions !== null ? permissions : undefined,
     enableProposedApi: enableProposedApi === true ? true : undefined,
     enablePrivatePluginApi: enablePrivatePluginApi === true ? true : undefined,
-    build: build !== null ? build : undefined
+    build: build !== null ? build : undefined,
+    capabilities: capabilities !== null ? capabilities : undefined
   }
   /* eslint-enable sort-keys-fix/sort-keys-fix */
   const result = await overrideManifestAsync(manifest)

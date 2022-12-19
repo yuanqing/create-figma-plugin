@@ -21,6 +21,7 @@ export interface RawConfig extends RawConfigCommand {
   readonly enableProposedApi?: boolean
   readonly enablePrivatePluginApi?: boolean
   readonly build?: string
+  readonly capabilities?: Array<string>
 }
 
 export type RawConfigCommandSeparator = '-'

@@ -25,6 +25,7 @@ test('`api`', async function (t) {
     ...config,
     api: '42',
     build: null,
+    capabilities: null,
     containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: false,
@@ -41,6 +42,7 @@ test('`widgetApi`', async function (t) {
     ...config,
     api: '1.0.0',
     build: null,
+    capabilities: null,
     containsWidget: true,
     editorType: ['figma'],
     enablePrivatePluginApi: false,
@@ -57,6 +59,7 @@ test('`editorType`', async function (t) {
     ...config,
     api: '1.0.0',
     build: null,
+    capabilities: null,
     containsWidget: false,
     editorType: ['figjam', 'figma'],
     enablePrivatePluginApi: false,
@@ -73,6 +76,7 @@ test('`containsWidget`', async function (t) {
     ...config,
     api: '1.0.0',
     build: null,
+    capabilities: null,
     containsWidget: true,
     editorType: ['figjam'],
     enablePrivatePluginApi: false,
@@ -89,6 +93,7 @@ test('`enablePrivatePluginApi`', async function (t) {
     ...config,
     api: '1.0.0',
     build: null,
+    capabilities: null,
     containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: true,
@@ -105,6 +110,7 @@ test('`enableProposedApi`', async function (t) {
     ...config,
     api: '1.0.0',
     build: null,
+    capabilities: null,
     containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: false,
@@ -121,6 +127,24 @@ test('`build`', async function (t) {
     ...config,
     api: '1.0.0',
     build: 'c',
+    capabilities: null,
+    containsWidget: false,
+    editorType: ['figma'],
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
+  })
+})
+
+test('`capabilities`', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '08-capabilities'))
+  t.deepEqual(await readConfigAsync(), {
+    ...config,
+    api: '1.0.0',
+    build: null,
+    capabilities: ['textreview'],
     containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: false,

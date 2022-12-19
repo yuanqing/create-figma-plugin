@@ -15,6 +15,7 @@ export type Manifest = {
   enableProposedApi?: boolean
   enablePrivatePluginApi?: boolean
   build?: string
+  capabilities?: Array<string>
 }
 
 export type ManifestMenuItem = {
