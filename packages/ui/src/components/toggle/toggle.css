@@ -67,7 +67,7 @@
 }
 
 .children {
-  padding: 2px 0 0 32px;
+  padding: 2px 0 2px 32px;
   color: var(--figma-color-text);
 }
 .disabled .children {
