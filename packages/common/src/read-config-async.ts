@@ -23,6 +23,7 @@ import {
 const defaultConfig: Config = {
   api: constants.build.manifestPluginApi,
   build: null,
+  capabilities: null,
   commandId: join(constants.build.srcDirectoryName, 'main.ts--default'),
   containsWidget: false,
   editorType: ['figma'],
@@ -58,6 +59,7 @@ export async function readConfigAsync(): Promise<Config> {
   const {
     api,
     build,
+    capabilities,
     containsWidget,
     editorType,
     enableProposedApi,
@@ -76,6 +78,7 @@ export async function readConfigAsync(): Promise<Config> {
   return {
     api: typeof api === 'undefined' ? constants.build.manifestPluginApi : api,
     build: typeof build === 'undefined' ? null : build,
+    capabilities: typeof capabilities === 'undefined' ? null : capabilities,
     containsWidget:
       typeof containsWidget === 'undefined' ? false : containsWidget,
     editorType: typeof editorType === 'undefined' ? ['figma'] : editorType,

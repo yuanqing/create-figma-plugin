@@ -305,6 +305,7 @@ test('additional fields', async function (t) {
   t.deepEqual(manifestJson, {
     api: '42',
     build: 'a',
+    capabilities: ['textreview'],
     containsWidget: true,
     editorType: ['figjam'],
     enablePrivatePluginApi: true,

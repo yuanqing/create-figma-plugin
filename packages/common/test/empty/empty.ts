@@ -9,6 +9,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const config = {
   api: '1.0.0',
   build: null,
+  capabilities: null,
   commandId: 'src/main.ts--default',
   containsWidget: false,
   editorType: ['figma'],

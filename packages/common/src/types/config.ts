@@ -22,6 +22,7 @@ export interface Config extends ConfigCommand {
   readonly enableProposedApi: boolean
   readonly enablePrivatePluginApi: boolean
   readonly build: null | string
+  readonly capabilities: null | Array<string>
 }
 
 export type ConfigCommandSeparator = { readonly separator: true }

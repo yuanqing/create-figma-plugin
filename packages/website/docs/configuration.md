@@ -224,6 +224,12 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 *Optional.* Set to `true` to allow the use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
 
+### `capabilities`
+
+(*`Array<string>`*)
+
+*Optional.* For specifying the capabilities your plugin has access to. At the moment the only applicable capability is `['textreview']`.
+
 ## JSON schema
 
 Validate the plugin configuration in your `package.json` file using [Create Figma Plugin’s configuration JSON schema](https://yuanqing.github.io/create-figma-plugin/figma-plugin.json).
