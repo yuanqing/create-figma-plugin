@@ -1,4 +1,3 @@
-/** @jsx h */
 /* eslint-disable no-console */
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'

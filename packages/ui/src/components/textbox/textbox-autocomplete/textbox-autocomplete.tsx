@@ -1,8 +1,7 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import menuStyles from '../../../css/menu.css'
+import menuStyles from '../../../css/menu.module.css'
 import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside'
 import { IconMenuCheckmarkChecked16 } from '../../../icons/icon-16/icon-menu-checkmark-checked-16'
 import { OnValueChange, Props } from '../../../types/types'
@@ -10,8 +9,8 @@ import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { computeNextValue } from '../private/compute-next-value'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
-import textboxStyles from '../textbox/textbox.css'
-import textboxAutocompleteStyles from './textbox-autocomplete.css'
+import textboxStyles from '../textbox/textbox.module.css'
+import textboxAutocompleteStyles from './textbox-autocomplete.module.css'
 
 const EMPTY_STRING = ''
 const INVALID_ID = null

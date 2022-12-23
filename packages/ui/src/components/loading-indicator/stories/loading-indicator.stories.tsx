@@ -1,4 +1,3 @@
-/** @jsx h */
 import { h } from 'preact'
 
 import { LoadingIndicator } from '../loading-indicator'

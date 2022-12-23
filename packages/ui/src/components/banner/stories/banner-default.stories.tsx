@@ -1,4 +1,3 @@
-/** @jsx h */
 import { h } from 'preact'
 
 import { IconInfo32 } from '../../../icons/icon-32/icon-info-32'

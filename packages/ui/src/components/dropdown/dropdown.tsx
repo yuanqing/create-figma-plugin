@@ -1,8 +1,7 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import menuStyles from '../../css/menu.css'
+import menuStyles from '../../css/menu.module.css'
 import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside'
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu'
 import { IconControlChevronDown8 } from '../../icons/icon-8/icon-control-chevron-down-8'
@@ -10,7 +9,7 @@ import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkm
 import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref'
-import dropdownStyles from './dropdown.css'
+import dropdownStyles from './dropdown.module.css'
 import { INVALID_ID, ITEM_ID_DATA_ATTRIBUTE_NAME } from './private/constants'
 import { Id } from './private/types'
 import { updateMenuElementLayout } from './private/update-menu-element-layout'

@@ -1,4 +1,3 @@
-/** @jsx h */
 /* eslint-disable no-console */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'

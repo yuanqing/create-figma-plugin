@@ -1,10 +1,9 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
-import styles from './toggle.css'
+import styles from './toggle.module.css'
 
 export type ToggleProps<Name extends string> = {
   children: ComponentChildren

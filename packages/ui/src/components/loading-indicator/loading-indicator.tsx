@@ -1,9 +1,8 @@
-/** @jsx h */
 import { h, JSX } from 'preact'
 
 import { IconColor } from '../../types/colors'
 import { Props } from '../../types/types'
-import styles from './loading-indicator.css'
+import styles from './loading-indicator.module.css'
 
 export type LoadingIndicatorProps = {
   color?: IconColor

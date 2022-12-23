@@ -1,9 +1,8 @@
-/** @jsx h */
 import { ComponentChildren, Fragment, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types/types'
-import styles from './tabs.css'
+import styles from './tabs.module.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
 

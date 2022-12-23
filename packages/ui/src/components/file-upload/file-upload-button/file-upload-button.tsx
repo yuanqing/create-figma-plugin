@@ -1,13 +1,12 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
-import buttonStyles from '../../button/button.css'
+import buttonStyles from '../../button/button.module.css'
 import { LoadingIndicator } from '../../loading-indicator/loading-indicator'
 import { fileComparator } from '../private/file-comparator'
-import fileUploadButtonStyles from './file-upload-button.css'
+import fileUploadButtonStyles from './file-upload-button.module.css'
 
 export type FileUploadButtonProps = {
   acceptedFileTypes?: Array<string>

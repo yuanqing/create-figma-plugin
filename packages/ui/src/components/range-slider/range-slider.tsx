@@ -1,10 +1,9 @@
-/** @jsx h */
 import { h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
-import styles from './range-slider.css'
+import styles from './range-slider.module.css'
 
 export type RangeSliderProps<Name extends string> = {
   disabled?: boolean

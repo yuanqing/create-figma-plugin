@@ -1,4 +1,3 @@
-/** @jsx h */
 import { ComponentChild, Fragment, h, JSX, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
@@ -8,7 +7,7 @@ import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-fo
 import { getFocusableElements } from '../../utilities/private/get-focusable-elements'
 import { IconButton } from '../icon-button/icon-button'
 import { Text } from '../text/text'
-import styles from './modal.css'
+import styles from './modal.module.css'
 
 export type ModalProps = {
   children: ComponentChild

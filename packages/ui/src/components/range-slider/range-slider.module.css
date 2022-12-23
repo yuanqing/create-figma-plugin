@@ -35,9 +35,9 @@
   width: 9px;
   height: 9px;
   border: 1px solid var(--figma-color-bg);
+  border-radius: 50%;
   -webkit-appearance: none;
   background-color: var(--figma-color-bg-inverse);
-  border-radius: 50%;
 }
 .input:focus::-webkit-slider-thumb {
   box-shadow: 0 0 0 2px var(--figma-color-border-brand-strong);

@@ -1,8 +1,7 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 
 import { Props } from '../../types/types'
-import styles from './bold.css'
+import styles from './bold.module.css'
 
 export type BoldProps = {
   children: ComponentChildren

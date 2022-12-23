@@ -1,8 +1,7 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 
 import { Props } from '../../types/types'
-import styles from './muted.css'
+import styles from './muted.module.css'
 
 export type MutedProps = {
   children: ComponentChildren

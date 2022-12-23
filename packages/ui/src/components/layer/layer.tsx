@@ -1,10 +1,9 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { OnValueChange, Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
-import styles from './layer.css'
+import styles from './layer.module.css'
 
 export type LayerProps<Name extends string> = {
   bold?: boolean

@@ -1,4 +1,3 @@
-/** @jsx h */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
@@ -7,7 +6,7 @@ import { OnValueChange, Props } from '../../../types/types'
 import { createClassName } from '../../../utilities/create-class-name'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating'
-import styles from './textbox-multiline.css'
+import styles from './textbox-multiline.module.css'
 
 const EMPTY_STRING = ''
 

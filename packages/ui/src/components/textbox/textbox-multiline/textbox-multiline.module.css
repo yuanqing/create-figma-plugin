@@ -22,8 +22,8 @@
   display: block;
   width: 100%;
   padding: 6px var(--space-extra-small) 6px var(--space-extra-small);
-  background-color: transparent;
   border-radius: var(--border-radius-2);
+  background-color: transparent;
   color: var(--figma-color-text);
   resize: none;
 }

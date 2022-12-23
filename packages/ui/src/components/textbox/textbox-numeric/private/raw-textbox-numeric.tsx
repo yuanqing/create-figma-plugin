@@ -1,9 +1,9 @@
-/** @jsx h */
 import {
   evaluateNumericExpression,
-  isValidNumericInput
+  isValidNumericInput,
+  MIXED_NUMBER,
+  MIXED_STRING
 } from '@create-figma-plugin/utilities'
-import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 

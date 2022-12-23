@@ -1,4 +1,3 @@
-/** @jsx h */
 import { h } from 'preact'
 
 import { IconCheckCircle32 } from '../../../icons/icon-32/icon-check-circle-32'

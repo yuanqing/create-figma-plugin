@@ -1,4 +1,3 @@
-/** @jsx h */
 /* eslint-disable no-console */
 import { h } from 'preact'
 

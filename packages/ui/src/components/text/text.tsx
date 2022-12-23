@@ -1,9 +1,8 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 
 import { Props } from '../../types/types'
 import { createClassName } from '../../utilities/create-class-name'
-import styles from './text.css'
+import styles from './text.module.css'
 
 export type TextProps = {
   align?: TextAlignment

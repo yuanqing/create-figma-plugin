@@ -1,5 +1,7 @@
-import { convertHexColorToRgbColor } from '@create-figma-plugin/utilities'
-import { MIXED_STRING } from '@create-figma-plugin/utilities'
+import {
+  convertHexColorToRgbColor,
+  MIXED_STRING
+} from '@create-figma-plugin/utilities'
 
 export function createRgbaColor(
   hexColor: string,

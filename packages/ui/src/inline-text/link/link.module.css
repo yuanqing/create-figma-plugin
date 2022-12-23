@@ -7,8 +7,8 @@
   text-decoration: underline;
 }
 .link:focus {
-  background-color: var(--figma-color-bg-selected);
   border-radius: var(--border-radius-2);
+  background-color: var(--figma-color-bg-selected);
   outline: 0;
 }
 

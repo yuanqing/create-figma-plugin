@@ -1,9 +1,8 @@
-/** @jsx h */
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Props } from '../../types/types'
-import styles from './icon-button.css'
+import styles from './icon-button.module.css'
 
 export type IconButtonProps = {
   children: ComponentChildren

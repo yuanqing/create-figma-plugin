@@ -1,4 +1,3 @@
-/** @jsx h */
 import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
@@ -10,7 +9,7 @@ import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeri
 import { createRgbaColor } from './private/create-rgba-color'
 import { normalizeUserInputColor } from './private/normalize-hex-color'
 import { updateHexColor } from './private/update-hex-color'
-import styles from './textbox-color.css'
+import styles from './textbox-color.module.css'
 
 const EMPTY_STRING = ''
 

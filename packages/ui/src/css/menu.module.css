@@ -3,8 +3,8 @@
   left: 0;
   min-width: 100%;
   padding: var(--space-extra-small) 0;
-  background-color: #1e1e1e; /* FIXME */
   border-radius: var(--border-radius-2);
+  background-color: #1e1e1e; /* FIXME */
   box-shadow: var(--box-shadow-menu);
   color: rgba(255, 255, 255, 1); /* FIXME */
   font-size: var(--font-size-12);

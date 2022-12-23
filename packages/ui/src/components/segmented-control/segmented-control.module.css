@@ -39,8 +39,8 @@
   cursor: not-allowed;
 }
 .input:checked ~ .children {
-  background-color: var(--figma-color-bg-tertiary);
   border-radius: var(--border-radius-2);
+  background-color: var(--figma-color-bg-tertiary);
 }
 .input:disabled ~ .children {
   color: var(--figma-color-text-disabled);

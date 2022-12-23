@@ -1,4 +1,3 @@
-/** @jsx h */
 import { h } from 'preact'
 
 import { Container } from '../container'

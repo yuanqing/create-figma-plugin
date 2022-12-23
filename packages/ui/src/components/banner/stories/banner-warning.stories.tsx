@@ -1,4 +1,3 @@
-/** @jsx h */
 import { h } from 'preact'
 
 import { IconWarning32 } from '../../../icons/icon-32/icon-warning-32'
