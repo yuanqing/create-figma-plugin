@@ -76,7 +76,7 @@
   "prettier": "eslint-config-yuanqing/prettier",
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "pre-push": "turbo run fix lint test build"
+    "pre-push": "npx turbo run fix lint test build"
   },
   "stylelint": {
     "extends": "stylelint-config-yuanqing"
