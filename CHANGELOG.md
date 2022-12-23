@@ -1,13 +1,31 @@
 # Changelog
 
+## 2.2.0
+
+- `@create-figma-plugin/build@2.2.0`
+  - Pinned the `build-figma-plugin` CLI to `typescript@>=4`. ([#139](https://github.com/yuanqing/create-figma-plugin/issues/139))
+  - Added support for the new `capabilities` config to enable usage of the new text review API. ([#140](https://github.com/yuanqing/create-figma-plugin/issues/140))
+
+- `@create-figma-plugin/ui@2.2.0`
+  - Renamed all CSS files to have a `.module.css` prefix.
+  - Switched to using Vite to build the Storybook.
+
+- `create-figma-plugin@2.2.0`
+  - Pinned to `preact@>=10` and `typescript@>=4` in all plugin and widget templates.
+
+- Bumped dependencies in all packages.
+- Replaced `lerna run` with `turbo run`.
+- Replaced `node --loader ts-node/esm` with `tsx`.
+- Refactored all `npm` `scripts`.
+
 ## 2.1.6
 
 - `@create-figma-plugin/ui@2.1.6`
-  - Added padding to the `Textbox`, `TextboxAutocomplete`, `TextboxMultiline` and `TextboxNumeric` components to prevent overflowing text from being clipped ([#136](https://github.com/yuanqing/create-figma-plugin/issues/136))
+  - Added padding to the `Textbox`, `TextboxAutocomplete`, `TextboxMultiline` and `TextboxNumeric` components to prevent overflowing text from being clipped. ([#136](https://github.com/yuanqing/create-figma-plugin/issues/136))
 
 - `@create-figma-plugin/utilities@2.1.6`
-  - Fixed a bug with `setAbsolutePosition` incorrectly setting the node position for a node nested within a `Section` node ([#137](https://github.com/yuanqing/create-figma-plugin/issues/137))
-  - Fixed a bug with Event utilities throwing an error when `window.parent.postMessage` is called ([#138](https://github.com/yuanqing/create-figma-plugin/issues/138))
+  - Fixed a bug with `setAbsolutePosition` incorrectly setting the node position for a node nested within a `Section` node. ([#137](https://github.com/yuanqing/create-figma-plugin/issues/137))
+  - Fixed a bug with Event utilities throwing an error when `window.parent.postMessage` is called. ([#138](https://github.com/yuanqing/create-figma-plugin/issues/138))
 
 ## 2.1.5
 
