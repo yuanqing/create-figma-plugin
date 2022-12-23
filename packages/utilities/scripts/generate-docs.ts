@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 import { createCategories, parseExportedFunctionsAsync } from 'generate-ts-docs'
-import { dirname, join, resolve } from 'path'
+import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 import { renderFunctionDataToMarkdown } from './render-function-data-to-markdown.js'
@@ -15,14 +15,11 @@ async function main(): Promise<void> {
       '!src/**/private/**/*'
     ]
     const tsconfigFilePath = resolve(__dirname, '..', 'tsconfig.json')
-    const outputFilePath = join(
-      __dirname,
-      '..',
-      '..',
-      'website',
-      'docs',
-      'utilities.md'
-    )
+    const args = process.argv.slice(2)
+    if (args.length === 0) {
+      throw new Error('Need an output file path')
+    }
+    const outputFilePath = args[0]
     await generateDocsAsync(globPatterns, tsconfigFilePath, outputFilePath)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
