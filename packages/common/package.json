@@ -29,28 +29,41 @@
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "npm run clean && npm run generate-index-ts && tsc --build",
-    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
-    "generate-index-ts": "node --loader ts-node/esm ../../scripts/generate-index-ts.ts -- 'src/**/*.ts' && eslint --fix src/index.ts",
-    "fix": "eslint --fix '{src,test}/**/*.ts' && prettier --loglevel error --write '*.json' 'test/**/fixtures/**/*.json'",
+    "prebuild": "npm run clean",
+    "build": "npm run build:js && npm run build:generate-index",
+    "build:js": "tsc --build",
+    "build:generate-index": "tsx ../../scripts/generate-index.ts -- 'src/**/*.ts' && eslint --fix src/index.ts",
+    "clean": "rimraf '*.log' .turbo lib tsconfig.tsbuildinfo",
+    "fix": "concurrently npm:fix:js npm:fix:json",
+    "fix:js": "eslint --fix '{src,test}/**/*.ts'",
+    "fix:json": "prettier --loglevel error --write '*.json' 'test/**/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
-    "test": "npm run build && ava --serial 'test/**/*.ts'"
+    "pretest": "npm run build",
+    "test": "ava --serial 'test/**/*.ts'"
   },
   "dependencies": {
     "@sindresorhus/slugify": "2.1.1",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.1.0",
     "kleur": "^4.1.5"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
-    "@types/node": "^18.11.3",
-    "ava": "^4.3.3",
-    "eslint": "^8.26.0",
-    "eslint-config-yuanqing": "^0.0.6",
-    "prettier": "^2.7.1",
+    "@types/node": "^18.11.17",
+    "@typescript-eslint/eslint-plugin": "5.47.0",
+    "ava": "^5.1.0",
+    "concurrently": "^7.6.0",
+    "eslint": "^8.30.0",
+    "eslint-config-yuanqing": "0.0.7",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.31.11",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-simple-import-sort": "8.0.0",
+    "eslint-plugin-sort-keys-fix": "1.1.2",
+    "prettier": "^2.8.1",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "tsx": "^3.12.1",
+    "typescript": "^4.9.4"
   },
   "ava": {
     "extensions": {
@@ -59,7 +72,7 @@
     "failFast": true,
     "nodeArguments": [
       "--loader",
-      "ts-node/esm"
+      "tsx"
     ],
     "timeout": "2m",
     "workerThreads": false

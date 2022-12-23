@@ -2,6 +2,7 @@
 *.log
 *.css.d.ts
 *.tsbuildinfo
+.turbo
 lib/
 node_modules/
 sandbox/

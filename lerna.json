@@ -1,11 +1,6 @@
 {
   "version": "2.1.6",
-  "npmClient": "npm",
-  "useWorkspaces": true,
   "command": {
-    "bootstrap": {
-      "forceLocal": true
-    },
     "version": {
       "message": "%v",
       "push": false
