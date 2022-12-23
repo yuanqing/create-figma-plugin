@@ -1,4 +1,3 @@
-/** @jsx h */
 import '../src/css/theme.css'
 import '../src/css/base.css'
 

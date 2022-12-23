@@ -1,38 +1,4 @@
-const baseCssRegex = /css\/(?:base|theme)\.css$/
-
-function webpackFinal(config) {
-  const index = config.module.rules.findIndex(function (rule) {
-    return rule.test.toString() === '/\\.css$/'
-  })
-  if (index === -1) {
-    throw new Error(
-      'Module rule for `.css` files not found in Storybook webpack config'
-    )
-  }
-  config.module.rules[index] = {
-    exclude: baseCssRegex,
-    sideEffects: true,
-    test: /\.css$/,
-    use: [
-      {
-        loader: 'style-loader'
-      },
-      {
-        loader: 'css-loader',
-        options: {
-          importLoaders: 0,
-          modules: true
-        }
-      }
-    ]
-  }
-  config.module.rules.splice(index + 1, 0, {
-    sideEffects: true,
-    test: baseCssRegex,
-    use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
-  })
-  return config
-}
+/* eslint-env node */
 
 module.exports = {
   addons: [
@@ -40,6 +6,9 @@ module.exports = {
     'storybook-dark-mode',
     'storybook-addon-themes'
   ],
-  stories: ['../src/**/stories/*.stories.tsx'],
-  webpackFinal
+  core: {
+    builder: '@storybook/builder-vite',
+    disableTelemetry: true
+  },
+  stories: ['../src/**/stories/*.stories.tsx']
 }
