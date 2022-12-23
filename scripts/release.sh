@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# generate docs
-npm run generate-docs
-
 # build
 npm run build
 
