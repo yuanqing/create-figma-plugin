@@ -1,3 +1,5 @@
+/* eslint-disable no-inner-declarations */
+
 import fs from 'fs-extra'
 import { globby } from 'globby'
 import ts from 'typescript'
