@@ -1,4 +1,5 @@
 import { blue, green, red } from 'kleur/colors'
+
 const ESC = '\u001B['
 
 function clearPreviousLine(): void {
