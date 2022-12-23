@@ -19,10 +19,10 @@ export interface Config extends ConfigCommand {
   readonly id: string
   readonly relaunchButtons: null | Array<ConfigRelaunchButton>
   readonly permissions: null | Array<string>
+  readonly capabilities: null | Array<string>
   readonly enableProposedApi: boolean
   readonly enablePrivatePluginApi: boolean
   readonly build: null | string
-  readonly capabilities: null | Array<string>
 }
 
 export type ConfigCommandSeparator = { readonly separator: true }

@@ -1,0 +1,9 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "permissions": [
+      "currentuser"
+    ]
+  }
+}

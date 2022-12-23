@@ -72,10 +72,10 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
         ? createRelaunchButtons(relaunchButtons)
         : undefined,
     permissions: permissions !== null ? permissions : undefined,
+    capabilities: capabilities !== null ? capabilities : undefined,
     enableProposedApi: enableProposedApi === true ? true : undefined,
     enablePrivatePluginApi: enablePrivatePluginApi === true ? true : undefined,
-    build: build !== null ? build : undefined,
-    capabilities: capabilities !== null ? capabilities : undefined
+    build: build !== null ? build : undefined
   }
   /* eslint-enable sort-keys-fix/sort-keys-fix */
   const result = await overrideManifestAsync(manifest)

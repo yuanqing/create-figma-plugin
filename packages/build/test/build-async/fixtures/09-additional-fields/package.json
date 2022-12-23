@@ -12,11 +12,11 @@
     "permissions": [
       "activeusers"
     ],
-    "enablePrivatePluginApi": true,
-    "enableProposedApi": true,
-    "build": "a",
     "capabilities": [
       "textreview"
-    ]
+    ],
+    "enablePrivatePluginApi": true,
+    "enableProposedApi": true,
+    "build": "a"
   }
 }

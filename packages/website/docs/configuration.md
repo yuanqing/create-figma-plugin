@@ -212,6 +212,12 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 *Optional.* For specifying the permissions that the plugin/widget needs access to. One of `["activeusers"]`, `["currentuser"]`, or `["activeusers", "currentuser"]`.
 
+### `capabilities`
+
+(*`Array<string>`*)
+
+*Optional.* For specifying the capabilities that the plugin needs access to. At the moment, the only applicable capability is `["textreview"]`.
+
 ### `enablePrivatePluginApi`
 
 (*`boolean`*)
@@ -223,12 +229,6 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 (*`boolean`*)
 
 *Optional.* Set to `true` to allow the use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
-
-### `capabilities`
-
-(*`Array<string>`*)
-
-*Optional.* For specifying the capabilities your plugin has access to. At the moment the only applicable capability is `['textreview']`.
 
 ## JSON schema
 

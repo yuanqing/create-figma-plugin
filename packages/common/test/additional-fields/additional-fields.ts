@@ -86,9 +86,43 @@ test('`containsWidget`', async function (t) {
   })
 })
 
+test('`permissions`', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '05-permissions'))
+  t.deepEqual(await readConfigAsync(), {
+    ...config,
+    api: '1.0.0',
+    build: null,
+    capabilities: null,
+    containsWidget: false,
+    editorType: ['figma'],
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    permissions: ['activeuser'],
+    widgetApi: '1.0.0'
+  })
+})
+
+test('`capabilities`', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '06-capabilities'))
+  t.deepEqual(await readConfigAsync(), {
+    ...config,
+    api: '1.0.0',
+    build: null,
+    capabilities: ['textreview'],
+    containsWidget: false,
+    editorType: ['figma'],
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
+  })
+})
+
 test('`enablePrivatePluginApi`', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '05-enable-private-plugin-api'))
+  process.chdir(join(__dirname, 'fixtures', '07-enable-private-plugin-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     api: '1.0.0',
@@ -105,7 +139,7 @@ test('`enablePrivatePluginApi`', async function (t) {
 
 test('`enableProposedApi`', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '06-enable-proposed-api'))
+  process.chdir(join(__dirname, 'fixtures', '08-enable-proposed-api'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     api: '1.0.0',
@@ -122,29 +156,12 @@ test('`enableProposedApi`', async function (t) {
 
 test('`build`', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '07-build'))
+  process.chdir(join(__dirname, 'fixtures', '09-build'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     api: '1.0.0',
     build: 'c',
     capabilities: null,
-    containsWidget: false,
-    editorType: ['figma'],
-    enablePrivatePluginApi: false,
-    enableProposedApi: false,
-    permissions: null,
-    widgetApi: '1.0.0'
-  })
-})
-
-test('`capabilities`', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '08-capabilities'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    api: '1.0.0',
-    build: null,
-    capabilities: ['textreview'],
     containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: false,

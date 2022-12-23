@@ -12,10 +12,10 @@ export type Manifest = {
   menu?: Array<ManifestMenuItem | ManifestMenuItemSeparator>
   relaunchButtons?: Array<ManifestRelaunchButton>
   permissions?: Array<string>
+  capabilities?: Array<string>
   enableProposedApi?: boolean
   enablePrivatePluginApi?: boolean
   build?: string
-  capabilities?: Array<string>
 }
 
 export type ManifestMenuItem = {

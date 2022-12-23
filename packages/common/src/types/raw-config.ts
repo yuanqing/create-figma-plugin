@@ -18,10 +18,10 @@ export interface RawConfig extends RawConfigCommand {
   readonly id?: string
   readonly relaunchButtons?: RawConfigRelaunchButtons
   readonly permissions?: Array<string>
+  readonly capabilities?: Array<string>
   readonly enableProposedApi?: boolean
   readonly enablePrivatePluginApi?: boolean
   readonly build?: string
-  readonly capabilities?: Array<string>
 }
 
 export type RawConfigCommandSeparator = '-'
