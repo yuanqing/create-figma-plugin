@@ -2,8 +2,8 @@
   display: block;
   padding: var(--space-100);
   border: 1px solid var(--color-gray-4);
-  margin-top: var(--space-200);
   border-radius: var(--border-radius);
+  margin-top: var(--space-200);
   color: var(--color-white);
   text-align: center;
   user-select: none;

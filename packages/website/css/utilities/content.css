@@ -21,9 +21,9 @@
 }
 
 .content pre {
+  border-radius: var(--border-radius);
   margin-top: var(--space-100);
   background-color: var(--color-gray-1);
-  border-radius: var(--border-radius);
 }
 .content pre code {
   display: grid;
