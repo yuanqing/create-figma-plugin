@@ -87,22 +87,13 @@
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing",
+    "root": true,
+    "env": {
+      "browser": true
+    },
     "ignorePatterns": [
       "*.css.d.ts"
-    ],
-    "rules": {
-      "react/no-unknown-property": [
-        "error",
-        {
-          "ignore": [
-            "class",
-            "clip-rule",
-            "fill-rule",
-            "spellcheck"
-          ]
-        }
-      ]
-    }
+    ]
   },
   "prettier": "eslint-config-yuanqing/prettier",
   "sideEffects": false,

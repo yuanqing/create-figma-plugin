@@ -79,6 +79,10 @@
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing",
+    "root": true,
+    "env": {
+      "node": true
+    },
     "ignorePatterns": [
       "templates"
     ]

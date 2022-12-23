@@ -44,7 +44,11 @@
     "typescript": "^4.8.4"
   },
   "eslintConfig": {
-    "extends": "eslint-config-yuanqing"
+    "extends": "eslint-config-yuanqing",
+    "root": true,
+    "env": {
+      "node": true
+    }
   },
   "lint-staged": {
     "*.{cjs,js,ts,tsx}": [

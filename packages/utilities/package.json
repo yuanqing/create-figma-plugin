@@ -72,7 +72,8 @@
     "workerThreads": false
   },
   "eslintConfig": {
-    "extends": "eslint-config-yuanqing"
+    "extends": "eslint-config-yuanqing",
+    "root": true
   },
   "prettier": "eslint-config-yuanqing/prettier",
   "sideEffects": false

@@ -65,7 +65,11 @@
     "workerThreads": false
   },
   "eslintConfig": {
-    "extends": "eslint-config-yuanqing"
+    "extends": "eslint-config-yuanqing",
+    "root": true,
+    "env": {
+      "node": true
+    }
   },
   "prettier": "eslint-config-yuanqing/prettier"
 }
