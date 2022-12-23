@@ -27,7 +27,7 @@
     "lib"
   ],
   "bin": {
-    "build-figma-plugin": "lib/cli.js"
+    "build-figma-plugin": "./lib/cli.js"
   },
   "scripts": {
     "build": "npm run clean && tsc --build",
