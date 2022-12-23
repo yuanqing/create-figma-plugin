@@ -2,7 +2,7 @@ import { paramCase, pascalCase, pascalCaseTransformMerge } from 'change-case'
 import fs from 'fs-extra'
 import { globby } from 'globby'
 import { basename, dirname, extname, join, resolve } from 'path'
-import { optimize, OptimizedError, OptimizedSvg } from 'svgo'
+import { optimize } from 'svgo'
 import { fileURLToPath } from 'url'
 
 type SvgFile = {
@@ -18,7 +18,7 @@ async function main(): Promise<void> {
   try {
     const globPatterns = ['icons/**/*.svg']
     const outputDirectoryPath = resolve(__dirname, '..', 'src', 'icons')
-    await generateIconsTsAsync(globPatterns, outputDirectoryPath)
+    await generateIconsAsync(globPatterns, outputDirectoryPath)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
@@ -26,7 +26,7 @@ async function main(): Promise<void> {
 }
 main()
 
-async function generateIconsTsAsync(
+async function generateIconsAsync(
   globPatterns: Array<string>,
   outputDirectoryPath: string
 ): Promise<void> {
@@ -57,7 +57,7 @@ async function readSvgFilesAsync(
   const result: Array<SvgFile> = []
   const usedNames: Record<string, true> = {}
   for (const filePath of filePaths.sort()) {
-    const svgFile = await readSvgFileAsync(filePath)
+    const svgFile: SvgFile = await readSvgFileAsync(filePath)
     const { componentName } = svgFile
     if (usedNames[componentName] === true) {
       throw new Error(`Name clash \`${componentName}\`: ${filePath}`)
@@ -71,8 +71,25 @@ async function readSvgFilesAsync(
 async function readSvgFileAsync(filePath: string): Promise<SvgFile> {
   const baseName = basename(filePath, extname(filePath))
   const svgString = await fs.readFile(filePath, 'utf8')
-  const result: OptimizedSvg | OptimizedError = optimize(svgString, {
+  let width = 0
+  let height = 0
+  const result = optimize(svgString, {
     plugins: [
+      {
+        fn: function () {
+          return {
+            element: {
+              enter: (node, parentNode) => {
+                if (parentNode.type === 'root') {
+                  width = parseInt(node.attributes.width, 10)
+                  height = parseInt(node.attributes.height, 10)
+                }
+              }
+            }
+          }
+        },
+        name: 'get-svg-size'
+      },
       {
         name: 'convertPathData',
         params: {
@@ -81,22 +98,23 @@ async function readSvgFileAsync(filePath: string): Promise<SvgFile> {
       }
     ]
   })
-  if (typeof result.error !== 'undefined') {
-    throw new Error(`\`svgo\` error: ${result.error}`)
+  if (width === null) {
+    throw new Error('`width` is `null`')
   }
-  const optimizedSvg = result as OptimizedSvg
-  const { width, height } = optimizedSvg.info
+  if (height === null) {
+    throw new Error('`height` is `null`')
+  }
   if (width !== height) {
     throw new Error(`Different \`width\` and \`height\`: ${filePath}`)
   }
-  const dimension = parseInt(optimizedSvg.info.width, 10)
+  const optimizedSvgString = result.data
   return {
-    baseName: paramCase(`icon-${baseName}-${dimension}`),
-    componentName: pascalCase(`Icon ${baseName} ${dimension}`, {
+    baseName: paramCase(`icon-${baseName}-${width}`),
+    componentName: pascalCase(`Icon ${baseName} ${width}`, {
       transform: pascalCaseTransformMerge
     }),
-    dimension,
-    svgPath: extractSvgPath(optimizedSvg.data, filePath)
+    dimension: width,
+    svgPath: extractSvgPath(optimizedSvgString, filePath)
   }
 }
 
@@ -151,8 +169,8 @@ async function writeStoriesAsync(
   dimension: string,
   directoryPath: string
 ): Promise<void> {
-  const imports = []
-  const stories = []
+  const imports: Array<string> = []
+  const stories: Array<string> = []
   for (const { baseName, componentName } of svgFiles) {
     imports.push(`import { ${componentName} } from '../${baseName}'`)
     stories.push(`export const ${componentName
@@ -161,16 +179,15 @@ async function writeStoriesAsync(
   return <${componentName} />
 }`)
   }
-  const fileContents = `/** @jsx h */
-import { h } from 'preact'
+  const fileContents = `import { h } from 'preact'
 
 ${imports.join('\n')}
 
-export default { 
+export default {
   parameters: {
     fixedWidth: false
   },
-  title: 'Icons/Size ${dimension}' 
+  title: 'Icons/Size ${dimension}'
 }
 
 ${stories.join('\n\n')}

@@ -21,7 +21,7 @@ async function main() {
       'theme.css'
     )
     const outputFilePath = resolve(__dirname, '..', 'src', 'types', 'colors.ts')
-    await generateColorsTsAsync(themeCssFilePath, outputFilePath)
+    await generateColorsTypesAsync(themeCssFilePath, outputFilePath)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
@@ -29,7 +29,7 @@ async function main() {
 }
 main()
 
-async function generateColorsTsAsync(
+async function generateColorsTypesAsync(
   themeCssFilePath: string,
   outputFilePath: string
 ): Promise<void> {
