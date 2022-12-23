@@ -1,3 +1,5 @@
+/* global window */
+
 const emptyLicense = {
   email: null,
   licenseKey: null,
