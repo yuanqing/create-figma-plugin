@@ -1,9 +1,12 @@
 #!/bin/sh
 
+# immediately exit if any of the shell commands fail
+set -e
+
 # build
 npm run build
 
-# exit if there were uncommitted files
+# exit if there were any uncommitted files
 if [[ $(git diff) != '' ]]; then
   echo 'Error: Uncommitted files'
   exit 1
@@ -14,8 +17,8 @@ git checkout main
 git merge next
 
 # create a new version and publish to `npm`
-npm run version
-npm run publish
+npm run packages-version
+npm run packages-publish
 
 # push `main`, including tags
 git push --no-verify --tags origin main
