@@ -98,7 +98,7 @@ test('`permissions`', async function (t) {
     editorType: ['figma'],
     enablePrivatePluginApi: false,
     enableProposedApi: false,
-    permissions: ['activeuser'],
+    permissions: ['currentuser'],
     widgetApi: '1.0.0'
   })
 })
