@@ -26,7 +26,7 @@
     "website-build:storybook": "cd packages/ui && npm run storybook-build && cpy './build/**/*' ../../build/create-figma-plugin/storybook",
     "website-build:figma-plugin-json": "cp packages/build/src/figma-plugin.json build/create-figma-plugin/figma-plugin.json",
     "prewebsite-deploy": "npm run website-build",
-    "website-deploy": "gh-pages --dist build",
+    "website-deploy": "gh-pages --dist build/create-figma-plugin",
     "website-serve": "sirv build --dev --host --port 4242"
   },
   "devDependencies": {
