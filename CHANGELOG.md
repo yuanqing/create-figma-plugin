@@ -14,9 +14,10 @@
   - Pinned to `preact@>=10` and `typescript@>=4` in all plugin and widget templates.
 
 - Bumped dependencies in all packages.
-- Replaced `lerna run` with `turbo run`.
-- Replaced `node --loader ts-node/esm` with `tsx`.
+- Replaced `lerna` with `lerna-lite` and `turbo`.
+- Replaced `ts-node` with `tsx`.
 - Refactored all `npm` `scripts`.
+- Changed minimum requirement to `node@18` for all packages.
 
 ## 2.1.6
 
