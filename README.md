@@ -20,8 +20,8 @@
 
 ### Pre-requisites
 
-- [Node.js](https://nodejs.org) – v16
-- [npm](https://docs.npmjs.com/cli/) – v8
+- [Node.js](https://nodejs.org) – v18
+- [npm](https://docs.npmjs.com/cli/) – v9
 
 ### Building the project locally
 
