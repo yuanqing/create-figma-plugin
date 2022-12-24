@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/ui",
-  "version": "2.1.6",
+  "version": "2.2.0-alpha.0",
   "publishConfig": {
     "access": "public"
   },
@@ -60,7 +60,7 @@
     "storybook-watch": "start-storybook --port 4242"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^2.1.6"
+    "@create-figma-plugin/utilities": "^2.2.0-alpha.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
