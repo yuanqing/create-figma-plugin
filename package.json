@@ -23,7 +23,7 @@
     "prewebsite-build": "npm run build && rimraf build",
     "website-build": "npm run website-build:website && npm run website-build:storybook && npm run website-build:figma-plugin-json",
     "website-build:website": "cd packages/website && npm run website-build && cpy './build/**/*' ../../build",
-    "website-build:storybook": "cd packages/ui && npm run storybook-build && cpy './build/**/*' ../../build/create-figma-plugin/storybook",
+    "website-build:storybook": "cd packages/ui && BASE_URL=/create-figma-plugin/storybook/ npm run storybook-build && cpy './build/**/*' ../../build/create-figma-plugin/storybook",
     "website-build:figma-plugin-json": "cp packages/build/src/figma-plugin.json build/create-figma-plugin/figma-plugin.json",
     "prewebsite-deploy": "npm run website-build",
     "website-deploy": "gh-pages --dist build/create-figma-plugin",

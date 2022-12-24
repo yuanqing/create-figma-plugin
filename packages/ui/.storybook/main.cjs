@@ -10,5 +10,11 @@ module.exports = {
     builder: '@storybook/builder-vite',
     disableTelemetry: true
   },
-  stories: ['../src/**/stories/*.stories.tsx']
+  stories: ['../src/**/stories/*.stories.tsx'],
+  viteFinal: function (config) {
+    if (typeof process.env.BASE_URL !== 'undefined') {
+      config.base = process.env.BASE_URL
+    }
+    return config
+  }
 }
