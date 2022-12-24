@@ -4,6 +4,7 @@
   "npmClient": "npm",
   "command": {
     "version": {
+      "allowBranch": "main",
       "message": "%v",
       "push": false
     }
