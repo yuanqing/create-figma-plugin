@@ -3,8 +3,8 @@
 @import './variables.css';
 @import './utilities/button.css';
 @import './utilities/columns.css';
+@import './utilities/companies.css';
 @import './utilities/content.css';
-@import './utilities/emoji-list-item.css';
 @import './utilities/featured-plugin.css';
 @import './utilities/image.css';
 @import './utilities/links.css';

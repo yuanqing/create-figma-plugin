@@ -43,18 +43,26 @@
 
 ## Features
 
-<div>
-<ul>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤗</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'quick-start').url %>#bootstrapping-a-new-plugin-widget-from-a-template">Bootstrap a new plugin/widget from a template</a></span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤯</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'quick-start').url %>#building-the-plugin-widget">Bundle and minify your TypeScript or JavaScript code</a>, with sub-second build times made possible by the esbuild compiler</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">😌</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'recipes').url %>#specifying-multiple-commands-in-the-plugin-sub-menu">Write plugin menu commands in separate files</a>, with support for each command having their own UI implementation</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤩</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'ui').url %>#using-the-preact-component-library">Create a UI for your plugin/widget</a> using a library of Preact components that replicate the Figma/FigJam editor’s UI design, with support for dark mode</span></li>
-<li class="emoji-list-item"><span class="emoji-list-item__emoji">🤓</span> <span class="emoji-list-item__text"><a href="<%- query('page', 'utilities').url %>#passing-data-between-the-plugin-widgets-main-and-ui-contexts">Leverage an extensive set of utility functions</a>, including <a href="<%- query('page', 'recipes').url %>">utilities for passing data between your plugin/widget’s main and UI contexts</a></span></li>
-</ul>
-</div>
+- [Bootstrap a new plugin/widget from a template](<%- query('page', 'quick-start').url %>#bootstrapping-a-new-plugin-widget-from-a-template)
+- [Bundle and minify your TypeScript or JavaScript code](<%- query('page', 'quick-start').url %>#building-the-plugin-widget), with sub-second build times made possible by the esbuild compiler
+- [Write plugin menu commands in separate files](<%- query('page', 'recipes').url %>#specifying-multiple-commands-in-the-plugin-sub-menu), with support for each command having their own UI implementation
+- [Create a UI for your plugin/widget](<%- query('page', 'ui').url %>#using-the-preact-component-library) using a library of Preact components that replicate the Figma/FigJam editor’s UI design, with support for dark mode
+- [Leverage an extensive set of utility functions](<%- query('page', 'utilities').url %>), including [utilities for passing data between your plugin/widget’s main and UI contexts](<%- query('page', 'recipes').url %>#passing-data-between-the-plugin-widgets-main-and-ui-contexts)
 
 <div class="button">
 <a href="<%- query('page', 'quick-start').url %>">Get started</a>
+</div>
+
+<div class="companies">
+<p class="companies__text">Used by designers + developers globally</p>
+<div class="companies__logos">
+  <img src="<%- media['logo-figma'] %>" alt="Figma logo" class="companies__logo" />
+  <img src="<%- media['logo-google'] %>" alt="Google logo" class="companies__logo" />
+  <img src="<%- media['logo-stripe'] %>" alt="Stripe logo" class="companies__logo" />
+  <div class="companies__break"></div>
+  <img src="<%- media['logo-bytedance'] %>" alt="ByteDance logo" class="companies__logo" />
+  <img src="<%- media['logo-epic-games'] %>" alt="Epic Games logo" class="companies__logo" />
+</div>
 </div>
 
 ## What people say about Create&nbsp;Figma&nbsp;Plugin
@@ -67,7 +75,7 @@
 <div class="tweet__meta">
 <div class="tweet__author">
 <a href="https://twitter.com/<%- handle %>">
-<div class="image"><img src="<%- profilePhotoUrl %>" /></div>
+<div class="tweet__author-photo image"><img src="<%- profilePhotoUrl %>" /></div>
 <div class="tweet__name"><%- name %></div>
 <div class="tweet__handle">@<%- handle %></div>
 </a>
