@@ -145,5 +145,5 @@ Official docs and code samples from Figma:
 
 Community:
 
-- [Figma Developers Slack](https://figmaplugins.slack.com/join/shared_invite/zt-wxiou90z-uvQxCXD5eIOrP9fw2B0bPw)
 - [Twitter List: Figma Society](https://twitter.com/i/lists/1426096037383581697)
+- [Friends of Figma Discord](https://discord.gg/figma)
