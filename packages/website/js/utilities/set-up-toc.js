@@ -10,7 +10,11 @@ export function setUpToc({
 
   if (window.innerWidth < HIDE_MENU_TOGGLE_BUTTON_BREAKPOINT) {
     function handleWindowScroll() {
-      updateTocActiveElement(headers)
+      updateTocActiveElement({
+        activeTocItemClassName,
+        headers,
+        tocElementSelector
+      })
     }
     window.addEventListener('scroll', handleWindowScroll)
     return
