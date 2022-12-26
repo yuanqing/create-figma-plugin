@@ -1,0 +1,27 @@
+.block {
+  display: block;
+}
+
+@media (max-width: 479px) {
+  .sm\:block {
+    display: block;
+  }
+}
+
+@media (min-width: 480px) {
+  .md\:block {
+    display: block;
+  }
+}
+
+@media (min-width: 1000px) {
+  .lg\:block {
+    display: block;
+  }
+}
+
+@media (min-width: 1000px) {
+  .xl\:block {
+    display: block;
+  }
+}
