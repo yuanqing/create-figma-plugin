@@ -8,7 +8,7 @@
   color: var(--color-gray-5);
 }
 
-@media (max-width: 959px) {
+@media (max-width: 999px) {
   .title {
     position: fixed;
     z-index: var(--z-index-2);
@@ -21,7 +21,7 @@
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1000px) {
   .title {
     margin-top: var(--space-150);
   }

@@ -39,7 +39,7 @@
   display: block;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1000px) {
   .menu-toggle-button {
     display: none;
   }

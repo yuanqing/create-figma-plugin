@@ -31,7 +31,7 @@
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1000px) {
   .page__header {
     position: fixed;
     z-index: var(--z-index-2);

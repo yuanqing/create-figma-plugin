@@ -40,7 +40,7 @@
   color: var(--color-gray-3);
 }
 
-@media (max-width: 959px) {
+@media (max-width: 999px) {
   .--menu-visible {
     overflow: hidden;
   }
@@ -64,7 +64,7 @@
   }
 }
 
-@media (min-width: 480px) and (max-width: 959px) {
+@media (min-width: 480px) and (max-width: 999px) {
   .menu {
     left: auto;
     width: 50%;
@@ -72,13 +72,13 @@
   }
 }
 
-@media (min-width: 760px) and (max-width: 959px) {
+@media (min-width: 760px) and (max-width: 999px) {
   .menu {
     width: 33%;
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1000px) {
   .menu {
     width: var(--width-secondary);
     margin-top: calc(var(--space-050));

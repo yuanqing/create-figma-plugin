@@ -28,7 +28,7 @@
   text-decoration: none;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1000px) {
   .content > blockquote a,
   .content > p a,
   .content > pre a,

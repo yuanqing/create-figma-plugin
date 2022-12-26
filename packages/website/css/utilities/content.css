@@ -126,7 +126,7 @@ h4 .header-link {
   max-width: 100%;
 }
 
-@media (max-width: 959px) {
+@media (max-width: 999px) {
   .content > h2,
   .content > h3,
   .content > h4 {
@@ -134,7 +134,7 @@ h4 .header-link {
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1000px) {
   .content > h1,
   .content > h2,
   .content > h3,

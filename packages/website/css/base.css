@@ -28,7 +28,7 @@ code {
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1000px) {
   html {
     font-size: var(--base-font-size-lg);
   }
