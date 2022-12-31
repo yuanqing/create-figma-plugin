@@ -211,6 +211,126 @@ for at least `minimumTime` (in milliseconds).
 (...args: T) => Promise<S>
 ```
 
+## Image
+
+```ts
+import {
+  createCanvasElementFromBlobAsync,
+  createCanvasElementFromBytesAsync,
+  createCanvasElementFromImageElement,
+  createImageElementFromBlobAsync,
+  createImageElementFromBytesAsync,
+  createImagePaint,
+  readBytesFromCanvasElementAsync
+} from '@create-figma-plugin/utilities'
+```
+
+### `createCanvasElementFromBlobAsync(blob)`
+
+Creates an [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
+from a [`blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
+representing an image.
+
+***Parameters***
+
+- `blob` (`Blob`)
+
+***Return type***
+
+```
+Promise<HTMLCanvasElement>
+```
+
+### `createCanvasElementFromBytesAsync(bytes)`
+
+Creates an [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
+from the `bytes` of an image.
+
+***Parameters***
+
+- `bytes` (`Uint8Array`)
+
+***Return type***
+
+```
+Promise<HTMLCanvasElement>
+```
+
+### `createCanvasElementFromImageElement(imageElement)`
+
+Creates an [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
+from an [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement).
+
+***Parameters***
+
+- `imageElement` (`HTMLImageElement`)
+
+***Return type***
+
+```
+Promise<HTMLCanvasElement>
+```
+
+### `createImageElementFromBlobAsync(blob)`
+
+Creates an [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
+from a [`blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
+representing an image.
+
+***Parameters***
+
+- `blob` (`Blob`)
+
+***Return type***
+
+```
+Promise<HTMLImageElement>
+```
+
+### `createImageElementFromBytesAsync(bytes)`
+
+Creates an [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
+from the `bytes` of an image.
+
+***Parameters***
+
+- `bytes` (`Uint8Array`)
+
+***Return type***
+
+```
+Promise<HTMLImageElement>
+```
+
+### `createImagePaint(bytes)`
+
+Creates an [`ImagePaint`](https://figma.com/plugin-docs/api/Paint/#imagepaint)
+object from the `bytes` of an image.
+
+***Parameters***
+
+- `bytes` (`Uint8Array`)
+
+***Return type***
+
+```
+ImagePaint
+```
+
+### `readBytesFromCanvasElementAsync(canvasElement)`
+
+Read the bytes off an [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement).
+
+***Parameters***
+
+- `canvasElement` (`HTMLCanvasElement`)
+
+***Return type***
+
+```
+Promise<Uint8Array>
+```
+
 ## Monetization
 
 ```ts
@@ -379,7 +499,6 @@ import {
   computeBoundingBox,
   computeMaximumBounds,
   computeSiblingNodes,
-  createImagePaint,
   deduplicateNodes,
   getAbsolutePosition,
   getDocumentComponents,
@@ -494,21 +613,6 @@ Returns an array of array of sibling `SceneNode` objects.
 
 ```
 Array<Array<Node>>
-```
-
-### `createImagePaint(bytes)`
-
-Creates an [`ImagePaint`](https://figma.com/plugin-docs/api/Paint/#imagepaint)
-object from the `bytes` of an image.
-
-***Parameters***
-
-- `bytes` (`Uint8Array`)
-
-***Return type***
-
-```
-ImagePaint
 ```
 
 ### `deduplicateNodes<Node>(nodes)`

@@ -5,6 +5,13 @@ export { convertRgbColorToHexColor } from './color/convert-rgb-color-to-hex-colo
 export { isValidHexColor } from './color/is-valid-hex-color.js'
 export { emit, EventHandler, on, once } from './events.js'
 export { ensureMinimumTime } from './function/ensure-minimum-time.js'
+export { createCanvasElementFromBlobAsync } from './image/create-canvas-element-from-blob-async.js'
+export { createCanvasElementFromBytesAsync } from './image/create-canvas-element-from-bytes-async.js'
+export { createCanvasElementFromImageElement } from './image/create-canvas-element-from-image-element.js'
+export { createImageElementFromBlobAsync } from './image/create-image-element-from-blob-async.js'
+export { createImageElementFromBytesAsync } from './image/create-image-element-from-bytes-async.js'
+export { createImagePaint } from './image/create-image-paint.js'
+export { readBytesFromCanvasElementAsync } from './image/read-bytes-from-canvas-element-async.js'
 export { MIXED_NUMBER, MIXED_STRING } from './mixed-values.js'
 export {
   getDocumentUseCount,
@@ -24,7 +31,6 @@ export { setAbsolutePosition } from './node/absolute-position/set-absolute-posit
 export { collapseLayer } from './node/collapse-layer.js'
 export { computeBoundingBox } from './node/compute-bounding-box.js'
 export { computeMaximumBounds } from './node/compute-maximum-bounds.js'
-export { createImagePaint } from './node/create-image-paint.js'
 export { deduplicateNodes } from './node/deduplicate-nodes.js'
 export { getDocumentComponents } from './node/get-nodes/get-document-components.js'
 export { getParentNode } from './node/get-nodes/get-parent-node.js'
