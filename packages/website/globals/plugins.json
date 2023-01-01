@@ -2,6 +2,18 @@
   {
     "authors": [
       {
+        "name": "Kent Yang",
+        "url": "https://figma.com/@kn"
+      }
+    ],
+    "description": "Add a simple device frame to make our design look more real",
+    "githubUrl": null,
+    "id": "1149987037748021167",
+    "name": "A Little Bit Mockup"
+  },
+  {
+    "authors": [
+      {
         "name": "Antonio Cao",
         "url": "https://twitter.com/RemitNotPaucity"
       }
@@ -234,6 +246,18 @@
   {
     "authors": [
       {
+        "name": "Andre Jilderda",
+        "url": "https://twitter.com/ajilderda"
+      }
+    ],
+    "description": "Quickly find, select and edit layers without taking your hands off your keyboard",
+    "githubUrl": null,
+    "id": "1179889828797638141",
+    "name": "Dash"
+  },
+  {
+    "authors": [
+      {
         "name": "Maarten Zilverberg",
         "url": "https://twitter.com/mzilverberg"
       }
@@ -242,6 +266,18 @@
     "githubUrl": null,
     "id": "953656637827255284",
     "name": "Delete Multiple Pages"
+  },
+  {
+    "authors": [
+      {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Bulk desaturate frames, groups and image fills in one click",
+    "githubUrl": "https://github.com/aashreys/desaturate",
+    "id": "972353621057384319",
+    "name": "Desaturate"
   },
   {
     "authors": [
@@ -330,6 +366,22 @@
   {
     "authors": [
       {
+        "name": "Alina Medvid",
+        "url": "https://figma.com/@alinamedvid"
+      },
+      {
+        "name": "Anton Tishchenko",
+        "url": "https://figma.com/@antonytm"
+      }
+    ],
+    "description": "Create mockups in a few clicks",
+    "githubUrl": null,
+    "id": "1180592708021765520",
+    "name": "Easy Mockup"
+  },
+  {
+    "authors": [
+      {
         "name": "Raphael S.",
         "url": "https://twitter.com/raf_underscore"
       }
@@ -338,6 +390,22 @@
     "githubUrl": "https://github.com/raf-underscore/exacto",
     "id": "1134091253154887126",
     "name": "Exacto"
+  },
+  {
+    "authors": [
+      {
+        "name": "Michael Yagudaev",
+        "url": "https://twitter.com/yagudaev"
+      },
+      {
+        "name": "Soheil Hajimohammadi",
+        "url": "https://twitter.com/sohei1L"
+      }
+    ],
+    "description": "Export your smart animation flows to GIF/Video animations in just one click",
+    "githubUrl": null,
+    "id": "1170836206919391034",
+    "name": "Export to GIF/Video"
   },
   {
     "authors": [
@@ -474,6 +542,18 @@
   {
     "authors": [
       {
+        "name": "Kent Yang",
+        "url": "https://figma.com/@kn"
+      }
+    ],
+    "description": "Use FigJam connectors in Figma",
+    "githubUrl": null,
+    "id": "1142132546076518629",
+    "name": "Give Me FigJam Connectors!"
+  },
+  {
+    "authors": [
+      {
         "name": "Alex Widua",
         "url": "https://twitter.com/alexwidua"
       }
@@ -594,6 +674,18 @@
   {
     "authors": [
       {
+        "name": "Truman Du",
+        "url": "https://twitter.com/genuine_impact"
+      }
+    ],
+    "description": "Quickly generate a line chart and easily populate it with random or precise data",
+    "githubUrl": null,
+    "id": "1172154175810151778",
+    "name": "Line Chart"
+  },
+  {
+    "authors": [
+      {
         "name": "Meni Zanzibar",
         "url": "https://figma.com/@meni"
       }
@@ -654,6 +746,30 @@
   {
     "authors": [
       {
+        "name": "Tabler Icons",
+        "url": "https://twitter.com/codecalm"
+      }
+    ],
+    "description": "Over 3,100 pixel-perfect icons",
+    "githubUrl": "https://github.com/tabler/tabler-icons-figma",
+    "id": "1169807996149376642",
+    "name": "Paweł Kuna"
+  },
+  {
+    "authors": [
+      {
+        "name": "Tabler Icons",
+        "url": "https://twitter.com/codecalm"
+      }
+    ],
+    "description": "Over 3,100 pixel-perfect icons",
+    "githubUrl": "https://github.com/tabler/tabler-icons-figma",
+    "id": "1169807996149376642",
+    "name": "Paweł Kuna"
+  },
+  {
+    "authors": [
+      {
         "name": "Gautham Sajith",
         "url": "https://twitter.com/GuamHat"
       }
@@ -674,6 +790,18 @@
     "githubUrl": "https://github.com/gsajith/person-generator",
     "id": "1104262872207297670",
     "name": "Person Generator"
+  },
+  {
+    "authors": [
+      {
+        "name": "Hiroki Tani",
+        "url": "https://twitter.com/hiloki"
+      }
+    ],
+    "description": "Fill placeholders with various dog images",
+    "githubUrl": null,
+    "id": "1177318800464881150",
+    "name": "Placedoggo"
   },
   {
     "authors": [
@@ -790,6 +918,18 @@
   {
     "authors": [
       {
+        "name": "Daniel Amram",
+        "url": "https://figma.com/@codbite"
+      }
+    ],
+    "description": "Make vector elements sketchy and hand-drawn",
+    "githubUrl": null,
+    "id": "1177565418933907283",
+    "name": "Roughly"
+  },
+  {
+    "authors": [
+      {
         "name": "Saeed Alipoor",
         "url": "https://twitter.com/Sali__Pure"
       }
@@ -902,6 +1042,18 @@
   {
     "authors": [
       {
+        "name": "Alex Streza",
+        "url": "https://twitter.com/alex_streza"
+      }
+    ],
+    "description": "Generate, edit, create variants for images using DALL-E 2",
+    "githubUrl": null,
+    "id": "1172891596048319817",
+    "name": "Summon.AI"
+  },
+  {
+    "authors": [
+      {
         "name": "Kirk Bentley",
         "url": "https://figma.com/@kirkbentley"
       }
@@ -926,6 +1078,18 @@
   {
     "authors": [
       {
+        "name": "Yahoo! Japan",
+        "url": "https://figma.com/@yahoojapan"
+      }
+    ],
+    "description": "Easily switch between two color styles applied to selected layers",
+    "githubUrl": null,
+    "id": "1143458500532683999",
+    "name": "Theme Switcher"
+  },
+  {
+    "authors": [
+      {
         "name": "Kyler Phillips",
         "url": "https://twitter.com/kylerjphillips"
       }
@@ -938,6 +1102,34 @@
   {
     "authors": [
       {
+        "name": "Alina Medvid",
+        "url": "https://figma.com/@alinamedvid"
+      },
+      {
+        "name": "Anton Tishchenko",
+        "url": "https://figma.com/@antonytm"
+      }
+    ],
+    "description": "Do text transformations directly in Figma",
+    "githubUrl": null,
+    "id": "1183722659656348694",
+    "name": "Type Tool"
+  },
+  {
+    "authors": [
+      {
+        "name": "Daniel Amram",
+        "url": "https://figma.com/@codbite"
+      }
+    ],
+    "description": "Remove background from images in a single click",
+    "githubUrl": null,
+    "id": "1181637104403040691",
+    "name": "Unbackground"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -946,6 +1138,22 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-upscale-image",
     "id": "939832535166467194",
     "name": "Upscale Image"
+  },
+  {
+    "authors": [
+      {
+        "name": "Felix Handschuh",
+        "url": "https://twitter.com/subbotnik_io"
+      },
+      {
+        "name": "Tobias Schwerdtfeger",
+        "url": "https://twitter.com/t0bsdt"
+      }
+    ],
+    "description": "Export WebP files from Figma for Web or Android",
+    "githubUrl": "https://github.com/tobias-schwerdtfeger/WebP-Generator-Figma",
+    "id": "1181873200384736932",
+    "name": "WebP Generator"
   },
   {
     "authors": [

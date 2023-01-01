@@ -2,6 +2,18 @@
   {
     "authors": [
       {
+        "name": "Aashrey Sharma",
+        "url": "https://twitter.com/aashrey_sharma"
+      }
+    ],
+    "description": "Open links and navigate your design canvas in one click",
+    "githubUrl": "https://github.com/aashreys/button",
+    "id": "1178811712656619576",
+    "name": "Button"
+  },
+  {
+    "authors": [
+      {
         "name": "Felix Tesche",
         "url": "https://twitter.com/mrfesch"
       }
@@ -74,12 +86,12 @@
   {
     "authors": [
       {
-        "name": "Felix",
+        "name": "Felix Handschuh",
         "url": "https://twitter.com/subbotnik_io"
       },
       {
         "name": "Tobias Schwerdtfeger",
-        "url": "https://figma.com/@_tobias"
+        "url": "https://twitter.com/t0bsdt"
       }
     ],
     "description": "Team estimations made easy",
