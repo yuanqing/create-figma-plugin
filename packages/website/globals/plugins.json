@@ -410,6 +410,18 @@
   {
     "authors": [
       {
+        "name": "Adam Albarghouthi",
+        "url": "https://twitter.com/adamalbargh"
+      }
+    ],
+    "description": "Clean frame statuses to keep you focused and your team aligned",
+    "githubUrl": null,
+    "id": "1159865715100399885",
+    "name": "FigDone"
+  },
+  {
+    "authors": [
+      {
         "name": "Saeed Alipoor",
         "url": "https://twitter.com/Sali__Pure"
       }
@@ -794,6 +806,22 @@
   {
     "authors": [
       {
+        "name": "Aryan Shah",
+        "url": "https://figma.com/@aryan_ui_ux"
+      },
+      {
+        "name": "Riken Shah",
+        "url": "https://twitter.com/_RikenShah"
+      }
+    ],
+    "description": "Create artwork in seconds",
+    "githubUrl": null,
+    "id": "1158539818059705018",
+    "name": "PicsAI"
+  },
+  {
+    "authors": [
+      {
         "name": "Hiroki Tani",
         "url": "https://twitter.com/hiloki"
       }
@@ -1166,6 +1194,18 @@
     "githubUrl": "https://figma.com/community/plugin/1082201909715309983/XAuto",
     "id": "1082201909715309983",
     "name": "XAuto"
+  },
+  {
+    "authors": [
+      {
+        "name": "Frad Lee",
+        "url": "https://twitter.com/FradSer"
+      }
+    ],
+    "description": "Tools to help you design XR applications",
+    "githubUrl": "https://github.com/FradSer/figma-xr-design-tools",
+    "id": "1149634536150338038",
+    "name": "XR Design Tools"
   },
   {
     "authors": [
