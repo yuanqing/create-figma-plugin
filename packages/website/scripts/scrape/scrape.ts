@@ -68,9 +68,9 @@ async function fetchFeedAsync(
   type: 'plugin' | 'widget'
 ): Promise<Array<Record<string, any>>> {
   let result: Array<Record<string, any>> = []
-  let url = `https://www.figma.com/api/feed/${type}s?sort_by=published_at&page_size=100`
+  let url = `/api/feed/${type}s?sort_by=published_at&page_size=100`
   while (typeof url !== 'undefined') {
-    const response = await fetch(url, {
+    const response = await fetch(`https://www.figma.com${url}`, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       }
