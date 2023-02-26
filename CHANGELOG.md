@@ -3,6 +3,7 @@
 ## 2.3.0
 
 - `@create-figma-plugin/utilities@2.3.0`
+
   - Added utilities for image handling:
     - `createCanvasElementFromBlobAsync`
     - `createCanvasElementFromBytesAsync`
@@ -14,14 +15,17 @@
 ## 2.2.0
 
 - `@create-figma-plugin/build@2.2.0`
+
   - Pinned the `build-figma-plugin` CLI to `typescript@>=4`. ([#139](https://github.com/yuanqing/create-figma-plugin/issues/139))
   - Added support for the new `capabilities` config to enable usage of the new text review API. ([#140](https://github.com/yuanqing/create-figma-plugin/issues/140))
 
 - `@create-figma-plugin/ui@2.2.0`
+
   - Renamed all CSS files to have a `.module.css` prefix.
   - Switched to using Vite to build the Storybook.
 
 - `create-figma-plugin@2.2.0`
+
   - Pinned to `preact@>=10` and `typescript@>=4` in all plugin and widget templates.
 
 - Bumped dependencies in all packages.
@@ -33,23 +37,28 @@
 ## 2.1.6
 
 - `@create-figma-plugin/ui@2.1.6`
+
   - Added padding to the `Textbox`, `TextboxAutocomplete`, `TextboxMultiline` and `TextboxNumeric` components to prevent overflowing text from being clipped. ([#136](https://github.com/yuanqing/create-figma-plugin/issues/136))
 
 - `@create-figma-plugin/utilities@2.1.6`
+
   - Fixed a bug with `setAbsolutePosition` incorrectly setting the node position for a node nested within a `Section` node. ([#137](https://github.com/yuanqing/create-figma-plugin/issues/137))
   - Fixed a bug with Event utilities throwing an error when `window.parent.postMessage` is called. ([#138](https://github.com/yuanqing/create-figma-plugin/issues/138))
 
 ## 2.1.5
 
 - `@create-figma-plugin/ui@2.1.5`
+
   - Limit the hit area of the `Disclosure` component to the title. ([#128](https://github.com/yuanqing/create-figma-plugin/issues/128))
 
 ## 2.1.4
 
 - `@create-figma-plugin/build@2.1.4`
+
   - Suppressed the `Cannot redeclare block-scoped variable 'console'.` type-check error when using `@types/node`. ([#126](https://github.com/yuanqing/create-figma-plugin/issues/126))
 
 - `create-figma-plugin@2.1.4`
+
   - Removed unnecessary imports in the `plugin/react-editor` template. ([#126](https://github.com/yuanqing/create-figma-plugin/issues/125))
 
 - Bumped dependencies in all packages, and removed usage of `untyped-dependencies.d.ts`.
@@ -188,11 +197,13 @@
 ## 1.9.2
 
 - `@create-figma-plugin/ui@1.9.2`
+
   - Fix a bug with the `Dropdown` menu not re-calculating its height when `value` is `null`. ([#100](https://github.com/yuanqing/create-figma-plugin/issues/100))
 
 ## 1.9.1
 
 - `@create-figma-plugin/ui@1.9.1`
+
   - Revert to `css-loader@5.2.7` and `style-loader@2.0.0`.
 
 - Revert to `cpy-cli@3.1.1`.
