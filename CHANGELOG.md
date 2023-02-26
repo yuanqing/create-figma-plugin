@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.3.0
+
+- `@create-figma-plugin/utilities@2.3.0`
+  - Added utilities for image handling:
+    - `createCanvasElementFromBlobAsync`
+    - `createCanvasElementFromBytesAsync`
+    - `createCanvasElementFromImageElement`
+    - `createImageElementFromBlobAsync`
+    - `createImageElementFromBytesAsync`
+    - `readBytesFromCanvasElementAsync`
+
 ## 2.2.0
 
 - `@create-figma-plugin/build@2.2.0`
