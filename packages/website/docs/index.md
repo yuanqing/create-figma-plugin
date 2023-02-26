@@ -53,19 +53,17 @@
 <a href="<%- query('page', 'quick-start').url %>">Get started</a>
 </div>
 
+## Used by designers and developers globally
+
 <div class="companies">
-<p class="companies__text">Used by designers and developers globally</p>
-<div class="companies__logos">
+  <div class="companies__logo"><img src="<%- media['logo-google'] %>" alt="Google logo" /></div>
+  <div class="companies__logo"><img src="<%- media['logo-microsoft'] %>" alt="Microsoft logo" /></div>
+  <div class="companies__logo"><img src="<%- media['logo-shopify'] %>" alt="Shopify logo" /></div>
+  <div class="companies__logo"><img src="<%- media['logo-figma'] %>" alt="Figma logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-bytedance'] %>" alt="ByteDance logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-epic-games'] %>" alt="Epic Games logo" /></div>
-  <div class="companies__logo"><img src="<%- media['logo-figma'] %>" alt="Figma logo" /></div>
-  <div class="companies__logo"><img src="<%- media['logo-google'] %>" alt="Google logo" /></div>
-  <div class="companies__logo-break"></div>
-  <div class="companies__logo"><img src="<%- media['logo-microsoft'] %>" alt="Microsoft logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-product-hunt'] %>" alt="Product Hunt logo" /></div>
-  <div class="companies__logo"><img src="<%- media['logo-shopify'] %>" alt="Shopify logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-stripe'] %>" alt="Stripe logo" /></div>
-</div>
 </div>
 
 ## What people say about Create&nbsp;Figma&nbsp;Plugin
