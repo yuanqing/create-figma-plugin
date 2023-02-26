@@ -41,7 +41,7 @@
 
 # The comprehensive toolkit for <span class="xl:block">developing plugins and widgets for Figma and FigJam</span>
 
-## Features
+## Key features
 
 - [Bootstrap a new plugin/widget from a template](<%- query('page', 'quick-start').url %>#bootstrapping-a-new-plugin-widget-from-a-template)
 - [Bundle and minify your TypeScript or JavaScript code](<%- query('page', 'quick-start').url %>#building-the-plugin-widget), with sub-second build times made possible by the esbuild compiler
