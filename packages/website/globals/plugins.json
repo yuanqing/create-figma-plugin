@@ -1118,6 +1118,18 @@
   {
     "authors": [
       {
+        "name": "Luca Dalli",
+        "url": "https://twitter.com/webdevluca"
+      }
+    ],
+    "description": "Create seamless patterns in seconds",
+    "githubUrl": null,
+    "id": "1160939259102989594",
+    "name": "Tylify"
+  },
+  {
+    "authors": [
+      {
         "name": "Alina Medvid",
         "url": "https://figma.com/@alinamedvid"
       },
