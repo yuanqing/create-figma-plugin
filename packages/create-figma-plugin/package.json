@@ -1,6 +1,6 @@
 {
   "name": "create-figma-plugin",
-  "version": "2.2.0",
+  "version": "2.3.0-alpha.0",
   "description": "Initialize a new Figma/FigJam plugin/widget using a template",
   "keywords": [
     "create-figma-plugin",
@@ -40,7 +40,7 @@
     "test": "ava --serial 'test/**/*.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^2.2.0",
+    "@create-figma-plugin/common": "^2.3.0-alpha.0",
     "fs-extra": "^11.1.0",
     "globby": "^13.1.3",
     "inquirer": "^9.1.4",
