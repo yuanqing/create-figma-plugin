@@ -502,6 +502,7 @@ import {
   deduplicateNodes,
   getAbsolutePosition,
   getDocumentComponents,
+  getNodeIndexPath,
   getParentNode,
   getSceneNodeById,
   getSelectedNodesOrAllNodes,
@@ -660,6 +661,23 @@ Returns all the local Components in the current document.
 
 ```
 Array<ComponentNode>
+```
+
+### `getNodeIndexPath(node)`
+
+Gets the index path to the `node`.
+
+***Parameters***
+
+- `node` (`SceneNode`)
+
+***Return type***
+
+Returns an array representing the index path to the given `node`,
+starting from `figma.root`
+
+```
+Array<number>
 ```
 
 ### `getParentNode(node)`
