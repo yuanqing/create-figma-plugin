@@ -17,8 +17,7 @@ export function getDocumentComponents(): Array<ComponentNode> {
           }
         },
         function (node: SceneNode): boolean {
-          const { type } = node
-          return type === 'COMPONENT' || type === 'FRAME' || type === 'GROUP'
+          return node.type === 'COMPONENT'
         }
       )
     }
