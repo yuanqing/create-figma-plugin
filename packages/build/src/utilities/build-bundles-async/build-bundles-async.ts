@@ -64,6 +64,7 @@ async function buildMainBundleAsync(options: {
         constants.build.buildDirectoryName,
         'main.js'
       ),
+      platform: 'neutral',
       plugins: [],
       stdin: {
         contents: js,
