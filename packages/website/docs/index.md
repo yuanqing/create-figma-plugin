@@ -16,7 +16,7 @@
       "handle": "alexwidua",
       "id": "1428782856998989827",
       "name": "Alex Widua",
-      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1517443003891261440/G8rWekk3_400x400.jpg",
+      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1635271174761349120/X9RCUHAm_400x400.jpg",
       "text": "This was also the first time I used <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin toolkit and wow – what a comprehensive and thought-out library. Allowed me to have the first prototype up and running in just an hour. A staple for building Figma plugins from now on 😌"
     },
     {
@@ -97,7 +97,7 @@
 <p class="muted">Plugins</p>
 <ul>
 <% const featuredPlugins = plugins.filter(function (plugin) {
-return ['Ando', 'Beautiful Shadows', 'Contrast', 'Draw Connector', 'Gist', 'html.to.design', 'Leading Trim', 'Protofly', 'Prototyper'].indexOf(plugin.name) !== -1
+return ['Ando', 'Beautiful Shadows', 'Contrast', 'Draw Connector', 'Figma GPT', 'html.to.design', 'Leading Trim', 'Protofly', 'Prototyper'].indexOf(plugin.name) !== -1
 }) %>
 <% for (const { id, name } of featuredPlugins) { %>
 <li class="featured-plugin">
