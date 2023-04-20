@@ -324,6 +324,8 @@ $ npx --yes create-figma-plugin --template plugin/preact-resizable
 
 ## Customizing the build
 
+(If `"type"` is set to `"module"` in your `package.json`, use a `build-figma-plugin.*.cjs` file instead of `build-figma-plugin.*.js`.)
+
 ### Customizing the underlying esbuild configuration
 
 The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuild.github.io). To customize the underlying build configuration for the [main bundle](https://figma.com/plugin-docs/how-plugins-run/), create a `build-figma-plugin.main.js` file:

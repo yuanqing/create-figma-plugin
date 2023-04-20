@@ -1,15 +1,15 @@
 export const constants = {
   build: {
     buildDirectoryName: 'build',
-    mainConfigFilePath: 'build-figma-plugin.main.js',
-    manifestConfigFilePath: 'build-figma-plugin.manifest.js',
+    mainConfigGlobPattern: 'build-figma-plugin.main.{cjs,js}',
+    manifestConfigGlobPattern: 'build-figma-plugin.manifest.{cjs,js}',
     manifestFilePath: 'manifest.json',
     manifestPluginApi: '1.0.0',
     manifestWidgetApi: '1.0.0',
     pluginCodeFilePath: 'build/main.js',
     pluginUiFilePath: 'build/ui.js',
     srcDirectoryName: 'src',
-    uiConfigFilePath: 'build-figma-plugin.ui.js'
+    uiConfigGlobPattern: 'build-figma-plugin.ui.{cjs,js}'
   },
   defaultTemplateName: 'plugin/hello-world',
   packageJson: {

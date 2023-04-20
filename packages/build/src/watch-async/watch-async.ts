@@ -22,9 +22,9 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
   const watcher = watch(
     [
       '**/*.{css,js,json,jsx,ts,tsx}',
-      constants.build.mainConfigFilePath,
-      constants.build.manifestConfigFilePath,
-      constants.build.uiConfigFilePath,
+      constants.build.mainConfigGlobPattern,
+      constants.build.manifestConfigGlobPattern,
+      constants.build.uiConfigGlobPattern,
       'package.json',
       'tsconfig.json'
     ],

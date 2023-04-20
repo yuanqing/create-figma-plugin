@@ -7,7 +7,7 @@ import {
   readConfigAsync
 } from '@create-figma-plugin/common'
 import fs from 'fs-extra'
-import { resolve } from 'path'
+import { globby } from 'globby'
 
 import {
   Manifest,
@@ -177,10 +177,12 @@ function createRelaunchButtons(
 async function overrideManifestAsync(
   manifest: Manifest
 ): Promise<Record<string, any>> {
-  const absolutePath = resolve(constants.build.manifestConfigFilePath)
-  if ((await fs.pathExists(absolutePath)) === false) {
+  const filePaths = await globby(constants.build.manifestConfigGlobPattern, {
+    absolute: true
+  })
+  if (filePaths.length === 0) {
     return manifest
   }
-  const { default: overrideManifest } = await import(absolutePath)
+  const { default: overrideManifest } = await import(filePaths[0])
   return overrideManifest(manifest)
 }

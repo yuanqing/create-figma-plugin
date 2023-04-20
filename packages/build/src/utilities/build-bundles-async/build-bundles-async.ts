@@ -8,10 +8,10 @@ import {
   readConfigAsync
 } from '@create-figma-plugin/common'
 import { build, BuildOptions } from 'esbuild'
-import fs from 'fs-extra'
+import { globby } from 'globby'
 import importFresh from 'import-fresh'
 import indentString from 'indent-string'
-import { join, resolve } from 'path'
+import { join } from 'path'
 
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
 import { esbuildPreactCompatPlugin } from './esbuild-preact-compat-plugin.js'
@@ -36,15 +36,15 @@ export async function buildBundlesAsync(minify: boolean): Promise<void> {
 
 async function overrideEsbuildConfigAsync(
   buildOptions: BuildOptions,
-  esbuildConfigFilePath: string
+  configGlobPattern: string
 ): Promise<BuildOptions> {
-  const absolutePath = resolve(esbuildConfigFilePath)
-  if ((await fs.pathExists(absolutePath)) === false) {
+  const filePaths = await globby(configGlobPattern, { absolute: true })
+  if (filePaths.length === 0) {
     return buildOptions
   }
   const overrideEsbuildConfig: (
     buildOptions: BuildOptions
-  ) => Promise<BuildOptions> = importFresh(absolutePath)
+  ) => Promise<BuildOptions> = importFresh(filePaths[0])
   return overrideEsbuildConfig(buildOptions)
 }
 
@@ -78,7 +78,7 @@ async function buildMainBundleAsync(options: {
     await build(
       await overrideEsbuildConfigAsync(
         esbuildConfig,
-        constants.build.mainConfigFilePath
+        constants.build.mainConfigGlobPattern
       )
     )
   } catch (error: any) {
@@ -140,7 +140,7 @@ async function buildUiBundleAsync(options: {
     await build(
       await overrideEsbuildConfigAsync(
         esbuildConfig,
-        constants.build.uiConfigFilePath
+        constants.build.uiConfigGlobPattern
       )
     )
   } catch (error: any) {
