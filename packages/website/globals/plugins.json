@@ -510,26 +510,6 @@
         "url": "https://figma.com/@joao208"
       },
       {
-        "name": "João Victor",
-        "url": "https://twitter.com/jvgcunha"
-      },
-      {
-        "name": "Mateus Coutinho",
-        "url": "https://figma.com/@coutinhomm"
-      }
-    ],
-    "description": "Enhance text creation and editing with AI",
-    "githubUrl": null,
-    "id": "1203827738055553363",
-    "name": "FigmaAI - Text"
-  },
-  {
-    "authors": [
-      {
-        "name": "João Barros",
-        "url": "https://figma.com/@joao208"
-      },
-      {
         "name": "Mateus Coutinho",
         "url": "https://figma.com/@coutinhomm"
       }
@@ -558,6 +538,26 @@
     "githubUrl": null,
     "id": "1215781288748657078",
     "name": "FigmaAI – Images"
+  },
+  {
+    "authors": [
+      {
+        "name": "João Barros",
+        "url": "https://figma.com/@joao208"
+      },
+      {
+        "name": "João Victor",
+        "url": "https://twitter.com/jvgcunha"
+      },
+      {
+        "name": "Mateus Coutinho",
+        "url": "https://figma.com/@coutinhomm"
+      }
+    ],
+    "description": "Enhance text creation and editing with AI",
+    "githubUrl": null,
+    "id": "1203827738055553363",
+    "name": "FigmaAI – Text"
   },
   {
     "authors": [
