@@ -38,18 +38,6 @@
   {
     "authors": [
       {
-        "name": "João Barros",
-        "url": "https://figma.com/@joao208"
-      }
-    ],
-    "description": "Easily generate random avatars from DiceBear",
-    "githubUrl": null,
-    "id": "1087220559503205766",
-    "name": "Avatar Generator"
-  },
-  {
-    "authors": [
-      {
         "name": "Youssef Bouzidi",
         "url": "https://twitter.com/Yusof_Bz"
       }
@@ -58,6 +46,18 @@
     "githubUrl": null,
     "id": "1120329159944131602",
     "name": "Avatarg"
+  },
+  {
+    "authors": [
+      {
+        "name": "Masanori Ueda",
+        "url": "https://twitter.com/wentz_design"
+      }
+    ],
+    "description": "Generate a simple bar chart",
+    "githubUrl": null,
+    "id": "1224003068372701617",
+    "name": "Bar Chart Generator"
   },
   {
     "authors": [
@@ -86,6 +86,18 @@
     "githubUrl": null,
     "id": "1068010542677347310",
     "name": "Brand Buddy"
+  },
+  {
+    "authors": [
+      {
+        "name": "Kirk Bentley",
+        "url": "https://figma.com/@kirkbentley"
+      }
+    ],
+    "description": "Export and import component metadata in bulk",
+    "githubUrl": null,
+    "id": "1217084230796932000",
+    "name": "BulkMeta"
   },
   {
     "authors": [
@@ -122,6 +134,30 @@
     "githubUrl": null,
     "id": "1123355421740529204",
     "name": "ClipDrop"
+  },
+  {
+    "authors": [
+      {
+        "name": "Pete Petrash",
+        "url": "https://twitter.com/petepetrash"
+      }
+    ],
+    "description": "Affinity mapping meets AI",
+    "githubUrl": null,
+    "id": "1225501037116774854",
+    "name": "Cluster"
+  },
+  {
+    "authors": [
+      {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Transform code snippets into fully editable Figma designs",
+    "githubUrl": null,
+    "id": "1222554159237609568",
+    "name": "code.to.design"
   },
   {
     "authors": [
@@ -410,6 +446,18 @@
   {
     "authors": [
       {
+        "name": "Lalith Sanathi",
+        "url": "https://twitter.com/justapentool"
+      }
+    ],
+    "description": "Find layers using natural language, powered by AI",
+    "githubUrl": null,
+    "id": "1226839936768069599",
+    "name": "Falcon"
+  },
+  {
+    "authors": [
+      {
         "name": "Adam Albarghouthi",
         "url": "https://twitter.com/adamalbargh"
       }
@@ -434,6 +482,18 @@
   {
     "authors": [
       {
+        "name": "Ryo Nakae",
+        "url": "https://twitter.com/ryo_dg"
+      }
+    ],
+    "description": "ChatGPT in Figma",
+    "githubUrl": "https://github.com/ryonakae/figma-plugin-figma-gpt",
+    "id": "1213050091855586023",
+    "name": "Figma GPT"
+  },
+  {
+    "authors": [
+      {
         "name": "Quest",
         "url": "https://quest.ai/"
       }
@@ -442,6 +502,62 @@
     "githubUrl": null,
     "id": "862039267149408972",
     "name": "Figma to React"
+  },
+  {
+    "authors": [
+      {
+        "name": "João Barros",
+        "url": "https://figma.com/@joao208"
+      },
+      {
+        "name": "João Victor",
+        "url": "https://twitter.com/jvgcunha"
+      },
+      {
+        "name": "Mateus Coutinho",
+        "url": "https://figma.com/@coutinhomm"
+      }
+    ],
+    "description": "Enhance text creation and editing with AI",
+    "githubUrl": null,
+    "id": "1203827738055553363",
+    "name": "FigmaAI - Text"
+  },
+  {
+    "authors": [
+      {
+        "name": "João Barros",
+        "url": "https://figma.com/@joao208"
+      },
+      {
+        "name": "Mateus Coutinho",
+        "url": "https://figma.com/@coutinhomm"
+      }
+    ],
+    "description": "Easily generate random avatars",
+    "githubUrl": null,
+    "id": "1087220559503205766",
+    "name": "FigmaAI – Avatar Generator"
+  },
+  {
+    "authors": [
+      {
+        "name": "João Barros",
+        "url": "https://figma.com/@joao208"
+      },
+      {
+        "name": "João Victor",
+        "url": "https://twitter.com/jvgcunha"
+      },
+      {
+        "name": "Mateus Coutinho",
+        "url": "https://figma.com/@coutinhomm"
+      }
+    ],
+    "description": "Create images with AI",
+    "githubUrl": null,
+    "id": "1215781288748657078",
+    "name": "FigmaAI – Images"
   },
   {
     "authors": [
@@ -698,6 +814,18 @@
   {
     "authors": [
       {
+        "name": "Masanori Ueda",
+        "url": "https://twitter.com/wentz_design"
+      }
+    ],
+    "description": "Generate a simple line chart",
+    "githubUrl": null,
+    "id": "1228330653779206411",
+    "name": "Line Chart Generator"
+  },
+  {
+    "authors": [
+      {
         "name": "Meni Zanzibar",
         "url": "https://figma.com/@meni"
       }
@@ -758,6 +886,18 @@
   {
     "authors": [
       {
+        "name": "Tim Hawkins",
+        "url": "https://figma.com/@timhawkins"
+      }
+    ],
+    "description": "Create and customize beautiful design assets in an instant",
+    "githubUrl": null,
+    "id": "1212293397617410608",
+    "name": "PatternKid"
+  },
+  {
+    "authors": [
+      {
         "name": "Tabler Icons",
         "url": "https://twitter.com/codecalm"
       }
@@ -806,6 +946,18 @@
     "githubUrl": null,
     "id": "1158539818059705018",
     "name": "PicsAI"
+  },
+  {
+    "authors": [
+      {
+        "name": "Masanori Ueda",
+        "url": "https://twitter.com/wentz_design"
+      }
+    ],
+    "description": "Generate a simple pie chart",
+    "githubUrl": null,
+    "id": "1210450291108691193",
+    "name": "Pie Chart Generator"
   },
   {
     "authors": [
@@ -878,6 +1030,18 @@
     "githubUrl": null,
     "id": "1081181836422264345",
     "name": "Quick Status"
+  },
+  {
+    "authors": [
+      {
+        "name": "Masanori Ueda",
+        "url": "https://twitter.com/wentz_design"
+      }
+    ],
+    "description": "Generate a simple radar chart",
+    "githubUrl": null,
+    "id": "1229257209607257414",
+    "name": "Radar Chart Generator"
   },
   {
     "authors": [
@@ -1066,6 +1230,18 @@
     "githubUrl": null,
     "id": "1172891596048319817",
     "name": "Summon.AI"
+  },
+  {
+    "authors": [
+      {
+        "name": "Hiroki Tani",
+        "url": "https://twitter.com/hiloki"
+      }
+    ],
+    "description": "Convert FigJam table cells to sticky notes",
+    "githubUrl": null,
+    "id": "1221892477305959368",
+    "name": "Table to Sticky Notes"
   },
   {
     "authors": [
