@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.4.0
+
+- `@create-figma-plugin/build@2.4.0`
+
+  - Allow the use of `build-figma-plugin.*.cjs` config files. ([#161](https://github.com/yuanqing/create-figma-plugin/issues/161))
+  - Prevent automatic substitution of `process.env.NODE_ENV` by the `build-figma-plugin` CLI. ([#160](https://github.com/yuanqing/create-figma-plugin/issues/160))
+
+- `@create-figma-plugin/utilities@2.4.0`
+
+  - Fixed a bug with `getDocumentComponents` not returning nested components ([#153](https://github.com/yuanqing/create-figma-plugin/issues/153))
+
 ## 2.3.0
 
 - `@create-figma-plugin/utilities@2.3.0`
@@ -49,7 +60,7 @@
 
 - `@create-figma-plugin/ui@2.1.5`
 
-  - Limit the hit area of the `Disclosure` component to the title. ([#128](https://github.com/yuanqing/create-figma-plugin/issues/128))
+  - Limited the hit area of the `Disclosure` component to the title. ([#128](https://github.com/yuanqing/create-figma-plugin/issues/128))
 
 ## 2.1.4
 
@@ -192,21 +203,21 @@
 
 - `showUI` now takes a `themeColors` option (*`boolean`*; optional), which defaults to `true`. (`themeColors` must be set to `true` if you’re using the components in `@create-figma-plugin/ui`.)
 
-- Fix a compilation problem caused by missing `.js` extensions in the import statements in `set-relaunch-button.ts` and `unset-relaunch-button.ts`. ([#109](https://github.com/yuanqing/create-figma-plugin/issues/109))
+- Fixed a compilation problem caused by missing `.js` extensions in the import statements in `set-relaunch-button.ts` and `unset-relaunch-button.ts`. ([#109](https://github.com/yuanqing/create-figma-plugin/issues/109))
 
 ## 1.9.2
 
 - `@create-figma-plugin/ui@1.9.2`
 
-  - Fix a bug with the `Dropdown` menu not re-calculating its height when `value` is `null`. ([#100](https://github.com/yuanqing/create-figma-plugin/issues/100))
+  - Fixed a bug with the `Dropdown` menu not re-calculating its height when `value` is `null`. ([#100](https://github.com/yuanqing/create-figma-plugin/issues/100))
 
 ## 1.9.1
 
 - `@create-figma-plugin/ui@1.9.1`
 
-  - Revert to `css-loader@5.2.7` and `style-loader@2.0.0`.
+  - Reverted to `css-loader@5.2.7` and `style-loader@2.0.0`.
 
-- Revert to `cpy-cli@3.1.1`.
+- Reverted to `cpy-cli@3.1.1`.
 
 ## 1.9.0
 
@@ -228,7 +239,7 @@
 
 - `@create-figma-plugin/build@1.8.4`
 
-  - Resolve paths to `tcm` and `preact-compat` starting from `__dirname` so that `build-figma-plugin` will work when used in a `pnpm` monorepo. ([#84](https://github.com/yuanqing/create-figma-plugin/issues/84))
+  - Resolved paths to `tcm` and `preact-compat` starting from `__dirname` so that `build-figma-plugin` will work when used in a `pnpm` monorepo. ([#84](https://github.com/yuanqing/create-figma-plugin/issues/84))
 
 ## 1.8.3
 
