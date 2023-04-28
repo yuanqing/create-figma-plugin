@@ -504,9 +504,9 @@ test('react', async function (t) {
   await cleanUpAsync()
 })
 
-test('esbuild main config', async function (t) {
+test('esbuild main config - js', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '16-esbuild-main-config'))
+  process.chdir(join(__dirname, 'fixtures', '16-esbuild-main-config-js'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -532,9 +532,37 @@ test('esbuild main config', async function (t) {
   await cleanUpAsync()
 })
 
-test('esbuild ui config', async function (t) {
+test('esbuild main config - cjs', async function (t) {
   t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '17-esbuild-ui-config'))
+  process.chdir(join(__dirname, 'fixtures', '17-esbuild-main-config-cjs'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await installFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    editorType: ['figma'],
+    id: '42',
+    main: 'build/main.js',
+    name: 'a'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  const mainJs = await fs.readFile('build/main.js', 'utf8')
+  t.true(/\/\/ comment appended to main\.js/.test(mainJs) === true)
+  t.false(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('esbuild ui config - js', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '18-esbuild-ui-config-js'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -561,9 +589,38 @@ test('esbuild ui config', async function (t) {
   await cleanUpAsync()
 })
 
-test('override manifest', async function (t) {
+test('esbuild ui config - cjs', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '19-esbuild-ui-config-cjs'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await installFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    editorType: ['figma'],
+    id: '42',
+    main: 'build/main.js',
+    name: 'a',
+    ui: 'build/ui.js'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.true(await fs.pathExists('build/ui.js'))
+  const uiJs = await fs.readFile('build/ui.js', 'utf8')
+  t.true(/\/\/ comment appended to ui\.js/.test(uiJs) === true)
+  await cleanUpAsync()
+})
+
+test('override manifest - js', async function (t) {
   t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '18-override-manifest'))
+  process.chdir(join(__dirname, 'fixtures', '20-override-manifest-js'))
   await cleanUpAsync()
   t.false(await fs.pathExists('build'))
   t.false(await fs.pathExists('node_modules'))
@@ -584,6 +641,61 @@ test('override manifest', async function (t) {
     x: 'y'
   })
   t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('override manifest - cjs', async function (t) {
+  t.plan(5)
+  process.chdir(join(__dirname, 'fixtures', '21-override-manifest-cjs'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await installFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: false,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    editorType: ['figma'],
+    id: '42',
+    main: 'build/main.js',
+    name: 'a',
+    x: 'y'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  t.false(await fs.pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('process.env.NODE_ENV', async function (t) {
+  t.plan(6)
+  process.chdir(join(__dirname, 'fixtures', '22-process-env-node-env'))
+  await cleanUpAsync()
+  t.false(await fs.pathExists('build'))
+  t.false(await fs.pathExists('node_modules'))
+  await installFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    clearPreviousLine: false,
+    minify: true,
+    typecheck: true
+  })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    editorType: ['figma'],
+    id: '42',
+    main: 'build/main.js',
+    name: 'a'
+  })
+  t.true(await fs.pathExists('build/main.js'))
+  const mainJs = await fs.readFile('build/main.js', 'utf8')
+  t.true(mainJs.indexOf('process.env.NODE_ENV==="production"') !== -1)
   t.false(await fs.pathExists('build/ui.js'))
   await cleanUpAsync()
 })
