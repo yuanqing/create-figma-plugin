@@ -22,6 +22,7 @@ async function main(): Promise<void> {
       throw new Error('Need a file path')
     }
     const validIdsFilePath = args[1]
+    const maxPages = typeof args[2] === 'undefined' ? -1 : parseInt(args[2])
     const validIds: Array<string> = JSON.parse(
       await fs.readFile(validIdsFilePath, 'utf8')
     ).map(function (item: { id: string }) {
@@ -33,7 +34,10 @@ async function main(): Promise<void> {
     const ignoredIds: Array<string> = JSON.parse(
       await fs.readFile(ignoredIdsFilePath, 'utf8')
     )
-    const data: Array<Record<string, any>> = await fetchDataAsync(type)
+    const data: Array<Record<string, any>> = await fetchDataAsync({
+      maxPages,
+      type
+    })
     for (const { id, isMatch, name } of data) {
       if (
         isMatch === false ||
@@ -52,10 +56,15 @@ async function main(): Promise<void> {
 }
 main()
 
-export async function fetchDataAsync(
+export async function fetchDataAsync(options: {
   type: 'plugin' | 'widget'
-): Promise<Array<{ id: string; name: string; isMatch: boolean }>> {
-  const data: Array<Record<string, any>> = await fetchFeedAsync(type)
+  maxPages: number
+}): Promise<Array<{ id: string; name: string; isMatch: boolean }>> {
+  const { type, maxPages } = options
+  const data: Array<Record<string, any>> = await fetchFeedAsync({
+    maxPages,
+    type
+  })
   const callbacks = data.map(function (item: Record<string, any>) {
     return function () {
       return fetchVersionsAsync({ id: item.id, type })
@@ -64,12 +73,19 @@ export async function fetchDataAsync(
   return pAll(callbacks, { concurrency: CONCURRENCY })
 }
 
-async function fetchFeedAsync(
+async function fetchFeedAsync(options: {
   type: 'plugin' | 'widget'
-): Promise<Array<Record<string, any>>> {
+  maxPages: number
+}): Promise<Array<Record<string, any>>> {
+  const { type, maxPages } = options
   let result: Array<Record<string, any>> = []
   let url = `/api/feed/${type}s?sort_by=published_at&page_size=100`
+  let i = 0
   while (typeof url !== 'undefined') {
+    if (maxPages !== -1 && i === maxPages) {
+      break
+    }
+    i += 1
     const response = await fetch(`https://www.figma.com${url}`, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
