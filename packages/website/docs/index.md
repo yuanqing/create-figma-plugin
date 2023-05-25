@@ -25,7 +25,7 @@
       "id": "1428024307511402499",
       "name": "tkmadeit",
       "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1322343885172051970/7r2g2q0E_400x400.jpg",
-      "text": "If you build plugins for <a href=\"https://twitter.com/figma\" target=\"_blank\">@figmadesign</a> do yourself a favor and start using Create Figma Plugin toolkit by <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>!"
+      "text": "If you build plugins for <a href=\"https://twitter.com/figma\" target=\"_blank\">@figma</a> do yourself a favor and start using Create Figma Plugin toolkit by <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>!"
     },
     {
       "date": "Aug 19, 2021",
@@ -33,7 +33,7 @@
       "id": "1428137898142883840",
       "name": "Aby Nimbalkar",
       "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1484323185185427456/o6Nzp-Hb_400x400.jpg",
-      "text": "I know I’m late to this party but I just published my first <a href=\"https://twitter.com/figma\" target=\"_blank\">@figmadesign</a> plugin 🥳 (org-only so can’t share yet). <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin library made building the UI so easy and helped me focus on the logic instead. Highly recommended!"
+      "text": "I know I’m late to this party but I just published my first <a href=\"https://twitter.com/figma\" target=\"_blank\">@figma</a> plugin 🥳 (org-only so can’t share yet). <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin library made building the UI so easy and helped me focus on the logic instead. Highly recommended!"
     }
   ]
 }
