@@ -39,7 +39,7 @@
 }
 ---
 
-# The comprehensive toolkit for <span class="xl:block">developing plugins and widgets for Figma and FigJam</span>
+# The comprehensive toolkit for developing plugins and widgets for Figma and FigJam
 
 ## Key features
 
