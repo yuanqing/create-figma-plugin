@@ -12,7 +12,7 @@
   color: var(--color-gray-4);
 }
 .menu ul a:not(.menu__active):hover {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 .menu ul .menu__active {
   color: var(--color-white);

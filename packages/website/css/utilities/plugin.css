@@ -29,7 +29,7 @@
   padding: var(--space-050) 0;
 }
 .plugin__authors a:hover {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 
 .plugin__github:before {
@@ -40,12 +40,11 @@
   padding: var(--space-050) 0;
 }
 .plugin__github a:hover {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 
 .plugin__description {
   margin-top: var(--space-025);
-  color: var(--color-gray-5);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);
 }

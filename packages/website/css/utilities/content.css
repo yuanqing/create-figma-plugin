@@ -17,7 +17,7 @@
 .content > ul code,
 .content > ol code,
 .content > table code {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 
 .content pre {
@@ -41,31 +41,38 @@
   counter-reset: count;
 }
 
-.content > ul li,
+.content > ul li {
+  position: relative;
+  padding-left: var(--space-100);
+}
 .content > ol li {
   position: relative;
   padding-left: var(--space-150);
-}
-.content > ol li {
   counter-increment: count;
 }
 
 .content > ul li:before,
 .content > ol li:before {
   position: absolute;
-  top: 0;
+  top: 0.0625rem;
   left: 0;
   display: block;
-  color: var(--color-gray-4);
 }
 .content > ul li:before {
-  content: '◦';
+  content: '·';
 }
 .content > ol li:before {
   content: counter(count);
   font-family: var(--font-family-code);
   font-size: var(--font-size-code);
   font-variant-numeric: tabular-nums;
+}
+
+.content > h1,
+.content > h2,
+.content > h3,
+.content > h4 {
+  color: var(--color-white);
 }
 
 .content > h1 {
@@ -84,6 +91,7 @@
   border-top: 1px solid var(--color-gray-2);
   margin: var(--space-400) 0 var(--space-150);
   font-size: 1.5rem;
+  font-weight: 500;
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.03125rem;
   line-height: 1.75rem;
@@ -97,11 +105,10 @@
   line-height: 1.5rem;
 }
 .content > h4 {
+  border-top: 1px solid var(--color-gray-2);
   margin: var(--space-200) 0 var(--space-050);
-  color: var(--color-gray-5);
   font-size: 1.125rem;
-  font-style: italic;
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-bold);
   line-height: 1.5rem;
 }
 
@@ -114,7 +121,7 @@
   user-select: none;
 }
 .header-link:hover {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 
 h4 .header-link {

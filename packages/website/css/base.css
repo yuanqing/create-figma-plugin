@@ -8,7 +8,7 @@ html {
 
 body {
   background-color: var(--color-black);
-  color: var(--color-white);
+  color: var(--color-gray-5);
   font-family: var(--font-family);
 }
 

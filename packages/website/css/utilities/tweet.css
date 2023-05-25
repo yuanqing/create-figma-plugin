@@ -2,7 +2,6 @@
   padding: var(--space-200) var(--space-200) var(--space-100);
   border-radius: var(--border-radius);
   background-color: var(--color-gray-1);
-  color: var(--color-white);
 }
 .tweet + .tweet {
   margin-top: var(--space-100);
@@ -44,12 +43,12 @@
   color: var(--color-gray-4);
 }
 a:hover .tweet__handle {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 
 .tweet__date a {
   color: var(--color-gray-4);
 }
 .tweet__date a:hover {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }

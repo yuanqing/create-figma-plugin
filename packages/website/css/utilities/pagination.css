@@ -22,7 +22,7 @@
 }
 .pagination__previous a:hover,
 .pagination__next a:hover {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 
 .pagination__previous a:before {

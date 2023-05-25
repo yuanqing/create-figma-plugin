@@ -5,7 +5,7 @@
   color: var(--color-gray-4);
 }
 .title a:hover {
-  color: var(--color-gray-5);
+  color: var(--color-white);
 }
 
 @media (max-width: 999px) {
