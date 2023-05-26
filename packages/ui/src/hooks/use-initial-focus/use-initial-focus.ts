@@ -9,7 +9,7 @@ export type InitialFocus = {
 export function useInitialFocus(): InitialFocus {
   useEffect(function (): void {
     const focusableElements = document.querySelectorAll<HTMLElement>(
-      `[${INITIAL_FOCUS_DATA_ATTRIBUTE_NAME}]`
+      `[${INITIAL_FOCUS_DATA_ATTRIBUTE_NAME}]:not([tabindex="-1"]`
     )
     if (focusableElements.length === 0) {
       throw new Error(
