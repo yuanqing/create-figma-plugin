@@ -17,10 +17,13 @@ export const decorators = [
   }
 ]
 
-const groupOrder = ['Layout', 'Components', 'Inline Text', 'Icons', 'Hooks']
+const groupOrder = ['Components', 'Inline Text', 'Icons', 'Layout', 'Hooks']
 
 function parseStory(story) {
   const split = story.title.split(/\//g)
+  if (split.length === 1) {
+    return null
+  }
   return [split[0], split[1], [...split.slice(2), story.story].join('/')]
 }
 
@@ -35,7 +38,13 @@ export const parameters = {
         return 0
       }
       const xx = parseStory(x[1])
+      if (xx === null) {
+        return -1
+      }
       const yy = parseStory(y[1])
+      if (yy === null) {
+        return 1
+      }
       // Different `[0]`
       if (xx[0] !== yy[0]) {
         const xGroupOrder = groupOrder.indexOf(xx[0])
