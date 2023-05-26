@@ -3,6 +3,7 @@ import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
+import { VerticalSpace } from '../../../layout/vertical-space/vertical-space'
 import { TextboxNumeric } from '../../textbox/textbox-numeric/textbox-numeric'
 import { RangeSlider } from '../range-slider'
 
@@ -116,6 +117,7 @@ export const WithTextboxNumeric = function () {
         onInput={handleInput}
         value={value}
       />
+      <VerticalSpace space="small" />
       <TextboxNumeric
         maximum={100}
         minimum={0}

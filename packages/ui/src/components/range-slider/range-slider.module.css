@@ -1,16 +1,17 @@
 .rangeSlider {
   position: relative;
+  width: 100%;
+  height: 1px;
   margin: 0 -2px;
 }
 
 .border {
   position: absolute;
-  top: 50%;
+  top: 0;
   right: 2px;
   left: 2px;
   height: 1px;
   background-color: var(--figma-color-border-strong);
-  transform: translateY(-50%);
 }
 .disabled .border {
   background-color: var(--figma-color-border-disabled-strong);
@@ -21,9 +22,10 @@
   z-index: var(
     --z-index-1
   ); /* stack `.input` over all other elements within `.rangeSlider` */
+  top: -16px;
   display: block;
   width: 100%;
-  height: 32px;
+  height: 33px;
   background-color: transparent;
 }
 .disabled .input {
