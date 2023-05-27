@@ -44,7 +44,7 @@
 }
 
 .plugin__description {
-  margin-top: var(--space-025);
+  margin-top: 0.125rem;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);
 }
