@@ -5,7 +5,8 @@
     "jsxFactory": "h",
     "lib": ["DOM", "ES2020"],
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "types": []
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "../utilities" }]
