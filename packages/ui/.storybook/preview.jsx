@@ -10,7 +10,7 @@ const themes = [
 export const globalTypes = {
   theme: {
     name: 'Theme',
-    defaultValue: window.matchMedia('(prefers-color-scheme: dark)').matches === true ? 'figma-dark' : 'figma-light',
+    defaultValue: 'figma-light',
     toolbar: {
       icon: 'mirror',
       items: themes,
