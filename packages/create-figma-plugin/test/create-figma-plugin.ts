@@ -1,7 +1,7 @@
 import test from 'ava'
 import fs from 'fs-extra'
 import { dirname, join } from 'path'
-import rimraf from 'rimraf'
+import { rimraf } from 'rimraf'
 import { fileURLToPath } from 'url'
 
 import { createFigmaPluginAsync } from '../src/create-figma-plugin-async.js'
@@ -29,13 +29,5 @@ test('plugin template', async function (t) {
 })
 
 async function cleanUpAsync(): Promise<void> {
-  await new Promise<void>(function (resolve, reject) {
-    rimraf(join(process.cwd(), 'figma-plugin'), function (error) {
-      if (error) {
-        reject(error)
-        return
-      }
-      resolve()
-    })
-  })
+  await rimraf(join(process.cwd(), 'figma-plugin'))
 }

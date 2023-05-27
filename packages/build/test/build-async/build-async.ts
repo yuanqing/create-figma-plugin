@@ -4,7 +4,7 @@ import { exec, ExecException } from 'child_process'
 import { findUp } from 'find-up'
 import fs from 'fs-extra'
 import { dirname, join } from 'path'
-import rimraf from 'rimraf'
+import { rimraf } from 'rimraf'
 import { fileURLToPath } from 'url'
 
 import { buildAsync } from '../../src/build-async.js'
@@ -731,28 +731,8 @@ async function symlinkCreateFigmaPluginTsConfigAsync(): Promise<void> {
 }
 
 async function cleanUpAsync(): Promise<void> {
-  const promises = [
-    new Promise<void>(function (resolve, reject) {
-      rimraf(
-        join(process.cwd(), '{build,manifest.json,node_modules}'),
-        function (error) {
-          if (error) {
-            reject(error)
-            return
-          }
-          resolve()
-        }
-      )
-    }),
-    new Promise<void>(function (resolve, reject) {
-      rimraf(join(process.cwd(), 'src', '*.css.d.ts'), function (error) {
-        if (error) {
-          reject(error)
-          return
-        }
-        resolve()
-      })
-    })
-  ]
-  await Promise.all(promises)
+  await rimraf(join(process.cwd(), '{build,manifest.json,node_modules}'), {
+    glob: true
+  })
+  await rimraf(join(process.cwd(), 'src', '*.css.d.ts'), { glob: true })
 }
