@@ -2,10 +2,10 @@
 import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { VerticalSpace } from '../../../layout/vertical-space/vertical-space'
-import { TextboxNumeric } from '../../textbox/textbox-numeric/textbox-numeric'
-import { RangeSlider } from '../range-slider'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { VerticalSpace } from '../../../layout/vertical-space/vertical-space.js'
+import { TextboxNumeric } from '../../textbox/textbox-numeric/textbox-numeric.js'
+import { RangeSlider } from '../range-slider.js'
 
 export default {
   parameters: {

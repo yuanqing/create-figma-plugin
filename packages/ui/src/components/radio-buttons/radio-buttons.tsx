@@ -1,9 +1,9 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Stack, StackSpace } from '../../layout/stack/stack'
-import { OnValueChange, Props } from '../../types/types'
-import { createClassName } from '../../utilities/create-class-name'
+import { Stack, StackSpace } from '../../layout/stack/stack.js'
+import { OnValueChange, Props } from '../../types/types.js'
+import { createClassName } from '../../utilities/create-class-name.js'
 import styles from './radio-buttons.module.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-radio-buttons-item-id'

@@ -1,7 +1,7 @@
 import { h } from 'preact'
 
-import { Text } from '../../../components/text/text'
-import { Muted } from '../muted'
+import { Text } from '../../../components/text/text.js'
+import { Muted } from '../muted.js'
 
 export default {
   title: 'Inline Text/Muted'

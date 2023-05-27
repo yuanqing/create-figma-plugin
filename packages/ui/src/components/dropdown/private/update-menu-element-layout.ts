@@ -2,8 +2,8 @@ import {
   INVALID_ID,
   ITEM_ID_DATA_ATTRIBUTE_NAME,
   VIEWPORT_MARGIN
-} from './constants'
-import { Id } from './types'
+} from './constants.js'
+import { Id } from './types.js'
 
 export function updateMenuElementLayout(
   rootElement: HTMLDivElement,

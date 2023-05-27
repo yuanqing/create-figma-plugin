@@ -1,8 +1,8 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types/types'
-import { createClassName } from '../../utilities/create-class-name'
+import { OnValueChange, Props } from '../../types/types.js'
+import { createClassName } from '../../utilities/create-class-name.js'
 import styles from './segmented-control.module.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'

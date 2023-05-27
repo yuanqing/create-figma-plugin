@@ -1,9 +1,9 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { Props } from '../../../types/types'
-import { createClassName } from '../../../utilities/create-class-name'
-import { fileComparator } from '../private/file-comparator'
+import { Props } from '../../../types/types.js'
+import { createClassName } from '../../../utilities/create-class-name.js'
+import { fileComparator } from '../private/file-comparator.js'
 import styles from './file-upload-dropzone.module.css'
 
 export type FileUploadDropzoneProps = {

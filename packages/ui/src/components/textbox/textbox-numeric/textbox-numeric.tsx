@@ -1,12 +1,12 @@
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../../types/types'
-import { createClassName } from '../../../utilities/create-class-name'
+import { Props } from '../../../types/types.js'
+import { createClassName } from '../../../utilities/create-class-name.js'
 import textboxStyles from '../textbox/textbox.module.css'
 import {
   RawTextboxNumeric,
   RawTextboxNumericProps
-} from './private/raw-textbox-numeric'
+} from './private/raw-textbox-numeric.js'
 import textboxNumericStyles from './textbox-numeric.module.css'
 
 export type TextboxNumericProps<Name extends string> =

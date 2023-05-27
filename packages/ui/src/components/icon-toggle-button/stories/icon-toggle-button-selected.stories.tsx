@@ -2,9 +2,9 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconEllipsis32 } from '../../../icons/icon-32/icon-ellipsis-32'
-import { IconToggleButton } from '../icon-toggle-button'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconEllipsis32 } from '../../../icons/icon-32/icon-ellipsis-32.js'
+import { IconToggleButton } from '../icon-toggle-button.js'
 
 export default {
   parameters: {

@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { Preview } from '../preview'
+import { Preview } from '../preview.js'
 
 export default {
   parameters: {

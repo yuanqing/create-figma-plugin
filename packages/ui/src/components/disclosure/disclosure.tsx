@@ -1,8 +1,8 @@
 import { ComponentChildren, Fragment, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { IconCaretRight16 } from '../../icons/icon-16/icon-caret-right-16'
-import { Props } from '../../types/types'
+import { IconCaretRight16 } from '../../icons/icon-16/icon-caret-right-16.js'
+import { Props } from '../../types/types.js'
 import styles from './disclosure.module.css'
 
 export type DisclosureProps = {

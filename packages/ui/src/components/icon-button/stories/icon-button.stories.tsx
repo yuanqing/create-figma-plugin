@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import { h, JSX } from 'preact'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconPlus32 } from '../../../icons/icon-32/icon-plus-32'
-import { IconButton } from '../icon-button'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconPlus32 } from '../../../icons/icon-32/icon-plus-32.js'
+import { IconButton } from '../icon-button.js'
 
 export default {
   title: 'Components/Icon Button'

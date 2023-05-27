@@ -1,7 +1,7 @@
 import { h } from 'preact'
 
-import { Text } from '../../../components/text/text'
-import { Link } from '../link'
+import { Text } from '../../../components/text/text.js'
+import { Link } from '../link.js'
 
 export default {
   title: 'Inline Text/Link'

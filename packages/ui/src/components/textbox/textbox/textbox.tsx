@@ -1,8 +1,8 @@
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../../types/types'
-import { createClassName } from '../../../utilities/create-class-name'
-import { RawTextbox, RawTextboxProps } from './private/raw-textbox'
+import { Props } from '../../../types/types.js'
+import { createClassName } from '../../../utilities/create-class-name.js'
+import { RawTextbox, RawTextboxProps } from './private/raw-textbox.js'
 import styles from './textbox.module.css'
 
 export type TextboxProps<Name extends string> = RawTextboxProps<Name> & {

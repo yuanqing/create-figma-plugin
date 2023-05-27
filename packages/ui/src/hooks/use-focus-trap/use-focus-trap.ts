@@ -1,6 +1,6 @@
 import { useEffect } from 'preact/hooks'
 
-import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler'
+import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler.js'
 
 export function useFocusTrap(rootElement?: HTMLElement): void {
   useEffect(

@@ -2,8 +2,8 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { Disclosure } from '../disclosure'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { Disclosure } from '../disclosure.js'
 
 export default {
   parameters: {

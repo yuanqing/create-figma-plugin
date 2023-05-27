@@ -1,12 +1,12 @@
 import { ComponentChild, Fragment, h, JSX, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
-import { IconCross32 } from '../../icons/icon-32/icon-cross-32'
-import { createClassName } from '../../utilities/create-class-name'
-import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler'
-import { getFocusableElements } from '../../utilities/private/get-focusable-elements'
-import { IconButton } from '../icon-button/icon-button'
-import { Text } from '../text/text'
+import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
+import { createClassName } from '../../utilities/create-class-name.js'
+import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler.js'
+import { getFocusableElements } from '../../utilities/private/get-focusable-elements.js'
+import { IconButton } from '../icon-button/icon-button.js'
+import { Text } from '../text/text.js'
 import styles from './modal.module.css'
 
 export type ModalProps = {

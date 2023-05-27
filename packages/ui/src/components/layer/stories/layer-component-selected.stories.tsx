@@ -2,9 +2,9 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconLayerComponent16 } from '../../../icons/icon-16/icon-layer-component-16'
-import { Layer } from '../layer'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconLayerComponent16 } from '../../../icons/icon-16/icon-layer-component-16.js'
+import { Layer } from '../layer.js'
 
 export default {
   parameters: {

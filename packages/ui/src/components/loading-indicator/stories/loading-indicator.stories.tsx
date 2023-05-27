@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { LoadingIndicator } from '../loading-indicator'
+import { LoadingIndicator } from '../loading-indicator.js'
 
 export default {
   parameters: {

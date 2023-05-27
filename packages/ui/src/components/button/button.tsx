@@ -1,9 +1,9 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../types/types'
-import { createClassName } from '../../utilities/create-class-name'
-import { LoadingIndicator } from '../loading-indicator/loading-indicator'
+import { Props } from '../../types/types.js'
+import { createClassName } from '../../utilities/create-class-name.js'
+import { LoadingIndicator } from '../loading-indicator/loading-indicator.js'
 import styles from './button.module.css'
 
 export type ButtonProps = {

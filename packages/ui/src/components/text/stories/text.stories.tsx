@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { Text } from '../text'
+import { Text } from '../text.js'
 
 export default {
   title: 'Components/Text'

@@ -2,11 +2,11 @@
 import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconLayerFrame16 } from '../../../icons/icon-16/icon-layer-frame-16'
-import { VerticalSpace } from '../../../layout/vertical-space/vertical-space'
-import { Button } from '../../button/button'
-import { Dropdown, DropdownOption } from '../dropdown'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconLayerFrame16 } from '../../../icons/icon-16/icon-layer-frame-16.js'
+import { VerticalSpace } from '../../../layout/vertical-space/vertical-space.js'
+import { Button } from '../../button/button.js'
+import { Dropdown, DropdownOption } from '../dropdown.js'
 
 export default {
   parameters: {

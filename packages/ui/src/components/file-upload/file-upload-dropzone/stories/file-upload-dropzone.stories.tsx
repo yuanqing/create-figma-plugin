@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import { h } from 'preact'
 
-import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
-import { Muted } from '../../../../inline-text/muted/muted'
-import { Text } from '../../../text/text'
-import { FileUploadDropzone } from '../file-upload-dropzone'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
+import { Muted } from '../../../../inline-text/muted/muted.js'
+import { Text } from '../../../text/text.js'
+import { FileUploadDropzone } from '../file-upload-dropzone.js'
 
 export default {
   parameters: {

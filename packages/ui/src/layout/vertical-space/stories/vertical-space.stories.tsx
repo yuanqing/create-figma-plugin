@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { VerticalSpace } from '../vertical-space'
+import { VerticalSpace } from '../vertical-space.js'
 
 export default {
   title: 'Layout/Vertical Space'

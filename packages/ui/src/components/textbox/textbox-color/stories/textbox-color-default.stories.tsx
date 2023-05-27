@@ -3,8 +3,8 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
-import { TextboxColor } from '../textbox-color'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
+import { TextboxColor } from '../textbox-color.js'
 
 export default {
   parameters: {

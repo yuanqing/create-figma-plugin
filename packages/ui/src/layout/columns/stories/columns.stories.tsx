@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { Columns } from '../columns'
+import { Columns } from '../columns.js'
 
 export default { title: 'Layout/Columns' }
 

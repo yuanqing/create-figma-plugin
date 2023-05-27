@@ -2,9 +2,9 @@
 import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { IconChevronDown32 } from '../../../icons/icon-32/icon-chevron-down-32'
-import { Button } from '../../button/button'
-import { Modal } from '../modal'
+import { IconChevronDown32 } from '../../../icons/icon-32/icon-chevron-down-32.js'
+import { Button } from '../../button/button.js'
+import { Modal } from '../modal.js'
 
 export default {
   parameters: {

@@ -1,6 +1,6 @@
 import { ComponentChild, ComponentChildren, h, JSX, toChildArray } from 'preact'
 
-import { Props } from '../../types/types'
+import { Props } from '../../types/types.js'
 import styles from './stack.module.css'
 
 export type StackProps = {

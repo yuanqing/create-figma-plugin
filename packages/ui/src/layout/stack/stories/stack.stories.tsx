@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { Stack } from '../stack'
+import { Stack } from '../stack.js'
 
 export default { title: 'Layout/Stack' }
 

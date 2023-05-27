@@ -2,9 +2,9 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types/types'
-import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
-import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating'
+import { OnValueChange, Props } from '../../../../types/types.js'
+import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
+import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
 
 const EMPTY_STRING = ''
 

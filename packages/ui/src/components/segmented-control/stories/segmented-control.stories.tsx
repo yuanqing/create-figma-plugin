@@ -2,11 +2,14 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { IconTextAlignCenter16 } from '../../../icons/icon-16/icon-text-align-center-16'
-import { IconTextAlignLeft16 } from '../../../icons/icon-16/icon-text-align-left-16'
-import { IconTextAlignRight16 } from '../../../icons/icon-16/icon-text-align-right-16'
-import { SegmentedControl, SegmentedControlOption } from '../segmented-control'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconTextAlignCenter16 } from '../../../icons/icon-16/icon-text-align-center-16.js'
+import { IconTextAlignLeft16 } from '../../../icons/icon-16/icon-text-align-left-16.js'
+import { IconTextAlignRight16 } from '../../../icons/icon-16/icon-text-align-right-16.js'
+import {
+  SegmentedControl,
+  SegmentedControlOption
+} from '../segmented-control.js'
 
 export default { title: 'Components/Segmented Control' }
 

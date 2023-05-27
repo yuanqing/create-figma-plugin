@@ -1,8 +1,8 @@
 import { h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types/types'
-import { createClassName } from '../../utilities/create-class-name'
+import { OnValueChange, Props } from '../../types/types.js'
+import { createClassName } from '../../utilities/create-class-name.js'
 import styles from './range-slider.module.css'
 
 export type RangeSliderProps<Name extends string> = {

@@ -7,11 +7,11 @@ import {
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types/types'
-import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref'
-import { computeNextValue } from '../../private/compute-next-value'
-import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating'
-import { formatEvaluatedValue } from './format-evaluated-value'
+import { OnValueChange, Props } from '../../../../types/types.js'
+import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
+import { computeNextValue } from '../../private/compute-next-value.js'
+import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
+import { formatEvaluatedValue } from './format-evaluated-value.js'
 
 const FRACTION_DIGITS = 3
 const EMPTY_STRING = ''

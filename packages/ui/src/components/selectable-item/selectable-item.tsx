@@ -1,9 +1,9 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16'
-import { OnValueChange, Props } from '../../types/types'
-import { createClassName } from '../../utilities/create-class-name'
+import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
+import { OnValueChange, Props } from '../../types/types.js'
+import { createClassName } from '../../utilities/create-class-name.js'
 import styles from './selectable-item.module.css'
 
 export type SelectableItemProps<Name extends string> = {

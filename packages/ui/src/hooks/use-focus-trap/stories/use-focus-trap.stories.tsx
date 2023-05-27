@@ -2,10 +2,10 @@
 import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { Button } from '../../../components/button/button'
-import { Textbox } from '../../../components/textbox/textbox/textbox'
-import { VerticalSpace } from '../../../layout/vertical-space/vertical-space'
-import { useFocusTrap } from '../use-focus-trap'
+import { Button } from '../../../components/button/button.js'
+import { Textbox } from '../../../components/textbox/textbox/textbox.js'
+import { VerticalSpace } from '../../../layout/vertical-space/vertical-space.js'
+import { useFocusTrap } from '../use-focus-trap.js'
 
 export default { title: 'Hooks/Use Focus Trap' }
 

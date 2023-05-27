@@ -2,8 +2,8 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus'
-import { SearchTextbox } from '../search-textbox'
+import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { SearchTextbox } from '../search-textbox.js'
 
 export default {
   parameters: {

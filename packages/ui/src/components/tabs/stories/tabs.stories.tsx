@@ -2,7 +2,7 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { Tabs, TabsOption } from '../tabs'
+import { Tabs, TabsOption } from '../tabs.js'
 
 export default {
   parameters: {

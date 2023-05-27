@@ -2,12 +2,12 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
-import { IconLayerFrame16 } from '../../../../icons/icon-16/icon-layer-frame-16'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconLayerFrame16 } from '../../../../icons/icon-16/icon-layer-frame-16.js'
 import {
   TextboxAutocomplete,
   TextboxAutocompleteOption
-} from '../textbox-autocomplete'
+} from '../textbox-autocomplete.js'
 
 export default {
   parameters: {

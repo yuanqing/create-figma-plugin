@@ -1,7 +1,7 @@
 import { h, JSX } from 'preact'
 
-import { IconColor } from '../types/colors'
-import { Props } from '../types/types'
+import { IconColor } from '../types/colors.js'
+import { Props } from '../types/types.js'
 import styles from './icon.module.css'
 
 export type IconProps = {

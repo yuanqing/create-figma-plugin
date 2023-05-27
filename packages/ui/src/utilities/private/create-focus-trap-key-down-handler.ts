@@ -1,4 +1,4 @@
-import { getFocusableElements } from './get-focusable-elements'
+import { getFocusableElements } from './get-focusable-elements.js'
 
 export function createFocusTrapKeyDownHandler(rootElement?: HTMLElement) {
   return function (event: KeyboardEvent): void {

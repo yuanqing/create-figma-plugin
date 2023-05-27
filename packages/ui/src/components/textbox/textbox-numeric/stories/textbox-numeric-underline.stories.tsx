@@ -3,9 +3,9 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
-import { IconLayerFrame16 } from '../../../../icons/icon-16/icon-layer-frame-16'
-import { TextboxNumeric } from '../textbox-numeric'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconLayerFrame16 } from '../../../../icons/icon-16/icon-layer-frame-16.js'
+import { TextboxNumeric } from '../textbox-numeric.js'
 
 export default {
   parameters: {

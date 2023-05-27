@@ -1,7 +1,7 @@
 import { h } from 'preact'
 
-import { IconInfo32 } from '../../../icons/icon-32/icon-info-32'
-import { Banner } from '../banner'
+import { IconInfo32 } from '../../../icons/icon-32/icon-info-32.js'
+import { Banner } from '../banner.js'
 
 export default {
   parameters: {

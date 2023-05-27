@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import { h } from 'preact'
 
-import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
-import { FileUploadButton } from '../file-upload-button'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
+import { FileUploadButton } from '../file-upload-button.js'
 
 export default {
   parameters: {

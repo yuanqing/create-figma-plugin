@@ -1,7 +1,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../types/types'
-import { createClassName } from '../../utilities/create-class-name'
+import { Props } from '../../types/types.js'
+import { createClassName } from '../../utilities/create-class-name.js'
 import styles from './banner.module.css'
 
 export type BannerProps = {

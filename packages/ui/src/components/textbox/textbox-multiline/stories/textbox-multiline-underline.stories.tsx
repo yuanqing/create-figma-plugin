@@ -3,8 +3,8 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus'
-import { TextboxMultiline } from '../textbox-multiline'
+import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
+import { TextboxMultiline } from '../textbox-multiline.js'
 
 export default {
   parameters: {

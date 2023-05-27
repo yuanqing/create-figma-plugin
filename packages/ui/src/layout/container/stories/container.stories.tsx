@@ -1,6 +1,6 @@
 import { h } from 'preact'
 
-import { Container } from '../container'
+import { Container } from '../container.js'
 
 export default {
   parameters: {
