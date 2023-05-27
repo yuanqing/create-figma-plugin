@@ -1,14 +1,12 @@
 /* eslint-env node */
 
 module.exports = {
-  addons: [
-    '@storybook/addon-storysource',
-    'storybook-dark-mode',
-    'storybook-addon-themes'
-  ],
+  addons: ['@storybook/addon-storysource', '@storybook/addon-toolbars'],
   core: {
-    builder: '@storybook/builder-vite',
     disableTelemetry: true
+  },
+  framework: {
+    name: '@storybook/preact-vite'
   },
   stories: ['../src/**/*.stories.tsx'],
   viteFinal: function (config) {
