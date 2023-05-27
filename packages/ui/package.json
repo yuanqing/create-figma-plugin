@@ -39,12 +39,11 @@
   "main": "./lib/index.js",
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "concurrently npm:build:generate-colors-types npm:build:generate-icons && npm run build:generate-index && npm run build:js && npm run build:add-js-extension-to-relative-module-paths && npm run build:copy-non-ts-files",
+    "build": "concurrently npm:build:generate-colors-types npm:build:generate-icons && npm run build:generate-index && npm run build:js && npm run build:copy-non-ts-files",
     "build:generate-colors-types": "tsx scripts/generate-colors-types.ts && eslint --fix src/types/colors.ts",
     "build:generate-icons": "tsx scripts/generate-icons.ts && eslint --fix 'src/icons/**/*.{ts,tsx}'",
     "build:generate-index": "tsx ../../scripts/generate-index.ts -- 'src/**/*.{ts,tsx}' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "build:js": "tsc --build",
-    "build:add-js-extension-to-relative-module-paths": "tsx scripts/add-js-extension-to-relative-module-paths.ts",
     "build:copy-non-ts-files": "tsx scripts/copy-non-ts-files.ts",
     "clean": "rimraf '*.log' .turbo lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
     "fix": "concurrently npm:fix:css npm:fix:js npm:fix:json",
