@@ -21,7 +21,7 @@ The component library ships with [three themes](https://figma.com/plugin-docs/cs
 2. *Figma (Dark)*
 3. *FigJam*
 
-If the UI is launched from a Figma plugin/widget, components will automatically render using the *Figma Design* theme (either *Light* or *Dark*, based on the user’s preferences as set in the Figma app). If the UI is launched from a FigJam plugin/widget, components will automatically render using the *FigJam* theme.
+If the UI is launched from a Figma plugin/widget, components will automatically render using the *Figma* theme (either *Light* or *Dark*, based on the user’s preferences as set in the Figma app). If the UI is launched from a FigJam plugin/widget, components will automatically render using the *FigJam* theme.
 
 ![UI of the Insert Big Image plugin rendered using the Figma and FigJam themes](<%- media['ui-themes'] %>)
 
