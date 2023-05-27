@@ -17,8 +17,8 @@ See the [full library of components in the Storybook](<%- baseUrl %>storybook/).
 
 The component library ships with [three themes](https://figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens):
 
-1. *Figma Design: Light*
-2. *Figma Design: Dark*
+1. *Figma (Light)*
+2. *Figma (Dark)*
 3. *FigJam*
 
 If the UI is launched from a Figma plugin/widget, components will automatically render using the *Figma Design* theme (either *Light* or *Dark*, based on the user’s preferences as set in the Figma app). If the UI is launched from a FigJam plugin/widget, components will automatically render using the *FigJam* theme.
