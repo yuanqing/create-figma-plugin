@@ -48,7 +48,7 @@ export const Index = function () {
     useState<string>('1st')
   const [textboxColorHexColor, setTextboxColorHexColor] =
     useState<string>('0D99FF')
-  const [textboxColorOpacity, setTextboxColorOpacity] = useState<string>('100%')
+  const [textboxColorOpacity, setTextboxColorOpacity] = useState<string>('50%')
   const [textboxNumericValue, setTextboxNumericValue] = useState<string>('42')
   const [toggleValue, setToggleValue] = useState<boolean>(true)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
