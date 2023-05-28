@@ -1,9 +1,11 @@
 .plugin {
   position: relative;
   display: flex;
-}
-.plugin + .plugin {
   margin-top: var(--space-100);
+}
+
+.plugin[aria-hidden='true'] {
+  display: none;
 }
 
 .plugin__image {

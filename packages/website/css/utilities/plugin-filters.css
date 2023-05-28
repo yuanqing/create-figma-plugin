@@ -1,0 +1,28 @@
+.plugin-filters {
+  display: flex;
+  gap: var(--space-050);
+}
+
+.plugin-filter {
+  display: flex;
+  padding: var(--space-050) var(--space-075);
+  border: 1px solid var(--color-gray-2);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  gap: var(--space-025);
+}
+.plugin-filter:hover {
+  border-color: var(--color-gray-4);
+}
+.plugin-filter--active {
+  border-color: var(--color-gray-4);
+  background-color: var(--color-gray-1);
+}
+
+.plugin-filter span {
+  display: block;
+}
+
+.plugin-filter__count {
+  color: var(--color-gray-4);
+}

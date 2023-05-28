@@ -15,5 +15,6 @@
 @import './utilities/page.css';
 @import './utilities/pagination.css';
 @import './utilities/plugin.css';
+@import './utilities/plugin-filters.css';
 @import './utilities/title.css';
 @import './utilities/tweet.css';
