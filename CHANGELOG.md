@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.5.0
+
+- `@create-figma-plugin/ui@2.5.0`
+
+  - Fixed a bug in the `Dropdown` component where the current menu element is highlighted on `mousedown`.
+  - Filtered out non-focusable elements (`tabindex="-1"`) in the `useInitialFocus` hook.
+  - Removed whitespace above and below the `RangeSlider` component.
+
+- Bumped dependencies in all packages.
+
 ## 2.4.0
 
 - `@create-figma-plugin/build@2.4.0`
