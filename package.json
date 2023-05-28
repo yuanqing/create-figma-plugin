@@ -30,7 +30,8 @@
     "website-serve": "sirv build --dev --host --port 4242"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^2.4.0",
+    "@lerna-lite/publish": "^2.4.0",
+    "@lerna-lite/version": "^2.4.0",
     "@types/node": "^20.2.4",
     "@typescript-eslint/eslint-plugin": "5.59.7",
     "concurrently": "^8.0.1",
