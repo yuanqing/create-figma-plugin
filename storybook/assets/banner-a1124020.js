@@ -1,0 +1,2 @@
+import{c as l}from"./create-class-name-71c46838.js";import{o as c}from"./jsxRuntime.module-893eb125.js";const o="_banner_1qlmg_1",_="_success_1qlmg_9",a="_warning_1qlmg_12",t="_icon_1qlmg_16",d="_children_1qlmg_30",n={banner:o,success:_,warning:a,icon:t,children:d};function u({children:e,icon:r,variant:s,...i}){return c("div",{...i,class:l([n.banner,typeof s>"u"?null:n[s]]),children:[c("div",{class:n.icon,children:r}),c("div",{class:n.children,children:e})]})}export{u as B};
+//# sourceMappingURL=banner-a1124020.js.map
