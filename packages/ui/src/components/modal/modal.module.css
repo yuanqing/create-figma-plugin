@@ -76,7 +76,7 @@
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   z-index: var(--z-index-1);
   top: 0;
   right: 0;
