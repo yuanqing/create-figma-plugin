@@ -62,7 +62,7 @@
   "devDependencies": {
     "@create-figma-plugin/tsconfig": "^2.5.0",
     "@create-figma-plugin/utilities": "^2.5.0",
-    "@figma/plugin-typings": "1.64.0",
+    "@figma/plugin-typings": "1.69.0",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^20.2.4",
     "@types/react": "^18.2.7",
