@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.5.1
+
+- `create-figma-plugin`
+  - Update `@figma/plugin-typings` version to `1.69.0`
+
 ## 2.5.0
 
 - `@create-figma-plugin/ui@2.5.0`
