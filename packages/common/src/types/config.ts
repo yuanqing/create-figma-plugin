@@ -20,6 +20,8 @@ export interface Config extends ConfigCommand {
   readonly relaunchButtons: null | Array<ConfigRelaunchButton>
   readonly permissions: null | Array<string>
   readonly capabilities: null | Array<string>
+  readonly codegenLanguages: null | Array<ConfigCodeLanguage>
+  readonly codegenPreferences: null | Array<ConfigCodegenPreference>
   readonly enableProposedApi: boolean
   readonly enablePrivatePluginApi: boolean
   readonly build: null | string
@@ -44,4 +46,26 @@ export interface ConfigRelaunchButton extends BaseConfigMixin {
   readonly commandId: string
   readonly main: ConfigFile
   readonly multipleSelection: boolean
+}
+
+export type ConfigCodeLanguage = {
+  readonly label: string
+  readonly value: string
+}
+
+export type ConfigCodegenPreferenceOption = {
+  readonly label: string
+  readonly value: string
+  readonly isDefault: null | boolean
+}
+
+export type ConfigCodegenPreference = {
+  readonly itemType: string
+  readonly defaultScaleFactor: null | number
+  readonly scaledUnit: null | string
+  readonly default: null | boolean
+  readonly propertyName: null | string
+  readonly label: null | string
+  readonly options: null | Array<ConfigCodegenPreferenceOption>
+  readonly includedLanguages: null | Array<string>
 }

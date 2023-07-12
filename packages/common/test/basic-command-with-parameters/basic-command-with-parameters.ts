@@ -10,6 +10,8 @@ const config = {
   api: '1.0.0',
   build: null,
   capabilities: null,
+  codegenLanguages: null,
+  codegenPreferences: null,
   commandId: 'b--default',
   containsWidget: false,
   editorType: ['figma'],

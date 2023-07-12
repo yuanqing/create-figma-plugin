@@ -10,6 +10,8 @@ const config = {
   api: '1.0.0',
   build: null,
   capabilities: null,
+  codegenLanguages: null,
+  codegenPreferences: null,
   containsWidget: false,
   editorType: ['figma'],
   enablePrivatePluginApi: false,

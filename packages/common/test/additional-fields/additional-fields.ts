@@ -7,6 +7,8 @@ import { readConfigAsync } from '../../src/read-config-async.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
+  codegenLanguages: null,
+  codegenPreferences: null,
   commandId: 'b--default',
   id: 'a',
   main: { handler: 'default', src: 'b' },
@@ -162,6 +164,63 @@ test('`build`', async function (t) {
     api: '1.0.0',
     build: 'c',
     capabilities: null,
+    containsWidget: false,
+    editorType: ['figma'],
+    enablePrivatePluginApi: false,
+    enableProposedApi: false,
+    permissions: null,
+    widgetApi: '1.0.0'
+  })
+})
+
+test('`codegen`', async function (t) {
+  t.plan(1)
+  process.chdir(join(__dirname, 'fixtures', '10-codegen'))
+  t.deepEqual(await readConfigAsync(), {
+    ...config,
+    api: '1.0.0',
+    build: null,
+    capabilities: ['codegen'],
+    codegenLanguages: [
+      { label: 'React', value: 'react' },
+      { label: 'Typescript', value: 'typescript' }
+    ],
+    codegenPreferences: [
+      {
+        default: true,
+        defaultScaleFactor: 16,
+        includedLanguages: ['react'],
+        itemType: 'unit',
+        label: null,
+        options: null,
+        propertyName: null,
+        scaledUnit: 'Rem'
+      },
+      {
+        default: false,
+        defaultScaleFactor: null,
+        includedLanguages: ['typescript'],
+        itemType: 'select',
+        label: 'Tab Size',
+        options: [
+          { isDefault: true, label: '2', value: '2' },
+          { isDefault: false, label: '4', value: '4' },
+          { isDefault: false, label: '8', value: '8' }
+        ],
+        propertyName: 'tabSize',
+        scaledUnit: null
+      },
+      {
+        default: false,
+        defaultScaleFactor: null,
+        includedLanguages: ['typescript'],
+        itemType: 'action',
+        label: 'More settings...',
+        options: null,
+        propertyName: 'showMore',
+        scaledUnit: null
+      }
+    ],
     containsWidget: false,
     editorType: ['figma'],
     enablePrivatePluginApi: false,

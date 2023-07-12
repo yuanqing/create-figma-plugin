@@ -1,0 +1,61 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "capabilities": [
+      "codegen"
+    ],
+    "codegenLanguages": [
+      {
+        "label": "React",
+        "value": "react"
+      },
+      {
+        "label": "Typescript",
+        "value": "typescript"
+      }
+    ],
+    "codegenPreferences": [
+      {
+        "itemType": "unit",
+        "scaledUnit": "Rem",
+        "defaultScaleFactor": 16,
+        "default": true,
+        "includedLanguages": [
+          "react"
+        ]
+      },
+      {
+        "itemType": "select",
+        "propertyName": "tabSize",
+        "label": "Tab Size",
+        "options": [
+          {
+            "label": "2",
+            "value": "2",
+            "isDefault": true
+          },
+          {
+            "label": "4",
+            "value": "4"
+          },
+          {
+            "label": "8",
+            "value": "8"
+          }
+        ],
+        "includedLanguages": [
+          "typescript"
+        ]
+      },
+      {
+        "itemType": "action",
+        "propertyName": "showMore",
+        "label": "More settings...",
+        "includedLanguages": [
+          "typescript"
+        ]
+      }
+    ]
+  }
+}

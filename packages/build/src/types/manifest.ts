@@ -16,6 +16,8 @@ export type Manifest = {
   enableProposedApi?: boolean
   enablePrivatePluginApi?: boolean
   build?: string
+  codegenLanguages?: Array<ManifestCodeLanguage>
+  codegenPreferences?: Array<ManifestCodegenPreference>
 }
 
 export type ManifestMenuItem = {
@@ -40,4 +42,26 @@ export type ManifestRelaunchButton = {
   command: string
   name: string
   multipleSelection?: true
+}
+
+export type ManifestCodeLanguage = {
+  label: string
+  value: string
+}
+
+export type ManifestCodegenPreferenceOption = {
+  label: string
+  value: string
+  isDefault?: boolean
+}
+
+export type ManifestCodegenPreference = {
+  itemType: string
+  defaultScaleFactor?: number
+  scaledUnit?: string
+  default?: boolean
+  propertyName?: string
+  label?: string
+  options?: Array<ManifestCodegenPreferenceOption>
+  includedLanguages?: Array<string>
 }

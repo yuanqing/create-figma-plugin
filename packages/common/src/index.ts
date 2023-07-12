@@ -4,6 +4,9 @@ export { log } from './log.js'
 export { readConfigAsync } from './read-config-async.js'
 export {
   Config,
+  ConfigCodegenPreference,
+  ConfigCodegenPreferenceOption,
+  ConfigCodeLanguage,
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
@@ -12,6 +15,9 @@ export {
 } from './types/config.js'
 export {
   RawConfig,
+  RawConfigCodegenPreference,
+  RawConfigCodegenPreferenceOption,
+  RawConfigCodeLanguage,
   RawConfigCommand,
   RawConfigCommandSeparator,
   RawConfigFile,

@@ -6,11 +6,17 @@ import {
   constants,
   readConfigAsync
 } from '@create-figma-plugin/common'
+import {
+  ConfigCodegenPreference,
+  ConfigCodegenPreferenceOption
+} from '@create-figma-plugin/common/lib/types/config'
 import fs from 'fs-extra'
 import { globby } from 'globby'
 
 import {
   Manifest,
+  ManifestCodegenPreference,
+  ManifestCodegenPreferenceOption,
   ManifestMenuItem,
   ManifestMenuItemSeparator,
   ManifestParameter,
@@ -23,6 +29,8 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     api,
     build,
     capabilities,
+    codegenLanguages,
+    codegenPreferences,
     commandId,
     containsWidget,
     editorType,
@@ -73,6 +81,11 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
         : undefined,
     permissions: permissions !== null ? permissions : undefined,
     capabilities: capabilities !== null ? capabilities : undefined,
+    codegenLanguages: codegenLanguages !== null ? codegenLanguages : undefined,
+    codegenPreferences:
+      codegenPreferences !== null
+        ? createCodegenPreferences(codegenPreferences)
+        : undefined,
     enableProposedApi: enableProposedApi === true ? true : undefined,
     enablePrivatePluginApi: enablePrivatePluginApi === true ? true : undefined,
     build: build !== null ? build : undefined
@@ -170,6 +183,67 @@ function createRelaunchButtons(
     if (relaunchButton.multipleSelection === true) {
       result.multipleSelection = true
     }
+    return result
+  })
+}
+
+function createCodegenPreferenceOptions(
+  options: Array<ConfigCodegenPreferenceOption>
+): Array<ManifestCodegenPreferenceOption> {
+  return options.map(function (
+    option: ConfigCodegenPreferenceOption
+  ): ManifestCodegenPreferenceOption {
+    const result: ManifestCodegenPreferenceOption = {
+      label: option.label,
+      value: option.value
+    }
+
+    if (option.isDefault === true) {
+      result.isDefault = true
+    }
+
+    return result
+  })
+}
+
+function createCodegenPreferences(
+  preferences: Array<ConfigCodegenPreference>
+): Array<ManifestCodegenPreference> {
+  return preferences.map(function (
+    preference: ConfigCodegenPreference
+  ): ManifestCodegenPreference {
+    const result: ManifestCodegenPreference = {
+      itemType: preference.itemType
+    }
+
+    if (preference.defaultScaleFactor !== null) {
+      result.defaultScaleFactor = preference.defaultScaleFactor
+    }
+
+    if (preference.scaledUnit !== null) {
+      result.scaledUnit = preference.scaledUnit
+    }
+
+    if (preference.default === true) {
+      result.default = true
+    }
+
+    if (preference.propertyName !== null) {
+      result.propertyName = preference.propertyName
+    }
+
+    if (preference.label !== null) {
+      result.label = preference.label
+    }
+
+    if (preference.options !== null) {
+      result.options = createCodegenPreferenceOptions(preference.options)
+    }
+
+    if (preference.includedLanguages !== null) {
+      result.includedLanguages = preference.includedLanguages
+    }
+
     return result
   })
 }

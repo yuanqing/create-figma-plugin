@@ -19,6 +19,8 @@ export interface RawConfig extends RawConfigCommand {
   readonly relaunchButtons?: RawConfigRelaunchButtons
   readonly permissions?: Array<string>
   readonly capabilities?: Array<string>
+  readonly codegenLanguages?: Array<RawConfigCodeLanguage>
+  readonly codegenPreferences?: Array<RawConfigCodegenPreference>
   readonly enableProposedApi?: boolean
   readonly enablePrivatePluginApi?: boolean
   readonly build?: string
@@ -47,4 +49,26 @@ export interface RawConfigRelaunchButton extends BaseRawConfigMixin {
 
 export type RawConfigRelaunchButtons = {
   readonly [relaunchButtonId: string]: RawConfigRelaunchButton
+}
+
+export type RawConfigCodeLanguage = {
+  readonly label: string
+  readonly value: string
+}
+
+export type RawConfigCodegenPreferenceOption = {
+  readonly label: string
+  readonly value: string
+  readonly isDefault?: boolean
+}
+
+export type RawConfigCodegenPreference = {
+  readonly itemType: string
+  readonly defaultScaleFactor?: number
+  readonly scaledUnit?: string
+  readonly default?: boolean
+  readonly propertyName?: string
+  readonly label?: string
+  readonly options?: Array<RawConfigCodegenPreferenceOption>
+  readonly includedLanguages?: Array<string>
 }

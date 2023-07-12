@@ -5,6 +5,8 @@ import { join } from 'path'
 import { constants } from './constants.js'
 import {
   Config,
+  ConfigCodegenPreference,
+  ConfigCodegenPreferenceOption,
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
@@ -13,6 +15,8 @@ import {
 } from './types/config.js'
 import {
   RawConfig,
+  RawConfigCodegenPreference,
+  RawConfigCodegenPreferenceOption,
   RawConfigCommand,
   RawConfigCommandSeparator,
   RawConfigFile,
@@ -24,6 +28,8 @@ const defaultConfig: Config = {
   api: constants.build.manifestPluginApi,
   build: null,
   capabilities: null,
+  codegenLanguages: null,
+  codegenPreferences: null,
   commandId: join(constants.build.srcDirectoryName, 'main.ts--default'),
   containsWidget: false,
   editorType: ['figma'],
@@ -60,6 +66,8 @@ export async function readConfigAsync(): Promise<Config> {
     api,
     build,
     capabilities,
+    codegenLanguages,
+    codegenPreferences,
     containsWidget,
     editorType,
     enableProposedApi,
@@ -79,6 +87,12 @@ export async function readConfigAsync(): Promise<Config> {
     api: typeof api === 'undefined' ? constants.build.manifestPluginApi : api,
     build: typeof build === 'undefined' ? null : build,
     capabilities: typeof capabilities === 'undefined' ? null : capabilities,
+    codegenLanguages:
+      typeof codegenLanguages === 'undefined' ? null : codegenLanguages,
+    codegenPreferences:
+      typeof codegenPreferences === 'undefined'
+        ? null
+        : parseCodegenPreferences(codegenPreferences),
     containsWidget:
       typeof containsWidget === 'undefined' ? false : containsWidget,
     editorType: typeof editorType === 'undefined' ? ['figma'] : editorType,
@@ -174,6 +188,61 @@ function parseCommandId(main: RawConfigFile): string {
     return `${src}--default`
   }
   return `${src}--${handler}`
+}
+
+function parseCodegenPreferenceOptions(
+  options: Array<RawConfigCodegenPreferenceOption>
+): Array<ConfigCodegenPreferenceOption> {
+  const result: Array<ConfigCodegenPreferenceOption> = []
+
+  for (const option of options) {
+    const { label, value, isDefault } = option
+
+    result.push({
+      isDefault: typeof isDefault === 'undefined' ? false : isDefault,
+      label,
+      value
+    })
+  }
+
+  return result
+}
+
+function parseCodegenPreferences(
+  preferences: Array<RawConfigCodegenPreference>
+): Array<ConfigCodegenPreference> {
+  const result: Array<ConfigCodegenPreference> = []
+
+  for (const preference of preferences) {
+    const {
+      itemType,
+      defaultScaleFactor,
+      scaledUnit,
+      default: defaultProperty,
+      propertyName,
+      label,
+      options,
+      includedLanguages
+    } = preference
+
+    result.push({
+      default: typeof defaultProperty === 'undefined' ? false : defaultProperty,
+      defaultScaleFactor:
+        typeof defaultScaleFactor === 'undefined' ? null : defaultScaleFactor,
+      includedLanguages:
+        typeof includedLanguages === 'undefined' ? null : includedLanguages,
+      itemType,
+      label: typeof label === 'undefined' ? null : label,
+      options:
+        typeof options === 'undefined'
+          ? null
+          : parseCodegenPreferenceOptions(options),
+      propertyName: typeof propertyName === 'undefined' ? null : propertyName,
+      scaledUnit: typeof scaledUnit === 'undefined' ? null : scaledUnit
+    })
+  }
+
+  return result
 }
 
 function parseFile(file: RawConfigFile): ConfigFile {
