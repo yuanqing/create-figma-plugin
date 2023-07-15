@@ -60,19 +60,13 @@ export function useScrollableMenu(options: {
       const menuElement = getCurrentFromRef(menuElementRef)
       const menuElementOffsetTop = menuElement.getBoundingClientRect().top
       if (selectedElementOffsetTop < menuElementOffsetTop) {
-        // Selected element is above the visible items at the current scroll position
-        menuElement.scrollTop = computeRelativeOffsetTop(
-          selectedElement,
-          menuElement
-        )
+        selectedElement.scrollIntoView()
         return
       }
       const offsetBottom =
         selectedElementOffsetTop + selectedElement.offsetHeight
       if (offsetBottom > menuElementOffsetTop + menuElement.offsetHeight) {
-        // Selected element is below the visible items at the current scroll position
-        menuElement.scrollTop =
-          selectedElement.offsetHeight - menuElement.offsetHeight
+        selectedElement.scrollIntoView()
       }
     },
     [findIndexByItemId, getItemElements, menuElementRef]
@@ -126,20 +120,4 @@ export function useScrollableMenu(options: {
     handleScrollableMenuItemMouseMove,
     handleScrollableMenuKeyDown
   }
-}
-
-function computeRelativeOffsetTop(
-  targetElement: HTMLElement,
-  parentElement: HTMLElement
-): number {
-  let element = targetElement
-  let offsetTop = 0
-  while (element !== parentElement) {
-    offsetTop += element.offsetTop
-    if (element.parentElement === null) {
-      throw new Error('`element.parentElement` is `null`')
-    }
-    element = element.parentElement
-  }
-  return offsetTop
 }
