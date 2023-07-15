@@ -55,18 +55,24 @@ export function useScrollableMenu(options: {
       const itemElements = getItemElements()
       const index = findIndexByItemId(id)
       const selectedElement = itemElements[index]
+      const selectedElementOffsetTop =
+        selectedElement.getBoundingClientRect().top
       const menuElement = getCurrentFromRef(menuElementRef)
-      const scrollTop = menuElement.scrollTop
-      const offsetTop = computeRelativeOffsetTop(selectedElement, menuElement)
-      if (offsetTop < scrollTop) {
+      const menuElementOffsetTop = menuElement.getBoundingClientRect().top
+      if (selectedElementOffsetTop < menuElementOffsetTop) {
         // Selected element is above the visible items at the current scroll position
-        menuElement.scrollTop = offsetTop
+        menuElement.scrollTop = computeRelativeOffsetTop(
+          selectedElement,
+          menuElement
+        )
         return
       }
-      const offsetBottom = offsetTop + selectedElement.offsetHeight
-      if (offsetBottom > menuElement.scrollTop + menuElement.offsetHeight) {
+      const offsetBottom =
+        selectedElementOffsetTop + selectedElement.offsetHeight
+      if (offsetBottom > menuElementOffsetTop + menuElement.offsetHeight) {
         // Selected element is below the visible items at the current scroll position
-        menuElement.scrollTop = offsetBottom - menuElement.offsetHeight
+        menuElement.scrollTop =
+          selectedElement.offsetHeight - menuElement.offsetHeight
       }
     },
     [findIndexByItemId, getItemElements, menuElementRef]
