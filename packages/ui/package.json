@@ -62,10 +62,10 @@
     "@create-figma-plugin/utilities": "^2.5.1"
   },
   "devDependencies": {
-    "@storybook/addon-storysource": "^7.0.17",
-    "@storybook/addon-toolbars": "^7.0.17",
-    "@storybook/preact": "^7.0.17",
-    "@storybook/preact-vite": "^7.0.17",
+    "@storybook/addon-storysource": "^7.0.27",
+    "@storybook/addon-toolbars": "^7.0.27",
+    "@storybook/preact": "^7.0.27",
+    "@storybook/preact-vite": "^7.0.27",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^20.2.4",
     "@typescript-eslint/eslint-plugin": "5.59.7",
