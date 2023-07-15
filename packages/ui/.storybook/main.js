@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-module.exports = {
+export default {
   addons: ['@storybook/addon-storysource', '@storybook/addon-toolbars'],
   core: {
     disableTelemetry: true
