@@ -35,7 +35,10 @@
   "files": [
     "lib"
   ],
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./css/*.css": "./lib/css/*.css"
+  },
   "main": "./lib/index.js",
   "scripts": {
     "prebuild": "npm run clean",
