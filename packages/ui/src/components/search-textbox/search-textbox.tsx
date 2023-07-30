@@ -14,7 +14,9 @@ export type SearchTextboxProps<Name extends string> = {
   clearOnEscapeKeyDown?: boolean
   disabled?: boolean
   name?: Name
+  onFocus?: OmitThisParameter<JSX.FocusEventHandler<HTMLInputElement>>
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
+  onKeyDown?: OmitThisParameter<JSX.KeyboardEventHandler<HTMLInputElement>>
   onValueInput?: OnValueChange<string, Name>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -26,7 +28,9 @@ export function SearchTextbox<Name extends string>({
   clearOnEscapeKeyDown = false,
   disabled = false,
   name,
+  onFocus = function () {},
   onInput = function () {},
+  onKeyDown = function () {},
   onValueInput = function () {},
   placeholder,
   propagateEscapeKeyDown = true,
@@ -45,12 +49,13 @@ export function SearchTextbox<Name extends string>({
     inputElement.focus()
   }, [])
 
-  const handleFocus = useCallback(function (
-    event: JSX.TargetedFocusEvent<HTMLInputElement>
-  ): void {
-    event.currentTarget.select()
-  },
-  [])
+  const handleFocus = useCallback(
+    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
+      onFocus(event)
+      event.currentTarget.select()
+    },
+    [onFocus]
+  )
 
   const handleInput = useCallback(
     function (event: JSX.TargetedEvent<HTMLInputElement>): void {
@@ -62,6 +67,7 @@ export function SearchTextbox<Name extends string>({
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
@@ -82,6 +88,7 @@ export function SearchTextbox<Name extends string>({
     [
       clearOnEscapeKeyDown,
       handleClearButtonClick,
+      onKeyDown,
       propagateEscapeKeyDown,
       value
     ]

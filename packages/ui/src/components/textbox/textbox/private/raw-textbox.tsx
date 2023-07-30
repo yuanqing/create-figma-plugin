@@ -11,6 +11,10 @@ const EMPTY_STRING = ''
 export type RawTextboxProps<Name extends string> = {
   disabled?: boolean
   name?: Name
+  onBlur?: OmitThisParameter<JSX.FocusEventHandler<HTMLInputElement>>
+  onFocus?: OmitThisParameter<JSX.FocusEventHandler<HTMLInputElement>>
+  onKeyDown?: OmitThisParameter<JSX.KeyboardEventHandler<HTMLInputElement>>
+  onMouseUp?: OmitThisParameter<JSX.MouseEventHandler<HTMLInputElement>>
   onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
   onValueInput?: OnValueChange<string, Name>
   password?: boolean
@@ -25,7 +29,11 @@ export type RawTextboxProps<Name extends string> = {
 export function RawTextbox<Name extends string>({
   disabled = false,
   name,
+  onBlur = function () {},
+  onFocus = function () {},
   onInput = function () {},
+  onKeyDown = function () {},
+  onMouseUp = function () {},
   onValueInput = function () {},
   password = false,
   placeholder,
@@ -50,11 +58,12 @@ export function RawTextbox<Name extends string>({
   }, [])
 
   const handleBlur = useCallback(
-    function (): void {
+    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
       if (revertOnEscapeKeyDownRef.current === true) {
         revertOnEscapeKeyDownRef.current = false
         return
       }
+      onBlur(event)
       if (typeof validateOnBlur !== 'undefined') {
         const result = validateOnBlur(value)
         if (typeof result === 'string') {
@@ -74,15 +83,16 @@ export function RawTextbox<Name extends string>({
       }
       setOriginalValue(EMPTY_STRING)
     },
-    [originalValue, setInputElementValue, validateOnBlur, value]
+    [onBlur, originalValue, setInputElementValue, validateOnBlur, value]
   )
 
   const handleFocus = useCallback(
     function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
+      onFocus(event)
       setOriginalValue(value)
       event.currentTarget.select()
     },
-    [value]
+    [onFocus, value]
   )
 
   const handleInput = useCallback(
@@ -95,6 +105,7 @@ export function RawTextbox<Name extends string>({
 
   const handleKeyDown = useCallback(
     function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+      onKeyDown(event)
       const key = event.key
       if (key === 'Escape') {
         if (propagateEscapeKeyDown === false) {
@@ -122,6 +133,7 @@ export function RawTextbox<Name extends string>({
       }
     },
     [
+      onKeyDown,
       originalValue,
       propagateEscapeKeyDown,
       revertOnEscapeKeyDown,
@@ -132,12 +144,13 @@ export function RawTextbox<Name extends string>({
 
   const handleMouseUp = useCallback(
     function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
+      onMouseUp(event)
       if (value === MIXED_STRING) {
         // Prevent changing the selection if `value` is `MIXED_STRING`
         event.preventDefault()
       }
     },
-    [value]
+    [onMouseUp, value]
   )
 
   return (
