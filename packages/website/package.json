@@ -24,7 +24,7 @@
     "website-watch": "build-website --watch"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
+    "@create-figma-plugin/common": "^2.5.1",
     "@types/text-table": "^0.2.2",
     "@typescript-eslint/eslint-plugin": "5.59.7",
     "@yuanqing/build-website": "^0.0.3",
@@ -37,7 +37,6 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-sort-keys-fix": "1.1.2",
-    "fs-extra": "^11.1.1",
     "node-fetch": "^3.3.1",
     "open-cli": "^7.2.0",
     "p-all": "^5.0.0",

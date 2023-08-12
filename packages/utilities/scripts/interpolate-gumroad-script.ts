@@ -1,7 +1,9 @@
+import fs from 'node:fs/promises'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import { writeFileAsync } from '@create-figma-plugin/common'
 import { transformSync } from 'esbuild'
-import fs from 'fs-extra'
-import { dirname, join, resolve } from 'path'
-import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -39,7 +41,7 @@ async function interpolateScriptAsync(
       return match + '`<script>' + scriptJs + '</script>`'
     }
   )
-  await fs.writeFile(tsFilePath, result)
+  await writeFileAsync(tsFilePath, result)
 }
 
 async function readScriptAsync(scriptFilePath: string): Promise<string> {

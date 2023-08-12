@@ -1,6 +1,8 @@
-import fs from 'fs-extra'
-import { dirname, join, resolve } from 'path'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import { writeFileAsync } from '@create-figma-plugin/common'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -45,7 +47,7 @@ async function generateColorsTypesAsync(
     }
     fileContents.push(`${result.join('\n')}`)
   }
-  await fs.writeFile(outputFilePath, `${fileContents.join('\n\n')}\n`)
+  await writeFileAsync(outputFilePath, `${fileContents.join('\n\n')}\n`)
 }
 
 async function parseIconColorsAsync(

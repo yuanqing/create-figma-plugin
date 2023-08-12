@@ -1,9 +1,10 @@
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import { globby } from 'globby'
 import { run } from 'npm-check-updates'
 import { Index } from 'npm-check-updates/build/src/types/IndexType'
 import { PackageFile } from 'npm-check-updates/build/src/types/PackageFile'
-import { dirname, join, resolve } from 'path'
-import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 

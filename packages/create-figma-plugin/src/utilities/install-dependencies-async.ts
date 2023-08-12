@@ -1,4 +1,4 @@
-import { exec, ExecException } from 'child_process'
+import { exec, ExecException } from 'node:child_process'
 
 export async function installDependenciesAsync(cwd: string): Promise<void> {
   await new Promise<void>(function (resolve, reject) {

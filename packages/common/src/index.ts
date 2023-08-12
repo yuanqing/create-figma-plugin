@@ -4,18 +4,14 @@ export { log } from './log.js'
 export { readConfigAsync } from './read-config-async.js'
 export {
   Config,
+  ConfigCapabilities,
   ConfigCommand,
   ConfigCommandSeparator,
+  ConfigEditorType,
   ConfigFile,
+  ConfigNetworkAccess,
   ConfigParameter,
+  ConfigPermission,
   ConfigRelaunchButton
 } from './types/config.js'
-export {
-  RawConfig,
-  RawConfigCommand,
-  RawConfigCommandSeparator,
-  RawConfigFile,
-  RawConfigParameter,
-  RawConfigRelaunchButton,
-  RawConfigRelaunchButtons
-} from './types/raw-config.js'
+export { writeFileAsync } from './write-file-async.js'

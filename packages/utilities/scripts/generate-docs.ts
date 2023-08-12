@@ -1,7 +1,8 @@
-import fs from 'fs-extra'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import { writeFileAsync } from '@create-figma-plugin/common'
 import { createCategories, parseExportedFunctionsAsync } from 'generate-ts-docs'
-import { dirname, resolve } from 'path'
-import { fileURLToPath } from 'url'
 
 import { renderFunctionDataToMarkdown } from './render-function-data-to-markdown.js'
 
@@ -93,5 +94,5 @@ async function generateDocsAsync(
       )
     }
   }
-  await fs.outputFile(outputFilePath, lines.join('\n').trim())
+  await writeFileAsync(outputFilePath, lines.join('\n').trim())
 }

@@ -9,14 +9,24 @@
     "id": "44",
     "name": "a",
     "main": "src/main.ts",
-    "permissions": [
-      "activeusers"
-    ],
     "capabilities": [
       "textreview"
     ],
+    "permissions": [
+      "activeusers"
+    ],
+    "networkAccess": {
+      "allowedDomains": [
+        "foo.com"
+      ],
+      "devAllowedDomains": [
+        "bar.com"
+      ],
+      "reasoning": "baz"
+    },
     "enablePrivatePluginApi": true,
     "enableProposedApi": true,
-    "build": "a"
+    "build": "b",
+    "x": "y"
   }
 }

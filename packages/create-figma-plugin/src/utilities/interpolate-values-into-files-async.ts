@@ -1,8 +1,10 @@
-import fs from 'fs-extra'
+import fs from 'node:fs/promises'
+import { join } from 'node:path'
+
+import { writeFileAsync } from '@create-figma-plugin/common'
 import { globby } from 'globby'
 import isUtf8 from 'is-utf8'
 import lodashTemplate from 'lodash.template'
-import { join } from 'path'
 
 export async function interpolateValuesIntoFilesAsync(
   directory: string,
@@ -19,7 +21,7 @@ export async function interpolateValuesIntoFilesAsync(
       const fileContents = isUtf8(buffer)
         ? lodashTemplate(buffer.toString())(values)
         : buffer
-      await fs.outputFile(absolutePath, fileContents)
+      await writeFileAsync(absolutePath, fileContents)
     })
   )
 }

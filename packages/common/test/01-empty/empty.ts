@@ -1,6 +1,9 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import test from 'ava'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 
 import { readConfigAsync } from '../../src/read-config-async.js'
 
@@ -8,23 +11,28 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
   api: '1.0.0',
-  build: null,
-  capabilities: null,
-  commandId: 'src/main.ts--default',
-  containsWidget: false,
+  widgetApi: '1.0.0',
   editorType: ['figma'],
+  containsWidget: false,
+  id: 'figma-plugin',
+  commandId: 'src/main.ts--default',
+  name: 'figma-plugin',
+  main: {
+    src: 'src/main.ts',
+    handler: 'default'
+  },
+  ui: null,
+  menu: null,
+  parameters: null,
+  parameterOnly: true,
+  relaunchButtons: null,
+  capabilities: null,
+  permissions: null,
+  networkAccess: null,
   enablePrivatePluginApi: false,
   enableProposedApi: false,
-  id: 'figma-plugin',
-  main: { handler: 'default', src: 'src/main.ts' },
-  menu: null,
-  name: 'figma-plugin',
-  parameterOnly: null,
-  parameters: null,
-  permissions: null,
-  relaunchButtons: null,
-  ui: null,
-  widgetApi: '1.0.0'
+  build: null,
+  rest: null
 }
 
 test('no `package.json`', async function (t) {

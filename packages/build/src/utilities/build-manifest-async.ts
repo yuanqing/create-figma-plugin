@@ -1,12 +1,14 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
 import {
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigParameter,
   ConfigRelaunchButton,
   constants,
-  readConfigAsync
+  readConfigAsync,
+  writeFileAsync
 } from '@create-figma-plugin/common'
-import fs from 'fs-extra'
 import { globby } from 'globby'
 
 import {
@@ -20,15 +22,15 @@ import {
 export async function buildManifestAsync(minify: boolean): Promise<void> {
   const config = await readConfigAsync()
   const {
-    api,
-    build,
-    capabilities,
     commandId,
+    id,
+    api,
+    widgetApi,
+    capabilities,
     containsWidget,
     editorType,
     enablePrivatePluginApi,
     enableProposedApi,
-    id,
     main,
     menu,
     name,
@@ -37,7 +39,8 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     permissions,
     relaunchButtons,
     ui,
-    widgetApi
+    build,
+    rest
   } = config
   const command = { commandId, main, menu, name, parameterOnly, parameters, ui }
   if (hasBundle(command, 'main') === false) {
@@ -51,7 +54,6 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
       ): boolean {
         return relaunchButton.ui !== null
       }).length > 0)
-  /* eslint-disable sort-keys-fix/sort-keys-fix */
   const manifest: Manifest = {
     api,
     widgetApi: containsWidget === true ? widgetApi : undefined,
@@ -61,29 +63,29 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     name,
     main: constants.build.pluginCodeFilePath,
     ui: hasUi === true ? constants.build.pluginUiFilePath : undefined,
+    menu: command.menu !== null ? createMenu(command.menu) : undefined,
     parameters:
       command.parameters !== null
         ? createParameters(command.parameters)
         : undefined,
     parameterOnly: command.parameterOnly === false ? false : undefined,
-    menu: command.menu !== null ? createMenu(command.menu) : undefined,
     relaunchButtons:
       relaunchButtons !== null
         ? createRelaunchButtons(relaunchButtons)
         : undefined,
-    permissions: permissions !== null ? permissions : undefined,
     capabilities: capabilities !== null ? capabilities : undefined,
+    permissions: permissions !== null ? permissions : undefined,
     enableProposedApi: enableProposedApi === true ? true : undefined,
     enablePrivatePluginApi: enablePrivatePluginApi === true ? true : undefined,
-    build: build !== null ? build : undefined
+    build: build !== null ? build : undefined,
+    ...rest
   }
-  /* eslint-enable sort-keys-fix/sort-keys-fix */
   const result = await overrideManifestAsync(manifest)
   const string =
     (minify === true
       ? JSON.stringify(result)
       : JSON.stringify(result, null, 2)) + '\n'
-  await fs.outputFile(constants.build.manifestFilePath, string)
+  await writeFileAsync(constants.build.manifestFilePath, string)
 }
 
 function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {

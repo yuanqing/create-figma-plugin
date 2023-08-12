@@ -1,4 +1,6 @@
-import fs from 'fs-extra'
+import fs from 'node:fs/promises'
+
+import { writeFileAsync } from '@create-figma-plugin/common'
 
 async function main(): Promise<void> {
   try {
@@ -20,7 +22,7 @@ async function main(): Promise<void> {
           name: data.name
         }
       })
-    await fs.writeFile(filePath, `${JSON.stringify(result, null, 2)}\n`)
+    await writeFileAsync(filePath, `${JSON.stringify(result, null, 2)}\n`)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)

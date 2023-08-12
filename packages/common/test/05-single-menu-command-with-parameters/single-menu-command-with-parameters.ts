@@ -1,6 +1,9 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import test from 'ava'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 
 import { readConfigAsync } from '../../src/read-config-async.js'
 
@@ -8,33 +11,35 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
   api: '1.0.0',
-  build: null,
-  capabilities: null,
-  commandId: null,
-  containsWidget: false,
+  widgetApi: '1.0.0',
   editorType: ['figma'],
+  containsWidget: false,
+  id: 'a',
+  commandId: null,
+  name: 'a',
+  main: null,
+  ui: null,
+  parameters: null,
+  parameterOnly: true,
+  relaunchButtons: null,
+  capabilities: null,
+  permissions: null,
+  networkAccess: null,
   enablePrivatePluginApi: false,
   enableProposedApi: false,
-  id: 'a',
-  main: null,
-  name: 'a',
-  parameterOnly: null,
-  parameters: null,
-  permissions: null,
-  relaunchButtons: null,
-  ui: null,
-  widgetApi: '1.0.0'
+  build: null,
+  rest: null
 }
 
 const menuItemConfig = {
   commandId: 'c--default',
-  main: {
-    handler: 'default',
-    src: 'c'
-  },
-  menu: null,
   name: 'b',
-  ui: null
+  main: {
+    src: 'c',
+    handler: 'default'
+  },
+  ui: null,
+  menu: null
 }
 
 test('single parameter', async function (t) {
@@ -45,16 +50,16 @@ test('single parameter', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: null,
         parameters: [
           {
-            allowFreeform: false,
-            description: null,
             key: 'd',
             name: 'd',
+            description: null,
+            allowFreeform: false,
             optional: false
           }
-        ]
+        ],
+        parameterOnly: true
       }
     ]
   })
@@ -68,16 +73,16 @@ test('name', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: null,
         parameters: [
           {
-            allowFreeform: false,
-            description: null,
             key: 'd',
             name: 'e',
+            description: null,
+            allowFreeform: false,
             optional: false
           }
-        ]
+        ],
+        parameterOnly: true
       }
     ]
   })
@@ -91,16 +96,16 @@ test('description', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: null,
         parameters: [
           {
-            allowFreeform: false,
-            description: 'e',
             key: 'd',
             name: 'd',
+            description: 'e',
+            allowFreeform: false,
             optional: false
           }
-        ]
+        ],
+        parameterOnly: true
       }
     ]
   })
@@ -114,16 +119,16 @@ test('allow freeform', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: null,
         parameters: [
           {
-            allowFreeform: true,
-            description: null,
             key: 'd',
             name: 'd',
+            description: null,
+            allowFreeform: true,
             optional: false
           }
-        ]
+        ],
+        parameterOnly: true
       }
     ]
   })
@@ -137,16 +142,16 @@ test('optional', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: null,
         parameters: [
           {
-            allowFreeform: false,
-            description: null,
             key: 'd',
             name: 'd',
+            description: null,
+            allowFreeform: false,
             optional: true
           }
-        ]
+        ],
+        parameterOnly: true
       }
     ]
   })
@@ -160,46 +165,46 @@ test('multiple parameters', async function (t) {
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: null,
         parameters: [
           {
-            allowFreeform: true,
-            description: null,
             key: 'd',
             name: 'e',
+            description: null,
+            allowFreeform: true,
             optional: false
           },
           {
-            allowFreeform: false,
-            description: 'g',
             key: 'f',
             name: 'f',
+            description: 'g',
+            allowFreeform: false,
             optional: true
           }
-        ]
+        ],
+        parameterOnly: true
       }
     ]
   })
 })
 
-test('not parameter only', async function (t) {
+test('parameter only false', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '07-not-parameter-only'))
+  process.chdir(join(__dirname, 'fixtures', '07-parameter-only-false'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     menu: [
       {
         ...menuItemConfig,
-        parameterOnly: false,
         parameters: [
           {
-            allowFreeform: false,
-            description: null,
             key: 'd',
             name: 'd',
+            description: null,
+            allowFreeform: false,
             optional: false
           }
-        ]
+        ],
+        parameterOnly: false
       }
     ]
   })

@@ -1,4 +1,5 @@
-import fs from 'fs-extra'
+import fs from 'node:fs/promises'
+
 import fetch from 'node-fetch'
 import pAll from 'p-all'
 import textTable from 'text-table'

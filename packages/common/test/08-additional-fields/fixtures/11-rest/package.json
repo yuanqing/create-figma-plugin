@@ -1,7 +1,7 @@
 {
   "figma-plugin": {
     "name": "a",
-    "id": "42",
-    "main": "b"
+    "main": "b",
+    "x": "y"
   }
 }

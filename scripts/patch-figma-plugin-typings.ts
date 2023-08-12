@@ -1,6 +1,8 @@
-import fs from 'fs-extra'
-import { dirname, resolve } from 'path'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import { writeFileAsync } from '@create-figma-plugin/common'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -23,7 +25,7 @@ async function main(): Promise<void> {
     for (const string of strings) {
       result = result.replace(string, '')
     }
-    await fs.writeFile(tsFilePath, result)
+    await writeFileAsync(tsFilePath, result)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)

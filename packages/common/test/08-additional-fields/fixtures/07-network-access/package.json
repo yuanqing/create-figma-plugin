@@ -1,0 +1,15 @@
+{
+  "figma-plugin": {
+    "name": "a",
+    "main": "b",
+    "networkAccess": {
+      "allowedDomains": [
+        "foo.com"
+      ],
+      "devAllowedDomains": [
+        "bar.com"
+      ],
+      "reasoning": "baz"
+    }
+  }
+}

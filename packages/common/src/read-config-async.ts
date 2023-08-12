@@ -1,104 +1,119 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
+import fs from 'node:fs/promises'
+import { join } from 'node:path'
+
 import slugify from '@sindresorhus/slugify'
-import fs from 'fs-extra'
-import { join } from 'path'
+import { pathExists } from 'path-exists'
 
 import { constants } from './constants.js'
+import { log } from './log.js'
 import {
   Config,
   ConfigCommand,
   ConfigCommandSeparator,
   ConfigFile,
+  ConfigNetworkAccess,
   ConfigParameter,
   ConfigRelaunchButton
 } from './types/config.js'
 import {
-  RawConfig,
   RawConfigCommand,
-  RawConfigCommandSeparator,
   RawConfigFile,
+  RawConfigNetworkAccess,
   RawConfigParameter,
   RawConfigRelaunchButtons
-} from './types/raw-config.js'
+} from './types/private/raw-config.js'
 
 const defaultConfig: Config = {
+  id: constants.packageJson.defaultName,
   api: constants.build.manifestPluginApi,
-  build: null,
-  capabilities: null,
-  commandId: join(constants.build.srcDirectoryName, 'main.ts--default'),
-  containsWidget: false,
+  widgetApi: constants.build.manifestWidgetApi,
   editorType: ['figma'],
+  containsWidget: false,
+  commandId: join(constants.build.srcDirectoryName, 'main.ts--default'),
+  name: constants.packageJson.defaultName,
+  main: {
+    src: join(constants.build.srcDirectoryName, 'main.ts'),
+    handler: 'default'
+  },
+  ui: null,
+  menu: null,
+  parameters: null,
+  parameterOnly: true,
+  relaunchButtons: null,
+  capabilities: null,
+  permissions: null,
+  networkAccess: null,
   enablePrivatePluginApi: false,
   enableProposedApi: false,
-  id: constants.packageJson.defaultName,
-  main: {
-    handler: 'default',
-    src: join(constants.build.srcDirectoryName, 'main.ts')
-  },
-  menu: null,
-  name: constants.packageJson.defaultName,
-  parameterOnly: null,
-  parameters: null,
-  permissions: null,
-  relaunchButtons: null,
-  ui: null,
-  widgetApi: constants.build.manifestWidgetApi
+  build: null,
+  rest: null
 }
 
 export async function readConfigAsync(): Promise<Config> {
   const packageJsonPath = join(process.cwd(), 'package.json')
-  if ((await fs.pathExists(packageJsonPath)) === false) {
+  if ((await pathExists(packageJsonPath)) === false) {
+    log.info('Using default config')
     return defaultConfig
   }
   const packageJson: any = JSON.parse(
     await fs.readFile(packageJsonPath, 'utf8')
   )
-  const config: RawConfig = packageJson[constants.packageJson.configKey]
+  const config = packageJson[constants.packageJson.configKey]
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig
   }
   const {
-    api,
-    build,
-    capabilities,
-    containsWidget,
-    editorType,
-    enableProposedApi,
-    enablePrivatePluginApi,
     id,
+    api,
+    widgetApi,
+    editorType,
+    containsWidget,
     name,
     main,
     ui,
     menu,
     parameters,
     parameterOnly,
-    permissions,
     relaunchButtons,
-    widgetApi
+    capabilities,
+    permissions,
+    networkAccess,
+    enablePrivatePluginApi,
+    enableProposedApi,
+    build,
+    ...rest
   } = config
   return {
     api: typeof api === 'undefined' ? constants.build.manifestPluginApi : api,
-    build: typeof build === 'undefined' ? null : build,
-    capabilities: typeof capabilities === 'undefined' ? null : capabilities,
+    widgetApi:
+      typeof widgetApi === 'undefined'
+        ? constants.build.manifestWidgetApi
+        : widgetApi,
+    ...parseCommand({ name, ui, main, menu, parameters, parameterOnly }),
+    editorType: typeof editorType === 'undefined' ? ['figma'] : editorType,
     containsWidget:
       typeof containsWidget === 'undefined' ? false : containsWidget,
-    editorType: typeof editorType === 'undefined' ? ['figma'] : editorType,
+    id: typeof id === 'undefined' ? slugify(name) : id,
+    relaunchButtons:
+      typeof relaunchButtons === 'undefined'
+        ? null
+        : parseRelaunchButtons(relaunchButtons),
+    capabilities: typeof capabilities === 'undefined' ? null : capabilities,
+    permissions: typeof permissions === 'undefined' ? null : permissions,
+    networkAccess:
+      typeof networkAccess === 'undefined'
+        ? null
+        : parseNetworkAccess(networkAccess),
     enablePrivatePluginApi:
       typeof enablePrivatePluginApi === 'undefined'
         ? false
         : enablePrivatePluginApi,
     enableProposedApi:
       typeof enableProposedApi === 'undefined' ? false : enableProposedApi,
-    id: typeof id === 'undefined' ? slugify(name) : id,
-    permissions: typeof permissions === 'undefined' ? null : permissions,
-    widgetApi:
-      typeof widgetApi === 'undefined'
-        ? constants.build.manifestWidgetApi
-        : widgetApi,
-    ...parseCommand({ main, menu, name, parameterOnly, parameters, ui }),
-    relaunchButtons:
-      typeof relaunchButtons === 'undefined'
-        ? null
-        : parseRelaunchButtons(relaunchButtons)
+    build: typeof build === 'undefined' ? null : build,
+    rest: Object.keys(rest).length === 0 ? null : rest
   }
 }
 
@@ -106,24 +121,35 @@ function parseCommand(command: RawConfigCommand): ConfigCommand {
   const { name, main, ui, menu, parameters, parameterOnly } = command
   return {
     commandId: typeof main === 'undefined' ? null : parseCommandId(main),
+    name,
     main: typeof main === 'undefined' ? null : parseFile(main),
+    ui: typeof ui === 'undefined' ? null : parseFile(ui),
     menu:
       typeof menu === 'undefined'
         ? null
         : menu.map(function (
-            command: RawConfigCommand | RawConfigCommandSeparator
+            command: RawConfigCommand | '-'
           ): ConfigCommand | ConfigCommandSeparator {
             if (command === '-') {
               return { separator: true }
             }
             return parseCommand(command)
           }),
-    name,
-    parameterOnly: typeof parameterOnly === 'undefined' ? null : parameterOnly,
     parameters:
       typeof parameters === 'undefined' ? null : parseParameters(parameters),
-    ui: typeof ui === 'undefined' ? null : parseFile(ui)
+    parameterOnly: typeof parameterOnly === 'undefined' ? true : parameterOnly
   }
+}
+
+function parseCommandId(main: RawConfigFile): string {
+  if (typeof main === 'string') {
+    return `${main}--default`
+  }
+  const { src, handler } = main
+  if (typeof handler === 'undefined') {
+    return `${src}--default`
+  }
+  return `${src}--${handler}`
 }
 
 function parseParameters(
@@ -165,30 +191,32 @@ function parseRelaunchButtons(
   return result
 }
 
-function parseCommandId(main: RawConfigFile): string {
-  if (typeof main === 'string') {
-    return `${main}--default`
-  }
-  const { src, handler } = main
-  if (typeof handler === 'undefined') {
-    return `${src}--default`
-  }
-  return `${src}--${handler}`
-}
-
 function parseFile(file: RawConfigFile): ConfigFile {
   if (typeof file === 'string') {
     return {
-      handler: 'default',
-      src: file
+      src: file,
+      handler: 'default'
     }
   }
   const { src, handler } = file
   if (typeof handler === 'undefined') {
     return {
-      handler: 'default',
-      src
+      src,
+      handler: 'default'
     }
   }
-  return { handler, src }
+  return { src, handler }
+}
+
+function parseNetworkAccess(
+  rawConfigNetworkAccess: RawConfigNetworkAccess
+): ConfigNetworkAccess {
+  const { allowedDomains, devAllowedDomains, reasoning } =
+    rawConfigNetworkAccess
+  return {
+    allowedDomains,
+    devAllowedDomains:
+      typeof devAllowedDomains === 'undefined' ? null : devAllowedDomains,
+    reasoning: typeof reasoning === 'undefined' ? null : reasoning
+  }
 }

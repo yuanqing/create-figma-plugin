@@ -1,8 +1,9 @@
-import fs from 'fs-extra'
+import fs from 'node:fs/promises'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import fetch from 'node-fetch'
 import pAll from 'p-all'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 
 const CONCURRENCY = 10
 

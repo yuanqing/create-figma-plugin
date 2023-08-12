@@ -1,5 +1,6 @@
-import fs from 'fs'
-import { dirname } from 'path'
+import fs from 'node:fs'
+import { dirname } from 'node:path'
+
 import ts from 'typescript'
 
 import { formatTypeScriptErrorMessage } from './format-typescript-error-message.js'

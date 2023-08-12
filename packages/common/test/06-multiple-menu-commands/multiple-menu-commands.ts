@@ -1,6 +1,9 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import test from 'ava'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 
 import { readConfigAsync } from '../../src/read-config-async.js'
 
@@ -8,22 +11,24 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
   api: '1.0.0',
-  build: null,
-  capabilities: null,
-  commandId: null,
-  containsWidget: false,
+  widgetApi: '1.0.0',
   editorType: ['figma'],
+  containsWidget: false,
+  id: 'a',
+  commandId: null,
+  name: 'a',
+  main: null,
+  ui: null,
+  parameters: null,
+  parameterOnly: true,
+  relaunchButtons: null,
+  capabilities: null,
+  permissions: null,
+  networkAccess: null,
   enablePrivatePluginApi: false,
   enableProposedApi: false,
-  id: 'a',
-  main: null,
-  name: 'a',
-  parameterOnly: null,
-  parameters: null,
-  permissions: null,
-  relaunchButtons: null,
-  ui: null,
-  widgetApi: '1.0.0'
+  build: null,
+  rest: null
 }
 
 test('multiple commands', async function (t) {
@@ -34,30 +39,30 @@ test('multiple commands', async function (t) {
     menu: [
       {
         commandId: 'c--default',
-        main: {
-          handler: 'default',
-          src: 'c'
-        },
-        menu: null,
         name: 'b',
-        parameterOnly: null,
+        main: {
+          src: 'c',
+          handler: 'default'
+        },
+        ui: null,
+        menu: null,
         parameters: null,
-        ui: null
+        parameterOnly: true
       },
       {
         commandId: 'e--default',
+        name: 'd',
         main: {
-          handler: 'default',
-          src: 'e'
+          src: 'e',
+          handler: 'default'
+        },
+        ui: {
+          src: 'f',
+          handler: 'default'
         },
         menu: null,
-        name: 'd',
-        parameterOnly: null,
         parameters: null,
-        ui: {
-          handler: 'default',
-          src: 'f'
-        }
+        parameterOnly: true
       }
     ]
   })
@@ -71,31 +76,31 @@ test('separator', async function (t) {
     menu: [
       {
         commandId: 'c--default',
-        main: {
-          handler: 'default',
-          src: 'c'
-        },
-        menu: null,
         name: 'b',
-        parameterOnly: null,
+        main: {
+          src: 'c',
+          handler: 'default'
+        },
+        ui: null,
+        menu: null,
         parameters: null,
-        ui: null
+        parameterOnly: true
       },
       { separator: true },
       {
         commandId: 'e--default',
+        name: 'd',
         main: {
-          handler: 'default',
-          src: 'e'
+          src: 'e',
+          handler: 'default'
+        },
+        ui: {
+          src: 'f',
+          handler: 'default'
         },
         menu: null,
-        name: 'd',
-        parameterOnly: null,
         parameters: null,
-        ui: {
-          handler: 'default',
-          src: 'f'
-        }
+        parameterOnly: true
       }
     ]
   })
@@ -109,40 +114,40 @@ test('nested', async function (t) {
     menu: [
       {
         commandId: 'c--default',
-        main: {
-          handler: 'default',
-          src: 'c'
-        },
-        menu: null,
         name: 'b',
-        parameterOnly: null,
+        main: {
+          src: 'c',
+          handler: 'default'
+        },
+        ui: null,
+        menu: null,
         parameters: null,
-        ui: null
+        parameterOnly: true
       },
       {
         commandId: null,
+        name: 'd',
         main: null,
+        ui: null,
         menu: [
           {
             commandId: 'f--default',
+            name: 'e',
             main: {
-              handler: 'default',
-              src: 'f'
+              src: 'f',
+              handler: 'default'
+            },
+            ui: {
+              src: 'g',
+              handler: 'default'
             },
             menu: null,
-            name: 'e',
-            parameterOnly: null,
             parameters: null,
-            ui: {
-              handler: 'default',
-              src: 'g'
-            }
+            parameterOnly: true
           }
         ],
-        name: 'd',
-        parameterOnly: null,
         parameters: null,
-        ui: null
+        parameterOnly: true
       }
     ]
   })
@@ -156,45 +161,45 @@ test('parameters', async function (t) {
     menu: [
       {
         commandId: 'c--default',
-        main: {
-          handler: 'default',
-          src: 'c'
-        },
-        menu: null,
         name: 'b',
-        parameterOnly: null,
+        main: {
+          src: 'c',
+          handler: 'default'
+        },
+        ui: null,
+        menu: null,
         parameters: null,
-        ui: null
+        parameterOnly: true
       },
       {
         commandId: 'e--default',
+        name: 'd',
         main: {
-          handler: 'default',
-          src: 'e'
+          src: 'e',
+          handler: 'default'
+        },
+        ui: {
+          src: 'f',
+          handler: 'default'
         },
         menu: null,
-        name: 'd',
-        parameterOnly: true,
         parameters: [
           {
-            allowFreeform: true,
-            description: null,
             key: 'g',
             name: 'h',
+            description: null,
+            allowFreeform: true,
             optional: false
           },
           {
-            allowFreeform: false,
-            description: 'j',
             key: 'i',
             name: 'i',
+            description: 'j',
+            allowFreeform: false,
             optional: true
           }
         ],
-        ui: {
-          handler: 'default',
-          src: 'f'
-        }
+        parameterOnly: true
       }
     ]
   })

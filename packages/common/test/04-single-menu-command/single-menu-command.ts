@@ -1,6 +1,9 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import test from 'ava'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 
 import { readConfigAsync } from '../../src/read-config-async.js'
 
@@ -8,21 +11,24 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
   api: '1.0.0',
-  build: null,
-  capabilities: null,
-  commandId: null,
-  containsWidget: false,
+  widgetApi: '1.0.0',
   editorType: ['figma'],
+  containsWidget: false,
+  id: 'a',
+  commandId: null,
+  name: 'a',
+  main: null,
+  ui: null,
+  parameters: null,
+  parameterOnly: true,
+  relaunchButtons: null,
+  capabilities: null,
+  permissions: null,
+  networkAccess: null,
   enablePrivatePluginApi: false,
   enableProposedApi: false,
-  main: null,
-  name: 'a',
-  parameterOnly: null,
-  parameters: null,
-  permissions: null,
-  relaunchButtons: null,
-  ui: null,
-  widgetApi: '1.0.0'
+  build: null,
+  rest: null
 }
 
 test('`main`', async function (t) {
@@ -30,19 +36,18 @@ test('`main`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '01-main'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    id: 'a',
     menu: [
       {
         commandId: 'c--default',
-        main: {
-          handler: 'default',
-          src: 'c'
-        },
-        menu: null,
         name: 'b',
-        parameterOnly: null,
+        main: {
+          src: 'c',
+          handler: 'default'
+        },
+        ui: null,
+        menu: null,
         parameters: null,
-        ui: null
+        parameterOnly: true
       }
     ]
   })
@@ -53,19 +58,18 @@ test('`main` with named export', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '02-main-named-export'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    id: 'a',
     menu: [
       {
         commandId: 'c--d',
-        main: {
-          handler: 'd',
-          src: 'c'
-        },
-        menu: null,
         name: 'b',
-        parameterOnly: null,
+        main: {
+          src: 'c',
+          handler: 'd'
+        },
+        ui: null,
+        menu: null,
         parameters: null,
-        ui: null
+        parameterOnly: true
       }
     ]
   })
@@ -76,22 +80,21 @@ test('`ui`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '03-ui'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    id: 'a',
     menu: [
       {
         commandId: 'c--default',
+        name: 'b',
         main: {
-          handler: 'default',
-          src: 'c'
+          src: 'c',
+          handler: 'default'
+        },
+        ui: {
+          src: 'd',
+          handler: 'default'
         },
         menu: null,
-        name: 'b',
-        parameterOnly: null,
         parameters: null,
-        ui: {
-          handler: 'default',
-          src: 'd'
-        }
+        parameterOnly: true
       }
     ]
   })
@@ -102,22 +105,21 @@ test('`ui` with named export', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '04-ui-named-export'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    id: 'a',
     menu: [
       {
         commandId: 'c--default',
+        name: 'b',
         main: {
-          handler: 'default',
-          src: 'c'
+          src: 'c',
+          handler: 'default'
+        },
+        ui: {
+          src: 'd',
+          handler: 'e'
         },
         menu: null,
-        name: 'b',
-        parameterOnly: null,
         parameters: null,
-        ui: {
-          handler: 'e',
-          src: 'd'
-        }
+        parameterOnly: true
       }
     ]
   })

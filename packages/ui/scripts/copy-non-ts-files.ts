@@ -1,7 +1,8 @@
-import fs from 'fs-extra'
+import fs from 'node:fs/promises'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import { globby } from 'globby'
-import { dirname, join, resolve } from 'path'
-import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -29,7 +30,7 @@ async function copyNonTsFiles(globPatterns: Array<string>): Promise<void> {
       srcPrefixRegex,
       resolve(__dirname, '..', 'lib')
     )
-    return fs.copy(filePath, outputFilePath)
+    return fs.cp(filePath, outputFilePath, { recursive: true })
   })
   await Promise.all(promises)
 }

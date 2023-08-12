@@ -1,8 +1,10 @@
+import fs from 'node:fs/promises'
+import { basename, extname, join, resolve } from 'node:path'
+
 import cssNano from 'cssnano'
 import { OnResolveArgs, Plugin, PluginBuild } from 'esbuild'
 import { findUp } from 'find-up'
-import fs from 'fs-extra'
-import { basename, extname, join, resolve } from 'path'
+import { pathExists } from 'path-exists'
 import postcss, { AcceptedPlugin } from 'postcss'
 import postCssModules from 'postcss-modules'
 import revHash from 'rev-hash'
@@ -22,7 +24,7 @@ export function esbuildCssModulesPlugin(minify: boolean): Plugin {
           )
           if (
             cssfilePath === null ||
-            (await fs.pathExists(cssfilePath)) === false
+            (await pathExists(cssfilePath)) === false
           ) {
             throw new Error(`CSS file not found: ${args.path}`)
           }
@@ -60,13 +62,13 @@ function parseCssFilePath(path: string): {
 
 async function createCssFilePathAsync(
   path: string,
-  resolveDir: string
+  resolveDirectory: string
 ): Promise<null | string> {
   if (path[0] === '/') {
     return path
   }
   if (path[0] === '.') {
-    return resolve(resolveDir, path)
+    return resolve(resolveDirectory, path)
   }
   const result = await findUp(join('node_modules', path))
   if (typeof result === 'undefined') {

@@ -1,47 +1,68 @@
 interface BaseConfigMixin {
-  readonly name: string
-  readonly commandId: null | string
-  readonly main: null | ConfigFile
-  readonly ui: null | ConfigFile
+  commandId: null | string
+  name: string
+  main: null | ConfigFile
+  ui: null | ConfigFile
 }
 
 export interface ConfigCommand extends BaseConfigMixin {
-  readonly menu: null | Array<ConfigCommand | ConfigCommandSeparator>
-  readonly parameters: null | Array<ConfigParameter>
-  readonly parameterOnly: null | boolean
+  menu: null | Array<ConfigCommand | ConfigCommandSeparator>
+  parameters: null | Array<ConfigParameter>
+  parameterOnly: boolean
 }
 
 export interface Config extends ConfigCommand {
-  readonly api: string
-  readonly widgetApi: string
-  readonly editorType: Array<string>
-  readonly containsWidget: boolean
-  readonly id: string
-  readonly relaunchButtons: null | Array<ConfigRelaunchButton>
-  readonly permissions: null | Array<string>
-  readonly capabilities: null | Array<string>
-  readonly enableProposedApi: boolean
-  readonly enablePrivatePluginApi: boolean
-  readonly build: null | string
+  id: string
+  api: string
+  widgetApi: string
+  editorType: Array<ConfigEditorType>
+  containsWidget: boolean
+  relaunchButtons: null | Array<ConfigRelaunchButton>
+  capabilities: null | Array<ConfigCapabilities>
+  permissions: null | Array<ConfigPermission>
+  networkAccess: null | ConfigNetworkAccess
+  enablePrivatePluginApi: boolean
+  enableProposedApi: boolean
+  build: null | string
+  rest: null | Record<string, unknown>
 }
 
-export type ConfigCommandSeparator = { readonly separator: true }
+export type ConfigCommandSeparator = {
+  separator: true
+}
 
 export interface ConfigFile {
-  readonly src: string
-  readonly handler: string
+  src: string
+  handler: string
 }
 
 export interface ConfigParameter {
-  readonly key: string
-  readonly name: string
-  readonly description: null | string
-  readonly allowFreeform: boolean
-  readonly optional: boolean
+  key: string
+  name: string
+  description: null | string
+  allowFreeform: boolean
+  optional: boolean
 }
 
 export interface ConfigRelaunchButton extends BaseConfigMixin {
-  readonly commandId: string
-  readonly main: ConfigFile
-  readonly multipleSelection: boolean
+  commandId: string
+  main: ConfigFile
+  multipleSelection: boolean
+}
+
+export type ConfigCapabilities = 'codegen' | 'inspect' | 'textreview'
+
+export type ConfigPermission =
+  | 'activeusers'
+  | 'currentuser'
+  | 'fileusers'
+  | 'payments'
+  | 'teamlibrary'
+
+export type ConfigEditorType = 'dev' | 'figma' | 'figjam'
+
+export type ConfigNetworkAccess = {
+  allowedDomains: Array<string>
+  devAllowedDomains: null | Array<string>
+  reasoning: null | string
 }

@@ -1,3 +1,5 @@
+import { join } from 'node:path'
+
 import {
   Config,
   ConfigCommand,
@@ -11,7 +13,6 @@ import { build, BuildOptions } from 'esbuild'
 import { globby } from 'globby'
 import importFresh from 'import-fresh'
 import indentString from 'indent-string'
-import { join } from 'path'
 
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
 import { esbuildPreactCompatPlugin } from './esbuild-preact-compat-plugin.js'

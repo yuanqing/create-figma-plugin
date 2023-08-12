@@ -1,8 +1,9 @@
+import { basename, join } from 'node:path'
+
 import { constants, log } from '@create-figma-plugin/common'
-import fs from 'fs-extra'
 import { green } from 'kleur/colors'
 import { paramCase } from 'param-case'
-import { basename, join } from 'path'
+import { pathExists } from 'path-exists'
 
 import { copyTemplateAsync } from './utilities/copy-template-async.js'
 import { createName } from './utilities/create-name.js'
@@ -19,7 +20,7 @@ export async function createFigmaPluginAsync(options: {
   try {
     if (typeof options.name !== 'undefined') {
       const directoryPath = join(process.cwd(), options.name)
-      if ((await fs.pathExists(directoryPath)) === true) {
+      if ((await pathExists(directoryPath)) === true) {
         throw new Error(`Directory already exists: ./${options.name}`)
       }
     }
@@ -55,7 +56,7 @@ export async function createFigmaPluginAsync(options: {
 
 To build the ${templateType}:
   ${green('npm run build')}
-  
+
 To watch for code changes and rebuild the ${templateType} automatically:
   ${green('npm run watch')}\n`)
   } catch (error: any) {

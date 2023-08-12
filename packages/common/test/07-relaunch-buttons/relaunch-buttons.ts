@@ -1,6 +1,9 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import test from 'ava'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 
 import { readConfigAsync } from '../../src/read-config-async.js'
 
@@ -8,22 +11,24 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
   api: '1.0.0',
-  build: null,
-  capabilities: null,
-  commandId: 'b--default',
-  containsWidget: false,
+  widgetApi: '1.0.0',
   editorType: ['figma'],
+  containsWidget: false,
+  id: 'a',
+  commandId: 'b--default',
+  name: 'a',
+  main: { src: 'b', handler: 'default' },
+  ui: null,
+  menu: null,
+  parameters: null,
+  parameterOnly: true,
+  capabilities: null,
+  permissions: null,
+  networkAccess: null,
   enablePrivatePluginApi: false,
   enableProposedApi: false,
-  id: 'a',
-  main: { handler: 'default', src: 'b' },
-  menu: null,
-  name: 'a',
-  parameterOnly: null,
-  parameters: null,
-  permissions: null,
-  ui: null,
-  widgetApi: '1.0.0'
+  build: null,
+  rest: null
 }
 
 test('`main`', async function (t) {
@@ -34,10 +39,13 @@ test('`main`', async function (t) {
     relaunchButtons: [
       {
         commandId: 'c',
-        main: { handler: 'default', src: 'e' },
-        multipleSelection: false,
         name: 'd',
-        ui: null
+        main: {
+          src: 'e',
+          handler: 'default'
+        },
+        ui: null,
+        multipleSelection: false
       }
     ]
   })
@@ -51,10 +59,13 @@ test('`main` with named export', async function (t) {
     relaunchButtons: [
       {
         commandId: 'c',
-        main: { handler: 'f', src: 'e' },
-        multipleSelection: false,
         name: 'd',
-        ui: null
+        main: {
+          src: 'e',
+          handler: 'f'
+        },
+        ui: null,
+        multipleSelection: false
       }
     ]
   })
@@ -68,10 +79,10 @@ test('`ui`', async function (t) {
     relaunchButtons: [
       {
         commandId: 'c',
-        main: { handler: 'default', src: 'e' },
-        multipleSelection: false,
         name: 'd',
-        ui: { handler: 'default', src: 'f' }
+        main: { src: 'e', handler: 'default' },
+        ui: { src: 'f', handler: 'default' },
+        multipleSelection: false
       }
     ]
   })
@@ -85,10 +96,10 @@ test('`ui` with named export', async function (t) {
     relaunchButtons: [
       {
         commandId: 'c',
-        main: { handler: 'default', src: 'e' },
-        multipleSelection: false,
         name: 'd',
-        ui: { handler: 'g', src: 'f' }
+        main: { src: 'e', handler: 'default' },
+        ui: { src: 'f', handler: 'g' },
+        multipleSelection: false
       }
     ]
   })
@@ -102,10 +113,10 @@ test('multiple selection', async function (t) {
     relaunchButtons: [
       {
         commandId: 'c',
-        main: { handler: 'default', src: 'e' },
-        multipleSelection: true,
         name: 'd',
-        ui: null
+        main: { src: 'e', handler: 'default' },
+        ui: null,
+        multipleSelection: true
       }
     ]
   })
@@ -119,23 +130,23 @@ test('multiple relaunch buttons', async function (t) {
     relaunchButtons: [
       {
         commandId: 'c',
-        main: { handler: 'default', src: 'e' },
-        multipleSelection: false,
         name: 'd',
-        ui: null
+        main: { src: 'e', handler: 'default' },
+        ui: null,
+        multipleSelection: false
       },
       {
         commandId: 'f',
-        main: {
-          handler: 'default',
-          src: 'h'
-        },
-        multipleSelection: true,
         name: 'g',
+        main: {
+          src: 'h',
+          handler: 'default'
+        },
         ui: {
-          handler: 'default',
-          src: 'i'
-        }
+          src: 'i',
+          handler: 'default'
+        },
+        multipleSelection: true
       }
     ]
   })

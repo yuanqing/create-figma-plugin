@@ -32,7 +32,7 @@
     "prebuild": "npm run clean",
     "build": "npm run build:interpolate-gumroad-script && npm run build:generate-index && npm run build:js && npm run build:generate-docs",
     "build:interpolate-gumroad-script": "tsx scripts/interpolate-gumroad-script.ts",
-    "build:generate-index": "tsx ../../scripts/generate-index.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
+    "build:generate-index": "rimraf src/index.ts && tsx ../../scripts/generate-index.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "build:js": "tsc --build",
     "build:generate-docs": "tsx scripts/generate-docs.ts '../website/docs/utilities.md'",
     "clean": "rimraf '*.log' .turbo lib tsconfig.tsbuildinfo",
@@ -49,8 +49,8 @@
     "rgb-hex": "^4.0.1"
   },
   "devDependencies": {
+    "@create-figma-plugin/common": "^2.5.1",
     "@figma/plugin-typings": "1.69.0",
-    "@types/fs-extra": "^11.0.1",
     "@types/natural-compare-lite": "^1.4.0",
     "@types/node": "^20.2.4",
     "@typescript-eslint/eslint-plugin": "5.59.7",
@@ -65,7 +65,6 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-sort-keys-fix": "1.1.2",
-    "fs-extra": "^11.1.1",
     "generate-ts-docs": "^0.0.14",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
