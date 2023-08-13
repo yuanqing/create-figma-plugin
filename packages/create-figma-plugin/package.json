@@ -54,6 +54,7 @@
     "title-case": "^3.0.3"
   },
   "devDependencies": {
+    "@create-figma-plugin/common": "^2.5.1",
     "@types/inquirer": "^9.0.3",
     "@types/is-utf8": "^0.2.1",
     "@types/lodash.template": "^4.5.1",
