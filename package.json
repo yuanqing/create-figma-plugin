@@ -6,8 +6,8 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "bump-dependencies": "tsx scripts/bump-dependencies.ts @typescript-eslint/eslint-plugin eslint-config-yuanqing eslint-plugin-import eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort eslint-plugin-sort-keys-fix prettier stylelint-config-yuanqing",
-    "clean": "turbo run clean && rimraf '*.log' build",
+    "bump-dependencies": "tsx scripts/bump-dependencies.ts @figma/plugin-typings @typescript-eslint/eslint-plugin eslint-config-yuanqing eslint-plugin-import eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort eslint-plugin-sort-keys-fix prettier stylelint-config-yuanqing",
+    "clean": "turbo run clean && rimraf node_modules/.cache/turbo '*.log' build",
     "fix": "turbo run fix && concurrently npm:fix:js npm:fix:json",
     "fix:js": "eslint --fix 'scripts/**/*.ts'",
     "fix:json": "prettier --loglevel error --write '*.json'",
