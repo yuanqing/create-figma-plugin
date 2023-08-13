@@ -38,7 +38,6 @@
     "fix:js": "eslint --fix '{src,test}/**/*.ts'",
     "fix:json": "prettier --loglevel error --write '*.json' 'test/**/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
-    "pretest": "npm run build",
     "test": "ava --serial 'test/**/*.ts'"
   },
   "dependencies": {
