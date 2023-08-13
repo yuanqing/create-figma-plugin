@@ -32,13 +32,13 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 
 (*`Array<string>`*)
 
-*Optional.* For specifying the editor that the plugin/widget is intended for. One of `["figma"]`, `["figjam"]`, or `["figma", "figjam"]`. Defaults to `["figma"]`.
+*Optional.* For specifying the editor that the plugin/widget is intended for. Possible editor types are **`"figma"`**, **`"figjam"`** and **`"dev"`**. Defaults to **`["figma"]`**.
 
 ### `containsWidget`
 
 (*`boolean`*)
 
-*Optional.* Set to `true` if you’re creating a widget. Defaults to `false`.
+*Optional.* This field must be set to `true` for a FigJam widget. Defaults to `false`.
 
 ### `id`
 
@@ -97,26 +97,6 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 
 Learn how to [add a UI to a plugin command](<%- query('page', 'ui').url %>).
 
-### `parameters`
-
-(*`array`*)
-
-*Optional.* Defines the list of [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via the Quick Actions search bar. Each parameter is an object with the following keys:
-
-- **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
-- **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions search bar. Defaults to the value of the sibling `"key"` key.
-- **`"description"`** (*`string`*) — *Optional.* The description for the parameter shown in the Quick Actions search bar.
-- **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
-- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.
-
-Learn how to [accept parameters via the Quick Actions search bar in your plugin command](https://figma.com/plugin-docs/plugin-parameters/).
-
-### `parameterOnly`
-
-(*`boolean`*)
-
-*Optional.* When **`"parameters"`** is specified, the default behavior is that the user will be required to input parameters via the Quick Actions search bar. Set **`"parameterOnly"`** to `false` to make parameter input optional.
-
 ### `menu`
 
 (*`array`*)
@@ -163,6 +143,26 @@ Use a **`"-"`** in the array to specify a separator between commands in the sub-
 
 See the [recipe for specifying multiple commands in the plugin sub-menu](<%- query('page', 'recipes').url %>#specifying-multiple-commands-in-the-plugin-sub-menu).
 
+### `parameters`
+
+(*`array`*)
+
+*Optional.* Defines the list of [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via the Quick Actions search bar. Each parameter is an object with the following keys:
+
+- **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
+- **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions search bar. Defaults to the value of the sibling `"key"` key.
+- **`"description"`** (*`string`*) — *Optional.* The description for the parameter shown in the Quick Actions search bar.
+- **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
+- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.
+
+Learn how to [accept parameters via the Quick Actions search bar in your plugin command](https://figma.com/plugin-docs/plugin-parameters/).
+
+### `parameterOnly`
+
+(*`boolean`*)
+
+*Optional.* When **`"parameters"`** is specified, the default behavior is that the user will be required to input parameters via the Quick Actions search bar. Set **`"parameterOnly"`** to `false` to make parameter input optional.
+
 ### `relaunchButtons`
 
 (*`object`*)
@@ -206,17 +206,27 @@ See the [recipe for specifying multiple commands in the plugin sub-menu](<%- que
 
 See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').url %>#configuring-relaunch-buttons).
 
-### `permissions`
-
-(*`Array<string>`*)
-
-*Optional.* For specifying the permissions that the plugin/widget needs access to. One of `["activeusers"]`, `["currentuser"]`, or `["activeusers", "currentuser"]`.
-
 ### `capabilities`
 
 (*`Array<string>`*)
 
-*Optional.* For specifying the capabilities that the plugin needs access to. At the moment, the only applicable capability is `["textreview"]`.
+*Optional.* For specifying the capabilities that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, and **`"textreview"`**.
+
+### `permissions`
+
+(*`Array<string>`*)
+
+*Optional.* For specifying the permissions that the plugin/widget needs access to. Possible permissions are **`"activeusers"`**, **`"currentuser"`**, **`"fileusers"`** and **`"payments"`**.
+
+### `networkAccess`
+
+(*`object`*)
+
+*Optional.* An object that specifies the [list of domains that your plugin/widget is permitted to access](https://figma.com/plugin-docs/manifest#networkaccess). Keys are:
+
+- **`"allowedDomains"`** (*`Array<string>`*) — *Required.* Match patterns for domains that your plugin/widget is permitted to access.
+- **`"reasoning"`** (*`string`*) — *Optional.* For specifying why your plugin/widgets needs to access the domains in **`"allowedDomains"`**.
+- **`"devAllowedDomains"`** (*`Array<string>`*) — *Optional.* Match patterns for domains that your plugin/widget is permitted to access during development.
 
 ### `enablePrivatePluginApi`
 

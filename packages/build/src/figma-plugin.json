@@ -219,6 +219,16 @@
             }
           }
         },
+        "capabilities": {
+          "description": "(optional)\nFor specifying the capabilities that the plugin needs access to. Possible capabilities are \"codegen\", \"inspect\", and \"textreview\".",
+          "type": "array",
+          "minItems": 1,
+          "items": [
+            {
+              "enum": ["codegen", "inspect", "textreview"]
+            }
+          ]
+        },
         "permissions": {
           "description": "(optional)\nFor specifying the permissions that the plugin/widget needs access to. Possible permissions are \"activeusers\", \"currentuser\", \"fileusers\" and \"payments\".",
           "type": "array",
@@ -235,11 +245,33 @@
             }
           ]
         },
-        "capabilities": {
-          "description": "(optional)\nFor specifying the capabilities that the plugin needs access to. Possible permissions are \"codegen\", \"inspect\", and \"textreview\".",
-          "type": "array",
-          "minItems": 1,
-          "items": [{ "enum": ["codegen", "inspect", "textreview"] }]
+        "networkAccess": {
+          "description": "(optional)\nAn object that specifies the list of domains that your plugin/widget is permitted to access. Keys are \"allowedDomains\" (required), \"reasoning\" (optional), and \"devAllowedDomains\" (optional).",
+          "type": "object",
+          "required": ["allowedDomains"],
+          "additionalProperties": false,
+          "properties": {
+            "allowedDomains": {
+              "description": "(required)\nMatch patterns for domains that your plugin/widget is permitted to access.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "reasoning": {
+              "description": "(optional)\nFor specifying why your plugin/widgets needs to access the domains in \"allowedDomains\".",
+              "type": "string"
+            },
+            "devAllowedDomains": {
+              "description": "(optional)\nMatch patterns for domains that your plugin/widget is permitted to access during development.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          }
         },
         "enablePrivatePluginApi": {
           "description": "(optional)\nSet to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.",
