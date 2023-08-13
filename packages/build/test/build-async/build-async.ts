@@ -316,6 +316,11 @@ test('additional fields', async function (t) {
     main: 'build/main.js',
     capabilities: ['textreview'],
     permissions: ['activeusers'],
+    networkAccess: {
+      allowedDomains: ['foo.com'],
+      devAllowedDomains: ['bar.com'],
+      reasoning: 'baz'
+    },
     enablePrivatePluginApi: true,
     enableProposedApi: true,
     build: 'b',

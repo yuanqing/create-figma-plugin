@@ -11,8 +11,8 @@ import { log } from './log.js'
 import {
   Config,
   ConfigCommand,
-  ConfigCommandSeparator,
   ConfigFile,
+  ConfigMenuItemSeparator,
   ConfigNetworkAccess,
   ConfigParameter,
   ConfigRelaunchButton
@@ -129,7 +129,7 @@ function parseCommand(command: RawConfigCommand): ConfigCommand {
         ? null
         : menu.map(function (
             command: RawConfigCommand | '-'
-          ): ConfigCommand | ConfigCommandSeparator {
+          ): ConfigCommand | ConfigMenuItemSeparator {
             if (command === '-') {
               return { separator: true }
             }

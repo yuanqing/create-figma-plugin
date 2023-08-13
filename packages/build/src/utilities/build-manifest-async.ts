@@ -2,47 +2,47 @@
 
 import {
   ConfigCommand,
-  ConfigCommandSeparator,
+  ConfigMenuItemSeparator,
+  ConfigNetworkAccess,
   ConfigParameter,
   ConfigRelaunchButton,
   constants,
+  Manifest,
+  ManifestMenuItem,
+  ManifestMenuItemSeparator,
+  ManifestNetworkAccess,
+  ManifestParameter,
+  ManifestRelaunchButton,
   readConfigAsync,
   writeFileAsync
 } from '@create-figma-plugin/common'
 import { globby } from 'globby'
 
-import {
-  Manifest,
-  ManifestMenuItem,
-  ManifestMenuItemSeparator,
-  ManifestParameter,
-  ManifestRelaunchButton
-} from '../types/manifest.js'
-
 export async function buildManifestAsync(minify: boolean): Promise<void> {
   const config = await readConfigAsync()
   const {
-    commandId,
-    id,
     api,
     widgetApi,
-    capabilities,
-    containsWidget,
     editorType,
+    containsWidget,
+    commandId,
+    id,
+    name,
+    main,
+    ui,
+    menu,
+    parameters,
+    parameterOnly,
+    relaunchButtons,
+    capabilities,
+    permissions,
+    networkAccess,
     enablePrivatePluginApi,
     enableProposedApi,
-    main,
-    menu,
-    name,
-    parameterOnly,
-    parameters,
-    permissions,
-    relaunchButtons,
-    ui,
     build,
     rest
   } = config
-  const command = { commandId, main, menu, name, parameterOnly, parameters, ui }
+  const command = { commandId, name, main, ui, menu, parameters, parameterOnly }
   if (hasBundle(command, 'main') === false) {
     throw new Error('Need a `main` entry point')
   }
@@ -63,22 +63,26 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     name,
     main: constants.build.pluginCodeFilePath,
     ui: hasUi === true ? constants.build.pluginUiFilePath : undefined,
-    menu: command.menu !== null ? createMenu(command.menu) : undefined,
+    menu: command.menu !== null ? createManifestMenu(command.menu) : undefined,
     parameters:
       command.parameters !== null
-        ? createParameters(command.parameters)
+        ? createManifestParameters(command.parameters)
         : undefined,
     parameterOnly: command.parameterOnly === false ? false : undefined,
     relaunchButtons:
       relaunchButtons !== null
-        ? createRelaunchButtons(relaunchButtons)
+        ? createManifestRelaunchButtons(relaunchButtons)
         : undefined,
     capabilities: capabilities !== null ? capabilities : undefined,
     permissions: permissions !== null ? permissions : undefined,
+    networkAccess:
+      networkAccess !== null
+        ? createManifestNetworkAccess(networkAccess)
+        : undefined,
     enableProposedApi: enableProposedApi === true ? true : undefined,
     enablePrivatePluginApi: enablePrivatePluginApi === true ? true : undefined,
     build: build !== null ? build : undefined,
-    ...rest
+    ...(rest !== null ? rest : {})
   }
   const result = await overrideManifestAsync(manifest)
   const string =
@@ -94,7 +98,7 @@ function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {
   }
   if (command.menu !== null) {
     const result = command.menu.filter(function (
-      command: ConfigCommand | ConfigCommandSeparator
+      command: ConfigCommand | ConfigMenuItemSeparator
     ): boolean {
       if ('separator' in command) {
         return false
@@ -106,7 +110,7 @@ function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {
   return false
 }
 
-function createParameters(
+function createManifestParameters(
   parameters: Array<ConfigParameter>
 ): Array<ManifestParameter> {
   return parameters.map(function (
@@ -129,11 +133,11 @@ function createParameters(
   })
 }
 
-function createMenu(
-  menu: Array<ConfigCommand | ConfigCommandSeparator>
+function createManifestMenu(
+  menu: Array<ConfigCommand | ConfigMenuItemSeparator>
 ): Array<ManifestMenuItem | ManifestMenuItemSeparator> {
   return menu.map(function (
-    item: ConfigCommand | ConfigCommandSeparator
+    item: ConfigCommand | ConfigMenuItemSeparator
   ): ManifestMenuItem | ManifestMenuItemSeparator {
     if ('separator' in item) {
       return { separator: true }
@@ -145,35 +149,49 @@ function createMenu(
       result.command = item.commandId
     }
     if (item.parameters !== null) {
-      result.parameters = createParameters(item.parameters)
+      result.parameters = createManifestParameters(item.parameters)
     }
     if (item.parameterOnly === false) {
       result.parameterOnly = false
     }
     if (item.menu !== null) {
-      result.menu = createMenu(item.menu)
+      result.menu = createManifestMenu(item.menu)
     }
     return result
   })
 }
 
-function createRelaunchButtons(
+function createManifestRelaunchButtons(
   relaunchButtons: Array<ConfigRelaunchButton>
 ): Array<ManifestRelaunchButton> {
   return relaunchButtons.map(function (
     relaunchButton: ConfigRelaunchButton
   ): ManifestRelaunchButton {
-    /* eslint-disable sort-keys-fix/sort-keys-fix */
     const result: ManifestRelaunchButton = {
       name: relaunchButton.name,
       command: relaunchButton.commandId
     }
-    /* eslint-enable sort-keys-fix/sort-keys-fix */
     if (relaunchButton.multipleSelection === true) {
       result.multipleSelection = true
     }
     return result
   })
+}
+
+function createManifestNetworkAccess(
+  networkAccess: ConfigNetworkAccess
+): ManifestNetworkAccess {
+  const { allowedDomains, devAllowedDomains, reasoning } = networkAccess
+  const result: ManifestNetworkAccess = {
+    allowedDomains
+  }
+  if (devAllowedDomains !== null) {
+    result.devAllowedDomains = devAllowedDomains
+  }
+  if (reasoning !== null) {
+    result.reasoning = reasoning
+  }
+  return result
 }
 
 async function overrideManifestAsync(

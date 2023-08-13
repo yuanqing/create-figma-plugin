@@ -3,8 +3,8 @@ import { join } from 'node:path'
 import {
   Config,
   ConfigCommand,
-  ConfigCommandSeparator,
   ConfigFile,
+  ConfigMenuItemSeparator,
   ConfigRelaunchButton,
   constants,
   readConfigAsync
@@ -175,7 +175,7 @@ function createUiEntryFile(config: Config): null | string {
 }
 
 function extractEntryFiles(
-  items: Array<ConfigCommandSeparator | ConfigCommand | ConfigRelaunchButton>,
+  items: Array<ConfigMenuItemSeparator | ConfigCommand | ConfigRelaunchButton>,
   key: 'ui' | 'main',
   result: Array<EntryFile>
 ): void {

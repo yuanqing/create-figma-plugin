@@ -3,7 +3,7 @@ export type Manifest = {
   widgetApi?: string
   editorType: Array<string>
   containsWidget?: boolean
-  id?: string
+  id: string
   name: string
   main: string
   ui?: string
@@ -13,10 +13,13 @@ export type Manifest = {
   relaunchButtons?: Array<ManifestRelaunchButton>
   permissions?: Array<string>
   capabilities?: Array<string>
+  networkAccess?: ManifestNetworkAccess
   enableProposedApi?: boolean
   enablePrivatePluginApi?: boolean
   build?: string
 }
+
+export type ManifestEditorType = 'dev' | 'figma' | 'figjam'
 
 export type ManifestMenuItem = {
   name: string
@@ -29,8 +32,8 @@ export type ManifestMenuItem = {
 export type ManifestMenuItemSeparator = { separator: true }
 
 export type ManifestParameter = {
-  name: string
   key: string
+  name: string
   description?: string
   allowFreeform?: boolean
   optional?: boolean
@@ -39,5 +42,20 @@ export type ManifestParameter = {
 export type ManifestRelaunchButton = {
   command: string
   name: string
-  multipleSelection?: true
+  multipleSelection?: boolean
+}
+
+export type ManifestCapabilities = 'codegen' | 'inspect' | 'textreview'
+
+export type ManifestPermission =
+  | 'activeusers'
+  | 'currentuser'
+  | 'fileusers'
+  | 'payments'
+  | 'teamlibrary'
+
+export type ManifestNetworkAccess = {
+  allowedDomains: Array<string>
+  devAllowedDomains?: Array<string>
+  reasoning?: string
 }
