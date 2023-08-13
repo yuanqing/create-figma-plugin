@@ -25,11 +25,16 @@ sade('build-figma-plugin', true)
       await buildAsync({
         ...buildOptions,
         clearPreviousLine: true,
+        exitOnError: false,
         typecheck: false
       })
       await watchAsync(buildOptions)
       return
     }
-    await buildAsync({ ...buildOptions, clearPreviousLine: false })
+    await buildAsync({
+      ...buildOptions,
+      clearPreviousLine: false,
+      exitOnError: true
+    })
   })
   .parse(process.argv)

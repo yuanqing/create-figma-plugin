@@ -8,9 +8,9 @@ import { trackElapsedTime } from './utilities/track-elapsed-time.js'
 import { typeCheckBuild } from './utilities/type-check/type-check-build.js'
 
 export async function buildAsync(
-  options: BuildOptions & { clearPreviousLine: boolean }
+  options: BuildOptions & { clearPreviousLine: boolean; exitOnError: boolean }
 ): Promise<void> {
-  const { minify, typecheck, clearPreviousLine } = options
+  const { minify, typecheck, clearPreviousLine, exitOnError } = options
   try {
     if (typecheck === true) {
       const getTypeCheckElapsedTime = trackElapsedTime()
@@ -39,6 +39,8 @@ export async function buildAsync(
     }
   } catch (error: any) {
     log.error(error.message)
-    process.exit(1)
+    if (exitOnError === true) {
+      process.exit(1)
+    }
   }
 }

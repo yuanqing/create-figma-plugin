@@ -13,6 +13,12 @@ import { watchIgnoreRegex } from './watch-ignore-regex.js'
 const cssRegex = /\.css$/
 const packageJsonRegex = /^package\.json$/
 
+const mapChokidarWatchEventToLabel: Record<string, string> = {
+  add: 'Added',
+  change: 'Changed',
+  unlink: 'Deleted'
+}
+
 export async function watchAsync(options: BuildOptions): Promise<void> {
   const { minify, typecheck } = options
   let endTypeCheckWatch: () => void
@@ -34,40 +40,48 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
       }
     }
   )
-  if (typecheck === false) {
-    watcher.on('ready', function (): void {
+
+  watcher.on('ready', function (): void {
+    if (typecheck === false) {
       log.info('Watching...')
-    })
-  }
-  watcher.on('change', async function (file: string): Promise<void> {
-    try {
-      if (typecheck === true && file.indexOf('tsconfig.json') !== -1) {
-        endTypeCheckWatch()
-      }
-      log.clearViewport()
-      const getElapsedTime = trackElapsedTime()
-      log.info(`Changed ${yellow(file)}`)
-      const promises: Array<Promise<void>> = []
-      if (packageJsonRegex.test(file) === true) {
-        promises.push(buildManifestAsync(minify))
-      } else {
-        if (cssRegex.test(file) === true) {
-          promises.push(buildCssModulesTypingsAsync())
+    }
+
+    watcher.on(
+      'all',
+      async function (event: string, file: string): Promise<void> {
+        if (typeof mapChokidarWatchEventToLabel[event] === 'undefined') {
+          return
+        }
+        try {
+          if (typecheck === true && file.indexOf('tsconfig.json') !== -1) {
+            endTypeCheckWatch()
+          }
+          log.clearViewport()
+          const getElapsedTime = trackElapsedTime()
+          log.info(`${mapChokidarWatchEventToLabel[event]} ${yellow(file)}`)
+          const promises: Array<Promise<void>> = []
+          if (packageJsonRegex.test(file) === true) {
+            promises.push(buildManifestAsync(minify))
+          } else {
+            if (cssRegex.test(file) === true) {
+              promises.push(buildCssModulesTypingsAsync())
+            }
+          }
+          promises.push(buildBundlesAsync(minify))
+          await Promise.all(promises)
+          log.success(`Built in ${getElapsedTime()}`)
+          if (typecheck === false) {
+            log.info('Watching...')
+            return
+          }
+          if (file.indexOf('tsconfig.json') !== -1) {
+            // Restart the type-check watcher program
+            endTypeCheckWatch = typeCheckWatch()
+          }
+        } catch (error: any) {
+          log.error(error.message)
         }
       }
-      promises.push(buildBundlesAsync(minify))
-      await Promise.all(promises)
-      log.success(`Built in ${getElapsedTime()}`)
-      if (typecheck === false) {
-        log.info('Watching...')
-        return
-      }
-      if (file.indexOf('tsconfig.json') !== -1) {
-        // Restart the type-check watcher program
-        endTypeCheckWatch = typeCheckWatch()
-      }
-    } catch (error: any) {
-      log.error(error.message)
-    }
+    )
   })
 }
