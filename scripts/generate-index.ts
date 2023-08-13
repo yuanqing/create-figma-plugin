@@ -1,11 +1,9 @@
 /* eslint-disable no-inner-declarations */
 
-import fs from 'node:fs/promises'
-
 import { globby } from 'globby'
-import { dirname } from 'path'
-import { pathExists } from 'path-exists'
 import ts from 'typescript'
+
+import { writeFileAsync } from '../packages/common/src/write-file-async.js'
 
 async function main(): Promise<void> {
   const globPatterns = process.argv.slice(2)
@@ -90,15 +88,4 @@ async function generateIndexTs(
       '\n'
     )}`
   )
-}
-
-export async function writeFileAsync(
-  outputFilePath: string,
-  fileContents: string | Buffer
-): Promise<void> {
-  const directoryName = dirname(outputFilePath)
-  if ((await pathExists(directoryName)) === false) {
-    await fs.mkdir(directoryName, { recursive: true })
-  }
-  await fs.writeFile(outputFilePath, fileContents)
 }

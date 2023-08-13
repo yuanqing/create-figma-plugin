@@ -47,11 +47,11 @@
     "path-exists": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.2.4",
+    "@types/node": "^20.4.10",
     "@typescript-eslint/eslint-plugin": "5.59.7",
-    "ava": "^5.3.0",
-    "concurrently": "^8.0.1",
-    "eslint": "^8.41.0",
+    "ava": "^5.3.1",
+    "concurrently": "^8.2.0",
+    "eslint": "^8.47.0",
     "eslint-config-yuanqing": "0.0.8",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "4.2.1",
@@ -59,10 +59,10 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-sort-keys-fix": "1.1.2",
-    "prettier": "^2.8.8",
+    "prettier": "2.8.8",
     "rimraf": "^5.0.1",
     "tsx": "^3.12.7",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   },
   "ava": {
     "extensions": {

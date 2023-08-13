@@ -44,7 +44,7 @@ async function generateIconsAsync(
     onlyFiles: false
   })
   for (const directoryPath of directoryPaths) {
-    await fs.unlink(directoryPath)
+    await fs.rm(directoryPath, { recursive: true })
   }
   for (const dimension in dimensions) {
     const directoryPath = join(outputDirectoryPath, `icon-${dimension}`)
