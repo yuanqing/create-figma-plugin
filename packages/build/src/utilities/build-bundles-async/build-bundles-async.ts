@@ -1,4 +1,4 @@
-import { join } from 'node:path'
+import { resolve } from 'node:path'
 
 import {
   Config,
@@ -73,7 +73,7 @@ async function buildMainBundleAsync(options: {
       bundle: true,
       logLevel: 'silent',
       minify,
-      outfile: join(outputDirectory, constants.build.pluginCodeFilePath),
+      outfile: resolve(outputDirectory, constants.build.pluginCodeFilePath),
       platform: 'neutral',
       plugins: [],
       stdin: {
@@ -140,7 +140,7 @@ async function buildUiBundleAsync(options: {
       },
       logLevel: 'silent',
       minify,
-      outfile: join(outputDirectory, constants.build.pluginUiFilePath),
+      outfile: resolve(outputDirectory, constants.build.pluginUiFilePath),
       plugins: [esbuildPreactCompatPlugin(), esbuildCssModulesPlugin(minify)],
       stdin: {
         contents: js,

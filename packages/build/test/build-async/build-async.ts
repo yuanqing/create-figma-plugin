@@ -704,11 +704,11 @@ test('output directory', async function (t) {
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
     ...buildAsyncOptions,
-    outputDirectory: join(directoryPath, outputDirectoryName)
+    outputDirectory: outputDirectoryName
   })
   t.false(await pathExists('build'))
   const manifestJson = JSON.parse(
-    await fs.readFile('foo/manifest.json', 'utf8')
+    await fs.readFile(join(outputDirectoryName, 'manifest.json'), 'utf8')
   )
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -717,8 +717,8 @@ test('output directory', async function (t) {
     name: 'a',
     main: 'build/main.js'
   })
-  t.true(await pathExists('foo/build/main.js'))
-  t.false(await pathExists('foo/build/ui.js'))
+  t.true(await pathExists(join(outputDirectoryName, 'build/main.js')))
+  t.false(await pathExists(join(outputDirectoryName, 'build/ui.js')))
   await cleanUpAsync()
   await fs.rm(outputDirectoryName, { force: true, recursive: true })
 })

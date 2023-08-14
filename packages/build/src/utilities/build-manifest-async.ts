@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 
-import { join } from 'node:path'
+import { resolve } from 'node:path'
 
 import {
   Config,
@@ -95,7 +95,10 @@ export async function buildManifestAsync(options: {
     (minify === true
       ? JSON.stringify(result)
       : JSON.stringify(result, null, 2)) + '\n'
-  const outputFilePath = join(outputDirectory, constants.build.manifestFilePath)
+  const outputFilePath = resolve(
+    outputDirectory,
+    constants.build.manifestFilePath
+  )
   await writeFileAsync(outputFilePath, string)
 }
 
