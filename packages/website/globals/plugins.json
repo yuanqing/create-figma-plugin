@@ -14,6 +14,34 @@
   {
     "authors": [
       {
+        "name": "Aaply",
+        "url": "https://twitter.com/AaplyHQ"
+      }
+    ],
+    "description": "Helps to work out the logic of the mobile app, plan flows, and design wireframes",
+    "githubUrl": null,
+    "id": "1229734902523136848",
+    "name": "Aaply"
+  },
+  {
+    "authors": [
+      {
+        "name": "Suraj Hanchinal",
+        "url": "https://figma.com/@surajhanchinal"
+      },
+      {
+        "name": "Vaishnav Ramayan",
+        "url": "https://figma.com/@coffeewriter"
+      }
+    ],
+    "description": "An AI-powered assistant for crafting flawless UI copy",
+    "githubUrl": null,
+    "id": "1226960677405751416",
+    "name": "AI Coffee Writer"
+  },
+  {
+    "authors": [
+      {
         "name": "Antonio Cao",
         "url": "https://twitter.com/RemitNotPaucity"
       }
@@ -22,6 +50,18 @@
     "githubUrl": null,
     "id": "1145446664512862540",
     "name": "Ando"
+  },
+  {
+    "authors": [
+      {
+        "name": "Unfold",
+        "url": "https://twitter.com/unfoldco"
+      }
+    ],
+    "description": "Bend your type!",
+    "githubUrl": null,
+    "id": "762070688792833472",
+    "name": "ARC"
   },
   {
     "authors": [
@@ -58,6 +98,18 @@
     "githubUrl": null,
     "id": "1224003068372701617",
     "name": "Bar Chart Generator"
+  },
+  {
+    "authors": [
+      {
+        "name": "Chien-Ju Peng",
+        "url": "https://cjp-design.com/"
+      }
+    ],
+    "description": "Visually proportional resizing icons or logos",
+    "githubUrl": null,
+    "id": "1260179181920548587",
+    "name": "Batch Icon Logo Resizer"
   },
   {
     "authors": [
@@ -210,6 +262,18 @@
   {
     "authors": [
       {
+        "name": "Khaled Garbaya",
+        "url": "https://twitter.com/khaled_garbaya"
+      }
+    ],
+    "description": "Effortlessly blend Contentful and Figma into your workflow",
+    "githubUrl": null,
+    "id": "789594601370719857",
+    "name": "Contentful to Figma"
+  },
+  {
+    "authors": [
+      {
         "name": "Roman Nurik",
         "url": "https://twitter.com/romannurik"
       }
@@ -314,6 +378,18 @@
     "githubUrl": "https://github.com/aashreys/desaturate",
     "id": "972353621057384319",
     "name": "Desaturate"
+  },
+  {
+    "authors": [
+      {
+        "name": "Wenju Li",
+        "url": "https://figma.com/@wenjuli"
+      }
+    ],
+    "description": "Export variables to JSON files, import variables from JSON files",
+    "githubUrl": null,
+    "id": "1263743870981744253",
+    "name": "Design Tokens Manager"
   },
   {
     "authors": [
@@ -446,6 +522,18 @@
   {
     "authors": [
       {
+        "name": "Honza Toman",
+        "url": "https://twitter.com/honzatmn"
+      }
+    ],
+    "description": "Export variables from one file and import them to another",
+    "githubUrl": null,
+    "id": "1256972111705530093",
+    "name": "Export/Import Variables"
+  },
+  {
+    "authors": [
+      {
         "name": "Lalith Sanathi",
         "url": "https://twitter.com/justapentool"
       }
@@ -482,6 +570,18 @@
   {
     "authors": [
       {
+        "name": "ΚΛΤΤΛΧ",
+        "url": "https://twitter.com/TheUltDev"
+      }
+    ],
+    "description": "Transform your Figma components to React Native components in real time",
+    "githubUrl": "https://github.com/kat-tax/figma-to-react-native",
+    "id": "821138713091291738",
+    "name": "Figma → React Native"
+  },
+  {
+    "authors": [
+      {
         "name": "Ryo Nakae",
         "url": "https://twitter.com/ryo_dg"
       }
@@ -506,12 +606,8 @@
   {
     "authors": [
       {
-        "name": "João Barros",
-        "url": "https://figma.com/@joao208"
-      },
-      {
-        "name": "Mateus Coutinho",
-        "url": "https://figma.com/@coutinhomm"
+        "name": "Typper",
+        "url": "https://figma.com/@typper"
       }
     ],
     "description": "Easily generate random avatars",
@@ -522,16 +618,8 @@
   {
     "authors": [
       {
-        "name": "João Barros",
-        "url": "https://figma.com/@joao208"
-      },
-      {
-        "name": "João Victor",
-        "url": "https://twitter.com/jvgcunha"
-      },
-      {
-        "name": "Mateus Coutinho",
-        "url": "https://figma.com/@coutinhomm"
+        "name": "Typper",
+        "url": "https://figma.com/@typper"
       }
     ],
     "description": "Create images with AI",
@@ -542,16 +630,8 @@
   {
     "authors": [
       {
-        "name": "João Barros",
-        "url": "https://figma.com/@joao208"
-      },
-      {
-        "name": "João Victor",
-        "url": "https://twitter.com/jvgcunha"
-      },
-      {
-        "name": "Mateus Coutinho",
-        "url": "https://figma.com/@coutinhomm"
+        "name": "Typper",
+        "url": "https://figma.com/@typper"
       }
     ],
     "description": "Enhance text creation and editing with AI",
@@ -718,6 +798,18 @@
   {
     "authors": [
       {
+        "name": "Creative Robots",
+        "url": "https://figma.com/@creative_robots"
+      }
+    ],
+    "description": "Beautiful web illustrations, with AI",
+    "githubUrl": null,
+    "id": "1242954096510314253",
+    "name": "Hippo AI"
+  },
+  {
+    "authors": [
+      {
         "name": "divRIOTS",
         "url": "https://twitter.com/divriots"
       }
@@ -726,6 +818,18 @@
     "githubUrl": null,
     "id": "1159123024924461424",
     "name": "html.to.design"
+  },
+  {
+    "authors": [
+      {
+        "name": "Humation",
+        "url": "https://twitter.com/humationapp"
+      }
+    ],
+    "description": "Human illustration system",
+    "githubUrl": null,
+    "id": "1252595876303925244",
+    "name": "Humation"
   },
   {
     "authors": [
@@ -778,6 +882,18 @@
   {
     "authors": [
       {
+        "name": "Yuki Takemoto",
+        "url": "https://twitter.com/mottox2"
+      }
+    ],
+    "description": "Easily set the font in text layers containing both Japanese and non-Japanese characters",
+    "githubUrl": null,
+    "id": "1119612117220702803",
+    "name": "Japanese Font Mixer"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -822,6 +938,18 @@
     "githubUrl": null,
     "id": "1228330653779206411",
     "name": "Line Chart Generator"
+  },
+  {
+    "authors": [
+      {
+        "name": "Lorenz Wöhr",
+        "url": "https://lorenzwoehr.com/"
+      }
+    ],
+    "description": "Link spacing variables with your design system",
+    "githubUrl": null,
+    "id": "1258541120380373830",
+    "name": "Link Spacing Variables"
   },
   {
     "authors": [
@@ -882,6 +1010,18 @@
     "githubUrl": null,
     "id": "1027037684003682350",
     "name": "Outline to Single Stroke"
+  },
+  {
+    "authors": [
+      {
+        "name": "Nick Romashov",
+        "url": "https://twitter.com/romashov"
+      }
+    ],
+    "description": "Simplify your screenshot process",
+    "githubUrl": null,
+    "id": "1256338758176314434",
+    "name": "Page Capture"
   },
   {
     "authors": [
@@ -1086,6 +1226,30 @@
   {
     "authors": [
       {
+        "name": "Ryan Sael",
+        "url": "https://twitter.com/ryansael"
+      }
+    ],
+    "description": "Find the right words fast",
+    "githubUrl": null,
+    "id": "1234908905353558285",
+    "name": "Rapid Copywriting"
+  },
+  {
+    "authors": [
+      {
+        "name": "Sanjeevkumar Hegde",
+        "url": "https://figma.com/@sanjeevhegde"
+      }
+    ],
+    "description": "Create redlines and annotations dynamically",
+    "githubUrl": null,
+    "id": "1228826129267290034",
+    "name": "Redlines & Annotations"
+  },
+  {
+    "authors": [
+      {
         "name": "Kirk Bentley",
         "url": "https://figma.com/@kirkbentley"
       }
@@ -1210,6 +1374,18 @@
   {
     "authors": [
       {
+        "name": "Stas Kulesh",
+        "url": "https://twitter.com/stas_kulesh"
+      }
+    ],
+    "description": "Powerful spelling and grammar inspector",
+    "githubUrl": null,
+    "id": "1140879347257676557",
+    "name": "SpellCheck"
+  },
+  {
+    "authors": [
+      {
         "name": "divRIOTS",
         "url": "https://twitter.com/divriots"
       }
@@ -1218,6 +1394,18 @@
     "githubUrl": null,
     "id": "1075741140914731351",
     "name": "story.to.design"
+  },
+  {
+    "authors": [
+      {
+        "name": "Joseph Le",
+        "url": "https://twitter.com/josephnqle"
+      }
+    ],
+    "description": "Import Style Dictionary JSON to Figma variables",
+    "githubUrl": null,
+    "id": "1254182310197842774",
+    "name": "Style Dictionary to Variables"
   },
   {
     "authors": [
@@ -1294,6 +1482,18 @@
   {
     "authors": [
       {
+        "name": "Hiroki Tani",
+        "url": "https://twitter.com/hiloki"
+      }
+    ],
+    "description": "Build a Table of Contents in an instant",
+    "githubUrl": null,
+    "id": "971347067329627666",
+    "name": "ToC Builder"
+  },
+  {
+    "authors": [
+      {
         "name": "Luca Dalli",
         "url": "https://twitter.com/webdevluca"
       }
@@ -1322,6 +1522,18 @@
   {
     "authors": [
       {
+        "name": "Typper",
+        "url": "https://figma.com/@typper"
+      }
+    ],
+    "description": "Code that works from anything inside Figma, in all frameworks",
+    "githubUrl": null,
+    "id": "1259335676400635834",
+    "name": "Typper – Codes"
+  },
+  {
+    "authors": [
+      {
         "name": "Daniel Amram",
         "url": "https://figma.com/@codbite"
       }
@@ -1342,6 +1554,42 @@
     "githubUrl": null,
     "id": "939832535166467194",
     "name": "Upscale Image"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuan Qing Lim",
+        "url": "https://twitter.com/yuanqinglim"
+      }
+    ],
+    "description": "Supercharge your variable workflows",
+    "githubUrl": null,
+    "id": "1271383289541400562",
+    "name": "Variable Utilities"
+  },
+  {
+    "authors": [
+      {
+        "name": "Yuki Takemoto",
+        "url": "https://twitter.com/mottox2"
+      }
+    ],
+    "description": "Displays variables used in the selection",
+    "githubUrl": "https://github.com/mottox2/figma-variables-inspector",
+    "id": "1263366994349005841",
+    "name": "Variables Inspector"
+  },
+  {
+    "authors": [
+      {
+        "name": "Haoqi Wen",
+        "url": "https://twitter.com/wenhaoqi"
+      }
+    ],
+    "description": "Fast, easy and practical powerful icon production and batch export tool",
+    "githubUrl": null,
+    "id": "1255914175202017737",
+    "name": "VectorSymbols"
   },
   {
     "authors": [
@@ -1382,17 +1630,5 @@
     "githubUrl": "https://github.com/FradSer/figma-xr-design-tools",
     "id": "1149634536150338038",
     "name": "XR Design Tools"
-  },
-  {
-    "authors": [
-      {
-        "name": "Aashrey Sharma",
-        "url": "https://twitter.com/aashrey_sharma"
-      }
-    ],
-    "description": "Easily create, convert or wrap layers in zero frames",
-    "githubUrl": "https://github.com/aashreys/zero-frame",
-    "id": "1069750945133910671",
-    "name": "Zero Frame"
   }
 ]
