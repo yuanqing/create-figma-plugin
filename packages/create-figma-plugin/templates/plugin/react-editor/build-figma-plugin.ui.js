@@ -1,4 +1,4 @@
-module.exports = function (buildOptions) {
+export default function (buildOptions) {
   return {
     ...buildOptions,
     define: {

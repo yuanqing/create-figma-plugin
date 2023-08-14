@@ -2,8 +2,9 @@ import fs from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { writeFileAsync } from '@create-figma-plugin/common'
 import { transformSync } from 'esbuild'
+
+import { writeFileAsync } from '../../common/src/write-file-async.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 

@@ -691,10 +691,11 @@ test('process.env.NODE_ENV', async function (t) {
 
 test('output directory', async function (t) {
   t.plan(8)
-  const outputDirectoryName = 'foo'
+  const outputDirectoryName = 'my-plugin'
   const directoryPath = join(__dirname, 'fixtures', '23-output-directory')
   process.chdir(directoryPath)
   await cleanUpAsync()
+  await fs.rm(outputDirectoryName, { force: true, recursive: true })
   t.false(await pathExists('build'))
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
@@ -719,6 +720,7 @@ test('output directory', async function (t) {
   t.true(await pathExists('foo/build/main.js'))
   t.false(await pathExists('foo/build/ui.js'))
   await cleanUpAsync()
+  await fs.rm(outputDirectoryName, { force: true, recursive: true })
 })
 
 async function installFigmaPluginTypingsAsync(): Promise<void> {

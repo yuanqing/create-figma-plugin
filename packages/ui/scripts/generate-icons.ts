@@ -2,10 +2,11 @@ import fs from 'node:fs/promises'
 import { basename, dirname, extname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { writeFileAsync } from '@create-figma-plugin/common'
 import { paramCase, pascalCase, pascalCaseTransformMerge } from 'change-case'
 import { globby } from 'globby'
 import { optimize } from 'svgo'
+
+import { writeFileAsync } from '../../common/src/write-file-async.js'
 
 type SvgFile = {
   dimension: number
@@ -44,7 +45,7 @@ async function generateIconsAsync(
     onlyFiles: false
   })
   for (const directoryPath of directoryPaths) {
-    await fs.rm(directoryPath, { recursive: true })
+    await fs.rm(directoryPath, { force: true, recursive: true })
   }
   for (const dimension in dimensions) {
     const directoryPath = join(outputDirectoryPath, `icon-${dimension}`)

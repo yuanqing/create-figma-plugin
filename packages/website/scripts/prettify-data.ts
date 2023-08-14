@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
+import { dirname } from 'node:path'
 
-import { writeFileAsync } from '@create-figma-plugin/common'
+import { pathExists } from 'path-exists'
 
 async function main(): Promise<void> {
   try {
@@ -29,3 +30,14 @@ async function main(): Promise<void> {
   }
 }
 main()
+
+async function writeFileAsync(
+  outputFilePath: string,
+  fileContents: string
+): Promise<void> {
+  const directoryPath = dirname(outputFilePath)
+  if ((await pathExists(directoryPath)) === false) {
+    await fs.mkdir(directoryPath, { recursive: true })
+  }
+  await fs.writeFile(outputFilePath, fileContents)
+}

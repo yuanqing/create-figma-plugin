@@ -1,4 +1,4 @@
-module.exports = function (manifest) {
+export default function (manifest) {
   return {
     ...manifest,
     x: 'y'

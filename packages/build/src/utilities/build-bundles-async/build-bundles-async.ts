@@ -20,6 +20,10 @@ interface EntryFile extends ConfigFile {
   commandId: string
 }
 
+type OverrideEsbuildConfig = (
+  buildOptions: BuildOptions
+) => Promise<BuildOptions>
+
 export async function buildBundlesAsync(options: {
   config: Config
   minify: boolean
@@ -48,9 +52,12 @@ async function overrideEsbuildConfigAsync(
   if (filePaths.length === 0) {
     return buildOptions
   }
-  const overrideEsbuildConfig: (
-    buildOptions: BuildOptions
-  ) => Promise<BuildOptions> = importFresh(filePaths[0])
+  const overrideEsbuildConfig:
+    | OverrideEsbuildConfig
+    | { default: OverrideEsbuildConfig } = importFresh(filePaths[0])
+  if ('default' in overrideEsbuildConfig) {
+    return overrideEsbuildConfig.default(buildOptions)
+  }
   return overrideEsbuildConfig(buildOptions)
 }
 

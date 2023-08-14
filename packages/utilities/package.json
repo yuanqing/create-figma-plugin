@@ -48,7 +48,6 @@
     "rgb-hex": "^4.0.1"
   },
   "devDependencies": {
-    "@create-figma-plugin/common": "^2.5.1",
     "@figma/plugin-typings": "1.74.0",
     "@types/natural-compare-lite": "^1.4.0",
     "@types/node": "^20.4.10",

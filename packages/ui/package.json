@@ -48,11 +48,11 @@
     "clean": "rimraf '*.log' lib 'src/**/*.css.d.ts' tsconfig.tsbuildinfo",
     "fix": "concurrently npm:fix:css npm:fix:js npm:fix:json",
     "fix:css": "stylelint --fix 'src/**/*.css'",
-    "fix:js": "eslint --fix '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}' --ignore-pattern '*.css.d.ts'",
+    "fix:js": "eslint --fix '{\\.storybook,scripts,src}/**/*.{js,ts,tsx}' --ignore-pattern '*.css.d.ts'",
     "fix:json": "prettier --loglevel error --write '*.json'",
     "lint": "concurrently npm:lint:css npm:lint:js",
     "lint:css": "stylelint 'src/**/*.css'",
-    "lint:js": "eslint '{\\.storybook,scripts,src}/**/*.{cjs,js,ts,tsx}'",
+    "lint:js": "eslint '{\\.storybook,scripts,src}/**/*.{js,ts,tsx}'",
     "prestorybook-build": "rimraf build",
     "storybook-build": "storybook build --output-dir build",
     "prestorybook-watch": "rimraf build",
@@ -62,7 +62,6 @@
     "@create-figma-plugin/utilities": "^2.5.1"
   },
   "devDependencies": {
-    "@create-figma-plugin/common": "^2.5.1",
     "@storybook/addon-storysource": "^7.2.3",
     "@storybook/addon-toolbars": "^7.2.3",
     "@storybook/preact": "^7.2.3",

@@ -1,9 +1,9 @@
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { writeFileAsync } from '@create-figma-plugin/common'
 import { createCategories, parseExportedFunctionsAsync } from 'generate-ts-docs'
 
+import { writeFileAsync } from '../../common/src/write-file-async.js'
 import { renderFunctionDataToMarkdown } from './render-function-data-to-markdown.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
