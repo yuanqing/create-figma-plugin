@@ -171,13 +171,13 @@ Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/m
 
 ## Using Tailwind CSS
 
-Install `tailwindcss` and `concurrently`:
+Install [`tailwindcss`](https://tailwindcss.com) and [`concurrently`](https://github.com/open-cli-tools/concurrently#readme):
 
 ```sh
 $ npm install --save-dev tailwindcss concurrently
 ```
 
-Then, create a `tailwind.config.js` file and `src/input.css` file:
+Then, create a [`tailwind.config.js`](https://tailwindcss.com/docs/configuration) file and `src/input.css` file:
 
 ```js
 // tailwind.config.js
@@ -207,7 +207,7 @@ Update the scripts in `package.json` to invoke the `tailwindcss` CLI:
     "build": "npm run build:css && npm run build:js",
     "build:css": "tailwindcss --input ./src/input.css --output ./src/output.css",
     "build:js": "build-figma-plugin --typecheck --minify",
-    "watch": "concurrently npm:watch:css npm:watch:js",
+    "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
     "watch:css": "tailwindcss --input ./src/input.css --output ./src/output.css --watch",
     "watch:js": "build-figma-plugin --typecheck --watch"
   }
