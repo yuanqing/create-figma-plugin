@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
+import { dirname } from 'node:path'
 
-import { dirname } from 'path'
 import { pathExists } from 'path-exists'
 
 export async function writeFileAsync(
