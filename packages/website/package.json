@@ -4,7 +4,7 @@
   "version": "2.5.1",
   "type": "module",
   "scripts": {
-    "clean": "rimraf '*.log' .turbo build",
+    "clean": "rimraf '*.log' build",
     "fix": "concurrently npm:fix:css npm:fix:data npm:fix:js",
     "fix:css": "stylelint --fix 'css/**/*.css'",
     "fix:data": "concurrently 'tsx scripts/prettify-data.ts globals/plugins.json' 'tsx scripts/prettify-data.ts globals/widgets.json'",

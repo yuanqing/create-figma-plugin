@@ -31,7 +31,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc --build",
-    "clean": "rimraf '*.log' .turbo lib tsconfig.tsbuildinfo",
+    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
     "fix": "concurrently npm:fix:js npm:fix:json",
     "fix:js": "eslint --fix '{src,test}/**/*.ts'",
     "fix:json": "prettier --loglevel error --write '*.json'",
