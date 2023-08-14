@@ -15,19 +15,24 @@ import { buildAsync } from '../../src/build-async.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+const buildAsyncOptions = {
+  exitOnError: true,
+  clearPreviousLine: false,
+  minify: false,
+  typecheck: true
+}
+
 test('no config', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '01-no-config'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '01-no-config')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -42,18 +47,16 @@ test('no config', async function (t) {
 })
 
 test('basic command', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '02-basic-command'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '02-basic-command')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -68,18 +71,16 @@ test('basic command', async function (t) {
 })
 
 test('basic command with UI', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '03-basic-command-with-ui'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '03-basic-command-with-ui')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -95,18 +96,20 @@ test('basic command with UI', async function (t) {
 })
 
 test('basic command with parameters', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '04-basic-command-with-parameters'))
+  t.plan(6)
+  const directoryPath = join(
+    __dirname,
+    'fixtures',
+    '04-basic-command-with-parameters'
+  )
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -131,18 +134,16 @@ test('basic command with parameters', async function (t) {
 })
 
 test('menu command', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '05-menu-command'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '05-menu-command')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -163,18 +164,16 @@ test('menu command', async function (t) {
 })
 
 test('menu command with UI', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '06-menu-command-with-ui'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '06-menu-command-with-ui')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -196,18 +195,20 @@ test('menu command with UI', async function (t) {
 })
 
 test('menu command with parameters', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '07-menu-command-with-parameters'))
+  t.plan(6)
+  const directoryPath = join(
+    __dirname,
+    'fixtures',
+    '07-menu-command-with-parameters'
+  )
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -238,18 +239,16 @@ test('menu command with parameters', async function (t) {
 })
 
 test('multiple menu commands', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '08-multiple-menu-commands'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '08-multiple-menu-commands')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -293,18 +292,16 @@ test('multiple menu commands', async function (t) {
 })
 
 test('additional fields', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '09-additional-fields'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '09-additional-fields')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '42',
@@ -332,18 +329,16 @@ test('additional fields', async function (t) {
 })
 
 test('relaunch button', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '10-relaunch-button'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '10-relaunch-button')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -370,18 +365,16 @@ test('relaunch button', async function (t) {
 })
 
 test('UI with image asset', async function (t) {
-  t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '11-ui-with-image-asset'))
+  t.plan(7)
+  const directoryPath = join(__dirname, 'fixtures', '11-ui-with-image-asset')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -399,19 +392,17 @@ test('UI with image asset', async function (t) {
 })
 
 test('CSS modules', async function (t) {
-  t.plan(8)
-  process.chdir(join(__dirname, 'fixtures', '12-css-modules'))
+  t.plan(9)
+  const directoryPath = join(__dirname, 'fixtures', '12-css-modules')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   t.false(await pathExists('src/styles.css.d.ts'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -430,19 +421,17 @@ test('CSS modules', async function (t) {
 })
 
 test('global CSS', async function (t) {
-  t.plan(8)
-  process.chdir(join(__dirname, 'fixtures', '13-global-css'))
+  t.plan(9)
+  const directoryPath = join(__dirname, 'fixtures', '13-global-css')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   t.false(await pathExists('src/styles.css.d.ts'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -461,18 +450,16 @@ test('global CSS', async function (t) {
 })
 
 test('preact', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '14-preact'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '14-preact')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -488,18 +475,16 @@ test('preact', async function (t) {
 })
 
 test('react', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '15-react'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '15-react')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -515,18 +500,16 @@ test('react', async function (t) {
 })
 
 test('esbuild main config - js', async function (t) {
-  t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '16-esbuild-main-config-js'))
+  t.plan(7)
+  const directoryPath = join(__dirname, 'fixtures', '16-esbuild-main-config-js')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -543,18 +526,20 @@ test('esbuild main config - js', async function (t) {
 })
 
 test('esbuild main config - cjs', async function (t) {
-  t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '17-esbuild-main-config-cjs'))
+  t.plan(7)
+  const directoryPath = join(
+    __dirname,
+    'fixtures',
+    '17-esbuild-main-config-cjs'
+  )
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -571,18 +556,16 @@ test('esbuild main config - cjs', async function (t) {
 })
 
 test('esbuild ui config - js', async function (t) {
-  t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '18-esbuild-ui-config-js'))
+  t.plan(7)
+  const directoryPath = join(__dirname, 'fixtures', '18-esbuild-ui-config-js')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -600,18 +583,16 @@ test('esbuild ui config - js', async function (t) {
 })
 
 test('esbuild ui config - cjs', async function (t) {
-  t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '19-esbuild-ui-config-cjs'))
+  t.plan(7)
+  const directoryPath = join(__dirname, 'fixtures', '19-esbuild-ui-config-cjs')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -629,18 +610,16 @@ test('esbuild ui config - cjs', async function (t) {
 })
 
 test('override manifest - js', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '20-override-manifest-js'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '20-override-manifest-js')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -656,18 +635,16 @@ test('override manifest - js', async function (t) {
 })
 
 test('override manifest - cjs', async function (t) {
-  t.plan(5)
-  process.chdir(join(__dirname, 'fixtures', '21-override-manifest-cjs'))
+  t.plan(6)
+  const directoryPath = join(__dirname, 'fixtures', '21-override-manifest-cjs')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
-  await buildAsync({
-    clearPreviousLine: false,
-    minify: false,
-    typecheck: true
-  })
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
     api: '1.0.0',
@@ -683,17 +660,19 @@ test('override manifest - cjs', async function (t) {
 })
 
 test('process.env.NODE_ENV', async function (t) {
-  t.plan(6)
-  process.chdir(join(__dirname, 'fixtures', '22-process-env-node-env'))
+  t.plan(7)
+  const directoryPath = join(__dirname, 'fixtures', '22-process-env-node-env')
+  process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({
-    clearPreviousLine: false,
+    ...buildAsyncOptions,
     minify: true,
-    typecheck: true
+    outputDirectory: directoryPath
   })
   const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
   t.deepEqual(manifestJson, {
@@ -707,6 +686,38 @@ test('process.env.NODE_ENV', async function (t) {
   const mainJs = await fs.readFile('build/main.js', 'utf8')
   t.true(mainJs.indexOf('process.env.NODE_ENV==="production"') !== -1)
   t.false(await pathExists('build/ui.js'))
+  await cleanUpAsync()
+})
+
+test('output directory', async function (t) {
+  t.plan(8)
+  const outputDirectoryName = 'foo'
+  const directoryPath = join(__dirname, 'fixtures', '23-output-directory')
+  process.chdir(directoryPath)
+  await cleanUpAsync()
+  t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
+  t.false(await pathExists('node_modules'))
+  t.false(await pathExists(outputDirectoryName))
+  await installFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({
+    ...buildAsyncOptions,
+    outputDirectory: join(directoryPath, outputDirectoryName)
+  })
+  t.false(await pathExists('build'))
+  const manifestJson = JSON.parse(
+    await fs.readFile('foo/manifest.json', 'utf8')
+  )
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    editorType: ['figma'],
+    id: '42',
+    name: 'a',
+    main: 'build/main.js'
+  })
+  t.true(await pathExists('foo/build/main.js'))
+  t.false(await pathExists('foo/build/ui.js'))
   await cleanUpAsync()
 })
 

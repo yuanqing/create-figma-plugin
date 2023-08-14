@@ -54,7 +54,7 @@ const defaultConfig: Config = {
 export async function readConfigAsync(): Promise<Config> {
   const packageJsonPath = join(process.cwd(), 'package.json')
   if ((await pathExists(packageJsonPath)) === false) {
-    log.info('Using default config')
+    log.info('Using default configuration')
     return defaultConfig
   }
   const packageJson: any = JSON.parse(

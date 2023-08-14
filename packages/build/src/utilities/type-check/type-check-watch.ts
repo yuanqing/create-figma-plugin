@@ -37,12 +37,12 @@ export function typeCheckWatch(): () => void {
         diagnostic.code === 6032 // 'File change detected. Starting incremental compilation...'
       ) {
         getElapsedTime = trackElapsedTime()
-        log.info('Type checking...')
+        log.info('Typechecking...')
         return
       }
       if (diagnostic.code === 6194) {
         // 'Found 0 errors. Watching for file changes.'
-        log.success(`Type checked in ${getElapsedTime()}`, {
+        log.success(`Typechecked in ${getElapsedTime()}`, {
           clearPreviousLine: true
         })
         log.info('Watching...')

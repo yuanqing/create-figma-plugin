@@ -1,4 +1,4 @@
-import { constants, log } from '@create-figma-plugin/common'
+import { constants, log, readConfigAsync } from '@create-figma-plugin/common'
 import { watch } from 'chokidar'
 import { yellow } from 'kleur/colors'
 
@@ -20,14 +20,14 @@ const mapChokidarWatchEventToLabel: Record<string, string> = {
 }
 
 export async function watchAsync(options: BuildOptions): Promise<void> {
-  const { minify, typecheck } = options
+  const { minify, outputDirectory, typecheck } = options
   let endTypeCheckWatch: () => void
   if (typecheck === true) {
     endTypeCheckWatch = typeCheckWatch()
   }
   const watcher = watch(
     [
-      '**/*.{css,js,json,jsx,ts,tsx}',
+      '**/*.{css,gif,jpeg,jpg,js,json,jsx,png,ts,tsx}',
       constants.build.mainConfigGlobPattern,
       constants.build.manifestConfigGlobPattern,
       constants.build.uiConfigGlobPattern,
@@ -53,6 +53,7 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
           return
         }
         try {
+          const config = await readConfigAsync()
           if (typecheck === true && file.indexOf('tsconfig.json') !== -1) {
             endTypeCheckWatch()
           }
@@ -61,13 +62,15 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
           log.info(`${mapChokidarWatchEventToLabel[event]} ${yellow(file)}`)
           const promises: Array<Promise<void>> = []
           if (packageJsonRegex.test(file) === true) {
-            promises.push(buildManifestAsync(minify))
+            promises.push(
+              buildManifestAsync({ config, minify, outputDirectory })
+            )
           } else {
             if (cssRegex.test(file) === true) {
               promises.push(buildCssModulesTypingsAsync())
             }
           }
-          promises.push(buildBundlesAsync(minify))
+          promises.push(buildBundlesAsync({ config, minify, outputDirectory }))
           await Promise.all(promises)
           log.success(`Built in ${getElapsedTime()}`)
           if (typecheck === false) {

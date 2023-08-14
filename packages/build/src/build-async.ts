@@ -1,4 +1,4 @@
-import { log } from '@create-figma-plugin/common'
+import { log, readConfigAsync } from '@create-figma-plugin/common'
 
 import { BuildOptions } from './types/build.js'
 import { buildBundlesAsync } from './utilities/build-bundles-async/build-bundles-async.js'
@@ -10,20 +10,25 @@ import { typeCheckBuild } from './utilities/type-check/type-check-build.js'
 export async function buildAsync(
   options: BuildOptions & { clearPreviousLine: boolean; exitOnError: boolean }
 ): Promise<void> {
-  const { minify, typecheck, clearPreviousLine, exitOnError } = options
+  const { minify, outputDirectory, typecheck, clearPreviousLine, exitOnError } =
+    options
+  const config = await readConfigAsync()
   try {
     if (typecheck === true) {
       const getTypeCheckElapsedTime = trackElapsedTime()
       await buildCssModulesTypingsAsync() // This must occur before `typeCheckBuild`
-      log.info('Type checking...')
+      log.info('Typechecking...')
       typeCheckBuild()
       const typeCheckElapsedTime = getTypeCheckElapsedTime()
-      log.success(`Type checked in ${typeCheckElapsedTime}`, {
+      log.success(`Typechecked in ${typeCheckElapsedTime}`, {
         clearPreviousLine
       })
       log.info('Building...')
       const getBuildElapsedTime = trackElapsedTime()
-      await Promise.all([buildBundlesAsync(minify), buildManifestAsync(minify)])
+      await Promise.all([
+        buildBundlesAsync({ config, minify, outputDirectory }),
+        buildManifestAsync({ config, minify, outputDirectory })
+      ])
       const buildElapsedTime = getBuildElapsedTime()
       log.success(`Built in ${buildElapsedTime}`, { clearPreviousLine })
     } else {
@@ -31,8 +36,8 @@ export async function buildAsync(
       const getBuildElapsedTime = trackElapsedTime()
       await Promise.all([
         buildCssModulesTypingsAsync(),
-        buildBundlesAsync(minify),
-        buildManifestAsync(minify)
+        buildBundlesAsync({ config, minify, outputDirectory }),
+        buildManifestAsync({ config, minify, outputDirectory })
       ])
       const buildElapsedTime = getBuildElapsedTime()
       log.success(`Built in ${buildElapsedTime}`, { clearPreviousLine })

@@ -7,17 +7,28 @@ import { BuildOptions } from './types/build.js'
 import { watchAsync } from './watch-async/watch-async.js'
 
 sade('build-figma-plugin', true)
-  .describe('Build a Figma/FigJam plugin')
-  .option('-m, --minify', 'Minify the plugin bundle', false)
-  .option('-t, --typecheck', 'Type check the plugin code before build', false)
-  .option('-w, --watch', 'Rebuild the plugin on code changes', false)
+  .describe('Build a Figma/FigJam plugin/widget')
+  .option('-m, --minify', 'Minify the plugin/widget bundle', false)
+  .option('-o, --output', 'Directory to output the plugin/widget bundle', null)
+  .option(
+    '-t, --typecheck',
+    'Typecheck the plugin/widget source code before build',
+    false
+  )
+  .option(
+    '-w, --watch',
+    'Automatically rebuild the plugin/widget on code changes',
+    false
+  )
   .action(async function (options: {
     minify: boolean
+    output: null | string
     typecheck: boolean
     watch: boolean
   }): Promise<void> {
     const buildOptions: BuildOptions = {
       minify: options.minify === true,
+      outputDirectory: options.output === null ? process.cwd() : options.output,
       typecheck: options.typecheck === true
     }
     if (options.watch === true) {

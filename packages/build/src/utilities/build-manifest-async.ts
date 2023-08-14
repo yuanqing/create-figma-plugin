@@ -1,6 +1,9 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 
+import { join } from 'node:path'
+
 import {
+  Config,
   ConfigCommand,
   ConfigMenuItemSeparator,
   ConfigNetworkAccess,
@@ -13,13 +16,16 @@ import {
   ManifestNetworkAccess,
   ManifestParameter,
   ManifestRelaunchButton,
-  readConfigAsync,
   writeFileAsync
 } from '@create-figma-plugin/common'
 import { globby } from 'globby'
 
-export async function buildManifestAsync(minify: boolean): Promise<void> {
-  const config = await readConfigAsync()
+export async function buildManifestAsync(options: {
+  config: Config
+  minify: boolean
+  outputDirectory: string
+}): Promise<void> {
+  const { config, minify, outputDirectory } = options
   const {
     api,
     widgetApi,
@@ -89,7 +95,8 @@ export async function buildManifestAsync(minify: boolean): Promise<void> {
     (minify === true
       ? JSON.stringify(result)
       : JSON.stringify(result, null, 2)) + '\n'
-  await writeFileAsync(constants.build.manifestFilePath, string)
+  const outputFilePath = join(outputDirectory, constants.build.manifestFilePath)
+  await writeFileAsync(outputFilePath, string)
 }
 
 function hasBundle(command: ConfigCommand, key: 'main' | 'ui'): boolean {

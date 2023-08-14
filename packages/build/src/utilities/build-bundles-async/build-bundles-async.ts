@@ -6,8 +6,7 @@ import {
   ConfigFile,
   ConfigMenuItemSeparator,
   ConfigRelaunchButton,
-  constants,
-  readConfigAsync
+  constants
 } from '@create-figma-plugin/common'
 import { build, BuildOptions } from 'esbuild'
 import { globby } from 'globby'
@@ -18,19 +17,25 @@ import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
 import { esbuildPreactCompatPlugin } from './esbuild-preact-compat-plugin.js'
 
 interface EntryFile extends ConfigFile {
-  readonly commandId: string
+  commandId: string
 }
 
-export async function buildBundlesAsync(minify: boolean): Promise<void> {
-  const config = await readConfigAsync()
+export async function buildBundlesAsync(options: {
+  config: Config
+  minify: boolean
+  outputDirectory: string
+}): Promise<void> {
+  const { config, minify, outputDirectory } = options
   await Promise.all([
     buildMainBundleAsync({
       config,
-      minify
+      minify,
+      outputDirectory
     }),
     buildUiBundleAsync({
       config,
-      minify
+      minify,
+      outputDirectory
     })
   ])
 }
@@ -52,19 +57,16 @@ async function overrideEsbuildConfigAsync(
 async function buildMainBundleAsync(options: {
   config: Config
   minify: boolean
+  outputDirectory: string
 }): Promise<void> {
-  const { config, minify } = options
+  const { config, minify, outputDirectory } = options
   const js = createMainEntryFile(config)
   try {
     const esbuildConfig: BuildOptions = {
       bundle: true,
       logLevel: 'silent',
       minify,
-      outfile: join(
-        process.cwd(),
-        constants.build.buildDirectoryName,
-        'main.js'
-      ),
+      outfile: join(outputDirectory, constants.build.pluginCodeFilePath),
       platform: 'neutral',
       plugins: [],
       stdin: {
@@ -111,8 +113,9 @@ function createMainEntryFile(config: Config): string {
 async function buildUiBundleAsync(options: {
   config: Config
   minify: boolean
+  outputDirectory: string
 }): Promise<void> {
-  const { config, minify } = options
+  const { config, minify, outputDirectory } = options
   const js = createUiEntryFile(config)
   if (js === null) {
     return
@@ -130,7 +133,7 @@ async function buildUiBundleAsync(options: {
       },
       logLevel: 'silent',
       minify,
-      outfile: join(process.cwd(), constants.build.buildDirectoryName, 'ui.js'),
+      outfile: join(outputDirectory, constants.build.pluginUiFilePath),
       plugins: [esbuildPreactCompatPlugin(), esbuildCssModulesPlugin(minify)],
       stdin: {
         contents: js,
