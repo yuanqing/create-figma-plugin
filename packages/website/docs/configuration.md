@@ -30,9 +30,9 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 
 ### `editorType`
 
-(*`Array<string>`*)
+(*`Array<"figma" | "figjam" | "dev">`*)
 
-*Optional.* For specifying the editor that the plugin/widget is intended for. Possible editor types are **`"figma"`**, **`"figjam"`** and **`"dev"`**. Defaults to **`["figma"]`**.
+*Optional.* For specifying the editor(s) that the plugin/widget is intended for. Possible editor types are **`"figma"`**, **`"figjam"`** and **`"dev"`**. Defaults to **`["figma"]`**. The value **`["figjam", "dev"]`** is currently not supported.
 
 ### `containsWidget`
 
@@ -208,13 +208,13 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 ### `capabilities`
 
-(*`Array<string>`*)
+(*`Array<"codegen" | "inspect" | "textreview">`*)
 
 *Optional.* For specifying the capabilities that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, and **`"textreview"`**.
 
 ### `permissions`
 
-(*`Array<string>`*)
+(*`Array<"activeusers" | "currentuser" | "fileusers" | "payments">`*)
 
 *Optional.* For specifying the permissions that the plugin/widget needs access to. Possible permissions are **`"activeusers"`**, **`"currentuser"`**, **`"fileusers"`** and **`"payments"`**.
 

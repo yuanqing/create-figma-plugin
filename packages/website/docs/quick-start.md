@@ -23,6 +23,7 @@ You’ll then be prompted to select from the following templates:
 - [`plugin/hello-world`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/hello-world) — A plugin without a UI.
 - [`plugin/preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-rectangles) — A plugin with a UI built using [Create Figma Plugin’s Preact component library](<%- query('page', 'ui').url %>#using-the-preact-component-library).
 - [`plugin/preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-resizable) — A plugin with a [resizable UI window](<%- query('page', 'ui').url %>#making-the-plugin-widget-ui-window-resizable).
+- [`plugin/preact-tailwindcss`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-tailwindcss) — A plugin with a UI that [uses Tailwind CSS](<%- query('page', 'ui').url %>#using-tailwindcss).
 - [`plugin/react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) — A plugin with a UI that [uses a React component](<%- query('page', 'ui').url %>#using-react).
 - [`widget/notepad`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/widget/notepad) — A FigJam widget with a UI.
 
@@ -99,7 +100,7 @@ To build the plugin/widget:
 $ npm run build
 ```
 
-This will generate a `manifest.json` file and a `build/` directory containing the JavaScript bundle(s) for the plugin/widget.
+This will generate a `manifest.json` file and a `build/` directory containing the JavaScript bundle(s) for the plugin/widget. (To customize the output directory for the `manifest.json` and JavaScript bundles, use the `--output` flag when invoking the `build-figma-plugin` CLI, eg. `--output my-plugin`)
 
 - [Plugin Manifest](https://figma.com/plugin-docs/manifest/)
 - [Widget Manifest](https://figma.com/widget-docs/widget-manifest/)

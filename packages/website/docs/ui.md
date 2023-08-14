@@ -169,6 +169,79 @@ export default render(Plugin)
 
 Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/ui/src/css/base.css) file in `@create-figma-plugin/ui` for the list of CSS variables that are available for use in your custom CSS.
 
+## Using Tailwind CSS
+
+Install `tailwindcss` and `concurrently`:
+
+```sh
+$ npm install --save-dev tailwindcss concurrently
+```
+
+Then, create a `tailwind.config.js` file and `src/input.css` file:
+
+```js
+// tailwind.config.js
+
+export default {
+  content: ['./src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: []
+}
+```
+
+```css
+/* src/input.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Update the scripts in `package.json` to invoke the `tailwindcss` CLI:
+
+```json
+{
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "tailwindcss --input ./src/input.css --output ./src/output.css",
+    "build:js": "build-figma-plugin --typecheck --minify",
+    "watch": "concurrently npm:watch:css npm:watch:js",
+    "watch:css": "tailwindcss --input ./src/input.css --output ./src/output.css --watch",
+    "watch:js": "build-figma-plugin --typecheck --watch"
+  }
+}
+```
+
+Then, import the generated stylesheet (`./src/output.css`) in your UI:
+
+```tsx {5,9-11}
+// src/ui.tsx
+
+import { render } from '@create-figma-plugin/ui'
+import { h } from 'preact'
+import '!./output.css'
+
+function Plugin () {
+  return (
+    <h1 class="text-3xl font-bold underline">
+      Hello, World!
+    </h1>
+  )
+}
+
+export default render(Plugin)
+```
+
+Note the addition of a `!` prefix before the stylesheet import path.
+
+For a runnable example, try the [`preact-tailwindcss`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-tailwindcss) plugin template:
+
+```sh
+$ npx --yes create-figma-plugin --template plugin/preact-tailwindcss
+```
+
 ## Using a custom UI library
 
 To use a custom UI library instead of `@create-figma-plugin/ui`, write your UI implementation as follows:

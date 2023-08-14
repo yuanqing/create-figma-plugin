@@ -146,7 +146,7 @@
           "type": "string"
         },
         "editorType": {
-          "description": "(optional)\nFor specifying the editor that the plugin/widget is intended for. Possible editor types are \"figma\", \"figjam\" and \"dev\". Defaults to [\"figma\"].",
+          "description": "(optional)\nFor specifying the editor(s) that the plugin/widget is intended for. Possible editor types are \"figma\", \"figjam\" and \"dev\". Defaults to [\"figma\"]. The value [\"figjam\", \"dev\"] is currently not supported.",
           "type": "array",
           "minItems": 1,
           "items": [{ "enum": ["dev", "figjam", "figma"] }]
