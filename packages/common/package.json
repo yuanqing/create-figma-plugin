@@ -33,7 +33,7 @@
     "build": "npm run build:generate-index && npm run build:js",
     "build:js": "tsc --build",
     "build:generate-index": "rimraf src/index.ts && tsx ../../scripts/generate-index.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
-    "clean": "rimraf '*.log' lib tsconfig.tsbuildinfo",
+    "clean": "rimraf --glob '*.log' lib tsconfig.tsbuildinfo",
     "fix": "concurrently npm:fix:js npm:fix:json",
     "fix:js": "eslint --fix '{src,test}/**/*.ts'",
     "fix:json": "prettier --loglevel error --write '*.json' 'test/**/fixtures/**/*.json'",

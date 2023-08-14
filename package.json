@@ -7,7 +7,7 @@
   "scripts": {
     "build": "turbo run build",
     "bump-dependencies": "tsx scripts/bump-dependencies.ts @figma/plugin-typings @typescript-eslint/eslint-plugin eslint-config-yuanqing eslint-plugin-import eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort eslint-plugin-sort-keys-fix prettier stylelint-config-yuanqing",
-    "clean": "turbo run clean && rimraf '*.log' build node_modules/.cache/turbo",
+    "clean": "turbo run clean && rimraf --glob '*.log' 'packages/*/.turbo' build node_modules/.cache/turbo",
     "fix": "turbo run fix && concurrently npm:fix:js npm:fix:json",
     "fix:js": "eslint --fix 'scripts/**/*.ts'",
     "fix:json": "prettier --loglevel error --write '*.json'",
@@ -18,7 +18,7 @@
     "packages-publish": "lerna publish from-package",
     "packages-version": "lerna version --force-publish",
     "release": "sh scripts/release.sh",
-    "reset": "npm run clean && rimraf node_modules package-lock.json './packages/*/node_modules' && npm install",
+    "reset": "npm run clean && rimraf --glob node_modules package-lock.json './packages/*/node_modules' && npm install",
     "test": "turbo run test",
     "prewebsite-build": "npm run build && rimraf build",
     "website-build": "npm run website-build:website && npm run website-build:storybook && npm run website-build:figma-plugin-json",

@@ -1339,7 +1339,7 @@
       }
     ],
     "description": "Upscale low resolution images using machine learning",
-    "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-upscale-image",
+    "githubUrl": null,
     "id": "939832535166467194",
     "name": "Upscale Image"
   },
