@@ -8,13 +8,9 @@ import { watchAsync } from './watch-async/watch-async.js'
 
 sade('build-figma-plugin', true)
   .describe('Build a Figma/FigJam plugin/widget')
-  .option('-m, --minify', 'Minify the plugin/widget bundle', false)
-  .option('-o, --output', 'Directory to output the plugin/widget bundle', null)
-  .option(
-    '-t, --typecheck',
-    'Typecheck the plugin/widget source code before build',
-    false
-  )
+  .option('-m, --minify', 'Minify the plugin/widget bundles', false)
+  .option('-o, --output', 'Directory to output the plugin/widget bundles', null)
+  .option('-t, --typecheck', 'Typecheck the plugin/widget source code', false)
   .option(
     '-w, --watch',
     'Automatically rebuild the plugin/widget on code changes',
