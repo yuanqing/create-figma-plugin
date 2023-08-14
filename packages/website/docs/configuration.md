@@ -210,13 +210,13 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 (*`Array<"codegen" | "inspect" | "textreview">`*)
 
-*Optional.* For specifying the capabilities that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, and **`"textreview"`**.
+*Optional.* For specifying the list of capabilities that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, and **`"textreview"`**.
 
 ### `permissions`
 
-(*`Array<"activeusers" | "currentuser" | "fileusers" | "payments">`*)
+(*`Array<"activeusers" | "currentuser" | "fileusers" | "payments" | "teamlibrary">`*)
 
-*Optional.* For specifying the permissions that the plugin/widget needs access to. Possible permissions are **`"activeusers"`**, **`"currentuser"`**, **`"fileusers"`** and **`"payments"`**.
+*Optional.* For specifying the list of permissions that the plugin/widget needs access to. Possible permissions are **`"activeusers"`**, **`"currentuser"`**, **`"fileusers"`**, **`"payments"`** and **`"teamlibrary"`**.
 
 ### `networkAccess`
 
