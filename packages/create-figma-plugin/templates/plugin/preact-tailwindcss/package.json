@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "@create-figma-plugin/ui": "^<%- versions.createFigmaPlugin.ui %>",
+    "@create-figma-plugin/utilities": "^<%- versions.createFigmaPlugin.utilities %>",
+    "preact": ">=10"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "^<%- versions.createFigmaPlugin.build %>",
+    "@create-figma-plugin/tsconfig": "^<%- versions.createFigmaPlugin.tsconfig %>",
+    "@figma/plugin-typings": "<%- versions.figma.pluginTypings %>",
+    "concurrently": ">=8",
+    "typescript": ">=4"
+  },
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "tailwindcss --input ./src/input.css --output ./src/output.css",
+    "build:js": "build-figma-plugin --typecheck --minify",
+    "watch": "concurrently npm:watch:css npm:watch:js",
+    "watch:css": "tailwindcss --input ./src/input.css --output ./src/output.css --watch",
+    "watch:js": "build-figma-plugin --typecheck --watch"
+  },
+  "figma-plugin": {
+    "editorType": [
+      "figma"
+    ],
+    "id": "<%- id %>",
+    "name": "<%- name %>",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx"
+  }
+}
