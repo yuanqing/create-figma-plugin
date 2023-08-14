@@ -570,7 +570,7 @@
 
 - Given the move away from Webpack, the ability to override the build process via a `figma-plugin.config.js` file has also been removed.
 
-- Minification and type checking of your plugin code is now disabled by default in the `build-figma-plugin` CLI. The `build` and `watch` scripts in your `package.json` should be updated as follows:
+- Minification and typechecking of your plugin code is now disabled by default in the `build-figma-plugin` CLI. The `build` and `watch` scripts in your `package.json` should be updated as follows:
 
     ```diff
       {
