@@ -1,9 +1,22 @@
 # Changelog
 
+## 2.6.0
+
+- `create-figma-plugin@2.6.0`
+  - Added a new `plugin/preact-tailwindcss` template.
+  - Bumped the `@figma/plugin-typings` version.
+
+- `@create-figma-plugin/build@2.6.0`
+  - Improved the handling of new and deleted files when using the `--watch` flag.
+  - Added support for customizing the output directory via the `--output` CLI flag. ([#157](https://github.com/yuanqing/create-figma-plugin/issues/157), [#170](https://github.com/yuanqing/create-figma-plugin/issues/170))
+  - Added support for configuring `networkAccess`. ([#164](https://github.com/yuanqing/create-figma-plugin/issues/164))
+  - Updated the options for `capabilities` (added `codegen` and `inspect`) and `permissions` (added `fileusers`, `payments` and `teamlibrary`).
+  - Additional keys configured under `"figma-plugin"` in `package.json` will be directly copied over to the generated `manifest.json` file.
+
 ## 2.5.1
 
-- `create-figma-plugin`
-  - Update `@figma/plugin-typings` version to `1.69.0`
+- `create-figma-plugin@2.5.1`
+  - Update `@figma/plugin-typings` version to `1.69.0`.
 
 ## 2.5.0
 
