@@ -98,7 +98,14 @@ export function Modal({
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
+      const bodyElement = document.body
       if (open === true) {
+        if (rootElements.length === 0) {
+          const hasScrollbar = bodyElement.scrollHeight > window.innerHeight
+          bodyElement.style.cssText += `position:fixed;overflow-y:${
+            hasScrollbar === true ? 'scroll' : 'hidden'
+          };width:100%;`
+        }
         rootElements.push(rootElementRef.current)
         rootElementRef.current.style.cssText =
           'position:absolute;top:0;left:0;bottom:0;right:0;z-index:1'
@@ -111,6 +118,11 @@ export function Modal({
           previousFocusedElementRef.current.blur()
         }
       } else {
+        if (rootElements.length === 1) {
+          bodyElement.style.removeProperty('position')
+          bodyElement.style.removeProperty('overflow-y')
+          bodyElement.style.removeProperty('width')
+        }
         rootElements.pop()
         rootElementRef.current.style.cssText = 'position:static'
       }

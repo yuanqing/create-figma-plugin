@@ -291,3 +291,60 @@ export const Nested = function () {
     </Fragment>
   )
 }
+
+export const BodyOverflow = function () {
+  const [parentOpen, setParentOpen] = useState<boolean>(false)
+  function handleParentOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setParentOpen(true)
+  }
+  function handleParentCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setParentOpen(false)
+  }
+  const parentStyle = { height: '160px', padding: '12px' }
+  const [childOpen, setChildOpen] = useState<boolean>(false)
+  function handleChildOpenButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setChildOpen(true)
+  }
+  function handleChildCloseButtonClick(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+    console.log(event)
+    setChildOpen(false)
+  }
+  const childStyle = { height: '120px', padding: '12px' }
+  const longText = Array(96).fill('Text').join(' ')
+  return (
+    <Fragment>
+      <div style="width: 320px">{longText}</div>
+      <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
+      <div style="width: 320px">{longText}</div>
+      <Modal
+        onCloseButtonClick={handleParentCloseButtonClick}
+        open={parentOpen}
+        position="left"
+        title="Parent"
+      >
+        <div style={parentStyle}>
+          <Button onClick={handleChildOpenButtonClick}>Open child modal</Button>
+          <Modal
+            onCloseButtonClick={handleChildCloseButtonClick}
+            open={childOpen}
+            position="left"
+            title="Child"
+          >
+            <div style={childStyle} />
+          </Modal>
+        </div>
+      </Modal>
+    </Fragment>
+  )
+}
