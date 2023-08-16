@@ -35,7 +35,7 @@ Then, include a call to [`showUI`](<%- query('page', 'utilities').url %>#showuid
 
 Consider a toy Figma plugin:
 
-```ts
+```ts {8}
 // src/main.ts
 
 import { showUI } from '@create-figma-plugin/utilities'
@@ -95,24 +95,6 @@ When we rebuild our plugin and run it, we’ll see:
 
 See the [Storybook](<%- baseUrl %>storybook/) for the full library of Preact components, and the [recipe for passing data between the plugin/widget’s main and UI contexts](<%- query('page', 'recipes').url %>#passing-data-between-the-plugin-widgets-main-and-ui-contexts).
 
-## Using React
-
-When building your plugin/widget, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use React components alongside the Preact components from the `@create-figma-plugin/ui` library.
-
-(If you still prefer to bundle React rather than Preact, see the [recipe to disable the automatic swapping of React imports](<%- query('page', 'recipes').url %>#disabling-automatic-swapping-of-react-imports).)
-
-To use React components in your UI, ensure that `react` and `@types/react` are installed:
-
-```sh
-$ npm install --save-dev react @types/react
-```
-
-For a runnable example, try the [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) plugin template:
-
-```sh
-$ npx --yes create-figma-plugin --template plugin/react-editor
-```
-
 ## Using custom CSS
 
 Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://github.com/css-modules/css-modules):
@@ -125,7 +107,7 @@ Out of the box, the `build-figma-plugin` CLI supports [CSS Modules](https://gith
 }
 ```
 
-```tsx
+```tsx {5,10-12}
 // src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'
@@ -148,7 +130,7 @@ By default, all the class names in CSS files imported via an `import` statement 
 
 To directly “inline” a CSS file in your UI *without* hashing its class names, add a `!` prefix to the import path:
 
-```tsx
+```tsx {5,10-12}
 // src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'
@@ -201,7 +183,7 @@ export default {
 
 Update the scripts in `package.json` to invoke the `tailwindcss` CLI:
 
-```json
+```json {3-8}
 {
   "scripts": {
     "build": "npm run build:css && npm run build:js",
@@ -234,12 +216,30 @@ function Plugin () {
 export default render(Plugin)
 ```
 
-Note the addition of a `!` prefix before the stylesheet import path.
+Note the use of a `!` prefix before the stylesheet import path – this is to “inline” the CSS file *without* hashing its class names.
 
 For a runnable example, try the [`preact-tailwindcss`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-tailwindcss) plugin template:
 
 ```sh
 $ npx --yes create-figma-plugin --template plugin/preact-tailwindcss
+```
+
+## Using React
+
+When building your plugin/widget, the `build-figma-plugin` CLI will detect and automatically swap out all `react` and `react-dom` imports with [`preact/compat`](https://preactjs.com/guide/v10/switching-to-preact/). This means that it’s possible to seamlessly use React components alongside the Preact components from the `@create-figma-plugin/ui` library.
+
+(If you still prefer to bundle React rather than Preact, see the [recipe to disable the automatic swapping of React imports](<%- query('page', 'recipes').url %>#disabling-automatic-swapping-of-react-imports).)
+
+To use React components in your UI, ensure that `react` and `@types/react` are installed:
+
+```sh
+$ npm install --save-dev react @types/react
+```
+
+For a runnable example, try the [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) plugin template:
+
+```sh
+$ npx --yes create-figma-plugin --template plugin/react-editor
 ```
 
 ## Using a custom UI library

@@ -23,7 +23,7 @@ You’ll then be prompted to select from the following templates:
 - [`plugin/hello-world`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/hello-world) — A plugin without a UI.
 - [`plugin/preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-rectangles) — A plugin with a UI built using [Create Figma Plugin’s Preact component library](<%- query('page', 'ui').url %>#using-the-preact-component-library).
 - [`plugin/preact-resizable`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-resizable) — A plugin with a [resizable UI window](<%- query('page', 'ui').url %>#making-the-plugin-widget-ui-window-resizable).
-- [`plugin/preact-tailwindcss`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-tailwindcss) — A plugin with a UI that [uses Tailwind CSS](<%- query('page', 'ui').url %>#using-tailwindcss).
+- [`plugin/preact-tailwindcss`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-tailwindcss) — A plugin with a UI that [uses Tailwind CSS](<%- query('page', 'ui').url %>#using-tailwind-css).
 - [`plugin/react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) — A plugin with a UI that [uses a React component](<%- query('page', 'ui').url %>#using-react).
 - [`widget/notepad`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/widget/notepad) — A FigJam widget with a UI.
 
@@ -36,7 +36,7 @@ Configuration options for your plugin/widget go under the **`"figma-plugin"`** k
 
 A Figma plugin (eg. [`plugin/preact-rectangles`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/preact-rectangles)) would be configured as follows:
 
-```json
+```json {8-9}
 {
   "figma-plugin": {
     "editorType": [
@@ -57,7 +57,7 @@ See that:
 
 A FigJam widget (eg. [`widget/notepad`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/widget/notepad)) would be configured as follows:
 
-```json
+```json {3-6}
 {
   "figma-plugin": {
     "editorType": [
@@ -83,7 +83,7 @@ See all the supported [configuration options](<%- query('page', 'configuration')
 
 In the `package.json` file, we have `build` and `watch` scripts set up to invoke the `build-figma-plugin` CLI:
 
-```json
+```json {3-4}
 {
   "scripts": {
     "build": "build-figma-plugin --typecheck --minify",

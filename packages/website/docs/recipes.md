@@ -17,7 +17,7 @@ The [`@create-figma-plugin/utilities`](<%- query('page', 'utilities').url %>) li
 
 Consider a toy Figma plugin:
 
-```ts
+```ts {9-12}
 // src/main.ts
 
 import {
@@ -34,7 +34,7 @@ export default function () {
 }
 ```
 
-```tsx
+```tsx {12-15,18}
 // src/ui.tsx
 
 import { render, Button } from '@create-figma-plugin/ui'
@@ -154,7 +154,7 @@ See that:
 
 Then, call [`setRelaunchButton`](<%- query('page', 'utilities').url %>#setrelaunchbuttonnode-relaunchbuttonid--options) in our plugin command’s main entry point:
 
-```ts
+```ts {9}
 // src/organize-layers/main.js
 
 import {
@@ -188,7 +188,7 @@ setRelaunchButton(
 
 Image assets used in your plugin/widget UI must be “inlined” into the UI bundle. Consider the following example where a PNG image is used in the UI:
 
-```tsx
+```tsx {6,12}
 // src/ui.tsx
 
 import { render } from '@create-figma-plugin/ui'
@@ -242,7 +242,7 @@ The plugin/widget UI window is *not* resizable by default; this must be implemen
 
 [`@create-figma-plugin/ui`](<%- query('page', 'ui').url %>#using-the-preact-component-library) includes a `useWindowResize` hook that makes it easier to implement a resizable UI window:
 
-```tsx
+```tsx {9-17}
 // src/ui.tsx
 
 import { render, useWindowResize } from '@create-figma-plugin/ui'
@@ -273,7 +273,7 @@ The hook takes two arguments:
 
 In the [main context](https://figma.com/plugin-docs/how-plugins-run/), we register a handler for the **`RESIZE_WINDOW`** event, and invoke [`figma.ui.resize`](https://figma.com/plugin-docs/api/figma-ui/#resize) with the new window size:
 
-```ts
+```ts {7-10}
 // src/main.ts
 
 import { on, showUI } from '@create-figma-plugin/utilities'
