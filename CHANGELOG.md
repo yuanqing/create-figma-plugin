@@ -6,6 +6,7 @@
 
   - Added a new `plugin/preact-tailwindcss` template.
   - Bumped the `@figma/plugin-typings` version.
+  - Fixed a bug with bootstrapped plugins/widgets not including a `.gitignore`. ([#173](https://github.com/yuanqing/create-figma-plugin/issues/173))
 
 - `@create-figma-plugin/build@2.6.0`
 
