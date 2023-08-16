@@ -37,9 +37,9 @@
     "build:generate-docs": "tsx scripts/generate-docs.ts '../website/docs/utilities.md'",
     "clean": "rimraf --glob '*.log' lib tsconfig.tsbuildinfo",
     "fix": "concurrently npm:fix:js npm:fix:json",
-    "fix:js": "eslint --fix '{scripts,src,test}/**/*.{js,ts}'",
+    "fix:js": "eslint --fix '{scripts,src,test}/**/*.{js,ts}' --ignore-pattern src/index.ts",
     "fix:json": "prettier --loglevel error --write '*.json'",
-    "lint": "eslint '{scripts,src,test}/**/*.{js,ts}'",
+    "lint": "eslint '{scripts,src,test}/**/*.{js,ts}' --ignore-pattern src/index.ts",
     "test": "ava --serial 'test/**/*.ts'"
   },
   "dependencies": {

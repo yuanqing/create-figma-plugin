@@ -35,9 +35,9 @@
     "build:generate-index": "rimraf src/index.ts && tsx ../../scripts/generate-index.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "clean": "rimraf --glob '*.log' lib tsconfig.tsbuildinfo",
     "fix": "concurrently npm:fix:js npm:fix:json",
-    "fix:js": "eslint --fix '{src,test}/**/*.ts'",
+    "fix:js": "eslint --fix '{src,test}/**/*.ts' --ignore-pattern src/index.ts",
     "fix:json": "prettier --loglevel error --write '*.json' 'test/**/fixtures/**/*.json'",
-    "lint": "eslint '{src,test}/**/*.ts'",
+    "lint": "eslint '{src,test}/**/*.ts' --ignore-pattern src/index.ts",
     "test": "ava --serial 'test/**/*.ts'"
   },
   "dependencies": {
