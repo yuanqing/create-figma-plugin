@@ -21,11 +21,9 @@ export async function copyTemplateAsync(
     await fs.mkdir(pluginDirectoryPath, { mode: 0o2775 })
   }
   await fs.cp(templateDirectory, pluginDirectoryPath, { recursive: true })
-  const npmIgnoreFile = join(pluginDirectoryPath, '.npmignore')
-  if ((await pathExists(npmIgnoreFile)) === true) {
-    // When running via npm/npx, the .gitignore file is renamed to .npmignore,
-    // so we need to rename it back
-    const gitIgnoreFile = join(pluginDirectoryPath, '.gitignore')
-    await fs.rename(npmIgnoreFile, gitIgnoreFile)
+  const gitIgnoreFilePath = join(pluginDirectoryPath, 'gitignore')
+  if ((await pathExists(gitIgnoreFilePath)) === true) {
+    const newFilePath = join(pluginDirectoryPath, '.gitignore')
+    await fs.rename(gitIgnoreFilePath, newFilePath)
   }
 }
