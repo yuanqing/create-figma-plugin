@@ -146,13 +146,13 @@
           "type": "string"
         },
         "editorType": {
-          "description": "(optional)\nFor specifying the editor that the plugin/widget is intended for. One of [\"figma\"], [\"figjam\"], or [\"figma\", \"figjam\"]. Defaults to [\"figma\"].",
+          "description": "(optional)\nFor specifying the editor(s) that the plugin/widget is intended for. Possible editor types are \"figma\", \"figjam\" and \"dev\". Defaults to [\"figma\"]. The value [\"figjam\", \"dev\"] is currently not supported.",
           "type": "array",
           "minItems": 1,
-          "items": [{ "enum": ["figjam", "figma"] }]
+          "items": [{ "enum": ["dev", "figjam", "figma"] }]
         },
         "containsWidget": {
-          "description": "(optional)\nSet to `true` for a FigJam widget. Defaults to `false`.",
+          "description": "(optional)\nThis field must be set to `true` for a FigJam widget. Defaults to `false`.",
           "type": "boolean"
         },
         "id": {
@@ -171,6 +171,14 @@
           "description": "(optional)\nPath to the UI implementation of the plugin command or widget (as specified via the sibling \"main\" key). The UI implementation must be the function set as the `default` export of the file. To use a particular named export instead, specify an object with \"src\" (required) and \"handler\" (required) keys.",
           "$ref": "#/definitions/FileUI"
         },
+        "menu": {
+          "description": "(required, unless \"main\" is specified)\nAn array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the keys \"name\" (required), \"main\" (required, unless \"main\" is specified), \"ui\" (optional), \"parameters\" (optional), \"parameterOnly\" (optional), and \"menu\" (optional). Use a \"-\" in the array to specify a separator between commands in the sub-menu.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        },
         "parameters": {
           "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Actions search bar.",
           "type": "array",
@@ -182,14 +190,6 @@
         "parameterOnly": {
           "description": "(optional)\nWhen \"parameters\" is specified, the default behavior is that the user will be required to input parameters via Figma’s Quick Actions search bar. Set \"parameterOnly\" to `false` to make parameter input optional.",
           "type": "boolean"
-        },
-        "menu": {
-          "description": "(required, unless \"main\" is specified)\nAn array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the keys \"name\" (required), \"main\" (required, unless \"main\" is specified), \"ui\" (optional), \"parameters\" (optional), \"parameterOnly\" (optional), and \"menu\" (optional). Use a \"-\" in the array to specify a separator between commands in the sub-menu.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/MenuItem"
-          }
         },
         "relaunchButtons": {
           "description": "(optional)\nAn object that specifies the commands that can be set as relaunch buttons. Each key is a `relaunchButtonId`. Each value specifies the relaunch button command, and is an object with the keys \"name\" (required), \"main\" (required), \"ui\" (optional), and \"multipleSelection\" (optional).",
@@ -219,17 +219,59 @@
             }
           }
         },
-        "permissions": {
-          "description": "(optional)\nFor specifying the permissions that the plugin/widget needs access to. One of [\"activeusers\"], [\"currentuser\"], or [\"activeusers\", \"currentuser\"].",
-          "type": "array",
-          "minItems": 1,
-          "items": [{ "enum": ["activeusers", "currentuser"] }]
-        },
         "capabilities": {
-          "description": "(optional)\nFor specifying the capabilities that the plugin needs access to. At the moment, the only applicable capability is [\"textreview\"].",
+          "description": "(optional)\nFor specifying the capabilities that the plugin needs access to. Possible capabilities are \"codegen\", \"inspect\", and \"textreview\".",
           "type": "array",
           "minItems": 1,
-          "items": [{ "enum": ["textreview"] }]
+          "items": [
+            {
+              "enum": ["codegen", "inspect", "textreview"]
+            }
+          ]
+        },
+        "permissions": {
+          "description": "(optional)\nFor specifying the permissions that the plugin/widget needs access to. Possible permissions are \"activeusers\", \"currentuser\", \"fileusers\", \"payments\" and \"teamlibrary\".",
+          "type": "array",
+          "minItems": 1,
+          "items": [
+            {
+              "enum": [
+                "activeusers",
+                "currentuser",
+                "fileusers",
+                "payments",
+                "teamlibrary"
+              ]
+            }
+          ]
+        },
+        "networkAccess": {
+          "description": "(optional)\nAn object that specifies the list of domains that your plugin/widget is permitted to access. Keys are \"allowedDomains\" (required), \"reasoning\" (optional), and \"devAllowedDomains\" (optional).",
+          "type": "object",
+          "required": ["allowedDomains"],
+          "additionalProperties": false,
+          "properties": {
+            "allowedDomains": {
+              "description": "(required)\nMatch patterns for domains that your plugin/widget is permitted to access.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "reasoning": {
+              "description": "(optional)\nFor specifying why your plugin/widgets needs to access the domains in \"allowedDomains\".",
+              "type": "string"
+            },
+            "devAllowedDomains": {
+              "description": "(optional)\nMatch patterns for domains that your plugin/widget is permitted to access during development.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          }
         },
         "enablePrivatePluginApi": {
           "description": "(optional)\nSet to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.",

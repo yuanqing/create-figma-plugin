@@ -1,2 +1,0 @@
-import{o}from"./jsxRuntime.module-893eb125.js";const l="_icon_13804_1",s={icon:l};function u(e,t){const{width:c,height:i}=t;return function({color:n,...r}){return o("svg",{...r,class:s.icon,height:i,style:typeof n>"u"?void 0:{fill:`var(--figma-color-icon-${n})`},width:c,xmlns:"http://www.w3.org/2000/svg",children:o("path",{"clip-rule":"evenodd",d:e,"fill-rule":"evenodd"})})}}export{u as c};
-//# sourceMappingURL=create-icon-b935921b.js.map
