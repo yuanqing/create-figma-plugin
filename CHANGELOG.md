@@ -4,17 +4,21 @@
 
 - `create-figma-plugin@2.6.0`
 
+  - Fixed a bug with bootstrapped plugins/widgets not including a `.gitignore`. ([#173](https://github.com/yuanqing/create-figma-plugin/issues/173))
   - Added a new `plugin/preact-tailwindcss` template.
   - Bumped the `@figma/plugin-typings` version.
-  - Fixed a bug with bootstrapped plugins/widgets not including a `.gitignore`. ([#173](https://github.com/yuanqing/create-figma-plugin/issues/173))
 
 - `@create-figma-plugin/build@2.6.0`
 
-  - Improved the handling of new and deleted files when using the `--watch` flag.
   - Added support for customizing the output directory via the `--output` CLI flag. ([#157](https://github.com/yuanqing/create-figma-plugin/issues/157), [#170](https://github.com/yuanqing/create-figma-plugin/issues/170))
   - Added support for configuring `networkAccess`. ([#164](https://github.com/yuanqing/create-figma-plugin/issues/164))
-  - Updated the options for `capabilities` (added `codegen` and `inspect`) and `permissions` (added `fileusers`, `payments` and `teamlibrary`).
+  - Updated the options for `capabilities` (added `codegen` and `inspect`) and `permissions` (added `fileusers`, `payments` and `teamlibrary`). ([#169](https://github.com/yuanqing/create-figma-plugin/issues/169))
+  - Improved the handling of new and deleted files when using the `--watch` flag.
   - Additional keys configured under `"figma-plugin"` in `package.json` will be copied over to the generated `manifest.json` file.
+
+- `@create-figma-plugin/ui@2.6.0`
+
+  - Exposed CSS files via `exports` in the module’s `package.json` file. ([#171](https://github.com/yuanqing/create-figma-plugin/issues/171))
 
 ## 2.5.1
 
