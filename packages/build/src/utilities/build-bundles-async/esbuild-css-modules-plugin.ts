@@ -78,6 +78,7 @@ async function createCssFilePathAsync(
 }
 
 const backQuoteRegex = /`/g
+const colonRegex = /:/g
 
 async function createGlobalCssJavaScriptAsync(
   cssFilePath: string,
@@ -106,7 +107,7 @@ async function createGlobalCssJavaScriptAsync(
       element.id = '${elementId}';
       element.textContent = \`${css
         .replace(backQuoteRegex, '\\`')
-        .replace(/:/g, '\\:')}\`;
+        .replace(colonRegex, '\\:')}\`;
       document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
     }
     export default {};
@@ -151,7 +152,9 @@ async function createCssModulesJavaScriptAsync(
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
       element.id = '${elementId}';
-      element.textContent = \`${css.replace(backQuoteRegex, '\\`')}\`;
+      element.textContent = \`${css
+        .replace(backQuoteRegex, '\\`')
+        .replace(colonRegex, '\\:')}\`;
       document.head.append(element);
     }
     export default ${classNamesJson};
