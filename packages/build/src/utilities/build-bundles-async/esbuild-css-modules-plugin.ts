@@ -104,7 +104,9 @@ async function createGlobalCssJavaScriptAsync(
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
       element.id = '${elementId}';
-      element.textContent = \`${css.replace(backQuoteRegex, '\\`')}\`;
+      element.textContent = \`${css
+        .replace(backQuoteRegex, '\\`')
+        .replace(/:/g, '\\:')}\`;
       document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
     }
     export default {};
