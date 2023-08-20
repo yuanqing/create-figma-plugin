@@ -164,12 +164,14 @@ Then, create a [`tailwind.config.js`](https://tailwindcss.com/docs/configuration
 ```js
 // tailwind.config.js
 
+/** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: []
+  plugins: [],
+  darkMode: ['class', '.figma-dark']
 }
 ```
 
