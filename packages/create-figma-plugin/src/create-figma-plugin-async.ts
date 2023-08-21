@@ -14,24 +14,28 @@ import { resolveTemplateNameAsync } from './utilities/resolve-template-name-asyn
 
 export async function createFigmaPluginAsync(options: {
   name?: string
+  path?: string
   template?: string
 }): Promise<void> {
   try {
     const templateName = await resolveTemplateNameAsync(options.template)
     const templateType =
       templateName.indexOf('plugin/') === 0 ? 'plugin' : 'widget'
-    const directoryName =
+
+    const pluginName =
       typeof options.name !== 'undefined'
         ? options.name
         : basename(templateName)
+    const directoryName =
+      typeof options.path !== 'undefined' ? options.path : pluginName
     const directoryPath = await resolveDirectoryPathAsync(directoryName)
     log.info(`Copying "${templateName}" template...`)
     await copyTemplateAsync(templateName, directoryPath)
     log.info('Resolving package versions...')
     const versions = await resolveCreateFigmaPluginLatestStableVersions()
     await interpolateValuesIntoFilesAsync(directoryPath, {
-      id: paramCase(directoryName),
-      name: createName(directoryName),
+      id: paramCase(pluginName),
+      name: createName(pluginName),
       versions: {
         createFigmaPlugin: versions,
         figma: {
