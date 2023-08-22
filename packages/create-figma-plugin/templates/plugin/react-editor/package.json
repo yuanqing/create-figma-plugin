@@ -1,4 +1,5 @@
 {
+  "name": "<%- id %>",
   "dependencies": {
     "@create-figma-plugin/ui": "^<%- versions.createFigmaPlugin.ui %>",
     "@create-figma-plugin/utilities": "^<%- versions.createFigmaPlugin.utilities %>",
