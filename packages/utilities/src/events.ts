@@ -81,26 +81,42 @@ export const emit =
       }
 
 function invokeEventHandler(name: string, args: Array<unknown>): void {
+  let invoked = false
   for (const id in eventHandlers) {
     if (eventHandlers[id].name === name) {
       eventHandlers[id].handler.apply(null, args)
+      invoked = true
     }
+  }
+  if (invoked === false) {
+    throw new Error(`No event handler with name \`${name}\``)
   }
 }
 
 if (typeof window === 'undefined') {
-  figma.ui.onmessage = function ([name, ...args]: [
-    string,
-    Array<unknown>
-  ]): void {
-    invokeEventHandler(name, args)
+  figma.ui.onmessage = function (args: unknown): void {
+    if (!Array.isArray(args)) {
+      return
+    }
+    const [name, ...rest]: Array<unknown> = args
+    if (typeof name !== 'string') {
+      return
+    }
+    invokeEventHandler(name, rest)
   }
 } else {
   window.onmessage = function (event: MessageEvent): void {
     if (typeof event.data.pluginMessage === 'undefined') {
       return
     }
-    const [name, ...args]: [string, Array<unknown>] = event.data.pluginMessage
-    invokeEventHandler(name, args)
+    const args = event.data.pluginMessage
+    if (!Array.isArray(args)) {
+      return
+    }
+    const [name, ...rest]: [unknown, Array<unknown>] = event.data.pluginMessage
+    if (typeof name !== 'string') {
+      return
+    }
+    invokeEventHandler(name, rest)
   }
 }
