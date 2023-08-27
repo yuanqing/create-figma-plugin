@@ -153,10 +153,10 @@ Refer to the [`base.css`](https://github.com/yuanqing/create-figma-plugin/blob/m
 
 ## Using Tailwind CSS
 
-Install [`tailwindcss`](https://tailwindcss.com) and [`concurrently`](https://github.com/open-cli-tools/concurrently#readme):
+Install [`tailwindcss`](https://tailwindcss.com), `preact`, and [`concurrently`](https://github.com/open-cli-tools/concurrently#readme):
 
 ```sh
-$ npm install --save-dev tailwindcss concurrently
+$ npm install --save-dev tailwindcss preact concurrently
 ```
 
 Then, create a [`tailwind.config.js`](https://tailwindcss.com/docs/configuration) file and `src/input.css` file:
