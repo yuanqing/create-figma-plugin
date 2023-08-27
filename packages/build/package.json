@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/build",
-  "version": "2.6.1-alpha.0",
+  "version": "2.6.1",
   "publishConfig": {
     "access": "public"
   },
@@ -40,7 +40,7 @@
     "test": "ava --serial 'test/**/*.ts'"
   },
   "dependencies": {
-    "@create-figma-plugin/common": "^2.6.1-alpha.0",
+    "@create-figma-plugin/common": "^2.6.1",
     "chokidar": "^3.5.3",
     "cssnano": "^6.0.1",
     "esbuild": "^0.19.1",
@@ -59,8 +59,8 @@
     "typed-css-modules": "^0.7.2"
   },
   "devDependencies": {
-    "@create-figma-plugin/tsconfig": "^2.6.1-alpha.0",
-    "@create-figma-plugin/utilities": "^2.6.1-alpha.0",
+    "@create-figma-plugin/tsconfig": "^2.6.1",
+    "@create-figma-plugin/utilities": "^2.6.1",
     "@figma/plugin-typings": "1.74.0",
     "@types/node": "^20.4.10",
     "@types/react": "^18.2.20",
