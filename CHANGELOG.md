@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.6.1
+
+- `create-figma-plugin@2.6.1`
+
+  - Add dark mode support to the `plugin/preact-tailwindcss` template. ([#174](https://github.com/yuanqing/create-figma-plugin/issues/174))
+
+- `@create-figma-plugin/build@2.6.1`
+
+  - Preserve backslashes in inserted class names. ([#174](https://github.com/yuanqing/create-figma-plugin/issues/174))
+
 ## 2.6.0
 
 - `create-figma-plugin@2.6.0`
