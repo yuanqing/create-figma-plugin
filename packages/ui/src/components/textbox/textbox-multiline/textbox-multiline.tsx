@@ -162,7 +162,6 @@ export function TextboxMultiline<Name extends string>({
         </div>
       ) : null}
       <textarea
-        {...rest}
         ref={textAreaElementRef}
         class={styles.textarea}
         disabled={disabled === true}
@@ -177,6 +176,7 @@ export function TextboxMultiline<Name extends string>({
         spellcheck={spellCheck}
         tabIndex={disabled === true ? -1 : 0}
         value={value === MIXED_STRING ? 'Mixed' : value}
+        {...rest}
       />
       <div class={styles.border} />
       {variant === 'underline' ? <div class={styles.underline} /> : null}
