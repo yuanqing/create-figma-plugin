@@ -1,4 +1,5 @@
 import '../src/css/theme.css'
+import '../src/css/fonts.css'
 import '../src/css/base.css'
 
 const themes = [
