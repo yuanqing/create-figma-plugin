@@ -149,7 +149,11 @@
           "description": "(optional)\nFor specifying the editor(s) that the plugin/widget is intended for. Possible editor types are \"figma\", \"figjam\" and \"dev\". Defaults to [\"figma\"]. The value [\"figjam\", \"dev\"] is currently not supported.",
           "type": "array",
           "minItems": 1,
-          "items": [{ "enum": ["dev", "figjam", "figma"] }]
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["dev", "figjam", "figma"]
+          }
         },
         "containsWidget": {
           "description": "(optional)\nThis field must be set to `true` for a FigJam widget. Defaults to `false`.",
@@ -223,27 +227,27 @@
           "description": "(optional)\nFor specifying the capabilities that the plugin needs access to. Possible capabilities are \"codegen\", \"inspect\", and \"textreview\".",
           "type": "array",
           "minItems": 1,
-          "items": [
-            {
-              "enum": ["codegen", "inspect", "textreview"]
-            }
-          ]
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["codegen", "inspect", "textreview"]
+          }
         },
         "permissions": {
           "description": "(optional)\nFor specifying the permissions that the plugin/widget needs access to. Possible permissions are \"activeusers\", \"currentuser\", \"fileusers\", \"payments\" and \"teamlibrary\".",
           "type": "array",
           "minItems": 1,
-          "items": [
-            {
-              "enum": [
-                "activeusers",
-                "currentuser",
-                "fileusers",
-                "payments",
-                "teamlibrary"
-              ]
-            }
-          ]
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "activeusers",
+              "currentuser",
+              "fileusers",
+              "payments",
+              "teamlibrary"
+            ]
+          }
         },
         "networkAccess": {
           "description": "(optional)\nAn object that specifies the list of domains that your plugin/widget is permitted to access. Keys are \"allowedDomains\" (required), \"reasoning\" (optional), and \"devAllowedDomains\" (optional).",
@@ -254,10 +258,11 @@
             "allowedDomains": {
               "description": "(required)\nMatch patterns for domains that your plugin/widget is permitted to access.",
               "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
               "items": {
                 "type": "string"
-              },
-              "minItems": 1
+              }
             },
             "reasoning": {
               "description": "(optional)\nFor specifying why your plugin/widgets needs to access the domains in \"allowedDomains\".",
@@ -266,10 +271,11 @@
             "devAllowedDomains": {
               "description": "(optional)\nMatch patterns for domains that your plugin/widget is permitted to access during development.",
               "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
               "items": {
                 "type": "string"
-              },
-              "minItems": 1
+              }
             }
           }
         },
