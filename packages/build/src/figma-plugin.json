@@ -107,6 +107,7 @@
               "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Actions search bar.",
               "type": "array",
               "minItems": 1,
+              "uniqueItems": true,
               "items": {
                 "$ref": "#/definitions/Parameter"
               }
@@ -119,6 +120,7 @@
               "description": "(required, unless \"main\" is specified)\nSub-menus can be nested.",
               "type": "array",
               "minItems": 1,
+              "uniqueItems": true,
               "items": {
                 "$ref": "#/definitions/MenuItem"
               }
@@ -179,6 +181,7 @@
           "description": "(required, unless \"main\" is specified)\nAn array that specifies the commands shown in the plugin’s sub-menu. Each object in the array has the keys \"name\" (required), \"main\" (required, unless \"main\" is specified), \"ui\" (optional), \"parameters\" (optional), \"parameterOnly\" (optional), and \"menu\" (optional). Use a \"-\" in the array to specify a separator between commands in the sub-menu.",
           "type": "array",
           "minItems": 1,
+          "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/MenuItem"
           }
