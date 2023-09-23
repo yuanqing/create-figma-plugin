@@ -2,9 +2,12 @@ import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types/types.js'
+import { Event, EventHandler } from '../../../types/event-handler.js'
+import { RGBA } from '../../../types/RGBA.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
+import { noop } from '../../../utilities/no-op.js'
 import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeric.js'
 import { createRgbaColor } from './private/create-rgba-color.js'
 import { normalizeUserInputColor } from './private/normalize-hex-color.js'
@@ -13,352 +16,362 @@ import styles from './textbox-color.module.css'
 
 const EMPTY_STRING = ''
 
-export type TextboxColorProps<
-  Name extends string,
-  HexColorName extends string,
-  OpacityName extends string
-> = {
+export type TextboxColorProps = {
+  blurOnEscapeKeyDown?: boolean
+  propagateEscapeKeyDown?: boolean
   disabled?: boolean
   hexColor: string
-  hexColorName?: HexColorName
+  hexColorName?: string
   hexColorPlaceholder?: string
-  name?: Name
-  onHexColorInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onHexColorValueInput?: OnValueChange<string, HexColorName>
-  onOpacityInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onOpacityNumericValueInput?: OnValueChange<null | number, OpacityName>
-  onOpacityValueInput?: OnValueChange<string, OpacityName>
-  onRgbaColorValueInput?: OnValueChange<null | RGBA, Name>
+  onHexColorInput?: EventHandler.onInput<HTMLInputElement>
+  onHexColorKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
+  onHexColorValueInput?: EventHandler.onValueChange<string>
+  onOpacityInput?: EventHandler.onInput<HTMLInputElement>
+  onOpacityKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
+  onOpacityNumericValueInput?: EventHandler.onValueChange<null | number>
+  onOpacityValueInput?: EventHandler.onValueChange<string>
+  onRgbaColorValueInput?: EventHandler.onValueChange<null | RGBA>
   opacity: string
-  opacityName?: OpacityName
+  opacityName?: string
   opacityPlaceholder?: string
-  propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   variant?: TextboxColorVariant
 }
 export type TextboxColorVariant = 'border' | 'underline'
 
-export function TextboxColor<
-  Name extends string,
-  HexColorName extends string,
-  OpacityName extends string
->({
-  disabled = false,
-  hexColor,
-  hexColorName,
-  hexColorPlaceholder,
-  name,
-  onHexColorInput = function () {},
-  onHexColorValueInput = function () {},
-  onOpacityInput = function () {},
-  onOpacityNumericValueInput = function () {},
-  onOpacityValueInput = function () {},
-  onRgbaColorValueInput = function () {},
-  opacity,
-  opacityName,
-  opacityPlaceholder,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
-  variant,
-  ...rest
-}: Props<
-  HTMLInputElement,
-  TextboxColorProps<Name, HexColorName, OpacityName>
->): JSX.Element {
-  const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
-  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+export type TextboxColorRef = {
+  hexColorInputElement: HTMLInputElement
+  opacityInputElement: HTMLInputElement
+}
 
-  const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
-
-  const setHexColorInputElementValue = useCallback(function (
-    value: string
-  ): void {
-    const inputElement = getCurrentFromRef(hexColorInputElementRef)
-    inputElement.value = value
-    const inputEvent = document.createEvent('Event')
-    inputEvent.initEvent('input', true, true)
-    inputElement.dispatchEvent(inputEvent)
-  },
-  [])
-
-  const handleHexColorSelectorFocus = useCallback(function (
-    event: JSX.TargetedEvent<HTMLInputElement>
-  ): void {
-    const hexColor = event.currentTarget.value.slice(1).toUpperCase()
-    setOriginalHexColor(hexColor)
-  },
-  [])
-
-  const handleHexColorSelectorInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      const hexColor = event.currentTarget.value.slice(1).toUpperCase()
-      setHexColorInputElementValue(hexColor)
-    },
-    [setHexColorInputElementValue]
-  )
-
-  const handleHexColorSelectorKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (revertOnEscapeKeyDown === true) {
-        setHexColorInputElementValue(originalHexColor)
-        setOriginalHexColor(EMPTY_STRING)
-      }
-      event.currentTarget.blur()
-    },
-    [
-      originalHexColor,
-      propagateEscapeKeyDown,
-      revertOnEscapeKeyDown,
-      setHexColorInputElementValue
-    ]
-  )
-
-  const handleHexColorBlur = useCallback(
-    function (): void {
-      if (revertOnEscapeKeyDownRef.current === true) {
-        revertOnEscapeKeyDownRef.current = false
-        return
-      }
-      if (hexColor === EMPTY_STRING) {
-        if (originalHexColor !== EMPTY_STRING) {
-          setHexColorInputElementValue(originalHexColor)
-        }
-        setOriginalHexColor(EMPTY_STRING)
-        return
-      }
-      if (hexColor !== MIXED_STRING) {
-        const normalizedHexColor = normalizeUserInputColor(hexColor)
-        const newHexColor =
-          normalizedHexColor === null ? originalHexColor : normalizedHexColor
-        if (newHexColor !== hexColor) {
-          setHexColorInputElementValue(newHexColor)
-        }
-      }
-      setOriginalHexColor(EMPTY_STRING)
-    },
-    [hexColor, originalHexColor, setHexColorInputElementValue]
-  )
-
-  const handleHexColorFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
-      setOriginalHexColor(hexColor)
-      event.currentTarget.select()
-    },
-    [hexColor]
-  )
-
-  const handleHexColorInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      onHexColorInput(event)
-      const newHexColor = event.currentTarget.value
-      onHexColorValueInput(newHexColor, hexColorName)
-      if (newHexColor === EMPTY_STRING) {
-        onRgbaColorValueInput(null, name)
-        return
-      }
-      const normalizedHexColor = normalizeUserInputColor(newHexColor)
-      if (normalizedHexColor === null) {
-        onRgbaColorValueInput(null, name)
-        return
-      }
-      const rgba = createRgbaColor(normalizedHexColor, opacity)
-      onRgbaColorValueInput(rgba, name)
-    },
-    [
+export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
+  function (
+    {
+      blurOnEscapeKeyDown = true,
+      disabled = false,
+      hexColor,
       hexColorName,
-      onHexColorInput,
-      onHexColorValueInput,
-      onRgbaColorValueInput,
-      name,
-      opacity
-    ]
-  )
+      hexColorPlaceholder,
+      onHexColorInput = noop,
+      onHexColorKeyDown = noop,
+      onHexColorValueInput = noop,
+      onOpacityInput = noop,
+      onOpacityKeyDown = noop,
+      onOpacityNumericValueInput = noop,
+      onOpacityValueInput = noop,
+      onRgbaColorValueInput = noop,
+      opacity,
+      opacityName,
+      opacityPlaceholder,
+      propagateEscapeKeyDown = true,
+      revertOnEscapeKeyDown = false,
+      variant,
+      ...rest
+    },
+    ref
+  ): JSX.Element {
+    const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
+    const opacityInputElementRef: RefObject<HTMLInputElement> = useRef(null)
+    const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
-  const handleHexColorKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
-      const key = event.key
-      if (key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
+    const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
+
+    const setHexColorInputElementValue = useCallback(function (
+      value: string
+    ): void {
+      const inputElement = getCurrentFromRef(hexColorInputElementRef)
+      inputElement.value = value
+      const inputEvent = new window.Event('input', {
+        bubbles: true,
+        cancelable: true
+      })
+      inputElement.dispatchEvent(inputEvent)
+    },
+    [])
+
+    const handleHexColorSelectorFocus = useCallback(function (
+      event: Event.onFocus<HTMLInputElement>
+    ): void {
+      const hexColor = event.currentTarget.value.slice(1).toUpperCase()
+      setOriginalHexColor(hexColor)
+    },
+    [])
+
+    const handleHexColorSelectorInput = useCallback(
+      function (event: Event.onInput<HTMLInputElement>): void {
+        const hexColor = event.currentTarget.value.slice(1).toUpperCase()
+        setHexColorInputElementValue(hexColor)
+      },
+      [setHexColorInputElementValue]
+    )
+
+    const handleHexColorSelectorKeyDown = useCallback(
+      function (event: Event.onKeyDown<HTMLInputElement>): void {
+        if (event.key !== 'Escape') {
+          return
         }
         if (revertOnEscapeKeyDown === true) {
-          revertOnEscapeKeyDownRef.current = true
           setHexColorInputElementValue(originalHexColor)
           setOriginalHexColor(EMPTY_STRING)
         }
-        event.currentTarget.blur()
-        return
-      }
-      if (key === 'Enter') {
-        event.currentTarget.blur()
-        return
-      }
-      const element = event.currentTarget
-      if (key === 'ArrowDown' || key === 'ArrowUp') {
-        event.preventDefault()
-        const delta = event.shiftKey === true ? 10 : 1
-        const startingHexColor =
-          hexColor === EMPTY_STRING || hexColor === MIXED_STRING
-            ? key === 'ArrowDown'
-              ? 'FFFFFF'
-              : '000000'
-            : hexColor
-        const newHexColor = updateHexColor(
-          startingHexColor,
-          key === 'ArrowDown' ? -1 * delta : delta
-        )
-        setHexColorInputElementValue(newHexColor)
-        element.select()
-        return
-      }
-      if (event.ctrlKey === true || event.metaKey === true) {
-        return
-      }
-    },
-    [
-      hexColor,
-      originalHexColor,
-      propagateEscapeKeyDown,
-      revertOnEscapeKeyDown,
-      setHexColorInputElementValue
-    ]
-  )
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
+      },
+      [
+        blurOnEscapeKeyDown,
+        originalHexColor,
+        propagateEscapeKeyDown,
+        revertOnEscapeKeyDown,
+        setHexColorInputElementValue
+      ]
+    )
 
-  const handleHexColorMouseUp = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
-      if (hexColor !== MIXED_STRING) {
-        return
-      }
-      event.preventDefault()
-    },
-    [hexColor]
-  )
-
-  const handleOpacityInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
-      onOpacityInput(event)
-      const newOpacity = event.currentTarget.value
-      const rgba = createRgbaColor(hexColor, newOpacity)
-      onRgbaColorValueInput(rgba, name)
-    },
-    [hexColor, onOpacityInput, onRgbaColorValueInput, name]
-  )
-
-  const handleOpacityNumericValueInput = useCallback(
-    function (opacity: null | number) {
-      onOpacityNumericValueInput(
-        opacity === null || opacity === MIXED_NUMBER ? opacity : opacity / 100
-      )
-    },
-    [onOpacityNumericValueInput]
-  )
-
-  const validateOpacityOnBlur = useCallback(function (opacity: null | number) {
-    return opacity !== null // Revert the original value if empty
-  }, [])
-
-  const parsedOpacity = parseOpacity(opacity)
-
-  const isHexColorValid = hexColor !== EMPTY_STRING && hexColor !== MIXED_STRING
-  const normalizedHexColor =
-    isHexColorValid === true ? normalizeUserInputColor(hexColor) : 'FFFFFF'
-  const renderedHexColor =
-    normalizedHexColor === null ? originalHexColor : normalizedHexColor
-
-  // Uncomment to debug
-  // console.table([{ hexColor, renderedHexColor, opacity, parsedOpacity }])
-
-  return (
-    <div
-      class={createClassName([
-        styles.textboxColor,
-        typeof variant === 'undefined'
-          ? null
-          : variant === 'border'
-          ? styles.hasBorder
-          : null,
-        disabled === true ? styles.disabled : null
-      ])}
-    >
-      <div class={styles.color}>
-        <div
-          class={styles.colorFill}
-          style={
-            isHexColorValid === true
-              ? { backgroundColor: `#${renderedHexColor}` }
-              : {}
+    const handleHexColorBlur = useCallback(
+      function (): void {
+        if (revertOnEscapeKeyDownRef.current === true) {
+          revertOnEscapeKeyDownRef.current = false
+          return
+        }
+        if (hexColor === EMPTY_STRING) {
+          if (originalHexColor !== EMPTY_STRING) {
+            setHexColorInputElementValue(originalHexColor)
           }
-        ></div>
-        {parsedOpacity === 1 ? null : (
+          setOriginalHexColor(EMPTY_STRING)
+          return
+        }
+        if (hexColor !== MIXED_STRING) {
+          const normalizedHexColor = normalizeUserInputColor(hexColor)
+          const newHexColor =
+            normalizedHexColor === null ? originalHexColor : normalizedHexColor
+          if (newHexColor !== hexColor) {
+            setHexColorInputElementValue(newHexColor)
+          }
+        }
+        setOriginalHexColor(EMPTY_STRING)
+      },
+      [hexColor, originalHexColor, setHexColorInputElementValue]
+    )
+
+    const handleHexColorFocus = useCallback(
+      function (event: Event.onFocus<HTMLInputElement>): void {
+        setOriginalHexColor(hexColor)
+        event.currentTarget.select()
+      },
+      [hexColor]
+    )
+
+    const handleHexColorInput = useCallback(
+      function (event: Event.onInput<HTMLInputElement>) {
+        onHexColorInput(event)
+        const newHexColor = event.currentTarget.value
+        onHexColorValueInput(newHexColor)
+        if (newHexColor === EMPTY_STRING) {
+          onRgbaColorValueInput(null)
+          return
+        }
+        const normalizedHexColor = normalizeUserInputColor(newHexColor)
+        if (normalizedHexColor === null) {
+          onRgbaColorValueInput(null)
+          return
+        }
+        const rgba = createRgbaColor(normalizedHexColor, opacity)
+        onRgbaColorValueInput(rgba)
+      },
+      [onHexColorInput, onHexColorValueInput, onRgbaColorValueInput, opacity]
+    )
+
+    const handleHexColorKeyDown = useCallback(
+      function (event: Event.onKeyDown<HTMLInputElement>): void {
+        onHexColorKeyDown(event)
+        const key = event.key
+        if (key === 'Escape') {
+          if (revertOnEscapeKeyDown === true) {
+            revertOnEscapeKeyDownRef.current = true
+            setHexColorInputElementValue(originalHexColor)
+            setOriginalHexColor(EMPTY_STRING)
+          }
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          if (blurOnEscapeKeyDown === true) {
+            event.currentTarget.blur()
+          }
+          return
+        }
+        const element = event.currentTarget
+        if (key === 'ArrowDown' || key === 'ArrowUp') {
+          event.preventDefault()
+          const delta = event.shiftKey === true ? 10 : 1
+          const startingHexColor =
+            hexColor === EMPTY_STRING || hexColor === MIXED_STRING
+              ? key === 'ArrowDown'
+                ? 'FFFFFF'
+                : '000000'
+              : hexColor
+          const newHexColor = updateHexColor(
+            startingHexColor,
+            key === 'ArrowDown' ? -1 * delta : delta
+          )
+          setHexColorInputElementValue(newHexColor)
+          element.select()
+          return
+        }
+        if (event.ctrlKey === true || event.metaKey === true) {
+          return
+        }
+      },
+      [
+        blurOnEscapeKeyDown,
+        hexColor,
+        onHexColorKeyDown,
+        originalHexColor,
+        propagateEscapeKeyDown,
+        revertOnEscapeKeyDown,
+        setHexColorInputElementValue
+      ]
+    )
+
+    const handleHexColorMouseUp = useCallback(
+      function (event: Event.onMouseUp<HTMLInputElement>): void {
+        if (hexColor !== MIXED_STRING) {
+          return
+        }
+        event.preventDefault()
+      },
+      [hexColor]
+    )
+
+    const handleOpacityInput = useCallback(
+      function (event: Event.onInput<HTMLInputElement>) {
+        onOpacityInput(event)
+        const newOpacity = event.currentTarget.value
+        const rgba = createRgbaColor(hexColor, newOpacity)
+        onRgbaColorValueInput(rgba)
+      },
+      [hexColor, onOpacityInput, onRgbaColorValueInput]
+    )
+
+    const handleOpacityNumericValueInput = useCallback(
+      function (opacity: null | number) {
+        onOpacityNumericValueInput(
+          opacity === null || opacity === MIXED_NUMBER ? opacity : opacity / 100
+        )
+      },
+      [onOpacityNumericValueInput]
+    )
+
+    const validateOpacityOnBlur = useCallback(function (
+      opacity: null | number
+    ) {
+      return opacity !== null // Revert the original value if empty
+    },
+    [])
+
+    const parsedOpacity = parseOpacity(opacity)
+
+    const isHexColorValid =
+      hexColor !== EMPTY_STRING && hexColor !== MIXED_STRING
+    const normalizedHexColor =
+      isHexColorValid === true ? normalizeUserInputColor(hexColor) : 'FFFFFF'
+    const renderedHexColor =
+      normalizedHexColor === null ? originalHexColor : normalizedHexColor
+
+    // Uncomment to debug
+    // console.table([{ hexColor, renderedHexColor, opacity, parsedOpacity }])
+
+    return (
+      <div
+        {...rest}
+        ref={ref}
+        class={createClassName([
+          styles.textboxColor,
+          typeof variant === 'undefined'
+            ? null
+            : variant === 'border'
+            ? styles.hasBorder
+            : null,
+          disabled === true ? styles.disabled : null
+        ])}
+      >
+        <div class={styles.color}>
           <div
             class={styles.colorFill}
             style={
               isHexColorValid === true
-                ? {
-                    backgroundColor: `#${renderedHexColor}`,
-                    opacity: parsedOpacity
-                  }
+                ? { backgroundColor: `#${renderedHexColor}` }
                 : {}
             }
           ></div>
-        )}
-        <div class={styles.colorBorder} />
+          {parsedOpacity === 1 ? null : (
+            <div
+              class={styles.colorFill}
+              style={
+                isHexColorValid === true
+                  ? {
+                      backgroundColor: `#${renderedHexColor}`,
+                      opacity: parsedOpacity
+                    }
+                  : {}
+              }
+            ></div>
+          )}
+          <div class={styles.colorBorder} />
+        </div>
+        <input
+          class={styles.hexColorSelector}
+          disabled={disabled === true}
+          onFocus={handleHexColorSelectorFocus}
+          onInput={handleHexColorSelectorInput}
+          onKeyDown={handleHexColorSelectorKeyDown}
+          tabIndex={-1}
+          type="color"
+          value={`#${renderedHexColor}`}
+        />
+        <input
+          ref={hexColorInputElementRef}
+          class={createClassName([styles.input, styles.hexColorInput])}
+          disabled={disabled === true}
+          name={hexColorName}
+          onBlur={handleHexColorBlur}
+          onFocus={handleHexColorFocus}
+          onInput={handleHexColorInput}
+          onKeyDown={handleHexColorKeyDown}
+          onMouseUp={handleHexColorMouseUp}
+          placeholder={hexColorPlaceholder}
+          spellcheck={false}
+          tabIndex={0}
+          type="text"
+          value={hexColor === MIXED_STRING ? 'Mixed' : hexColor}
+        />
+        <RawTextboxNumeric
+          ref={opacityInputElementRef}
+          class={createClassName([styles.input, styles.opacityInput])}
+          disabled={disabled === true}
+          maximum={100}
+          minimum={0}
+          name={opacityName}
+          onInput={handleOpacityInput}
+          onKeyDown={onOpacityKeyDown}
+          onNumericValueInput={handleOpacityNumericValueInput}
+          onValueInput={onOpacityValueInput}
+          placeholder={opacityPlaceholder}
+          propagateEscapeKeyDown={propagateEscapeKeyDown}
+          revertOnEscapeKeyDown={revertOnEscapeKeyDown}
+          suffix="%"
+          validateOnBlur={validateOpacityOnBlur}
+          value={opacity}
+        />
+        <div class={styles.divider} />
+        <div class={styles.border} />
+        {variant === 'underline' ? <div class={styles.underline} /> : null}
       </div>
-      <input
-        class={styles.hexColorSelector}
-        disabled={disabled === true}
-        onFocus={handleHexColorSelectorFocus}
-        onInput={handleHexColorSelectorInput}
-        onKeyDown={handleHexColorSelectorKeyDown}
-        tabIndex={-1}
-        type="color"
-        value={`#${renderedHexColor}`}
-      />
-      <input
-        {...rest}
-        ref={hexColorInputElementRef}
-        class={createClassName([styles.input, styles.hexColorInput])}
-        disabled={disabled === true}
-        name={hexColorName}
-        onBlur={handleHexColorBlur}
-        onFocus={handleHexColorFocus}
-        onInput={handleHexColorInput}
-        onKeyDown={handleHexColorKeyDown}
-        onMouseUp={handleHexColorMouseUp}
-        placeholder={hexColorPlaceholder}
-        spellcheck={false}
-        tabIndex={disabled === true ? -1 : 0}
-        type="text"
-        value={hexColor === MIXED_STRING ? 'Mixed' : hexColor}
-      />
-      <RawTextboxNumeric
-        class={createClassName([styles.input, styles.opacityInput])}
-        disabled={disabled === true}
-        maximum={100}
-        minimum={0}
-        name={opacityName}
-        onInput={handleOpacityInput}
-        onNumericValueInput={handleOpacityNumericValueInput}
-        onValueInput={onOpacityValueInput}
-        placeholder={opacityPlaceholder}
-        propagateEscapeKeyDown={propagateEscapeKeyDown}
-        revertOnEscapeKeyDown={revertOnEscapeKeyDown}
-        suffix="%"
-        validateOnBlur={validateOpacityOnBlur}
-        value={opacity}
-      />
-      <div class={styles.divider} />
-      <div class={styles.border} />
-      {variant === 'underline' ? <div class={styles.underline} /> : null}
-    </div>
-  )
-}
+    )
+  }
+)
 
 function parseOpacity(opacity: string): number {
   if (opacity === MIXED_STRING || opacity === EMPTY_STRING) {

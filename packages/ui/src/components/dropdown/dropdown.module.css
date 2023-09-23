@@ -77,8 +77,14 @@
   border-radius: var(--border-radius-2);
 }
 .hasBorder .border,
-.dropdown:not(.disabled):hover .border {
+.dropdown:not(.disabled):not(:focus):hover .border {
   border-color: var(--figma-color-border);
+}
+.dropdown:focus .border {
+  top: -1px;
+  bottom: -1px;
+  border-width: 2px;
+  border-color: var(--figma-color-border-brand-strong);
 }
 
 .underline {

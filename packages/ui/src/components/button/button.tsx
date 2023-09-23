@@ -1,44 +1,55 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../types/types.js'
+import { Event, EventHandler } from '../../types/event-handler.js'
+import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { noop } from '../../utilities/no-op.js'
 import { LoadingIndicator } from '../loading-indicator/loading-indicator.js'
 import styles from './button.module.css'
 
-export type ButtonProps = {
+export interface ButtonProps
+  extends FocusableComponentProps<HTMLButtonElement> {
   children: ComponentChildren
   danger?: boolean
   disabled?: boolean
   fullWidth?: boolean
   loading?: boolean
-  onClick?: JSX.MouseEventHandler<HTMLButtonElement>
-  propagateEscapeKeyDown?: boolean
+  onClick?: EventHandler.onClick<HTMLButtonElement>
   secondary?: boolean
 }
 
-export function Button({
-  children,
-  danger = false,
-  disabled = false,
-  fullWidth = false,
-  loading = false,
-  onClick,
-  propagateEscapeKeyDown = true,
-  secondary = false,
-  ...rest
-}: Props<HTMLButtonElement, ButtonProps>): JSX.Element {
+export const Button = createComponent<HTMLButtonElement, ButtonProps>(function (
+  {
+    blurOnEscapeKeyDown = true,
+    children,
+    danger = false,
+    disabled = false,
+    fullWidth = false,
+    loading = false,
+    onClick = noop,
+    onKeyDown = noop,
+    propagateEscapeKeyDown = true,
+    secondary = false,
+    ...rest
+  },
+  ref
+): JSX.Element {
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLButtonElement>): void {
+    function (event: Event.onKeyDown<HTMLButtonElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      event.currentTarget.blur()
+      if (blurOnEscapeKeyDown === true) {
+        event.currentTarget.blur()
+      }
     },
-    [propagateEscapeKeyDown]
+    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -59,15 +70,16 @@ export function Button({
       ) : null}
       <button
         {...rest}
+        ref={ref}
         disabled={disabled === true}
         onClick={disabled === true || loading === true ? undefined : onClick}
         onKeyDown={
           disabled === true || loading === true ? undefined : handleKeyDown
         }
-        tabIndex={disabled === true ? -1 : 0}
+        tabIndex={0}
       >
         <div class={styles.children}>{children}</div>
       </button>
     </div>
   )
-}
+})

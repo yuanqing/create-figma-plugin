@@ -1,40 +1,56 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { Props } from '../../../types/types.js'
+import { Event, EventHandler } from '../../../types/event-handler.js'
+import { FocusableComponentProps } from '../../../types/focusable-component-props.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
+import { noop } from '../../../utilities/no-op.js'
 import buttonStyles from '../../button/button.module.css'
 import { LoadingIndicator } from '../../loading-indicator/loading-indicator.js'
 import { fileComparator } from '../private/file-comparator.js'
 import fileUploadButtonStyles from './file-upload-button.module.css'
 
-export type FileUploadButtonProps = {
+export interface FileUploadButtonProps
+  extends FocusableComponentProps<HTMLInputElement> {
   acceptedFileTypes?: Array<string>
   children: ComponentChildren
   disabled?: boolean
   fullWidth?: boolean
   loading?: boolean
   multiple?: boolean
-  onSelectedFiles?: (files: Array<File>) => void
-  propagateEscapeKeyDown?: boolean
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onClick?: EventHandler.onClick<HTMLInputElement>
+  onSelectedFiles?: EventHandler.onSelectedFiles
   secondary?: boolean
 }
 
-export function FileUploadButton({
-  acceptedFileTypes,
-  children,
-  disabled = false,
-  fullWidth = false,
-  loading = false,
-  multiple = false,
-  onSelectedFiles,
-  propagateEscapeKeyDown = true,
-  secondary = false,
-  ...rest
-}: Props<HTMLInputElement, FileUploadButtonProps>): JSX.Element {
+export const FileUploadButton = createComponent<
+  HTMLInputElement,
+  FileUploadButtonProps
+>(function (
+  {
+    acceptedFileTypes = [],
+    blurOnEscapeKeyDown = true,
+    children,
+    disabled = false,
+    fullWidth = false,
+    loading = false,
+    multiple = false,
+    onChange = noop,
+    onClick = noop,
+    onSelectedFiles = noop,
+    onKeyDown = noop,
+    propagateEscapeKeyDown = true,
+    secondary = false,
+    ...rest
+  },
+  ref
+): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      if (typeof onSelectedFiles === 'undefined') {
+    function (event: Event.onChange<HTMLInputElement>): void {
+      onChange(event)
+      if (disabled === true || loading === true) {
         return
       }
       const files = Array.prototype.slice
@@ -42,42 +58,35 @@ export function FileUploadButton({
         .sort(fileComparator)
       onSelectedFiles(files)
     },
-    [onSelectedFiles]
+    [disabled, loading, onChange, onSelectedFiles]
   )
 
   const handleClick = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
+    function (event: Event.onClick<HTMLInputElement>): void {
+      onClick(event)
       if (disabled === true || loading === true) {
-        event.preventDefault()
         return
       }
       event.currentTarget.focus()
     },
-    [disabled, loading]
+    [disabled, loading, onClick]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      event.currentTarget.blur()
+      if (blurOnEscapeKeyDown === true) {
+        event.currentTarget.blur()
+      }
     },
-    [propagateEscapeKeyDown]
+    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
   )
-
-  const handleLoadingMouseDown = useCallback(function (
-    event: JSX.TargetedMouseEvent<HTMLInputElement>
-  ): void {
-    // This is needed so that the `loading` state behaviour will be identical
-    // to the `Button` component ie. clicking the button will focus it.
-    event.preventDefault()
-    event.currentTarget.focus()
-  },
-  [])
 
   return (
     <div
@@ -100,23 +109,19 @@ export function FileUploadButton({
       ) : null}
       <input
         {...rest}
+        ref={ref}
         accept={
-          typeof acceptedFileTypes === 'undefined'
+          acceptedFileTypes.length === 0
             ? undefined
             : acceptedFileTypes.join(',')
         }
         class={fileUploadButtonStyles.input}
         disabled={disabled === true}
         multiple={multiple}
-        onChange={
-          disabled === true || loading === true ? undefined : handleChange
-        }
+        onChange={handleChange}
         onClick={handleClick}
-        onKeyDown={
-          disabled === true || loading === true ? undefined : handleKeyDown
-        }
-        onMouseDown={loading === true ? handleLoadingMouseDown : undefined}
-        tabIndex={disabled === true ? -1 : 0}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
         title=""
         type="file"
       />
@@ -125,4 +130,4 @@ export function FileUploadButton({
       </button>
     </div>
   )
-}
+})

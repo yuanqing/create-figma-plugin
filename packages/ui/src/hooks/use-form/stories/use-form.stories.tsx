@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { Fragment, h } from 'preact'
+import { useCallback } from 'preact/hooks'
 
 import { Button } from '../../../components/button/button.js'
 import { Text } from '../../../components/text/text.js'
@@ -35,12 +36,17 @@ export const UseForm = function () {
         }
       }
     )
+  const handleValueInput = useCallback(
+    function (text: string) {
+      setFormState(text, 'text')
+    },
+    [setFormState]
+  )
   return (
     <Fragment>
       <Textbox
         {...initialFocus}
-        name="text"
-        onValueInput={setFormState}
+        onValueInput={handleValueInput}
         value={formState.text}
         variant="border"
       />

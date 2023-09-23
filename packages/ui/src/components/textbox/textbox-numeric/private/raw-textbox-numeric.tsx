@@ -7,8 +7,11 @@ import {
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types/types.js'
+import { Event, EventHandler } from '../../../../types/event-handler.js'
+import { FocusableComponentProps } from '../../../../types/focusable-component-props.js'
+import { createComponent } from '../../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
+import { noop } from '../../../../utilities/no-op.js'
 import { computeNextValue } from '../../private/compute-next-value.js'
 import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
 import { formatEvaluatedValue } from './format-evaluated-value.js'
@@ -16,44 +19,50 @@ import { formatEvaluatedValue } from './format-evaluated-value.js'
 const FRACTION_DIGITS = 3
 const EMPTY_STRING = ''
 
-export type RawTextboxNumericProps<Name extends string> = {
+export interface RawTextboxNumericProps
+  extends FocusableComponentProps<HTMLInputElement> {
   disabled?: boolean
   incrementBig?: number
   incrementSmall?: number
   integer?: boolean
   maximum?: number
   minimum?: number
-  name?: Name
-  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onNumericValueInput?: OnValueChange<null | number, Name>
-  onValueInput?: OnValueChange<string, Name>
+  onInput?: EventHandler.onInput<HTMLInputElement>
+  onNumericValueInput?: EventHandler.onValueChange<null | number>
+  onValueInput?: EventHandler.onValueChange<string>
   placeholder?: string
-  propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   suffix?: string
   validateOnBlur?: (value: null | number) => null | number | boolean
   value: string
 }
 
-export function RawTextboxNumeric<Name extends string>({
-  disabled = false,
-  incrementBig = 10,
-  incrementSmall = 1,
-  integer = false,
-  maximum,
-  minimum,
-  name,
-  onInput = function () {},
-  onNumericValueInput = function () {},
-  onValueInput = function () {},
-  placeholder,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
-  suffix,
-  validateOnBlur,
-  value,
-  ...rest
-}: Props<HTMLInputElement, RawTextboxNumericProps<Name>>): JSX.Element {
+export const RawTextboxNumeric = createComponent<
+  HTMLInputElement,
+  RawTextboxNumericProps
+>(function (
+  {
+    blurOnEscapeKeyDown = true,
+    disabled = false,
+    incrementBig = 10,
+    incrementSmall = 1,
+    integer = false,
+    maximum,
+    minimum,
+    onInput = noop,
+    onKeyDown = noop,
+    onNumericValueInput = noop,
+    onValueInput = noop,
+    placeholder,
+    propagateEscapeKeyDown = true,
+    revertOnEscapeKeyDown = false,
+    suffix,
+    validateOnBlur,
+    value,
+    ...rest
+  },
+  ref
+): JSX.Element {
   if (
     typeof minimum !== 'undefined' &&
     typeof maximum !== 'undefined' &&
@@ -70,8 +79,10 @@ export function RawTextboxNumeric<Name extends string>({
   const setInputElementValue = useCallback(function (value: string): void {
     const inputElement = getCurrentFromRef(inputElementRef)
     inputElement.value = value
-    const inputEvent = document.createEvent('Event')
-    inputEvent.initEvent('input', true, true)
+    const inputEvent = new window.Event('input', {
+      bubbles: true,
+      cancelable: true
+    })
     inputElement.dispatchEvent(inputEvent)
   }, [])
 
@@ -128,7 +139,7 @@ export function RawTextboxNumeric<Name extends string>({
   )
 
   const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
+    function (event: Event.onFocus<HTMLInputElement>): void {
       setOriginalValue(value)
       event.currentTarget.select()
     },
@@ -136,33 +147,32 @@ export function RawTextboxNumeric<Name extends string>({
   )
 
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: Event.onInput<HTMLInputElement>): void {
       onInput(event)
       const value = event.currentTarget.value
-      onValueInput(value, name)
+      onValueInput(value)
       const evaluatedValue = evaluateValue(value, suffix)
-      onNumericValueInput(evaluatedValue, name)
+      onNumericValueInput(evaluatedValue)
     },
-    [name, onInput, onNumericValueInput, onValueInput, suffix]
+    [onInput, onNumericValueInput, onValueInput, suffix]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
+      onKeyDown(event)
       const key = event.key
       if (key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
         if (revertOnEscapeKeyDown === true) {
           revertOnEscapeKeyDownRef.current = true
           setInputElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }
-        event.currentTarget.blur()
-        return
-      }
-      if (key === 'Enter') {
-        event.currentTarget.blur()
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
         return
       }
       const element = event.currentTarget
@@ -251,12 +261,14 @@ export function RawTextboxNumeric<Name extends string>({
       }
     },
     [
+      blurOnEscapeKeyDown,
       handleInput,
       incrementBig,
       incrementSmall,
       integer,
       maximum,
       minimum,
+      onKeyDown,
       originalValue,
       propagateEscapeKeyDown,
       revertOnEscapeKeyDown,
@@ -267,7 +279,7 @@ export function RawTextboxNumeric<Name extends string>({
   )
 
   const handleMouseUp = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
+    function (event: Event.onMouseUp<HTMLInputElement>): void {
       if (value !== MIXED_STRING) {
         return
       }
@@ -277,7 +289,7 @@ export function RawTextboxNumeric<Name extends string>({
   )
 
   const handlePaste = useCallback(
-    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>): void {
+    function (event: Event.onPaste<HTMLInputElement>): void {
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
@@ -299,12 +311,26 @@ export function RawTextboxNumeric<Name extends string>({
     [integer, suffix]
   )
 
+  const refCallback = useCallback(
+    function (inputElement: null | HTMLInputElement) {
+      inputElementRef.current = inputElement
+      if (ref === null) {
+        return
+      }
+      if (typeof ref === 'function') {
+        ref(inputElement)
+        return
+      }
+      ref.current = inputElement
+    },
+    [ref, inputElementRef]
+  )
+
   return (
     <input
       {...rest}
-      ref={inputElementRef}
+      ref={refCallback}
       disabled={disabled === true}
-      name={name}
       onBlur={handleBlur}
       onFocus={handleFocus}
       onInput={handleInput}
@@ -313,12 +339,12 @@ export function RawTextboxNumeric<Name extends string>({
       onPaste={handlePaste}
       placeholder={placeholder}
       spellcheck={false}
-      tabIndex={disabled === true ? -1 : 0}
+      tabIndex={0}
       type="text"
       value={value === MIXED_STRING ? 'Mixed' : value}
     />
   )
-}
+})
 
 function restrictValue(value: number, minimum?: number, maximum?: number) {
   if (typeof minimum !== 'undefined') {

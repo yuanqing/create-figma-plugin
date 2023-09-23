@@ -1,49 +1,61 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types/types.js'
+import { Event, EventHandler } from '../../types/event-handler.js'
+import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { noop } from '../../utilities/no-op.js'
 import styles from './icon-toggle-button.module.css'
 
-export type IconToggleButtonProps<Name extends string> = {
+export interface IconToggleButtonProps
+  extends FocusableComponentProps<HTMLInputElement> {
   children: ComponentChildren
   disabled?: boolean
-  name?: Name
-  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, Name>
-  propagateEscapeKeyDown?: boolean
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onValueChange?: EventHandler.onValueChange<boolean>
   value: boolean
 }
 
-export function IconToggleButton<Name extends string>({
-  children,
-  disabled = false,
-  name,
-  onChange = function () {},
-  onValueChange = function () {},
-  propagateEscapeKeyDown = true,
-  value,
-  ...rest
-}: Props<HTMLInputElement, IconToggleButtonProps<Name>>): JSX.Element {
+export const IconToggleButton = createComponent<
+  HTMLInputElement,
+  IconToggleButtonProps
+>(function (
+  {
+    blurOnEscapeKeyDown = true,
+    children,
+    disabled = false,
+    onChange = noop,
+    onKeyDown = noop,
+    onValueChange = noop,
+    propagateEscapeKeyDown = true,
+    value,
+    ...rest
+  },
+  ref
+): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      onValueChange(!value, name)
+    function (event: Event.onChange<HTMLInputElement>): void {
+      onValueChange(!(value === true))
       onChange(event)
     },
-    [name, onChange, onValueChange, value]
+    [onChange, onValueChange, value]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      event.currentTarget.blur()
+      if (blurOnEscapeKeyDown === true) {
+        event.currentTarget.blur()
+      }
     },
-    [propagateEscapeKeyDown]
+    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -55,13 +67,13 @@ export function IconToggleButton<Name extends string>({
     >
       <input
         {...rest}
+        ref={ref}
         checked={value === true}
         class={styles.input}
         disabled={disabled === true}
-        name={name}
         onChange={handleChange}
         onKeyDown={disabled === true ? undefined : handleKeyDown}
-        tabIndex={disabled === true ? -1 : 0}
+        tabIndex={0}
         type="checkbox"
       />
       <div class={styles.box}>
@@ -69,4 +81,4 @@ export function IconToggleButton<Name extends string>({
       </div>
     </label>
   )
-}
+})

@@ -87,7 +87,7 @@ export const Placeholder = function () {
     <TextboxAutocomplete
       onInput={handleInput}
       options={options}
-      placeholder="placeholder"
+      placeholder="Placeholder"
       value={value}
       variant="border"
     />
@@ -114,7 +114,7 @@ export const PlaceholderFocused = function () {
       {...useInitialFocus()}
       onInput={handleInput}
       options={options}
-      placeholder="placeholder"
+      placeholder="Placeholder"
       value={value}
       variant="border"
     />

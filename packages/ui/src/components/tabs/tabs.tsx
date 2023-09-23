@@ -1,17 +1,18 @@
 import { ComponentChildren, Fragment, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types/types.js'
+import { Event, EventHandler } from '../../types/event-handler.js'
+import { FocusableComponentProps } from '../../types/focusable-component-props.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { noop } from '../../utilities/no-op.js'
 import styles from './tabs.module.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-tabs-item-id'
 
-export type TabsProps<Name extends string> = {
-  name?: Name
-  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<string, Name>
+export interface TabsProps extends FocusableComponentProps<HTMLDivElement> {
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onValueChange?: EventHandler.onValueChange<string>
   options: Array<TabsOption>
-  propagateEscapeKeyDown?: boolean
   value: null | string
 }
 export type TabsOption = {
@@ -19,38 +20,45 @@ export type TabsOption = {
   value: string
 }
 
-export function Tabs<Name extends string>({
-  name,
-  onChange = function () {},
-  onValueChange = function () {},
-  options,
-  propagateEscapeKeyDown = true,
-  value,
-  ...rest
-}: Props<HTMLInputElement, TabsProps<Name>>): JSX.Element {
+export const Tabs = createComponent<HTMLDivElement, TabsProps>(function (
+  {
+    blurOnEscapeKeyDown = true,
+    onChange = noop,
+    onKeyDown = noop,
+    onValueChange = noop,
+    options,
+    propagateEscapeKeyDown = true,
+    value,
+    ...rest
+  },
+  ref
+): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>): void {
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name)
+      onValueChange(newValue)
       onChange(event)
     },
-    [name, onChange, onValueChange, options]
+    [onChange, onValueChange, options]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      event.currentTarget.blur()
+      if (blurOnEscapeKeyDown === true) {
+        event.currentTarget.blur()
+      }
     },
-    [propagateEscapeKeyDown]
+    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
   )
 
   const activeOption = options.find(function (option: TabsOption): boolean {
@@ -59,7 +67,7 @@ export function Tabs<Name extends string>({
 
   return (
     <Fragment>
-      <div class={styles.tabs}>
+      <div ref={ref} class={styles.tabs}>
         {options.map(function (option: TabsOption, index: number): JSX.Element {
           return (
             <label key={index} class={styles.label}>
@@ -67,7 +75,6 @@ export function Tabs<Name extends string>({
                 {...rest}
                 checked={value === option.value}
                 class={styles.input}
-                name={name}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 tabIndex={0}
@@ -85,4 +92,4 @@ export function Tabs<Name extends string>({
       )}
     </Fragment>
   )
-}
+})

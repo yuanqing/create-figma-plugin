@@ -1,107 +1,126 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
-import { Props } from '../../../types/types.js'
+import { Event, EventHandler } from '../../../types/event-handler.js'
+import { FocusableComponentProps } from '../../../types/focusable-component-props.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
+import { noop } from '../../../utilities/no-op.js'
 import { fileComparator } from '../private/file-comparator.js'
 import styles from './file-upload-dropzone.module.css'
 
-export type FileUploadDropzoneProps = {
+export interface FileUploadDropzoneProps
+  extends FocusableComponentProps<HTMLInputElement> {
   acceptedFileTypes?: Array<string>
   children: ComponentChildren
   multiple?: boolean
-  onSelectedFiles?: (files: Array<File>) => void
-  propagateEscapeKeyDown?: boolean
+  onBlur?: EventHandler.onBlur<HTMLInputElement>
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onDragEnd?: EventHandler.onDragEnd<HTMLInputElement>
+  onDragEnter?: EventHandler.onDragEnter<HTMLInputElement>
+  onDragOver?: EventHandler.onDragOver<HTMLInputElement>
+  onDrop?: EventHandler.onDrop<HTMLInputElement>
+  onSelectedFiles?: EventHandler.onSelectedFiles
 }
 
-export function FileUploadDropzone({
-  acceptedFileTypes,
-  children,
-  multiple = false,
-  onSelectedFiles,
-  propagateEscapeKeyDown = true,
-  ...rest
-}: Props<HTMLInputElement, FileUploadDropzoneProps>): JSX.Element {
-  const [isDropActive, setIsDropActive] = useState(false)
+export const FileUploadDropzone = createComponent<
+  HTMLInputElement,
+  FileUploadDropzoneProps
+>(function (
+  {
+    acceptedFileTypes = [],
+    blurOnEscapeKeyDown = true,
+    children,
+    multiple = false,
+    onBlur = noop,
+    onChange = noop,
+    onDragEnd = noop,
+    onDragEnter = noop,
+    onDragOver = noop,
+    onDrop = noop,
+    onKeyDown = noop,
+    onSelectedFiles = noop,
+    propagateEscapeKeyDown = true,
+    ...rest
+  },
+  ref
+): JSX.Element {
+  const [isDropActive, setIsDropActive] = useState<boolean>(false)
 
-  const filterFiles = useCallback(
-    function (files: FileList): Array<File> {
-      const result = Array.prototype.slice.call(files).sort(fileComparator)
-      if (typeof acceptedFileTypes === 'undefined') {
-        return result
-      }
-      return result.filter(function (file): boolean {
-        return acceptedFileTypes.indexOf(file.type) !== -1
-      })
+  const handleBlur = useCallback(
+    function (event: Event.onBlur<HTMLInputElement>): void {
+      onBlur(event)
+      setIsDropActive(false)
     },
-    [acceptedFileTypes]
+    [onBlur]
   )
-
-  const handleBlur = useCallback(function (): void {
-    setIsDropActive(false)
-  }, [])
 
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      if (typeof onSelectedFiles === 'undefined') {
-        return
+    function (event: Event.onChange<HTMLInputElement>): void {
+      onChange(event)
+      const files = event.currentTarget.files
+      if (files === null) {
+        throw new Error('`event.currentTarget.files` is `null`')
       }
-      const files = event.currentTarget.files as FileList
-      onSelectedFiles(filterFiles(files))
+      onSelectedFiles(filterFiles({ acceptedFileTypes, files }))
     },
-    [filterFiles, onSelectedFiles]
+    [acceptedFileTypes, onChange, onSelectedFiles]
   )
 
-  const handleDragEnter = useCallback(function (
-    event: JSX.TargetedDragEvent<HTMLInputElement>
-  ) {
-    event.preventDefault()
-  },
-  [])
+  const handleDragEnter = useCallback(
+    function (event: Event.onDragEnter<HTMLInputElement>) {
+      onDragEnter(event)
+      event.preventDefault()
+    },
+    [onDragEnter]
+  )
 
-  const handleDragOver = useCallback(function (
-    event: JSX.TargetedDragEvent<HTMLInputElement>
-  ): void {
-    event.preventDefault()
-    setIsDropActive(true)
-  },
-  [])
+  const handleDragOver = useCallback(
+    function (event: Event.onDragOver<HTMLInputElement>): void {
+      onDragOver(event)
+      event.preventDefault()
+      setIsDropActive(true)
+    },
+    [onDragOver]
+  )
 
-  const handleDragEnd = useCallback(function (
-    event: JSX.TargetedDragEvent<HTMLInputElement>
-  ): void {
-    event.preventDefault()
-    setIsDropActive(false)
-  },
-  [])
+  const handleDragEnd = useCallback(
+    function (event: Event.onDragEnd<HTMLInputElement>): void {
+      onDragEnd(event)
+      event.preventDefault()
+      setIsDropActive(false)
+    },
+    [onDragEnd]
+  )
 
   const handleDrop = useCallback(
-    function (event: JSX.TargetedDragEvent<HTMLInputElement>): void {
-      if (typeof onSelectedFiles === 'undefined') {
-        return
-      }
-      event.preventDefault()
+    function (event: Event.onDrop<HTMLInputElement>): void {
+      onDrop(event)
       if (event.dataTransfer === null) {
         throw new Error('`event.dataTransfer` is `null`')
       }
-      const files = filterFiles(event.dataTransfer.files)
-      onSelectedFiles(files)
+      event.preventDefault()
+      const files = event.dataTransfer.files
+      onSelectedFiles(filterFiles({ acceptedFileTypes, files }))
       setIsDropActive(false)
     },
-    [filterFiles, onSelectedFiles]
+    [acceptedFileTypes, onDrop, onSelectedFiles]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      event.currentTarget.blur()
+      if (blurOnEscapeKeyDown === true) {
+        event.currentTarget.blur()
+      }
     },
-    [propagateEscapeKeyDown]
+    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -113,8 +132,9 @@ export function FileUploadDropzone({
     >
       <input
         {...rest}
+        ref={ref}
         accept={
-          typeof acceptedFileTypes === 'undefined'
+          acceptedFileTypes.length === 0
             ? undefined
             : acceptedFileTypes.join(',')
         }
@@ -136,4 +156,18 @@ export function FileUploadDropzone({
       <div class={styles.children}>{children}</div>
     </div>
   )
+})
+
+function filterFiles(options: {
+  files: FileList
+  acceptedFileTypes: Array<string>
+}): Array<File> {
+  const { files, acceptedFileTypes } = options
+  const result = Array.prototype.slice.call(files).sort(fileComparator)
+  if (acceptedFileTypes.length === 0) {
+    return result
+  }
+  return result.filter(function (file): boolean {
+    return acceptedFileTypes.indexOf(file.type) !== -1
+  })
 }

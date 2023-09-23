@@ -2,53 +2,65 @@ import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
-import { OnValueChange, Props } from '../../types/types.js'
+import { Event, EventHandler } from '../../types/event-handler.js'
+import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { noop } from '../../utilities/no-op.js'
 import styles from './selectable-item.module.css'
 
-export type SelectableItemProps<Name extends string> = {
+export interface SelectableItemProps
+  extends FocusableComponentProps<HTMLInputElement> {
   bold?: boolean
   children: ComponentChildren
   disabled?: boolean
   indent?: boolean
-  name?: Name
-  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, Name>
-  propagateEscapeKeyDown?: boolean
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onValueChange?: EventHandler.onValueChange<boolean>
   value: boolean
 }
 
-export function SelectableItem<Name extends string>({
-  bold = false,
-  children,
-  disabled = false,
-  indent = false,
-  name,
-  onChange = function () {},
-  onValueChange = function () {},
-  propagateEscapeKeyDown = true,
-  value,
-  ...rest
-}: Props<HTMLInputElement, SelectableItemProps<Name>>): JSX.Element {
+export const SelectableItem = createComponent<
+  HTMLInputElement,
+  SelectableItemProps
+>(function (
+  {
+    blurOnEscapeKeyDown = true,
+    bold = false,
+    children,
+    disabled = false,
+    indent = false,
+    onChange = noop,
+    onKeyDown = noop,
+    onValueChange = noop,
+    propagateEscapeKeyDown = true,
+    value,
+    ...rest
+  },
+  ref
+): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      onValueChange(!value, name)
+    function (event: Event.onChange<HTMLInputElement>): void {
+      onValueChange(!(value === true))
       onChange(event)
     },
-    [name, onChange, onValueChange, value]
+    [onChange, onValueChange, value]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      event.currentTarget.blur()
+      if (blurOnEscapeKeyDown === true) {
+        event.currentTarget.blur()
+      }
     },
-    [propagateEscapeKeyDown]
+    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -62,13 +74,13 @@ export function SelectableItem<Name extends string>({
     >
       <input
         {...rest}
+        ref={ref}
         checked={value === true}
         class={styles.input}
         disabled={disabled === true}
-        name={name}
         onChange={handleChange}
         onKeyDown={disabled === true ? undefined : handleKeyDown}
-        tabIndex={disabled === true ? -1 : 0}
+        tabIndex={0}
         type="checkbox"
       />
       <div class={styles.box} />
@@ -80,4 +92,4 @@ export function SelectableItem<Name extends string>({
       ) : null}
     </label>
   )
-}
+})

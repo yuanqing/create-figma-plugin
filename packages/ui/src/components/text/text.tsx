@@ -1,7 +1,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../types/types.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './text.module.css'
 
 export type TextProps = {
@@ -11,12 +11,12 @@ export type TextProps = {
 }
 export type TextAlignment = 'left' | 'center' | 'right'
 
-export function Text({
+export const Text = createComponent<HTMLDivElement, TextProps>(function ({
   align = 'left',
   children,
   numeric = false,
   ...rest
-}: Props<HTMLDivElement, TextProps>): JSX.Element {
+}): JSX.Element {
   return (
     <div
       {...rest}
@@ -29,4 +29,4 @@ export function Text({
       {children}
     </div>
   )
-}
+})

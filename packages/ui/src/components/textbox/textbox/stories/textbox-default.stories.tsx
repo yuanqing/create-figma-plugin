@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, JSX } from 'preact'
-import { useState } from 'preact/hooks'
+import { h, JSX, RefObject } from 'preact'
+import { useRef, useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
 import { IconLayerFrame16 } from '../../../../icons/icon-16/icon-layer-frame-16.js'
@@ -43,7 +43,7 @@ export const Placeholder = function () {
     setValue(newValue)
   }
   return (
-    <Textbox onInput={handleInput} placeholder="placeholder" value={value} />
+    <Textbox onInput={handleInput} placeholder="Placeholder" value={value} />
   )
 }
 
@@ -58,7 +58,7 @@ export const PlaceholderFocused = function () {
     <Textbox
       {...useInitialFocus()}
       onInput={handleInput}
-      placeholder="placeholder"
+      placeholder="Placeholder"
       value={value}
     />
   )
@@ -150,6 +150,18 @@ export const Mixed = function () {
   return <Textbox onInput={handleInput} value={value} />
 }
 
+export const BlurOnEnterKeyDown = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Textbox blurOnEnterKeyDown={false} onInput={handleInput} value={value} />
+  )
+}
+
 export const RevertOnEscapeKeyDown = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -196,4 +208,19 @@ export const OnValueInput = function () {
     setValue(newValue)
   }
   return <Textbox onValueInput={handleValueInput} value={value} />
+}
+
+export const Ref = function () {
+  const ref: RefObject<HTMLInputElement> = useRef(null)
+  const [value, setValue] = useState<string>('Text')
+  function handleInput() {
+    if (ref.current === null) {
+      throw new Error('`ref.current` is `null`')
+    }
+    console.log(ref.current)
+    const newValue = ref.current.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox ref={ref} onInput={handleInput} value={value} />
 }

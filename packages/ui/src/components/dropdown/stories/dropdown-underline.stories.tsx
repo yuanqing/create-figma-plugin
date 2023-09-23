@@ -22,7 +22,7 @@ export const Empty = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -69,7 +69,7 @@ export const Placeholder = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -82,7 +82,7 @@ export const Placeholder = function () {
     <Dropdown
       onChange={handleChange}
       options={options}
-      placeholder="placeholder"
+      placeholder="Placeholder"
       value={value}
       variant="underline"
     />
@@ -95,7 +95,7 @@ export const Filled = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -142,7 +142,7 @@ export const LongText = function () {
     { value: Array(20).fill('foo').join(' ') },
     { value: Array(20).fill('bar').join(' ') },
     { value: Array(20).fill('baz').join(' ') },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: Array(4).fill('qux').join(' ') }
   ]
@@ -167,7 +167,7 @@ export const Focused = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -192,7 +192,7 @@ export const Disabled = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -216,7 +216,7 @@ export const OptionDisabled = function () {
     { value: 'foo' },
     { disabled: true, value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -244,7 +244,7 @@ export const OptionText = function () {
     },
     { text: 'bar', value: 'b' },
     { text: 'baz', value: 'c' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { text: 'qux', value: 'd' }
   ]
@@ -269,7 +269,7 @@ export const Icon = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -295,7 +295,7 @@ export const IconDisabled = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -322,7 +322,7 @@ export const IconText = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -348,7 +348,7 @@ export const IconTextDisabled = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -379,7 +379,7 @@ export const DynamicallySetOptions = function () {
       { value: 'foo' },
       { value: 'bar' },
       { value: 'baz' },
-      { separator: true },
+      '-',
       { header: 'Header' },
       { value: 'qux' }
     ])
@@ -396,7 +396,7 @@ export const DynamicallySetOptions = function () {
       <Dropdown
         onChange={handleChange}
         options={options}
-        placeholder="placeholder"
+        placeholder="Placeholder"
         value={value}
         variant="underline"
       />
@@ -452,7 +452,7 @@ export const OnValueChange = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -476,7 +476,7 @@ export const TopLeft = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -539,7 +539,7 @@ export const TopRight = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -602,7 +602,7 @@ export const MiddleLeft = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -667,7 +667,7 @@ export const MiddleRight = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -732,7 +732,7 @@ export const BottomLeft = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -795,7 +795,7 @@ export const BottomRight = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]

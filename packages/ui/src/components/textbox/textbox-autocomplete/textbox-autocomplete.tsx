@@ -4,9 +4,12 @@ import { useCallback, useRef, useState } from 'preact/hooks'
 import menuStyles from '../../../css/menu.module.css'
 import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside.js'
 import { IconMenuCheckmarkChecked16 } from '../../../icons/icon-16/icon-menu-checkmark-checked-16.js'
-import { OnValueChange, Props } from '../../../types/types.js'
+import { Event, EventHandler } from '../../../types/event-handler.js'
+import { FocusableComponentProps } from '../../../types/focusable-component-props'
 import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
+import { noop } from '../../../utilities/no-op'
 import { computeNextValue } from '../private/compute-next-value.js'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating.js'
 import textboxStyles from '../textbox/textbox.module.css'
@@ -17,16 +20,15 @@ const INVALID_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
 const MENU_VERTICAL_MARGIN = 16
 
-export type TextboxAutocompleteProps<Name extends string> = {
+export interface TextboxAutocompleteProps
+  extends FocusableComponentProps<HTMLInputElement> {
   disabled?: boolean
   filter?: boolean
   icon?: ComponentChildren
-  name?: Name
-  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueInput?: OnValueChange<string, Name>
+  onInput?: EventHandler.onInput<HTMLInputElement>
+  onValueInput?: EventHandler.onValueChange<string>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
-  propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   spellCheck?: boolean
   strict?: boolean
@@ -59,23 +61,30 @@ type OptionValueWithId = TextboxAutocompleteOptionValue & {
 }
 type Id = typeof INVALID_ID | string
 
-export function TextboxAutocomplete<Name extends string>({
-  disabled = false,
-  filter = false,
-  icon,
-  name,
-  onInput = function () {},
-  onValueInput = function () {},
-  placeholder,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
-  spellCheck = false,
-  strict = false,
-  top = false,
-  value,
-  variant,
-  ...rest
-}: Props<HTMLInputElement, TextboxAutocompleteProps<Name>>): JSX.Element {
+export const TextboxAutocomplete = createComponent<
+  HTMLInputElement,
+  TextboxAutocompleteProps
+>(function (
+  {
+    blurOnEscapeKeyDown = true,
+    disabled = false,
+    filter = false,
+    icon,
+    onInput = noop,
+    onKeyDown = noop,
+    onValueInput = noop,
+    placeholder,
+    propagateEscapeKeyDown = true,
+    revertOnEscapeKeyDown = false,
+    spellCheck = false,
+    strict = false,
+    top = false,
+    value,
+    variant,
+    ...rest
+  },
+  ref
+): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
@@ -96,14 +105,6 @@ export function TextboxAutocomplete<Name extends string>({
 
   // Uncomment to debug
   // console.table([{ isMenuVisible, selectedId, originalValue, editedValue, value }])
-
-  const triggerBlur = useCallback(function (): void {
-    setIsMenuVisible(false)
-    setOriginalValue(EMPTY_STRING)
-    setEditedValue(EMPTY_STRING)
-    setSelectedId(INVALID_ID)
-    getCurrentFromRef(inputElementRef).blur()
-  }, [])
 
   // Adjust the menu scroll position so that the selected option is always visible
   const updateScrollPosition = useCallback(function (id: Id): void {
@@ -149,9 +150,19 @@ export function TextboxAutocomplete<Name extends string>({
     [options, updateScrollPosition]
   )
 
-  const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
-      setIsMenuVisible(true)
+  const triggerBlur = useCallback(function (): void {
+    getCurrentFromRef(inputElementRef).blur()
+  }, [])
+
+  const triggerHideMenu = useCallback(function (): void {
+    setIsMenuVisible(false)
+    setOriginalValue(EMPTY_STRING)
+    setEditedValue(EMPTY_STRING)
+    setSelectedId(INVALID_ID)
+  }, [])
+
+  const triggerShowMenu = useCallback(
+    function (): void {
       updateMenuElementMaxHeight(
         getCurrentFromRef(rootElementRef),
         getCurrentFromRef(menuElementRef),
@@ -159,29 +170,44 @@ export function TextboxAutocomplete<Name extends string>({
       )
       setOriginalValue(value)
       updateEditedValue(value)
-      const inputElement = event.currentTarget
-      inputElement.focus()
-      inputElement.select()
+      setIsMenuVisible(true)
     },
     [top, updateEditedValue, value]
   )
 
+  const handleFocus = useCallback(
+    function (event: Event.onFocus<HTMLInputElement>): void {
+      event.currentTarget.select()
+      if (isMenuVisible === false) {
+        triggerShowMenu()
+      }
+    },
+    [isMenuVisible, triggerShowMenu]
+  )
+
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
+    function (event: Event.onInput<HTMLInputElement>): void {
+      if (isMenuVisible === false) {
+        triggerShowMenu()
+      }
       const newValue = event.currentTarget.value
       updateEditedValue(newValue)
-      onValueInput(newValue, name)
+      onValueInput(newValue)
       onInput(event)
     },
-    [name, onInput, onValueInput, updateEditedValue]
+    [isMenuVisible, onInput, onValueInput, triggerShowMenu, updateEditedValue]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
       const inputElement = event.currentTarget
       const key = event.key
       if (key === 'ArrowUp' || key === 'ArrowDown') {
         event.preventDefault()
+        if (isMenuVisible === false) {
+          triggerShowMenu()
+          return
+        }
         if (options.length === 0) {
           return
         }
@@ -193,7 +219,7 @@ export function TextboxAutocomplete<Name extends string>({
           // Reached beginning/end of list of `options`, so just restore `savedValue`
           setSelectedId(INVALID_ID)
           inputElement.value = editedValue
-          onValueInput(editedValue, name)
+          onValueInput(editedValue)
           onInput(event)
           updateScrollPosition(INVALID_ID)
           return
@@ -207,23 +233,43 @@ export function TextboxAutocomplete<Name extends string>({
         }
         const newValue = newOptionValue.value
         inputElement.value = newValue
-        onValueInput(newValue, name)
+        onValueInput(newValue)
         onInput(event)
         inputElement.select()
         return
       }
-      if (key === 'Enter' || key === 'Escape' || key === 'Tab') {
+      if (key === 'Escape') {
         event.preventDefault()
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (key === 'Escape' && revertOnEscapeKeyDown === true) {
+        if (isMenuVisible === false) {
+          triggerBlur()
+          return
+        }
+        if (revertOnEscapeKeyDown === true) {
           inputElement.value = originalValue
-          const inputEvent = document.createEvent('Event')
-          inputEvent.initEvent('input', true, true)
+          const inputEvent = new window.Event('input', {
+            bubbles: true,
+            cancelable: true
+          })
           inputElement.dispatchEvent(inputEvent)
         }
-        triggerBlur()
+        triggerHideMenu()
+        return
+      }
+      if (key === 'Enter') {
+        event.preventDefault()
+        inputElement.select()
+        if (isMenuVisible === false) {
+          triggerShowMenu()
+          return
+        }
+        triggerHideMenu()
+        return
+      }
+      if (key === 'Tab') {
+        triggerHideMenu()
         return
       }
       if (strict === false) {
@@ -242,7 +288,7 @@ export function TextboxAutocomplete<Name extends string>({
     },
     [
       editedValue,
-      name,
+      isMenuVisible,
       onInput,
       onValueInput,
       options,
@@ -252,12 +298,23 @@ export function TextboxAutocomplete<Name extends string>({
       selectedId,
       strict,
       triggerBlur,
+      triggerHideMenu,
+      triggerShowMenu,
       updateScrollPosition
     ]
   )
 
+  const handleMouseDown = useCallback(
+    function (): void {
+      if (isMenuVisible === false) {
+        triggerShowMenu()
+      }
+    },
+    [isMenuVisible, triggerShowMenu]
+  )
+
   const handlePaste = useCallback(
-    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>): void {
+    function (event: Event.onPaste<HTMLInputElement>): void {
       if (strict === false) {
         return
       }
@@ -276,7 +333,7 @@ export function TextboxAutocomplete<Name extends string>({
   )
 
   const handleOptionChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>): void {
       const newId = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -288,16 +345,19 @@ export function TextboxAutocomplete<Name extends string>({
       }
       const inputElement = getCurrentFromRef(inputElementRef)
       inputElement.value = newOptionValue.value
-      const inputEvent = document.createEvent('Event')
-      inputEvent.initEvent('input', true, true)
+      const inputEvent = new window.Event('input', {
+        bubbles: true,
+        cancelable: true
+      })
       inputElement.dispatchEvent(inputEvent)
-      triggerBlur()
+      inputElement.focus()
+      triggerHideMenu()
     },
-    [options, triggerBlur]
+    [options, triggerHideMenu]
   )
 
   const handleOptionMouseMove = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
+    function (event: Event.onMouseMove<HTMLInputElement>): void {
       const newId = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -313,14 +373,30 @@ export function TextboxAutocomplete<Name extends string>({
       if (isMenuVisible === false) {
         return
       }
+      triggerHideMenu()
       triggerBlur()
     },
-    [isMenuVisible, triggerBlur]
+    [isMenuVisible, triggerBlur, triggerHideMenu]
   )
   useMouseDownOutside({
     onMouseDownOutside: handleMouseDownOutside,
     ref: rootElementRef
   })
+
+  const refCallback = useCallback(
+    function (inputElement: null | HTMLInputElement) {
+      inputElementRef.current = inputElement
+      if (ref === null) {
+        return
+      }
+      if (typeof ref === 'function') {
+        ref(inputElement)
+        return
+      }
+      ref.current = inputElement
+    },
+    [ref, inputElementRef]
+  )
 
   return (
     <div
@@ -339,16 +415,16 @@ export function TextboxAutocomplete<Name extends string>({
       <div class={textboxStyles.inner}>
         <input
           {...rest}
-          ref={inputElementRef}
+          ref={refCallback}
           class={textboxStyles.input}
           disabled={disabled === true}
-          name={name}
           onFocus={handleFocus}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
+          onMouseDown={handleMouseDown}
           onPaste={handlePaste}
           placeholder={placeholder}
-          tabIndex={disabled === true ? -1 : 0}
+          tabIndex={0}
           type="text"
           value={value}
         />
@@ -400,7 +476,6 @@ export function TextboxAutocomplete<Name extends string>({
                   checked={value === option.value}
                   class={menuStyles.input}
                   disabled={option.disabled === true}
-                  name={name}
                   onChange={handleOptionChange}
                   onMouseMove={handleOptionMouseMove}
                   spellcheck={spellCheck}
@@ -422,7 +497,7 @@ export function TextboxAutocomplete<Name extends string>({
       </div>
     </div>
   )
-}
+})
 
 // Add an `id` attribute to all the `TextboxAutocompleteOptionValue` items in `options`
 function createOptions(

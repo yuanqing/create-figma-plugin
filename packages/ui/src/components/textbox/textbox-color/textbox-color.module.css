@@ -116,7 +116,9 @@
 }
 .hasBorder .divider,
 .textboxColor:not(.disabled) .input:hover ~ .divider,
-.textboxColor:not(.disabled) .input:focus ~ .divider {
+.textboxColor:not(.disabled) .input:focus ~ .divider,
+.textboxColor:not(.disabled) .hexColorSelector:hover ~ .divider,
+.textboxColor:not(.disabled) .hexColorSelector:focus ~ .divider {
   background-color: var(--figma-color-border);
 }
 

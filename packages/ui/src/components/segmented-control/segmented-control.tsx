@@ -1,68 +1,69 @@
 import { ComponentChildren, h, JSX } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types/types.js'
+import { Event, EventHandler } from '../../types/event-handler.js'
+import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { noop } from '../../utilities/no-op.js'
 import styles from './segmented-control.module.css'
 
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'
 
-export type SegmentedControlProps<
-  Name extends string,
-  Value extends boolean | number | string
-> = {
+export interface SegmentedControlProps
+  extends FocusableComponentProps<HTMLInputElement> {
   disabled?: boolean
-  name?: Name
-  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<Value, Name>
-  options: Array<SegmentedControlOption<Value>>
-  propagateEscapeKeyDown?: boolean
-  value: Value
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onValueChange?: EventHandler.onValueChange<string>
+  options: Array<SegmentedControlOption>
+  value: string
 }
-export type SegmentedControlOption<
-  Value extends boolean | number | string = string
-> = {
+export type SegmentedControlOption = {
   disabled?: boolean
   children?: ComponentChildren
-  value: Value
+  value: string
 }
 
-export function SegmentedControl<
-  Name extends string,
-  Value extends boolean | number | string
->({
+export const SegmentedControl = createComponent<
+  HTMLInputElement,
+  SegmentedControlProps
+>(function ({
+  blurOnEscapeKeyDown = true,
   disabled = false,
-  name,
-  onChange = function () {},
-  onValueChange = function () {},
+  onChange = noop,
+  onKeyDown = noop,
+  onValueChange = noop,
   options,
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}: Props<HTMLInputElement, SegmentedControlProps<Name, Value>>): JSX.Element {
+}): JSX.Element {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>): void {
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
       const newValue = options[parseInt(id, 10)].value
-      onValueChange(newValue, name)
+      onValueChange(newValue)
       onChange(event)
     },
-    [name, onChange, onValueChange, options]
+    [onChange, onValueChange, options]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>): void {
+      onKeyDown(event)
       if (event.key !== 'Escape') {
         return
       }
       if (propagateEscapeKeyDown === false) {
         event.stopPropagation()
       }
-      event.currentTarget.blur()
+      if (blurOnEscapeKeyDown === true) {
+        event.currentTarget.blur()
+      }
     },
-    [propagateEscapeKeyDown]
+    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -74,7 +75,7 @@ export function SegmentedControl<
     >
       <div class={styles.labels}>
         {options.map(function (
-          option: SegmentedControlOption<Value>,
+          option: SegmentedControlOption,
           index: number
         ): JSX.Element {
           const children =
@@ -89,10 +90,9 @@ export function SegmentedControl<
                 checked={value === option.value}
                 class={styles.input}
                 disabled={isOptionDisabled === true}
-                name={name}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                tabIndex={isOptionDisabled === true ? -1 : 0}
+                tabIndex={0}
                 type="radio"
                 value={`${option.value}`}
                 {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
@@ -111,4 +111,4 @@ export function SegmentedControl<
       <div class={styles.border} />
     </div>
   )
-}
+})

@@ -1,19 +1,19 @@
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../types/types.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './muted.module.css'
 
 export type MutedProps = {
   children: ComponentChildren
 }
 
-export function Muted({
-  children,
-  ...rest
-}: Props<HTMLSpanElement, MutedProps>): JSX.Element {
+export const Muted = createComponent<HTMLSpanElement, MutedProps>(function (
+  { children, ...rest },
+  ref
+): JSX.Element {
   return (
-    <span {...rest} class={styles.muted}>
+    <span {...rest} ref={ref} class={styles.muted}>
       {children}
     </span>
   )
-}
+})

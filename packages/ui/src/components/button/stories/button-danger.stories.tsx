@@ -105,3 +105,11 @@ export const FullWidthLongText = function () {
 FullWidthLongText.parameters = {
   fixedWidth: true
 }
+
+export const BlurOnEscapeKeyDown = function () {
+  return (
+    <Button blurOnEscapeKeyDown={false} danger>
+      Text
+    </Button>
+  )
+}

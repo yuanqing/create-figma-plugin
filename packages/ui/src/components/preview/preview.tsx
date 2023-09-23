@@ -1,19 +1,19 @@
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../types/types.js'
+import { createComponent } from '../../utilities/create-component.js'
 import style from './preview.module.css'
 
 export type PreviewProps = {
   children: ComponentChildren
 }
 
-export function Preview({
-  children,
-  ...rest
-}: Props<HTMLDivElement, PreviewProps>): JSX.Element {
+export const Preview = createComponent<HTMLDivElement, PreviewProps>(function (
+  { children, ...rest },
+  ref
+): JSX.Element {
   return (
-    <div {...rest} class={style.preview}>
+    <div {...rest} ref={ref} class={style.preview}>
       {children}
     </div>
   )
-}
+})

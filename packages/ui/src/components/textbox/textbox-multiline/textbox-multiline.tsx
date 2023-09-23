@@ -2,22 +2,24 @@ import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { h, JSX, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../types/types.js'
+import { Event, EventHandler } from '../../../types/event-handler.js'
+import { FocusableComponentProps } from '../../../types/focusable-component-props.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
+import { noop } from '../../../utilities/no-op.js'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating.js'
 import styles from './textbox-multiline.module.css'
 
 const EMPTY_STRING = ''
 
-export type TextboxMultilineProps<Name extends string> = {
+export interface TextboxMultilineProps
+  extends FocusableComponentProps<HTMLTextAreaElement> {
   grow?: boolean
   disabled?: boolean
-  name?: Name
-  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLTextAreaElement>>
-  onValueInput?: OnValueChange<string, Name>
+  onInput?: EventHandler.onInput<HTMLTextAreaElement>
+  onValueInput?: (value: string) => void
   placeholder?: string
-  propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   rows?: number
   spellCheck?: boolean
@@ -28,22 +30,29 @@ export type TextboxMultilineProps<Name extends string> = {
 
 export type TextboxMultilineVariant = 'border' | 'underline'
 
-export function TextboxMultiline<Name extends string>({
-  grow = false,
-  disabled = false,
-  name,
-  onInput = function () {},
-  onValueInput = function () {},
-  placeholder,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
-  rows = 3,
-  spellCheck = false,
-  validateOnBlur,
-  variant,
-  value,
-  ...rest
-}: Props<HTMLTextAreaElement, TextboxMultilineProps<Name>>): JSX.Element {
+export const TextboxMultiline = createComponent<
+  HTMLTextAreaElement,
+  TextboxMultilineProps
+>(function (
+  {
+    blurOnEscapeKeyDown = true,
+    grow = false,
+    disabled = false,
+    onInput = noop,
+    onKeyDown = noop,
+    onValueInput = noop,
+    placeholder,
+    propagateEscapeKeyDown = true,
+    revertOnEscapeKeyDown = false,
+    rows = 3,
+    spellCheck = false,
+    validateOnBlur,
+    variant,
+    value,
+    ...rest
+  },
+  ref
+): JSX.Element {
   const textAreaElementRef: RefObject<HTMLTextAreaElement> = useRef(null)
   const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
@@ -52,8 +61,10 @@ export function TextboxMultiline<Name extends string>({
   const setTextAreaElementValue = useCallback(function (value: string): void {
     const textAreaElement = getCurrentFromRef(textAreaElementRef)
     textAreaElement.value = value
-    const inputEvent = document.createEvent('Event')
-    inputEvent.initEvent('input', true, true)
+    const inputEvent = new window.Event('input', {
+      bubbles: true,
+      cancelable: true
+    })
     textAreaElement.dispatchEvent(inputEvent)
   }, [])
 
@@ -86,7 +97,7 @@ export function TextboxMultiline<Name extends string>({
   )
 
   const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLTextAreaElement>): void {
+    function (event: Event.onFocus<HTMLTextAreaElement>): void {
       setOriginalValue(value)
       event.currentTarget.select()
     },
@@ -94,25 +105,28 @@ export function TextboxMultiline<Name extends string>({
   )
 
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLTextAreaElement>): void {
-      onValueInput(event.currentTarget.value, name)
+    function (event: Event.onInput<HTMLTextAreaElement>): void {
+      onValueInput(event.currentTarget.value)
       onInput(event)
     },
-    [name, onInput, onValueInput]
+    [onInput, onValueInput]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLTextAreaElement>): void {
+    function (event: Event.onKeyDown<HTMLTextAreaElement>): void {
+      onKeyDown(event)
       if (event.key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
         if (revertOnEscapeKeyDown === true) {
           revertOnEscapeKeyDownRef.current = true
           setTextAreaElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }
-        event.currentTarget.blur()
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
         return
       }
       if (
@@ -125,6 +139,8 @@ export function TextboxMultiline<Name extends string>({
       }
     },
     [
+      blurOnEscapeKeyDown,
+      onKeyDown,
       originalValue,
       propagateEscapeKeyDown,
       revertOnEscapeKeyDown,
@@ -134,13 +150,28 @@ export function TextboxMultiline<Name extends string>({
   )
 
   const handleMouseUp = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLTextAreaElement>): void {
+    function (event: Event.onMouseUp<HTMLTextAreaElement>): void {
       if (value === MIXED_STRING) {
         // Prevent changing the selection if `value` is `MIXED_STRING`
         event.preventDefault()
       }
     },
     [value]
+  )
+
+  const refCallback = useCallback(
+    function (textAreaElement: null | HTMLTextAreaElement) {
+      textAreaElementRef.current = textAreaElement
+      if (ref === null) {
+        return
+      }
+      if (typeof ref === 'function') {
+        ref(textAreaElement)
+        return
+      }
+      ref.current = textAreaElement
+    },
+    [ref, textAreaElementRef]
   )
 
   return (
@@ -163,10 +194,9 @@ export function TextboxMultiline<Name extends string>({
       ) : null}
       <textarea
         {...rest}
-        ref={textAreaElementRef}
+        ref={refCallback}
         class={styles.textarea}
         disabled={disabled === true}
-        name={name}
         onBlur={handleBlur}
         onFocus={handleFocus}
         onInput={handleInput}
@@ -175,11 +205,11 @@ export function TextboxMultiline<Name extends string>({
         placeholder={placeholder}
         rows={rows}
         spellcheck={spellCheck}
-        tabIndex={disabled === true ? -1 : 0}
+        tabIndex={0}
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
       <div class={styles.border} />
       {variant === 'underline' ? <div class={styles.underline} /> : null}
     </div>
   )
-}
+})

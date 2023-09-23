@@ -26,7 +26,7 @@ export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
 
 const rootElements: Array<HTMLDivElement> = [] // Stack of currently-open modals
 
-export function Modal({
+export const Modal = function ({
   children,
   closeButtonIcon = <IconCross32 />,
   closeButtonPosition = 'right',

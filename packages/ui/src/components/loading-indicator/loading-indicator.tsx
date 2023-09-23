@@ -1,19 +1,19 @@
 import { h, JSX } from 'preact'
 
 import { IconColor } from '../../types/colors.js'
-import { Props } from '../../types/types.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './loading-indicator.module.css'
 
 export type LoadingIndicatorProps = {
   color?: IconColor
 }
 
-export function LoadingIndicator({
-  color,
-  ...rest
-}: Props<HTMLDivElement, LoadingIndicatorProps>): JSX.Element {
+export const LoadingIndicator = createComponent<
+  HTMLDivElement,
+  LoadingIndicatorProps
+>(function ({ color, ...rest }, ref): JSX.Element {
   return (
-    <div {...rest} class={styles.loadingIndicator}>
+    <div {...rest} ref={ref} class={styles.loadingIndicator}>
       <svg
         class={styles.svg}
         style={
@@ -28,4 +28,4 @@ export function LoadingIndicator({
       </svg>
     </div>
   )
-}
+})

@@ -1,7 +1,7 @@
 import { ComponentChildren, h, JSX } from 'preact'
 
-import { Props } from '../../../types/types.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
 import textboxStyles from '../textbox/textbox.module.css'
 import {
   RawTextboxNumeric,
@@ -9,19 +9,17 @@ import {
 } from './private/raw-textbox-numeric.js'
 import textboxNumericStyles from './textbox-numeric.module.css'
 
-export type TextboxNumericProps<Name extends string> =
-  RawTextboxNumericProps<Name> & {
-    icon?: ComponentChildren
-    variant?: TextboxNumericVariant
-  }
+export type TextboxNumericProps = RawTextboxNumericProps & {
+  icon?: ComponentChildren
+  variant?: TextboxNumericVariant
+}
 
 export type TextboxNumericVariant = 'border' | 'underline'
 
-export function TextboxNumeric<Name extends string>({
-  icon,
-  variant,
-  ...rest
-}: Props<HTMLInputElement, TextboxNumericProps<Name>>): JSX.Element {
+export const TextboxNumeric = createComponent<
+  HTMLInputElement,
+  TextboxNumericProps
+>(function ({ icon, variant, ...rest }, ref): JSX.Element {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
@@ -41,6 +39,7 @@ export function TextboxNumeric<Name extends string>({
     >
       <RawTextboxNumeric
         {...rest}
+        ref={ref}
         class={createClassName([
           textboxStyles.input,
           textboxNumericStyles.input
@@ -53,4 +52,4 @@ export function TextboxNumeric<Name extends string>({
       {variant === 'underline' ? <div class={textboxStyles.underline} /> : null}
     </div>
   )
-}
+})

@@ -88,39 +88,6 @@ export const DisabledOption = function () {
   )
 }
 
-export const BooleanValue = function () {
-  const [value, setValue] = useState<boolean>(false)
-  const options: Array<RadioButtonsOption<boolean>> = [
-    { children: <Text>foo</Text>, value: true },
-    { children: <Text>bar</Text>, value: false }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue === 'true' ? true : false)
-  }
-  return (
-    <RadioButtons onChange={handleChange} options={options} value={value} />
-  )
-}
-
-export const NumberValue = function () {
-  const [value, setValue] = useState<number>(2)
-  const options: Array<RadioButtonsOption<number>> = [
-    { children: <Text>foo</Text>, value: 1 },
-    { children: <Text>bar</Text>, value: 2 },
-    { children: <Text>baz</Text>, value: 3 }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(parseInt(newValue, 10))
-  }
-  return (
-    <RadioButtons onChange={handleChange} options={options} value={value} />
-  )
-}
-
 export const Space = function () {
   const [value, setValue] = useState<string>('bar')
   const options: Array<RadioButtonsOption> = [
