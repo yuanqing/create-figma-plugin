@@ -12,7 +12,7 @@ import { useCallback, useState } from 'preact/hooks'
 import { highlight, languages } from 'prismjs'
 import Editor from 'react-simple-code-editor'
 
-import styles from './styles.css'
+import styles from './styles.module.css'
 import { InsertCodeHandler } from './types'
 
 function Plugin() {
