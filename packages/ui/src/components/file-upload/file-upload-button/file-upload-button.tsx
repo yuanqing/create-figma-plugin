@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../../types/event-handler.js'
@@ -21,6 +21,7 @@ export interface FileUploadButtonProps
   multiple?: boolean
   onChange?: EventHandler.onChange<HTMLInputElement>
   onClick?: EventHandler.onClick<HTMLInputElement>
+  onMouseDown?: EventHandler.onMouseDown<HTMLInputElement>
   onSelectedFiles?: EventHandler.onSelectedFiles
   secondary?: boolean
 }
@@ -39,50 +40,58 @@ export const FileUploadButton = createComponent<
     multiple = false,
     onChange = noop,
     onClick = noop,
-    onSelectedFiles = noop,
     onKeyDown = noop,
+    onMouseDown = noop,
+    onSelectedFiles = noop,
     propagateEscapeKeyDown = true,
     secondary = false,
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const handleChange = useCallback(
-    function (event: Event.onChange<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
-      if (disabled === true || loading === true) {
-        return
+      const fileList = event.currentTarget.files
+      if (fileList === null) {
+        throw new Error('`event.currentTarget.files` is `null`')
       }
-      const files = Array.prototype.slice
-        .call(event.currentTarget.files)
-        .sort(fileComparator)
-      onSelectedFiles(files)
+      const files = parseFileList(fileList)
+      if (files.length > 0) {
+        onSelectedFiles(files)
+      }
     },
-    [disabled, loading, onChange, onSelectedFiles]
+    [onChange, onSelectedFiles]
   )
 
   const handleClick = useCallback(
-    function (event: Event.onClick<HTMLInputElement>): void {
+    function (event: Event.onClick<HTMLInputElement>) {
       onClick(event)
-      if (disabled === true || loading === true) {
-        return
+      if (loading === true) {
+        event.preventDefault()
       }
+    },
+    [onClick, loading]
+  )
+
+  const handleMouseDown = useCallback(
+    function (event: Event.onClick<HTMLInputElement>) {
+      onMouseDown(event)
       event.currentTarget.focus()
     },
-    [disabled, loading, onClick]
+    [onMouseDown]
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
@@ -121,6 +130,7 @@ export const FileUploadButton = createComponent<
         onChange={handleChange}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
         tabIndex={0}
         title=""
         type="file"
@@ -131,3 +141,7 @@ export const FileUploadButton = createComponent<
     </div>
   )
 })
+
+function parseFileList(fileList: FileList): Array<File> {
+  return Array.prototype.slice.call(fileList).sort(fileComparator)
+}

@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
@@ -33,26 +33,26 @@ export const IconToggleButton = createComponent<
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const handleChange = useCallback(
-    function (event: Event.onChange<HTMLInputElement>): void {
-      onValueChange(!(value === true))
+    function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
+      const newValue = event.currentTarget.checked === true
+      onValueChange(newValue)
     },
-    [onChange, onValueChange, value]
+    [onChange, onValueChange]
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
@@ -72,7 +72,7 @@ export const IconToggleButton = createComponent<
         class={styles.input}
         disabled={disabled === true}
         onChange={handleChange}
-        onKeyDown={disabled === true ? undefined : handleKeyDown}
+        onKeyDown={handleKeyDown}
         tabIndex={0}
         type="checkbox"
       />

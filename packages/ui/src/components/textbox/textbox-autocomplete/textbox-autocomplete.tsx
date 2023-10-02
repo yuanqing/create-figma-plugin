@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX, RefObject } from 'preact'
+import { ComponentChildren, h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.module.css'
@@ -84,7 +84,7 @@ export const TextboxAutocomplete = createComponent<
     ...rest
   },
   ref
-): JSX.Element {
+) {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
@@ -107,7 +107,7 @@ export const TextboxAutocomplete = createComponent<
   // console.table([{ isMenuVisible, selectedId, originalValue, editedValue, value }])
 
   // Adjust the menu scroll position so that the selected option is always visible
-  const updateScrollPosition = useCallback(function (id: Id): void {
+  const updateScrollPosition = useCallback(function (id: Id) {
     const menuElement = getCurrentFromRef(menuElementRef)
     if (id === INVALID_ID) {
       menuElement.scrollTop = 0
@@ -133,7 +133,7 @@ export const TextboxAutocomplete = createComponent<
   }, [])
 
   const updateEditedValue = useCallback(
-    function (editedValue: string): void {
+    function (editedValue: string) {
       const newId = getIdByValue(options, editedValue)
       if (newId === INVALID_ID) {
         // `newValue` does not match any option in `options`
@@ -150,11 +150,11 @@ export const TextboxAutocomplete = createComponent<
     [options, updateScrollPosition]
   )
 
-  const triggerBlur = useCallback(function (): void {
+  const triggerBlur = useCallback(function () {
     getCurrentFromRef(inputElementRef).blur()
   }, [])
 
-  const triggerHideMenu = useCallback(function (): void {
+  const triggerHideMenu = useCallback(function () {
     setIsMenuVisible(false)
     setOriginalValue(EMPTY_STRING)
     setEditedValue(EMPTY_STRING)
@@ -162,7 +162,7 @@ export const TextboxAutocomplete = createComponent<
   }, [])
 
   const triggerShowMenu = useCallback(
-    function (): void {
+    function () {
       updateMenuElementMaxHeight(
         getCurrentFromRef(rootElementRef),
         getCurrentFromRef(menuElementRef),
@@ -176,7 +176,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handleFocus = useCallback(
-    function (event: Event.onFocus<HTMLInputElement>): void {
+    function (event: Event.onFocus<HTMLInputElement>) {
       event.currentTarget.select()
       if (isMenuVisible === false) {
         triggerShowMenu()
@@ -186,7 +186,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handleInput = useCallback(
-    function (event: Event.onInput<HTMLInputElement>): void {
+    function (event: Event.onInput<HTMLInputElement>) {
       if (isMenuVisible === false) {
         triggerShowMenu()
       }
@@ -199,7 +199,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       const inputElement = event.currentTarget
       const key = event.key
       if (key === 'ArrowUp' || key === 'ArrowDown') {
@@ -305,7 +305,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handleMouseDown = useCallback(
-    function (): void {
+    function () {
       if (isMenuVisible === false) {
         triggerShowMenu()
       }
@@ -314,7 +314,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handlePaste = useCallback(
-    function (event: Event.onPaste<HTMLInputElement>): void {
+    function (event: Event.onPaste<HTMLInputElement>) {
       if (strict === false) {
         return
       }
@@ -333,7 +333,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handleOptionChange = useCallback(
-    function (event: Event.onChange<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>) {
       const newId = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -357,7 +357,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handleOptionMouseMove = useCallback(
-    function (event: Event.onMouseMove<HTMLInputElement>): void {
+    function (event: Event.onMouseMove<HTMLInputElement>) {
       const newId = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -369,7 +369,7 @@ export const TextboxAutocomplete = createComponent<
   )
 
   const handleMouseDownOutside = useCallback(
-    function (): void {
+    function () {
       if (isMenuVisible === false) {
         return
       }
@@ -447,7 +447,7 @@ export const TextboxAutocomplete = createComponent<
               : textboxAutocompleteStyles.bottom
           ])}
         >
-          {options.map(function (option: Option, index: number): JSX.Element {
+          {options.map(function (option: Option, index: number) {
             if ('separator' in option) {
               return <hr key={index} class={menuStyles.optionSeparator} />
             }

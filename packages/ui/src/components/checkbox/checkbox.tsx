@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { IconControlCheckboxChecked12 } from '../../icons/icon-12/icon-control-checkbox-checked-12.js'
@@ -32,27 +32,26 @@ export const Checkbox = createComponent<HTMLInputElement, CheckboxProps>(
       ...rest
     },
     ref
-  ): JSX.Element {
+  ) {
     const handleChange = useCallback(
-      function (event: Event.onChange<HTMLInputElement>): void {
-        const newValue = event.currentTarget.checked
-        onValueChange(newValue)
+      function (event: Event.onChange<HTMLInputElement>) {
         onChange(event)
+        const newValue = event.currentTarget.checked === true
+        onValueChange(newValue)
       },
       [onChange, onValueChange]
     )
 
     const handleKeyDown = useCallback(
-      function (event: Event.onKeyDown<HTMLInputElement>): void {
+      function (event: Event.onKeyDown<HTMLInputElement>) {
         onKeyDown(event)
-        if (event.key !== 'Escape') {
-          return
-        }
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
+        if (event.key === 'Escape') {
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          if (blurOnEscapeKeyDown === true) {
+            event.currentTarget.blur()
+          }
         }
       },
       [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]

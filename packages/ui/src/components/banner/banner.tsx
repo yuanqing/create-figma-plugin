@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -14,7 +14,7 @@ export type BannerVariant = 'success' | 'warning'
 export const Banner = createComponent<HTMLDivElement, BannerProps>(function (
   { children, icon, variant, ...rest },
   ref
-): JSX.Element {
+) {
   return (
     <div
       {...rest}

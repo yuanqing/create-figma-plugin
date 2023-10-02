@@ -1,4 +1,4 @@
-import { h, JSX } from 'preact'
+import { h } from 'preact'
 
 import { IconColor } from '../types/colors.js'
 import { createComponent } from '../utilities/create-component.js'
@@ -16,7 +16,7 @@ export function createIcon(
   return createComponent<SVGSVGElement, IconProps>(function ({
     color,
     ...rest
-  }): JSX.Element {
+  }) {
     return (
       <svg
         {...rest}

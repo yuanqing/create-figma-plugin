@@ -1,4 +1,4 @@
-import { ComponentChild, ComponentChildren, h, JSX, toChildArray } from 'preact'
+import { ComponentChild, ComponentChildren, h, toChildArray } from 'preact'
 
 import { Space } from '../../types/space.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -13,7 +13,7 @@ export type InlineSpace = Space
 export const Inline = createComponent<HTMLDivElement, InlineProps>(function (
   { children, space, ...rest },
   ref
-): JSX.Element {
+) {
   return (
     <div
       {...rest}
@@ -23,7 +23,7 @@ export const Inline = createComponent<HTMLDivElement, InlineProps>(function (
       {toChildArray(children).map(function (
         child: ComponentChild,
         index: number
-      ): JSX.Element {
+      ) {
         return (
           <div key={index} class={styles.child}>
             {child}

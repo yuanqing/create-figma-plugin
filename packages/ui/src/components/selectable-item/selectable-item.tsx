@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
@@ -38,26 +38,26 @@ export const SelectableItem = createComponent<
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const handleChange = useCallback(
-    function (event: Event.onChange<HTMLInputElement>): void {
-      onValueChange(!(value === true))
+    function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
+      const newValue = !(value === true)
+      onValueChange(newValue)
     },
     [onChange, onValueChange, value]
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]

@@ -1,4 +1,4 @@
-import { ComponentChildren, Fragment, h, JSX } from 'preact'
+import { ComponentChildren, Fragment, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { IconCaretRight16 } from '../../icons/icon-16/icon-caret-right-16.js'
@@ -29,18 +29,17 @@ export const Disclosure = createComponent<HTMLInputElement, DisclosureProps>(
       ...rest
     },
     ref
-  ): JSX.Element {
+  ) {
     const handleKeyDown = useCallback(
-      function (event: Event.onKeyDown<HTMLInputElement>): void {
+      function (event: Event.onKeyDown<HTMLInputElement>) {
         onKeyDown(event)
-        if (event.key !== 'Escape') {
-          return
-        }
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
+        if (event.key === 'Escape') {
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          if (blurOnEscapeKeyDown === true) {
+            event.currentTarget.blur()
+          }
         }
       },
       [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]

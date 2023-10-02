@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event } from '../../types/event-handler.js'
@@ -27,18 +27,17 @@ export const Link = createComponent<HTMLAnchorElement, LinkProps>(function (
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLAnchorElement>): void {
+    function (event: Event.onKeyDown<HTMLAnchorElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, propagateEscapeKeyDown, onKeyDown]

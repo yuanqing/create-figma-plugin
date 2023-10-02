@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -16,7 +16,7 @@ export const Text = createComponent<HTMLDivElement, TextProps>(function ({
   children,
   numeric = false,
   ...rest
-}): JSX.Element {
+}) {
   return (
     <div
       {...rest}

@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
@@ -35,18 +35,17 @@ export const Button = createComponent<HTMLButtonElement, ButtonProps>(function (
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLButtonElement>): void {
+    function (event: Event.onKeyDown<HTMLButtonElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
@@ -72,10 +71,8 @@ export const Button = createComponent<HTMLButtonElement, ButtonProps>(function (
         {...rest}
         ref={ref}
         disabled={disabled === true}
-        onClick={disabled === true || loading === true ? undefined : onClick}
-        onKeyDown={
-          disabled === true || loading === true ? undefined : handleKeyDown
-        }
+        onClick={loading === true ? undefined : onClick}
+        onKeyDown={handleKeyDown}
         tabIndex={0}
       >
         <div class={styles.children}>{children}</div>

@@ -57,7 +57,6 @@ export const Bold = function () {
   return (
     <Layer
       bold
-      description="Description"
       icon={<IconLayerFrame16 />}
       onChange={handleChange}
       value={value}

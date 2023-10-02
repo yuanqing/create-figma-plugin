@@ -59,8 +59,8 @@ export const Loading = function () {
 }
 
 export const LoadingFocused = function () {
-  function handleSelectedFiles(files: Array<File>) {
-    console.log(files)
+  function handleSelectedFiles() {
+    throw new Error('This function should not be called')
   }
   return (
     <FileUploadButton

@@ -1,4 +1,4 @@
-import { h, JSX } from 'preact'
+import { h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
@@ -37,7 +37,7 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
       ...rest
     },
     ref
-  ): JSX.Element {
+  ) {
     const handleInput = useCallback(
       function (event: Event.onInput<HTMLInputElement>) {
         onInput(event)
@@ -49,16 +49,15 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
     )
 
     const handleKeyDown = useCallback(
-      function (event: Event.onKeyDown<HTMLInputElement>): void {
+      function (event: Event.onKeyDown<HTMLInputElement>) {
         onKeyDown(event)
-        if (event.key !== 'Escape') {
-          return
-        }
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
+        if (event.key === 'Escape') {
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          if (blurOnEscapeKeyDown === true) {
+            event.currentTarget.blur()
+          }
         }
       },
       [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]

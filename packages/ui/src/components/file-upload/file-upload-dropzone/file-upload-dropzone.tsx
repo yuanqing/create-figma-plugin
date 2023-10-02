@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../../types/event-handler.js'
@@ -44,11 +44,11 @@ export const FileUploadDropzone = createComponent<
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const [isDropActive, setIsDropActive] = useState<boolean>(false)
 
   const handleBlur = useCallback(
-    function (event: Event.onBlur<HTMLInputElement>): void {
+    function (event: Event.onBlur<HTMLInputElement>) {
       onBlur(event)
       setIsDropActive(false)
     },
@@ -56,13 +56,16 @@ export const FileUploadDropzone = createComponent<
   )
 
   const handleChange = useCallback(
-    function (event: Event.onChange<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
-      const files = event.currentTarget.files
-      if (files === null) {
+      const fileList = event.currentTarget.files
+      if (fileList === null) {
         throw new Error('`event.currentTarget.files` is `null`')
       }
-      onSelectedFiles(filterFiles({ acceptedFileTypes, files }))
+      const files = parseFileList({ acceptedFileTypes, fileList })
+      if (files.length > 0) {
+        onSelectedFiles(files)
+      }
     },
     [acceptedFileTypes, onChange, onSelectedFiles]
   )
@@ -76,7 +79,7 @@ export const FileUploadDropzone = createComponent<
   )
 
   const handleDragOver = useCallback(
-    function (event: Event.onDragOver<HTMLInputElement>): void {
+    function (event: Event.onDragOver<HTMLInputElement>) {
       onDragOver(event)
       event.preventDefault()
       setIsDropActive(true)
@@ -85,7 +88,7 @@ export const FileUploadDropzone = createComponent<
   )
 
   const handleDragEnd = useCallback(
-    function (event: Event.onDragEnd<HTMLInputElement>): void {
+    function (event: Event.onDragEnd<HTMLInputElement>) {
       onDragEnd(event)
       event.preventDefault()
       setIsDropActive(false)
@@ -94,30 +97,32 @@ export const FileUploadDropzone = createComponent<
   )
 
   const handleDrop = useCallback(
-    function (event: Event.onDrop<HTMLInputElement>): void {
+    function (event: Event.onDrop<HTMLInputElement>) {
       onDrop(event)
       if (event.dataTransfer === null) {
         throw new Error('`event.dataTransfer` is `null`')
       }
       event.preventDefault()
-      const files = event.dataTransfer.files
-      onSelectedFiles(filterFiles({ acceptedFileTypes, files }))
+      const fileList = event.dataTransfer.files
+      const files = parseFileList({ acceptedFileTypes, fileList })
+      if (files.length > 0) {
+        onSelectedFiles(files)
+      }
       setIsDropActive(false)
     },
     [acceptedFileTypes, onDrop, onSelectedFiles]
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
@@ -158,12 +163,12 @@ export const FileUploadDropzone = createComponent<
   )
 })
 
-function filterFiles(options: {
-  files: FileList
+function parseFileList(options: {
+  fileList: FileList
   acceptedFileTypes: Array<string>
 }): Array<File> {
-  const { files, acceptedFileTypes } = options
-  const result = Array.prototype.slice.call(files).sort(fileComparator)
+  const { fileList, acceptedFileTypes } = options
+  const result = Array.prototype.slice.call(fileList).sort(fileComparator)
   if (acceptedFileTypes.length === 0) {
     return result
   }

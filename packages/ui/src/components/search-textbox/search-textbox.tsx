@@ -1,4 +1,4 @@
-import { h, JSX, RefObject } from 'preact'
+import { h, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
 import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
@@ -45,10 +45,10 @@ export const SearchTextbox = createComponent<
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
-  const handleClearButtonClick = useCallback(function (): void {
+  const handleClearButtonClick = useCallback(function () {
     const inputElement = getCurrentFromRef(inputElementRef)
     inputElement.value = EMPTY_STRING
     const inputEvent = new window.Event('input', {
@@ -60,7 +60,7 @@ export const SearchTextbox = createComponent<
   }, [])
 
   const handleFocus = useCallback(
-    function (event: Event.onFocus<HTMLInputElement>): void {
+    function (event: Event.onFocus<HTMLInputElement>) {
       onFocus(event)
       event.currentTarget.select()
     },
@@ -68,7 +68,7 @@ export const SearchTextbox = createComponent<
   )
 
   const handleInput = useCallback(
-    function (event: Event.onInput<HTMLInputElement>): void {
+    function (event: Event.onInput<HTMLInputElement>) {
       onValueInput(event.currentTarget.value)
       onInput(event)
     },
@@ -76,7 +76,7 @@ export const SearchTextbox = createComponent<
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
       if (event.key !== 'Escape') {
         return

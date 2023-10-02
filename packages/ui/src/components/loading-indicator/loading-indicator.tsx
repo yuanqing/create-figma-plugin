@@ -1,4 +1,4 @@
-import { h, JSX } from 'preact'
+import { h } from 'preact'
 
 import { IconColor } from '../../types/colors.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -11,7 +11,7 @@ export type LoadingIndicatorProps = {
 export const LoadingIndicator = createComponent<
   HTMLDivElement,
   LoadingIndicatorProps
->(function ({ color, ...rest }, ref): JSX.Element {
+>(function ({ color, ...rest }, ref) {
   return (
     <div {...rest} ref={ref} class={styles.loadingIndicator}>
       <svg

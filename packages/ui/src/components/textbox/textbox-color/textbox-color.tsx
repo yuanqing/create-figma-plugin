@@ -1,5 +1,5 @@
 import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, JSX, RefObject } from 'preact'
+import { h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../../types/event-handler.js'
@@ -69,16 +69,14 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
       ...rest
     },
     ref
-  ): JSX.Element {
+  ) {
     const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
     const opacityInputElementRef: RefObject<HTMLInputElement> = useRef(null)
     const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
     const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
 
-    const setHexColorInputElementValue = useCallback(function (
-      value: string
-    ): void {
+    const setHexColorInputElementValue = useCallback(function (value: string) {
       const inputElement = getCurrentFromRef(hexColorInputElementRef)
       inputElement.value = value
       const inputEvent = new window.Event('input', {
@@ -86,19 +84,18 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
         cancelable: true
       })
       inputElement.dispatchEvent(inputEvent)
-    },
-    [])
+    }, [])
 
     const handleHexColorSelectorFocus = useCallback(function (
       event: Event.onFocus<HTMLInputElement>
-    ): void {
+    ) {
       const hexColor = event.currentTarget.value.slice(1).toUpperCase()
       setOriginalHexColor(hexColor)
     },
     [])
 
     const handleHexColorSelectorInput = useCallback(
-      function (event: Event.onInput<HTMLInputElement>): void {
+      function (event: Event.onInput<HTMLInputElement>) {
         const hexColor = event.currentTarget.value.slice(1).toUpperCase()
         setHexColorInputElementValue(hexColor)
       },
@@ -106,7 +103,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
     )
 
     const handleHexColorSelectorKeyDown = useCallback(
-      function (event: Event.onKeyDown<HTMLInputElement>): void {
+      function (event: Event.onKeyDown<HTMLInputElement>) {
         if (event.key !== 'Escape') {
           return
         }
@@ -131,7 +128,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
     )
 
     const handleHexColorBlur = useCallback(
-      function (): void {
+      function () {
         if (revertOnEscapeKeyDownRef.current === true) {
           revertOnEscapeKeyDownRef.current = false
           return
@@ -157,7 +154,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
     )
 
     const handleHexColorFocus = useCallback(
-      function (event: Event.onFocus<HTMLInputElement>): void {
+      function (event: Event.onFocus<HTMLInputElement>) {
         setOriginalHexColor(hexColor)
         event.currentTarget.select()
       },
@@ -185,7 +182,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
     )
 
     const handleHexColorKeyDown = useCallback(
-      function (event: Event.onKeyDown<HTMLInputElement>): void {
+      function (event: Event.onKeyDown<HTMLInputElement>) {
         onHexColorKeyDown(event)
         const key = event.key
         if (key === 'Escape') {
@@ -236,7 +233,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
     )
 
     const handleHexColorMouseUp = useCallback(
-      function (event: Event.onMouseUp<HTMLInputElement>): void {
+      function (event: Event.onMouseUp<HTMLInputElement>) {
         if (hexColor !== MIXED_STRING) {
           return
         }

@@ -4,7 +4,7 @@ import {
   MIXED_NUMBER,
   MIXED_STRING
 } from '@create-figma-plugin/utilities'
-import { h, JSX, RefObject } from 'preact'
+import { h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../../../types/event-handler.js'
@@ -62,7 +62,7 @@ export const RawTextboxNumeric = createComponent<
     ...rest
   },
   ref
-): JSX.Element {
+) {
   if (
     typeof minimum !== 'undefined' &&
     typeof maximum !== 'undefined' &&
@@ -76,7 +76,7 @@ export const RawTextboxNumeric = createComponent<
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
-  const setInputElementValue = useCallback(function (value: string): void {
+  const setInputElementValue = useCallback(function (value: string) {
     const inputElement = getCurrentFromRef(inputElementRef)
     inputElement.value = value
     const inputEvent = new window.Event('input', {
@@ -87,7 +87,7 @@ export const RawTextboxNumeric = createComponent<
   }, [])
 
   const handleBlur = useCallback(
-    function (): void {
+    function () {
       if (revertOnEscapeKeyDownRef.current === true) {
         revertOnEscapeKeyDownRef.current = false
         return
@@ -139,7 +139,7 @@ export const RawTextboxNumeric = createComponent<
   )
 
   const handleFocus = useCallback(
-    function (event: Event.onFocus<HTMLInputElement>): void {
+    function (event: Event.onFocus<HTMLInputElement>) {
       setOriginalValue(value)
       event.currentTarget.select()
     },
@@ -147,7 +147,7 @@ export const RawTextboxNumeric = createComponent<
   )
 
   const handleInput = useCallback(
-    function (event: Event.onInput<HTMLInputElement>): void {
+    function (event: Event.onInput<HTMLInputElement>) {
       onInput(event)
       const value = event.currentTarget.value
       onValueInput(value)
@@ -158,7 +158,7 @@ export const RawTextboxNumeric = createComponent<
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
       const key = event.key
       if (key === 'Escape') {
@@ -279,7 +279,7 @@ export const RawTextboxNumeric = createComponent<
   )
 
   const handleMouseUp = useCallback(
-    function (event: Event.onMouseUp<HTMLInputElement>): void {
+    function (event: Event.onMouseUp<HTMLInputElement>) {
       if (value !== MIXED_STRING) {
         return
       }
@@ -289,7 +289,7 @@ export const RawTextboxNumeric = createComponent<
   )
 
   const handlePaste = useCallback(
-    function (event: Event.onPaste<HTMLInputElement>): void {
+    function (event: Event.onPaste<HTMLInputElement>) {
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }

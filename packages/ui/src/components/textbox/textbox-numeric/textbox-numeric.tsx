@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
@@ -19,7 +19,7 @@ export type TextboxNumericVariant = 'border' | 'underline'
 export const TextboxNumeric = createComponent<
   HTMLInputElement,
   TextboxNumericProps
->(function ({ icon, variant, ...rest }, ref): JSX.Element {
+>(function ({ icon, variant, ...rest }, ref) {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }

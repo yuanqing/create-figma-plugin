@@ -1,4 +1,4 @@
-import { ComponentChildren, Fragment, h, JSX } from 'preact'
+import { ComponentChildren, Fragment, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
@@ -32,9 +32,9 @@ export const Tabs = createComponent<HTMLDivElement, TabsProps>(function (
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const handleChange = useCallback(
-    function (event: Event.onChange<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -46,16 +46,15 @@ export const Tabs = createComponent<HTMLDivElement, TabsProps>(function (
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
@@ -68,7 +67,7 @@ export const Tabs = createComponent<HTMLDivElement, TabsProps>(function (
   return (
     <Fragment>
       <div ref={ref} class={styles.tabs}>
-        {options.map(function (option: TabsOption, index: number): JSX.Element {
+        {options.map(function (option: TabsOption, index: number) {
           return (
             <label key={index} class={styles.label}>
               <input

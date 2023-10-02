@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
@@ -37,9 +37,9 @@ export const SegmentedControl = createComponent<
   propagateEscapeKeyDown = true,
   value,
   ...rest
-}): JSX.Element {
+}) {
   const handleChange = useCallback(
-    function (event: Event.onChange<HTMLInputElement>): void {
+    function (event: Event.onChange<HTMLInputElement>) {
       const id = event.currentTarget.getAttribute(
         ITEM_ID_DATA_ATTRIBUTE_NAME
       ) as string
@@ -51,16 +51,15 @@ export const SegmentedControl = createComponent<
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
@@ -74,10 +73,7 @@ export const SegmentedControl = createComponent<
       ])}
     >
       <div class={styles.labels}>
-        {options.map(function (
-          option: SegmentedControlOption,
-          index: number
-        ): JSX.Element {
+        {options.map(function (option: SegmentedControlOption, index: number) {
           const children =
             typeof option.children === 'undefined'
               ? `${option.value}`

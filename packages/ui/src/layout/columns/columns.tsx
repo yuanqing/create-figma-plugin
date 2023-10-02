@@ -1,4 +1,4 @@
-import { ComponentChild, h, JSX, toChildArray } from 'preact'
+import { ComponentChild, h, toChildArray } from 'preact'
 
 import { Space } from '../../types/space.js'
 import { createClassName } from '../../utilities/create-class-name.js'
@@ -14,7 +14,7 @@ export type ColumnsSpace = Space
 export const Columns = createComponent<HTMLDivElement, ColumnsProps>(function (
   { children, space, ...rest },
   ref
-): JSX.Element {
+) {
   return (
     <div
       {...rest}
@@ -27,7 +27,7 @@ export const Columns = createComponent<HTMLDivElement, ColumnsProps>(function (
       {toChildArray(children).map(function (
         element: ComponentChild,
         index: number
-      ): JSX.Element {
+      ) {
         return (
           <div key={index} class={styles.child}>
             {element}

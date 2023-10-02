@@ -1,5 +1,5 @@
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, JSX, RefObject } from 'preact'
+import { h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../../types/event-handler.js'
@@ -52,13 +52,13 @@ export const TextboxMultiline = createComponent<
     ...rest
   },
   ref
-): JSX.Element {
+) {
   const textAreaElementRef: RefObject<HTMLTextAreaElement> = useRef(null)
   const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
-  const setTextAreaElementValue = useCallback(function (value: string): void {
+  const setTextAreaElementValue = useCallback(function (value: string) {
     const textAreaElement = getCurrentFromRef(textAreaElementRef)
     textAreaElement.value = value
     const inputEvent = new window.Event('input', {
@@ -69,7 +69,7 @@ export const TextboxMultiline = createComponent<
   }, [])
 
   const handleBlur = useCallback(
-    function (): void {
+    function () {
       if (revertOnEscapeKeyDownRef.current === true) {
         revertOnEscapeKeyDownRef.current = false
         return
@@ -97,7 +97,7 @@ export const TextboxMultiline = createComponent<
   )
 
   const handleFocus = useCallback(
-    function (event: Event.onFocus<HTMLTextAreaElement>): void {
+    function (event: Event.onFocus<HTMLTextAreaElement>) {
       setOriginalValue(value)
       event.currentTarget.select()
     },
@@ -105,7 +105,7 @@ export const TextboxMultiline = createComponent<
   )
 
   const handleInput = useCallback(
-    function (event: Event.onInput<HTMLTextAreaElement>): void {
+    function (event: Event.onInput<HTMLTextAreaElement>) {
       onValueInput(event.currentTarget.value)
       onInput(event)
     },
@@ -113,7 +113,7 @@ export const TextboxMultiline = createComponent<
   )
 
   const handleKeyDown = useCallback(
-    function (event: Event.onKeyDown<HTMLTextAreaElement>): void {
+    function (event: Event.onKeyDown<HTMLTextAreaElement>) {
       onKeyDown(event)
       if (event.key === 'Escape') {
         if (revertOnEscapeKeyDown === true) {
@@ -150,7 +150,7 @@ export const TextboxMultiline = createComponent<
   )
 
   const handleMouseUp = useCallback(
-    function (event: Event.onMouseUp<HTMLTextAreaElement>): void {
+    function (event: Event.onMouseUp<HTMLTextAreaElement>) {
       if (value === MIXED_STRING) {
         // Prevent changing the selection if `value` is `MIXED_STRING`
         event.preventDefault()

@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX, RefObject } from 'preact'
+import { ComponentChildren, h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../css/menu.module.css'
@@ -58,7 +58,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
       ...rest
     },
     ref
-  ): JSX.Element {
+  ) {
     if (typeof icon === 'string' && icon.length !== 1) {
       throw new Error(`String \`icon\` must be a single character: "${icon}"`)
     }
@@ -91,11 +91,11 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
         setSelectedId: setSelectedId
       })
 
-    const triggerBlur = useCallback(function (): void {
+    const triggerBlur = useCallback(function () {
       getCurrentFromRef(rootElementRef).blur()
     }, [])
 
-    const triggerHideMenu = useCallback(function (): void {
+    const triggerHideMenu = useCallback(function () {
       setIsMenuVisible(false)
       setSelectedId(INVALID_ID)
     }, [])
@@ -166,7 +166,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
     )
 
     const handleRootKeyDown = useCallback(
-      function (event: Event.onKeyDown<HTMLDivElement>): void {
+      function (event: Event.onKeyDown<HTMLDivElement>) {
         const key = event.key
         if (key === 'ArrowUp' || key === 'ArrowDown') {
           if (isMenuVisible === false) {
@@ -239,7 +239,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
     [])
 
     const handleOptionChange = useCallback(
-      function (event: Event.onChange<HTMLInputElement>): void {
+      function (event: Event.onChange<HTMLInputElement>) {
         const id = event.currentTarget.getAttribute(
           ITEM_ID_DATA_ATTRIBUTE_NAME
         ) as string
@@ -343,10 +343,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
           ])}
           onMouseDown={handleMenuMouseDown}
         >
-          {options.map(function (
-            option: DropdownOption,
-            index: number
-          ): JSX.Element {
+          {options.map(function (option: DropdownOption, index: number) {
             if (typeof option === 'string') {
               return <hr key={index} class={menuStyles.optionSeparator} />
             }

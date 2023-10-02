@@ -42,7 +42,7 @@ export const Default = function () {
   )
 }
 
-export const NoTransition = function () {
+export const TransitionFalse = function () {
   const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick(
     event: JSX.TargetedMouseEvent<HTMLButtonElement>
@@ -60,7 +60,7 @@ export const NoTransition = function () {
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
-      <Modal noTransition open={open}>
+      <Modal open={open} transition={false}>
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
             Close

@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
 import { Space } from '../../types/space.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -11,7 +11,7 @@ export type ContainerProps = {
 export type ContainerSpace = Space
 
 export const Container = createComponent<HTMLDivElement, ContainerProps>(
-  function ({ space, ...rest }, ref): JSX.Element {
+  function ({ space, ...rest }, ref) {
     return <div {...rest} ref={ref} class={styles[space]} />
   }
 )

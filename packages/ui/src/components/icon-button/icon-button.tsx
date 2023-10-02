@@ -1,4 +1,4 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
@@ -26,18 +26,17 @@ export const IconButton = createComponent<HTMLButtonElement, IconButtonProps>(
       ...rest
     },
     ref
-  ): JSX.Element {
+  ) {
     const handleKeyDown = useCallback(
-      function (event: Event.onKeyDown<HTMLButtonElement>): void {
+      function (event: Event.onKeyDown<HTMLButtonElement>) {
         onKeyDown(event)
-        if (event.key !== 'Escape') {
-          return
-        }
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
+        if (event.key === 'Escape') {
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          if (blurOnEscapeKeyDown === true) {
+            event.currentTarget.blur()
+          }
         }
       },
       [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
@@ -49,8 +48,8 @@ export const IconButton = createComponent<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         class={styles.iconButton}
         disabled={disabled === true}
-        onClick={disabled === true ? undefined : onClick}
-        onKeyDown={disabled === true ? undefined : handleKeyDown}
+        onClick={onClick}
+        onKeyDown={handleKeyDown}
         tabIndex={0}
       >
         <div class={styles.icon}>{children}</div>

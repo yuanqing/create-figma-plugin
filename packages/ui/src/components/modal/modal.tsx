@@ -2,7 +2,9 @@ import { ComponentChild, Fragment, h, JSX, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
 import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
+import { EventHandler } from '../../types/event-handler.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
 import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler.js'
 import { getFocusableElements } from '../../utilities/private/get-focusable-elements.js'
 import { IconButton } from '../icon-button/icon-button.js'
@@ -14,10 +16,10 @@ export type ModalProps = {
   closeButtonIcon?: ComponentChild
   closeButtonPosition?: ModalCloseButtonPosition
   open: boolean
-  noTransition?: boolean
-  onCloseButtonClick?: JSX.MouseEventHandler<HTMLButtonElement>
+  transition?: boolean
+  onCloseButtonClick?: EventHandler.onClick<HTMLButtonElement>
   onEscapeKeyDown?: (event: KeyboardEvent) => void
-  onOverlayClick?: JSX.MouseEventHandler<HTMLDivElement>
+  onOverlayClick?: EventHandler.onClick<HTMLDivElement>
   position?: ModalPosition
   title?: string
 }
@@ -26,33 +28,36 @@ export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
 
 const rootElements: Array<HTMLDivElement> = [] // Stack of currently-open modals
 
-export const Modal = function ({
-  children,
-  closeButtonIcon = <IconCross32 />,
-  closeButtonPosition = 'right',
-  open,
-  noTransition = false,
-  onCloseButtonClick,
-  onEscapeKeyDown,
-  onOverlayClick,
-  position = 'center',
-  title,
-  ...rest
-}: ModalProps): null {
+export const Modal = createComponent<HTMLDivElement, ModalProps>(function (
+  {
+    children,
+    closeButtonIcon = <IconCross32 />,
+    closeButtonPosition = 'right',
+    open,
+    transition = true,
+    onCloseButtonClick,
+    onEscapeKeyDown,
+    onOverlayClick,
+    position = 'center',
+    title,
+    ...rest
+  },
+  ref
+): null {
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const previousFocusedElementRef: RefObject<HTMLElement> = useRef(null)
 
-  useEffect(function (): () => void {
+  useEffect(function () {
     const rootElement = document.createElement('div')
     document.body.appendChild(rootElement)
     rootElementRef.current = rootElement
-    return function (): void {
+    return function () {
       document.body.removeChild(rootElement)
     }
   }, [])
 
   useEffect(
-    function (): () => void {
+    function () {
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
@@ -65,7 +70,7 @@ export const Modal = function ({
         }
       }
       window.addEventListener('keydown', handleTabKeyDown)
-      return function (): void {
+      return function () {
         window.removeEventListener('keydown', handleTabKeyDown)
       }
     },
@@ -73,7 +78,7 @@ export const Modal = function ({
   )
 
   useEffect(
-    function (): () => void {
+    function () {
       function handleEscapeKeyDown(event: KeyboardEvent) {
         if (
           open === false ||
@@ -86,7 +91,7 @@ export const Modal = function ({
         onEscapeKeyDown(event)
       }
       window.addEventListener('keydown', handleEscapeKeyDown)
-      return function (): void {
+      return function () {
         window.removeEventListener('keydown', handleEscapeKeyDown)
       }
     },
@@ -94,7 +99,7 @@ export const Modal = function ({
   )
 
   useEffect(
-    function (): () => void {
+    function () {
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
@@ -126,7 +131,7 @@ export const Modal = function ({
         rootElements.pop()
         rootElementRef.current.style.cssText = 'position:static'
       }
-      return function (): void {
+      return function () {
         if (previousFocusedElementRef.current !== null) {
           previousFocusedElementRef.current.focus()
         }
@@ -136,7 +141,22 @@ export const Modal = function ({
   )
 
   useEffect(
-    function (): void {
+    function () {
+      if (ref === null) {
+        return
+      }
+      const rootElement = rootElementRef.current
+      if (typeof ref === 'function') {
+        ref(rootElement)
+        return
+      }
+      ref.current = rootElement
+    },
+    [ref]
+  )
+
+  useEffect(
+    function () {
       if (rootElementRef.current === null) {
         throw new Error('`rootElementRef.current` is `null`')
       }
@@ -147,7 +167,7 @@ export const Modal = function ({
             class={createClassName([
               styles.modal,
               open === true ? styles.open : null,
-              noTransition === true ? styles.noTransition : null,
+              transition === false ? styles.noTransition : null,
               styles[position]
             ])}
           >
@@ -192,15 +212,15 @@ export const Modal = function ({
       children,
       closeButtonIcon,
       closeButtonPosition,
-      noTransition,
       onCloseButtonClick,
       onOverlayClick,
       open,
       position,
       rest,
-      title
+      title,
+      transition
     ]
   )
 
   return null
-}
+})
