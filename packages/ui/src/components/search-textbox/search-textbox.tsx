@@ -20,7 +20,7 @@ export interface SearchTextboxProps
   onFocus?: EventHandler.onFocus<HTMLInputElement>
   onInput?: EventHandler.onInput<HTMLInputElement>
   onKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
-  onValueInput?: (value: string) => void
+  onValueInput?: EventHandler.onValueChange<string>
   placeholder?: string
   spellCheck?: boolean
   value: string
@@ -69,8 +69,9 @@ export const SearchTextbox = createComponent<
 
   const handleInput = useCallback(
     function (event: Event.onInput<HTMLInputElement>) {
-      onValueInput(event.currentTarget.value)
       onInput(event)
+      const value = event.currentTarget.value
+      onValueInput(value)
     },
     [onInput, onValueInput]
   )
@@ -78,23 +79,18 @@ export const SearchTextbox = createComponent<
   const handleKeyDown = useCallback(
     function (event: Event.onKeyDown<HTMLInputElement>) {
       onKeyDown(event)
-      if (event.key !== 'Escape') {
-        return
-      }
-      if (
-        clearOnEscapeKeyDown === true &&
-        value !== EMPTY_STRING &&
-        value !== null
-      ) {
-        event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
-        handleClearButtonClick()
-        return
-      }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      if (blurOnEscapeKeyDown === true) {
-        event.currentTarget.blur()
+      if (event.key === 'Escape') {
+        if (clearOnEscapeKeyDown === true && value !== EMPTY_STRING) {
+          event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
+          handleClearButtonClick()
+          return
+        }
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        if (blurOnEscapeKeyDown === true) {
+          event.currentTarget.blur()
+        }
       }
     },
     [
@@ -119,7 +115,7 @@ export const SearchTextbox = createComponent<
       }
       ref.current = inputElement
     },
-    [ref, inputElementRef]
+    [ref]
   )
 
   return (
@@ -141,12 +137,12 @@ export const SearchTextbox = createComponent<
         spellcheck={spellCheck}
         tabIndex={0}
         type="text"
-        value={value === null ? EMPTY_STRING : value}
+        value={value}
       />
       <div class={styles.searchIcon}>
         <IconSearch32 />
       </div>
-      {value === null || value === EMPTY_STRING || disabled === true ? null : (
+      {value === EMPTY_STRING || disabled === true ? null : (
         <button
           class={styles.clearButton}
           onClick={handleClearButtonClick}

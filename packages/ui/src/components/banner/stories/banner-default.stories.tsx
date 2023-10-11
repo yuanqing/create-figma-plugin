@@ -5,9 +5,9 @@ import { Banner } from '../banner.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 1
+    fixedWidth: true
   },
+  tags: ['1'],
   title: 'Components/Banner/Default'
 }
 

@@ -27,7 +27,10 @@ export interface RawTextboxNumericProps
   integer?: boolean
   maximum?: number
   minimum?: number
+  onBlur?: EventHandler.onBlur<HTMLInputElement>
+  onFocus?: EventHandler.onFocus<HTMLInputElement>
   onInput?: EventHandler.onInput<HTMLInputElement>
+  onMouseDown?: EventHandler.onMouseUp<HTMLInputElement>
   onNumericValueInput?: EventHandler.onValueChange<null | number>
   onValueInput?: EventHandler.onValueChange<string>
   placeholder?: string
@@ -49,7 +52,10 @@ export const RawTextboxNumeric = createComponent<
     integer = false,
     maximum,
     minimum,
+    onBlur = noop,
+    onFocus = noop,
     onInput = noop,
+    onMouseDown = noop,
     onKeyDown = noop,
     onNumericValueInput = noop,
     onValueInput = noop,
@@ -72,7 +78,6 @@ export const RawTextboxNumeric = createComponent<
   }
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
@@ -87,11 +92,8 @@ export const RawTextboxNumeric = createComponent<
   }, [])
 
   const handleBlur = useCallback(
-    function () {
-      if (revertOnEscapeKeyDownRef.current === true) {
-        revertOnEscapeKeyDownRef.current = false
-        return
-      }
+    function (event: Event.onBlur<HTMLInputElement>) {
+      onBlur(event)
       if (typeof validateOnBlur !== 'undefined') {
         const evaluatedValue = evaluateValue(value, suffix)
         const result = validateOnBlur(evaluatedValue)
@@ -135,23 +137,24 @@ export const RawTextboxNumeric = createComponent<
       }
       setOriginalValue(EMPTY_STRING)
     },
-    [originalValue, setInputElementValue, suffix, validateOnBlur, value]
+    [onBlur, originalValue, setInputElementValue, suffix, validateOnBlur, value]
   )
 
   const handleFocus = useCallback(
     function (event: Event.onFocus<HTMLInputElement>) {
+      onFocus(event)
       setOriginalValue(value)
       event.currentTarget.select()
     },
-    [value]
+    [onFocus, value]
   )
 
   const handleInput = useCallback(
     function (event: Event.onInput<HTMLInputElement>) {
       onInput(event)
-      const value = event.currentTarget.value
-      onValueInput(value)
-      const evaluatedValue = evaluateValue(value, suffix)
+      const newValue = event.currentTarget.value
+      onValueInput(newValue)
+      const evaluatedValue = evaluateValue(newValue, suffix)
       onNumericValueInput(evaluatedValue)
     },
     [onInput, onNumericValueInput, onValueInput, suffix]
@@ -163,7 +166,6 @@ export const RawTextboxNumeric = createComponent<
       const key = event.key
       if (key === 'Escape') {
         if (revertOnEscapeKeyDown === true) {
-          revertOnEscapeKeyDownRef.current = true
           setInputElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }
@@ -175,11 +177,11 @@ export const RawTextboxNumeric = createComponent<
         }
         return
       }
-      const element = event.currentTarget
+      const inputElement = event.currentTarget
       if (key === 'ArrowDown' || key === 'ArrowUp') {
         const delta = event.shiftKey === true ? incrementBig : incrementSmall
+        event.preventDefault()
         if (value === EMPTY_STRING || value === MIXED_STRING) {
-          event.preventDefault()
           // `startingValue` is biased towards 0
           const startingValue = (function () {
             if (typeof minimum !== 'undefined' && minimum > 0) {
@@ -190,39 +192,32 @@ export const RawTextboxNumeric = createComponent<
             }
             return 0
           })()
-          const newValue = restrictValue(
-            evaluateValueWithDelta(
-              startingValue,
-              key === 'ArrowDown' ? -1 * delta : delta
-            ),
-            minimum,
-            maximum
+          const evaluatedValue = evaluateValueWithDelta(
+            startingValue,
+            key === 'ArrowDown' ? -1 * delta : delta
           )
+          const newValue = restrictValue(evaluatedValue, minimum, maximum)
           const formattedValue = formatEvaluatedValue(newValue, value, suffix)
-          element.value = formattedValue
-          element.select()
+          inputElement.value = formattedValue
+          inputElement.select()
           handleInput(event)
           return
         }
-        const evaluatedValue = evaluateValue(value, suffix)
-        if (evaluatedValue === null) {
+        const number = evaluateValue(value, suffix)
+        if (number === null) {
           throw new Error('Invariant violation') // `value` is a valid numeric expression
         }
-        event.preventDefault()
-        const newValue = restrictValue(
-          evaluateValueWithDelta(
-            evaluatedValue,
-            key === 'ArrowDown' ? -1 * delta : delta
-          ),
-          minimum,
-          maximum
+        const evaluatedValue = evaluateValueWithDelta(
+          number,
+          key === 'ArrowDown' ? -1 * delta : delta
         )
+        const newValue = restrictValue(evaluatedValue, minimum, maximum)
         const formattedValue = formatEvaluatedValue(newValue, value, suffix)
         if (formattedValue === value) {
           return
         }
-        element.value = formattedValue
-        element.select()
+        inputElement.value = formattedValue
+        inputElement.select()
         handleInput(event)
         return
       }
@@ -230,17 +225,17 @@ export const RawTextboxNumeric = createComponent<
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        // Piece together `nextValue` using the key that was pressed, and stop
+        // Piece together `newValue` using the key that was pressed, and stop
         // the `keyDown` event (by calling `event.preventDefault()`) if
         // `newValue` is found to be invalid
-        const nextValue = trimSuffix(
+        const newValue = trimSuffix(
           value === MIXED_STRING
             ? event.key
-            : computeNextValue(element, event.key),
+            : computeNextValue(inputElement, event.key),
           suffix
         )
         if (
-          isValidNumericInput(nextValue, { integersOnly: integer }) === false
+          isValidNumericInput(newValue, { integersOnly: integer }) === false
         ) {
           event.preventDefault()
           return
@@ -248,7 +243,7 @@ export const RawTextboxNumeric = createComponent<
         if (typeof minimum === 'undefined' && typeof maximum === 'undefined') {
           return
         }
-        const evaluatedValue = evaluateNumericExpression(nextValue)
+        const evaluatedValue = evaluateNumericExpression(newValue)
         if (evaluatedValue === null) {
           return
         }
@@ -278,14 +273,16 @@ export const RawTextboxNumeric = createComponent<
     ]
   )
 
-  const handleMouseUp = useCallback(
+  const handleMouseDown = useCallback(
     function (event: Event.onMouseUp<HTMLInputElement>) {
-      if (value !== MIXED_STRING) {
-        return
+      onMouseDown(event)
+      if (value === MIXED_STRING) {
+        // Prevent changing the selection if `value` is `MIXED_STRING`
+        event.preventDefault()
+        event.currentTarget.select()
       }
-      event.preventDefault()
     },
-    [value]
+    [onMouseDown, value]
   )
 
   const handlePaste = useCallback(
@@ -323,7 +320,7 @@ export const RawTextboxNumeric = createComponent<
       }
       ref.current = inputElement
     },
-    [ref, inputElementRef]
+    [ref]
   )
 
   return (
@@ -335,7 +332,7 @@ export const RawTextboxNumeric = createComponent<
       onFocus={handleFocus}
       onInput={handleInput}
       onKeyDown={handleKeyDown}
-      onMouseUp={handleMouseUp}
+      onMouseDown={handleMouseDown}
       onPaste={handlePaste}
       placeholder={placeholder}
       spellcheck={false}

@@ -7,9 +7,7 @@ import { Text } from '../../text/text.js'
 import { Toggle } from '../toggle.js'
 
 export default {
-  parameters: {
-    order: 2
-  },
+  tags: ['2'],
   title: 'Components/Toggle/Selected'
 }
 

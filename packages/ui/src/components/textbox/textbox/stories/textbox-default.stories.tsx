@@ -9,9 +9,9 @@ import { Textbox } from '../textbox.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 1
+    fixedWidth: true
   },
+  tags: ['1'],
   title: 'Components/Textbox/Default'
 }
 
@@ -148,18 +148,6 @@ export const Mixed = function () {
     setValue(newValue)
   }
   return <Textbox onInput={handleInput} value={value} />
-}
-
-export const BlurOnEnterKeyDown = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox blurOnEnterKeyDown={false} onInput={handleInput} value={value} />
-  )
 }
 
 export const RevertOnEscapeKeyDown = function () {

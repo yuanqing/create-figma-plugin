@@ -9,9 +9,9 @@ import { TextboxNumeric } from '../textbox-numeric.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 2
+    fixedWidth: true
   },
+  tags: ['2'],
   title: 'Components/Textbox Numeric/Border'
 }
 
@@ -198,23 +198,6 @@ export const Mixed = function () {
   return <TextboxNumeric onInput={handleInput} value={value} variant="border" />
 }
 
-export const BlurOnEnterKeyDown = function () {
-  const [value, setValue] = useState<string>('42')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <TextboxNumeric
-      blurOnEnterKeyDown={false}
-      onInput={handleInput}
-      value={value}
-      variant="border"
-    />
-  )
-}
-
 export const RevertOnEscapeKeyDown = function () {
   const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -279,8 +262,8 @@ export const CustomIncrements = function () {
   }
   return (
     <TextboxNumeric
-      incrementBig={8}
-      incrementSmall={4}
+      incrementBig={100}
+      incrementSmall={10}
       onInput={handleInput}
       value={value}
       variant="border"

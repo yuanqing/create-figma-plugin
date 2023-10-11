@@ -1,5 +1,3 @@
-// From https://figma.com/plugin-docs/css-variables/#list-of-all-available-color-tokens
-
 export type BackgroundColor =
   | 'brand'
   | 'brand-hover'

@@ -7,9 +7,7 @@ import { Text } from '../../text/text.js'
 import { RadioButtons, RadioButtonsOption } from '../radio-buttons.js'
 
 export default {
-  parameters: {
-    order: 2
-  },
+  tags: ['2'],
   title: 'Components/Radio Buttons/Selected'
 }
 

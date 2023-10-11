@@ -5,9 +5,7 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { Button } from '../button.js'
 
 export default {
-  parameters: {
-    order: 3
-  },
+  tags: ['3'],
   title: 'Components/Button/Secondary'
 }
 

@@ -9,9 +9,9 @@ import { TextboxNumeric } from '../textbox-numeric.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 1
+    fixedWidth: true
   },
+  tags: ['1'],
   title: 'Components/Textbox Numeric/Default'
 }
 
@@ -172,22 +172,6 @@ export const Mixed = function () {
   return <TextboxNumeric onInput={handleInput} value={value} />
 }
 
-export const BlurOnEnterKeyDown = function () {
-  const [value, setValue] = useState<string>('42')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <TextboxNumeric
-      blurOnEnterKeyDown={false}
-      onInput={handleInput}
-      value={value}
-    />
-  )
-}
-
 export const RevertOnEscapeKeyDown = function () {
   const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -231,7 +215,7 @@ export const IntegersOnly = function () {
 }
 
 export const CustomIncrements = function () {
-  const [value, setValue] = useState<string>('42')
+  const [value, setValue] = useState<string>('0')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -239,8 +223,8 @@ export const CustomIncrements = function () {
   }
   return (
     <TextboxNumeric
-      incrementBig={8}
-      incrementSmall={4}
+      incrementBig={100}
+      incrementSmall={10}
       onInput={handleInput}
       value={value}
     />

@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, JSX } from 'preact'
-import { useState } from 'preact/hooks'
+import { h, JSX, RefObject } from 'preact'
+import { useRef, useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
 import { TextboxMultiline } from '../textbox-multiline.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 3
+    fixedWidth: true
   },
+  tags: ['3'],
   title: 'Components/Textbox Multiline/Underline'
 }
 
@@ -180,7 +180,7 @@ export const Rows = function () {
   return (
     <TextboxMultiline
       onInput={handleInput}
-      rows={1}
+      rows={5}
       value={value}
       variant="underline"
     />
@@ -214,6 +214,28 @@ export const OnValueInput = function () {
   return (
     <TextboxMultiline
       onValueInput={handleValueInput}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const Ref = function () {
+  const ref: RefObject<HTMLTextAreaElement> = useRef(null)
+  const [value, setValue] = useState<string>('Text')
+  function handleInput() {
+    if (ref.current === null) {
+      throw new Error('`ref.current` is `null`')
+    }
+    console.log(ref.current)
+    const newValue = ref.current.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <TextboxMultiline
+      ref={ref}
+      onInput={handleInput}
       value={value}
       variant="underline"
     />

@@ -15,10 +15,13 @@ const EMPTY_STRING = ''
 
 export interface TextboxMultilineProps
   extends FocusableComponentProps<HTMLTextAreaElement> {
-  grow?: boolean
   disabled?: boolean
+  grow?: boolean
+  onBlur?: EventHandler.onBlur<HTMLTextAreaElement>
+  onFocus?: EventHandler.onFocus<HTMLTextAreaElement>
   onInput?: EventHandler.onInput<HTMLTextAreaElement>
-  onValueInput?: (value: string) => void
+  onMouseDown?: EventHandler.onMouseDown<HTMLTextAreaElement>
+  onValueInput?: EventHandler.onValueChange<string>
   placeholder?: string
   revertOnEscapeKeyDown?: boolean
   rows?: number
@@ -38,9 +41,12 @@ export const TextboxMultiline = createComponent<
     blurOnEscapeKeyDown = true,
     grow = false,
     disabled = false,
+    onBlur = noop,
+    onFocus = noop,
     onInput = noop,
     onKeyDown = noop,
     onValueInput = noop,
+    onMouseDown = noop,
     placeholder,
     propagateEscapeKeyDown = true,
     revertOnEscapeKeyDown = false,
@@ -54,7 +60,6 @@ export const TextboxMultiline = createComponent<
   ref
 ) {
   const textAreaElementRef: RefObject<HTMLTextAreaElement> = useRef(null)
-  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
@@ -69,11 +74,8 @@ export const TextboxMultiline = createComponent<
   }, [])
 
   const handleBlur = useCallback(
-    function () {
-      if (revertOnEscapeKeyDownRef.current === true) {
-        revertOnEscapeKeyDownRef.current = false
-        return
-      }
+    function (event: Event.onBlur<HTMLTextAreaElement>) {
+      onBlur(event)
       if (typeof validateOnBlur !== 'undefined') {
         const result = validateOnBlur(value)
         if (typeof result === 'string') {
@@ -83,7 +85,7 @@ export const TextboxMultiline = createComponent<
           return
         }
         if (result === false) {
-          // Revert the original value
+          // Revert to the original value
           if (value !== originalValue) {
             setTextAreaElementValue(originalValue)
           }
@@ -93,21 +95,23 @@ export const TextboxMultiline = createComponent<
       }
       setOriginalValue(EMPTY_STRING)
     },
-    [originalValue, setTextAreaElementValue, validateOnBlur, value]
+    [onBlur, originalValue, setTextAreaElementValue, validateOnBlur, value]
   )
 
   const handleFocus = useCallback(
     function (event: Event.onFocus<HTMLTextAreaElement>) {
+      onFocus(event)
       setOriginalValue(value)
       event.currentTarget.select()
     },
-    [value]
+    [onFocus, value]
   )
 
   const handleInput = useCallback(
     function (event: Event.onInput<HTMLTextAreaElement>) {
-      onValueInput(event.currentTarget.value)
       onInput(event)
+      const newValue = event.currentTarget.value
+      onValueInput(newValue)
     },
     [onInput, onValueInput]
   )
@@ -117,7 +121,6 @@ export const TextboxMultiline = createComponent<
       onKeyDown(event)
       if (event.key === 'Escape') {
         if (revertOnEscapeKeyDown === true) {
-          revertOnEscapeKeyDownRef.current = true
           setTextAreaElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }
@@ -149,14 +152,16 @@ export const TextboxMultiline = createComponent<
     ]
   )
 
-  const handleMouseUp = useCallback(
+  const handleMouseDown = useCallback(
     function (event: Event.onMouseUp<HTMLTextAreaElement>) {
+      onMouseDown(event)
       if (value === MIXED_STRING) {
         // Prevent changing the selection if `value` is `MIXED_STRING`
         event.preventDefault()
+        event.currentTarget.select()
       }
     },
-    [value]
+    [onMouseDown, value]
   )
 
   const refCallback = useCallback(
@@ -171,7 +176,7 @@ export const TextboxMultiline = createComponent<
       }
       ref.current = textAreaElement
     },
-    [ref, textAreaElementRef]
+    [ref]
   )
 
   return (
@@ -201,7 +206,7 @@ export const TextboxMultiline = createComponent<
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
-        onMouseUp={handleMouseUp}
+        onMouseDown={handleMouseDown}
         placeholder={placeholder}
         rows={rows}
         spellcheck={spellCheck}

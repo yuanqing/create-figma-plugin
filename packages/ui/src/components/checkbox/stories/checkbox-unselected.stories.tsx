@@ -7,7 +7,7 @@ import { Text } from '../../text/text.js'
 import { Checkbox } from '../checkbox.js'
 
 export default {
-  parameters: { order: 1 },
+  tags: ['1'],
   title: 'Components/Checkbox/Unselected'
 }
 

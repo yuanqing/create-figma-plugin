@@ -30,7 +30,7 @@ export const Toggle = createComponent<HTMLInputElement, ToggleProps>(function ({
   const handleChange = useCallback(
     function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
-      const newValue = event.currentTarget.checked
+      const newValue = event.currentTarget.checked === true
       onValueChange(newValue)
     },
     [onChange, onValueChange]

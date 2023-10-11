@@ -16,10 +16,9 @@ export interface RawTextboxProps
   disabled?: boolean
   onBlur?: EventHandler.onBlur<HTMLInputElement>
   onFocus?: EventHandler.onFocus<HTMLInputElement>
-  onKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
-  onMouseUp?: EventHandler.onMouseUp<HTMLInputElement>
+  onMouseDown?: EventHandler.onMouseUp<HTMLInputElement>
   onInput?: EventHandler.onInput<HTMLInputElement>
-  onValueInput?: (value: string) => void
+  onValueInput?: EventHandler.onValueChange<string>
   password?: boolean
   placeholder?: string
   revertOnEscapeKeyDown?: boolean
@@ -37,7 +36,7 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
       onFocus = noop,
       onInput = noop,
       onKeyDown = noop,
-      onMouseUp = noop,
+      onMouseDown = noop,
       onValueInput = noop,
       password = false,
       placeholder,
@@ -51,11 +50,10 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
     ref
   ) {
     const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-    const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
 
     const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
-    const setInputElementValue = useCallback(function (value: string) {
+    const setTextboxValue = useCallback(function (value: string) {
       const inputElement = getCurrentFromRef(inputElementRef)
       inputElement.value = value
       const inputEvent = new window.Event('input', {
@@ -67,33 +65,27 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
 
     const handleBlur = useCallback(
       function (event: Event.onBlur<HTMLInputElement>) {
-        if (revertOnEscapeKeyDownRef.current === true) {
-          revertOnEscapeKeyDownRef.current = false
-          return
-        }
+        onBlur(event)
         if (typeof validateOnBlur !== 'undefined') {
           const result = validateOnBlur(value)
           if (typeof result === 'string') {
             // Set to the value returned by `validateOnBlur`
-            setInputElementValue(result)
+            setTextboxValue(result)
             setOriginalValue(EMPTY_STRING)
-            onBlur(event)
             return
           }
           if (result === false) {
-            // Revert the original value
+            // Revert to the original value
             if (value !== originalValue) {
-              setInputElementValue(originalValue)
+              setTextboxValue(originalValue)
             }
             setOriginalValue(EMPTY_STRING)
-            onBlur(event)
             return
           }
         }
         setOriginalValue(EMPTY_STRING)
-        onBlur(event)
       },
-      [onBlur, originalValue, setInputElementValue, validateOnBlur, value]
+      [onBlur, originalValue, setTextboxValue, validateOnBlur, value]
     )
 
     const handleFocus = useCallback(
@@ -108,7 +100,8 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
     const handleInput = useCallback(
       function (event: Event.onInput<HTMLInputElement>) {
         onInput(event)
-        onValueInput(event.currentTarget.value)
+        const newValue = event.currentTarget.value
+        onValueInput(newValue)
       },
       [onInput, onValueInput]
     )
@@ -116,11 +109,9 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
     const handleKeyDown = useCallback(
       function (event: Event.onKeyDown<HTMLInputElement>) {
         onKeyDown(event)
-        const key = event.key
-        if (key === 'Escape') {
+        if (event.key === 'Escape') {
           if (revertOnEscapeKeyDown === true) {
-            revertOnEscapeKeyDownRef.current = true
-            setInputElementValue(originalValue)
+            setTextboxValue(originalValue)
             setOriginalValue(EMPTY_STRING)
           }
           if (propagateEscapeKeyDown === false) {
@@ -146,20 +137,21 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
         originalValue,
         propagateEscapeKeyDown,
         revertOnEscapeKeyDown,
-        setInputElementValue,
+        setTextboxValue,
         value
       ]
     )
 
-    const handleMouseUp = useCallback(
+    const handleMouseDown = useCallback(
       function (event: Event.onMouseUp<HTMLInputElement>) {
-        onMouseUp(event)
+        onMouseDown(event)
         if (value === MIXED_STRING) {
           // Prevent changing the selection if `value` is `MIXED_STRING`
           event.preventDefault()
+          event.currentTarget.select()
         }
       },
-      [onMouseUp, value]
+      [onMouseDown, value]
     )
 
     const refCallback = useCallback(
@@ -174,7 +166,7 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
         }
         ref.current = inputElement
       },
-      [ref, inputElementRef]
+      [ref]
     )
 
     return (
@@ -186,7 +178,7 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
-        onMouseUp={handleMouseUp}
+        onMouseDown={handleMouseDown}
         placeholder={placeholder}
         spellcheck={spellCheck}
         tabIndex={0}

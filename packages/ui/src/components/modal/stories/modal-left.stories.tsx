@@ -7,9 +7,7 @@ import { Button } from '../../button/button.js'
 import { Modal } from '../modal.js'
 
 export default {
-  parameters: {
-    order: 3
-  },
+  tags: ['3'],
   title: 'Components/Modal/Left'
 }
 
@@ -252,7 +250,7 @@ export const Nested = function () {
     console.log(event)
     setParentOpen(false)
   }
-  const parentStyle = { height: '160px', padding: '12px' }
+  const parentStyle = { padding: '12px', width: '240px' }
   const [childOpen, setChildOpen] = useState<boolean>(false)
   function handleChildOpenButtonClick(
     event: JSX.TargetedMouseEvent<HTMLButtonElement>
@@ -266,7 +264,7 @@ export const Nested = function () {
     console.log(event)
     setChildOpen(false)
   }
-  const childStyle = { height: '120px', padding: '12px' }
+  const childStyle = { padding: '12px', width: '160px' }
   return (
     <Fragment>
       <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
@@ -306,7 +304,7 @@ export const BodyOverflow = function () {
     console.log(event)
     setParentOpen(false)
   }
-  const parentStyle = { height: '160px', padding: '12px' }
+  const parentStyle = { padding: '12px', width: '240px' }
   const [childOpen, setChildOpen] = useState<boolean>(false)
   function handleChildOpenButtonClick(
     event: JSX.TargetedMouseEvent<HTMLButtonElement>
@@ -320,7 +318,7 @@ export const BodyOverflow = function () {
     console.log(event)
     setChildOpen(false)
   }
-  const childStyle = { height: '120px', padding: '12px' }
+  const childStyle = { padding: '12px', width: '160px' }
   const longText = Array(96).fill('Text').join(' ')
   return (
     <Fragment>

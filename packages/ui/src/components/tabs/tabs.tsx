@@ -35,12 +35,13 @@ export const Tabs = createComponent<HTMLDivElement, TabsProps>(function (
 ) {
   const handleChange = useCallback(
     function (event: Event.onChange<HTMLInputElement>) {
-      const id = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE_NAME
-      ) as string
+      onChange(event)
+      const id = event.currentTarget.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
+      if (id === null) {
+        throw new Error('`id` is `null`')
+      }
       const newValue = options[parseInt(id, 10)].value
       onValueChange(newValue)
-      onChange(event)
     },
     [onChange, onValueChange, options]
   )

@@ -105,6 +105,7 @@ export { Toggle, ToggleProps } from './components/toggle/toggle.js'
 export { useFocusTrap } from './hooks/use-focus-trap/use-focus-trap.js'
 export { useForm } from './hooks/use-form/use-form.js'
 export {
+  INITIAL_FOCUS_DATA_ATTRIBUTE_NAME,
   InitialFocus,
   useInitialFocus
 } from './hooks/use-initial-focus/use-initial-focus.js'
@@ -327,8 +328,16 @@ export {
   IconColor,
   TextColor
 } from './types/colors.js'
-export { OnValueChange, Props } from './types/types.js'
+export { Event, EventHandler } from './types/event-handler.js'
+export { FocusableComponentProps } from './types/focusable-component-props.js'
+export { RGBA } from './types/rgba.js'
+export { Space } from './types/space.js'
 export { createClassName } from './utilities/create-class-name.js'
+export {
+  createComponent,
+  MixinHTMLElementAttributes
+} from './utilities/create-component.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'
 export { mapTextboxNumericValueToString } from './utilities/map-textbox-numeric-value-to-string.js'
+export { noop } from './utilities/no-op.js'
 export { render } from './utilities/render.js'

@@ -7,9 +7,9 @@ import { Disclosure } from '../disclosure.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 1
+    fixedWidth: true
   },
+  tags: ['1'],
   title: 'Components/Disclosure/Closed'
 }
 

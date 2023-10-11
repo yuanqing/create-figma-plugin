@@ -5,9 +5,7 @@ import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial
 import { FileUploadButton } from '../file-upload-button.js'
 
 export default {
-  parameters: {
-    order: 2
-  },
+  tags: ['2'],
   title: 'Components/File Upload Button/Secondary'
 }
 

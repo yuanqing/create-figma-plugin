@@ -1,16 +1,14 @@
 /* eslint-disable no-console */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, JSX, RefObject } from 'preact'
-import { useRef, useState } from 'preact/hooks'
+import { h, JSX } from 'preact'
+import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
-import { RGBA } from '../../../../types/RGBA.js'
-import { TextboxColor, TextboxColorRef } from '../textbox-color.js'
+import { RGBA } from '../../../../types/rgba.js'
+import { TextboxColor } from '../textbox-color.js'
 
 export default {
-  parameters: {
-    order: 1
-  },
+  tags: ['1'],
   title: 'Components/Textbox Color/Default'
 }
 
@@ -206,30 +204,6 @@ export const Mixed = function () {
   )
 }
 
-export const BlurOnEnterKeyDown = function () {
-  const [hexColor, setHexColor] = useState<string>('0D99FF')
-  const [opacity, setOpacity] = useState<string>('100%')
-  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newHexColor = event.currentTarget.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newOpacity = event.currentTarget.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      blurOnEnterKeyDown
-      hexColor={hexColor}
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
-      opacity={opacity}
-    />
-  )
-}
-
 export const RevertOnEscapeKeyDown = function () {
   const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
@@ -270,39 +244,6 @@ export const OnValueInput = function () {
       onOpacityNumericValueInput={handleOpacityNumericValueInput}
       onOpacityValueInput={setOpacity}
       onRgbaColorValueInput={handleRgbaColorValueInput}
-      opacity={opacity}
-    />
-  )
-}
-
-export const Ref = function () {
-  const ref: RefObject<TextboxColorRef> = useRef(null)
-  const [hexColor, setHexColor] = useState<string>('0D99FF')
-  const [opacity, setOpacity] = useState<string>('100%')
-  function handleHexColorInput() {
-    if (ref.current === null) {
-      throw new Error('`ref.current` is `null`')
-    }
-    console.log(ref.current.hexColorInputElement)
-    const newHexColor = ref.current.hexColorInputElement.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput() {
-    if (ref.current === null) {
-      throw new Error('`ref.current` is `null`')
-    }
-    console.log(ref.current.opacityInputElement)
-    const newOpacity = ref.current.opacityInputElement.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      ref={ref}
-      hexColor={hexColor}
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
       opacity={opacity}
     />
   )

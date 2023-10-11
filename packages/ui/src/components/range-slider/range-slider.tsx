@@ -38,6 +38,10 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
     },
     ref
   ) {
+    if (minimum >= maximum) {
+      throw new Error('`minimum` must be less than `maximum`')
+    }
+
     const handleInput = useCallback(
       function (event: Event.onInput<HTMLInputElement>) {
         onInput(event)

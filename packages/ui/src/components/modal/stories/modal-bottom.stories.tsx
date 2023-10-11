@@ -7,9 +7,7 @@ import { Button } from '../../button/button.js'
 import { Modal } from '../modal.js'
 
 export default {
-  parameters: {
-    order: 2
-  },
+  tags: ['2'],
   title: 'Components/Modal/Bottom'
 }
 

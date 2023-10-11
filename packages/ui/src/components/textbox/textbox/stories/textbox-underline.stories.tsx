@@ -9,9 +9,9 @@ import { Textbox } from '../textbox.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 2
+    fixedWidth: true
   },
+  tags: ['3'],
   title: 'Components/Textbox/Underline'
 }
 
@@ -185,23 +185,6 @@ export const Mixed = function () {
     setValue(newValue)
   }
   return <Textbox onInput={handleInput} value={value} variant="underline" />
-}
-
-export const BlurOnEnterKeyDown = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      blurOnEnterKeyDown={false}
-      onInput={handleInput}
-      value={value}
-      variant="underline"
-    />
-  )
 }
 
 export const RevertOnEscapeKeyDown = function () {

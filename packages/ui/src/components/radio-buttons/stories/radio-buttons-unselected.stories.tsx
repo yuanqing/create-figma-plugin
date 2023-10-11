@@ -7,9 +7,7 @@ import { Text } from '../../text/text.js'
 import { RadioButtons, RadioButtonsOption } from '../radio-buttons.js'
 
 export default {
-  parameters: {
-    order: 1
-  },
+  tags: ['1'],
   title: 'Components/Radio Buttons/Unselected'
 }
 
@@ -88,39 +86,6 @@ export const DisabledOption = function () {
   )
 }
 
-export const BooleanValue = function () {
-  const [value, setValue] = useState<null | boolean>(null)
-  const options: Array<RadioButtonsOption<boolean>> = [
-    { children: <Text>foo</Text>, value: true },
-    { children: <Text>bar</Text>, value: false }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue === 'true' ? true : false)
-  }
-  return (
-    <RadioButtons onChange={handleChange} options={options} value={value} />
-  )
-}
-
-export const NumberValue = function () {
-  const [value, setValue] = useState<null | number>(null)
-  const options: Array<RadioButtonsOption<number>> = [
-    { children: <Text>foo</Text>, value: 1 },
-    { children: <Text>bar</Text>, value: 2 },
-    { children: <Text>baz</Text>, value: 3 }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(parseInt(newValue, 10))
-  }
-  return (
-    <RadioButtons onChange={handleChange} options={options} value={value} />
-  )
-}
-
 export const Space = function () {
   const [value, setValue] = useState<null | string>(null)
   const options: Array<RadioButtonsOption> = [
@@ -150,7 +115,7 @@ export const OnValueChange = function () {
     { children: <Text>bar</Text>, value: 'bar' },
     { children: <Text>baz</Text>, value: 'baz' }
   ]
-  function handleChange(newValue: null | string) {
+  function handleChange(newValue: string) {
     console.log(newValue)
     setValue(newValue)
   }

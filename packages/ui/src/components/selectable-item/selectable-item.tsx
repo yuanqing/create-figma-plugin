@@ -42,10 +42,10 @@ export const SelectableItem = createComponent<
   const handleChange = useCallback(
     function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
-      const newValue = !(value === true)
+      const newValue = event.currentTarget.checked === true
       onValueChange(newValue)
     },
-    [onChange, onValueChange, value]
+    [onChange, onValueChange]
   )
 
   const handleKeyDown = useCallback(
