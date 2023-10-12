@@ -7,7 +7,6 @@ import { useScrollableMenu } from '../../hooks/use-scrollable-menu.js'
 import { IconControlChevronDown8 } from '../../icons/icon-8/icon-control-chevron-down-8.js'
 import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
-import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
@@ -17,13 +16,16 @@ import { INVALID_ID, ITEM_ID_DATA_ATTRIBUTE_NAME } from './private/constants.js'
 import { Id } from './private/types.js'
 import { updateMenuElementLayout } from './private/update-menu-element-layout.js'
 
-export interface DropdownProps extends FocusableComponentProps<HTMLDivElement> {
+export interface DropdownProps {
   disabled?: boolean
   icon?: ComponentChildren
   onChange?: EventHandler.onChange<HTMLInputElement>
+  onKeyDown?: EventHandler.onKeyDown<HTMLDivElement>
+  onMouseDown?: EventHandler.onMouseDown<HTMLDivElement>
   onValueChange?: EventHandler.onValueChange<string>
   options: Array<DropdownOption>
   placeholder?: string
+  propagateEscapeKeyDown?: boolean
   value: null | string
   variant?: DropdownVariant
 }
@@ -45,10 +47,11 @@ export type DropdownVariant = 'border' | 'underline'
 export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
   function (
     {
-      blurOnEscapeKeyDown = true,
       disabled = false,
       icon,
       onChange = noop,
+      onKeyDown = noop,
+      onMouseDown = noop,
       onValueChange = noop,
       options,
       placeholder,
@@ -91,25 +94,22 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
         setSelectedId: setSelectedId
       })
 
-    const triggerBlur = useCallback(function () {
+    const triggerRootBlur = useCallback(function () {
       getCurrentFromRef(rootElementRef).blur()
     }, [])
 
-    const triggerHideMenu = useCallback(function () {
+    const triggerMenuUpdateLayout = useCallback(function (selectedId: Id) {
+      const rootElement = getCurrentFromRef(rootElementRef)
+      const menuElement = getCurrentFromRef(menuElementRef)
+      updateMenuElementLayout(rootElement, menuElement, selectedId)
+    }, [])
+
+    const triggerMenuHide = useCallback(function () {
       setIsMenuVisible(false)
       setSelectedId(INVALID_ID)
     }, [])
 
-    const triggerUpdateMenuElementLayout = useCallback(function (
-      selectedId: Id
-    ) {
-      const rootElement = getCurrentFromRef(rootElementRef)
-      const menuElement = getCurrentFromRef(menuElementRef)
-      updateMenuElementLayout(rootElement, menuElement, selectedId)
-    },
-    [])
-
-    const triggerShowMenu = useCallback(
+    const triggerMenuShow = useCallback(
       function () {
         if (isMenuVisible === true) {
           return
@@ -117,7 +117,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
         // Show the menu and update the `selectedId` on focus
         setIsMenuVisible(true)
         if (value === null) {
-          triggerUpdateMenuElementLayout(selectedId)
+          triggerMenuUpdateLayout(selectedId)
           return
         }
         const index = findOptionIndexByValue(options, value)
@@ -126,63 +126,40 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
         }
         const newSelectedId = `${index}`
         setSelectedId(newSelectedId)
-        triggerUpdateMenuElementLayout(newSelectedId)
+        triggerMenuUpdateLayout(newSelectedId)
       },
-      [
-        isMenuVisible,
-        options,
-        selectedId,
-        triggerUpdateMenuElementLayout,
-        value
-      ]
-    )
-
-    const handleRootFocus = useCallback(
-      function (): void {
-        if (isMenuVisible === true) {
-          return
-        }
-        // Show the menu and update the `selectedId` on focus
-        setIsMenuVisible(true)
-        if (value === null) {
-          triggerUpdateMenuElementLayout(selectedId)
-          return
-        }
-        const index = findOptionIndexByValue(options, value)
-        if (index === -1) {
-          throw new Error(`Invalid \`value\`: ${value}`)
-        }
-        const newSelectedId = `${index}`
-        setSelectedId(newSelectedId)
-        triggerUpdateMenuElementLayout(newSelectedId)
-      },
-      [
-        isMenuVisible,
-        options,
-        selectedId,
-        triggerUpdateMenuElementLayout,
-        value
-      ]
+      [isMenuVisible, options, selectedId, triggerMenuUpdateLayout, value]
     )
 
     const handleRootKeyDown = useCallback(
       function (event: Event.onKeyDown<HTMLDivElement>) {
+        onKeyDown(event)
         const key = event.key
         if (key === 'ArrowUp' || key === 'ArrowDown') {
+          event.preventDefault()
           if (isMenuVisible === false) {
-            triggerShowMenu()
+            triggerMenuShow()
             return
           }
           handleScrollableMenuKeyDown(event)
           return
         }
         if (key === 'Escape') {
-          triggerHideMenu()
+          event.preventDefault()
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          if (isMenuVisible === true) {
+            triggerMenuHide()
+            return
+          }
+          triggerRootBlur()
           return
         }
         if (key === 'Enter') {
+          event.preventDefault()
           if (isMenuVisible === false) {
-            triggerShowMenu()
+            triggerMenuShow()
             return
           }
           if (selectedId !== INVALID_ID) {
@@ -192,7 +169,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
               `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
             )
             if (selectedElement === null) {
-              throw new Error('Invariant violation') // `selectedId` is valid
+              throw new Error('`selectedElement` is `null`')
             }
             selectedElement.checked = true
             const changeEvent = new window.Event('change', {
@@ -201,33 +178,35 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
             })
             selectedElement.dispatchEvent(changeEvent)
           }
-          triggerHideMenu()
+          triggerMenuHide()
           return
         }
         if (key === 'Tab') {
-          triggerHideMenu()
-          triggerBlur()
+          triggerMenuHide()
           return
         }
       },
       [
         handleScrollableMenuKeyDown,
         isMenuVisible,
+        onKeyDown,
+        propagateEscapeKeyDown,
         selectedId,
-        triggerBlur,
-        triggerHideMenu,
-        triggerShowMenu
+        triggerMenuHide,
+        triggerMenuShow,
+        triggerRootBlur
       ]
     )
 
     const handleRootMouseDown = useCallback(
-      function (): void {
+      function (event: Event.onMouseDown<HTMLDivElement>): void {
+        onMouseDown(event)
         // `mousedown` events from `menuElement` are stopped from propagating to `rootElement` by `handleMenuMouseDown`
         if (isMenuVisible === false) {
-          triggerShowMenu()
+          triggerMenuShow()
         }
       },
-      [isMenuVisible, triggerShowMenu]
+      [isMenuVisible, onMouseDown, triggerMenuShow]
     )
 
     const handleMenuMouseDown = useCallback(function (
@@ -240,25 +219,26 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
 
     const handleOptionChange = useCallback(
       function (event: Event.onChange<HTMLInputElement>) {
-        const id = event.currentTarget.getAttribute(
-          ITEM_ID_DATA_ATTRIBUTE_NAME
-        ) as string
+        const id = event.currentTarget.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
+        if (id === null) {
+          throw new Error('`id` is `null`')
+        }
         const optionValue = options[parseInt(id, 10)] as DropdownOptionValue
         const newValue = optionValue.value
         onValueChange(newValue)
         onChange(event)
         getCurrentFromRef(rootElementRef).focus()
-        triggerHideMenu()
+        triggerMenuHide()
       },
-      [onChange, onValueChange, options, triggerHideMenu]
+      [onChange, onValueChange, options, triggerMenuHide]
     )
 
     const handleOptionClick = useCallback(
       function (): void {
-        triggerHideMenu()
+        triggerMenuHide()
         getCurrentFromRef(rootElementRef).focus()
       },
-      [triggerHideMenu]
+      [triggerMenuHide]
     )
 
     const handleMouseDownOutside = useCallback(
@@ -266,10 +246,10 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
         if (isMenuVisible === false) {
           return
         }
-        triggerHideMenu()
-        triggerBlur()
+        triggerMenuHide()
+        triggerRootBlur()
       },
-      [isMenuVisible, triggerBlur, triggerHideMenu]
+      [isMenuVisible, triggerRootBlur, triggerMenuHide]
     )
     useMouseDownOutside({
       onMouseDownOutside: handleMouseDownOutside,
@@ -301,7 +281,6 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
           typeof icon !== 'undefined' ? dropdownStyles.hasIcon : null,
           disabled === true ? dropdownStyles.disabled : null
         ])}
-        // onFocus={handleRootFocus}
         onKeyDown={disabled === true ? undefined : handleRootKeyDown}
         onMouseDown={handleRootMouseDown}
         tabIndex={0}

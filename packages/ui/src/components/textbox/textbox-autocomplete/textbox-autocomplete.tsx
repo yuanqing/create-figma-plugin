@@ -5,7 +5,6 @@ import menuStyles from '../../../css/menu.module.css'
 import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside.js'
 import { IconMenuCheckmarkChecked16 } from '../../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { Event, EventHandler } from '../../../types/event-handler.js'
-import { FocusableComponentProps } from '../../../types/focusable-component-props'
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
@@ -20,8 +19,7 @@ const INVALID_ID = null
 const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
 const MENU_VERTICAL_MARGIN = 8
 
-export interface TextboxAutocompleteProps
-  extends FocusableComponentProps<HTMLInputElement> {
+export interface TextboxAutocompleteProps {
   disabled?: boolean
   filter?: boolean
   icon?: ComponentChildren
@@ -32,6 +30,7 @@ export interface TextboxAutocompleteProps
   onValueInput?: EventHandler.onValueChange<string>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
+  propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   spellCheck?: boolean
   strict?: boolean
@@ -110,6 +109,14 @@ export const TextboxAutocomplete = createComponent<
   // Uncomment to debug
   // console.table([{ editedValue, isMenuVisible, originalValue, selectedId, value }])
 
+  const triggerTextboxSelect = useCallback(function () {
+    getCurrentFromRef(inputElementRef).select()
+  }, [])
+
+  const triggerTextboxBlur = useCallback(function () {
+    getCurrentFromRef(inputElementRef).blur()
+  }, [])
+
   const triggerMenuUpdateScrollPosition = useCallback(function (id: Id) {
     // Adjust the menu scroll position so that the selected option is always visible
     const menuElement = getCurrentFromRef(menuElementRef)
@@ -136,18 +143,18 @@ export const TextboxAutocomplete = createComponent<
     }
   }, [])
 
-  // Functions to imperatively update the UI state
   const updateSelectedId = useCallback(
     function (value: string) {
       const id = getIdByValue(options, value)
       if (id === INVALID_ID) {
-        setEditedValue(value)
+        setEditedValue(value) // Copy `value` to `editedValue`
       }
       setSelectedId(id)
       triggerMenuUpdateScrollPosition(id)
     },
     [options, triggerMenuUpdateScrollPosition]
   )
+
   const updateTextboxValue = useCallback(function (value: string) {
     const inputElement = getCurrentFromRef(inputElementRef)
     inputElement.value = value
@@ -157,17 +164,13 @@ export const TextboxAutocomplete = createComponent<
     })
     inputElement.dispatchEvent(inputEvent)
   }, [])
-  const triggerTextboxSelect = useCallback(function () {
-    getCurrentFromRef(inputElementRef).select()
-  }, [])
-  const triggerTextboxBlur = useCallback(function () {
-    getCurrentFromRef(inputElementRef).blur()
-  }, [])
+
   const triggerMenuHide = useCallback(function () {
     setIsMenuVisible(false)
     // Unset `originalValue` on blur
     setOriginalValue(EMPTY_STRING)
   }, [])
+
   const triggerMenuShow = useCallback(
     function () {
       updateMenuElementMaxHeight(

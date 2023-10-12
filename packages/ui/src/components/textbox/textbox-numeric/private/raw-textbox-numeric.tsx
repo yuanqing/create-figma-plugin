@@ -205,7 +205,7 @@ export const RawTextboxNumeric = createComponent<
         }
         const number = evaluateValue(value, suffix)
         if (number === null) {
-          throw new Error('Invariant violation') // `value` is a valid numeric expression
+          throw new Error('`number` is `null`')
         }
         const evaluatedValue = evaluateValueWithDelta(
           number,
