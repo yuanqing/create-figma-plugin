@@ -30,7 +30,6 @@ export interface RawTextboxProps
 export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
   function (
     {
-      blurOnEscapeKeyDown = true,
       disabled = false,
       onBlur = noop,
       onFocus = noop,
@@ -117,9 +116,7 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          if (blurOnEscapeKeyDown === true) {
-            event.currentTarget.blur()
-          }
+          event.currentTarget.blur()
           return
         }
         if (
@@ -132,7 +129,6 @@ export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
         }
       },
       [
-        blurOnEscapeKeyDown,
         onKeyDown,
         originalValue,
         propagateEscapeKeyDown,

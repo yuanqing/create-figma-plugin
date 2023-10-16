@@ -1,6 +1,6 @@
 import { useEffect } from 'preact/hooks'
 
-export const INITIAL_FOCUS_DATA_ATTRIBUTE_NAME = 'data-initial-focus'
+const INITIAL_FOCUS_DATA_ATTRIBUTE_NAME = 'data-initial-focus'
 
 export type InitialFocus = {
   [INITIAL_FOCUS_DATA_ATTRIBUTE_NAME]: true

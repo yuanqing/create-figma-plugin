@@ -22,7 +22,6 @@ export const IconToggleButton = createComponent<
   IconToggleButtonProps
 >(function (
   {
-    blurOnEscapeKeyDown = true,
     children,
     disabled = false,
     onChange = noop,
@@ -50,12 +49,10 @@ export const IconToggleButton = createComponent<
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (

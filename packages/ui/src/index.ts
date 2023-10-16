@@ -105,7 +105,6 @@ export { Toggle, ToggleProps } from './components/toggle/toggle.js'
 export { useFocusTrap } from './hooks/use-focus-trap/use-focus-trap.js'
 export { useForm } from './hooks/use-form/use-form.js'
 export {
-  INITIAL_FOCUS_DATA_ATTRIBUTE_NAME,
   InitialFocus,
   useInitialFocus
 } from './hooks/use-initial-focus/use-initial-focus.js'

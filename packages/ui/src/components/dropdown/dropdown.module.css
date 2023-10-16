@@ -99,8 +99,3 @@
 .dropdown:not(.disabled):focus .underline {
   background-color: transparent;
 }
-
-.menu {
-  max-width: 0;
-  max-height: 0;
-}

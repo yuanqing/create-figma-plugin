@@ -94,26 +94,3 @@ export const FullWidth = function () {
 FullWidth.parameters = {
   fixedWidth: true
 }
-
-export const FullWidthLongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
-    console.log(event)
-  }
-  return (
-    <Button danger fullWidth onClick={handleClick} secondary>
-      {longText}
-    </Button>
-  )
-}
-FullWidthLongText.parameters = {
-  fixedWidth: true
-}
-
-export const BlurOnEscapeKeyDown = function () {
-  return (
-    <Button blurOnEscapeKeyDown={false} danger secondary>
-      Text
-    </Button>
-  )
-}

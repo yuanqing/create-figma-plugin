@@ -3,6 +3,9 @@ import { h } from 'preact'
 import { VerticalSpace } from '../vertical-space.js'
 
 export default {
+  parameters: {
+    fixedWidth: true
+  },
   title: 'Layout/Vertical Space'
 }
 

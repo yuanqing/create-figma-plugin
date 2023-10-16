@@ -45,7 +45,6 @@ export const RawTextboxNumeric = createComponent<
   RawTextboxNumericProps
 >(function (
   {
-    blurOnEscapeKeyDown = true,
     disabled = false,
     incrementBig = 10,
     incrementSmall = 1,
@@ -78,6 +77,7 @@ export const RawTextboxNumeric = createComponent<
   }
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Set to `true` when the `Escape` key is pressed; used to bail out of `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
@@ -94,6 +94,10 @@ export const RawTextboxNumeric = createComponent<
   const handleBlur = useCallback(
     function (event: Event.onBlur<HTMLInputElement>) {
       onBlur(event)
+      if (revertOnEscapeKeyDownRef.current === true) {
+        revertOnEscapeKeyDownRef.current = false
+        return
+      }
       if (typeof validateOnBlur !== 'undefined') {
         const evaluatedValue = evaluateValue(value, suffix)
         const result = validateOnBlur(evaluatedValue)
@@ -166,15 +170,14 @@ export const RawTextboxNumeric = createComponent<
       const key = event.key
       if (key === 'Escape') {
         if (revertOnEscapeKeyDown === true) {
+          revertOnEscapeKeyDownRef.current = true
           setInputElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
         return
       }
       const inputElement = event.currentTarget
@@ -256,7 +259,6 @@ export const RawTextboxNumeric = createComponent<
       }
     },
     [
-      blurOnEscapeKeyDown,
       handleInput,
       incrementBig,
       incrementSmall,

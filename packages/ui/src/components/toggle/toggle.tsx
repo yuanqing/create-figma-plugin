@@ -17,7 +17,6 @@ export interface ToggleProps extends FocusableComponentProps<HTMLInputElement> {
 }
 
 export const Toggle = createComponent<HTMLInputElement, ToggleProps>(function ({
-  blurOnEscapeKeyDown = true,
   children,
   disabled = false,
   onChange = noop,
@@ -43,12 +42,10 @@ export const Toggle = createComponent<HTMLInputElement, ToggleProps>(function ({
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, propagateEscapeKeyDown, onKeyDown]
+    [propagateEscapeKeyDown, onKeyDown]
   )
 
   return (

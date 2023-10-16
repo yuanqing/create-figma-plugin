@@ -11,23 +11,8 @@ export default {
   title: 'Components/Tabs'
 }
 
-export const Unselected = function () {
-  const [value, setValue] = useState<null | string>(null)
-  const options: Array<TabsOption> = [
-    { children: <div>Foo</div>, value: 'foo' },
-    { children: <div>Bar</div>, value: 'bar' },
-    { children: <div>Baz</div>, value: 'baz' }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Tabs onChange={handleChange} options={options} value={value} />
-}
-
-export const Selected = function () {
-  const [value, setValue] = useState<string>('bar')
+export const Passive = function () {
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TabsOption> = [
     { children: <div>Foo</div>, value: 'foo' },
     { children: <div>Bar</div>, value: 'bar' },
@@ -42,7 +27,7 @@ export const Selected = function () {
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState<string>('bar')
+  const [value, setValue] = useState<string>('foo')
   const options: Array<TabsOption> = [
     { children: <div>Foo</div>, value: 'foo' },
     { children: <div>Bar</div>, value: 'bar' },

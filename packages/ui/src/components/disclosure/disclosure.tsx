@@ -19,7 +19,6 @@ export interface DisclosureProps
 export const Disclosure = createComponent<HTMLInputElement, DisclosureProps>(
   function (
     {
-      blurOnEscapeKeyDown = true,
       children,
       onClick = noop,
       onKeyDown = noop,
@@ -37,12 +36,10 @@ export const Disclosure = createComponent<HTMLInputElement, DisclosureProps>(
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          if (blurOnEscapeKeyDown === true) {
-            event.currentTarget.blur()
-          }
+          event.currentTarget.blur()
         }
       },
-      [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+      [onKeyDown, propagateEscapeKeyDown]
     )
 
     return (

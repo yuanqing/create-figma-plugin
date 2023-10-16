@@ -8,21 +8,24 @@ import { Event, EventHandler } from '../../../types/event-handler.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
-import { noop } from '../../../utilities/no-op'
+import { noop } from '../../../utilities/no-op.js'
+import {
+  INVALID_ID,
+  ITEM_ID_DATA_ATTRIBUTE_NAME,
+  VIEWPORT_MARGIN
+} from '../../../utilities/private/constants.js'
 import { computeNextValue } from '../private/compute-next-value.js'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating.js'
 import textboxStyles from '../textbox/textbox.module.css'
 import textboxAutocompleteStyles from './textbox-autocomplete.module.css'
 
 const EMPTY_STRING = ''
-const INVALID_ID = null
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
-const MENU_VERTICAL_MARGIN = 8
 
 export interface TextboxAutocompleteProps {
   disabled?: boolean
   filter?: boolean
   icon?: ComponentChildren
+  onChange?: EventHandler.onChange<HTMLInputElement>
   onInput?: EventHandler.onInput<HTMLInputElement>
   onKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
   onMouseDown?: EventHandler.onMouseDown<HTMLInputElement>
@@ -71,6 +74,7 @@ export const TextboxAutocomplete = createComponent<
     disabled = false,
     filter = false,
     icon,
+    onChange = noop,
     onInput = noop,
     onKeyDown = noop,
     onMouseDown = noop,
@@ -96,7 +100,9 @@ export const TextboxAutocomplete = createComponent<
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
-  const [originalValue, setOriginalValue] = useState<string>(EMPTY_STRING) // Value of the textbox when the menu is shown
+  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Set to `true` when the `Escape` key is pressed; used to bail out of `handleTextboxInput`
+
+  const [originalValue, setOriginalValue] = useState<string>(value) // Value of the textbox when the menu is focused
   const [editedValue, setEditedValue] = useState<string>(EMPTY_STRING) // Value being edited that does not match any of the options
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false)
   const [selectedId, setSelectedId] = useState<Id>(INVALID_ID)
@@ -107,7 +113,9 @@ export const TextboxAutocomplete = createComponent<
       : createOptions(rest.options)
 
   // Uncomment to debug
-  // console.table([{ editedValue, isMenuVisible, originalValue, selectedId, value }])
+  // console.table([
+  //   { editedValue, isMenuVisible, originalValue, selectedId, value }
+  // ])
 
   const triggerTextboxSelect = useCallback(function () {
     getCurrentFromRef(inputElementRef).select()
@@ -167,8 +175,6 @@ export const TextboxAutocomplete = createComponent<
 
   const triggerMenuHide = useCallback(function () {
     setIsMenuVisible(false)
-    // Unset `originalValue` on blur
-    setOriginalValue(EMPTY_STRING)
   }, [])
 
   const triggerMenuShow = useCallback(
@@ -178,7 +184,6 @@ export const TextboxAutocomplete = createComponent<
         getCurrentFromRef(menuElementRef),
         top
       )
-      // Copy `value` to `originalValue` on focus
       setOriginalValue(value)
       updateSelectedId(value)
       setIsMenuVisible(true)
@@ -193,6 +198,10 @@ export const TextboxAutocomplete = createComponent<
       updateSelectedId(newValue)
       onValueInput(newValue)
       if (isMenuVisible === true) {
+        return
+      }
+      if (revertOnEscapeKeyDownRef.current === true) {
+        revertOnEscapeKeyDownRef.current = false
         return
       }
       triggerMenuShow()
@@ -244,6 +253,7 @@ export const TextboxAutocomplete = createComponent<
           event.stopPropagation()
         }
         if (revertOnEscapeKeyDown === true) {
+          revertOnEscapeKeyDownRef.current = true
           updateTextboxValue(originalValue)
         }
         // Hide the menu if it is visible, else blur the textbox
@@ -342,6 +352,7 @@ export const TextboxAutocomplete = createComponent<
 
   const handleOptionChange = useCallback(
     function (event: Event.onChange<HTMLInputElement>) {
+      onChange(event)
       const id = event.currentTarget.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
       if (id === null) {
         throw new Error('`id` is `null`')
@@ -352,13 +363,20 @@ export const TextboxAutocomplete = createComponent<
       if (optionValue === null) {
         throw new Error('`optionValue` is `null`')
       }
-      // Imperatively set the textbox value
+      // Imperatively set the textbox value; the new value will eventually
+      // reach `handleTextboxInput`
       updateTextboxValue(optionValue.value)
       // Select the textbox, then hide the menu
       triggerTextboxSelect()
       triggerMenuHide()
     },
-    [options, triggerMenuHide, triggerTextboxSelect, updateTextboxValue]
+    [
+      onChange,
+      options,
+      triggerMenuHide,
+      triggerTextboxSelect,
+      updateTextboxValue
+    ]
   )
 
   const handleOptionMouseMove = useCallback(
@@ -483,7 +501,12 @@ export const TextboxAutocomplete = createComponent<
                   checked={value === option.value}
                   class={menuStyles.input}
                   disabled={option.disabled === true}
-                  onChange={handleOptionChange}
+                  // If clicked on an unselected element, set the value
+                  onChange={
+                    value === option.value ? undefined : handleOptionChange
+                  }
+                  // Else hide the menu if clicked on an already-selected element
+                  onClick={value === option.value ? triggerMenuHide : undefined}
                   onMouseMove={handleOptionMouseMove}
                   tabIndex={-1}
                   type="radio"
@@ -702,10 +725,10 @@ function updateMenuElementMaxHeight(
   const rootElementTop = rootElement.getBoundingClientRect().top
   const maxHeight =
     top === true
-      ? rootElementTop - MENU_VERTICAL_MARGIN
+      ? rootElementTop - VIEWPORT_MARGIN
       : window.innerHeight -
         rootElementTop -
         rootElement.offsetHeight -
-        MENU_VERTICAL_MARGIN
+        VIEWPORT_MARGIN
   menuElement.style.maxHeight = `${maxHeight}px`
 }

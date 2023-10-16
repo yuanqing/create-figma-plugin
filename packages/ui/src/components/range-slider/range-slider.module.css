@@ -2,14 +2,13 @@
   position: relative;
   width: 100%;
   height: 1px;
-  margin: 0 -2px;
 }
 
 .border {
   position: absolute;
   top: 0;
-  right: 2px;
-  left: 2px;
+  right: 0;
+  left: 0;
   height: 1px;
   background-color: var(--figma-color-border-strong);
 }
@@ -18,13 +17,14 @@
 }
 
 .input {
-  position: relative;
+  position: absolute;
   z-index: var(
     --z-index-1
   ); /* stack `.input` over all other elements within `.rangeSlider` */
   top: -16px;
+  right: -2px;
+  left: -2px;
   display: block;
-  width: 100%;
   height: 33px;
   background-color: transparent;
 }

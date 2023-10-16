@@ -32,7 +32,6 @@ export const FileUploadButton = createComponent<
 >(function (
   {
     acceptedFileTypes = [],
-    blurOnEscapeKeyDown = true,
     children,
     disabled = false,
     fullWidth = false,
@@ -89,12 +88,10 @@ export const FileUploadButton = createComponent<
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (

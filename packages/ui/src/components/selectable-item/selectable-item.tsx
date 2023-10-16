@@ -25,7 +25,6 @@ export const SelectableItem = createComponent<
   SelectableItemProps
 >(function (
   {
-    blurOnEscapeKeyDown = true,
     bold = false,
     children,
     disabled = false,
@@ -55,12 +54,10 @@ export const SelectableItem = createComponent<
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (

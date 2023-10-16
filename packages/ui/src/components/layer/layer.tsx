@@ -21,7 +21,6 @@ export interface LayerProps extends FocusableComponentProps<HTMLInputElement> {
 
 export const Layer = createComponent<HTMLInputElement, LayerProps>(function (
   {
-    blurOnEscapeKeyDown = true,
     bold = false,
     children,
     component = false,
@@ -52,12 +51,10 @@ export const Layer = createComponent<HTMLInputElement, LayerProps>(function (
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (

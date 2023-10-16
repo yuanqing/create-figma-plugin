@@ -13,7 +13,7 @@ import {
 
 export default { title: 'Components/Segmented Control' }
 
-export const Selected = function () {
+export const Passive = function () {
   const [value, setValue] = useState<string>('bar')
   const options: Array<SegmentedControlOption> = [
     { value: 'foo' },

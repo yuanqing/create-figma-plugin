@@ -38,7 +38,6 @@ export const TextboxMultiline = createComponent<
   TextboxMultilineProps
 >(function (
   {
-    blurOnEscapeKeyDown = true,
     grow = false,
     disabled = false,
     onBlur = noop,
@@ -127,9 +126,7 @@ export const TextboxMultiline = createComponent<
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
         return
       }
       if (
@@ -142,7 +139,6 @@ export const TextboxMultiline = createComponent<
       }
     },
     [
-      blurOnEscapeKeyDown,
       onKeyDown,
       originalValue,
       propagateEscapeKeyDown,

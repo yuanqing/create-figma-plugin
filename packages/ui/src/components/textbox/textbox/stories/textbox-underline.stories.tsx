@@ -25,7 +25,7 @@ export const Empty = function () {
   return <Textbox onInput={handleInput} value={value} variant="underline" />
 }
 
-export const EmptyFocused = function () {
+export const Focused = function () {
   const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -59,24 +59,6 @@ export const Placeholder = function () {
   )
 }
 
-export const PlaceholderFocused = function () {
-  const [value, setValue] = useState<string>('')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      {...useInitialFocus()}
-      onInput={handleInput}
-      placeholder="Placeholder"
-      value={value}
-      variant="underline"
-    />
-  )
-}
-
 export const Filled = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -85,23 +67,6 @@ export const Filled = function () {
     setValue(newValue)
   }
   return <Textbox onInput={handleInput} value={value} variant="underline" />
-}
-
-export const Focused = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      {...useInitialFocus()}
-      onInput={handleInput}
-      value={value}
-      variant="underline"
-    />
-  )
 }
 
 export const Disabled = function () {
@@ -130,7 +95,7 @@ export const Icon = function () {
   )
 }
 
-export const IconDisabled = function () {
+export const TextIcon = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -138,42 +103,7 @@ export const IconDisabled = function () {
     setValue(newValue)
   }
   return (
-    <Textbox
-      disabled
-      icon={<IconLayerFrame16 />}
-      onInput={handleInput}
-      value={value}
-    />
-  )
-}
-
-export const IconText = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox icon="X" onInput={handleInput} value={value} variant="underline" />
-  )
-}
-
-export const IconTextDisabled = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      disabled
-      icon="X"
-      onInput={handleInput}
-      value={value}
-      variant="underline"
-    />
+    <Textbox icon="W" onInput={handleInput} value={value} variant="underline" />
   )
 }
 
@@ -235,21 +165,6 @@ export const Password = function () {
   )
 }
 
-export const OnValueInput = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleValueInput(newValue: string) {
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      onValueInput={handleValueInput}
-      value={value}
-      variant="underline"
-    />
-  )
-}
-
 export const Ref = function () {
   const ref: RefObject<HTMLInputElement> = useRef(null)
   const [value, setValue] = useState<string>('Text')
@@ -266,6 +181,21 @@ export const Ref = function () {
     <Textbox
       ref={ref}
       onInput={handleInput}
+      value={value}
+      variant="underline"
+    />
+  )
+}
+
+export const OnValueInput = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Textbox
+      onValueInput={handleValueInput}
       value={value}
       variant="underline"
     />

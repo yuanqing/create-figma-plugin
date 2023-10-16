@@ -29,7 +29,6 @@ export const FileUploadDropzone = createComponent<
 >(function (
   {
     acceptedFileTypes = [],
-    blurOnEscapeKeyDown = true,
     children,
     multiple = false,
     onBlur = noop,
@@ -120,12 +119,10 @@ export const FileUploadDropzone = createComponent<
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (

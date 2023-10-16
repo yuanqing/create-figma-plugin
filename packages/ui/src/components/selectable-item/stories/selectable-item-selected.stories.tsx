@@ -56,21 +56,6 @@ export const Disabled = function () {
   )
 }
 
-export const LongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  const [value, setValue] = useState<boolean>(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <SelectableItem onChange={handleChange} value={value}>
-      {longText}
-    </SelectableItem>
-  )
-}
-
 export const Bold = function () {
   const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {

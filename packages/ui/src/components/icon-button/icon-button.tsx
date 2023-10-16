@@ -17,7 +17,6 @@ export interface IconButtonProps
 export const IconButton = createComponent<HTMLButtonElement, IconButtonProps>(
   function (
     {
-      blurOnEscapeKeyDown = true,
       children,
       disabled = false,
       onClick,
@@ -34,12 +33,10 @@ export const IconButton = createComponent<HTMLButtonElement, IconButtonProps>(
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          if (blurOnEscapeKeyDown === true) {
-            event.currentTarget.blur()
-          }
+          event.currentTarget.blur()
         }
       },
-      [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+      [onKeyDown, propagateEscapeKeyDown]
     )
 
     return (

@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
-import { Fragment, h, JSX } from 'preact'
+import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
 import { IconLayerFrame16 } from '../../../icons/icon-16/icon-layer-frame-16.js'
-import { VerticalSpace } from '../../../layout/vertical-space/vertical-space.js'
-import { Button } from '../../button/button.js'
 import { Dropdown, DropdownOption } from '../dropdown.js'
 
 export default {
@@ -32,12 +30,14 @@ export const Empty = function () {
     setValue(newValue)
   }
   return (
-    <Dropdown
-      onChange={handleChange}
-      options={options}
-      value={value}
-      variant="underline"
-    />
+    <div>
+      <Dropdown
+        onChange={handleChange}
+        options={options}
+        value={value}
+        variant="underline"
+      />
+    </div>
   )
 }
 
@@ -289,7 +289,7 @@ export const Icon = function () {
   )
 }
 
-export const IconDisabled = function () {
+export const TextIcon = function () {
   const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
     { value: 'foo' },
@@ -306,143 +306,12 @@ export const IconDisabled = function () {
   }
   return (
     <Dropdown
-      disabled
-      icon={<IconLayerFrame16 />}
+      icon="W"
       onChange={handleChange}
       options={options}
       value={value}
       variant="underline"
     />
-  )
-}
-
-export const IconText = function () {
-  const [value, setValue] = useState<string>('foo')
-  const options: Array<DropdownOption> = [
-    { value: 'foo' },
-    { value: 'bar' },
-    { value: 'baz' },
-    '-',
-    { header: 'Header' },
-    { value: 'qux' }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Dropdown
-      icon="X"
-      onChange={handleChange}
-      options={options}
-      value={value}
-      variant="underline"
-    />
-  )
-}
-
-export const IconTextDisabled = function () {
-  const [value, setValue] = useState<string>('foo')
-  const options: Array<DropdownOption> = [
-    { value: 'foo' },
-    { value: 'bar' },
-    { value: 'baz' },
-    '-',
-    { header: 'Header' },
-    { value: 'qux' }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Dropdown
-      disabled
-      icon="X"
-      onChange={handleChange}
-      options={options}
-      value={value}
-      variant="underline"
-    />
-  )
-}
-
-export const DynamicallySetOptions = function () {
-  const [value, setValue] = useState<null | string>(null)
-  const [options, setOptions] = useState<Array<DropdownOption>>([
-    { value: 'foo' }
-  ])
-  function handleClick() {
-    setOptions([
-      { value: 'foo' },
-      { value: 'bar' },
-      { value: 'baz' },
-      '-',
-      { header: 'Header' },
-      { value: 'qux' }
-    ])
-  }
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Fragment>
-      <Button onClick={handleClick}>Set</Button>
-      <VerticalSpace space="small" />
-      <Dropdown
-        onChange={handleChange}
-        options={options}
-        placeholder="Placeholder"
-        value={value}
-        variant="underline"
-      />
-    </Fragment>
-  )
-}
-
-export const FlexParent = function () {
-  const [valueA, setValueA] = useState<string>(Array(20).fill('foo').join(' '))
-  const optionsA: Array<DropdownOption> = [
-    { value: Array(20).fill('foo').join(' ') },
-    { value: 'bar' }
-  ]
-  function handleChangeA(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValueA(newValue)
-  }
-  const [valueB, setValueB] = useState<string>('qux')
-  const optionsB: Array<DropdownOption> = [
-    { value: Array(20).fill('baz').join(' ') },
-    { value: 'qux' }
-  ]
-  function handleChangeB(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValueB(newValue)
-  }
-  const style = { display: 'flex' }
-  return (
-    <div style={style}>
-      <Dropdown
-        onChange={handleChangeA}
-        options={optionsA}
-        value={valueA}
-        variant="underline"
-      />
-      )
-      <Dropdown
-        onChange={handleChangeB}
-        options={optionsB}
-        value={valueB}
-        variant="underline"
-      />
-      )
-    </div>
   )
 }
 
@@ -486,9 +355,9 @@ export const TopLeft = function () {
     setValue(newValue)
   }
   const style = {
-    left: '-24px',
-    position: 'absolute',
-    top: '-12px',
+    left: '-8px',
+    position: 'fixed',
+    top: '-8px',
     width: '240px'
   }
   return (
@@ -516,9 +385,9 @@ export const TopLeftManyOptions = function () {
     setValue(newValue)
   }
   const style = {
-    left: '-24px',
-    position: 'absolute',
-    top: '-12px',
+    left: '-8px',
+    position: 'fixed',
+    top: '-8px',
     width: '240px'
   }
   return (
@@ -549,9 +418,9 @@ export const TopRight = function () {
     setValue(newValue)
   }
   const style = {
-    position: 'absolute',
-    right: '-24px',
-    top: '-12px',
+    position: 'fixed',
+    right: '-8px',
+    top: '-8px',
     width: '240px'
   }
   return (
@@ -579,9 +448,9 @@ export const TopRightManyOptions = function () {
     setValue(newValue)
   }
   const style = {
-    position: 'absolute',
-    right: '-24px',
-    top: '-12px',
+    position: 'fixed',
+    right: '-8px',
+    top: '-8px',
     width: '240px'
   }
   return (
@@ -612,8 +481,8 @@ export const MiddleLeft = function () {
     setValue(newValue)
   }
   const style = {
-    left: '-24px',
-    position: 'absolute',
+    left: '-8px',
+    position: 'fixed',
     top: '50%',
     transform: 'translateY(-50%)',
     width: '240px'
@@ -643,8 +512,8 @@ export const MiddleLeftManyOptions = function () {
     setValue(newValue)
   }
   const style = {
-    left: '-24px',
-    position: 'absolute',
+    left: '-8px',
+    position: 'fixed',
     top: '50%',
     transform: 'translateY(-50%)',
     width: '240px'
@@ -677,8 +546,8 @@ export const MiddleRight = function () {
     setValue(newValue)
   }
   const style = {
-    position: 'absolute',
-    right: '-24px',
+    position: 'fixed',
+    right: '-8px',
     top: '50%',
     transform: 'translateY(-50%)',
     width: '240px'
@@ -708,8 +577,8 @@ export const MiddleRightManyOptions = function () {
     setValue(newValue)
   }
   const style = {
-    position: 'absolute',
-    right: '-24px',
+    position: 'fixed',
+    right: '-8px',
     top: '50%',
     transform: 'translateY(-50%)',
     width: '240px'
@@ -742,9 +611,9 @@ export const BottomLeft = function () {
     setValue(newValue)
   }
   const style = {
-    bottom: '-12px',
-    left: '-24px',
-    position: 'absolute',
+    bottom: '-8px',
+    left: '-8px',
+    position: 'fixed',
     width: '240px'
   }
   return (
@@ -772,9 +641,9 @@ export const BottomLeftManyOptions = function () {
     setValue(newValue)
   }
   const style = {
-    bottom: '-12px',
-    left: '-24px',
-    position: 'absolute',
+    bottom: '-8px',
+    left: '-8px',
+    position: 'fixed',
     width: '240px'
   }
   return (
@@ -805,9 +674,9 @@ export const BottomRight = function () {
     setValue(newValue)
   }
   const style = {
-    bottom: '-12px',
-    position: 'absolute',
-    right: '-24px',
+    bottom: '-8px',
+    position: 'fixed',
+    right: '-8px',
     width: '240px'
   }
   return (
@@ -835,9 +704,9 @@ export const BottomRightManyOptions = function () {
     setValue(newValue)
   }
   const style = {
-    bottom: '-12px',
-    position: 'absolute',
-    right: '-24px',
+    bottom: '-8px',
+    position: 'fixed',
+    right: '-8px',
     width: '240px'
   }
   return (

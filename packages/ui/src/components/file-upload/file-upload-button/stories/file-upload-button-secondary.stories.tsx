@@ -103,21 +103,6 @@ FullWidth.parameters = {
   fixedWidth: true
 }
 
-export const FullWidthLongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  function handleSelectedFiles(files: Array<File>) {
-    console.log(files)
-  }
-  return (
-    <FileUploadButton fullWidth onSelectedFiles={handleSelectedFiles} secondary>
-      {longText}
-    </FileUploadButton>
-  )
-}
-FullWidthLongText.parameters = {
-  fixedWidth: true
-}
-
 export const AcceptedFileTypes = function () {
   const acceptedFileTypes = ['image/x-png', 'image/gif', 'image/jpeg']
   function handleSelectedFiles(files: Array<File>) {

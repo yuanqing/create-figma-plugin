@@ -22,7 +22,6 @@ export interface ButtonProps
 
 export const Button = createComponent<HTMLButtonElement, ButtonProps>(function (
   {
-    blurOnEscapeKeyDown = true,
     children,
     danger = false,
     disabled = false,
@@ -43,12 +42,10 @@ export const Button = createComponent<HTMLButtonElement, ButtonProps>(function (
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (

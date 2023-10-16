@@ -2,7 +2,12 @@ import { h } from 'preact'
 
 import { MiddleAlign } from '../middle-align.js'
 
-export default { title: 'Layout/Middle Align' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Layout/Middle Align'
+}
 
 export const Default = function () {
   const style = {

@@ -21,7 +21,6 @@ export interface CheckboxProps
 export const Checkbox = createComponent<HTMLInputElement, CheckboxProps>(
   function (
     {
-      blurOnEscapeKeyDown = true,
       children,
       disabled = false,
       onChange = noop,
@@ -49,12 +48,10 @@ export const Checkbox = createComponent<HTMLInputElement, CheckboxProps>(
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          if (blurOnEscapeKeyDown === true) {
-            event.currentTarget.blur()
-          }
+          event.currentTarget.blur()
         }
       },
-      [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+      [onKeyDown, propagateEscapeKeyDown]
     )
 
     return (

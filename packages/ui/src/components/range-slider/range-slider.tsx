@@ -23,7 +23,6 @@ export interface RangeSliderProps
 export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
   function (
     {
-      blurOnEscapeKeyDown = true,
       disabled = false,
       increment = 1,
       maximum,
@@ -59,12 +58,10 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          if (blurOnEscapeKeyDown === true) {
-            event.currentTarget.blur()
-          }
+          event.currentTarget.blur()
         }
       },
-      [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+      [onKeyDown, propagateEscapeKeyDown]
     )
 
     return (

@@ -25,7 +25,7 @@ export const Empty = function () {
   return <Textbox onInput={handleInput} value={value} />
 }
 
-export const EmptyFocused = function () {
+export const Focused = function () {
   const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -47,23 +47,6 @@ export const Placeholder = function () {
   )
 }
 
-export const PlaceholderFocused = function () {
-  const [value, setValue] = useState<string>('')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      {...useInitialFocus()}
-      onInput={handleInput}
-      placeholder="Placeholder"
-      value={value}
-    />
-  )
-}
-
 export const Filled = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -72,16 +55,6 @@ export const Filled = function () {
     setValue(newValue)
   }
   return <Textbox onInput={handleInput} value={value} />
-}
-
-export const Focused = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Textbox {...useInitialFocus()} onInput={handleInput} value={value} />
 }
 
 export const Disabled = function () {
@@ -103,41 +76,14 @@ export const Icon = function () {
   )
 }
 
-export const IconDisabled = function () {
+export const TextIcon = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <Textbox
-      disabled
-      icon={<IconLayerFrame16 />}
-      onInput={handleInput}
-      value={value}
-    />
-  )
-}
-
-export const IconText = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Textbox icon="X" onInput={handleInput} value={value} />
-}
-
-export const IconTextDisabled = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Textbox disabled icon="X" onInput={handleInput} value={value} />
+  return <Textbox icon="W" onInput={handleInput} value={value} />
 }
 
 export const Mixed = function () {
@@ -189,15 +135,6 @@ export const Password = function () {
   return <Textbox onInput={handleInput} password value={value} />
 }
 
-export const OnValueInput = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleValueInput(newValue: string) {
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Textbox onValueInput={handleValueInput} value={value} />
-}
-
 export const Ref = function () {
   const ref: RefObject<HTMLInputElement> = useRef(null)
   const [value, setValue] = useState<string>('Text')
@@ -211,4 +148,13 @@ export const Ref = function () {
     setValue(newValue)
   }
   return <Textbox ref={ref} onInput={handleInput} value={value} />
+}
+
+export const OnValueInput = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <Textbox onValueInput={handleValueInput} value={value} />
 }

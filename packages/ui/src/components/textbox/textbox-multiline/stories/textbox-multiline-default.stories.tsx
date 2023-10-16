@@ -24,7 +24,7 @@ export const Empty = function () {
   return <TextboxMultiline onInput={handleInput} value={value} />
 }
 
-export const EmptyFocused = function () {
+export const Focused = function () {
   const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
     const newValue = event.currentTarget.value
@@ -56,23 +56,6 @@ export const Placeholder = function () {
   )
 }
 
-export const PlaceholderFocused = function () {
-  const [value, setValue] = useState<string>('')
-  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <TextboxMultiline
-      {...useInitialFocus()}
-      onInput={handleInput}
-      placeholder="Placeholder"
-      value={value}
-    />
-  )
-}
-
 export const Filled = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
@@ -81,22 +64,6 @@ export const Filled = function () {
     setValue(newValue)
   }
   return <TextboxMultiline onInput={handleInput} value={value} />
-}
-
-export const Focused = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLTextAreaElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <TextboxMultiline
-      {...useInitialFocus()}
-      onInput={handleInput}
-      value={value}
-    />
-  )
 }
 
 export const Disabled = function () {
@@ -171,15 +138,6 @@ export const AutoGrow = function () {
   return <TextboxMultiline grow onInput={handleInput} rows={1} value={value} />
 }
 
-export const OnValueInput = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleValueInput(newValue: string) {
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <TextboxMultiline onValueInput={handleValueInput} value={value} />
-}
-
 export const Ref = function () {
   const ref: RefObject<HTMLTextAreaElement> = useRef(null)
   const [value, setValue] = useState<string>('Text')
@@ -193,4 +151,13 @@ export const Ref = function () {
     setValue(newValue)
   }
   return <TextboxMultiline ref={ref} onInput={handleInput} value={value} />
+}
+
+export const OnValueInput = function () {
+  const [value, setValue] = useState<string>('Text')
+  function handleValueInput(newValue: string) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return <TextboxMultiline onValueInput={handleValueInput} value={value} />
 }

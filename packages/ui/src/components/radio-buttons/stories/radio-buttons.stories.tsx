@@ -7,8 +7,7 @@ import { Text } from '../../text/text.js'
 import { RadioButtons, RadioButtonsOption } from '../radio-buttons.js'
 
 export default {
-  tags: ['2'],
-  title: 'Components/Radio Buttons/Selected'
+  title: 'Components/Radio Buttons'
 }
 
 export const Passive = function () {

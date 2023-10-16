@@ -6,9 +6,8 @@ import { FocusableComponentProps } from '../../types/focusable-component-props.j
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { noop } from '../../utilities/no-op.js'
+import { ITEM_ID_DATA_ATTRIBUTE_NAME } from '../../utilities/private/constants.js'
 import styles from './segmented-control.module.css'
-
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-segmented-control-item-id'
 
 export interface SegmentedControlProps
   extends FocusableComponentProps<HTMLInputElement> {
@@ -28,7 +27,6 @@ export const SegmentedControl = createComponent<
   HTMLInputElement,
   SegmentedControlProps
 >(function ({
-  blurOnEscapeKeyDown = true,
   disabled = false,
   onChange = noop,
   onKeyDown = noop,
@@ -58,12 +56,10 @@ export const SegmentedControl = createComponent<
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, onKeyDown, propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (

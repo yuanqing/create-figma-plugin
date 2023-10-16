@@ -36,7 +36,7 @@ export const Empty = function () {
   )
 }
 
-export const EmptyFocused = function () {
+export const Focused = function () {
   const [hexColor, setHexColor] = useState<string>('')
   const [opacity, setOpacity] = useState<string>('')
   function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -87,33 +87,6 @@ export const Placeholder = function () {
   )
 }
 
-export const PlaceholderFocused = function () {
-  const [hexColor, setHexColor] = useState<string>('')
-  const [opacity, setOpacity] = useState<string>('')
-  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newHexColor = event.currentTarget.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newOpacity = event.currentTarget.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      {...useInitialFocus()}
-      hexColor={hexColor}
-      hexColorPlaceholder="Color"
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
-      opacity={opacity}
-      opacityPlaceholder="%"
-      variant="border"
-    />
-  )
-}
-
 export const Filled = function () {
   const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
@@ -129,31 +102,6 @@ export const Filled = function () {
   }
   return (
     <TextboxColor
-      hexColor={hexColor}
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
-      opacity={opacity}
-      variant="border"
-    />
-  )
-}
-
-export const Focused = function () {
-  const [hexColor, setHexColor] = useState<string>('0D99FF')
-  const [opacity, setOpacity] = useState<string>('100%')
-  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newHexColor = event.currentTarget.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newOpacity = event.currentTarget.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      {...useInitialFocus()}
       hexColor={hexColor}
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}

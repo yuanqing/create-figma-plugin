@@ -17,7 +17,6 @@ export interface LinkProps extends FocusableComponentProps<HTMLAnchorElement> {
 
 export const Link = createComponent<HTMLAnchorElement, LinkProps>(function (
   {
-    blurOnEscapeKeyDown = true,
     children,
     fullWidth = false,
     href,
@@ -35,12 +34,10 @@ export const Link = createComponent<HTMLAnchorElement, LinkProps>(function (
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
-    [blurOnEscapeKeyDown, propagateEscapeKeyDown, onKeyDown]
+    [propagateEscapeKeyDown, onKeyDown]
   )
 
   return (

@@ -17,11 +17,9 @@ import styles from './textbox-color.module.css'
 const EMPTY_STRING = ''
 
 export type TextboxColorProps = {
-  blurOnEscapeKeyDown?: boolean
   propagateEscapeKeyDown?: boolean
   disabled?: boolean
   hexColor: string
-  hexColorName?: string
   hexColorPlaceholder?: string
   onHexColorInput?: EventHandler.onInput<HTMLInputElement>
   onHexColorKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
@@ -32,7 +30,6 @@ export type TextboxColorProps = {
   onOpacityValueInput?: EventHandler.onValueChange<string>
   onRgbaColorValueInput?: EventHandler.onValueChange<null | RGBA>
   opacity: string
-  opacityName?: string
   opacityPlaceholder?: string
   revertOnEscapeKeyDown?: boolean
   variant?: TextboxColorVariant
@@ -42,10 +39,8 @@ export type TextboxColorVariant = 'border' | 'underline'
 export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
   function (
     {
-      blurOnEscapeKeyDown = true,
       disabled = false,
       hexColor,
-      hexColorName,
       hexColorPlaceholder,
       onHexColorInput = noop,
       onHexColorKeyDown = noop,
@@ -56,7 +51,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
       onOpacityValueInput = noop,
       onRgbaColorValueInput = noop,
       opacity,
-      opacityName,
       opacityPlaceholder,
       propagateEscapeKeyDown = true,
       revertOnEscapeKeyDown = false,
@@ -67,6 +61,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
   ) {
     const hexColorInputElementRef: RefObject<HTMLInputElement> = useRef(null)
     const opacityInputElementRef: RefObject<HTMLInputElement> = useRef(null)
+    const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Set to `true` when the `Escape` key is pressed; used to bail out of `handleHexColorBlur`
 
     const [originalHexColor, setOriginalHexColor] = useState(EMPTY_STRING) // Value of the hex color textbox when it was initially focused
 
@@ -102,18 +97,16 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
           return
         }
         if (revertOnEscapeKeyDown === true) {
+          revertOnEscapeKeyDownRef.current = true
           setHexColorInputElementValue(originalHexColor)
           setOriginalHexColor(EMPTY_STRING)
         }
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       },
       [
-        blurOnEscapeKeyDown,
         originalHexColor,
         propagateEscapeKeyDown,
         revertOnEscapeKeyDown,
@@ -123,6 +116,10 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
 
     const handleHexColorBlur = useCallback(
       function () {
+        if (revertOnEscapeKeyDownRef.current === true) {
+          revertOnEscapeKeyDownRef.current = false
+          return
+        }
         if (hexColor === EMPTY_STRING) {
           if (originalHexColor !== EMPTY_STRING) {
             setHexColorInputElementValue(originalHexColor)
@@ -177,15 +174,14 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
         const key = event.key
         if (key === 'Escape') {
           if (revertOnEscapeKeyDown === true) {
+            revertOnEscapeKeyDownRef.current = true
             setHexColorInputElementValue(originalHexColor)
             setOriginalHexColor(EMPTY_STRING)
           }
           if (propagateEscapeKeyDown === false) {
             event.stopPropagation()
           }
-          if (blurOnEscapeKeyDown === true) {
-            event.currentTarget.blur()
-          }
+          event.currentTarget.blur()
           return
         }
         const element = event.currentTarget
@@ -211,7 +207,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
         }
       },
       [
-        blurOnEscapeKeyDown,
         hexColor,
         onHexColorKeyDown,
         originalHexColor,
@@ -321,7 +316,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
           ref={hexColorInputElementRef}
           class={createClassName([styles.input, styles.hexColorInput])}
           disabled={disabled === true}
-          name={hexColorName}
           onBlur={handleHexColorBlur}
           onFocus={handleHexColorFocus}
           onInput={handleHexColorInput}
@@ -339,7 +333,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
           disabled={disabled === true}
           maximum={100}
           minimum={0}
-          name={opacityName}
           onInput={handleOpacityInput}
           onKeyDown={onOpacityKeyDown}
           onNumericValueInput={handleOpacityNumericValueInput}

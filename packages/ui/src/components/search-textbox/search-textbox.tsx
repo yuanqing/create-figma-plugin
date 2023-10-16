@@ -31,7 +31,6 @@ export const SearchTextbox = createComponent<
   SearchTextboxProps
 >(function (
   {
-    blurOnEscapeKeyDown = true,
     clearOnEscapeKeyDown = false,
     disabled = false,
     onFocus = noop,
@@ -88,13 +87,10 @@ export const SearchTextbox = createComponent<
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (blurOnEscapeKeyDown === true) {
-          event.currentTarget.blur()
-        }
+        event.currentTarget.blur()
       }
     },
     [
-      blurOnEscapeKeyDown,
       clearOnEscapeKeyDown,
       handleClearButtonClick,
       onKeyDown,
