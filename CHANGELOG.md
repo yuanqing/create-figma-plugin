@@ -14,7 +14,7 @@
   - `Dropdown`:
     - Stop showing the menu on focus. ([#193](https://github.com/yuanqing/create-figma-plugin/issues/193))
     - Prevent the page from scrolling when pressing the <kdb>↑</kbd> and <kdb>↓</kbd> keys while the dropdown menu is visible. ([#194](https://github.com/yuanqing/create-figma-plugin/issues/194))
-    - Render the dropdown menu in a portal. ([#177](https://github.com/yuanqing/create-figma-plugin/issues/177))
+    - Render the dropdown menu in a portal. ([#117](https://github.com/yuanqing/create-figma-plugin/issues/117))
 
 - Bumped dependencies in all packages.
 
