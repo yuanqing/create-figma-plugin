@@ -342,6 +342,8 @@ module.exports = function (buildOptions) {
 
 `buildOptions` is the original [esbuild configuration object](https://esbuild.github.io/api/#build-api) used internally by the `build-figma-plugin` CLI. The exported function must return the new configuration object to be used.
 
+(Using `export default` in place of `module.exports =` is supported only if `"type": "module"` is specified in your `package.json` file.)
+
 Correspondingly, use a `build-figma-plugin.ui.js` file to customize the build configuration for the [UI bundle](https://figma.com/plugin-docs/how-plugins-run/).
 
 #### Disabling automatic swapping of React imports
