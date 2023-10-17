@@ -110,7 +110,7 @@ function createMainEntryFile(config: Config): string {
     const modules = ${createRequireCode(entryFiles)};
     const commandId = (${
       entryFiles.length === 1
-    } || typeof figma.command === 'undefined' || figma.command === '') ? '${
+    } || typeof figma.command === 'undefined' || figma.command === '' || figma.command === 'generate') ? '${
     entryFiles[0].commandId
   }' : figma.command;
     modules[commandId]();
