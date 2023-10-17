@@ -499,9 +499,13 @@ test('react', async function (t) {
   await cleanUpAsync()
 })
 
-test('esbuild main config - js', async function (t) {
+test('esbuild main config - esm', async function (t) {
   t.plan(7)
-  const directoryPath = join(__dirname, 'fixtures', '16-esbuild-main-config-js')
+  const directoryPath = join(
+    __dirname,
+    'fixtures',
+    '16-esbuild-main-config-esm'
+  )
   process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
@@ -555,9 +559,9 @@ test('esbuild main config - cjs', async function (t) {
   await cleanUpAsync()
 })
 
-test('esbuild ui config - js', async function (t) {
+test('esbuild ui config - esm', async function (t) {
   t.plan(7)
-  const directoryPath = join(__dirname, 'fixtures', '18-esbuild-ui-config-js')
+  const directoryPath = join(__dirname, 'fixtures', '18-esbuild-ui-config-esm')
   process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
@@ -609,9 +613,9 @@ test('esbuild ui config - cjs', async function (t) {
   await cleanUpAsync()
 })
 
-test('override manifest - js', async function (t) {
+test('override manifest - esm', async function (t) {
   t.plan(6)
-  const directoryPath = join(__dirname, 'fixtures', '20-override-manifest-js')
+  const directoryPath = join(__dirname, 'fixtures', '20-override-manifest-esm')
   process.chdir(directoryPath)
   await cleanUpAsync()
   t.false(await pathExists('build'))
