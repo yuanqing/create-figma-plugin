@@ -331,7 +331,7 @@ The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuil
 ```js
 // build-figma-plugin.main.js
 
-export default function (buildOptions) {
+module.exports = function (buildOptions) {
   // ...
   return {
     ...buildOptions,
@@ -351,7 +351,7 @@ The `build-figma-plugin` CLI will detect and automatically swap out all `react` 
 ```js
 // build-figma-plugin.ui.js
 
-export default function (buildOptions) {
+module.exports = function (buildOptions) {
   return {
     ...buildOptions,
     plugins: buildOptions.plugins.filter(function (plugin) {
@@ -368,7 +368,7 @@ To modify the `manifest.json` file just before it gets output by the `build-figm
 ```js
 // build-figma-plugin.manifest.js
 
-export default function (manifest) {
+module.exports = function (manifest) {
   // ...
   return {
     ...manifest,
