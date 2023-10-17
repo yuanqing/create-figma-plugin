@@ -1,8 +1,8 @@
 import { basename } from 'node:path'
 
 import { constants, log } from '@create-figma-plugin/common'
+import slugify from '@sindresorhus/slugify'
 import { green } from 'kleur/colors'
-import { paramCase } from 'param-case'
 
 import { copyTemplateAsync } from './utilities/copy-template-async.js'
 import { createName } from './utilities/create-name.js'
@@ -30,7 +30,7 @@ export async function createFigmaPluginAsync(options: {
     log.info('Resolving package versions...')
     const versions = await resolveCreateFigmaPluginLatestStableVersions()
     await interpolateValuesIntoFilesAsync(directoryPath, {
-      id: paramCase(directoryName),
+      id: slugify(directoryName),
       name: createName(directoryName),
       versions: {
         createFigmaPlugin: versions,
