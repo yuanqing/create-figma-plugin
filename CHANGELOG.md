@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.7.0
+
+- `@create-figma-plugin/build@2.7.0`
+
+  - Refined the `package.json` JSON schema for `"editorType"`, `"menu"`, `"parameters"`, `"capabilities"`, `"permissions"`, `"networkAccess"`.
+  - Fixed the dynamic importing of `build-figma-plugin.*.js` files. Using `export default` is supported only if `"type": "module"` is specified in the `package.json` file. ([#197](https://github.com/yuanqing/create-figma-plugin/issues/197))
+
+- `@create-figma-plugin/ui@2.7.0`
+
+  - Stop importing Inter from Google Fonts in favor of using the version of Inter already loaded in the Figma editor. ([#188](https://github.com/yuanqing/create-figma-plugin/issues/188))
+  - Changed the behavior of all text boxes to not blur on pressing the <kbd>Enter</kbd> key. ([#192](https://github.com/yuanqing/create-figma-plugin/issues/192))
+  - `Dropdown`:
+    - Stop showing the menu on focus. ([#193](https://github.com/yuanqing/create-figma-plugin/issues/193))
+    - Prevent the page from scrolling when pressing the <kdb>↑</kbd> and <kdb>↓</kbd> keys while the dropdown menu is visible. ([#194](https://github.com/yuanqing/create-figma-plugin/issues/194))
+    - Render the dropdown menu in a portal. ([#177](https://github.com/yuanqing/create-figma-plugin/issues/177))
+
+- Bumped dependencies in all packages.
+
 ## 2.6.1
 
 - `create-figma-plugin@2.6.1`
