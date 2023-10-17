@@ -37,6 +37,7 @@
 ## 2.5.1
 
 - `create-figma-plugin@2.5.1`
+
   - Update `@figma/plugin-typings` version to `1.69.0`.
 
 ## 2.5.0
