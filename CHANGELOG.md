@@ -6,15 +6,19 @@
 
   - Refined the `package.json` JSON schema for `"editorType"`, `"menu"`, `"parameters"`, `"capabilities"`, `"permissions"`, and `"networkAccess"`.
   - Fixed the dynamic importing of `build-figma-plugin.*.js` files. Using the `export default` syntax (instead of `module.exports =`) is supported only if `"type": "module"` is specified in the `package.json` file. ([#197](https://github.com/yuanqing/create-figma-plugin/issues/197))
+  - Fixed a bug with having both a `codegen` command and menu commands in a Dev Mode plugin. ([#202](https://github.com/yuanqing/create-figma-plugin/issues/202))
 
 - `@create-figma-plugin/ui@2.7.0`
 
   - Stop importing Inter from Google Fonts in favor of using the version of Inter already loaded in the Figma editor. ([#188](https://github.com/yuanqing/create-figma-plugin/issues/188))
-  - Changed the behavior of all text boxes to not blur on pressing the `Enter` key. ([#192](https://github.com/yuanqing/create-figma-plugin/issues/192))
+  - Added support for passing down a `ref` prop in all components.
+  - Changed the behavior of all text boxes (`Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`) to not blur on pressing the `Enter` key. ([#192](https://github.com/yuanqing/create-figma-plugin/issues/192))
   - `Dropdown`:
-    - Stop showing the dropdown menu on focus. ([#193](https://github.com/yuanqing/create-figma-plugin/issues/193))
-    - Prevent the page from scrolling when pressing the `↑` and `↓` keys while the dropdown menu is visible. ([#194](https://github.com/yuanqing/create-figma-plugin/issues/194))
-    - Render the dropdown menu in a portal. ([#117](https://github.com/yuanqing/create-figma-plugin/issues/117))
+    - Stop showing the menu on focus. ([#193](https://github.com/yuanqing/create-figma-plugin/issues/193))
+    - Prevent the page from scrolling when pressing the `↑` and `↓` keys while the menu is visible. ([#194](https://github.com/yuanqing/create-figma-plugin/issues/194))
+    - Render the menu in a portal. ([#117](https://github.com/yuanqing/create-figma-plugin/issues/117))
+  - `TextboxAutocomplete`:
+    - Stop showing the autocomplete menu on focus.
 
 - Bumped dependencies in all packages.
 
