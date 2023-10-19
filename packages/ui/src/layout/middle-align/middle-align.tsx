@@ -1,19 +1,18 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
-import { Props } from '../../types/types.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './middle-align.module.css'
 
 export type MiddleAlignProps = {
   children: ComponentChildren
 }
 
-export function MiddleAlign({
-  children,
-  ...rest
-}: Props<HTMLDivElement, MiddleAlignProps>): JSX.Element {
-  return (
-    <div {...rest} class={styles.middleAlign}>
-      <div class={styles.children}>{children}</div>
-    </div>
-  )
-}
+export const MiddleAlign = createComponent<HTMLDivElement, MiddleAlignProps>(
+  function ({ children, ...rest }, ref) {
+    return (
+      <div {...rest} ref={ref} class={styles.middleAlign}>
+        <div class={styles.children}>{children}</div>
+      </div>
+    )
+  }
+)

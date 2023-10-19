@@ -1,30 +1,25 @@
-import { ComponentChild, ComponentChildren, h, JSX, toChildArray } from 'preact'
+import { ComponentChild, ComponentChildren, h, toChildArray } from 'preact'
 
-import { Props } from '../../types/types.js'
+import { Space } from '../../types/space.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './stack.module.css'
 
 export type StackProps = {
   children: ComponentChildren
   space: StackSpace
 }
-export type StackSpace =
-  | 'extraSmall'
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'extraLarge'
+export type StackSpace = Space
 
-export function Stack({
-  children,
-  space,
-  ...rest
-}: Props<HTMLDivElement, StackProps>): JSX.Element {
+export const Stack = createComponent<HTMLDivElement, StackProps>(function (
+  { children, space, ...rest },
+  ref
+) {
   return (
-    <div {...rest} class={styles[space]}>
+    <div {...rest} ref={ref} class={styles[space]}>
       {toChildArray(children).map(function (
         element: ComponentChild,
         index: number
-      ): JSX.Element {
+      ) {
         return (
           <div key={index} class={styles.child}>
             {element}
@@ -33,4 +28,4 @@ export function Stack({
       })}
     </div>
   )
-}
+})

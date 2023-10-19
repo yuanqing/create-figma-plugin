@@ -8,10 +8,10 @@ import { Layer } from '../layer.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 2
+    fixedWidth: true
   },
-  title: 'Components/Layer/Selected'
+  tags: ['2'],
+  title: 'Components/Layer/Frame Selected'
 }
 
 export const Passive = function () {
@@ -57,7 +57,6 @@ export const Bold = function () {
   return (
     <Layer
       bold
-      description="Description"
       icon={<IconLayerFrame16 />}
       onChange={handleChange}
       value={value}
@@ -86,44 +85,7 @@ export const Description = function () {
   )
 }
 
-export const LongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  const [value, setValue] = useState<boolean>(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Layer icon={<IconLayerFrame16 />} onChange={handleChange} value={value}>
-      {longText}
-    </Layer>
-  )
-}
-
-export const LongTextDescription = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  const description = Array(100).fill('Text').join(' ')
-  const [value, setValue] = useState<boolean>(true)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Layer
-      description={description}
-      icon={<IconLayerFrame16 />}
-      onChange={handleChange}
-      value={value}
-    >
-      {longText}
-    </Layer>
-  )
-}
-
 export const OnValueChange = function () {
-  const longText = Array(100).fill('Text').join(' ')
   const [value, setValue] = useState<boolean>(true)
   function handleValueChange(newValue: boolean) {
     console.log(newValue)
@@ -135,7 +97,7 @@ export const OnValueChange = function () {
       onValueChange={handleValueChange}
       value={value}
     >
-      {longText}
+      Text
     </Layer>
   )
 }

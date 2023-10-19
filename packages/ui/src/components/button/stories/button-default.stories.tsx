@@ -5,9 +5,7 @@ import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-fo
 import { Button } from '../button.js'
 
 export default {
-  parameters: {
-    order: 1
-  },
+  tags: ['1'],
   title: 'Components/Button/Default'
 }
 
@@ -84,20 +82,5 @@ export const FullWidth = function () {
   )
 }
 FullWidth.parameters = {
-  fixedWidth: true
-}
-
-export const FullWidthLongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  function handleClick(event: JSX.TargetedMouseEvent<HTMLButtonElement>) {
-    console.log(event)
-  }
-  return (
-    <Button fullWidth onClick={handleClick}>
-      {longText}
-    </Button>
-  )
-}
-FullWidthLongText.parameters = {
   fixedWidth: true
 }

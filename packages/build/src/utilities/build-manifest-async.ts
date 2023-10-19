@@ -20,6 +20,8 @@ import {
 } from '@create-figma-plugin/common'
 import { globby } from 'globby'
 
+import { importFresh } from './import-fresh.js'
+
 export async function buildManifestAsync(options: {
   config: Config
   minify: boolean
@@ -213,6 +215,6 @@ async function overrideManifestAsync(
   if (filePaths.length === 0) {
     return manifest
   }
-  const { default: overrideManifest } = await import(filePaths[0])
+  const { default: overrideManifest } = await importFresh(filePaths[0])
   return overrideManifest(manifest)
 }

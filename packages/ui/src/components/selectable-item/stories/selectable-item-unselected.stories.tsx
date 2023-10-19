@@ -7,9 +7,9 @@ import { SelectableItem } from '../selectable-item.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 1
+    fixedWidth: true
   },
+  tags: ['1'],
   title: 'Components/Selectable Item/Unselected'
 }
 
@@ -52,21 +52,6 @@ export const Disabled = function () {
   return (
     <SelectableItem disabled onChange={handleChange} value={false}>
       Text
-    </SelectableItem>
-  )
-}
-
-export const LongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  const [value, setValue] = useState<boolean>(false)
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.checked
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <SelectableItem onChange={handleChange} value={value}>
-      {longText}
     </SelectableItem>
   )
 }

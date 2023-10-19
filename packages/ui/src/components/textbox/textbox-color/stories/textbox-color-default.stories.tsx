@@ -4,12 +4,11 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
+import { RGBA } from '../../../../types/rgba.js'
 import { TextboxColor } from '../textbox-color.js'
 
 export default {
-  parameters: {
-    order: 1
-  },
+  tags: ['1'],
   title: 'Components/Textbox Color/Default'
 }
 
@@ -36,7 +35,7 @@ export const Empty = function () {
   )
 }
 
-export const EmptyFocused = function () {
+export const Focused = function () {
   const [hexColor, setHexColor] = useState<string>('')
   const [opacity, setOpacity] = useState<string>('')
   function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -85,32 +84,6 @@ export const Placeholder = function () {
   )
 }
 
-export const PlaceholderFocused = function () {
-  const [hexColor, setHexColor] = useState<string>('')
-  const [opacity, setOpacity] = useState<string>('')
-  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newHexColor = event.currentTarget.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newOpacity = event.currentTarget.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      {...useInitialFocus()}
-      hexColor={hexColor}
-      hexColorPlaceholder="Color"
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
-      opacity={opacity}
-      opacityPlaceholder="%"
-    />
-  )
-}
-
 export const Filled = function () {
   const [hexColor, setHexColor] = useState<string>('0D99FF')
   const [opacity, setOpacity] = useState<string>('100%')
@@ -126,30 +99,6 @@ export const Filled = function () {
   }
   return (
     <TextboxColor
-      hexColor={hexColor}
-      onHexColorInput={handleHexColorInput}
-      onOpacityInput={handleOpacityInput}
-      opacity={opacity}
-    />
-  )
-}
-
-export const Focused = function () {
-  const [hexColor, setHexColor] = useState<string>('0D99FF')
-  const [opacity, setOpacity] = useState<string>('100%')
-  function handleHexColorInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newHexColor = event.currentTarget.value
-    console.log(newHexColor)
-    setHexColor(newHexColor)
-  }
-  function handleOpacityInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newOpacity = event.currentTarget.value
-    console.log(newOpacity)
-    setOpacity(newOpacity)
-  }
-  return (
-    <TextboxColor
-      {...useInitialFocus()}
       hexColor={hexColor}
       onHexColorInput={handleHexColorInput}
       onOpacityInput={handleOpacityInput}

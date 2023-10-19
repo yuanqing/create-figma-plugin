@@ -1,5 +1,6 @@
 .menu {
   position: absolute;
+  z-index: var(--z-index-2);
   left: 0;
   min-width: 100%;
   padding: var(--space-extra-small) 0;
@@ -13,8 +14,12 @@
 .menu::-webkit-scrollbar {
   display: none;
 }
+.menu:empty {
+  display: none;
+}
 
 .hidden {
+  position: fixed;
   pointer-events: none;
   visibility: hidden;
 }

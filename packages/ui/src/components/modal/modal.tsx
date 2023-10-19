@@ -1,8 +1,11 @@
-import { ComponentChild, Fragment, h, JSX, RefObject, render } from 'preact'
+import { ComponentChild, h, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
 import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
+import { EventHandler } from '../../types/event-handler.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
 import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler.js'
 import { getFocusableElements } from '../../utilities/private/get-focusable-elements.js'
 import { IconButton } from '../icon-button/icon-button.js'
@@ -14,58 +17,58 @@ export type ModalProps = {
   closeButtonIcon?: ComponentChild
   closeButtonPosition?: ModalCloseButtonPosition
   open: boolean
-  noTransition?: boolean
-  onCloseButtonClick?: JSX.MouseEventHandler<HTMLButtonElement>
+  transition?: boolean
+  onCloseButtonClick?: EventHandler.onClick<HTMLButtonElement>
   onEscapeKeyDown?: (event: KeyboardEvent) => void
-  onOverlayClick?: JSX.MouseEventHandler<HTMLDivElement>
+  onOverlayClick?: EventHandler.onClick<HTMLDivElement>
   position?: ModalPosition
   title?: string
 }
+
 export type ModalCloseButtonPosition = 'left' | 'right'
 export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
 
-const rootElements: Array<HTMLDivElement> = [] // Stack of currently-open modals
-
-export function Modal({
-  children,
-  closeButtonIcon = <IconCross32 />,
-  closeButtonPosition = 'right',
-  open,
-  noTransition = false,
-  onCloseButtonClick,
-  onEscapeKeyDown,
-  onOverlayClick,
-  position = 'center',
-  title,
-  ...rest
-}: ModalProps): null {
-  const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
+export const Modal = createComponent<HTMLDivElement, ModalProps>(function (
+  {
+    children,
+    closeButtonIcon = <IconCross32 />,
+    closeButtonPosition = 'right',
+    open,
+    transition = true,
+    onCloseButtonClick,
+    onEscapeKeyDown,
+    onOverlayClick,
+    position = 'center',
+    title,
+    ...rest
+  },
+  ref
+): null {
+  const portalElementRef: RefObject<HTMLDivElement> = useRef(null)
+  const modalElementsRef: RefObject<Array<HTMLDivElement>> = useRef([]) // Stack of currently-open modals
   const previousFocusedElementRef: RefObject<HTMLElement> = useRef(null)
 
-  useEffect(function (): () => void {
-    const rootElement = document.createElement('div')
-    document.body.appendChild(rootElement)
-    rootElementRef.current = rootElement
-    return function (): void {
-      document.body.removeChild(rootElement)
+  useEffect(function () {
+    const portalElement = document.createElement('div')
+    document.body.appendChild(portalElement)
+    portalElementRef.current = portalElement
+    return function () {
+      document.body.removeChild(portalElement)
     }
   }, [])
 
   useEffect(
-    function (): () => void {
-      if (rootElementRef.current === null) {
-        throw new Error('`rootElementRef.current` is `null`')
-      }
-      const focusTrapKeyDownHandler = createFocusTrapKeyDownHandler(
-        rootElementRef.current
-      )
+    function () {
+      const portalElement = getCurrentFromRef<HTMLDivElement>(portalElementRef)
+      const focusTrapKeyDownHandler =
+        createFocusTrapKeyDownHandler(portalElement)
       function handleTabKeyDown(event: KeyboardEvent) {
         if (open === true) {
           focusTrapKeyDownHandler(event)
         }
       }
       window.addEventListener('keydown', handleTabKeyDown)
-      return function (): void {
+      return function () {
         window.removeEventListener('keydown', handleTabKeyDown)
       }
     },
@@ -73,20 +76,24 @@ export function Modal({
   )
 
   useEffect(
-    function (): () => void {
+    function () {
       function handleEscapeKeyDown(event: KeyboardEvent) {
+        const modalElements =
+          getCurrentFromRef<Array<HTMLDivElement>>(modalElementsRef)
+        const portalElement =
+          getCurrentFromRef<HTMLDivElement>(portalElementRef)
         if (
           open === false ||
           event.key !== 'Escape' ||
           typeof onEscapeKeyDown === 'undefined' ||
-          rootElements[rootElements.length - 1] !== rootElementRef.current
+          modalElements[modalElements.length - 1] !== portalElement
         ) {
           return
         }
         onEscapeKeyDown(event)
       }
       window.addEventListener('keydown', handleEscapeKeyDown)
-      return function (): void {
+      return function () {
         window.removeEventListener('keydown', handleEscapeKeyDown)
       }
     },
@@ -94,39 +101,39 @@ export function Modal({
   )
 
   useEffect(
-    function (): () => void {
-      if (rootElementRef.current === null) {
-        throw new Error('`rootElementRef.current` is `null`')
-      }
+    function () {
+      const modalElements =
+        getCurrentFromRef<Array<HTMLDivElement>>(modalElementsRef)
+      const portalElement = getCurrentFromRef<HTMLDivElement>(portalElementRef)
       const bodyElement = document.body
       if (open === true) {
-        if (rootElements.length === 0) {
+        if (modalElements.length === 0) {
           const hasScrollbar = bodyElement.scrollHeight > window.innerHeight
           bodyElement.style.cssText += `position:fixed;overflow-y:${
             hasScrollbar === true ? 'scroll' : 'hidden'
           };width:100%;`
         }
-        rootElements.push(rootElementRef.current)
-        rootElementRef.current.style.cssText =
+        modalElements.push(portalElement)
+        portalElement.style.cssText =
           'position:absolute;top:0;left:0;bottom:0;right:0;z-index:1'
         previousFocusedElementRef.current =
           document.activeElement as HTMLElement
-        const focusableElements = getFocusableElements(rootElementRef.current)
+        const focusableElements = getFocusableElements(portalElement)
         if (focusableElements.length > 0) {
           focusableElements[0].focus()
         } else {
           previousFocusedElementRef.current.blur()
         }
       } else {
-        if (rootElements.length === 1) {
+        if (modalElements.length === 1) {
           bodyElement.style.removeProperty('position')
           bodyElement.style.removeProperty('overflow-y')
           bodyElement.style.removeProperty('width')
         }
-        rootElements.pop()
-        rootElementRef.current.style.cssText = 'position:static'
+        modalElements.pop()
+        portalElement.style.cssText = 'position:static'
       }
-      return function (): void {
+      return function () {
         if (previousFocusedElementRef.current !== null) {
           previousFocusedElementRef.current.focus()
         }
@@ -136,18 +143,16 @@ export function Modal({
   )
 
   useEffect(
-    function (): void {
-      if (rootElementRef.current === null) {
-        throw new Error('`rootElementRef.current` is `null`')
-      }
+    function () {
+      const portalElement = getCurrentFromRef<HTMLDivElement>(portalElementRef)
       render(
-        <Fragment>
+        <div ref={ref}>
           <div
             {...rest}
             class={createClassName([
               styles.modal,
               open === true ? styles.open : null,
-              noTransition === true ? styles.noTransition : null,
+              transition === false ? styles.noTransition : null,
               styles[position]
             ])}
           >
@@ -184,23 +189,24 @@ export function Modal({
               typeof onOverlayClick === 'undefined' ? undefined : onOverlayClick
             }
           />
-        </Fragment>,
-        rootElementRef.current
+        </div>,
+        portalElement
       )
     },
     [
       children,
       closeButtonIcon,
       closeButtonPosition,
-      noTransition,
       onCloseButtonClick,
       onOverlayClick,
       open,
       position,
+      ref,
       rest,
-      title
+      title,
+      transition
     ]
   )
 
   return null
-}
+})

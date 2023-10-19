@@ -13,7 +13,7 @@ import {
 
 export default { title: 'Components/Segmented Control' }
 
-export const Selected = function () {
+export const Passive = function () {
   const [value, setValue] = useState<string>('bar')
   const options: Array<SegmentedControlOption> = [
     { value: 'foo' },
@@ -88,39 +88,6 @@ export const DisabledOption = function () {
   )
 }
 
-export const BooleanValue = function () {
-  const [value, setValue] = useState<boolean>(false)
-  const options: Array<SegmentedControlOption<boolean>> = [
-    { children: 'foo', value: true },
-    { children: 'bar', value: false }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue === 'true' ? true : false)
-  }
-  return (
-    <SegmentedControl onChange={handleChange} options={options} value={value} />
-  )
-}
-
-export const NumberValue = function () {
-  const [value, setValue] = useState<number>(2)
-  const options: Array<SegmentedControlOption<number>> = [
-    { children: 'foo', value: 1 },
-    { children: 'bar', value: 2 },
-    { children: 'baz', value: 3 }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(parseInt(newValue, 10))
-  }
-  return (
-    <SegmentedControl onChange={handleChange} options={options} value={value} />
-  )
-}
-
 export const IconChildren = function () {
   const [value, setValue] = useState<string>('align-left')
   const options: Array<SegmentedControlOption> = [
@@ -140,6 +107,11 @@ export const IconChildren = function () {
 
 export const OnValueChange = function () {
   const [value, setValue] = useState<string>('bar')
+  const options: Array<SegmentedControlOption> = [
+    { value: 'foo' },
+    { value: 'bar' },
+    { value: 'baz' }
+  ]
   function handleValueChange(newValue: string) {
     console.log(newValue)
     setValue(newValue)
@@ -147,7 +119,7 @@ export const OnValueChange = function () {
   return (
     <SegmentedControl
       onValueChange={handleValueChange}
-      options={[{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }]}
+      options={options}
       value={value}
     />
   )

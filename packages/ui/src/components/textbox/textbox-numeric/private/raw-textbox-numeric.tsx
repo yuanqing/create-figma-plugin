@@ -4,11 +4,14 @@ import {
   MIXED_NUMBER,
   MIXED_STRING
 } from '@create-figma-plugin/utilities'
-import { h, JSX, RefObject } from 'preact'
+import { h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types/types.js'
+import { Event, EventHandler } from '../../../../types/event-handler.js'
+import { FocusableComponentProps } from '../../../../types/focusable-component-props.js'
+import { createComponent } from '../../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
+import { noop } from '../../../../utilities/no-op.js'
 import { computeNextValue } from '../../private/compute-next-value.js'
 import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
 import { formatEvaluatedValue } from './format-evaluated-value.js'
@@ -16,44 +19,55 @@ import { formatEvaluatedValue } from './format-evaluated-value.js'
 const FRACTION_DIGITS = 3
 const EMPTY_STRING = ''
 
-export type RawTextboxNumericProps<Name extends string> = {
+export interface RawTextboxNumericProps
+  extends FocusableComponentProps<HTMLInputElement> {
   disabled?: boolean
   incrementBig?: number
   incrementSmall?: number
   integer?: boolean
   maximum?: number
   minimum?: number
-  name?: Name
-  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onNumericValueInput?: OnValueChange<null | number, Name>
-  onValueInput?: OnValueChange<string, Name>
+  onBlur?: EventHandler.onBlur<HTMLInputElement>
+  onFocus?: EventHandler.onFocus<HTMLInputElement>
+  onInput?: EventHandler.onInput<HTMLInputElement>
+  onMouseDown?: EventHandler.onMouseUp<HTMLInputElement>
+  onNumericValueInput?: EventHandler.onValueChange<null | number>
+  onValueInput?: EventHandler.onValueChange<string>
   placeholder?: string
-  propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   suffix?: string
   validateOnBlur?: (value: null | number) => null | number | boolean
   value: string
 }
 
-export function RawTextboxNumeric<Name extends string>({
-  disabled = false,
-  incrementBig = 10,
-  incrementSmall = 1,
-  integer = false,
-  maximum,
-  minimum,
-  name,
-  onInput = function () {},
-  onNumericValueInput = function () {},
-  onValueInput = function () {},
-  placeholder,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
-  suffix,
-  validateOnBlur,
-  value,
-  ...rest
-}: Props<HTMLInputElement, RawTextboxNumericProps<Name>>): JSX.Element {
+export const RawTextboxNumeric = createComponent<
+  HTMLInputElement,
+  RawTextboxNumericProps
+>(function (
+  {
+    disabled = false,
+    incrementBig = 10,
+    incrementSmall = 1,
+    integer = false,
+    maximum,
+    minimum,
+    onBlur = noop,
+    onFocus = noop,
+    onInput = noop,
+    onMouseDown = noop,
+    onKeyDown = noop,
+    onNumericValueInput = noop,
+    onValueInput = noop,
+    placeholder,
+    propagateEscapeKeyDown = true,
+    revertOnEscapeKeyDown = false,
+    suffix,
+    validateOnBlur,
+    value,
+    ...rest
+  },
+  ref
+) {
   if (
     typeof minimum !== 'undefined' &&
     typeof maximum !== 'undefined' &&
@@ -63,20 +77,23 @@ export function RawTextboxNumeric<Name extends string>({
   }
 
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Set to `true` when the `Escape` key is pressed; used to bail out of `handleBlur`
 
   const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
-  const setInputElementValue = useCallback(function (value: string): void {
+  const setInputElementValue = useCallback(function (value: string) {
     const inputElement = getCurrentFromRef(inputElementRef)
     inputElement.value = value
-    const inputEvent = document.createEvent('Event')
-    inputEvent.initEvent('input', true, true)
+    const inputEvent = new window.Event('input', {
+      bubbles: true,
+      cancelable: true
+    })
     inputElement.dispatchEvent(inputEvent)
   }, [])
 
   const handleBlur = useCallback(
-    function (): void {
+    function (event: Event.onBlur<HTMLInputElement>) {
+      onBlur(event)
       if (revertOnEscapeKeyDownRef.current === true) {
         revertOnEscapeKeyDownRef.current = false
         return
@@ -124,52 +141,50 @@ export function RawTextboxNumeric<Name extends string>({
       }
       setOriginalValue(EMPTY_STRING)
     },
-    [originalValue, setInputElementValue, suffix, validateOnBlur, value]
+    [onBlur, originalValue, setInputElementValue, suffix, validateOnBlur, value]
   )
 
   const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
+    function (event: Event.onFocus<HTMLInputElement>) {
+      onFocus(event)
       setOriginalValue(value)
       event.currentTarget.select()
     },
-    [value]
+    [onFocus, value]
   )
 
   const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>) {
+    function (event: Event.onInput<HTMLInputElement>) {
       onInput(event)
-      const value = event.currentTarget.value
-      onValueInput(value, name)
-      const evaluatedValue = evaluateValue(value, suffix)
-      onNumericValueInput(evaluatedValue, name)
+      const newValue = event.currentTarget.value
+      onValueInput(newValue)
+      const evaluatedValue = evaluateValue(newValue, suffix)
+      onNumericValueInput(evaluatedValue)
     },
-    [name, onInput, onNumericValueInput, onValueInput, suffix]
+    [onInput, onNumericValueInput, onValueInput, suffix]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+    function (event: Event.onKeyDown<HTMLInputElement>) {
+      onKeyDown(event)
       const key = event.key
       if (key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
-        }
         if (revertOnEscapeKeyDown === true) {
           revertOnEscapeKeyDownRef.current = true
           setInputElementValue(originalValue)
           setOriginalValue(EMPTY_STRING)
         }
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
         event.currentTarget.blur()
         return
       }
-      if (key === 'Enter') {
-        event.currentTarget.blur()
-        return
-      }
-      const element = event.currentTarget
+      const inputElement = event.currentTarget
       if (key === 'ArrowDown' || key === 'ArrowUp') {
         const delta = event.shiftKey === true ? incrementBig : incrementSmall
+        event.preventDefault()
         if (value === EMPTY_STRING || value === MIXED_STRING) {
-          event.preventDefault()
           // `startingValue` is biased towards 0
           const startingValue = (function () {
             if (typeof minimum !== 'undefined' && minimum > 0) {
@@ -180,39 +195,32 @@ export function RawTextboxNumeric<Name extends string>({
             }
             return 0
           })()
-          const newValue = restrictValue(
-            evaluateValueWithDelta(
-              startingValue,
-              key === 'ArrowDown' ? -1 * delta : delta
-            ),
-            minimum,
-            maximum
+          const evaluatedValue = evaluateValueWithDelta(
+            startingValue,
+            key === 'ArrowDown' ? -1 * delta : delta
           )
+          const newValue = restrictValue(evaluatedValue, minimum, maximum)
           const formattedValue = formatEvaluatedValue(newValue, value, suffix)
-          element.value = formattedValue
-          element.select()
+          inputElement.value = formattedValue
+          inputElement.select()
           handleInput(event)
           return
         }
-        const evaluatedValue = evaluateValue(value, suffix)
-        if (evaluatedValue === null) {
-          throw new Error('Invariant violation') // `value` is a valid numeric expression
+        const number = evaluateValue(value, suffix)
+        if (number === null) {
+          throw new Error('`number` is `null`')
         }
-        event.preventDefault()
-        const newValue = restrictValue(
-          evaluateValueWithDelta(
-            evaluatedValue,
-            key === 'ArrowDown' ? -1 * delta : delta
-          ),
-          minimum,
-          maximum
+        const evaluatedValue = evaluateValueWithDelta(
+          number,
+          key === 'ArrowDown' ? -1 * delta : delta
         )
+        const newValue = restrictValue(evaluatedValue, minimum, maximum)
         const formattedValue = formatEvaluatedValue(newValue, value, suffix)
         if (formattedValue === value) {
           return
         }
-        element.value = formattedValue
-        element.select()
+        inputElement.value = formattedValue
+        inputElement.select()
         handleInput(event)
         return
       }
@@ -220,17 +228,17 @@ export function RawTextboxNumeric<Name extends string>({
         return
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
-        // Piece together `nextValue` using the key that was pressed, and stop
+        // Piece together `newValue` using the key that was pressed, and stop
         // the `keyDown` event (by calling `event.preventDefault()`) if
         // `newValue` is found to be invalid
-        const nextValue = trimSuffix(
+        const newValue = trimSuffix(
           value === MIXED_STRING
             ? event.key
-            : computeNextValue(element, event.key),
+            : computeNextValue(inputElement, event.key),
           suffix
         )
         if (
-          isValidNumericInput(nextValue, { integersOnly: integer }) === false
+          isValidNumericInput(newValue, { integersOnly: integer }) === false
         ) {
           event.preventDefault()
           return
@@ -238,7 +246,7 @@ export function RawTextboxNumeric<Name extends string>({
         if (typeof minimum === 'undefined' && typeof maximum === 'undefined') {
           return
         }
-        const evaluatedValue = evaluateNumericExpression(nextValue)
+        const evaluatedValue = evaluateNumericExpression(newValue)
         if (evaluatedValue === null) {
           return
         }
@@ -257,6 +265,7 @@ export function RawTextboxNumeric<Name extends string>({
       integer,
       maximum,
       minimum,
+      onKeyDown,
       originalValue,
       propagateEscapeKeyDown,
       revertOnEscapeKeyDown,
@@ -266,18 +275,20 @@ export function RawTextboxNumeric<Name extends string>({
     ]
   )
 
-  const handleMouseUp = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
-      if (value !== MIXED_STRING) {
-        return
+  const handleMouseDown = useCallback(
+    function (event: Event.onMouseUp<HTMLInputElement>) {
+      onMouseDown(event)
+      if (value === MIXED_STRING) {
+        // Prevent changing the selection if `value` is `MIXED_STRING`
+        event.preventDefault()
+        event.currentTarget.select()
       }
-      event.preventDefault()
     },
-    [value]
+    [onMouseDown, value]
   )
 
   const handlePaste = useCallback(
-    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>): void {
+    function (event: Event.onPaste<HTMLInputElement>) {
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
@@ -299,26 +310,40 @@ export function RawTextboxNumeric<Name extends string>({
     [integer, suffix]
   )
 
+  const refCallback = useCallback(
+    function (inputElement: null | HTMLInputElement) {
+      inputElementRef.current = inputElement
+      if (ref === null) {
+        return
+      }
+      if (typeof ref === 'function') {
+        ref(inputElement)
+        return
+      }
+      ref.current = inputElement
+    },
+    [ref]
+  )
+
   return (
     <input
       {...rest}
-      ref={inputElementRef}
+      ref={refCallback}
       disabled={disabled === true}
-      name={name}
       onBlur={handleBlur}
       onFocus={handleFocus}
       onInput={handleInput}
       onKeyDown={handleKeyDown}
-      onMouseUp={handleMouseUp}
+      onMouseDown={handleMouseDown}
       onPaste={handlePaste}
       placeholder={placeholder}
       spellcheck={false}
-      tabIndex={disabled === true ? -1 : 0}
+      tabIndex={0}
       type="text"
       value={value === MIXED_STRING ? 'Mixed' : value}
     />
   )
-}
+})
 
 function restrictValue(value: number, minimum?: number, maximum?: number) {
   if (typeof minimum !== 'undefined') {

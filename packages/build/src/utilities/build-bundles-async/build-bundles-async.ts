@@ -10,9 +10,9 @@ import {
 } from '@create-figma-plugin/common'
 import { build, BuildOptions } from 'esbuild'
 import { globby } from 'globby'
-import importFresh from 'import-fresh'
 import indentString from 'indent-string'
 
+import { importFresh } from '../import-fresh.js'
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
 import { esbuildPreactCompatPlugin } from './esbuild-preact-compat-plugin.js'
 
@@ -54,7 +54,7 @@ async function overrideEsbuildConfigAsync(
   }
   const overrideEsbuildConfig:
     | OverrideEsbuildConfig
-    | { default: OverrideEsbuildConfig } = importFresh(filePaths[0])
+    | { default: OverrideEsbuildConfig } = await importFresh(filePaths[0])
   if ('default' in overrideEsbuildConfig) {
     return overrideEsbuildConfig.default(buildOptions)
   }
@@ -110,7 +110,7 @@ function createMainEntryFile(config: Config): string {
     const modules = ${createRequireCode(entryFiles)};
     const commandId = (${
       entryFiles.length === 1
-    } || typeof figma.command === 'undefined' || figma.command === '') ? '${
+    } || typeof figma.command === 'undefined' || figma.command === '' || figma.command === 'generate') ? '${
     entryFiles[0].commandId
   }' : figma.command;
     modules[commandId]();

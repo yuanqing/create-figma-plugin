@@ -2,7 +2,12 @@ import { h } from 'preact'
 
 import { Columns } from '../columns.js'
 
-export default { title: 'Layout/Columns' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Layout/Columns'
+}
 
 export const Default = function () {
   const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }

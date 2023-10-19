@@ -1,28 +1,24 @@
-import { ComponentChild, h, JSX, toChildArray } from 'preact'
+import { ComponentChild, h, toChildArray } from 'preact'
 
-import { Props } from '../../types/types.js'
+import { Space } from '../../types/space.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './columns.module.css'
 
 export type ColumnsProps = {
   children: ComponentChild
   space?: ColumnsSpace
 }
-export type ColumnsSpace =
-  | 'extraSmall'
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'extraLarge'
+export type ColumnsSpace = Space
 
-export function Columns({
-  children,
-  space,
-  ...rest
-}: Props<HTMLDivElement, ColumnsProps>): JSX.Element {
+export const Columns = createComponent<HTMLDivElement, ColumnsProps>(function (
+  { children, space, ...rest },
+  ref
+) {
   return (
     <div
       {...rest}
+      ref={ref}
       class={createClassName([
         styles.columns,
         typeof space === 'undefined' ? null : styles[space]
@@ -31,7 +27,7 @@ export function Columns({
       {toChildArray(children).map(function (
         element: ComponentChild,
         index: number
-      ): JSX.Element {
+      ) {
         return (
           <div key={index} class={styles.child}>
             {element}
@@ -40,4 +36,4 @@ export function Columns({
       })}
     </div>
   )
-}
+})

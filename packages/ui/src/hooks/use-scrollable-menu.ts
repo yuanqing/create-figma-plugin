@@ -1,6 +1,7 @@
 import { JSX, RefObject } from 'preact'
 import { useCallback } from 'preact/hooks'
 
+import { Event } from '../types/event-handler.js'
 import { getCurrentFromRef } from '../utilities/get-current-from-ref.js'
 
 export function useScrollableMenu(options: {
@@ -9,11 +10,9 @@ export function useScrollableMenu(options: {
   selectedId: null | string
   setSelectedId: (selectedId: string) => void
 }): {
-  handleScrollableMenuKeyDown: (
-    event: JSX.TargetedKeyboardEvent<HTMLElement>
-  ) => void
+  handleScrollableMenuKeyDown: (event: Event.onKeyDown<HTMLElement>) => void
   handleScrollableMenuItemMouseMove: (
-    event: JSX.TargetedMouseEvent<HTMLElement>
+    event: Event.onMouseMove<HTMLElement>
   ) => void
 } {
   const { itemIdDataAttributeName, menuElementRef, selectedId, setSelectedId } =
@@ -43,7 +42,7 @@ export function useScrollableMenu(options: {
         return (element.getAttribute(itemIdDataAttributeName) as string) === id
       })
       if (index === -1) {
-        throw new Error('Invariant violation') // `id` is valid
+        throw new Error('`index` is `-1`') // `id` is valid
       }
       return index
     },

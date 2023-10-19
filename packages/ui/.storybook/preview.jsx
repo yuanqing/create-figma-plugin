@@ -1,4 +1,5 @@
 import '../src/css/theme.css'
+import '../src/css/fonts.css'
 import '../src/css/base.css'
 
 const themes = [
@@ -43,8 +44,49 @@ export const decorators = [
 export const parameters = {
   layout: 'centered',
   options: {
-    storySort: {
-      order: ['Index', 'Components', 'Inline Text', 'Icons', 'Layout', 'Hooks']
+    storySort: function storySort (x, y) {
+      function parseStory(story) {
+        const split = story.title.split(/\//g)
+        if (split.length === 1) {
+          return {
+            section: split[0],
+            component: null,
+            story: null,
+            order: null,
+          }
+        }
+        const order = story.tags[0] === 'story' ? null : parseInt(story.tags[0], 10)
+        return {
+          section: split[0],
+          component: split[1],
+          story: split.slice(2).join('/'),
+          order
+        }
+      }
+      const sectionSortOrder = ['Index', 'Components', 'Inline Text', 'Icons', 'Layout', 'Hooks']
+      const xx = parseStory(x)
+      const yy = parseStory(y)
+      // Different `section`
+      if (xx.section !== yy.section) {
+        return sectionSortOrder.indexOf(xx.section) - sectionSortOrder.indexOf(yy.section)
+      }
+      // Different `component`
+      if (xx.component !== yy.component) {
+        return xx.component.localeCompare(yy.component, undefined, { numeric: true })
+      }
+      // Both `order` defined
+      if (xx.order !== null && yy.order !== null) {
+        return xx.order - yy.order
+      }
+      // Either `order` defined
+      if (xx.order !== null) {
+        return -1
+      }
+      if (yy.order !== null) {
+        return 1
+      }
+      // Both `order` undefined
+      return xx.story.localeCompare(yy.story, undefined, { numeric: true })
     }
   }
 }

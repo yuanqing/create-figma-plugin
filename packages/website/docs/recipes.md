@@ -331,7 +331,7 @@ The `build-figma-plugin` CLI is powered by the [esbuild compiler](https://esbuil
 ```js
 // build-figma-plugin.main.js
 
-export default function (buildOptions) {
+module.exports = function (buildOptions) {
   // ...
   return {
     ...buildOptions,
@@ -342,6 +342,8 @@ export default function (buildOptions) {
 
 `buildOptions` is the original [esbuild configuration object](https://esbuild.github.io/api/#build-api) used internally by the `build-figma-plugin` CLI. The exported function must return the new configuration object to be used.
 
+(Using `export default` in place of `module.exports =` is supported only if `"type": "module"` is specified in your `package.json` file.)
+
 Correspondingly, use a `build-figma-plugin.ui.js` file to customize the build configuration for the [UI bundle](https://figma.com/plugin-docs/how-plugins-run/).
 
 #### Disabling automatic swapping of React imports
@@ -351,7 +353,7 @@ The `build-figma-plugin` CLI will detect and automatically swap out all `react` 
 ```js
 // build-figma-plugin.ui.js
 
-export default function (buildOptions) {
+module.exports = function (buildOptions) {
   return {
     ...buildOptions,
     plugins: buildOptions.plugins.filter(function (plugin) {
@@ -368,7 +370,7 @@ To modify the `manifest.json` file just before it gets output by the `build-figm
 ```js
 // build-figma-plugin.manifest.js
 
-export default function (manifest) {
+module.exports = function (manifest) {
   // ...
   return {
     ...manifest,

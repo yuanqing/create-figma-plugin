@@ -1,8 +1,8 @@
 {
+  "type": "module",
   "figma-plugin": {
     "id": "42",
     "name": "a",
-    "main": "src/main.ts",
-    "ui": "src/ui.ts"
+    "main": "src/main.ts"
   }
 }

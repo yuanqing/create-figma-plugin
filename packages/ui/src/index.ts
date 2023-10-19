@@ -327,8 +327,16 @@ export {
   IconColor,
   TextColor
 } from './types/colors.js'
-export { OnValueChange, Props } from './types/types.js'
+export { Event, EventHandler } from './types/event-handler.js'
+export { FocusableComponentProps } from './types/focusable-component-props.js'
+export { RGBA } from './types/rgba.js'
+export { Space } from './types/space.js'
 export { createClassName } from './utilities/create-class-name.js'
+export {
+  createComponent,
+  MixinHTMLElementAttributes
+} from './utilities/create-component.js'
 export { getCurrentFromRef } from './utilities/get-current-from-ref.js'
 export { mapTextboxNumericValueToString } from './utilities/map-textbox-numeric-value-to-string.js'
+export { noop } from './utilities/no-op.js'
 export { render } from './utilities/render.js'

@@ -2,7 +2,7 @@ import {
   INVALID_ID,
   ITEM_ID_DATA_ATTRIBUTE_NAME,
   VIEWPORT_MARGIN
-} from './constants.js'
+} from '../../../utilities/private/constants.js'
 import { Id } from './types.js'
 
 export function updateMenuElementLayout(
@@ -10,148 +10,132 @@ export function updateMenuElementLayout(
   menuElement: HTMLDivElement,
   selectedId: Id
 ) {
+  const rootElementBoundingClientRect = rootElement.getBoundingClientRect()
+  const rootWidth = rootElement.offsetWidth
+  const rootHeight = rootElement.offsetHeight
+  const rootLeft = rootElementBoundingClientRect.left
+  const rootTop = rootElementBoundingClientRect.top
+
+  menuElement.style.minWidth = `${rootWidth}px`
+
   const menuElementMaxWidth = window.innerWidth - 2 * VIEWPORT_MARGIN
-  const menuElementMaxHeight = window.innerHeight - 2 * VIEWPORT_MARGIN
   menuElement.style.maxWidth = `${menuElementMaxWidth}px`
+
+  const menuElementMaxHeight = window.innerHeight - 2 * VIEWPORT_MARGIN
   menuElement.style.maxHeight = `${menuElementMaxHeight}px`
 
-  const selectedLabelElement = getSelectedLabelElement(menuElement, selectedId)
-  const rootElementBoundingClientRect = rootElement.getBoundingClientRect()
-  const isScrollable = menuElement.offsetHeight === menuElementMaxHeight
+  const menuWidth = menuElement.offsetWidth
+  const menuHeight = menuElement.offsetHeight
+  const menuScrollHeight = menuElement.scrollHeight
+  const menuPaddingTop = parseInt(
+    window.getComputedStyle(menuElement).paddingTop,
+    10
+  )
+  const labelElement = getSelectedLabelElement(menuElement, selectedId)
 
-  const left = computeMenuElementLeft({
-    menuWidth: menuElement.offsetWidth,
-    rootLeft: rootElementBoundingClientRect.left
-  })
-  const top = computeMenuElementTop({
-    isScrollable,
-    menuHeight: menuElement.offsetHeight,
-    rootHeight: rootElement.offsetHeight,
-    rootTop: rootElementBoundingClientRect.top,
-    selectedTop:
-      selectedLabelElement === null ? null : selectedLabelElement.offsetTop
+  const left = computeLeft({
+    menuWidth,
+    rootLeft
   })
   menuElement.style.left = `${left}px`
+
+  const top = computeTop({
+    menuHeight,
+    rootTop,
+    selectedTop: labelElement.offsetTop
+  })
   menuElement.style.top = `${top}px`
 
-  if (selectedLabelElement !== null && isScrollable === true) {
-    menuElement.scrollTop = computeMenuElementScrollTop({
-      menuHeight: menuElement.offsetHeight,
-      menuScrollHeight: menuElement.scrollHeight,
-      menuTop: menuElement.getBoundingClientRect().top,
-      rootHeight: rootElement.offsetHeight,
-      rootTop: rootElementBoundingClientRect.top,
-      selectedHeight: selectedLabelElement.offsetHeight,
-      selectedTop: selectedLabelElement.offsetTop
-    })
+  const isScrollable = menuScrollHeight > menuHeight
+  if (isScrollable === false) {
+    return
   }
+  menuElement.scrollTop = computeScrollTop({
+    menuHeight,
+    menuPaddingTop,
+    menuScrollHeight,
+    rootHeight,
+    rootTop,
+    selectedTop: labelElement.offsetTop
+  })
 }
 
 function getSelectedLabelElement(
   menuElement: HTMLDivElement,
   selectedId: Id
-): null | HTMLLabelElement {
-  if (selectedId === INVALID_ID) {
-    return null
-  }
-  const selectedInputElement = menuElement.querySelector<HTMLInputElement>(
-    `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
+): HTMLLabelElement {
+  const inputElement = menuElement.querySelector<HTMLInputElement>(
+    selectedId === INVALID_ID
+      ? `[${ITEM_ID_DATA_ATTRIBUTE_NAME}]`
+      : `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${selectedId}']`
   )
-  if (selectedInputElement === null) {
-    throw new Error('Invariant violation')
+  if (inputElement === null) {
+    throw new Error('`inputElement` is `null`')
   }
-  const selectedLabelElement = selectedInputElement.parentElement
-  if (selectedLabelElement === null) {
-    throw new Error('Invariant violation')
+  const labelElement = inputElement.parentElement
+  if (labelElement === null) {
+    throw new Error('`labelElement` is `null`')
   }
-  return selectedLabelElement as HTMLLabelElement
+  return labelElement as HTMLLabelElement
 }
 
-function computeMenuElementLeft(options: {
-  menuWidth: number
-  rootLeft: number
-}): number {
-  const { rootLeft, menuWidth } = options
+function computeLeft(options: { menuWidth: number; rootLeft: number }): number {
+  const { menuWidth, rootLeft } = options
   if (rootLeft <= VIEWPORT_MARGIN) {
-    return negate(rootLeft) + VIEWPORT_MARGIN
+    return VIEWPORT_MARGIN
   }
-  const left = negate(
-    rootLeft + menuWidth - (window.innerWidth - VIEWPORT_MARGIN)
-  )
-  return Math.min(left, 0)
+  const viewportWidth = window.innerWidth
+  if (rootLeft + menuWidth > viewportWidth - VIEWPORT_MARGIN) {
+    return viewportWidth - VIEWPORT_MARGIN - menuWidth
+  }
+  return rootLeft
 }
 
-function computeMenuElementTop(options: {
-  isScrollable: boolean
+function computeTop(options: {
   menuHeight: number
-  rootHeight: number
   rootTop: number
-  selectedTop: null | number
-}): number {
-  const viewportHeight = window.innerHeight
-  const { isScrollable, menuHeight, rootHeight, rootTop, selectedTop } = options
-  if (rootTop <= VIEWPORT_MARGIN) {
-    return negate(rootTop) + VIEWPORT_MARGIN
-  }
-  if (rootTop + rootHeight >= viewportHeight - VIEWPORT_MARGIN) {
-    return negate(rootTop - (viewportHeight - VIEWPORT_MARGIN - menuHeight))
-  }
-
-  const minimumTop = negate(rootTop - VIEWPORT_MARGIN)
-  const maximumTop = viewportHeight - VIEWPORT_MARGIN - menuHeight - rootTop
-
-  if (selectedTop === null || isScrollable === true) {
-    // Return the `top` position of `menuElement` such that `menuElement` fits
-    // within the viewport height
-    const top = Math.min(negate((menuHeight - rootHeight) / 2), 0)
-    return restrictToRange(top, minimumTop, maximumTop)
-  }
-
-  // Return the `top` position of `menuElement` such that `selectedElement` is
-  // directly above the `rootElement`
-  return restrictToRange(negate(selectedTop), minimumTop, maximumTop)
-}
-
-function computeMenuElementScrollTop(options: {
-  menuHeight: number
-  menuScrollHeight: number
-  menuTop: number
-  rootHeight: number
-  rootTop: number
-  selectedHeight: number
   selectedTop: number
 }): number {
+  const { menuHeight, rootTop, selectedTop } = options
   const viewportHeight = window.innerHeight
-  const {
-    menuHeight,
-    menuScrollHeight,
-    menuTop,
-    rootHeight,
-    rootTop,
-    selectedTop,
-    selectedHeight
-  } = options
-  const minimumScrollTop = 0
-  const maximumScrollTop = menuScrollHeight - menuHeight
-  if (rootTop <= menuTop) {
-    return restrictToRange(selectedTop, minimumScrollTop, maximumScrollTop)
+  if (
+    rootTop <= VIEWPORT_MARGIN ||
+    menuHeight === viewportHeight - 2 * VIEWPORT_MARGIN
+  ) {
+    return VIEWPORT_MARGIN
   }
-  if (rootTop + rootHeight >= viewportHeight - VIEWPORT_MARGIN) {
-    return restrictToRange(
-      selectedTop + selectedHeight - menuHeight,
-      minimumScrollTop,
-      maximumScrollTop
-    )
-  }
-  return restrictToRange(
-    selectedTop - rootTop + menuTop,
-    minimumScrollTop,
-    maximumScrollTop
-  )
+  // Position the selected element at `rootTop`
+  const top = rootTop - selectedTop
+  const minimumTop = VIEWPORT_MARGIN
+  const maximumTop = viewportHeight - VIEWPORT_MARGIN - menuHeight
+  return restrictToRange(top, minimumTop, maximumTop)
 }
 
-function negate(number: number): number {
-  return -1 * number
+function computeScrollTop(options: {
+  menuHeight: number
+  menuPaddingTop: number
+  menuScrollHeight: number
+  rootHeight: number
+  rootTop: number
+  selectedTop: number
+}): number {
+  const {
+    menuHeight,
+    menuPaddingTop,
+    menuScrollHeight,
+    rootHeight,
+    rootTop,
+    selectedTop
+  } = options
+  const restrictedRootTop = restrictToRange(
+    rootTop,
+    VIEWPORT_MARGIN,
+    window.innerHeight - VIEWPORT_MARGIN - rootHeight + menuPaddingTop / 2
+  )
+  const scrollTop = selectedTop - (restrictedRootTop - VIEWPORT_MARGIN)
+  const minimumScrollTop = 0
+  const maximumScrollTop = menuScrollHeight - menuHeight
+  return restrictToRange(scrollTop, minimumScrollTop, maximumScrollTop)
 }
 
 function restrictToRange(

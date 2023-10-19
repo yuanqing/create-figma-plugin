@@ -2,7 +2,12 @@ import { h } from 'preact'
 
 import { Stack } from '../stack.js'
 
-export default { title: 'Layout/Stack' }
+export default {
+  parameters: {
+    fixedWidth: true
+  },
+  title: 'Layout/Stack'
+}
 
 export const ExtraSmallSpace = function () {
   const style = { backgroundColor: 'var(--figma-color-bg-brand-tertiary)' }

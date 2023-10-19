@@ -5,9 +5,7 @@ import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial
 import { FileUploadButton } from '../file-upload-button.js'
 
 export default {
-  parameters: {
-    order: 1
-  },
+  tags: ['1'],
   title: 'Components/File Upload Button/Default'
 }
 
@@ -59,8 +57,8 @@ export const Loading = function () {
 }
 
 export const LoadingFocused = function () {
-  function handleSelectedFiles(files: Array<File>) {
-    console.log(files)
+  function handleSelectedFiles() {
+    throw new Error('This function should not be called')
   }
   return (
     <FileUploadButton
@@ -95,21 +93,6 @@ export const FullWidth = function () {
   )
 }
 FullWidth.parameters = {
-  fixedWidth: true
-}
-
-export const FullWidthLongText = function () {
-  const longText = Array(100).fill('Text').join(' ')
-  function handleSelectedFiles(files: Array<File>) {
-    console.log(files)
-  }
-  return (
-    <FileUploadButton fullWidth onSelectedFiles={handleSelectedFiles}>
-      {longText}
-    </FileUploadButton>
-  )
-}
-FullWidthLongText.parameters = {
   fixedWidth: true
 }
 

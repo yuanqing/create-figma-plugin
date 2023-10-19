@@ -1,7 +1,7 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
-import { Props } from '../../types/types.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './banner.module.css'
 
 export type BannerProps = {
@@ -11,15 +11,14 @@ export type BannerProps = {
 }
 export type BannerVariant = 'success' | 'warning'
 
-export function Banner({
-  children,
-  icon,
-  variant,
-  ...rest
-}: Props<HTMLDivElement, BannerProps>): JSX.Element {
+export const Banner = createComponent<HTMLDivElement, BannerProps>(function (
+  { children, icon, variant, ...rest },
+  ref
+) {
   return (
     <div
       {...rest}
+      ref={ref}
       class={createClassName([
         styles.banner,
         typeof variant === 'undefined' ? null : styles[variant]
@@ -29,4 +28,4 @@ export function Banner({
       <div class={styles.children}>{children}</div>
     </div>
   )
-}
+})

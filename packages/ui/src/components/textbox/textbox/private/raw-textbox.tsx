@@ -1,174 +1,186 @@
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, JSX, RefObject } from 'preact'
+import { h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../../../types/types.js'
+import { Event, EventHandler } from '../../../../types/event-handler.js'
+import { FocusableComponentProps } from '../../../../types/focusable-component-props.js'
+import { createComponent } from '../../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
+import { noop } from '../../../../utilities/no-op.js'
 import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
 
 const EMPTY_STRING = ''
 
-export type RawTextboxProps<Name extends string> = {
+export interface RawTextboxProps
+  extends FocusableComponentProps<HTMLInputElement> {
   disabled?: boolean
-  name?: Name
-  onBlur?: OmitThisParameter<JSX.FocusEventHandler<HTMLInputElement>>
-  onFocus?: OmitThisParameter<JSX.FocusEventHandler<HTMLInputElement>>
-  onKeyDown?: OmitThisParameter<JSX.KeyboardEventHandler<HTMLInputElement>>
-  onMouseUp?: OmitThisParameter<JSX.MouseEventHandler<HTMLInputElement>>
-  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueInput?: OnValueChange<string, Name>
+  onBlur?: EventHandler.onBlur<HTMLInputElement>
+  onFocus?: EventHandler.onFocus<HTMLInputElement>
+  onMouseDown?: EventHandler.onMouseUp<HTMLInputElement>
+  onInput?: EventHandler.onInput<HTMLInputElement>
+  onValueInput?: EventHandler.onValueChange<string>
   password?: boolean
   placeholder?: string
-  propagateEscapeKeyDown?: boolean
   revertOnEscapeKeyDown?: boolean
   spellCheck?: boolean
   validateOnBlur?: (value: string) => string | boolean
   value: string
 }
 
-export function RawTextbox<Name extends string>({
-  disabled = false,
-  name,
-  onBlur = function () {},
-  onFocus = function () {},
-  onInput = function () {},
-  onKeyDown = function () {},
-  onMouseUp = function () {},
-  onValueInput = function () {},
-  password = false,
-  placeholder,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
-  spellCheck = false,
-  validateOnBlur,
-  value,
-  ...rest
-}: Props<HTMLInputElement, RawTextboxProps<Name>>): JSX.Element {
-  const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
-  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Boolean flag to exit early from `handleBlur`
+export const RawTextbox = createComponent<HTMLInputElement, RawTextboxProps>(
+  function (
+    {
+      disabled = false,
+      onBlur = noop,
+      onFocus = noop,
+      onInput = noop,
+      onKeyDown = noop,
+      onMouseDown = noop,
+      onValueInput = noop,
+      password = false,
+      placeholder,
+      propagateEscapeKeyDown = true,
+      revertOnEscapeKeyDown = false,
+      spellCheck = false,
+      validateOnBlur,
+      value,
+      ...rest
+    },
+    ref
+  ) {
+    const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
 
-  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
+    const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
 
-  const setInputElementValue = useCallback(function (value: string): void {
-    const inputElement = getCurrentFromRef(inputElementRef)
-    inputElement.value = value
-    const inputEvent = document.createEvent('Event')
-    inputEvent.initEvent('input', true, true)
-    inputElement.dispatchEvent(inputEvent)
-  }, [])
+    const setTextboxValue = useCallback(function (value: string) {
+      const inputElement = getCurrentFromRef(inputElementRef)
+      inputElement.value = value
+      const inputEvent = new window.Event('input', {
+        bubbles: true,
+        cancelable: true
+      })
+      inputElement.dispatchEvent(inputEvent)
+    }, [])
 
-  const handleBlur = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
-      if (revertOnEscapeKeyDownRef.current === true) {
-        revertOnEscapeKeyDownRef.current = false
-        return
-      }
-      onBlur(event)
-      if (typeof validateOnBlur !== 'undefined') {
-        const result = validateOnBlur(value)
-        if (typeof result === 'string') {
-          // Set to the value returned by `validateOnBlur`
-          setInputElementValue(result)
-          setOriginalValue(EMPTY_STRING)
-          return
-        }
-        if (result === false) {
-          // Revert the original value
-          if (value !== originalValue) {
-            setInputElementValue(originalValue)
+    const handleBlur = useCallback(
+      function (event: Event.onBlur<HTMLInputElement>) {
+        onBlur(event)
+        if (typeof validateOnBlur !== 'undefined') {
+          const result = validateOnBlur(value)
+          if (typeof result === 'string') {
+            // Set to the value returned by `validateOnBlur`
+            setTextboxValue(result)
+            setOriginalValue(EMPTY_STRING)
+            return
           }
-          setOriginalValue(EMPTY_STRING)
+          if (result === false) {
+            // Revert to the original value
+            if (value !== originalValue) {
+              setTextboxValue(originalValue)
+            }
+            setOriginalValue(EMPTY_STRING)
+            return
+          }
+        }
+        setOriginalValue(EMPTY_STRING)
+      },
+      [onBlur, originalValue, setTextboxValue, validateOnBlur, value]
+    )
+
+    const handleFocus = useCallback(
+      function (event: Event.onFocus<HTMLInputElement>) {
+        onFocus(event)
+        setOriginalValue(value)
+        event.currentTarget.select()
+      },
+      [onFocus, value]
+    )
+
+    const handleInput = useCallback(
+      function (event: Event.onInput<HTMLInputElement>) {
+        onInput(event)
+        const newValue = event.currentTarget.value
+        onValueInput(newValue)
+      },
+      [onInput, onValueInput]
+    )
+
+    const handleKeyDown = useCallback(
+      function (event: Event.onKeyDown<HTMLInputElement>) {
+        onKeyDown(event)
+        if (event.key === 'Escape') {
+          if (revertOnEscapeKeyDown === true) {
+            setTextboxValue(originalValue)
+            setOriginalValue(EMPTY_STRING)
+          }
+          if (propagateEscapeKeyDown === false) {
+            event.stopPropagation()
+          }
+          event.currentTarget.blur()
           return
         }
-      }
-      setOriginalValue(EMPTY_STRING)
-    },
-    [onBlur, originalValue, setInputElementValue, validateOnBlur, value]
-  )
-
-  const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
-      onFocus(event)
-      setOriginalValue(value)
-      event.currentTarget.select()
-    },
-    [onFocus, value]
-  )
-
-  const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      onValueInput(event.currentTarget.value, name)
-      onInput(event)
-    },
-    [name, onInput, onValueInput]
-  )
-
-  const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
-      onKeyDown(event)
-      const key = event.key
-      if (key === 'Escape') {
-        if (propagateEscapeKeyDown === false) {
-          event.stopPropagation()
+        if (
+          value === MIXED_STRING &&
+          isKeyCodeCharacterGenerating(event.keyCode) === false
+        ) {
+          // Prevent changing the cursor position with the keyboard if `value` is `MIXED_STRING`
+          event.preventDefault()
+          event.currentTarget.select()
         }
-        if (revertOnEscapeKeyDown === true) {
-          revertOnEscapeKeyDownRef.current = true
-          setInputElementValue(originalValue)
-          setOriginalValue(EMPTY_STRING)
+      },
+      [
+        onKeyDown,
+        originalValue,
+        propagateEscapeKeyDown,
+        revertOnEscapeKeyDown,
+        setTextboxValue,
+        value
+      ]
+    )
+
+    const handleMouseDown = useCallback(
+      function (event: Event.onMouseUp<HTMLInputElement>) {
+        onMouseDown(event)
+        if (value === MIXED_STRING) {
+          // Prevent changing the selection if `value` is `MIXED_STRING`
+          event.preventDefault()
+          event.currentTarget.select()
         }
-        event.currentTarget.blur()
-        return
-      }
-      if (key === 'Enter') {
-        event.currentTarget.blur()
-        return
-      }
-      if (
-        value === MIXED_STRING &&
-        isKeyCodeCharacterGenerating(event.keyCode) === false
-      ) {
-        // Prevent changing the cursor position with the keyboard if `value` is `MIXED_STRING`
-        event.preventDefault()
-        event.currentTarget.select()
-      }
-    },
-    [
-      onKeyDown,
-      originalValue,
-      propagateEscapeKeyDown,
-      revertOnEscapeKeyDown,
-      setInputElementValue,
-      value
-    ]
-  )
+      },
+      [onMouseDown, value]
+    )
 
-  const handleMouseUp = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
-      onMouseUp(event)
-      if (value === MIXED_STRING) {
-        // Prevent changing the selection if `value` is `MIXED_STRING`
-        event.preventDefault()
-      }
-    },
-    [onMouseUp, value]
-  )
+    const refCallback = useCallback(
+      function (inputElement: null | HTMLInputElement) {
+        inputElementRef.current = inputElement
+        if (ref === null) {
+          return
+        }
+        if (typeof ref === 'function') {
+          ref(inputElement)
+          return
+        }
+        ref.current = inputElement
+      },
+      [ref]
+    )
 
-  return (
-    <input
-      {...rest}
-      ref={inputElementRef}
-      disabled={disabled === true}
-      name={name}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
-      onInput={handleInput}
-      onKeyDown={handleKeyDown}
-      onMouseUp={handleMouseUp}
-      placeholder={placeholder}
-      spellcheck={spellCheck}
-      tabIndex={disabled === true ? -1 : 0}
-      type={password === true ? 'password' : 'text'}
-      value={value === MIXED_STRING ? 'Mixed' : value}
-    />
-  )
-}
+    return (
+      <input
+        {...rest}
+        ref={refCallback}
+        disabled={disabled === true}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        onInput={handleInput}
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
+        placeholder={placeholder}
+        spellcheck={spellCheck}
+        tabIndex={0}
+        type={password === true ? 'password' : 'text'}
+        value={value === MIXED_STRING ? 'Mixed' : value}
+      />
+    )
+  }
+)

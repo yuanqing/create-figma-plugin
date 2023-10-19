@@ -1,19 +1,19 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 
-import { Props } from '../../types/types.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './code.module.css'
 
 export type CodeProps = {
   children: ComponentChildren
 }
 
-export function Code({
-  children,
-  ...rest
-}: Props<HTMLSpanElement, CodeProps>): JSX.Element {
+export const Code = createComponent<HTMLSpanElement, CodeProps>(function (
+  { children, ...rest },
+  ref
+) {
   return (
-    <code {...rest} class={styles.code}>
+    <code {...rest} ref={ref} class={styles.code}>
       {children}
     </code>
   )
-}
+})

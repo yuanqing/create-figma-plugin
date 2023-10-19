@@ -73,6 +73,14 @@ async function generateIndexTs(
           }
         }
       }
+      if (ts.isModuleDeclaration(node)) {
+        if (
+          typeof node.modifiers !== 'undefined' &&
+          node.modifiers[0].kind === ts.SyntaxKind.ExportKeyword
+        ) {
+          addExport(node.name.text)
+        }
+      }
     })
     const normalizedFilePath = filePath
       .replace(/^(?:\.\/)?src\//, './') // Relace `./src/` with `./`

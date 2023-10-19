@@ -3,6 +3,9 @@ import { h } from 'preact'
 import { Text } from '../text.js'
 
 export default {
+  parameters: {
+    fixedWidth: true
+  },
   title: 'Components/Text'
 }
 

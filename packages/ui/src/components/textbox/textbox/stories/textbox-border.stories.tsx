@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, JSX } from 'preact'
-import { useState } from 'preact/hooks'
+import { h, JSX, RefObject } from 'preact'
+import { useRef, useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
 import { IconLayerFrame16 } from '../../../../icons/icon-16/icon-layer-frame-16.js'
@@ -9,9 +9,9 @@ import { Textbox } from '../textbox.js'
 
 export default {
   parameters: {
-    fixedWidth: true,
-    order: 2
+    fixedWidth: true
   },
+  tags: ['2'],
   title: 'Components/Textbox/Border'
 }
 
@@ -25,7 +25,7 @@ export const Empty = function () {
   return <Textbox onInput={handleInput} value={value} variant="border" />
 }
 
-export const EmptyFocused = function () {
+export const Focused = function () {
   const [value, setValue] = useState<string>('')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -52,25 +52,7 @@ export const Placeholder = function () {
   return (
     <Textbox
       onInput={handleInput}
-      placeholder="placeholder"
-      value={value}
-      variant="border"
-    />
-  )
-}
-
-export const PlaceholderFocused = function () {
-  const [value, setValue] = useState<string>('')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      {...useInitialFocus()}
-      onInput={handleInput}
-      placeholder="placeholder"
+      placeholder="Placeholder"
       value={value}
       variant="border"
     />
@@ -85,23 +67,6 @@ export const Filled = function () {
     setValue(newValue)
   }
   return <Textbox onInput={handleInput} value={value} variant="border" />
-}
-
-export const Focused = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      {...useInitialFocus()}
-      onInput={handleInput}
-      value={value}
-      variant="border"
-    />
-  )
 }
 
 export const Disabled = function () {
@@ -130,7 +95,7 @@ export const Icon = function () {
   )
 }
 
-export const IconDisabled = function () {
+export const TextIcon = function () {
   const [value, setValue] = useState<string>('Text')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
@@ -138,42 +103,7 @@ export const IconDisabled = function () {
     setValue(newValue)
   }
   return (
-    <Textbox
-      disabled
-      icon={<IconLayerFrame16 />}
-      onInput={handleInput}
-      value={value}
-    />
-  )
-}
-
-export const IconText = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox icon="X" onInput={handleInput} value={value} variant="border" />
-  )
-}
-
-export const IconTextDisabled = function () {
-  const [value, setValue] = useState<string>('Text')
-  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return (
-    <Textbox
-      disabled
-      icon="X"
-      onInput={handleInput}
-      value={value}
-      variant="border"
-    />
+    <Textbox icon="W" onInput={handleInput} value={value} variant="border" />
   )
 }
 
@@ -232,6 +162,23 @@ export const Password = function () {
   }
   return (
     <Textbox onInput={handleInput} password value={value} variant="border" />
+  )
+}
+
+export const Ref = function () {
+  const ref: RefObject<HTMLInputElement> = useRef(null)
+  const [value, setValue] = useState<string>('Text')
+  function handleInput() {
+    if (ref.current === null) {
+      throw new Error('`ref.current` is `null`')
+    }
+    console.log(ref.current)
+    const newValue = ref.current.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <Textbox ref={ref} onInput={handleInput} value={value} variant="border" />
   )
 }
 

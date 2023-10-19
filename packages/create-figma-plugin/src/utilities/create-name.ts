@@ -1,7 +1,7 @@
-import { titleCase } from 'title-case'
+import titleize from 'titleize'
 
 export function createName(directoryName: string): string {
-  return titleCase(
+  return titleize(
     directoryName
       .replace(/^fig(?:ma|jam)-/, '')
       .replace(/tailwindcss/, 'Tailwind CSS')

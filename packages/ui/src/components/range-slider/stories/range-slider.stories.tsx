@@ -109,18 +109,20 @@ export const WithTextboxNumeric = function () {
     console.log(newValue)
     setValue(newValue)
   }
+  const minimum = 0
+  const maximum = 100
   return (
     <Fragment>
       <RangeSlider
-        maximum={100}
-        minimum={0}
+        maximum={maximum}
+        minimum={minimum}
         onInput={handleInput}
         value={value}
       />
       <VerticalSpace space="small" />
       <TextboxNumeric
-        maximum={100}
-        minimum={0}
+        maximum={maximum}
+        minimum={minimum}
         onInput={handleInput}
         value={value}
         variant="border"

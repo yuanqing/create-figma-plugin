@@ -1,56 +1,60 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types/types.js'
+import { Event, EventHandler } from '../../types/event-handler.js'
+import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { noop } from '../../utilities/no-op.js'
 import styles from './layer.module.css'
 
-export type LayerProps<Name extends string> = {
+export interface LayerProps extends FocusableComponentProps<HTMLInputElement> {
   bold?: boolean
   children: ComponentChildren
   component?: boolean
   description?: string
   icon: ComponentChildren
-  name?: Name
-  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, Name>
-  propagateEscapeKeyDown?: boolean
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onValueChange?: EventHandler.onValueChange<boolean>
   value: boolean
 }
 
-export function Layer<Name extends string>({
-  bold = false,
-  children,
-  description,
-  component = false,
-  icon,
-  name,
-  onChange = function () {},
-  onValueChange = function () {},
-  propagateEscapeKeyDown = true,
-  value,
-  ...rest
-}: Props<HTMLInputElement, LayerProps<Name>>): JSX.Element {
+export const Layer = createComponent<HTMLInputElement, LayerProps>(function (
+  {
+    bold = false,
+    children,
+    component = false,
+    description,
+    icon,
+    onChange = noop,
+    onKeyDown = noop,
+    onValueChange = noop,
+    propagateEscapeKeyDown = true,
+    value,
+    ...rest
+  },
+  ref
+) {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      const newValue = event.currentTarget.checked
-      onValueChange(newValue, name)
+    function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
+      const newValue = event.currentTarget.checked === true
+      onValueChange(newValue)
     },
-    [name, onChange, onValueChange]
+    [onChange, onValueChange]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
-      if (event.key !== 'Escape') {
-        return
+    function (event: Event.onKeyDown<HTMLInputElement>) {
+      onKeyDown(event)
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        event.currentTarget.blur()
       }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      event.currentTarget.blur()
     },
-    [propagateEscapeKeyDown]
+    [onKeyDown, propagateEscapeKeyDown]
   )
 
   return (
@@ -63,9 +67,9 @@ export function Layer<Name extends string>({
     >
       <input
         {...rest}
+        ref={ref}
         checked={value === true}
         class={styles.input}
-        name={name}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         tabIndex={0}
@@ -79,4 +83,4 @@ export function Layer<Name extends string>({
       )}
     </label>
   )
-}
+})

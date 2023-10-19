@@ -1,29 +1,36 @@
-import { ComponentChildren, h, JSX, RefObject } from 'preact'
+import { ComponentChildren, h, RefObject } from 'preact'
 import { useCallback, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.module.css'
 import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside.js'
 import { IconMenuCheckmarkChecked16 } from '../../../icons/icon-16/icon-menu-checkmark-checked-16.js'
-import { OnValueChange, Props } from '../../../types/types.js'
+import { Event, EventHandler } from '../../../types/event-handler.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
+import { noop } from '../../../utilities/no-op.js'
+import {
+  INVALID_ID,
+  ITEM_ID_DATA_ATTRIBUTE_NAME,
+  VIEWPORT_MARGIN
+} from '../../../utilities/private/constants.js'
 import { computeNextValue } from '../private/compute-next-value.js'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating.js'
 import textboxStyles from '../textbox/textbox.module.css'
 import textboxAutocompleteStyles from './textbox-autocomplete.module.css'
 
 const EMPTY_STRING = ''
-const INVALID_ID = null
-const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-textbox-autocomplete-item-id'
-const MENU_VERTICAL_MARGIN = 16
 
-export type TextboxAutocompleteProps<Name extends string> = {
+export interface TextboxAutocompleteProps {
   disabled?: boolean
   filter?: boolean
   icon?: ComponentChildren
-  name?: Name
-  onInput?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueInput?: OnValueChange<string, Name>
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onInput?: EventHandler.onInput<HTMLInputElement>
+  onKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
+  onMouseDown?: EventHandler.onMouseDown<HTMLInputElement>
+  onPaste?: EventHandler.onPaste<HTMLInputElement>
+  onValueInput?: EventHandler.onValueChange<string>
   options: Array<TextboxAutocompleteOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -59,23 +66,32 @@ type OptionValueWithId = TextboxAutocompleteOptionValue & {
 }
 type Id = typeof INVALID_ID | string
 
-export function TextboxAutocomplete<Name extends string>({
-  disabled = false,
-  filter = false,
-  icon,
-  name,
-  onInput = function () {},
-  onValueInput = function () {},
-  placeholder,
-  propagateEscapeKeyDown = true,
-  revertOnEscapeKeyDown = false,
-  spellCheck = false,
-  strict = false,
-  top = false,
-  value,
-  variant,
-  ...rest
-}: Props<HTMLInputElement, TextboxAutocompleteProps<Name>>): JSX.Element {
+export const TextboxAutocomplete = createComponent<
+  HTMLInputElement,
+  TextboxAutocompleteProps
+>(function (
+  {
+    disabled = false,
+    filter = false,
+    icon,
+    onChange = noop,
+    onInput = noop,
+    onKeyDown = noop,
+    onMouseDown = noop,
+    onPaste = noop,
+    onValueInput = noop,
+    placeholder,
+    propagateEscapeKeyDown = true,
+    revertOnEscapeKeyDown = false,
+    spellCheck = false,
+    strict = false,
+    top = false,
+    value,
+    variant,
+    ...rest
+  },
+  ref
+) {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
@@ -84,29 +100,33 @@ export function TextboxAutocomplete<Name extends string>({
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
 
-  const [isMenuVisible, setIsMenuVisible] = useState(false)
-  const [selectedId, setSelectedId] = useState<Id>(INVALID_ID)
-  const [originalValue, setOriginalValue] = useState(EMPTY_STRING) // Value of the textbox when it was initially focused
-  const [editedValue, setEditedValue] = useState<string>(value) // Value being edited that does not match any of the options
+  const revertOnEscapeKeyDownRef: RefObject<boolean> = useRef(false) // Set to `true` when the `Escape` key is pressed; used to bail out of `handleTextboxInput`
 
-  let options: Array<Option> = createOptions(rest.options)
-  if (filter === true) {
-    options = filterOptions(options, value, editedValue)
-  }
+  const [originalValue, setOriginalValue] = useState<string>(value) // Value of the textbox when the menu is focused
+  const [editedValue, setEditedValue] = useState<string>(EMPTY_STRING) // Value being edited that does not match any of the options
+  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false)
+  const [selectedId, setSelectedId] = useState<Id>(INVALID_ID)
+
+  const options =
+    filter === true
+      ? filterOptions(createOptions(rest.options), value, editedValue)
+      : createOptions(rest.options)
 
   // Uncomment to debug
-  // console.table([{ isMenuVisible, selectedId, originalValue, editedValue, value }])
+  // console.table([
+  //   { editedValue, isMenuVisible, originalValue, selectedId, value }
+  // ])
 
-  const triggerBlur = useCallback(function (): void {
-    setIsMenuVisible(false)
-    setOriginalValue(EMPTY_STRING)
-    setEditedValue(EMPTY_STRING)
-    setSelectedId(INVALID_ID)
+  const triggerTextboxSelect = useCallback(function () {
+    getCurrentFromRef(inputElementRef).select()
+  }, [])
+
+  const triggerTextboxBlur = useCallback(function () {
     getCurrentFromRef(inputElementRef).blur()
   }, [])
 
-  // Adjust the menu scroll position so that the selected option is always visible
-  const updateScrollPosition = useCallback(function (id: Id): void {
+  const triggerMenuUpdateScrollPosition = useCallback(function (id: Id) {
+    // Adjust the menu scroll position so that the selected option is always visible
     const menuElement = getCurrentFromRef(menuElementRef)
     if (id === INVALID_ID) {
       menuElement.scrollTop = 0
@@ -116,7 +136,7 @@ export function TextboxAutocomplete<Name extends string>({
       `[${ITEM_ID_DATA_ATTRIBUTE_NAME}='${id}']`
     )
     if (selectedElement === null) {
-      throw new Error('Invariant violation') // `id` is valid
+      throw new Error('`selectedElement` is `null`')
     }
     const y =
       selectedElement.getBoundingClientRect().y -
@@ -131,99 +151,132 @@ export function TextboxAutocomplete<Name extends string>({
     }
   }, [])
 
-  const updateEditedValue = useCallback(
-    function (editedValue: string): void {
-      const newId = getIdByValue(options, editedValue)
-      if (newId === INVALID_ID) {
-        // `newValue` does not match any option in `options`
-        setEditedValue(editedValue)
-        setSelectedId(INVALID_ID)
-        updateScrollPosition(INVALID_ID)
-        return
+  const updateSelectedId = useCallback(
+    function (value: string) {
+      const id = getIdByValue(options, value)
+      if (id === INVALID_ID) {
+        setEditedValue(value) // Copy `value` to `editedValue`
       }
-      // `newValue` matches one of the options in `options`
-      setEditedValue(EMPTY_STRING)
-      setSelectedId(newId)
-      updateScrollPosition(newId)
+      setSelectedId(id)
+      triggerMenuUpdateScrollPosition(id)
     },
-    [options, updateScrollPosition]
+    [options, triggerMenuUpdateScrollPosition]
   )
 
-  const handleFocus = useCallback(
-    function (event: JSX.TargetedFocusEvent<HTMLInputElement>): void {
-      setIsMenuVisible(true)
+  const updateTextboxValue = useCallback(function (value: string) {
+    const inputElement = getCurrentFromRef(inputElementRef)
+    inputElement.value = value
+    const inputEvent = new window.Event('input', {
+      bubbles: true,
+      cancelable: true
+    })
+    inputElement.dispatchEvent(inputEvent)
+  }, [])
+
+  const triggerMenuHide = useCallback(function () {
+    setIsMenuVisible(false)
+  }, [])
+
+  const triggerMenuShow = useCallback(
+    function () {
       updateMenuElementMaxHeight(
         getCurrentFromRef(rootElementRef),
         getCurrentFromRef(menuElementRef),
         top
       )
       setOriginalValue(value)
-      updateEditedValue(value)
-      const inputElement = event.currentTarget
-      inputElement.focus()
-      inputElement.select()
+      updateSelectedId(value)
+      setIsMenuVisible(true)
     },
-    [top, updateEditedValue, value]
+    [top, updateSelectedId, value]
   )
 
-  const handleInput = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      const newValue = event.currentTarget.value
-      updateEditedValue(newValue)
-      onValueInput(newValue, name)
+  const handleTextboxInput = useCallback(
+    function (event: Event.onInput<HTMLInputElement>) {
       onInput(event)
+      const newValue = event.currentTarget.value
+      updateSelectedId(newValue)
+      onValueInput(newValue)
+      if (isMenuVisible === true) {
+        return
+      }
+      if (revertOnEscapeKeyDownRef.current === true) {
+        revertOnEscapeKeyDownRef.current = false
+        return
+      }
+      triggerMenuShow()
     },
-    [name, onInput, onValueInput, updateEditedValue]
+    [isMenuVisible, onInput, onValueInput, triggerMenuShow, updateSelectedId]
   )
 
-  const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
+  const handleTextboxKeyDown = useCallback(
+    function (event: Event.onKeyDown<HTMLInputElement>) {
+      onKeyDown(event)
       const inputElement = event.currentTarget
       const key = event.key
       if (key === 'ArrowUp' || key === 'ArrowDown') {
         event.preventDefault()
+        if (isMenuVisible === false) {
+          triggerMenuShow()
+          return
+        }
         if (options.length === 0) {
           return
         }
-        const newId =
+        const id =
           key === 'ArrowUp'
             ? computePreviousId(options, selectedId)
             : computeNextId(options, selectedId)
-        if (newId === INVALID_ID) {
-          // Reached beginning/end of list of `options`, so just restore `savedValue`
+        if (id === INVALID_ID) {
+          // Reached beginning/end of list of `options`, so just restore `editedValue`
           setSelectedId(INVALID_ID)
-          inputElement.value = editedValue
-          onValueInput(editedValue, name)
-          onInput(event)
-          updateScrollPosition(INVALID_ID)
+          updateTextboxValue(editedValue)
+          triggerTextboxSelect()
+          triggerMenuUpdateScrollPosition(INVALID_ID)
           return
         }
-        // Set the selected option to `newId`, and update `value`
-        setSelectedId(newId)
-        updateScrollPosition(newId)
-        const newOptionValue = findOptionValueById(options, newId)
-        if (newOptionValue === null) {
-          throw new Error('Invariant violation') // `newId` is valid
+        // Set the selected option to `id`
+        setSelectedId(id)
+        const optionValue = findOptionValueById(options, id)
+        if (optionValue === null) {
+          throw new Error('`optionValue` is `null`')
         }
-        const newValue = newOptionValue.value
-        inputElement.value = newValue
-        onValueInput(newValue, name)
-        onInput(event)
-        inputElement.select()
+        // Imperatively set the textbox value
+        updateTextboxValue(optionValue.value)
+        triggerTextboxSelect()
+        triggerMenuUpdateScrollPosition(id)
         return
       }
-      if (key === 'Enter' || key === 'Escape' || key === 'Tab') {
+      if (key === 'Escape') {
         event.preventDefault()
         if (propagateEscapeKeyDown === false) {
           event.stopPropagation()
         }
-        if (key === 'Escape' && revertOnEscapeKeyDown === true) {
-          inputElement.value = originalValue
-          const inputEvent = document.createEvent('Event')
-          inputEvent.initEvent('input', true, true)
-          inputElement.dispatchEvent(inputEvent)
+        if (revertOnEscapeKeyDown === true) {
+          revertOnEscapeKeyDownRef.current = true
+          updateTextboxValue(originalValue)
         }
-        triggerBlur()
+        // Hide the menu if it is visible, else blur the textbox
+        if (isMenuVisible === true) {
+          triggerMenuHide()
+          return
+        }
+        triggerTextboxBlur()
+        return
+      }
+      if (key === 'Enter') {
+        event.preventDefault()
+        triggerTextboxSelect()
+        // Toggle visibility of the menu
+        if (isMenuVisible === true) {
+          triggerMenuHide()
+          return
+        }
+        triggerMenuShow()
+        return
+      }
+      if (key === 'Tab') {
+        triggerMenuHide()
         return
       }
       if (strict === false) {
@@ -234,93 +287,142 @@ export function TextboxAutocomplete<Name extends string>({
       }
       if (isKeyCodeCharacterGenerating(event.keyCode) === true) {
         // Piece together `newValue`, and stop the `keyDown` event if `newValue` is invalid
-        const newValue = computeNextValue(inputElement, event.key)
-        if (isValidValue(options, newValue) === false) {
-          event.preventDefault()
+        const nextValue = computeNextValue(inputElement, event.key)
+        if (isValidValue(options, nextValue) === true) {
+          return
         }
+        event.preventDefault()
       }
     },
     [
       editedValue,
-      name,
-      onInput,
-      onValueInput,
+      isMenuVisible,
+      onKeyDown,
       options,
       originalValue,
       propagateEscapeKeyDown,
       revertOnEscapeKeyDown,
       selectedId,
       strict,
-      triggerBlur,
-      updateScrollPosition
+      triggerMenuHide,
+      triggerMenuShow,
+      triggerMenuUpdateScrollPosition,
+      triggerTextboxBlur,
+      triggerTextboxSelect,
+      updateTextboxValue
     ]
   )
 
-  const handlePaste = useCallback(
-    function (event: JSX.TargetedClipboardEvent<HTMLInputElement>): void {
+  const handleTextboxMouseDown = useCallback(
+    function (event: Event.onMouseDown<HTMLInputElement>) {
+      onMouseDown(event)
+      if (isMenuVisible === true) {
+        return
+      }
+      event.preventDefault()
+      triggerTextboxSelect()
+      triggerMenuShow()
+    },
+    [isMenuVisible, onMouseDown, triggerTextboxSelect, triggerMenuShow]
+  )
+
+  const handleTextboxPaste = useCallback(
+    function (event: Event.onPaste<HTMLInputElement>) {
+      onPaste(event)
+      // Piece together the `nextValue`, and stop the `paste` event (by
+      // calling `event.preventDefault()`) if `nextValue` is found to
+      // be invalid
       if (strict === false) {
         return
       }
       if (event.clipboardData === null) {
         throw new Error('`event.clipboardData` is `null`')
       }
-      const newValue = computeNextValue(
+      const nextValue = computeNextValue(
         event.currentTarget,
         event.clipboardData.getData('Text')
       )
-      if (isValidValue(options, newValue) === false) {
-        event.preventDefault()
+      if (isValidValue(options, nextValue) === true) {
+        return
       }
+      event.preventDefault()
     },
-    [options, strict]
+    [onPaste, options, strict]
   )
 
   const handleOptionChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      const newId = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE_NAME
-      ) as string
-      // Set the selected option to `newId`, and update `value`
-      setSelectedId(newId)
-      const newOptionValue = findOptionValueById(options, newId)
-      if (newOptionValue === null) {
-        throw new Error('Invariant violation') // `newId` is valid
+    function (event: Event.onChange<HTMLInputElement>) {
+      onChange(event)
+      const id = event.currentTarget.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
+      if (id === null) {
+        throw new Error('`id` is `null`')
       }
-      const inputElement = getCurrentFromRef(inputElementRef)
-      inputElement.value = newOptionValue.value
-      const inputEvent = document.createEvent('Event')
-      inputEvent.initEvent('input', true, true)
-      inputElement.dispatchEvent(inputEvent)
-      triggerBlur()
+      // Set the selected option to `id`
+      setSelectedId(id)
+      const optionValue = findOptionValueById(options, id)
+      if (optionValue === null) {
+        throw new Error('`optionValue` is `null`')
+      }
+      // Imperatively set the textbox value; the new value will eventually
+      // reach `handleTextboxInput`
+      updateTextboxValue(optionValue.value)
+      // Select the textbox, then hide the menu
+      triggerTextboxSelect()
+      triggerMenuHide()
     },
-    [options, triggerBlur]
+    [
+      onChange,
+      options,
+      triggerMenuHide,
+      triggerTextboxSelect,
+      updateTextboxValue
+    ]
   )
 
   const handleOptionMouseMove = useCallback(
-    function (event: JSX.TargetedMouseEvent<HTMLInputElement>): void {
-      const newId = event.currentTarget.getAttribute(
-        ITEM_ID_DATA_ATTRIBUTE_NAME
-      ) as string
-      if (newId !== selectedId) {
-        setSelectedId(newId)
+    function (event: Event.onMouseMove<HTMLInputElement>) {
+      // Set the selected option to the one being moused over
+      const id = event.currentTarget.getAttribute(ITEM_ID_DATA_ATTRIBUTE_NAME)
+      if (id === null) {
+        throw new Error('`id` is `null`')
       }
+      if (id === selectedId) {
+        return
+      }
+      setSelectedId(id)
     },
     [selectedId]
   )
 
   const handleMouseDownOutside = useCallback(
-    function (): void {
+    function () {
       if (isMenuVisible === false) {
         return
       }
-      triggerBlur()
+      triggerMenuHide()
+      triggerTextboxBlur()
     },
-    [isMenuVisible, triggerBlur]
+    [isMenuVisible, triggerTextboxBlur, triggerMenuHide]
   )
   useMouseDownOutside({
     onMouseDownOutside: handleMouseDownOutside,
     ref: rootElementRef
   })
+
+  const refCallback = useCallback(
+    function (inputElement: null | HTMLInputElement) {
+      inputElementRef.current = inputElement
+      if (ref === null) {
+        return
+      }
+      if (typeof ref === 'function') {
+        ref(inputElement)
+        return
+      }
+      ref.current = inputElement
+    },
+    [ref]
+  )
 
   return (
     <div
@@ -339,16 +441,16 @@ export function TextboxAutocomplete<Name extends string>({
       <div class={textboxStyles.inner}>
         <input
           {...rest}
-          ref={inputElementRef}
+          ref={refCallback}
           class={textboxStyles.input}
           disabled={disabled === true}
-          name={name}
-          onFocus={handleFocus}
-          onInput={handleInput}
-          onKeyDown={handleKeyDown}
-          onPaste={handlePaste}
+          onInput={handleTextboxInput}
+          onKeyDown={handleTextboxKeyDown}
+          onMouseDown={handleTextboxMouseDown}
+          onPaste={handleTextboxPaste}
           placeholder={placeholder}
-          tabIndex={disabled === true ? -1 : 0}
+          spellcheck={spellCheck}
+          tabIndex={0}
           type="text"
           value={value}
         />
@@ -371,7 +473,7 @@ export function TextboxAutocomplete<Name extends string>({
               : textboxAutocompleteStyles.bottom
           ])}
         >
-          {options.map(function (option: Option, index: number): JSX.Element {
+          {options.map(function (option: Option, index: number) {
             if ('separator' in option) {
               return <hr key={index} class={menuStyles.optionSeparator} />
             }
@@ -396,14 +498,16 @@ export function TextboxAutocomplete<Name extends string>({
                 ])}
               >
                 <input
-                  {...rest}
                   checked={value === option.value}
                   class={menuStyles.input}
                   disabled={option.disabled === true}
-                  name={name}
-                  onChange={handleOptionChange}
+                  // If clicked on an unselected element, set the value
+                  onChange={
+                    value === option.value ? undefined : handleOptionChange
+                  }
+                  // Else hide the menu if clicked on an already-selected element
+                  onClick={value === option.value ? triggerMenuHide : undefined}
                   onMouseMove={handleOptionMouseMove}
-                  spellcheck={spellCheck}
                   tabIndex={-1}
                   type="radio"
                   value={`${option.value}`}
@@ -422,7 +526,7 @@ export function TextboxAutocomplete<Name extends string>({
       </div>
     </div>
   )
-}
+})
 
 // Add an `id` attribute to all the `TextboxAutocompleteOptionValue` items in `options`
 function createOptions(
@@ -621,10 +725,10 @@ function updateMenuElementMaxHeight(
   const rootElementTop = rootElement.getBoundingClientRect().top
   const maxHeight =
     top === true
-      ? rootElementTop - MENU_VERTICAL_MARGIN
+      ? rootElementTop - VIEWPORT_MARGIN
       : window.innerHeight -
         rootElementTop -
         rootElement.offsetHeight -
-        MENU_VERTICAL_MARGIN
+        VIEWPORT_MARGIN
   menuElement.style.maxHeight = `${maxHeight}px`
 }

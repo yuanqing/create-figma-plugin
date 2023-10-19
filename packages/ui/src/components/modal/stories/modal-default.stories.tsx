@@ -7,9 +7,7 @@ import { Button } from '../../button/button.js'
 import { Modal } from '../modal.js'
 
 export default {
-  parameters: {
-    order: 1
-  },
+  tags: ['1'],
   title: 'Components/Modal/Default'
 }
 
@@ -42,7 +40,7 @@ export const Default = function () {
   )
 }
 
-export const NoTransition = function () {
+export const TransitionFalse = function () {
   const [open, setOpen] = useState<boolean>(false)
   function handleOpenButtonClick(
     event: JSX.TargetedMouseEvent<HTMLButtonElement>
@@ -60,7 +58,7 @@ export const NoTransition = function () {
   return (
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
-      <Modal noTransition open={open}>
+      <Modal open={open} transition={false}>
         <div style={style}>
           <Button onClick={handleCloseButtonClick} secondary>
             Close
@@ -267,61 +265,6 @@ export const Nested = function () {
   return (
     <Fragment>
       <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
-      <Modal
-        onCloseButtonClick={handleParentCloseButtonClick}
-        open={parentOpen}
-        title="Parent"
-      >
-        <div style={parentStyle}>
-          <Button onClick={handleChildOpenButtonClick}>Open child modal</Button>
-          <Modal
-            onCloseButtonClick={handleChildCloseButtonClick}
-            open={childOpen}
-            title="Child"
-          >
-            <div style={childStyle} />
-          </Modal>
-        </div>
-      </Modal>
-    </Fragment>
-  )
-}
-
-export const BodyOverflow = function () {
-  const [parentOpen, setParentOpen] = useState<boolean>(false)
-  function handleParentOpenButtonClick(
-    event: JSX.TargetedMouseEvent<HTMLButtonElement>
-  ) {
-    console.log(event)
-    setParentOpen(true)
-  }
-  function handleParentCloseButtonClick(
-    event: JSX.TargetedMouseEvent<HTMLButtonElement>
-  ) {
-    console.log(event)
-    setParentOpen(false)
-  }
-  const parentStyle = { height: '160px', padding: '12px', width: '240px' }
-  const [childOpen, setChildOpen] = useState<boolean>(false)
-  function handleChildOpenButtonClick(
-    event: JSX.TargetedMouseEvent<HTMLButtonElement>
-  ) {
-    console.log(event)
-    setChildOpen(true)
-  }
-  function handleChildCloseButtonClick(
-    event: JSX.TargetedMouseEvent<HTMLButtonElement>
-  ) {
-    console.log(event)
-    setChildOpen(false)
-  }
-  const childStyle = { height: '120px', padding: '12px', width: '240px' }
-  const longText = Array(96).fill('Text').join(' ')
-  return (
-    <Fragment>
-      <div style="width: 320px">{longText}</div>
-      <Button onClick={handleParentOpenButtonClick}>Open parent modal</Button>
-      <div style="width: 320px">{longText}</div>
       <Modal
         onCloseButtonClick={handleParentCloseButtonClick}
         open={parentOpen}

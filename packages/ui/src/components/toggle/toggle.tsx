@@ -1,50 +1,51 @@
-import { ComponentChildren, h, JSX } from 'preact'
+import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { OnValueChange, Props } from '../../types/types.js'
+import { Event, EventHandler } from '../../types/event-handler.js'
+import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { noop } from '../../utilities/no-op.js'
 import styles from './toggle.module.css'
 
-export type ToggleProps<Name extends string> = {
+export interface ToggleProps extends FocusableComponentProps<HTMLInputElement> {
   children: ComponentChildren
   disabled?: boolean
-  name?: Name
-  onChange?: OmitThisParameter<JSX.GenericEventHandler<HTMLInputElement>>
-  onValueChange?: OnValueChange<boolean, Name>
-  propagateEscapeKeyDown?: boolean
+  onChange?: EventHandler.onChange<HTMLInputElement>
+  onValueChange?: EventHandler.onValueChange<boolean>
   value: boolean
 }
 
-export function Toggle<Name extends string>({
+export const Toggle = createComponent<HTMLInputElement, ToggleProps>(function ({
   children,
   disabled = false,
-  name,
-  onChange = function () {},
-  onValueChange = function () {},
+  onChange = noop,
+  onKeyDown = noop,
+  onValueChange = noop,
   propagateEscapeKeyDown = true,
   value = false,
   ...rest
-}: Props<HTMLInputElement, ToggleProps<Name>>): JSX.Element {
+}) {
   const handleChange = useCallback(
-    function (event: JSX.TargetedEvent<HTMLInputElement>): void {
-      const newValue = event.currentTarget.checked
-      onValueChange(newValue, name)
+    function (event: Event.onChange<HTMLInputElement>) {
       onChange(event)
+      const newValue = event.currentTarget.checked === true
+      onValueChange(newValue)
     },
-    [name, onChange, onValueChange]
+    [onChange, onValueChange]
   )
 
   const handleKeyDown = useCallback(
-    function (event: JSX.TargetedKeyboardEvent<HTMLInputElement>): void {
-      if (event.key !== 'Escape') {
-        return
+    function (event: Event.onKeyDown<HTMLInputElement>) {
+      onKeyDown(event)
+      if (event.key === 'Escape') {
+        if (propagateEscapeKeyDown === false) {
+          event.stopPropagation()
+        }
+        event.currentTarget.blur()
       }
-      if (propagateEscapeKeyDown === false) {
-        event.stopPropagation()
-      }
-      event.currentTarget.blur()
     },
-    [propagateEscapeKeyDown]
+    [propagateEscapeKeyDown, onKeyDown]
   )
 
   return (
@@ -59,10 +60,9 @@ export function Toggle<Name extends string>({
         checked={value === true}
         class={styles.input}
         disabled={disabled === true}
-        name={name}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        tabIndex={disabled === true ? -1 : 0}
+        tabIndex={0}
         type="checkbox"
       />
       <div class={styles.box} />
@@ -70,4 +70,4 @@ export function Toggle<Name extends string>({
       <div class={styles.children}>{children}</div>
     </label>
   )
-}
+})

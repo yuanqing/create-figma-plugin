@@ -2,7 +2,8 @@ import fs from 'node:fs/promises'
 import { basename, dirname, extname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { paramCase, pascalCase, pascalCaseTransformMerge } from 'change-case'
+import slugify from '@sindresorhus/slugify'
+import camelcase from 'camelcase'
 import { globby } from 'globby'
 import { optimize } from 'svgo'
 
@@ -112,9 +113,9 @@ async function readSvgFileAsync(filePath: string): Promise<SvgFile> {
   }
   const optimizedSvgString = result.data
   return {
-    baseName: paramCase(`icon-${baseName}-${width}`),
-    componentName: pascalCase(`Icon ${baseName} ${width}`, {
-      transform: pascalCaseTransformMerge
+    baseName: slugify(`icon-${baseName}-${width}`),
+    componentName: camelcase(`Icon ${baseName} ${width}`, {
+      pascalCase: true
     }),
     dimension: width,
     svgPath: extractSvgPath(optimizedSvgString, filePath)

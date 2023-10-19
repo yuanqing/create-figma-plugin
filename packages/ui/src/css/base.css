@@ -1,17 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Inter:400,600&display=swap');
-
 :root {
-  /* border-radius */
   --border-radius-2: 2px;
   --border-radius-6: 6px;
-  /* box-shadow */
   --box-shadow: var(--box-shadow-menu);
   --box-shadow-menu: 0 5px 17px rgba(0, 0, 0, 0.2),
     0 2px 7px rgba(0, 0, 0, 0.15), inset 0 0 0 0.5px #000000,
     0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
     0 0 0 0.5px rgba(0, 0, 0, 0.2);
-  /* font */
   --font-family: 'Inter', 'Helvetica', sans-serif;
   --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
@@ -20,15 +15,12 @@
   --font-weight-regular: 400;
   --font-weight-bold: 600;
   --line-height-16: 16px;
-  /* opacity */
   --opacity-30: 0.3;
-  /* space */
   --space-extra-small: 8px;
   --space-small: 12px;
   --space-medium: 16px;
   --space-large: 20px;
   --space-extra-large: 24px;
-  /* z-index */
   --z-index-1: 1;
   --z-index-2: 2;
 }

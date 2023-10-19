@@ -1,21 +1,17 @@
-import { h, JSX } from 'preact'
+import { h } from 'preact'
 
-import { Props } from '../../types/types.js'
+import { Space } from '../../types/space.js'
+import { createComponent } from '../../utilities/create-component.js'
 import styles from './vertical-space.module.css'
 
 export type VerticalSpaceProps = {
   space: VerticalSpaceSpace
 }
-export type VerticalSpaceSpace =
-  | 'extraSmall'
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'extraLarge'
+export type VerticalSpaceSpace = Space
 
-export function VerticalSpace({
-  space,
-  ...rest
-}: Props<HTMLDivElement, VerticalSpaceProps>): JSX.Element {
-  return <div {...rest} class={styles[space]} />
-}
+export const VerticalSpace = createComponent<
+  HTMLDivElement,
+  VerticalSpaceProps
+>(function ({ space, ...rest }, ref) {
+  return <div {...rest} ref={ref} class={styles[space]} />
+})
