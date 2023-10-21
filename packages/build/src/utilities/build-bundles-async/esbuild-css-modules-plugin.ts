@@ -77,8 +77,7 @@ async function createCssFilePathAsync(
   return result
 }
 
-const backQuoteRegex = /`/g
-const backSlashColonRegex = /\\:/g
+const nonAlphanumericRegex = /[^a-zA-Z0-9-_]/g
 
 async function createGlobalCssJavaScriptAsync(
   cssFilePath: string,
@@ -105,9 +104,9 @@ async function createGlobalCssJavaScriptAsync(
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
       element.id = '${elementId}';
-      element.innerHTML = \`${css
-        .replace(backQuoteRegex, '\\`')
-        .replace(backSlashColonRegex, '\\\\:')}\`;
+      element.innerHTML = \`${css.replace(nonAlphanumericRegex, (match) => {
+        return `\\${match}`
+      })}\`;
       document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
     }
     export default {};
@@ -152,9 +151,9 @@ async function createCssModulesJavaScriptAsync(
     if (document.getElementById('${elementId}') === null) {
       const element = document.createElement('style');
       element.id = '${elementId}';
-      element.textContent = \`${css
-        .replace(backQuoteRegex, '\\`')
-        .replace(backSlashColonRegex, '\\\\:')}\`;
+      element.textContent = \`${css.replace(nonAlphanumericRegex, (match) => {
+        return `\\${match}`
+      })}\`;
       document.head.append(element);
     }
     export default ${classNamesJson};
