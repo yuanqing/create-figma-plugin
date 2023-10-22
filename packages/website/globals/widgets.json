@@ -14,6 +14,18 @@
   {
     "authors": [
       {
+        "name": "Kevin Feng",
+        "url": "https://twitter.com/kjfeng_"
+      }
+    ],
+    "description": "Craft AI-powered user experiences by shaping the behavior of large language models (LLMs) right in your canvas",
+    "githubUrl": null,
+    "id": "1277396720888327660",
+    "name": "Canvil"
+  },
+  {
+    "authors": [
+      {
         "name": "Felix Tesche",
         "url": "https://twitter.com/mrfesch"
       }

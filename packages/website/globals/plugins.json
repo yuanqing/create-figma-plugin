@@ -166,6 +166,18 @@
   {
     "authors": [
       {
+        "name": "Victor Karanja",
+        "url": "https://twitter.com/karavic78"
+      }
+    ],
+    "description": "AI-powered design copilot that transforms text into stunning UI",
+    "githubUrl": null,
+    "id": "1278764073399815199",
+    "name": "Chat2Design"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -174,18 +186,6 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-clean-document",
     "id": "767379019764649932",
     "name": "Clean Document"
-  },
-  {
-    "authors": [
-      {
-        "name": "Cyril Diagne",
-        "url": "https://twitter.com/cyrildiagne"
-      }
-    ],
-    "description": "Use the most advanced image processing tools from ClipDrop directly in Figma",
-    "githubUrl": null,
-    "id": "1123355421740529204",
-    "name": "ClipDrop"
   },
   {
     "authors": [
@@ -506,6 +506,10 @@
   {
     "authors": [
       {
+        "name": "Arman Abtahi",
+        "url": "https://figma.com/@armanabtahi"
+      },
+      {
         "name": "Michael Yagudaev",
         "url": "https://twitter.com/yagudaev"
       },
@@ -590,6 +594,18 @@
     "githubUrl": "https://github.com/ryonakae/figma-plugin-figma-gpt",
     "id": "1213050091855586023",
     "name": "Figma GPT"
+  },
+  {
+    "authors": [
+      {
+        "name": "Gabriel Barbosa",
+        "url": "https://figma.com/@gabrielbarbosa5"
+      }
+    ],
+    "description": "Export Figma designs to Bootstrap 5 code",
+    "githubUrl": null,
+    "id": "1287660587112027215",
+    "name": "Figma to Bootstrap 5"
   },
   {
     "authors": [
@@ -846,6 +862,18 @@
   {
     "authors": [
       {
+        "name": "Icon Bundler",
+        "url": "https://iconbundler.com/"
+      }
+    ],
+    "description": "Export icons to React, Vue and Svelte",
+    "githubUrl": null,
+    "id": "1279765215672775733",
+    "name": "iconbundler"
+  },
+  {
+    "authors": [
+      {
         "name": "Tekeste Kidanu",
         "url": "https://twitter.com/tkmadeit"
       }
@@ -954,6 +982,18 @@
   {
     "authors": [
       {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Generate direct links to your selection, exported as SVG / PNG / PDF / JPG",
+    "githubUrl": null,
+    "id": "1295697368673613991",
+    "name": "link.to.design"
+  },
+  {
+    "authors": [
+      {
         "name": "Meni Zanzibar",
         "url": "https://figma.com/@meni"
       }
@@ -974,6 +1014,18 @@
     "githubUrl": "https://github.com/yuanqing/figma-plugins/tree/main/packages/figma-move-layers",
     "id": "767379204511357902",
     "name": "Move Layers"
+  },
+  {
+    "authors": [
+      {
+        "name": "Jeremy Knudsen",
+        "url": "https://figma.com/@jeremyknudsen"
+      }
+    ],
+    "description": "Create and export Windows icons directly from Figma",
+    "githubUrl": null,
+    "id": "1260682452610603641",
+    "name": "My ICO of Joy"
   },
   {
     "authors": [
@@ -1058,6 +1110,30 @@
     "githubUrl": "https://github.com/gsajith/pdf-to-figma",
     "id": "1105316927173658462",
     "name": "PDF to Figma"
+  },
+  {
+    "authors": [
+      {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Convert any PDF document into Figma designs",
+    "githubUrl": null,
+    "id": "1280917768965269588",
+    "name": "pdf.to.design"
+  },
+  {
+    "authors": [
+      {
+        "name": "Jeremy Knudsen",
+        "url": "https://figma.com/@jeremyknudsen"
+      }
+    ],
+    "description": "Inspect and manipulate color gradients using the OKLCH color space",
+    "githubUrl": null,
+    "id": "1266828922235523696",
+    "name": "Perceptual Color"
   },
   {
     "authors": [
@@ -1262,6 +1338,18 @@
   {
     "authors": [
       {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Remove the background from images 100% privately",
+    "githubUrl": null,
+    "id": "1278756064864777232",
+    "name": "Remove Background"
+  },
+  {
+    "authors": [
+      {
         "name": "Daniel Amram",
         "url": "https://figma.com/@codbite"
       }
@@ -1362,6 +1450,50 @@
   {
     "authors": [
       {
+        "name": "Michael Yagudaev",
+        "url": "https://twitter.com/yagudaev"
+      },
+      {
+        "name": "Soheil Hajimohammadi",
+        "url": "https://twitter.com/sohei1L"
+      }
+    ],
+    "description": "Share text and images to social media without leaving Figma",
+    "githubUrl": null,
+    "id": "1285721021860422447",
+    "name": "Share to Social Media"
+  },
+  {
+    "authors": [
+      {
+        "name": "Alina Medvid",
+        "url": "https://figma.com/@alinamedvid"
+      },
+      {
+        "name": "Anton Tishchenko",
+        "url": "https://figma.com/@antonytm"
+      }
+    ],
+    "description": "Skew any object in your design",
+    "githubUrl": null,
+    "id": "1288423133657605450",
+    "name": "Skew 360°"
+  },
+  {
+    "authors": [
+      {
+        "name": "Pavel Kuprin",
+        "url": "https://figma.com/@kuprin"
+      }
+    ],
+    "description": "Easily connect frames in Figma using customizable arrows",
+    "githubUrl": null,
+    "id": "1283830698192890694",
+    "name": "Smart Route"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -1394,6 +1526,18 @@
     "githubUrl": null,
     "id": "1075741140914731351",
     "name": "story.to.design"
+  },
+  {
+    "authors": [
+      {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Stretch text, vectors, and frames, and edit after",
+    "githubUrl": null,
+    "id": "1288508418281450054",
+    "name": "Stretch"
   },
   {
     "authors": [
@@ -1494,6 +1638,26 @@
   {
     "authors": [
       {
+        "name": "Arman Abtahi",
+        "url": "https://figma.com/@armanabtahi"
+      },
+      {
+        "name": "Michael Yagudaev",
+        "url": "https://twitter.com/yagudaev"
+      },
+      {
+        "name": "Soheil Hajimohammadi",
+        "url": "https://twitter.com/sohei1L"
+      }
+    ],
+    "description": "1-click conversion from bitmap to SVG vectors",
+    "githubUrl": null,
+    "id": "1291512177354533481",
+    "name": "Trace Images"
+  },
+  {
+    "authors": [
+      {
         "name": "Luca Dalli",
         "url": "https://twitter.com/webdevluca"
       }
@@ -1542,6 +1706,18 @@
     "githubUrl": null,
     "id": "1181637104403040691",
     "name": "Unbackground"
+  },
+  {
+    "authors": [
+      {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Improves any image in Figma to make it high resolution",
+    "githubUrl": null,
+    "id": "1291418014691383723",
+    "name": "Upscale"
   },
   {
     "authors": [
