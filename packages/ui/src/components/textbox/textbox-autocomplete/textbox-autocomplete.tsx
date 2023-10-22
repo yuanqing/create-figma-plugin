@@ -52,9 +52,7 @@ export type TextboxAutocompleteOptionValue = {
   value: string
   disabled?: boolean
 }
-export type TextboxAutocompleteOptionSeparator = {
-  separator: true
-}
+export type TextboxAutocompleteOptionSeparator = '-'
 export type TextboxAutocompleteVariant = 'border' | 'underline'
 
 type Option =
@@ -474,7 +472,7 @@ export const TextboxAutocomplete = createComponent<
           ])}
         >
           {options.map(function (option: Option, index: number) {
-            if ('separator' in option) {
+            if (typeof option === 'string') {
               return <hr key={index} class={menuStyles.optionSeparator} />
             }
             if ('header' in option) {
@@ -536,7 +534,7 @@ function createOptions(
     option: TextboxAutocompleteOption,
     index: number
   ): Option {
-    if ('value' in option) {
+    if (typeof option !== 'string' && 'value' in option) {
       const optionValueWithId: OptionValueWithId = {
         ...option,
         id: `${index}`
@@ -559,7 +557,7 @@ function filterOptions(
   if (id === INVALID_ID) {
     // `value` does not match any option in `options`
     return options.filter(function (option: Option): boolean {
-      if ('value' in option) {
+      if (typeof option !== 'string' && 'value' in option) {
         return doesStringContainSubstring(option.value, value) === true
       }
       return false
@@ -571,7 +569,7 @@ function filterOptions(
   }
   // Filter `options` by `editedValue`
   return options.filter(function (option: Option): boolean {
-    if ('value' in option) {
+    if (typeof option !== 'string' && 'value' in option) {
       return doesStringContainSubstring(option.value, editedValue) === true
     }
     return false
@@ -589,7 +587,7 @@ function doesStringContainSubstring(
 // Returns the `id` of an `OptionValueWithId` in `options` with the given `value`
 function getIdByValue(options: Array<Option>, value: string): Id {
   for (const option of options) {
-    if ('value' in option) {
+    if (typeof option !== 'string' && 'value' in option) {
       if (option.value === value) {
         return option.id
       }
@@ -604,7 +602,7 @@ function isValidValue(options: Array<Option>, value: string): boolean {
     return true
   }
   for (const option of options) {
-    if ('value' in option) {
+    if (typeof option !== 'string' && 'value' in option) {
       if (option.value.toLowerCase().indexOf(value.toLowerCase()) === 0) {
         return true
       }
@@ -619,7 +617,7 @@ function findOptionValueById(
   id: string
 ): null | OptionValueWithId {
   for (const option of options) {
-    if ('id' in option && option.id === id) {
+    if (typeof option !== 'string' && 'id' in option && option.id === id) {
       return option
     }
   }
@@ -630,7 +628,7 @@ function findOptionValueById(
 function getIndexById(options: Array<Option>, id: string): number {
   let index = 0
   for (const option of options) {
-    if ('id' in option && option.id === id) {
+    if (typeof option !== 'string' && 'id' in option && option.id === id) {
       return index
     }
     index += 1
@@ -705,7 +703,11 @@ function findFirstOptionValue(
   options: Array<Option>
 ): null | OptionValueWithId {
   for (const option of options) {
-    if ('id' in option && option.disabled !== true) {
+    if (
+      typeof option !== 'string' &&
+      'id' in option &&
+      option.disabled !== true
+    ) {
       return option
     }
   }

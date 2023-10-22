@@ -23,7 +23,7 @@ export const Empty = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -48,7 +48,7 @@ export const Focused = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -74,7 +74,7 @@ export const Placeholder = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -100,7 +100,7 @@ export const Filled = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -124,7 +124,7 @@ export const Disabled = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -148,7 +148,7 @@ export const DisabledOption = function () {
     { value: 'foo' },
     { disabled: true, value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -173,7 +173,7 @@ export const Icon = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -199,7 +199,7 @@ export const TextIcon = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -225,7 +225,7 @@ export const RevertOnEscapeKeyDown = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -251,7 +251,7 @@ export const Strict = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -277,7 +277,7 @@ export const Filter = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -303,7 +303,7 @@ export const StrictFilter = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -330,7 +330,7 @@ export const MenuTop = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
@@ -356,7 +356,7 @@ export const OnValueInput = function () {
     { value: 'foo' },
     { value: 'bar' },
     { value: 'baz' },
-    { separator: true },
+    '-',
     { header: 'Header' },
     { value: 'qux' }
   ]
