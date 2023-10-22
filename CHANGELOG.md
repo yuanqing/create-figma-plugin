@@ -7,9 +7,9 @@
 #### `@create-figma-plugin/ui@3.0.0`
 
 > [!IMPORTANT]
-> Breaking changes to the component APIs will result in TypeScript errors when you build your plugin with the `build-figma-plugin` CLI. If there are no build errors, then your plugin/widget is already up to date with `3.0.0`.
+> Breaking changes to the component APIs will result in TypeScript errors when you build your plugin/widget with the `build-figma-plugin` CLI. You may need to make some minor code changes if you’re using any of these components: `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `Modal`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SegmentedControl`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, `Toggle`.
 >
-> Otherwise, you may need to make some minor code changes if you’re using any of these components: `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `Modal`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SegmentedControl`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, `Toggle`.
+> If you see no build errors after upgrading, then your plugin/widget is already up-to-date with `3.0.0`.
 
 ##### `Checkbox`
 
