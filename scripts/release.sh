@@ -23,12 +23,11 @@ npm run packages-publish
 # push `main`, including tags
 git push --no-verify --tags origin main
 
-# delete `next`
-git branch -D next
-git push --no-verify origin :next
+# merge `main` into `next`
+git checkout next
+git merge main
 
-# create and push `next`
-git checkout -b next
+# push `next`
 git push --no-verify origin next
 
 # update docs
