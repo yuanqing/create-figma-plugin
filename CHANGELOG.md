@@ -8,6 +8,7 @@
 
 > [!IMPORTANT]
 > Breaking changes to the component APIs will cause a TypeScript error when you build your plugin with the `build-figma-plugin` CLI. Fixing all of these TypeScript errors will bring your plugin/widget up to date.
+>
 > You may need to make small code changes if you’re using any of these components: `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `Modal`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SegmentedControl`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, `Toggle`
 
 ##### `Checkbox`
