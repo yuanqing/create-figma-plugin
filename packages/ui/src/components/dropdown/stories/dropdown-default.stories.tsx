@@ -109,24 +109,6 @@ export const FilledManyOptions = function () {
   return <Dropdown onChange={handleChange} options={options} value={value} />
 }
 
-export const LongText = function () {
-  const [value, setValue] = useState<string>(Array(20).fill('foo').join(' '))
-  const options: Array<DropdownOption> = [
-    { value: Array(20).fill('foo').join(' ') },
-    { value: Array(20).fill('bar').join(' ') },
-    { value: Array(20).fill('baz').join(' ') },
-    '-',
-    { header: 'Header' },
-    { value: Array(4).fill('qux').join(' ') }
-  ]
-  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value
-    console.log(newValue)
-    setValue(newValue)
-  }
-  return <Dropdown onChange={handleChange} options={options} value={value} />
-}
-
 export const Focused = function () {
   const [value, setValue] = useState<string>('foo')
   const options: Array<DropdownOption> = [
