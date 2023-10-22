@@ -100,18 +100,23 @@ To build the plugin/widget:
 $ npm run build
 ```
 
-This will generate a `manifest.json` file and a `build/` directory containing the JavaScript bundle(s) for the plugin/widget. (To customize the output directory for the `manifest.json` and JavaScript bundles, use the `--output` flag when invoking the `build-figma-plugin` CLI, eg. `--output my-plugin`)
+This will generate a `manifest.json` file and a `build/` directory containing the JavaScript bundle(s) for the plugin/widget. (To customize the output directory for the `manifest.json` and JavaScript bundles, use the `--output` flag when invoking the `build-figma-plugin` CLI, eg. `--output my-plugin`.)
 
 - [Plugin Manifest](https://figma.com/plugin-docs/manifest/)
 - [Widget Manifest](https://figma.com/widget-docs/widget-manifest/)
 
-(Configuring your plugin/widget is done via `package.json`. Avoid manually editing the `manifest.json` file. Because the `manifest.json` file is always regenerated on build, any changes you make will always get overridden.)
+(Configuring your plugin/widget must be done via `package.json`. Avoid manually editing the `manifest.json` file. Because the `manifest.json` file is always regenerated on build, any changes you make will always get overridden.)
 
 To watch for code changes and rebuild the plugin/widget automatically:
 
 ```sh
 $ npm run watch
 ```
+
+Learn how to:
+
+- [Customize the underlying build configuration used by the `build-figma-plugin` CLI](<%- query('page', 'recipes').url %>#customizing-the-underlying-esbuild-configuration)
+- [Modify the `manifest.json` file just before it gets output by the `build-figma-plugin` CLI](<%- query('page', 'recipes').url %>#customizing-the-manifest-json-file)
 
 ## Installing the plugin/widget
 
@@ -146,5 +151,5 @@ Official docs and code samples from Figma:
 
 Community:
 
+- [Friends of Figma Discord](https://discord.gg/figma) – Join the `#plugin-api` and `#widget-api` channels
 - [Twitter List: Figma Society](https://twitter.com/i/lists/1426096037383581697)
-- [Friends of Figma Discord](https://discord.gg/figma)
