@@ -4,36 +4,125 @@
 
 ### Breaking changes
 
-- `@create-figma-plugin/ui@3.0.0`
+#### `@create-figma-plugin/ui@3.0.0`
 
-  - Removed the `noTransition` prop from `Modal` in favor of setting the new `transition` prop to `false`.
-  - Removed the `name` prop from `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, and `Toggle`.
-  - Removed the `hexColorName` and `opacityName` props from `TextboxColor`.
-  - Removed the `Value` type parameter from `DropdownOption`, `RadioButtonsOption`, and `SegmentedControlOption`.
-  - Changed the type of the `value` prop in `Dropdown`, `RadioButtons`, and `SegmentedControl` to `null | string`.
-  - Changed `DropdownOptionSeparator` and `TextboxAutocompleteOptionSeparator` types from `{ separator: true }` to `-`.
-  - Changed the behavior of `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, and `TextboxNumeric` to not blur on pressing the `Enter` key. ([#192](https://github.com/yuanqing/create-figma-plugin/issues/192))
-  - Stop the menu in `Dropdown` and `TextboxAutocomplete` from appearing on focus. ([#193](https://github.com/yuanqing/create-figma-plugin/issues/193))
+    > [!IMPORTANT]
+    > Breaking changes to the component APIs will cause a TypeScript error when you build your plugin with the `build-figma-plugin` CLI. Fixing all of these TypeScript errors will bring your plugin/widget up to date.
+    > You may need to make small code changes if you’re using any of these components: `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `Modal`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SegmentedControl`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, `Toggle`
+
+##### `Checkbox`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+
+##### `Dropdown`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+- Changed the type of the `value` prop to `null | string`.
+- Removed the `Value` type parameter from `DropdownOption`.
+- Changed `DropdownOptionSeparator` from `{ separator: true }` to `-`.
+
+##### `IconToggleButton`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+
+##### `Layer`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+
+##### `Modal`
+
+- Removed the `noTransition` prop in favor of setting the new `transition` prop to `false`.
+
+##### `RadioButtons`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+- Changed the type of the `value` prop to `null | string`.
+- Removed the `Value` type parameter from `RadioButtonsOption`.
+
+##### `RangeSlider`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueInput` and `onNumericValueInput` function prop.
+
+##### `SearchTextbox`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueInput` function prop.
+
+##### `SegmentedControl`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+- Changed the type of the `value` prop to `null | string`.
+- Removed the `Value` type parameter from `SegmentedControlOption`.
+
+##### `SelectableItem`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+
+##### `Tabs`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
+
+##### `Textbox`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueInput` function prop.
+
+##### `TextboxAutocomplete`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueInput` function prop.
+- Changed `TextboxAutocompleteOptionSeparator` from `{ separator: true }` to `-`.
+
+##### `TextboxColor`
+
+- Removed the `hexColorName` and `opacityName` props.
+- Removed the second `name` parameter from the `onHexColorValueInput`, `onOpacityNumericValueInput`, `onOpacityValueInput`, and `onRgbaColorValueInput` function props.
+
+##### `TextboxMultiline`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueInput` function prop.
+
+##### `TextboxNumeric`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueInput` and `onNumericValueInput` function prop.
+
+##### `Toggle`
+
+- Removed the `name` prop.
+- Removed the second `name` parameter from the `onValueChange` function prop.
 
 ### Bug fixes and enhancements
 
-- `@create-figma-plugin/build@3.0.0`
-
-  - Fixed the dynamic importing of `build-figma-plugin.*.js` files. Using the `export default` syntax (instead of `module.exports =`) is supported only if `"type": "module"` is specified in the `package.json` file. ([#197](https://github.com/yuanqing/create-figma-plugin/issues/197))
-  - Fixed a bug with having both a `codegen` command and menu commands in a Dev Mode plugin. ([#202](https://github.com/yuanqing/create-figma-plugin/issues/202))
-  - Refined the `package.json` JSON schema for `"editorType"`, `"menu"`, `"parameters"`, `"capabilities"`, `"permissions"`, and `"networkAccess"`.
-
-- `@create-figma-plugin/ui@3.0.0`
-
-  - Disable scrolling when the `grow` prop is set in `TextboxMultiline`.
-  - `Dropdown`:
-    - Added a new `propagateEscapeKeyDown` prop.
-    - Prevent the page from scrolling when pressing the `↑` and `↓` keys while the menu is visible. ([#194](https://github.com/yuanqing/create-figma-plugin/issues/194))
-    - Render the menu in a portal. ([#117](https://github.com/yuanqing/create-figma-plugin/issues/117))
-  - Added support for setting a `ref` prop in all components.
-  - Stop importing Inter from Google Fonts in favor of using the version of Inter already loaded in the Figma editor. ([#188](https://github.com/yuanqing/create-figma-plugin/issues/188))
-
 - Bumped dependencies in all packages.
+
+#### `@create-figma-plugin/build@3.0.0`
+
+- Fixed the dynamic importing of `build-figma-plugin.*.js` files. Using the `export default` syntax (instead of `module.exports =`) is supported only if `"type": "module"` is specified in the `package.json` file. ([#197](https://github.com/yuanqing/create-figma-plugin/issues/197))
+- Fixed a bug with having both a `codegen` command and menu commands in a Dev Mode plugin. ([#202](https://github.com/yuanqing/create-figma-plugin/issues/202))
+- Refined the `package.json` JSON schema for `"editorType"`, `"menu"`, `"parameters"`, `"capabilities"`, `"permissions"`, and `"networkAccess"`.
+
+#### `@create-figma-plugin/ui@3.0.0`
+
+- Disable scrolling when the `grow` prop is set in `TextboxMultiline`.
+- `Dropdown`:
+  - Added a new `propagateEscapeKeyDown` prop.
+  - Prevent the page from scrolling when pressing the `↑` and `↓` keys while the menu is visible. ([#194](https://github.com/yuanqing/create-figma-plugin/issues/194))
+  - Render the menu in a portal. ([#117](https://github.com/yuanqing/create-figma-plugin/issues/117))
+- Added support for setting a `ref` prop in all components.
+- Stop importing Inter from Google Fonts in favor of using the version of Inter already loaded in the Figma editor. ([#188](https://github.com/yuanqing/create-figma-plugin/issues/188))
+- Changed the behavior of `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, and `TextboxNumeric` to not blur on pressing the `Enter` key. ([#192](https://github.com/yuanqing/create-figma-plugin/issues/192))
+- Stop the menu in `Dropdown` and `TextboxAutocomplete` from appearing on focus. ([#193](https://github.com/yuanqing/create-figma-plugin/issues/193))
 
 ## 2.6.1
 
