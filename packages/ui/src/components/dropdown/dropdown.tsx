@@ -1,6 +1,6 @@
 import { ComponentChildren, h, RefObject } from 'preact'
 import { createPortal } from 'preact/compat'
-import { useCallback, useRef, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../css/menu.module.css'
 import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside.js'
@@ -248,6 +248,23 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
         triggerMenuHide()
       },
       [triggerMenuHide, triggerRootFocus]
+    )
+
+    useEffect(
+      function () {
+        function handleWindowScroll() {
+          if (isMenuVisible === false) {
+            return
+          }
+          triggerRootFocus()
+          triggerMenuHide()
+        }
+        window.addEventListener('scroll', handleWindowScroll)
+        return function () {
+          window.removeEventListener('scroll', handleWindowScroll)
+        }
+      },
+      [isMenuVisible, triggerMenuHide, triggerRootFocus]
     )
 
     const handleMouseDownOutside = useCallback(
