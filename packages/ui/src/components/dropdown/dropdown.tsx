@@ -207,7 +207,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
     )
 
     const handleRootMouseDown = useCallback(
-      function (event: Event.onMouseDown<HTMLDivElement>): void {
+      function (event: Event.onMouseDown<HTMLDivElement>) {
         // `mousedown` events from `menuElement` are stopped from propagating to `rootElement` by `handleMenuMouseDown`
         onMouseDown(event)
         if (isMenuVisible === false) {
@@ -219,7 +219,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
 
     const handleMenuMouseDown = useCallback(function (
       event: Event.onMouseDown<HTMLDivElement>
-    ): void {
+    ) {
       // Stop the `mousedown` event from propagating to the `rootElement`
       event.stopPropagation()
     },
@@ -243,7 +243,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
     )
 
     const handleSelectedOptionClick = useCallback(
-      function (): void {
+      function () {
         triggerRootFocus()
         triggerMenuHide()
       },
@@ -268,7 +268,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
     )
 
     const handleMouseDownOutside = useCallback(
-      function (): void {
+      function () {
         if (isMenuVisible === false) {
           return
         }
