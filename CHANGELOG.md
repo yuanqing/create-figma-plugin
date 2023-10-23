@@ -7,9 +7,9 @@
 #### `@create-figma-plugin/ui@3.0.0`
 
 > [!IMPORTANT]
-> Breaking changes to the component APIs will result in TypeScript errors when you build your plugin/widget with the `build-figma-plugin` CLI. You may need to make some minor code changes if you’re using any of these components: `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `Modal`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SegmentedControl`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, `Toggle`.
+> Breaking changes to the component APIs may result in TypeScript errors when you build your plugin/widget using the `build-figma-plugin` CLI with the `--typecheck` flag. You may need to make some code changes if you’re using any of these components: `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `Modal`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SegmentedControl`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, `Toggle`.
 >
-> If you see no build errors after upgrading, then your plugin/widget is already up-to-date with `3.0.0`.
+> If you don’t see any TypeScript errors after upgrading, then your plugin/widget should already be up to date with `3.0.0`.
 
 ##### `Checkbox`
 
@@ -22,7 +22,7 @@
 - Removed the second `name` parameter from the `onValueChange` function prop.
 - Changed the type of the `value` prop to `null | string`.
 - Removed the `Value` type parameter from `DropdownOption`.
-- Changed `DropdownOptionSeparator` from `{ separator: true }` to `-`.
+- Changed `DropdownOptionSeparator` from `{ separator: true }` to `"-"`.
 
 ##### `IconToggleButton`
 
@@ -81,7 +81,7 @@
 
 - Removed the `name` prop.
 - Removed the second `name` parameter from the `onValueInput` function prop.
-- Changed `TextboxAutocompleteOptionSeparator` from `{ separator: true }` to `-`.
+- Changed `TextboxAutocompleteOptionSeparator` from `{ separator: true }` to `"-"`.
 
 ##### `TextboxColor`
 
