@@ -1,15 +1,15 @@
 # Changelog
 
-## 3.0.0
+## 3.0.1
 
 ### Breaking changes
 
-#### `@create-figma-plugin/ui@3.0.0`
+#### `@create-figma-plugin/ui@3.0.1`
 
 > [!IMPORTANT]
 > Breaking changes to the component APIs may result in TypeScript errors when you build your plugin/widget using the `build-figma-plugin` CLI with the `--typecheck` flag. You may need to make some code changes if you’re using any of these components: `Checkbox`, `Dropdown`, `IconToggleButton`, `Layer`, `Modal`, `RadioButtons`, `RangeSlider`, `SearchTextbox`, `SegmentedControl`, `SelectableItem`, `Tabs`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, `TextboxNumeric`, `Toggle`.
 >
-> If you don’t see any TypeScript errors after upgrading, then your plugin/widget should already be up to date with `3.0.0`.
+> If you don’t see any TypeScript errors after upgrading, then your plugin/widget should already be up to date with `v3` of Create Figma Plugin.
 
 ##### `Checkbox`
 
@@ -107,13 +107,13 @@
 
 - Bumped dependencies in all packages.
 
-#### `@create-figma-plugin/build@3.0.0`
+#### `@create-figma-plugin/build@3.0.1`
 
 - Fixed the dynamic importing of `build-figma-plugin.*.js` files. Using the `export default` syntax (instead of `module.exports =`) is supported only if `"type": "module"` is specified in the `package.json` file. ([#197](https://github.com/yuanqing/create-figma-plugin/issues/197))
 - Fixed a bug with having both a `codegen` command and menu commands in a Dev Mode plugin. ([#202](https://github.com/yuanqing/create-figma-plugin/issues/202))
 - Refined the `package.json` JSON schema for `"editorType"`, `"menu"`, `"parameters"`, `"capabilities"`, `"permissions"`, and `"networkAccess"`.
 
-#### `@create-figma-plugin/ui@3.0.0`
+#### `@create-figma-plugin/ui@3.0.1`
 
 - Disable scrolling when the `grow` prop is set in `TextboxMultiline`.
 - `Dropdown`:
@@ -124,6 +124,7 @@
 - Stop importing Inter from Google Fonts in favor of using the version of Inter already loaded in the Figma editor. ([#188](https://github.com/yuanqing/create-figma-plugin/issues/188))
 - Changed the behavior of `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, and `TextboxNumeric` to not blur on pressing the `Enter` key. ([#192](https://github.com/yuanqing/create-figma-plugin/issues/192))
 - Stop the menu in `Dropdown` and `TextboxAutocomplete` from appearing on focus. ([#193](https://github.com/yuanqing/create-figma-plugin/issues/193))
+- Hide the menu in `Dropdown` and `TextboxAutocomplete` when the page is scrolled.
 
 ## 2.6.1
 
