@@ -1,5 +1,5 @@
 import { ComponentChildren, h, RefObject } from 'preact'
-import { useCallback, useRef, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.module.css'
 import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside.js'
@@ -406,6 +406,23 @@ export const TextboxAutocomplete = createComponent<
     onMouseDownOutside: handleMouseDownOutside,
     ref: rootElementRef
   })
+
+  useEffect(
+    function () {
+      function handleWindowScroll() {
+        if (isMenuVisible === false) {
+          return
+        }
+        triggerMenuHide()
+        triggerTextboxSelect()
+      }
+      window.addEventListener('scroll', handleWindowScroll)
+      return function () {
+        window.removeEventListener('scroll', handleWindowScroll)
+      }
+    },
+    [isMenuVisible, triggerMenuHide, triggerTextboxSelect]
+  )
 
   const refCallback = useCallback(
     function (inputElement: null | HTMLInputElement) {
