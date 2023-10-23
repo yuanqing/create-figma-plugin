@@ -250,6 +250,21 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
       [triggerMenuHide, triggerRootFocus]
     )
 
+    const handleMouseDownOutside = useCallback(
+      function () {
+        if (isMenuVisible === false) {
+          return
+        }
+        triggerMenuHide()
+        triggerRootBlur()
+      },
+      [isMenuVisible, triggerRootBlur, triggerMenuHide]
+    )
+    useMouseDownOutside({
+      onMouseDownOutside: handleMouseDownOutside,
+      ref: rootElementRef
+    })
+
     useEffect(
       function () {
         function handleWindowScroll() {
@@ -266,21 +281,6 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
       },
       [isMenuVisible, triggerMenuHide, triggerRootFocus]
     )
-
-    const handleMouseDownOutside = useCallback(
-      function () {
-        if (isMenuVisible === false) {
-          return
-        }
-        triggerMenuHide()
-        triggerRootBlur()
-      },
-      [isMenuVisible, triggerRootBlur, triggerMenuHide]
-    )
-    useMouseDownOutside({
-      onMouseDownOutside: handleMouseDownOutside,
-      ref: rootElementRef
-    })
 
     const refCallback = useCallback(
       function (rootElement: null | HTMLDivElement) {
