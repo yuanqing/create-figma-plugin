@@ -1,0 +1,2 @@
+import{p as u}from"./create-component-b0512abd.js";const e="data-initial-focus";function i(){return u(function(){const t=document.querySelectorAll(`[${e}]:not([tabindex="-1"]`);if(t.length===0)throw new Error(`No element with attribute \`${e}\``);const n=Array.prototype.slice.call(t).find(function(r){const o=r;return o.type==="radio"&&o.checked===!0});if(typeof n<"u"){n.focus();return}t[0].focus()},[]),{[e]:!0}}export{i as u};
+//# sourceMappingURL=use-initial-focus-57bdde46.js.map

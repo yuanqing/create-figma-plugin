@@ -1,0 +1,2 @@
+import{C as m}from"./preact.module-fa42f7d1.js";import{c as o}from"./create-component-b0512abd.js";import{o as r}from"./jsxRuntime.module-632ba37d.js";const n="_extraSmall_dpsd3_1",_="_child_dpsd3_1",i="_small_dpsd3_4",p="_medium_dpsd3_7",u="_large_dpsd3_10",x="_extraLarge_dpsd3_13",t={extraSmall:n,child:_,small:i,medium:p,large:u,extraLarge:x},S=o(function({children:a,space:s,...e},l){return r("div",{...e,ref:l,class:t[s],children:m(a).map(function(d,c){return r("div",{class:t.child,children:d},c)})})});export{S};
+//# sourceMappingURL=stack-a63253f7.js.map

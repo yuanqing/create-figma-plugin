@@ -1,0 +1,2 @@
+import{c as l}from"./create-component-b0512abd.js";import{o as n}from"./jsxRuntime.module-632ba37d.js";const s="_icon_13804_1",d={icon:s};function p(e,t){const{width:c,height:r}=t;return l(function({color:o,...i}){return n("svg",{...i,class:d.icon,height:r,style:{fill:typeof o>"u"?"currentColor":`var(--figma-color-icon-${o})`},width:c,xmlns:"http://www.w3.org/2000/svg",children:n("path",{"clip-rule":"evenodd",d:e,"fill-rule":"evenodd"})})})}export{p as c};
+//# sourceMappingURL=create-icon-59b2c318.js.map

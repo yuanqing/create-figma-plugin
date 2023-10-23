@@ -1,0 +1,2 @@
+import{c as r}from"./create-component-b0512abd.js";import{o as c}from"./jsxRuntime.module-632ba37d.js";const l="_extraSmall_zc4n0_1",m="_small_zc4n0_4",n="_medium_zc4n0_7",o="_large_zc4n0_10",s="_extraLarge_zc4n0_13",_={extraSmall:l,small:m,medium:n,large:o,extraLarge:s},g=r(function({space:a,...e},t){return c("div",{...e,ref:t,class:_[a]})});export{g as V};
+//# sourceMappingURL=vertical-space-f6719a71.js.map
