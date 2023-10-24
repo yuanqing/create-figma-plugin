@@ -8,7 +8,7 @@
 
 - `@create-figma-plugin/build@3.0.2`
 
-  - Fixed bug with the `package.json` JSON schema showing a validation error when `"menu"` contains multiple separators (`"-"`). ([#204](https://github.com/yuanqing/create-figma-plugin/issues/204))
+  - Fixed a bug with the `package.json` JSON schema showing a validation error when `"menu"` contains multiple separators (`"-"`). ([#204](https://github.com/yuanqing/create-figma-plugin/issues/204))
 
 ## 3.0.1
 
