@@ -35,7 +35,7 @@ $ npm run watch
 
 Use `console.log` statements to inspect values in your code.
 
-To open the developer console, search for and run `Open Console` via the Quick Actions search bar.
+To open the developer console, search for and run `Show/Hide Console` via the Quick Actions search bar.
 
 ## See also
 
