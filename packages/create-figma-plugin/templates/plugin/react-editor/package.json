@@ -3,14 +3,14 @@
     "@create-figma-plugin/ui": "^<%- versions.createFigmaPlugin.ui %>",
     "@create-figma-plugin/utilities": "^<%- versions.createFigmaPlugin.utilities %>",
     "preact": ">=10",
-    "prismjs": "^1.28.0",
-    "react-simple-code-editor": "^0.11.2"
+    "prismjs": "^1.29.0",
+    "react-simple-code-editor": "^0.13.1"
   },
   "devDependencies": {
     "@create-figma-plugin/build": "^<%- versions.createFigmaPlugin.build %>",
     "@create-figma-plugin/tsconfig": "^<%- versions.createFigmaPlugin.tsconfig %>",
     "@figma/plugin-typings": "<%- versions.figma.pluginTypings %>",
-    "@types/prismjs": "^1.26.0",
+    "@types/prismjs": "^1.26.3",
     "@types/react": ">=18",
     "react": ">=18",
     "typescript": ">=4"
