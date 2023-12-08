@@ -75,7 +75,7 @@
     },
     "failFast": true,
     "nodeArguments": [
-      "--loader",
+      "--import",
       "tsx"
     ],
     "timeout": "2m",
