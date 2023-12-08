@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconStrokeWeight32 = createIcon(
-  'M10 10h12v1H10v-1Zm0 4h12v2H10v-2Zm12 5H10v3h12v-3Z',
+  'M10 10h12v1H10zm0 4h12v2H10zm12 5H10v3h12z',
   { height: 32, width: 32 }
 )

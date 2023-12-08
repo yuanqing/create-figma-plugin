@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconOrientationPortrait16 = createIcon(
-  'M11 2H5v12h6V2ZM5 1H4v14h8V1H5Z',
+  'M11 2H5v12h6zM5 1H4v14h8V1h-1z',
   { height: 16, width: 16 }
 )

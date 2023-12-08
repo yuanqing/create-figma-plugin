@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconTextAlignJustified16 = createIcon(
-  'M1 3h14v1H1V3Zm0 4h14v1H1V7Zm14 4H1v1h14v-1Z',
+  'M1 3h14v1H1zm0 4h14v1H1zm14 4H1v1h14z',
   { height: 16, width: 16 }
 )

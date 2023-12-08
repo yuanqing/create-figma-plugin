@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconTidyListHorizontal32 = createIcon(
-  'M10 22.5v-13h2v13h-2Zm5 0v-13h2v13h-2Zm5-13v13h2v-13h-2Z',
+  'M10 22.5v-13h2v13zm5 0v-13h2v13zm5-13v13h2v-13z',
   { height: 32, width: 32 }
 )

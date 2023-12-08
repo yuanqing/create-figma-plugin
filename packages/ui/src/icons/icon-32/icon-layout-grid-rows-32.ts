@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconLayoutGridRows32 = createIcon(
-  'M9 9h14v3H9V9Zm0 5.5h14v3H9v-3ZM23 20H9v3h14v-3Z',
+  'M9 9h14v3H9zm0 5.5h14v3H9zM23 20H9v3h14z',
   { height: 32, width: 32 }
 )

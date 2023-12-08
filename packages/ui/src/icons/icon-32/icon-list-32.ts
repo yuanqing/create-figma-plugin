@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconList32 = createIcon(
-  'M23 10H9v1h14v-1ZM9 15.5h14v1H9v-1ZM9 21h14v1H9v-1Z',
+  'M23 10H9v1h14zM9 15.5h14v1H9zM9 21h14v1H9z',
   { height: 32, width: 32 }
 )

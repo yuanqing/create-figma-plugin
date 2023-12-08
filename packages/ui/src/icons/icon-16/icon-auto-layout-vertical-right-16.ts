@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconAutoLayoutVerticalRight16 = createIcon(
-  'M5 3v2h8V3H5ZM3 7v2h10V7H3Zm4 6v-2h6v2H7Z',
+  'M5 3v2h8V3zM3 7v2h10V7zm4 6v-2h6v2z',
   { height: 16, width: 16 }
 )

@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconLayerGroup16 = createIcon(
-  'M9 3H7v1h2V3Zm2.5 9h.5v-.5h1V13h-1.5v-1ZM4 7v2H3V7h1Zm8-2.5V4h-.5V3H13v1.5h-1ZM12 7v2h1V7h-1ZM4 4.5V4h.5V3H3v1.5h1ZM3 12v-.5h1v.5h.5v1H3v-1Zm6 0H7v1h2v-1Z',
+  'M9 3H7v1h2zm2.5 9h.5v-.5h1V13h-1.5zM4 7v2H3V7zm8-2.5V4h-.5V3H13v1.5zM12 7v2h1V7zM4 4.5V4h.5V3H3v1.5zM3 12v-.5h1v.5h.5v1H3zm6 0H7v1h2z',
   { height: 16, width: 16 }
 )

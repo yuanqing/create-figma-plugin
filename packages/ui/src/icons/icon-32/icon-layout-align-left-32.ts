@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconLayoutAlignLeft32 = createIcon(
-  'M10 22.5H9v-13h1v13Zm12-8H12v-2h10v2Zm-10 5h6v-2h-6v2Z',
+  'M10 22.5H9v-13h1zm12-8H12v-2h10zm-10 5h6v-2h-6z',
   { height: 32, width: 32 }
 )

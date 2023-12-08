@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconLetterSpacing32 = createIcon(
-  'M8 22V10h1v12H8Zm15 0V10h1v12h-1Zm-10.4517-2 2.8-8h1.3036l2.8 8h-.9536l-.7-2h-3.5964l-.7 2h-.9536Zm3.4518-7.1378L17.4483 17h-2.8964l1.4482-4.1378Z',
+  'M8 22V10h1v12zm15 0V10h1v12zm-10.4517-2 2.8-8h1.3036l2.8 8h-.9536l-.7-2h-3.5964l-.7 2zm3.4518-7.1378L17.4483 17h-2.8964z',
   { height: 32, width: 32 }
 )

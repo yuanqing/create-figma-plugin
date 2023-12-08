@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconPaddingHorizontal32 = createIcon(
-  'M9 23V9h1v14H9Zm13 0V9h1v14h-1Zm-9-10h6v6h-6v-6Zm-1-1h8v8h-8v-8Z',
+  'M9 23V9h1v14zm13 0V9h1v14zm-9-10h6v6h-6zm-1-1h8v8h-8v-7z',
   { height: 32, width: 32 }
 )
