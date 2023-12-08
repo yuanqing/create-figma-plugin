@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.3
+
+- `create-figma-plugin@3.0.3`
+
+  - Updated the `tsconfig.json` of the `plugin/react-editor` template to use Preact’s types instead of React’s. ([#207](https://github.com/yuanqing/create-figma-plugin/issues/207))
+
 ## 3.0.2
 
 - `create-figma-plugin@3.0.2`
