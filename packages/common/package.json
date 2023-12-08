@@ -46,11 +46,11 @@
     "path-exists": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.8.6",
+    "@types/node": "^20.10.4",
     "@typescript-eslint/eslint-plugin": "5.59.7",
-    "ava": "^5.3.1",
-    "concurrently": "^8.2.1",
-    "eslint": "^8.51.0",
+    "ava": "^6.0.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.55.0",
     "eslint-config-yuanqing": "0.0.8",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "4.2.1",
@@ -60,8 +60,8 @@
     "eslint-plugin-sort-keys-fix": "1.1.2",
     "prettier": "2.8.8",
     "rimraf": "^5.0.5",
-    "tsx": "^3.13.0",
-    "typescript": "^5.2.2"
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.3"
   },
   "ava": {
     "extensions": {

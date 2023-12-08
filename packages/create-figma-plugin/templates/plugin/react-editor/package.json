@@ -11,8 +11,8 @@
     "@create-figma-plugin/tsconfig": "^<%- versions.createFigmaPlugin.tsconfig %>",
     "@figma/plugin-typings": "<%- versions.figma.pluginTypings %>",
     "@types/prismjs": "^1.26.3",
-    "@types/react": ">=18",
-    "react": ">=18",
+    "@types/react": ">=20",
+    "react": ">=20",
     "typescript": ">=4"
   },
   "scripts": {
