@@ -238,6 +238,21 @@ To use React components in your UI, ensure that `react` and `@types/react` are i
 $ npm install --save-dev react @types/react
 ```
 
+Then, add the following configuration to your `tsconfig.json` to [ensure that Preact’s types are used in place of React’s](https://preactjs.com/guide/v10/getting-started#aliasing-in-typescript):
+
+```json {4-8}
+{
+  "compilerOptions": {
+    // ...
+    "paths": {
+      "react": ["./node_modules/preact/compat"],
+      "react-dom": ["./node_modules/preact/compat"]
+    },
+    "skipLibCheck": true
+  }
+}
+```
+
 For a runnable example, try the [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) plugin template:
 
 ```sh
