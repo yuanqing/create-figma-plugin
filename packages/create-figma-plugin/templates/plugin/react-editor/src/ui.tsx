@@ -8,7 +8,7 @@ import {
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
 import { h } from 'preact'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import { highlight, languages } from 'prismjs'
 import Editor from 'react-simple-code-editor'
 
@@ -23,6 +23,14 @@ function Plugin() {
     },
     [code]
   )
+  useEffect(function () {
+    const textAreaElement = document.querySelector(`.${styles.textarea}`)
+    if (textAreaElement === null) {
+      return
+    }
+    // Make `react-simple-code-editor` work with `preact`
+    textAreaElement.textContent = code
+  }, [code])
   return (
     <Container space="medium">
       <VerticalSpace space="small" />
@@ -32,8 +40,8 @@ function Plugin() {
             return highlight(code, languages.js, 'js')
           }}
           onValueChange={setCode}
-          preClassName={styles.editor}
-          textareaClassName={styles.editor}
+          preClassName={styles.pre}
+          textareaClassName={styles.textarea}
           value={code}
         />
       </div>
