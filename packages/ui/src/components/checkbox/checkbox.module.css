@@ -40,7 +40,8 @@
   border: 0;
 }
 .checkbox:not(.disabled) .input:checked:focus ~ .border {
-  box-shadow: 0 0 0 1px var(--figma-color-bg),
+  box-shadow:
+    0 0 0 1px var(--figma-color-bg),
     0 0 0 2px var(--figma-color-border-brand-strong);
 }
 .disabled .input ~ .border {

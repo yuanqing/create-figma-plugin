@@ -43,11 +43,11 @@ export const Empty = function () {
 
 export const EmptyManyOptions = function () {
   const [value, setValue] = useState<null | string>(null)
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -116,11 +116,11 @@ export const Filled = function () {
 
 export const FilledManyOptions = function () {
   const [value, setValue] = useState<string>('42')
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -349,11 +349,11 @@ export const TopLeft = function () {
 
 export const TopLeftManyOptions = function () {
   const [value, setValue] = useState<null | string>(null)
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -412,11 +412,11 @@ export const TopRight = function () {
 
 export const TopRightManyOptions = function () {
   const [value, setValue] = useState<null | string>(null)
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -476,11 +476,11 @@ export const MiddleLeft = function () {
 
 export const MiddleLeftManyOptions = function () {
   const [value, setValue] = useState<null | string>(null)
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -541,11 +541,11 @@ export const MiddleRight = function () {
 
 export const MiddleRightManyOptions = function () {
   const [value, setValue] = useState<null | string>(null)
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -605,11 +605,11 @@ export const BottomLeft = function () {
 
 export const BottomLeftManyOptions = function () {
   const [value, setValue] = useState<null | string>(null)
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -668,11 +668,11 @@ export const BottomRight = function () {
 
 export const BottomRightManyOptions = function () {
   const [value, setValue] = useState<null | string>(null)
-  const options: Array<DropdownOption> = [...Array(100).keys()].map(function (
-    index
-  ) {
-    return { value: `${index + 1}` }
-  })
+  const options: Array<DropdownOption> = [...Array(100).keys()].map(
+    function (index) {
+      return { value: `${index + 1}` }
+    }
+  )
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)

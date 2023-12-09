@@ -31,8 +31,8 @@ export const TextboxNumeric = createComponent<
         typeof variant === 'undefined'
           ? null
           : variant === 'border'
-          ? textboxStyles.hasBorder
-          : null,
+            ? textboxStyles.hasBorder
+            : null,
         typeof icon === 'undefined' ? null : textboxStyles.hasIcon,
         rest.disabled === true ? textboxStyles.disabled : null
       ])}

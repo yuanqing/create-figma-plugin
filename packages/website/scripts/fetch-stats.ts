@@ -93,15 +93,13 @@ function printStats(stats: Array<Stat>, type: 'plugin' | 'widget'): void {
     { runCount }: Stat
   ) {
     return total + runCount
-  },
-  0)
+  }, 0)
   const totalLikeCount = stats.reduce(function (
     total: number,
     { likeCount }: Stat
   ) {
     return total + likeCount
-  },
-  0)
+  }, 0)
   data.push([
     '',
     new Intl.NumberFormat().format(totalRunCount),

@@ -111,8 +111,8 @@ function createMainEntryFile(config: Config): string {
     const commandId = (${
       entryFiles.length === 1
     } || typeof figma.command === 'undefined' || figma.command === '' || figma.command === 'generate') ? '${
-    entryFiles[0].commandId
-  }' : figma.command;
+      entryFiles[0].commandId
+    }' : figma.command;
     modules[commandId]();
   `
 }

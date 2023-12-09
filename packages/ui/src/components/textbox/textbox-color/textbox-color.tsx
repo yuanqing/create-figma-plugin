@@ -80,8 +80,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
     ) {
       const hexColor = event.currentTarget.value.slice(1).toUpperCase()
       setOriginalHexColor(hexColor)
-    },
-    [])
+    }, [])
 
     const handleHexColorSelectorInput = useCallback(
       function (event: Event.onInput<HTMLInputElement>) {
@@ -249,8 +248,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
       opacity: null | number
     ) {
       return opacity !== null // Revert the original value if empty
-    },
-    [])
+    }, [])
 
     const parsedOpacity = parseOpacity(opacity)
 
@@ -272,8 +270,8 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
           typeof variant === 'undefined'
             ? null
             : variant === 'border'
-            ? styles.hasBorder
-            : null,
+              ? styles.hasBorder
+              : null,
           disabled === true ? styles.disabled : null
         ])}
       >

@@ -222,8 +222,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
     ) {
       // Stop the `mousedown` event from propagating to the `rootElement`
       event.stopPropagation()
-    },
-    [])
+    }, [])
 
     const handleOptionChange = useCallback(
       function (event: Event.onChange<HTMLInputElement>) {

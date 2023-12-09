@@ -447,8 +447,8 @@ export const TextboxAutocomplete = createComponent<
         typeof variant === 'undefined'
           ? null
           : variant === 'border'
-          ? textboxStyles.hasBorder
-          : null,
+            ? textboxStyles.hasBorder
+            : null,
         typeof icon === 'undefined' ? null : textboxStyles.hasIcon,
         disabled === true ? textboxStyles.disabled : null
       ])}

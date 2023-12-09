@@ -41,6 +41,5 @@ function findElementIndex(
       return index
     }
     return result
-  },
-  -1)
+  }, -1)
 }

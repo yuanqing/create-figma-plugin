@@ -182,8 +182,8 @@ export const TextboxMultiline = createComponent<
         typeof variant === 'undefined'
           ? null
           : variant === 'border'
-          ? styles.hasBorder
-          : null,
+            ? styles.hasBorder
+            : null,
         grow === true ? styles.grow : null,
         disabled === true ? styles.disabled : null
       ])}

@@ -30,7 +30,8 @@
   transition: background-color 0.1s ease-out;
 }
 .toggle:not(.disabled) .input:focus ~ .box {
-  box-shadow: 0 0 0 1px var(--figma-color-bg),
+  box-shadow:
+    0 0 0 1px var(--figma-color-bg),
     0 0 0 3px var(--figma-color-border-brand-strong);
 }
 .toggle:not(.disabled) .input:checked ~ .box {
