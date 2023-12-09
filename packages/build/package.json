@@ -35,7 +35,7 @@
     "clean": "rimraf --glob '*.log' lib tsconfig.tsbuildinfo",
     "fix": "concurrently npm:fix:js npm:fix:json",
     "fix:js": "eslint --fix '{src,test}/**/*.ts'",
-    "fix:json": "prettier --loglevel error --write '*.json' 'src/**/*.json' 'test/**/fixtures/**/*.json'",
+    "fix:json": "prettier --log-level error --write '*.json' 'src/**/*.json' 'test/**/fixtures/**/*.json'",
     "lint": "eslint '{src,test}/**/*.ts'",
     "test": "ava --serial 'test/**/*.ts'"
   },
