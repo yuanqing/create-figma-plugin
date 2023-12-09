@@ -6,6 +6,8 @@ import { globby } from 'globby'
 import isUtf8 from 'is-utf8'
 import lodashTemplate from 'lodash.template'
 
+const interpolateRegex = /<%=([\s\S]+?)%>/g
+
 export async function interpolateValuesIntoFilesAsync(
   directory: string,
   values: Record<string, any>
@@ -19,7 +21,9 @@ export async function interpolateValuesIntoFilesAsync(
       const absolutePath = join(directory, filePath)
       const buffer = await fs.readFile(absolutePath)
       const fileContents = isUtf8(buffer)
-        ? lodashTemplate(buffer.toString())(values)
+        ? lodashTemplate(buffer.toString(), { interpolate: interpolateRegex })(
+            values
+          )
         : buffer
       await writeFileAsync(absolutePath, fileContents)
     })
