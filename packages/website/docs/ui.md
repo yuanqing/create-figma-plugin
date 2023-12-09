@@ -232,7 +232,7 @@ When building your plugin/widget, the `build-figma-plugin` CLI will detect and a
 
 (If you still prefer to bundle React rather than Preact, see the [recipe to disable the automatic swapping of React imports](<%- query('page', 'recipes').url %>#disabling-automatic-swapping-of-react-imports).)
 
-If you’re referencing any React components in your UI, add the following configuration to your `tsconfig.json`:
+If you want to use a React component in your UI, add the following configuration to your `tsconfig.json`:
 
 ```json {4-8}
 {
@@ -247,7 +247,7 @@ If you’re referencing any React components in your UI, add the following confi
 }
 ```
 
-This is to [ensure that Preact’s types are used in place of React’s](https://preactjs.com/guide/v10/getting-started#aliasing-in-typescript), and to suppress TypeScript compilation errors when the React component uses types not provided by `preact/compat`.
+This is to [ensure that Preact’s types are used in place of React’s](https://preactjs.com/guide/v10/getting-started#aliasing-in-typescript), and to suppress TypeScript compilation errors when any React component uses types not provided by `preact/compat`.
 
 For a runnable example, try the [`react-editor`](https://github.com/yuanqing/create-figma-plugin/tree/main/packages/create-figma-plugin/templates/plugin/react-editor) plugin template:
 
