@@ -3,8 +3,7 @@
   height: 164px;
 }
 
-.pre,
-.textarea {
+.editor {
   min-height: 100%;
   font-family: var(--font-family-code);
   font-size: var(--font-size-12);

@@ -7,8 +7,8 @@ import {
   VerticalSpace
 } from '@create-figma-plugin/ui'
 import { emit } from '@create-figma-plugin/utilities'
-import { h } from 'preact'
-import { useCallback, useEffect, useState } from 'preact/hooks'
+import { h, RefObject } from 'preact'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 import { highlight, languages } from 'prismjs'
 import Editor from 'react-simple-code-editor'
 
@@ -17,31 +17,43 @@ import { InsertCodeHandler } from './types'
 
 function Plugin() {
   const [code, setCode] = useState(`function add(a, b) {\n  return a + b;\n}`)
+  const containerElementRef : RefObject<HTMLDivElement> = useRef(null)
   const handleInsertCodeButtonClick = useCallback(
     function () {
       emit<InsertCodeHandler>('INSERT_CODE', code)
     },
     [code]
   )
+  // Patch to make `react-simple-code-editor` compatible with Preact
   useEffect(function () {
-    const textAreaElement = document.querySelector(`.${styles.textarea}`)
+    const containerElement = containerElementRef.current
+    if (containerElement === null) {
+      return
+    }
+    const textAreaElement = containerElement.querySelector('textarea')
     if (textAreaElement === null) {
       return
     }
-    // Make `react-simple-code-editor` work with `preact`
     textAreaElement.textContent = code
+    const preElement = containerElement.querySelector('pre')
+    if (preElement === null) {
+      return
+    }
+    if (textAreaElement.nextElementSibling !== preElement) {
+      textAreaElement.after(preElement)
+    }
   }, [code])
   return (
     <Container space="medium">
       <VerticalSpace space="small" />
-      <div class={styles.container}>
+      <div class={styles.container} ref={containerElementRef}>
         <Editor
           highlight={function (code: string) {
             return highlight(code, languages.js, 'js')
           }}
           onValueChange={setCode}
-          preClassName={styles.pre}
-          textareaClassName={styles.textarea}
+          preClassName={styles.editor}
+          textareaClassName={styles.editor}
           value={code}
         />
       </div>
