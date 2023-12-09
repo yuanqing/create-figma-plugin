@@ -1,6 +1,6 @@
 {
   "name": "@create-figma-plugin/ui",
-  "version": "3.1.0-alpha.1",
+  "version": "3.1.0-alpha.2",
   "publishConfig": {
     "access": "public"
   },
@@ -62,7 +62,7 @@
     "storybook-watch": "storybook dev --port 4242"
   },
   "dependencies": {
-    "@create-figma-plugin/utilities": "^3.1.0-alpha.1"
+    "@create-figma-plugin/utilities": "^3.1.0-alpha.2"
   },
   "devDependencies": {
     "@sindresorhus/slugify": "2.2.1",
