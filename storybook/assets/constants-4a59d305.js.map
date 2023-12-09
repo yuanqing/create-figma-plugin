@@ -1,1 +1,0 @@
-{"version":3,"file":"constants-4a59d305.js","sources":["../../src/utilities/private/constants.ts"],"sourcesContent":["export const INVALID_ID = null\nexport const VIEWPORT_MARGIN = 12\nexport const ITEM_ID_DATA_ATTRIBUTE_NAME = 'data-item-id'\n"],"names":["INVALID_ID","VIEWPORT_MARGIN","ITEM_ID_DATA_ATTRIBUTE_NAME"],"mappings":"AAAO,MAAMA,EAAa,KACbC,EAAkB,GAClBC,EAA8B"}

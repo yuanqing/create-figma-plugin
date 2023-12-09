@@ -1,2 +1,0 @@
-import{c as n}from"./create-class-name-71c46838.js";import{c as o}from"./create-component-b0512abd.js";import{o as s}from"./jsxRuntime.module-632ba37d.js";const _="_text_mh6mm_1",i="_numeric_mh6mm_15",l="_left_mh6mm_19",a="_center_mh6mm_22",f="_right_mh6mm_25",t={text:_,numeric:i,left:l,center:a,right:f},p=o(function({align:e="left",children:m,numeric:r=!1,...c}){return s("div",{...c,class:n([t.text,t[e],r===!0?t.numeric:null]),children:m})});export{p as T};
-//# sourceMappingURL=text-72c2365d.js.map
