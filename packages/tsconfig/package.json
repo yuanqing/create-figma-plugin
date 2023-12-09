@@ -27,7 +27,7 @@
     "fix": "prettier --loglevel error --write '*.json'"
   },
   "devDependencies": {
-    "prettier": "^3.0.1"
+    "prettier": "3.0.1"
   },
   "prettier": "eslint-config-yuanqing/prettier"
 }
