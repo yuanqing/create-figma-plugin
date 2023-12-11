@@ -29,21 +29,24 @@ export function on<Handler extends EventHandler>(
  * Registers an event `handler` that will run at most once for the given
  * event `name`.
  *
- * @returns Returns a function for deregistering the `handler`.
+ * This method wraps the `handler` in a new function that will automatically deregister
+ * it after the first time it is called. It also returns a function that can be used
+ * to deregister the handler manually.
+ *
  * @category Events
  */
 export function once<Handler extends EventHandler>(
   name: Handler['name'],
   handler: Handler['handler']
 ): () => void {
-  let done = false
-  return on(name, function (...args): void {
-    if (done === true) {
-      return
-    }
-    done = true
-    handler(...args)
-  })
+  const deregister = on(name, wrappedHandle);
+
+  function wrappedHandle(...args: Parameters<Handler['handler']>[]): void {
+    deregister();
+    handler(...args);
+  }
+
+  return deregister;
 }
 
 /**
