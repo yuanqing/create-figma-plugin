@@ -358,6 +358,18 @@
   {
     "authors": [
       {
+        "name": "Klára Scholleová",
+        "url": "https://twitter.com/the_schollka"
+      }
+    ],
+    "description": "Generate business cards, certificates, or anything else you like as simply as pasting your data",
+    "githubUrl": "https://github.com/klarasch/data-merge",
+    "id": "1308577896517145604",
+    "name": "Data Merge"
+  },
+  {
+    "authors": [
+      {
         "name": "Maarten Zilverberg",
         "url": "https://twitter.com/mzilverberg"
       }
@@ -518,6 +530,26 @@
         "url": "https://twitter.com/sohei1L"
       }
     ],
+    "description": "1-click export of animation to HTML/CSS from Figma",
+    "githubUrl": null,
+    "id": "1316914571143821889",
+    "name": "Export to CSS Animation"
+  },
+  {
+    "authors": [
+      {
+        "name": "Arman Abtahi",
+        "url": "https://figma.com/@armanabtahi"
+      },
+      {
+        "name": "Michael Yagudaev",
+        "url": "https://twitter.com/yagudaev"
+      },
+      {
+        "name": "Soheil Hajimohammadi",
+        "url": "https://twitter.com/sohei1L"
+      }
+    ],
     "description": "Export your smart animation flows to GIF/Video animations in just one click",
     "githubUrl": null,
     "id": "1170836206919391034",
@@ -618,6 +650,18 @@
     "githubUrl": null,
     "id": "862039267149408972",
     "name": "Figma to React"
+  },
+  {
+    "authors": [
+      {
+        "name": "Mohit Tater",
+        "url": "https://twitter.com/tatermohit"
+      }
+    ],
+    "description": "See your Figma variables in list, JSON, and CSS formats in both Dev mode and Design mode",
+    "githubUrl": null,
+    "id": "1310888112326715990",
+    "name": "Figma Variable Explorer"
   },
   {
     "authors": [
@@ -886,6 +930,18 @@
   {
     "authors": [
       {
+        "name": "Sasha",
+        "url": "https://twitter.com/sasha_codes"
+      }
+    ],
+    "description": "iPhone 15 Pro Max devices in different styles and variations",
+    "githubUrl": null,
+    "id": "1305891870034170272",
+    "name": "iMockup"
+  },
+  {
+    "authors": [
+      {
         "name": "Yuan Qing Lim",
         "url": "https://twitter.com/yuanqinglim"
       }
@@ -918,6 +974,18 @@
     "githubUrl": null,
     "id": "1119612117220702803",
     "name": "Japanese Font Mixer"
+  },
+  {
+    "authors": [
+      {
+        "name": "Hiroki Tani",
+        "url": "https://twitter.com/hiloki"
+      }
+    ],
+    "description": "Convert JSON to color variables",
+    "githubUrl": null,
+    "id": "1304481992729678387",
+    "name": "JSON to Color Variables"
   },
   {
     "authors": [
@@ -994,6 +1062,18 @@
   {
     "authors": [
       {
+        "name": "divRIOTS",
+        "url": "https://twitter.com/divriots"
+      }
+    ],
+    "description": "Fill your designs with placeholders in a click",
+    "githubUrl": null,
+    "id": "736000994034548392",
+    "name": "Lorem Ipsum"
+  },
+  {
+    "authors": [
+      {
         "name": "Meni Zanzibar",
         "url": "https://figma.com/@meni"
       }
@@ -1002,6 +1082,26 @@
     "githubUrl": null,
     "id": "941410492434902618",
     "name": "Lorepsum"
+  },
+  {
+    "authors": [
+      {
+        "name": "Arman Abtahi",
+        "url": "https://figma.com/@armanabtahi"
+      },
+      {
+        "name": "Michael Yagudaev",
+        "url": "https://twitter.com/yagudaev"
+      },
+      {
+        "name": "Soheil Hajimohammadi",
+        "url": "https://twitter.com/sohei1L"
+      }
+    ],
+    "description": "Transform one vector into another and export it as an HTML animation",
+    "githubUrl": null,
+    "id": "1294450680812113347",
+    "name": "Morph Animation"
   },
   {
     "authors": [
@@ -1362,6 +1462,18 @@
   {
     "authors": [
       {
+        "name": "Abdelwahab Muhammed",
+        "url": "https://twitter.com/abdelwahabb_"
+      }
+    ],
+    "description": "Convert your design layouts to right-to-left and translate them with a single click!",
+    "githubUrl": null,
+    "id": "1299598792826701614",
+    "name": "RTL Layout"
+  },
+  {
+    "authors": [
+      {
         "name": "Saeed Alipoor",
         "url": "https://twitter.com/Sali__Pure"
       }
@@ -1550,6 +1662,18 @@
     "githubUrl": null,
     "id": "1254182310197842774",
     "name": "Style Dictionary to Variables"
+  },
+  {
+    "authors": [
+      {
+        "name": "Corey Lee",
+        "url": "https://twitter.com/factorzero"
+      }
+    ],
+    "description": "Apply multiple text styles to a text layer automatically based on language character sets",
+    "githubUrl": null,
+    "id": "1310549497852945534",
+    "name": "Style Merger"
   },
   {
     "authors": [
@@ -1754,6 +1878,18 @@
     "githubUrl": "https://github.com/mottox2/figma-variables-inspector",
     "id": "1263366994349005841",
     "name": "Variables Inspector"
+  },
+  {
+    "authors": [
+      {
+        "name": "Vladislav Mikhailov",
+        "url": "https://figma.com/@vmikh"
+      }
+    ],
+    "description": "Displays variables in a table view",
+    "githubUrl": null,
+    "id": "1296936195607753364",
+    "name": "Variables to Table"
   },
   {
     "authors": [

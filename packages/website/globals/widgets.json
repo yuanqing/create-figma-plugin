@@ -38,6 +38,18 @@
   {
     "authors": [
       {
+        "name": "Seal",
+        "url": "https://getseal.co/"
+      }
+    ],
+    "description": "Effortlessly plan and document your product data tracking in Figma",
+    "githubUrl": null,
+    "id": "1293629666452338642",
+    "name": "Data Tracking Plan"
+  },
+  {
+    "authors": [
+      {
         "name": "Felix Tesche",
         "url": "https://twitter.com/mrfesch"
       }
