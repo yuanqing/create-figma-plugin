@@ -51,7 +51,7 @@
     "simple-git-hooks": "2.9.0",
     "sirv-cli": "2.0.2",
     "stylelint": "16.0.0",
-    "stylelint-config-yuanqing": "0.0.5",
+    "stylelint-config-yuanqing": "0.0.6",
     "tsx": "4.6.2",
     "turbo": "1.11.1",
     "typescript": "5.3.3"
