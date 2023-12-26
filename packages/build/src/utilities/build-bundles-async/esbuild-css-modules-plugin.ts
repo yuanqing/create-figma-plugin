@@ -79,6 +79,7 @@ async function createCssFilePathAsync(
 
 const backQuoteRegex = /`/g
 const backSlashColonRegex = /\\:/g
+const backSlashClassRegex = /\\(?=\[|\])/g
 
 async function createGlobalCssJavaScriptAsync(
   cssFilePath: string,
@@ -107,7 +108,8 @@ async function createGlobalCssJavaScriptAsync(
       element.id = '${elementId}';
       element.innerHTML = \`${css
         .replace(backQuoteRegex, '\\`')
-        .replace(backSlashColonRegex, '\\\\:')}\`;
+        .replace(backSlashColonRegex, '\\\\:')
+        .replace(backSlashClassRegex, '\\\\')}\`;
       document.head.${isBaseCss === true ? 'prepend' : 'append'}(element);
     }
     export default {};
