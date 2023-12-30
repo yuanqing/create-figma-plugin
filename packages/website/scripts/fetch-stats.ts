@@ -20,11 +20,12 @@ async function main() {
       throw new Error('Need a file path')
     }
     const filePath = args[1]
-    const ids: Array<string> = JSON.parse(
-      await fs.readFile(filePath, 'utf8')
-    ).map(function (item: { id: string }) {
-      return item.id
-    })
+    const ignoredIdsFilePath = args[2]
+    const ids: Array<string> = JSON.parse(await fs.readFile(filePath, 'utf8'))
+      .map(function (item: { id: string }) {
+        return item.id
+      })
+      .concat(JSON.parse(await fs.readFile(ignoredIdsFilePath, 'utf8')))
     const stats = await fetchStatsAsync(ids, type)
     printStats(stats, type)
   } catch (error: any) {
@@ -77,8 +78,12 @@ async function fetchStatAsync(
 }
 
 function printStats(stats: Array<Stat>, type: 'plugin' | 'widget'): void {
-  const data = stats.map(function ({ id, name, runCount, likeCount }: Stat) {
+  const data = stats.map(function (
+    { id, name, runCount, likeCount }: Stat,
+    index: number
+  ) {
     return [
+      new Intl.NumberFormat().format(index + 1),
       name.length > NAME_MAX_LENGTH
         ? `${name.slice(0, NAME_MAX_LENGTH).trim()}…`
         : name,
@@ -87,7 +92,7 @@ function printStats(stats: Array<Stat>, type: 'plugin' | 'widget'): void {
       `https://figma.com/community/${type}/${id}`
     ]
   })
-  data.splice(0, 0, ['name', 'runs', 'likes', 'url'])
+  data.splice(0, 0, ['', 'name', 'runs', 'likes', 'url'])
   const totalRunCount = stats.reduce(function (
     total: number,
     { runCount }: Stat
@@ -101,6 +106,7 @@ function printStats(stats: Array<Stat>, type: 'plugin' | 'widget'): void {
     return total + likeCount
   }, 0)
   data.push([
+    '',
     '',
     new Intl.NumberFormat().format(totalRunCount),
     new Intl.NumberFormat().format(totalLikeCount),

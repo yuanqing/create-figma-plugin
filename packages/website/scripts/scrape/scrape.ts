@@ -10,7 +10,8 @@ const CONCURRENCY = 10
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const invalidIdsFilePath = join(__dirname, 'invalid-ids.json')
-const ignoredIdsFilePath = join(__dirname, 'ignored-ids.json')
+const ignoredPluginIdsFilePath = join(__dirname, 'ignored-ids', 'plugins.json')
+const ignoredWidgetIdsFilePath = join(__dirname, 'ignored-ids', 'widgets.json')
 
 async function main(): Promise<void> {
   try {
@@ -33,7 +34,10 @@ async function main(): Promise<void> {
       await fs.readFile(invalidIdsFilePath, 'utf8')
     )
     const ignoredIds: Array<string> = JSON.parse(
-      await fs.readFile(ignoredIdsFilePath, 'utf8')
+      await fs.readFile(
+        type === 'plugin' ? ignoredPluginIdsFilePath : ignoredWidgetIdsFilePath,
+        'utf8'
+      )
     )
     const data: Array<Record<string, any>> = await fetchDataAsync({
       maxPages,
