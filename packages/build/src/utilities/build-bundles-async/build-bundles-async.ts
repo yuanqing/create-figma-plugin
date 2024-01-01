@@ -1,4 +1,5 @@
 import { resolve } from 'node:path'
+import { platform } from 'node:os'
 
 import {
   Config,
@@ -48,9 +49,12 @@ async function overrideEsbuildConfigAsync(
   buildOptions: BuildOptions,
   configGlobPattern: string
 ): Promise<BuildOptions> {
-  const filePaths = await globby(configGlobPattern, { absolute: true })
+  let filePaths = await globby(configGlobPattern, { absolute: true })
   if (filePaths.length === 0) {
     return buildOptions
+  }
+  if (platform() === 'win32') {
+    filePaths = `file://${filePaths}`;
   }
   const overrideEsbuildConfig:
     | OverrideEsbuildConfig
