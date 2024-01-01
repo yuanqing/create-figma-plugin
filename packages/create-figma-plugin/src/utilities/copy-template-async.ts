@@ -8,7 +8,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export async function copyTemplateAsync(
   templateName: string,
-  pluginDirectoryPath: string
+  pluginDirectoryPath: string,
+  exclude?: string
 ): Promise<void> {
   const templateDirectory = resolve(
     __dirname,
@@ -20,7 +21,14 @@ export async function copyTemplateAsync(
   if ((await pathExists(pluginDirectoryPath)) === false) {
     await fs.mkdir(pluginDirectoryPath, { mode: 0o2775 })
   }
-  await fs.cp(templateDirectory, pluginDirectoryPath, { recursive: true })
+  const excludes = exclude?.split(',') || []
+  await fs.cp(templateDirectory, pluginDirectoryPath, {
+    filter: (source) => {
+      // Skip the source file if it is in the excludes list
+      return !excludes?.some((file) => source.includes(file))
+    },
+    recursive: true
+  })
   const gitIgnoreFilePath = join(pluginDirectoryPath, 'gitignore')
   if ((await pathExists(gitIgnoreFilePath)) === true) {
     const newFilePath = join(pluginDirectoryPath, '.gitignore')

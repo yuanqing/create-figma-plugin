@@ -15,6 +15,7 @@ import { resolveTemplateNameAsync } from './utilities/resolve-template-name-asyn
 export async function createFigmaPluginAsync(options: {
   name?: string
   template?: string
+  exclude?: string
 }): Promise<void> {
   try {
     const templateName = await resolveTemplateNameAsync(options.template)
@@ -26,7 +27,8 @@ export async function createFigmaPluginAsync(options: {
         : basename(templateName)
     const directoryPath = await resolveDirectoryPathAsync(directoryName)
     log.info(`Copying "${templateName}" template...`)
-    await copyTemplateAsync(templateName, directoryPath)
+
+    await copyTemplateAsync(templateName, directoryPath, options.exclude)
     log.info('Resolving package versions...')
     const versions = await resolveCreateFigmaPluginLatestStableVersions()
     await interpolateValuesIntoFilesAsync(directoryPath, {
