@@ -54,7 +54,7 @@ async function overrideEsbuildConfigAsync(
     return buildOptions
   }
   if (platform() === 'win32') {
-    filePaths = `file://${filePaths}`;
+    filePaths = filePaths.map(p => `file:///${p}`);
   }
   const overrideEsbuildConfig:
     | OverrideEsbuildConfig
