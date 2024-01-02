@@ -18,7 +18,7 @@ import { importFresh } from '../import-fresh.js'
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
 import { esbuildPreactCompatPlugin } from './esbuild-preact-compat-plugin.js'
 
-const isWindows = platform() === 'win32';
+const isWindows = platform() === 'win32'
 
 interface EntryFile extends ConfigFile {
   commandId: string
@@ -57,7 +57,7 @@ async function overrideEsbuildConfigAsync(
     return buildOptions
   }
   if (isWindows) {
-    filePaths = filePaths.map(p => pathToFileURL(p).href);
+    filePaths = filePaths.map(p => pathToFileURL(p).href)
   }
   const overrideEsbuildConfig:
     | OverrideEsbuildConfig
