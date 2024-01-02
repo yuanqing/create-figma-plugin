@@ -1,6 +1,8 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 
 import { resolve } from 'node:path'
+import { platform } from 'node:os'
+import { pathToFileURL } from 'node:url'
 
 import {
   Config,
@@ -21,6 +23,8 @@ import {
 import { globby } from 'globby'
 
 import { importFresh } from './import-fresh.js'
+
+const isWindows = platform() === 'win32'
 
 export async function buildManifestAsync(options: {
   config: Config
@@ -209,11 +213,14 @@ function createManifestNetworkAccess(
 async function overrideManifestAsync(
   manifest: Manifest
 ): Promise<Record<string, any>> {
-  const filePaths = await globby(constants.build.manifestConfigGlobPattern, {
+  let filePaths = await globby(constants.build.manifestConfigGlobPattern, {
     absolute: true
   })
   if (filePaths.length === 0) {
     return manifest
+  }
+  if (isWindows) {
+    filePaths = filePaths.map(p => pathToFileURL(p).href)
   }
   const { default: overrideManifest } = await importFresh(filePaths[0])
   return overrideManifest(manifest)
