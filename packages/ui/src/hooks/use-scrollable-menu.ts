@@ -1,8 +1,7 @@
-import { JSX, RefObject } from 'preact'
-import { useCallback } from 'preact/hooks'
-
 import { Event } from '../types/event-handler.js'
+import { RefObject } from 'react'
 import { getCurrentFromRef } from '../utilities/get-current-from-ref.js'
+import { useCallback } from 'react'
 
 export function useScrollableMenu(options: {
   itemIdDataAttributeName: string

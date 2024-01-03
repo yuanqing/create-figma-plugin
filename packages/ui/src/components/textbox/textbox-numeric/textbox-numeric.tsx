@@ -1,16 +1,15 @@
-import { ComponentChildren, h } from 'preact'
-
-import { createClassName } from '../../../utilities/create-class-name.js'
-import { createComponent } from '../../../utilities/create-component.js'
-import textboxStyles from '../textbox/textbox.module.css'
 import {
   RawTextboxNumeric,
   RawTextboxNumericProps
 } from './private/raw-textbox-numeric.js'
+
+import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
 import textboxNumericStyles from './textbox-numeric.module.css'
+import textboxStyles from '../textbox/textbox.module.css'
 
 export type TextboxNumericProps = RawTextboxNumericProps & {
-  icon?: ComponentChildren
+  icon?: JSX.Element
   variant?: TextboxNumericVariant
 }
 

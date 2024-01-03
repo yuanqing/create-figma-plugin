@@ -1,13 +1,12 @@
-import { MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, RefObject } from 'preact'
-import { useCallback, useRef, useState } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../../../types/event-handler.js'
+import { RefObject, useCallback, useRef, useState } from 'react'
+
 import { FocusableComponentProps } from '../../../../types/focusable-component-props.js'
+import { MIXED_STRING } from '@create-figma-plugin/utilities'
 import { createComponent } from '../../../../utilities/create-component.js'
 import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
-import { noop } from '../../../../utilities/no-op.js'
 import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
+import { noop } from '../../../../utilities/no-op.js'
 
 const EMPTY_STRING = ''
 

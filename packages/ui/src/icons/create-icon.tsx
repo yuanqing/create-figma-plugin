@@ -1,5 +1,3 @@
-import { h } from 'preact'
-
 import { IconColor } from '../types/colors.js'
 import { createComponent } from '../utilities/create-component.js'
 import styles from './icon.module.css'

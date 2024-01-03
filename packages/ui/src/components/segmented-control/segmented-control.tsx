@@ -1,13 +1,12 @@
-import { ComponentChildren, h } from 'preact'
-import { useCallback } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../types/event-handler.js'
+
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
+import { ITEM_ID_DATA_ATTRIBUTE_NAME } from '../../utilities/private/constants.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { noop } from '../../utilities/no-op.js'
-import { ITEM_ID_DATA_ATTRIBUTE_NAME } from '../../utilities/private/constants.js'
 import styles from './segmented-control.module.css'
+import { useCallback } from 'react'
 
 export interface SegmentedControlProps
   extends FocusableComponentProps<HTMLInputElement> {
@@ -19,7 +18,7 @@ export interface SegmentedControlProps
 }
 export type SegmentedControlOption = {
   disabled?: boolean
-  children?: ComponentChildren
+  children?: JSX.Element
   value: string
 }
 

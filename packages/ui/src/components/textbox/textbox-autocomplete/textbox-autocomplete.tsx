@@ -1,30 +1,29 @@
-import { ComponentChildren, h, RefObject } from 'preact'
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
-
-import menuStyles from '../../../css/menu.module.css'
-import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside.js'
-import { IconMenuCheckmarkChecked16 } from '../../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { Event, EventHandler } from '../../../types/event-handler.js'
-import { createClassName } from '../../../utilities/create-class-name.js'
-import { createComponent } from '../../../utilities/create-component.js'
-import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
-import { noop } from '../../../utilities/no-op.js'
 import {
   INVALID_ID,
   ITEM_ID_DATA_ATTRIBUTE_NAME,
   VIEWPORT_MARGIN
 } from '../../../utilities/private/constants.js'
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react'
+
+import { IconMenuCheckmarkChecked16 } from '../../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { computeNextValue } from '../private/compute-next-value.js'
+import { createClassName } from '../../../utilities/create-class-name.js'
+import { createComponent } from '../../../utilities/create-component.js'
+import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
 import { isKeyCodeCharacterGenerating } from '../private/is-keycode-character-generating.js'
-import textboxStyles from '../textbox/textbox.module.css'
+import menuStyles from '../../../css/menu.module.css'
+import { noop } from '../../../utilities/no-op.js'
 import textboxAutocompleteStyles from './textbox-autocomplete.module.css'
+import textboxStyles from '../textbox/textbox.module.css'
+import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside.js'
 
 const EMPTY_STRING = ''
 
 export interface TextboxAutocompleteProps {
   disabled?: boolean
   filter?: boolean
-  icon?: ComponentChildren
+  icon?: JSX.Element
   onChange?: EventHandler.onChange<HTMLInputElement>
   onInput?: EventHandler.onInput<HTMLInputElement>
   onKeyDown?: EventHandler.onKeyDown<HTMLInputElement>

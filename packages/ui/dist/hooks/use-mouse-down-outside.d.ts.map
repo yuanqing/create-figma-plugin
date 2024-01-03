@@ -1,0 +1,1 @@
+{"version":3,"file":"use-mouse-down-outside.d.ts","sourceRoot":"","sources":["../../src/hooks/use-mouse-down-outside.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,OAAO,CAAA;AAI5C,wBAAgB,mBAAmB,CAAC,OAAO,EAAE;IAC3C,GAAG,EAAE,SAAS,CAAC,WAAW,CAAC,CAAA;IAC3B,kBAAkB,EAAE,MAAM,IAAI,CAAA;CAC/B,GAAG,IAAI,CA2BP"}

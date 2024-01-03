@@ -1,0 +1,1 @@
+{"version":3,"file":"use-initial-focus.d.ts","sourceRoot":"","sources":["../../../src/hooks/use-initial-focus/use-initial-focus.ts"],"names":[],"mappings":"AAEA,QAAA,MAAM,iCAAiC,uBAAuB,CAAA;AAE9D,MAAM,MAAM,YAAY,GAAG;IACzB,CAAC,iCAAiC,CAAC,EAAE,IAAI,CAAA;CAC1C,CAAA;AAED,wBAAgB,eAAe,IAAI,YAAY,CA0B9C"}

@@ -1,20 +1,19 @@
-import { ComponentChildren, h } from 'preact'
-import { useCallback } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../../types/event-handler.js'
+
 import { FocusableComponentProps } from '../../../types/focusable-component-props.js'
+import { LoadingIndicator } from '../../loading-indicator/loading-indicator.js'
+import buttonStyles from '../../button/button.module.css'
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
-import { noop } from '../../../utilities/no-op.js'
-import buttonStyles from '../../button/button.module.css'
-import { LoadingIndicator } from '../../loading-indicator/loading-indicator.js'
 import { fileComparator } from '../private/file-comparator.js'
 import fileUploadButtonStyles from './file-upload-button.module.css'
+import { noop } from '../../../utilities/no-op.js'
+import { useCallback } from 'react'
 
 export interface FileUploadButtonProps
   extends FocusableComponentProps<HTMLInputElement> {
   acceptedFileTypes?: Array<string>
-  children: ComponentChildren
+  children: JSX.Element
   disabled?: boolean
   fullWidth?: boolean
   loading?: boolean

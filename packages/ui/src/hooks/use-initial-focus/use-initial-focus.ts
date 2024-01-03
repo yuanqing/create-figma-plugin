@@ -1,4 +1,4 @@
-import { useEffect } from 'preact/hooks'
+import { useEffect } from 'react'
 
 const INITIAL_FOCUS_DATA_ATTRIBUTE_NAME = 'data-initial-focus'
 

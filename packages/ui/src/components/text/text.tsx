@@ -1,12 +1,10 @@
-import { ComponentChildren, h } from 'preact'
-
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import styles from './text.module.css'
 
 export type TextProps = {
   align?: TextAlignment
-  children: ComponentChildren
+  children: JSX.Element
   numeric?: boolean
 }
 export type TextAlignment = 'left' | 'center' | 'right'

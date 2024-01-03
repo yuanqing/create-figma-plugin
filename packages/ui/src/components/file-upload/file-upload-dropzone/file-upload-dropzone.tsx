@@ -1,18 +1,17 @@
-import { ComponentChildren, h } from 'preact'
-import { useCallback, useState } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../../types/event-handler.js'
+import { useCallback, useState } from 'react'
+
 import { FocusableComponentProps } from '../../../types/focusable-component-props.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
-import { noop } from '../../../utilities/no-op.js'
 import { fileComparator } from '../private/file-comparator.js'
+import { noop } from '../../../utilities/no-op.js'
 import styles from './file-upload-dropzone.module.css'
 
 export interface FileUploadDropzoneProps
   extends FocusableComponentProps<HTMLInputElement> {
   acceptedFileTypes?: Array<string>
-  children: ComponentChildren
+  children: JSX.Element
   multiple?: boolean
   onBlur?: EventHandler.onBlur<HTMLInputElement>
   onChange?: EventHandler.onChange<HTMLInputElement>

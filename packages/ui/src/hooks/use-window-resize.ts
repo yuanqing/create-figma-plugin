@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'preact/hooks'
+import { useCallback, useEffect, useRef } from 'react'
 
 export type ResizeBehaviorOnDoubleClick = 'minimize' | 'maximize'
 export type ResizeDirection = 'both' | 'horizontal' | 'vertical'

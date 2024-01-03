@@ -1,9 +1,13 @@
-import '!../css/base.css'
+import '../css/base.css'
+import '../css/fonts.css'
+import '../css/menu.module.css'
+import '../css/theme.css'
 
-import { FunctionComponent, h, JSX, render as preactRender } from 'preact'
+import { FC } from 'react'
+import { render as ReactRender } from 'react-dom'
 
-export function render<P>(Plugin: FunctionComponent<P>) {
+export function render<P>(Plugin: FC<P>) {
   return function (rootNode: HTMLElement, props: P & JSX.IntrinsicAttributes) {
-    preactRender(<Plugin {...props} />, rootNode)
+    ReactRender(<Plugin {...props} />, rootNode)
   }
 }
