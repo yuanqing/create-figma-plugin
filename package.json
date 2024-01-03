@@ -61,7 +61,6 @@
     "typescript": "5.3.3"
   },
   "eslintConfig": {
-    "extends": "eslint-config-yuanqing",
     "root": true,
     "env": {
       "node": true
@@ -79,9 +78,6 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
     "pre-push": "npx turbo run fix lint test build"
-  },
-  "stylelint": {
-    "extends": "stylelint-config-yuanqing"
   },
   "workspaces": [
     "packages/*"
