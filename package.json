@@ -69,9 +69,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint"
-    ],
     "*.css": [
       "stylelint"
     ]
