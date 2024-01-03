@@ -1,5 +1,3 @@
-
-
 :root {
   --border-radius-2: 2px;
   --border-radius-6: 6px;
@@ -9,9 +7,9 @@
     0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
     0 0 0 0.5px rgba(0, 0, 0, 0.2);
-  --font-family: 'Inter', 'Helvetica', sans-serif;
-  --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
+  --font-family: "Inter", "Helvetica", sans-serif;
+  --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   --font-size-11: 11px;
   --font-size-12: 12px;
   --font-weight-regular: 400;

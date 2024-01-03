@@ -59,7 +59,8 @@
     "prestorybook-build": "rimraf build",
     "storybook-build": "storybook build --output-dir build",
     "prestorybook-watch": "rimraf build",
-    "storybook-watch": "storybook dev --port 4242"
+    "storybook-watch": "storybook dev --port 4242",
+    "build:prod": "vite build"
   },
   "dependencies": {
     "@create-figma-plugin/utilities": "^3.1.0"
