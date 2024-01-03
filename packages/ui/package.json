@@ -41,7 +41,7 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "prebuild": "npm run clean && npm run build",
+    "prebuild": "npm run clean",
     "build": "concurrently npm:build:generate-colors-types npm:build:generate-icons && npm run build:generate-index && npm run build:js && npm run build:copy-non-ts-files",
     "build:generate-colors-types": "tsx scripts/generate-colors-types.ts && eslint --fix src/types/colors.ts",
     "build:generate-icons": "tsx scripts/generate-icons.ts && eslint --fix 'src/icons/**/*.{ts,tsx}'",
@@ -110,8 +110,7 @@
     ]
   },
   "prettier": "eslint-config-yuanqing/prettier",
-  "sideEffects": false,
+  "sideEffects": ["*.css"],
   "stylelint": {
-    "extends": "stylelint-config-yuanqing"
   }
 }
