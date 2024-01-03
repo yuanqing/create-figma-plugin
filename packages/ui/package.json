@@ -42,6 +42,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "prebuild": "npm run clean",
+    "postinstall": "npm run build",
     "build": "concurrently npm:build:generate-colors-types npm:build:generate-icons && npm run build:prod",
     "build:generate-colors-types": "tsx scripts/generate-colors-types.ts",
     "build:generate-icons": "tsx scripts/generate-icons.ts",
