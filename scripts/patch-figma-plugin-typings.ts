@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pathExists } from "path-exists";
 
-export async function writeFileAsync(
+async function writeFileAsync(
   outputFilePath: string,
   fileContents: string | Buffer
 ): Promise<void> {
