@@ -1,15 +1,14 @@
-import { ComponentChildren, h } from 'preact'
-import { useCallback } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../types/event-handler.js'
+
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { noop } from '../../utilities/no-op.js'
 import styles from './icon-button.module.css'
+import { useCallback } from 'react'
 
 export interface IconButtonProps
   extends FocusableComponentProps<HTMLButtonElement> {
-  children: ComponentChildren
+  children: JSX.Element
   disabled?: boolean
   onClick?: EventHandler.onClick<HTMLButtonElement>
 }

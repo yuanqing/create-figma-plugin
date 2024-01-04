@@ -1,0 +1,1 @@
+{"version":3,"file":"focusable-component-props.d.ts","sourceRoot":"","sources":["../../src/types/focusable-component-props.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,oBAAoB,CAAA;AAEjD,MAAM,WAAW,uBAAuB,CAAC,MAAM,SAAS,WAAW;IACjE,SAAS,CAAC,EAAE,YAAY,CAAC,SAAS,CAAC,MAAM,CAAC,CAAA;IAC1C,sBAAsB,CAAC,EAAE,OAAO,CAAA;CACjC"}

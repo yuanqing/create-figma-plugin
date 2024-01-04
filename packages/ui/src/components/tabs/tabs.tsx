@@ -1,12 +1,12 @@
-import { ComponentChildren, Fragment, h } from 'preact'
-import { useCallback } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../types/event-handler.js'
+
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
+import { Fragment } from 'react'
+import { ITEM_ID_DATA_ATTRIBUTE_NAME } from '../../utilities/private/constants.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { noop } from '../../utilities/no-op.js'
-import { ITEM_ID_DATA_ATTRIBUTE_NAME } from '../../utilities/private/constants.js'
 import styles from './tabs.module.css'
+import { useCallback } from 'react'
 
 export interface TabsProps extends FocusableComponentProps<HTMLDivElement> {
   onChange?: EventHandler.onChange<HTMLInputElement>
@@ -15,7 +15,7 @@ export interface TabsProps extends FocusableComponentProps<HTMLDivElement> {
   value: null | string
 }
 export type TabsOption = {
-  children: ComponentChildren
+  children: JSX.Element
   value: string
 }
 

@@ -1,0 +1,1 @@
+{"version":3,"file":"create-icon.d.ts","sourceRoot":"","sources":["../../src/icons/create-icon.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,oBAAoB,CAAA;AAI9C,MAAM,MAAM,SAAS,GAAG;IACtB,KAAK,CAAC,EAAE,SAAS,CAAA;CAClB,CAAA;AAED,wBAAgB,UAAU,CACxB,IAAI,EAAE,MAAM,EACZ,OAAO,EAAE;IAAE,KAAK,EAAE,MAAM,CAAC;IAAC,MAAM,EAAE,MAAM,CAAA;CAAE;;GAyB3C"}

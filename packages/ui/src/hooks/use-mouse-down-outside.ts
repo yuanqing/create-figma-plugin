@@ -1,5 +1,4 @@
-import { RefObject } from 'preact'
-import { useEffect } from 'preact/hooks'
+import { RefObject, useEffect } from 'react'
 
 import { getCurrentFromRef } from '../utilities/get-current-from-ref.js'
 

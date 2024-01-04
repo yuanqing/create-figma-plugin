@@ -1,10 +1,8 @@
-import { ComponentChildren, h } from 'preact'
-
 import { createComponent } from '../../utilities/create-component.js'
 import styles from './bold.module.css'
 
 export type BoldProps = {
-  children: ComponentChildren
+  children: JSX.Element
 }
 
 export const Bold = createComponent<HTMLSpanElement, BoldProps>(function (

@@ -1,18 +1,17 @@
-import { ComponentChildren, h } from 'preact'
-import { useCallback } from 'preact/hooks'
-
-import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
+
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
+import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { noop } from '../../utilities/no-op.js'
 import styles from './selectable-item.module.css'
+import { useCallback } from 'react'
 
 export interface SelectableItemProps
   extends FocusableComponentProps<HTMLInputElement> {
   bold?: boolean
-  children: ComponentChildren
+  children: JSX.Element
   disabled?: boolean
   indent?: boolean
   onChange?: EventHandler.onChange<HTMLInputElement>

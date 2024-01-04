@@ -12,3 +12,4 @@ sandbox/
 /packages/create-figma-plugin/test/figma-plugin/
 /packages/ui/build/
 /packages/website/build/
+dist/

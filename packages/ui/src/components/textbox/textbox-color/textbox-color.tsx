@@ -1,18 +1,17 @@
-import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
-import { h, RefObject } from 'preact'
-import { useCallback, useRef, useState } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../../types/event-handler.js'
+import { MIXED_NUMBER, MIXED_STRING } from '@create-figma-plugin/utilities'
+import { RefObject, useCallback, useRef, useState } from 'react'
+
 import { RGBA } from '../../../types/rgba.js'
+import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeric.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
+import { createRgbaColor } from './private/create-rgba-color.js'
 import { getCurrentFromRef } from '../../../utilities/get-current-from-ref.js'
 import { noop } from '../../../utilities/no-op.js'
-import { RawTextboxNumeric } from '../textbox-numeric/private/raw-textbox-numeric.js'
-import { createRgbaColor } from './private/create-rgba-color.js'
 import { normalizeUserInputColor } from './private/normalize-hex-color.js'
-import { updateHexColor } from './private/update-hex-color.js'
 import styles from './textbox-color.module.css'
+import { updateHexColor } from './private/update-hex-color.js'
 
 const EMPTY_STRING = ''
 

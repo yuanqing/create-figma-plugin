@@ -1,28 +1,27 @@
-import { ComponentChildren, h, RefObject } from 'preact'
-import { createPortal } from 'preact/compat'
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
-
-import menuStyles from '../../css/menu.module.css'
-import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside.js'
-import { useScrollableMenu } from '../../hooks/use-scrollable-menu.js'
-import { IconControlChevronDown8 } from '../../icons/icon-8/icon-control-chevron-down-8.js'
-import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
-import { createClassName } from '../../utilities/create-class-name.js'
-import { createComponent } from '../../utilities/create-component.js'
-import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
-import { noop } from '../../utilities/no-op.js'
 import {
   INVALID_ID,
   ITEM_ID_DATA_ATTRIBUTE_NAME
 } from '../../utilities/private/constants.js'
-import dropdownStyles from './dropdown.module.css'
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react'
+
+import { IconControlChevronDown8 } from '../../icons/icon-8/icon-control-chevron-down-8.js'
+import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { Id } from './private/types.js'
+import { createClassName } from '../../utilities/create-class-name.js'
+import { createComponent } from '../../utilities/create-component.js'
+import { createPortal } from 'react-dom'
+import dropdownStyles from './dropdown.module.css'
+import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
+import menuStyles from '../../css/menu.module.css'
+import { noop } from '../../utilities/no-op.js'
 import { updateMenuElementLayout } from './private/update-menu-element-layout.js'
+import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside.js'
+import { useScrollableMenu } from '../../hooks/use-scrollable-menu.js'
 
 export interface DropdownProps {
   disabled?: boolean
-  icon?: ComponentChildren
+  icon?: JSX.Element
   onChange?: EventHandler.onChange<HTMLInputElement>
   onKeyDown?: EventHandler.onKeyDown<HTMLDivElement>
   onMouseDown?: EventHandler.onMouseDown<HTMLDivElement>
@@ -411,7 +410,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
   }
 )
 
-function getDropdownOptionValue(option: DropdownOption): ComponentChildren {
+function getDropdownOptionValue(option: DropdownOption): JSX.Element {
   if (typeof option !== 'string') {
     if ('text' in option) {
       return option.text

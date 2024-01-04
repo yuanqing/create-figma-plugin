@@ -1,20 +1,19 @@
-import {
-  evaluateNumericExpression,
-  isValidNumericInput,
-  MIXED_NUMBER,
-  MIXED_STRING
-} from '@create-figma-plugin/utilities'
-import { h, RefObject } from 'preact'
-import { useCallback, useRef, useState } from 'preact/hooks'
-
 import { Event, EventHandler } from '../../../../types/event-handler.js'
+import {
+  MIXED_NUMBER,
+  MIXED_STRING,
+  evaluateNumericExpression,
+  isValidNumericInput
+} from '@create-figma-plugin/utilities'
+import { RefObject, useCallback, useRef, useState } from 'react'
+
 import { FocusableComponentProps } from '../../../../types/focusable-component-props.js'
-import { createComponent } from '../../../../utilities/create-component.js'
-import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
-import { noop } from '../../../../utilities/no-op.js'
 import { computeNextValue } from '../../private/compute-next-value.js'
-import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
+import { createComponent } from '../../../../utilities/create-component.js'
 import { formatEvaluatedValue } from './format-evaluated-value.js'
+import { getCurrentFromRef } from '../../../../utilities/get-current-from-ref.js'
+import { isKeyCodeCharacterGenerating } from '../../private/is-keycode-character-generating.js'
+import { noop } from '../../../../utilities/no-op.js'
 
 const FRACTION_DIGITS = 3
 const EMPTY_STRING = ''

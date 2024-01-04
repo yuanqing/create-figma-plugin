@@ -1,0 +1,1 @@
+{"version":3,"file":"container.d.ts","sourceRoot":"","sources":["../../../src/layout/container/container.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,sBAAsB,CAAA;AAI5C,MAAM,MAAM,cAAc,GAAG;IAC3B,QAAQ,EAAE,GAAG,CAAC,OAAO,CAAA;IACrB,KAAK,EAAE,cAAc,CAAA;CACtB,CAAA;AACD,MAAM,MAAM,cAAc,GAAG,KAAK,CAAA;AAElC,eAAO,MAAM,SAAS;;EAIrB,CAAA"}

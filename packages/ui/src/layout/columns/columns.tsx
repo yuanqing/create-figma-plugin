@@ -1,12 +1,11 @@
-import { ComponentChild, h, toChildArray } from 'preact'
-
+import { Children } from 'react'
 import { Space } from '../../types/space.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import styles from './columns.module.css'
 
 export type ColumnsProps = {
-  children: ComponentChild
+  children: JSX.Element
   space?: ColumnsSpace
 }
 export type ColumnsSpace = Space
@@ -24,8 +23,8 @@ export const Columns = createComponent<HTMLDivElement, ColumnsProps>(function (
         typeof space === 'undefined' ? null : styles[space]
       ])}
     >
-      {toChildArray(children).map(function (
-        element: ComponentChild,
+      {Children.toArray(children).map(function (
+        element: JSX.Element,
         index: number
       ) {
         return (

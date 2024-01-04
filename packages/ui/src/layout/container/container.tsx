@@ -1,11 +1,9 @@
-import { ComponentChildren, h } from 'preact'
-
 import { Space } from '../../types/space.js'
 import { createComponent } from '../../utilities/create-component.js'
 import styles from './container.module.css'
 
 export type ContainerProps = {
-  children: ComponentChildren
+  children: JSX.Element
   space: ContainerSpace
 }
 export type ContainerSpace = Space

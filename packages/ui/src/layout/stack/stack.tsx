@@ -1,11 +1,10 @@
-import { ComponentChild, ComponentChildren, h, toChildArray } from 'preact'
-
+import { Children } from 'react'
 import { Space } from '../../types/space.js'
 import { createComponent } from '../../utilities/create-component.js'
 import styles from './stack.module.css'
 
 export type StackProps = {
-  children: ComponentChildren
+  children: JSX.Element
   space: StackSpace
 }
 export type StackSpace = Space
@@ -16,8 +15,8 @@ export const Stack = createComponent<HTMLDivElement, StackProps>(function (
 ) {
   return (
     <div {...rest} ref={ref} class={styles[space]}>
-      {toChildArray(children).map(function (
-        element: ComponentChild,
+      {Children.toArray(children).map(function (
+        element: JSX.Element,
         index: number
       ) {
         return (

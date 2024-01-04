@@ -1,5 +1,3 @@
-import { h } from 'preact'
-
 import { createComponent } from '../../utilities/create-component.js'
 import styles from './divider.module.css'
 

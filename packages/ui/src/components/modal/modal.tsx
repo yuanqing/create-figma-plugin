@@ -1,20 +1,20 @@
-import { ComponentChild, h, RefObject, render } from 'preact'
-import { useEffect, useRef } from 'preact/hooks'
+import { RefObject, useEffect, useRef } from 'react'
 
-import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
 import { EventHandler } from '../../types/event-handler.js'
+import { IconButton } from '../icon-button/icon-button.js'
+import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
+import { Text } from '../text/text.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
-import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
 import { createFocusTrapKeyDownHandler } from '../../utilities/private/create-focus-trap-key-down-handler.js'
+import { createPortal } from 'react-dom'
+import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
 import { getFocusableElements } from '../../utilities/private/get-focusable-elements.js'
-import { IconButton } from '../icon-button/icon-button.js'
-import { Text } from '../text/text.js'
 import styles from './modal.module.css'
 
 export type ModalProps = {
-  children: ComponentChild
-  closeButtonIcon?: ComponentChild
+  children: JSX.Element
+  closeButtonIcon?: JSX.Element
   closeButtonPosition?: ModalCloseButtonPosition
   open: boolean
   transition?: boolean
@@ -145,7 +145,7 @@ export const Modal = createComponent<HTMLDivElement, ModalProps>(function (
   useEffect(
     function () {
       const portalElement = getCurrentFromRef<HTMLDivElement>(portalElementRef)
-      render(
+      createPortal(
         <div ref={ref}>
           <div
             {...rest}

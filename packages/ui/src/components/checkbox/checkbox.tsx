@@ -1,17 +1,16 @@
-import { ComponentChildren, h } from 'preact'
-import { useCallback } from 'preact/hooks'
-
-import { IconControlCheckboxChecked12 } from '../../icons/icon-12/icon-control-checkbox-checked-12.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
+
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
+import { IconControlCheckboxChecked12 } from '../../icons/icon-12/icon-control-checkbox-checked-12.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { noop } from '../../utilities/no-op.js'
 import styles from './checkbox.module.css'
+import { useCallback } from 'react'
 
 export interface CheckboxProps
   extends FocusableComponentProps<HTMLInputElement> {
-  children: ComponentChildren
+  children: JSX.Element
   disabled?: boolean
   onChange?: EventHandler.onChange<HTMLInputElement>
   onValueChange?: EventHandler.onValueChange<boolean>

@@ -1,12 +1,11 @@
-import { ComponentChildren, h } from 'preact'
+import { RawTextbox, RawTextboxProps } from './private/raw-textbox.js'
 
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
-import { RawTextbox, RawTextboxProps } from './private/raw-textbox.js'
 import styles from './textbox.module.css'
 
 export type TextboxProps = RawTextboxProps & {
-  icon?: ComponentChildren
+  icon?: JSX.Element
   variant?: TextboxVariant
 }
 
