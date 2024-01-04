@@ -1,12 +1,12 @@
 import fs from "node:fs/promises";
 import { basename, dirname, extname, join, resolve } from "node:path";
-import { pathExists } from "path-exists";
 import { fileURLToPath } from "node:url";
 
 import slugify from "@sindresorhus/slugify";
 import camelcase from "camelcase";
 import { globby } from "globby";
 import { optimize } from "svgo";
+import { existsSync } from "node:fs";
 
 type SvgFile = {
   dimension: number;
@@ -22,7 +22,7 @@ export async function writeFileAsync(
   fileContents: string | Buffer
 ): Promise<void> {
   const directoryPath = dirname(outputFilePath);
-  if ((await pathExists(directoryPath)) === false) {
+  if (existsSync(directoryPath) === false) {
     await fs.mkdir(directoryPath, { recursive: true });
   }
   await fs.writeFile(outputFilePath, fileContents);

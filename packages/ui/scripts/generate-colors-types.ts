@@ -1,7 +1,7 @@
+import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { pathExists } from "path-exists";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,7 +19,7 @@ export async function writeFileAsync(
   fileContents: string | Buffer
 ): Promise<void> {
   const directoryPath = dirname(outputFilePath);
-  if ((await pathExists(directoryPath)) === false) {
+  if (existsSync(directoryPath) === false) {
     await fs.mkdir(directoryPath, { recursive: true });
   }
   await fs.writeFile(outputFilePath, fileContents);
