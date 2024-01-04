@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "lib": ["DOM", "ES2020"],
