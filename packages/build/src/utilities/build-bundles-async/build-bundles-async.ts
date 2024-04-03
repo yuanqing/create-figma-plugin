@@ -1,6 +1,4 @@
 import { resolve } from 'node:path'
-import { platform } from 'node:os'
-import { pathToFileURL } from 'node:url'
 
 import {
   Config,
@@ -17,8 +15,6 @@ import indentString from 'indent-string'
 import { importFresh } from '../import-fresh.js'
 import { esbuildCssModulesPlugin } from './esbuild-css-modules-plugin.js'
 import { esbuildPreactCompatPlugin } from './esbuild-preact-compat-plugin.js'
-
-const isWindows = platform() === 'win32'
 
 interface EntryFile extends ConfigFile {
   commandId: string
@@ -52,12 +48,9 @@ async function overrideEsbuildConfigAsync(
   buildOptions: BuildOptions,
   configGlobPattern: string
 ): Promise<BuildOptions> {
-  let filePaths = await globby(configGlobPattern, { absolute: true })
+  const filePaths = await globby(configGlobPattern, { absolute: true })
   if (filePaths.length === 0) {
     return buildOptions
-  }
-  if (isWindows) {
-    filePaths = filePaths.map(p => pathToFileURL(p).href)
   }
   const overrideEsbuildConfig:
     | OverrideEsbuildConfig
