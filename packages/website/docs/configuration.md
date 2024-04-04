@@ -218,6 +218,12 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 *Optional.* For specifying the list of permissions that the plugin/widget needs access to. Possible permissions are **`"activeusers"`**, **`"currentuser"`**, **`"fileusers"`**, **`"payments"`** and **`"teamlibrary"`**.
 
+### `documentAccess`
+
+(*`"dynamic-page"`*)
+
+*Optional.* For specifying whether the plugin is compatible with Figma’s dynamic page loading feature. If this field is omitted, running the plugin will trigger the loading of additional pages in a file with multiple pages.
+
 ### `networkAccess`
 
 (*`object`*)
