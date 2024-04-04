@@ -2,21 +2,23 @@ import '../src/css/theme.css'
 import '../src/css/fonts.css'
 import '../src/css/base.css'
 
+import { h } from 'preact'
+
 const themes = [
-  { value: 'figma-light', title: 'Figma (Light)' },
-  { value: 'figma-dark', title: 'Figma (Dark)' },
-  { value: 'figjam', title: 'FigJam' },
+  { title: 'Figma (Light)', value: 'figma-light' },
+  { title: 'Figma (Dark)', value: 'figma-dark' },
+  { title: 'FigJam', value: 'figjam' }
 ]
 
 export const globalTypes = {
   theme: {
-    name: 'Theme',
     defaultValue: 'figma-light',
+    name: 'Theme',
     toolbar: {
+      dynamicTitle: true,
       icon: 'mirror',
-      items: themes,
-      dynamicTitle: true
-    },
+      items: themes
+    }
   }
 }
 
@@ -26,7 +28,8 @@ function updateTheme(activeTheme) {
     bodyElement.classList.remove(theme.value)
   }
   bodyElement.classList.add(activeTheme)
-  document.body.style.backgroundColor = activeTheme === 'figma-dark' ? '#2c2c2c' : '#ffffff'
+  document.body.style.backgroundColor =
+    activeTheme === 'figma-dark' ? '#2c2c2c' : '#ffffff'
 }
 
 export const decorators = [
@@ -34,7 +37,14 @@ export const decorators = [
     const { theme } = context.globals
     updateTheme(theme)
     return (
-      <div style={context.parameters.fixedWidth === true ? { width: '240px' } : undefined} class={theme}>
+      <div
+        className={theme}
+        style={
+          context.parameters.fixedWidth === true
+            ? { width: '240px' }
+            : undefined
+        }
+      >
         <Story />
       </div>
     )
@@ -44,35 +54,48 @@ export const decorators = [
 export const parameters = {
   layout: 'centered',
   options: {
-    storySort: function storySort (x, y) {
+    storySort: function storySort(x, y) {
       function parseStory(story) {
         const split = story.title.split(/\//g)
         if (split.length === 1) {
           return {
-            section: split[0],
             component: null,
-            story: null,
             order: null,
+            section: split[0],
+            story: null
           }
         }
-        const order = story.tags[0] === 'story' ? null : parseInt(story.tags[0], 10)
+        const order =
+          story.tags[0] === 'story' ? null : parseInt(story.tags[0], 10)
         return {
-          section: split[0],
           component: split[1],
-          story: split.slice(2).join('/'),
-          order
+          order,
+          section: split[0],
+          story: split.slice(2).join('/')
         }
       }
-      const sectionSortOrder = ['Index', 'Components', 'Inline Text', 'Icons', 'Layout', 'Hooks']
+      const sectionSortOrder = [
+        'Index',
+        'Components',
+        'Inline Text',
+        'Icons',
+        'Layout',
+        'Hooks'
+      ]
       const xx = parseStory(x)
       const yy = parseStory(y)
       // Different `section`
       if (xx.section !== yy.section) {
-        return sectionSortOrder.indexOf(xx.section) - sectionSortOrder.indexOf(yy.section)
+        return (
+          sectionSortOrder.indexOf(xx.section) -
+          sectionSortOrder.indexOf(yy.section)
+        )
       }
       // Different `component`
       if (xx.component !== yy.component) {
-        return xx.component.localeCompare(yy.component, undefined, { numeric: true })
+        return xx.component.localeCompare(yy.component, undefined, {
+          numeric: true
+        })
       }
       // Both `order` defined
       if (xx.order !== null && yy.order !== null) {
