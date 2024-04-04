@@ -37,7 +37,7 @@
     "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-sort-keys-fix": "1.1.2",
     "node-fetch": "3.3.2",
-    "open-cli": "7.2.0",
+    "open-cli": "8.0.0",
     "p-all": "5.0.0",
     "path-exists": "5.0.0",
     "prettier": "3.1.0",
@@ -46,8 +46,8 @@
     "stylelint": "16.0.0",
     "stylelint-config-yuanqing": "0.0.5",
     "text-table": "0.2.0",
-    "tsx": "4.6.2",
-    "typescript": "5.3.3"
+    "tsx": "4.7.1",
+    "typescript": "5.4.3"
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing",

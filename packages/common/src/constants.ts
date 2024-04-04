@@ -16,7 +16,7 @@ export const constants = {
     configKey: 'figma-plugin',
     defaultName: 'figma-plugin',
     versions: {
-      pluginTypings: '1.82.0',
+      pluginTypings: '1.89.0',
       widgetTypings: '1.9.1'
     }
   }
