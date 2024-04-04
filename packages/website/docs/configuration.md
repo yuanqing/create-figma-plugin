@@ -208,9 +208,9 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 ### `capabilities`
 
-(*`Array<"codegen" | "inspect" | "textreview">`*)
+(*`Array<"codegen" | "inspect" | "textreview" | "vscode">`*)
 
-*Optional.* For specifying the list of capabilities that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, and **`"textreview"`**.
+*Optional.* For specifying the list of capabilities that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, **`"textreview"`**, and **`"vscode"`**.
 
 ### `permissions`
 

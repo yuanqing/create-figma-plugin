@@ -46,7 +46,11 @@ export type ManifestRelaunchButton = {
   multipleSelection?: boolean
 }
 
-export type ManifestCapabilities = 'codegen' | 'inspect' | 'textreview'
+export type ManifestCapabilities =
+  | 'codegen'
+  | 'inspect'
+  | 'textreview'
+  | 'vscode'
 
 export type ManifestPermission =
   | 'activeusers'
