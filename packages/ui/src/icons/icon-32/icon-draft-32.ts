@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon'
 
 export const IconDraft32 = createIcon(
-  'M10 8.5h7.7071l.1465.14645 4 3.99995.1464.1465V23.5H10V9zm1 1v13h10v-9h-4v-4zm7 .7071L20.2929 12.5H18z',
+  'M10 8.5h7.7071l.1465.14645 4 3.99995.1464.1465V23.5H10v-15m1 1v13h10v-9h-4v-4zm7 .7071L20.2929 12.5H18z',
   { height: 32, width: 32 }
 )
