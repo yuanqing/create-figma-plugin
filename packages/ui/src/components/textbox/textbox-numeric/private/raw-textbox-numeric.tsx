@@ -203,7 +203,11 @@ export const RawTextboxNumeric = createComponent<
           const formattedValue = formatEvaluatedValue(newValue, value, suffix)
           inputElement.value = formattedValue
           inputElement.select()
-          handleInput(event)
+          const inputEvent = new window.Event('input', {
+            bubbles: true,
+            cancelable: true
+          })
+          inputElement.dispatchEvent(inputEvent)
           return
         }
         const number = evaluateValue(value, suffix)
@@ -221,7 +225,11 @@ export const RawTextboxNumeric = createComponent<
         }
         inputElement.value = formattedValue
         inputElement.select()
-        handleInput(event)
+        const inputEvent = new window.Event('input', {
+          bubbles: true,
+          cancelable: true
+        })
+        inputElement.dispatchEvent(inputEvent)
         return
       }
       if (event.ctrlKey === true || event.metaKey === true) {
@@ -259,7 +267,6 @@ export const RawTextboxNumeric = createComponent<
       }
     },
     [
-      handleInput,
       incrementBig,
       incrementSmall,
       integer,

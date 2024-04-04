@@ -2,10 +2,8 @@
 
 import { JSXInternal } from 'preact/src/jsx'
 
-type First<T extends never[]> = T[0]
-
 type FirstArgument<EventHandler extends ((...args: any) => any) | undefined> =
-  First<Parameters<NonNullable<EventHandler>>>
+  Parameters<NonNullable<EventHandler>>[0]
 
 export namespace EventHandler {
   export type onBlur<Target extends EventTarget> =
