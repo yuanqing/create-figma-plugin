@@ -23,12 +23,6 @@ const config = {
   parameters: null,
   parameterOnly: true,
   relaunchButtons: null,
-  capabilities: null,
-  permissions: null,
-  networkAccess: null,
-  enablePrivatePluginApi: false,
-  enableProposedApi: false,
-  build: null,
   rest: null
 }
 
@@ -70,67 +64,9 @@ test('`containsWidget`', async function (t) {
   })
 })
 
-test('`capabilities`', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '05-capabilities'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    capabilities: ['textreview']
-  })
-})
-
-test('`permissions`', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '06-permissions'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    permissions: ['currentuser']
-  })
-})
-
-test('`networkAccess`', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '07-network-access'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    networkAccess: {
-      allowedDomains: ['foo.com'],
-      devAllowedDomains: ['bar.com'],
-      reasoning: 'baz'
-    }
-  })
-})
-
-test('`enablePrivatePluginApi`', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '08-enable-private-plugin-api'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    enablePrivatePluginApi: true
-  })
-})
-
-test('`enableProposedApi`', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '09-enable-proposed-api'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    enableProposedApi: true
-  })
-})
-
-test('`build`', async function (t) {
-  t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '10-build'))
-  t.deepEqual(await readConfigAsync(), {
-    ...config,
-    build: 'c'
-  })
-})
-
 test('rest', async function (t) {
   t.plan(1)
-  process.chdir(join(__dirname, 'fixtures', '11-rest'))
+  process.chdir(join(__dirname, 'fixtures', '05-rest'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
     rest: {

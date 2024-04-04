@@ -13,14 +13,12 @@ import {
   ConfigCommand,
   ConfigFile,
   ConfigMenuItemSeparator,
-  ConfigNetworkAccess,
   ConfigParameter,
   ConfigRelaunchButton
 } from './types/config.js'
 import {
   RawConfigCommand,
   RawConfigFile,
-  RawConfigNetworkAccess,
   RawConfigParameter,
   RawConfigRelaunchButtons
 } from './types/private/raw-config.js'
@@ -42,13 +40,6 @@ const defaultConfig: Config = {
   parameters: null,
   parameterOnly: true,
   relaunchButtons: null,
-  capabilities: null,
-  permissions: null,
-  documentAccess: null,
-  networkAccess: null,
-  enablePrivatePluginApi: false,
-  enableProposedApi: false,
-  build: null,
   rest: null
 }
 
@@ -78,13 +69,6 @@ export async function readConfigAsync(): Promise<Config> {
     parameters,
     parameterOnly,
     relaunchButtons,
-    capabilities,
-    permissions,
-    documentAccess,
-    networkAccess,
-    enablePrivatePluginApi,
-    enableProposedApi,
-    build,
     ...rest
   } = config
   return {
@@ -102,21 +86,6 @@ export async function readConfigAsync(): Promise<Config> {
       typeof relaunchButtons === 'undefined'
         ? null
         : parseRelaunchButtons(relaunchButtons),
-    capabilities: typeof capabilities === 'undefined' ? null : capabilities,
-    permissions: typeof permissions === 'undefined' ? null : permissions,
-    documentAccess:
-      typeof documentAccess === 'undefined' ? null : documentAccess,
-    networkAccess:
-      typeof networkAccess === 'undefined'
-        ? null
-        : parseNetworkAccess(networkAccess),
-    enablePrivatePluginApi:
-      typeof enablePrivatePluginApi === 'undefined'
-        ? false
-        : enablePrivatePluginApi,
-    enableProposedApi:
-      typeof enableProposedApi === 'undefined' ? false : enableProposedApi,
-    build: typeof build === 'undefined' ? null : build,
     rest: Object.keys(rest).length === 0 ? null : rest
   }
 }
@@ -210,17 +179,4 @@ function parseFile(file: RawConfigFile): ConfigFile {
     }
   }
   return { src, handler }
-}
-
-function parseNetworkAccess(
-  rawConfigNetworkAccess: RawConfigNetworkAccess
-): ConfigNetworkAccess {
-  const { allowedDomains, devAllowedDomains, reasoning } =
-    rawConfigNetworkAccess
-  return {
-    allowedDomains,
-    devAllowedDomains:
-      typeof devAllowedDomains === 'undefined' ? null : devAllowedDomains,
-    reasoning: typeof reasoning === 'undefined' ? null : reasoning
-  }
 }

@@ -1,10 +1,4 @@
-import {
-  ManifestCapabilities,
-  ManifestDocumentAccess,
-  ManifestEditorType,
-  ManifestMenuItemSeparator,
-  ManifestPermission
-} from './manifest.js'
+import { ManifestEditorType, ManifestMenuItemSeparator } from './manifest.js'
 
 interface BaseConfigMixin {
   commandId: null | string
@@ -22,17 +16,10 @@ export interface ConfigCommand extends BaseConfigMixin {
 export interface Config extends ConfigCommand {
   api: string
   widgetApi: string
-  editorType: Array<ManifestEditorType>
+  editorType: Array<ConfigEditorType>
   containsWidget: boolean
   id: string
   relaunchButtons: null | Array<ConfigRelaunchButton>
-  capabilities: null | Array<ManifestCapabilities>
-  permissions: null | Array<ManifestPermission>
-  documentAccess: null | ManifestDocumentAccess
-  networkAccess: null | ConfigNetworkAccess
-  enablePrivatePluginApi: boolean
-  enableProposedApi: boolean
-  build: null | string
   rest: null | Record<string, unknown>
 }
 
@@ -57,14 +44,4 @@ export interface ConfigRelaunchButton extends BaseConfigMixin {
   commandId: string
   main: ConfigFile
   multipleSelection: boolean
-}
-
-export type ConfigCapabilities = ManifestCapabilities
-
-export type ConfigPermission = ManifestPermission
-
-export type ConfigNetworkAccess = {
-  allowedDomains: Array<string>
-  devAllowedDomains: null | Array<string>
-  reasoning: null | string
 }

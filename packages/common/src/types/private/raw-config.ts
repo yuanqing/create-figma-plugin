@@ -30,9 +30,3 @@ export type RawConfigRelaunchButtons = Record<string, RawConfigRelaunchButton>
 export interface RawConfigRelaunchButton extends BaseRawConfigMixin {
   multipleSelection?: boolean
 }
-
-export type RawConfigNetworkAccess = {
-  allowedDomains: Array<string>
-  devAllowedDomains?: Array<string>
-  reasoning?: string
-}

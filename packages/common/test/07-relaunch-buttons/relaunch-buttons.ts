@@ -22,12 +22,6 @@ const config = {
   menu: null,
   parameters: null,
   parameterOnly: true,
-  capabilities: null,
-  permissions: null,
-  networkAccess: null,
-  enablePrivatePluginApi: false,
-  enableProposedApi: false,
-  build: null,
   rest: null
 }
 

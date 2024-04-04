@@ -18,12 +18,6 @@ const config = {
   parameters: null,
   parameterOnly: true,
   relaunchButtons: null,
-  capabilities: null,
-  permissions: null,
-  networkAccess: null,
-  enablePrivatePluginApi: false,
-  enableProposedApi: false,
-  build: null,
   rest: null
 }
 

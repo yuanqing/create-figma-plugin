@@ -4,25 +4,19 @@ export { log } from './log.js'
 export { readConfigAsync } from './read-config-async.js'
 export {
   Config,
-  ConfigCapabilities,
   ConfigCommand,
   ConfigEditorType,
   ConfigFile,
   ConfigMenuItemSeparator,
-  ConfigNetworkAccess,
   ConfigParameter,
-  ConfigPermission,
   ConfigRelaunchButton
 } from './types/config.js'
 export {
   Manifest,
-  ManifestCapabilities,
   ManifestEditorType,
   ManifestMenuItem,
   ManifestMenuItemSeparator,
-  ManifestNetworkAccess,
   ManifestParameter,
-  ManifestPermission,
   ManifestRelaunchButton
 } from './types/manifest.js'
 export { writeFileAsync } from './write-file-async.js'

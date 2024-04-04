@@ -11,12 +11,6 @@ export type Manifest = {
   parameterOnly?: boolean
   menu?: Array<ManifestMenuItem | ManifestMenuItemSeparator>
   relaunchButtons?: Array<ManifestRelaunchButton>
-  permissions?: Array<string>
-  capabilities?: Array<string>
-  documentAccess?: ManifestDocumentAccess
-  networkAccess?: ManifestNetworkAccess
-  enableProposedApi?: boolean
-  enablePrivatePluginApi?: boolean
   build?: string
 }
 
@@ -44,25 +38,4 @@ export type ManifestRelaunchButton = {
   command: string
   name: string
   multipleSelection?: boolean
-}
-
-export type ManifestCapabilities =
-  | 'codegen'
-  | 'inspect'
-  | 'textreview'
-  | 'vscode'
-
-export type ManifestPermission =
-  | 'activeusers'
-  | 'currentuser'
-  | 'fileusers'
-  | 'payments'
-  | 'teamlibrary'
-
-export type ManifestDocumentAccess = 'dynamic-page'
-
-export type ManifestNetworkAccess = {
-  allowedDomains: Array<string>
-  devAllowedDomains?: Array<string>
-  reasoning?: string
 }
