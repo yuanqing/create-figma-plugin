@@ -1,5 +1,6 @@
 import {
   ManifestCapabilities,
+  ManifestDocumentAccess,
   ManifestEditorType,
   ManifestMenuItemSeparator,
   ManifestPermission
@@ -27,6 +28,7 @@ export interface Config extends ConfigCommand {
   relaunchButtons: null | Array<ConfigRelaunchButton>
   capabilities: null | Array<ManifestCapabilities>
   permissions: null | Array<ManifestPermission>
+  documentAccess: null | ManifestDocumentAccess
   networkAccess: null | ConfigNetworkAccess
   enablePrivatePluginApi: boolean
   enableProposedApi: boolean

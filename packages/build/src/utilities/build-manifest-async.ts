@@ -44,6 +44,7 @@ export async function buildManifestAsync(options: {
     relaunchButtons,
     capabilities,
     permissions,
+    documentAccess,
     networkAccess,
     enablePrivatePluginApi,
     enableProposedApi,
@@ -83,6 +84,7 @@ export async function buildManifestAsync(options: {
         : undefined,
     capabilities: capabilities !== null ? capabilities : undefined,
     permissions: permissions !== null ? permissions : undefined,
+    documentAccess: documentAccess !== null ? documentAccess : undefined,
     networkAccess:
       networkAccess !== null
         ? createManifestNetworkAccess(networkAccess)

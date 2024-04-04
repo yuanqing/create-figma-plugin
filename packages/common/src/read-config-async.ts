@@ -44,6 +44,7 @@ const defaultConfig: Config = {
   relaunchButtons: null,
   capabilities: null,
   permissions: null,
+  documentAccess: null,
   networkAccess: null,
   enablePrivatePluginApi: false,
   enableProposedApi: false,
@@ -79,6 +80,7 @@ export async function readConfigAsync(): Promise<Config> {
     relaunchButtons,
     capabilities,
     permissions,
+    documentAccess,
     networkAccess,
     enablePrivatePluginApi,
     enableProposedApi,
@@ -102,6 +104,8 @@ export async function readConfigAsync(): Promise<Config> {
         : parseRelaunchButtons(relaunchButtons),
     capabilities: typeof capabilities === 'undefined' ? null : capabilities,
     permissions: typeof permissions === 'undefined' ? null : permissions,
+    documentAccess:
+      typeof documentAccess === 'undefined' ? null : documentAccess,
     networkAccess:
       typeof networkAccess === 'undefined'
         ? null

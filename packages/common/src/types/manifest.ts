@@ -13,6 +13,7 @@ export type Manifest = {
   relaunchButtons?: Array<ManifestRelaunchButton>
   permissions?: Array<string>
   capabilities?: Array<string>
+  documentAccess?: ManifestDocumentAccess
   networkAccess?: ManifestNetworkAccess
   enableProposedApi?: boolean
   enablePrivatePluginApi?: boolean
@@ -53,6 +54,8 @@ export type ManifestPermission =
   | 'fileusers'
   | 'payments'
   | 'teamlibrary'
+
+export type ManifestDocumentAccess = 'dynamic-page'
 
 export type ManifestNetworkAccess = {
   allowedDomains: Array<string>
