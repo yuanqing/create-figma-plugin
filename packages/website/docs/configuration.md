@@ -222,7 +222,7 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 (*`"dynamic-page"`*)
 
-*Optional.* Set this to `"dynamic-page"` if your plugin is compatible with Figma’s [dynamic page loading feature](https://www.figma.com/plugin-docs/accessing-document/#loading-pages-and-nodes). If this is not set, running the plugin will trigger the loading of additional pages in a file with multiple pages.
+*Optional.* Set this to `"dynamic-page"` if your plugin is compatible with Figma’s [dynamic page loading feature](https://figma.com/plugin-docs/accessing-document/#loading-pages-and-nodes). If this is not set, running the plugin will trigger the loading of additional pages in a file with multiple pages.
 
 ### `networkAccess`
 
@@ -243,11 +243,13 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 - **`"label"`** (*`string`*) — *Required.* A label for the code language displayed in the Figma UI.
 - **`"value"`** (*`string`*) — *Required.* A specific code language.
 
+See the [example](https://figma.com/plugin-docs/manifest/#codegenlanguages).
+
 ### `codegenPreferences`
 
 (*`Array<CodegenPreference>`*)
 
-*Optional.* Preferences for your codegen plugin. See [the example](https://www.figma.com/plugin-docs/manifest/#codegenpreferences).
+*Optional.* Preferences for your codegen plugin. See the [example](https://figma.com/plugin-docs/manifest/#codegenpreferences).
 
 ### `enablePrivatePluginApi`
 
