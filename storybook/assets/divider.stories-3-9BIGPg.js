@@ -1,3 +1,0 @@
-import{c as d}from"./create-component-a83A1_Pu.js";import{u as o}from"./jsxRuntime.module-mP9ZGqev.js";import"./preact.module-pS-_M4k6.js";const a="_divider_m18ta_1",c={divider:a},m=d(function(s,n){return o("hr",{...s,ref:n,class:c.divider})}),v={parameters:{fixedWidth:!0},title:"Components/Divider"},r=function(){return o(m,{})};var e,t,i;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:`function () {
-  return <Divider />;
-}`,...(i=(t=r.parameters)==null?void 0:t.docs)==null?void 0:i.source}}};const l=["Default"];export{r as Default,l as __namedExportsOrder,v as default};

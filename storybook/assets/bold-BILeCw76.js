@@ -1,0 +1,1 @@
+import{y as n}from"./preact.module-Cko36Lti.js";import{c as r}from"./create-component-B1Y1oDBF.js";const c="_bold_72210_1",l={bold:c},m=r(function({children:o,...t},s){return n("strong",{...t,ref:s,class:l.bold},o)});export{m as B};

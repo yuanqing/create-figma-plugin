@@ -1,1 +1,0 @@
-import{c as n}from"./create-component-a83A1_Pu.js";import{u as r}from"./jsxRuntime.module-mP9ZGqev.js";const c="_bold_72210_1",l={bold:c},m=n(function({children:o,...t},s){return r("strong",{...t,ref:s,class:l.bold,children:o})});export{m as B};

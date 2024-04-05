@@ -1,1 +1,0 @@
-import{c as r}from"./create-component-a83A1_Pu.js";import{u as c}from"./jsxRuntime.module-mP9ZGqev.js";const l="_extraSmall_zc4n0_1",m="_small_zc4n0_4",n="_medium_zc4n0_7",s="_large_zc4n0_10",o="_extraLarge_zc4n0_13",_={extraSmall:l,small:m,medium:n,large:s,extraLarge:o},g=r(function({space:a,...e},t){return c("div",{...e,ref:t,class:_[a]})});export{g as V};
