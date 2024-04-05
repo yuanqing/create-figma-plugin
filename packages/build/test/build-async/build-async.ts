@@ -313,6 +313,7 @@ test('additional fields', async function (t) {
     main: 'build/main.js',
     capabilities: ['textreview'],
     permissions: ['activeusers'],
+    documentAccess: 'dynamic-page',
     networkAccess: {
       allowedDomains: ['foo.com'],
       devAllowedDomains: ['bar.com'],

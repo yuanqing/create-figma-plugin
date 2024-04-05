@@ -15,6 +15,7 @@
     "permissions": [
       "activeusers"
     ],
+    "documentAccess": "dynamic-page",
     "networkAccess": {
       "allowedDomains": [
         "foo.com"
