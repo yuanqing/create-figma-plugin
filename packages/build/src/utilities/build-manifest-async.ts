@@ -6,14 +6,12 @@ import {
   Config,
   ConfigCommand,
   ConfigMenuItemSeparator,
-  ConfigNetworkAccess,
   ConfigParameter,
   ConfigRelaunchButton,
   constants,
   Manifest,
   ManifestMenuItem,
   ManifestMenuItemSeparator,
-  ManifestNetworkAccess,
   ManifestParameter,
   ManifestRelaunchButton,
   writeFileAsync
@@ -42,13 +40,6 @@ export async function buildManifestAsync(options: {
     parameters,
     parameterOnly,
     relaunchButtons,
-    capabilities,
-    permissions,
-    documentAccess,
-    networkAccess,
-    enablePrivatePluginApi,
-    enableProposedApi,
-    build,
     rest
   } = config
   const command = { commandId, name, main, ui, menu, parameters, parameterOnly }
@@ -82,16 +73,6 @@ export async function buildManifestAsync(options: {
       relaunchButtons !== null
         ? createManifestRelaunchButtons(relaunchButtons)
         : undefined,
-    capabilities: capabilities !== null ? capabilities : undefined,
-    permissions: permissions !== null ? permissions : undefined,
-    documentAccess: documentAccess !== null ? documentAccess : undefined,
-    networkAccess:
-      networkAccess !== null
-        ? createManifestNetworkAccess(networkAccess)
-        : undefined,
-    enableProposedApi: enableProposedApi === true ? true : undefined,
-    enablePrivatePluginApi: enablePrivatePluginApi === true ? true : undefined,
-    build: build !== null ? build : undefined,
     ...(rest !== null ? rest : {})
   }
   const result = await overrideManifestAsync(manifest)
@@ -190,22 +171,6 @@ function createManifestRelaunchButtons(
     }
     return result
   })
-}
-
-function createManifestNetworkAccess(
-  networkAccess: ConfigNetworkAccess
-): ManifestNetworkAccess {
-  const { allowedDomains, devAllowedDomains, reasoning } = networkAccess
-  const result: ManifestNetworkAccess = {
-    allowedDomains
-  }
-  if (devAllowedDomains !== null) {
-    result.devAllowedDomains = devAllowedDomains
-  }
-  if (reasoning !== null) {
-    result.reasoning = reasoning
-  }
-  return result
 }
 
 async function overrideManifestAsync(
