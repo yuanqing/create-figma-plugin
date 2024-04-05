@@ -1,5 +1,5 @@
 {
-  "title": "JSON schema for configuring a Figma/FigJam plugin built with the Create Figma Plugin toolkit",
+  "title": "JSON schema for configuring a Figma/FigJam plugin/widget built with the Create Figma Plugin toolkit",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json",
   "type": "object",
@@ -66,11 +66,11 @@
           "type": "string"
         },
         "allowFreeform": {
-          "description": "(optional)\nSet to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.",
+          "description": "(optional)\nSet this to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.",
           "type": "boolean"
         },
         "optional": {
-          "description": "(optional)\nSet to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.",
+          "description": "(optional)\nSet this to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.",
           "type": "boolean"
         }
       }
@@ -104,7 +104,7 @@
               "$ref": "#/definitions/FileUI"
             },
             "parameters": {
-              "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Actions search bar.",
+              "description": "(optional)\nAn array that specifies the parameters that the plugin command accepts via Figma’s Quick Actions search bar. Each parameter is an object with the keys \"key\" (required), \"name\" (optional), \"description\" (optional), \"allowFreeform\" (optional), and \"optional\" (optional).",
               "type": "array",
               "minItems": 1,
               "uniqueItems": true,
@@ -127,6 +127,117 @@
           }
         }
       ]
+    },
+    "CodegenLanguage": {
+      "type": "object",
+      "required": ["label", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "description": "(required)\n A label for the code language displayed in the Figma UI.",
+          "type": "string"
+        },
+        "value": {
+          "description": "(required)\nA specific code language.",
+          "type": "string"
+        }
+      }
+    },
+    "CodegenPreference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["itemType", "defaultScaleFactor", "scaledUnit"],
+          "additionalProperties": false,
+          "properties": {
+            "itemType": {
+              "type": "string",
+              "enum": ["unit"]
+            },
+            "defaultScaleFactor": {
+              "type": "number"
+            },
+            "scaledUnit": {
+              "type": "string"
+            },
+            "default": {
+              "type": "boolean"
+            },
+            "includedLanguages": {
+              "$ref": "#/definitions/CodegenPreferenceIncludedLanguages"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["itemType", "propertyName", "label", "options"],
+          "additionalProperties": false,
+          "properties": {
+            "itemType": {
+              "type": "string",
+              "enum": ["select"]
+            },
+            "propertyName": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "options": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "required": ["label", "value"],
+                "additionalProperties": false,
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "isDefault": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "includedLanguages": {
+              "$ref": "#/definitions/CodegenPreferenceIncludedLanguages"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["itemType", "propertyName", "label"],
+          "additionalProperties": false,
+          "properties": {
+            "itemType": {
+              "type": "string",
+              "enum": ["action"]
+            },
+            "propertyName": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "includedLanguages": {
+              "$ref": "#/definitions/CodegenPreferenceIncludedLanguages"
+            }
+          }
+        }
+      ]
+    },
+    "CodegenPreferenceIncludedLanguages": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
     }
   },
   "properties": {
@@ -157,7 +268,7 @@
           }
         },
         "containsWidget": {
-          "description": "(optional)\nThis field must be set to `true` for a FigJam widget. Defaults to `false`.",
+          "description": "(optional)\nThis field must be set to `true` for a Figma/FigJam widget. Defaults to `false`.",
           "type": "boolean"
         },
         "id": {
@@ -185,7 +296,7 @@
           }
         },
         "parameters": {
-          "description": "(optional)\nDefines the list of parameters that the plugin command accepts via Figma’s Quick Actions search bar.",
+          "description": "(optional)\nAn array that specifies the parameters that the plugin command accepts via Figma’s Quick Actions search bar. Each parameter is an object with the keys \"key\" (required), \"name\" (optional), \"description\" (optional), \"allowFreeform\" (optional), and \"optional\" (optional).",
           "type": "array",
           "minItems": 1,
           "items": {
@@ -207,7 +318,7 @@
             "properties": {
               "name": {
                 "type": "string",
-                "description": "(required)\nThe name of the relaunch button."
+                "description": "(required)\nThe name of the relaunch button displayed in the Figma UI."
               },
               "main": {
                 "$ref": "#/definitions/FileMain",
@@ -225,17 +336,17 @@
           }
         },
         "capabilities": {
-          "description": "(optional)\nFor specifying the capabilities that the plugin needs access to. Possible capabilities are \"codegen\", \"inspect\", and \"textreview\".",
+          "description": "(optional)\nAn array that specifies the capabilities that the plugin needs access to. Possible capabilities are \"codegen\", \"inspect\", \"textreview\", and \"vscode\".",
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
           "items": {
             "type": "string",
-            "enum": ["codegen", "inspect", "textreview"]
+            "enum": ["codegen", "inspect", "textreview", "vscode"]
           }
         },
         "permissions": {
-          "description": "(optional)\nFor specifying the permissions that the plugin/widget needs access to. Possible permissions are \"activeusers\", \"currentuser\", \"fileusers\", \"payments\" and \"teamlibrary\".",
+          "description": "(optional)\nAn array that specifies the permissions that the plugin/widget needs access to. Possible permissions are \"activeusers\", \"currentuser\", \"fileusers\", \"payments\" and \"teamlibrary\".",
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
@@ -250,14 +361,19 @@
             ]
           }
         },
+        "documentAccess": {
+          "description": "(optional)\nSet this to \"dynamic-page\" if your plugin is compatible with Figma’s dynamic page loading feature. If this is not set, running the plugin will trigger the loading of additional pages in a file with multiple pages.",
+          "type": "string",
+          "enum": ["dynamic-page"]
+        },
         "networkAccess": {
-          "description": "(optional)\nAn object that specifies the list of domains that your plugin/widget is permitted to access. Keys are \"allowedDomains\" (required), \"reasoning\" (optional), and \"devAllowedDomains\" (optional).",
+          "description": "(optional)\nAn object that specifies the list of domains that your plugin/widget is allowed to access. The object has the keys \"allowedDomains\" (required), \"reasoning\" (optional), and \"devAllowedDomains\" (optional).",
           "type": "object",
           "required": ["allowedDomains"],
           "additionalProperties": false,
           "properties": {
             "allowedDomains": {
-              "description": "(required)\nMatch patterns for domains that your plugin/widget is permitted to access.",
+              "description": "(required)\nMatch patterns for domains that your plugin/widget is allowed to access.",
               "type": "array",
               "minItems": 1,
               "uniqueItems": true,
@@ -266,11 +382,11 @@
               }
             },
             "reasoning": {
-              "description": "(optional)\nFor specifying why your plugin/widgets needs to access the domains in \"allowedDomains\".",
+              "description": "(optional)\nFor specifying why your plugin/widget needs to access the domains in \"allowedDomains\".",
               "type": "string"
             },
             "devAllowedDomains": {
-              "description": "(optional)\nMatch patterns for domains that your plugin/widget is permitted to access during development.",
+              "description": "(optional)\nMatch patterns for domains that your plugin/widget is allowed to access during development.",
               "type": "array",
               "minItems": 1,
               "uniqueItems": true,
@@ -280,13 +396,35 @@
             }
           }
         },
+        "codegenLanguages": {
+          "description": "(required for codegen plugins only)\nAn array of code languages that your codegen plugin supports. Each language is an object with the keys \"label\" (required) and \"value\" (required).",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/CodegenLanguage"
+          }
+        },
+        "codegenPreferences": {
+          "description": "(optional)\nPreferences for your codegen plugin.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/CodegenPreference"
+          }
+        },
         "enablePrivatePluginApi": {
-          "description": "(optional)\nSet to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.",
+          "description": "(optional)\nSet this to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.",
           "type": "boolean"
         },
         "enableProposedApi": {
-          "description": "(optional)\nSet to `true` to allow the use of Proposed APIs that are only available during development.",
+          "description": "(optional)\nSet this to `true` to allow the use of Proposed APIs that are only available during development.",
           "type": "boolean"
+        },
+        "build": {
+          "description": "(optional)\nA shell command that Figma will run before your plugin’s files are loaded.",
+          "type": "string"
         }
       }
     }
