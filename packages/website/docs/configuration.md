@@ -38,7 +38,7 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 
 (*`boolean`*)
 
-*Optional.* This field must be set to `true` for a FigJam widget. Defaults to `false`.
+*Optional.* This field must be set to `true` for a Figma/FigJam widget. Defaults to `false`.
 
 ### `id`
 
@@ -101,13 +101,13 @@ Learn how to [add a UI to a plugin command](<%- query('page', 'ui').url %>).
 
 (*`array`*)
 
-*Optional.* Defines the list of [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via the Quick Actions search bar. Each parameter is an object with the following keys:
+*Optional.* An array that specifies the [parameters](https://figma.com/plugin-docs/plugin-parameters/) that the plugin command accepts via Figma’s Quick Actions search bar. Each parameter is an object with the following keys:
 
 - **`"key"`** (*`string`*) — *Required.* The unique key used to identify the parameter.
 - **`"name"`** (*`string`*) — *Optional.* The name of the parameter shown in the Quick Actions search bar. Defaults to the value of the sibling `"key"` key.
 - **`"description"`** (*`string`*) — *Optional.* The description for the parameter shown in the Quick Actions search bar.
-- **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
-- **`"optional"`** (*`boolean`*) — *Optional.* Set to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.
+- **`"allowFreeform"`** (*`boolean`*) — *Optional.* Set this to `true` to allow any value to be entered for the parameter, not just the values suggested by the plugin command.
+- **`"optional"`** (*`boolean`*) — *Optional.* Set this to `true` to make the parameter optional. Optional parameters can only occur at the end of the list of parameters. There must be at least one non-optional parameter.
 
 Learn how to [accept parameters via the Quick Actions search bar in your plugin command](https://figma.com/plugin-docs/plugin-parameters/).
 
@@ -210,41 +210,62 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 (*`Array<"codegen" | "inspect" | "textreview" | "vscode">`*)
 
-*Optional.* For specifying the list of capabilities that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, **`"textreview"`**, and **`"vscode"`**.
+*Optional.* For specifying the list of [capabilities](https://figma.com/plugin-docs/manifest/#capabilities) that the plugin needs access to. Possible capabilities are **`"codegen"`**, **`"inspect"`**, **`"textreview"`**, and **`"vscode"`**.
 
 ### `permissions`
 
 (*`Array<"activeusers" | "currentuser" | "fileusers" | "payments" | "teamlibrary">`*)
 
-*Optional.* For specifying the list of permissions that the plugin/widget needs access to. Possible permissions are **`"activeusers"`**, **`"currentuser"`**, **`"fileusers"`**, **`"payments"`** and **`"teamlibrary"`**.
+*Optional.* For specifying the list of [permissions](https://figma.com/plugin-docs/manifest/#permissions) that the plugin/widget needs access to. Possible permissions are **`"activeusers"`**, **`"currentuser"`**, **`"fileusers"`**, **`"payments"`** and **`"teamlibrary"`**.
 
 ### `documentAccess`
 
 (*`"dynamic-page"`*)
 
-*Optional.* For specifying whether the plugin is compatible with Figma’s dynamic page loading feature. If this field is omitted, running the plugin will trigger the loading of additional pages in a file with multiple pages.
+*Optional.* Set this to `"dynamic-page"` if your plugin is compatible with Figma’s [dynamic page loading feature](https://www.figma.com/plugin-docs/accessing-document/#loading-pages-and-nodes). If this is not set, running the plugin will trigger the loading of additional pages in a file with multiple pages.
 
 ### `networkAccess`
 
 (*`object`*)
 
-*Optional.* An object that specifies the [list of domains that your plugin/widget is permitted to access](https://figma.com/plugin-docs/manifest#networkaccess). Keys are:
+*Optional.* An object that specifies the [list of domains that your plugin/widget is permitted to access](https://figma.com/plugin-docs/manifest#networkaccess). The object has the following keys:
 
 - **`"allowedDomains"`** (*`Array<string>`*) — *Required.* Match patterns for domains that your plugin/widget is permitted to access.
 - **`"reasoning"`** (*`string`*) — *Optional.* For specifying why your plugin/widgets needs to access the domains in **`"allowedDomains"`**.
 - **`"devAllowedDomains"`** (*`Array<string>`*) — *Optional.* Match patterns for domains that your plugin/widget is permitted to access during development.
 
+### `codegenLanguages`
+
+(*`Array<CodeLanguage>`*)
+
+*Required for codegen plugins only.* An array of code languages that your codegen plugin supports. Each language is an object with the following keys:
+
+- **`"label"`** (*`string`*) — *Required.* A label for the code language displayed in the Figma UI.
+- **`"value"`** (*`string`*) — *Required.* A specific code language.
+
+### `codegenPreferences`
+
+(*`Array<CodegenPreference>`*)
+
+*Optional.* Preferences for your codegen plugin. See [the example](https://www.figma.com/plugin-docs/manifest/#codegenpreferences).
+
 ### `enablePrivatePluginApi`
 
 (*`boolean`*)
 
-*Optional.* Set to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.
+*Optional.* Set this to `true` to allow the use of plugin APIs that are only available to private plugins/widgets.
 
 ### `enableProposedApi`
 
 (*`boolean`*)
 
-*Optional.* Set to `true` to allow the use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
+*Optional.* Set this to `true` to allow the use of [Proposed APIs](https://figma.com/plugin-docs/proposed-api/) that are only available during development.
+
+### `build`
+
+(*`string`*)
+
+*Optional.* A shell command that Figma will run before your plugin’s files are loaded.
 
 ## JSON schema
 
