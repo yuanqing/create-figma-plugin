@@ -60,7 +60,7 @@
   "devDependencies": {
     "@create-figma-plugin/tsconfig": "^3.2.0-alpha.0",
     "@create-figma-plugin/utilities": "^3.2.0-alpha.0",
-    "@figma/plugin-typings": "1.89.0",
+    "@figma/plugin-typings": "1.90.0",
     "@types/node": "20.12.4",
     "@types/react": "18.2.74",
     "@types/rimraf": "3.0.2",
