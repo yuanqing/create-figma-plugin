@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.2.0
+
+- `@create-figma-plugin/build@3.2.0`
+
+  - Added support for the `documentAccess`, `codegenLanguages`, `codegenPreferences` and `build` configuration option in the `manifest.json`.
+
+- `@create-figma-plugin/common@3.2.0`
+
+  - Directly copy the `capabilities`, `permissions`, `networkAccess`, `enablePrivatePluginApi`, and `enableProposedApi` fields instead of parsing them by hand.
+
+- `@create-figma-plugin/ui@3.2.0`
+
+  - Fix type error in the `EventHandler` module.
+
+- Bumped dependencies in all packages.
+
 ## 3.1.0
 
 - `create-figma-plugin@3.1.0`
