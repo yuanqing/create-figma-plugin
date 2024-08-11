@@ -6,7 +6,7 @@
     "lib": ["DOM", "ES2020"],
     "outDir": "lib",
     "rootDir": "src",
-    "types": []
+    "types": ["@figma/plugin-typings", "preact"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "../utilities" }]
