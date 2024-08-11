@@ -3,7 +3,7 @@ import {
   MIXED_STRING
 } from '@create-figma-plugin/utilities'
 
-import { RGBA } from '../../../../types/rgba'
+import { RGBA } from '../../../../types/rgba.js'
 
 export function createRgbaColor(
   hexColor: string,
