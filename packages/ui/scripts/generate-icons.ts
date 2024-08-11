@@ -156,7 +156,7 @@ async function writePreactComponentsAsync(
   directoryPath: string
 ): Promise<void> {
   for (const { baseName, componentName, svgPath, dimension } of svgFiles) {
-    const fileContents = `import { createIcon } from '../create-icon'
+    const fileContents = `import { createIcon } from '../create-icon.js'
 
 export const ${componentName} = createIcon(
   '${svgPath}',
@@ -176,7 +176,7 @@ async function writeStoriesAsync(
   const imports: Array<string> = []
   const stories: Array<string> = []
   for (const { baseName, componentName } of svgFiles) {
-    imports.push(`import { ${componentName} } from '../${baseName}'`)
+    imports.push(`import { ${componentName} } from '../${baseName}.js'`)
     stories.push(`export const ${componentName
       .replace(/^Icon/, '')
       .replace(/\d+$/, '')} = function () {
