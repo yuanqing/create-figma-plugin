@@ -1,8 +1,8 @@
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import select from '@inquirer/select'
 import { globby } from 'globby'
-import inquirer from 'inquirer'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -16,15 +16,15 @@ export async function resolveTemplateNameAsync(
     }
     return templateName
   }
-  const result: { templateName: string } = await inquirer.prompt([
-    {
-      choices: templateNames,
-      message: 'Select a template:',
-      name: 'templateName',
-      type: 'list'
-    }
-  ])
-  return result.templateName
+  const result: string = await select({
+    choices: templateNames.map(function (templateName: string) {
+      return {
+        value: templateName
+      }
+    }),
+    message: 'Select a template:'
+  })
+  return result
 }
 
 async function readTemplateNamesAsync(): Promise<Array<string>> {
