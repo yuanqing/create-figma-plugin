@@ -132,8 +132,8 @@ See the [recipe for passing data between the main and UI contexts](<%- query('pa
 
 ***Parameters***
 
-- `name` (`Handler['name']`)
-- `args` (`Parameters<Handler['handler']>`)
+- `name` (`Handler["name"]`)
+- `args` (`Parameters<Handler["handler"]>`)
 
 ***Return type***
 
