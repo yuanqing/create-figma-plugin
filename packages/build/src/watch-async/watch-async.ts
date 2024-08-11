@@ -8,7 +8,7 @@ import { buildCssModulesTypingsAsync } from '../utilities/build-css-modules-typi
 import { buildManifestAsync } from '../utilities/build-manifest-async.js'
 import { trackElapsedTime } from '../utilities/track-elapsed-time.js'
 import { typeCheckWatch } from '../utilities/type-check/type-check-watch.js'
-import { watchIgnoreRegex } from './watch-ignore-regex.js'
+import { createWatchIgnoreRegex } from './create-watch-ignore-regex.js'
 
 const cssRegex = /\.css$/
 const packageJsonRegex = /^package\.json$/
@@ -25,6 +25,7 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
   if (typecheck === true) {
     endTypeCheckWatch = typeCheckWatch()
   }
+  const watchIgnoreRegex = createWatchIgnoreRegex(outputDirectory)
   const watcher = watch(
     [
       '**/*.{css,gif,jpeg,jpg,js,json,jsx,png,ts,tsx}',
