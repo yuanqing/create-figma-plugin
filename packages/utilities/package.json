@@ -50,11 +50,11 @@
   "devDependencies": {
     "@figma/plugin-typings": "1.90.0",
     "@types/natural-compare-lite": "1.4.2",
-    "@types/node": "20.12.4",
+    "@types/node": "22.2.0",
     "@typescript-eslint/eslint-plugin": "6.13.2",
-    "ava": "6.1.2",
+    "ava": "6.1.3",
     "concurrently": "8.2.2",
-    "esbuild": "0.20.2",
+    "esbuild": "0.23.0",
     "eslint": "8.55.0",
     "eslint-config-yuanqing": "0.0.9",
     "eslint-plugin-import": "2.29.0",
@@ -65,9 +65,9 @@
     "eslint-plugin-sort-keys-fix": "1.1.2",
     "generate-ts-docs": "0.0.14",
     "prettier": "3.1.0",
-    "rimraf": "5.0.5",
-    "tsx": "4.7.1",
-    "typescript": "5.4.3"
+    "rimraf": "6.0.1",
+    "tsx": "4.17.0",
+    "typescript": "5.5.4"
   },
   "ava": {
     "extensions": {
