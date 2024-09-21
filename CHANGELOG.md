@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.1
+
+- `@create-figma-plugin/build@3.2.1`
+
+  - Ignore the output directory when building with the `--watch` flag. ([#237](https://github.com/yuanqing/create-figma-plugin/issues/237))
+
+- Bumped dependencies in all packages.
+
 ## 3.2.0
 
 - `@create-figma-plugin/build@3.2.0`
@@ -12,7 +20,7 @@
 
 - `@create-figma-plugin/ui@3.2.0`
 
-  - Fix type error caused by the `EventHandler` module.
+  - Fixed type error caused by the `EventHandler` module.
 
 - Bumped dependencies in all packages.
 
