@@ -1,26 +1,26 @@
 import test from 'ava'
 
-import { watchIgnoreRegex } from '../../src/watch-async/create-watch-ignore-regex.js'
+import { createWatchIgnoreRegex } from '../../src/watch-async/create-watch-ignore-regex.js'
 
 test('ignored', function (t) {
   t.plan(6)
-  t.true(watchIgnoreRegex.test('node_modules'))
-  t.true(watchIgnoreRegex.test('manifest.json'))
-  t.true(watchIgnoreRegex.test('package-lock.json'))
-  t.true(watchIgnoreRegex.test('styles.css.d.ts'))
-  t.true(watchIgnoreRegex.test('src/styles.css.d.ts'))
-  t.true(watchIgnoreRegex.test('build/main.js'))
+  t.true(createWatchIgnoreRegex('./').test('node_modules'))
+  t.true(createWatchIgnoreRegex('./').test('manifest.json'))
+  t.true(createWatchIgnoreRegex('./').test('package-lock.json'))
+  t.true(createWatchIgnoreRegex('./').test('styles.css.d.ts'))
+  t.true(createWatchIgnoreRegex('./').test('src/styles.css.d.ts'))
+  t.true(createWatchIgnoreRegex('./').test('build/main.js'))
 })
 
 test('not ignored', function (t) {
   t.plan(9)
-  t.false(watchIgnoreRegex.test('build-figma-plugin.manifest.js'))
-  t.false(watchIgnoreRegex.test('build-figma-plugin.main.js'))
-  t.false(watchIgnoreRegex.test('build-figma-plugin.ui.js'))
-  t.false(watchIgnoreRegex.test('package.json'))
-  t.false(watchIgnoreRegex.test('tsconfig.json'))
-  t.false(watchIgnoreRegex.test('src/data.json'))
-  t.false(watchIgnoreRegex.test('src/main.js'))
-  t.false(watchIgnoreRegex.test('src/styles.css'))
-  t.false(watchIgnoreRegex.test('src/ui.tsx'))
+  t.false(createWatchIgnoreRegex('./').test('build-figma-plugin.manifest.js'))
+  t.false(createWatchIgnoreRegex('./').test('build-figma-plugin.main.js'))
+  t.false(createWatchIgnoreRegex('./').test('build-figma-plugin.ui.js'))
+  t.false(createWatchIgnoreRegex('./').test('package.json'))
+  t.false(createWatchIgnoreRegex('./').test('tsconfig.json'))
+  t.false(createWatchIgnoreRegex('./').test('src/data.json'))
+  t.false(createWatchIgnoreRegex('./').test('src/main.js'))
+  t.false(createWatchIgnoreRegex('./').test('src/styles.css'))
+  t.false(createWatchIgnoreRegex('./').test('src/ui.tsx'))
 })
