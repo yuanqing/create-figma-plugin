@@ -121,6 +121,7 @@
 
 .children {
   display: inline;
+  cursor: inherit;
 }
 .loading .children {
   visibility: hidden;
