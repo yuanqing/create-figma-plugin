@@ -56,7 +56,7 @@
     "stylelint-config-yuanqing": "0.0.7",
     "tsx": "4.17.0",
     "turbo": "2.0.12",
-    "typescript": "5.5.4"
+    "typescript": "5.4.5"
   },
   "eslintConfig": {
     "extends": "eslint-config-yuanqing",
