@@ -228,9 +228,9 @@ See the [recipe for configuring relaunch buttons](<%- query('page', 'recipes').u
 
 (*`object`*)
 
-*Optional.* An object that specifies the [list of domains that your plugin/widget is permitted to access](https://figma.com/plugin-docs/manifest#networkaccess). The object has the following keys:
+*Required.* An object that specifies the [list of domains that your plugin/widget is permitted to access](https://figma.com/plugin-docs/manifest#networkaccess). The object has the following keys:
 
-- **`"allowedDomains"`** (*`Array<string>`*) — *Required.* Match patterns for domains that your plugin/widget is permitted to access.
+- **`"allowedDomains"`** (*`Array<string>`*) — *Required.* Either `["none"]` or match patterns for domains that your plugin/widget is permitted to access.
 - **`"reasoning"`** (*`string`*) — *Optional.* For specifying why your plugin/widgets needs to access the domains in **`"allowedDomains"`**.
 - **`"devAllowedDomains"`** (*`Array<string>`*) — *Optional.* Match patterns for domains that your plugin/widget is permitted to access during development.
 
