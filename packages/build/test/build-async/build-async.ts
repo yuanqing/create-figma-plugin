@@ -474,7 +474,7 @@ test('tailwind CSS', async function (t) {
   t.true(await pathExists('build/main.js'))
   t.true(await pathExists('build/ui.js'))
   const uiJs = await fs.readFile('build/ui.js', 'utf8')
-  t.true(uiJs.indexOf('.\\\\!top-\\\\[117px\\\\]') !== -1)
+  t.true(uiJs.indexOf('.\\\\!pt-\\\\[117px\\\\]') !== -1)
   t.true(
     uiJs.indexOf(".before\\\\:content-\\\\[\\\\'foo\\\\'\\\\]::before") !== -1
   )
