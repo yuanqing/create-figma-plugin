@@ -450,6 +450,39 @@ test('global CSS', async function (t) {
   await cleanUpAsync()
 })
 
+test('tailwind CSS', async function (t) {
+  t.plan(11)
+  const directoryPath = join(__dirname, 'fixtures', '14-tailwind-css')
+  process.chdir(directoryPath)
+  await cleanUpAsync()
+  t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
+  t.false(await pathExists('node_modules'))
+  t.false(await pathExists('src/styles.css.d.ts'))
+  await installFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    editorType: ['figma'],
+    id: '42',
+    name: 'a',
+    main: 'build/main.js',
+    ui: 'build/ui.js'
+  })
+  t.true(await pathExists('build/main.js'))
+  t.true(await pathExists('build/ui.js'))
+  const uiJs = await fs.readFile('build/ui.js', 'utf8')
+  t.true(uiJs.indexOf('.\\\\!top-\\\\[117px\\\\]') !== -1)
+  t.true(
+    uiJs.indexOf(".before\\\\:content-\\\\[\\\\'foo\\\\'\\\\]::before") !== -1
+  )
+  t.true(uiJs.indexOf('.hover\\\\:bg-\\\\[\\\\#bada55\\\\]:hover') !== -1)
+  t.true(await pathExists('src/styles.css.d.ts'))
+  await cleanUpAsync()
+})
+
 test('preact', async function (t) {
   t.plan(6)
   const directoryPath = join(__dirname, 'fixtures', '15-preact')

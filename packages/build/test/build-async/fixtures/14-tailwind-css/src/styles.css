@@ -1,0 +1,13 @@
+.\!top-\[117px\] {
+  top: 117px !important;
+}
+
+.before\:content-\[\'foo\'\]::before {
+  --tw-content: 'foo';
+  content: var(--tw-content);
+}
+
+.hover\:bg-\[\#bada55\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(186 218 85 / var(--tw-bg-opacity));
+}
