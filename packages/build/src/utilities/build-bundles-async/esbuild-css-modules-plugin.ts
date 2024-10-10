@@ -81,7 +81,7 @@ const backQuoteRegex = /`/g
 const backSlashRegex = /\\/g
 
 function escapeCss(css: string) {
-  return css.replace(backQuoteRegex, '\\`').replace(backSlashRegex, '\\\\')
+  return css.replace(backSlashRegex, '\\\\').replace(backQuoteRegex, '\\`')
 }
 
 async function createGlobalCssJavaScriptAsync(
