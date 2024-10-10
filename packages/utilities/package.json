@@ -48,7 +48,7 @@
     "rgb-hex": "^4.1.0"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "1.90.0",
+    "@figma/plugin-typings": "1.100.2",
     "@types/natural-compare-lite": "1.4.2",
     "@types/node": "22.2.0",
     "@typescript-eslint/eslint-plugin": "6.13.2",
