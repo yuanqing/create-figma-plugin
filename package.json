@@ -13,7 +13,7 @@
     "fix": "turbo run fix && eslint --fix 'scripts/**/*.ts'",
     "lint": "turbo run lint && eslint 'scripts/**/*.ts'",
     "postinstall": "simple-git-hooks && tsx scripts/patch-figma-plugin-typings.ts && npm run build",
-    "prepackages-publish": "turbo run fix lint test build",
+    "prepackages-publish": "turbo run fix lint && turbo run test build",
     "packages-publish": "lerna publish from-package",
     "packages-version": "lerna version --force-publish",
     "release": "sh scripts/release.sh",
@@ -76,7 +76,7 @@
   "prettier": "eslint-config-yuanqing/prettier",
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "pre-push": "npx turbo run fix lint test build"
+    "pre-push": "npx turbo run fix lint && npx turbo run test build"
   },
   "stylelint": {
     "extends": "stylelint-config-yuanqing"
