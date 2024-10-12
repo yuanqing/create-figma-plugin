@@ -1,5 +1,7 @@
 :root {
+  --border-width-1: 1px;
   --border-radius-2: 2px;
+  --border-radius-4: 4px;
   --border-radius-6: 6px;
   --box-shadow: var(--box-shadow-menu);
   --box-shadow-menu: 0 5px 17px rgba(0, 0, 0, 0.2),
@@ -21,6 +23,15 @@
   --space-medium: 16px;
   --space-large: 20px;
   --space-extra-large: 24px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --transition-duration-100: 0.1s;
+  --transition-duration-300: 0.3s;
   --z-index-1: 1;
   --z-index-2: 2;
 }
