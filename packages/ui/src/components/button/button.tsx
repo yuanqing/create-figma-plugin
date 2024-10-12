@@ -59,11 +59,6 @@ export const Button = createComponent<HTMLButtonElement, ButtonProps>(function (
         loading === true ? styles.loading : null
       ])}
     >
-      {loading === true ? (
-        <div class={styles.loadingIndicator}>
-          <LoadingIndicator />
-        </div>
-      ) : null}
       <button
         {...rest}
         ref={ref}
@@ -74,6 +69,11 @@ export const Button = createComponent<HTMLButtonElement, ButtonProps>(function (
       >
         <div class={styles.children}>{children}</div>
       </button>
+      {loading === true ? (
+        <div class={styles.loadingIndicator}>
+          <LoadingIndicator />
+        </div>
+      ) : null}
     </div>
   )
 })

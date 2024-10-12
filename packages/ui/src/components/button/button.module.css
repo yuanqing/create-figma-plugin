@@ -9,8 +9,12 @@
 }
 
 .button button {
+  position: relative;
   display: inline-block;
-  height: 32px;
+  height: var(--space-24);
+  padding: 0 var(--space-8);
+  border-width: var(--border-width-1);
+  border-style: solid;
   border-radius: var(--border-radius-6);
 }
 
@@ -27,14 +31,19 @@
 }
 
 .default button {
-  padding: 0 14px;
-  border: 2px solid transparent;
+  border-color: transparent;
   background-color: var(--figma-color-bg-brand);
   color: var(--figma-color-text-onbrand);
-  line-height: 28px;
 }
+
 .default:not(.disabled) button:focus {
-  border-color: var(--figma-color-border-brand-strong);
+  border-color: var(--figma-color-border-onbrand);
+}
+.default:not(.disabled) button:focus-visible {
+  box-shadow: 0 0 0 var(--border-width-1) var(--figma-color-bg) inset;
+}
+.default:not(.disabled) button:active {
+  background-color: var(--figma-color-bg-brand-pressed);
 }
 .default.disabled button {
   background-color: var(--figma-color-bg-disabled);
@@ -48,31 +57,32 @@
 .default.danger:not(.disabled) button:focus {
   border-color: var(--figma-color-border-danger-strong);
 }
+.default.danger:not(.disabled) button:active {
+  background-color: var(--figma-color-bg-danger-pressed);
+}
 .default.danger.disabled button {
   background-color: var(--figma-color-bg-disabled);
   color: var(--figma-color-text-ondisabled);
 }
 
 .secondary button {
-  padding: 0 15px;
-  border: 1px solid var(--figma-color-border-strong);
+  border-color: var(--figma-color-border);
   background-color: transparent;
   color: var(--figma-color-text);
-  line-height: 30px;
 }
 .secondary:not(.disabled) button:focus {
-  padding: 0 14px;
-  border-width: 2px;
-  border-color: var(--figma-color-border-brand-strong);
-  line-height: 28px;
+  border-color: var(--figma-color-border-selected);
+}
+.secondary:not(.disabled) button:active {
+  background-color: var(--figma-color-bg-pressed);
 }
 .secondary.disabled button {
-  border-color: var(--figma-color-border-disabled-strong);
+  border-color: var(--figma-color-border-disabled);
   color: var(--figma-color-text-disabled);
 }
 
 .secondary.danger button {
-  border-color: var(--figma-color-border-danger-strong);
+  border-color: var(--figma-color-border-danger);
   color: var(--figma-color-text-danger);
 }
 .secondary.danger:not(.disabled) button:focus {
