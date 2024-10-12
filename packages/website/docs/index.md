@@ -16,7 +16,7 @@
       "handle": "alexwidua",
       "id": "1428782856998989827",
       "name": "Alex Widua",
-      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1659282301132341248/mUlxAI0D_400x400.jpg",
+      "profilePhotoUrl": "https://avatars.githubusercontent.com/u/12382286?v=4",
       "text": "This was also the first time I used <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin toolkit and wow – what a comprehensive and thought-out library. Allowed me to have the first prototype up and running in just an hour. A staple for building Figma plugins from now on 😌"
     },
     {
@@ -24,7 +24,7 @@
       "handle": "tkmadeit",
       "id": "1428024307511402499",
       "name": "tkmadeit",
-      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1322343885172051970/7r2g2q0E_400x400.jpg",
+      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1816221794887417857/k7yV9pLZ_400x400.jpg",
       "text": "If you build plugins for <a href=\"https://twitter.com/figma\" target=\"_blank\">@figma</a> do yourself a favor and start using Create Figma Plugin toolkit by <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>!"
     },
     {
@@ -32,7 +32,7 @@
       "handle": "abynim",
       "id": "1428137898142883840",
       "name": "Aby Nimbalkar",
-      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1484323185185427456/o6Nzp-Hb_400x400.jpg",
+      "profilePhotoUrl": "https://pbs.twimg.com/profile_images/1759823930838405120/d8WAr0QG_400x400.jpg",
       "text": "I know I’m late to this party but I just published my first <a href=\"https://twitter.com/figma\" target=\"_blank\">@figma</a> plugin 🥳 (org-only so can’t share yet). <a href=\"https://twitter.com/yuanqinglim\" target=\"_blank\">@yuanqinglim</a>’s Create Figma Plugin library made building the UI so easy and helped me focus on the logic instead. Highly recommended!"
     }
   ]
