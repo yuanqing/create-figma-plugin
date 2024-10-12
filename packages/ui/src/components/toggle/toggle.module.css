@@ -1,6 +1,8 @@
 .toggle {
   position: relative;
   z-index: var(--z-index-1);
+  display: flex;
+  gap: var(--space-8);
 }
 
 .input {
@@ -8,37 +10,37 @@
   z-index: var(
     --z-index-1
   ); /* stack `.input` over all other elements within `.toggle` */
-  top: -8px;
-  right: -16px;
-  bottom: -8px;
-  left: -16px;
+  top: calc(-1 * var(--space-8));
+  right: calc(-1 * var(--space-8));
+  bottom: calc(-1 * var(--space-8));
+  left: calc(-1 * var(--space-8));
   display: block;
-  width: calc(100% + 32px);
 }
 .disabled .input {
   cursor: not-allowed;
 }
 
 .box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 12px;
-  border: 1px solid var(--figma-color-border-strong);
-  border-radius: 6px;
-  transition: background-color 0.1s ease-out;
+  position: relative;
+  width: var(--space-32);
+  height: var(--space-16);
+  border: var(--border-width-1) solid transparent;
+  border-radius: calc(var(--space-16) / 2);
+  background-color: var(--figma-color-bg-tertiary);
+  transition: background-color var(--transition-duration-100) ease-out;
 }
-.toggle:not(.disabled) .input:focus ~ .box {
-  box-shadow:
-    0 0 0 1px var(--figma-color-bg),
-    0 0 0 3px var(--figma-color-border-brand-strong);
+.toggle:not(.disabled) .input:focus-visible ~ .box {
+  border-color: var(--figma-color-border-onbrand);
 }
 .toggle:not(.disabled) .input:checked ~ .box {
-  background-color: var(--figma-color-bg-inverse);
+  background-color: var(--figma-color-bg-brand);
 }
-.disabled .input ~ .box {
-  border-color: var(--figma-color-border-disabled);
+.toggle:not(.disabled) .input:checked:focus ~ .box {
+  border-color: var(--figma-color-border-onbrand);
+}
+.toggle:not(.disabled) .input:checked:focus-visible ~ .box {
+  border-color: var(--figma-color-border-onbrand);
+  box-shadow: 0 0 0 var(--border-width-1) var(--figma-color-bg) inset;
 }
 .disabled .input:checked ~ .box {
   background-color: var(--figma-color-bg-disabled);
@@ -47,28 +49,22 @@
 .switch {
   position: absolute;
   top: 0;
-  width: 12px;
-  height: 12px;
-  border: 1px solid transparent;
-  border-radius: 6px;
+  width: calc(var(--space-16) - (2 * var(--border-width-1)));
+  height: calc(var(--space-16) - (2 * var(--border-width-1)));
+  border-radius: calc((var(--space-16) / 2) - var(--border-width-1));
   background-color: var(--figma-color-bg);
-  transition: left 0.1s ease-out;
+  transition: left var(--transition-duration-100) ease-out;
 }
-.input:not(:checked) ~ .switch {
+.input:not(:checked) ~ .box .switch {
   left: 0;
 }
-.input:checked ~ .switch {
-  left: 12px;
-}
-.toggle:not(.disabled) .input ~ .switch {
-  border-color: var(--figma-color-border-strong);
-}
-.disabled .input ~ .switch {
-  border-color: var(--figma-color-border-disabled);
+.input:checked ~ .box .switch {
+  left: calc(var(--space-32) - var(--space-16));
 }
 
 .children {
-  padding: 2px 0 2px 32px;
+  flex: 1;
+  padding-top: var(--space-4);
   color: var(--figma-color-text);
 }
 .disabled .children {

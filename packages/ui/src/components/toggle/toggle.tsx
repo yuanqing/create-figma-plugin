@@ -65,8 +65,9 @@ export const Toggle = createComponent<HTMLInputElement, ToggleProps>(function ({
         tabIndex={0}
         type="checkbox"
       />
-      <div class={styles.box} />
-      <div class={styles.switch} />
+      <div class={styles.box}>
+        <div class={styles.switch} />
+      </div>
       <div class={styles.children}>{children}</div>
     </label>
   )
