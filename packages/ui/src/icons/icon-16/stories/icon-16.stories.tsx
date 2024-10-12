@@ -28,6 +28,7 @@ import { IconCircleHelp16 } from '../icon-circle-help-16.js'
 import { IconCircleInfo16 } from '../icon-circle-info-16.js'
 import { IconCode16 } from '../icon-code-16.js'
 import { IconConnector16 } from '../icon-connector-16.js'
+import { IconControlCheckboxChecked16 } from '../icon-control-checkbox-checked-16.js'
 import { IconHyperlink16 } from '../icon-hyperlink-16.js'
 import { IconLayerAnimated16 } from '../icon-layer-animated-16.js'
 import { IconLayerComponent16 } from '../icon-layer-component-16.js'
@@ -190,6 +191,10 @@ export const Code = function () {
 
 export const Connector = function () {
   return <IconConnector16 />
+}
+
+export const ControlCheckboxChecked = function () {
+  return <IconControlCheckboxChecked16 />
 }
 
 export const Hyperlink = function () {
