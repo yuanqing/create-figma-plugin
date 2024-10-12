@@ -4,6 +4,8 @@
 
 - `@create-figma-plugin/build@3.2.1`
 
+  - Properly escape `/` in imported CSS, to allow the use of Tailwind’s modifiers and square bracket notation. ([#209](https://github.com/yuanqing/create-figma-plugin/issues/209))
+
   - Ignore the output directory when building with the `--watch` flag. ([#237](https://github.com/yuanqing/create-figma-plugin/issues/237))
 
 - Bumped dependencies in all packages.
