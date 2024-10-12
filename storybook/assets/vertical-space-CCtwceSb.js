@@ -1,1 +1,0 @@
-import{y as r}from"./preact.module-Cko36Lti.js";import{c}from"./create-component-B1Y1oDBF.js";const l="_extraSmall_zc4n0_1",m="_small_zc4n0_4",n="_medium_zc4n0_7",s="_large_zc4n0_10",o="_extraLarge_zc4n0_13",_={extraSmall:l,small:m,medium:n,large:s,extraLarge:o},g=c(function({space:a,...e},t){return r("div",{...e,ref:t,class:_[a]})});export{g as V};
