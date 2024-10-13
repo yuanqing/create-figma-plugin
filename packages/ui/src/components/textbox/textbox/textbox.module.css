@@ -9,17 +9,24 @@
 .input {
   display: block;
   width: 100%;
-  height: 28px;
-  padding: 0 var(--space-extra-small);
-  background-color: transparent;
+  height: var(--space-24);
+  padding: var(--space-0) calc(var(--space-8) - var(--border-width-1));
+  border: var(--border-width-1) solid transparent;
+  border-radius: var(--border-radius-4);
+  background-color: var(--figma-color-bg-secondary);
   color: var(--figma-color-text);
 }
+.input:focus {
+  border-color: var(--figma-color-border-selected);
+}
 .disabled .input {
+  border-color: var(--figma-color-border-disabled);
+  background-color: transparent;
   color: var(--figma-color-text-disabled);
   cursor: not-allowed;
 }
 .hasIcon .input {
-  padding-left: 32px;
+  padding-left: calc(var(--space-24) - var(--border-width-1));
 }
 
 .input::placeholder {
@@ -28,15 +35,12 @@
 
 .icon {
   position: absolute;
-  top: 14px;
-  left: 16px;
+  top: var(--space-4);
+  left: var(--space-4);
+  min-width: var(--space-16);
   color: var(--figma-color-icon-secondary);
-  pointer-events: none; /* so that clicking the icon focuses the textbox */
+  pointer-events: none;
   text-align: center;
-  transform: translate(-50%, -50%);
-}
-.textbox:not(.disabled) .input:focus ~ .icon {
-  color: var(--figma-color-icon-brand);
 }
 .disabled .icon {
   color: var(--figma-color-icon-disabled);
@@ -44,38 +48,4 @@
 
 .icon svg {
   fill: currentColor;
-}
-
-.border {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius-2);
-  pointer-events: none;
-}
-.hasBorder .border,
-.textbox:not(.disabled):hover .border {
-  border-color: var(--figma-color-border);
-}
-.textbox:not(.disabled) .input:focus ~ .border {
-  top: -1px;
-  bottom: -1px;
-  border-width: 2px;
-  border-color: var(--figma-color-border-brand-strong);
-}
-
-.underline {
-  position: absolute;
-  right: var(--space-extra-small);
-  bottom: 0;
-  left: var(--space-extra-small);
-  height: 1px;
-  background-color: var(--figma-color-border);
-}
-.textbox:not(.disabled) .input:focus ~ .underline,
-.textbox:not(.disabled):hover .underline {
-  background-color: transparent;
 }

@@ -7,13 +7,10 @@ import styles from './textbox.module.css'
 
 export type TextboxProps = RawTextboxProps & {
   icon?: ComponentChildren
-  variant?: TextboxVariant
 }
 
-export type TextboxVariant = 'border' | 'underline'
-
 export const Textbox = createComponent<HTMLInputElement, TextboxProps>(
-  function ({ icon, variant, ...rest }, ref) {
+  function ({ icon, ...rest }, ref) {
     if (typeof icon === 'string' && icon.length !== 1) {
       throw new Error(`String \`icon\` must be a single character: ${icon}`)
     }
@@ -22,7 +19,6 @@ export const Textbox = createComponent<HTMLInputElement, TextboxProps>(
       <div
         class={createClassName([
           styles.textbox,
-          variant === 'border' ? styles.hasBorder : null,
           typeof icon === 'undefined' ? null : styles.hasIcon,
           rest.disabled === true ? styles.disabled : null
         ])}
@@ -31,8 +27,6 @@ export const Textbox = createComponent<HTMLInputElement, TextboxProps>(
         {typeof icon === 'undefined' ? null : (
           <div class={styles.icon}>{icon}</div>
         )}
-        <div class={styles.border} />
-        {variant === 'underline' ? <div class={styles.underline} /> : null}
       </div>
     )
   }

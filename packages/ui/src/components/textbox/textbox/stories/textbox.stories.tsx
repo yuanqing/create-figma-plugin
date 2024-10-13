@@ -11,8 +11,8 @@ export default {
   parameters: {
     fixedWidth: true
   },
-  tags: ['3'],
-  title: 'Components/Textbox/Underline'
+  tags: ['1'],
+  title: 'Components/Textbox'
 }
 
 export const Empty = function () {
@@ -22,7 +22,7 @@ export const Empty = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox onInput={handleInput} value={value} variant="underline" />
+  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const Focused = function () {
@@ -32,14 +32,7 @@ export const Focused = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <Textbox
-      {...useInitialFocus()}
-      onInput={handleInput}
-      value={value}
-      variant="underline"
-    />
-  )
+  return <Textbox {...useInitialFocus()} onInput={handleInput} value={value} />
 }
 
 export const Placeholder = function () {
@@ -50,12 +43,7 @@ export const Placeholder = function () {
     setValue(newValue)
   }
   return (
-    <Textbox
-      onInput={handleInput}
-      placeholder="Placeholder"
-      value={value}
-      variant="underline"
-    />
+    <Textbox onInput={handleInput} placeholder="Placeholder" value={value} />
   )
 }
 
@@ -66,16 +54,7 @@ export const Filled = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox onInput={handleInput} value={value} variant="underline" />
-}
-
-export const Disabled = function () {
-  function handleInput() {
-    throw new Error('This function should not be called')
-  }
-  return (
-    <Textbox disabled onInput={handleInput} value="Text" variant="underline" />
-  )
+  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const Icon = function () {
@@ -86,12 +65,7 @@ export const Icon = function () {
     setValue(newValue)
   }
   return (
-    <Textbox
-      icon={<IconLayerFrame16 />}
-      onInput={handleInput}
-      value={value}
-      variant="underline"
-    />
+    <Textbox icon={<IconLayerFrame16 />} onInput={handleInput} value={value} />
   )
 }
 
@@ -102,8 +76,27 @@ export const TextIcon = function () {
     console.log(newValue)
     setValue(newValue)
   }
+  return <Textbox icon="W" onInput={handleInput} value={value} />
+}
+
+export const Disabled = function () {
+  function handleInput() {
+    throw new Error('This function should not be called')
+  }
+  return <Textbox disabled onInput={handleInput} value="Text" />
+}
+
+export const DisabledIcon = function () {
+  function handleInput() {
+    throw new Error('This function should not be called')
+  }
   return (
-    <Textbox icon="W" onInput={handleInput} value={value} variant="underline" />
+    <Textbox
+      disabled
+      icon={<IconLayerFrame16 />}
+      onInput={handleInput}
+      value="Text"
+    />
   )
 }
 
@@ -114,7 +107,7 @@ export const Mixed = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return <Textbox onInput={handleInput} value={value} variant="underline" />
+  return <Textbox onInput={handleInput} value={value} />
 }
 
 export const RevertOnEscapeKeyDown = function () {
@@ -124,14 +117,7 @@ export const RevertOnEscapeKeyDown = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <Textbox
-      onInput={handleInput}
-      revertOnEscapeKeyDown
-      value={value}
-      variant="underline"
-    />
-  )
+  return <Textbox onInput={handleInput} revertOnEscapeKeyDown value={value} />
 }
 
 export const ValidateOnBlur = function () {
@@ -160,9 +146,7 @@ export const Password = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <Textbox onInput={handleInput} password value={value} variant="underline" />
-  )
+  return <Textbox onInput={handleInput} password value={value} />
 }
 
 export const Ref = function () {
@@ -177,14 +161,7 @@ export const Ref = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <Textbox
-      ref={ref}
-      onInput={handleInput}
-      value={value}
-      variant="underline"
-    />
-  )
+  return <Textbox ref={ref} onInput={handleInput} value={value} />
 }
 
 export const OnValueInput = function () {
@@ -193,11 +170,5 @@ export const OnValueInput = function () {
     console.log(newValue)
     setValue(newValue)
   }
-  return (
-    <Textbox
-      onValueInput={handleValueInput}
-      value={value}
-      variant="underline"
-    />
-  )
+  return <Textbox onValueInput={handleValueInput} value={value} />
 }
