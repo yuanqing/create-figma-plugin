@@ -28,7 +28,6 @@ import { IconCircleHelp16 } from '../icon-circle-help-16.js'
 import { IconCircleInfo16 } from '../icon-circle-info-16.js'
 import { IconCode16 } from '../icon-code-16.js'
 import { IconConnector16 } from '../icon-connector-16.js'
-import { IconControlCheckboxChecked16 } from '../icon-control-checkbox-checked-16.js'
 import { IconHyperlink16 } from '../icon-hyperlink-16.js'
 import { IconLayerAnimated16 } from '../icon-layer-animated-16.js'
 import { IconLayerComponent16 } from '../icon-layer-component-16.js'
@@ -72,6 +71,8 @@ import { IconTextAlignLeft16 } from '../icon-text-align-left-16.js'
 import { IconTextAlignRight16 } from '../icon-text-align-right-16.js'
 import { IconTextDecorationStrikethrough16 } from '../icon-text-decoration-strikethrough-16.js'
 import { IconTextDecorationUnderline16 } from '../icon-text-decoration-underline-16.js'
+import { IconUi3CheckboxCheck16 } from '../icon-ui-3-checkbox-check-16.js'
+import { IconUi3DisclosureChevron16 } from '../icon-ui-3-disclosure-chevron-16.js'
 import { IconUpload16 } from '../icon-upload-16.js'
 import { IconVisibilityHidden16 } from '../icon-visibility-hidden-16.js'
 import { IconVisibilityVisible16 } from '../icon-visibility-visible-16.js'
@@ -191,10 +192,6 @@ export const Code = function () {
 
 export const Connector = function () {
   return <IconConnector16 />
-}
-
-export const ControlCheckboxChecked = function () {
-  return <IconControlCheckboxChecked16 />
 }
 
 export const Hyperlink = function () {
@@ -367,6 +364,14 @@ export const TextDecorationStrikethrough = function () {
 
 export const TextDecorationUnderline = function () {
   return <IconTextDecorationUnderline16 />
+}
+
+export const Ui3CheckboxCheck = function () {
+  return <IconUi3CheckboxCheck16 />
+}
+
+export const Ui3DisclosureChevron = function () {
+  return <IconUi3DisclosureChevron16 />
 }
 
 export const Upload = function () {
