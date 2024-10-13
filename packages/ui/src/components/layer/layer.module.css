@@ -62,8 +62,8 @@
 }
 
 .icon {
-  height: 16px;
-  flex: 0 0 16px;
+  height: var(--space-16);
+  flex: 0 0 var(--space-16);
   color: var(--figma-color-icon-secondary);
 }
 .input:checked ~ .box .icon {
