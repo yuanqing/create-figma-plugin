@@ -101,7 +101,6 @@ export const SegmentedControl = createComponent<
           )
         })}
       </div>
-      <div class={styles.border} />
     </div>
   )
 })
