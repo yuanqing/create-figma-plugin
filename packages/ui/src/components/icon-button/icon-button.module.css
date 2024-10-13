@@ -1,20 +1,22 @@
 .iconButton {
   position: relative;
-  width: 30px;
-  height: 30px;
-  border: 2px solid transparent;
-  border-radius: var(--border-radius-2);
+  width: var(--space-24);
+  height: var(--space-24);
+  border: var(--border-width-1) solid transparent;
+  border-radius: var(--border-radius-4);
 }
 
 .iconButton:not(:disabled) {
   color: var(--figma-color-icon);
 }
-.iconButton:not(:disabled):hover {
+.iconButton:not(:disabled):hover,
+.iconButton:not(:disabled):active {
   background-color: var(--figma-color-bg-hover);
 }
-.iconButton:not(:disabled):focus {
-  border-color: var(--figma-color-border-brand-strong);
+.iconButton:not(:disabled):focus-visible {
+  border-color: var(--figma-color-border-selected);
 }
+
 .iconButton:disabled {
   color: var(--figma-color-icon-disabled);
   cursor: not-allowed;
@@ -24,6 +26,5 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  pointer-events: none;
   transform: translate(-50%, -50%);
 }
