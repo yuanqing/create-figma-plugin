@@ -12,7 +12,7 @@ export default {
     fixedWidth: true
   },
   tags: ['1'],
-  title: 'Components/Textbox Numeric/Default'
+  title: 'Components/Textbox Numeric'
 }
 
 export const Empty = function () {
@@ -67,13 +67,6 @@ export const Filled = function () {
   return <TextboxNumeric onInput={handleInput} value={value} />
 }
 
-export const Disabled = function () {
-  function handleInput() {
-    throw new Error('This function should not be called')
-  }
-  return <TextboxNumeric disabled onInput={handleInput} value="42" />
-}
-
 export const Icon = function () {
   const [value, setValue] = useState<string>('42')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
@@ -98,6 +91,27 @@ export const TextIcon = function () {
     setValue(newValue)
   }
   return <TextboxNumeric icon="W" onInput={handleInput} value={value} />
+}
+
+export const Disabled = function () {
+  function handleInput() {
+    throw new Error('This function should not be called')
+  }
+  return <TextboxNumeric disabled onInput={handleInput} value="42" />
+}
+
+export const DisabledIcon = function () {
+  function handleInput() {
+    throw new Error('This function should not be called')
+  }
+  return (
+    <TextboxNumeric
+      disabled
+      icon={<IconLayerFrame16 />}
+      onInput={handleInput}
+      value="42"
+    />
+  )
 }
 
 export const Mixed = function () {

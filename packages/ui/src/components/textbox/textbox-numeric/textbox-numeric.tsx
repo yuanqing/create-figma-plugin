@@ -11,15 +11,12 @@ import textboxNumericStyles from './textbox-numeric.module.css'
 
 export type TextboxNumericProps = RawTextboxNumericProps & {
   icon?: ComponentChildren
-  variant?: TextboxNumericVariant
 }
-
-export type TextboxNumericVariant = 'border' | 'underline'
 
 export const TextboxNumeric = createComponent<
   HTMLInputElement,
   TextboxNumericProps
->(function ({ icon, variant, ...rest }, ref) {
+>(function ({ icon, ...rest }, ref) {
   if (typeof icon === 'string' && icon.length !== 1) {
     throw new Error(`String \`icon\` must be a single character: ${icon}`)
   }
@@ -28,11 +25,6 @@ export const TextboxNumeric = createComponent<
     <div
       class={createClassName([
         textboxStyles.textbox,
-        typeof variant === 'undefined'
-          ? null
-          : variant === 'border'
-            ? textboxStyles.hasBorder
-            : null,
         typeof icon === 'undefined' ? null : textboxStyles.hasIcon,
         rest.disabled === true ? textboxStyles.disabled : null
       ])}
@@ -48,8 +40,6 @@ export const TextboxNumeric = createComponent<
       {typeof icon === 'undefined' ? null : (
         <div class={textboxStyles.icon}>{icon}</div>
       )}
-      <div class={textboxStyles.border} />
-      {variant === 'underline' ? <div class={textboxStyles.underline} /> : null}
     </div>
   )
 })
