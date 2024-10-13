@@ -76,17 +76,18 @@ export const RadioButtons = createComponent<HTMLDivElement, RadioButtonsProps>(
                 : option.children
             const isOptionDisabled =
               disabled === true || option.disabled === true
+            const checked = value === option.value
             return (
               <label
                 key={index}
                 class={createClassName([
-                  styles.label,
+                  styles.radioButton,
                   isOptionDisabled === true ? styles.disabled : null
                 ])}
               >
                 <input
                   {...rest}
-                  checked={value === option.value}
+                  checked={checked === true}
                   class={styles.input}
                   disabled={isOptionDisabled === true}
                   onChange={handleChange}
@@ -96,8 +97,7 @@ export const RadioButtons = createComponent<HTMLDivElement, RadioButtonsProps>(
                   value={`${option.value}`}
                   {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
                 />
-                <div class={styles.fill} />
-                <div class={styles.border} />
+                <div class={styles.box} />
                 <div class={styles.children}>{children}</div>
               </label>
             )

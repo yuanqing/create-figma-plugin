@@ -3,63 +3,49 @@
   z-index: var(--z-index-1);
 }
 
-.label {
+.radioButton {
   position: relative;
+  display: flex;
+  gap: var(--space-8);
 }
 
 .input {
   position: absolute;
   z-index: var(--z-index-1); /* stack `.input` on top of everything else */
-  top: -8px;
-  right: -16px;
-  bottom: -8px;
-  left: -16px;
+  top: calc(-1 * var(--space-8));
+  right: calc(-1 * var(--space-8));
+  bottom: calc(-1 * var(--space-8));
+  left: calc(-1 * var(--space-8));
   display: block;
-  width: calc(100% + 32px);
 }
 .disabled .input {
   cursor: not-allowed;
 }
 
-.fill {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
-}
-.input:checked ~ .fill {
-  background-color: var(--figma-color-icon);
-}
-.disabled .input:checked ~ .fill {
-  background-color: var(--figma-color-icon-disabled);
-}
-
-.border {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border: 1px solid var(--figma-color-border-strong);
-  border-radius: 6px;
-}
-.radioButtons:not(.disabled) .input:focus ~ .border {
-  top: -1px;
-  left: -1px;
+.box {
   width: 14px;
   height: 14px;
-  border: 2px solid var(--figma-color-border-brand-strong);
+  border: 1px solid var(--figma-color-border-strong);
   border-radius: 7px;
+  background-color: var(--figma-color-bg);
+  box-shadow: 0 0 0 2.5px var(--figma-color-bg) inset;
 }
-.disabled .input ~ .border {
-  border-color: var(--figma-color-border-disabled-strong);
+.radioButton:not(.disabled) .input:checked ~ .box {
+  background-color: var(--figma-color-bg-inverse);
+}
+.radioButton:not(.disabled) .input:focus ~ .box {
+  border-color: var(--figma-color-border-brand-strong);
+}
+.disabled .input ~ .box {
+  border-color: var(--figma-color-border-disabled);
+}
+.disabled .input:checked ~ .box {
+  background-color: var(--figma-color-bg-disabled);
 }
 
 .children {
-  min-height: 12px;
-  padding: 2px 0 0 20px;
+  flex: 1;
+  padding-top: 3px;
 }
 .disabled .children {
   opacity: var(--opacity-30);
