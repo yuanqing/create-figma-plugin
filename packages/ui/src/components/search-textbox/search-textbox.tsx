@@ -144,7 +144,11 @@ export const SearchTextbox = createComponent<
           onClick={handleClearButtonClick}
           tabIndex={0}
         >
-          <IconCross32 />
+          <div class={styles.clearButtonBox}>
+            <div class={styles.crossIcon}>
+              <IconCross32 />
+            </div>
+          </div>
         </button>
       )}
     </div>
