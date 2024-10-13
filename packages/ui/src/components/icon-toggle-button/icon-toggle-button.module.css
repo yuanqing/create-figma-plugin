@@ -1,7 +1,7 @@
 .iconToggleButton {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: var(--space-24);
+  height: var(--space-24);
 }
 
 .input {
@@ -22,28 +22,28 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border: 2px solid transparent;
-  border-radius: var(--border-radius-2);
-}
-.iconToggleButton:not(.disabled) .input:not(:checked) ~ .box {
+  border: var(--border-width-1) solid transparent;
+  border-radius: var(--border-radius-6);
   color: var(--figma-color-icon);
 }
-.iconToggleButton:not(.disabled) .input:not(:checked):hover ~ .box {
+
+.iconToggleButton:not(.disabled) .input:focus-visible ~ .box {
+  border-color: var(--figma-color-border-selected);
+}
+.iconToggleButton:not(.disabled) .input:hover ~ .box,
+.iconToggleButton:not(.disabled) .input:active ~ .box {
   background-color: var(--figma-color-bg-hover);
 }
-.iconToggleButton:not(.disabled) .input:focus ~ .box {
-  border-color: var(--figma-color-border-brand-strong);
-}
 .iconToggleButton:not(.disabled) .input:checked ~ .box {
-  background-color: var(--figma-color-bg-brand);
-  color: var(--figma-color-icon-onbrand);
+  background-color: var(--figma-color-bg-brand-tertiary);
+  color: var(--figma-color-icon-brand);
 }
-.disabled .input:not(:checked) ~ .box {
+
+.disabled .input ~ .box {
   color: var(--figma-color-icon-disabled);
 }
 .disabled .input:checked ~ .box {
-  background-color: var(--figma-color-bg-disabled);
-  color: var(--figma-color-icon-ondisabled);
+  background-color: var(--figma-color-bg-secondary);
 }
 
 .icon {
