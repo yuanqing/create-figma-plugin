@@ -69,38 +69,36 @@ export const SegmentedControl = createComponent<
         disabled === true ? styles.disabled : null
       ])}
     >
-      <div class={styles.labels}>
-        {options.map(function (option: SegmentedControlOption, index: number) {
-          const children =
-            typeof option.children === 'undefined'
-              ? `${option.value}`
-              : option.children
-          const isOptionDisabled = disabled === true || option.disabled === true
-          return (
-            <label key={index} class={styles.label}>
-              <input
-                {...rest}
-                checked={value === option.value}
-                class={styles.input}
-                disabled={isOptionDisabled === true}
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-                tabIndex={0}
-                type="radio"
-                value={`${option.value}`}
-                {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
-              />
-              <div class={styles.children}>
-                <div
-                  class={typeof children === 'string' ? styles.text : undefined}
-                >
-                  {children}
-                </div>
+      {options.map(function (option: SegmentedControlOption, index: number) {
+        const children =
+          typeof option.children === 'undefined'
+            ? `${option.value}`
+            : option.children
+        const isOptionDisabled = disabled === true || option.disabled === true
+        return (
+          <label key={index}>
+            <input
+              {...rest}
+              checked={value === option.value}
+              class={styles.input}
+              disabled={isOptionDisabled === true}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              tabIndex={0}
+              type="radio"
+              value={`${option.value}`}
+              {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+            />
+            <div class={styles.box}>
+              <div
+                class={typeof children === 'string' ? styles.text : undefined}
+              >
+                {children}
               </div>
-            </label>
-          )
-        })}
-      </div>
+            </div>
+          </label>
+        )
+      })}
     </div>
   )
 })
