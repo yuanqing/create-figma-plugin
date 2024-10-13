@@ -2,7 +2,6 @@
 import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
 import { Disclosure } from '../disclosure.js'
 
 export default {
@@ -10,10 +9,10 @@ export default {
     fixedWidth: true
   },
   tags: ['1'],
-  title: 'Components/Disclosure/Closed'
+  title: 'Components/Disclosure'
 }
 
-export const Default = function () {
+export const Closed = function () {
   const [open, setOpen] = useState<boolean>(false)
   function handleClick(event: JSX.TargetedMouseEvent<HTMLInputElement>) {
     console.log(event)
@@ -22,15 +21,15 @@ export const Default = function () {
   const style = { height: '64px' }
   return (
     <div style={style}>
-      <Disclosure onClick={handleClick} open={open} title="foo">
-        bar
+      <Disclosure onClick={handleClick} open={open} title="Title">
+        Body
       </Disclosure>
     </div>
   )
 }
 
-export const Focused = function () {
-  const [open, setOpen] = useState<boolean>(false)
+export const Open = function () {
+  const [open, setOpen] = useState<boolean>(true)
   function handleClick(event: JSX.TargetedMouseEvent<HTMLInputElement>) {
     console.log(event)
     setOpen(!(open === true))
@@ -38,13 +37,8 @@ export const Focused = function () {
   const style = { height: '64px' }
   return (
     <div style={style}>
-      <Disclosure
-        {...useInitialFocus()}
-        onClick={handleClick}
-        open={open}
-        title="foo"
-      >
-        bar
+      <Disclosure onClick={handleClick} open={open} title="Title">
+        Text
       </Disclosure>
     </div>
   )

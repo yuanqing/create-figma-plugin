@@ -1,7 +1,7 @@
 import { ComponentChildren, Fragment, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { IconCaretRight16 } from '../../icons/icon-16/icon-caret-right-16.js'
+import { IconUi3DisclosureChevron16 } from '../../icons/icon-16/icon-ui-3-disclosure-chevron-16.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -57,7 +57,7 @@ export const Disclosure = createComponent<HTMLInputElement, DisclosureProps>(
           />
           <div class={styles.title}>
             <div class={styles.icon}>
-              <IconCaretRight16 />
+              <IconUi3DisclosureChevron16 />
             </div>
             {title}
           </div>
