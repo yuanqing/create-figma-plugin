@@ -1,20 +1,28 @@
 .input {
   position: absolute;
+  z-index: var(--z-index-1);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: 100%;
-  opacity: 0;
+  text-indent: -9999em;
 }
 
-.default:not(.disabled) .input:focus ~ button {
-  border-color: var(--figma-color-border-brand-strong);
+/* Rules below are copied from `button.module.css` */
+
+.default:not(.disabled) input:focus ~ button {
+  border-color: var(--figma-color-border-onbrand);
+}
+.default:not(.disabled) input:focus-visible ~ button {
+  box-shadow: 0 0 0 var(--border-width-1) var(--figma-color-bg) inset;
+}
+.default:not(.disabled) input:active ~ button {
+  background-color: var(--figma-color-bg-brand-pressed);
 }
 
-.secondary:not(.disabled) .input:focus ~ button {
-  padding: 0 14px;
-  border-width: 2px;
-  border-color: var(--figma-color-border-brand-strong);
-  line-height: 28px;
+.secondary:not(.disabled) input:focus ~ button {
+  border-color: var(--figma-color-border-selected);
+}
+.secondary:not(.disabled) input:active ~ button {
+  background-color: var(--figma-color-bg-pressed);
 }

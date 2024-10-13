@@ -108,11 +108,6 @@ export const FileUploadButton = createComponent<
         loading === true ? buttonStyles.loading : null
       ])}
     >
-      {loading === true ? (
-        <div class={buttonStyles.loadingIndicator}>
-          <LoadingIndicator />
-        </div>
-      ) : null}
       <input
         {...rest}
         ref={ref}
@@ -135,6 +130,11 @@ export const FileUploadButton = createComponent<
       <button disabled={disabled === true} tabIndex={-1}>
         <div class={buttonStyles.children}>{children}</div>
       </button>
+      {loading === true ? (
+        <div class={buttonStyles.loadingIndicator}>
+          <LoadingIndicator />
+        </div>
+      ) : null}
     </div>
   )
 })
