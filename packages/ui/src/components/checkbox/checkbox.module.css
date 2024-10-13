@@ -1,6 +1,8 @@
 .checkbox {
   position: relative;
   z-index: var(--z-index-1);
+  display: flex;
+  gap: var(--space-8);
 }
 
 .input {
@@ -8,66 +10,53 @@
   z-index: var(
     --z-index-1
   ); /* stack `.input` over all other elements within `.checkbox` */
-  top: -8px;
-  right: -16px;
-  bottom: -8px;
-  left: -16px;
+  top: calc(-1 * var(--space-8));
+  right: calc(-1 * var(--space-8));
+  bottom: calc(-1 * var(--space-8));
+  left: calc(-1 * var(--space-8));
   display: block;
-  width: calc(100% + 32px);
 }
 .disabled .input {
   cursor: not-allowed;
 }
 
-.fill,
-.border {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: var(--border-radius-2);
+.box {
+  position: relative;
+  width: var(--space-16);
+  height: var(--space-16);
+  border: 1px solid var(--figma-color-border);
+  border-radius: var(--border-radius-4);
+  background-color: var(--figma-color-bg-secondary);
 }
-
-.border {
-  border: 1px solid var(--figma-color-border-strong);
+.checkbox:not(.disabled) .input:focus-visible ~ .box {
+  box-shadow: 0 0 0 var(--border-width-1) var(--figma-color-bg) inset;
 }
-.checkbox:not(.disabled) .input:focus ~ .border {
+.checkbox:not(.disabled) .input:focus ~ .box {
+  border-color: var(--figma-color-border-selected);
+}
+.checkbox:not(.disabled) .input:checked ~ .box {
   border-color: var(--figma-color-border-brand-strong);
-  box-shadow: 0 0 0 1px var(--figma-color-border-brand-strong);
-}
-.checkbox:not(.disabled) .input:checked ~ .border {
-  border: 0;
-}
-.checkbox:not(.disabled) .input:checked:focus ~ .border {
-  box-shadow:
-    0 0 0 1px var(--figma-color-bg),
-    0 0 0 2px var(--figma-color-border-brand-strong);
-}
-.disabled .input ~ .border {
-  border-color: var(--figma-color-border-disabled-strong);
-}
-.disabled .input:checked ~ .border {
-  border: 0;
-}
-
-.checkbox:not(.disabled) .input:checked ~ .fill {
   background-color: var(--figma-color-bg-brand);
 }
-.disabled .input:checked ~ .fill {
+
+.disabled .input ~ .box {
+  background-color: transparent;
+}
+.disabled .input:checked ~ .box {
+  border-color: transparent;
   background-color: var(--figma-color-bg-disabled);
 }
 
 .checkIcon {
+  position: absolute;
+  top: calc(-1 * var(--border-width-1));
+  left: calc(-1 * var(--border-width-1));
   color: var(--figma-color-icon-onbrand);
-}
-.disabled .checkIcon {
-  color: var(--figma-color-icon-ondisabled);
 }
 
 .children {
-  min-height: 12px;
-  padding: 2px 0 0 20px;
+  flex: 1;
+  padding-top: var(--space-4);
   color: var(--figma-color-text);
 }
 .disabled .children {
