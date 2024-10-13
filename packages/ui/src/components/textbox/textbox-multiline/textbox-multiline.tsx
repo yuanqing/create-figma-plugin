@@ -28,10 +28,7 @@ export interface TextboxMultilineProps
   spellCheck?: boolean
   validateOnBlur?: (value: string) => string | boolean
   value: string
-  variant?: TextboxMultilineVariant
 }
-
-export type TextboxMultilineVariant = 'border' | 'underline'
 
 export const TextboxMultiline = createComponent<
   HTMLTextAreaElement,
@@ -52,7 +49,6 @@ export const TextboxMultiline = createComponent<
     rows = 3,
     spellCheck = false,
     validateOnBlur,
-    variant,
     value,
     ...rest
   },
@@ -179,11 +175,6 @@ export const TextboxMultiline = createComponent<
     <div
       class={createClassName([
         styles.textboxMultiline,
-        typeof variant === 'undefined'
-          ? null
-          : variant === 'border'
-            ? styles.hasBorder
-            : null,
         grow === true ? styles.grow : null,
         disabled === true ? styles.disabled : null
       ])}
@@ -209,8 +200,6 @@ export const TextboxMultiline = createComponent<
         tabIndex={0}
         value={value === MIXED_STRING ? 'Mixed' : value}
       />
-      <div class={styles.border} />
-      {variant === 'underline' ? <div class={styles.underline} /> : null}
     </div>
   )
 })

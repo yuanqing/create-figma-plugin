@@ -11,7 +11,7 @@ export default {
     fixedWidth: true
   },
   tags: ['1'],
-  title: 'Components/Textbox Multiline/Default'
+  title: 'Components/Textbox Multiline'
 }
 
 export const Empty = function () {
