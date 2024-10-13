@@ -2,7 +2,7 @@
   position: relative;
   z-index: var(--z-index-1);
   width: 100%;
-  padding: 32px 0;
+  padding: var(--space-32) var(--space-0);
 }
 
 .isDropActive {
@@ -10,7 +10,7 @@
 }
 
 .input,
-.border {
+.box {
   position: absolute;
   top: 0;
   right: 0;
@@ -26,13 +26,13 @@
   opacity: 0;
 }
 
-.border {
-  border: 1px dashed var(--figma-color-border);
+.box {
+  border: var(--border-width-1) dashed var(--figma-color-border);
 }
-.input:active ~ .border,
-.input:focus ~ .border,
-.isDropActive .border {
-  border-color: var(--figma-color-border-brand-strong);
+.input:active ~ .box,
+.input:focus ~ .box,
+.isDropActive .box {
+  border-color: var(--figma-color-border-selected);
 }
 
 .children {

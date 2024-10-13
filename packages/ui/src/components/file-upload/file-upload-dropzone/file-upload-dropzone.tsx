@@ -153,8 +153,7 @@ export const FileUploadDropzone = createComponent<
         title=""
         type="file"
       />
-      <div class={styles.fill} />
-      <div class={styles.border} />
+      <div class={styles.box} />
       <div class={styles.children}>{children}</div>
     </div>
   )
