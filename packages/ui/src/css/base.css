@@ -1,5 +1,6 @@
 :root {
   --border-width-1: 1px;
+  --border-width-4: 4px;
   --border-radius-2: 2px;
   --border-radius-4: 4px;
   --border-radius-6: 6px;
@@ -9,6 +10,9 @@
     0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
     0 0 0 0.5px rgba(0, 0, 0, 0.2);
+  --box-shadow-range-slider: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 3px 8px 0 rgba(0, 0, 0, 0.1), 0 0 0.5px 0 rgba(0, 0, 0, 0.18),
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
   --font-family: 'Inter', 'Helvetica', sans-serif;
   --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;

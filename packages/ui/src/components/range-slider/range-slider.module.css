@@ -1,32 +1,21 @@
 .rangeSlider {
   position: relative;
   width: 100%;
-  height: 1px;
-}
-
-.border {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 1px;
-  background-color: var(--figma-color-border-strong);
-}
-.disabled .border {
-  background-color: var(--figma-color-border-disabled-strong);
+  height: var(--space-16);
 }
 
 .input {
-  position: absolute;
+  position: relative;
   z-index: var(
     --z-index-1
-  ); /* stack `.input` over all other elements within `.rangeSlider` */
-  top: -16px;
-  right: -2px;
-  left: -2px;
+  ); /* stack `.input` over all other elements within `.checkbox` */
   display: block;
-  height: 33px;
-  background-color: transparent;
+  width: 100%;
+  height: var(--space-16);
+  border-radius: var(--space-8);
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
 }
 .disabled .input {
   cursor: not-allowed;
@@ -34,16 +23,32 @@
 
 .input::-webkit-slider-thumb {
   display: block;
-  width: 9px;
-  height: 9px;
-  border: 1px solid var(--figma-color-bg);
-  border-radius: 50%;
+  width: var(--space-16);
+  height: var(--space-16);
+  border: var(--border-width-4) solid var(--figma-color-bg);
+  border-radius: var(--space-8);
   -webkit-appearance: none;
-  background-color: var(--figma-color-bg-inverse);
+  appearance: none;
+  background-color: var(--figma-color-bg-brand);
+  box-shadow: var(--box-shadow-range-slider);
 }
-.input:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 2px var(--figma-color-border-brand-strong);
+.input:focus-visible::-webkit-slider-thumb {
+  outline: var(--border-width-1) solid var(--figma-color-border-selected);
 }
+
 .disabled .input::-webkit-slider-thumb {
-  background-color: var(--figma-color-bg-disabled-secondary);
+  border: none;
+  background-color: var(--figma-color-bg);
+}
+
+.box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--space-16);
+  border: var(--border-width-1) solid var(--figma-color-border);
+  border-radius: var(--space-8);
+  background-color: var(--figma-color-bg-secondary);
 }

@@ -1,10 +1,11 @@
-import { h } from 'preact'
-import { useCallback } from 'preact/hooks'
+import { h, RefObject } from 'preact'
+import { useCallback, useRef } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
+import { getCurrentFromRef } from '../../utilities/get-current-from-ref.js'
 import { noop } from '../../utilities/no-op.js'
 import styles from './range-slider.module.css'
 
@@ -37,18 +38,37 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
     },
     ref
   ) {
+    const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+
     if (minimum >= maximum) {
       throw new Error('`minimum` must be less than `maximum`')
     }
+
+    const renderProgressTrack = useCallback(
+      function (value: number) {
+        const inputElement = getCurrentFromRef(inputElementRef)
+        const inputElementWidth = inputElement.offsetWidth
+        const sliderThumbElementWidth = inputElement.offsetHeight
+        const percentage = value / maximum
+        const px = `${
+          percentage * (inputElementWidth - sliderThumbElementWidth) +
+          sliderThumbElementWidth / 2
+        }px`
+        inputElement.style.background = `linear-gradient(to right, var(--figma-color-bg-brand) ${px}, transparent ${px})`
+      },
+      [maximum]
+    )
 
     const handleInput = useCallback(
       function (event: Event.onInput<HTMLInputElement>) {
         onInput(event)
         const value = event.currentTarget.value
         onValueInput(value)
-        onNumericValueInput(parseFloat(value))
+        const numericValue = parseFloat(value)
+        onNumericValueInput(numericValue)
+        renderProgressTrack(numericValue)
       },
-      [onInput, onNumericValueInput, onValueInput]
+      [onInput, onNumericValueInput, onValueInput, renderProgressTrack]
     )
 
     const handleKeyDown = useCallback(
@@ -64,6 +84,21 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
       [onKeyDown, propagateEscapeKeyDown]
     )
 
+    const refCallback = useCallback(
+      function (inputElement: null | HTMLInputElement) {
+        inputElementRef.current = inputElement
+        if (ref === null) {
+          return
+        }
+        if (typeof ref === 'function') {
+          ref(inputElement)
+          return
+        }
+        ref.current = inputElement
+      },
+      [ref]
+    )
+
     return (
       <label
         class={createClassName([
@@ -73,7 +108,7 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
       >
         <input
           {...rest}
-          ref={ref}
+          ref={refCallback}
           class={styles.input}
           disabled={disabled}
           max={maximum}
@@ -84,7 +119,7 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
           type="range"
           value={value}
         />
-        <div class={styles.border} />
+        <div class={styles.box} />
       </label>
     )
   }
