@@ -2,15 +2,20 @@
   position: relative;
   z-index: var(--z-index-1);
   display: flex;
-  padding-left: var(--space-extra-small);
-  border-bottom: 1px solid var(--figma-color-border);
+  border-bottom: var(--border-width-1) solid var(--figma-color-border);
 }
 
-.label {
-  padding: var(--space-small) var(--space-extra-small);
+.tab {
+  padding: var(--space-8) var(--space-4);
   color: var(--figma-color-text-secondary);
 }
-.label:hover {
+.tab:first-child {
+  padding-left: var(--space-8);
+}
+.tab:last-child {
+  padding-right: var(--space-8);
+}
+.tab:hover {
   color: var(--figma-color-text);
 }
 
@@ -20,7 +25,16 @@
   height: 0;
 }
 
-.input:checked ~ .value {
+.value {
+  height: var(--space-24);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--border-radius-4);
+}
+label:hover .input ~ .value {
+  background-color: var(--figma-color-bg-secondary);
+}
+label .input:checked ~ .value {
+  background-color: var(--figma-color-bg-secondary);
   color: var(--figma-color-text);
   font-weight: var(--font-weight-bold);
 }

@@ -66,7 +66,7 @@ export const Tabs = createComponent<HTMLDivElement, TabsProps>(function (
       <div ref={ref} class={styles.tabs}>
         {options.map(function (option: TabsOption, index: number) {
           return (
-            <label key={index} class={styles.label}>
+            <label key={index} class={styles.tab}>
               <input
                 {...rest}
                 checked={value === option.value}
