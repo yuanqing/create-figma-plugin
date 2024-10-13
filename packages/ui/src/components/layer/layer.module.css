@@ -1,14 +1,10 @@
 .layer {
   position: relative;
   z-index: var(--z-index-1);
-  display: flex;
-  height: 32px;
-  align-items: center;
-  padding: 0 var(--space-small);
+  padding: var(--space-4) var(--space-12);
 }
 
-.input,
-.box {
+.input {
   position: absolute;
   top: 0;
   right: 0;
@@ -24,26 +20,28 @@
   cursor: not-allowed;
 }
 
+.box {
+  display: flex;
+  padding: 3px var(--space-8) 3px 3px;
+  border: var(--border-width-1) solid transparent;
+  border-radius: var(--border-radius-6);
+  gap: var(--space-8);
+}
+.input:hover ~ .box {
+  background-color: var(--figma-color-bg-hover);
+}
+.input:focus-visible ~ .box {
+  border-color: var(--figma-color-border-selected);
+}
 .input:checked ~ .box {
   background-color: var(--figma-color-bg-selected);
 }
-.input:not(:checked):hover ~ .box,
-.input:focus ~ .box {
-  border: 1px solid var(--figma-color-border-brand-strong);
-}
 
+.component .input:focus-visible ~ .box {
+  border-color: var(--figma-color-border-component-hover);
+}
 .component .input:checked ~ .box {
   background-color: var(--figma-color-bg-component-tertiary);
-}
-.component .input:not(:checked):hover ~ .box,
-.component .input:focus ~ .box {
-  border-color: var(--figma-color-border-component-strong);
-}
-
-.icon,
-.children,
-.description {
-  position: relative;
 }
 
 .children,
@@ -54,7 +52,6 @@
 }
 
 .children {
-  padding-left: var(--space-extra-small);
   color: var(--figma-color-text);
 }
 .component .children {
@@ -69,15 +66,15 @@
   flex: 0 0 16px;
   color: var(--figma-color-icon-secondary);
 }
-.input:checked ~ .icon {
+.input:checked ~ .box .icon {
   color: var(--figma-color-icon);
 }
-.component .icon,
-.component .input:checked ~ .icon {
+.component .box .icon,
+.component .input:checked ~ .box .icon {
   color: var(--figma-color-icon-component);
 }
 
 .description {
-  padding-left: var(--space-extra-small);
+  flex: 1;
   color: var(--figma-color-text-secondary);
 }

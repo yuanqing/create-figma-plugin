@@ -75,12 +75,13 @@ export const Layer = createComponent<HTMLInputElement, LayerProps>(function (
         tabIndex={0}
         type="checkbox"
       />
-      <div class={styles.box} />
-      <div class={styles.icon}>{icon}</div>
-      <div class={styles.children}>{children}</div>
-      {typeof description === 'undefined' ? null : (
-        <div class={styles.description}>{description}</div>
-      )}
+      <div class={styles.box}>
+        <div class={styles.icon}>{icon}</div>
+        <div class={styles.children}>{children}</div>
+        {typeof description === 'undefined' ? null : (
+          <div class={styles.description}>{description}</div>
+        )}
+      </div>
     </label>
   )
 })
