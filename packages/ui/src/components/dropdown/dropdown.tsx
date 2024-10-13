@@ -46,7 +46,6 @@ export type DropdownOptionValue = {
   text?: string
   value: string
 }
-export type DropdownVariant = 'border' | 'underline'
 
 export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
   function (
@@ -61,7 +60,6 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
       placeholder,
       propagateEscapeKeyDown = true,
       value,
-      variant,
       ...rest
     },
     ref
@@ -302,7 +300,6 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
         ref={refCallback}
         class={createClassName([
           dropdownStyles.dropdown,
-          variant === 'border' ? dropdownStyles.hasBorder : null,
           typeof icon !== 'undefined' ? dropdownStyles.hasIcon : null,
           disabled === true ? dropdownStyles.disabled : null
         ])}
@@ -314,28 +311,20 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
           <div class={dropdownStyles.icon}>{icon}</div>
         )}
         {value === null ? (
-          typeof placeholder === 'undefined' ? (
-            <div class={dropdownStyles.empty} />
-          ) : (
-            <div
-              class={createClassName([
-                dropdownStyles.value,
-                dropdownStyles.placeholder
-              ])}
-            >
-              {placeholder}
-            </div>
-          )
+          <div
+            class={createClassName([
+              dropdownStyles.value,
+              dropdownStyles.placeholder
+            ])}
+          >
+            {placeholder}
+          </div>
         ) : (
           <div class={dropdownStyles.value}>{children}</div>
         )}
         <div class={dropdownStyles.chevronIcon}>
           <IconControlChevronDown8 />
         </div>
-        {variant === 'underline' ? (
-          <div class={dropdownStyles.underline} />
-        ) : null}
-        <div class={dropdownStyles.border} />
         {createPortal(
           <div
             ref={menuElementRef}

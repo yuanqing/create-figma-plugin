@@ -63,7 +63,7 @@
 .icon {
   height: var(--space-16);
   flex: 0 0 var(--space-16);
-  color: var(--figma-color-icon);
+  color: var(--figma-color-icon-brand);
 }
 .disabled .icon {
   color: var(--figma-color-icon-disabled);

@@ -13,8 +13,8 @@ export default {
   parameters: {
     fixedWidth: true
   },
-  tags: ['3'],
-  title: 'Components/Textbox Autocomplete/Underline'
+  tags: ['1'],
+  title: 'Components/Textbox Autocomplete'
 }
 
 export const Empty = function () {
@@ -37,7 +37,6 @@ export const Empty = function () {
       onInput={handleInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -63,7 +62,6 @@ export const Focused = function () {
       onInput={handleInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -89,7 +87,6 @@ export const Placeholder = function () {
       options={options}
       placeholder="Placeholder"
       value={value}
-      variant="underline"
     />
   )
 }
@@ -114,7 +111,6 @@ export const Filled = function () {
       onInput={handleInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -137,7 +133,6 @@ export const Disabled = function () {
       onInput={handleInput}
       options={options}
       value="foo"
-      variant="underline"
     />
   )
 }
@@ -162,7 +157,6 @@ export const DisabledOption = function () {
       onInput={handleInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -188,7 +182,6 @@ export const Icon = function () {
       onInput={handleInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -214,7 +207,6 @@ export const TextIcon = function () {
       onInput={handleInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -240,7 +232,6 @@ export const RevertOnEscapeKeyDown = function () {
       options={options}
       revertOnEscapeKeyDown
       value={value}
-      variant="underline"
     />
   )
 }
@@ -266,7 +257,6 @@ export const Strict = function () {
       options={options}
       strict
       value={value}
-      variant="underline"
     />
   )
 }
@@ -292,7 +282,6 @@ export const Filter = function () {
       onInput={handleInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }
@@ -319,7 +308,6 @@ export const StrictFilter = function () {
       options={options}
       strict
       value={value}
-      variant="underline"
     />
   )
 }
@@ -345,7 +333,6 @@ export const MenuTop = function () {
       options={options}
       top
       value={value}
-      variant="underline"
     />
   )
 }
@@ -369,7 +356,6 @@ export const OnValueInput = function () {
       onValueInput={handleValueInput}
       options={options}
       value={value}
-      variant="underline"
     />
   )
 }

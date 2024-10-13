@@ -3,8 +3,8 @@
   z-index: var(--z-index-2);
   left: 0;
   min-width: 100%;
-  padding: var(--space-extra-small) 0;
-  border-radius: var(--border-radius-2);
+  padding: var(--space-8);
+  border-radius: var(--border-radius-12);
   background-color: #1e1e1e; /* FIXME */
   box-shadow: var(--box-shadow-menu);
   color: rgba(255, 255, 255, 1); /* FIXME */
@@ -34,7 +34,7 @@
 .optionHeader,
 .optionValue {
   overflow: hidden;
-  padding: 4px var(--space-medium) 4px 32px;
+  padding: var(--space-4) var(--space-12) var(--space-4) var(--space-28);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -46,6 +46,7 @@
 
 .optionValue {
   position: relative;
+  border-radius: var(--border-radius-4);
 }
 .optionValueSelected {
   background-color: var(--figma-color-bg-brand);
@@ -74,6 +75,6 @@
 
 .checkIcon {
   position: absolute;
-  top: 5px;
-  left: var(--space-extra-small);
+  top: var(--space-4);
+  left: var(--space-4);
 }

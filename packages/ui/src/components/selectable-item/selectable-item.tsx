@@ -1,7 +1,7 @@
 import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { IconUi3CheckboxCheck16 } from '../../icons/icon-16/icon-ui-3-checkbox-check-16.js'
+import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
@@ -84,7 +84,7 @@ export const SelectableItem = createComponent<
         <div class={styles.children}>{children}</div>
         {value === true ? (
           <div class={styles.icon}>
-            <IconUi3CheckboxCheck16 />
+            <IconMenuCheckmarkChecked16 />
           </div>
         ) : null}
       </div>

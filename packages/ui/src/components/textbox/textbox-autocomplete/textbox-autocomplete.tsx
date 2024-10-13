@@ -39,7 +39,6 @@ export interface TextboxAutocompleteProps {
   strict?: boolean
   top?: boolean
   value: string
-  variant?: TextboxAutocompleteVariant
 }
 export type TextboxAutocompleteOption =
   | TextboxAutocompleteOptionHeader
@@ -53,7 +52,6 @@ export type TextboxAutocompleteOptionValue = {
   disabled?: boolean
 }
 export type TextboxAutocompleteOptionSeparator = '-'
-export type TextboxAutocompleteVariant = 'border' | 'underline'
 
 type Option =
   | TextboxAutocompleteOptionHeader
@@ -85,7 +83,6 @@ export const TextboxAutocomplete = createComponent<
     strict = false,
     top = false,
     value,
-    variant,
     ...rest
   },
   ref
@@ -444,11 +441,6 @@ export const TextboxAutocomplete = createComponent<
       ref={rootElementRef}
       class={createClassName([
         textboxStyles.textbox,
-        typeof variant === 'undefined'
-          ? null
-          : variant === 'border'
-            ? textboxStyles.hasBorder
-            : null,
         typeof icon === 'undefined' ? null : textboxStyles.hasIcon,
         disabled === true ? textboxStyles.disabled : null
       ])}
@@ -472,10 +464,6 @@ export const TextboxAutocomplete = createComponent<
         {typeof icon === 'undefined' ? null : (
           <div class={textboxStyles.icon}>{icon}</div>
         )}
-        <div class={textboxStyles.border} />
-        {variant === 'underline' ? (
-          <div class={textboxStyles.underline} />
-        ) : null}
         <div
           ref={menuElementRef}
           class={createClassName([

@@ -11,7 +11,7 @@ export default {
     fixedWidth: true
   },
   tags: ['1'],
-  title: 'Components/Dropdown/Default'
+  title: 'Components/Dropdown'
 }
 
 export const Empty = function () {
