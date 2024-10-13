@@ -1,16 +1,16 @@
 .loadingIndicator {
   position: relative;
-  width: 16px;
-  height: 16px;
-  margin: 0 auto;
+  width: var(--space-16);
+  height: var(--space-16);
+  margin: auto;
 }
 
 .svg {
   position: absolute;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 16px;
+  width: var(--space-16);
+  height: var(--space-16);
   animation: rotating 0.5s linear infinite;
   fill: currentColor;
 }
