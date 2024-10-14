@@ -297,7 +297,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
               }
             ></div>
           )}
-          <div class={styles.colorBorder} />
         </div>
         <input
           class={styles.hexColorSelector}
@@ -343,8 +342,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
           value={opacity}
         />
         <div class={styles.divider} />
-        <div class={styles.border} />
-        {variant === 'underline' ? <div class={styles.underline} /> : null}
       </div>
     )
   }

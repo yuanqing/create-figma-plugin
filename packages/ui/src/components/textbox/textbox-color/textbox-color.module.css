@@ -2,23 +2,28 @@
   position: relative;
   z-index: var(--z-index-1);
   display: flex;
-  width: 144px;
+  align-items: center;
+  padding-left: var(--space-8);
+  border: var(--border-width-1) solid transparent;
+  border-radius: var(--border-radius-4);
+  background-color: var(--figma-color-bg-secondary);
+}
+.textboxColor:hover {
+  border-color: var(--figma-color-border);
 }
 .textboxColor:focus-within {
   z-index: var(
     --z-index-2
-  ); /* stack `.textboxColor` over its sibling elements */
+  ); /* Stack `.textboxColor` over its sibling elements */
+  border-color: var(--figma-color-border-selected);
 }
 
 .color {
-  position: absolute;
-  top: 6px;
-  left: 8px;
   display: flex;
   overflow: hidden;
-  width: 16px;
-  height: 16px;
-  border-radius: 1px;
+  height: 14px;
+  flex: 0 0 14px;
+  border-radius: var(--border-radius-2);
   background-image: url('data:image/svg+xml;utf8,%3Csvg%20width%3D%226%22%20height%3D%226%22%20viewBox%3D%220%200%206%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200H3V3H0V0Z%22%20fill%3D%22%23E1E1E1%22/%3E%3Cpath%20d%3D%22M3%200H6V3H3V0Z%22%20fill%3D%22white%22/%3E%3Cpath%20d%3D%22M3%203H6V6H3V3Z%22%20fill%3D%22%23E1E1E1%22/%3E%3Cpath%20d%3D%22M0%203H3V6H0V3Z%22%20fill%3D%22white%22/%3E%3C/svg%3E%0A');
 }
 .disabled .color {
@@ -26,44 +31,30 @@
 }
 
 .colorFill {
-  flex-grow: 1;
+  flex: 1;
   background: none;
-}
-
-.colorBorder {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 1px solid rgba(0, 0, 0, 0.1); /* FIXME */
-  border-radius: 2px;
-  background: none;
-  pointer-events: none;
-}
-:global(.figma-dark) .colorBorder {
-  border-color: rgba(255, 255, 255, 0.15); /* FIXME */
 }
 
 .hexColorSelector {
   position: absolute;
-  top: -4px;
+  top: calc(-1 * var(--space-4));
   left: 0;
-  width: 24px;
-  height: 36px;
+  width: var(--space-24);
+  height: var(--space-32);
   opacity: 0;
+}
+.disabled .hexColorSelector {
+  cursor: not-allowed;
 }
 
 .input {
   display: block;
   width: 100%;
-  height: 28px;
+  height: var(--space-24);
   background-color: transparent;
   color: var(--figma-color-text);
 }
-
-.disabled .input,
-.disabled .hexColorSelector {
+.disabled .input {
   color: var(--figma-color-text-disabled);
   cursor: not-allowed;
 }
@@ -78,59 +69,11 @@
 }
 
 .hexColorInput {
-  flex: 0 0 97px;
-  padding-left: 32px;
+  flex: 1 67px;
+  padding-left: 6px;
+  border-right: var(--border-width-1) solid var(--figma-color-bg);
 }
 .opacityInput {
-  padding-left: var(--space-extra-small);
-}
-
-.border {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius-2);
-  pointer-events: none;
-}
-.hasBorder .border,
-.textboxColor:not(.disabled):hover .border {
-  border-color: var(--figma-color-border);
-}
-.textboxColor:not(.disabled) .input:focus ~ .border,
-.textboxColor:not(.disabled) .hexColorSelector:focus ~ .border {
-  top: -1px;
-  bottom: -1px;
-  border: 2px solid var(--figma-color-border-brand-strong);
-}
-
-.divider {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 96px;
-  width: 1px;
-  pointer-events: none;
-}
-.hasBorder .divider,
-.textboxColor:not(.disabled) .input:hover ~ .divider,
-.textboxColor:not(.disabled) .input:focus ~ .divider,
-.textboxColor:not(.disabled) .hexColorSelector:hover ~ .divider,
-.textboxColor:not(.disabled) .hexColorSelector:focus ~ .divider {
-  background-color: var(--figma-color-border);
-}
-
-.underline {
-  position: absolute;
-  right: var(--space-extra-small);
-  bottom: 0;
-  left: var(--space-extra-small);
-  height: 1px;
-  background-color: var(--figma-color-border);
-}
-.textboxColor:not(.disabled) .input:focus ~ .underline,
-.textboxColor:not(.disabled):hover .underline {
-  background-color: transparent;
+  flex: 0 0 54px;
+  padding-left: var(--space-8);
 }

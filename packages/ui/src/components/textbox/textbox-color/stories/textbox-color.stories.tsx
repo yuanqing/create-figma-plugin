@@ -9,7 +9,7 @@ import { TextboxColor } from '../textbox-color.js'
 
 export default {
   tags: ['1'],
-  title: 'Components/Textbox Color/Default'
+  title: 'Components/Textbox Color'
 }
 
 export const Empty = function () {
