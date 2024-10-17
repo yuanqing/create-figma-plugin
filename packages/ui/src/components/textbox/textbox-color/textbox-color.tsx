@@ -21,6 +21,7 @@ export type TextboxColorProps = {
   disabled?: boolean
   hexColor: string
   hexColorPlaceholder?: string
+  fullWidth?: boolean
   onHexColorInput?: EventHandler.onInput<HTMLInputElement>
   onHexColorKeyDown?: EventHandler.onKeyDown<HTMLInputElement>
   onHexColorValueInput?: EventHandler.onValueChange<string>
@@ -30,7 +31,6 @@ export type TextboxColorProps = {
   onOpacityValueInput?: EventHandler.onValueChange<string>
   onRgbaColorValueInput?: EventHandler.onValueChange<null | RGBA>
   opacity: string
-  opacityPlaceholder?: string
   revertOnEscapeKeyDown?: boolean
   variant?: TextboxColorVariant
 }
@@ -40,6 +40,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
   function (
     {
       disabled = false,
+      fullWidth = false,
       hexColor,
       hexColorPlaceholder,
       onHexColorInput = noop,
@@ -51,7 +52,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
       onOpacityValueInput = noop,
       onRgbaColorValueInput = noop,
       opacity,
-      opacityPlaceholder,
       propagateEscapeKeyDown = true,
       revertOnEscapeKeyDown = false,
       variant,
@@ -272,12 +272,13 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
             : variant === 'border'
               ? styles.hasBorder
               : null,
-          disabled === true ? styles.disabled : null
+          disabled === true ? styles.disabled : null,
+          fullWidth === true ? styles.fullWidth : null
         ])}
       >
-        <div class={styles.color}>
+        <div class={styles.chit}>
           <div
-            class={styles.colorFill}
+            class={styles.color}
             style={
               isHexColorValid === true
                 ? { backgroundColor: `#${renderedHexColor}` }
@@ -286,7 +287,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
           ></div>
           {parsedOpacity === 1 ? null : (
             <div
-              class={styles.colorFill}
+              class={styles.color}
               style={
                 isHexColorValid === true
                   ? {
@@ -324,24 +325,27 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
           type="text"
           value={hexColor === MIXED_STRING ? 'Mixed' : hexColor}
         />
-        <RawTextboxNumeric
-          ref={opacityInputElementRef}
-          class={createClassName([styles.input, styles.opacityInput])}
-          disabled={disabled === true}
-          maximum={100}
-          minimum={0}
-          onInput={handleOpacityInput}
-          onKeyDown={onOpacityKeyDown}
-          onNumericValueInput={handleOpacityNumericValueInput}
-          onValueInput={onOpacityValueInput}
-          placeholder={opacityPlaceholder}
-          propagateEscapeKeyDown={propagateEscapeKeyDown}
-          revertOnEscapeKeyDown={revertOnEscapeKeyDown}
-          suffix="%"
-          validateOnBlur={validateOpacityOnBlur}
-          value={opacity}
-        />
-        <div class={styles.divider} />
+        <div class={styles.opacityInputWrapper}>
+          <RawTextboxNumeric
+            ref={opacityInputElementRef}
+            class={createClassName([styles.input, styles.opacityInput])}
+            disabled={disabled === true}
+            maximum={100}
+            minimum={0}
+            onInput={handleOpacityInput}
+            onKeyDown={onOpacityKeyDown}
+            onNumericValueInput={handleOpacityNumericValueInput}
+            onValueInput={onOpacityValueInput}
+            propagateEscapeKeyDown={propagateEscapeKeyDown}
+            revertOnEscapeKeyDown={revertOnEscapeKeyDown}
+            validateOnBlur={validateOpacityOnBlur}
+            value={opacity}
+          />
+          {opacity === MIXED_STRING ? null : (
+            <div class={styles.percentage}>%</div>
+          )}
+        </div>
+        <div class={styles.border} />
       </div>
     )
   }
