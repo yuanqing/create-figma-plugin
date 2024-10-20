@@ -125,7 +125,6 @@ export const WithTextboxNumeric = function () {
         minimum={minimum}
         onInput={handleInput}
         value={value}
-        variant="border"
       />
     </Fragment>
   )

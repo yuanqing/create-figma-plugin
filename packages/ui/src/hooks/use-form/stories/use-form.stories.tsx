@@ -48,7 +48,6 @@ export const UseForm = function () {
         {...initialFocus}
         onValueInput={handleValueInput}
         value={formState.text}
-        variant="border"
       />
       <VerticalSpace space="small" />
       <Text align="center">

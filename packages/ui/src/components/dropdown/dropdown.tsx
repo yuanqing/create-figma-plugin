@@ -31,7 +31,6 @@ export interface DropdownProps {
   placeholder?: string
   propagateEscapeKeyDown?: boolean
   value: null | string
-  variant?: DropdownVariant
 }
 export type DropdownOption =
   | DropdownOptionHeader

@@ -1,7 +1,6 @@
 .layer {
   position: relative;
   z-index: var(--z-index-1);
-  padding: var(--space-4) var(--space-12);
 }
 
 .input {

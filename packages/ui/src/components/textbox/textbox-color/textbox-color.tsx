@@ -32,9 +32,7 @@ export type TextboxColorProps = {
   onRgbaColorValueInput?: EventHandler.onValueChange<null | RGBA>
   opacity: string
   revertOnEscapeKeyDown?: boolean
-  variant?: TextboxColorVariant
 }
-export type TextboxColorVariant = 'border' | 'underline'
 
 export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
   function (
@@ -54,7 +52,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
       opacity,
       propagateEscapeKeyDown = true,
       revertOnEscapeKeyDown = false,
-      variant,
       ...rest
     },
     ref
@@ -267,11 +264,6 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
         ref={ref}
         class={createClassName([
           styles.textboxColor,
-          typeof variant === 'undefined'
-            ? null
-            : variant === 'border'
-              ? styles.hasBorder
-              : null,
           disabled === true ? styles.disabled : null,
           fullWidth === true ? styles.fullWidth : null
         ])}

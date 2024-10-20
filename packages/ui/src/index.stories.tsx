@@ -1,5 +1,5 @@
 import { Fragment, h, JSX } from 'preact'
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 
 import { Banner } from './components/banner/banner.js'
 import { Button } from './components/button/button.js'
@@ -32,7 +32,7 @@ export default {
 
 const boxStyle = {
   alignItems: 'center',
-  backgroundColor: 'var(--figma-color-bg-secondary)',
+  backgroundColor: 'var(--figma-color-bg)',
   display: 'flex',
   height: '92px',
   justifyContent: 'center',
@@ -40,6 +40,9 @@ const boxStyle = {
 }
 
 export const Index = function () {
+  useEffect(function () {
+    document.body.style.backgroundColor = 'var(--figma-color-bg-secondary)'
+  }, [])
   const [componentLayerValue, setComponentLayerValue] = useState<boolean>(true)
   const [dropdownValue, setDropdownValue] = useState<string>('Regular')
   const [frameLayerValue, setFrameLayerValue] = useState<boolean>(true)
@@ -48,7 +51,7 @@ export const Index = function () {
     useState<string>('1st')
   const [textboxColorHexColor, setTextboxColorHexColor] =
     useState<string>('0D99FF')
-  const [textboxColorOpacity, setTextboxColorOpacity] = useState<string>('50%')
+  const [textboxColorOpacity, setTextboxColorOpacity] = useState<string>('50')
   const [textboxNumericValue, setTextboxNumericValue] = useState<string>('42')
   const [toggleValue, setToggleValue] = useState<boolean>(true)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
@@ -86,7 +89,6 @@ export const Index = function () {
                   setTextboxNumericValue(event.currentTarget.value)
                 }}
                 value={textboxNumericValue}
-                variant="border"
               />
             </div>
             <Stack space="extraSmall">
@@ -173,22 +175,31 @@ export const Index = function () {
                 value={segmentedControlValue}
               />
             </div>
-            <FileUploadDropzone
-              acceptedFileTypes={['image/jpeg', 'image/png']}
-              multiple
+            <div
+              style={{
+                backgroundColor: 'var(--figma-color-bg)',
+                padding: 'var(--space-12)'
+              }}
             >
-              <Text align="center">
-                <Bold>Drop images here</Bold>
-              </Text>
-              <VerticalSpace space="small" />
-              <Text align="center">
-                <Muted>or</Muted>
-              </Text>
-              <VerticalSpace space="small" />
-              <FileUploadButton acceptedFileTypes={['image/jpeg', 'image/png']}>
-                Choose Image Files
-              </FileUploadButton>
-            </FileUploadDropzone>
+              <FileUploadDropzone
+                acceptedFileTypes={['image/jpeg', 'image/png']}
+                multiple
+              >
+                <Text align="center">
+                  <Bold>Drop images here</Bold>
+                </Text>
+                <VerticalSpace space="small" />
+                <Text align="center">
+                  <Muted>or</Muted>
+                </Text>
+                <VerticalSpace space="small" />
+                <FileUploadButton
+                  acceptedFileTypes={['image/jpeg', 'image/png']}
+                >
+                  Choose Image Files
+                </FileUploadButton>
+              </FileUploadDropzone>
+            </div>
             <div style={boxStyle}>
               <Dropdown
                 onChange={function (
@@ -203,7 +214,6 @@ export const Index = function () {
                   { value: 'Bold' }
                 ]}
                 value={dropdownValue}
-                variant="border"
               />
             </div>
             <Stack space="extraSmall">
@@ -231,7 +241,6 @@ export const Index = function () {
                   setTextboxColorOpacity(event.currentTarget.value)
                 }}
                 opacity={textboxColorOpacity}
-                variant="border"
               />
             </div>
           </Stack>

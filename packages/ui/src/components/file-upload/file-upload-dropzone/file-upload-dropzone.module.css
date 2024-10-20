@@ -28,6 +28,7 @@
 
 .box {
   border: var(--border-width-1) dashed var(--figma-color-border);
+  border-radius: var(--border-radius-6);
 }
 .input:active ~ .box,
 .input:focus ~ .box,

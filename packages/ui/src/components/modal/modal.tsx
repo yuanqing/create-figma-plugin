@@ -108,14 +108,12 @@ export const Modal = createComponent<HTMLDivElement, ModalProps>(function (
       const bodyElement = document.body
       if (open === true) {
         if (modalElements.length === 0) {
-          const hasScrollbar = bodyElement.scrollHeight > window.innerHeight
-          bodyElement.style.cssText += `position:fixed;overflow-y:${
-            hasScrollbar === true ? 'scroll' : 'hidden'
-          };width:100%;`
+          const scrollY = window.scrollY
+          bodyElement.style.cssText += `position:fixed;top:-${scrollY}px;width:100%;overflow-y:hidden;`
         }
         modalElements.push(portalElement)
         portalElement.style.cssText =
-          'position:absolute;top:0;left:0;bottom:0;right:0;z-index:1'
+          'position:absolute;top:0;right:0;bottom:0;left:0;z-index:1'
         previousFocusedElementRef.current =
           document.activeElement as HTMLElement
         const focusableElements = getFocusableElements(portalElement)
@@ -126,9 +124,12 @@ export const Modal = createComponent<HTMLDivElement, ModalProps>(function (
         }
       } else {
         if (modalElements.length === 1) {
+          const top = parseInt(document.body.style.top)
           bodyElement.style.removeProperty('position')
+          bodyElement.style.removeProperty('top')
           bodyElement.style.removeProperty('overflow-y')
           bodyElement.style.removeProperty('width')
+          window.scrollTo({ top: top * -1 })
         }
         modalElements.pop()
         portalElement.style.cssText = 'position:static'
