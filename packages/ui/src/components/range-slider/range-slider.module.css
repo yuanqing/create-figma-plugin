@@ -16,9 +16,11 @@
   -webkit-appearance: none;
   appearance: none;
   background: none;
+  --progress-track-color: var(--figma-color-bg-brand);
 }
 .disabled .input {
   cursor: not-allowed;
+  --progress-track-color: var(--figma-color-bg-disabled);
 }
 
 .input::-webkit-slider-thumb {

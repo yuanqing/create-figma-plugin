@@ -1,5 +1,5 @@
 import { h, RefObject } from 'preact'
-import { useCallback, useRef } from 'preact/hooks'
+import { useCallback, useEffect, useRef } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
@@ -44,21 +44,6 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
       throw new Error('`minimum` must be less than `maximum`')
     }
 
-    const renderProgressTrack = useCallback(
-      function (value: number) {
-        const inputElement = getCurrentFromRef(inputElementRef)
-        const inputElementWidth = inputElement.offsetWidth
-        const sliderThumbElementWidth = inputElement.offsetHeight
-        const percentage = value / maximum
-        const px = `${
-          percentage * (inputElementWidth - sliderThumbElementWidth) +
-          sliderThumbElementWidth / 2
-        }px`
-        inputElement.style.background = `linear-gradient(to right, var(--figma-color-bg-brand) ${px}, transparent ${px})`
-      },
-      [maximum]
-    )
-
     const handleInput = useCallback(
       function (event: Event.onInput<HTMLInputElement>) {
         onInput(event)
@@ -66,9 +51,8 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
         onValueInput(value)
         const numericValue = parseFloat(value)
         onNumericValueInput(numericValue)
-        renderProgressTrack(numericValue)
       },
-      [onInput, onNumericValueInput, onValueInput, renderProgressTrack]
+      [onInput, onNumericValueInput, onValueInput]
     )
 
     const handleKeyDown = useCallback(
@@ -97,6 +81,29 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
         ref.current = inputElement
       },
       [ref]
+    )
+
+    const renderProgressTrack = useCallback(function (options: {
+      value: number
+      maximum: number
+    }) {
+      const { value, maximum } = options
+      const inputElement = getCurrentFromRef(inputElementRef)
+      const inputElementWidth = inputElement.offsetWidth
+      const sliderThumbElementWidth = inputElement.offsetHeight
+      const percentage = value / maximum
+      const px = `${
+        percentage * (inputElementWidth - sliderThumbElementWidth) +
+        sliderThumbElementWidth / 2
+      }px`
+      inputElement.style.background = `linear-gradient(to right, var(--progress-track-color) ${px}, transparent ${px})`
+    }, [])
+
+    useEffect(
+      function () {
+        renderProgressTrack({ maximum, value: parseFloat(value) })
+      },
+      [maximum, renderProgressTrack, value]
     )
 
     return (

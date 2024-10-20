@@ -15,7 +15,7 @@ export default {
 }
 
 export const Passive = function () {
-  const [value, setValue] = useState<string>('0')
+  const [value, setValue] = useState<string>('50')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -32,7 +32,7 @@ export const Passive = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState<string>('0')
+  const [value, setValue] = useState<string>('50')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -59,13 +59,13 @@ export const Disabled = function () {
       maximum={100}
       minimum={0}
       onInput={handleInput}
-      value="0"
+      value="50"
     />
   )
 }
 
 export const CustomIncrement = function () {
-  const [value, setValue] = useState<string>('0')
+  const [value, setValue] = useState<string>('50')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
@@ -83,7 +83,7 @@ export const CustomIncrement = function () {
 }
 
 export const OnValueInput = function () {
-  const [value, setValue] = useState<string>('0')
+  const [value, setValue] = useState<string>('50')
   function handleValueInput(newValue: string) {
     console.log(newValue)
     setValue(newValue)
@@ -103,7 +103,7 @@ export const OnValueInput = function () {
 }
 
 export const WithTextboxNumeric = function () {
-  const [value, setValue] = useState<string>('0')
+  const [value, setValue] = useState<string>('50')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value
     console.log(newValue)
