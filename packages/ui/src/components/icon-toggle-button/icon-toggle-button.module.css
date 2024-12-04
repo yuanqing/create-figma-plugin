@@ -4,6 +4,11 @@
   height: var(--space-24);
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .input {
   position: absolute;
   z-index: var(--z-index-1); /* stack above .icon */
@@ -13,9 +18,6 @@
   left: 0;
   display: block;
   width: 100%;
-}
-.disabled .input {
-  cursor: not-allowed;
 }
 
 .box {

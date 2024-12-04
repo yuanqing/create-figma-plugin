@@ -5,6 +5,11 @@
   gap: var(--space-8);
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .input {
   position: absolute;
   z-index: var(
@@ -15,9 +20,6 @@
   bottom: calc(-1 * var(--space-8));
   left: calc(-1 * var(--space-8));
   display: block;
-}
-.disabled .input {
-  cursor: not-allowed;
 }
 
 .box {

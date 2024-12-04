@@ -4,6 +4,11 @@
   padding: var(--space-4) var(--space-12);
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .input {
   position: absolute;
   top: 0;
@@ -15,9 +20,6 @@
 .input {
   z-index: var(--z-index-1); /* stack `.input` on top of everything else */
   display: block;
-}
-.disabled .input {
-  cursor: not-allowed;
 }
 
 .box {

@@ -3,6 +3,7 @@ import { useCallback } from 'preact/hooks'
 
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
+import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
 import { noop } from '../../utilities/no-op.js'
 import styles from './icon-button.module.css'
@@ -43,7 +44,10 @@ export const IconButton = createComponent<HTMLButtonElement, IconButtonProps>(
       <button
         {...rest}
         ref={ref}
-        class={styles.iconButton}
+        class={createClassName([
+          styles.iconButton,
+          disabled === true ? styles.disabled : null
+        ])}
         disabled={disabled === true}
         onClick={onClick}
         onKeyDown={handleKeyDown}

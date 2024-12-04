@@ -3,6 +3,11 @@
   z-index: var(--z-index-1);
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .input {
   position: absolute;
   top: 0;
@@ -14,9 +19,6 @@
 .input {
   z-index: var(--z-index-1); /* stack `.input` on top of everything else */
   display: block;
-}
-.disabled .input {
-  cursor: not-allowed;
 }
 
 .box {

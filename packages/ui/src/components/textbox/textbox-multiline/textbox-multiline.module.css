@@ -3,6 +3,11 @@
   z-index: var(--z-index-1);
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .grow {
   display: grid;
 }
@@ -35,7 +40,6 @@
   border-color: var(--figma-color-border-disabled);
   background-color: transparent;
   color: var(--figma-color-text-disabled);
-  cursor: not-allowed;
 }
 .grow .textarea {
   overflow: hidden;

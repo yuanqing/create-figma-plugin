@@ -4,6 +4,11 @@
   height: var(--space-16);
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .input {
   position: relative;
   z-index: var(
@@ -19,7 +24,6 @@
   --progress-track-color: var(--figma-color-bg-brand);
 }
 .disabled .input {
-  cursor: not-allowed;
   --progress-track-color: var(--figma-color-bg-disabled);
 }
 

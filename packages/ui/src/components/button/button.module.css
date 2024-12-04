@@ -8,6 +8,11 @@
   display: block;
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .button button {
   position: relative;
   display: inline-block;
@@ -15,10 +20,6 @@
   padding: var(--space-0) var(--space-8);
   border: var(--border-width-1) solid transparent;
   border-radius: var(--border-radius-6);
-}
-
-.disabled button {
-  cursor: not-allowed;
 }
 
 .fullWidth button {

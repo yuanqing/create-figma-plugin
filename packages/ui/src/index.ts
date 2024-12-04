@@ -17,8 +17,7 @@ export {
   DropdownOptionHeader,
   DropdownOptionSeparator,
   DropdownOptionValue,
-  DropdownProps,
-  DropdownVariant
+  DropdownProps
 } from './components/dropdown/dropdown.js'
 export {
   FileUploadButton,
@@ -72,34 +71,26 @@ export {
 } from './components/selectable-item/selectable-item.js'
 export { Tabs, TabsOption, TabsProps } from './components/tabs/tabs.js'
 export { Text, TextAlignment, TextProps } from './components/text/text.js'
-export {
-  Textbox,
-  TextboxProps,
-  TextboxVariant
-} from './components/textbox/textbox/textbox.js'
+export { Textbox, TextboxProps } from './components/textbox/textbox/textbox.js'
 export {
   TextboxAutocomplete,
   TextboxAutocompleteOption,
   TextboxAutocompleteOptionHeader,
   TextboxAutocompleteOptionSeparator,
   TextboxAutocompleteOptionValue,
-  TextboxAutocompleteProps,
-  TextboxAutocompleteVariant
+  TextboxAutocompleteProps
 } from './components/textbox/textbox-autocomplete/textbox-autocomplete.js'
 export {
   TextboxColor,
-  TextboxColorProps,
-  TextboxColorVariant
+  TextboxColorProps
 } from './components/textbox/textbox-color/textbox-color.js'
 export {
   TextboxMultiline,
-  TextboxMultilineProps,
-  TextboxMultilineVariant
+  TextboxMultilineProps
 } from './components/textbox/textbox-multiline/textbox-multiline.js'
 export {
   TextboxNumeric,
-  TextboxNumericProps,
-  TextboxNumericVariant
+  TextboxNumericProps
 } from './components/textbox/textbox-numeric/textbox-numeric.js'
 export { Toggle, ToggleProps } from './components/toggle/toggle.js'
 export { useFocusTrap } from './hooks/use-focus-trap/use-focus-trap.js'

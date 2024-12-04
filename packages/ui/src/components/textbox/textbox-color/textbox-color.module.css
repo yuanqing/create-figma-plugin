@@ -13,6 +13,11 @@
   ); /* Stack `.textboxColor` over its sibling elements */
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .fullWidth {
   width: 100%;
 }
@@ -44,9 +49,6 @@
   opacity: 0;
   transform: translate(0, -50%);
 }
-.disabled .hexColorSelector {
-  cursor: not-allowed;
-}
 
 .input {
   display: block;
@@ -54,10 +56,6 @@
   height: var(--space-24);
   background-color: transparent;
   color: var(--figma-color-text);
-}
-.disabled .input {
-  color: var(--figma-color-text-disabled);
-  cursor: not-allowed;
 }
 
 .input::placeholder {

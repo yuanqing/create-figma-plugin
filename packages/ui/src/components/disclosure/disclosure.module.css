@@ -1,5 +1,6 @@
 .label {
   position: relative;
+  z-index: var(--z-index-1);
 }
 
 .input {

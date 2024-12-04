@@ -6,19 +6,19 @@
   border-radius: var(--border-radius-4);
 }
 
-.iconButton:not(:disabled) {
+.iconButton:not(.disabled) {
   color: var(--figma-color-icon);
 }
-.iconButton:not(:disabled):hover,
-.iconButton:not(:disabled):active {
+.iconButton:not(.disabled):hover,
+.iconButton:not(.disabled):active {
   background-color: var(--figma-color-bg-hover);
 }
-.iconButton:not(:disabled):focus-visible {
+.iconButton:not(.disabled):focus-visible {
   border-color: var(--figma-color-border-selected);
 }
 
-.iconButton:disabled {
-  color: var(--figma-color-icon-disabled);
+.disabled,
+.disabled * {
   cursor: not-allowed;
 }
 
@@ -27,4 +27,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.disabled .icon {
+  color: var(--figma-color-icon-disabled);
 }

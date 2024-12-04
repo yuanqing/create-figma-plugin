@@ -1,5 +1,4 @@
 .banner {
-  position: relative;
   display: flex;
   padding: var(--space-8) var(--space-16) var(--space-8) var(--space-4);
   border-radius: var(--border-radius-6);

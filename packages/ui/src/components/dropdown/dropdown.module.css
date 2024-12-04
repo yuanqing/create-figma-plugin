@@ -4,30 +4,33 @@
   display: flex;
   width: 100%;
   min-width: 0; /* See https://css-tricks.com/flexbox-truncated-text/ */
-  height: 24px;
+  height: var(--space-24);
   align-items: center;
   border: var(--border-width-1) solid var(--figma-color-border);
   border-radius: var(--border-radius-4);
   color: var(--figma-color-text);
+}
+
+.dropdown:not(.disabled):focus-visible {
+  border-color: var(--figma-color-border-selected);
 }
 .dropdown:not(.disabled):focus-within {
   z-index: var(--z-index-2); /* stack `.dropdown` over its sibling elements */
   outline: 0;
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .menu {
   position: fixed;
 }
 
-.disabled {
-  cursor: not-allowed;
-}
-
 .icon {
-  position: absolute;
-  top: calc(var(--space-4) - var(--border-width-1));
-  left: calc(var(--space-4) - var(--border-width-1));
-  min-width: var(--space-16);
+  flex: 0 0 var(--space-16);
+  padding-left: var(--space-4);
   color: var(--figma-color-icon-secondary);
   pointer-events: none;
   text-align: center;
@@ -42,21 +45,19 @@
   flex-grow: 1;
 }
 
-.value {
+.value,
+.placeholder {
   overflow: hidden;
   padding-left: calc(var(--space-8) - var(--border-width-1));
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.disabled .value {
-  color: var(--figma-color-text-disabled);
-}
-.hasIcon .value {
-  padding-left: calc(var(--space-24) - var(--border-width-1));
-}
-
 .placeholder {
   color: var(--figma-color-text-tertiary);
+}
+
+.disabled .value {
+  color: var(--figma-color-text-disabled);
 }
 
 .chevronIcon {
