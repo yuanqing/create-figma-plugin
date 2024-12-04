@@ -3,10 +3,15 @@
   z-index: var(--z-index-1);
 }
 
+.disabled,
+.disabled * {
+  cursor: not-allowed;
+}
+
 .radioButton {
   position: relative;
   display: flex;
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 
 .input {
@@ -17,9 +22,6 @@
   bottom: calc(-1 * var(--space-8));
   left: calc(-1 * var(--space-8));
   display: block;
-}
-.disabled .input {
-  cursor: not-allowed;
 }
 
 .box {

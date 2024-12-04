@@ -107,6 +107,28 @@ export const Space = function () {
   )
 }
 
+export const Horizontal = function () {
+  const [value, setValue] = useState<string>('bar')
+  const options: Array<RadioButtonsOption> = [
+    { children: <Text>foo</Text>, value: 'foo' },
+    { children: <Text>bar</Text>, value: 'bar' },
+    { children: <Text>baz</Text>, value: 'baz' }
+  ]
+  function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <RadioButtons
+      direction="horizontal"
+      onChange={handleChange}
+      options={options}
+      value={value}
+    />
+  )
+}
+
 export const OnValueChange = function () {
   const [value, setValue] = useState<string>('bar')
   const options: Array<RadioButtonsOption> = [

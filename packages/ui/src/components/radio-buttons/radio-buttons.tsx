@@ -1,6 +1,7 @@
 import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
+import { Inline, InlineSpace } from '../../layout/inline/inline.js'
 import { Stack, StackSpace } from '../../layout/stack/stack.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
@@ -13,10 +14,11 @@ import styles from './radio-buttons.module.css'
 export interface RadioButtonsProps
   extends FocusableComponentProps<HTMLDivElement> {
   disabled?: boolean
+  direction?: 'vertical' | 'horizontal'
   onChange?: EventHandler.onChange<HTMLInputElement>
   onValueChange?: EventHandler.onValueChange<string>
   options: Array<RadioButtonsOption>
-  space?: StackSpace
+  space?: StackSpace | InlineSpace
   value: null | string
 }
 export type RadioButtonsOption = {
@@ -29,12 +31,13 @@ export const RadioButtons = createComponent<HTMLDivElement, RadioButtonsProps>(
   function (
     {
       disabled = false,
+      direction = 'vertical',
       onChange = noop,
       onKeyDown = noop,
       onValueChange = noop,
       options,
       propagateEscapeKeyDown = true,
-      space = 'small',
+      space,
       value,
       ...rest
     },
@@ -66,43 +69,53 @@ export const RadioButtons = createComponent<HTMLDivElement, RadioButtonsProps>(
       [onKeyDown, propagateEscapeKeyDown]
     )
 
+    const body = options.map(function (
+      option: RadioButtonsOption,
+      index: number
+    ) {
+      const children =
+        typeof option.children === 'undefined'
+          ? `${option.value}`
+          : option.children
+      const isOptionDisabled = disabled === true || option.disabled === true
+      const checked = value === option.value
+      return (
+        <label
+          key={index}
+          class={createClassName([
+            styles.radioButton,
+            isOptionDisabled === true ? styles.disabled : null
+          ])}
+        >
+          <input
+            {...rest}
+            checked={checked === true}
+            class={styles.input}
+            disabled={isOptionDisabled === true}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            type="radio"
+            value={`${option.value}`}
+            {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+          />
+          <div class={styles.box} />
+          <div class={styles.children}>{children}</div>
+        </label>
+      )
+    })
+
     return (
       <div ref={ref} class={styles.radioButtons}>
-        <Stack space={space}>
-          {options.map(function (option: RadioButtonsOption, index: number) {
-            const children =
-              typeof option.children === 'undefined'
-                ? `${option.value}`
-                : option.children
-            const isOptionDisabled =
-              disabled === true || option.disabled === true
-            const checked = value === option.value
-            return (
-              <label
-                key={index}
-                class={createClassName([
-                  styles.radioButton,
-                  isOptionDisabled === true ? styles.disabled : null
-                ])}
-              >
-                <input
-                  {...rest}
-                  checked={checked === true}
-                  class={styles.input}
-                  disabled={isOptionDisabled === true}
-                  onChange={handleChange}
-                  onKeyDown={handleKeyDown}
-                  tabIndex={0}
-                  type="radio"
-                  value={`${option.value}`}
-                  {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
-                />
-                <div class={styles.box} />
-                <div class={styles.children}>{children}</div>
-              </label>
-            )
-          })}
-        </Stack>
+        {direction === 'vertical' ? (
+          <Stack space={typeof space === 'undefined' ? 'small' : space}>
+            {body}
+          </Stack>
+        ) : (
+          <Inline space={typeof space === 'undefined' ? 'medium' : space}>
+            {body}
+          </Inline>
+        )}
       </div>
     )
   }
