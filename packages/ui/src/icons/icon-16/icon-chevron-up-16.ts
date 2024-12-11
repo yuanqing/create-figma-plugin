@@ -2,6 +2,6 @@
 import { createIcon } from '../create-icon.js'
 
 export const IconChevronUp16 = createIcon(
-  'm8.354 6.292 3 3-.708.708L8 7.35299 5.354 10l-.708-.708 3-3L8 5.939z',
+  'M5.525 9.232a.5.5 0 0 1 0-.707L8 6.05l2.474 2.475a.5.5 0 0 1-.706.707L8 7.464 6.232 9.232a.5.5 0 0 1-.707 0',
   { height: 16, width: 16 }
 )

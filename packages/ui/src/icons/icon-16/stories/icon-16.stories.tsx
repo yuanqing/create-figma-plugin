@@ -22,7 +22,10 @@ import { IconCaretDown16 } from '../icon-caret-down-16.js'
 import { IconCaretLeft16 } from '../icon-caret-left-16.js'
 import { IconCaretRight16 } from '../icon-caret-right-16.js'
 import { IconCaretUp16 } from '../icon-caret-up-16.js'
+import { IconCheck16 } from '../icon-check-16.js'
 import { IconChevronDown16 } from '../icon-chevron-down-16.js'
+import { IconChevronLeft16 } from '../icon-chevron-left-16.js'
+import { IconChevronRight16 } from '../icon-chevron-right-16.js'
 import { IconChevronUp16 } from '../icon-chevron-up-16.js'
 import { IconCircleHelp16 } from '../icon-circle-help-16.js'
 import { IconCircleInfo16 } from '../icon-circle-info-16.js'
@@ -48,9 +51,6 @@ import { IconLayerText16 } from '../icon-layer-text-16.js'
 import { IconLayerVector16 } from '../icon-layer-vector-16.js'
 import { IconLockLocked16 } from '../icon-lock-locked-16.js'
 import { IconLockUnlocked16 } from '../icon-lock-unlocked-16.js'
-import { IconMenuCheckmarkBreadcrumb16 } from '../icon-menu-checkmark-breadcrumb-16.js'
-import { IconMenuCheckmarkChecked16 } from '../icon-menu-checkmark-checked-16.js'
-import { IconMenuCheckmarkMixed16 } from '../icon-menu-checkmark-mixed-16.js'
 import { IconMoveDown16 } from '../icon-move-down-16.js'
 import { IconMoveRight16 } from '../icon-move-right-16.js'
 import { IconOptionCheck16 } from '../icon-option-check-16.js'
@@ -71,8 +71,6 @@ import { IconTextAlignLeft16 } from '../icon-text-align-left-16.js'
 import { IconTextAlignRight16 } from '../icon-text-align-right-16.js'
 import { IconTextDecorationStrikethrough16 } from '../icon-text-decoration-strikethrough-16.js'
 import { IconTextDecorationUnderline16 } from '../icon-text-decoration-underline-16.js'
-import { IconUi3CheckboxCheck16 } from '../icon-ui-3-checkbox-check-16.js'
-import { IconUi3DisclosureChevron16 } from '../icon-ui-3-disclosure-chevron-16.js'
 import { IconUpload16 } from '../icon-upload-16.js'
 import { IconVisibilityHidden16 } from '../icon-visibility-hidden-16.js'
 import { IconVisibilityVisible16 } from '../icon-visibility-visible-16.js'
@@ -170,8 +168,20 @@ export const CaretUp = function () {
   return <IconCaretUp16 />
 }
 
+export const Check = function () {
+  return <IconCheck16 />
+}
+
 export const ChevronDown = function () {
   return <IconChevronDown16 />
+}
+
+export const ChevronLeft = function () {
+  return <IconChevronLeft16 />
+}
+
+export const ChevronRight = function () {
+  return <IconChevronRight16 />
 }
 
 export const ChevronUp = function () {
@@ -274,18 +284,6 @@ export const LockUnlocked = function () {
   return <IconLockUnlocked16 />
 }
 
-export const MenuCheckmarkBreadcrumb = function () {
-  return <IconMenuCheckmarkBreadcrumb16 />
-}
-
-export const MenuCheckmarkChecked = function () {
-  return <IconMenuCheckmarkChecked16 />
-}
-
-export const MenuCheckmarkMixed = function () {
-  return <IconMenuCheckmarkMixed16 />
-}
-
 export const MoveDown = function () {
   return <IconMoveDown16 />
 }
@@ -364,14 +362,6 @@ export const TextDecorationStrikethrough = function () {
 
 export const TextDecorationUnderline = function () {
   return <IconTextDecorationUnderline16 />
-}
-
-export const Ui3CheckboxCheck = function () {
-  return <IconUi3CheckboxCheck16 />
-}
-
-export const Ui3DisclosureChevron = function () {
-  return <IconUi3DisclosureChevron16 />
 }
 
 export const Upload = function () {

@@ -61,7 +61,7 @@
 }
 
 .chevronIcon {
-  padding-right: calc(var(--space-8) - var(--border-width-1));
+  padding-right: var(--space-4);
   color: var(--figma-color-icon);
 }
 .disabled .chevronIcon {

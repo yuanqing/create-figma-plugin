@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 import menuStyles from '../../../css/menu.module.css'
 import { useMouseDownOutside } from '../../../hooks/use-mouse-down-outside.js'
-import { IconMenuCheckmarkChecked16 } from '../../../icons/icon-16/icon-menu-checkmark-checked-16.js'
+import { IconCheck16 } from '../../../icons/icon-16/icon-check-16.js'
 import { Event, EventHandler } from '../../../types/event-handler.js'
 import { createClassName } from '../../../utilities/create-class-name.js'
 import { createComponent } from '../../../utilities/create-component.js'
@@ -518,7 +518,7 @@ export const TextboxAutocomplete = createComponent<
                 />
                 {option.value === originalValue ? ( // Show check icon if option matches `originalValue`
                   <div class={menuStyles.checkIcon}>
-                    <IconMenuCheckmarkChecked16 />
+                    <IconCheck16 />
                   </div>
                 ) : null}
                 {option.value}

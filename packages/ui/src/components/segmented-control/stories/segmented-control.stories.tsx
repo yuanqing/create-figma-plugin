@@ -3,9 +3,9 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
-import { IconTextAlignCenter16 } from '../../../icons/icon-16/icon-text-align-center-16.js'
-import { IconTextAlignLeft16 } from '../../../icons/icon-16/icon-text-align-left-16.js'
-import { IconTextAlignRight16 } from '../../../icons/icon-16/icon-text-align-right-16.js'
+import { IconTextAlignCenter24 } from '../../../icons/icon-24/icon-text-align-center-24.js'
+import { IconTextAlignLeft24 } from '../../../icons/icon-24/icon-text-align-left-24.js'
+import { IconTextAlignRight24 } from '../../../icons/icon-24/icon-text-align-right-24.js'
 import {
   SegmentedControl,
   SegmentedControlOption
@@ -91,9 +91,9 @@ export const DisabledOption = function () {
 export const IconChildren = function () {
   const [value, setValue] = useState<string>('align-left')
   const options: Array<SegmentedControlOption> = [
-    { children: <IconTextAlignLeft16 />, value: 'align-left' },
-    { children: <IconTextAlignCenter16 />, value: 'align-center' },
-    { children: <IconTextAlignRight16 />, value: 'align-right' }
+    { children: <IconTextAlignLeft24 />, value: 'align-left' },
+    { children: <IconTextAlignCenter24 />, value: 'align-center' },
+    { children: <IconTextAlignRight24 />, value: 'align-right' }
   ]
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value

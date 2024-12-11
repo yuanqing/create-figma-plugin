@@ -31,7 +31,7 @@
   display: block;
   width: var(--space-16);
   height: var(--space-16);
-  border: var(--border-width-4) solid var(--figma-color-bg);
+  border: var(--border-width-4) solid var(--figma-color-icon-onbrand);
   border-radius: var(--space-8);
   -webkit-appearance: none;
   appearance: none;

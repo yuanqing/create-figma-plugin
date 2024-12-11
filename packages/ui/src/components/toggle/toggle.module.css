@@ -54,7 +54,7 @@
   width: calc(var(--space-16) - (2 * var(--border-width-1)));
   height: calc(var(--space-16) - (2 * var(--border-width-1)));
   border-radius: calc((var(--space-16) / 2) - var(--border-width-1));
-  background-color: var(--figma-color-bg);
+  background-color: var(--figma-color-icon-onbrand);
   transition: left var(--transition-duration-100) ease-out;
 }
 .input:not(:checked) ~ .box .switch {

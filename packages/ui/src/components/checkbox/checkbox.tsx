@@ -1,7 +1,7 @@
 import { ComponentChildren, h } from 'preact'
 import { useCallback } from 'preact/hooks'
 
-import { IconUi3CheckboxCheck16 } from '../../icons/icon-16/icon-ui-3-checkbox-check-16.js'
+import { IconCheck16 } from '../../icons/icon-16/icon-check-16.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
@@ -75,7 +75,7 @@ export const Checkbox = createComponent<HTMLInputElement, CheckboxProps>(
         <div class={styles.box}>
           {value === true ? (
             <div class={styles.checkIcon}>
-              <IconUi3CheckboxCheck16 />
+              <IconCheck16 />
             </div>
           ) : null}
         </div>

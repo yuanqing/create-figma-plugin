@@ -5,8 +5,8 @@ import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 import menuStyles from '../../css/menu.module.css'
 import { useMouseDownOutside } from '../../hooks/use-mouse-down-outside.js'
 import { useScrollableMenu } from '../../hooks/use-scrollable-menu.js'
-import { IconControlChevronDown8 } from '../../icons/icon-8/icon-control-chevron-down-8.js'
-import { IconMenuCheckmarkChecked16 } from '../../icons/icon-16/icon-menu-checkmark-checked-16.js'
+import { IconCheck16 } from '../../icons/icon-16/icon-check-16.js'
+import { IconChevronDown16 } from '../../icons/icon-16/icon-chevron-down-16.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -322,7 +322,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
           <div class={dropdownStyles.value}>{children}</div>
         )}
         <div class={dropdownStyles.chevronIcon}>
-          <IconControlChevronDown8 />
+          <IconChevronDown16 />
         </div>
         {createPortal(
           <div
@@ -382,7 +382,7 @@ export const Dropdown = createComponent<HTMLDivElement, DropdownProps>(
                   />
                   {option.value === value ? (
                     <div class={menuStyles.checkIcon}>
-                      <IconMenuCheckmarkChecked16 />
+                      <IconCheck16 />
                     </div>
                   ) : null}
                   {typeof option.text === 'undefined'

@@ -1,8 +1,8 @@
 import { h, RefObject } from 'preact'
 import { useCallback, useRef } from 'preact/hooks'
 
-import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
-import { IconSearch32 } from '../../icons/icon-32/icon-search-32.js'
+import { IconClose24 } from '../../icons/icon-24/icon-close-24.js'
+import { IconSearch24 } from '../../icons/icon-24/icon-search-24.js'
 import { Event, EventHandler } from '../../types/event-handler.js'
 import { FocusableComponentProps } from '../../types/focusable-component-props.js'
 import { createClassName } from '../../utilities/create-class-name.js'
@@ -136,7 +136,7 @@ export const SearchTextbox = createComponent<
         value={value}
       />
       <div class={styles.searchIcon}>
-        <IconSearch32 />
+        <IconSearch24 />
       </div>
       {value === EMPTY_STRING || disabled === true ? null : (
         <button
@@ -145,9 +145,7 @@ export const SearchTextbox = createComponent<
           tabIndex={0}
         >
           <div class={styles.clearButtonBox}>
-            <div class={styles.crossIcon}>
-              <IconCross32 />
-            </div>
+            <IconClose24 />
           </div>
         </button>
       )}

@@ -23,8 +23,8 @@
 
 .searchIcon {
   position: absolute;
-  top: var(--space-0);
-  left: var(--space-0);
+  top: var(--space-4);
+  left: var(--space-4);
   color: var(--figma-color-icon-secondary);
   pointer-events: none; /* so that clicking the icon focuses the textbox */
 }
@@ -41,7 +41,7 @@
   right: var(--space-0);
   width: var(--space-32);
   height: var(--space-32);
-  padding: var(--space-4);
+  padding: calc(var(--space-4) - var(--border-width-1));
   color: var(--figma-color-icon-secondary);
 }
 .searchTextbox:not(.disabled) .clearButton:hover,
@@ -53,18 +53,13 @@
 }
 
 .clearButtonBox {
-  width: var(--space-24);
-  height: var(--space-24);
+  display: block;
   border: var(--border-width-1) solid transparent;
   border-radius: var(--border-radius-4);
 }
 .searchTextbox:not(.disabled) .clearButton:focus-visible .clearButtonBox {
   border-color: var(--figma-color-border-selected);
 }
-
-.crossIcon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.clearButtonBox svg {
+  display: block;
 }

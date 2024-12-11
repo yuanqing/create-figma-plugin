@@ -90,11 +90,11 @@ export const SegmentedControl = createComponent<
               {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
             />
             <div class={styles.box}>
-              <div
-                class={typeof children === 'string' ? styles.text : undefined}
-              >
-                {children}
-              </div>
+              {typeof children === 'string' ? (
+                <div class={styles.text}>{children}</div>
+              ) : (
+                children
+              )}
             </div>
           </label>
         )

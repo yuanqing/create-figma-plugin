@@ -19,7 +19,6 @@
   height: var(--space-24);
   align-items: center;
   justify-content: center;
-  padding: var(--space-0) var(--space-8);
   border: var(--border-width-1) solid transparent;
   border-radius: var(--border-radius-4);
   color: var(--figma-color-text-secondary);
@@ -38,5 +37,5 @@
 }
 
 .text {
-  padding: var(--space-4) var(--space-0);
+  padding: var(--space-4) var(--space-8);
 }

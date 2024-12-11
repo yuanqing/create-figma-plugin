@@ -66,6 +66,9 @@
   border-bottom-width: 1px;
 }
 
+.closeButton {
+  display: flex;
+}
 .closeButtonLeft {
   order: -1;
 }
@@ -82,7 +85,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* FIXME */
+  background-color: var(--color-bg-overlay);
   opacity: 0;
   pointer-events: none;
   transition: opacity ease 0.3s;

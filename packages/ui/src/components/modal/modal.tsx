@@ -1,7 +1,7 @@
 import { ComponentChild, h, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
-import { IconCross32 } from '../../icons/icon-32/icon-cross-32.js'
+import { IconClose24 } from '../../icons/icon-24/icon-close-24.js'
 import { EventHandler } from '../../types/event-handler.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'
@@ -31,7 +31,7 @@ export type ModalPosition = 'bottom' | 'center' | 'left' | 'right'
 export const Modal = createComponent<HTMLDivElement, ModalProps>(function (
   {
     children,
-    closeButtonIcon = <IconCross32 />,
+    closeButtonIcon = <IconClose24 />,
     closeButtonPosition = 'right',
     open,
     transition = true,
@@ -170,11 +170,12 @@ export const Modal = createComponent<HTMLDivElement, ModalProps>(function (
                 </div>
                 {typeof onCloseButtonClick === 'undefined' ? null : (
                   <div
-                    class={
+                    class={createClassName([
+                      styles.closeButton,
                       closeButtonPosition === 'left'
                         ? styles.closeButtonLeft
-                        : undefined
-                    }
+                        : null
+                    ])}
                   >
                     <IconButton onClick={onCloseButtonClick}>
                       {closeButtonIcon}

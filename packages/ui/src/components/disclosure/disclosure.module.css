@@ -33,11 +33,7 @@
 .title .icon {
   position: absolute;
   left: var(--space-0);
-  display: none;
-  color: var(--figma-color-icon-tertiary);
-}
-.input:hover ~ .title .icon {
-  display: block;
+  color: var(--figma-color-icon);
 }
 .input:checked ~ .title .icon {
   transform: rotate(90deg);

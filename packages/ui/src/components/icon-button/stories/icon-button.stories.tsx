@@ -2,7 +2,7 @@
 import { h, JSX } from 'preact'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
-import { IconPlus32 } from '../../../icons/icon-32/icon-plus-32.js'
+import { IconPlus24 } from '../../../icons/icon-24/icon-plus-24.js'
 import { IconButton } from '../icon-button.js'
 
 export default {
@@ -15,7 +15,7 @@ export const Passive = function () {
   }
   return (
     <IconButton onClick={handleClick}>
-      <IconPlus32 />
+      <IconPlus24 />
     </IconButton>
   )
 }
@@ -26,7 +26,7 @@ export const Focused = function () {
   }
   return (
     <IconButton {...useInitialFocus()} onClick={handleClick}>
-      <IconPlus32 />
+      <IconPlus24 />
     </IconButton>
   )
 }
@@ -37,7 +37,7 @@ export const Disabled = function () {
   }
   return (
     <IconButton disabled onClick={handleClick}>
-      <IconPlus32 />
+      <IconPlus24 />
     </IconButton>
   )
 }
