@@ -9,7 +9,7 @@
 
 ## Pre-requisites
 
-- [Node.js](https://nodejs.org) – v20
+- [Node.js](https://nodejs.org) – v22
 - [Figma desktop app](https://figma.com/downloads/)
 
 ## Bootstrapping a new plugin/widget from a template

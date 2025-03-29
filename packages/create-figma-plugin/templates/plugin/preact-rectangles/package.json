@@ -8,7 +8,7 @@
     "@create-figma-plugin/build": "^<%- versions.createFigmaPlugin.build %>",
     "@create-figma-plugin/tsconfig": "^<%- versions.createFigmaPlugin.tsconfig %>",
     "@figma/plugin-typings": "<%- versions.figma.pluginTypings %>",
-    "typescript": ">=4"
+    "typescript": ">=5"
   },
   "scripts": {
     "build": "build-figma-plugin --typecheck --minify",

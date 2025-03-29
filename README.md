@@ -20,8 +20,8 @@
 
 ### Pre-requisites
 
-- [Node.js](https://nodejs.org) – v20
-- [npm](https://docs.npmjs.com/cli/) – v10
+- [Node.js](https://nodejs.org) – v22
+- [npm](https://docs.npmjs.com/cli/) – v11
 
 ### Building the project locally
 

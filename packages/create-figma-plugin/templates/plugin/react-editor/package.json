@@ -11,7 +11,7 @@
     "@create-figma-plugin/tsconfig": "^<%- versions.createFigmaPlugin.tsconfig %>",
     "@figma/plugin-typings": "<%- versions.figma.pluginTypings %>",
     "@types/prismjs": "1.26.3",
-    "typescript": ">=4"
+    "typescript": ">=5"
   },
   "scripts": {
     "build": "build-figma-plugin --typecheck --minify",
