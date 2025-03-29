@@ -23,9 +23,9 @@ export function evaluateNumericExpression(value: string): null | number {
   if (operatorRegex.test(value) === true) {
     if (operatorSuffixRegex.test(value) === true) {
       // Drop the operator suffix
-      return eval(value.substring(0, value.length - 1)) // eslint-disable-line no-eval
+      return eval(value.substring(0, value.length - 1))
     }
-    return eval(value) // eslint-disable-line no-eval
+    return eval(value)
   }
   return parseFloat(value)
 }

@@ -105,8 +105,10 @@
           (
               100% - var(--width-secondary) - var(--width-secondary) -
                 var(--width-main)
-            ) / 2
-        ) + var(--width-main) + var(--space-100)
+            ) /
+            2
+        ) +
+        var(--width-main) + var(--space-100)
     );
     overflow: auto;
     width: var(--width-secondary);

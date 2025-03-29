@@ -13,10 +13,11 @@
   --color-white: #fff;
   --color-highlight-bg: #141f28;
   --color-highlight-fg: #7cc4f8;
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-  --font-family-code: SFMono-Regular, Consolas, 'Liberation Mono', Menlo,
-    monospace;
+  --font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-family-code:
+    SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
   --font-weight-regular: normal;
   --font-weight-bold: 500;
   --font-size-code: 90%;
