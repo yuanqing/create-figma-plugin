@@ -22,6 +22,7 @@ export type TabsOption = {
 export const Tabs = createComponent<HTMLDivElement, TabsProps>(function (
   {
     onChange = noop,
+    onCommand, // eslint-disable-line @typescript-eslint/no-unused-vars
     onKeyDown = noop,
     onValueChange = noop,
     options,

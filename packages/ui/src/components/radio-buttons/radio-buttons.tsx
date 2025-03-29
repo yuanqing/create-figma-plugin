@@ -33,6 +33,7 @@ export const RadioButtons = createComponent<HTMLDivElement, RadioButtonsProps>(
       disabled = false,
       direction = 'vertical',
       onChange = noop,
+      onCommand, // eslint-disable-line @typescript-eslint/no-unused-vars
       onKeyDown = noop,
       onValueChange = noop,
       options,

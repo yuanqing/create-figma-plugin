@@ -41,6 +41,7 @@ export const TextboxColor = createComponent<HTMLDivElement, TextboxColorProps>(
       fullWidth = false,
       hexColor,
       hexColorPlaceholder,
+      onCommand, // eslint-disable-line @typescript-eslint/no-unused-vars
       onHexColorInput = noop,
       onHexColorKeyDown = noop,
       onHexColorValueInput = noop,
