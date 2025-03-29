@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
+/* eslint-disable sort-keys */
 
 import { exec, ExecException } from 'node:child_process'
 import fs from 'node:fs/promises'

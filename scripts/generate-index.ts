@@ -1,5 +1,3 @@
-/* eslint-disable no-inner-declarations */
-
 import { globby } from 'globby'
 import ts from 'typescript'
 
