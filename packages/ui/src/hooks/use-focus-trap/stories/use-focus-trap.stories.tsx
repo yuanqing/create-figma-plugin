@@ -17,7 +17,7 @@ export const UseFocusTrap = function () {
   }
   return (
     <Fragment>
-      <Textbox name="text" onValueInput={setValue} value={value} />
+      <Textbox onValueInput={setValue} value={value} />
       <VerticalSpace space="small" />
       <Button fullWidth onClick={handleClick}>
         Submit

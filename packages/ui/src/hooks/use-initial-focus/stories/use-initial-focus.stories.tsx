@@ -17,12 +17,7 @@ export const UseInitialFocus = function () {
   }
   return (
     <Fragment>
-      <Textbox
-        {...initialFocus}
-        name="text"
-        onValueInput={setValue}
-        value={value}
-      />
+      <Textbox {...initialFocus} onValueInput={setValue} value={value} />
       <VerticalSpace space="small" />
       <Button fullWidth onClick={handleClick}>
         Submit
