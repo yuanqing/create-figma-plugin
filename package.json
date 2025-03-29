@@ -5,13 +5,13 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "npm@10.8.2",
+  "packageManager": "npm@11.2.0",
   "scripts": {
     "build": "turbo run build",
-    "bump-dependencies": "tsx scripts/bump-dependencies.ts @figma/plugin-typings @typescript-eslint/eslint-plugin eslint eslint-config-yuanqing eslint-plugin-import eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-simple-import-sort eslint-plugin-sort-keys-fix prettier stylelint stylelint-config-yuanqing",
+    "bump-dependencies": "tsx scripts/bump-dependencies.ts @figma/plugin-typings",
     "clean": "turbo run clean && rimraf --glob '*.log' 'packages/*/.turbo' .turbo build node_modules/.cache/turbo",
-    "fix": "turbo run fix && eslint --fix 'scripts/**/*.ts'",
-    "lint": "turbo run lint && eslint 'scripts/**/*.ts'",
+    "fix": "turbo run fix && eslint --fix eslint.config.js 'scripts/**/*.ts'",
+    "lint": "turbo run lint && eslint eslint.config.js 'scripts/**/*.ts'",
     "postinstall": "simple-git-hooks && tsx scripts/patch-figma-plugin-typings.ts && npm run build",
     "prepackages-publish": "turbo run fix lint && turbo run test build",
     "packages-publish": "lerna publish from-package",
@@ -29,41 +29,34 @@
     "website-serve": "sirv build --dev --host --port 4242"
   },
   "devDependencies": {
-    "@lerna-lite/publish": "3.8.0",
-    "@lerna-lite/version": "3.8.0",
-    "@types/node": "22.2.0",
-    "@typescript-eslint/eslint-plugin": "8.0.1",
-    "concurrently": "8.2.2",
+    "@eslint/js": "9.23.0",
+    "@lerna-lite/publish": "4.0.0",
+    "@lerna-lite/version": "4.0.0",
+    "@types/node": "22.13.14",
+    "concurrently": "9.1.2",
     "cpy-cli": "5.0.0",
-    "eslint": "8.57.0",
-    "eslint-config-yuanqing": "0.0.11",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react": "7.35.0",
-    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint": "9.23.0",
+    "eslint-config-prettier": "10.1.1",
+    "eslint-plugin-prettier": "5.2.5",
+    "eslint-plugin-react": "7.37.4",
+    "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-sort-keys-fix": "1.1.2",
-    "gh-pages": "6.1.1",
-    "globby": "14.0.2",
-    "lint-staged": "15.2.8",
-    "npm-check-updates": "17.0.6",
+    "gh-pages": "6.3.0",
+    "globby": "14.1.0",
+    "lint-staged": "15.5.0",
+    "npm-check-updates": "17.1.16",
     "path-exists": "5.0.0",
-    "prettier": "3.3.3",
+    "prettier": "3.5.3",
     "rimraf": "6.0.1",
-    "simple-git-hooks": "2.11.1",
-    "sirv-cli": "2.0.2",
-    "stylelint": "16.8.1",
-    "stylelint-config-yuanqing": "0.0.7",
-    "tsx": "4.17.0",
-    "turbo": "2.0.12",
-    "typescript": "5.4.5"
-  },
-  "eslintConfig": {
-    "extends": "eslint-config-yuanqing",
-    "root": true,
-    "env": {
-      "node": true
-    }
+    "simple-git-hooks": "2.12.1",
+    "sirv-cli": "3.0.1",
+    "stylelint": "16.17.0",
+    "stylelint-config-idiomatic-order": "10.0.0",
+    "stylelint-prettier": "5.0.3",
+    "tsx": "4.19.3",
+    "turbo": "2.4.4",
+    "typescript": "5.8.2",
+    "typescript-eslint": "8.28.0"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
@@ -73,13 +66,21 @@
       "stylelint"
     ]
   },
-  "prettier": "eslint-config-yuanqing/prettier",
+  "prettier": {
+    "quoteProps": "consistent",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
     "pre-push": "npx turbo run fix lint && npx turbo run test build"
   },
   "stylelint": {
-    "extends": "stylelint-config-yuanqing"
+    "extends": [
+      "stylelint-prettier/recommended",
+      "stylelint-config-idiomatic-order"
+    ]
   },
   "workspaces": [
     "packages/*"

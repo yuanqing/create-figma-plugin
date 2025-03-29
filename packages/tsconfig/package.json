@@ -25,9 +25,5 @@
   "main": "./tsconfig.json",
   "scripts": {
     "fix": "prettier --log-level error --write '*.json'"
-  },
-  "devDependencies": {
-    "prettier": "3.0.1"
-  },
-  "prettier": "eslint-config-yuanqing/prettier"
+  }
 }

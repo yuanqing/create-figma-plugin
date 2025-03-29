@@ -41,16 +41,16 @@
   },
   "dependencies": {
     "@create-figma-plugin/common": "^4.0.0-alpha.0",
-    "chokidar": "^3.6.0",
-    "cssnano": "^7.0.5",
-    "esbuild": "0.23.0",
+    "chokidar": "^4.0.3",
+    "cssnano": "^7.0.6",
+    "esbuild": "0.25.1",
     "find-up": "^7.0.0",
-    "globby": "^14.0.2",
+    "globby": "^14.1.0",
     "indent-string": "^5.0.0",
     "kleur": "^4.1.5",
     "path-exists": "^5.0.0",
-    "postcss": "^8.4.41",
-    "postcss-modules": "^6.0.0",
+    "postcss": "^8.5.3",
+    "postcss-modules": "^6.0.1",
     "rev-hash": "^4.1.0",
     "sade": "^1.8.1",
     "temp-write": "^6.0.0",
@@ -60,31 +60,21 @@
   "devDependencies": {
     "@create-figma-plugin/tsconfig": "^4.0.0-alpha.0",
     "@create-figma-plugin/utilities": "^4.0.0-alpha.0",
-    "@figma/plugin-typings": "1.100.2",
-    "@types/node": "22.2.0",
-    "@types/react": "18.3.3",
-    "@types/rimraf": "3.0.2",
-    "@typescript-eslint/eslint-plugin": "6.13.2",
-    "ava": "6.1.3",
-    "concurrently": "8.2.2",
-    "eslint": "8.55.0",
-    "eslint-config-yuanqing": "0.0.9",
-    "eslint-plugin-import": "2.29.0",
-    "eslint-plugin-prettier": "5.0.1",
-    "eslint-plugin-react": "7.33.2",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "eslint-plugin-simple-import-sort": "10.0.0",
-    "eslint-plugin-sort-keys-fix": "1.1.2",
-    "preact": "10.23.1",
-    "prettier": "3.1.0",
-    "react": "18.3.1",
+    "@figma/plugin-typings": "1.109.0",
+    "@types/node": "22.13.14",
+    "@types/react": "19.0.12",
+    "@types/rimraf": "4.0.5",
+    "ava": "6.2.0",
+    "concurrently": "9.1.2",
+    "preact": "10.26.4",
+    "react": "19.1.0",
     "rimraf": "6.0.1",
-    "tsx": "4.17.0",
-    "typescript": "5.4.5"
+    "tsx": "4.19.3",
+    "typescript": "5.8.2"
   },
   "peerDependencies": {
     "@figma/plugin-typings": ">=1",
-    "typescript": ">=4"
+    "typescript": ">=5"
   },
   "ava": {
     "extensions": {
@@ -97,13 +87,5 @@
     ],
     "timeout": "2m",
     "workerThreads": false
-  },
-  "eslintConfig": {
-    "extends": "eslint-config-yuanqing",
-    "root": true,
-    "env": {
-      "node": true
-    }
-  },
-  "prettier": "eslint-config-yuanqing/prettier"
+  }
 }
