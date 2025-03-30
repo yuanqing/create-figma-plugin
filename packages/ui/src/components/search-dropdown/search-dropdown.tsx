@@ -244,14 +244,18 @@ export const SearchDropdown = createComponent<
       if (isMenuVisible === true) {
         return
       }
-      // Show the menu and update the `selectedId` on focus
+
+      // Show menu first
       setIsMenuVisible(true)
 
-      // Need to wait for the menu to be rendered before measuring its height
-      // We'll update the position once it's visible
-      setTimeout(() => {
+      // Update position immediately and after a short delay to ensure smooth transition
+      requestAnimationFrame(() => {
         updateMenuPosition()
-      }, 0)
+        // Update again after content is rendered
+        setTimeout(() => {
+          updateMenuPosition()
+        }, 50)
+      })
 
       if (value === null) {
         triggerMenuUpdateLayout(selectedId)
@@ -286,9 +290,32 @@ export const SearchDropdown = createComponent<
       onSearchValueInput(currentText)
       setIsSearching(true)
       event.currentTarget.select()
+
+      // Always show menu on focus
+      triggerMenuShow()
     },
-    [onFocus, getSelectedOptionText, onSearchValueInput, propSearchValue]
+    [
+      onFocus,
+      getSelectedOptionText,
+      onSearchValueInput,
+      propSearchValue,
+      triggerMenuShow
+    ]
   )
+
+  // Update menu position when filtered options change
+  useEffect(() => {
+    if (isMenuVisible) {
+      // Use requestAnimationFrame for smoother updates
+      requestAnimationFrame(() => {
+        updateMenuPosition()
+        // Update again after content is rendered
+        setTimeout(() => {
+          updateMenuPosition()
+        }, 50)
+      })
+    }
+  }, [isMenuVisible, filteredOptions, updateMenuPosition])
 
   const handleInput = useCallback(
     function (event: Event.onInput<HTMLInputElement>) {
@@ -303,6 +330,7 @@ export const SearchDropdown = createComponent<
       // If input is completely cleared, clear selection
       if (newValue === EMPTY_STRING) {
         onValueChange(null)
+        setSelectedId(INVALID_ID)
       }
 
       // Show menu when typing
@@ -449,9 +477,8 @@ export const SearchDropdown = createComponent<
       }
       onSearchValueInput(EMPTY_STRING)
 
-      // Select `root`, then hide the menu
+      // Don't hide menu after selection, just focus the input
       triggerRootFocus()
-      triggerMenuHide()
     },
     [
       filteredOptions,
@@ -459,7 +486,6 @@ export const SearchDropdown = createComponent<
       onValueChange,
       onSearchValueInput,
       propSearchValue,
-      triggerMenuHide,
       triggerRootFocus
     ]
   )
