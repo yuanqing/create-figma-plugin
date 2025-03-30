@@ -587,7 +587,7 @@ export const SearchDropdown = createComponent<
       ])}
       onKeyDown={disabled === true ? undefined : handleRootKeyDown}
       onMouseDown={handleRootMouseDown}
-      tabIndex={0}
+      tabIndex={-1}
     >
       <div class={styles.inputContainer}>
         {typeof icon === 'undefined' ? (

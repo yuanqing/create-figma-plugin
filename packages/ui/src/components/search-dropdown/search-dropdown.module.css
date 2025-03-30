@@ -1,11 +1,13 @@
 .searchDropdown {
   position: relative;
-  z-index: var(--z-index-1);
+  display: flex;
   width: 100%;
+  flex-direction: column;
+  outline: none;
 }
 
 .searchDropdown:focus {
-  border-color: var(--figma-color-border-selected);
+  outline: none;
 }
 
 .disabled,
