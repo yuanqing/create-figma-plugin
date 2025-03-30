@@ -140,6 +140,7 @@ export const SearchDropdown = createComponent<
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [filteredOptions, setFilteredOptions] = useState(options)
   const [menuPosition, setMenuPosition] = useState({
+    isAbove: false,
     left: 0,
     top: 0,
     width: 0
@@ -195,13 +196,35 @@ export const SearchDropdown = createComponent<
 
   const updateMenuPosition = useCallback(function () {
     const rootElement = getCurrentFromRef(rootElementRef)
-    if (rootElement) {
+    const menuElement = getCurrentFromRef(menuElementRef)
+    if (rootElement && menuElement) {
       const rect = rootElement.getBoundingClientRect()
-      setMenuPosition({
-        left: rect.left,
-        top: rect.bottom,
-        width: rect.width
-      })
+      const viewportHeight = window.innerHeight
+
+      // Calculate the actual menu height rather than using a hardcoded value
+      const menuHeight = menuElement.offsetHeight || 0
+
+      // Calculate available space
+      const spaceBelow = viewportHeight - rect.bottom
+
+      // Position above if we're close to the bottom of the viewport
+      if (spaceBelow < menuHeight && rect.top > menuHeight) {
+        setMenuPosition({
+          isAbove: true,
+          left: rect.left,
+          // For "above" positioning, we set top to a value that will position the menu above
+          top: rect.top - menuHeight - 8, // Position above with 8px gap
+          width: rect.width
+        })
+      } else {
+        // Position below (default)
+        setMenuPosition({
+          isAbove: false,
+          left: rect.left,
+          top: rect.bottom + 4, // 4px gap below
+          width: rect.width
+        })
+      }
     }
   }, [])
 
@@ -221,11 +244,15 @@ export const SearchDropdown = createComponent<
       if (isMenuVisible === true) {
         return
       }
-      // Update the menu position
-      updateMenuPosition()
-
       // Show the menu and update the `selectedId` on focus
       setIsMenuVisible(true)
+
+      // Need to wait for the menu to be rendered before measuring its height
+      // We'll update the position once it's visible
+      setTimeout(() => {
+        updateMenuPosition()
+      }, 0)
+
       if (value === null) {
         triggerMenuUpdateLayout(selectedId)
         return
@@ -490,6 +517,16 @@ export const SearchDropdown = createComponent<
     [isMenuVisible, updateMenuPosition]
   )
 
+  // Effect to update menu position after it becomes visible
+  useEffect(() => {
+    if (isMenuVisible) {
+      // Update position once menu is rendered
+      setTimeout(() => {
+        updateMenuPosition()
+      }, 0)
+    }
+  }, [isMenuVisible, updateMenuPosition])
+
   const refCallback = useCallback(
     function (rootElement: null | HTMLDivElement) {
       rootElementRef.current = rootElement
@@ -513,6 +550,7 @@ export const SearchDropdown = createComponent<
 
   return (
     <div
+      {...rest}
       ref={refCallback}
       class={createClassName([
         styles.searchDropdown,
@@ -531,7 +569,6 @@ export const SearchDropdown = createComponent<
           <div class={styles.icon}>{icon}</div>
         )}
         <input
-          {...rest}
           ref={inputRefCallback}
           class={styles.input}
           disabled={disabled === true}
@@ -601,6 +638,11 @@ export const SearchDropdown = createComponent<
                 disabled === true ? menuStyles.hidden : null
               ])}
               onMouseDown={handleMenuMouseDown}
+              style={{
+                margin: 0,
+                maxHeight: 'fit-content',
+                overflowY: 'auto'
+              }}
             >
               {filteredOptions.map(function (
                 option: SearchDropdownOption,
