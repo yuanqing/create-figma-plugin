@@ -25,7 +25,6 @@
   width: 100%;
   height: var(--space-32);
   padding: var(--space-0) var(--space-32);
-  border-radius: var(--border-radius-6);
   background-color: var(--figma-color-bg-secondary);
   color: var(--figma-color-text);
   cursor: text;
@@ -108,6 +107,8 @@
 :global(.menu-container) {
   position: fixed;
   z-index: var(--z-index-5);
+  width: 100%;
+  padding: var(--space-4) var(--space-4);
 }
 
 .searchContainer {
@@ -132,7 +133,6 @@
   height: var(--space-32);
   padding: var(--space-0) var(--space-8) var(--space-0) var(--space-32);
   border: var(--border-width-1) solid var(--figma-color-border);
-  border-radius: var(--border-radius-6);
   background-color: var(--figma-color-bg);
   color: var(--figma-color-text);
   font-size: var(--font-size-12);
