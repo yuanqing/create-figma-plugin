@@ -95,9 +95,15 @@ export const SearchDropdown = createComponent<
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
+  const menuContainerRef: RefObject<HTMLDivElement> = useRef(null)
 
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [filteredOptions, setFilteredOptions] = useState(options)
+  const [menuPosition, setMenuPosition] = useState({
+    left: 0,
+    top: 0,
+    width: 0
+  })
 
   const index = findOptionIndexByValue(options, value)
   if (value !== null && index === -1) {
@@ -147,6 +153,18 @@ export const SearchDropdown = createComponent<
     getCurrentFromRef(rootElementRef).focus()
   }, [])
 
+  const updateMenuPosition = useCallback(function () {
+    const rootElement = getCurrentFromRef(rootElementRef)
+    if (rootElement) {
+      const rect = rootElement.getBoundingClientRect()
+      setMenuPosition({
+        left: rect.left,
+        top: rect.bottom,
+        width: rect.width
+      })
+    }
+  }, [])
+
   const triggerMenuUpdateLayout = useCallback(function (selectedId: Id) {
     const rootElement = getCurrentFromRef(rootElementRef)
     const menuElement = getCurrentFromRef(menuElementRef)
@@ -163,6 +181,9 @@ export const SearchDropdown = createComponent<
       if (isMenuVisible === true) {
         return
       }
+      // Update the menu position
+      updateMenuPosition()
+
       // Show the menu and update the `selectedId` on focus
       setIsMenuVisible(true)
       if (value === null) {
@@ -177,23 +198,35 @@ export const SearchDropdown = createComponent<
       setSelectedId(newSelectedId)
       triggerMenuUpdateLayout(newSelectedId)
     },
-    [isMenuVisible, options, selectedId, triggerMenuUpdateLayout, value]
+    [
+      isMenuVisible,
+      options,
+      selectedId,
+      triggerMenuUpdateLayout,
+      updateMenuPosition,
+      value
+    ]
   )
 
   const handleClearButtonClick = useCallback(
-    function () {
+    function (event: { stopPropagation: () => void }) {
+      // Stop propagation to prevent dropdown from showing
+      event.stopPropagation()
+
       const inputElement = getCurrentFromRef(inputElementRef)
-      inputElement.value = EMPTY_STRING
-      if (propSearchValue === undefined) {
-        setInternalSearchValue(EMPTY_STRING)
+      if (inputElement) {
+        inputElement.value = EMPTY_STRING
+        if (propSearchValue === undefined) {
+          setInternalSearchValue(EMPTY_STRING)
+        }
+        onSearchValueInput(EMPTY_STRING)
+        const inputEvent = new window.Event('input', {
+          bubbles: true,
+          cancelable: true
+        })
+        inputElement.dispatchEvent(inputEvent)
+        inputElement.focus()
       }
-      onSearchValueInput(EMPTY_STRING)
-      const inputEvent = new window.Event('input', {
-        bubbles: true,
-        cancelable: true
-      })
-      inputElement.dispatchEvent(inputEvent)
-      inputElement.focus()
     },
     [onSearchValueInput, propSearchValue]
   )
@@ -213,8 +246,13 @@ export const SearchDropdown = createComponent<
         setInternalSearchValue(newValue)
       }
       onSearchValueInput(newValue)
+
+      // Show menu when typing
+      if (!isMenuVisible) {
+        triggerMenuShow()
+      }
     },
-    [onSearchValueInput, propSearchValue]
+    [isMenuVisible, onSearchValueInput, propSearchValue, triggerMenuShow]
   )
 
   const handleRootKeyDown = useCallback(
@@ -226,7 +264,7 @@ export const SearchDropdown = createComponent<
         event.preventDefault()
         if (clearOnEscapeKeyDown === true && searchValue !== EMPTY_STRING) {
           event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
-          handleClearButtonClick()
+          handleClearButtonClick(event)
           return
         }
         if (propagateEscapeKeyDown === false) {
@@ -326,11 +364,13 @@ export const SearchDropdown = createComponent<
       ] as SearchDropdownOptionValue
       const newValue = optionValue.value
       onValueChange(newValue)
+
       // Clear the search input
       if (propSearchValue === undefined) {
         setInternalSearchValue(EMPTY_STRING)
       }
       onSearchValueInput(EMPTY_STRING)
+
       // Select `root`, then hide the menu
       triggerRootFocus()
       triggerMenuHide()
@@ -369,21 +409,34 @@ export const SearchDropdown = createComponent<
     ref: rootElementRef
   })
 
+  // Update menu position when the window resizes
+  useEffect(() => {
+    function handleWindowResize() {
+      if (isMenuVisible) {
+        updateMenuPosition()
+      }
+    }
+
+    window.addEventListener('resize', handleWindowResize)
+    return () => {
+      window.removeEventListener('resize', handleWindowResize)
+    }
+  }, [isMenuVisible, updateMenuPosition])
+
   useEffect(
     function () {
       function handleWindowScroll() {
         if (isMenuVisible === false) {
           return
         }
-        triggerRootFocus()
-        triggerMenuHide()
+        updateMenuPosition()
       }
       window.addEventListener('scroll', handleWindowScroll)
       return function () {
         window.removeEventListener('scroll', handleWindowScroll)
       }
     },
-    [isMenuVisible, triggerMenuHide, triggerRootFocus]
+    [isMenuVisible, updateMenuPosition]
   )
 
   const refCallback = useCallback(
@@ -413,7 +466,6 @@ export const SearchDropdown = createComponent<
       ref={refCallback}
       class={createClassName([
         styles.searchDropdown,
-        typeof icon !== 'undefined' ? styles.hasIcon : null,
         disabled === true ? styles.disabled : null
       ])}
       onKeyDown={disabled === true ? undefined : handleRootKeyDown}
@@ -421,12 +473,13 @@ export const SearchDropdown = createComponent<
       tabIndex={0}
     >
       <div class={styles.inputContainer}>
-        {typeof icon === 'undefined' ? null : (
+        {typeof icon === 'undefined' ? (
+          <div class={styles.searchIcon}>
+            <IconSearch24 />
+          </div>
+        ) : (
           <div class={styles.icon}>{icon}</div>
         )}
-        <div class={styles.searchIcon}>
-          <IconSearch24 />
-        </div>
         <input
           ref={inputRefCallback}
           class={styles.input}
@@ -444,6 +497,7 @@ export const SearchDropdown = createComponent<
             class={styles.clearButton}
             onClick={handleClearButtonClick}
             tabIndex={0}
+            type="button"
           >
             <div class={styles.clearButtonBox}>
               <IconClose24 />
@@ -456,84 +510,93 @@ export const SearchDropdown = createComponent<
       </div>
       <div class={styles.valueDisplay}>
         {value === null ? (
-          <div class={createClassName([styles.value, styles.placeholder])}>
-            {placeholder}
-          </div>
+          placeholder ? (
+            <span>{placeholder}</span>
+          ) : null
         ) : (
-          <div class={styles.value}>{children}</div>
+          <span>{children}</span>
         )}
       </div>
-      {createPortal(
-        <div
-          ref={menuElementRef}
-          class={createClassName([
-            menuStyles.menu,
-            styles.menu,
-            disabled === true || isMenuVisible === false
-              ? menuStyles.hidden
-              : null
-          ])}
-          onMouseDown={handleMenuMouseDown}
-        >
-          {filteredOptions.map(function (
-            option: SearchDropdownOption,
-            index: number
-          ) {
-            if (typeof option === 'string') {
-              return <hr key={index} class={menuStyles.optionSeparator} />
-            }
-            if ('header' in option) {
-              return (
-                <h1 key={index} class={menuStyles.optionHeader}>
-                  {option.header}
-                </h1>
-              )
-            }
-            return (
-              <label
-                key={index}
-                class={createClassName([
-                  menuStyles.optionValue,
-                  option.disabled === true
-                    ? menuStyles.optionValueDisabled
-                    : null,
-                  option.disabled !== true && `${index}` === selectedId
-                    ? menuStyles.optionValueSelected
-                    : null
-                ])}
-              >
-                <input
-                  checked={value === option.value}
-                  class={menuStyles.input}
-                  disabled={option.disabled === true}
-                  onChange={
-                    value === option.value ? undefined : handleOptionChange
-                  }
-                  onClick={
-                    value === option.value
-                      ? handleSelectedOptionClick
-                      : undefined
-                  }
-                  onMouseMove={handleScrollableMenuItemMouseMove}
-                  tabIndex={-1}
-                  type="radio"
-                  value={`${option.value}`}
-                  {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
-                />
-                {option.value === value ? (
-                  <div class={menuStyles.checkIcon}>
-                    <IconCheck16 />
-                  </div>
-                ) : null}
-                {typeof option.text === 'undefined'
-                  ? option.value
-                  : option.text}
-              </label>
-            )
-          })}
-        </div>,
-        document.body
-      )}
+      {isMenuVisible &&
+        createPortal(
+          <div
+            ref={menuContainerRef}
+            className="menu-container"
+            style={{
+              left: `${menuPosition.left}px`,
+              top: `${menuPosition.top}px`,
+              width: `${menuPosition.width}px`
+            }}
+          >
+            <div
+              ref={menuElementRef}
+              class={createClassName([
+                menuStyles.menu,
+                styles.menu,
+                disabled === true ? menuStyles.hidden : null
+              ])}
+              onMouseDown={handleMenuMouseDown}
+            >
+              {filteredOptions.map(function (
+                option: SearchDropdownOption,
+                index: number
+              ) {
+                if (typeof option === 'string') {
+                  return <hr key={index} class={menuStyles.optionSeparator} />
+                }
+                if ('header' in option) {
+                  return (
+                    <h1 key={index} class={menuStyles.optionHeader}>
+                      {option.header}
+                    </h1>
+                  )
+                }
+                return (
+                  <label
+                    key={index}
+                    class={createClassName([
+                      menuStyles.optionValue,
+                      option.disabled === true
+                        ? menuStyles.optionValueDisabled
+                        : null,
+                      option.disabled !== true && `${index}` === selectedId
+                        ? menuStyles.optionValueSelected
+                        : null
+                    ])}
+                  >
+                    <input
+                      checked={value === option.value}
+                      class={menuStyles.input}
+                      disabled={option.disabled === true}
+                      onChange={
+                        value === option.value ? undefined : handleOptionChange
+                      }
+                      onClick={
+                        value === option.value
+                          ? handleSelectedOptionClick
+                          : undefined
+                      }
+                      onMouseMove={handleScrollableMenuItemMouseMove}
+                      tabIndex={-1}
+                      type="radio"
+                      value={`${option.value}`}
+                      {...{ [ITEM_ID_DATA_ATTRIBUTE_NAME]: `${index}` }}
+                    />
+                    {option.value === value ? (
+                      <div class={menuStyles.checkIcon}>
+                        <IconCheck16 />
+                      </div>
+                    ) : null}
+                    {typeof option.text === 'undefined'
+                      ? option.value
+                      : option.text}
+                  </label>
+                )
+              })}
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   )
 })

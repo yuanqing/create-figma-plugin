@@ -20,32 +20,161 @@
   cursor: not-allowed;
 }
 
-.value {
-  overflow: hidden;
+.inputContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: var(--space-20);
+  padding: var(--space-0) var(--space-28) var(--space-0) var(--space-24);
+  border: none;
+  background: none;
   color: var(--figma-color-text);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: var(--font-size-12);
 }
 
-.placeholder {
-  color: var(--figma-color-text-tertiary);
+.input:focus {
+  outline: none;
 }
 
-.disabled .value {
-  opacity: var(--opacity-30);
+.input:disabled {
+  color: var(--figma-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.icon {
+  position: absolute;
+  left: 0;
+  display: flex;
+  width: var(--space-24);
+  height: var(--space-24);
+  align-items: center;
+  justify-content: center;
+  color: var(--figma-color-icon);
+  pointer-events: none;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0;
+  display: flex;
+  width: var(--space-24);
+  height: var(--space-24);
+  align-items: center;
+  justify-content: center;
+  color: var(--figma-color-icon);
+  pointer-events: none;
+}
+
+.clearButton {
+  position: absolute;
+  z-index: var(--z-index-2);
+  right: var(--space-24);
+  display: flex;
+  width: var(--space-24);
+  height: var(--space-24);
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.clearButtonBox {
+  cursor: pointer;
+}
+
+.clearButton:hover .clearButtonBox {
+  background-color: var(--figma-color-bg-hover);
+}
+
+.clearButton:active .clearButtonBox {
+  background-color: var(--figma-color-bg-pressed);
+  color: var(--figma-color-icon);
+}
+
+.clearButton:focus .clearButtonBox {
+  outline: 0;
+}
+
+.chevronIcon {
+  position: absolute;
+  right: 0;
+  display: flex;
+  width: var(--space-24);
+  height: var(--space-24);
+  align-items: center;
+  justify-content: center;
+  color: var(--figma-color-icon);
+  pointer-events: none;
+}
+
+.valueDisplay {
+  display: none;
+}
+
+/* Position the menu in the document body */
+:global(.menu-container) {
+  position: fixed;
+  z-index: var(--z-index-5);
 }
 
 .menu {
   display: flex;
-  width: auto;
+  width: 100%;
   max-height: 80vh;
   flex-direction: column;
   padding: 0;
+  border: var(--border-width-1) solid var(--figma-color-border);
+  border-radius: var(--border-radius-6);
+  margin-top: var(--space-4);
+  background-color: var(--figma-color-bg);
+  box-shadow: var(--shadow-1);
+  color: var(--figma-color-text);
+}
+
+.menu :global(.optionValue) {
+  display: flex;
+  min-height: var(--space-32);
+  align-items: center;
+  padding: var(--space-8) var(--space-12);
+  color: var(--figma-color-text);
+}
+
+.menu :global(.optionValue:hover) {
+  background-color: var(--figma-color-bg-hover);
+}
+
+.menu :global(.optionValueSelected) {
+  background-color: var(--figma-color-bg-selected);
+}
+
+.menu :global(.optionValueDisabled) {
+  color: var(--figma-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.menu :global(.optionHeader) {
+  padding: var(--space-8) var(--space-12);
+  color: var(--figma-color-text-secondary);
+  font-weight: var(--font-weight-bold);
+}
+
+.menu :global(.optionSeparator) {
+  border: none;
+  border-top: var(--border-width-1) solid var(--figma-color-border);
+  margin: var(--space-2) 0;
 }
 
 .searchContainer {
   position: sticky;
-  z-index: var(--z-index-2);
+  z-index: var(--z-index-3);
   top: 0;
   width: 100%;
   padding: var(--space-8) var(--space-8);
@@ -73,51 +202,5 @@
 
 .searchInput:focus {
   border-color: var(--figma-color-border-selected);
-  outline: 0;
-}
-
-.searchIcon {
-  position: absolute;
-  left: var(--space-8);
-  width: var(--space-16);
-  height: var(--space-16);
-  color: var(--figma-color-icon);
-  pointer-events: none;
-}
-
-.clearButton {
-  position: absolute;
-  right: var(--space-8);
-  display: flex;
-  width: var(--space-24);
-  height: var(--space-24);
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  margin: 0;
-  background: none;
-}
-
-.clearButtonBox {
-  display: flex;
-  width: var(--space-16);
-  height: var(--space-16);
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--border-radius-2);
-  color: var(--figma-color-icon);
-}
-
-.clearButton:hover .clearButtonBox {
-  background-color: var(--figma-color-bg-hover);
-}
-
-.clearButton:active .clearButtonBox {
-  background-color: var(--figma-color-bg-pressed);
-  color: var(--figma-color-icon);
-}
-
-.clearButton:focus .clearButtonBox {
   outline: 0;
 }
