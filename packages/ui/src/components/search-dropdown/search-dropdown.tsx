@@ -461,7 +461,6 @@ export const SearchDropdown = createComponent<
 
   return (
     <div
-      {...rest}
       ref={refCallback}
       class={createClassName([
         styles.searchDropdown,
@@ -480,6 +479,7 @@ export const SearchDropdown = createComponent<
           <div class={styles.icon}>{icon}</div>
         )}
         <input
+          {...rest}
           ref={inputRefCallback}
           class={styles.input}
           disabled={disabled === true}
