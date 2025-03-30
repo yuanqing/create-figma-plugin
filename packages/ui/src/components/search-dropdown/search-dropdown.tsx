@@ -512,8 +512,8 @@ export const SearchDropdown = createComponent<
       }
       onSearchValueInput(EMPTY_STRING)
 
-      // Don't hide menu after selection, just focus the input
-      triggerRootFocus()
+      // Hide menu after selection
+      triggerMenuHide()
     },
     [
       filteredOptions,
@@ -521,7 +521,7 @@ export const SearchDropdown = createComponent<
       onValueChange,
       onSearchValueInput,
       propSearchValue,
-      triggerRootFocus
+      triggerMenuHide
     ]
   )
 
