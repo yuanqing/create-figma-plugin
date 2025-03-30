@@ -30,7 +30,7 @@ export const Empty = function () {
     setSearchValue(newValue)
   }
 
-  function handleValueChange(newValue: string) {
+  function handleValueChange(newValue: string | null) {
     console.log(newValue)
     setValue(newValue)
   }
@@ -67,7 +67,7 @@ export const Focused = function () {
     setSearchValue(newValue)
   }
 
-  function handleValueChange(newValue: string) {
+  function handleValueChange(newValue: string | null) {
     console.log(newValue)
     setValue(newValue)
   }
@@ -98,14 +98,14 @@ export const Selected = function () {
   ]
 
   const [searchValue, setSearchValue] = useState<string>('')
-  const [value, setValue] = useState<string>('banana')
+  const [value, setValue] = useState<string | null>('banana')
 
   function handleSearchInput(newValue: string) {
     console.log(newValue)
     setSearchValue(newValue)
   }
 
-  function handleValueChange(newValue: string) {
+  function handleValueChange(newValue: string | null) {
     console.log(newValue)
     setValue(newValue)
   }
@@ -143,7 +143,7 @@ export const WithSections = function () {
     setSearchValue(newValue)
   }
 
-  function handleValueChange(newValue: string) {
+  function handleValueChange(newValue: string | null) {
     console.log(newValue)
     setValue(newValue)
   }
@@ -180,7 +180,7 @@ export const Disabled = function () {
     setSearchValue(newValue)
   }
 
-  function handleValueChange(newValue: string) {
+  function handleValueChange(newValue: string | null) {
     console.log(newValue)
     setValue(newValue)
   }
@@ -218,7 +218,7 @@ export const WithIcon = function () {
     setSearchValue(newValue)
   }
 
-  function handleValueChange(newValue: string) {
+  function handleValueChange(newValue: string | null) {
     console.log(newValue)
     setValue(newValue)
   }
