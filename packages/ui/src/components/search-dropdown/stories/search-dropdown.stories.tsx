@@ -8,7 +8,7 @@ import { SearchDropdown, SearchDropdownOption } from '../search-dropdown.js'
 
 export default {
   tags: ['2'],
-  title: 'Components/SearchDropdown'
+  title: 'Components/Search Dropdown'
 }
 
 export const Empty = function () {
