@@ -75,7 +75,7 @@ export const Focused = function () {
 
   return (
     <SearchDropdown
-      {...useInitialFocus()}
+      inputProps={useInitialFocus()}
       onSearchValueInput={handleSearchInput}
       onValueChange={handleValueChange}
       options={options}

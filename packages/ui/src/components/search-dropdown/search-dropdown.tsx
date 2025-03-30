@@ -61,6 +61,8 @@ export interface SearchDropdownProps
   searchValue?: string
   /** Called when the search input value changes */
   onSearchValueInput?: (newValue: string) => void
+  /** Props to apply to the input element */
+  inputProps?: Record<string, unknown>
 }
 
 export const SearchDropdown = createComponent<
@@ -83,6 +85,7 @@ export const SearchDropdown = createComponent<
     spellCheck = false,
     value,
     searchValue: propSearchValue,
+    inputProps = {},
     ...rest
   },
   ref
@@ -605,6 +608,7 @@ export const SearchDropdown = createComponent<
           tabIndex={0}
           type="text"
           value={displayValue}
+          {...inputProps}
         />
         {/* Render the clear button if either a value is selected or the user is searching */}
         {(searchValue !== EMPTY_STRING || value !== null) && !disabled ? (
