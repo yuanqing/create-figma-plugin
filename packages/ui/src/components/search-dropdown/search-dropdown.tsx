@@ -606,7 +606,6 @@ export const SearchDropdown = createComponent<
                 option: SearchDropdownOption,
                 index: number
               ) {
-                // Keep separators and headers
                 if (typeof option === 'string') {
                   return <hr key={index} class={menuStyles.optionSeparator} />
                 }
@@ -617,17 +616,13 @@ export const SearchDropdown = createComponent<
                     </h1>
                   )
                 }
-                // If the option is disabled, skip rendering it in figma light mode & FigJam
-                if (option.disabled === true) {
-                  return null
-                }
                 return (
                   <label
                     key={index}
                     class={createClassName([
                       menuStyles.optionValue,
-                      // The selected styling remains for enabled items only
-                      `${index}` === selectedId
+                      option.disabled ? menuStyles.optionValueDisabled : null,
+                      !option.disabled && `${index}` === selectedId
                         ? menuStyles.optionValueSelected
                         : null
                     ])}
@@ -635,10 +630,12 @@ export const SearchDropdown = createComponent<
                     <input
                       checked={value === option.value}
                       class={menuStyles.input}
-                      disabled={!!option.disabled}
+                      disabled={option.disabled}
+                      // If clicked on an unselected element, set the value
                       onChange={
                         value === option.value ? undefined : handleOptionChange
                       }
+                      // Else hide the menu if clicked on an already-selected element
                       onClick={
                         value === option.value
                           ? handleSelectedOptionClick

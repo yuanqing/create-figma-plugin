@@ -149,6 +149,13 @@ export const WithSections = function () {
     setValue(newValue)
   }
 
+  const style = {
+    bottom: '-8px',
+    position: 'fixed',
+    right: '-8px',
+    width: '240px'
+  }
+
   return (
     <SearchDropdown
       onSearchValueInput={handleSearchInput}
@@ -156,6 +163,7 @@ export const WithSections = function () {
       options={options as SearchDropdownOption[]}
       placeholder="Choose a food…"
       searchValue={searchValue}
+      style={style}
       value={value}
     />
   )
