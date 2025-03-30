@@ -299,9 +299,21 @@ export const SearchDropdown = createComponent<
 
       if (key === 'Escape') {
         event.preventDefault()
-        if (clearOnEscapeKeyDown === true && searchValue !== EMPTY_STRING) {
-          event.stopPropagation() // Clear the value without bubbling up the `Escape` key press
-          handleClearButtonClick(event)
+        if (clearOnEscapeKeyDown === true) {
+          event.stopPropagation()
+          // Clear both search and selection
+          if (propSearchValue === undefined) {
+            setInternalSearchValue(EMPTY_STRING)
+          }
+          onSearchValueInput(EMPTY_STRING)
+          onValueChange(null)
+          setIsSearching(false)
+
+          const inputElement = getCurrentFromRef(inputElementRef)
+          if (inputElement) {
+            inputElement.value = EMPTY_STRING
+            inputElement.focus()
+          }
           return
         }
         if (propagateEscapeKeyDown === false) {
@@ -358,12 +370,13 @@ export const SearchDropdown = createComponent<
     },
     [
       clearOnEscapeKeyDown,
-      handleClearButtonClick,
       handleScrollableMenuKeyDown,
       isMenuVisible,
       onKeyDown,
+      onSearchValueInput,
+      onValueChange,
+      propSearchValue,
       propagateEscapeKeyDown,
-      searchValue,
       selectedId,
       triggerMenuHide,
       triggerMenuShow,

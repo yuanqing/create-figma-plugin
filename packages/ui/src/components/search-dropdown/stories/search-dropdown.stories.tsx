@@ -235,3 +235,46 @@ export const WithIcon = function () {
     />
   )
 }
+
+export const WithClearOnEscape = function () {
+  const options = [
+    { text: 'Apple', value: 'apple' },
+    { text: 'Banana', value: 'banana' },
+    { text: 'Blueberry', value: 'blueberry' },
+    { text: 'Cherry', value: 'cherry' },
+    { text: 'Grape', value: 'grape' },
+    { text: 'Orange', value: 'orange' },
+    { text: 'Pear', value: 'pear' },
+    { text: 'Strawberry', value: 'strawberry' }
+  ]
+
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [value, setValue] = useState<string | null>('banana')
+
+  function handleSearchInput(newValue: string) {
+    console.log(newValue)
+    setSearchValue(newValue)
+  }
+
+  function handleValueChange(newValue: string | null) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+
+  return (
+    <div>
+      <p style={{ marginBottom: '10px' }}>
+        Press Escape key to clear the selection
+      </p>
+      <SearchDropdown
+        clearOnEscapeKeyDown={true}
+        onSearchValueInput={handleSearchInput}
+        onValueChange={handleValueChange}
+        options={options}
+        placeholder="Choose a fruit…"
+        searchValue={searchValue}
+        value={value}
+      />
+    </div>
+  )
+}
