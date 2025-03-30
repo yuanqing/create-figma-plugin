@@ -73,7 +73,7 @@
 .clearButton {
   position: absolute;
   z-index: var(--z-index-2);
-  right: var(--space-24);
+  right: 0;
   display: flex;
   width: var(--space-24);
   height: var(--space-24);

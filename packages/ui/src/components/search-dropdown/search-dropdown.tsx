@@ -51,7 +51,7 @@ export interface SearchDropdownProps
   onFocus?: EventHandler.onFocus<HTMLInputElement>
   onKeyDown?: EventHandler.onKeyDown<HTMLDivElement>
   onMouseDown?: EventHandler.onMouseDown<HTMLDivElement>
-  onValueChange?: EventHandler.onValueChange<string>
+  onValueChange?: EventHandler.onValueChange<string | null>
   options: Array<SearchDropdownOption>
   placeholder?: string
   propagateEscapeKeyDown?: boolean
@@ -210,9 +210,7 @@ export const SearchDropdown = createComponent<
 
   const handleClearButtonClick = useCallback(
     function (event: { stopPropagation: () => void }) {
-      // Stop propagation to prevent dropdown from showing
       event.stopPropagation()
-
       const inputElement = getCurrentFromRef(inputElementRef)
       if (inputElement) {
         inputElement.value = EMPTY_STRING
@@ -220,6 +218,7 @@ export const SearchDropdown = createComponent<
           setInternalSearchValue(EMPTY_STRING)
         }
         onSearchValueInput(EMPTY_STRING)
+        onValueChange(null) // Clear the selection
         const inputEvent = new window.Event('input', {
           bubbles: true,
           cancelable: true
@@ -228,7 +227,7 @@ export const SearchDropdown = createComponent<
         inputElement.focus()
       }
     },
-    [onSearchValueInput, propSearchValue]
+    [onSearchValueInput, onValueChange, propSearchValue]
   )
 
   const handleFocus = useCallback(
@@ -492,7 +491,8 @@ export const SearchDropdown = createComponent<
           type="text"
           value={searchValue}
         />
-        {searchValue === EMPTY_STRING || disabled === true ? null : (
+        {/* Render the clear button if either a value is selected or the user is searching */}
+        {(searchValue !== EMPTY_STRING || value !== null) && !disabled ? (
           <button
             class={styles.clearButton}
             onClick={handleClearButtonClick}
@@ -503,10 +503,13 @@ export const SearchDropdown = createComponent<
               <IconClose24 />
             </div>
           </button>
+        ) : null}
+        {/* Only render the chevron if not searching and no value is selected */}
+        {searchValue === EMPTY_STRING && value === null && (
+          <div class={styles.chevronIcon}>
+            <IconChevronDown16 />
+          </div>
         )}
-        <div class={styles.chevronIcon}>
-          <IconChevronDown16 />
-        </div>
       </div>
       <div class={styles.valueDisplay}>
         {value === null ? (
@@ -541,6 +544,7 @@ export const SearchDropdown = createComponent<
                 option: SearchDropdownOption,
                 index: number
               ) {
+                // Keep separators and headers
                 if (typeof option === 'string') {
                   return <hr key={index} class={menuStyles.optionSeparator} />
                 }
@@ -551,15 +555,17 @@ export const SearchDropdown = createComponent<
                     </h1>
                   )
                 }
+                // If the option is disabled, skip rendering it in figma light mode & FigJam
+                if (option.disabled === true) {
+                  return null
+                }
                 return (
                   <label
                     key={index}
                     class={createClassName([
                       menuStyles.optionValue,
-                      option.disabled === true
-                        ? menuStyles.optionValueDisabled
-                        : null,
-                      option.disabled !== true && `${index}` === selectedId
+                      // The selected styling remains for enabled items only
+                      `${index}` === selectedId
                         ? menuStyles.optionValueSelected
                         : null
                     ])}
@@ -567,7 +573,7 @@ export const SearchDropdown = createComponent<
                     <input
                       checked={value === option.value}
                       class={menuStyles.input}
-                      disabled={option.disabled === true}
+                      disabled={!!option.disabled}
                       onChange={
                         value === option.value ? undefined : handleOptionChange
                       }
