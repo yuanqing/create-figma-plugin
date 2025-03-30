@@ -19,7 +19,8 @@
     "forms",
     "preact",
     "ui",
-    "ui2"
+    "ui2",
+    "ui3"
   ],
   "license": "MIT",
   "author": "Yuan Qing Lim",
