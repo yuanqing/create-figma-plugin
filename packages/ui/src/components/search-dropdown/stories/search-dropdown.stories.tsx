@@ -161,51 +161,6 @@ export const WithSections = function () {
   )
 }
 
-export const WithCustomStyles = function () {
-  const options = [
-    { text: 'Apple', value: 'apple' },
-    { text: 'Banana', value: 'banana' },
-    { text: 'Blueberry', value: 'blueberry' },
-    { text: 'Cherry', value: 'cherry' },
-    { text: 'Grape', value: 'grape' },
-    { text: 'Orange', value: 'orange' },
-    { text: 'Pear', value: 'pear' },
-    { text: 'Strawberry', value: 'strawberry' }
-  ]
-
-  const [searchValue, setSearchValue] = useState<string>('')
-  const [value, setValue] = useState<null | string>(null)
-
-  function handleSearchInput(newValue: string) {
-    console.log(newValue)
-    setSearchValue(newValue)
-  }
-
-  function handleValueChange(newValue: string | null) {
-    console.log(newValue)
-    setValue(newValue)
-  }
-
-  const style = {
-    bottom: '-8px',
-    position: 'fixed',
-    right: '-8px',
-    width: '240px'
-  }
-
-  return (
-    <SearchDropdown
-      onSearchValueInput={handleSearchInput}
-      onValueChange={handleValueChange}
-      options={options}
-      placeholder="Choose a fruit…"
-      searchValue={searchValue}
-      style={style}
-      value={value}
-    />
-  )
-}
-
 export const Disabled = function () {
   const options = [
     { text: 'Apple', value: 'apple' },
@@ -321,6 +276,98 @@ export const WithClearOnEscape = function () {
         searchValue={searchValue}
         value={value}
       />
+    </div>
+  )
+}
+
+export const CornerPositions = function () {
+  const options = [
+    { text: 'Apple', value: 'apple' },
+    { text: 'Banana', value: 'banana' },
+    { text: 'Blueberry', value: 'blueberry' },
+    { text: 'Cherry', value: 'cherry' },
+    { text: 'Grape', value: 'grape' },
+    { text: 'Orange', value: 'orange' },
+    { text: 'Pear', value: 'pear' },
+    { text: 'Strawberry', value: 'strawberry' }
+  ]
+
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [value, setValue] = useState<null | string>(null)
+
+  function handleSearchInput(newValue: string) {
+    setSearchValue(newValue)
+  }
+
+  function handleValueChange(newValue: string | null) {
+    setValue(newValue)
+  }
+
+  const containerStyle = {
+    display: 'grid',
+    gap: '16px',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    height: '100vh',
+    padding: '16px'
+  }
+
+  const dropdownStyle = {
+    width: '240px'
+  }
+
+  return (
+    <div style={containerStyle}>
+      {/* Bottom Left */}
+      <div style={{ bottom: '16px', left: '16px', position: 'fixed' }}>
+        <SearchDropdown
+          onSearchValueInput={handleSearchInput}
+          onValueChange={handleValueChange}
+          options={options}
+          placeholder="Bottom Left"
+          searchValue={searchValue}
+          style={dropdownStyle}
+          value={value}
+        />
+      </div>
+
+      {/* Bottom Right */}
+      <div style={{ bottom: '16px', position: 'fixed', right: '16px' }}>
+        <SearchDropdown
+          onSearchValueInput={handleSearchInput}
+          onValueChange={handleValueChange}
+          options={options}
+          placeholder="Bottom Right"
+          searchValue={searchValue}
+          style={dropdownStyle}
+          value={value}
+        />
+      </div>
+
+      {/* Top Left */}
+      <div style={{ left: '16px', position: 'fixed', top: '16px' }}>
+        <SearchDropdown
+          onSearchValueInput={handleSearchInput}
+          onValueChange={handleValueChange}
+          options={options}
+          placeholder="Top Left"
+          searchValue={searchValue}
+          style={dropdownStyle}
+          value={value}
+        />
+      </div>
+
+      {/* Top Right */}
+      <div style={{ position: 'fixed', right: '16px', top: '16px' }}>
+        <SearchDropdown
+          onSearchValueInput={handleSearchInput}
+          onValueChange={handleValueChange}
+          options={options}
+          placeholder="Top Right"
+          searchValue={searchValue}
+          style={dropdownStyle}
+          value={value}
+        />
+      </div>
     </div>
   )
 }
