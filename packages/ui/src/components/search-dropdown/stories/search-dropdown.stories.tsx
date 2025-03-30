@@ -161,6 +161,51 @@ export const WithSections = function () {
   )
 }
 
+export const WithCustomStyles = function () {
+  const options = [
+    { text: 'Apple', value: 'apple' },
+    { text: 'Banana', value: 'banana' },
+    { text: 'Blueberry', value: 'blueberry' },
+    { text: 'Cherry', value: 'cherry' },
+    { text: 'Grape', value: 'grape' },
+    { text: 'Orange', value: 'orange' },
+    { text: 'Pear', value: 'pear' },
+    { text: 'Strawberry', value: 'strawberry' }
+  ]
+
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [value, setValue] = useState<null | string>(null)
+
+  function handleSearchInput(newValue: string) {
+    console.log(newValue)
+    setSearchValue(newValue)
+  }
+
+  function handleValueChange(newValue: string | null) {
+    console.log(newValue)
+    setValue(newValue)
+  }
+
+  const style = {
+    bottom: '-8px',
+    position: 'fixed',
+    right: '-8px',
+    width: '240px'
+  }
+
+  return (
+    <SearchDropdown
+      onSearchValueInput={handleSearchInput}
+      onValueChange={handleValueChange}
+      options={options}
+      placeholder="Choose a fruit…"
+      searchValue={searchValue}
+      style={style}
+      value={value}
+    />
+  )
+}
+
 export const Disabled = function () {
   const options = [
     { text: 'Apple', value: 'apple' },
