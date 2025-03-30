@@ -3,6 +3,7 @@ import { h } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
+import { IconFrame32 } from '../../../icons/icon-32/icon-frame-32.js'
 import { SearchDropdown, SearchDropdownOption } from '../search-dropdown.js'
 
 export default {
@@ -225,7 +226,7 @@ export const WithIcon = function () {
 
   return (
     <SearchDropdown
-      icon="🍎"
+      icon={<IconFrame32 />}
       onSearchValueInput={handleSearchInput}
       onValueChange={handleValueChange}
       options={options}

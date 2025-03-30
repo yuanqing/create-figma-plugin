@@ -52,6 +52,15 @@
   color: var(--figma-color-icon);
 }
 
+.icon {
+  position: absolute;
+  top: 50%;
+  left: var(--space-3);
+  color: var(--figma-color-icon-secondary);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
 .clearButton {
   position: absolute;
   top: var(--space-0);
