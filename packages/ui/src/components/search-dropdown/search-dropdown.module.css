@@ -20,25 +20,6 @@
 }
 
 .input {
-  width: 100%;
-  height: var(--space-20);
-  padding: var(--space-0) var(--space-28) var(--space-0) var(--space-24);
-  border: none;
-  background: none;
-  color: var(--figma-color-text);
-  font-size: var(--font-size-12);
-}
-
-.input:focus {
-  outline: none;
-}
-
-.input:disabled {
-  color: var(--figma-color-text-disabled);
-  cursor: not-allowed;
-}
-
-.input {
   display: block;
   width: 100%;
   height: var(--space-32);
@@ -47,6 +28,13 @@
   background-color: var(--figma-color-bg-secondary);
   color: var(--figma-color-text);
   cursor: text;
+}
+.disabled .input {
+  color: var(--figma-color-text-disabled);
+  cursor: not-allowed;
+}
+.input::placeholder {
+  color: var(--figma-color-text-tertiary);
 }
 
 .searchIcon {
