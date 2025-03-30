@@ -1,6 +1,7 @@
 .searchDropdown {
   position: relative;
   z-index: var(--z-index-1);
+  width: 100%;
 }
 
 .searchDropdown:focus {
