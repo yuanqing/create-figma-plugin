@@ -174,12 +174,44 @@ export const SearchDropdown = createComponent<
     if (searchValue === '') {
       setFilteredOptions(options)
     } else {
-      const filtered = options.filter((option) => {
+      const filtered = options.filter((option, index, array) => {
         if (typeof option === 'string') {
-          return true // Keep separators
+          // For separators, check if there are any matching options after it until the next header or separator
+          const nextHeaderIndex = array.findIndex(
+            (opt, i) =>
+              i > index && (typeof opt === 'string' || 'header' in opt)
+          )
+          const relevantOptions = array.slice(
+            index + 1,
+            nextHeaderIndex === -1 ? array.length : nextHeaderIndex
+          )
+          return relevantOptions.some(
+            (opt) =>
+              typeof opt !== 'string' &&
+              !('header' in opt) &&
+              (opt.text || opt.value)
+                .toLowerCase()
+                .includes(searchValue.toLowerCase())
+          )
         }
         if ('header' in option) {
-          return true // Keep headers
+          // For headers, check if there are any matching options after it until the next header or separator
+          const nextHeaderIndex = array.findIndex(
+            (opt, i) =>
+              i > index && (typeof opt === 'string' || 'header' in opt)
+          )
+          const relevantOptions = array.slice(
+            index + 1,
+            nextHeaderIndex === -1 ? array.length : nextHeaderIndex
+          )
+          return relevantOptions.some(
+            (opt) =>
+              typeof opt !== 'string' &&
+              !('header' in opt) &&
+              (opt.text || opt.value)
+                .toLowerCase()
+                .includes(searchValue.toLowerCase())
+          )
         }
         // Filter by value or text if available
         const optionText = option.text || option.value
