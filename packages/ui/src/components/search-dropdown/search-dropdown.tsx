@@ -92,10 +92,50 @@ export const SearchDropdown = createComponent<
   const searchValue =
     propSearchValue !== undefined ? propSearchValue : internalSearchValue
 
+  // Track if the user is actively searching
+  const [isSearching, setIsSearching] = useState(false)
+
+  // Get the current selected option's display text
+  const getSelectedOptionText = useCallback(() => {
+    if (value === null) return ''
+    const index = findOptionIndexByValue(options, value)
+    if (index === -1) return ''
+    return String(getDropdownOptionValue(options[index]))
+  }, [options, value])
+
+  // Determine what to show in the input
+  const displayValue = isSearching ? searchValue : getSelectedOptionText()
+
   const rootElementRef: RefObject<HTMLDivElement> = useRef(null)
   const menuElementRef: RefObject<HTMLDivElement> = useRef(null)
   const inputElementRef: RefObject<HTMLInputElement> = useRef(null)
   const menuContainerRef: RefObject<HTMLDivElement> = useRef(null)
+
+  const handleClearButtonClick = useCallback(
+    function (event: { stopPropagation: () => void }) {
+      event.stopPropagation()
+
+      const inputElement = getCurrentFromRef(inputElementRef)
+      if (inputElement) {
+        // Clear everything
+        inputElement.value = EMPTY_STRING
+        if (propSearchValue === undefined) {
+          setInternalSearchValue(EMPTY_STRING)
+        }
+        onSearchValueInput(EMPTY_STRING)
+        onValueChange(null)
+        setIsSearching(false)
+
+        const inputEvent = new window.Event('input', {
+          bubbles: true,
+          cancelable: true
+        })
+        inputElement.dispatchEvent(inputEvent)
+        inputElement.focus()
+      }
+    },
+    [onSearchValueInput, onValueChange, propSearchValue]
+  )
 
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const [filteredOptions, setFilteredOptions] = useState(options)
@@ -208,50 +248,48 @@ export const SearchDropdown = createComponent<
     ]
   )
 
-  const handleClearButtonClick = useCallback(
-    function (event: { stopPropagation: () => void }) {
-      event.stopPropagation()
-      const inputElement = getCurrentFromRef(inputElementRef)
-      if (inputElement) {
-        inputElement.value = EMPTY_STRING
-        if (propSearchValue === undefined) {
-          setInternalSearchValue(EMPTY_STRING)
-        }
-        onSearchValueInput(EMPTY_STRING)
-        onValueChange(null) // Clear the selection
-        const inputEvent = new window.Event('input', {
-          bubbles: true,
-          cancelable: true
-        })
-        inputElement.dispatchEvent(inputEvent)
-        inputElement.focus()
-      }
-    },
-    [onSearchValueInput, onValueChange, propSearchValue]
-  )
-
   const handleFocus = useCallback(
     function (event: Event.onFocus<HTMLInputElement>) {
       onFocus(event)
+      // Start with the current selected value in search
+      const currentText = getSelectedOptionText()
+      if (propSearchValue === undefined) {
+        setInternalSearchValue(currentText)
+      }
+      onSearchValueInput(currentText)
+      setIsSearching(true)
       event.currentTarget.select()
     },
-    [onFocus]
+    [onFocus, getSelectedOptionText, onSearchValueInput, propSearchValue]
   )
 
   const handleInput = useCallback(
     function (event: Event.onInput<HTMLInputElement>) {
       const newValue = event.currentTarget.value
+      setIsSearching(true)
+
       if (propSearchValue === undefined) {
         setInternalSearchValue(newValue)
       }
       onSearchValueInput(newValue)
+
+      // If input is completely cleared, clear selection
+      if (newValue === EMPTY_STRING) {
+        onValueChange(null)
+      }
 
       // Show menu when typing
       if (!isMenuVisible) {
         triggerMenuShow()
       }
     },
-    [isMenuVisible, onSearchValueInput, propSearchValue, triggerMenuShow]
+    [
+      isMenuVisible,
+      onSearchValueInput,
+      onValueChange,
+      propSearchValue,
+      triggerMenuShow
+    ]
   )
 
   const handleRootKeyDown = useCallback(
@@ -364,7 +402,8 @@ export const SearchDropdown = createComponent<
       const newValue = optionValue.value
       onValueChange(newValue)
 
-      // Clear the search input
+      // Clear the search state
+      setIsSearching(false)
       if (propSearchValue === undefined) {
         setInternalSearchValue(EMPTY_STRING)
       }
@@ -489,13 +528,23 @@ export const SearchDropdown = createComponent<
           spellcheck={spellCheck}
           tabIndex={0}
           type="text"
-          value={searchValue}
+          value={displayValue}
         />
         {/* Render the clear button if either a value is selected or the user is searching */}
         {(searchValue !== EMPTY_STRING || value !== null) && !disabled ? (
           <button
             class={styles.clearButton}
             onClick={handleClearButtonClick}
+            onMouseDown={(event) => {
+              event.stopPropagation()
+              event.preventDefault()
+              // Immediately clear values
+              if (propSearchValue === undefined) {
+                setInternalSearchValue(EMPTY_STRING)
+              }
+              onSearchValueInput(EMPTY_STRING)
+              onValueChange(null)
+            }}
             tabIndex={0}
             type="button"
           >
