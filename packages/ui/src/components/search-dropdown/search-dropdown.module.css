@@ -108,7 +108,7 @@
 /* Position the menu in the document body */
 :global(.menu-container) {
   position: fixed;
-  z-index: var(--z-index-3);
+  z-index: var(--z-index-1);
   width: 100%;
   padding: var(--space-4) var(--space-4);
 }
