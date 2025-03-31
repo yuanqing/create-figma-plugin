@@ -2,7 +2,8 @@
   "figma-plugin": {
     "editorType": [
       "figjam",
-      "figma"
+      "figma",
+      "slides"
     ],
     "name": "a",
     "main": "b"
