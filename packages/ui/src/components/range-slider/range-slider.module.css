@@ -21,10 +21,14 @@
   -webkit-appearance: none;
   appearance: none;
   background: none;
-  --progress-track-color: var(--figma-color-bg-brand);
+  --create-figma-plugin-range-slider-progress-track-color: var(
+    --figma-color-bg-brand
+  );
 }
 .disabled .input {
-  --progress-track-color: var(--figma-color-bg-disabled);
+  --create-figma-plugin-range-slider-progress-track-color: var(
+    --figma-color-bg-disabled
+  );
 }
 
 .input::-webkit-slider-thumb {

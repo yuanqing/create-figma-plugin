@@ -43,12 +43,12 @@
 
 .icon {
   position: absolute;
-  top: var(--space-4);
-  left: var(--space-4);
-  min-width: var(--space-16);
+  top: 50%;
+  left: var(--space-12);
   color: var(--figma-color-icon-secondary);
   pointer-events: none;
   text-align: center;
+  transform: translate(-50%, -50%);
 }
 .disabled .icon {
   color: var(--figma-color-icon-disabled);

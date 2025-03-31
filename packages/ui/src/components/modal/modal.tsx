@@ -1,7 +1,7 @@
 import { ComponentChild, h, RefObject, render } from 'preact'
 import { useEffect, useRef } from 'preact/hooks'
 
-import { IconClose24 } from '../../icons/ui3/icon-24/icon-close-24.js'
+import { IconClose24 } from '../../icons/icon-24/icon-close-24.js'
 import { EventHandler } from '../../types/event-handler.js'
 import { createClassName } from '../../utilities/create-class-name.js'
 import { createComponent } from '../../utilities/create-component.js'

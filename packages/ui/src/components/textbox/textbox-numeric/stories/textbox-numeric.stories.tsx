@@ -4,7 +4,7 @@ import { h, JSX, RefObject } from 'preact'
 import { useRef, useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../../hooks/use-initial-focus/use-initial-focus.js'
-import { IconLayerFrame16 } from '../../../../icons/icon-16/icon-layer-frame-16.js'
+import { IconFrame16 } from '../../../../icons/icon-16/icon-frame-16.js'
 import { TextboxNumeric } from '../textbox-numeric.js'
 
 export default {
@@ -76,7 +76,7 @@ export const Icon = function () {
   }
   return (
     <TextboxNumeric
-      icon={<IconLayerFrame16 />}
+      icon={<IconFrame16 />}
       onInput={handleInput}
       value={value}
     />
@@ -107,7 +107,7 @@ export const DisabledIcon = function () {
   return (
     <TextboxNumeric
       disabled
-      icon={<IconLayerFrame16 />}
+      icon={<IconFrame16 />}
       onInput={handleInput}
       value="42"
     />

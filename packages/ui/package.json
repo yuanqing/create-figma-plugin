@@ -19,7 +19,6 @@
     "forms",
     "preact",
     "ui",
-    "ui2",
     "ui3"
   ],
   "license": "MIT",

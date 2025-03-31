@@ -3,7 +3,7 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
-import { IconEllipsis24 } from '../../../icons/icon-24/icon-ellipsis-24.js'
+import { IconMore24 } from '../../../icons/icon-24/icon-more-24.js'
 import { IconToggleButton } from '../icon-toggle-button.js'
 
 export default {
@@ -20,7 +20,7 @@ export const Passive = function () {
   }
   return (
     <IconToggleButton onChange={handleChange} value={value}>
-      <IconEllipsis24 />
+      <IconMore24 />
     </IconToggleButton>
   )
 }
@@ -38,7 +38,7 @@ export const Focused = function () {
       onChange={handleChange}
       value={value}
     >
-      <IconEllipsis24 />
+      <IconMore24 />
     </IconToggleButton>
   )
 }
@@ -49,7 +49,7 @@ export const Disabled = function () {
   }
   return (
     <IconToggleButton disabled onChange={handleChange} value={false}>
-      <IconEllipsis24 />
+      <IconMore24 />
     </IconToggleButton>
   )
 }
@@ -62,7 +62,7 @@ export const OnValueChange = function () {
   }
   return (
     <IconToggleButton onValueChange={handleValueChange} value={value}>
-      <IconEllipsis24 />
+      <IconMore24 />
     </IconToggleButton>
   )
 }

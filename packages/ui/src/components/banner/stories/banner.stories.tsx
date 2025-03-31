@@ -1,8 +1,8 @@
 import { h } from 'preact'
 
-import { IconCheckCircle32 } from '../../../icons/ui2/icon-32/icon-check-circle-32.js'
-import { IconInfo32 } from '../../../icons/ui2/icon-32/icon-info-32.js'
-import { IconWarning32 } from '../../../icons/ui2/icon-32/icon-warning-32.js'
+import { IconApprovedCheckmark24 } from '../../../icons/icon-24/icon-approved-checkmark-24.js'
+import { IconInfoSmall24 } from '../../../icons/icon-24/icon-info-small-24.js'
+import { IconWarningSmall24 } from '../../../icons/icon-24/icon-warning-small-24.js'
 import { Banner } from '../banner.js'
 
 export default {
@@ -13,12 +13,12 @@ export default {
 }
 
 export const Default = function () {
-  return <Banner icon={<IconInfo32 />}>Text</Banner>
+  return <Banner icon={<IconInfoSmall24 />}>Text</Banner>
 }
 
 export const Success = function () {
   return (
-    <Banner icon={<IconCheckCircle32 />} variant="success">
+    <Banner icon={<IconApprovedCheckmark24 />} variant="success">
       Text
     </Banner>
   )
@@ -26,7 +26,7 @@ export const Success = function () {
 
 export const Warning = function () {
   return (
-    <Banner icon={<IconWarning32 />} variant="warning">
+    <Banner icon={<IconWarningSmall24 />} variant="warning">
       Text
     </Banner>
   )

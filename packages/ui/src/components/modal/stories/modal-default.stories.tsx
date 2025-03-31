@@ -2,7 +2,7 @@
 import { Fragment, h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
-import { IconChevronDown32 } from '../../../icons/icon-32/icon-chevron-down-32.js'
+import { IconChevronDown24 } from '../../../icons/icon-24/icon-chevron-down-24.js'
 import { Button } from '../../button/button.js'
 import { Modal } from '../modal.js'
 
@@ -192,7 +192,7 @@ export const CloseButtonIcon = function () {
     <Fragment>
       <Button onClick={handleOpenButtonClick}>Open</Button>
       <Modal
-        closeButtonIcon={<IconChevronDown32 />}
+        closeButtonIcon={<IconChevronDown24 />}
         onCloseButtonClick={handleCloseButtonClick}
         open={open}
         title="foo"

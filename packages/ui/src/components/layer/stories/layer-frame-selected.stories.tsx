@@ -3,7 +3,7 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
-import { IconLayerFrame16 } from '../../../icons/icon-16/icon-layer-frame-16.js'
+import { IconFrame16 } from '../../../icons/icon-16/icon-frame-16.js'
 import { Layer } from '../layer.js'
 
 export default {
@@ -22,7 +22,7 @@ export const Passive = function () {
     setValue(newValue)
   }
   return (
-    <Layer icon={<IconLayerFrame16 />} onChange={handleChange} value={value}>
+    <Layer icon={<IconFrame16 />} onChange={handleChange} value={value}>
       Text
     </Layer>
   )
@@ -38,7 +38,7 @@ export const Focused = function () {
   return (
     <Layer
       {...useInitialFocus()}
-      icon={<IconLayerFrame16 />}
+      icon={<IconFrame16 />}
       onChange={handleChange}
       value={value}
     >
@@ -55,12 +55,7 @@ export const Bold = function () {
     setValue(newValue)
   }
   return (
-    <Layer
-      bold
-      icon={<IconLayerFrame16 />}
-      onChange={handleChange}
-      value={value}
-    >
+    <Layer bold icon={<IconFrame16 />} onChange={handleChange} value={value}>
       Text
     </Layer>
   )
@@ -76,7 +71,7 @@ export const Description = function () {
   return (
     <Layer
       description="Description"
-      icon={<IconLayerFrame16 />}
+      icon={<IconFrame16 />}
       onChange={handleChange}
       value={value}
     >
@@ -93,7 +88,7 @@ export const OnValueChange = function () {
   }
   return (
     <Layer
-      icon={<IconLayerFrame16 />}
+      icon={<IconFrame16 />}
       onValueChange={handleValueChange}
       value={value}
     >

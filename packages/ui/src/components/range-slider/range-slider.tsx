@@ -21,6 +21,9 @@ export interface RangeSliderProps
   value: string
 }
 
+const PROGRESS_TRACK_COLOR_VARIABLE_NAME =
+  '--create-figma-plugin-range-slider-progress-track-color'
+
 export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
   function (
     {
@@ -96,7 +99,7 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
         percentage * (inputElementWidth - sliderThumbElementWidth) +
         sliderThumbElementWidth / 2
       }px`
-      inputElement.style.background = `linear-gradient(to right, var(--progress-track-color) ${px}, transparent ${px})`
+      inputElement.style.background = `linear-gradient(to right, var(${PROGRESS_TRACK_COLOR_VARIABLE_NAME}) ${px}, transparent ${px})`
     }, [])
 
     useEffect(

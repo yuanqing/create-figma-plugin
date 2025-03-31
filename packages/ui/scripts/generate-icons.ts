@@ -11,18 +11,19 @@ import { writeFileAsync } from '../../common/src/write-file-async.js'
 
 type SvgFile = {
   baseName: string
+  storyName: string
   componentName: string
   dimension: number
-  svgPath: string
+  svgString: string
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 async function main(): Promise<void> {
   try {
-    const globPattern = 'icons/*'
+    const globPatterns = ['icons/**/*.svg']
     const outputDirectoryPath = resolve(__dirname, '..', 'src', 'icons')
-    await generateIconsAsync(globPattern, outputDirectoryPath)
+    await generateIconsAsync(globPatterns, outputDirectoryPath)
   } catch (error: any) {
     console.error(error.message) // eslint-disable-line no-console
     process.exit(1)
@@ -31,43 +32,27 @@ async function main(): Promise<void> {
 main()
 
 async function generateIconsAsync(
-  globPattern: string,
+  globPatterns: Array<string>,
   outputDirectoryPath: string
 ): Promise<void> {
-  const directoryPaths = await globby(globPattern, { onlyFiles: false })
-  if (directoryPaths.length === 0) {
-    throw new Error(`No files match \`${globPattern}\``)
+  const filePaths = await globby(globPatterns)
+  if (filePaths.length === 0) {
+    throw new Error(`No files match \`${globPatterns.join(', ')}\``)
   }
+  const svgFiles = await readSvgFilesAsync(filePaths)
+  const dimensions: Record<string, Array<SvgFile>> = groupSvgFilesByDimension(
+    svgFiles
+  )
+  const directoryPaths = await globby(join(outputDirectoryPath, 'icon-*'), {
+    onlyFiles: false
+  })
   for (const directoryPath of directoryPaths) {
-    const iconVersion = basename(directoryPath)
-    const filePaths = await globby(join(directoryPath, '**/*.svg'))
-    const svgFiles = await readSvgFilesAsync(filePaths)
-    const dimensions: Record<string, Array<SvgFile>> = groupSvgFilesByDimension(
-      svgFiles
-    )
-    const directoryPaths = await globby(
-      join(outputDirectoryPath, iconVersion.toLowerCase(), 'icon-*'),
-      {
-        onlyFiles: false
-      }
-    )
-    for (const directoryPath of directoryPaths) {
-      await fs.rm(directoryPath, { force: true, recursive: true })
-    }
-    for (const dimension in dimensions) {
-      const directoryPath = join(
-        outputDirectoryPath,
-        iconVersion.toLowerCase(),
-        `icon-${dimension}`
-      )
-      await writePreactComponentsAsync(dimensions[dimension], directoryPath)
-      await writeStoriesAsync(
-        dimensions[dimension],
-        iconVersion,
-        dimension,
-        directoryPath
-      )
-    }
+    await fs.rm(directoryPath, { force: true, recursive: true })
+  }
+  for (const dimension in dimensions) {
+    const directoryPath = join(outputDirectoryPath, `icon-${dimension}`)
+    await writePreactComponentsAsync(dimensions[dimension], directoryPath)
+    await writeStoriesAsync(dimensions[dimension], dimension, directoryPath)
   }
 }
 
@@ -127,30 +112,17 @@ async function readSvgFileAsync(filePath: string): Promise<SvgFile> {
   if (width !== height) {
     throw new Error(`Different \`width\` and \`height\`: ${filePath}`)
   }
-  const optimizedSvgString = result.data
   return {
     baseName: slugify(`icon-${baseName}-${width}`),
     componentName: camelcase(`Icon ${baseName} ${width}`, {
       pascalCase: true
     }),
     dimension: width,
-    svgPath: extractSvgPath(optimizedSvgString, filePath)
+    storyName: camelcase(`Icon ${baseName}`, {
+      pascalCase: true
+    }),
+    svgString: result.data
   }
-}
-
-function extractSvgPath(svgString: string, filePath: string): string {
-  const result: Array<string> = []
-  const matches = svgString.matchAll(/ d="([^"]+)"/g)
-  for (const match of matches) {
-    result.push(match[1])
-  }
-  if (result.length === 0) {
-    throw new Error(`No paths in ${filePath}`)
-  }
-  if (result.length > 1) {
-    throw new Error(`More than 1 \`path\` in ${filePath}`)
-  }
-  return result[0]
 }
 
 function groupSvgFilesByDimension(
@@ -171,32 +143,30 @@ async function writePreactComponentsAsync(
   svgFiles: Array<SvgFile>,
   directoryPath: string
 ): Promise<void> {
-  for (const { baseName, componentName, svgPath, dimension } of svgFiles) {
-    const fileContents = `import { createIcon } from '../../create-icon.js'
+  for (const { baseName, componentName, svgString } of svgFiles) {
+    const fileContents = `import { h } from 'preact'
+
+import { createIcon } from '../create-icon.js'
 
 export const ${componentName} = createIcon(
-  '${svgPath}',
-  { height: ${dimension}, width: ${dimension} }
+  ${svgString}
 )
 `
-    const filePath = join(directoryPath, `${baseName}.ts`)
+    const filePath = join(directoryPath, `${baseName}.tsx`)
     await writeTsFileAsync(filePath, fileContents)
   }
 }
 
 async function writeStoriesAsync(
   svgFiles: Array<SvgFile>,
-  iconVersion: string,
   dimension: string,
   directoryPath: string
 ): Promise<void> {
   const imports: Array<string> = []
   const stories: Array<string> = []
-  for (const { baseName, componentName } of svgFiles) {
+  for (const { baseName, componentName, storyName } of svgFiles) {
     imports.push(`import { ${componentName} } from '../${baseName}.js'`)
-    stories.push(`export const ${componentName
-      .replace(/^Icon/, '')
-      .replace(/\d+$/, '')} = function () {
+    stories.push(`export const ${storyName.replace(/^Icon/, '')} = function () {
   return <${componentName} />
 }`)
   }
@@ -208,7 +178,7 @@ export default {
   parameters: {
     fixedWidth: false
   },
-  title: 'Icons/${iconVersion}/Size ${dimension}'
+  title: 'Icons/Size ${dimension}'
 }
 
 ${stories.join('\n\n')}

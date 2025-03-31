@@ -14,12 +14,12 @@ import { Text } from './components/text/text.js'
 import { TextboxColor } from './components/textbox/textbox-color/textbox-color.js'
 import { TextboxNumeric } from './components/textbox/textbox-numeric/textbox-numeric.js'
 import { Toggle } from './components/toggle/toggle.js'
-import { IconSpaceHorizontal16 } from './icons/ui2/icon-16/icon-space-horizontal-16.js'
-import { IconCheckCircle32 } from './icons/ui2/icon-32/icon-check-circle-32.js'
-import { IconInfo32 } from './icons/ui2/icon-32/icon-info-32.js'
-import { IconWarning32 } from './icons/ui2/icon-32/icon-warning-32.js'
-import { IconLayerComponent16 } from './icons/ui3/icon-16/icon-layer-component-16.js'
-import { IconLayerFrame16 } from './icons/ui3/icon-16/icon-layer-frame-16.js'
+import { IconComponent16 } from './icons/icon-16/icon-component-16.js'
+import { IconFrame16 } from './icons/icon-16/icon-frame-16.js'
+import { IconApprovedCheckmark24 } from './icons/icon-24/icon-approved-checkmark-24.js'
+import { IconAutoLayoutPaddingHorizontal24 } from './icons/icon-24/icon-auto-layout-padding-horizontal-24.js'
+import { IconInfoSmall24 } from './icons/icon-24/icon-info-small-24.js'
+import { IconWarningSmall24 } from './icons/icon-24/icon-warning-small-24.js'
 import { Bold } from './inline-text/bold/bold.js'
 import { Muted } from './inline-text/muted/muted.js'
 import { Columns } from './layout/columns/columns.js'
@@ -84,7 +84,7 @@ export const Index = function () {
             </Stack>
             <div style={boxStyle}>
               <TextboxNumeric
-                icon={<IconSpaceHorizontal16 />}
+                icon={<IconAutoLayoutPaddingHorizontal24 />}
                 onInput={function (event: JSX.TargetedEvent<HTMLInputElement>) {
                   setTextboxNumericValue(event.currentTarget.value)
                 }}
@@ -93,7 +93,7 @@ export const Index = function () {
             </div>
             <Stack space="extraSmall">
               <Layer
-                icon={<IconLayerFrame16 />}
+                icon={<IconFrame16 />}
                 onChange={function (
                   event: JSX.TargetedEvent<HTMLInputElement>
                 ) {
@@ -106,7 +106,7 @@ export const Index = function () {
               <Layer
                 bold
                 component
-                icon={<IconLayerComponent16 />}
+                icon={<IconComponent16 />}
                 onChange={function (
                   event: JSX.TargetedEvent<HTMLInputElement>
                 ) {
@@ -217,13 +217,13 @@ export const Index = function () {
               />
             </div>
             <Stack space="extraSmall">
-              <Banner icon={<IconInfo32 />}>
+              <Banner icon={<IconInfoSmall24 />}>
                 Select a layer to get started
               </Banner>
-              <Banner icon={<IconCheckCircle32 />} variant="success">
+              <Banner icon={<IconApprovedCheckmark24 />} variant="success">
                 Plugin unlocked
               </Banner>
-              <Banner icon={<IconWarning32 />} variant="warning">
+              <Banner icon={<IconWarningSmall24 />} variant="warning">
                 Invalid license key
               </Banner>
             </Stack>

@@ -3,7 +3,7 @@ import { h, JSX } from 'preact'
 import { useState } from 'preact/hooks'
 
 import { useInitialFocus } from '../../../hooks/use-initial-focus/use-initial-focus.js'
-import { IconLayerComponent16 } from '../../../icons/icon-16/icon-layer-component-16.js'
+import { IconComponent16 } from '../../../icons/icon-16/icon-component-16.js'
 import { Layer } from '../layer.js'
 
 export default {
@@ -24,7 +24,7 @@ export const Passive = function () {
   return (
     <Layer
       component
-      icon={<IconLayerComponent16 />}
+      icon={<IconComponent16 />}
       onChange={handleChange}
       value={value}
     >
@@ -44,7 +44,7 @@ export const Focused = function () {
     <Layer
       {...useInitialFocus()}
       component
-      icon={<IconLayerComponent16 />}
+      icon={<IconComponent16 />}
       onChange={handleChange}
       value={value}
     >
@@ -64,7 +64,7 @@ export const Bold = function () {
     <Layer
       bold
       component
-      icon={<IconLayerComponent16 />}
+      icon={<IconComponent16 />}
       onChange={handleChange}
       value={value}
     >
@@ -84,7 +84,7 @@ export const Description = function () {
     <Layer
       component
       description="Description"
-      icon={<IconLayerComponent16 />}
+      icon={<IconComponent16 />}
       onChange={handleChange}
       value={value}
     >
@@ -102,7 +102,7 @@ export const OnValueChange = function () {
   return (
     <Layer
       component
-      icon={<IconLayerComponent16 />}
+      icon={<IconComponent16 />}
       onValueChange={handleValueChange}
       value={value}
     >
