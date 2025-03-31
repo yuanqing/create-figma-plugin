@@ -1,8 +1,0 @@
-.preview {
-  position: relative;
-  overflow: auto;
-  height: 121px;
-  padding: var(--space-medium) 0;
-  border-bottom: 1px solid var(--figma-color-border);
-  background-color: var(--figma-color-bg-secondary);
-}

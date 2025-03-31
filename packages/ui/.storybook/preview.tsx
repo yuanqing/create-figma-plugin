@@ -59,17 +59,19 @@ export const parameters = {
         const split = story.title.split(/\//g)
         if (split.length === 1) {
           return {
+            component: null,
             order: null,
             section: split[0],
             story: null
           }
         }
-        const n = parseInt(story.tags[story.tags.length - 1], 10)
-        const order = isNaN(n) === true ? null : n
+        const order =
+          story.tags[0] === 'story' ? null : parseInt(story.tags[0], 10)
         return {
+          component: split[1],
           order,
           section: split[0],
-          story: split.slice(1).join('/')
+          story: split.slice(2).join('/')
         }
       }
       const sectionSortOrder = [
@@ -88,6 +90,12 @@ export const parameters = {
           sectionSortOrder.indexOf(xx.section) -
           sectionSortOrder.indexOf(yy.section)
         )
+      }
+      // Different `component`
+      if (xx.component !== yy.component) {
+        return xx.component.localeCompare(yy.component, undefined, {
+          numeric: true
+        })
       }
       // Both `order` defined
       if (xx.order !== null && yy.order !== null) {
