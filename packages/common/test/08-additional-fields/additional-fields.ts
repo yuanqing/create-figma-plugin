@@ -50,7 +50,7 @@ test('`editorType`', async function (t) {
   process.chdir(join(__dirname, 'fixtures', '03-editor-type'))
   t.deepEqual(await readConfigAsync(), {
     ...config,
-    editorType: ['figjam', 'figma']
+    editorType: ['figjam', 'figma', 'slides']
   })
 })
 

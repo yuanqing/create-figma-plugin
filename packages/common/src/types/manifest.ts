@@ -14,7 +14,7 @@ export type Manifest = {
   build?: string
 }
 
-export type ManifestEditorType = 'dev' | 'figma' | 'figjam'
+export type ManifestEditorType = 'dev' | 'figma' | 'figjam' | 'slides'
 
 export type ManifestMenuItem = {
   name: string

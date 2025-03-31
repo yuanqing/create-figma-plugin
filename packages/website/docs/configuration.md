@@ -30,9 +30,9 @@ The configuration options map closely to the plugin and widget `manifest.json` A
 
 ### `editorType`
 
-(*`Array<"figma" | "figjam" | "dev">`*)
+(*`Array<"figma" | "figjam" | "slides" | "dev">`*)
 
-*Optional.* For specifying the editor(s) that the plugin/widget is intended for. Possible editor types are **`"figma"`**, **`"figjam"`** and **`"dev"`**. Defaults to **`["figma"]`**. The value **`["figjam", "dev"]`** is currently not supported.
+*Optional.* For specifying the editor(s) that the plugin/widget is intended for. Possible editor types are **`"figma"`**, **`"figjam"`**, **`"slides"`**, and **`"dev"`**. Defaults to **`["figma"]`**. The values **`["figjam", "dev"]`** and **`["slides", "dev"]`** are currently not supported.
 
 ### `containsWidget`
 
