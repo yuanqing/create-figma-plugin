@@ -46,7 +46,6 @@ export {
   ModalPosition,
   ModalProps
 } from './components/modal/modal.js'
-export { Preview, PreviewProps } from './components/preview/preview.js'
 export {
   RadioButtons,
   RadioButtonsOption,
