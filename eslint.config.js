@@ -27,12 +27,19 @@ export default tsEslint.config(
       'no-console': ['error'],
       'no-unused-vars': ['off'],
       'sort-keys': ['error', 'asc', { caseSensitive: false, natural: true }],
+      '@typescript-eslint/explicit-function-return-type': ['off'],
+      '@typescript-eslint/explicit-module-boundary-types': ['off'],
+      '@typescript-eslint/member-delimiter-style': ['off'],
+      '@typescript-eslint/no-empty-function': ['off'],
+      '@typescript-eslint/no-explicit-any': ['off'],
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
           argsIgnorePattern: '^_'
         }
       ],
+      '@typescript-eslint/no-use-before-define': ['off'],
+      '@typescript-eslint/no-var-requires': ['off'],
       'prettier/prettier': [
         'error',
         { semi: false, singleQuote: true, trailingComma: 'none' }
@@ -53,14 +60,7 @@ export default tsEslint.config(
       'react-hooks/rules-of-hooks': ['error'],
       'react-hooks/exhaustive-deps': ['error'],
       'simple-import-sort/imports': ['error'],
-      'simple-import-sort/exports': ['error'],
-      '@typescript-eslint/explicit-function-return-type': ['off'],
-      '@typescript-eslint/explicit-module-boundary-types': ['off'],
-      '@typescript-eslint/member-delimiter-style': ['off'],
-      '@typescript-eslint/no-empty-function': ['off'],
-      '@typescript-eslint/no-explicit-any': ['off'],
-      '@typescript-eslint/no-use-before-define': ['off'],
-      '@typescript-eslint/no-var-requires': ['off']
+      'simple-import-sort/exports': ['error']
     }
   }
 )
