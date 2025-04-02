@@ -1,5 +1,27 @@
 # Changelog
 
+## 4.0.0
+
+> [!IMPORTANT]
+> This is a major release due to breaking changes in the component library.
+
+- `@create-figma-plugin/build@4.0.0`
+
+  - Added support for `"slides"` on the `editorType` configuration option.
+
+- `@create-figma-plugin/utilities@4.0.0`
+
+  - Removed the `validateGumroadLicenseKeyMainAsync` and `validateGumroadLicenseKeyUiAsync` functions.
+
+- `@create-figma-plugin/ui@4.0.0`
+
+  - Updated the visual design of all components to follow Figma’s latest UI3 design.
+  - Dropped support for UI2 icons in favor of UI3 icons, which are only available in sizes `16×16` and `24×24`. You may encounter build errors if your plugin UI uses any icons from v3. If so, find an appropriate replacement icon in the UI3 [Storybook](https://yuanqing.github.io/create-figma-plugin/storybook/).
+
+- Updated the minimum `node` version to `v22` for all packages.
+
+- Bumped dependencies in all packages.
+
 ## 3.2.1
 
 - `@create-figma-plugin/build@3.2.1`
