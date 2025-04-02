@@ -18,8 +18,6 @@ export {
   incrementDocumentUseCount,
   resetDocumentUseCount
 } from './monetization/document-use-count.js'
-export { validateGumroadLicenseKeyMainAsync } from './monetization/gumroad/validate-gumroad-license-key-main-async.js'
-export { validateGumroadLicenseKeyUiAsync } from './monetization/gumroad/validate-gumroad-license-key-ui-async.js'
 export {
   getTotalUseCountAsync,
   incrementTotalUseCountAsync,

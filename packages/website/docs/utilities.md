@@ -340,9 +340,7 @@ import {
   incrementDocumentUseCount,
   incrementTotalUseCountAsync,
   resetDocumentUseCount,
-  resetTotalUseCountAsync,
-  validateGumroadLicenseKeyMainAsync,
-  validateGumroadLicenseKeyUiAsync
+  resetTotalUseCountAsync
 } from '@create-figma-plugin/utilities'
 ```
 
@@ -438,56 +436,6 @@ on which to store the use count. Defaults to `'totalUseCount'`.
 
 ```
 Promise<void>
-```
-
-### `validateGumroadLicenseKeyMainAsync(options)`
-
-Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
-for the product with the given `productPermalink` in the
-[main context](https://figma.com/plugin-docs/how-plugins-run/).
-
-***Parameters***
-
-- `options` (`object`)
-  - `incrementUseCount` (`boolean`) – *Optional.* Set to `true` to increment the license
-key use count tracked by Gumroad. Defaults to `false`.
-  - `licenseKey` (`string`) – The Gumroad license key to validate.
-  - `productPermalink` (`string`) – The Gumroad “product permalink”. If the
-Gumroad product URL is `https://gumroad.com/l/QGMY`, then the product
-permalink is `'QGMY'`.
-
-***Return type***
-
-Returns a
-[`LicenseKeyValidationResult`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/utilities/src/monetization/types.ts) object.
-
-```
-Promise<LicenseKeyValidationResult>
-```
-
-### `validateGumroadLicenseKeyUiAsync(options)`
-
-Validates the given [Gumroad license key](https://help.gumroad.com/article/76-license-keys)
-for the product with the given `productPermalink` in the
-[UI context](https://figma.com/plugin-docs/how-plugins-run/).
-
-***Parameters***
-
-- `options` (`object`)
-  - `incrementUseCount` (`boolean`) – *Optional.* Set to `true` to increment the license
-key use count tracked by Gumroad. Defaults to `false`.
-  - `licenseKey` (`string`) – The Gumroad license key to validate.
-  - `productPermalink` (`string`) – The Gumroad “product permalink”. If the
-Gumroad product URL is `https://gumroad.com/l/QGMY`, then the product
-permalink is `'QGMY'`.
-
-***Return type***
-
-Returns a
-[`LicenseKeyValidationResult`](https://github.com/yuanqing/create-figma-plugin/blob/main/packages/utilities/src/monetization/types.ts) object.
-
-```
-Promise<LicenseKeyValidationResult>
 ```
 
 ## Node

@@ -30,8 +30,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "npm run build:interpolate-gumroad-script && npm run build:generate-index && npm run build:js && npm run build:generate-docs",
-    "build:interpolate-gumroad-script": "tsx scripts/interpolate-gumroad-script.ts",
+    "build": "npm run build:generate-index && npm run build:js && npm run build:generate-docs",
     "build:generate-index": "rimraf src/index.ts && tsx ../../scripts/generate-index.ts -- 'src/**/*.ts' '!src/**/private/**/*' && eslint --fix src/index.ts",
     "build:js": "tsc --build",
     "build:generate-docs": "tsx scripts/generate-docs.ts '../website/docs/utilities.md'",
