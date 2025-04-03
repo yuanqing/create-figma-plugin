@@ -25,7 +25,7 @@ export default function () {
     figma.closePlugin()
   })
   showUI({
-    height: 137,
+    height: 124,
     width: 240
   })
 }

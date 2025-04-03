@@ -11,5 +11,5 @@ export default function () {
     figma.viewport.scrollAndZoomIntoView([text])
     figma.closePlugin()
   })
-  showUI({ height: 240, width: 320 })
+  showUI({ height: 232, width: 320 })
 }
