@@ -97,7 +97,7 @@
 <p class="muted">Plugins</p>
 <ul>
 <% const featuredPlugins = plugins.filter(function (plugin) {
-return ['Beautiful Shadows', 'Contrast', 'Destroyer', 'Draw Connector', 'Export/Import Variables', 'Figma → React Native', 'Figma GPT', 'html.to.design', 'Prototyper'].indexOf(plugin.name) !== -1
+return ['Arc', 'Beautiful Shadows', 'Destroyer', 'Export/Import Variables', 'Figma → React Native', 'Figma GPT', 'html.to.design', 'Print for Figma', 'Prototyper'].indexOf(plugin.name) !== -1
 }) %>
 <% for (const { id, name } of featuredPlugins) { %>
 <li class="featured-plugin">

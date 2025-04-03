@@ -42,18 +42,6 @@
   {
     "authors": [
       {
-        "name": "Antonio Cao",
-        "url": "https://twitter.com/RemitNotPaucity"
-      }
-    ],
-    "description": "AI copilot for designers",
-    "githubUrl": null,
-    "id": "1145446664512862540",
-    "name": "Ando"
-  },
-  {
-    "authors": [
-      {
         "name": "Unfold",
         "url": "https://twitter.com/unfoldco"
       }
@@ -61,7 +49,7 @@
     "description": "Bend your type!",
     "githubUrl": null,
     "id": "762070688792833472",
-    "name": "ARC"
+    "name": "Arc"
   },
   {
     "authors": [
@@ -662,18 +650,6 @@
     "githubUrl": null,
     "id": "1310888112326715990",
     "name": "Figma Variable Explorer"
-  },
-  {
-    "authors": [
-      {
-        "name": "Typper",
-        "url": "https://figma.com/@typper"
-      }
-    ],
-    "description": "Easily generate random avatars",
-    "githubUrl": null,
-    "id": "1087220559503205766",
-    "name": "FigmaAI – Avatar Generator"
   },
   {
     "authors": [
@@ -1842,18 +1818,6 @@
     "githubUrl": null,
     "id": "1291418014691383723",
     "name": "Upscale"
-  },
-  {
-    "authors": [
-      {
-        "name": "Yuan Qing Lim",
-        "url": "https://twitter.com/yuanqinglim"
-      }
-    ],
-    "description": "Upscale low resolution images using machine learning",
-    "githubUrl": null,
-    "id": "939832535166467194",
-    "name": "Upscale Image"
   },
   {
     "authors": [
