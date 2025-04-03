@@ -1,0 +1,1 @@
+import{_ as r}from"./preact.module-7_OotSvk.js";import{c}from"./create-component-CR2aSVXZ.js";const l="_extraSmall_zc4n0_1",m="_small_zc4n0_4",n="_medium_zc4n0_7",s="_large_zc4n0_10",_="_extraLarge_zc4n0_13",o={extraSmall:l,small:m,medium:n,large:s,extraLarge:_},g=c(function({space:a,...e},t){return r("div",{...e,ref:t,class:o[a]})});export{g as V};

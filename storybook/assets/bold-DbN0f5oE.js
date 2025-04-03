@@ -1,0 +1,1 @@
+import{_ as n}from"./preact.module-7_OotSvk.js";import{c as r}from"./create-component-CR2aSVXZ.js";const c="_bold_72210_1",l={bold:c},m=r(function({children:o,...t},s){return n("strong",{...t,ref:s,class:l.bold},o)});export{m as B};

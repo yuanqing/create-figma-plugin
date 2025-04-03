@@ -1,0 +1,1 @@
+const n="_button_avmy7_1",a="_fullWidth_avmy7_7",d="_disabled_avmy7_11",t="_danger_avmy7_53",_="_secondary_avmy7_68",o="_loadingIndicator_avmy7_96",l="_children_avmy7_132",c="_loading_avmy7_96",i={button:n,fullWidth:a,disabled:d,default:"_default_avmy7_33",danger:t,secondary:_,loadingIndicator:o,children:l,loading:c};export{i as b};

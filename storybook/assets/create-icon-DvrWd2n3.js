@@ -1,0 +1,1 @@
+import{_ as n}from"./preact.module-7_OotSvk.js";import{c as t}from"./create-component-CR2aSVXZ.js";function f(r){return t(function({color:o,...e}){return n("div",{...e,style:{color:typeof o>"u"?"currentColor":`var(--figma-color-icon-${o})`}},r)})}export{f as c};
