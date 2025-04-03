@@ -16,6 +16,8 @@
 - `@create-figma-plugin/ui@4.0.0`
 
   - Updated the visual design of all components to follow Figma’s latest UI3 design.
+  - Removed the `Preview` component.
+  - Removed the `variant` prop from the `Dropdown`, `Textbox`, `TextboxAutocomplete`, `TextboxColor`, `TextboxMultiline`, and `TextboxNumeric` components.
   - Dropped support for UI2 icons in favor of UI3 icons, which are only available in sizes `16×16` and `24×24`. You may encounter build errors if your plugin UI uses any icons from v3. If so, find an appropriate replacement icon in the UI3 [Storybook](https://yuanqing.github.io/create-figma-plugin/storybook/).
 
 - Updated the minimum `node` version to `v22` for all packages.
