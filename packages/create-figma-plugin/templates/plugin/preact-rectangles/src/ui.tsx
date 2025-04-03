@@ -39,7 +39,6 @@ function Plugin() {
         onNumericValueInput={setCount}
         onValueInput={setCountString}
         value={countString}
-        variant="border"
       />
       <VerticalSpace space="extraLarge" />
       <Columns space="extraSmall">

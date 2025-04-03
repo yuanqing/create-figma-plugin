@@ -25,7 +25,6 @@ function Plugin(props: { text: string }) {
         {...useInitialFocus()}
         onValueInput={setText}
         value={text}
-        variant="border"
       />
       <VerticalSpace space="large" />
       <Button fullWidth onClick={handleUpdateButtonClick}>
