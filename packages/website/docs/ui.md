@@ -11,7 +11,7 @@
 
 `@create-figma-plugin/ui` is a library of production-grade [Preact](https://preactjs.com) components that replicate the Figma/FigJam editor’s UI design.
 
-[![UI components from `@create-figma-plugin/ui`: Button, File Upload Dropzone, Textbox Numeric, Textbox Autocomplete, Checkbox, Selectable Item, Segmented Control](<%- media['ui-figma-components'] %>)](<%- baseUrl %>storybook/)
+[![UI components from `@create-figma-plugin/ui`](<%- media['ui-figma-components'] %>)](<%- baseUrl %>storybook/)
 
 See the [full library of components in the Storybook](<%- baseUrl %>storybook/).
 
@@ -22,8 +22,6 @@ The component library ships with [three themes](https://figma.com/plugin-docs/cs
 3. *FigJam*
 
 If the UI is launched from a Figma plugin/widget, components will automatically render using the *Figma* theme (either *Light* or *Dark*, based on the user’s preferences as set in the Figma app). If the UI is launched from a FigJam plugin/widget, components will automatically render using the *FigJam* theme.
-
-![UI of the Insert Big Image plugin rendered using the Figma and FigJam themes](<%- media['ui-themes'] %>)
 
 To install, do:
 
