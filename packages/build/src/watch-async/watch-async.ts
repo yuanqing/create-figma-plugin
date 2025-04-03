@@ -28,12 +28,12 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
   const watchIgnoreRegex = createWatchIgnoreRegex(outputDirectory)
   const watcher = watch(
     [
+      'package.json',
+      'tsconfig.json',
       '**/*.{css,gif,jpeg,jpg,js,json,jsx,png,ts,tsx}',
       constants.build.mainConfigGlobPattern,
       constants.build.manifestConfigGlobPattern,
-      constants.build.uiConfigGlobPattern,
-      'package.json',
-      'tsconfig.json'
+      constants.build.uiConfigGlobPattern
     ],
     {
       ignored: function (path: string): boolean {
