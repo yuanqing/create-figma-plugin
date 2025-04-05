@@ -56,13 +56,13 @@
 ## Used by designers and developers globally
 
 <div class="companies">
+  <div class="companies__logo"><img src="<%- media['logo-apple'] %>" alt="Apple logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-google'] %>" alt="Google logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-microsoft'] %>" alt="Microsoft logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-shopify'] %>" alt="Shopify logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-figma'] %>" alt="Figma logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-bytedance'] %>" alt="ByteDance logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-epic-games'] %>" alt="Epic Games logo" /></div>
-  <div class="companies__logo"><img src="<%- media['logo-product-hunt'] %>" alt="Product Hunt logo" /></div>
   <div class="companies__logo"><img src="<%- media['logo-stripe'] %>" alt="Stripe logo" /></div>
 </div>
 
