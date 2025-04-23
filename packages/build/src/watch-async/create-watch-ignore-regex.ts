@@ -8,8 +8,8 @@ export function createWatchIgnoreRegex(outputDirectoryPath: string) {
       '^node_modules',
       '^manifest.json$',
       '^package-lock.json$',
-      '.css.d.ts$',
-      `^${constants.build.buildDirectoryName}/`
+      `^${constants.build.buildDirectoryName}/`,
+      '.css.d.ts$'
     ].join('|')
   )
 }
