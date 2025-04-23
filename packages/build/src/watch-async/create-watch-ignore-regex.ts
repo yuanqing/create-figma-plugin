@@ -4,6 +4,7 @@ export function createWatchIgnoreRegex(outputDirectoryPath: string) {
   return new RegExp(
     [
       `^${outputDirectoryPath}`,
+      '^.git',
       '^node_modules',
       '^manifest.json$',
       '^package-lock.json$',
