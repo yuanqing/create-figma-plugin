@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.1
+
+- `@create-figma-plugin/build@4.0.1`
+
+  - Ignore the `.git` folder when watching ([#258](https://github.com/yuanqing/create-figma-plugin/issues/258))
+
 ## 4.0.0
 
 > [!IMPORTANT]
