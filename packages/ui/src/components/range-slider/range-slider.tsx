@@ -89,12 +89,13 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
     const renderProgressTrack = useCallback(function (options: {
       value: number
       maximum: number
+      minimum: number
     }) {
-      const { value, maximum } = options
+      const { value, maximum, minimum } = options
       const inputElement = getCurrentFromRef(inputElementRef)
       const inputElementWidth = inputElement.offsetWidth
       const sliderThumbElementWidth = inputElement.offsetHeight
-      const percentage = value / maximum
+      const percentage = (value - minimum) / (maximum - minimum)
       const px = `${
         percentage * (inputElementWidth - sliderThumbElementWidth) +
         sliderThumbElementWidth / 2
@@ -104,9 +105,9 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
 
     useEffect(
       function () {
-        renderProgressTrack({ maximum, value: parseFloat(value) })
+        renderProgressTrack({ maximum, minimum, value: parseFloat(value) })
       },
-      [maximum, renderProgressTrack, value]
+      [maximum, minimum, renderProgressTrack, value]
     )
 
     return (
