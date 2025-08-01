@@ -19,7 +19,7 @@ export function sortNodesByCanonicalOrder<Node extends SceneNode>(
   if (areSiblingNodes(siblingNodes) === false) {
     throw new Error('Nodes in `siblingNodes` do not have the same parent')
   }
-  return siblingNodes
+  const result = siblingNodes
     .slice()
     .map(function (node: Node): { index: number; node: Node } {
       return {
@@ -33,4 +33,8 @@ export function sortNodesByCanonicalOrder<Node extends SceneNode>(
     .map(function ({ node }: { node: Node }): Node {
       return node
     })
+  if ('layoutMode' in parentNode && parentNode.layoutMode !== 'NONE') {
+    return result
+  }
+  return result.reverse()
 }

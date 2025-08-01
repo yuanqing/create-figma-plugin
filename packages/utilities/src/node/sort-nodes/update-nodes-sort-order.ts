@@ -17,17 +17,20 @@ export function updateNodesSortOrder(siblingNodes: Array<SceneNode>): boolean {
     throw new Error('Nodes in `siblingNodes` do not have the same parent')
   }
   const siblingNodesCopy = siblingNodes.slice()
-  const ids = parentNode.children.map(function ({ id }: SceneNode) {
+  if ('layoutMode' in parentNode && parentNode.layoutMode !== 'NONE') {
+    siblingNodesCopy.reverse()
+  }
+  const idsBefore = parentNode.children.map(function ({ id }: SceneNode) {
     return id
   })
-  const insertIndex = computeInsertIndex(siblingNodesCopy, ids)
+  const insertIndex = computeInsertIndex(siblingNodesCopy, idsBefore)
   for (const node of siblingNodesCopy) {
     parentNode.insertChild(insertIndex, node)
   }
   const idsAfter = parentNode.children.map(function ({ id }: SceneNode) {
     return id
   })
-  return compareStringArrays(ids, idsAfter) === false
+  return compareStringArrays(idsBefore, idsAfter) === false
 }
 
 function computeInsertIndex(
