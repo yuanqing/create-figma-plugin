@@ -64,6 +64,24 @@ export const Disabled = function () {
   )
 }
 
+export const NegativeMinimum = function () {
+  const [value, setValue] = useState<string>('0')
+  function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
+    const newValue = event.currentTarget.value
+    console.log(newValue)
+    setValue(newValue)
+  }
+  return (
+    <RangeSlider
+      increment={10}
+      maximum={100}
+      minimum={-100}
+      onInput={handleInput}
+      value={value}
+    />
+  )
+}
+
 export const CustomIncrement = function () {
   const [value, setValue] = useState<string>('50')
   function handleInput(event: JSX.TargetedEvent<HTMLInputElement>) {
