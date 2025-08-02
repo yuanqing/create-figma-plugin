@@ -10,6 +10,7 @@ import { readConfigAsync } from '../../src/read-config-async.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const config = {
+  esmModule: false,
   api: '1.0.0',
   widgetApi: '1.0.0',
   editorType: ['figma'],
