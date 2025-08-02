@@ -58,7 +58,7 @@ export async function watchAsync(options: BuildOptions): Promise<void> {
             )
           } else {
             if (cssRegex.test(file) === true) {
-              promises.push(buildCssModulesTypingsAsync())
+              promises.push(buildCssModulesTypingsAsync(config.esmModule))
             }
           }
           promises.push(buildBundlesAsync({ config, minify, outputDirectory }))

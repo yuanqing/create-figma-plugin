@@ -10,13 +10,13 @@ import { typeCheckBuild } from './utilities/type-check/type-check-build.js'
 export async function buildAsync(
   options: BuildOptions & { clearPreviousLine: boolean; exitOnError: boolean }
 ): Promise<void> {
-  const { minify, outputDirectory, typecheck, clearPreviousLine, exitOnError } =
+  const { clearPreviousLine, exitOnError, minify, outputDirectory, typecheck } =
     options
   const config = await readConfigAsync()
   try {
     if (typecheck === true) {
       const getTypeCheckElapsedTime = trackElapsedTime()
-      await buildCssModulesTypingsAsync() // This must occur before `typeCheckBuild`
+      await buildCssModulesTypingsAsync(config.esmModule) // This must occur before `typeCheckBuild`
       log.info('Typechecking...')
       typeCheckBuild()
       const typeCheckElapsedTime = getTypeCheckElapsedTime()
@@ -35,7 +35,7 @@ export async function buildAsync(
       log.info('Building...')
       const getBuildElapsedTime = trackElapsedTime()
       await Promise.all([
-        buildCssModulesTypingsAsync(),
+        buildCssModulesTypingsAsync(config.esmModule),
         buildBundlesAsync({ config, minify, outputDirectory }),
         buildManifestAsync({ config, minify, outputDirectory })
       ])

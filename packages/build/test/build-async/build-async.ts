@@ -16,8 +16,9 @@ import { buildAsync } from '../../src/build-async.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const buildAsyncOptions = {
-  exitOnError: true,
   clearPreviousLine: false,
+  esmModules: false,
+  exitOnError: true,
   minify: false,
   typecheck: true
 }
@@ -393,7 +394,7 @@ test('UI with image asset', async function (t) {
 })
 
 test('CSS modules', async function (t) {
-  t.plan(9)
+  t.plan(13)
   const directoryPath = join(__dirname, 'fixtures', '12-css-modules')
   process.chdir(directoryPath)
   await cleanUpAsync()
@@ -401,6 +402,7 @@ test('CSS modules', async function (t) {
   t.false(await pathExists('manifest.json'))
   t.false(await pathExists('node_modules'))
   t.false(await pathExists('src/styles.css.d.ts'))
+  t.false(await pathExists('src/styles.d.css.ts'))
   await installFigmaPluginTypingsAsync()
   await symlinkCreateFigmaPluginTsConfigAsync()
   await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
@@ -418,6 +420,44 @@ test('CSS modules', async function (t) {
   const uiJs = await fs.readFile('build/ui.js', 'utf8')
   t.true(/\._foo_[^ ]+ {/.test(uiJs) === true)
   t.true(await pathExists('src/styles.css.d.ts'))
+  const cssTypingsJs = await fs.readFile('src/styles.css.d.ts', 'utf8')
+  t.true(cssTypingsJs.indexOf('export = styles;') !== -1)
+  t.true(cssTypingsJs.indexOf('export default styles;') === -1)
+  t.false(await pathExists('src/styles.d.css.ts'))
+  await cleanUpAsync()
+})
+
+test('CSS modules - ESM', async function (t) {
+  t.plan(13)
+  const directoryPath = join(__dirname, 'fixtures', '13-css-modules-esm')
+  process.chdir(directoryPath)
+  await cleanUpAsync()
+  t.false(await pathExists('build'))
+  t.false(await pathExists('manifest.json'))
+  t.false(await pathExists('node_modules'))
+  t.false(await pathExists('src/styles.css.d.ts'))
+  t.false(await pathExists('src/styles.d.css.ts'))
+  await installFigmaPluginTypingsAsync()
+  await symlinkCreateFigmaPluginTsConfigAsync()
+  await buildAsync({ ...buildAsyncOptions, outputDirectory: directoryPath })
+  const manifestJson = JSON.parse(await fs.readFile('manifest.json', 'utf8'))
+  t.deepEqual(manifestJson, {
+    api: '1.0.0',
+    editorType: ['figma'],
+    id: '42',
+    name: 'a',
+    main: 'build/main.js',
+    ui: 'build/ui.js'
+  })
+  t.true(await pathExists('build/main.js'))
+  t.true(await pathExists('build/ui.js'))
+  const uiJs = await fs.readFile('build/ui.js', 'utf8')
+  t.true(/\._foo_[^ ]+ {/.test(uiJs) === true)
+  t.true(await pathExists('src/styles.d.css.ts'))
+  const cssTypingsJs = await fs.readFile('src/styles.d.css.ts', 'utf8')
+  t.true(cssTypingsJs.indexOf('export = styles;') === -1)
+  t.true(cssTypingsJs.indexOf('export default styles;') !== -1)
+  t.false(await pathExists('src/styles.css.d.ts'))
   await cleanUpAsync()
 })
 
@@ -800,5 +840,7 @@ async function cleanUpAsync(): Promise<void> {
   await rimraf(join(process.cwd(), '{build,manifest.json,node_modules}'), {
     glob: true
   })
-  await rimraf(join(process.cwd(), 'src', '*.css.d.ts'), { glob: true })
+  await rimraf(join(process.cwd(), 'src', '*.{d.css.ts,css.d.ts}'), {
+    glob: true
+  })
 }

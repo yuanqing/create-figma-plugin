@@ -14,6 +14,7 @@ export interface ConfigCommand extends BaseConfigMixin {
 }
 
 export interface Config extends ConfigCommand {
+  esmModule: boolean
   api: string
   widgetApi: string
   editorType: Array<ConfigEditorType>

@@ -24,6 +24,7 @@ import {
 } from './types/private/raw-config.js'
 
 const defaultConfig: Config = {
+  esmModule: false,
   id: constants.packageJson.defaultName,
   api: constants.build.manifestPluginApi,
   widgetApi: constants.build.manifestWidgetApi,
@@ -52,6 +53,7 @@ export async function readConfigAsync(): Promise<Config> {
   const packageJson: any = JSON.parse(
     await fs.readFile(packageJsonPath, 'utf8')
   )
+  const esmModule = packageJson.type === 'module'
   const config = packageJson[constants.packageJson.configKey]
   if (typeof config === 'undefined' || Object.keys(config).length === 0) {
     return defaultConfig
@@ -72,6 +74,7 @@ export async function readConfigAsync(): Promise<Config> {
     ...rest
   } = config
   return {
+    esmModule,
     api: typeof api === 'undefined' ? constants.build.manifestPluginApi : api,
     widgetApi:
       typeof widgetApi === 'undefined'
