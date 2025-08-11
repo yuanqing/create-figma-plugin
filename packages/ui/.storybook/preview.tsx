@@ -65,8 +65,10 @@ export const parameters = {
             story: null
           }
         }
-        const order =
-          story.tags[0] === 'story' ? null : parseInt(story.tags[0], 10)
+        const tag = story.tags.find(function (tag) {
+          return /^\d+$/.test(tag)
+        })
+        const order = typeof tag === 'undefined' ? null : parseInt(tag, 10)
         return {
           component: split[1],
           order,
