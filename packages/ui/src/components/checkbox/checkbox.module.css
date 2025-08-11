@@ -36,7 +36,8 @@
 .checkbox:not(.disabled) .input:focus ~ .box {
   border-color: var(--figma-color-border-selected);
 }
-.checkbox:not(.disabled) .input:checked ~ .box {
+.checkbox:not(.disabled) .input:checked ~ .box,
+.checkbox:not(.disabled) .input:indeterminate ~ .box {
   border-color: var(--figma-color-border-brand-strong);
   background-color: var(--figma-color-bg-brand);
 }
@@ -44,12 +45,13 @@
 .disabled .input ~ .box {
   background-color: transparent;
 }
-.disabled .input:checked ~ .box {
+.disabled .input:checked ~ .box,
+.disabled .input:indeterminate ~ .box {
   border-color: transparent;
   background-color: var(--figma-color-bg-disabled);
 }
 
-.checkIcon {
+.icon {
   position: absolute;
   top: calc(-1 * var(--border-width-1));
   left: calc(-1 * var(--border-width-1));

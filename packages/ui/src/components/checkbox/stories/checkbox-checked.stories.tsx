@@ -7,12 +7,12 @@ import { Text } from '../../text/text.js'
 import { Checkbox } from '../checkbox.js'
 
 export default {
-  tags: ['1'],
-  title: 'Components/Checkbox/Unselected'
+  tags: ['2'],
+  title: 'Components/Checkbox/Checked'
 }
 
 export const Passive = function () {
-  const [value, setValue] = useState<boolean>(false)
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -26,7 +26,7 @@ export const Passive = function () {
 }
 
 export const Focused = function () {
-  const [value, setValue] = useState<boolean>(false)
+  const [value, setValue] = useState<boolean>(true)
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.checked
     console.log(newValue)
@@ -44,14 +44,14 @@ export const Disabled = function () {
     throw new Error('This function should not be called')
   }
   return (
-    <Checkbox disabled onChange={handleChange} value={false}>
+    <Checkbox disabled onChange={handleChange} value={true}>
       <Text>Text</Text>
     </Checkbox>
   )
 }
 
 export const OnValueChange = function () {
-  const [value, setValue] = useState<boolean>(false)
+  const [value, setValue] = useState<boolean>(true)
   function handleValueChange(newValue: boolean) {
     console.log(newValue)
     setValue(newValue)

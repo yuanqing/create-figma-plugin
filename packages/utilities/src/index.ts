@@ -12,7 +12,7 @@ export { createImageElementFromBlobAsync } from './image/create-image-element-fr
 export { createImageElementFromBytesAsync } from './image/create-image-element-from-bytes-async.js'
 export { createImagePaint } from './image/create-image-paint.js'
 export { readBytesFromCanvasElementAsync } from './image/read-bytes-from-canvas-element-async.js'
-export { MIXED_NUMBER, MIXED_STRING } from './mixed-values.js'
+export { MIXED_BOOLEAN, MIXED_NUMBER, MIXED_STRING } from './mixed-values.js'
 export {
   getDocumentUseCount,
   incrementDocumentUseCount,
