@@ -56,6 +56,14 @@ export {
   RangeSliderProps
 } from './components/range-slider/range-slider.js'
 export {
+  SearchDropdown,
+  SearchDropdownOption,
+  SearchDropdownOptionHeader,
+  SearchDropdownOptionSeparator,
+  SearchDropdownOptionValue,
+  SearchDropdownProps
+} from './components/search-dropdown/search-dropdown.js'
+export {
   SearchTextbox,
   SearchTextboxProps
 } from './components/search-textbox/search-textbox.js'
