@@ -1,10 +1,25 @@
 # Changelog
 
+## 4.0.2
+
+- `@create-figma-plugin/build@4.0.2`
+
+  - Fix issue with using CSS modules with `typescript@5`.
+
+- `@create-figma-plugin/ui@4.0.2`
+
+  - Fix a bug with the `RangeSlider` component when `minimum` is non-zero. ([#261](https://github.com/yuanqing/create-figma-plugin/issues/261))
+  - Allow the `Checkbox` component to be set to an “indeterminate” or “mixed” value.
+
+- `create-figma-plugin@4.0.2`
+
+  - Update calls to the Tailwind CSS CLI in the the `preact-tailwindcss` template. ([#256](https://github.com/yuanqing/create-figma-plugin/issues/256))
+
 ## 4.0.1
 
 - `@create-figma-plugin/build@4.0.1`
 
-  - Ignore the `.git` folder when watching ([#258](https://github.com/yuanqing/create-figma-plugin/issues/258))
+  - Ignore the `.git` folder when watching. ([#258](https://github.com/yuanqing/create-figma-plugin/issues/258))
 
 ## 4.0.0
 
