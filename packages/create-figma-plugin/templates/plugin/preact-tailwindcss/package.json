@@ -9,15 +9,15 @@
     "@create-figma-plugin/tsconfig": "^<%- versions.createFigmaPlugin.tsconfig %>",
     "@figma/plugin-typings": "<%- versions.figma.pluginTypings %>",
     "concurrently": ">=8",
-    "tailwindcss": ">=3",
+    "tailwindcss": ">=4",
     "typescript": ">=5"
   },
   "scripts": {
     "build": "npm run build:css && npm run build:js",
-    "build:css": "tailwindcss --input ./src/input.css --output ./src/output.css",
+    "build:css": "@tailwindcss/cli --input ./src/input.css --output ./src/output.css",
     "build:js": "build-figma-plugin --typecheck --minify",
     "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
-    "watch:css": "tailwindcss --input ./src/input.css --output ./src/output.css --watch",
+    "watch:css": "@tailwindcss/cli --input ./src/input.css --output ./src/output.css --watch",
     "watch:js": "build-figma-plugin --typecheck --watch"
   },
   "figma-plugin": {
