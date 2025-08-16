@@ -1,0 +1,1 @@
+import{_ as o}from"./preact.module-7_OotSvk.js";import{c as t}from"./create-icon-DvrWd2n3.js";const e=t(o("svg",{fill:"none",height:"16",viewBox:"0 0 16 16",width:"16",xmlns:"http://www.w3.org/2000/svg"},o("path",{d:"M4 8c0-.27614.22386-.5.5-.5h7c.2761 0 .5.22386.5.5s-.2239.5-.5.5h-7c-.27614 0-.5-.22386-.5-.5",fill:"currentColor"})));export{e as I};
