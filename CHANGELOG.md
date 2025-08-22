@@ -1,10 +1,17 @@
 # Changelog
 
+## 4.0.3
+
+- `create-figma-plugin@4.0.3`
+
+  - Update CSS import in the `preact-tailwindcss` template. ([#266](https://github.com/yuanqing/create-figma-plugin/issues/266))
+
+
 ## 4.0.2
 
 - `@create-figma-plugin/build@4.0.2`
 
-  - Fix issue with using CSS modules with `typescript@5`.
+  - Fix an issue with using CSS modules with `typescript@5`.
 
 - `@create-figma-plugin/ui@4.0.2`
 
@@ -13,7 +20,7 @@
 
 - `create-figma-plugin@4.0.2`
 
-  - Update calls to the Tailwind CSS CLI in the the `preact-tailwindcss` template. ([#256](https://github.com/yuanqing/create-figma-plugin/issues/256))
+  - Update calls to the Tailwind CSS CLI in the `preact-tailwindcss` template. ([#256](https://github.com/yuanqing/create-figma-plugin/issues/256))
 
 ## 4.0.1
 
