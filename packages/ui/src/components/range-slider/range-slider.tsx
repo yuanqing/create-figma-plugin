@@ -93,6 +93,9 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
     }) {
       const { value, maximum, minimum } = options
       const inputElement = getCurrentFromRef(inputElementRef)
+      if (inputElement === null) {
+          return
+      }
       const inputElementWidth = inputElement.offsetWidth
       const sliderThumbElementWidth = inputElement.offsetHeight
       const percentage = (value - minimum) / (maximum - minimum)
@@ -106,6 +109,13 @@ export const RangeSlider = createComponent<HTMLInputElement, RangeSliderProps>(
     useEffect(
       function () {
         renderProgressTrack({ maximum, minimum, value: parseFloat(value) })
+        const handleResize = function () {
+            renderProgressTrack({ maximum, minimum, value: parseFloat(value) })
+        }
+        window.addEventListener('resize', handleResize)
+        return function () {
+            window.removeEventListener('resize', handleResize)
+        }
       },
       [maximum, minimum, renderProgressTrack, value]
     )
