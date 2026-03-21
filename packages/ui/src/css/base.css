@@ -1,119 +1,121 @@
-:root {
-  --border-width-1: 1px;
-  --border-width-4: 4px;
-  --border-radius-2: 2px;
-  --border-radius-4: 4px;
-  --border-radius-6: 6px;
-  --border-radius-12: 12px;
-  --box-shadow: var(--box-shadow-menu);
-  --box-shadow-menu:
-    0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15),
-    inset 0 0 0 0.5px #000000, 0 0 0 0.5px rgba(0, 0, 0, 0.1);
-  --box-shadow-modal:
-    0 2px 14px rgba(0, 0, 0, 0.15), 0 0 0 0.5px rgba(0, 0, 0, 0.2);
-  --box-shadow-range-slider:
-    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 3px 8px 0 rgba(0, 0, 0, 0.1),
-    0 0 0.5px 0 rgba(0, 0, 0, 0.18), inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
-  --color-bg-menu: #1e1e1e;
-  --color-bg-overlay: rgba(0, 0, 0, 0.5);
-  --font-family: 'Inter', 'Helvetica', sans-serif;
-  --font-family-code:
-    SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
-  --font-size-11: 11px;
-  --font-size-12: 12px;
-  --font-weight-regular: 400;
-  --font-weight-bold: 600;
-  --line-height-16: 16px;
-  --opacity-30: 0.3;
-  --space-extra-small: 8px;
-  --space-small: 12px;
-  --space-medium: 16px;
-  --space-large: 20px;
-  --space-extra-large: 24px;
-  --space-0: 0;
-  --space-4: 4px;
-  --space-6: 6px;
-  --space-8: 8px;
-  --space-12: 12px;
-  --space-16: 16px;
-  --space-20: 20px;
-  --space-24: 24px;
-  --space-28: 28px;
-  --space-32: 32px;
-  --transition-duration-100: 0.1s;
-  --transition-duration-300: 0.3s;
-  --z-index-1: 1;
-  --z-index-2: 2;
-}
+@layer base {
+  :root {
+    --border-width-1: 1px;
+    --border-width-4: 4px;
+    --border-radius-2: 2px;
+    --border-radius-4: 4px;
+    --border-radius-6: 6px;
+    --border-radius-12: 12px;
+    --box-shadow: var(--box-shadow-menu);
+    --box-shadow-menu:
+      0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15),
+      inset 0 0 0 0.5px #000000, 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+    --box-shadow-modal:
+      0 2px 14px rgba(0, 0, 0, 0.15), 0 0 0 0.5px rgba(0, 0, 0, 0.2);
+    --box-shadow-range-slider:
+      0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 3px 8px 0 rgba(0, 0, 0, 0.1),
+      0 0 0.5px 0 rgba(0, 0, 0, 0.18), inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+    --color-bg-menu: #1e1e1e;
+    --color-bg-overlay: rgba(0, 0, 0, 0.5);
+    --font-family: 'Inter', 'Helvetica', sans-serif;
+    --font-family-code:
+      SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+      monospace;
+    --font-size-11: 11px;
+    --font-size-12: 12px;
+    --font-weight-regular: 400;
+    --font-weight-bold: 600;
+    --line-height-16: 16px;
+    --opacity-30: 0.3;
+    --space-extra-small: 8px;
+    --space-small: 12px;
+    --space-medium: 16px;
+    --space-large: 20px;
+    --space-extra-large: 24px;
+    --space-0: 0;
+    --space-4: 4px;
+    --space-6: 6px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-20: 20px;
+    --space-24: 24px;
+    --space-28: 28px;
+    --space-32: 32px;
+    --transition-duration-100: 0.1s;
+    --transition-duration-300: 0.3s;
+    --z-index-1: 1;
+    --z-index-2: 2;
+  }
 
-.figma-dark {
-  color-scheme: dark;
-}
+  .figma-dark {
+    color-scheme: dark;
+  }
 
-* {
-  box-sizing: border-box;
-  border-width: 0;
-  border-style: solid;
-  border-color: currentColor;
-}
+  * {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: currentColor;
+  }
 
-body {
-  margin: 0;
-  background-color: var(--figma-color-bg);
-  color: var(--figma-color-text);
-  font-family: var(--font-family);
-  font-size: var(--font-size-11);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-16);
-}
+  body {
+    margin: 0;
+    background-color: var(--figma-color-bg);
+    color: var(--figma-color-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-11);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-16);
+  }
 
-div,
-span {
-  cursor: default;
-  user-select: none;
-}
+  div,
+  span {
+    cursor: default;
+    user-select: none;
+  }
 
-h1,
-h2,
-h3 {
-  margin: 0;
-  font-weight: inherit;
-}
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    font-weight: inherit;
+  }
 
-button {
-  padding: 0;
-  border: 0;
-  -webkit-appearance: none;
-  background-color: transparent;
-  font: inherit;
-  outline: 0;
-}
+  button {
+    padding: 0;
+    border: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font: inherit;
+    outline: 0;
+  }
 
-hr {
-  border: 0;
-  margin: 0;
-}
+  hr {
+    border: 0;
+    margin: 0;
+  }
 
-label {
-  display: block;
-}
+  label {
+    display: block;
+  }
 
-input,
-textarea {
-  padding: 0;
-  border: 0;
-  margin: 0;
-  -webkit-appearance: none;
-  cursor: default;
-  font: inherit;
-  outline: 0;
-}
+  input,
+  textarea {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    cursor: default;
+    font: inherit;
+    outline: 0;
+  }
 
-svg {
-  display: block;
-}
+  svg {
+    display: block;
+  }
 
-::selection {
-  background-color: var(--figma-color-bg-onselected);
+  ::selection {
+    background-color: var(--figma-color-bg-onselected);
+  }
 }
