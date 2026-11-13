@@ -36,9 +36,20 @@ export async function buildCssModulesTypingsAsync(
   }
 }
 
+/**
+ * Returns the glob pattern that matches the `*.d.css.ts` typings files
+ * under `srcDirectory`.
+ *
+ * Globs always use forward slashes. `path.join` is avoided here because it
+ * produces backslashes on Windows, which `globby` treats as escape characters.
+ */
+export function cssModulesTypingsGlob(srcDirectory: string): string {
+  return `${srcDirectory}/**/*.d.css.ts`
+}
+
 async function patchExportSyntaxAsync() {
   const typingsFilePaths = await globby(
-    join(constants.build.srcDirectoryName, '**', '*.d.css.ts')
+    cssModulesTypingsGlob(constants.build.srcDirectoryName)
   )
   for (const typingsFilePath of typingsFilePaths) {
     const contents = await fs.readFile(typingsFilePath, 'utf8')
